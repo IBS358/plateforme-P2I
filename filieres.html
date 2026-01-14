@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filières Industrielles | P2I</title>
+    <title>Les 12 Filières Industrielles | P2I</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* RÉCUPÉRATION DU DESIGN IDENTIQUE À "À PROPOS" */
         :root {
             --primary: #4cc9f0;
             --secondary: #f72585;
@@ -17,44 +16,52 @@
         body { background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%); color: white; line-height: 1.6; min-height: 100vh; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* HEADER AVEC ENGRENAGES */
+        /* HEADER (Synchronisé) */
         header { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(13, 27, 42, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(76, 201, 240, 0.1); padding: 15px 0; }
         .nav-container { display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; }
-        .logo-icon { width: 45px; height: 45px; position: relative; }
+        .logo-icon { width: 40px; height: 40px; position: relative; }
         .gear { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--primary); }
         .gear-large { animation: rotate 20s linear infinite; }
         .gear-small { width: 40%; height: 40%; top: 30%; left: 30%; animation: rotate 10s linear infinite reverse; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .logo-text { font-size: 1.6rem; font-weight: 700; background: linear-gradient(to right, #4cc9f0, #f72585); -webkit-background-clip: text; color: transparent; }
+        .logo-text { font-size: 1.5rem; font-weight: 700; background: linear-gradient(to right, #4cc9f0, #f72585); -webkit-background-clip: text; color: transparent; }
+
+        /* CONTENU */
+        .main-content { margin-top: 130px; margin-bottom: 80px; }
         
-        nav ul { display: flex; gap: 30px; list-style: none; }
-        nav a { color: #b8c1ec; text-decoration: none; font-weight: 500; transition: 0.3s; }
-        nav a:hover { color: var(--primary); }
+        .header-section { text-align: center; margin-bottom: 50px; }
+        .header-section h1 { font-size: 2.5rem; margin-bottom: 15px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; color: transparent; }
+        
+        .btn-retour { 
+            display: inline-flex; align-items: center; gap: 10px; color: var(--primary); 
+            text-decoration: none; font-weight: bold; margin-bottom: 30px; transition: 0.3s;
+        }
+        .btn-retour:hover { color: var(--secondary); transform: translateX(-5px); }
 
-        /* TITRE DE LA PAGE */
-        .page-header { margin-top: 130px; text-align: center; margin-bottom: 50px; }
-        .page-header h1 { font-size: 2.5rem; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; color: transparent; margin-bottom: 10px; }
-        .page-header p { color: #b8c1ec; font-size: 1.1rem; }
-
-        /* GRILLE DES FILIÈRES */
-        .grid-filieres { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin-bottom: 80px; }
+        /* GRILLE */
+        .grid-filieres { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        
         .filiere-card { 
             background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); 
-            border-radius: 20px; padding: 30px; transition: 0.4s; text-decoration: none; color: white;
-            display: block; position: relative; overflow: hidden;
+            border-radius: 20px; padding: 25px; transition: 0.4s; text-decoration: none; color: white;
+            display: flex; flex-direction: column; align-items: flex-start;
         }
+        
         .filiere-card:hover { 
-            transform: translateY(-10px); border-color: var(--primary); 
-            background: rgba(76, 201, 240, 0.1);
-            box-shadow: 0 0 30px rgba(76, 201, 240, 0.3);
+            transform: translateY(-5px); border-color: var(--primary); 
+            background: rgba(76, 201, 240, 0.08);
+            box-shadow: 0 0 20px rgba(76, 201, 240, 0.2);
         }
-        .filiere-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; display: block; }
-        .filiere-card h3 { font-size: 1.4rem; margin-bottom: 12px; color: #fff; }
-        .filiere-card p { color: #b8c1ec; font-size: 0.95rem; }
+
+        .filiere-card i { font-size: 2rem; color: var(--secondary); margin-bottom: 15px; }
+        .filiere-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); }
+        .filiere-card p { font-size: 0.9rem; color: #b8c1ec; margin-bottom: 15px; flex-grow: 1; }
+        
+        .btn-selection { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: #fff; border-bottom: 2px solid var(--secondary); padding-bottom: 2px; }
 
         /* FOOTER */
-        footer { background: rgba(0,0,0,0.3); padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #b8c1ec; }
+        footer { background: rgba(0,0,0,0.3); padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #b8c1ec; }
     </style>
 </head>
 <body>
@@ -69,51 +76,112 @@
                 <div class="logo-text">P2I</div>
             </a>
             <nav>
-                <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="secteur-industriel.html">Secteurs</a></li>
-                    <li><a href="filieres.html" style="color:var(--primary)">Filières</a></li>
-                    <li><a href="apropos.html">À Propos</a></li>
-                </ul>
+                <a href="apropos.html" style="color:#b8c1ec; text-decoration:none;">À Propos</a>
             </nav>
         </div>
     </header>
 
-    <div class="container">
-        <div class="page-header">
+    <div class="container main-content">
+        <a href="index.html" class="btn-retour"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>
+        
+        <div class="header-section">
             <h1>Bienvenue dans le Monde des Filières Industrielles</h1>
-            <p>Sélectionnez une filière pour configurer votre unité de production</p>
+            <p>Découvrez les 12 piliers de la transformation économique</p>
         </div>
 
         <div class="grid-filieres">
-            <a href="configurateur.html" class="filiere-card">
-                <i class="fas fa-wheat-awn"></i>
+            <a href="configurateur.html?filiere=agro" class="filiere-card">
+                <i class="fas fa-seedling"></i>
                 <h3>Agro-alimentaire & Boissons</h3>
-                <p>Transformation de cacao, anacarde, boulangerie industrielle et jus de fruits.</p>
+                <p>Valorisation des ressources agricoles : Cacao, Anacarde, Fruits et Boulangerie industrielle.</p>
+                <span class="btn-selection">Configurer l'unité</span>
             </a>
 
-            <a href="configurateur.html" class="filiere-card">
+            <a href="configurateur.html?filiere=chimie" class="filiere-card">
                 <i class="fas fa-flask"></i>
                 <h3>Chimie & Cosmétiques</h3>
-                <p>Savonnerie, détergents, produits d'entretien et cosmétiques au karité.</p>
+                <p>Fabrication de savons, détergents, peintures et produits cosmétiques locaux.</p>
+                <span class="btn-selection">Configurer l'unité</span>
             </a>
 
-            <a href="configurateur.html" class="filiere-card">
+            <a href="configurateur.html?filiere=textile" class="filiere-card">
                 <i class="fas fa-shirt"></i>
                 <h3>Textile & Confection</h3>
-                <p>Égrenage, filature, tissage et fabrication de vêtements industriels.</p>
+                <p>De la fibre au vêtement : Filature, tissage et confection industrielle.</p>
+                <span class="btn-selection">Configurer l'unité</span>
             </a>
 
-            <div class="filiere-card" style="opacity: 0.5; cursor: not-allowed;">
+            <a href="configurateur.html?filiere=construction" class="filiere-card">
+                <i class="fas fa-trowel-bricks"></i>
+                <h3>Matériaux de Construction</h3>
+                <p>Cimenterie, briqueterie et transformation du bois pour l'habitat.</p>
+                <span class="btn-selection">Configurer l'unité</span>
+            </a>
+
+            <a href="configurateur.html?filiere=mines" class="filiere-card">
+                <i class="fas fa-gem"></i>
+                <h3>Mines & Métallurgie</h3>
+                <p>Extraction et première transformation des métaux et ressources minières.</p>
+                <span class="btn-selection">Configurer l'unité</span>
+            </a>
+
+            <a href="configurateur.html?filiere=emballage" class="filiere-card">
+                <i class="fas fa-box-open"></i>
+                <h3>Emballages & Plastiques</h3>
+                <p>Solutions de conditionnement carton, plastique et matériaux biodégradables.</p>
+                <span class="btn-selection">Configurer l'unité</span>
+            </a>
+
+            <a href="configurateur.html?filiere=pharma" class="filiere-card">
+                <i class="fas fa-pills"></i>
+                <h3>Industrie Pharmaceutique</h3>
+                <p>Production locale de médicaments essentiels et produits de santé.</p>
+                <span class="btn-selection">Configurer l'unité</span>
+            </a>
+
+            <a href="configurateur.html?filiere=auto" class="filiere-card">
                 <i class="fas fa-car"></i>
                 <h3>Automobile & Transport</h3>
-                <p>Bientôt disponible : Montage et pièces détachées.</p>
-            </div>
-            
-            </div>
+                <p>Unités d'assemblage, montage de véhicules et pièces de rechange.</p>
+                <span class="btn-selection">Configurer l'unité</span>
+            </a>
+
+            <a href="configurateur.html?filiere=electro" class="filiere-card">
+                <i class="fas fa-microchip"></i>
+                <h3>Électronique & TIC</h3>
+                <p>Assemblage de composants, ordinateurs et équipements connectés.</p>
+                <span class="btn-selection">Configurer l'unité</span>
+            </a>
+
+            <a href="configurateur.html?filiere=energie" class="filiere-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Énergie & Équipements</h3>
+                <p>Solaire, composants électriques et solutions de stockage d'énergie.</p>
+                <span class="btn-selection">Configurer l'unité</span>
+            </a>
+
+            <a href="configurateur.html?filiere=cuir" class="filiere-card">
+                <i class="fas fa-shoe-prints"></i>
+                <h3>Cuir & Chaussures</h3>
+                <p>Tannerie et fabrication industrielle de chaussures et maroquinerie.</p>
+                <span class="btn-selection">Configurer l'unité</span>
+            </a>
+
+            <a href="configurateur.html?filiere=bois" class="filiere-card">
+                <i class="fas fa-tree"></i>
+                <h3>Industrie du Bois</h3>
+                <p>Menuiserie industrielle, contreplaqués et mobilier exportable.</p>
+                <span class="btn-selection">Configurer l'unité</span>
+            </a>
+        </div>
     </div>
 
     <footer>
+        <p>&copy; 2025 Plateforme Industrielle Ivoirienne. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
         <div class="container">
             <p>&copy; 2025 Plateforme Industrielle Ivoirienne. Propulsion de l'économie locale.</p>
         </div>
