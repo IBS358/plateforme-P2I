@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réseautage Industriel | Plateforme Industrielle Ivoirienne (P2I)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== STYLES DE BASE P2I ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER & NAVIGATION P2I ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(76, 201, 240, 0.1);
+            padding: 15px 0;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+        .gear {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #4cc9f0;
+        }
+        .gear-large { animation: rotate 20s linear infinite; }
+        .gear-medium {
+            width: 70%; height: 70%; top: 15%; left: 15%;
+            animation: rotate 15s linear infinite reverse;
+        }
+        .gear-small {
+            width: 40%; height: 40%; top: 30%; left: 30%;
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        nav ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        nav a {
+            color: #b8c1ec;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        nav a:hover { color: #4cc9f0; }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after { width: 100%; }
+        nav a.active {
+            color: #4cc9f0;
+            font-weight: 600;
+        }
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            position: relative;
+            text-align: center;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #b8c1ec;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        /* ===== SECTION PRINCIPALE ===== */
+        .main-content {
+            padding: 80px 0;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #b8c1ec;
+            font-size: 1.2rem;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== GRILLE DES FORMULAIRES ===== */
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+        @media (max-width: 1100px) {
+            .forms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cartes de formulaire */
+        .form-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .form-card:hover {
+            transform: translateY(-5px);
+            border-color: #4cc9f0;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .form-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .form-icon {
+            font-size: 3rem;
+            color: #4cc9f0;
+        }
+        .form-title {
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        /* Styles des formulaires */
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #b8c1ec;
+            font-weight: 500;
+        }
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #4cc9f0;
+            box-shadow: 0 0 0 2px rgba(76, 201, 240, 0.2);
+        }
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .file-upload {
+            padding: 10px;
+            background: rgba(76, 201, 240, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px dashed #4cc9f0;
+        }
+        .file-upload:hover {
+            background: rgba(76, 201, 240, 0.2);
+        }
+
+        /* Boutons */
+        .btn-submit {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(90deg, #4361ee, #f72585);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        /* ===== TABLEAU DES OFFRES ===== */
+        .offres-section {
+            margin-top: 80px;
+        }
+        .offres-table-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .offres-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .offres-table thead {
+            background: rgba(76, 201, 240, 0.15);
+        }
+        .offres-table th {
+            padding: 20px;
+            text-align: left;
+            color: #4cc9f0;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(76, 201, 240, 0.3);
+        }
+        .offres-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #b8c1ec;
+        }
+        .offres-table tbody tr:hover {
+            background: rgba(76, 201, 240, 0.05);
+        }
+        .statut-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .statut-ouvert {
+            background: rgba(0, 230, 118, 0.2);
+            color: #00e676;
+        }
+        .statut-pourvu {
+            background: rgba(255, 158, 0, 0.2);
+            color: #ff9e00;
+        }
+        .btn-postuler {
+            padding: 8px 20px;
+            background: rgba(76, 201, 240, 0.1);
+            color: #4cc9f0;
+            border: 1px solid #4cc9f0;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-postuler:hover {
+            background: rgba(76, 201, 240, 0.2);
+        }
+
+        /* ===== FOOTER P2I ===== */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(76, 201, 240, 0.1);
+            margin-top: 100px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a {
+            color: #b8c1ec;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .footer-links a:hover {
+            color: #4cc9f0;
+            padding-left: 5px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b8c1ec;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero { padding-top: 150px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .nav-container { flex-direction: column; gap: 20px; }
+            .forms-grid { grid-template-columns: 1fr; }
+            .form-card { padding: 25px; }
+            .offres-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header avec Navigation P2I -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="gear gear-large"></div>
+                    <div class="gear gear-medium"></div>
+                    <div class="gear gear-small"></div>
+                </div>
+                <div class="logo-text">P2I</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="filieres.html">Filières</a></li>
+                    <li><a href="secteur-industriel.html">Secteur industriel</a></li>
+                    <li><a href="reseau.html" class="active">Réseautage</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section Héro -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Réseautage Industriel</h1>
+                <p class="hero-subtitle">
+                    Lieu de rencontre entre les talents ivoiriens et les opportunités industrielles.
+                    Déposez votre CV, publiez une offre d'emploi et connectez-vous avec l'écosystème industriel de Côte d'Ivoire.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Principale -->
+    <div class="container main-content">
+        <!-- Introduction -->
+        <h2 class="section-title">Connectez-vous à l'Industrie de Demain</h2>
+        <p class="section-subtitle">
+            La P2I facilite la mise en relation entre les chercheurs d'emploi, les entrepreneurs et les industriels.
+            Utilisez les outils ci-dessous pour participer à la dynamique de création d'emplois industriels en Côte d'Ivoire.
+        </p>
+
+        <!-- Grille des Deux Formulaires -->
+        <div class="forms-grid">
+            <!-- Formulaire 1 : Dépôt de CV -->
+            <div class="form-card">
+                <div class="form-header">
+                    <div class="form-icon">📄</div>
+                    <h3 class="form-title">Déposer votre CV</h3>
+                </div>
+                <form id="cvForm">
+                    <div class="form-group">
+                        <label for="cvNom">Nom complet *</label>
+                        <input type="text" id="cvNom" class="form-control" required placeholder="Ex: Kouamé Jean">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvEmail">Email *</label>
+                        <input type="email" id="cvEmail" class="form-control" required placeholder="exemple@email.ci">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvTelephone">Téléphone</label>
+                        <input type="tel" id="cvTelephone" class="form-control" placeholder="+225 00 00 00 00">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvFiliere">Filière industrielle recherchée *</label>
+                        <select id="cvFiliere" class="form-control" required>
+                            <option value="">Sélectionnez une filière</option>
+                            <option value="agroalimentaire">Agro-alimentaire & Boissons</option>
+                            <option value="chime-entretien">Chimie & Entretien</option>
+                            <option value="transformation-cacao">Transformation du Cacao</option>
+                            <option value="transformation-anacarde">Transformation de l'Anacarde</option>
+                            <option value="materiaux">Matériaux de Construction</option>
+                            <option value="textile">Textile & Habillement</option>
+                            <option value="plasturgie">Plasturgie & Emballage</option>
+                            <option value="pharmacie">Pharmacie & Cosmétique</option>
+                            <option value="energie">Énergie Renouvelable</option>
+                            <option value="logistique">Logistique & Transport</option>
+                            <option value="numerique">Numérique & TIC</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvExperience">Expérience & Compétences *</label>
+                        <textarea id="cvExperience" class="form-control" required placeholder="Décrivez votre parcours, vos compétences techniques et vos aspirations..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvFichier">Téléverser votre CV (PDF ou DOC, max 5MB)</label>
+                        <div class="file-upload">
+                            <input type="file" id="cvFichier" accept=".pdf,.doc,.docx" style="display: none;">
+                            <label for="cvFichier" style="cursor: pointer; display: block; padding: 15px;">
+                                <i class="fas fa-cloud-upload-alt"></i> Cliquez pour sélectionner un fichier
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> Soumettre mon profil
+                    </button>
+                </form>
+            </div>
+
+            <!-- Formulaire 2 : Publication d'Offre -->
+            <div class="form-card">
+                <div class="form-header">
+                    <div class="form-icon">💼</div>
+                    <h3 class="form-title">Publier une offre d'emploi</h3>
+                </div>
+                <form id="offreForm">
+                    <div class="form-group">
+                        <label for="offreEntreprise">Nom de l'entreprise *</label>
+                        <input type="text" id="offreEntreprise" class="form-control" required placeholder="Ex: Industries CI SA">
+                    </div>
+                    <div class="form-group">
+                        <label for="offrePoste">Intitulé du poste *</label>
+                        <input type="text" id="offrePoste" class="form-control" required placeholder="Ex: Responsable de production">
+                    </div>
+                    <div class="form-group">
+                        <label for="offreFiliere">Filière concernée *</label>
+                        <select id="offreFiliere" class="form-control" required>
+                            <option value="">Sélectionnez une filière</option>
+                            <option value="agroalimentaire">Agro-alimentaire & Boissons</option>
+                            <option value="chime-entretien">Chimie & Entretien</option>
+                            <option value="transformation-cacao">Transformation du Cacao</option>
+                            <option value="transformation-anacarde">Transformation de l'Anacarde</option>
+                            <option value="materiaux">Matériaux de Construction</option>
+                            <option value="textile">Textile & Habillement</option>
+                            <option value="plasturgie">Plasturgie & Emballage</option>
+                            <option value="pharmacie">Pharmacie & Cosmétique</option>
+                            <option value="energie">Énergie Renouvelable</option>
+                            <option value="logistique">Logistique & Transport</option>
+                            <option value="numerique">Numérique & TIC</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="offreLocalisation">Localisation *</label>
+                        <input type="text" id="offreLocalisation" class="form-control" required placeholder="Ex: Zone Industrielle Yopougon, Abidjan">
+                    </div>
+                    <div class="form-group">
+                        <label for="offreDescription">Description du poste *</label>
+                        <textarea id="offreDescription" class="form-control" required placeholder="Décrivez les missions, responsabilités et exigences du poste..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="offreContact">Contact (email ou téléphone) *</label>
+                        <input type="text" id="offreContact" class="form-control" required placeholder="Ex: rh@entreprise.ci ou +225 00 00 00 00">
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-bullhorn"></i> Publier l'offre
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Section Tableau des Offres -->
+        <div class="offres-section">
+            <h2 class="section-title">Offres d'emploi récentes</h2>
+            <div class="offres-table-container">
+                <table class="offres-table">
+                    <thead>
+                        <tr>
+                            <th>Poste</th>
+                            <th>Entreprise</th>
+                            <th>Filière</th>
+                            <th>Localisation</th>
+                            <th>Date</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="offresTableBody">
+                        <!-- Les offres seront ajoutées ici par JavaScript -->
+                        <!-- Exemple statique pour la démonstration -->
+                        <tr>
+                            <td>Technicien de maintenance industrielle</td>
+                            <td>Agro-Industries CI</td>
+                            <td>Agro-alimentaire</td>
+                            <td>San Pedro</td>
+                            <td>15/01/2025</td>
+                            <td><span class="statut-badge statut-ouvert">Ouverte</span></td>
+                            <td><a href="#postuler" class="btn-postuler">Postuler</a></td>
+                        </tr>
+                        <tr>
+                            <td>Chimiste de formulation</td>
+                            <td>Cosmétic CI</td>
+                            <td>Pharmacie & Cosmétique</td>
+                            <td>Yopougon, Abidjan</td>
+                            <td>10/01/2025</td>
+                            <td><span class="statut-badge statut-ouvert">Ouverte</span></td>
+                            <td><a href="#postuler" class="btn-postuler">Postuler</a></td>
+                        </tr>
+                        <tr>
+                            <td>Responsable contrôle qualité</td>
+                            <td>Transform Cacao CI</td>
+                            <td>Transformation du Cacao</td>
+                            <td>PK24</td>
+                            <td>05/01/2025</td>
+                            <td><span class="statut-badge statut-pourvu">Pourvue</span></td>
+                            <td><a href="#postuler" class="btn-postuler" style="opacity:0.6">Postuler</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="text-align: center; margin-top: 20px; color: #b8c1ec;">
+                <i>Les offres sont publiées pour 60 jours. Postulez directement ou déposez votre CV pour être visible par les recruteurs.</i>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer P2I -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>P2I Réseautage</h3>
+                    <p style="color: #b8c1ec; line-height: 1.7;">
+                        La plateforme de mise en relation dédiée à l'industrie ivoirienne.
+                        Un service gratuit pour faciliter l'emploi et le recrutement dans les filières prioritaires.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="filieres.html">Filières Industrielles</a></li>
+                        <li><a href="secteur-industriel.html">Secteur Industriel</a></li>
+                        <li><a href="reseau.html">Réseautage</a></li>
+                        <li><a href="apropos.html">À Propos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Réseautage</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:reseau@p2i-ci.org">reseau@p2i-ci.org</a></li>
+                        <li><a href="tel:+225000000001">+225 00 00 00 01</a></li>
+                        <li>Support technique et modération</li>
+                        <li>Partenariats recrutement</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Plateforme Industrielle Ivoirienne (P2I). Tous droits réservés.</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">
+                    Les CV et offres sont modérés sous 48h. La P2I ne garantit pas l'issue des recrutements.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // CONFIGURATION
+    const DB_STORAGE_KEY = 'p2i_reseau_data_v2'; // Version changée pour éviter les conflits
+
+    // DONNÉES D'EXEMPLE (toujours visibles)
+    const OFFRES_EXEMPLE = [
+        {
+            id: 1,
+            poste: "Technicien de maintenance industrielle",
+            entreprise: "Agro-Industries CI",
+            filiere: "Agro-alimentaire",
+            filiereTexte: "Agro-alimentaire & Boissons",
+            localisation: "San Pedro",
+            datePublication: "15/01/2025",
+            statut: "ouverte",
+            contact: "rh@agroindustries.ci",
+            description: "Maintenance préventive et curative des équipements de production agroalimentaire."
+        },
+        {
+            id: 2,
+            poste: "Chimiste de formulation",
+            entreprise: "Cosmétic CI",
+            filiere: "Pharmacie & Cosmétique",
+            filiereTexte: "Pharmacie & Cosmétique",
+            localisation: "Yopougon, Abidjan",
+            datePublication: "10/01/2025",
+            statut: "ouverte",
+            contact: "carriere@cosmetic-ci.ci",
+            description: "Développement de nouvelles formulations cosmétiques à base de beurre de karité."
+        },
+        {
+            id: 3,
+            poste: "Responsable contrôle qualité",
+            entreprise: "Transform Cacao CI",
+            filiere: "Transformation du Cacao",
+            filiereTexte: "Transformation du Cacao",
+            localisation: "Parc Industriel PK24",
+            datePublication: "05/01/2025",
+            statut: "pourvue",
+            contact: "emploi@transformcacao.ci",
+            description: "Supervision des équipes QC et assurance de la conformité des produits finis."
+        }
+    ];
+
+    // 1. INITIALISATION GARANTIE DE LA BASE
+    function initialiserBaseDeDonnees() {
+        let db = { cvs: [], offres: [] };
+        const dbExistant = localStorage.getItem(DB_STORAGE_KEY);
+        
+        if (dbExistant) {
+            db = JSON.parse(dbExistant);
+            // VÉRIFICATION CRITIQUE : Si pas d'offres du tout, on réinitialise avec les exemples
+            if (!db.offres || db.offres.length === 0) {
+                db.offres = [...OFFRES_EXEMPLE];
+                localStorage.setItem(DB_STORAGE_KEY, JSON.stringify(db));
+            }
+        } else {
+            // Première visite : initialiser avec les exemples
+            db.offres = [...OFFRES_EXEMPLE];
+            localStorage.setItem(DB_STORAGE_KEY, JSON.stringify(db));
+        }
+        
+        return db;
+    }
+
+    // 2. FONCTIONS UTILITAIRES
+    function getDatabase() {
+        return initialiserBaseDeDonnees(); // Toujours garantir un état valide
+    }
+
+    function saveToDatabase(data) {
+        localStorage.setItem(DB_STORAGE_KEY, JSON.stringify(data));
+    }
+
+    // 3. AFFICHAGE DES OFFRES (FOOLPROOF)
+    function afficherOffres() {
+        const db = getDatabase();
+        const tbody = document.getElementById('offresTableBody');
+        
+        // VIDER le tableau AVANT de le remplir
+        tbody.innerHTML = '';
+        
+        // Message de débogage dans la console
+        console.log('Offres à afficher :', db.offres);
+        
+        // Si toujours vide, forcer les exemples
+        if (db.offres.length === 0) {
+            console.warn('Aucune offre trouvée, chargement des exemples...');
+            db.offres = [...OFFRES_EXEMPLE];
+            saveToDatabase(db);
+        }
+        
+        // CONSTRUIRE le tableau
+        db.offres.forEach(offre => {
+            const estPourvue = offre.statut === 'pourvue';
+            const row = document.createElement('tr');
+            
+            row.innerHTML = `
+                <td ${estPourvue ? 'style="opacity:0.7;"' : ''}>${offre.poste || 'Poste non spécifié'}</td>
+                <td ${estPourvue ? 'style="opacity:0.7;"' : ''}>${offre.entreprise || 'Entreprise non spécifiée'}</td>
+                <td ${estPourvue ? 'style="opacity:0.7;"' : ''}>${offre.filiereTexte || offre.filiere || 'Non spécifié'}</td>
+                <td ${estPourvue ? 'style="opacity:0.7;"' : ''}>${offre.localisation || 'Non spécifié'}</td>
+                <td ${estPourvue ? 'style="opacity:0.7;"' : ''}>${offre.datePublication || new Date().toLocaleDateString('fr-FR')}</td>
+                <td>
+                    <span class="statut-badge ${offre.statut === 'ouverte' ? 'statut-ouvert' : 'statut-pourvu'}">
+                        ${offre.statut === 'ouverte' ? 'Ouverte' : 'Pourvue'}
+                    </span>
+                </td>
+                <td>
+                    ${estPourvue 
+                        ? '<span style="color:#888; font-style:italic">Poste pourvu</span>' 
+                        : `<a href="#postuler" class="btn-postuler" onclick="postulerOffre(${offre.id})">Postuler</a>`
+                    }
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    // 4. GESTION DES FORMULAIRES (identique mais avec initialisation)
+    document.getElementById('cvForm')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Réinitialisation VISIBLE du champ fichier
+        const fileInput = document.getElementById('cvFichier');
+        const fileLabel = fileInput.parentElement.querySelector('label');
+        fileLabel.innerHTML = `<i class="fas fa-cloud-upload-alt"></i> Cliquez pour sélectionner un fichier`;
+        
+        // Simulation de soumission
+        const email = document.getElementById('cvEmail').value;
+        alert(`✅ Soumission simulée !\nUn email de confirmation serait envoyé à : ${email}`);
+        
+        // Réinitialisation COMPLÈTE du formulaire
+        this.reset();
+        fileInput.value = '';
+    });
+
+    document.getElementById('offreForm')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nouvelleOffre = {
+            id: Date.now(),
+            entreprise: document.getElementById('offreEntreprise').value,
+            poste: document.getElementById('offrePoste').value,
+            filiere: document.getElementById('offreFiliere').value,
+            filiereTexte: document.getElementById('offreFiliere').options[document.getElementById('offreFiliere').selectedIndex].text,
+            localisation: document.getElementById('offreLocalisation').value,
+            contact: document.getElementById('offreContact').value,
+            datePublication: new Date().toLocaleDateString('fr-FR'),
+            statut: 'ouverte'
+        };
+        
+        const db = getDatabase();
+        db.offres.unshift(nouvelleOffre); // Ajouter au DÉBUT
+        saveToDatabase(db);
+        afficherOffres(); // RAFRAÎCHIR l'affichage
+        
+        alert('✅ Nouvelle offre ajoutée !');
+        this.reset();
+    });
+
+    // 5. FONCTION POSTULER
+    window.postulerOffre = function(offreId) {
+        const db = getDatabase();
+        const offre = db.offres.find(o => o.id == offreId);
+        
+        if (offre) {
+            const sujet = `Candidature - ${offre.poste} - P2I`;
+            alert(`📧 Pour postuler :\n\nEnvoyez votre CV à :\n${offre.contact}\n\nObjet : "${sujet}"`);
+        }
+    };
+
+    // 6. GESTION DU FICHIER
+    document.getElementById('cvFichier')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const label = this.parentElement.querySelector('label');
+        
+        if (file) {
+            // Validation simple
+            const maxSize = 5 * 1024 * 1024; // 5MB
+            if (file.size > maxSize) {
+                alert('❌ Fichier trop volumineux (max 5MB)');
+                this.value = '';
+                label.innerHTML = `<i class="fas fa-cloud-upload-alt"></i> Cliquez pour sélectionner un fichier`;
+                return;
+            }
+            label.innerHTML = `<i class="fas fa-file"></i> ${file.name}`;
+        }
+    });
+
+    // 7. INITIALISATION AU CHARGEMENT
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Initialisation de la page Réseautage P2I...');
+        afficherOffres(); // CRITIQUE : Appel initial
+    });
+</script>
+</body>
+</html>

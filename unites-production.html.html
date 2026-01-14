@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unités de Production | Agro-alimentaire & Boissons | P2I</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ===========================================================================
+       RESET COMPLET & NOUVELLE BASE - DESIGN P2I MODERNISÉ
+       =========================================================================== */
+
+    /* 1. RESET GLOBAL RENFORCÉ */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: linear-gradient(135deg, 
+            #0d1b2a 0%, 
+            #1b263b 50%, 
+            #0d1b2a 100%);
+        color: #ffffff;
+        line-height: 1.6;
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+            radial-gradient(circle at 20% 80%, rgba(76, 201, 240, 0.05) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(247, 37, 133, 0.05) 0%, transparent 50%);
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    /* 2. CONTAINER UNIVERSEL */
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+        width: 100%;
+    }
+
+    /* ===========================================================================
+       HEADER & NAVIGATION - VERSION AMÉLIORÉE
+       =========================================================================== */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(13, 27, 42, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(76, 201, 240, 0.15);
+        padding: 15px 0;
+        transition: all 0.3s ease;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 30px;
+    }
+
+    /* Logo animé amélioré */
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+        transform: scale(1.05);
+    }
+
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+        position: relative;
+    }
+
+    .gear {
+        position: absolute;
+        border-radius: 50%;
+        border: 2.5px solid transparent;
+        background: linear-gradient(45deg, #4cc9f0, #f72585) border-box;
+        mask: linear-gradient(#fff 0 0) padding-box, 
+              linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+
+    .gear-large {
+        width: 100%;
+        height: 100%;
+        animation: rotateGear 25s linear infinite;
+    }
+
+    .gear-medium {
+        width: 70%;
+        height: 70%;
+        top: 15%;
+        left: 15%;
+        animation: rotateGear 20s linear infinite reverse;
+    }
+
+    .gear-small {
+        width: 40%;
+        height: 40%;
+        top: 30%;
+        left: 30%;
+        animation: rotateGear 15s linear infinite;
+    }
+
+    @keyframes rotateGear {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .logo-text {
+        font-size: 1.8rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #4cc9f0 0%, #f72585 50%, #7209b7 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        letter-spacing: -0.5px;
+    }
+
+    /* Navigation améliorée */
+    nav ul {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+    }
+
+    nav a {
+        color: #b8c1ec;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: all 0.3s;
+        position: relative;
+        padding: 8px 0;
+        display: block;
+    }
+
+    nav a:hover {
+        color: #4cc9f0;
+    }
+
+    nav a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #4cc9f0, #f72585);
+        border-radius: 3px;
+        transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    nav a:hover::after {
+        width: 100%;
+    }
+
+    nav a.active {
+        color: #4cc9f0;
+        font-weight: 600;
+    }
+
+    nav a.active::after {
+        width: 100%;
+    }
+
+    /* ===========================================================================
+       SECTION HERO - MODERNISÉE
+       =========================================================================== */
+    .hero {
+        min-height: 45vh;
+        display: flex;
+        align-items: center;
+        padding-top: 140px;
+        padding-bottom: 60px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-content {
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-content h1 {
+        font-size: 3.5rem !important;
+        font-weight: 800;
+        margin-bottom: 25px;
+        background: linear-gradient(135deg, 
+            #4cc9f0 0%, 
+            #f72585 50%, 
+            #7209b7 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1.2;
+        letter-spacing: -0.5px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem !important;
+        color: #b8c1ec;
+        max-width: 800px;
+        margin: 0 auto 40px;
+        line-height: 1.7;
+    }
+
+    .filiere-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(135deg, 
+            rgba(76, 201, 240, 0.15) 0%, 
+            rgba(247, 37, 133, 0.15) 100%);
+        color: #4cc9f0;
+        padding: 10px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+        margin-top: 20px;
+        border: 1px solid rgba(76, 201, 240, 0.3);
+        backdrop-filter: blur(10px);
+        animation: pulseGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+        from {
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.2);
+        }
+        to {
+            box-shadow: 0 0 25px rgba(76, 201, 240, 0.4);
+        }
+    }
+
+    /* ===========================================================================
+       SYSTÈME DE CADRES COMPLET - NOUVELLE VERSION
+       =========================================================================== */
+
+    /* Section des unités */
+    .units-section {
+        padding: 60px 0 100px;
+        position: relative;
+    }
+
+    .section-title {
+        font-size: 3rem !important;
+        text-align: center;
+        margin-bottom: 30px !important;
+        background: linear-gradient(135deg, #4cc9f0 0%, #f72585 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: #b8c1ec;
+        font-size: 1.4rem !important;
+        margin-bottom: 80px !important;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.7;
+    }
+
+    /* Grille des cadres - NOUVEAU DESIGN */
+    .units-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+        margin-bottom: 80px;
+    }
+
+    /* Cadre principal - DESIGN COMPLETEMENT RÉINVENTÉ */
+    .unit-card {
+        background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+        border-radius: 20px;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        min-height: 320px;
+        display: flex;
+        flex-direction: column;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* Effet de bordure lumineuse */
+    .unit-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        padding: 2px;
+        background: linear-gradient(135deg, 
+            rgba(76, 201, 240, 0.3), 
+            rgba(247, 37, 133, 0.3),
+            transparent 70%);
+        -webkit-mask: 
+            linear-gradient(#fff 0 0) content-box, 
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .unit-card:hover::before {
+        opacity: 1;
+    }
+
+    /* Effet au survol */
+    .unit-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        border-color: rgba(76, 201, 240, 0.3);
+        box-shadow: 
+            0 25px 50px rgba(0, 0, 0, 0.3),
+            0 0 100px rgba(76, 201, 240, 0.1);
+    }
+
+    /* Cadre sélectionné */
+    .unit-card.selected {
+        background: linear-gradient(145deg,
+            rgba(0, 230, 118, 0.08) 0%,
+            rgba(0, 230, 118, 0.04) 100%);
+        border-color: rgba(0, 230, 118, 0.4);
+    }
+
+    .unit-card.selected::before {
+        background: linear-gradient(135deg, 
+            rgba(0, 230, 118, 0.6), 
+            rgba(0, 179, 72, 0.6),
+            transparent 70%);
+        opacity: 1;
+    }
+
+    /* En-tête du cadre */
+    .unit-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 25px;
+        gap: 20px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* SYSTÈME D'ICÔNES COMPLET - NOUVEAU */
+    .unit-icon-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .unit-icon {
+        font-size: 2.5rem;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, 
+            rgba(76, 201, 240, 0.2) 0%, 
+            rgba(247, 37, 133, 0.2) 100%);
+        border-radius: 15px;
+        color: #4cc9f0;
+        transition: all 0.3s ease;
+    }
+
+    .unit-card:hover .unit-icon {
+        transform: scale(1.1) rotate(5deg);
+        background: linear-gradient(135deg, 
+            rgba(76, 201, 240, 0.3) 0%, 
+            rgba(247, 37, 133, 0.3) 100%);
+    }
+
+    .unit-name {
+        font-size: 1.5rem !important;
+        font-weight: 800 !important;
+        color: white;
+        line-height: 1.3;
+        margin: 0;
+        flex: 1;
+    }
+
+    /* SYSTÈME CAPEX - REDESIGN COMPLET */
+    .unit-capex-container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .unit-capex {
+    background: linear-gradient(135deg, 
+        rgba(0, 230, 118, 0.2) 0%, 
+        rgba(0, 179, 72, 0.25) 100%);
+    color: #00ff88 !important;
+    padding: 6px 16px !important; /* RÉDUIT de 10px à 6px (vertical) */
+    border-radius: 20px !important; /* RÉDUIT de 25px à 20px */
+    font-size: 0.95rem !important; /* RÉDUIT de 1rem à 0.95rem */
+    font-weight: 800;
+    border: 2px solid #00ff88;
+    box-shadow: 
+        0 0 15px rgba(0, 255, 136, 0.3),
+        inset 0 0 15px rgba(0, 255, 136, 0.1);
+    text-align: center;
+    min-width: 130px !important; /* RÉDUIT de 140px à 130px */
+    display: flex;
+    flex-direction: column;
+    gap: 3px !important; /* RÉDUIT de 5px à 3px */
+    backdrop-filter: blur(5px);
+    animation: capexPulseSoft 4s ease-in-out infinite;
+    height: auto !important;
+    max-height: 55px !important; /* HAUTEUR MAXIMALE AJOUTÉE */
+    line-height: 1.2 !important; /* RÉDUIT l'interligne */
+}
+
+@keyframes capexPulseSoft {
+    0%, 100% {
+        box-shadow: 
+            0 0 15px rgba(0, 255, 136, 0.3),
+            inset 0 0 15px rgba(0, 255, 136, 0.1);
+    }
+    50% {
+        box-shadow: 
+            0 0 20px rgba(0, 255, 136, 0.4),
+            inset 0 0 20px rgba(0, 255, 136, 0.15);
+    }
+}
+
+.capex-label {
+    font-size: 0.75rem !important; /* RÉDUIT de 0.8rem à 0.75rem */
+    font-weight: 600;
+    opacity: 0.9;
+    letter-spacing: 0.3px; /* RÉDUIT de 0.5px à 0.3px */
+    line-height: 1.1 !important; /* INTERLIGNE RÉDUIT */
+}
+
+.capex-value {
+    font-size: 1.1rem !important; /* RÉDUIT de 1.2rem à 1.1rem */
+    font-weight: 900;
+    line-height: 1.1 !important; /* INTERLIGNE RÉDUIT */
+}
+
+/* OPTIONNEL : Pour éviter que les CAPEX ne poussent trop l'en-tête */
+.unit-header {
+    align-items: center !important; /* Aligne verticalement au centre */
+    margin-bottom: 20px !important;
+    gap: 15px !important;
+}
+
+    /* Description */
+    .unit-desc {
+        color: #b8c1ec;
+        font-size: 1.15rem !important;
+        line-height: 1.8 !important;
+        margin-bottom: 25px;
+        flex-grow: 1;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Section caractéristiques */
+    .unit-features {
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 20px;
+        margin-top: auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    .feature {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+        font-size: 1rem !important;
+        color: #8a8fb3;
+        transition: all 0.3s ease;
+    }
+
+    .feature:hover {
+        color: #b8c1ec;
+        transform: translateX(5px);
+    }
+
+    .feature i {
+        color: #4cc9f0;
+        font-size: 1.1rem;
+        width: 20px;
+        text-align: center;
+    }
+
+    /* ===========================================================================
+       SYSTÈME D'ÉCRITURES COMPTABLES - NOUVEAU DESIGN AVEC TEXTE AGRANDI
+       =========================================================================== */
+    .accounting-section {
+        margin: 50px 0;
+        position: relative;
+    }
+
+    .accounting-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .accounting-title {
+        font-size: 2.2rem !important;
+        font-weight: 800 !important;
+        background: linear-gradient(135deg, #00e676 0%, #00b248 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    /* Tableau des écritures - NOUVEAU DESIGN */
+    .accounting-table-container {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 20px;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .accounting-table-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(76, 201, 240, 0.5), 
+            transparent);
+    }
+
+    .accounting-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 1.15rem !important;
+    }
+
+    .accounting-table thead {
+        background: linear-gradient(135deg, 
+            rgba(76, 201, 240, 0.1) 0%, 
+            rgba(247, 37, 133, 0.1) 100%);
+    }
+
+    .accounting-table th {
+        padding: 22px 25px !important;
+        text-align: left;
+        color: #b8c1ec;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+        text-transform: uppercase;
+        letter-spacing: 1px !important;
+        border-bottom: 3px solid rgba(76, 201, 240, 0.5) !important;
+    }
+
+    .accounting-table tbody tr {
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .accounting-table tbody tr:hover {
+        background: rgba(76, 201, 240, 0.05);
+        transform: translateX(5px);
+    }
+
+    .accounting-table td {
+        padding: 20px 25px !important;
+        color: #ffffff;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+        vertical-align: middle;
+        font-weight: 500 !important;
+    }
+
+    .accounting-table td:first-child {
+        border-radius: 10px 0 0 10px;
+    }
+
+    .accounting-table td:last-child {
+        border-radius: 0 10px 10px 0;
+    }
+
+    /* Styles pour les montants */
+    .amount-debit {
+        color: #ff6b6b;
+        font-weight: 800 !important;
+        font-size: 1.2rem !important;
+    }
+
+    .amount-credit {
+        color: #00e676;
+        font-weight: 800 !important;
+        font-size: 1.2rem !important;
+    }
+
+    .amount-total {
+        color: #4cc9f0;
+        font-weight: 900 !important;
+        font-size: 1.4rem !important;
+    }
+
+    /* Badge de statut */
+    .status-badge {
+        display: inline-block;
+        padding: 10px 20px !important;
+        border-radius: 25px !important;
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        text-align: center;
+        min-width: 120px !important;
+    }
+
+    .status-pending {
+        background: rgba(255, 193, 7, 0.2);
+        color: #ffc107;
+        border: 1px solid rgba(255, 193, 7, 0.4);
+    }
+
+    .status-completed {
+        background: rgba(0, 230, 118, 0.2);
+        color: #00e676;
+        border: 1px solid rgba(0, 230, 118, 0.4);
+    }
+
+    /* ===========================================================================
+       INDICATEUR DE SÉLECTION - AMÉLIORÉ
+       =========================================================================== */
+    .selection-indicator {
+        text-align: center;
+        margin: 60px auto 70px !important;
+        min-height: 40px;
+        max-width: 1000px;
+        padding: 30px 40px !important;
+        background: linear-gradient(135deg, 
+            rgba(0, 255, 136, 0.15) 0%, 
+            rgba(0, 200, 83, 0.2) 100%);
+        border-radius: 20px;
+        border: 3px solid rgba(0, 255, 136, 0.5) !important;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(15px);
+        box-shadow: 
+            0 15px 35px rgba(0, 255, 136, 0.2),
+            0 0 40px rgba(0, 255, 136, 0.3) !important;
+    }
+
+    .indicator-text {
+        font-size: 1.6rem !important;
+        font-weight: 800 !important;
+        color: #00ffaa !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        position: relative;
+        z-index: 1;
+        text-shadow: 
+            0 2px 10px rgba(0, 255, 136, 0.5),
+            0 0 20px rgba(0, 255, 136, 0.3) !important;
+    }
+
+    .indicator-text i {
+        font-size: 2.2rem !important;
+        animation: bounce 1.5s ease-in-out infinite;
+        color: #00ff88;
+        filter: drop-shadow(0 0 10px #00ff88);
+    }
+
+    /* ===========================================================================
+   BOUTONS - VERSION CORRIGÉE (TAILLE + CLIC PROPRE)
+   =========================================================================== */
+.navigation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 60px !important;
+    margin-top: 100px !important;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.btn {
+    padding: 35px 90px !important; /* BEAUCOUP PLUS GROS */
+    font-size: 1.8rem !important; /* BEAUCOUP PLUS GRAND */
+    font-weight: 800 !important;
+    border-radius: 25px !important;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    min-width: 400px !important; /* BEAUCOUP PLUS LARGE */
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase;
+    border: 4px solid transparent !important; /* BORDURE PLUS ÉPAISSE */
+    z-index: 1;
+    outline: none !important; /* ENLÈVE LE CONTOUR AU CLIC */
+}
+
+/* Supprime l'ancien effet neon border */
+.btn::after {
+    display: none;
+}
+
+/* Nouvel effet de bordure lumineuse SIMPLE */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 29px;
+    background: linear-gradient(45deg, 
+        #00ff88, #00ffaa, #00ff88);
+    z-index: -1;
+    opacity: 0.8;
+    animation: borderGlow 3s linear infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.5);
+    }
+}
+
+/* BOUTON VERT DE CONFIRMATION - SIMPLIFIÉ */
+.btn-primary {
+    background: linear-gradient(145deg, 
+        #00ff88 0%, 
+        #00cc66 50%, 
+        #00994c 100%) !important;
+    color: #002200 !important;
+    box-shadow: 
+        0 25px 50px rgba(0, 255, 136, 0.6),
+        0 0 80px rgba(0, 255, 136, 0.8),
+        0 0 120px rgba(0, 255, 136, 0.4),
+        inset 0 4px 8px rgba(255, 255, 255, 0.6) !important;
+    border: 4px solid #00ff88 !important;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8) !important;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-12px) scale(1.08) !important;
+    box-shadow: 
+        0 40px 80px rgba(0, 255, 136, 0.8),
+        0 0 100px rgba(0, 255, 136, 1),
+        0 0 150px rgba(0, 255, 136, 0.6),
+        inset 0 4px 10px rgba(255, 255, 255, 0.8) !important;
+    border-color: #ffffff !important;
+    background: linear-gradient(145deg, 
+        #00ffaa 0%, 
+        #00ff88 50%, 
+        #00cc66 100%) !important;
+}
+
+/* Animation de pulsation DOUCE */
+@keyframes softPulse {
+    0%, 100% {
+        box-shadow: 
+            0 25px 50px rgba(0, 255, 136, 0.6),
+            0 0 80px rgba(0, 255, 136, 0.8),
+            0 0 120px rgba(0, 255, 136, 0.4);
+    }
+    50% {
+        box-shadow: 
+            0 25px 50px rgba(0, 255, 136, 0.8),
+            0 0 100px rgba(0, 255, 136, 1),
+            0 0 140px rgba(0, 255, 136, 0.6);
+    }
+}
+
+.btn-primary {
+    animation: softPulse 3s ease-in-out infinite !important;
+}
+
+/* CLIC PROPRE - pas de changement disgracieux */
+.btn-primary:active:not(:disabled) {
+    transform: translateY(-6px) scale(1.04) !important;
+    box-shadow: 
+        0 20px 40px rgba(0, 255, 136, 0.7),
+        0 0 70px rgba(0, 255, 136, 0.9),
+        0 0 100px rgba(0, 255, 136, 0.5),
+        inset 0 2px 6px rgba(255, 255, 255, 0.7) !important;
+    transition: all 0.2s ease !important;
+}
+
+/* BOUTON ROUGE DE MODIFICATION - SIMPLIFIÉ */
+.btn-secondary {
+    background: linear-gradient(145deg, 
+        #ff5555 0%, 
+        #ff3333 50%, 
+        #cc0000 100%) !important;
+    color: white !important;
+    border: 4px solid #ff6666 !important;
+    box-shadow: 
+        0 25px 50px rgba(255, 85, 85, 0.5),
+        0 0 70px rgba(255, 102, 102, 0.6),
+        0 0 100px rgba(255, 85, 85, 0.3),
+        inset 0 4px 8px rgba(255, 255, 255, 0.4) !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+.btn-secondary::before {
+    background: linear-gradient(45deg, 
+        #ff5555, #ff7777, #ff5555) !important;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(145deg, 
+        #ff7777 0%, 
+        #ff5555 50%, 
+        #ff3333 100%) !important;
+    transform: translateY(-12px) scale(1.08) !important;
+    box-shadow: 
+        0 40px 80px rgba(255, 85, 85, 0.7),
+        0 0 90px rgba(255, 102, 102, 0.8),
+        0 0 130px rgba(255, 85, 85, 0.5),
+        inset 0 4px 10px rgba(255, 255, 255, 0.6) !important;
+    border-color: #ffffff !important;
+}
+
+/* CLIC PROPRE pour le rouge */
+.btn-secondary:active {
+    transform: translateY(-6px) scale(1.04) !important;
+    box-shadow: 
+        0 20px 40px rgba(255, 85, 85, 0.6),
+        0 0 60px rgba(255, 102, 102, 0.7),
+        0 0 90px rgba(255, 85, 85, 0.4),
+        inset 0 2px 6px rgba(255, 255, 255, 0.5) !important;
+    transition: all 0.2s ease !important;
+}
+
+/* Bouton désactivé */
+.btn:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+    filter: grayscale(0.7) !important;
+    animation: none !important;
+}
+
+/* Icônes dans les boutons - PLUS GROSSES */
+.btn i {
+    font-size: 2.5rem !important;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6)) !important;
+}
+
+.btn-primary i {
+    color: #002200 !important;
+    text-shadow: 0 0 15px #00ff88 !important;
+}
+
+.btn-secondary i {
+    color: #ffcccc !important;
+    text-shadow: 0 0 15px #ff5555 !important;
+}
+
+/* RESPONSIVE pour les GROS boutons */
+@media (max-width: 1200px) {
+    .btn {
+        padding: 30px 75px !important;
+        min-width: 350px !important;
+        font-size: 1.6rem !important;
+    }
+    
+    .navigation-buttons {
+        gap: 50px !important;
+        margin-top: 80px !important;
+    }
+    
+    .btn i {
+        font-size: 2.2rem !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .btn {
+        padding: 28px 65px !important;
+        min-width: 320px !important;
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .navigation-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px !important;
+        margin-top: 70px !important;
+    }
+    
+    .btn {
+        width: 100% !important;
+        max-width: 500px !important;
+        min-width: auto !important;
+        padding: 25px 50px !important;
+        font-size: 1.4rem !important;
+        border-radius: 22px !important;
+    }
+    
+    .btn i {
+        font-size: 2rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn {
+        padding: 22px 40px !important;
+        font-size: 1.3rem !important;
+        border-radius: 20px !important;
+    }
+    
+    .navigation-buttons {
+        gap: 30px !important;
+        margin-top: 60px !important;
+    }
+    
+    .btn i {
+        font-size: 1.8rem !important;
+    }
+}
+
+    /* ===========================================================================
+       FOOTER - MODERNISÉ
+       =========================================================================== */
+    footer {
+        background: linear-gradient(180deg, 
+            transparent 0%, 
+            rgba(13, 27, 42, 0.8) 100%);
+        padding: 80px 0 40px;
+        border-top: 1px solid rgba(76, 201, 240, 0.15);
+        margin-top: 100px;
+        position: relative;
+    }
+
+    footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(76, 201, 240, 0.5), 
+            transparent);
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 50px;
+        margin-bottom: 60px;
+    }
+
+    .footer-column h3 {
+        font-size: 1.4rem;
+        margin-bottom: 25px;
+        background: linear-gradient(135deg, #4cc9f0 0%, #f72585 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .footer-column h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(90deg, #4cc9f0, #f72585);
+        border-radius: 3px;
+    }
+
+    .footer-links {
+        list-style: none;
+    }
+
+    .footer-links li {
+        margin-bottom: 15px;
+        transition: transform 0.3s ease;
+    }
+
+    .footer-links li:hover {
+        transform: translateX(8px);
+    }
+
+    .footer-links a {
+        color: #b8c1ec;
+        text-decoration: none;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .footer-links a:hover {
+        color: #4cc9f0;
+    }
+
+    .footer-links i {
+        font-size: 0.9rem;
+        width: 20px;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #8a8fb3;
+        font-size: 0.95rem;
+    }
+
+    /* ===========================================================================
+       RESPONSIVE DESIGN
+       =========================================================================== */
+    @media (max-width: 1200px) {
+        .units-grid {
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+        }
+        
+        .btn {
+            padding: 22px 60px !important;
+            min-width: 280px !important;
+            font-size: 1.4rem !important;
+        }
+        
+        .navigation-buttons {
+            gap: 40px !important;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .nav-container {
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        nav ul {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .hero {
+            padding-top: 180px;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.6rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .units-grid {
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        
+        .unit-card {
+            min-height: 300px;
+            padding: 25px;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.2rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+        }
+        
+        .navigation-buttons {
+            flex-direction: column;
+            align-items: center;
+            gap: 30px !important;
+            margin-top: 60px !important;
+        }
+        
+        .btn {
+            width: 100% !important;
+            max-width: 450px !important;
+            min-width: auto !important;
+            padding: 20px 40px !important;
+            font-size: 1.3rem !important;
+            border-radius: 18px !important;
+        }
+        
+        .btn i {
+            font-size: 1.8rem !important;
+        }
+        
+        .accounting-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .accounting-table th,
+        .accounting-table td {
+            padding: 15px 18px !important;
+        }
+        
+        .accounting-table {
+            font-size: 1rem !important;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .container {
+            padding: 0 15px;
+        }
+        
+        .hero {
+            min-height: 50vh;
+            padding-top: 200px;
+        }
+        
+        .unit-header {
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .unit-capex {
+            width: 100%;
+        }
+        
+        .accounting-table {
+            font-size: 0.95rem !important;
+        }
+        
+        .footer-content {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        .btn {
+            padding: 18px 30px !important;
+            font-size: 1.2rem !important;
+            border-radius: 16px !important;
+        }
+        
+        .navigation-buttons {
+            gap: 25px !important;
+            margin-top: 50px !important;
+        }
+        
+        .selection-indicator {
+            padding: 20px 25px !important;
+            margin: 40px auto 50px !important;
+        }
+        
+        .indicator-text {
+            font-size: 1.3rem !important;
+        }
+    }
+
+    /* ===========================================================================
+       ANIMATIONS & TRANSITIONS SUPPLÉMENTAIRES
+       =========================================================================== */
+    .fade-in {
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    .slide-up {
+        animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+    }
+
+    /* État de chargement */
+    .loading-skeleton {
+        background: linear-gradient(90deg, 
+            rgba(255, 255, 255, 0.05) 25%, 
+            rgba(255, 255, 255, 0.1) 50%, 
+            rgba(255, 255, 255, 0.05) 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+        border-radius: 10px;
+    }
+
+    @keyframes loading {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+
+    /* Scrollbar personnalisée */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(13, 27, 42, 0.5);
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #4cc9f0, #f72585);
+        border-radius: 5px;
+        border: 2px solid rgba(13, 27, 42, 0.5);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #5cd5ff, #ff3b94);
+    }
+
+    /* ===========================================================================
+       CLASSES UTILITAIRES
+       =========================================================================== */
+    .text-gradient {
+        background: linear-gradient(135deg, #4cc9f0 0%, #f72585 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .glow-effect {
+        filter: drop-shadow(0 0 10px currentColor);
+    }
+
+    .separator {
+        height: 1px;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(76, 201, 240, 0.5), 
+            transparent);
+        margin: 40px 0;
+    }
+
+    /* Badges supplémentaires */
+    .badge {
+        display: inline-block;
+        padding: 8px 18px;
+        border-radius: 20px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin: 0 5px;
+    }
+
+    .badge-info {
+        background: rgba(76, 201, 240, 0.2);
+        color: #4cc9f0;
+        border: 1px solid rgba(76, 201, 240, 0.4);
+    }
+
+    .badge-warning {
+        background: rgba(255, 193, 7, 0.2);
+        color: #ffc107;
+        border: 1px solid rgba(255, 193, 7, 0.4);
+    }
+
+    .badge-danger {
+        background: rgba(220, 53, 69, 0.2);
+        color: #dc3545;
+        border: 1px solid rgba(220, 53, 69, 0.4);
+    }
+</style>
+</head>
+<body>
+    <!-- Header avec Navigation P2I -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="gear gear-large"></div>
+                    <div class="gear gear-medium"></div>
+                    <div class="gear gear-small"></div>
+                </div>
+                <div class="logo-text">P2I</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="filieres.html">Filières</a></li>
+                    <li><a href="secteur-industriel.html">Secteur industriel</a></li>
+                    <li><a href="reseau.html">Réseautage</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section Héro -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Sélectionnez une Unité de Production</h1>
+                <p class="hero-subtitle">
+                    Explorez les 8 unités de production spécifiques à la filière Agro-alimentaire & Boissons.
+                    Cliquez sur une unité pour la sélectionner et passer à l'étape suivante de configuration de votre projet.
+                </p>
+                <div class="filiere-indicator" id="filiereIndicator">
+                    <!-- Rempli par JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Sélection des Unités -->
+    <section class="units-section">
+        <div class="container">
+            <h2 class="section-title">Unités de Production Disponibles</h2>
+            <p class="section-subtitle">
+                Chaque unité représente un projet industriel concret avec son propre CAPEX minimum, sa technologie et son marché cible.
+                Sélectionnez celle qui correspond le mieux à votre vision et à votre budget.
+            </p>
+            
+            <!-- Grille des 8 Unités de Production -->
+            <div class="units-grid" id="unitsGrid">
+                <!-- Les cartes seront générées dynamiquement par JavaScript -->
+            </div>
+            
+            <!-- Indicateur de sélection -->
+            <div class="selection-indicator" id="selectionIndicator">
+                <i class="fas fa-info-circle"></i> Aucune unité sélectionnée. Cliquez sur une carte ci-dessus pour choisir votre projet.
+            </div>
+            
+            <!-- Boutons de Navigation -->
+            <div class="navigation-buttons">
+                <button class="btn-secondary" id="backToSectorsBtn">
+                    <i class="fas fa-arrow-left"></i> Retour aux Filières
+                </button>
+                <button class="btn-primary" id="nextStepBtn" disabled>
+                    Étape suivante : Choisir une Région <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer P2I -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Plateforme Industrielle Ivoirienne</h3>
+                    <p style="color: #b8c1ec; line-height: 1.7;">
+                        Votre guide intelligent pour le développement industriel en Côte d'Ivoire.
+                        Des données fiables, des modèles éprouvés, un accompagnement sur mesure.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigation Projet</h3>
+                    <ul class="footer-links">
+                        <li><a href="filieres.html">1. Choisir une Filière</a></li>
+                        <li><a href="#current">2. Sélectionner une Unité</a></li>
+                        <li><a href="#next">3. Localiser le Projet</a></li>
+                        <li><a href="#next">4. Définir l'Investissement</a></li>
+                        <li><a href="#next">5. Business Plan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support Technique</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:support-projet@p2i-ci.org">support-projet@p2i-ci.org</a></li>
+                        <li><a href="tel:+225000000002">+225 00 00 00 02</a></li>
+                        <li>Questions techniques CAPEX</li>
+                        <li>Simulation financière</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Plateforme Industrielle Ivoirienne (P2I). Tous droits réservés.</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">
+                    Les CAPEX sont des estimations minimales basées sur des équipements neufs de qualité industrielle. Les coûts réels peuvent varier.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== DONNÉES DES UNITÉS DE PRODUCTION ==========
+        // Liste des 8 unités pour la filière Agro-alimentaire & Boissons
+        const productionUnits = [
+            {
+                id: "huile-palme",
+                name: "Production d'huile de palme raffinée",
+                description: "Unité complète de raffinage d'huile de palme pour le marché local et l'export. Inclut filtration, neutralisation, blanchiment et désodorisation.",
+                capex: "80 000 $",
+                icon: "🛢️",
+                features: ["Marché: Local & Export", "Technologie: Raffinage physique", "Emplois: 8-12 directs"]
+            },
+            {
+                id: "jus-fruits",
+                name: "Production de jus de fruits",
+                description: "Unité de pasteurisation et conditionnement de jus de fruits tropicaux (ananas, mangue, orange). Ligne aseptique pour longue conservation.",
+                capex: "120 000 $",
+                icon: "🍹",
+                features: ["Marché: Urbain & Régional", "Process: Pasteurisation HTST", "Emplois: 10-15 directs"]
+            },
+            {
+                id: "conserverie-legumes",
+                name: "Conserverie de légumes",
+                description: "Mise en conserve et stérilisation de légumes locaux (tomates, gombos, haricots). Conditionnement en boîtes métal et verre.",
+                capex: "70 000 $",
+                icon: "🥫",
+                features: ["Marché: National", "Process: Autoclave industriel", "Emplois: 12-18 directs"]
+            },
+            {
+                id: "boulangerie",
+                name: "Boulangerie industrielle",
+                description: "Production à grande échelle de pain, pains au chocolat et viennoiseries pour le marché urbain. Ligne de pétrissage, fermentation et cuisson automatisée.",
+                capex: "55 000 $",
+                icon: "🥐",
+                features: ["Marché: Zones urbaines", "Capacité: 5000+ pièces/jour", "Emplois: 8-10 directs"]
+            },
+            {
+                id: "biscuits",
+                name: "Production de biscuits",
+                description: "Fabrication de biscuits à base de farines locales (manioc, maïs) enrichis. Ligne de découpe, cuisson et conditionnement.",
+                capex: "45 000 $",
+                icon: "🍪",
+                features: ["Marché: National", "Produits: Sucrés & salés", "Emplois: 6-8 directs"]
+            },
+            {
+                id: "fruits-confits",
+                name: "Production de fruits confits",
+                description: "Transformation de fruits tropicaux (ananas, papaye, gingembre) en fruits confits pour l'export. Process de confisage et séchage.",
+                capex: "65 000 $",
+                icon: "🍍",
+                features: ["Marché: Export (UE, Asie)", "Valeur ajoutée: Élevée", "Emplois: 8-12 directs"]
+            },
+            {
+                id: "transformation-cacao",
+                name: "Transformation du cacao",
+                description: "Unité de broyage et transformation de fèves de cacao en pâte, beurre et poudre. Première étape de valorisation locale.",
+                capex: "250 000 $",
+                icon: "🍫",
+                description: "Unité de broyage et transformation de fèves de cacao en pâte, beurre et poudre. Première étape de valorisation locale pour le 1er producteur mondial.",
+                features: ["Marché: International", "Stratégie nationale", "Emplois: 15-20 directs"]
+            },
+            {
+                id: "transformation-anacarde",
+                name: "Transformation de l'anacarde",
+                description: "Unité de décorticage et transformation de noix de cajou brutes. Process de grillage, salage et conditionnement sous vide.",
+                capex: "180 000 $",
+                icon: "🌰",
+                description: "Unité de décorticage et transformation de noix de cajou brutes (1er producteur mondial). Process de grillage, salage et conditionnement sous vide.",
+                features: ["Marché: International", "Priorité gouvernementale", "Emplois: 20-25 directs"]
+            }
+        ];
+
+        // ========== ÉTAT DE L'APPLICATION ==========
+        let selectedUnit = null;
+        let currentSector = "Agro-alimentaire & Boissons"; // Valeur par défaut
+
+        // ========== INITIALISATION AU CHARGEMENT ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Récupérer la filière sélectionnée (depuis la page précédente ou session)
+            const urlParams = new URLSearchParams(window.location.search);
+            const sectorFromURL = urlParams.get('sector');
+            const sectorFromStorage = sessionStorage.getItem('selectedSectorName');
+            
+            currentSector = sectorFromURL || sectorFromStorage || "Agro-alimentaire & Boissons";
+            
+            // Mettre à jour l'indicateur de filière
+            document.getElementById('filiereIndicator').textContent = `Filière sélectionnée : ${currentSector}`;
+            
+            // 2. Générer les cartes des unités de production
+            generateUnitCards();
+            
+            // 3. Configurer les écouteurs d'événements
+            setupEventListeners();
+            
+            // 4. Vérifier s'il y a une sélection précédente
+            const previousUnit = sessionStorage.getItem('selectedUnitId');
+            if (previousUnit) {
+                const unitCard = document.querySelector(`[data-unit-id="${previousUnit}"]`);
+                if (unitCard) {
+                    setTimeout(() => unitCard.click(), 100); // Petit délai pour l'animation
+                }
+            }
+        });
+
+        // ========== FONCTIONS ==========
+        function generateUnitCards() {
+            const grid = document.getElementById('unitsGrid');
+            grid.innerHTML = ''; // Nettoyer
+            
+            productionUnits.forEach(unit => {
+                const card = document.createElement('div');
+                card.className = 'unit-card';
+                card.setAttribute('data-unit-id', unit.id);
+                
+                card.innerHTML = `
+                    <div class="unit-header">
+                        <div>
+                            <div class="unit-icon">${unit.icon}</div>
+                            <div class="unit-name">${unit.name}</div>
+                        </div>
+                       <div style="background: linear-gradient(135deg, rgba(0, 230, 118, 0.2), rgba(0, 179, 72, 0.25)); color: #00ff88; padding: 10px 18px; border-radius: 25px; font-size: 1.1rem; font-weight: 900; border: 2px solid #00ff88; box-shadow: 0 0 15px rgba(0, 255, 136, 0.4); text-align: center; min-width: 150px; letter-spacing: 0.5px;">CAPEX: ${unit.capex}</div>
+                    </div>
+                    <div class="unit-desc">${unit.description}</div>
+                    <div class="unit-features">
+                        ${unit.features.map(feature => `
+                            <div class="feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>${feature}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                // Ajouter l'écouteur de clic
+                card.addEventListener('click', () => selectUnit(unit.id, unit.name, unit.capex));
+                grid.appendChild(card);
+            });
+        }
+        
+        function selectUnit(unitId, unitName, unitCapex) {
+            // Désélectionner toutes les cartes
+            document.querySelectorAll('.unit-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Sélectionner la carte cliquée
+            const selectedCard = document.querySelector(`[data-unit-id="${unitId}"]`);
+            selectedCard.classList.add('selected');
+            
+            // Mettre à jour l'état
+            selectedUnit = { id: unitId, name: unitName, capex: unitCapex };
+            
+            // Mettre à jour l'indicateur
+            document.getElementById('selectionIndicator').innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <strong>Unité sélectionnée :</strong> ${unitName} | <strong>Investissement minimum :</strong> ${unitCapex}
+                <br><small>Cliquez sur "Étape suivante" pour choisir la localisation de votre projet.</small>
+            `;
+            
+            // Activer le bouton suivant
+            document.getElementById('nextStepBtn').disabled = false;
+            document.getElementById('nextStepBtn').innerHTML = `Étape suivante : Choisir une Région <i class="fas fa-arrow-right"></i>`;
+            
+            // Sauvegarder dans sessionStorage
+            sessionStorage.setItem('selectedUnitId', unitId);
+            sessionStorage.setItem('selectedUnitName', unitName);
+            sessionStorage.setItem('selectedUnitCapex', unitCapex);
+            
+            // Défiler doucement vers l'indicateur
+            document.getElementById('selectionIndicator').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }
+        
+        function setupEventListeners() {
+            // Bouton "Retour aux Filières"
+            document.getElementById('backToSectorsBtn').addEventListener('click', function() {
+                window.location.href = 'filieres.html';
+            });
+            
+            // Bouton "Étape suivante"
+            document.getElementById('nextStepBtn').addEventListener('click', function() {
+                if (!selectedUnit) {
+                    alert('Veuillez d\'abord sélectionner une unité de production.');
+                    return;
+                }
+                
+                // Redirection vers la page de sélection de région
+                // Pour l'instant, simulation
+                alert(`Redirection vers la sélection de région pour : ${selectedUnit.name}\n\nDans la version finale, cette action ouvrira la page "selection-region.html" pour choisir la localisation du projet.`);
+                
+                // À terme, cette ligne redirigera vers :
+                // window.location.href = `selection-region.html?unit=${selectedUnit.id}&sector=${encodeURIComponent(currentSector)}`;
+            });
+        }
+    </script>
+</body>
+</html>

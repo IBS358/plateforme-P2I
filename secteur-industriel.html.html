@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Secteur Industriel en Côte d'Ivoire | Plateforme Industrielle Ivoirienne (P2I)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== STYLES DE BASE (identiques à l'accueil P2I) ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER & NAVIGATION P2I ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(76, 201, 240, 0.1);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        .gear {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #4cc9f0;
+        }
+
+        .gear-large { animation: rotate 20s linear infinite; }
+        .gear-medium { 
+            width: 70%; height: 70%; top: 15%; left: 15%;
+            animation: rotate 15s linear infinite reverse;
+        }
+        .gear-small { 
+            width: 40%; height: 40%; top: 30%; left: 30%;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        nav a {
+            color: #b8c1ec;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a:hover { color: #4cc9f0; }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after { width: 100%; }
+
+        /* Style pour le lien actif dans la navigation */
+        nav a.active {
+            color: #4cc9f0;
+            font-weight: 600;
+        }
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #b8c1ec;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        /* ===== SECTIONS CONTENU ===== */
+        .content-section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Section Chiffres */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: #4cc9f0;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #4cc9f0;
+            margin-bottom: 10px;
+        }
+
+        .stat-source {
+            color: #f72585;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Graphique */
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-bar {
+            height: 40px;
+            background: linear-gradient(90deg, #4361ee, #f72585);
+            border-radius: 20px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            width: 0;
+            animation: fillBar 2s ease-out forwards;
+        }
+
+        .chart-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        @keyframes fillBar {
+            from { width: 0; }
+            to { width: var(--target-width); }
+        }
+
+        /* Carte des zones */
+        .map-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .zone-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .zone-card:hover {
+            transform: translateY(-5px);
+            border-color: #4cc9f0;
+        }
+
+        .zone-icon {
+            font-size: 2.5rem;
+            color: #4cc9f0;
+            margin-bottom: 20px;
+        }
+
+        /* Frise chronologique */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 60px auto;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 4px solid #4cc9f0;
+            position: relative;
+        }
+
+        .timeline-year {
+            color: #4cc9f0;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Avantages */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .advantage-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            border-color: #f72585;
+        }
+
+        /* ===== FOOTER P2I ===== */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(76, 201, 240, 0.1);
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a {
+            color: #b8c1ec;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .footer-links a:hover {
+            color: #4cc9f0;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b8c1ec;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero { padding-top: 150px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .nav-container { flex-direction: column; gap: 20px; }
+            .stats-grid, .map-container, .advantages-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header avec Navigation P2I -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="gear gear-large"></div>
+                    <div class="gear gear-medium"></div>
+                    <div class="gear gear-small"></div>
+                </div>
+                <div class="logo-text">P2I</div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="filieres.html">Filières</a></li>
+                    <li><a href="secteur-industriel.html" class="active">Secteur industriel</a></li>
+                    <li><a href="reseau.html">Réseautage</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section Héro -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Le Secteur Industriel en Côte d'Ivoire</h1>
+                <p class="hero-subtitle">
+                    Découvrez le poids économique, les dynamiques de croissance et les perspectives 
+                    d'un secteur clé pour l'avenir de la Côte d'Ivoire. Données actualisées issues des 
+                    principales institutions (BAD, Gouvernement Ivoirien, INS).
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Chiffres Clés -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Chiffres Clés du Secteur (2023-2024)</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="counter1">0</div>
+                    <div class="stat-label">Contribution au PIB</div>
+                    <div class="stat-source">Source : INS Côte d'Ivoire</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="counter2">0</div>
+                    <div class="stat-label">Croissance annuelle moyenne</div>
+                    <div class="stat-source">Source : BAD - Rapport 2024</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="counter3">0</div>
+                    <div class="stat-label">Emplois directs générés</div>
+                    <div class="stat-source">Source : Ministère de l'Industrie</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="counter4">0</div>
+                    <div class="stat-label">Investissements étrangers (M$)</div>
+                    <div class="stat-source">Source : CEPICI</div>
+                </div>
+            </div>
+
+            <!-- Graphique de croissance -->
+            <div class="chart-container">
+                <h3 style="color: white; margin-bottom: 30px; text-align: center;">
+                    Évolution de la Contribution Industrielle au PIB
+                </h3>
+                
+                <div class="chart-label">
+                    <span>2020</span>
+                    <span>24%</span>
+                </div>
+                <div class="chart-bar" style="--target-width: 65%;"></div>
+                
+                <div class="chart-label">
+                    <span>2022</span>
+                    <span>26%</span>
+                </div>
+                <div class="chart-bar" style="--target-width: 70%;"></div>
+                
+                <div class="chart-label">
+                    <span>2024</span>
+                    <span>28%</span>
+                </div>
+                <div class="chart-bar" style="--target-width: 75%; background: linear-gradient(90deg, #f72585, #ff9e00);"></div>
+                
+                <div class="chart-label">
+                    <span>2026 (Projection PND)</span>
+                    <span>32%</span>
+                </div>
+                <div class="chart-bar" style="--target-width: 85%; background: linear-gradient(90deg, #ff9e00, #00e676);"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Zones Industrielles -->
+    <section class="content-section" style="background: rgba(255, 255, 255, 0.02);">
+        <div class="container">
+            <h2 class="section-title">Pôles Industriels Stratégiques en Côte d'Ivoire</h2>
+            
+            <div class="map-container">
+                <div class="zone-card">
+                    <div class="zone-icon">🏭</div>
+                    <h3 style="color: white; margin-bottom: 15px;">Zone Industrielle de Yopougon (Abidjan)</h3>
+                    <p style="color: #b8c1ec;">
+                        Le poumon industriel historique, concentrant une grande diversité d'activités (agroalimentaire, chimie, matériaux). Bénéficie de la proximité du port autonome d'Abidjan.
+                    </p>
+                </div>
+                
+                <div class="zone-card">
+                    <div class="zone-icon">⚡</div>
+                    <h3 style="color: white; margin-bottom: 15px;">Parc Industriel de PK24</h3>
+                    <p style="color: #b8c1ec;">
+                        Nouveau pôle en développement, destiné à accueillir les grandes industries et à désengorger Abidjan. Offre des terrains aménagés et des incitations spécifiques.
+                    </p>
+                </div>
+                
+                <div class="zone-card">
+                    <div class="zone-icon">🌱</div>
+                    <h3 style="color: white; margin-bottom: 15px;">Pôle Industriel de San Pedro</h3>
+                    <p style="color: #b8c1ec;">
+                        Spécialisé dans la première transformation des produits agricoles d'exportation (cacao, caoutchouc, palmiste) grâce à son port en eau profonde.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Perspectives -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Perspectives & Stratégie Nationale (PND 2021-2025)</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2021-2023</div>
+                    <p style="color: #b8c1ec;">
+                        Mise en œuvre des réformes pour améliorer le climat des affaires et lancement de projets structurants dans l'agro-industrie et la chimie.
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2024-2025</div>
+                    <p style="color: #b8c1ec;">
+                        Accélération des investissements dans les parcs industriels (PK24, etc.) et développement de chaînes de valeur régionales.
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">Vision 2030</div>
+                    <p style="color: #b8c1ec;">
+                        Faire de la Côte d'Ivoire un hub industriel régional, avec une industrie diversifiée contribuant à plus de 30% du PIB et créatrice d'emplois qualifiés.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Avantages -->
+    <section class="content-section" style="background: rgba(255, 255, 255, 0.02);">
+        <div class="container">
+            <h2 class="section-title">Pourquoi Investir dans l'Industrie Ivoirienne ?</h2>
+            
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="zone-icon">📈</div>
+                    <h3 style="color: white; margin-bottom: 15px;">Croissance Rapide</h3>
+                    <p style="color: #b8c1ec;">
+                        Taux de croissance industrielle parmi les plus élevés d'Afrique de l'Ouest (+8% en moyenne sur 5 ans).
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="zone-icon">💰</div>
+                    <h3 style="color: white; margin-bottom: 15px;">Incitations Fiscales</h3>
+                    <p style="color: #b8c1ec;">
+                        Exonérations douanières et fiscales pour les projets prioritaires dans les zones industrielles.
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="zone-icon">🌍</div>
+                    <h3 style="color: white; margin-bottom: 15px;">Accès aux Marchés</h3>
+                    <p style="color: #b8c1ec;">
+                        Porte d'entrée vers un marché de 400 millions de consommateurs de la CEDEAO et accès préférentiel à l'UE.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer P2I -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Plateforme Industrielle Ivoirienne</h3>
+                    <p style="color: #b8c1ec; line-height: 1.7;">
+                        Votre source d'information fiable sur le secteur industriel ivoirien. 
+                        Données actualisées et analyses stratégiques alignées avec le PND 2021-2025.
+                    </p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="filieres.html">Filières Industrielles</a></li>
+                        <li><a href="secteur-industriel.html">Secteur Industriel</a></li>
+                        <li><a href="reseau.html">Réseautage</a></li>
+                        <li><a href="apropos.html">À Propos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact & Sources</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:contact@p2i-ci.org">contact@p2i-ci.org</a></li>
+                        <li><a href="tel:+225000000000">+225 00 00 00 00</a></li>
+                        <li>Ministère de l'Industrie de Côte d'Ivoire</li>
+                        <li>BAD • INS • CEPICI</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Plateforme Industrielle Ivoirienne (P2I). Tous droits réservés.</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">
+                    Données actualisées en janvier 2025. Sources officielles gouvernementales et institutionnelles.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animation des compteurs avec valeurs adaptées à la Côte d'Ivoire
+        function animateCounter(elementId, finalValue, duration = 2000) {
+            let element = document.getElementById(elementId);
+            let start = 0;
+            let increment = finalValue / (duration / 16);
+            let current = 0;
+            
+            function updateCounter() {
+                current += increment;
+                if (current < finalValue) {
+                    // Affiche le symbole '%' pour les compteurs 1 et 2, 'k' pour le 3, 'M$' pour le 4
+                    let suffix = '';
+                    if (elementId.includes('counter1') || elementId.includes('counter2')) suffix = '%';
+                    if (elementId.includes('counter3')) suffix = 'k';
+                    if (elementId.includes('counter4')) suffix = 'M$';
+                    element.textContent = Math.floor(current) + suffix;
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    let suffix = '';
+                    if (elementId.includes('counter1') || elementId.includes('counter2')) suffix = '%';
+                    if (elementId.includes('counter3')) suffix = 'k';
+                    if (elementId.includes('counter4')) suffix = 'M$';
+                    element.textContent = finalValue + suffix;
+                }
+            }
+            updateCounter();
+        }
+
+        // Observer pour déclencher les animations au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animer les compteurs avec les valeurs pour la Côte d'Ivoire
+                    animateCounter('counter1', 26);   // Contribution au PIB ~26%
+                    animateCounter('counter2', 8.5);  // Croissance annuelle ~8.5%
+                    animateCounter('counter3', 450);  // ~450 000 emplois directs
+                    animateCounter('counter4', 850);  // ~850 M$ d'IDE
+                    
+                    // Animer les barres du graphique
+                    document.querySelectorAll('.chart-bar').forEach(bar => {
+                        bar.style.animation = 'fillBar 2s ease-out forwards';
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        // Observer la section des chiffres
+        const statsSection = document.querySelector('.content-section');
+        if (statsSection) observer.observe(statsSection);
+    </script>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos | Plateforme Industrielle Ivoirienne (P2I)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== STYLES DE BASE P2I ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER & NAVIGATION P2I ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(76, 201, 240, 0.1);
+            padding: 15px 0;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+        .gear {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #4cc9f0;
+        }
+        .gear-large { animation: rotate 20s linear infinite; }
+        .gear-medium {
+            width: 70%; height: 70%; top: 15%; left: 15%;
+            animation: rotate 15s linear infinite reverse;
+        }
+        .gear-small {
+            width: 40%; height: 40%; top: 30%; left: 30%;
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        nav ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        nav a {
+            color: #b8c1ec;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        nav a:hover { color: #4cc9f0; }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after { width: 100%; }
+        nav a.active {
+            color: #4cc9f0;
+            font-weight: 600;
+        }
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            position: relative;
+            text-align: center;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #b8c1ec;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        /* ===== SECTIONS CONTENU ===== */
+        .content-section {
+            padding: 80px 0;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Cartes de valeurs/mission */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-color: #4cc9f0;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .value-icon {
+            font-size: 3rem;
+            color: #4cc9f0;
+            margin-bottom: 20px;
+        }
+        .value-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        /* Équipe */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .team-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4cc9f0, #f72585);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+        .team-name {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: white;
+        }
+        .team-role {
+            color: #4cc9f0;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        /* Frise chronologique */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 4px solid #4cc9f0;
+        }
+        .timeline-year {
+            color: #4cc9f0;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* ===== FOOTER P2I ===== */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(76, 201, 240, 0.1);
+            margin-top: 80px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a {
+            color: #b8c1ec;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .footer-links a:hover {
+            color: #4cc9f0;
+            padding-left: 5px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b8c1ec;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero { padding-top: 150px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .nav-container { flex-direction: column; gap: 20px; }
+            .values-grid, .team-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header avec Navigation P2I -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="gear gear-large"></div>
+                    <div class="gear gear-medium"></div>
+                    <div class="gear gear-small"></div>
+                </div>
+                <div class="logo-text">P2I</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="filieres.html">Filières</a></li>
+                    <li><a href="secteur-industriel.html">Secteur industriel</a></li>
+                    <li><a href="reseau.html">Réseautage</a></li>
+                    <li><a href="apropos.html" class="active">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section Héro -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>À Propos de la P2I</h1>
+                <p class="hero-subtitle">
+                    Découvrez la vision, la mission et les valeurs qui animent la Plateforme Industrielle Ivoirienne,
+                    votre partenaire stratégique pour le développement industriel de la Côte d'Ivoire.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Notre Mission -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Notre Mission</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3 class="value-title">Catalyser l'Industrialisation</h3>
+                    <p style="color: #b8c1ec;">
+                        Accélérer la transformation structurelle de l'économie ivoirienne en facilitant la création et le développement d'entreprises industrielles compétitives.
+                    </p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3 class="value-title">Connecter les Acteurs</h3>
+                    <p style="color: #b8c1ec;">
+                        Créer un écosystème dynamique rassemblant investisseurs, entrepreneurs, talents et institutions autour des opportunités industrielles.
+                    </p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">💡</div>
+                    <h3 class="value-title">Démocratiser l'Information</h3>
+                    <p style="color: #b8c1ec;">
+                        Mettre à disposition des données fiables, des analyses stratégiques et des outils concrets pour des prises de décision éclairées.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Notre Histoire -->
+    <section class="content-section" style="background: rgba(255, 255, 255, 0.02);">
+        <div class="container">
+            <h2 class="section-title">Notre Histoire</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2023 - L'Idée</div>
+                    <p style="color: #b8c1ec;">
+                        Constat du besoin crucial d'une plateforme intégrée pour accompagner l'ambition industrielle de la Côte d'Ivoire, inspirée des meilleures pratiques tout en s'adaptant au contexte local.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2024 - Le Développement</div>
+                    <p style="color: #b8c1ec;">
+                        Conception et développement de la première version de la P2I, en étroite collaboration avec des experts du secteur industriel, des investisseurs et des institutions publiques ivoiriennes.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2025 - Le Lancement</div>
+                    <p style="color: #b8c1ec;">
+                        Lancement officiel de la plateforme avec 12 filières prioritaires identifiées, alignées sur le Plan National de Développement (PND) 2021-2025.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Notre Équipe -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Notre Équipe Fondatrice</h2>
+            <p style="text-align: center; color: #b8c1ec; max-width: 800px; margin: 0 auto 50px;">
+                La P2I est portée par une équipe pluridisciplinaire passionnée par le développement industriel de la Côte d'Ivoire.
+            </p>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">👨‍💼</div>
+                    <h4 class="team-name">Dr. Kouamé N'Guessan</h4>
+                    <div class="team-role">Expert en Politique Industrielle</div>
+                    <p style="color: #b8c1ec; font-size: 0.9rem;">
+                        Ancien conseiller au Ministère de l'Industrie, 15 ans d'expérience dans le développement des chaînes de valeur.
+                    </p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👩‍💻</div>
+                    <h4 class="team-name">Karmelle Diabaté</h4>
+                    <div class="team-role">Avocate & Responsable Partenariats</div>
+                    <p style="color: #b8c1ec; font-size: 0.9rem;">
+                        Spécialiste du droit des affaires et des investissements en Côte d'Ivoire. En charge des relations avec les institutions et bailleurs.
+                    </p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👨‍🔧</div>
+                    <h4 class="team-name">Ing. Sékou Traoré</h4>
+                    <div class="team-role">Expert Technique & Process Industriels</div>
+                    <p style="color: #b8c1ec; font-size: 0.9rem;">
+                        Ingénieur procédés avec une expérience internationale dans l'agro-industrie et la transformation des ressources locales.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Nos Partenaires -->
+    <section class="content-section" style="background: rgba(255, 255, 255, 0.02);">
+        <div class="container">
+            <h2 class="section-title">Nos Partenaires Stratégiques</h2>
+            <p style="text-align: center; color: #b8c1ec; max-width: 800px; margin: 0 auto 40px;">
+                La P2I travaille en synergie avec les institutions clés du développement industriel ivoirien.
+            </p>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🏛️</div>
+                    <h3 class="value-title">Ministère de l'Industrie</h3>
+                    <p style="color: #b8c1ec;">Alignement sur les politiques industrielles nationales et accès aux données officielles.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🏦</div>
+                    <h3 class="value-title">CEPICI</h3>
+                    <p style="color: #b8c1ec;">Centre de Promotion des Investissements en Côte d'Ivoire. Partenaire pour l'accompagnement des investisseurs.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌍</div>
+                    <h3 class="value-title">BAD & AFD</h3>
+                    <p style="color: #b8c1ec;">Collaboration avec les bailleurs de fonds pour le financement de projets industriels viables.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer P2I -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Plateforme Industrielle Ivoirienne</h3>
+                    <p style="color: #b8c1ec; line-height: 1.7;">
+                        <strong>Vision :</strong> Faire de la Côte d'Ivoire un hub industriel leader en Afrique de l'Ouest.<br>
+                        <strong>Mission :</strong> De l'idée à l'usine, nous accompagnons chaque étape de votre projet industriel.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="filieres.html">Filières Industrielles</a></li>
+                        <li><a href="secteur-industriel.html">Secteur Industriel</a></li>
+                        <li><a href="reseau.html">Réseautage</a></li>
+                        <li><a href="apropos.html">À Propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal & Information</h3>
+                    <ul class="footer-links">
+                        <li><a href="#cgu">Conditions Générales</a></li>
+                        <li><a href="#confidentialite">Politique de Confidentialité</a></li>
+                        <li><a href="#mentions">Mentions Légales</a></li>
+                        <li>Immatriculation : RC Abidjan 2025-00123</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Plateforme Industrielle Ivoirienne (P2I). Tous droits réservés.</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">
+                    Ce site est une démonstration. Les données sont simulées à des fins d'illustration.
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plateforme Industrielle Ivoirienne (P2I) | Accueil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13, 27, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(76, 201, 240, 0.1);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+        .gear {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #4cc9f0;
+        }
+        .gear-large { animation: rotate 20s linear infinite; }
+        .gear-medium { width: 70%; height: 70%; top: 15%; left: 15%; animation: rotate 15s linear infinite reverse; }
+        .gear-small { width: 40%; height: 40%; top: 30%; left: 30%; animation: rotate 10s linear infinite; }
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        nav ul { display: flex; gap: 40px; list-style: none; }
+        nav a {
+            color: #b8c1ec;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        nav a:hover { color: #4cc9f0; }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after { width: 100%; }
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .hero h1 {
+            font-size: 4.5rem;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 0 0 30px rgba(76, 201, 240, 0.3);
+        }
+        .hero-subtitle { font-size: 1.8rem; color: #b8c1ec; margin-bottom: 30px; font-weight: 300; }
+        .hero-description { font-size: 1.2rem; color: #b8c1ec; max-width: 700px; margin: 0 auto 40px; line-height: 1.8; }
+        .btn-hero {
+            background: linear-gradient(to right, #4cc9f0, #4361ee);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(76, 201, 240, 0.3);
+        }
+        .btn-hero:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 40px rgba(76, 201, 240, 0.4); }
+        /* ===== STATS SECTION ===== */
+        .stats-section { padding: 80px 0; background: rgba(255, 255, 255, 0.02); }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        .stat-card:hover { background: rgba(255, 255, 255, 0.08); transform: translateY(-10px); border-color: #4cc9f0; box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+        .stat-icon { font-size: 3rem; margin-bottom: 20px; color: #4cc9f0; }
+        .stat-number { font-size: 3rem; font-weight: 700; background: linear-gradient(to right, #4cc9f0, #f72585); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 10px; }
+        .stat-label { color: #b8c1ec; font-size: 1.1rem; }
+        /* ===== PROCESS SECTION ===== */
+        .process-section { padding: 100px 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 60px; background: linear-gradient(to right, #4cc9f0, #f72585); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .process-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        .process-card:hover { background: rgba(255, 255, 255, 0.08); transform: translateY(-10px); border-color: #4cc9f0; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .process-number { font-size: 1.5rem; font-weight: 700; color: #4cc9f0; margin-bottom: 20px; }
+        .process-icon { font-size: 3rem; margin-bottom: 25px; color: #4cc9f0; }
+        .process-title { font-size: 1.8rem; color: white; margin-bottom: 15px; }
+        .process-description { color: #b8c1ec; font-size: 1.1rem; line-height: 1.7; margin-bottom: 20px; }
+        .process-cta { color: #4cc9f0; font-weight: 600; display: flex; align-items: center; gap: 10px; transition: gap 0.3s ease; }
+        .process-card:hover .process-cta { gap: 15px; }
+        /* ===== BENEFITS SECTION ===== */
+        .benefits-section { padding: 80px 0; background: rgba(255, 255, 255, 0.02); }
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .benefit-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-5px); border-color: #4cc9f0; }
+        .benefit-icon { font-size: 2.5rem; margin-bottom: 25px; color: #4cc9f0; }
+        .benefit-title { font-size: 1.5rem; color: white; margin-bottom: 15px; }
+        .benefit-description { color: #b8c1ec; font-size: 1rem; line-height: 1.7; }
+        /* ===== CTA SECTION ===== */
+        .cta-section { padding: 100px 0; text-align: center; }
+        .cta-content { max-width: 800px; margin: 0 auto; }
+        .cta-title { font-size: 3rem; margin-bottom: 30px; background: linear-gradient(to right, #4cc9f0, #f72585); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .cta-description { font-size: 1.3rem; color: #b8c1ec; margin-bottom: 50px; line-height: 1.8; }
+        .btn-cta {
+            background: linear-gradient(to right, #ff9800, #ff5722);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255,152,0,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .btn-cta:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 40px rgba(255,152,0,0.4); }
+        /* ===== FOOTER ===== */
+        footer {
+            background: rgba(0,0,0,0.3);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(76,201,240,0.1);
+        }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-column h3 {
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #b8c1ec; text-decoration: none; transition: all 0.3s; }
+        .footer-links a:hover { color: #4cc9f0; padding-left: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #b8c1ec; font-size: 0.9rem; }
+        /* ===== ANIMATIONS ===== */
+        @keyframes rotate { from {transform: rotate(0deg);} to {transform: rotate(360deg);} }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-container">
+        <div class="logo">
+            <div class="logo-icon">
+                <div class="gear gear-large"></div>
+                <div class="gear gear-medium"></div>
+                <div class="gear gear-small"></div>
+            </div>
+            <div class="logo-text">P2I</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#filières">Filières</a></li>
+                <li><a href="secteur-industriel.html">Secteur industriel</a></li>
+                <li><a href="#reseau">Réseautage</a></li>
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="hero" id="accueil">
+    <div class="container hero-content">
+        <h1>PLATEFORME INDUSTRIELLE IVOIRIENNE</h1>
+        <p class="hero-subtitle">L'IA qui concrétise vos projets industriels</p>
+        <p class="hero-description">
+            De l'idée à l'usine : la première plateforme intelligente qui transforme vos ambitions en projets industriels rentables en Côte d'Ivoire.
+        </p>
+        <button class="btn-hero" onclick="window.location.href='filieres.html';">
+            <i class="fas fa-play-circle"></i> COMMENCER GRATUITEMENT VOTRE PROJET
+        </button>
+    </div>
+</section>
+
+<section class="process-section" id="filières">
+    <div class="container">
+        <h2 class="section-title">Votre Projet en 4 Étapes</h2>
+        <div class="process-grid">
+            <a href="filieres.html" class="process-card">
+                <div class="process-number">ÉTAPE 1</div>
+                <div class="process-icon">🏭</div>
+                <h3 class="process-title">Choisissez votre Filière</h3>
+                <p class="process-description">
+                    Sélectionnez parmi 12 secteurs industriels porteurs en Côte d'Ivoire, identifiés pour leur fort potentiel de croissance et de rentabilité.
+                </p>
+                <div class="process-cta">Explorer les 12 filières <i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="fiche-production.html?id=huile_palme_raffinee" class="process-card">
+                <div class="process-number">ÉTAPE 2</div>
+                <div class="process-icon">⚙️</div>
+                <h3 class="process-title">Choisissez votre Unité de Production</h3>
+                <p class="process-description">Parcourez et comparez les unités de production détaillées au sein de votre filière. Analysez les investissements, processus et débouchés.</p>
+                <div class="process-cta">Voir l’unité de production <i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="#" class="process-card">
+                <div class="process-number">ÉTAPE 3</div>
+                <div class="process-icon">📊</div>
+                <h3 class="process-title">Votre Business Plan</h3>
+                <p class="process-description">Obtenez une analyse financière et technique détaillée pour l'unité choisie. Évaluez la rentabilité et planifiez votre implantation.</p>
+                <div class="process-cta">Découvrir les Business Plans <i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="#" class="process-card">
+                <div class="process-number">ÉTAPE 4</div>
+                <div class="process-icon">🚀</div>
+                <h3 class="process-title">Commandez votre Business Plan Complet</h3>
+                <p class="process-description">Passez du projet à l'action avec un accompagnement sur mesure. Accédez à notre réseau d'experts et lancez votre entreprise.</p>
+                <div class="process-cta">Passer à l'action <i class="fas fa-arrow-right"></i></div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="benefits-section">
+    <div class="container">
+        <h2 class="section-title">Pourquoi choisir la P2I ?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-lightbulb"></i></div>
+                <h3 class="benefit-title">Innovation</h3>
+                <p class="benefit-description">Une plateforme unique en Côte d'Ivoire qui met l'intelligence artificielle au service de vos projets industriels.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+                <h3 class="benefit-title">Rentabilité</h3>
+                <p class="benefit-description">Analyse détaillée des projets et filières pour maximiser le retour sur investissement.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-users"></i></div>
+                <h3 class="benefit-title">Accompagnement</h3>
+                <p class="benefit-description">Support et conseils par des experts du secteur industriel pour chaque étape de votre projet.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container cta-content">
+        <h2 class="cta-title">Prêt à concrétiser votre projet ?</h2>
+        <p class="cta-description">Découvrez dès maintenant les filières industrielles porteurs et commencez votre aventure entrepreneuriale avec PIG.</p>
+        <button class="btn-cta" onclick="window.location.href='filieres.html';">
+            <i class="fas fa-play-circle"></i> COMMENCER VOTRE PROJET
+        </button>
+    </div>
+</section>
+
+<footer>
+    <div class="container footer-content">
+        <div class="footer-column">
+            <h3>Plateforme Industrielle Ivoirienne</h3>
+            <p>La P2I transforme vos idées en projets industriels rentables en Côte d'Ivoire.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Liens rapides</h3>
+            <ul class="footer-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#filières">Filières</a></li>
+                <li><a href="secteur-industriel.html">Secteur industriel</a></li>
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Contact</h3>
+            <p>Email: contact@p2i.ci</p>
+            <p>Téléphone: +225 622 000 000</p>
+        </div>
+    </div>
+    <div class="footer-bottom">© 2025 P2I. Tous droits réservés.</div>
+</footer>
+
+</body>
+</html>
