@@ -3,191 +3,2158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les 12 Filières Industrielles | P2I</title>
+    <title>PIG - Sélection Complète d'Unité de Production</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #4cc9f0;
-            --secondary: #f72585;
-            --bg-dark: #0d1b2a;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%); color: white; line-height: 1.6; min-height: 100vh; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        /* HEADER (Synchronisé) */
-        header { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(13, 27, 42, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(76, 201, 240, 0.1); padding: 15px 0; }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; }
-        .logo-icon { width: 40px; height: 40px; position: relative; }
-        .gear { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--primary); }
-        .gear-large { animation: rotate 20s linear infinite; }
-        .gear-small { width: 40%; height: 40%; top: 30%; left: 30%; animation: rotate 10s linear infinite reverse; }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .logo-text { font-size: 1.5rem; font-weight: 700; background: linear-gradient(to right, #4cc9f0, #f72585); -webkit-background-clip: text; color: transparent; }
-
-        /* CONTENU */
-        .main-content { margin-top: 130px; margin-bottom: 80px; }
-        
-        .header-section { text-align: center; margin-bottom: 50px; }
-        .header-section h1 { font-size: 2.5rem; margin-bottom: 15px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; color: transparent; }
-        
-        .btn-retour { 
-            display: inline-flex; align-items: center; gap: 10px; color: var(--primary); 
-            text-decoration: none; font-weight: bold; margin-bottom: 30px; transition: 0.3s;
-        }
-        .btn-retour:hover { color: var(--secondary); transform: translateX(-5px); }
-
-        /* GRILLE */
-        .grid-filieres { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        
-        .filiere-card { 
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); 
-            border-radius: 20px; padding: 25px; transition: 0.4s; text-decoration: none; color: white;
-            display: flex; flex-direction: column; align-items: flex-start;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        .filiere-card:hover { 
-            transform: translateY(-5px); border-color: var(--primary); 
-            background: rgba(76, 201, 240, 0.08);
-            box-shadow: 0 0 20px rgba(76, 201, 240, 0.2);
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            color: white;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
         }
-
-        .filiere-card i { font-size: 2rem; color: var(--secondary); margin-bottom: 15px; }
-        .filiere-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); }
-        .filiere-card p { font-size: 0.9rem; color: #b8c1ec; margin-bottom: 15px; flex-grow: 1; }
         
-        .btn-selection { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: #fff; border-bottom: 2px solid var(--secondary); padding-bottom: 2px; }
-
-        /* FOOTER */
-        footer { background: rgba(0,0,0,0.3); padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #b8c1ec; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(76, 201, 240, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            color: #4cc9f0;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(76, 201, 240, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        h1 {
+            color: #4cc9f0;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            color: #b8c1ec;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            gap: 20px;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #b8c1ec;
+            transition: all 0.3s;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .step.active .step-circle {
+            background: #4361ee;
+            color: white;
+            box-shadow: 0 0 20px rgba(67, 97, 238, 0.7);
+            border-color: #4cc9f0;
+        }
+        
+        .step.completed .step-circle {
+            background: #28a745;
+            color: white;
+            box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #4cc9f0, transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .section:hover::before {
+            opacity: 1;
+        }
+        
+        .section:hover {
+            border-color: rgba(76, 201, 240, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px);
+        }
+        
+        .section.active {
+            display: block;
+            border-color: rgba(76, 201, 240, 0.2);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .filiere-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .filiere-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .filiere-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 201, 240, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .filiere-card:hover::before {
+            left: 100%;
+        }
+        
+        .filiere-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(76, 201, 240, 0.5);
+            box-shadow: 0 15px 30px rgba(76, 201, 240, 0.2);
+        }
+        
+        .filiere-card.selected {
+            border-color: #4361ee;
+            background: rgba(67, 97, 238, 0.15);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.3);
+            animation: selectedGlow 2s infinite alternate;
+        }
+        
+        @keyframes selectedGlow {
+            from { box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3); }
+            to { box-shadow: 0 15px 30px rgba(67, 97, 238, 0.5); }
+        }
+        
+        .filiere-icon {
+            font-size: 2.5rem;
+            color: #4cc9f0;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+        }
+        
+        .filiere-title {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .unite-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .unite-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .unite-card:hover {
+            border-color: rgba(76, 201, 240, 0.7);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(76, 201, 240, 0.3);
+        }
+        
+        .unite-card.selected {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.15);
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+            animation: selectedPulse 1.5s infinite alternate;
+        }
+        
+        @keyframes selectedPulse {
+            from { background: rgba(40, 167, 69, 0.15); }
+            to { background: rgba(40, 167, 69, 0.25); }
+        }
+        
+        .capex-badge {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group:hover {
+            border-color: rgba(76, 201, 240, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .form-title {
+            color: #4cc9f0;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-title i {
+            margin-right: 10px;
+            text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+        }
+        
+        .region-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .region-btn {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .region-btn:hover {
+            background: rgba(76, 201, 240, 0.3);
+            border-color: rgba(76, 201, 240, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(76, 201, 240, 0.2);
+        }
+        
+        .region-btn.selected {
+            background: rgba(67, 97, 238, 0.4);
+            border-color: #4361ee;
+            color: #4cc9f0;
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+            animation: buttonGlow 2s infinite alternate;
+        }
+        
+        @keyframes buttonGlow {
+            from { box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3); }
+            to { box-shadow: 0 10px 25px rgba(67, 97, 238, 0.5); }
+        }
+        
+        .investment-input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+        
+        .investment-input:focus {
+            outline: none;
+            border-color: #4cc9f0;
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.3);
+        }
+        
+        .investment-range {
+            width: 100%;
+            margin: 20px 0;
+            -webkit-appearance: none;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        .investment-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #4361ee;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 0 15px rgba(67, 97, 238, 0.8);
+            transition: all 0.3s;
+        }
+        
+        .investment-range::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(67, 97, 238, 1);
+        }
+        
+        .recap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .recap-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .recap-card:hover {
+            border-color: rgba(76, 201, 240, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(76, 201, 240, 0.2);
+        }
+        
+        .recap-label {
+            color: #b8c1ec;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .recap-value {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .recap-capex {
+            color: #28a745;
+            text-shadow: 0 0 10px rgba(40, 167, 69, 0.3);
+        }
+        
+        .recap-opex {
+            color: #ff6b6b;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            padding: 18px 35px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-prev {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-prev:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+            border-color: rgba(76, 201, 240, 0.5);
+        }
+        
+        .btn-next {
+            background: linear-gradient(to right, #4361ee, #3a0ca3);
+            color: white;
+            border: 1px solid rgba(67, 97, 238, 0.5);
+        }
+        
+        .btn-next:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn-confirm {
+            background: linear-gradient(to right, #28a745, #20c997);
+            color: white;
+            width: 100%;
+            max-width: 400px;
+            margin: 40px auto 0;
+            display: block;
+            min-width: 250px;
+            border: 1px solid rgba(40, 167, 69, 0.5);
+        }
+        
+        .btn-confirm:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(40, 167, 69, 0.4);
+        }
+        
+        .btn-modify {
+            background: linear-gradient(to right, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 250px;
+            border: 1px solid rgba(255, 107, 107, 0.5);
+        }
+        
+        .btn-modify:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(to right, #ff5252, #ff3838);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        /* Styles spécifiques pour l'étape 3 - Localisation Guinée */
+        .location-container {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .location-container:hover {
+            border-color: rgba(76, 201, 240, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .location-title {
+            color: #4cc9f0;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .location-title i {
+            margin-right: 10px;
+            text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+        }
+        
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .location-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .location-card:hover {
+            background: rgba(76, 201, 240, 0.25);
+            transform: translateY(-5px) scale(1.05);
+            border-color: rgba(76, 201, 240, 0.7);
+            box-shadow: 0 10px 20px rgba(76, 201, 240, 0.3);
+        }
+        
+        .location-card.selected {
+            background: rgba(67, 97, 238, 0.35);
+            border-color: #4361ee;
+            color: #4cc9f0;
+            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.4);
+            animation: cardGlow 2s infinite alternate;
+        }
+        
+        @keyframes cardGlow {
+            from { box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3); }
+            to { box-shadow: 0 10px 25px rgba(67, 97, 238, 0.5); }
+        }
+        
+        .location-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .location-type {
+            font-size: 0.8rem;
+            color: #b8c1ec;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .location-type.region {
+            background: rgba(40, 167, 69, 0.25);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        
+        .location-type.city {
+            background: rgba(76, 201, 240, 0.25);
+            color: #4cc9f0;
+            border: 1px solid rgba(76, 201, 240, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .filiere-grid, .unite-list, .form-grid, .recap-grid, .location-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-indicator {
+                flex-wrap: wrap;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn, .btn-modify {
+                width: 100%;
+                min-width: unset;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .location-card {
+                min-width: 150px;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <header>
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <div class="gear gear-large"></div>
-                    <div class="gear gear-small"></div>
-                </div>
-                <div class="logo-text">P2I</div>
-            </a>
-            <nav>
-                <a href="apropos.html" style="color:#b8c1ec; text-decoration:none;">À Propos</a>
-            </nav>
-        </div>
-    </header>
-
-    <div class="container main-content">
-        <a href="index.html" class="btn-retour"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>
-        
-        <div class="header-section">
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-industry"></i>
+            </div>
             <h1>Bienvenue dans le Monde des Filières Industrielles</h1>
-            <p>Découvrez les 12 piliers de la transformation économique</p>
+            <p class="subtitle">Sélectionnez votre unité de production et visualisez sa fiche détaillée</p>
         </div>
-
-        <div class="grid-filieres">
-            <a href="configurateur.html?filiere=agro" class="filiere-card">
-                <i class="fas fa-seedling"></i>
-                <h3>Agro-alimentaire & Boissons</h3>
-                <p>Valorisation des ressources agricoles : Cacao, Anacarde, Fruits et Boulangerie industrielle.</p>
-                <span class="btn-selection">Configurer l'unité</span>
-            </a>
-
-            <a href="configurateur.html?filiere=chimie" class="filiere-card">
-                <i class="fas fa-flask"></i>
-                <h3>Chimie & Cosmétiques</h3>
-                <p>Fabrication de savons, détergents, peintures et produits cosmétiques locaux.</p>
-                <span class="btn-selection">Configurer l'unité</span>
-            </a>
-
-            <a href="configurateur.html?filiere=textile" class="filiere-card">
-                <i class="fas fa-shirt"></i>
-                <h3>Textile & Confection</h3>
-                <p>De la fibre au vêtement : Filature, tissage et confection industrielle.</p>
-                <span class="btn-selection">Configurer l'unité</span>
-            </a>
-
-            <a href="configurateur.html?filiere=construction" class="filiere-card">
-                <i class="fas fa-trowel-bricks"></i>
-                <h3>Matériaux de Construction</h3>
-                <p>Cimenterie, briqueterie et transformation du bois pour l'habitat.</p>
-                <span class="btn-selection">Configurer l'unité</span>
-            </a>
-
-            <a href="configurateur.html?filiere=mines" class="filiere-card">
-                <i class="fas fa-gem"></i>
-                <h3>Mines & Métallurgie</h3>
-                <p>Extraction et première transformation des métaux et ressources minières.</p>
-                <span class="btn-selection">Configurer l'unité</span>
-            </a>
-
-            <a href="configurateur.html?filiere=emballage" class="filiere-card">
-                <i class="fas fa-box-open"></i>
-                <h3>Emballages & Plastiques</h3>
-                <p>Solutions de conditionnement carton, plastique et matériaux biodégradables.</p>
-                <span class="btn-selection">Configurer l'unité</span>
-            </a>
-
-            <a href="configurateur.html?filiere=pharma" class="filiere-card">
-                <i class="fas fa-pills"></i>
-                <h3>Industrie Pharmaceutique</h3>
-                <p>Production locale de médicaments essentiels et produits de santé.</p>
-                <span class="btn-selection">Configurer l'unité</span>
-            </a>
-
-            <a href="configurateur.html?filiere=auto" class="filiere-card">
-                <i class="fas fa-car"></i>
-                <h3>Automobile & Transport</h3>
-                <p>Unités d'assemblage, montage de véhicules et pièces de rechange.</p>
-                <span class="btn-selection">Configurer l'unité</span>
-            </a>
-
-            <a href="configurateur.html?filiere=electro" class="filiere-card">
-                <i class="fas fa-microchip"></i>
-                <h3>Électronique & TIC</h3>
-                <p>Assemblage de composants, ordinateurs et équipements connectés.</p>
-                <span class="btn-selection">Configurer l'unité</span>
-            </a>
-
-            <a href="configurateur.html?filiere=energie" class="filiere-card">
-                <i class="fas fa-bolt"></i>
-                <h3>Énergie & Équipements</h3>
-                <p>Solaire, composants électriques et solutions de stockage d'énergie.</p>
-                <span class="btn-selection">Configurer l'unité</span>
-            </a>
-
-            <a href="configurateur.html?filiere=cuir" class="filiere-card">
-                <i class="fas fa-shoe-prints"></i>
-                <h3>Cuir & Chaussures</h3>
-                <p>Tannerie et fabrication industrielle de chaussures et maroquinerie.</p>
-                <span class="btn-selection">Configurer l'unité</span>
-            </a>
-
-            <a href="configurateur.html?filiere=bois" class="filiere-card">
-                <i class="fas fa-tree"></i>
-                <h3>Industrie du Bois</h3>
-                <p>Menuiserie industrielle, contreplaqués et mobilier exportable.</p>
-                <span class="btn-selection">Configurer l'unité</span>
-            </a>
+        
+        <!-- Indicateur d'étapes -->
+        <div class="step-indicator">
+            <div class="step active" id="step1">
+                <div class="step-circle">1</div>
+                <span>Filière</span>
+            </div>
+            <div class="step" id="step2">
+                <div class="step-circle">2</div>
+                <span>Unité</span>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-circle">3</div>
+                <span>Localisation</span>
+            </div>
+            <div class="step" id="step4">
+                <div class="step-circle">4</div>
+                <span>Investissement</span>
+            </div>
+            <div class="step" id="step5">
+                <div class="step-circle">5</div>
+                <span>Récapitulatif</span>
+            </div>
+        </div>
+        
+        <!-- Étape 1 : Sélection de la filière -->
+        <div class="section active" id="section1">
+            <h2 style="color: #4cc9f0; margin-bottom: 20px;">
+                <i class="fas fa-layer-group"></i> Sélectionnez une Filière Industrielle
+            </h2>
+            <p style="color: #b8c1ec; margin-bottom: 30px;">
+                Choisissez parmi nos 12 filières industrielles. Chaque filière contient 8 unités de production spécifiques.
+            </p>
+            <div class="filiere-grid" id="filiereGrid">
+                <!-- Généré par JavaScript -->
+            </div>
+            <div class="navigation-buttons">
+                <div></div> <!-- Espace vide à gauche -->
+                <button class="btn btn-next" onclick="nextStep(2)">
+                    Suivant <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Étape 2 : Sélection de l'unité -->
+        <div class="section" id="section2">
+            <h2 style="color: #4cc9f0; margin-bottom: 20px;">
+                <i class="fas fa-industry"></i> Sélectionnez une Unité de Production
+            </h2>
+            <p style="color: #b8c1ec; margin-bottom: 30px;" id="selectedFiliereText">
+                <!-- Texte dynamique -->
+            </p>
+            <div class="unite-list" id="uniteList">
+                <!-- Généré par JavaScript -->
+            </div>
+            <div class="navigation-buttons">
+                <button class="btn btn-prev" onclick="prevStep(1)">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </button>
+                <button class="btn btn-next" onclick="nextStep(3)">
+                    Suivant <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Étape 3 : Choix de la localisation (NOUVELLE VERSION) -->
+        <div class="section" id="section3">
+            <h2 style="color: #4cc9f0; margin-bottom: 20px;">
+                <i class="fas fa-map-marker-alt"></i> Sélectionnez votre Localisation en Guinée
+            </h2>
+            <p style="color: #b8c1ec; margin-bottom: 30px;">
+                Choisissez une région naturelle ou une ville spécifique pour l'implantation de votre unité de production.
+            </p>
+            
+            <!-- Régions naturelles de Guinée -->
+            <div class="location-container">
+                <h3 class="location-title"><i class="fas fa-mountain"></i> Régions Naturelles de Guinée</h3>
+                <div class="location-grid" id="regionsGrid">
+                    <!-- Généré par JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Villes principales de Guinée -->
+            <div class="location-container" style="margin-top: 30px;">
+                <h3 class="location-title"><i class="fas fa-city"></i> Villes Principales</h3>
+                <div class="location-grid" id="citiesGrid">
+                    <!-- Généré par JavaScript -->
+                </div>
+            </div>
+            
+            <div class="navigation-buttons">
+                <button class="btn btn-prev" onclick="prevStep(2)">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </button>
+                <button class="btn btn-next" onclick="nextStep(4)">
+                    Suivant <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Étape 4 : Montant d'investissement -->
+        <div class="section" id="section4">
+            <h2 style="color: #4cc9f0; margin-bottom: 20px;">
+                <i class="fas fa-money-bill-wave"></i> Montant d'Investissement
+            </h2>
+            <p style="color: #b8c1ec; margin-bottom: 30px;">
+                Définissez votre budget d'investissement (CAPEX) pour cette unité de production.
+            </p>
+            <div class="form-grid">
+                <div class="form-group">
+                    <h3 class="form-title"><i class="fas fa-chart-line"></i> Budget CAPEX</h3>
+                    <p style="color: #b8c1ec; margin-bottom: 20px;">
+                        CAPEX minimum recommandé : <span id="minCapex" style="color: #28a745; font-weight: bold;">80k $</span>
+                    </p>
+                    <input type="range" class="investment-range" id="capexRange" min="50" max="1000" step="10" value="200">
+                    <input type="number" class="investment-input" id="capexInput" value="200" min="50" max="1000">
+                    <p style="color: #b8c1ec; margin-top: 15px; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> Le CAPEX comprend les équipements, machines et installations.
+                    </p>
+                </div>
+                
+                <div class="form-group">
+                    <h3 class="form-title"><i class="fas fa-calculator"></i> Estimation OPEX</h3>
+                    <p style="color: #b8c1ec; margin-bottom: 20px;">
+                        Coûts opérationnels estimés (par an) :
+                    </p>
+                    <div style="background: rgba(255, 107, 107, 0.1); padding: 20px; border-radius: 10px; margin-top: 20px;">
+                        <h4 style="color: #ff6b6b; margin-bottom: 10px;">OPEX Annuel Estimé</h4>
+                        <div style="font-size: 2rem; color: #ff6b6b; font-weight: bold;" id="opexEstimation">
+                            -- k $
+                        </div>
+                        <p style="color: #b8c1ec; margin-top: 10px; font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> Inclut matières premières, salaires, énergie, maintenance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation-buttons">
+                <button class="btn btn-prev" onclick="prevStep(3)">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </button>
+                <button class="btn btn-next" onclick="nextStep(5)">
+                    Suivant <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Étape 5 : Récapitulatif -->
+        <div class="section" id="section5">
+            <h2 style="color: #4cc9f0; margin-bottom: 20px;">
+                <i class="fas fa-clipboard-check"></i> Récapitulatif de votre Sélection
+            </h2>
+            <p style="color: #b8c1ec; margin-bottom: 30px;">
+                Vérifiez les informations ci-dessous avant de confirmer votre sélection.
+            </p>
+            
+            <div class="recap-grid">
+                <div class="recap-card">
+                    <div class="recap-label">Filière Sélectionnée</div>
+                    <div class="recap-value" id="recapFiliere">--</div>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-label">Unité de Production</div>
+                    <div class="recap-value" id="recapUnite">--</div>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-label">Localisation</div>
+                    <div class="recap-value" id="recapLocation">--</div>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-label">Type de Localisation</div>
+                    <div class="recap-value" id="recapLocationType">--</div>
+                </div>
+            </div>
+            
+            <div class="recap-grid" style="margin-top: 40px;">
+                <div class="recap-card">
+                    <div class="recap-label">Investissement CAPEX</div>
+                    <div class="recap-value recap-capex" id="recapCapex">-- k $</div>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-label">OPEX Annuel Estimé</div>
+                    <div class="recap-value recap-opex" id="recapOpex">-- k $</div>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-label">Surface Estimée</div>
+                    <div class="recap-value" id="recapSurface">-- m²</div>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-label">Personnel Estimé</div>
+                    <div class="recap-value" id="recapPersonnel">-- personnes</div>
+                </div>
+            </div>
+            
+            <!-- Boutons d'action -->
+            <div class="action-buttons">
+                <button class="btn btn-modify" onclick="modifyChoices()">
+                    <i class="fas fa-redo-alt"></i> Modifier vos choix
+                </button>
+                
+                <button class="btn btn-confirm" onclick="confirmSelection()">
+                    <i class="fas fa-check-circle"></i> Confirmer la sélection et voir la fiche
+                </button>
+            </div>
+            
+            <div class="navigation-buttons">
+                <button class="btn btn-prev" onclick="prevStep(4)">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </button>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Plateforme Industrielle Ivoirienne. Tous droits réservés.</p>
-    </footer>
+    <script>
+        // ===== DONNÉES DES FILIÈRES =====
+        const filieresData = [
+            {
+    id: "agro",
+    name: "Agro-alimentaire & Boissons",
+    icon: "fas fa-utensils",
+    description: "Transformation des produits agricoles locaux en produits finis",
+    units: [
+        {
+            id: "huile_palme_raffinee",
+            name: "Production d'huile de palme raffinée",
+            minCapex: 80,
+            description: "Unité complète de raffinage d'huile de palme pour l'export et le marché local",
+            fichelink: "fiche-production.html#huile_palme_raffinee"
+        },
+        {
+            id: "jus_fruits",
+            name: "Production de jus de fruits",
+            minCapex: 60,
+            description: "Unité de pasteurisation et conditionnement de jus de fruits tropicaux",
+            fichelink: "fiche-production.html#jus_fruits"
+        },
+        {
+            id: "conserverie_legumes",
+            name: "Conserverie de légumes",
+            minCapex: 120,
+            description: "Unité de mise en conserve de légumes locaux (tomates, haricots, gombos)",
+            fichelink: "fiche-production.html#conserverie_legumes"
+        },
+        {
+            id: "boulangerie_industrielle",
+            name: "Boulangerie industrielle",
+            minCapex: 70,
+            description: "Production de pain et viennoiseries à grande échelle pour le marché urbain",
+            fichelink: "fiche-production.html#boulangerie_industrielle"
+        },
+        {
+            id: "biscuits",
+            name: "Production de biscuits",
+            minCapex: 55,
+            description: "Fabrication de biscuits à base de farines locales enrichies",
+            fichelink: "fiche-production.html#biscuits"
+        },
+        {
+            id: "fruits_confits",
+            name: "Production de fruits confits",
+            minCapex: 45,
+            description: "Transformation de fruits tropicaux en fruits confits pour l'export",
+            fichelink: "fiche-production.html#fruits_confits"
+        },
+        {
+            id: "viande_sechee",
+            name: "Production de viande séchée",
+            minCapex: 65,
+            description: "Unité de séchage et conservation de viande (bœuf, poisson, volaille)",
+            fichelink: "fiche-production.html#viande_sechee"
+        },
+        {
+            id: "riz_blancherie_industrielle",
+            name: "Blancherie industrielle de riz",
+            minCapex: 300,
+            description: "Transformation industrielle du riz paddy en riz blanc de qualité marchande",
+            fichelink: "fiche-production.html#riz_blancherie_industrielle"
+        }
+    ]
+},
+            {
+    id: "chimie",
+    name: "Chimie, Cosmétiques & Détergents",
+    icon: "fas fa-flask",
+    description: "Fabrication de produits chimiques, cosmétiques, détergents et produits d’hygiène",
+    units: [
+        {
+            id: "savons_industriels",
+            name: "Production de savons industriels",
+            minCapex: 45,
+            description: "Fabrication de savons de toilette et ménagers à base d’huile de palme locale",
+            fichelink: "fiche-production.html#savons_industriels"
+        },
+        {
+            id: "detergents",
+            name: "Production de détergents",
+            minCapex: 85,
+            description: "Fabrication de produits détergents et nettoyants pour ménages et industries",
+            fichelink: "fiche-production.html#detergents"
+        },
+        {
+            id: "hygiene_liquide",
+            name: "Produits d’hygiène liquide",
+            minCapex: 90,
+            description: "Fabrication de savons liquides, gels hydroalcooliques, shampooings et gels douche",
+            fichelink: "fiche-production.html#hygiene_liquide"
+        },
+        {
+            id: "peintures_industrielles",
+            name: "Production de peintures",
+            minCapex: 130,
+            description: "Fabrication de peintures décoratives et industrielles pour le bâtiment et l’industrie",
+            fichelink: "fiche-production.html#peintures_industrielles"
+        },
+        {
+            id: "cosmetiques",
+            name: "Production de cosmétiques",
+            minCapex: 95,
+            description: "Fabrication de crèmes, lotions et produits de beauté à base de ressources locales",
+            fichelink: "fiche-production.html#cosmetiques"
+        },
+        {
+            id: "engrais",
+            name: "Production d’engrais",
+            minCapex: 250,
+            description: "Fabrication d’engrais organiques et minéraux pour l’agriculture",
+            fichelink: "fiche-production.html#engrais"
+        },
+        {
+            id: "insecticides",
+            name: "Production d’insecticides",
+            minCapex: 110,
+            description: "Fabrication de produits anti-moustiques et insecticides agricoles",
+            fichelink: "fiche-production.html#insecticides"
+        },
+        {
+            id: "colles_industrielles",
+            name: "Production de colles industrielles",
+            minCapex: 75,
+            description: "Fabrication d’adhésifs et colles pour industries et construction",
+            fichelink: "fiche-production.html#colles_industrielles"
+        }
+    ]
+},
+            {
+    id: "textile",
+    name: "Textile, Habillement & Cuir",
+    icon: "fas fa-tshirt",
+    description: "Fabrication de textiles, vêtements, articles en cuir et produits d’habillement adaptés au marché guinéen et sous-régional",
+    units: [
 
-</body>
-</html>
-        <div class="container">
-            <p>&copy; 2025 Plateforme Industrielle Ivoirienne. Propulsion de l'économie locale.</p>
-        </div>
-    </footer>
+        {
+            id: "confection_vetements",
+            name: "Confection de vêtements",
+            minCapex: 60,
+            description: "Atelier semi-industriel de confection de vêtements prêts-à-porter et tenues africaines modernes pour le marché local et régional",
+            fichelink: "fiche-production.html#confection_vetements"
+        },
 
-</body>
-</html>
+        {
+            id: "tissage_pagnes",
+            name: "Tissage semi-industriel & pagnes",
+            minCapex: 100,
+            description: "Production de tissus traditionnels et pagnes à partir de fibres locales avec équipements semi-industriels modernisés",
+            fichelink: "fiche-production.html#tissage_pagnes"
+        },
+
+        {
+            id: "maroquinerie_cuir",
+            name: "Maroquinerie en cuir",
+            minCapex: 75,
+            description: "Fabrication d’articles en cuir (sacs, ceintures, portefeuilles) à destination du marché local et de l’export sous-régional",
+            fichelink: "fiche-production.html#maroquinerie_cuir"
+        },
+
+        {
+            id: "teinture_textile",
+            name: "Atelier de teinture textile",
+            minCapex: 40,
+            description: "Teinture de tissus avec colorants naturels et industriels (batik, indigo, tie-dye) dans le respect des normes environnementales",
+            fichelink: "fiche-production.html#teinture_textile"
+        },
+
+        {
+            id: "broderie_industrielle",
+            name: "Broderie industrielle",
+            minCapex: 55,
+            description: "Broderie automatisée sur vêtements, boubous et textiles traditionnels à l’aide de machines numériques",
+            fichelink: "fiche-production.html#broderie_industrielle"
+        },
+
+        {
+            id: "chaussures_sandales",
+            name: "Fabrication de chaussures et sandales",
+            minCapex: 120,
+            description: "Production de chaussures et sandales en cuir et matières synthétiques pour enfants, adultes et professionnels",
+            fichelink: "fiche-production.html#chaussures_sandales"
+        },
+
+        {
+            id: "uniformes",
+            name: "Confection d’uniformes",
+            minCapex: 70,
+            description: "Fabrication d’uniformes scolaires, professionnels et administratifs avec contrats récurrents",
+            fichelink: "fiche-production.html#uniformes"
+        },
+
+        {
+            id: "linge_maison",
+            name: "Production de linge de maison",
+            minCapex: 90,
+            description: "Fabrication de draps, serviettes, rideaux et linge hôtelier pour ménages, hôtels et institutions",
+            fichelink: "fiche-production.html#linge_maison"
+        }
+
+    ]
+},
+            {
+    id: "metallurgie",
+    name: "Métallurgie & Mécanique",
+    icon: "fas fa-industry",
+    description: "Travail des métaux, fabrication mécanique et structures métalliques pour l'industrie, le BTP et l'énergie",
+    units: [
+
+        {
+            id: "serrurerie_metallique",
+            name: "Serrurerie métallique",
+            minCapex: 55,
+            description: "Fabrication de portes, fenêtres, grilles et structures métalliques pour bâtiments",
+            fichelink: "fiche-production.html#serrurerie_metallique"
+        },
+
+        {
+            id: "outillage_agricole",
+            name: "Production d’outillage agricole",
+            minCapex: 85,
+            description: "Fabrication d’outils agricoles, manuels et petits équipements pour l’agriculture",
+            fichelink: "fiche-production.html#outillage_agricole"
+        },
+
+        {
+            id: "recyclage_metaux",
+            name: "Recyclage de métaux",
+            minCapex: 110,
+            description: "Collecte, tri et transformation de métaux usagés en matières premières secondaires",
+            fichelink: "fiche-production.html#recyclage_metaux"
+        },
+
+        {
+            id: "chaudronnerie_industrielle",
+            name: "Chaudronnerie industrielle",
+            minCapex: 95,
+            description: "Fabrication de cuves, réservoirs, silos et équipements industriels métalliques",
+            fichelink: "fiche-production.html#chaudronnerie_industrielle"
+        },
+
+        {
+            id: "mecanosoudure",
+            name: "Atelier de mécanosoudure",
+            minCapex: 65,
+            description: "Services de soudure industrielle et fabrication sur mesure de structures métalliques",
+            fichelink: "fiche-production.html#mecanosoudure"
+        },
+
+        {
+            id: "structures_metalliques",
+            name: "Fabrication de structures métalliques",
+            minCapex: 100,
+            description: "Fabrication de charpentes métalliques, hangars, pylônes et supports pour BTP et énergie",
+            fichelink: "fiche-production.html#structures_metalliques"
+        },
+
+        {
+            id: "pieces_mecaniques",
+            name: "Fabrication de pièces mécaniques",
+            minCapex: 140,
+            description: "Usinage de pièces mécaniques pour maintenance industrielle et équipements",
+            fichelink: "fiche-production.html#pieces_mecaniques"
+        },
+
+        {
+    id: "quincaillerie_metallique",
+    name: "Production de quincaillerie métallique",
+    minCapex: 75,
+    description: "Fabrication de vis, boulons, écrous et pièces de fixation pour BTP et industrie",
+    fichelink: "fiche-production.html#quincaillerie_metallique"
+},
+
+    ]
+},
+            {
+    id: "plastique",
+    name: "Plastique & Caoutchouc",
+    icon: "fas fa-recycle",
+    description: "Transformation des matières plastiques et fabrication d’articles en plastique et caoutchouc pour l’industrie, l’agroalimentaire et le BTP",
+    units: [
+
+        {
+            id: "sacs_plastiques",
+            name: "Production de sacs plastiques",
+            minCapex: 75,
+            description: "Fabrication de sacs en polyéthylène biodégradables et réutilisables",
+            fichelink: "fiche-production.html#sacs_plastiques"
+        },
+
+        {
+            id: "bouteilles_pet",
+            name: "Soufflage de bouteilles PET",
+            minCapex: 110,
+            description: "Production de bouteilles en PET pour eau, jus et boissons gazeuses",
+            fichelink: "fiche-production.html#bouteilles_pet"
+        },
+
+        {
+            id: "rechapage_pneus",
+            name: "Rechapage de pneus",
+            minCapex: 95,
+            description: "Reconditionnement de pneus usagés pour véhicules légers et poids lourds",
+            fichelink: "fiche-production.html#rechapage_pneus"
+        },
+
+        {
+            id: "tuyaux_pvc",
+            name: "Production de tuyaux PVC",
+            minCapex: 130,
+            description: "Fabrication de tuyaux pour irrigation, construction et assainissement",
+            fichelink: "fiche-production.html#tuyaux_pvc"
+        },
+
+        {
+            id: "emballages_plastiques",
+            name: "Emballages plastiques",
+            minCapex: 85,
+            description: "Production de films, sacs et emballages plastiques alimentaires",
+            fichelink: "fiche-production.html#emballages_plastiques"
+        },
+
+        {
+            id: "jouets_plastique",
+            name: "Fabrication de jouets en plastique",
+            minCapex: 70,
+            description: "Production de jouets simples, éducatifs et articles pour enfants en plastique",
+            fichelink: "fiche-production.html#jouets_plastique"
+        },
+
+        {
+            id: "profiles_plastiques",
+            name: "Production de profilés plastiques",
+            minCapex: 120,
+            description: "Extrusion de profilés plastiques pour construction, ameublement et industrie",
+            fichelink: "fiche-production.html#profiles_plastiques"
+        },
+
+        {
+            id: "joints_caoutchouc",
+            name: "Fabrication de joints en caoutchouc",
+            minCapex: 60,
+            description: "Production de joints d’étanchéité et pièces techniques en caoutchouc",
+            fichelink: "fiche-production.html#joints_caoutchouc"
+        }
+
+    ]
+},
+            {
+    id: "electronique",
+    name: "Électronique & Électricité",
+    icon: "fas fa-plug",
+    description: "Fabrication de composants électriques, électroniques et équipements énergétiques pour l'industrie, le bâtiment et l'électrification rurale",
+    units: [
+
+        {
+            id: "cables_electriques",
+            name: "Fabrication de câbles électriques",
+            minCapex: 125,
+            description: "Production de câbles et fils électriques pour bâtiment et industrie",
+            fichelink: "fiche-production.html#cables_electriques"
+        },
+
+        {
+            id: "panneaux_solaires",
+            name: "Assemblage de panneaux solaires",
+            minCapex: 180,
+            description: "Assemblage de kits solaires photovoltaïques pour électrification rurale",
+            fichelink: "fiche-production.html#panneaux_solaires"
+        },
+
+        {
+            id: "appareils_electroniques",
+            name: "Assemblage d'appareils électroniques",
+            minCapex: 95,
+            description: "Montage de petits appareils électroniques (chargeurs, radios, TV)",
+            fichelink: "fiche-production.html#appareils_electroniques"
+        },
+
+        {
+            id: "lampes_led",
+            name: "Production de lampes LED",
+            minCapex: 65,
+            description: "Assemblage de lampes LED à faible consommation pour éclairage public et domestique",
+            fichelink: "fiche-production.html#lampes_led"
+        },
+
+        {
+            id: "tableaux_electriques",
+            name: "Fabrication de tableaux électriques",
+            minCapex: 85,
+            description: "Production de tableaux de distribution et coffrets électriques",
+            fichelink: "fiche-production.html#tableaux_electriques"
+        },
+
+        {
+            id: "onduleurs",
+            name: "Assemblage d'onduleurs",
+            minCapex: 110,
+            description: "Montage d'onduleurs et régulateurs de tension pour systèmes solaires",
+            fichelink: "fiche-production.html#onduleurs"
+        },
+
+        {
+            id: "compteurs_electriques",
+            name: "Production de compteurs électriques",
+            minCapex: 150,
+            description: "Assemblage de compteurs d'énergie électrique monophasés et triphasés",
+            fichelink: "fiche-production.html#compteurs_electriques"
+        },
+
+        {
+            id: "batteries",
+            name: "Fabrication de batteries",
+            minCapex: 200,
+            description: "Production de batteries automobiles, motos et stationnaires",
+            fichelink: "fiche-production.html#batteries"
+        }
+
+    ]
+},
+           {
+  id: "btp",
+  name: "BTP & Matériaux de Construction",
+  icon: "fas fa-building",
+  description: "Matériaux de construction et équipements BTP",
+  units: [
+    {
+      id: "mini_cimenterie",
+      name: "Mini-cimenterie",
+      minCapex: 600,
+      description: "Production de ciment à petite échelle pour le marché local et régional",
+      fichelink: "fiche-production.html#mini_cimenterie"
+    },
+    {
+      id: "briques",
+      name: "Fabrication de briques",
+      minCapex: 55,
+      description: "Production de briques en terre cuite et blocs de terre comprimée",
+      fichelink: "fiche-production.html#briques"
+    },
+    {
+      id: "prefabrication_beton",
+      name: "Éléments préfabriqués en béton",
+      minCapex: 110,
+      description: "Production de poutrelles, dalles et éléments préfabriqués",
+      fichelink: "fiche-production.html#prefabrication_beton"
+    },
+    {
+      id: "tuiles",
+      name: "Production de tuiles",
+      minCapex: 85,
+      description: "Fabrication de tuiles en béton ou céramique",
+      fichelink: "fiche-production.html#tuiles"
+    },
+    {
+      id: "agglos",
+      name: "Production d’agglos",
+      minCapex: 75,
+      description: "Fabrication de blocs de béton (parpaings)",
+      fichelink: "fiche-production.html#agglos"
+    },
+    {
+      id: "peintures_btp",
+      name: "Peintures BTP",
+      minCapex: 95,
+      description: "Production de peintures pour le bâtiment et travaux publics",
+      fichelink: "fiche-production.html#peintures_btp"
+    },
+    {
+      id: "centrale_beton",
+      name: "Centrale à béton",
+      minCapex: 150,
+      description: "Production de béton prêt à l’emploi et mortiers",
+      fichelink: "fiche-production.html#centrale_beton"
+    },
+    {
+      id: "menuiserie_aluminium",
+      name: "Menuiserie aluminium & PVC",
+      minCapex: 150,
+      description: "Fabrication de portes, fenêtres et façades aluminium/PVC",
+      fichelink: "fiche-production.html#menuiserie_aluminium"
+    }
+  ]
+},
+            {
+    id: "medical",
+    name: "Petits Matériels Médicaux",
+    icon: "fas fa-heartbeat",
+    description: "Fabrication de consommables médicaux, équipements de base et aides à la mobilité pour les structures de santé",
+    units: [
+
+        {
+            id: "masques_medicaux",
+            name: "Production de masques médicaux",
+            minCapex: 35,
+            description: "Fabrication de masques chirurgicaux et de protection médicale",
+            fichelink: "fiche-production.html#masques_medicaux"
+        },
+
+        {
+            id: "bandages",
+            name: "Production de bandages et pansements",
+            minCapex: 45,
+            description: "Fabrication de bandes, compresses et pansements médicaux",
+            fichelink: "fiche-production.html#bandages"
+        },
+
+        {
+            id: "mobilier_medical",
+            name: "Fabrication de mobilier médical",
+            minCapex: 70,
+            description: "Production de lits médicaux, tables d’examen et chariots hospitaliers",
+            fichelink: "fiche-production.html#mobilier_medical"
+        },
+
+        {
+            id: "fauteuils_roulants",
+            name: "Fabrication de fauteuils roulants",
+            minCapex: 85,
+            description: "Production de fauteuils roulants manuels et aides à la mobilité",
+            fichelink: "fiche-production.html#fauteuils_roulants"
+        },
+
+        {
+            id: "instruments_medicaux",
+            name: "Fabrication d’instruments médicaux de base",
+            minCapex: 120,
+            description: "Production d’instruments médicaux simples et matériel hospitalier non invasif",
+            fichelink: "fiche-production.html#instruments_medicaux"
+        },
+
+        {
+            id: "bequilles_cannes",
+            name: "Production de béquilles et cannes",
+            minCapex: 55,
+            description: "Fabrication d’aides à la marche en aluminium et matériaux légers",
+            fichelink: "fiche-production.html#bequilles_cannes"
+        },
+
+        {
+            id: "solutions_antiseptiques",
+            name: "Production de solutions antiseptiques",
+            minCapex: 65,
+            description: "Fabrication de solutions hydroalcooliques et produits antiseptiques",
+            fichelink: "fiche-production.html#solutions_antiseptiques"
+        },
+
+        {
+            id: "kits_medicaux",
+            name: "Assemblage de kits médicaux",
+            minCapex: 50,
+            description: "Assemblage de trousses de premiers secours et kits médicaux standards",
+            fichelink: "fiche-production.html#kits_medicaux"
+        }
+
+    ]
+},
+            {
+    id: "assemblage",
+    name: "Assemblage & Montage",
+    icon: "fas fa-cogs",
+    description: "Assemblage industriel de produits finis à partir de composants importés (CKD/SKD), avec intégration progressive locale, SAV structuré et orientation marchés institutionnels",
+    units: [
+
+        {
+            id: "smartphones",
+            name: "Assemblage de smartphones",
+            minCapex: 300,
+            description: "Assemblage semi-industriel de smartphones et tablettes à partir de kits CKD, avec contrôle qualité, SAV local et ciblage des marchés institutionnels, opérateurs télécoms et programmes publics",
+            fichelink: "fiche-production.html#smartphones"
+        },
+
+        {
+            id: "tricycles",
+            name: "Assemblage de tricycles",
+            minCapex: 140,
+            description: "Montage de tricycles utilitaires pour transport de marchandises, agriculture et services urbains, avec forte demande locale et potentiel d’intégration progressive (châssis, peinture)",
+            fichelink: "fiche-production.html#tricycles"
+        },
+
+        {
+            id: "climatiseurs",
+            name: "Assemblage de climatiseurs",
+            minCapex: 220,
+            description: "Assemblage de climatiseurs splits et mobiles à partir de kits CKD, avec bancs de test, stockage structuré et SAV pour marchés B2B (bureaux, hôtels, administrations)",
+            fichelink: "fiche-production.html#climatiseurs"
+        },
+
+        {
+            id: "meubles",
+            name: "Assemblage de meubles",
+            minCapex: 70,
+            description: "Assemblage de meubles en kit et prêts à monter pour logements, bureaux et institutions, avec forte intensité de main-d’œuvre locale et compétitivité logistique",
+            fichelink: "fiche-production.html#meubles"
+        },
+
+        {
+            id: "bicyclettes",
+            name: "Assemblage de bicyclettes",
+            minCapex: 100,
+            description: "Montage de vélos et bicyclettes à partir de pièces importées, avec réglage, contrôle qualité et SAV local pour marchés urbains et ruraux",
+            fichelink: "fiche-production.html#bicyclettes"
+        },
+
+        {
+            id: "electromenager",
+            name: "Assemblage d’électroménager",
+            minCapex: 220,
+            description: "Assemblage de réfrigérateurs, cuisinières et appareils électroménagers à partir de kits CKD, avec tests électriques, conformité normes et organisation du service après-vente",
+            fichelink: "fiche-production.html#electromenager"
+        },
+
+        {
+            id: "motos",
+            name: "Assemblage de motos",
+            minCapex: 280,
+            description: "Assemblage industriel de motos et scooters à partir de kits CKD, avec contrôle qualité, réseau de distribution et SAV structuré pour mobilité urbaine et rurale",
+            fichelink: "fiche-production.html#motos"
+        },
+
+        {
+            id: "ordinateurs",
+            name: "Assemblage d’ordinateurs",
+            minCapex: 150,
+            description: "Assemblage de PC et ordinateurs portables pour écoles, administrations et entreprises, avec configuration logicielle, garantie locale et maintenance",
+            fichelink: "fiche-production.html#ordinateurs"
+        }
+
+    ]
+},
+            {
+    id: "recyclage",
+    name: "Recyclage & Valorisation",
+    icon: "fas fa-recycle",
+    description: "Collecte, transformation et valorisation des déchets pour la production de matières premières secondaires et produits recyclés",
+    units: [
+
+        {
+            id: "recyclage_plastique",
+            name: "Recyclage du plastique",
+            minCapex: 110,
+            description: "Collecte, tri, lavage et broyage des déchets plastiques (PET, PEHD, PP) pour la production de granulés plastiques destinés à l’industrie.",
+            fichelink: "fiche-production.html#recyclage_plastique"
+        },
+
+        {
+            id: "recyclage_papier",
+            name: "Recyclage du papier",
+            minCapex: 120,
+            description: "Transformation de papiers et cartons usagés en pâte recyclée et produits papier simples pour l’emballage et l’industrie.",
+            fichelink: "fiche-production.html#recyclage_papier"
+        },
+
+        {
+            id: "recyclage_metaux",
+            name: "Recyclage des métaux",
+            minCapex: 130,
+            description: "Collecte, tri, découpe et transformation de métaux ferreux et non ferreux en matières premières secondaires pour l’industrie et le BTP.",
+            fichelink: "fiche-production.html#recyclage_metaux"
+        },
+
+        {
+            id: "compost",
+            name: "Production de compost",
+            minCapex: 55,
+            description: "Valorisation des déchets organiques en compost et amendements naturels pour l’agriculture et le maraîchage.",
+            fichelink: "fiche-production.html#compost"
+        },
+
+        {
+            id: "recyclage_verre",
+            name: "Recyclage du verre",
+            minCapex: 150,
+            description: "Broyage et transformation du verre usagé en granulats et matières premières pour le BTP et l’industrie.",
+            fichelink: "fiche-production.html#recyclage_verre"
+        },
+
+        {
+            id: "recyclage_pneus",
+            name: "Recyclage de pneus",
+            minCapex: 150,
+            description: "Transformation de pneus usagés en granulats de caoutchouc pour routes, sols sportifs et applications industrielles.",
+            fichelink: "fiche-production.html#recyclage_pneus"
+        },
+
+        {
+            id: "recyclage_huiles",
+            name: "Recyclage d’huiles usagées",
+            minCapex: 85,
+            description: "Collecte, filtration et régénération d’huiles de moteur et industrielles pour réutilisation contrôlée.",
+            fichelink: "fiche-production.html#recyclage_huiles"
+        },
+
+        {
+            id: "recyclage_deee",
+            name: "Recyclage DEEE",
+            minCapex: 160,
+            description: "Démantèlement et valorisation des déchets d’équipements électriques et électroniques (DEEE).",
+            fichelink: "fiche-production.html#recyclage_deee"
+        }
+
+    ]
+},
+            {
+    id: "services_industriels",
+    name: "Services Industriels",
+    icon: "fas fa-industry",
+    description: "Prestations techniques, logistiques et organisationnelles dédiées au fonctionnement, à la performance et à la sécurité des industries",
+    units: [
+
+        {
+            id: "nettoyage_industriel",
+            name: "Services de nettoyage industriel",
+            minCapex: 40,
+            description: "Prestations de nettoyage industriel, dépollution de sites, entretien d’usines et nettoyage technique spécialisé.",
+            fichelink: "fiche-production.html#nettoyage_industriel"
+        },
+
+        {
+            id: "maintenance_industrielle",
+            name: "Maintenance industrielle",
+            minCapex: 90,
+            description: "Maintenance préventive et corrective des équipements, machines et installations industrielles.",
+            fichelink: "fiche-production.html#maintenance_industrielle"
+        },
+
+        {
+            id: "logistique_industrielle",
+            name: "Logistique industrielle",
+            minCapex: 120,
+            description: "Gestion des stocks industriels, entreposage, manutention et transport pour unités de production.",
+            fichelink: "fiche-production.html#logistique_industrielle"
+        },
+
+        {
+            id: "formation_industrielle",
+            name: "Centre de formation industrielle",
+            minCapex: 70,
+            description: "Formation professionnelle aux métiers industriels, maintenance, production, sécurité et qualité.",
+            fichelink: "fiche-production.html#formation_industrielle"
+        },
+
+        {
+            id: "controle_qualite",
+            name: "Contrôle qualité industriel",
+            minCapex: 60,
+            description: "Contrôle qualité, essais, tests, audits et accompagnement à la certification industrielle.",
+            fichelink: "fiche-production.html#controle_qualite"
+        },
+
+        {
+            id: "bureau_etudes",
+            name: "Bureau d’études techniques",
+            minCapex: 55,
+            description: "Études techniques, ingénierie, assistance à maîtrise d’ouvrage et conception de projets industriels.",
+            fichelink: "fiche-production.html#bureau_etudes"
+        },
+
+        {
+            id: "securite_industrielle",
+            name: "Sécurité industrielle",
+            minCapex: 50,
+            description: "Audit HSE, prévention des risques industriels et fourniture d’équipements de protection.",
+            fichelink: "fiche-production.html#securite_industrielle"
+        },
+
+        {
+            id: "services_energetiques",
+            name: "Services énergétiques",
+            minCapex: 100,
+            description: "Audit énergétique, optimisation de la consommation et gestion de l’énergie pour industries.",
+            fichelink: "fiche-production.html#services_energetiques"
+        }
+
+    ]
+},
+   {
+    id: "energie_eau_environnement",
+    name: "Énergie, Eau & Environnement",
+    icon: "fas fa-bolt",
+    description: "Solutions industrielles pour la production, la distribution et l’optimisation de l’énergie, de l’eau et des ressources environnementales",
+    units: [
+
+        {
+            id: "poteaux_electriques",
+            name: "Fabrication de poteaux électriques en béton",
+            minCapex: 150,
+            description: "Production industrielle de poteaux en béton armé pour réseaux électriques, télécoms et éclairage public.",
+            fichelink: "fiche-production.html#poteaux_electriques"
+        },
+
+        {
+            id: "compteurs_eau",
+            name: "Production de compteurs d’eau",
+            minCapex: 120,
+            description: "Assemblage, calibration et conditionnement de compteurs d’eau pour réseaux urbains et ruraux.",
+            fichelink: "fiche-production.html#compteurs_eau"
+        },
+
+        {
+            id: "kits_solaires",
+            name: "Assemblage de kits solaires domestiques",
+            minCapex: 100,
+            description: "Assemblage de systèmes solaires autonomes pour ménages, PME et zones rurales.",
+            fichelink: "fiche-production.html#kits_solaires"
+        },
+
+        {
+            id: "lampadaires_solaires",
+            name: "Production de lampadaires solaires",
+            minCapex: 130,
+            description: "Assemblage industriel de lampadaires solaires pour éclairage public et infrastructures rurales.",
+            fichelink: "fiche-production.html#lampadaires_solaires"
+        },
+
+        {
+            id: "equipements_hydrauliques",
+            name: "Forage et équipements hydrauliques",
+            minCapex: 160,
+            description: "Production, intégration et maintenance d’équipements de forage et systèmes hydrauliques.",
+            fichelink: "fiche-production.html#equipements_hydrauliques"
+        },
+
+        {
+            id: "traitement_eau",
+            name: "Traitement et conditionnement de l’eau",
+            minCapex: 110,
+            description: "Mini-stations industrielles de traitement, purification et conditionnement d’eau potable.",
+            fichelink: "fiche-production.html#traitement_eau"
+        },
+
+        {
+            id: "maintenance_energetique",
+            name: "Maintenance d’installations énergétiques",
+            minCapex: 80,
+            description: "Maintenance des installations solaires, hydrauliques, électriques et groupes électrogènes.",
+            fichelink: "fiche-production.html#maintenance_energetique"
+        },
+
+        {
+            id: "audit_energie_environnement",
+            name: "Audit énergétique et environnemental",
+            minCapex: 60,
+            description: "Audit énergétique, diagnostics environnementaux et études d’impact réglementaires.",
+            fichelink: "fiche-production.html#audit_energie_environnement"
+        }
+
+    ]
+}
+];
+
+
+        // ===== DONNÉES DE LOCALISATION GUINÉE =====
+        const guineeLocations = {
+            regions: [
+                { id: "basse", name: "Basse-Guinée", type: "Région Naturelle", description: "Zone côtière avec Conakry comme centre économique" },
+                { id: "moyenne", name: "Moyenne-Guinée", type: "Région Naturelle", description: "Région du Fouta Djallon, zone montagneuse" },
+                { id: "haute", name: "Haute-Guinée", type: "Région Naturelle", description: "Zone sahélienne, région de savane" },
+                { id: "foret", name: "Guinée Forestière", type: "Région Naturelle", description: "Région forestière au sud-est du pays" }
+            ],
+            cities: [
+                { id: "conakry", name: "Conakry", type: "Ville", region: "Basse-Guinée", description: "Capitale économique et politique" },
+                { id: "kankan", name: "Kankan", type: "Ville", region: "Haute-Guinée", description: "Deuxième ville du pays, centre commercial" },
+                { id: "kindia", name: "Kindia", type: "Ville", region: "Basse-Guinée", description: "Ville agricole et industrielle" },
+                { id: "nzerekore", name: "Nzérékoré", type: "Ville", region: "Guinée Forestière", description: "Principale ville de la Guinée forestière" },
+                { id: "boke", name: "Boké", type: "Ville", region: "Basse-Guinée", description: "Centre minier (bauxite)" },
+                { id: "labé", name: "Labé", type: "Ville", region: "Moyenne-Guinée", description: "Capitale du Fouta Djallon" },
+                { id: "faranah", name: "Faranah", type: "Ville", region: "Haute-Guinée", description: "Ville historique et commerciale" },
+                { id: "kamsar", name: "Kamsar", type: "Ville", region: "Basse-Guinée", description: "Port minéralier important" },
+                { id: "mamou", name: "Mamou", type: "Ville", region: "Moyenne-Guinée", description: "Carrefour commercial et agricole" },
+                { id: "siguiri", name: "Siguiri", type: "Ville", region: "Haute-Guinée", description: "Centre aurifère important" },
+                { id: "gueckedou", name: "Guéckédou", type: "Ville", region: "Guinée Forestière", description: "Ville frontalière et commerciale" },
+                { id: "telimele", name: "Télimélé", type: "Ville", region: "Moyenne-Guinée", description: "Ville agricole et d'élevage" },
+                { id: "pita", name: "Pita", type: "Ville", region: "Moyenne-Guinée", description: "Station climatique et agricole" },
+                { id: "dabola", name: "Dabola", type: "Ville", region: "Moyenne-Guinée", description: "Carrefour ferroviaire et routier" },
+                { id: "dinguiraye", name: "Dinguiraye", type: "Ville", region: "Haute-Guinée", description: "Ville historique et religieuse" },
+                { id: "yomou", name: "Yomou", type: "Ville", region: "Guinée Forestière", description: "Zone forestière et minière" }
+            ]
+        };
+
+        // Variables globales
+        let selectedFiliere = null;
+        let selectedUnite = null;
+        let selectedLocation = null;
+        let selectedLocationType = null;
+        let selectedCapex = 200; // Valeur par défaut
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            chargerFilieres();
+            chargerLocations();
+            setupEventListeners();
+        });
+
+        // Charger les filières
+        function chargerFilieres() {
+            const filiereGrid = document.getElementById('filiereGrid');
+            filiereGrid.innerHTML = '';
             
+            filieresData.forEach(filiere => {
+                const card = document.createElement('div');
+                card.className = 'filiere-card';
+                card.dataset.id = filiere.id;
+                card.onclick = () => selectFiliere(filiere, card);
+                
+                card.innerHTML = `
+                    <div class="filiere-icon">
+                        <i class="${filiere.icon}"></i>
+                    </div>
+                    <h3 class="filiere-title">${filiere.name}</h3>
+                    <p class="filiere-desc">${filiere.description}</p>
+                    <div style="margin-top: 15px; color: #4cc9f0; font-size: 0.9rem;">
+                        <i class="fas fa-industry"></i> ${filiere.units.length} unités disponibles
+                    </div>
+                `;
+                
+                filiereGrid.appendChild(card);
+            });
+        }
+
+        // Charger les localisations de Guinée
+        function chargerLocations() {
+            const regionsGrid = document.getElementById('regionsGrid');
+            const citiesGrid = document.getElementById('citiesGrid');
+            
+            regionsGrid.innerHTML = '';
+            citiesGrid.innerHTML = '';
+            
+            // Charger les régions
+            guineeLocations.regions.forEach(region => {
+                const card = document.createElement('div');
+                card.className = 'location-card';
+                card.dataset.id = region.id;
+                card.dataset.type = 'region';
+                card.onclick = () => selectLocation(region, card);
+                
+                card.innerHTML = `
+                    <div class="location-name">${region.name}</div>
+                    <div class="location-type region">${region.type}</div>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: #b8c1ec;">${region.description}</p>
+                `;
+                
+                regionsGrid.appendChild(card);
+            });
+            
+            // Charger les villes
+            guineeLocations.cities.forEach(city => {
+                const card = document.createElement('div');
+                card.className = 'location-card';
+                card.dataset.id = city.id;
+                card.dataset.type = 'city';
+                card.onclick = () => selectLocation(city, card);
+                
+                card.innerHTML = `
+                    <div class="location-name">${city.name}</div>
+                    <div class="location-type city">${city.type}</div>
+                    <div style="font-size: 0.8rem; margin-top: 5px; color: #4cc9f0;">
+                        <i class="fas fa-map-pin"></i> ${city.region}
+                    </div>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: #b8c1ec;">${city.description}</p>
+                `;
+                
+                citiesGrid.appendChild(card);
+            });
+        }
+
+        // Sélectionner une filière
+        function selectFiliere(filiere, element) {
+            // Désélectionner toutes les filières
+            document.querySelectorAll('.filiere-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Sélectionner la filière choisie
+            element.classList.add('selected');
+            selectedFiliere = filiere;
+            
+            // Mettre à jour le texte de l'étape 2
+            document.getElementById('selectedFiliereText').innerHTML = `
+                Filière sélectionnée : <strong style="color: #4cc9f0;">${filiere.name}</strong><br>
+                ${filiere.description}
+            `;
+            
+            // Charger les unités de cette filière
+            chargerUnites(filiere);
+        }
+
+        // Charger les unités d'une filière
+        function chargerUnites(filiere) {
+            const uniteList = document.getElementById('uniteList');
+            uniteList.innerHTML = '';
+            
+            filiere.units.forEach(unite => {
+    const card = document.createElement('div');
+    card.className = 'unite-card';
+
+card.style.cursor = "pointer";
+card.onclick = (e) => {
+    e.stopPropagation();
+    selectUnite(unite, card);
+};
+
+    card.innerHTML = `
+        <div class="capex-badge">CAPEX minimum: ${unite.minCapex}k $</div>
+        <h4 class="unite-name">${unite.name}</h4>
+        <p class="unite-desc">${unite.description}</p>
+    `;
+
+    uniteList.appendChild(card);
+});
+
+        }
+
+        // Sélectionner une unité
+        function selectUnite(unite, element) {
+            // Désélectionner toutes les unités
+            document.querySelectorAll('.unite-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Sélectionner l'unité choisie
+            element.classList.add('selected');
+            selectedUnite = unite;
+            
+            // Mettre à jour le CAPEX minimum dans l'étape 4
+            document.getElementById('minCapex').textContent = `${unite.minCapex}k $`;
+            document.getElementById('capexRange').min = unite.minCapex;
+            document.getElementById('capexInput').min = unite.minCapex;
+            document.getElementById('capexRange').value = Math.max(unite.minCapex, selectedCapex);
+            document.getElementById('capexInput').value = Math.max(unite.minCapex, selectedCapex);
+            
+            // Mettre à jour l'estimation OPEX
+            updateOpexEstimation();
+        }
+
+        // Sélectionner une localisation
+        function selectLocation(location, element) {
+            // Désélectionner toutes les localisations
+            document.querySelectorAll('.location-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Sélectionner la localisation choisie
+            element.classList.add('selected');
+            selectedLocation = location.name;
+            selectedLocationType = location.type;
+            
+            // Mettre à jour le récapitulatif
+            updateRecap();
+        }
+
+        // Configurer les événements
+        function setupEventListeners() {
+            // Slider CAPEX
+            const capexRange = document.getElementById('capexRange');
+            const capexInput = document.getElementById('capexInput');
+            
+            capexRange.addEventListener('input', function() {
+                capexInput.value = this.value;
+                selectedCapex = parseInt(this.value);
+                updateOpexEstimation();
+                updateRecap();
+            });
+            
+            capexInput.addEventListener('input', function() {
+                const minCapex = selectedUnite ? selectedUnite.minCapex : 50;
+                let value = parseInt(this.value) || minCapex;
+                value = Math.max(minCapex, Math.min(1000, value));
+                
+                this.value = value;
+                capexRange.value = value;
+                selectedCapex = value;
+                updateOpexEstimation();
+                updateRecap();
+            });
+        }
+
+        // Mettre à jour l'estimation OPEX
+        function updateOpexEstimation() {
+            if (!selectedUnite) return;
+            
+            // OPEX estimé = 40-60% du CAPEX par an
+            const opexRatio = 0.5; // 50%
+            const opexEstime = Math.round(selectedCapex * opexRatio);
+            
+            document.getElementById('opexEstimation').textContent = `${opexEstime}k $`;
+        }
+
+        // Mettre à jour le récapitulatif
+        function updateRecap() {
+            if (selectedFiliere) {
+                document.getElementById('recapFiliere').textContent = selectedFiliere.name;
+            }
+            
+            if (selectedUnite) {
+                document.getElementById('recapUnite').textContent = selectedUnite.name;
+            }
+            
+            if (selectedLocation) {
+                document.getElementById('recapLocation').textContent = selectedLocation;
+            }
+            
+            if (selectedLocationType) {
+                document.getElementById('recapLocationType').textContent = selectedLocationType;
+            }
+            
+            // CAPEX et OPEX
+            document.getElementById('recapCapex').textContent = `${selectedCapex}k $`;
+            
+            const opexEstime = Math.round(selectedCapex * 0.5);
+            document.getElementById('recapOpex').textContent = `${opexEstime}k $`;
+            
+            // Surface et personnel estimés
+            const surface = Math.round(selectedCapex * 10 + 100);
+            const personnel = Math.max(3, Math.round(selectedCapex / 20));
+            
+            document.getElementById('recapSurface').textContent = `${surface} m²`;
+            document.getElementById('recapPersonnel').textContent = `${personnel} personnes`;
+        }
+
+        // Navigation entre les étapes
+        function nextStep(step) {
+            // Validation avant de passer à l'étape suivante
+            if (step === 2 && !selectedFiliere) {
+                alert("Veuillez sélectionner une filière avant de continuer.");
+                return;
+            }
+            
+            if (step === 3 && !selectedUnite) {
+                alert("Veuillez sélectionner une unité de production avant de continuer.");
+                return;
+            }
+            
+            if (step === 5) {
+                if (!selectedLocation) {
+                    alert("Veuillez sélectionner une localisation avant de continuer.");
+                    return;
+                }
+                updateRecap();
+            }
+            
+            // Cacher toutes les sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Afficher la section demandée
+            document.getElementById(`section${step}`).classList.add('active');
+            
+            // Mettre à jour les indicateurs d'étape
+            updateStepIndicators(step);
+        }
+
+        function prevStep(step) {
+            // Cacher toutes les sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Afficher la section demandée
+            document.getElementById(`section${step}`).classList.add('active');
+            
+            // Mettre à jour les indicateurs d'étape
+            updateStepIndicators(step);
+        }
+
+        function updateStepIndicators(currentStep) {
+            // Réinitialiser tous les indicateurs
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                
+                const stepNumber = index + 1;
+                if (stepNumber < currentStep) {
+                    step.classList.add('completed');
+                } else if (stepNumber === currentStep) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        // Fonction pour modifier les choix - Retour au début
+        function modifyChoices() {
+            // Réinitialiser toutes les sélections
+            selectedFiliere = null;
+            selectedUnite = null;
+            selectedLocation = null;
+            selectedLocationType = null;
+            selectedCapex = 200;
+            
+            // Désélectionner visuellement tous les éléments
+            document.querySelectorAll('.filiere-card, .unite-card, .location-card').forEach(element => {
+                element.classList.remove('selected');
+            });
+            
+            // Réinitialiser les valeurs d'entrée
+            document.getElementById('capexRange').value = 200;
+            document.getElementById('capexInput').value = 200;
+            
+            // Retourner à la première étape
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('section1').classList.add('active');
+            
+            // Réinitialiser les indicateurs d'étape
+            updateStepIndicators(1);
+            
+            // Réinitialiser le texte de l'étape 2
+            document.getElementById('selectedFiliereText').innerHTML = 
+                "Filière sélectionnée : <strong style='color: #4cc9f0;'>--</strong><br>";
+            
+            // Réinitialiser le récapitulatif
+            document.getElementById('recapFiliere').textContent = "--";
+            document.getElementById('recapUnite').textContent = "--";
+            document.getElementById('recapLocation').textContent = "--";
+            document.getElementById('recapLocationType').textContent = "--";
+            document.getElementById('recapCapex').textContent = "-- k $";
+            document.getElementById('recapOpex').textContent = "-- k $";
+            document.getElementById('recapSurface').textContent = "-- m²";
+            document.getElementById('recapPersonnel').textContent = "-- personnes";
+            
+            // Réinitialiser l'estimation OPEX
+            document.getElementById('opexEstimation').textContent = "-- k $";
+            document.getElementById('minCapex').textContent = "80k $";
+            
+            // Vider la grille des unités
+            document.getElementById('uniteList').innerHTML = "";
+            
+            console.log("Recherche réinitialisée. Vous pouvez recommencer.");
+        }
+
+       // ✅ NOUVELLE VERSION : redirection directe vers la fiche dynamique
+function confirmSelection() {
+
+    if (!selectedFiliere || !selectedUnite || !selectedLocation) {
+        alert("Veuillez compléter toutes les étapes avant de continuer.");
+        return;
+    }
+
+    console.log("Redirection vers fiche dynamique :", selectedUnite.id);
+
+    // 🔑 REDIRECTION UNIQUE
+    window.location.href =
+        "fiche-production.html#" + selectedUnite.id;
+}
+    </script>
+</body>
+</html>
+        
+   
+
+  
                 
