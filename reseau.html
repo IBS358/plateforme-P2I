@@ -6,6 +6,23 @@
     <title>Réseautage Industriel | Plateforme Industrielle Ivoirienne (P2I)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+<style>
+        /* AJOUTER CECI DANS VOTRE BLOC <style> EXISTANT */
+        .nav-connexion {
+            color: #4cc9f0 !important;
+            font-weight: 700 !important;
+            border: 1px solid #4cc9f0;
+            padding: 8px 20px !important;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .nav-connexion:hover {
+            background: rgba(76, 201, 240, 0.1);
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.3);
+            transform: translateY(-2px);
+        }
+        /* Fin de l'ajout */
+  
         /* ===== STYLES DE BASE P2I ===== */
         * {
             margin: 0;
@@ -89,7 +106,7 @@
         nav a {
             color: #b8c1ec;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;
             transition: all 0.3s;
             position: relative;
@@ -399,6 +416,7 @@
                     <li><a href="reseau.html" class="active">Réseautage</a></li>
                     <li><a href="apropos.html">À propos</a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li><a href="connexion.html" class="nav-connexion">Connexion</a></li>
                 </ul>
             </nav>
         </div>
