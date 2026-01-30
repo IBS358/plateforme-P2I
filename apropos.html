@@ -5,7 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>À Propos | Plateforme Industrielle Ivoirienne (P2I)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
+   <style>
+       /* AJOUTER CECI DANS VOTRE BLOC <style> EXISTANT */
+        .nav-connexion {
+            color: #4cc9f0 !important;
+            font-weight: 700 !important;
+            border: 1px solid #4cc9f0;
+            padding: 8px 20px !important;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .nav-connexion:hover {
+            background: rgba(76, 201, 240, 0.1);
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.3);
+            transform: translateY(-2px);
+        }
+        /* Fin de l'ajout */
+
         /* ===== STYLES DE BASE P2I ===== */
         * {
             margin: 0;
@@ -89,7 +105,7 @@
         nav a {
             color: #b8c1ec;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 500;
             transition: all 0.3s;
             position: relative;
@@ -114,7 +130,26 @@
         nav a.active::after {
             width: 100%;
         }
-
+       /* NOUVEAU : Style du bouton Connexion */
+        .btn-login-nav {
+            background: rgba(76, 201, 240, 0.1);
+            border: 1px solid #4cc9f0;
+            color: #4cc9f0;
+            padding: 8px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 10px;
+        }
+        .btn-login-nav:hover {
+            background: #4cc9f0;
+            color: #0d1b2a;
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.4);
+        }
         /* ===== HERO SECTION ===== */
         .hero {
             min-height: 60vh;
@@ -292,6 +327,7 @@
             .values-grid, .team-grid { grid-template-columns: 1fr; }
         }
     </style>
+
 </head>
 <body>
     <!-- Header avec Navigation P2I -->
@@ -313,6 +349,7 @@
                     <li><a href="reseau.html">Réseautage</a></li>
                     <li><a href="apropos.html" class="active">À propos</a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li><a href="connexion.html" class="nav-connexion">Connexion</a></li>
                 </ul>
             </nav>
         </div>
@@ -484,6 +521,15 @@
                 </div>
             </div>
             <div class="footer-bottom">
+                <p>&copy; 2025 Plateforme Industrielle Ivoirienne (P2I). Tous droits réservés.</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">
+                    Ce site est une démonstration. Les données sont simulées à des fins d'illustration.
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
                 <p>&copy; 2025 Plateforme Industrielle Ivoirienne (P2I). Tous droits réservés.</p>
                 <p style="margin-top: 10px; font-size: 0.8rem;">
                     Ce site est une démonstration. Les données sont simulées à des fins d'illustration.
