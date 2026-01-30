@@ -90,7 +90,7 @@
         nav a {
             color: #b8c1ec;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;
             transition: all 0.3s;
             position: relative;
@@ -114,6 +114,26 @@
         }
         nav a.active::after {
             width: 100%;
+        }
+ /* NOUVEAU : Style du bouton Connexion */
+        .btn-login-nav {
+            background: rgba(76, 201, 240, 0.1);
+            border: 1px solid #4cc9f0;
+            color: #4cc9f0;
+            padding: 8px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 10px;
+        }
+        .btn-login-nav:hover {
+            background: #4cc9f0;
+            color: #0d1b2a;
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.4);
         }
 
         /* ===== HERO SECTION FILIÈRES ===== */
@@ -736,6 +756,7 @@
                     <li><a href="reseau.html">Réseautage</a></li>
                     <li><a href="apropos.html">À propos</a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li><a href="connexion.html" class="nav-connexion">Connexion</a></li>
                 </ul>
             </nav>
         </div>
@@ -1575,22 +1596,84 @@
             // Vider la grille des unités
             document.getElementById('uniteList').innerHTML = "";
             
-            console.log("Recherche réinitialisée. Vous pouvez recommencer.");
+        console.log("Recherche réinitialisée. Vous pouvez recommencer.");
         }
+    </script>
 
-        // ✅ REDIRECTION VERS LA FICHE DYNAMIQUE
-        function confirmSelection() {
-            if (!selectedFiliere || !selectedUnite || !selectedLocation) {
-                alert("Veuillez compléter toutes les étapes avant de continuer.");
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        // CONFIGURATION MISE À JOUR (Clé de l'image IMG_1143)
+        const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18'; // <-- TA NOUVELLE CLÉ ICI
+        
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function confirmSelection() {
+            if (!selectedFiliere || !selectedUnite) {
+                alert("Veuillez sélectionner une filière et une unité.");
                 return;
             }
 
-            console.log("Redirection vers fiche dynamique :", selectedUnite.id);
+            const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+            
+            if (sessionError || !session) {
+                alert("Votre session a expiré. Redirection vers la connexion...");
+                window.location.href = 'index.html';
+                return;
+            }
 
-            // 🔑 REDIRECTION UNIQUE
-            window.location.href = "fiche-production.html#" + selectedUnite.id;
+            // Enregistrement final corrigé
+            const { data, error } = await supabaseClient
+                .from('simulations')
+                .insert([
+                    { 
+                        users_id: session.user.id,
+                        nom_simulation: selectedUnite.nom || "Nouveau Projet",
+                        filiere_choisie: selectedFiliere, // C'est du texte, OK pour la colonne text
+                        unite_id: parseInt(selectedUnite.id) || 1, // On force en NOMBRE entier
+                        statut: 'En cours',
+                        progression: 10 // C'est un nombre, OK pour int8
+                    }
+                ])
+                .select();
+
+            if (error) {
+                alert("Erreur base de données : " + error.message);
+            } else {
+                console.log("Succès !");
+                window.location.href = `fiche-production.html?id=${data[0].id}`;
+            }
         }
+async function confirmerSelection() {
+    const { data: { user } } = await supabaseClient.auth.getUser();
+
+    const simulationData = {
+        unite_id: selectedUnite.id,
+        localisation: selectedLocation,
+        investissement: selectedCapex,
+        progression: 100,
+        users_id: user ? user.id : null, // Changement ici : avec un "s"
+        type_bp: "aucun"
+    };
+
+    try {
+        const { data, error } = await supabaseClient
+            .from('simulations')
+            .insert([simulationData])
+            .select();
+
+        if (error) throw error;
+
+        const newId = data[0].id;
+        // On part vers la fiche avec l'ID de la simulation
+        window.location.href = `fiche-production.html?id=${newId}`;
+
+    } catch (err) {
+        console.error("Erreur d'enregistrement :", err.message);
+        alert("Erreur lors de l'enregistrement.");
+    }
+}
     </script>
 </body>
 </html>
-            
