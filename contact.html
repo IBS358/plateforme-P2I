@@ -25,7 +25,6 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-
         /* ===== HEADER & NAVIGATION P2I ===== */
         header {
             position: fixed;
@@ -89,7 +88,7 @@
         nav a {
             color: #b8c1ec;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;
             transition: all 0.3s;
             position: relative;
@@ -114,7 +113,26 @@
         nav a.active::after {
             width: 100%;
         }
-
+       /* NOUVEAU : Style du bouton Connexion */
+        .btn-login-nav {
+            background: rgba(76, 201, 240, 0.1);
+            border: 1px solid #4cc9f0;
+            color: #4cc9f0;
+            padding: 8px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 10px;
+        }
+        .btn-login-nav:hover {
+            background: #4cc9f0;
+            color: #0d1b2a;
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.4);
+        }
         /* ===== HERO SECTION ===== */
         .hero {
             min-height: 50vh;
@@ -374,6 +392,7 @@
                     <li><a href="reseau.html">Réseautage</a></li>
                     <li><a href="apropos.html">À propos</a></li>
                     <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="connexion.html" class="nav-connexion">Connexion</a></li>
                 </ul>
             </nav>
         </div>
