@@ -6,6 +6,23 @@
     <title>Le Secteur Industriel en Côte d'Ivoire | Plateforme Industrielle Ivoirienne (P2I)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+       /* Style spécifique pour le bouton Connexion P2I */
+        .nav-connexion {
+            color: #4cc9f0 !important;
+            font-weight: 700 !important;
+            border: 2px solid #4cc9f0 !important;
+            padding: 8px 20px !important;
+            border-radius: 12px !important;
+            transition: all 0.3s ease !important;
+            text-decoration: none !important;
+            margin-left: 10px;
+        }
+        .nav-connexion:hover {
+            background: rgba(76, 201, 240, 0.1) !important;
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.3) !important;
+            transform: translateY(-2px);
+        }
+
         /* ===== STYLES DE BASE (identiques à l'accueil P2I) ===== */
         * {
             margin: 0;
@@ -91,23 +108,19 @@
             color: transparent;
         }
 
-        nav ul {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-
+        nav ul { display: flex; gap: 20px; list-style: none; align-items: center; }
+        
         nav a {
             color: #b8c1ec;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;
             transition: all 0.3s;
             position: relative;
             padding: 5px 0;
         }
 
-        nav a:hover { color: #4cc9f0; }
+        /* --- GESTION DU SOULIGNEMENT (HOVER & ACTIVE) --- */
         nav a::after {
             content: '';
             position: absolute;
@@ -118,15 +131,38 @@
             background: linear-gradient(to right, #4cc9f0, #f72585);
             transition: width 0.3s ease;
         }
+
+        /* Soulignement au survol */
+        nav a:hover { color: #4cc9f0; }
         nav a:hover::after { width: 100%; }
 
-        /* Style pour le lien actif dans la navigation */
+        /* Soulignement FIXE pour la page active (Secteur Industriel) */
         nav a.active {
-            color: #4cc9f0;
-            font-weight: 600;
+            color: #4cc9f0 !important;
         }
         nav a.active::after {
-            width: 100%;
+            width: 100% !important; /* Force la barre à rester pleine */
+        }
+
+        /* Style du bouton Connexion (btn-login-nav utilisé par erreur dans votre texte, on garde .nav-connexion par sécurité) */
+        .btn-login-nav {
+            background: rgba(76, 201, 240, 0.1);
+            border: 1px solid #4cc9f0;
+            color: #4cc9f0;
+            padding: 8px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 10px;
+        }
+        .btn-login-nav:hover {
+            background: #4cc9f0;
+            color: #0d1b2a;
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.4);
         }
 
         /* ===== HERO SECTION ===== */
@@ -140,7 +176,7 @@
         }
 
         .hero-content h1 {
-            font-size: 4rem;
+            font-size: 3.5rem; /* Réduit légèrement pour éviter les débordements */
             background: linear-gradient(to right, #4cc9f0, #f72585);
             -webkit-background-clip: text;
             background-clip: text;
@@ -154,6 +190,8 @@
             max-width: 800px;
             margin: 0 auto 40px;
         }
+
+        /* ... Le reste de vos styles de contenu (stats, charts, etc.) restent identiques ... */
 
         /* ===== SECTIONS CONTENU ===== */
         .content-section {
@@ -389,6 +427,7 @@
                     <li><a href="reseau.html">Réseautage</a></li>
                     <li><a href="apropos.html">À propos</a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li><a href="connexion.html" class="nav-connexion">Connexion</a></li>
                 </ul>
             </nav>
         </div>
