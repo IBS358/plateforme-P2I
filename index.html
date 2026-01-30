@@ -6,6 +6,21 @@
     <title>Plateforme Industrielle Ivoirienne (P2I) | Accueil</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Style spécifique pour le bouton Connexion P2I */
+.nav-connexion {
+    color: #4cc9f0 !important;
+    font-weight: 700 !important;
+    border: 2px solid #4cc9f0 !important;
+    padding: 8px 20px !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+}
+.nav-connexion:hover {
+    background: rgba(76, 201, 240, 0.1) !important;
+    box-shadow: 0 0 15px rgba(76, 201, 240, 0.3) !important;
+    transform: translateY(-2px);
+}
         /* ===== RESET & BASE STYLES ===== */
         * {
             margin: 0;
@@ -38,11 +53,31 @@
             padding: 15px 0;
             transition: all 0.3s ease;
         }
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        /* Réajustement pour tout faire tenir sur une ligne */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+nav ul {
+    display: flex;
+    gap: 15px; /* On réduit l'espace entre les liens (au lieu de 30px) */
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+nav a {
+    font-size: 0.9rem; /* On réduit légèrement la taille de la police */
+    white-space: nowrap; /* Empêche le texte de revenir à la ligne */
+}
+
+.nav-connexion {
+    padding: 6px 15px !important; /* Bouton un peu plus compact */
+    font-size: 0.85rem !important;
+}
         .logo {
             display: flex;
             align-items: center;
@@ -71,11 +106,11 @@
             background-clip: text;
             color: transparent;
         }
-        nav ul { display: flex; gap: 40px; list-style: none; }
+        nav ul { display: flex; gap: 30px; list-style: none; align-items: center; }
         nav a {
             color: #b8c1ec;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;
             transition: all 0.3s;
             position: relative;
@@ -93,6 +128,27 @@
             transition: width 0.3s ease;
         }
         nav a:hover::after { width: 100%; }
+
+        /* NOUVEAU : Style du bouton Connexion */
+        .btn-login-nav {
+            background: rgba(76, 201, 240, 0.1);
+            border: 1px solid #4cc9f0;
+            color: #4cc9f0;
+            padding: 8px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 10px;
+        }
+        .btn-login-nav:hover {
+            background: #4cc9f0;
+            color: #0d1b2a;
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.4);
+        }
         /* ===== HERO SECTION ===== */
         .hero {
             min-height: 100vh;
@@ -109,8 +165,9 @@
             position: relative;
             z-index: 2;
         }
+        /* Modification du titre principal */
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: 4rem;
             background: linear-gradient(to right, #4cc9f0, #f72585);
             -webkit-background-clip: text;
             background-clip: text;
@@ -121,21 +178,34 @@
         }
         .hero-subtitle { font-size: 1.8rem; color: #b8c1ec; margin-bottom: 30px; font-weight: 300; }
         .hero-description { font-size: 1.2rem; color: #b8c1ec; max-width: 700px; margin: 0 auto 40px; line-height: 1.8; }
-        .btn-hero {
+        /* === MODIFICATION 2 : BOUTONS CTA PLUS VISIBLES === */
+        .btn-hero, .btn-cta {
             background: linear-gradient(to right, #4cc9f0, #4361ee);
             color: white;
             border: none;
             padding: 20px 50px;
             border-radius: 15px;
-            font-size: 1.3rem;
+            font-size: 1.3rem; /* Taille de police augmentée */
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(76, 201, 240, 0.3);
+            /* Amélioration du contraste et de la lisibilité */
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
-        .btn-hero:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 40px rgba(76, 201, 240, 0.4); }
+        .btn-hero:hover, .btn-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(76, 201, 240, 0.4);
+        }
+        .btn-cta {
+            background: linear-gradient(to right, #ff9800, #ff5722);
+            box-shadow: 0 10px 30px rgba(255,152,0,0.3);
+        }
+        .btn-cta:hover {
+            box-shadow: 0 15px 40px rgba(255,152,0,0.4);
+        }
         /* ===== STATS SECTION ===== */
         .stats-section { padding: 80px 0; background: rgba(255, 255, 255, 0.02); }
         .stats-grid {
@@ -201,24 +271,6 @@
         .cta-content { max-width: 800px; margin: 0 auto; }
         .cta-title { font-size: 3rem; margin-bottom: 30px; background: linear-gradient(to right, #4cc9f0, #f72585); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .cta-description { font-size: 1.3rem; color: #b8c1ec; margin-bottom: 50px; line-height: 1.8; }
-        .btn-cta {
-            background: linear-gradient(to right, #ff9800, #ff5722);
-            color: white;
-            border: none;
-            padding: 20px 50px;
-            border-radius: 15px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(255,152,0,0.3);
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .btn-cta:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 40px rgba(255,152,0,0.4); }
         /* ===== FOOTER ===== */
         footer {
             background: rgba(0,0,0,0.3);
@@ -242,6 +294,41 @@
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #b8c1ec; font-size: 0.9rem; }
         /* ===== ANIMATIONS ===== */
         @keyframes rotate { from {transform: rotate(0deg);} to {transform: rotate(360deg);} }
+        /* ===== RESPONSIVE MOBILE ===== */
+        @media (max-width: 768px) {
+            /* Ajustement du titre sur mobile */
+            .hero h1 {
+                font-size: 2.5rem; /* Taille parfaitement lisible sur mobile */
+                line-height: 1.2;
+                padding: 0 15px; /* Evite que le texte touche les bords */
+            }
+            .hero-subtitle {
+                font-size: 1.4rem;
+                padding: 0 15px;
+            }
+            .section-title, .cta-title {
+                font-size: 2rem; /* Titres de sections cohérents */
+                padding: 0 15px;
+            }
+            /* Boutons adaptés aux petits écrans */
+            .btn-hero, .btn-cta {
+                padding: 16px 35px;
+                font-size: 1.1rem;
+                width: 90%;
+                max-width: 350px;
+                margin: 0 auto;
+                display: block;
+            }
+            nav ul {
+                gap: 20px;
+            }
+            nav a {
+                font-size: 0.9rem;
+            }
+            .hero {
+                padding-top: 80px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -258,12 +345,13 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#index.html" class="active">Accueil</a></li>
                 <li><a href="#filières">Filières</a></li>
                 <li><a href="secteur-industriel.html">Secteur industriel</a></li>
-                <li><a href="#reseau">Réseautage</a></li>
-                <li><a href="#apropos">À propos</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="reseau.html">Réseautage</a></li>
+                <li><a href="apropos.html">À Propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="connexion.html" class="nav-connexion">Connexion</a></li>
             </ul>
         </nav>
     </div>
@@ -271,7 +359,8 @@
 
 <section class="hero" id="accueil">
     <div class="container hero-content">
-        <h1>PLATEFORME INDUSTRIELLE IVOIRIENNE</h1>
+        <!-- MODIFICATION HTML : Titre sur 2 lignes avec <br> -->
+        <h1>PLATEFORME<br>INDUSTRIELLE IVOIRIENNE</h1>
         <p class="hero-subtitle">L'IA qui concrétise vos projets industriels</p>
         <p class="hero-description">
             De l'idée à l'usine : la première plateforme intelligente qui transforme vos ambitions en projets industriels rentables en Côte d'Ivoire.
@@ -300,7 +389,7 @@
                 <div class="process-icon">⚙️</div>
                 <h3 class="process-title">Choisissez votre Unité de Production</h3>
                 <p class="process-description">Parcourez et comparez les unités de production détaillées au sein de votre filière. Analysez les investissements, processus et débouchés.</p>
-                <div class="process-cta">Voir l’unité de production <i class="fas fa-arrow-right"></i></div>
+                <div class="process-cta">Voir l'unité de production <i class="fas fa-arrow-right"></i></div>
             </a>
             <a href="#" class="process-card">
                 <div class="process-number">ÉTAPE 3</div>
@@ -365,8 +454,9 @@
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#filières">Filières</a></li>
                 <li><a href="secteur-industriel.html">Secteur industriel</a></li>
-                <li><a href="#apropos">À propos</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="reseau.html">Réseautage</a></li>
+                <li><a href="apropos.html">À Propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </div>
         <div class="footer-column">
