@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion | P2I</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Réutilisation de ton style P2I */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; width: 100%; }
+
+        /* HEADER */
+        header {
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(76, 201, 240, 0.1);
+            padding: 15px 0;
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+        .logo-text { font-size: 1.8rem; font-weight: 700; background: linear-gradient(to right, #4cc9f0, #f72585); -webkit-background-clip: text; color: transparent; }
+        nav ul { display: flex; gap: 40px; list-style: none; }
+        nav a { color: #b8c1ec; text-decoration: none; font-weight: 500; }
+
+        /* SECTION CONNEXION */
+        .auth-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+        }
+        .auth-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(76, 201, 240, 0.2);
+            border-radius: 25px;
+            padding: 50px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .auth-title {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+        .auth-subtitle { color: #b8c1ec; margin-bottom: 40px; }
+
+        .selection-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .selection-button {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .selection-button:hover {
+            transform: translateY(-5px);
+            border-color: #4cc9f0;
+            background: rgba(76, 201, 240, 0.1);
+        }
+        .selection-button i { font-size: 2.5rem; color: #4cc9f0; }
+        .selection-button.entrepreneur i { color: #f72585; }
+        .selection-button h3 { font-size: 1.2rem; }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid rgba(76, 201, 240, 0.1);
+            color: #b8c1ec;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-text">P2I</div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="filieres.html">Filières</a></li>
+                    <li><a href="secteur-industriel.html">Secteur</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li><a href="connexion.html" style="color:#4cc9f0; font-weight: bold;">Connexion</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="auth-section">
+        <div class="container">
+            <div class="auth-card">
+                <h1 class="auth-title">Bienvenue sur P2I</h1>
+                <p class="auth-subtitle">Veuillez sélectionner votre type de profil pour accéder à votre espace.</p>
+                
+                <div class="selection-grid">
+                    <a href="login.html?role=user" class="selection-button">
+                        <i class="fas fa-user"></i>
+                        <h3>Utilisateur</h3>
+                        <p style="font-size: 0.8rem; color: #b8c1ec;">Particulier / Étudiant</p>
+                    </a>
+                    
+                    <a href="login.html?role=entrepreneur" class="selection-button entrepreneur">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>Entrepreneur</h3>
+                        <p style="font-size: 0.8rem; color: #b8c1ec;">Porteur de projet</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Plateforme Industrielle Ivoirienne (P2I). Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
