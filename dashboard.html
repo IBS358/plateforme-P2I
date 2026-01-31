@@ -3,54 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Espace P2I | Dashboard</title>
+    <title>P2I Dashboard | Expert Industriel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
             --primary: #4cc9f0;
             --secondary: #f72585;
-            --dark-bg: #0d1b2a;
-            --card-bg: #1b263b;
+            --dark-bg: #0b132b;
+            --sidebar-bg: #141d33;
+            --card-bg: #1c2541;
             --text-main: #ffffff;
-            --text-dim: #b8c1ec;
-            --sidebar-width: 260px;
+            --text-dim: #94a3b8;
+            --accent-gradient: linear-gradient(135deg, #4cc9f0, #f72585);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--dark-bg); color: var(--text-main); display: flex; min-height: 100vh; }
 
-        /* SIDEBAR */
+        /* SIDEBAR STYLE IMAGE */
         .sidebar {
-            width: var(--sidebar-width);
-            background: rgba(27, 38, 59, 0.95);
-            border-right: 1px solid rgba(76, 201, 240, 0.2);
-            display: flex; flex-direction: column; padding: 25px 15px;
-            position: fixed; height: 100vh;
+            width: 280px; background: var(--sidebar-bg); border-right: 1px solid rgba(255,255,255,0.05);
+            display: flex; flex-direction: column; padding: 30px 20px; position: fixed; height: 100vh;
         }
-        .logo-text { font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 30px; }
-        .nav-links { list-style: none; flex-grow: 1; }
-        .nav-links a { display: flex; align-items: center; gap: 10px; color: var(--text-dim); text-decoration: none; padding: 10px; border-radius: 10px; font-size: 0.85rem; margin-bottom: 5px; }
-        .nav-links a.active { background: rgba(76, 201, 240, 0.1); color: var(--primary); }
-        .btn-logout { color: #ff4d4d; cursor: pointer; padding: 15px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
-
-        /* CONTENT */
-        .main-content { margin-left: var(--sidebar-width); flex-grow: 1; padding: 30px; width: calc(100% - var(--sidebar-width)); }
-        .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .logo-text { font-size: 1.6rem; font-weight: 800; color: var(--primary); margin-bottom: 40px; }
         
-        /* STATS */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
-        .stat-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); }
-        .stat-val { font-size: 1.6rem; font-weight: 700; display: block; margin-top: 5px; }
+        .nav-links { list-style: none; flex-grow: 1; }
+        .nav-links li { margin-bottom: 8px; }
+        .nav-links a { 
+            display: flex; align-items: center; gap: 12px; color: var(--text-dim); 
+            text-decoration: none; padding: 12px 15px; border-radius: 12px; transition: 0.3s; font-size: 0.95rem;
+        }
+        .nav-links a:hover, .nav-links a.active { background: rgba(76, 201, 240, 0.1); color: var(--primary); }
 
-        /* TABLEUR PROPRE */
-        .section-box { background: var(--card-bg); border-radius: 15px; padding: 20px; }
-        .project-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-        .project-table th { text-align: left; color: var(--text-dim); padding-bottom: 12px; font-size: 0.8rem; text-transform: uppercase; }
-        .project-table td { padding: 12px 5px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .sidebar-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; margin-top: 20px; }
+        .btn-nav-footer { 
+            display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; 
+            font-size: 0.95rem; border-radius: 12px; transition: 0.3s;
+        }
+        .btn-home { color: var(--text-dim); }
+        .btn-home:hover { color: var(--primary); background: rgba(255,255,255,0.05); }
+        .btn-logout { color: #ff4d4d; cursor: pointer; }
+        .btn-logout:hover { background: rgba(255, 77, 77, 0.1); }
 
-        .status-badge { padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; background: rgba(76, 201, 240, 0.1); color: var(--primary); }
-        .btn-action { padding: 6px 12px; background: var(--primary); color: var(--dark-bg); border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.8rem; }
+        /* MAIN CONTENT */
+        .main-content { margin-left: 280px; flex-grow: 1; padding: 50px; }
+        .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+        .welcome-text h1 { font-size: 2.2rem; margin-bottom: 5px; }
+        .welcome-text p { color: var(--text-dim); font-size: 1.1rem; }
+        
+        /* STATS CARDS */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 40px; }
+        .stat-card { background: var(--card-bg); padding: 30px; border-radius: 24px; position: relative; overflow: hidden; }
+        .stat-card i { font-size: 1.5rem; color: var(--primary); margin-bottom: 15px; display: block; }
+        .stat-val { font-size: 2.5rem; font-weight: 800; margin: 10px 0; display: block; }
+        .stat-label { color: var(--text-dim); font-weight: 500; }
+
+        /* SECTION PROJETS */
+        .section-box { background: var(--card-bg); border-radius: 24px; padding: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .btn-new { 
+            background: var(--primary); color: var(--dark-bg); border: none; 
+            padding: 12px 24px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.3s;
+        }
+        .btn-new:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(76, 201, 240, 0.4); }
+
+        /* TABLEAU */
+        .project-table { width: 100%; border-collapse: collapse; }
+        .project-table th { text-align: left; color: var(--text-dim); padding: 15px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .project-table td { padding: 20px 15px; border-top: 1px solid rgba(255,255,255,0.05); white-space: nowrap; }
+        
+        .status-badge { background: rgba(76, 201, 240, 0.1); color: var(--primary); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; }
+        .btn-view { border: 1.5px solid var(--primary); background: transparent; color: var(--primary); padding: 8px 18px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .btn-view:hover { background: var(--primary); color: var(--dark-bg); }
     </style>
 </head>
 <body>
@@ -59,114 +84,128 @@
         <div class="logo-text">P2I Dashboard</div>
         <ul class="nav-links">
             <li><a href="#" class="active"><i class="fas fa-user-circle"></i> Mon Profil</a></li>
-            <li><a href="#"><i class="fas fa-rocket"></i> Mes Simulations</a></li>
-            <li><a href="#"><i class="fas fa-file-contract"></i> Business Plans</a></li>
-            <li><a href="#"><i class="fas fa-shopping-basket"></i> Commandes</a></li>
-            <li><a href="#"><i class="fas fa-graduation-cap"></i> Ressources</a></li>
+            <li><a href="#"><i class="fas fa-rocket"></i> Mes Projets / Simulations</a></li>
+            <li><a href="#"><i class="fas fa-file-contract"></i> Mes Business Plans</a></li>
+            <li><a href="#"><i class="fas fa-shopping-basket"></i> Mes Commandes</a></li>
+            <li><a href="#"><i class="fas fa-tools"></i> Mes Services</a></li>
+            <li><a href="#"><i class="fas fa-briefcase"></i> Mon Réseau / Emploi</a></li>
+            <li><a href="#"><i class="fas fa-graduation-cap"></i> Mes Tutoriels & Ressources</a></li>
         </ul>
-        <div class="btn-logout" onclick="handleLogout()">
-            <i class="fas fa-power-off"></i> Déconnexion
+        
+        <div class="sidebar-footer">
+            <a href="index.html" class="btn-nav-footer btn-home">
+                <i class="fas fa-home"></i> Retour à l'accueil
+            </a>
+            <div class="btn-nav-footer btn-logout" onclick="handleLogout()">
+                <i class="fas fa-power-off"></i> Déconnexion
+            </div>
         </div>
     </div>
 
     <div class="main-content">
         <div class="header-top">
             <div class="welcome-text">
-                <h1 id="userName">Bienvenue</h1>
-                <p>Analyse de vos activités industrielles</p>
+                <h1 id="userName">Bonjour !</h1>
+                <p>Espace personnel - vos activités industrielles</p>
             </div>
-            <div class="user-profile"><i class="fas fa-user-circle" style="font-size: 2rem; color: var(--primary);"></i></div>
+            <div class="user-avatar">
+                <i class="fas fa-user-circle" style="font-size: 3rem; color: var(--primary)"></i>
+            </div>
         </div>
 
         <div class="stats-grid">
             <div class="stat-card">
-                <i class="fas fa-industry" style="color:var(--primary)"></i>
-                <span class="stat-val" id="totalSimulations">--</span>
-                <span class="stat-label">Simulations</span>
+                <i class="fas fa-industry"></i>
+                <span class="stat-val" id="totalSims">--</span>
+                <span class="stat-label">Simulations lancées</span>
             </div>
             <div class="stat-card">
-                <i class="fas fa-id-badge" style="color:var(--secondary)"></i>
-                <span class="stat-val" id="profileType">Standard</span>
-                <span class="stat-label">Compte</span>
+                <i class="fas fa-id-badge" style="color: var(--secondary)"></i>
+                <span class="stat-val" id="accountType">USER</span>
+                <span class="stat-label">Statut du Compte</span>
             </div>
             <div class="stat-card">
-                <i class="fas fa-tasks" style="color:var(--primary)"></i>
+                <i class="fas fa-tasks"></i>
                 <span class="stat-val" id="globalProgress">0%</span>
-                <span class="stat-label">Progression</span>
+                <span class="stat-label">Progression BP global</span>
             </div>
         </div>
 
         <div class="section-box">
-            <h2 style="margin-bottom: 15px; font-size: 1.2rem;">Projets récents</h2>
+            <div class="section-header">
+                <h2>Projets récents</h2>
+                <button class="btn-new" onclick="window.location.href='filieres.html'">+ Nouvelle Simulation</button>
+            </div>
             <table class="project-table">
                 <thead>
                     <tr>
-                        <th style="width: 40%;">Unité</th>
-                        <th style="width: 25%;">Filière</th>
+                        <th style="width: 40%;">Unité Industrielle</th>
+                        <th style="width: 20%;">Filière</th>
                         <th style="width: 20%;">Statut</th>
-                        <th style="width: 15%;">Action</th>
+                        <th style="width: 20%;">Action</th>
                     </tr>
                 </thead>
                 <tbody id="projectList">
-                    <tr>
-                        <td><strong>Chargement...</strong></td>
-                        <td>---</td>
-                        <td><span class="status-badge">Vérification</span></td>
-                        <td><button class="btn-action">...</button></td>
-                    </tr>
-                </tbody>
+                    </tbody>
             </table>
         </div>
     </div>
 
     <script>
+        // Configuration Supabase
         const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18';
-        
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        async function initDashboard() {
-            // On tente de récupérer la session, mais on ne bloque pas l'affichage
+        async function init() {
             const { data: { session } } = await supabase.auth.getSession();
-            
-            if (session) {
-                const user = session.user;
-                document.getElementById('userName').innerText = `Bonjour, ${user.email.split('@')[0]} !`;
-                
-                const { data: sims } = await supabase
-                    .from('simulations')
-                    .select('*')
-                    .eq('users_id', user.id);
+            if (!session) {
+                window.location.href = 'connexion.html';
+                return;
+            }
 
-                if (sims && sims.length > 0) {
-                    document.getElementById('totalSimulations').innerText = sims.length.toString().padStart(2, '0');
-                    const list = document.getElementById('projectList');
-                    list.innerHTML = ''; // On vide le "Chargement..."
-                    
-                    sims.forEach(sim => {
-                        list.innerHTML += `
-                            <tr>
-                                <td><strong>${sim.nom_simulation || 'Projet'}</strong></td>
-                                <td>${sim.filiere_choisie || 'Industrie'}</td>
-                                <td><span class="status-badge">${sim.statut || 'En cours'}</span></td>
-                                <td><button class="btn-action" onclick="window.location.href='resultats.html?id=${sim.id}'">Ouvrir</button></td>
-                            </tr>`;
-                    });
-                } else {
-                    document.getElementById('projectList').innerHTML = '<tr><td colspan="4" style="text-align:center;">Aucun projet trouvé.</td></tr>';
-                }
-            } else {
-                document.getElementById('userName').innerText = "Mode invité (non connecté)";
+            const user = session.user;
+            document.getElementById('userName').innerText = `Bonjour, ${user.email.split('@')[0]} !`;
+
+            // Récupération des simulations
+            const { data: sims, error } = await supabase
+                .from('simulations')
+                .select('*')
+                .eq('users_id', user.id)
+                .order('date_creation', { ascending: false });
+
+            if (sims) {
+                document.getElementById('totalSims').innerText = sims.length.toString().padStart(2, '0');
+                const list = document.getElementById('projectList');
+                list.innerHTML = '';
+
+                sims.forEach(sim => {
+                    list.innerHTML += `
+                        <tr>
+                            <td><strong>${sim.nom_simulation || 'Simulation Sans Nom'}</strong></td>
+                            <td style="color: var(--text-dim)">${sim.filiere_choisie || '---'}</td>
+                            <td><span class="status-badge">${sim.statut || 'En cours'}</span></td>
+                            <td>
+                                <button class="btn-view" onclick="window.location.href='fiche-production.html?id=${sim.unite_id}'">
+                                    Ouvrir
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
             }
         }
 
         async function handleLogout() {
-            await supabase.auth.signOut();
-            window.location.href = 'index.html';
-        }
-
-        // On lance la récupération des données après le chargement du HTML
-        window.onload = initDashboard;
+    try {
+        await supabase.auth.signOut();
+    } catch (err) {
+        console.log("Déconnexion forcée");
+    } finally {
+        window.location.href = 'index.html'; // Quoi qu'il arrive, on rentre à la maison
+    }
+}
+        window.onload = init;
     </script>
 </body>
 </html>
