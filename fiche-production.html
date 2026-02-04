@@ -816,7 +816,7 @@
             </p>
             
             <div style="text-align: center; margin-top: 25px;">
-                <button class="btn-success" onclick="window.location.href='register.html'">
+                <button class="btn-success" onclick="window.location.href='login.html?mode=register'">
                     <i class="fas fa-user-plus"></i> Créer mon compte gratuit
                 </button>
             </div>
@@ -2639,210 +2639,321 @@
         }
 
         // ==============================================
-        // CHARGEMENT DES DONNÉES DE L'UNITÉ
-        // ==============================================
-        async function loadProductionData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const simulationId = urlParams.get('id');
-            const titleElement = document.getElementById('production-title');
+// MAPPING COMPLET DES IDs (96 unités)
+// ==============================================
+const unitIdMapping = {
+    // ID numérique Supabase → Clé données locales
+    1: "conserverie_legumes",
+    2: "biscuiterie", 
+    3: "boulangerie_industrielle",
+    4: "jus_boissons",
+    5: "mini_laiterie",
+    6: "huiles_alimentaires",
+    7: "epices",
+    8: "aliments_betail",  // IMPORTANT: ID 8 = Usine d'aliments pour bétail
+    9: "detergents",
+    10: "savonnerie",
+    11: "cosmetiques",
+    12: "peintures",
+    13: "adhesifs",
+    14: "engrais",
+    15: "javel",
+    16: "produits_industriels",
+    17: "confection",
+    18: "tissage",
+    19: "maroquinerie",
+    20: "teinture",
+    21: "broderie",
+    22: "chaussures",
+    23: "uniformes",
+    24: "linge",
+    25: "serrurerie",
+    26: "outillage",
+    27: "recyclage_metaux",
+    28: "chaudronnerie",
+    29: "mecanosoudure",
+    30: "structures",
+    31: "pieces",
+    32: "quincaillerie",
+    33: "sacs",
+    34: "bouteilles_pet",
+    35: "tuyaux_pvc",
+    36: "emballages",
+    37: "profiles",
+    38: "jouets",
+    39: "joints",
+    40: "granules",
+    41: "cables",
+    42: "panneaux_solaires",
+    43: "appareils",
+    44: "led",
+    45: "tableaux",
+    46: "onduleurs",  // ID 46 = Onduleurs, PAS conserverie_legumes
+    47: "compteurs",
+    48: "batteries",
+    49: "cimenterie",
+    50: "briques",
+    51: "prefab",
+    52: "tuiles",
+    53: "agglos",
+    54: "peintures_btp",
+    55: "centrale_beton",
+    56: "menuiserie",
+    57: "masques",
+    58: "pansements",
+    59: "mobilier",
+    60: "fauteuils",
+    61: "instruments",
+    62: "bequilles",
+    63: "antiseptiques",
+    64: "kits",
+    65: "smartphones",
+    66: "ordinateurs",
+    67: "electromenager",
+    68: "climatiseurs",
+    69: "motos",
+    70: "aliments_betail",  // ID 70 = Usine d'aliments pour bétail (problème actuel)
+    71: "velos",
+    72: "meubles",
+    73: "equipements",
+    74: "plastique",
+    75: "papier",
+    76: "metaux",
+    77: "compost",
+    78: "verre",
+    79: "pneus",
+    80: "huiles",
+    81: "deee",
+    82: "nettoyage",
+    83: "maintenance",
+    84: "logistique",
+    85: "formation",
+    86: "qualite",
+    87: "etudes",
+    88: "securite",
+    89: "energie",
+    90: "poteaux",
+    91: "compteurs_eau",
+    92: "kits_solaires",
+    93: "lampadaires",
+    94: "forage",
+    95: "eau",
+    96: "maintenance_energie",
+    97: "audit"
+};
 
-            console.log("Chargement des données pour ID:", simulationId);
+// Mapping inverse (clé locale → ID numérique)
+const reverseMapping = {};
+Object.keys(unitIdMapping).forEach(id => {
+    reverseMapping[unitIdMapping[id]] = parseInt(id);
+});
 
-            // Si pas d'ID, essayer avec l'ID direct de l'unité
-            if (!simulationId) {
-                const uniteId = urlParams.get('unite_id');
-                if (uniteId) {
-                    console.log("Utilisation directe de l'ID unité:", uniteId);
-                    loadFromLocalDatabase(uniteId);
-                } else {
-                    titleElement.textContent = "ID manquant dans l'URL";
-                }
+// ==============================================
+// CHARGEMENT DES DONNÉES DE L'UNITÉ (VERSION SIMPLIFIÉE)
+// ==============================================
+async function loadProductionData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // 1. Récupérer l'ID de l'unité depuis l'URL (paramètre 'id')
+    const unitIdParam = urlParams.get('id');
+    const simulationId = urlParams.get('simulation_id'); // Optionnel
+    
+    console.log("Chargement pour unité ID:", unitIdParam, "simulation:", simulationId);
+
+    // 2. DÉTERMINER LE VRAI ID DE L'UNITÉ
+    let realUnitId = unitIdParam;
+    let isNumericId = false;
+    
+    // Si l'ID est numérique (venant de Supabase ou URL)
+    if (unitIdParam && /^\d+$/.test(unitIdParam)) {
+        isNumericId = true;
+        realUnitId = parseInt(unitIdParam);
+        console.log("ID numérique détecté:", realUnitId);
+    }
+    
+    // 3. TENTER LE CHARGEMENT DEPUIS SUPABASE
+    try {
+        console.log("Tentative de chargement depuis Supabase...");
+        
+        let unitData = null;
+        
+        if (isNumericId) {
+            // Recherche directe par ID numérique
+            const { data, error } = await supabaseClient
+                .from('unites_production')
+                .select('*')
+                .eq('id', realUnitId)
+                .single();
+                
+            if (error) {
+                console.log("Supabase error:", error.message);
+                // Fallback: chercher dans données locales
+                loadFromLocalDatabase(realUnitId, true);
                 return;
             }
-
-            try {
-                // 1. ESSAYER D'ABORD SUPABASE
-                console.log("Tentative de récupération depuis Supabase...");
+            
+            unitData = data;
+        } else {
+            // ID textuel: chercher par slug ou nom
+            const { data, error } = await supabaseClient
+                .from('unites_production')
+                .select('*')
+                .or(`slug.eq.${unitIdParam},nom.eq.${unitIdParam}`)
+                .single();
                 
-                const { data: simulation, error: simError } = await supabaseClient
-                    .from('simulations')
-                    .select('*')
-                    .eq('id', simulationId)
-                    .single();
+            if (error) {
+                console.log("Supabase error pour ID textuel:", error.message);
+                loadFromLocalDatabase(unitIdParam, false);
+                return;
+            }
+            
+            unitData = data;
+        }
+        
+        if (unitData) {
+            console.log("✅ Données récupérées depuis Supabase:", unitData.nom);
+            
+            // Déterminer la clé locale pour sauvegarde
+            let localKey = unitIdParam;
+            if (isNumericId && unitIdMapping[realUnitId]) {
+                localKey = unitIdMapping[realUnitId];
+            }
+            
+            // Sauvegarde locale
+            localStorage.setItem('currentProduction', JSON.stringify(unitData));
+            localStorage.setItem('currentProductionKey', localKey);
+            localStorage.setItem('currentUnitId', realUnitId);
+            
+            // Mise à jour UI
+            updateUI(unitData, realUnitId);
+            
+        } else {
+            console.log("❌ Aucune donnée Supabase trouvée, fallback local...");
+            loadFromLocalDatabase(unitIdParam, isNumericId);
+        }
+        
+    } catch (err) {
+        console.error("❌ Erreur critique:", err);
+        loadFromLocalDatabase(unitIdParam, isNumericId);
+    }
+}
 
-                if (simError || !simulation) {
-                    console.error("Erreur Supabase (simulation):", simError);
-                    
-                    // Fallback: Utiliser directement l'ID depuis l'URL
-                    loadFromLocalDatabase(simulationId);
-                    return;
-                }
-
-                console.log("Simulation trouvée:", simulation.unite_id);
-
-                // 2. Mapping des IDs (correspondance entre vos clés JS et IDs Supabase)
-                const mappingInverse = {
-                    "conserverie_legumes": 1,
-                    "biscuiterie": 2,
-                    "boulangerie_industrielle": 3,
-                    "jus_boissons": 4,
-                    "mini_laiterie": 5,
-                    "huiles_alimentaires": 6,
-                    "epices": 7,
-                    "aliments_betail": 8,
-                    "detergents": 9,
-                    "savonnerie": 10,
-                    "cosmetiques": 11,
-                    "peintures": 12,
-                    "adhesifs": 13,
-                    "engrais": 14,
-                    "javel": 15,
-                    "produits_industriels": 16,
-                    "confection": 17,
-                    "tissage": 18,
-                    "maroquinerie": 19,
-                    "teinture": 20,
-                    "broderie": 21,
-                    "chaussures": 22,
-                    "uniformes": 23,
-                    "linge": 24,
-                    "serrurerie": 25,
-                    "outillage": 26,
-                    "recyclage_metaux": 27,
-                    "chaudronnerie": 28,
-                    "mecanosoudure": 29,
-                    "structures": 30,
-                    "pieces": 31,
-                    "quincaillerie": 32,
-                    "sacs": 33,
-                    "bouteilles_pet": 34,
-                    "tuyaux_pvc": 35,
-                    "emballages": 36,
-                    "profiles": 37,
-                    "jouets": 38,
-                    "joints": 39,
-                    "granules": 40
-                    // Continuez le mapping pour les autres unités...
-                };
-                
-                let numericId = mappingInverse[simulation.unite_id] || simulation.unite_id;
-
-                // 3. Récupération des détails techniques depuis Supabase
-                const { data: detailsUP, error: upError } = await supabaseClient
-                    .from('unites_production')
-                    .select('*')
-                    .eq('id', numericId)
-                    .single();
-
-                if (detailsUP) {
-                    console.log("✅ Données récupérées depuis Supabase:", detailsUP);
-                    
-                    // Vérifier si les données sont complètes
-                    const hasCompleteData = detailsUP.capex_min && detailsUP.chiffre_affaires_estime && detailsUP.marge_brute;
-                    
-                    if (!hasCompleteData) {
-                        console.warn("⚠️ Données Supabase incomplètes, utilisation du fallback local");
-                        // Essayer le fallback local
-                        const localData = productionsData[simulation.unite_id];
-                        if (localData) {
-                            updateUI(localData, numericId);
-                            showDemoWarning();
-                        } else {
-                            updateUI(detailsUP, numericId); // Utiliser ce qu'il y a
-                        }
-                    } else {
-                        updateUI(detailsUP, numericId);
-                    }
-                } else {
-                    console.error("❌ Supabase: Détails UP introuvables pour l'ID:", numericId, upError);
-                    
-                    // Fallback vers la base locale
-                    console.log("Tentative de fallback vers la base locale...");
-                    loadFromLocalDatabase(simulation.unite_id);
-                }
-
-            } catch (err) {
-                console.error("❌ Erreur critique de chargement:", err);
-                
-                // Dernier recours: utiliser l'ID direct
-                loadFromLocalDatabase(simulationId);
+// ==============================================
+// FONCTION FALLBACK: CHARGEMENT LOCAL
+// ==============================================
+function loadFromLocalDatabase(unitId, isNumeric = false) {
+    console.log("Chargement depuis base locale:", { unitId, isNumeric });
+    
+    let data = null;
+    let localKey = unitId;
+    
+    // 1. Si ID numérique: utiliser le mapping
+    if (isNumeric && unitIdMapping[unitId]) {
+        localKey = unitIdMapping[unitId];
+        data = productionsData[localKey];
+    }
+    // 2. Si ID textuel: chercher directement
+    else if (!isNumeric && productionsData[unitId]) {
+        data = productionsData[unitId];
+    }
+    // 3. Si ID numérique mais pas dans mapping: chercher par valeur numérique
+    else if (isNumeric) {
+        // Parcourir toutes les unités pour trouver correspondance
+        for (const [key, value] of Object.entries(productionsData)) {
+            if (value.id === parseInt(unitId) || value.capex_min === parseInt(unitId)) {
+                data = value;
+                localKey = key;
+                break;
             }
         }
+    }
+    
+    if (data) {
+        console.log("✅ Données trouvées localement:", data.nom);
+        
+        // Sauvegarde locale
+        localStorage.setItem('currentProduction', JSON.stringify(data));
+        localStorage.setItem('currentProductionKey', localKey);
+        localStorage.setItem('currentUnitId', unitId);
+        
+        // Mise à jour UI
+        updateUI(data, unitId);
+        
+        // Avertissement démo
+        showDemoWarning();
+        
+    } else {
+        console.error("❌ Aucune donnée trouvée localement pour:", unitId);
+        
+        // Message d'erreur utilisateur
+        document.getElementById('production-title').textContent = "Unité non disponible";
+        document.getElementById('description').textContent = 
+            "Désolé, les données de cette unité de production ne sont pas disponibles pour le moment.";
+        
+        // Afficher liste des unités disponibles
+        showAvailableUnits();
+    }
+}
 
-        // FONCTION FALLBACK: Chargement depuis la base locale
-        function loadFromLocalDatabase(uniteId) {
-            console.log("Chargement depuis la base locale pour ID:", uniteId);
-            
-            // Essayer plusieurs formats d'ID
-            let data = null;
-            
-            // 1. Essayer avec l'ID tel quel (clé de votre objet)
-            if (productionsData[uniteId]) {
-                data = productionsData[uniteId];
-            }
-            // 2. Essayer avec un ID numérique
-            else if (typeof uniteId === 'number' || /^\d+$/.test(uniteId)) {
-                // Chercher par correspondance numérique
-                const idMapping = {
-                    1: "conserverie_legumes",
-                    2: "biscuiterie",
-                    3: "boulangerie_industrielle",
-                    4: "jus_boissons",
-                    5: "mini_laiterie",
-                    6: "huiles_alimentaires",
-                    7: "epices",
-                    8: "aliments_betail",
-                    9: "detergents",
-                    10: "savonnerie",
-                    11: "cosmetiques",
-                    12: "peintures",
-                    13: "adhesifs",
-                    14: "engrais",
-                    15: "javel",
-                    16: "produits_industriels",
-                    17: "confection",
-                    18: "tissage",
-                    19: "maroquinerie",
-                    20: "teinture",
-                    21: "broderie",
-                    22: "chaussures",
-                    23: "uniformes",
-                    24: "linge",
-                    25: "serrurerie",
-                    26: "outillage",
-                    27: "recyclage_metaux",
-                    28: "chaudronnerie",
-                    29: "mecanosoudure",
-                    30: "structures",
-                    31: "pieces",
-                    32: "quincaillerie",
-                    33: "sacs",
-                    34: "bouteilles_pet",
-                    35: "tuyaux_pvc",
-                    36: "emballages",
-                    37: "profiles",
-                    38: "jouets",
-                    39: "joints",
-                    40: "granules"
-                    // Continuez pour toutes les 96 unités...
-                };
-                
-                const localKey = idMapping[parseInt(uniteId)];
-                if (localKey && productionsData[localKey]) {
-                    data = productionsData[localKey];
-                }
-            }
-            
-            if (data) {
-                console.log("✅ Données trouvées dans la base locale");
-                updateUI(data, uniteId);
-                showDemoWarning();
-            } else {
-                console.error("❌ Aucune donnée trouvée localement pour:", uniteId);
-                document.getElementById('production-title').textContent = "Données non disponibles";
-                document.getElementById('description').textContent = "L'unité de production n'a pas pu être chargée. Veuillez réessayer.";
-            }
-        }
+// ==============================================
+// FONCTIONS UTILITAIRES
+// ==============================================
+function showDemoWarning() {
+    const warningDiv = document.createElement('div');
+    warningDiv.style.cssText = `
+        background: rgba(255, 193, 7, 0.2);
+        color: #ffc107;
+        padding: 10px 15px;
+        border-radius: 8px;
+        border: 1px solid #ffc107;
+        margin: 15px 0;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    `;
+    warningDiv.innerHTML = `
+        <i class="fas fa-exclamation-triangle"></i>
+        <div>
+            <strong>Mode démo</strong> - Données locales affichées.<br>
+            <small>Les données Supabase seront utilisées lorsqu'elles seront disponibles.</small>
+        </div>
+    `;
+    
+    const ficheHeader = document.querySelector('.fiche-header');
+    if (ficheHeader) {
+        ficheHeader.appendChild(warningDiv);
+    }
+}
+
+function showAvailableUnits() {
+    const container = document.getElementById('description');
+    if (!container) return;
+    
+    container.innerHTML = `
+        <p style="color: #f72585; font-weight: bold;">Unité de production non trouvée (ID: ${new URLSearchParams(window.location.search).get('id')})</p>
+        <p style="color: #b8c1ec;">Veuillez sélectionner une unité disponible :</p>
+        <ul style="color: #b8c1ec; margin-left: 20px;">
+            <li><a href="fiche-production.html?id=1" style="color: #4cc9f0;">Conserverie de légumes (ID: 1)</a></li>
+            <li><a href="fiche-production.html?id=8" style="color: #4cc9f0;">Usine d'aliments pour bétail (ID: 8)</a></li>
+            <li><a href="fiche-production.html?id=46" style="color: #4cc9f0;">Onduleurs et convertisseurs (ID: 46)</a></li>
+            <li><a href="fiche-production.html?id=70" style="color: #4cc9f0;">Usine d'aliments pour bétail (ID: 70)</a></li>
+        </ul>
+    `;
+}
+
+// ==============================================
+// INITIALISATION
+// ==============================================
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page fiche-production chargée');
+    
+    // Charger les données de l'UP
+    loadProductionData();
+    
+    // Initialiser le panier
+    updateCartDisplay();
+});
 
         function showDemoWarning() {
             const warningDiv = document.createElement('div');
@@ -2939,17 +3050,56 @@
         // GESTION BUSINESS PLANS
         // ==============================================
         function handleDownloadBP() {
-            const userHasAccount = localStorage.getItem('p2i_user_logged_in') === 'true';
-            
-            if (!userHasAccount) {
-                openModal('modal-bp-download');
-            } else {
-                const userEmail = localStorage.getItem('p2i_user_email') || 'Non spécifié';
-                document.getElementById('user-email-display').textContent = userEmail;
-                openModal('modal-bp-email-confirm');
+            // 1. On vérifie si l'utilisateur est connecté (via Supabase ou localStorage)
+            // On vérifie si un email est stocké dans le localStorage
+            const userEmail = localStorage.getItem('p2i_user_email');
+
+            if (!userEmail) {
+                // CAS : UTILISATEUR NON CONNECTÉ
+                // On crée le contenu de la fenêtre d'alerte avec les liens mode=register et mode=login
+                const htmlMessage = `
+                    <div style="text-align:center; padding: 20px;">
+                        <i class="fas fa-lock" style="font-size: 3rem; color: #f72585; margin-bottom: 20px;"></i>
+                        <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">Accès Réservé</h3>
+                        <p style="color: #b8c1ec; margin-bottom: 25px;">Pour télécharger gratuitement le Business Plan complet de cette unité, vous devez posséder un compte P2I.</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            <a href="login.html?mode=register" style="background: linear-gradient(to right, #4cc9f0, #4361ee); color: white; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 1rem; box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);">
+                                <i class="fas fa-user-plus"></i> Créer mon espace gratuitement
+                            </a>
+                            
+                            <p style="color: #b8c1ec; font-size: 0.9rem;">
+                                Déjà inscrit ? <a href="login.html?mode=login" style="color: #4cc9f0; font-weight: bold; text-decoration: underline;">Se connecter</a>
+                            </p>
+                        </div>
+                    </div>
+                `;
                 
+                // On utilise ta fonction showModal pour afficher ce contenu
+                // Si ta fonction s'appelle openModal, remplace showModal par openModal
+                if (typeof showModal === "function") {
+                    showModal(htmlMessage);
+                } else {
+                    // Si tu n'as pas de fonction showModal générique, on utilise une alerte ou on ouvre une modal existante
+                    alert("Veuillez vous connecter pour télécharger ce document.");
+                    window.location.href = "login.html?mode=register";
+                }
+
+            } else {
+                // CAS : UTILISATEUR CONNECTÉ
+                // On affiche la confirmation d'envoi par email
+                document.getElementById('user-email-display').textContent = userEmail;
+                
+                // On ouvre la modal de confirmation existante dans ta page
+                if (typeof openModal === "function") {
+                    openModal('modal-bp-email-confirm');
+                }
+
+                // Logique d'enregistrement du téléchargement
                 const unitId = localStorage.getItem('currentUnitId');
-                const code = generateProjectCode(unitId);
+                // On vérifie si la fonction de génération de code existe
+                const code = (typeof generateProjectCode === "function") ? generateProjectCode(unitId) : "P2I-BP-TEMP";
+                
                 const downloads = JSON.parse(localStorage.getItem('p2i_downloads') || '[]');
                 downloads.push({
                     type: 'bp_gratuit',
