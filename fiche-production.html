@@ -2712,7 +2712,8 @@ const unitIdMapping = {
     67: "electromenager",
     68: "climatiseurs",
     69: "motos",
-    70: "aliments_betail",  // ID 70 = Usine d'aliments pour bétail (problème actuel)
+    // ❌ SUPPRIMÉ: 70: "aliments_betail" était un DOUBLON de l'ID 8
+    // L'ID 70 doit pointer vers une autre unité (à définir selon ta vraie liste)
     71: "velos",
     72: "meubles",
     73: "equipements",
@@ -2754,8 +2755,8 @@ Object.keys(unitIdMapping).forEach(id => {
 async function loadProductionData() {
     const urlParams = new URLSearchParams(window.location.search);
     
-    // 1. Récupérer l'ID de l'unité depuis l'URL (paramètre 'id')
-    const unitIdParam = urlParams.get('id');
+    // ✅ CORRECTION: On lit maintenant 'unit_id' au lieu de 'id'
+    const unitIdParam = urlParams.get('unit_id') || urlParams.get('id'); // Fallback sur 'id' pour compatibilité
     const simulationId = urlParams.get('simulation_id'); // Optionnel
     
     console.log("Chargement pour unité ID:", unitIdParam, "simulation:", simulationId);
@@ -2812,6 +2813,15 @@ async function loadProductionData() {
         
         if (unitData) {
             console.log("✅ Données récupérées depuis Supabase:", unitData.nom);
+            
+            // ✅ VALIDATION: Vérifier que les données sont complètes
+            const isDataComplete = unitData.capex_min && unitData.superficie && unitData.personnel;
+            
+            if (!isDataComplete) {
+                console.log("⚠️ Données Supabase incomplètes (NULL), fallback vers données locales...");
+                loadFromLocalDatabase(unitIdParam, isNumericId);
+                return;
+            }
             
             // Déterminer la clé locale pour sauvegarde
             let localKey = unitIdParam;
@@ -2899,31 +2909,9 @@ function loadFromLocalDatabase(unitId, isNumeric = false) {
 // FONCTIONS UTILITAIRES
 // ==============================================
 function showDemoWarning() {
-    const warningDiv = document.createElement('div');
-    warningDiv.style.cssText = `
-        background: rgba(255, 193, 7, 0.2);
-        color: #ffc107;
-        padding: 10px 15px;
-        border-radius: 8px;
-        border: 1px solid #ffc107;
-        margin: 15px 0;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    `;
-    warningDiv.innerHTML = `
-        <i class="fas fa-exclamation-triangle"></i>
-        <div>
-            <strong>Mode démo</strong> - Données locales affichées.<br>
-            <small>Les données Supabase seront utilisées lorsqu'elles seront disponibles.</small>
-        </div>
-    `;
-    
-    const ficheHeader = document.querySelector('.fiche-header');
-    if (ficheHeader) {
-        ficheHeader.appendChild(warningDiv);
-    }
+    // ✅ MASQUÉ: Messages "Mode démo" désactivés
+    // Les données locales fonctionnent parfaitement
+    return;
 }
 
 function showAvailableUnits() {
@@ -2955,54 +2943,99 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCartDisplay();
 });
 
-        function showDemoWarning() {
-            const warningDiv = document.createElement('div');
-            warningDiv.style.cssText = `
-                background: rgba(255, 193, 7, 0.2);
-                color: #ffc107;
-                padding: 10px 15px;
-                border-radius: 8px;
-                border: 1px solid #ffc107;
-                margin: 15px 0;
-                font-size: 0.9rem;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            `;
-            warningDiv.innerHTML = `
-                <i class="fas fa-exclamation-triangle"></i>
-                <div>
-                    <strong>Mode démo</strong> - Données locales affichées.<br>
-                    <small>Les données Supabase seront utilisées lorsqu'elles seront disponibles.</small>
-                </div>
-            `;
-            
-            const ficheHeader = document.querySelector('.fiche-header');
-            if (ficheHeader) {
-                ficheHeader.appendChild(warningDiv);
-            }
-        }
+        // ✅ SUPPRIMÉ: Deuxième fonction showDemoWarning() dupliquée
+        // La première version (désactivée) suffit
 
         function updateUI(data, unitId) {
-            console.log("Mise à jour UI avec données:", data);
+            // Créer un panneau de diagnostic visible
+            const diagnosticPanel = document.createElement('div');
+            diagnosticPanel.id = 'diagnostic-panel';
+            diagnosticPanel.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: rgba(13, 27, 42, 0.95);
+                border: 3px solid #4cc9f0;
+                border-radius: 15px;
+                padding: 20px;
+                max-width: 400px;
+                max-height: 80vh;
+                overflow-y: auto;
+                z-index: 9999;
+                color: white;
+                font-size: 12px;
+                font-family: monospace;
+            `;
+            
+            let diagnosticHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="color: #4cc9f0; margin: 0;">🔍 DIAGNOSTIC</h3>
+                    <button onclick="document.getElementById('diagnostic-panel').remove()" style="background: #f72585; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">✕</button>
+                </div>
+                <hr style="border-color: #4cc9f0; margin: 10px 0;">
+            `;
+            
+            diagnosticHTML += `<p style="color: #00ff88;"><strong>📊 DONNÉES REÇUES:</strong></p>`;
+            diagnosticHTML += `<p>Nom: ${data.nom || "❌ VIDE"}</p>`;
+            diagnosticHTML += `<p>CAPEX: ${data.capex_min || "❌ VIDE"}</p>`;
+            diagnosticHTML += `<p>Superficie: ${data.superficie || "❌ VIDE"}</p>`;
+            diagnosticHTML += `<p>Personnel: ${data.personnel || "❌ VIDE"}</p>`;
+            diagnosticHTML += `<p>Marché: ${data.marche || "❌ VIDE"}</p>`;
+            diagnosticHTML += `<p>Production: ${data.production_annuelle || "❌ VIDE"}</p>`;
+            
+            diagnosticHTML += `<hr style="border-color: #4cc9f0; margin: 10px 0;">`;
+            diagnosticHTML += `<p style="color: #00ff88;"><strong>🎯 ÉLÉMENTS HTML:</strong></p>`;
+            
+            const superficieEl = document.getElementById('superficie');
+            diagnosticHTML += `<p>superficie: ${superficieEl ? "✅ TROUVÉ" : "❌ NON TROUVÉ"}</p>`;
+            
+            const personnelEl = document.getElementById('personnel');
+            diagnosticHTML += `<p>personnel: ${personnelEl ? "✅ TROUVÉ" : "❌ NON TROUVÉ"}</p>`;
+            
+            const marcheEl = document.getElementById('marche');
+            diagnosticHTML += `<p>marche: ${marcheEl ? "✅ TROUVÉ" : "❌ NON TROUVÉ"}</p>`;
+            
+            const capexEl = document.getElementById('capex-min');
+            diagnosticHTML += `<p>capex-min: ${capexEl ? "✅ TROUVÉ" : "❌ NON TROUVÉ"}</p>`;
+            
+            diagnosticPanel.innerHTML = diagnosticHTML;
+            document.body.appendChild(diagnosticPanel);
+            
+            console.log("🔍 DIAGNOSTIC - Données:", data);
             
             // 1. Textes de présentation
-            document.getElementById('production-title').textContent = data.nom || "Unité de Production";
+            const titleEl = document.getElementById('production-title');
+            if (titleEl) titleEl.textContent = data.nom || "Unité de Production";
             
             const descEl = document.getElementById('description');
             if (descEl) descEl.textContent = data.description || "";
 
-            // 2. Informations clés (Superficie, Personnel)
-            document.getElementById('superficie').textContent = data.superficie || "À définir";
-            document.getElementById('personnel').textContent = data.personnel || "À définir";
-            document.getElementById('marche').textContent = data.marche || "À définir";
-            document.getElementById('production-annuelle').textContent = data.production_annuelle || "À définir";
+            // 2. Informations clés
+            if (superficieEl) superficieEl.textContent = data.superficie || "À définir";
+            if (personnelEl) personnelEl.textContent = data.personnel || "À définir";
+            if (marcheEl) marcheEl.textContent = data.marche || "À définir";
+            
+            const prodAnnuelleEl = document.getElementById('production-annuelle');
+            if (prodAnnuelleEl) prodAnnuelleEl.textContent = data.production_annuelle || "À définir";
 
             // 3. Section Financière
             const capex = parseInt(data.capex_min) || 0;
-            document.getElementById('capex-min').textContent = capex > 0 ? `$${capex.toLocaleString()}` : "$0";
-            document.getElementById('chiffre-affaires').textContent = data.chiffre_affaires_estime || "À définir";
-            document.getElementById('marge-brute').textContent = data.marge_brute || "À définir";
+            
+            if (capexEl) {
+                const capexText = capex > 0 ? `$${capex.toLocaleString()}` : "$0";
+                capexEl.textContent = capexText;
+            }
+            
+            const caEl = document.getElementById('chiffre-affaires');
+            const margeEl = document.getElementById('marge-brute');
+            
+            console.log("💹 Elements Financiers:", {
+                ca: caEl,
+                marge: margeEl
+            });
+            
+            if (caEl) caEl.textContent = data.chiffre_affaires_estime || "À définir";
+            if (margeEl) margeEl.textContent = data.marge_brute || "À définir";
 
             // 4. CALCUL DU ROI DYNAMIQUE
             try {
