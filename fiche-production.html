@@ -2947,6 +2947,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // La première version (désactivée) suffit
 
         function updateUI(data, unitId) {
+            // ✅ PANNEAU DE DIAGNOSTIC DÉSACTIVÉ
+            // Pour le réactiver, décommente les lignes ci-dessous
+            /*
             // Créer un panneau de diagnostic visible
             const diagnosticPanel = document.createElement('div');
             diagnosticPanel.id = 'diagnostic-panel';
@@ -3000,6 +3003,13 @@ document.addEventListener('DOMContentLoaded', function() {
             
             diagnosticPanel.innerHTML = diagnosticHTML;
             document.body.appendChild(diagnosticPanel);
+            */
+            
+            // Les éléments sont toujours récupérés pour le code fonctionnel
+            const superficieEl = document.getElementById('superficie');
+            const personnelEl = document.getElementById('personnel');
+            const marcheEl = document.getElementById('marche');
+            const capexEl = document.getElementById('capex-min');
             
             console.log("🔍 DIAGNOSTIC - Données:", data);
             
