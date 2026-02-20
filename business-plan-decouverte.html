@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>P2I | Business Plan Découverte (Gratuit)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root{
+      --bg:#0b132b;
+      --panel:#121c36;
+      --card:#1c2541;
+      --stroke:rgba(255,255,255,0.08);
+      --text:#ffffff;
+      --muted:#94a3b8;
+      --p2i-blue:#4cc9f0;
+      --p2i-pink:#f72585;
+
+      --cta-bg:rgba(34,197,94,0.10);
+      --cta-stroke:rgba(34,197,94,0.35);
+      --cta-text:#86efac;
+
+      --warn-bg:rgba(245,158,11,0.10);
+      --warn-stroke:rgba(245,158,11,0.35);
+      --warn-text:#fbbf24;
+
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --grad: linear-gradient(135deg, rgba(76,201,240,0.22), rgba(247,37,133,0.18));
+      --grad-strong: linear-gradient(135deg, var(--p2i-blue), var(--p2i-pink));
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
+    body{background:radial-gradient(1000px 800px at 20% 0%, rgba(76,201,240,0.14), transparent 60%),
+                  radial-gradient(900px 700px at 80% 10%, rgba(247,37,133,0.12), transparent 60%),
+                  var(--bg);
+         color:var(--text);}
+    a{color:inherit;text-decoration:none;}
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      background: rgba(11,19,43,0.72);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid var(--stroke);
+    }
+    .topbar-inner{
+      max-width:1100px;margin:0 auto;padding:16px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      font-weight:800; letter-spacing:0.4px;
+    }
+    .logo{
+      width:36px;height:36px;border-radius:12px;
+      background: var(--grad);
+      border:1px solid var(--stroke);
+      display:grid;place-items:center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+    .logo i{color:var(--p2i-blue);}
+    .brand .name{
+      display:flex;align-items:baseline;gap:8px;
+      font-size:1.05rem;
+    }
+    .pill{
+      font-size:0.78rem;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(247,37,133,0.35);
+      color: rgba(247,37,133,0.95);
+      background: rgba(247,37,133,0.08);
+      font-weight:800;
+    }
+
+    .actions{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;
+    }
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:12px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      cursor:pointer;
+      transition: 0.2s ease;
+      font-weight:800;
+      font-size:0.92rem;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,0.16);}
+    .btn.primary{
+      border:none;
+      background: var(--grad-strong);
+      color: #07101f;
+      box-shadow: 0 14px 35px rgba(76,201,240,0.18);
+    }
+    .btn.primary:hover{filter: brightness(1.02);}
+
+    /* Layout */
+    .wrap{max-width:1100px;margin:0 auto;padding:26px 18px 60px;}
+    .hero{
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-top{
+      padding:26px 26px 18px;
+      background: radial-gradient(800px 450px at 20% 0%, rgba(76,201,240,0.14), transparent 60%),
+                  radial-gradient(800px 450px at 80% 0%, rgba(247,37,133,0.12), transparent 60%);
+      border-bottom:1px solid var(--stroke);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap:18px;
+      align-items:start;
+    }
+    .title{
+      font-size:2.05rem;
+      letter-spacing:0.2px;
+      margin-bottom:10px;
+    }
+    .subtitle{color:var(--muted);font-size:1.02rem;line-height:1.45;}
+    .meta{
+      display:grid;gap:10px;justify-items:end;
+    }
+    .meta-card{
+      width:100%;
+      background: rgba(28,37,65,0.55);
+      border: 1px solid var(--stroke);
+      border-radius:18px;
+      padding:14px 14px;
+      display:grid;gap:6px;
+    }
+    .meta-k{color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.9px;}
+    .meta-v{font-weight:900;font-size:0.98rem;}
+    .free-badge{
+      display:inline-flex;align-items:center;gap:10px;
+      border-radius:999px;
+      padding:10px 14px;
+      border:1px solid rgba(76,201,240,0.35);
+      background: rgba(76,201,240,0.10);
+      color: rgba(76,201,240,0.95);
+      font-weight:900;
+      width:max-content;
+      margin-top:14px;
+    }
+
+    /* Content */
+    .content{padding:22px 26px 26px;}
+    .toc{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin: 0 0 18px;
+    }
+    .toc a{
+      display:flex;align-items:center;gap:10px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.02);
+      transition:0.2s ease;
+    }
+    .toc a:hover{border-color:rgba(76,201,240,0.35);transform:translateY(-1px);}
+    .toc i{color:var(--p2i-blue);}
+    .toc span{color:var(--muted);font-size:0.95rem;}
+
+    .section{
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      background: rgba(28,37,65,0.35);
+      padding:18px 18px;
+      margin-top:14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+    .section-head{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+      margin-bottom:10px;
+    }
+    .hgroup{
+      display:flex;gap:12px;align-items:flex-start;
+    }
+    .icon{
+      width:40px;height:40px;border-radius:14px;
+      background: var(--grad);
+      border:1px solid var(--stroke);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+    }
+    .icon i{color:var(--p2i-blue);}
+    .section h2{
+      font-size:1.25rem;
+      margin-bottom:4px;
+      letter-spacing:0.2px;
+    }
+    .section p, .section li{
+      color:var(--muted);
+      line-height:1.55;
+      font-size:0.98rem;
+    }
+    .section ul{padding-left:18px;margin-top:8px;}
+    .mini{
+      font-size:0.85rem;color:rgba(148,163,184,0.85);
+      border-left: 3px solid rgba(76,201,240,0.35);
+      padding-left:10px;margin-top:10px;
+    }
+
+    /* CTA Box */
+    .cta{
+      margin-top:14px;
+      border-radius:18px;
+      border:1px solid var(--cta-stroke);
+      background: var(--cta-bg);
+      padding:14px 14px;
+      display:grid;gap:10px;
+    }
+    .cta .row{
+      display:flex;gap:10px;align-items:flex-start;
+    }
+    .cta i{color: var(--cta-text);margin-top:2px;}
+    .cta b{color: var(--cta-text);}
+    .cta p{color: rgba(134,239,172,0.9);}
+
+    /* Disclaimer box (small) */
+    .disclaimer{
+      border-radius:16px;
+      border:1px dashed rgba(255,255,255,0.16);
+      padding:10px 12px;
+      color: rgba(148,163,184,0.95);
+      font-size:0.88rem;
+      line-height:1.45;
+      background: rgba(255,255,255,0.02);
+    }
+    .disclaimer b{color:#cbd5e1;}
+
+    /* Footer CTA */
+    .final{
+      margin-top:18px;
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(76,201,240,0.10), rgba(247,37,133,0.08));
+      padding:18px;
+      display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+    }
+    .final .left{display:grid;gap:6px;}
+    .final .left h3{font-size:1.18rem;}
+    .final .left p{color:var(--muted);max-width:760px;line-height:1.45;}
+    .final .right{display:flex;gap:10px;flex-wrap:wrap;}
+
+    /* Print helpers */
+    @media print{
+      .topbar, .final .right, .btn{display:none !important;}
+      body{background:#fff;color:#111;}
+      .hero, .section{box-shadow:none;}
+      .section, .hero{border-color:#ddd;}
+      .section p, .section li, .subtitle, .meta-k{color:#333 !important;}
+      .cta{border-color:#2e7d32;background:#e8f5e9;}
+      .cta p{color:#1b5e20;}
+    }
+
+    @media (max-width: 860px){
+      .hero-grid{grid-template-columns:1fr;}
+      .meta{justify-items:start;}
+      .toc{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo"><i class="fa-solid fa-bullseye"></i></div>
+        <div class="name">
+          <span>P2I</span>
+          <span class="pill">BP Découverte</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn" id="btnBack" href="dashboard.html"><i class="fa-solid fa-arrow-left"></i> Tableau de bord</a>
+        <a class="btn" href="#sommaire"><i class="fa-solid fa-list-check"></i> Sommaire</a>
+        <a class="btn primary" id="btnPro" href="#passer-pro"><i class="fa-solid fa-rocket"></i> Passer au BP Pro</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-top">
+        <div class="hero-grid">
+          <div>
+            <div class="title" id="bpTitle">Business Plan Découverte</div>
+            <div class="subtitle" id="bpSub">
+              Une première vision structurée pour évaluer la faisabilité de votre projet industriel, avec un design moderne P2I.
+            </div>
+            <div class="free-badge">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>GRATUIT — version “Découverte”</span>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div class="meta-card">
+              <div class="meta-k">Unité industrielle</div>
+              <div class="meta-v" id="metaUnit">—</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-k">Filière</div>
+              <div class="meta-v" id="metaFiliere">—</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-k">Date</div>
+              <div class="meta-v" id="metaDate">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content" id="sommaire">
+        <!-- TOC -->
+        <div class="toc">
+          <a href="#s1"><i class="fa-solid fa-file-lines"></i><span>Description (sommaire) de l’activité</span></a>
+          <a href="#s2"><i class="fa-solid fa-chart-line"></i><span>Analyse du marché cible</span></a>
+          <a href="#s3"><i class="fa-solid fa-gears"></i><span>Machines & équipements nécessaires</span></a>
+          <a href="#s4"><i class="fa-solid fa-coins"></i><span>Investissements CAPEX estimés</span></a>
+          <a href="#s5"><i class="fa-solid fa-receipt"></i><span>Compte de résultat prévisionnel sommaire</span></a>
+          <a href="#s6"><i class="fa-solid fa-scale-balanced"></i><span>Bilan prévisionnel simplifié</span></a>
+          <a href="#s7"><i class="fa-solid fa-arrow-trend-up"></i><span>Calcul du ROI approximatif</span></a>
+          <a href="#s8"><i class="fa-solid fa-compass"></i><span>Recommandations stratégiques</span></a>
+        </div>
+
+        <div class="disclaimer">
+          <b>Important :</b> le <b>Business Plan Pro</b> (document bancable +40 pages + accompagnement) <b>n’inclut pas automatiquement</b> les services additionnels (sourcing machines, tutoriels/formations, accompagnement comptable, etc.).
+          Ces services peuvent être disponibles <b>séparément</b> selon l’UP et vos besoins.
+        </div>
+
+        <!-- SECTION 1 -->
+        <section class="section" id="s1">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-file-lines"></i></div>
+              <div>
+                <h2>Description (sommaire) de l’activité</h2>
+                <p id="s1_text">
+                  <b>À compléter dynamiquement</b> : activité, produits/services, clients visés, chaîne de valeur, principaux facteurs de réussite.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini">
+            Astuce : dans la version Découverte, le contenu reste volontairement synthétique pour vous donner une vision rapide et actionnable.
+          </div>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> avec le <b>Business Plan Pro</b>, obtenez une description complète du modèle économique, du process, des capacités, des contraintes qualité et des hypothèses chiffrées, au format bancable (+40 pages) avec accompagnement.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : le BP Pro n’inclut pas automatiquement les services additionnels (machines, formations, compta, etc.).</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section class="section" id="s2">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+              <div>
+                <h2>Analyse du marché cible</h2>
+                <p id="s2_text">
+                  <b>À compléter dynamiquement</b> : taille du marché (ordre de grandeur), segments clients, concurrence (niveau), canaux, tendances.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s2_list">
+            <li>Segments clients prioritaires (à remplir).</li>
+            <li>Principaux concurrents et positionnement (à remplir).</li>
+            <li>Hypothèses clés (prix/volume) (à remplir).</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> intègre une étude de marché approfondie avec données récentes, segmentation, SWOT et stratégie de positionnement pour convaincre banques et bailleurs.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : l’accès à des services (réseautage, formations, etc.) est indépendant de la souscription BP Pro.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section class="section" id="s3">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-gears"></i></div>
+              <div>
+                <h2>Liste des machines & équipements nécessaires</h2>
+                <p id="s3_text">
+                  <b>À compléter dynamiquement</b> : liste indicative des équipements, fonctions, niveau de capacité, besoins utilités (énergie/eau/air).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s3_list">
+            <li>Équipement 1 — rôle / capacité (à remplir).</li>
+            <li>Équipement 2 — rôle / capacité (à remplir).</li>
+            <li>Équipement 3 — rôle / capacité (à remplir).</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> ajoute un dimensionnement détaillé (capacités, rendements, contraintes), et un planning d’implantation (layout, phasage).</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <p><b>Service additionnel (optionnel) :</b> sourcing machines via P2I (sourcing, prix négociés, fret, garanties, pièces, interlocuteur). <b>Service séparé</b> du BP Pro.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : le BP Pro n’inclut pas automatiquement le sourcing machines.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section class="section" id="s4">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-coins"></i></div>
+              <div>
+                <h2>Investissements CAPEX estimés</h2>
+                <p id="s4_text">
+                  <b>À compléter dynamiquement</b> : estimation CAPEX (fourchettes), installation, travaux, utilités, équipements critiques.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s4_list">
+            <li>Machines & équipements : — (à remplir)</li>
+            <li>Installation & mise en service : — (à remplir)</li>
+            <li>Aménagement/Travaux : — (à remplir)</li>
+            <li>Fret & douane : — (à remplir)</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> détaille CAPEX + plan de financement (apport/dette/aides), tableaux d’amortissement et justification bancable.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : certains services additionnels (accompagnement comptable, formations, etc.) sont proposés séparément.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5 -->
+        <section class="section" id="s5">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-receipt"></i></div>
+              <div>
+                <h2>Compte de résultat prévisionnel sommaire</h2>
+                <p id="s5_text">
+                  <b>À compléter dynamiquement</b> : CA estimé, coût matière, charges clés, marge brute, résultat (ordre de grandeur).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s5_list">
+            <li>Chiffre d’affaires estimé : —</li>
+            <li>Marge brute : —</li>
+            <li>Charges principales : —</li>
+            <li>Résultat estimé : —</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> fournit des prévisionnels sur 5 ans, une analyse de sensibilité (scénarios), et un fichier Excel financier modifiable.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : le BP Pro n’inclut pas automatiquement l’accompagnement comptable (service additionnel séparé).</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 6 -->
+        <section class="section" id="s6">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-scale-balanced"></i></div>
+              <div>
+                <h2>Bilan prévisionnel simplifié</h2>
+                <p id="s6_text">
+                  <b>À compléter dynamiquement</b> : actifs principaux, dettes, capitaux propres (très simplifié).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s6_list">
+            <li>Actifs (machines, stock, trésorerie) : —</li>
+            <li>Passifs (dettes, fournisseurs) : —</li>
+            <li>Capitaux propres : —</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> ajoute BFR, trésorerie, ratios clés, stress tests et structure financière attendue par les institutions.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : les services additionnels (formations, compta, etc.) sont indépendants de la souscription BP Pro.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 7 -->
+        <section class="section" id="s7">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+              <div>
+                <h2>Calcul du ROI approximatif</h2>
+                <p id="s7_text">
+                  <b>À compléter dynamiquement</b> : ROI indicatif selon hypothèses simples (prudentes), risques principaux.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s7_list">
+            <li>Hypothèses (prix/volume/marge) : —</li>
+            <li>ROI approximatif : —</li>
+            <li>Risques principaux : —</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> affine le ROI (scénarios, risques, sensibilité) et propose une trajectoire de rentabilité réaliste + plan d’action opérationnel.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : certains services peuvent accélérer l’exécution (machines, formation) mais sont proposés séparément.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 8 -->
+        <section class="section" id="s8">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-compass"></i></div>
+              <div>
+                <h2>Recommandations stratégiques</h2>
+                <p id="s8_text">
+                  <b>À compléter dynamiquement</b> : recommandations actionnables (positionnement, prix, go-to-market, priorités 30/60/90 jours).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s8_list">
+            <li>Priorité 1 : —</li>
+            <li>Priorité 2 : —</li>
+            <li>Priorité 3 : —</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> inclut plan marketing détaillé, plan opérationnel, risques & mitigation, et un format adapté aux banques, institutions financières, aides gouvernementales et bailleurs de fonds.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <p><b>Services additionnels (optionnels) :</b> tutoriels & formations, accompagnements, etc. <b>Services séparés</b> du BP Pro.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : la souscription BP Pro ne comprend pas automatiquement tous les services additionnels.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <div class="final" id="passer-pro">
+          <div class="left">
+            <h3>Prêt à passer à une version bancable (+40 pages) ?</h3>
+            <p>
+              Le <b>Business Plan Pro</b> est conçu pour les soumissions auprès des banques, institutions financières, programmes d’aides et bailleurs de fonds,
+              avec un accompagnement et un format complet.
+            </p>
+          </div>
+          <div class="right">
+            <!-- À brancher ensuite vers ta page Pro / paiement -->
+            <a class="btn primary" href="fiche-production.html" id="goProBtn"><i class="fa-solid fa-rocket"></i> Découvrir le BP Pro</a>
+            <a class="btn" href="fiche-production.html" id="goServicesBtn"><i class="fa-solid fa-screwdriver-wrench"></i> Services additionnels</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // -------------------------------------------------------
+    // OBJECTIF : gabarit prêt à brancher sur tes données UP.
+    // Ce fichier fonctionne déjà "visuellement" sans données.
+    //
+    // On lit quelques infos simples :
+    // - unit / filiere via query string: ?unit=...&filiere=...
+    // - ou via localStorage (si tu ajoutes plus tard)
+    // -------------------------------------------------------
+
+    function getParam(name){
+      const u = new URL(window.location.href);
+      return u.searchParams.get(name) || "";
+    }
+
+    function setText(id, val){
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    }
+
+    // 1) Meta
+    const unit = getParam("unit") || getParam("unit_name") || getParam("up") || "Unité industrielle";
+    const filiere = getParam("filiere") || getParam("filiere_name") || "Filière";
+    const now = new Date();
+    const dateFR = now.toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" });
+
+    setText("metaUnit", unit);
+    setText("metaFiliere", filiere);
+    setText("metaDate", dateFR);
+
+    // 2) Liens retour / pro / services : on garde les params
+    const back = document.getElementById("btnBack");
+    if (back) back.href = "dashboard.html";
+
+    const proLink = document.getElementById("goProBtn");
+    const srvLink = document.getElementById("goServicesBtn");
+    const baseFiche = "fiche-production.html";
+    const qs = new URLSearchParams();
+    if (getParam("unit_id")) qs.set("unit_id", getParam("unit_id"));
+    if (getParam("unit")) qs.set("unit", getParam("unit"));
+    if (getParam("filiere")) qs.set("filiere", getParam("filiere"));
+    const qstr = qs.toString() ? ("?" + qs.toString()) : "";
+
+    if (proLink) proLink.href = baseFiche + qstr + (qstr ? "#bp-pro" : "#bp-pro");
+    if (srvLink) srvLink.href = baseFiche + qstr + (qstr ? "#services" : "#services");
+
+    // 3) Option : pré-remplir un peu de texte si unit/filiere existent
+    // (juste pour que ça fasse "vivant" sans brancher les vraies données)
+    const s1 = document.getElementById("s1_text");
+    if (s1 && unit && unit !== "Unité industrielle"){
+      s1.innerHTML = `Ce document présente une <b>vision synthétique</b> du projet <b>${unit}</b>, afin d’évaluer la faisabilité et les principaux besoins (marché, équipements, CAPEX, prévisionnels simplifiés).`;
+    }
+
+    const s2 = document.getElementById("s2_text");
+    if (s2 && filiere && filiere !== "Filière"){
+      s2.innerHTML = `Analyse sommaire du marché cible pour la filière <b>${filiere}</b> : segments prioritaires, concurrence (niveau), tendances et hypothèses de démarrage.`;
+    }
+  </script>
+</body>
+</html>
