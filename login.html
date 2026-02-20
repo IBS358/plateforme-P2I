@@ -227,7 +227,103 @@
                 const { data, error } = await sb.auth.signInWithPassword({ email, password });
                 if (error) throw error;
                 showMessage('successDisplay', "Connexion réussie !", false);
-                setTimeout(() => window.location.href = 'dashboard.html', 800);
+
+// ✅ IMPORTANT : fixer l’utilisateur actif immédiatement (avant toute redirection)
+localStorage.setItem("p2i_user_email", email);
+localStorage.setItem("p2i_active_user", email);
+localStorage.setItem("p2i_user_logged_in", "true");
+
+setTimeout(() => {
+  const pendingRaw = localStorage.getItem("pending_bp");
+
+  if (pendingRaw) {
+    const pending = JSON.parse(pendingRaw);
+
+    const url = new URL(
+      pending.return_to || `fiche-production.html?id=${pending.up_id}`,
+      window.location.origin
+    );
+
+    url.searchParams.set("autodownload", "1");
+
+    // Optionnel mais propre : on nettoie ici
+    // (sinon c’est nettoyé côté fiche)
+    // localStorage.removeItem("pending_bp");
+
+    window.location.href = url.toString();
+    return;
+  }
+
+  // ==============================================
+// ✅ PATCH 2 : Continuer l’action "BP gratuit" après login (SAFE)
+// ==============================================
+
+// ✅ Fixer l’utilisateur actif depuis la valeur déjà connue (sans await pour ne pas casser le login)
+(function setActiveUserSafely(){
+  try {
+    const emailLS = localStorage.getItem("p2i_user_email") || "";
+    if (emailLS) {
+      localStorage.setItem("p2i_active_user", emailLS);
+      localStorage.setItem("p2i_user_logged_in", "true");
+    } else {
+      // fallback
+      localStorage.setItem("p2i_active_user", "");
+    }
+  } catch (_) {}
+})();
+
+// Lire action en attente
+let pending = null;
+try {
+  pending = JSON.parse(localStorage.getItem("p2i_pending_action") || "null");
+} catch (_) {
+  pending = null;
+}
+
+// Clé par utilisateur
+const activeEmail = localStorage.getItem("p2i_active_user") || "";
+const downloadsKey = activeEmail ? `p2i_downloads__${activeEmail}` : "p2i_downloads__guest";
+
+// Rejouer l’action BP gratuit
+if (pending && pending.action === "bp_gratuit") {
+  try {
+    if (pending.unit_id) localStorage.setItem("currentUnitId", pending.unit_id);
+    if (pending.unit_name) localStorage.setItem("currentUnitName", pending.unit_name);
+    if (pending.filiere) localStorage.setItem("currentFiliereName", pending.filiere);
+
+    const unitId = pending.unit_id || "";
+    const unitName = pending.unit_name || "Unité de Production";
+    const url = pending.return_url || "business-plan-decouverte.html";
+    const code = "P2I-BP-" + (unitId || "TEMP");
+
+    let downloads = [];
+    try {
+      downloads = JSON.parse(localStorage.getItem(downloadsKey) || "[]");
+      if (!Array.isArray(downloads)) downloads = [];
+    } catch (_) {
+      downloads = [];
+    }
+
+    downloads.push({
+      type: "bp_gratuit",
+      code,
+      unit: unitName,
+      date: new Date().toISOString(),
+      url,
+      mode: "web_preview"
+    });
+
+    localStorage.setItem(downloadsKey, JSON.stringify(downloads));
+    localStorage.removeItem("p2i_pending_action");
+  } catch (_) {}
+}
+// 🔥 Neutraliser définitivement les anciens BP globaux
+localStorage.removeItem("p2i_downloads");
+localStorage.removeItem("p2i_downloads__guest");
+
+// Redirection
+window.location.href = "dashboard.html";
+}, 800);
             } else {
                 if (password.length < 6) throw new Error("Min 6 caractères.");
                 const { data, error } = await sb.auth.signUp({
@@ -244,6 +340,5 @@
         }
     });
 </script>
-
 </body>
 </html>
