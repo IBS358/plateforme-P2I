@@ -6,6 +6,7 @@
     <title>Unité de Production - P2I Côte d'Ivoire</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         /* ===== STYLES DE BASE P2I ===== */
         * {
@@ -91,7 +92,7 @@
         nav a {
             color: #b8c1ec;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 500;
             transition: all 0.3s;
             position: relative;
@@ -556,6 +557,7 @@
             }
         }
     </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <!-- Header avec Navigation P2I -->
@@ -577,6 +579,11 @@
                     <li><a href="reseau.html">Réseautage</a></li>
                     <li><a href="apropos.html">À propos</a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li>
+    <a href="dashboard.html" class="nav-auth-btn" data-personal-space>
+    <i class="fas fa-user-circle"></i> Mon Espace Personnel
+</a>
+</li>
                 </ul>
             </nav>
         </div>
@@ -3089,70 +3096,165 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('currentUnitName', data.nom || "Unité de Production");
         }
 
-        // ==============================================
-        // GESTION BUSINESS PLANS
-        // ==============================================
-        function handleDownloadBP() {
-            // 1. On vérifie si l'utilisateur est connecté (via Supabase ou localStorage)
-            // On vérifie si un email est stocké dans le localStorage
-            const userEmail = localStorage.getItem('p2i_user_email');
+// ==============================================
+// ✅ GESTION BUSINESS PLANS (VERSION ROBUSTE iPad)
+// ==============================================
 
-            if (!userEmail) {
-                // CAS : UTILISATEUR NON CONNECTÉ
-                // On crée le contenu de la fenêtre d'alerte avec les liens mode=register et mode=login
-                const htmlMessage = `
-                    <div style="text-align:center; padding: 20px;">
-                        <i class="fas fa-lock" style="font-size: 3rem; color: #f72585; margin-bottom: 20px;"></i>
-                        <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">Accès Réservé</h3>
-                        <p style="color: #b8c1ec; margin-bottom: 25px;">Pour télécharger gratuitement le Business Plan complet de cette unité, vous devez posséder un compte P2I.</p>
-                        
-                        <div style="display: flex; flex-direction: column; gap: 15px;">
-                            <a href="login.html?mode=register" style="background: linear-gradient(to right, #4cc9f0, #4361ee); color: white; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 1rem; box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);">
-                                <i class="fas fa-user-plus"></i> Créer mon espace gratuitement
-                            </a>
-                            
-                            <p style="color: #b8c1ec; font-size: 0.9rem;">
-                                Déjà inscrit ? <a href="login.html?mode=login" style="color: #4cc9f0; font-weight: bold; text-decoration: underline;">Se connecter</a>
-                            </p>
-                        </div>
-                    </div>
-                `;
-                
-                // On utilise ta fonction showModal pour afficher ce contenu
-                // Si ta fonction s'appelle openModal, remplace showModal par openModal
-                if (typeof showModal === "function") {
-                    showModal(htmlMessage);
-                } else {
-                    // Si tu n'as pas de fonction showModal générique, on utilise une alerte ou on ouvre une modal existante
-                    alert("Veuillez vous connecter pour télécharger ce document.");
-                    window.location.href = "login.html?mode=register";
-                }
+async function getConnectedEmail() {
+  // 1) Trouver le client Supabase, quel que soit son nom
+  const sb =
+    (typeof supabaseClient !== "undefined" && supabaseClient) ||
+    (typeof supabase !== "undefined" && supabase) ||
+    (window && (window.supabaseClient || window.supabase)) ||
+    null;
 
-            } else {
-                // CAS : UTILISATEUR CONNECTÉ
-                // On affiche la confirmation d'envoi par email
-                document.getElementById('user-email-display').textContent = userEmail;
-                
-                // On ouvre la modal de confirmation existante dans ta page
-                if (typeof openModal === "function") {
-                    openModal('modal-bp-email-confirm');
-                }
+  // 2) Essayer la session Supabase si possible
+  try {
+    if (sb?.auth?.getSession) {
+      const { data } = await sb.auth.getSession();
+      const email = data?.session?.user?.email || "";
+      if (email) {
+        localStorage.setItem("p2i_user_logged_in", "true");
+        localStorage.setItem("p2i_user_email", email);
+        return email;
+      }
+    }
+  } catch (_) {}
 
-                // Logique d'enregistrement du téléchargement
-                const unitId = localStorage.getItem('currentUnitId');
-                // On vérifie si la fonction de génération de code existe
-                const code = (typeof generateProjectCode === "function") ? generateProjectCode(unitId) : "P2I-BP-TEMP";
-                
-                const downloads = JSON.parse(localStorage.getItem('p2i_downloads') || '[]');
-                downloads.push({
-                    type: 'bp_gratuit',
-                    code: code,
-                    unit: localStorage.getItem('currentUnitName'),
-                    date: new Date().toISOString()
-                });
-                localStorage.setItem('p2i_downloads', JSON.stringify(downloads));
-            }
-        }
+  // 3) Fallback localStorage
+  try {
+    return localStorage.getItem("p2i_user_email") || "";
+  } catch (_) {
+    return "";
+  }
+}
+
+function getCurrentUnitIdSafe() {
+  const params = new URLSearchParams(window.location.search);
+  // priorité à unit_id (ton système actuel), fallback id
+  return params.get("unit_id") || params.get("id") || localStorage.getItem("currentUnitId") || "";
+}
+
+function getCurrentUnitNameSafe() {
+  return localStorage.getItem("currentUnitName") || "Unité de Production";
+}
+
+function safeBuildBpUrl() {
+  const unitId = getCurrentUnitIdSafe();
+  const unitName = getCurrentUnitNameSafe();
+
+  const params = new URLSearchParams(window.location.search);
+  const filiere = params.get("filiere") || localStorage.getItem("currentFiliereName") || "";
+
+  const u = new URL("business-plan-decouverte.html", window.location.href);
+  if (unitId) u.searchParams.set("unit_id", unitId);
+  if (unitName) u.searchParams.set("unit", unitName);
+  if (filiere) u.searchParams.set("filiere", filiere);
+  u.searchParams.set("src", "free");
+  return u.toString();
+}
+
+function getDownloadsKeyForCurrentUser(){
+  const email =
+    localStorage.getItem("p2i_user_email") ||
+    localStorage.getItem("p2i_active_user") ||
+    "";
+  return email ? `p2i_downloads__${email}` : "p2i_downloads__guest";
+}
+
+function pushLocalFreeBpDownload() {
+  const unitId = getCurrentUnitIdSafe();
+  const unitName = getCurrentUnitNameSafe();
+
+  const code =
+    (typeof generateProjectCode === "function")
+      ? generateProjectCode(unitId)
+      : "P2I-BP-TEMP";
+
+  const url = safeBuildBpUrl();
+  const key = getDownloadsKeyForCurrentUser();
+
+  let downloads = [];
+  try {
+    downloads = JSON.parse(localStorage.getItem(key) || "[]");
+    if (!Array.isArray(downloads)) downloads = [];
+  } catch (_) {
+    downloads = [];
+  }
+
+  downloads.push({
+    type: "bp_gratuit",
+    code,
+    unit: unitName,
+    date: new Date().toISOString(),
+    url,
+    mode: "web_preview"
+  });
+
+  localStorage.setItem(key, JSON.stringify(downloads));
+}
+
+async function handleDownloadBP() {
+  const email = await getConnectedEmail();
+
+  // ❌ Pas connecté => on mémorise l’UP + l’action, puis on affiche la modal / login
+  if (!email) {
+
+    // ============================
+    // ✅ PATCH 1 : mémoriser l’intention avant le login
+    // ============================
+    try {
+      localStorage.setItem("p2i_pending_action", JSON.stringify({
+        action: "bp_gratuit",
+        unit_id: getCurrentUnitIdSafe(),
+        unit_name: getCurrentUnitNameSafe(),
+        filiere: (new URLSearchParams(window.location.search)).get("filiere") || localStorage.getItem("currentFiliereName") || "",
+        return_url: safeBuildBpUrl(),      // URL du BP découverte déjà prête
+        ts: new Date().toISOString()
+      }));
+    } catch (_) {}
+    // ============================
+
+    // Si tu as showModal, on l’utilise (ta page le prévoit)
+    if (typeof showModal === "function") {
+      const htmlMessage = `
+        <div style="text-align:center; padding: 20px;">
+          <i class="fas fa-lock" style="font-size: 3rem; color: #f72585; margin-bottom: 20px;"></i>
+          <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">Accès Réservé</h3>
+          <p style="color: #b8c1ec; margin-bottom: 25px;">
+            Pour télécharger gratuitement le Business Plan Découverte, vous devez être connecté.
+          </p>
+          <div style="display:flex; flex-direction:column; gap:15px;">
+            <a href="login.html?mode=register" style="background: linear-gradient(to right, #4cc9f0, #4361ee); color: white; padding: 14px; border-radius: 12px; text-decoration:none; font-weight:bold;">
+              <i class="fas fa-user-plus"></i> Créer mon espace gratuitement
+            </a>
+            <p style="color:#b8c1ec; font-size:0.9rem;">
+              Déjà inscrit ? <a href="login.html?mode=login" style="color:#4cc9f0; font-weight:bold; text-decoration:underline;">Se connecter</a>
+            </p>
+          </div>
+        </div>
+      `;
+      showModal(htmlMessage);
+      return;
+    }
+
+    // Fallback simple
+    window.location.href = "login.html?mode=login";
+    return;
+  }
+
+  // ✅ Connecté => on affiche la modal moderne + on enregistre dans le dashboard
+  const emailEl = document.getElementById("user-email-display");
+  if (emailEl) emailEl.textContent = email;
+
+  // Ouvre ta modal de confirmation existante (celle que tu décris)
+  if (typeof openModal === "function") {
+    openModal("modal-bp-email-confirm");
+  }
+
+  // ✅ Enregistrement local (dashboard)
+  pushLocalFreeBpDownload();
+}
 
         // ==============================================
         // GESTION DU PANIER
@@ -3363,5 +3465,248 @@ document.addEventListener('DOMContentLoaded', function() {
             updateCartDisplay();
         });
     </script>
+<script>
+// ================================
+// CONFIG SUPABASE (si pas déjà présent)
+// ================================
+const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18';
+
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ================================
+// RÉCUPÉRER ID UP
+// ================================
+function getUpId() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
+}
+<script>
+/**
+ * Récupère l'UP courante depuis l'URL (ex: ?id=12 ou ?up_id=12).
+ * Adapte ici si ton paramètre s’appelle autrement.
+ */
+function getCurrentUpId() {
+  const url = new URL(window.location.href);
+  return url.searchParams.get("id") || url.searchParams.get("up_id");
+}
+
+/**
+ * Nettoie l’URL : enlève un paramètre (anti-boucle), sans recharger la page.
+ */
+function removeQueryParam(paramName) {
+  const url = new URL(window.location.href);
+  url.searchParams.delete(paramName);
+  window.history.replaceState({}, "", url.toString());
+}
+
+/**
+ * Enregistre une demande de BP gratuit (optionnel).
+ * - Si tu as une table Supabase, garde ce code.
+ * - Sinon, tu peux commenter ce bloc : ça n’empêchera pas le flow de marcher.
+ */
+async function logFreeBpRequest({ upId, userEmail }) {
+  try {
+    // Exemple : table "bp_requests" (à créer côté Supabase si tu veux)
+    // colonnes possibles: up_id (text/int), email (text), created_at (timestamp default now())
+    const { error } = await supabaseClient
+      .from("bp_requests")
+      .insert([{ up_id: upId ?? null, email: userEmail ?? null, kind: "free_bp" }]);
+
+    // Si la table n’existe pas encore, ça va renvoyer une erreur : on ignore pour ne pas bloquer l’utilisateur.
+    if (error) console.warn("[BP] logFreeBpRequest ignored:", error.message);
+  } catch (e) {
+    console.warn("[BP] logFreeBpRequest failed:", e);
+  }
+}
+
+/**
+ * UI : remplace par ta modal existante si tu en as une.
+ */
+function showBpNotReadyMessage() {
+  alert(
+    "✅ Demande enregistrée.\n\nLe business plan gratuit n’est pas encore disponible. " +
+    "Nous te notifierons dès qu’il sera prêt."
+  );
+}
+
+/**
+ * Stocke l’intention de téléchargement, puis envoie sur login.
+ */
+function redirectToLoginForFreeBp(upId) {
+  const returnTo = window.location.href;
+
+  localStorage.setItem(
+    "pending_bp",
+    JSON.stringify({
+      kind: "free_bp",
+      up_id: upId ?? null,
+      return_to: returnTo
+    })
+  );
+
+  // Important : une seule page de login dans tout le site
+  window.location.href = "login.html?mode=login";
+}
+
+/**
+ * ✅ VERSION NETTOYÉE : un seul flow.
+ * - Si pas connecté -> pending_bp + redirect login
+ * - Si connecté -> on ne télécharge pas (car fichier inexistant), on log + message
+ */
+async function handleDownloadBP() {
+  const upId = getCurrentUpId();
+
+  // 1) Vérifier session Supabase
+  let session = null;
+  try {
+    const { data, error } = await supabaseClient.auth.getSession();
+    if (error) console.warn("[BP] getSession error:", error.message);
+    session = data?.session ?? null;
+  } catch (e) {
+    console.warn("[BP] getSession exception:", e);
+  }
+
+  // 2) Pas connecté => login + retour
+  if (!session) {
+    redirectToLoginForFreeBp(upId);
+    return;
+  }
+
+  // 3) Connecté => business plan gratuit pas encore dispo
+  const userEmail = session.user?.email ?? null;
+
+  // (Optionnel) mettre à jour les flags legacy pour éviter que d’autres bouts du site disent "pas connecté"
+  localStorage.setItem("p2i_user_logged_in", "true");
+  if (userEmail) localStorage.setItem("p2i_user_email", userEmail);
+
+  // (Optionnel) log demande
+  await logFreeBpRequest({ upId, userEmail });
+
+  // Message utilisateur
+  showBpNotReadyMessage();
+}
+
+/**
+ * ✅ AUTODOWNLOAD (anti-boucle)
+ * Quand login renvoie vers la fiche avec ?autodownload=1, on déclenche une fois, puis on nettoie l’URL.
+ */
+document.addEventListener("DOMContentLoaded", async () => {
+  const url = new URL(window.location.href);
+  const auto = url.searchParams.get("autodownload");
+
+  if (auto === "1") {
+    // Important : enlever tout de suite pour éviter boucle si quelque chose relance le chargement
+    removeQueryParam("autodownload");
+
+    // Si on arrive ici suite au login, on peut aussi supprimer pending_bp (propre)
+    try {
+      const pb = localStorage.getItem("pending_bp");
+      if (pb) localStorage.removeItem("pending_bp");
+    } catch (_) {}
+
+    // Déclenche le flow
+    await handleDownloadBP();
+  }
+});
+</script>
+<script>
+(function () {
+  // ========= Helpers =========
+  function qs(name) {
+    return new URL(window.location.href).searchParams.get(name) || "";
+  }
+
+  function pickFirstText(selectors) {
+    for (const sel of selectors) {
+      const el = document.querySelector(sel);
+      if (el && el.textContent && el.textContent.trim()) return el.textContent.trim();
+    }
+    return "";
+  }
+
+  function buildBpUrl() {
+    // Ta fiche utilise surtout unit_id ou id (fallback)
+    const unitId = qs("unit_id") || qs("id") || localStorage.getItem("currentUnitId") || "";
+
+    const unitName =
+      localStorage.getItem("currentUnitName") ||
+      pickFirstText(["#production-title", "#unitTitle", ".unit-title", "h1", "h2"]) ||
+      "Unité";
+
+    const filiereName =
+      localStorage.getItem("currentFiliereName") ||
+      qs("filiere") || qs("filiere_name") ||
+      "";
+
+    const u = new URL("business-plan-decouverte.html", window.location.href);
+    if (unitId) u.searchParams.set("unit_id", unitId);
+    if (unitName) u.searchParams.set("unit", unitName);
+    if (filiereName) u.searchParams.set("filiere", filiereName);
+    u.searchParams.set("src", "free");
+    return u.toString();
+  }
+
+  // ========= Hook bouton OK de la modal =========
+  function tryHookOkButton() {
+    const bodyText = (document.body.innerText || "");
+
+    // On n'agit que si on voit le message de confirmation
+    if (!bodyText.includes("Business Plan envoyé") && !bodyText.includes("Business Plan envoy")) return;
+
+    const candidates = Array.from(document.querySelectorAll("button, a, [role='button']"));
+    const okButtons = candidates.filter(el => {
+      const t = (el.textContent || "").trim().toLowerCase();
+      return t === "ok" || t === "okay";
+    });
+
+    okButtons.forEach(btn => {
+      if (btn.dataset.p2iOkHooked === "1") return;
+      btn.dataset.p2iOkHooked = "1";
+
+      btn.addEventListener("click", () => {
+        const url = buildBpUrl();
+
+        // Optionnel : enrichir l'entrée dashboard avec l'URL (pour que "Ouvrir" soit parfait)
+        try {
+  const email =
+    localStorage.getItem("p2i_user_email") ||
+    localStorage.getItem("p2i_active_user") ||
+    "";
+  const key = email ? `p2i_downloads__${email}` : "p2i_downloads__guest";
+
+  const raw = localStorage.getItem(key) || "[]";
+  const arr = JSON.parse(raw);
+
+  if (Array.isArray(arr) && arr.length) {
+    const unitName = localStorage.getItem("currentUnitName") || "";
+
+    // Met à jour la dernière entrée BP gratuite correspondant à l’unité
+    for (let i = arr.length - 1; i >= 0; i--) {
+      const d = arr[i];
+      if (!d) continue;
+      if (d.type !== "bp_gratuit") continue;
+
+      if (!unitName || d.unit === unitName || !d.url) {
+        d.url = url;
+        d.mode = "web_preview";
+        break;
+      }
+    }
+
+    localStorage.setItem(key, JSON.stringify(arr));
+  }
+} catch (_) {}
+        // Redirection iPad-friendly
+        window.location.href = url;
+      }, { passive: true });
+    });
+  }
+
+  const obs = new MutationObserver(() => tryHookOkButton());
+  obs.observe(document.body, { childList: true, subtree: true });
+
+})();
+</script>
 </body>
 </html>
