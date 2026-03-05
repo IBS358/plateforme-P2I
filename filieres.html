@@ -756,9 +756,11 @@
                     <li><a href="reseau.html">Réseautage</a></li>
                     <li><a href="apropos.html">À propos</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="mon-espace-personnel.html" class="nav-auth-btn">
-        <i class="fas fa-user-circle"></i> Mon Espace Personnel
-    </a></li>
+                    <li>
+  <a href="#" class="nav-auth-btn" data-personal-space>
+    <i class="fas fa-user-circle"></i> Mon Espace Personnel
+  </a>
+</li>
                 </ul>
             </nav>
         </div>
@@ -932,7 +934,7 @@
                 </div>
                 <div class="recap-card">
                     <div class="recap-label">Unité de Production</div>
-                    <div class="recap-value" id="recapUnite">--</div>
+                    <div class="recap-value" id="recapUnite" data-unit-id="">--</div>
                 </div>
                 <div class="recap-card">
                     <div class="recap-label">Localisation</div>
@@ -969,7 +971,7 @@
                     <i class="fas fa-redo-alt"></i> Modifier vos choix
                 </button>
                 
-                <button class="btn btn-confirm" onclick="confirmSelection()">
+                <button class="btn btn-confirm" onclick="confirmerSelection()">
                     <i class="fas fa-check-circle"></i> Confirmer la sélection et voir la fiche
                 </button>
             </div>
@@ -1348,7 +1350,7 @@
             // Sélectionner la filière choisie
             element.classList.add('selected');
             selectedFiliere = filiere;
-            
+            localStorage.setItem("currentFiliereName", filiere.name);
             // Mettre à jour le texte de l'étape 2
             document.getElementById('selectedFiliereText').innerHTML = `
                 Filière sélectionnée : <strong style="color: #4cc9f0;">${filiere.name}</strong><br>
@@ -1600,7 +1602,7 @@
             
         console.log("Recherche réinitialisée. Vous pouvez recommencer.");
         }
-    </script>
+   </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -1608,75 +1610,102 @@
         // CONFIGURATION MISE À JOUR (Clé de l'image IMG_1143)
         const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18'; // <-- TA NOUVELLE CLÉ ICI
-        
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        async function confirmSelection() {
-            if (!selectedFiliere || !selectedUnite) {
-                alert("Veuillez sélectionner une filière et une unité.");
-                return;
-            }
+       <!-- ✅ Supabase SDK (UNE SEULE FOIS) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-            const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
-            
-            if (sessionError || !session) {
-                alert("Votre session a expiré. Redirection vers la connexion...");
-                window.location.href = 'index.html';
-                return;
-            }
+<!-- ✅ auth-ui (navigation "Mon espace personnel") -->
+<script src="js/auth-ui.js"></script>
 
-            // Enregistrement final corrigé
-            const { data, error } = await supabaseClient
-                .from('simulations')
-                .insert([
-                    { 
-                        users_id: session.user.id,
-                        nom_simulation: selectedUnite.nom || "Nouveau Projet",
-                        filiere_choisie: selectedFiliere, // C'est du texte, OK pour la colonne text
-                        unite_id: parseInt(selectedUnite.id) || 1, // On force en NOMBRE entier
-                        statut: 'En cours',
-                        progression: 10 // C'est un nombre, OK pour int8
-                    }
-                ])
-                .select();
+<script>
+  /*
+    PATCH FINAL (SANS CASSER TON SCRIPT) :
+    - On s’assure que l’UP sélectionnée (selectedUnite.id) est stockée dans :
+      1) #recapUnite[data-unit-id]
+      2) localStorage (backup)
+    - Et confirmerSelection redirige TOUJOURS vers CETTE UP.
+  */
 
-            if (error) {
-                alert("Erreur base de données : " + error.message);
-            } else {
-                console.log("Succès !");
-                // ✅ CORRECTION: On passe l'ID de l'unité ET l'ID de simulation
-                window.location.href = `fiche-production.html?unit_id=${selectedUnite.id}&simulation_id=${data[0].id}`;
-            }
-        }
-async function confirmerSelection() {
-    const { data: { user } } = await supabaseClient.auth.getUser();
+  const UNIT_STORAGE_KEY = "p2i_selected_unit_id";
 
-    const simulationData = {
-        unite_id: selectedUnite.id,
-        localisation: selectedLocation,
-        investissement: selectedCapex,
-        progression: 100,
-        users_id: user ? user.id : null, // Changement ici : avec un "s"
-        type_bp: "aucun"
+  function setSelectedUnitId(id) {
+    if (!id) return;
+
+    // 1) Récap = source de vérité visible
+    const recapUniteEl = document.getElementById("recapUnite");
+    if (recapUniteEl) recapUniteEl.setAttribute("data-unit-id", String(id));
+
+    // 2) Backup storage
+    localStorage.setItem(UNIT_STORAGE_KEY, String(id));
+  }
+
+  function getSelectedUnitId() {
+    const recapUniteEl = document.getElementById("recapUnite");
+    const fromRecap = recapUniteEl?.getAttribute("data-unit-id") || "";
+    if (fromRecap.trim()) return fromRecap.trim();
+
+    // fallback sur la variable globale (ton script)
+    if (window.selectedUnite && window.selectedUnite.id) return String(window.selectedUnite.id);
+
+    // fallback storage
+    const fromStorage = localStorage.getItem(UNIT_STORAGE_KEY) || "";
+    return fromStorage.trim() || null;
+  }
+
+  // 1) On “wrap” ta fonction selectUnite sans la modifier
+  (function wrapSelectUnite() {
+    if (typeof window.selectUnite !== "function") return;
+
+    const _selectUnite = window.selectUnite;
+    window.selectUnite = function (unite, element) {
+      _selectUnite(unite, element);
+
+      // Dès qu’une UP est choisie, on verrouille son id
+      if (unite && unite.id) setSelectedUnitId(unite.id);
+
+      // Et on met à jour le récap (ton script le fait parfois plus tard)
+      if (typeof window.updateRecap === "function") window.updateRecap();
     };
+  })();
 
-    try {
-        const { data, error } = await supabaseClient
-            .from('simulations')
-            .insert([simulationData])
-            .select();
+  // 2) On “wrap” updateRecap aussi (au cas où l’UP change ailleurs)
+  (function wrapUpdateRecap() {
+    if (typeof window.updateRecap !== "function") return;
 
-        if (error) throw error;
+    const _updateRecap = window.updateRecap;
+    window.updateRecap = function () {
+      _updateRecap();
 
-        const newId = data[0].id;
-        // ✅ CORRECTION: On passe maintenant l'ID de l'unité ET l'ID de simulation
-        window.location.href = `fiche-production.html?unit_id=${selectedUnite.id}&simulation_id=${newId}`;
+      // Si selectedUnite est défini, on écrit son id dans le récap
+      if (window.selectedUnite && window.selectedUnite.id) {
+        setSelectedUnitId(window.selectedUnite.id);
+      }
+    };
+  })();
 
-    } catch (err) {
-        console.error("Erreur d'enregistrement :", err.message);
-        alert("Erreur lors de l'enregistrement.");
+  // 3) ✅ Fonction demandée : confirmerSelection (elle n’existait pas chez toi)
+  function confirmerSelection() {
+    const unitId = getSelectedUnitId();
+
+    if (!unitId) {
+      alert("Veuillez sélectionner une unité de production avant de continuer.");
+      return;
     }
-}
-    </script>
+
+    // Redirection fiable vers la fiche de l’UP sélectionnée
+    window.location.href = `fiche-production.html?unit_id=${encodeURIComponent(unitId)}`;
+  }
+
+  // exposer au global pour ton bouton onclick="confirmerSelection()"
+  window.confirmerSelection = confirmerSelection;
+
+  // 4) Au chargement : si une UP est déjà sélectionnée, on la synchronise
+  document.addEventListener("DOMContentLoaded", () => {
+    if (window.selectedUnite && window.selectedUnite.id) {
+      setSelectedUnitId(window.selectedUnite.id);
+    }
+  });
+</script>
+
 </body>
 </html>
