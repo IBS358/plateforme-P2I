@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plateforme Industrielle Ivoirienne (P2I) | Accueil</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/business-plan.css">
     <style>
         /* Style spécifique pour le bouton Connexion P2I */
 .nav-connexion {
@@ -372,10 +373,9 @@ nav a {
                 <li><a href="apropos.html">À Propos</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li>
-    <a href="mon-espace-personnel.html" class="nav-auth-btn">
-        <i class="fas fa-user-circle"></i> Mon Espace Personnel
-    </a>
-</li>
+    <a href="#" class="nav-auth-btn" data-personal-space>
+    <i class="fas fa-user-circle"></i> Mon Espace Personnel
+</a></li>
             </ul>
         </nav>
     </div>
@@ -491,6 +491,8 @@ nav a {
     </div>
     <div class="footer-bottom">© 2025 P2I. Tous droits réservés.</div>
 </footer>
-
+<script src="js/business-plan.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/auth-ui.js"></script>
 </body>
 </html>
