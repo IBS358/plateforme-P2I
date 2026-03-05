@@ -1,0 +1,3935 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>P2I | Business Plan Pro</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root{
+      --bg:#0b132b;
+      --panel:#121c36;
+      --card:#1c2541;
+      --stroke:rgba(255,255,255,0.08);
+      --text:#ffffff;
+      --muted:#94a3b8;
+      --p2i-blue:#4cc9f0;
+      --p2i-pink:#f72585;
+
+      --cta-bg:rgba(34,197,94,0.10);
+      --cta-stroke:rgba(34,197,94,0.35);
+      --cta-text:#86efac;
+
+      --warn-bg:rgba(245,158,11,0.10);
+      --warn-stroke:rgba(245,158,11,0.35);
+      --warn-text:#fbbf24;
+
+      --danger-bg:rgba(239,68,68,0.10);
+      --danger-stroke:rgba(239,68,68,0.35);
+      --danger-text:#fca5a5;
+
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --grad: linear-gradient(135deg, rgba(76,201,240,0.22), rgba(247,37,133,0.18));
+      --grad-strong: linear-gradient(135deg, var(--p2i-blue), var(--p2i-pink));
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
+    body{
+      background:
+        radial-gradient(1000px 800px at 20% 0%, rgba(76,201,240,0.14), transparent 60%),
+        radial-gradient(900px 700px at 80% 10%, rgba(247,37,133,0.12), transparent 60%),
+        var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none;}
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      background: rgba(11,19,43,0.72);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid var(--stroke);
+    }
+    .topbar-inner{
+      max-width:1100px;margin:0 auto;padding:16px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800; letter-spacing:0.4px;}
+    .logo{
+      width:36px;height:36px;border-radius:12px;
+      background: var(--grad);
+      border:1px solid var(--stroke);
+      display:grid;place-items:center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+    .logo i{color:var(--p2i-blue);}
+    .brand .name{display:flex;align-items:baseline;gap:8px;font-size:1.05rem;}
+    .pill{
+      font-size:0.78rem;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(247,37,133,0.35);
+      color: rgba(247,37,133,0.95);
+      background: rgba(247,37,133,0.08);
+      font-weight:800;
+    }
+
+    .actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:12px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      cursor:pointer;
+      transition: 0.2s ease;
+      font-weight:800;
+      font-size:0.92rem;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,0.16);}
+    .btn.primary{
+      border:none;
+      background: var(--grad-strong);
+      color: #07101f;
+      box-shadow: 0 14px 35px rgba(76,201,240,0.18);
+    }
+    .btn.primary:hover{filter: brightness(1.02);}
+    .btn.warn{
+      border:1px solid var(--warn-stroke);
+      background: var(--warn-bg);
+      color: var(--warn-text);
+    }
+    .btn.danger{
+      border:1px solid var(--danger-stroke);
+      background: var(--danger-bg);
+      color: var(--danger-text);
+    }
+    .btn[disabled]{
+      opacity:.55;
+      cursor:not-allowed;
+      transform:none !important;
+    }
+
+    /* Layout */
+    .wrap{max-width:1100px;margin:0 auto;padding:26px 18px 60px;}
+    .hero{
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-top{
+      padding:26px 26px 18px;
+      background:
+        radial-gradient(800px 450px at 20% 0%, rgba(76,201,240,0.14), transparent 60%),
+        radial-gradient(800px 450px at 80% 0%, rgba(247,37,133,0.12), transparent 60%);
+      border-bottom:1px solid var(--stroke);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap:18px;
+      align-items:start;
+    }
+    .title{font-size:2.05rem;letter-spacing:0.2px;margin-bottom:10px;}
+    .subtitle{color:var(--muted);font-size:1.02rem;line-height:1.45;}
+    .meta{display:grid;gap:10px;justify-items:end;}
+    .meta-card{
+      width:100%;
+      background: rgba(28,37,65,0.55);
+      border: 1px solid var(--stroke);
+      border-radius:18px;
+      padding:14px 14px;
+      display:grid;gap:6px;
+    }
+    .meta-k{color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.9px;}
+    .meta-v{font-weight:900;font-size:0.98rem;}
+    .free-badge{
+      display:inline-flex;align-items:center;gap:10px;
+      border-radius:999px;padding:10px 14px;
+      border:1px solid rgba(76,201,240,0.35);
+      background: rgba(76,201,240,0.10);
+      color: rgba(76,201,240,0.95);
+      font-weight:900;
+      width:max-content;
+      margin-top:14px;
+    }
+
+    /* Content */
+    .content{padding:22px 26px 26px;}
+
+    .disclaimer{
+      border-radius:16px;
+      border:1px dashed rgba(255,255,255,0.16);
+      padding:10px 12px;
+      color: rgba(148,163,184,0.95);
+      font-size:0.88rem;
+      line-height:1.45;
+      background: rgba(255,255,255,0.02);
+      margin-bottom:12px;
+    }
+    .disclaimer b{color:#cbd5e1;}
+
+    /* Tracking */
+    .tracking{
+      border:1px solid var(--stroke);
+      border-radius:18px;
+      background: rgba(28,37,65,0.35);
+      padding:14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+      display:grid;
+      gap:10px;
+      margin-bottom:14px;
+    }
+    .kpis{
+      display:flex;gap:10px;flex-wrap:wrap;
+      color:rgba(148,163,184,0.95);
+      font-weight:800;font-size:0.92rem;
+    }
+    .bar{
+      width:100%;
+      height:10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      overflow:hidden;
+    }
+    .bar > div{
+      height:100%;
+      width:0%;
+      background: var(--grad-strong);
+      border-radius:999px;
+      transition: width .25s ease;
+    }
+    .tracking-actions{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+    }
+    .tracking-actions .left,.tracking-actions .right{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+    }
+    .mini{
+      font-size:0.85rem;color:rgba(148,163,184,0.85);
+      border-left: 3px solid rgba(76,201,240,0.35);
+      padding-left:10px;margin-top:6px;
+      line-height:1.45;
+    }
+
+    /* Sommaire */
+    .toc{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin: 0 0 14px;
+    }
+    .toc a{
+      display:flex;align-items:center;gap:10px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.02);
+      transition:0.2s ease;
+    }
+    .toc a:hover{border-color:rgba(76,201,240,0.35);transform:translateY(-1px);}
+    .toc i{color:var(--p2i-blue);}
+    .toc span{color:var(--muted);font-size:0.95rem;}
+    .toc .state{
+      margin-left:auto;
+      font-size:.78rem;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.02);
+      color: rgba(203,213,225,0.92);
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .state.ok{border-color: rgba(34,197,94,0.35); background: rgba(34,197,94,0.10); color: rgba(134,239,172,0.95);}
+    .state.run{border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.10); color: rgba(251,191,36,0.95);}
+    .state.todo{border-color: rgba(255,255,255,0.10); background: rgba(255,255,255,0.02); color: rgba(148,163,184,0.95);}
+
+    /* Section (1 visible à la fois) */
+    .section{
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      background: rgba(28,37,65,0.35);
+      padding:18px 18px;
+      margin-top:14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+      display:none;
+    }
+    .section.is-active{display:block;}
+    .section-head{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+      margin-bottom:10px;
+    }
+    .hgroup{display:flex;gap:12px;align-items:flex-start;}
+    .icon{
+      width:40px;height:40px;border-radius:14px;
+      background: var(--grad);
+      border:1px solid var(--stroke);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+    }
+    .icon i{color:var(--p2i-blue);}
+    .section h2{font-size:1.25rem;margin-bottom:4px;letter-spacing:0.2px;}
+    .section p,.section li{color:var(--muted);line-height:1.55;font-size:0.98rem;}
+    .section ul{padding-left:18px;margin-top:8px;}
+
+    .field{
+      display:grid;gap:6px;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.02);
+      margin-top:10px;
+    }
+    .field label{
+      color: rgba(148,163,184,0.95);
+      font-size:0.78rem;
+      text-transform:uppercase;
+      letter-spacing:0.9px;
+      font-weight:800;
+    }
+    .field input, .field select, .field textarea{
+      width:100%;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      outline:none;
+      font-size:0.95rem;
+    }
+    .field textarea{min-height:96px; resize:vertical;}
+    .hint{color:rgba(148,163,184,0.85); font-size:0.85rem; line-height:1.4;}
+
+    /* Preview blur */
+    .blurred{ position:relative; overflow:hidden; }
+    .blurred::after{
+      content:"";
+      position:absolute; inset:0;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(11,19,43,0.08), rgba(11,19,43,0.55));
+      pointer-events:none;
+    }
+    .blur-label{
+      display:inline-flex; align-items:center; gap:10px;
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px dashed rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.02);
+      color: rgba(148,163,184,0.95);
+      font-weight:900;
+      width:max-content;
+    }
+
+    /* Pager */
+    .pager{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      border-top:1px solid var(--stroke);
+      padding-top:14px;
+    }
+    .pager .left,.pager .right{display:flex;gap:10px;flex-wrap:wrap;}
+
+    /* Final CTA */
+    .final{
+      margin-top:18px;
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(76,201,240,0.10), rgba(247,37,133,0.08));
+      padding:18px;
+      display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+    }
+    .final .left{display:grid;gap:6px;}
+    .final .left h3{font-size:1.18rem;}
+    .final .left p{color:var(--muted);max-width:760px;line-height:1.45;}
+    .final .right{display:flex;gap:10px;flex-wrap:wrap;}
+
+    @media (max-width: 860px){
+      .hero-grid{grid-template-columns:1fr;}
+      .meta{justify-items:start;}
+      .toc{grid-template-columns:1fr;}
+      .tracking-actions{gap:12px;}
+      .tracking-actions .right{justify-content:flex-start;}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo"><i class="fa-solid fa-bullseye"></i></div>
+        <div class="name">
+          <span>P2I</span>
+          <span class="pill">BP Pro</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn" id="btnBack" href="dashboard.html"><i class="fa-solid fa-arrow-left"></i> Tableau de bord</a>
+        <a class="btn" href="#sommaire"><i class="fa-solid fa-list-check"></i> Sommaire</a>
+        <a class="btn primary" id="btnCart" href="panier.html"><i class="fa-solid fa-bag-shopping"></i> Voir mon panier</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-top">
+        <div class="hero-grid">
+          <div>
+            <div class="title" id="bpTitle">Business Plan Pro</div>
+            <div class="subtitle" id="bpSub">
+              Questionnaire détaillé + génération d’un document bancable (+40 pages) adapté aux banques et bailleurs de fonds.
+            </div>
+
+            <div class="free-badge" id="modeBadge">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>Mode simulation — aperçu flouté</span>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div class="meta-card">
+              <div class="meta-k">Unité industrielle</div>
+              <div class="meta-v" id="metaUnit">—</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-k">Filière</div>
+              <div class="meta-v" id="metaFiliere">—</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-k">Date</div>
+              <div class="meta-v" id="metaDate">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content" id="sommaire">
+
+        <div class="disclaimer" id="paywallInfo">
+          <b>Info :</b> en mode simulation, certaines rubriques restent <b>floutées</b>. Après paiement/commande, tu obtiens la version complète
+          (PDF bancable, PPT investisseurs, Excel financier modifiable, 2 révisions incluses, etc.).
+        </div>
+
+        <!-- ✅ TRACKING AU-DESSUS DU QUESTIONNAIRE -->
+        <div class="tracking" id="tracking">
+          <div class="kpis">
+            <span id="kpiDone">0/8 blocs complétés</span>
+            <span>•</span>
+            <span id="kpiReq">0 champs critiques manquants</span>
+            <span>•</span>
+            <span id="kpiActive">Bloc : 1/8</span>
+          </div>
+
+          <div class="bar"><div id="barFill"></div></div>
+
+          <div class="tracking-actions">
+            <div class="left">
+              <button class="btn" id="btnSaveTop"><i class="fa-solid fa-floppy-disk"></i> Enregistrer</button>
+              <button class="btn primary" id="btnGenerateTop"><i class="fa-solid fa-file-pdf"></i> Générer</button>
+              <a class="btn warn" id="btnUnlockTop" href="panier.html"><i class="fa-solid fa-cart-shopping"></i> Débloquer / Payer</a>
+              <a class="btn" id="btnBackUPTop" href="fiche-production.html"><i class="fa-solid fa-store"></i> Retour fiche UP</a>
+            </div>
+            <div class="right">
+              <span class="btn" style="cursor:default;opacity:.95" id="kpiMode"><i class="fa-solid fa-eye-slash"></i> Mode : preview</span>
+              <span class="btn" style="cursor:default;opacity:.95" id="kpiSaved"><i class="fa-solid fa-clock"></i> Dernière sauvegarde : —</span>
+            </div>
+          </div>
+
+          <div class="mini" id="trackingHint">
+            Navigation : clique sur un bloc dans le sommaire, ou utilise <b>Retour / Suivant</b>. Les boutons sont visibles mais certains restent
+            <b>désactivés</b> en mode preview.
+          </div>
+        </div>
+
+        <!-- Sommaire (cliquable + état) -->
+        <div class="toc">
+          <a href="#p1" data-goto="1"><i class="fa-solid fa-id-card"></i><span>Bloc 1 — Administratif</span><span class="state todo" id="s1">À faire</span></a>
+          <a href="#p2" data-goto="2"><i class="fa-solid fa-location-dot"></i><span>Bloc 2 — Localisation</span><span class="state todo" id="s2">À faire</span></a>
+          <a href="#p3" data-goto="3"><i class="fa-solid fa-industry"></i><span>Bloc 3 — Description de l’activité</span><span class="state todo" id="s3">À faire</span></a>
+          <a href="#p4" data-goto="4"><i class="fa-solid fa-chart-line"></i><span>Bloc 4 — Marché cible</span><span class="state todo" id="s4">À faire</span></a>
+          <a href="#p5" data-goto="5"><i class="fa-solid fa-chess"></i><span>Bloc 5 — Concurrence & SWOT</span><span class="state todo" id="s5">À faire</span></a>
+          <a href="#p6" data-goto="6"><i class="fa-solid fa-coins"></i><span>Bloc 6 — Finances & prévisionnels</span><span class="state todo" id="s6">À faire</span></a>
+          <a href="#p7" data-goto="7"><i class="fa-solid fa-rocket"></i><span>Bloc 7 — Stratégie & risques</span><span class="state todo" id="s7">À faire</span></a>
+          <a href="#p8" data-goto="8"><i class="fa-solid fa-file-shield"></i><span>Bloc 8 — Documents requis</span><span class="state todo" id="s8">À faire</span></a>
+        </div>
+
+        <!-- =========================
+     QUESTIONNAIRE — 1 BLOC À LA FOIS
+     ========================= -->
+
+<!-- P1 - BLOC 1 : PORTEUR & STRUCTURE JURIDIQUE -->
+<section class="section is-active" id="p1" data-block="1">
+  <div class="section-head">
+    <div class="hgroup">
+      <div class="icon"><i class="fa-solid fa-user-shield"></i></div>
+      <div>
+        <h2>Bloc 1 — Porteur & Structure juridique</h2>
+        <p>Identité du projet, KYC du porteur, gouvernance et répartition du capital (bancable).</p>
+      </div>
+    </div>
+
+    <div class="notice" style="margin-top:12px; padding:12px; background:rgba(247,37,133,0.1); border-left:4px solid #f72585; border-radius:8px;">
+      <i class="fa-solid fa-id-card" style="color:#f72585; margin-right:8px;"></i>
+      <span style="color:#fff;"><b>Important (version bancable)</b> — Les informations d’identité doivent être <b>strictement conformes</b> aux pièces d’identité (CNI / passeport). Les champs <span style="color:#f72585; font-weight:bold;">*</span> sont obligatoires pour générer le BP Pro.</span>
+    </div>
+  </div>
+
+  <!-- 1.1 Identité du projet -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-briefcase"></i> 1.1 Identité du projet
+    </h3>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px;">
+      <!-- Nom du projet - OBLIGATOIRE -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Nom du projet / entité <span style="color:#f72585; margin-left:4px;">*</span>
+        </label>
+        <input id="s1_proj_name" data-req="1" type="text" placeholder="Ex : AgroP2I Côte d'Ivoire" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+        <div class="hint" style="color:#64748b; font-size:0.8rem; margin-top:5px;">Nom commercial ou dénomination sociale si déjà créée.</div>
+      </div>
+
+      <!-- Statut du projet - OBLIGATOIRE -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Statut actuel du projet <span style="color:#f72585; margin-left:4px;">*</span>
+        </label>
+        <select id="s1_proj_status" data-req="1" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner…</option>
+          <option value="idee">Idée structurée</option>
+          <option value="creation">En cours de création</option>
+          <option value="existant_moins_3">Activité existante (&lt; 3 ans)</option>
+          <option value="existant_plus_3">Activité existante (&gt; 3 ans)</option>
+        </select>
+        <div class="hint" style="color:#64748b; font-size:0.8rem; margin-top:5px;">Détermine le type de financement adapté.</div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin-top:15px;">
+      <!-- Date - OBLIGATOIRE -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Date prévisionnelle / création <span style="color:#f72585; margin-left:4px;">*</span>
+        </label>
+        <input id="s1_start_date" data-req="1" type="month" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+        <div class="hint" style="color:#64748b; font-size:0.8rem; margin-top:5px;">Si existant : date de création.</div>
+      </div>
+
+      <!-- Nature du projet - RECOMMANDÉ (🟡) -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px; border-left:3px solid #fbbf24;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Nature du projet <span style="color:#fbbf24; margin-left:4px; font-size:0.7rem;">recommandé</span>
+        </label>
+        <select id="s1_proj_type" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner (optionnel)</option>
+          <option value="creation">Création ex-nihilo</option>
+          <option value="extension">Extension d'activité existante</option>
+          <option value="reprise">Reprise / transformation</option>
+        </select>
+      </div>
+
+      <!-- Horizon visé - OPTIONNEL (⚪) -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px; opacity:0.8;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Horizon visé <span style="color:#94a3b8; margin-left:4px; font-size:0.7rem;">optionnel</span>
+        </label>
+        <select id="s1_project_horizon" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner (optionnel)</option>
+          <option value="personnel">Projet personnel</option>
+          <option value="familial">Projet transmissible / familial</option>
+          <option value="investisseurs">Projet avec ouverture à investisseurs</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.2 Porteur principal — identité (KYC) -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-id-card"></i> 1.2 Porteur principal — identité (KYC)
+    </h3>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px;">
+      <!-- Nom - OBLIGATOIRE -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Nom (tel que sur la pièce) <span style="color:#f72585; margin-left:4px;">*</span>
+        </label>
+        <input id="s1_prom_last" data-req="1" type="text" placeholder="Nom de famille" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+
+      <!-- Prénoms - OBLIGATOIRE -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Prénoms (tel que sur la pièce) <span style="color:#f72585; margin-left:4px;">*</span>
+        </label>
+        <input id="s1_prom_first" data-req="1" type="text" placeholder="Tous les prénoms" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+
+      <!-- Nom marital - OPTIONNEL -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px; opacity:0.8;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Nom marital <span style="color:#94a3b8; margin-left:4px;">optionnel</span>
+        </label>
+        <input id="s1_prom_marital" type="text" placeholder="(si applicable)" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin-top:15px;">
+      <!-- Type de pièce - RECOMMANDÉ (KYC) -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px; border-left:3px solid #fbbf24;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Type de pièce <span style="color:#fbbf24; margin-left:4px;">recommandé</span>
+        </label>
+        <select id="s1_id_type" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner</option>
+          <option value="cni">CNI</option>
+          <option value="passeport">Passeport</option>
+          <option value="consulaire">Carte consulaire</option>
+        </select>
+      </div>
+
+      <!-- Numéro de pièce - RECOMMANDÉ -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px; border-left:3px solid #fbbf24;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Numéro de pièce <span style="color:#fbbf24; margin-left:4px;">recommandé</span>
+        </label>
+        <input id="s1_id_number" type="text" placeholder="Numéro" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+
+      <!-- Date d'expiration - RECOMMANDÉ -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px; border-left:3px solid #fbbf24;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Date d'expiration <span style="color:#fbbf24; margin-left:4px;">recommandé</span>
+        </label>
+        <input id="s1_id_expiry" type="date" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+    </div>
+
+    <!-- Porteur principal identifié - OBLIGATOIRE -->
+    <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px; margin-top:15px;">
+      <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+        Porteur principal identifié <span style="color:#f72585; margin-left:4px;">*</span>
+      </label>
+      <select id="s1_is_lead" data-req="1" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+        <option value="">Sélectionner…</option>
+        <option value="oui">Oui</option>
+        <option value="non">Non (collégial)</option>
+      </select>
+      <div class="hint" style="color:#64748b; font-size:0.8rem; margin-top:5px;">Qui signera le prêt ?</div>
+    </div>
+  </div>
+
+  <!-- 1.3 Structure juridique & capital -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-scale-balanced"></i> 1.3 Structure juridique & capital
+    </h3>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px;">
+      <!-- Forme juridique - OBLIGATOIRE -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Forme juridique <span style="color:#f72585; margin-left:4px;">*</span>
+        </label>
+        <select id="s1_legal_form" data-req="1" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner…</option>
+          <option value="ei">Entreprise individuelle</option>
+          <option value="sarl">SARL</option>
+          <option value="sas">SAS</option>
+          <option value="sa">SA</option>
+          <option value="coop">Coopérative</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+
+      <!-- Capital social - OBLIGATOIRE -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Capital social <span style="color:#f72585; margin-left:4px;">*</span>
+        </label>
+        <div style="display:flex; gap:8px;">
+          <input id="s1_capital_amount" data-req="1" type="number" min="0" step="1" placeholder="Montant" style="flex:2; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <select id="s1_capital_currency" data-req="1" style="flex:1; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+            <option value="XOF">XOF</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+        <div class="hint" style="color:#64748b; font-size:0.8rem; margin-top:5px;">Idéal : 20-30% de l'investissement total</div>
+      </div>
+    </div>
+
+    <!-- Répartition du capital - OBLIGATOIRE -->
+    <div style="background:rgba(0,0,0,0.2); border-radius:12px; padding:15px; margin-top:15px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <h4 style="color:#fff; margin:0;">Répartition du capital</h4>
+        <button type="button" class="btn" id="s1_add_partner" style="background:rgba(76,201,240,0.2); border:1px solid #4cc9f0; color:#4cc9f0; padding:8px 15px; border-radius:8px; cursor:pointer;">
+          <i class="fa-solid fa-plus"></i> Ajouter un associé
+        </button>
+      </div>
+
+      <div class="hint" style="color:#94a3b8; margin-bottom:10px;">
+        Total idéal = 100% (tolérance 99.5-100.5%). La répartition est obligatoire pour valider le bloc.
+      </div>
+
+      <div id="s1_cap_table" class="cap-table" style="min-height:50px;"></div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+        <div class="cap-kpi" id="s1_cap_total" style="color:#4cc9f0; font-weight:bold;">Total : 0%</div>
+        <div class="cap-warn" id="s1_cap_warning" style="color:#f72585; display:none;">
+          <i class="fa-solid fa-triangle-exclamation"></i> Le total doit être 100%
+        </div>
+      </div>
+
+      <!-- Hidden field pour la sauvegarde -->
+      <input type="hidden" id="s1_cap_table_json" data-req="1" />
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:15px;">
+      <!-- Pacte d'associés - RECOMMANDÉ -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px; border-left:3px solid #fbbf24;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Pacte d'associés <span style="color:#fbbf24; margin-left:4px;">recommandé</span>
+        </label>
+        <select id="s1_share_pact" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner</option>
+          <option value="oui">Oui</option>
+          <option value="en_cours">En cours</option>
+          <option value="non">Non</option>
+        </select>
+      </div>
+
+      <!-- Droits de décision - RECOMMANDÉ -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px; border-left:3px solid #fbbf24;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Droits de décision <span style="color:#fbbf24; margin-left:4px;">recommandé</span>
+        </label>
+        <select id="s1_decision_rights" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner</option>
+          <option value="concentres">Concentrés</option>
+          <option value="partages">Partagés</option>
+          <option value="formaliser">À formaliser</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.4 Profil & capacité d'exécution -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-chart-line"></i> 1.4 Profil du porteur — capacité d'exécution
+    </h3>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px;">
+      <!-- Âge - OBLIGATOIRE -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Âge <span style="color:#f72585; margin-left:4px;">*</span>
+        </label>
+        <input id="s1_age" data-req="1" type="number" min="16" max="90" step="1" placeholder="Ex : 34" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+
+      <!-- Formation - OBLIGATOIRE -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Formation principale <span style="color:#f72585; margin-left:4px;">*</span>
+        </label>
+        <input id="s1_education" data-req="1" type="text" placeholder="Ex : BTS Agro / Ingénieur" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+
+      <!-- Années d'expérience - OBLIGATOIRE -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Années d'expérience <span style="color:#f72585; margin-left:4px;">*</span>
+        </label>
+        <input id="s1_exp_years" data-req="1" type="number" min="0" max="60" step="1" placeholder="Ex : 8" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+    </div>
+
+    <!-- Secteurs d'expérience - OBLIGATOIRE -->
+    <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px; margin-top:15px;">
+      <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+        Secteurs d'expérience (principaux) <span style="color:#f72585; margin-left:4px;">*</span>
+      </label>
+      <input id="s1_exp_sectors" data-req="1" type="text" placeholder="Ex : agroalimentaire, logistique, commercial..." style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:15px;">
+      <!-- Lien avec activité - OBLIGATOIRE -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Lien avec l'activité <span style="color:#f72585; margin-left:4px;">*</span>
+        </label>
+        <select id="s1_exp_link" data-req="1" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner…</option>
+          <option value="fort">Fort</option>
+          <option value="partiel">Partiel</option>
+          <option value="indirect">Indirect</option>
+        </select>
+        <div class="hint" style="color:#64748b; font-size:0.8rem; margin-top:5px;">"Pourquoi vous et pas un autre ?"</div>
+      </div>
+
+      <!-- Temps consacré - OBLIGATOIRE avec conditionnel -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Temps consacré <span style="color:#f72585; margin-left:4px;">*</span>
+        </label>
+        <select id="s1_time_commit" data-req="1" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner…</option>
+          <option value="plein">Temps plein</option>
+          <option value="partiel">Temps partiel</option>
+        </select>
+
+        <!-- Champ conditionnel (visible si temps partiel) -->
+        <div class="subfield" id="s1_timePartBox" style="display:none; margin-top:10px;">
+          <label style="color:#94a3b8; font-size:0.8rem; margin-bottom:5px; display:block;">Précisez votre organisation :</label>
+          <input id="s1_time_detail" type="text" placeholder="Ex : 20h/sem + week-ends" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:15px;">
+      <!-- Projets antérieurs - RECOMMANDÉ -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px; border-left:3px solid #fbbf24;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Projets entrepreneuriaux antérieurs <span style="color:#fbbf24; margin-left:4px;">recommandé</span>
+        </label>
+        <select id="s1_prev_entrepreneur" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner</option>
+          <option value="oui">Oui</option>
+          <option value="non">Non</option>
+        </select>
+      </div>
+
+      <!-- Équipe clé - RECOMMANDÉ -->
+      <div class="field" style="background:rgba(255,255,255,0.03); border-radius:12px; padding:15px; border-left:3px solid #fbbf24;">
+        <label style="display:flex; align-items:center; gap:4px; margin-bottom:8px; color:#94a3b8; font-size:0.85rem; text-transform:uppercase;">
+          Équipe clé identifiée <span style="color:#fbbf24; margin-left:4px;">recommandé</span>
+        </label>
+        <select id="s1_key_team" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner</option>
+          <option value="oui">Oui</option>
+          <option value="en_cours">En cours</option>
+          <option value="non">Non</option>
+        </select>
+        <div class="hint" style="color:#64748b; font-size:0.8rem; margin-top:5px;">Compétences complémentaires identifiées</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="pager" style="display:flex; justify-content:space-between; margin-top:30px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1);">
+    <div class="left">
+      <button class="btn" data-prev style="padding:12px 25px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; cursor:pointer;">
+        <i class="fa-solid fa-arrow-left"></i> Retour
+      </button>
+    </div>
+    <div class="right">
+      <button class="btn primary" data-next style="padding:12px 25px; background:linear-gradient(135deg, #4cc9f0, #f72585); border:none; border-radius:8px; color:#fff; font-weight:bold; cursor:pointer;">
+        Suivant <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- P2 - BLOC 2 : LOCALISATION & ENVIRONNEMENT -->
+<section class="section" id="p2" data-block="2">
+  <div class="section-head">
+    <div class="hgroup">
+      <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+      <div>
+        <h2>Bloc 2 — Localisation & Environnement</h2>
+        <p>Site, accès logistique, énergie/eau, conformité, autorisations.</p>
+      </div>
+    </div>
+
+    <div class="notice" style="margin-top:12px; padding:12px; background:rgba(247,37,133,0.1); border-left:4px solid #f72585; border-radius:8px;">
+      <i class="fa-solid fa-triangle-exclamation" style="color:#f72585; margin-right:8px;"></i>
+      <span style="color:#fff;"><b>Critique pour le financement</b> — Un site non sécurisé bloque l'instruction bancaire.</span>
+    </div>
+  </div>
+
+  <!-- 2.1 Localisation géographique -->
+  <div class="field">
+    <label>Lieu de production <span style="color:#f72585;">*</span></label>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <input id="f_geo" data-req="1" type="text" placeholder="Ex : Région Littoral ou Ville d'Abidjan" 
+             style="flex:2; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-weight:500;" 
+             value="" readonly>
+      <button id="edit-location-btn" type="button" class="btn" style="background:rgba(76,201,240,0.2); border:1px solid #4cc9f0; color:#4cc9f0; padding:12px 20px; border-radius:8px; cursor:pointer;">
+        <i class="fa-solid fa-pen"></i> Modifier
+      </button>
+    </div>
+    <div id="location-source" style="color:#4cc9f0; font-size:0.85rem; margin-top:5px;">
+      <i class="fa-solid fa-circle-info"></i> Chargement de votre sélection...
+    </div>
+  </div>
+
+  <!-- Sélecteur de localisation -->
+  <div id="location-selector" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#1c2541; border:2px solid #4cc9f0; border-radius:16px; padding:25px; width:90%; max-width:450px; z-index:10000; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+    <h3 style="color:#4cc9f0; margin-bottom:20px; display:flex; align-items:center; gap:10px;">
+      <i class="fa-solid fa-map-location-dot"></i> Choisir votre localisation
+    </h3>
+    
+    <div style="margin-bottom:25px;">
+      <label style="color:#94a3b8; display:block; margin-bottom:8px;">Région ou Ville</label>
+      <select id="location_select" style="width:100%; padding:12px; background:rgba(0,0,0,0.3); border:1px solid #4cc9f0; border-radius:8px; color:#fff;">
+        <option value="">Sélectionnez...</option>
+        <!-- Les options seront ajoutées ici -->
+      </select>
+      <div style="color:#94a3b8; font-size:0.8rem; margin-top:8px;">
+        <i class="fa-solid fa-info-circle"></i> Choisissez une région ou une ville
+      </div>
+    </div>
+    
+    <div style="display:flex; gap:10px; justify-content:flex-end;">
+      <button id="cancel-location" class="btn" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; padding:10px 20px; border-radius:8px; cursor:pointer;">
+        Annuler
+      </button>
+      <button id="confirm-location" class="btn primary" style="background:linear-gradient(135deg, #4cc9f0, #f72585); border:none; color:#fff; padding:10px 25px; border-radius:8px; cursor:pointer; font-weight:bold;">
+        Confirmer
+      </button>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div id="selector-overlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:9999;" onclick="closeSelector()"></div>
+
+  <!-- Script de gestion -->
+  <script>
+  // Fonction pour fermer
+  window.closeSelector = function() {
+    document.getElementById('location-selector').style.display = 'none';
+    document.getElementById('selector-overlay').style.display = 'none';
+  };
+
+  // Exécuter au chargement
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
+      // ===== 1. RÉCUPÉRER LE LIEU SAUVEGARDÉ =====
+      const savedLocation = localStorage.getItem('selectedLocation');
+      const savedType = localStorage.getItem('selectedLocationType');
+      const geoInput = document.getElementById('f_geo');
+      const sourceEl = document.getElementById('location-source');
+      
+      console.log('Lieu sauvegardé:', savedLocation, savedType); // Pour debug
+      
+      if (savedLocation && geoInput) {
+        let displayText = '';
+        
+        if (savedType === 'city') {
+          displayText = savedLocation; // Ex: "Abidjan"
+        } else if (savedType === 'region') {
+          displayText = savedLocation; // Ex: "Littoral"
+        }
+        
+        if (displayText) {
+          geoInput.value = displayText;
+          sourceEl.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#4cc9f0;"></i> Lieu repris de votre simulation';
+        } else {
+          sourceEl.innerHTML = '<i class="fa-solid fa-circle-info"></i> Aucun lieu sélectionné';
+        }
+      } else {
+        sourceEl.innerHTML = '<i class="fa-solid fa-circle-info"></i> Aucun lieu sélectionné';
+      }
+
+      // ===== 2. BOUTON MODIFIER =====
+      document.getElementById('edit-location-btn').addEventListener('click', function() {
+        // Activer le sélecteur
+        document.getElementById('location-selector').style.display = 'block';
+        document.getElementById('selector-overlay').style.display = 'block';
+        
+        // Focus sur le select
+        setTimeout(() => document.getElementById('location_select').focus(), 100);
+      });
+
+      // ===== 3. BOUTON ANNULER =====
+      document.getElementById('cancel-location').addEventListener('click', closeSelector);
+
+      // ===== 4. BOUTON CONFIRMER =====
+      document.getElementById('confirm-location').addEventListener('click', function() {
+        const select = document.getElementById('location_select');
+        const selectedValue = select.value;
+        const selectedText = select.options[select.selectedIndex]?.textContent || '';
+        
+        if (!selectedValue) {
+          alert('Veuillez sélectionner une localisation');
+          return;
+        }
+        
+        // Mettre à jour le champ
+        geoInput.value = selectedText;
+        sourceEl.innerHTML = '<i class="fa-solid fa-pen" style="color:#fbbf24;"></i> Lieu modifié';
+        
+        // Fermer
+        closeSelector();
+      });
+
+      // ===== 5. CHARGEMENT DES OPTIONS (à remplacer par vos données) =====
+      const select = document.getElementById('location_select');
+      
+      // Exemple de structure - À REMPLACER PAR VOS DONNÉES
+      const options = [
+        { type: 'region', value: 'sud_forestier', label: 'Sud Forestier' },
+        { type: 'region', value: 'centre_savanicole', label: 'Centre Savanicole' },
+        { type: 'region', value: 'nord_soudanais', label: 'Nord Soudanais' },
+        { type: 'region', value: 'region_lac', label: 'Région du Lac' },
+        { type: 'region', value: 'littoral', label: 'Littoral' },
+        { type: 'region', value: 'ouest_montagneux', label: 'Ouest Montagneux' },
+        { type: 'city', value: 'abidjan', label: 'Abidjan' },
+        { type: 'city', value: 'bouake', label: 'Bouaké' },
+        { type: 'city', value: 'daloa', label: 'Daloa' },
+        { type: 'city', value: 'korhogo', label: 'Korhogo' },
+        { type: 'city', value: 'yamoussoukro', label: 'Yamoussoukro' },
+        { type: 'city', value: 'sanpedro', label: 'San-Pédro' },
+        { type: 'city', value: 'gagnoa', label: 'Gagnoa' },
+        { type: 'city', value: 'man', label: 'Man' },
+        { type: 'city', value: 'divo', label: 'Divo' },
+        { type: 'city', value: 'abengourou', label: 'Abengourou' },
+        { type: 'city', value: 'agboville', label: 'Agboville' },
+        { type: 'city', value: 'dabou', label: 'Dabou' },
+        { type: 'city', value: 'grandbassam', label: 'Grand-Bassam' },
+        { type: 'city', value: 'bondoukou', label: 'Bondoukou' },
+        { type: 'city', value: 'odienne', label: 'Odienné' },
+        { type: 'city', value: 'seguela', label: 'Séguéla' },
+        { type: 'city', value: 'touba', label: 'Touba' },
+        { type: 'city', value: 'ferkessedougou', label: 'Ferkessédougou' },
+        { type: 'city', value: 'bingerville', label: 'Bingerville' },
+        { type: 'city', value: 'anyama', label: 'Anyama' }
+      ];
+      
+      // Vider et remplir le select
+      select.innerHTML = '<option value="">Sélectionnez une région ou une ville</option>';
+      
+      // Ajouter les régions en premier
+      options.forEach(opt => {
+        if (opt.type === 'region') {
+          const option = document.createElement('option');
+          option.value = opt.value;
+          option.textContent = 'Région ' + opt.label;
+          option.setAttribute('data-type', 'region');
+          select.appendChild(option);
+        }
+      });
+      
+      // Ajouter un séparateur visuel
+      const separator = document.createElement('option');
+      separator.disabled = true;
+      separator.textContent = '────────── Villes ──────────';
+      select.appendChild(separator);
+      
+      // Ajouter les villes
+      options.forEach(opt => {
+        if (opt.type === 'city') {
+          const option = document.createElement('option');
+          option.value = opt.value;
+          option.textContent = opt.label;
+          option.setAttribute('data-type', 'city');
+          select.appendChild(option);
+        }
+      });
+      
+    } catch(e) {
+      console.log('Info (non bloquant):', e.message);
+    }
+  });
+  </script>
+
+  <!-- 2.2 Statut du site -->
+  <div class="field">
+    <label>Statut du site <span style="color:#f72585;">*</span></label>
+    <select id="f_site" data-req="1" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      <option value="">Sélectionner…</option>
+      <option value="acquis">Terrain acquis (titre foncier)</option>
+      <option value="signe">Bail signé</option>
+      <option value="identifie">Terrain identifié</option>
+      <option value="negociation">En négociation</option>
+      <option value="recherche">En recherche</option>
+    </select>
+  </div>
+
+  <!-- 2.3 Superficie -->
+  <div class="field">
+    <label>Superficie disponible (m²)</label>
+    <input id="f_land_area" type="number" min="0" placeholder="Ex : 1000" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+  </div>
+
+  <!-- 2.4 Accès logistique -->
+  <div class="field">
+    <label>Accès logistique</label>
+    <select id="f_road_access" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      <option value="">Sélectionner</option>
+      <option value="bitume">Route bitumée</option>
+      <option value="piste">Piste praticable</option>
+      <option value="enclave">Enclavé</option>
+    </select>
+  </div>
+
+  <!-- 2.5 Disponibilité des utilités -->
+  <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px;">
+    <div class="field">
+      <label>Eau</label>
+      <select id="f_water" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+        <option value="">Sélectionner</option>
+        <option value="reseau">Réseau public</option>
+        <option value="forage">Forage</option>
+        <option value="puits">Puits</option>
+        <option value="non">Non disponible</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Électricité</label>
+      <select id="f_electricity" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+        <option value="">Sélectionner</option>
+        <option value="reseau">Réseau national</option>
+        <option value="groupe">Groupe électrogène</option>
+        <option value="solaire">Solaire</option>
+        <option value="non">Non disponible</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- 2.6 Contraintes & autorisations -->
+  <div class="field" style="margin-top:15px;">
+    <label>Contraintes & autorisations (hygiène, environnement, sécurité…)</label>
+    <textarea id="f_permits" placeholder="Liste les autorisations et contraintes principales" rows="3" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"></textarea>
+  </div>
+
+  <!-- Navigation -->
+  <div class="pager">
+    <div class="left">
+      <button class="btn" data-prev><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    </div>
+    <div class="right">
+      <button class="btn primary" data-next>Suivant <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- P3 - BLOC 3 : DESCRIPTION DE L'ACTIVITÉ -->
+<section class="section" id="p3" data-block="3">
+  <div class="section-head">
+    <div class="hgroup">
+      <div class="icon"><i class="fa-solid fa-industry"></i></div>
+      <div>
+        <h2>Bloc 3 — Description de l'activité</h2>
+        <p>Offre, process, capacités, fournisseurs, qualité, ressources.</p>
+      </div>
+    </div>
+
+    <div class="notice" style="margin-top:12px; padding:12px; background:rgba(247,37,133,0.1); border-left:4px solid #f72585; border-radius:8px;">
+      <i class="fa-solid fa-gear" style="color:#f72585; margin-right:8px;"></i>
+      <span style="color:#fff;"><b>Maîtrise technique</b> — Le banquier doit sentir que vous contrôlez chaque étape, de l'approvisionnement à la livraison.</span>
+    </div>
+  </div>
+
+  <!-- ===== DONNÉES UP (pré-remplissage silencieux) ===== -->
+  <script>
+  // Récupérer les données de l'UP sélectionnée
+  try {
+    const currentProd = JSON.parse(localStorage.getItem('currentProduction') || '{}');
+    
+    // Si on a des données, on pourra pré-remplir certains champs plus tard
+    window.upData = {
+      nom: currentProd.nom || '',
+      produits: currentProd.produits || [],
+      processus: currentProd.processus || [],
+      capex_min: currentProd.capex_min || 0
+    };
+  } catch(e) {
+    window.upData = { nom: '', produits: [], processus: [], capex_min: 0 };
+  }
+  </script>
+
+  <!-- 3.1 Produits & Services (OBLIGATOIRE) -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-cube"></i> 3.1 Produits & Services
+    </h3>
+
+    <!-- Produits principaux (pré-rempli depuis l'UP si possible) -->
+    <div class="field">
+      <label>Produits / services principaux <span style="color:#f72585;">*</span></label>
+      <textarea id="f_offer" data-req="1" rows="3" 
+                placeholder="Décrivez vos produits/services : nature, formats, conditionnement, différenciation..."
+                style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"><?php 
+        // Si on a des produits dans l'UP, on les pré-remplit
+        if (window.upData && window.upData.produits && window.upData.produits.length) {
+          echo implode("\n", window.upData.produits);
+        }
+      ?></textarea>
+      <div class="hint" style="color:#64748b; font-size:0.8rem; margin-top:5px;">
+        <i class="fa-solid fa-circle-info"></i> Préciser les spécificités qui vous différencient
+      </div>
+    </div>
+
+    <!-- Gamme et qualité (recommandé) -->
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:15px;">
+      <div class="field" style="border-left:3px solid #fbbf24; padding-left:15px;">
+        <label style="display:flex; align-items:center; gap:4px;">
+          Gamme envisagée <span style="color:#fbbf24; margin-left:4px; font-size:0.7rem;">recommandé</span>
+        </label>
+        <select id="f_range" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner</option>
+          <option value="basique">Basique (premier prix)</option>
+          <option value="standard">Standard (milieu de gamme)</option>
+          <option value="premium">Premium (haut de gamme)</option>
+          <option value="mixte">Mixte (plusieurs gammes)</option>
+        </select>
+      </div>
+
+      <div class="field" style="border-left:3px solid #fbbf24; padding-left:15px;">
+        <label style="display:flex; align-items:center; gap:4px;">
+          Niveau de qualité visé <span style="color:#fbbf24; margin-left:4px; font-size:0.7rem;">recommandé</span>
+        </label>
+        <select id="f_quality" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner</option>
+          <option value="local">Local (marché domestique)</option>
+          <option value="national">National (normes ivoiriennes)</option>
+          <option value="export">Export (normes internationales)</option>
+          <option value="certifie">Certifié (ISO, CE, etc.)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.2 Processus de production (OBLIGATOIRE) -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-gears"></i> 3.2 Processus de production
+    </h3>
+
+    <!-- Process (étapes clés) - pré-rempli depuis l'UP -->
+    <div class="field">
+      <label>Étapes clés du processus <span style="color:#f72585;">*</span></label>
+      <textarea id="f_process" data-req="1" rows="4" 
+                placeholder="Décrivez les étapes : réception → transformation → contrôle → conditionnement → stockage → expédition"
+                style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"><?php 
+        if (window.upData && window.upData.processus && window.upData.processus.length) {
+          echo implode(" → ", window.upData.processus);
+        }
+      ?></textarea>
+    </div>
+
+    <!-- Capacité et rendement (recommandé) -->
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:15px;">
+      <div class="field" style="border-left:3px solid #fbbf24; padding-left:15px;">
+        <label style="display:flex; align-items:center; gap:4px;">
+          Capacité de production cible <span style="color:#fbbf24; margin-left:4px; font-size:0.7rem;">recommandé</span>
+        </label>
+        <div style="display:flex; gap:8px;">
+          <input id="f_capacity" type="number" min="0" step="1" placeholder="Quantité" style="flex:2; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <select id="f_capacity_unit" style="flex:1; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+            <option value="jour">/jour</option>
+            <option value="mois">/mois</option>
+            <option value="an">/an</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field" style="border-left:3px solid #fbbf24; padding-left:15px;">
+        <label style="display:flex; align-items:center; gap:4px;">
+          Taux de perte / rebut <span style="color:#fbbf24; margin-left:4px; font-size:0.7rem;">recommandé</span>
+        </label>
+        <div style="display:flex; gap:8px;">
+          <input id="f_waste" type="number" min="0" max="100" step="0.1" placeholder="%" style="flex:1; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <span style="color:#94a3b8; align-self:center;">%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.3 Approvisionnement & fournisseurs (RECOMMANDÉ FORT) -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px; border-left:3px solid #fbbf24;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-truck"></i> 3.3 Approvisionnement & fournisseurs
+      <span style="color:#fbbf24; font-size:0.8rem; background:rgba(251,191,36,0.1); padding:4px 8px; border-radius:12px;">recommandé</span>
+    </h3>
+
+    <!-- Matières premières -->
+    <div class="field">
+      <label>Matières premières principales</label>
+      <input id="f_raw_materials" type="text" placeholder="Ex : Cacao, coton, plastique, acier..." style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+    </div>
+
+    <!-- Fournisseurs -->
+    <div class="field" style="margin-top:15px;">
+      <label>Fournisseurs identifiés (nom et localisation)</label>
+      <textarea id="f_suppliers" rows="2" placeholder="Ex : Société X - Abidjan (contrat en cours), Fournisseur Y - Import (devis reçu)..."
+                style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"></textarea>
+    </div>
+
+    <!-- Saisonnalité et risques -->
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:15px;">
+      <div class="field">
+        <label>Saisonnalité</label>
+        <select id="f_seasonality" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner</option>
+          <option value="continue">Disponible toute l'année</option>
+          <option value="saison">Variable selon saison</option>
+          <option value="cyclique">Cyclique (récoltes)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Risques d'approvisionnement</label>
+        <select id="f_supply_risk" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner</option>
+          <option value="faible">Faible (multi-fournisseurs)</option>
+          <option value="moyen">Moyen (quelques fournisseurs)</option>
+          <option value="eleve">Élevé (fournisseur unique)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.4 Ressources humaines (RECOMMANDÉ) -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-users"></i> 3.4 Ressources humaines
+      <span style="color:#fbbf24; font-size:0.8rem; background:rgba(251,191,36,0.1); padding:4px 8px; border-radius:12px; margin-left:10px;">recommandé</span>
+    </h3>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px;">
+      <div class="field">
+        <label>Effectif production</label>
+        <input id="f_staff_prod" type="number" min="0" placeholder="Nombre" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+
+      <div class="field">
+        <label>Effectif administration</label>
+        <input id="f_staff_admin" type="number" min="0" placeholder="Nombre" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+
+      <div class="field">
+        <label>Effectif commercial</label>
+        <input id="f_staff_com" type="number" min="0" placeholder="Nombre" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+    </div>
+
+    <!-- Compétences clés -->
+    <div class="field" style="margin-top:15px;">
+      <label>Compétences clés nécessaires</label>
+      <input id="f_skills" type="text" placeholder="Ex : Conducteur de ligne, technicien qualité, responsable maintenance..." style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+    </div>
+  </div>
+
+  <!-- 3.5 Qualité & Conformité (RECOMMANDÉ) -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-certificate"></i> 3.5 Qualité & Conformité
+      <span style="color:#fbbf24; font-size:0.8rem; background:rgba(251,191,36,0.1); padding:4px 8px; border-radius:12px; margin-left:10px;">recommandé</span>
+    </h3>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px;">
+      <div class="field">
+        <label>Normes visées</label>
+        <select id="f_norms" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="">Sélectionner</option>
+          <option value="iso9001">ISO 9001 (Qualité)</option>
+          <option value="iso22000">ISO 22000 (Sécurité alimentaire)</option>
+          <option value="iso14001">ISO 14001 (Environnement)</option>
+          <option value="ce">Marquage CE</option>
+          <option value="local">Normes locales</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Certifications à obtenir</label>
+        <input id="f_certifications" type="text" placeholder="Ex : Bio, Commerce équitable..." style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+    </div>
+
+    <!-- Contrôles qualité -->
+    <div class="field" style="margin-top:15px;">
+      <label>Contrôles qualité prévus</label>
+      <textarea id="f_qc" rows="2" placeholder="Ex : Contrôle matières premières, contrôle en cours de process, contrôle final, traçabilité..."
+                style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"></textarea>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="pager">
+    <div class="left">
+      <button class="btn" data-prev><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    </div>
+    <div class="right">
+      <button class="btn primary" data-next>Suivant <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+        <!-- P3 -->
+        <section class="section" id="p3" data-block="3">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-industry"></i></div>
+              <div>
+                <h2>Bloc 3 — Description de l’activité</h2>
+                <p>Offre, process, capacités, fournisseurs, qualité, ressources.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Produits / services <span style="opacity:.7">*</span></label>
+            <textarea id="f_offer" data-req="1" placeholder="Gamme, formats, qualité, packaging, différenciation"></textarea>
+          </div>
+          <div class="field">
+            <label>Process (étapes clés)</label>
+            <textarea id="f_process" placeholder="Réception → transformation → QC → conditionnement → stockage → distribution"></textarea>
+          </div>
+          <div class="field">
+            <label>Approvisionnement & fournisseurs</label>
+            <textarea id="f_supply" placeholder="Sources, volumes, saisonnalité, risques, conditions de paiement"></textarea>
+          </div>
+
+          <div class="pager">
+            <div class="left">
+              <button class="btn" data-prev><i class="fa-solid fa-arrow-left"></i> Retour</button>
+            </div>
+            <div class="right">
+              <button class="btn primary" data-next>Suivant <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </section>
+<!-- P4 - BLOC 4 : MARCHÉ CIBLE -->
+<section class="section" id="p4" data-block="4">
+  <div class="section-head">
+    <div class="hgroup">
+      <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+      <div>
+        <h2>Bloc 4 — Marché cible</h2>
+        <p>Segments, besoins, taille, canaux, prix et concurrence.</p>
+      </div>
+    </div>
+
+    <div class="notice" style="margin-top:12px; padding:12px; background:rgba(247,37,133,0.1); border-left:4px solid #f72585; border-radius:8px;">
+      <i class="fa-solid fa-bullseye" style="color:#f72585; margin-right:8px;"></i>
+      <span style="color:#fff;"><b>Vision banquier</b> — Un marché mal identifié = un projet mort. Soyez précis.</span>
+    </div>
+  </div>
+
+  <!-- 4.1 Segments clients -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-users-between-lines"></i> 4.1 Segments clients prioritaires
+    </h3>
+
+    <div class="field">
+      <label>Segments clients <span style="color:#f72585;">*</span></label>
+      <textarea id="f_segments" data-req="1" rows="4" 
+                placeholder="Décrivez vos clients cibles : B2B, B2C, institutions, etc."
+                style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"></textarea>
+      <div class="hint" style="color:#64748b; font-size:0.8rem; margin-top:5px;">
+        <i class="fa-solid fa-circle-info"></i> Ex: "Supermarchés, hôtels, restaurateurs, collectivités"
+      </div>
+    </div>
+
+    <!-- Sous-segments (optionnel mais valorisant) -->
+    <div class="field" style="margin-top:15px;">
+      <label>Sous-segments / clients typiques (optionnel)</label>
+      <input id="f_subsegments" type="text" placeholder="Ex: Épiceries de proximité, cantines scolaires, industries agroalimentaires"
+             style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+    </div>
+  </div>
+
+  <!-- 4.2 Besoins clients & zone de vente -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-circle-question"></i> 4.2 Besoins & marché
+    </h3>
+
+    <div class="field">
+      <label>Problème client auquel votre produit/service répond <span style="color:#f72585;">*</span></label>
+      <textarea id="f_problem" data-req="1" rows="3" 
+                placeholder="Quel besoin spécifique adressez-vous ?"
+                style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"></textarea>
+    </div>
+
+    <div class="field" style="margin-top:15px;">
+      <label>Zone de vente principale <span style="color:#f72585;">*</span></label>
+      <select id="f_zone" data-req="1" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+        <option value="">Sélectionner</option>
+        <option value="locale">Locale (ville/département)</option>
+        <option value="regionale">Régionale (district)</option>
+        <option value="nationale">Nationale (Côte d'Ivoire)</option>
+        <option value="sous-regionale">Sous-régionale (UEMOA/CEDEAO)</option>
+        <option value="internationale">Internationale</option>
+      </select>
+    </div>
+
+    <!-- Taille marché (optionnel mais fortement recommandé) -->
+    <div class="field" style="margin-top:15px; border-left:3px solid #fbbf24; padding-left:15px;">
+      <label style="display:flex; align-items:center; gap:4px;">
+        Taille estimée du marché (ordre de grandeur) <span style="color:#fbbf24; margin-left:4px; font-size:0.7rem;">recommandé</span>
+      </label>
+      <input id="f_market_size" type="text" placeholder="Ex: 500M FCFA/an, 10 000 clients potentiels"
+             style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      <div class="hint" style="color:#64748b; font-size:0.8rem; margin-top:5px;">
+        Même une estimation large vaut mieux que rien
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.3 Politique de prix -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-tag"></i> 4.3 Politique de prix
+    </h3>
+
+    <div class="field">
+      <label>Prix de vente moyen envisagé <span style="color:#f72585;">*</span></label>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <input id="f_price" data-req="1" type="text" placeholder="Ex: 5 000 FCFA/kg, 25 000 FCFA/prestation"
+               style="flex:2; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+    </div>
+
+    <!-- ✅ DEVENU OBLIGATOIRE -->
+    <div class="field" style="margin-top:15px;">
+      <label>Justification du prix / Comparaison marché <span style="color:#f72585;">*</span></label>
+      <textarea id="f_price_justification" data-req="1" rows="2" 
+                placeholder="Pourquoi ce prix ? (ex: 20% moins cher que l'import, positionnement premium, marge suffisante pour être rentable...)"
+                style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"></textarea>
+      <div class="hint" style="color:#4cc9f0; font-size:0.8rem; margin-top:5px;">
+        <i class="fa-solid fa-chart-simple"></i> Le prix doit équilibrer compétitivité ET rentabilité
+      </div>
+    </div>
+
+    <!-- Structure tarifaire (optionnel) -->
+    <div class="field" style="margin-top:15px;">
+      <label>Structure tarifaire (optionnel)</label>
+      <select id="f_pricing_structure" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+        <option value="">Sélectionner</option>
+        <option value="unitaire">Prix unitaire</option>
+        <option value="volume">Tarif dégressif selon volume</option>
+        <option value="abonnement">Abonnement / forfait</option>
+        <option value="devis">Sur devis</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- 4.4 Canaux de distribution (VERSION CLARIFIÉE) -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-truck-fast"></i> 4.4 Canaux de distribution
+    </h3>
+
+    <div class="field">
+      <label>Comment allez-vous vendre vos produits/services ? <span style="color:#f72585;">*</span></label>
+      <div style="display:grid; grid-template-columns:1fr; gap:12px; margin-top:10px;">
+        
+        <!-- Canal 1 : Vente directe -->
+        <div style="display:flex; align-items:flex-start; gap:12px; background:rgba(255,255,255,0.03); padding:12px; border-radius:8px;">
+          <input type="checkbox" id="channel_direct" style="margin-top:3px; width:18px; height:18px;">
+          <div style="flex:1;">
+            <div style="font-weight:bold; color:#fff;">Vente directe</div>
+            <div style="color:#94a3b8; font-size:0.85rem;">Vous vendez vous-même à vos clients finaux (boutique, showroom, force de vente propre)</div>
+          </div>
+        </div>
+
+        <!-- Canal 2 : Distributeurs / grossistes -->
+        <div style="display:flex; align-items:flex-start; gap:12px; background:rgba(255,255,255,0.03); padding:12px; border-radius:8px;">
+          <input type="checkbox" id="channel_distributeurs" style="margin-top:3px; width:18px; height:18px;">
+          <div style="flex:1;">
+            <div style="font-weight:bold; color:#fff;">Distributeurs / grossistes</div>
+            <div style="color:#94a3b8; font-size:0.85rem;">Vous passez par des intermédiaires qui achètent en gros et revendent à leurs clients</div>
+          </div>
+        </div>
+
+        <!-- Canal 3 : Détaillants / supermarchés -->
+        <div style="display:flex; align-items:flex-start; gap:12px; background:rgba(255,255,255,0.03); padding:12px; border-radius:8px;">
+          <input type="checkbox" id="channel_detaillants" style="margin-top:3px; width:18px; height:18px;">
+          <div style="flex:1;">
+            <div style="font-weight:bold; color:#fff;">Détaillants / supermarchés</div>
+            <div style="color:#94a3b8; font-size:0.85rem;">Vos produits sont en rayon dans des commerces de détail (épiceries, grandes surfaces)</div>
+          </div>
+        </div>
+
+        <!-- Canal 4 : Appels d'offres -->
+        <div style="display:flex; align-items:flex-start; gap:12px; background:rgba(255,255,255,0.03); padding:12px; border-radius:8px;">
+          <input type="checkbox" id="channel_appels_offres" style="margin-top:3px; width:18px; height:18px;">
+          <div style="flex:1;">
+            <div style="font-weight:bold; color:#fff;">Appels d'offres</div>
+            <div style="color:#94a3b8; font-size:0.85rem;">Vous répondez à des marchés publics ou privés (institutions, grandes entreprises)</div>
+          </div>
+        </div>
+
+        <!-- Canal 5 : Vente en ligne / e-commerce -->
+        <div style="display:flex; align-items:flex-start; gap:12px; background:rgba(255,255,255,0.03); padding:12px; border-radius:8px;">
+          <input type="checkbox" id="channel_en_ligne" style="margin-top:3px; width:18px; height:18px;">
+          <div style="flex:1;">
+            <div style="font-weight:bold; color:#fff;">Vente en ligne / e-commerce</div>
+            <div style="color:#94a3b8; font-size:0.85rem;">Site web, marketplace, réseaux sociaux pour vendre directement</div>
+          </div>
+        </div>
+
+        <!-- Canal 6 : Export -->
+        <div style="display:flex; align-items:flex-start; gap:12px; background:rgba(255,255,255,0.03); padding:12px; border-radius:8px;">
+          <input type="checkbox" id="channel_export" style="margin-top:3px; width:18px; height:18px;">
+          <div style="flex:1;">
+            <div style="font-weight:bold; color:#fff;">Export</div>
+            <div style="color:#94a3b8; font-size:0.85rem;">Vente à l'international (pays voisins, Europe, etc.)</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Partenaires commerciaux (optionnel) -->
+    <div class="field" style="margin-top:15px;">
+      <label>Partenaires commerciaux identifiés (optionnel)</label>
+      <input id="f_partners_commercial" type="text" placeholder="Ex: 3 distributeurs en discussion, chaîne de supermarchés intéressée"
+             style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+    </div>
+  </div>
+
+  <!-- 4.5 Premiers contacts (SIGNAL FORT pour banquier) -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px; border-left:3px solid #4cc9f0;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-handshake"></i> 4.5 Premiers contacts commerciaux
+      <span style="color:#4cc9f0; font-size:0.8rem; background:rgba(76,201,240,0.1); padding:4px 8px; border-radius:12px; margin-left:10px;">+value</span>
+    </h3>
+
+    <div class="field">
+      <label>Avez-vous déjà des contacts, lettres d'intention ou contrats ?</label>
+      <select id="f_first_contacts" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+        <option value="">Sélectionner</option>
+        <option value="contrats">Oui, contrats signés</option>
+        <option value="loi">Oui, lettres d'intention</option>
+        <option value="discussions">Discussions avancées</option>
+        <option value="aucun">Pas encore</option>
+      </select>
+    </div>
+
+    <div class="field" style="margin-top:15px;">
+      <label>Précisions (optionnel mais valorisé)</label>
+      <textarea id="f_contacts_details" rows="2" 
+                placeholder="Ex: 3 acheteurs potentiels identifiés, 2 distributeurs intéressés, etc."
+                style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"></textarea>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="pager">
+    <div class="left">
+      <button class="btn" data-prev><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    </div>
+    <div class="right">
+      <button class="btn primary" data-next>Suivant <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- P5 - BLOC 5 : CONCURRENCE & POSITIONNEMENT -->
+<section class="section" id="p5" data-block="5">
+  <div class="section-head">
+    <div class="hgroup">
+      <div class="icon"><i class="fa-solid fa-chess-board"></i></div>
+      <div>
+        <h2>Bloc 5 — Concurrence & positionnement</h2>
+        <p>Analyse concurrentielle, forces/faiblesses, avantages différenciants.</p>
+      </div>
+    </div>
+
+    <div class="notice" style="margin-top:12px; padding:12px; background:rgba(247,37,133,0.1); border-left:4px solid #f72585; border-radius:8px;">
+      <i class="fa-solid fa-eye" style="color:#f72585; margin-right:8px;"></i>
+      <span style="color:#fff;"><b>Vision banquier</b> — Un projet qui ignore ses concurrents est un projet aveugle. La concurrence chinoise est une réalité, même en Côte d'Ivoire.</span>
+    </div>
+  </div>
+
+  <!-- 5.1 Concurrents identifiés -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-building"></i> 5.1 Concurrents identifiés
+    </h3>
+
+    <div class="field">
+      <label>Principaux concurrents (nom, localisation) <span style="color:#f72585;">*</span></label>
+      <textarea id="f_competitors_list" data-req="1" rows="4" 
+                placeholder="Ex: - Société X (Abidjan) - Produits similaires
+- Importateur Y (Chine) - Prix très compétitifs
+- Marque Z (Marché local) - Forte notoriété"
+                style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"></textarea>
+      <div class="hint" style="color:#4cc9f0; font-size:0.8rem; margin-top:5px;">
+        <i class="fa-solid fa-globe"></i> N'oubliez pas la concurrence internationale (importations)
+      </div>
+    </div>
+
+    <!-- Grille d'analyse concurrentielle (optionnelle mais puissante) -->
+    <div style="margin-top:20px; border-left:3px solid #fbbf24; padding-left:15px;">
+      <h4 style="color:#fbbf24; margin-bottom:10px;">Analyse rapide (optionnelle mais valorisée)</h4>
+      
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:10px;">
+        <div style="font-weight:bold; color:#94a3b8;">Concurrent</div>
+        <div style="font-weight:bold; color:#94a3b8;">Forces</div>
+        <div style="font-weight:bold; color:#94a3b8;">Faiblesses</div>
+      </div>
+
+      <!-- Ligne 1 -->
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:8px;">
+        <input type="text" placeholder="Concurrent 1" style="padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;">
+        <input type="text" placeholder="Forces" style="padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;">
+        <input type="text" placeholder="Faiblesses" style="padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;">
+      </div>
+
+      <!-- Ligne 2 -->
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:8px;">
+        <input type="text" placeholder="Concurrent 2" style="padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;">
+        <input type="text" placeholder="Forces" style="padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;">
+        <input type="text" placeholder="Faiblesses" style="padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;">
+      </div>
+
+      <!-- Ligne 3 -->
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
+        <input type="text" placeholder="Concurrent 3" style="padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;">
+        <input type="text" placeholder="Forces" style="padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;">
+        <input type="text" placeholder="Faiblesses" style="padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;">
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.2 Avantages concurrentiels -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-star"></i> 5.2 Vos avantages concurrentiels
+    </h3>
+
+    <div class="field">
+      <label>Pourquoi les clients vous choisiraient-ils ? <span style="color:#f72585;">*</span></label>
+      <textarea id="f_advantages" data-req="1" rows="3" 
+                placeholder="Ex: Prix plus compétitif, qualité supérieure, disponibilité, service après-vente, proximité..."
+                style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"></textarea>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:15px;">
+      <div class="field">
+        <label>En quoi êtes-vous différent ?</label>
+        <input id="f_different" type="text" placeholder="Ex: Produit local vs import, circuit court, emballage éco..."
+               style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+
+      <div class="field">
+        <label>En quoi êtes-vous meilleur ?</label>
+        <input id="f_better" type="text" placeholder="Ex: Qualité constante, délais réduits, flexibilité..."
+               style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.3 Barrières à l'entrée -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-shield-halved"></i> 5.3 Barrières à l'entrée
+    </h3>
+
+    <div class="field">
+      <label>Qu'est-ce qui protège votre activité face aux nouveaux entrants ?</label>
+      <textarea id="f_barriers" rows="3" 
+                placeholder="Ex: Investissement initial élevé, savoir-faire spécifique, agréments difficiles à obtenir, accès privilégié aux matières premières..."
+                style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"></textarea>
+      <div class="hint" style="color:#64748b; font-size:0.8rem; margin-top:5px;">
+        Plus les barrières sont élevées, plus votre position est durable
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.4 Positionnement stratégique (VERSION SIMPLE MAIS PUISSANTE) -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-bullseye"></i> 5.4 Votre positionnement
+    </h3>
+
+    <div class="field">
+      <label>En une phrase, comment voulez-vous être perçu sur le marché ? <span style="color:#f72585;">*</span></label>
+      <input id="f_positioning" data-req="1" type="text" 
+             placeholder="Ex: 'Le spécialiste local de l'huile de palme de qualité' ou 'La solution la plus fiable pour l'agroalimentaire'"
+             style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+    </div>
+
+    <!-- Choix du positionnement (visuel) -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:15px;">
+      <div style="text-align:center; padding:10px; background:rgba(255,255,255,0.03); border-radius:8px; border:1px solid rgba(255,255,255,0.1);">
+        <div style="font-size:2rem; margin-bottom:5px;">🏆</div>
+        <div style="font-weight:bold;">Leader qualité</div>
+        <div style="font-size:0.8rem; color:#94a3b8;">Le meilleur produit</div>
+      </div>
+      <div style="text-align:center; padding:10px; background:rgba(255,255,255,0.03); border-radius:8px; border:1px solid rgba(255,255,255,0.1);">
+        <div style="font-size:2rem; margin-bottom:5px;">💰</div>
+        <div style="font-weight:bold;">Prix compétitifs</div>
+        <div style="font-size:0.8rem; color:#94a3b8;">Moins cher que l'import</div>
+      </div>
+      <div style="text-align:center; padding:10px; background:rgba(255,255,255,0.03); border-radius:8px; border:1px solid rgba(255,255,255,0.1);">
+        <div style="font-size:2rem; margin-bottom:5px;">⚡</div>
+        <div style="font-weight:bold;">Disponibilité</div>
+        <div style="font-size:0.8rem; color:#94a3b8;">Toujours en stock</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="pager">
+    <div class="left">
+      <button class="btn" data-prev><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    </div>
+    <div class="right">
+      <button class="btn primary" data-next>Suivant <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+        <!-- P6 - BLOC 6 : FINANCES & PRÉVISIONNELS (VERSION FINALE AVEC DONNÉES UP) -->
+<section class="section" id="p6" data-block="6">
+  <div class="section-head">
+    <div class="hgroup">
+      <div class="icon"><i class="fa-solid fa-coins"></i></div>
+      <div>
+        <h2>Bloc 6 — Finances & prévisionnels</h2>
+        <p>Plan de financement, compte de résultat, BFR, trésorerie mensuelle, bilan.</p>
+      </div>
+    </div>
+
+    <div class="notice" style="margin-top:12px; padding:12px; background:rgba(247,37,133,0.1); border-left:4px solid #f72585; border-radius:8px;">
+      <i class="fa-solid fa-calculator" style="color:#f72585; margin-right:8px;"></i>
+      <span style="color:#fff;"><b>Vision banquier</b> — Chaque ligne doit être justifiée. Les données de votre UP ont été pré-remplies.</span>
+    </div>
+  </div>
+
+  <!-- ===== IA DYNAMIQUE ===== -->
+  <div id="ia-finance-alerts" style="background:rgba(76,201,240,0.1); border-radius:12px; padding:15px; margin-bottom:20px;">
+    <!-- Rempli par JS -->
+  </div>
+
+  <!-- ===== SCRIPT DE CHARGEMENT DES DONNÉES UP ===== -->
+  <script>
+  // Fonction pour charger les données de l'UP
+  function loadUPData() {
+    try {
+      const up = JSON.parse(localStorage.getItem('currentProduction') || '{}');
+      console.log('Chargement UP:', up.nom);
+      
+      // CAPEX
+      if (up.capex_min) {
+        const capex = up.capex_min;
+        document.getElementById('capex_machines').value = Math.round(capex * 0.45);
+        document.getElementById('capex_land').value = Math.round(capex * 0.2);
+        document.getElementById('capex_installation').value = Math.round(capex * 0.1);
+        document.getElementById('capex_studies').value = Math.round(capex * 0.05);
+        document.getElementById('capex_wc').value = Math.round(capex * 0.15);
+        document.getElementById('capex_contingency').value = Math.round(capex * 0.05);
+      }
+      
+      // Chiffre d'affaires
+      if (up.chiffre_affaires_estime) {
+        document.getElementById('up_ca_range').innerHTML = up.chiffre_affaires_estime;
+        const caMatch = up.chiffre_affaires_estime.match(/(\d+)/g);
+        if (caMatch && caMatch.length) {
+          const caMin = parseInt(caMatch[0]) * 1000;
+          document.getElementById('revenue').value = caMin;
+          document.getElementById('up_reference_ca').innerHTML = (caMin/1000) + 'k';
+          document.getElementById('base_ca_value').value = caMin;
+        }
+      }
+      
+      // Marge brute
+      if (up.marge_brute) {
+        const margeMatch = up.marge_brute.match(/(\d+)/g);
+        if (margeMatch && margeMatch.length) {
+          const margeMin = parseInt(margeMatch[0]);
+          document.getElementById('cogs_pct').value = 100 - margeMin;
+        }
+      }
+      
+      // Personnel (si disponible)
+      if (up.personnel) {
+        const staffMatch = up.personnel.match(/(\d+)/g);
+        if (staffMatch && staffMatch.length) {
+          const staffMin = parseInt(staffMatch[0]);
+          document.getElementById('staff_cost').value = staffMin * 300 * 12; // 300 USD/mois/personne
+        }
+      }
+      
+      // Lancer les calculs
+      setTimeout(calculateAll, 200);
+      
+    } catch(e) {
+      console.log('Erreur chargement UP:', e);
+    }
+  }
+  </script>
+
+  <!-- 6.1 INVESTISSEMENT (CAPEX DÉTAILLÉ) -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-chart-pie"></i> 6.1 Plan d'investissement (CAPEX)
+    </h3>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px;">
+      <div class="field">
+        <label>Machines & équipements</label>
+        <input id="capex_machines" type="number" min="0" step="1000" value="45000" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Terrain & construction</label>
+        <input id="capex_land" type="number" min="0" step="1000" value="20000" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Installation & mise en service</label>
+        <input id="capex_installation" type="number" min="0" step="1000" value="10000" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Frais de constitution / études</label>
+        <input id="capex_studies" type="number" min="0" step="1000" value="5000" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Fonds de roulement initial (BFR)</label>
+        <input id="capex_wc" type="number" min="0" step="1000" value="15000" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Imprévus / aléas (5-10%)</label>
+        <input id="capex_contingency" type="number" min="0" step="1000" value="5000" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+    </div>
+
+    <div style="margin-top:20px; padding:15px; background:linear-gradient(135deg, rgba(76,201,240,0.2), rgba(247,37,133,0.2)); border-radius:10px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="color:#fff; font-size:1.1rem;">INVESTISSEMENT TOTAL</span>
+        <span style="color:#4cc9f0; font-size:2rem; font-weight:bold;" id="total_capex">100 000</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-top:5px;">
+        <span style="color:#94a3b8;">Dont BFR initial</span>
+        <span style="color:#94a3b8;" id="bfr_display">15 000 USD (15%)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6.2 PLAN DE FINANCEMENT -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-hand-holding-dollar"></i> 6.2 Plan de financement
+    </h3>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px;">
+      <div class="field">
+        <label>Apport personnel</label>
+        <input id="equity" type="number" min="0" step="1000" value="30000" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Dette bancaire</label>
+        <input id="debt" type="number" min="0" step="1000" value="65000" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Subventions / aides</label>
+        <input id="grants" type="number" min="0" step="1000" value="5000" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+    </div>
+
+    <div style="margin-top:15px; padding:15px; background:rgba(0,0,0,0.2); border-radius:10px;">
+      <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+        <span style="color:#94a3b8;">Total ressources</span>
+        <span style="color:#fff; font-weight:bold;" id="total_financing">100 000</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+        <span style="color:#94a3b8;">Total investissement</span>
+        <span style="color:#fff; font-weight:bold;" id="total_investment_check">100 000</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid rgba(255,255,255,0.1);">
+        <span style="color:#94a3b8;">Équilibre</span>
+        <span style="color:#4cc9f0; font-weight:bold;" id="financial_balance">✓ Équilibré</span>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin-top:20px;">
+      <div class="field">
+        <label>Taux d'intérêt (%)</label>
+        <input id="interest_rate" type="number" min="0" max="20" step="0.1" value="7.5" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Durée (années)</label>
+        <select id="loan_term" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="3">3 ans</option>
+          <option value="5" selected>5 ans</option>
+          <option value="7">7 ans</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Différé (mois)</label>
+        <select id="grace_period" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <option value="0">0 mois</option>
+          <option value="6">6 mois</option>
+          <option value="12">12 mois</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="margin-top:15px; background:rgba(76,201,240,0.05); border-radius:8px; padding:15px;">
+      <div style="display:flex; justify-content:space-between;">
+        <span style="color:#94a3b8;">Mensualité</span>
+        <span style="color:#fff; font-size:1.2rem; font-weight:bold;" id="monthly_payment">1 302 USD</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-top:5px;">
+        <span style="color:#94a3b8;">Coût total du crédit</span>
+        <span style="color:#fff;" id="total_loan_cost">78 120 USD</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6.3 HYPOTHÈSES D'EXPLOITATION DÉTAILLÉES -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-sliders"></i> 6.3 Hypothèses d'exploitation
+    </h3>
+
+    <!-- Champ caché pour stocker la valeur de base -->
+    <input type="hidden" id="base_ca_value" value="180000">
+
+    <!-- Ligne CA avec bouton Modifier -->
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+      <div style="flex:1;">
+        <label>Chiffre d'affaires annuel cible <span style="color:#f72585;">*</span></label>
+        <div style="display:flex; gap:10px;">
+          <input id="revenue" type="number" min="0" step="1000" value="180000" class="pl-input" 
+                 style="flex:2; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-weight:bold;">
+          <select id="revenue_multiplier" class="pl-input" style="width:120px; padding:12px; background:rgba(0,0,0,0.2); border:1px solid #4cc9f0; border-radius:8px; color:#4cc9f0;">
+            <option value="1">Base</option>
+            <option value="1.1">+10%</option>
+            <option value="1.2">+20%</option>
+            <option value="1.3">+30%</option>
+            <option value="1.4">+40%</option>
+            <option value="1.5">+50%</option>
+          </select>
+        </div>
+      </div>
+      <div style="width:100px; text-align:center; background:rgba(76,201,240,0.1); border-radius:8px; padding:10px;">
+        <div style="color:#4cc9f0; font-size:0.8rem;">UP référence</div>
+        <div style="color:#fff; font-weight:bold;" id="up_reference_ca">180k</div>
+      </div>
+    </div>
+
+    <!-- Explication IA -->
+    <div style="background:rgba(76,201,240,0.05); border-radius:8px; padding:10px; margin-bottom:15px;">
+      <i class="fa-solid fa-robot" style="color:#4cc9f0;"></i>
+      <span style="color:#b8c1ec; margin-left:5px;">
+        CA de référence basé sur votre UP : <span id="up_ca_range">300k-750k USD</span> (fourchette basse)
+      </span>
+    </div>
+
+    <!-- Autres hypothèses -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px;">
+      <div class="field">
+        <label>% Coûts matières premières</label>
+        <input id="cogs_pct" type="number" min="0" max="100" step="1" value="50" class="pl-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Charges de personnel (annuelles)</label>
+        <input id="staff_cost" type="number" min="0" step="1000" value="36000" class="pl-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Loyer / location (annuel)</label>
+        <input id="rent_cost" type="number" min="0" step="1000" value="12000" class="pl-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Électricité, eau, énergie (annuel)</label>
+        <input id="utilities_cost" type="number" min="0" step="1000" value="8000" class="pl-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Frais généraux (comptable, assurance)</label>
+        <input id="overhead_cost" type="number" min="0" step="1000" value="6000" class="pl-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Taxes & impôts (hors IS)</label>
+        <input id="taxes_cost" type="number" min="0" step="1000" value="4000" class="pl-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Transport & logistique</label>
+        <input id="transport_cost" type="number" min="0" step="1000" value="6000" class="pl-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Maintenance & entretien</label>
+        <input id="maintenance_cost" type="number" min="0" step="1000" value="4000" class="pl-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:15px;">
+      <div class="field">
+        <label>Délai paiement clients (jours)</label>
+        <input id="ar_days" type="number" min="0" max="180" step="5" value="45" class="pl-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+      <div class="field">
+        <label>Délai paiement fournisseurs (jours)</label>
+        <input id="ap_days" type="number" min="0" max="180" step="5" value="30" class="pl-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+      </div>
+    </div>
+
+    <div class="field" style="margin-top:15px;">
+      <label>Progression du CA (% du CA cible par mois)</label>
+      <div style="display:flex; gap:5px; flex-wrap:wrap;">
+        <input id="progress_m1" type="number" min="0" max="100" step="1" value="30" style="width:70px; padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;"> M1
+        <input id="progress_m2" type="number" min="0" max="100" step="1" value="40" style="width:70px; padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;"> M2
+        <input id="progress_m3" type="number" min="0" max="100" step="1" value="50" style="width:70px; padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;"> M3
+        <input id="progress_m4" type="number" min="0" max="100" step="1" value="60" style="width:70px; padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;"> M4
+        <input id="progress_m5" type="number" min="0" max="100" step="1" value="70" style="width:70px; padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;"> M5
+        <input id="progress_m6" type="number" min="0" max="100" step="1" value="80" style="width:70px; padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;"> M6
+        <input id="progress_m7" type="number" min="0" max="100" step="1" value="90" style="width:70px; padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;"> M7
+        <input id="progress_m8" type="number" min="0" max="100" step="1" value="100" style="width:70px; padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;"> M8
+        <input id="progress_m9" type="number" min="0" max="100" step="1" value="100" style="width:70px; padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;"> M9
+        <input id="progress_m10" type="number" min="0" max="100" step="1" value="100" style="width:70px; padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;"> M10
+        <input id="progress_m11" type="number" min="0" max="100" step="1" value="100" style="width:70px; padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;"> M11
+        <input id="progress_m12" type="number" min="0" max="100" step="1" value="100" style="width:70px; padding:8px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff;"> M12
+      </div>
+      <div class="hint" style="color:#4cc9f0;">% du CA cible atteint chaque mois</div>
+    </div>
+  </div>
+
+  <!-- 6.4 COMPTE DE RÉSULTAT PRÉVISIONNEL DÉTAILLÉ -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-chart-line"></i> 6.4 Compte de résultat prévisionnel (Année 1)
+    </h3>
+
+    <table style="width:100%; border-collapse:collapse;">
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">Chiffre d'affaires</td>
+        <td style="padding:10px 0; text-align:right; font-weight:bold;" id="pl_revenue">180 000</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">- Achats matières premières</td>
+        <td style="padding:10px 0; text-align:right;" id="pl_cogs">-90 000</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0; font-weight:bold;">= MARGE BRUTE</td>
+        <td style="padding:10px 0; text-align:right; font-weight:bold; color:#4cc9f0;" id="pl_gross_profit">90 000</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">- Charges de personnel</td>
+        <td style="padding:10px 0; text-align:right;" id="pl_staff">-36 000</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">- Loyer / location</td>
+        <td style="padding:10px 0; text-align:right;" id="pl_rent">-12 000</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">- Électricité, eau, énergie</td>
+        <td style="padding:10px 0; text-align:right;" id="pl_utilities">-8 000</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">- Frais généraux (compta, assurance)</td>
+        <td style="padding:10px 0; text-align:right;" id="pl_overhead">-6 000</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">- Transport & logistique</td>
+        <td style="padding:10px 0; text-align:right;" id="pl_transport">-6 000</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">- Maintenance & entretien</td>
+        <td style="padding:10px 0; text-align:right;" id="pl_maintenance">-4 000</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">- Taxes & impôts (hors IS)</td>
+        <td style="padding:10px 0; text-align:right;" id="pl_taxes">-4 000</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">= EBITDA</td>
+        <td style="padding:10px 0; text-align:right; font-weight:bold;" id="pl_ebitda">14 000</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">- Dotations aux amortissements</td>
+        <td style="padding:10px 0; text-align:right;" id="pl_depreciation">-7 857</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">= RÉSULTAT D'EXPLOITATION</td>
+        <td style="padding:10px 0; text-align:right;" id="pl_operating">6 143</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+        <td style="padding:10px 0;">- Charges financières</td>
+        <td style="padding:10px 0; text-align:right;" id="pl_interest">-4 875</td>
+      </tr>
+      <tr style="border-top:2px solid #4cc9f0;">
+        <td style="padding:10px 0; font-weight:bold;">RÉSULTAT NET</td>
+        <td style="padding:10px 0; text-align:right; font-weight:bold; color:#4cc9f0; font-size:1.2rem;" id="pl_net">1 268</td>
+      </tr>
+    </table>
+
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:15px; margin-top:20px;">
+      <div style="text-align:center; padding:10px; background:rgba(76,201,240,0.1); border-radius:8px;">
+        <div style="color:#94a3b8;">Marge brute</div>
+        <div style="color:#fff; font-size:1.2rem;" id="ratio_gross_margin">50%</div>
+      </div>
+      <div style="text-align:center; padding:10px; background:rgba(76,201,240,0.1); border-radius:8px;">
+        <div style="color:#94a3b8;">Marge EBITDA</div>
+        <div style="color:#fff; font-size:1.2rem;" id="ratio_ebitda_margin">7.8%</div>
+      </div>
+      <div style="text-align:center; padding:10px; background:rgba(76,201,240,0.1); border-radius:8px;">
+        <div style="color:#94a3b8;">Marge nette</div>
+        <div style="color:#fff; font-size:1.2rem;" id="ratio_net_margin">0.7%</div>
+      </div>
+      <div style="text-align:center; padding:10px; background:rgba(76,201,240,0.1); border-radius:8px;">
+        <div style="color:#94a3b8;">ROI (an 1)</div>
+        <div style="color:#fff; font-size:1.2rem;" id="ratio_roi">1.3%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6.5 TABLEAU DE TRÉSORERIE MENSUEL COMPLET -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-clock"></i> 6.5 Tableau de trésorerie mensuel - Année 1
+    </h3>
+
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; min-width:1300px; font-size:0.8rem;">
+        <thead>
+          <tr style="border-bottom:2px solid #4cc9f0;">
+            <th style="padding:6px; text-align:left;">(USD)</th>
+            <th style="padding:6px; text-align:right;">M0</th>
+            <th style="padding:6px; text-align:right;">M1</th>
+            <th style="padding:6px; text-align:right;">M2</th>
+            <th style="padding:6px; text-align:right;">M3</th>
+            <th style="padding:6px; text-align:right;">M4</th>
+            <th style="padding:6px; text-align:right;">M5</th>
+            <th style="padding:6px; text-align:right;">M6</th>
+            <th style="padding:6px; text-align:right;">M7</th>
+            <th style="padding:6px; text-align:right;">M8</th>
+            <th style="padding:6px; text-align:right;">M9</th>
+            <th style="padding:6px; text-align:right;">M10</th>
+            <th style="padding:6px; text-align:right;">M11</th>
+            <th style="padding:6px; text-align:right;">M12</th>
+            <th style="padding:6px; text-align:right; background:rgba(76,201,240,0.1);">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody id="cashflow_table_body">
+          <!-- Rempli par JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Synthèse trésorerie -->
+    <div style="margin-top:20px; display:grid; grid-template-columns:repeat(4,1fr); gap:15px;">
+      <div style="background:rgba(0,0,0,0.2); border-radius:8px; padding:12px;">
+        <div style="color:#94a3b8;">Trésorerie initiale (M0)</div>
+        <div style="color:#fff; font-size:1.2rem;" id="cash_start">0</div>
+      </div>
+      <div style="background:rgba(0,0,0,0.2); border-radius:8px; padding:12px;">
+        <div style="color:#94a3b8;">Trésorerie minimale</div>
+        <div style="color:#f72585; font-size:1.2rem;" id="cash_min">-5 000</div>
+      </div>
+      <div style="background:rgba(0,0,0,0.2); border-radius:8px; padding:12px;">
+        <div style="color:#94a3b8;">Trésorerie maximale</div>
+        <div style="color:#4cc9f0; font-size:1.2rem;" id="cash_max">45 000</div>
+      </div>
+      <div style="background:rgba(0,0,0,0.2); border-radius:8px; padding:12px;">
+        <div style="color:#94a3b8;">Trésorerie finale</div>
+        <div style="color:#4cc9f0; font-size:1.2rem;" id="cash_end">25 000</div>
+      </div>
+    </div>
+
+    <!-- Alerte trésorerie -->
+    <div id="cashflow_alert" style="margin-top:15px; padding:12px; border-radius:8px; background:rgba(247,37,133,0.1); border-left:4px solid #f72585;">
+      <!-- Rempli par JS -->
+    </div>
+  </div>
+
+  <!-- 6.6 BILAN PRÉVISIONNEL AVEC DÉTAIL BFR -->
+  <div class="card" style="background:rgba(28,37,65,0.5); border-radius:16px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#4cc9f0; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
+      <i class="fa-solid fa-scale-balanced"></i> 6.6 Bilan prévisionnel (fin année 1)
+    </h3>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:30px;">
+      <!-- Actif -->
+      <div>
+        <h4 style="color:#4cc9f0; margin-bottom:10px;">ACTIF</h4>
+        <table style="width:100%;">
+          <tr>
+            <td>Immobilisations brutes</td>
+            <td style="text-align:right;" id="balance_fixed_gross">80 000</td>
+          </tr>
+          <tr>
+            <td>- Amortissements cumulés</td>
+            <td style="text-align:right;" id="balance_depreciation">-7 857</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold;">Immobilisations nettes</td>
+            <td style="text-align:right; font-weight:bold;" id="balance_fixed_net">72 143</td>
+          </tr>
+          <tr>
+            <td>Stocks</td>
+            <td style="text-align:right;" id="balance_stock">15 000</td>
+          </tr>
+          <tr>
+            <td>Créances clients</td>
+            <td style="text-align:right;" id="balance_receivables">22 500</td>
+          </tr>
+          <tr>
+            <td>Trésorerie</td>
+            <td style="text-align:right;" id="balance_cash">10 000</td>
+          </tr>
+          <tr style="border-top:1px solid #4cc9f0;">
+            <td style="font-weight:bold;">TOTAL ACTIF</td>
+            <td style="text-align:right; font-weight:bold;" id="balance_total_assets">119 643</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Passif -->
+      <div>
+        <h4 style="color:#4cc9f0; margin-bottom:10px;">PASSIF</h4>
+        <table style="width:100%;">
+          <tr>
+            <td>Capital social (apport)</td>
+            <td style="text-align:right;" id="balance_equity_capital">30 000</td>
+          </tr>
+          <tr>
+            <td>Résultat net (bénéfice)</td>
+            <td style="text-align:right;" id="balance_net_income">1 268</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold;">Capitaux propres</td>
+            <td style="text-align:right; font-weight:bold;" id="balance_equity">31 268</td>
+          </tr>
+          <tr>
+            <td>Dettes financières (capital restant)</td>
+            <td style="text-align:right;" id="balance_debt">63 375</td>
+          </tr>
+          <tr>
+            <td>Dettes fournisseurs</td>
+            <td style="text-align:right;" id="balance_suppliers">7 500</td>
+          </tr>
+          <tr>
+            <td>Dettes fiscales & sociales</td>
+            <td style="text-align:right;" id="balance_taxes">2 500</td>
+          </tr>
+          <tr>
+            <td>Subventions (quote-part)</td>
+            <td style="text-align:right;" id="balance_grants">5 000</td>
+          </tr>
+          <tr>
+            <td>Autres dettes</td>
+            <td style="text-align:right;" id="balance_other">10 000</td>
+          </tr>
+          <tr style="border-top:1px solid #4cc9f0;">
+            <td style="font-weight:bold;">TOTAL PASSIF</td>
+            <td style="text-align:right; font-weight:bold;" id="balance_total_liabilities">119 643</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Explication du BFR -->
+    <div style="margin-top:20px; background:rgba(76,201,240,0.05); border-radius:10px; padding:15px;">
+      <h4 style="color:#4cc9f0; margin-bottom:10px;">📊 Composition du BFR (Besoin en Fonds de Roulement)</h4>
+      
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px;">
+        <div style="background:rgba(0,0,0,0.2); border-radius:8px; padding:10px;">
+          <div style="color:#94a3b8;">Stocks</div>
+          <div style="color:#fff; font-size:1.1rem;" id="bfr_stocks">15 000</div>
+          <div style="color:#4cc9f0; font-size:0.8rem;">2 mois de consommation</div>
+        </div>
+        
+        <div style="background:rgba(0,0,0,0.2); border-radius:8px; padding:10px;">
+          <div style="color:#94a3b8;">Créances clients</div>
+          <div style="color:#fff; font-size:1.1rem;" id="bfr_receivables">22 500</div>
+          <div style="color:#4cc9f0; font-size:0.8rem;" id="bfr_ar_days">45 jours de CA</div>
+        </div>
+        
+        <div style="background:rgba(0,0,0,0.2); border-radius:8px; padding:10px;">
+          <div style="color:#94a3b8;">- Dettes fournisseurs</div>
+          <div style="color:#fff; font-size:1.1rem;" id="bfr_suppliers">-7 500</div>
+          <div style="color:#4cc9f0; font-size:0.8rem;" id="bfr_ap_days">30 jours d'achats</div>
+        </div>
+      </div>
+      
+      <div style="margin-top:10px; padding:10px; background:rgba(0,0,0,0.3); border-radius:8px;">
+        <div style="display:flex; justify-content:space-between;">
+          <span style="color:#fff; font-weight:bold;">BFR D'EXPLOITATION</span>
+          <span style="color:#4cc9f0; font-weight:bold; font-size:1.2rem;" id="bfr_operating">30 000</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:5px;">
+          <span style="color:#fff;">BFR INITIAL (constituté en M0)</span>
+          <span style="color:#fff;" id="bfr_initial">15 000</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:5px; border-top:1px dashed #4cc9f0; padding-top:5px;">
+          <span style="color:#fff; font-weight:bold;">BFR TOTAL FIN D'ANNÉE</span>
+          <span style="color:#4cc9f0; font-weight:bold; font-size:1.2rem;" id="bfr_total">45 000</span>
+        </div>
+        <div style="color:#94a3b8; font-size:0.8rem; margin-top:5px;">
+          Ce montant représente les liquidités immobilisées dans le cycle d'exploitation
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="pager">
+    <div class="left">
+      <button class="btn" data-prev><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    </div>
+    <div class="right">
+      <button class="btn primary" data-next>Suivant <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCRIPT DYNAMIQUE COMPLET ===== -->
+<script>
+// Fonction principale de calcul
+function calculateAll() {
+  // ===== 1. RÉCUPÉRATION DES VALEURS =====
+  
+  // CAPEX
+  const machines = parseFloat(document.getElementById('capex_machines')?.value) || 0;
+  const land = parseFloat(document.getElementById('capex_land')?.value) || 0;
+  const installation = parseFloat(document.getElementById('capex_installation')?.value) || 0;
+  const studies = parseFloat(document.getElementById('capex_studies')?.value) || 0;
+  const wc = parseFloat(document.getElementById('capex_wc')?.value) || 0;
+  const contingency = parseFloat(document.getElementById('capex_contingency')?.value) || 0;
+  
+  const totalCapex = machines + land + installation + studies + wc + contingency;
+  const amortizableAssets = machines + installation; // Ce qui s'amortit
+  
+  // Financement
+  const equity = parseFloat(document.getElementById('equity')?.value) || 0;
+  const debt = parseFloat(document.getElementById('debt')?.value) || 0;
+  const grants = parseFloat(document.getElementById('grants')?.value) || 0;
+  const totalFinancing = equity + debt + grants;
+  
+  // Conditions de prêt
+  const annualRate = (parseFloat(document.getElementById('interest_rate')?.value) || 7.5) / 100;
+  const monthlyRate = annualRate / 12;
+  const termYears = parseFloat(document.getElementById('loan_term')?.value) || 5;
+  const graceMonths = parseFloat(document.getElementById('grace_period')?.value) || 0;
+  const totalMonths = termYears * 12;
+  
+  // Calcul mensualité (formule de crédit)
+  let monthlyPayment = 0;
+  if (monthlyRate > 0 && debt > 0) {
+    const factor = Math.pow(1 + monthlyRate, totalMonths);
+    monthlyPayment = debt * monthlyRate * factor / (factor - 1);
+  } else {
+    monthlyPayment = debt / totalMonths;
+  }
+  
+  // Hypothèses exploitation
+  const revenueTarget = parseFloat(document.getElementById('revenue')?.value) || 0;
+  const cogsPct = (parseFloat(document.getElementById('cogs_pct')?.value) || 50) / 100;
+  const staffCost = parseFloat(document.getElementById('staff_cost')?.value) || 0;
+  const rentCost = parseFloat(document.getElementById('rent_cost')?.value) || 0;
+  const utilitiesCost = parseFloat(document.getElementById('utilities_cost')?.value) || 0;
+  const overheadCost = parseFloat(document.getElementById('overhead_cost')?.value) || 0;
+  const taxesCost = parseFloat(document.getElementById('taxes_cost')?.value) || 0;
+  const transportCost = parseFloat(document.getElementById('transport_cost')?.value) || 0;
+  const maintenanceCost = parseFloat(document.getElementById('maintenance_cost')?.value) || 0;
+  
+  const totalOpex = staffCost + rentCost + utilitiesCost + overheadCost + taxesCost + transportCost + maintenanceCost;
+  
+  // Délais
+  const arDays = parseFloat(document.getElementById('ar_days')?.value) || 45;
+  const apDays = parseFloat(document.getElementById('ap_days')?.value) || 30;
+  
+  // Progression mensuelle du CA
+  const progress = [];
+  for (let i = 1; i <= 12; i++) {
+    const val = parseFloat(document.getElementById(`progress_m${i}`)?.value) || 0;
+    progress.push(val / 100); // Convertir en décimal
+  }
+  
+  // ===== 2. CALCULS ANNUELS =====
+  
+  const cogs = revenueTarget * cogsPct;
+  const grossProfit = revenueTarget - cogs;
+  const ebitda = grossProfit - totalOpex;
+  const depreciation = amortizableAssets / 7; // Amortissement linéaire sur 7 ans
+  const interestYear1 = debt * annualRate;
+  const netProfit = ebitda - depreciation - interestYear1;
+  
+  // ===== 3. TRÉSORERIE MENSUELLE =====
+  
+  // MOIS 0 : Apports des financements (avant le début de l'activité)
+  const totalInvestment = machines + land + installation + studies + contingency;
+  
+  // Encaissements mensuels (progressifs)
+  const monthlyRevenue = [];
+  for (let m = 0; m < 12; m++) {
+    const baseMonthly = revenueTarget / 12;
+    monthlyRevenue.push(baseMonthly * progress[m]);
+  }
+  
+  // Décaissements mensuels
+  const monthlyCogs = cogs / 12;
+  const monthlyStaff = staffCost / 12;
+  const monthlyRent = rentCost / 12;
+  const monthlyUtilities = utilitiesCost / 12;
+  const monthlyOverhead = overheadCost / 12;
+  const monthlyTaxes = taxesCost / 12;
+  const monthlyTransport = transportCost / 12;
+  const monthlyMaintenance = maintenanceCost / 12;
+  
+  // Tableau de trésorerie
+  let cashArray = [];
+  
+  // MOIS 0 : Apports et investissement
+  let cash = totalFinancing; // On reçoit tous les financements
+  cash -= totalInvestment;   // On paie tout l'investissement
+  cash -= wc;                // On constitue le BFR (trésorerie de départ)
+  cashArray.push(cash);      // Trésorerie après M0
+  
+  // Calcul des flux pour M1 à M12
+  for (let m = 0; m < 12; m++) {
+    // Encaissements clients
+    const encaissement = monthlyRevenue[m];
+    
+    // Paiements fournisseurs
+    const paiementFournisseur = monthlyCogs;
+    
+    // Total des sorties du mois
+    const sorties = paiementFournisseur + monthlyStaff + monthlyRent + monthlyUtilities + 
+                    monthlyOverhead + monthlyTaxes + monthlyTransport + monthlyMaintenance;
+    
+    // Intérêts et capital (si période de grâce terminée)
+    const interet = m < graceMonths ? 0 : (interestYear1 / 12);
+    const capital = m < graceMonths ? 0 : (monthlyPayment - interet);
+    
+    const flux = encaissement - sorties - interet - capital;
+    cash += flux;
+    cashArray.push(cash);
+  }
+  
+  // Calcul des BFR pour explication
+  const monthlyRevenueAvg = revenueTarget / 12;
+  const monthlyCogsAvg = cogs / 12;
+  const stocks = monthlyCogsAvg * 2; // 2 mois de stock
+  const receivables = monthlyRevenueAvg * (arDays / 30);
+  const suppliers = monthlyCogsAvg * (apDays / 30);
+  const bfrOperating = stocks + receivables - suppliers;
+  const bfrTotal = wc + bfrOperating;
+  
+  document.getElementById('bfr_stocks').innerHTML = stocks.toFixed(0);
+  document.getElementById('bfr_receivables').innerHTML = receivables.toFixed(0);
+  document.getElementById('bfr_suppliers').innerHTML = '-' + suppliers.toFixed(0);
+  document.getElementById('bfr_ar_days').innerHTML = arDays + ' jours de CA';
+  document.getElementById('bfr_ap_days').innerHTML = apDays + ' jours d\'achats';
+  document.getElementById('bfr_operating').innerHTML = bfrOperating.toFixed(0);
+  document.getElementById('bfr_initial').innerHTML = wc.toFixed(0);
+  document.getElementById('bfr_total').innerHTML = bfrTotal.toFixed(0);
+  
+  // Construction des lignes du tableau
+  let tableBody = '';
+  
+  // Ligne Apports
+  let apportRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#4cc9f0; font-weight:bold;">+ Apports (fonds)</td>';
+  apportRow += `<td style="padding:4px; text-align:right; color:#4cc9f0; font-weight:bold;">${totalFinancing.toFixed(0)}</td>`;
+  let totalApports = totalFinancing;
+  for (let m = 1; m <= 12; m++) {
+    apportRow += '<td style="padding:4px; text-align:right; color:#4cc9f0;">0</td>';
+  }
+  apportRow += `<td style="padding:4px; text-align:right; background:rgba(76,201,240,0.1); font-weight:bold;">${totalApports.toFixed(0)}</td>`;
+  apportRow += '</tr>';
+  tableBody += apportRow;
+  
+  // Ligne Investissements
+  let investRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#f72585;">- Investissements</td>';
+  investRow += `<td style="padding:4px; text-align:right; color:#f72585;">-${totalInvestment.toFixed(0)}</td>`;
+  let totalInvest = totalInvestment;
+  for (let m = 1; m <= 12; m++) {
+    investRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  }
+  investRow += `<td style="padding:4px; text-align:right; background:rgba(247,37,133,0.1); font-weight:bold;">-${totalInvest.toFixed(0)}</td>`;
+  investRow += '</tr>';
+  tableBody += investRow;
+  
+  // Ligne BFR
+  let bfrRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#94a3b8;">- Constitution BFR</td>';
+  bfrRow += `<td style="padding:4px; text-align:right; color:#b8c1ec;">-${wc.toFixed(0)}</td>`;
+  let totalBfr = wc;
+  for (let m = 1; m <= 12; m++) {
+    bfrRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  }
+  bfrRow += `<td style="padding:4px; text-align:right; background:rgba(148,163,184,0.1); font-weight:bold;">-${totalBfr.toFixed(0)}</td>`;
+  bfrRow += '</tr>';
+  tableBody += bfrRow;
+  
+  // Ligne Encaissements
+  let encaissRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#4cc9f0;">Encaissements clients</td>';
+  encaissRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  let totalEncaissements = 0;
+  for (let m = 0; m < 12; m++) {
+    encaissRow += `<td style="padding:4px; text-align:right; color:#4cc9f0;">${monthlyRevenue[m].toFixed(0)}</td>`;
+    totalEncaissements += monthlyRevenue[m];
+  }
+  encaissRow += `<td style="padding:4px; text-align:right; background:rgba(76,201,240,0.1); font-weight:bold;">${totalEncaissements.toFixed(0)}</td>`;
+  encaissRow += '</tr>';
+  tableBody += encaissRow;
+  
+  // Ligne Fournisseurs
+  let fournRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#94a3b8;">- Paiements fournisseurs</td>';
+  fournRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  let totalFournisseurs = 0;
+  for (let m = 0; m < 12; m++) {
+    fournRow += `<td style="padding:4px; text-align:right; color:#b8c1ec;">-${monthlyCogs.toFixed(0)}</td>`;
+    totalFournisseurs += monthlyCogs;
+  }
+  fournRow += `<td style="padding:4px; text-align:right; background:rgba(148,163,184,0.1); font-weight:bold;">-${totalFournisseurs.toFixed(0)}</td>`;
+  fournRow += '</tr>';
+  tableBody += fournRow;
+  
+  // Ligne Personnel
+  let staffRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#94a3b8;">- Personnel</td>';
+  staffRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  let totalStaff = 0;
+  for (let m = 0; m < 12; m++) {
+    staffRow += `<td style="padding:4px; text-align:right; color:#b8c1ec;">-${monthlyStaff.toFixed(0)}</td>`;
+    totalStaff += monthlyStaff;
+  }
+  staffRow += `<td style="padding:4px; text-align:right; background:rgba(148,163,184,0.1); font-weight:bold;">-${totalStaff.toFixed(0)}</td>`;
+  staffRow += '</tr>';
+  tableBody += staffRow;
+  
+  // Ligne Loyer
+  let rentRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#94a3b8;">- Loyer</td>';
+  rentRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  let totalRent = 0;
+  for (let m = 0; m < 12; m++) {
+    rentRow += `<td style="padding:4px; text-align:right; color:#b8c1ec;">-${monthlyRent.toFixed(0)}</td>`;
+    totalRent += monthlyRent;
+  }
+  rentRow += `<td style="padding:4px; text-align:right; background:rgba(148,163,184,0.1); font-weight:bold;">-${totalRent.toFixed(0)}</td>`;
+  rentRow += '</tr>';
+  tableBody += rentRow;
+  
+  // Ligne Utilities
+  let utilRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#94a3b8;">- Électricité/eau</td>';
+  utilRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  let totalUtil = 0;
+  for (let m = 0; m < 12; m++) {
+    utilRow += `<td style="padding:4px; text-align:right; color:#b8c1ec;">-${monthlyUtilities.toFixed(0)}</td>`;
+    totalUtil += monthlyUtilities;
+  }
+  utilRow += `<td style="padding:4px; text-align:right; background:rgba(148,163,184,0.1); font-weight:bold;">-${totalUtil.toFixed(0)}</td>`;
+  utilRow += '</tr>';
+  tableBody += utilRow;
+  
+  // Ligne Frais généraux
+  let overRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#94a3b8;">- Frais généraux</td>';
+  overRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  let totalOver = 0;
+  for (let m = 0; m < 12; m++) {
+    overRow += `<td style="padding:4px; text-align:right; color:#b8c1ec;">-${monthlyOverhead.toFixed(0)}</td>`;
+    totalOver += monthlyOverhead;
+  }
+  overRow += `<td style="padding:4px; text-align:right; background:rgba(148,163,184,0.1); font-weight:bold;">-${totalOver.toFixed(0)}</td>`;
+  overRow += '</tr>';
+  tableBody += overRow;
+  
+  // Ligne Taxes
+  let taxesRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#94a3b8;">- Taxes</td>';
+  taxesRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  let totalTaxes = 0;
+  for (let m = 0; m < 12; m++) {
+    taxesRow += `<td style="padding:4px; text-align:right; color:#b8c1ec;">-${monthlyTaxes.toFixed(0)}</td>`;
+    totalTaxes += monthlyTaxes;
+  }
+  taxesRow += `<td style="padding:4px; text-align:right; background:rgba(148,163,184,0.1); font-weight:bold;">-${totalTaxes.toFixed(0)}</td>`;
+  taxesRow += '</tr>';
+  tableBody += taxesRow;
+  
+  // Ligne Transport
+  let transRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#94a3b8;">- Transport</td>';
+  transRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  let totalTrans = 0;
+  for (let m = 0; m < 12; m++) {
+    transRow += `<td style="padding:4px; text-align:right; color:#b8c1ec;">-${monthlyTransport.toFixed(0)}</td>`;
+    totalTrans += monthlyTransport;
+  }
+  transRow += `<td style="padding:4px; text-align:right; background:rgba(148,163,184,0.1); font-weight:bold;">-${totalTrans.toFixed(0)}</td>`;
+  transRow += '</tr>';
+  tableBody += transRow;
+  
+  // Ligne Maintenance
+  let maintRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#94a3b8;">- Maintenance</td>';
+  maintRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  let totalMaint = 0;
+  for (let m = 0; m < 12; m++) {
+    maintRow += `<td style="padding:4px; text-align:right; color:#b8c1ec;">-${monthlyMaintenance.toFixed(0)}</td>`;
+    totalMaint += monthlyMaintenance;
+  }
+  maintRow += `<td style="padding:4px; text-align:right; background:rgba(148,163,184,0.1); font-weight:bold;">-${totalMaint.toFixed(0)}</td>`;
+  maintRow += '</tr>';
+  tableBody += maintRow;
+  
+  // Ligne Intérêts
+  let interetRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#94a3b8;">- Intérêts</td>';
+  interetRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  let totalInterets = 0;
+  for (let m = 0; m < 12; m++) {
+    const interet = m < graceMonths ? 0 : (interestYear1 / 12);
+    interetRow += `<td style="padding:4px; text-align:right; color:#b8c1ec;">-${interet.toFixed(0)}</td>`;
+    totalInterets += interet;
+  }
+  interetRow += `<td style="padding:4px; text-align:right; background:rgba(148,163,184,0.1); font-weight:bold;">-${totalInterets.toFixed(0)}</td>`;
+  interetRow += '</tr>';
+  tableBody += interetRow;
+  
+  // Ligne Capital
+  let capitalRow = '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px; color:#94a3b8;">- Remboursement capital</td>';
+  capitalRow += '<td style="padding:4px; text-align:right; color:#b8c1ec;">0</td>';
+  let totalCapital = 0;
+  for (let m = 0; m < 12; m++) {
+    const interet = m < graceMonths ? 0 : (interestYear1 / 12);
+    const capital = m < graceMonths ? 0 : (monthlyPayment - interet);
+    capitalRow += `<td style="padding:4px; text-align:right; color:#b8c1ec;">-${capital.toFixed(0)}</td>`;
+    totalCapital += capital;
+  }
+  capitalRow += `<td style="padding:4px; text-align:right; background:rgba(148,163,184,0.1); font-weight:bold;">-${totalCapital.toFixed(0)}</td>`;
+  capitalRow += '</tr>';
+  tableBody += capitalRow;
+  
+  // Ligne Flux nets
+  let fluxRow = '<tr style="border-top:1px solid #4cc9f0;"><td style="padding:6px; font-weight:bold;">Flux net du mois</td>';
+  
+  // Flux M0
+  const fluxM0 = totalFinancing - totalInvestment - wc;
+  fluxRow += `<td style="padding:6px; text-align:right; color:${fluxM0 >= 0 ? '#4cc9f0' : '#f72585'}; font-weight:bold;">${fluxM0.toFixed(0)}</td>`;
+  
+  // Flux M1 à M12
+  let totalFlux = fluxM0;
+  for (let m = 0; m < 12; m++) {
+    const interet = m < graceMonths ? 0 : (interestYear1 / 12);
+    const capital = m < graceMonths ? 0 : (monthlyPayment - interet);
+    const flux = monthlyRevenue[m] - monthlyCogs - monthlyStaff - monthlyRent - monthlyUtilities - 
+                 monthlyOverhead - monthlyTaxes - monthlyTransport - monthlyMaintenance - interet - capital;
+    const color = flux >= 0 ? '#4cc9f0' : '#f72585';
+    fluxRow += `<td style="padding:6px; text-align:right; color:${color};">${flux.toFixed(0)}</td>`;
+    totalFlux += flux;
+  }
+  fluxRow += `<td style="padding:6px; text-align:right; background:rgba(76,201,240,0.1); font-weight:bold;">${totalFlux.toFixed(0)}</td>`;
+  fluxRow += '</tr>';
+  tableBody += fluxRow;
+  
+  // Ligne Trésorerie
+  let tresoRow = '<tr><td style="padding:6px; font-weight:bold;">Trésorerie fin de mois</td>';
+  
+  // Trésorerie M0
+  let cashTemp = totalFinancing - totalInvestment - wc;
+  tresoRow += `<td style="padding:6px; text-align:right; color:${cashTemp >= 0 ? '#4cc9f0' : '#f72585'}; font-weight:bold;">${cashTemp.toFixed(0)}</td>`;
+  
+  // Trésorerie M1 à M12
+  for (let m = 0; m < 12; m++) {
+    const interet = m < graceMonths ? 0 : (interestYear1 / 12);
+    const capital = m < graceMonths ? 0 : (monthlyPayment - interet);
+    const flux = monthlyRevenue[m] - monthlyCogs - monthlyStaff - monthlyRent - monthlyUtilities - 
+                 monthlyOverhead - monthlyTaxes - monthlyTransport - monthlyMaintenance - interet - capital;
+    cashTemp += flux;
+    const color = cashTemp >= 0 ? '#4cc9f0' : '#f72585';
+    tresoRow += `<td style="padding:6px; text-align:right; color:${color};">${cashTemp.toFixed(0)}</td>`;
+  }
+  tresoRow += `<td style="padding:6px; text-align:right; background:rgba(76,201,240,0.1); font-weight:bold;">${cashTemp.toFixed(0)}</td>`;
+  tresoRow += '</tr>';
+  
+  tableBody += tresoRow;
+  document.getElementById('cashflow_table_body').innerHTML = tableBody;
+  
+  // Calcul des stats de trésorerie
+  const cashValues = cashArray.slice(1); // Exclure M0 pour les min/max d'exploitation
+  const cashMin = Math.min(...cashValues);
+  const cashMax = Math.max(...cashValues);
+  const cashEnd = cashArray[cashArray.length - 1];
+  
+  document.getElementById('cash_start').innerHTML = cashArray[0].toFixed(0);
+  document.getElementById('cash_min').innerHTML = cashMin.toFixed(0);
+  document.getElementById('cash_max').innerHTML = cashMax.toFixed(0);
+  document.getElementById('cash_end').innerHTML = cashEnd.toFixed(0);
+  
+  // Alerte trésorerie
+  let alertHtml = '';
+  if (cashMin < 0) {
+    alertHtml = '<i class="fa-solid fa-circle-exclamation" style="color:#f72585; margin-right:8px;"></i>';
+    alertHtml += '<span style="color:#fff;"><b>⚠️ Alerte trésorerie</b> — Votre trésorerie devient négative en cours d\'année (minimum ' + cashMin.toFixed(0) + ' USD). Augmentez votre BFR initial ou réduisez les délais clients.</span>';
+  } else if (cashMin < cashArray[0] * 0.2) {
+    alertHtml = '<i class="fa-solid fa-triangle-exclamation" style="color:#fbbf24; margin-right:8px;"></i>';
+    alertHtml += '<span style="color:#fff;"><b>⚠️ Trésorerie tendue</b> — Votre trésorerie minimum est faible (' + cashMin.toFixed(0) + ' USD). Prévoyez une marge de sécurité.</span>';
+  } else {
+    alertHtml = '<i class="fa-solid fa-circle-check" style="color:#4cc9f0; margin-right:8px;"></i>';
+    alertHtml += '<span style="color:#fff;"><b>✅ Trésorerie saine</b> — Votre trésorerie reste positive toute l\'année.</span>';
+  }
+  document.getElementById('cashflow_alert').innerHTML = alertHtml;
+  
+  // Mise à jour UI CAPEX
+  document.getElementById('total_capex').innerHTML = totalCapex.toLocaleString();
+  document.getElementById('bfr_display').innerHTML = wc.toLocaleString() + ' USD (' + Math.round(wc/totalCapex*100) + '%)';
+  
+  // Mise à jour financement
+  document.getElementById('total_financing').innerHTML = totalFinancing.toLocaleString();
+  document.getElementById('total_investment_check').innerHTML = totalCapex.toLocaleString();
+  
+  if (Math.abs(totalFinancing - totalCapex) < 100) {
+    document.getElementById('financial_balance').innerHTML = '✓ Équilibré';
+    document.getElementById('financial_balance').style.color = '#4cc9f0';
+  } else if (totalFinancing < totalCapex) {
+    document.getElementById('financial_balance').innerHTML = '⚠️ Déficit de ' + (totalCapex - totalFinancing).toLocaleString();
+    document.getElementById('financial_balance').style.color = '#f72585';
+  } else {
+    document.getElementById('financial_balance').innerHTML = 'ℹ️ Excédent de ' + (totalFinancing - totalCapex).toLocaleString();
+    document.getElementById('financial_balance').style.color = '#fbbf24';
+  }
+  
+  document.getElementById('monthly_payment').innerHTML = monthlyPayment.toFixed(0) + ' USD';
+  document.getElementById('total_loan_cost').innerHTML = (monthlyPayment * totalMonths).toFixed(0) + ' USD';
+  
+  // Mise à jour compte de résultat
+  document.getElementById('pl_revenue').innerHTML = revenueTarget.toLocaleString();
+  document.getElementById('pl_cogs').innerHTML = '-' + cogs.toLocaleString();
+  document.getElementById('pl_gross_profit').innerHTML = grossProfit.toLocaleString();
+  document.getElementById('pl_staff').innerHTML = '-' + staffCost.toLocaleString();
+  document.getElementById('pl_rent').innerHTML = '-' + rentCost.toLocaleString();
+  document.getElementById('pl_utilities').innerHTML = '-' + utilitiesCost.toLocaleString();
+  document.getElementById('pl_overhead').innerHTML = '-' + overheadCost.toLocaleString();
+  document.getElementById('pl_transport').innerHTML = '-' + transportCost.toLocaleString();
+  document.getElementById('pl_maintenance').innerHTML = '-' + maintenanceCost.toLocaleString();
+  document.getElementById('pl_taxes').innerHTML = '-' + taxesCost.toLocaleString();
+  document.getElementById('pl_ebitda').innerHTML = ebitda.toLocaleString();
+  document.getElementById('pl_depreciation').innerHTML = '-' + depreciation.toFixed(0);
+  document.getElementById('pl_operating').innerHTML = (ebitda - depreciation).toFixed(0);
+  document.getElementById('pl_interest').innerHTML = '-' + interestYear1.toFixed(0);
+  document.getElementById('pl_net').innerHTML = netProfit.toFixed(0);
+  
+  // Ratios
+  document.getElementById('ratio_gross_margin').innerHTML = Math.round(grossProfit/revenueTarget*100) + '%';
+  document.getElementById('ratio_ebitda_margin').innerHTML = Math.round(ebitda/revenueTarget*100) + '%';
+  document.getElementById('ratio_net_margin').innerHTML = Math.round(netProfit/revenueTarget*100) + '%';
+  document.getElementById('ratio_roi').innerHTML = Math.round(netProfit/totalCapex*100) + '%';
+  
+  // Bilan
+  const fixedGross = machines + land + installation;
+  const fixedNet = fixedGross - depreciation;
+  
+  document.getElementById('balance_fixed_gross').innerHTML = fixedGross.toFixed(0);
+  document.getElementById('balance_depreciation').innerHTML = '-' + depreciation.toFixed(0);
+  document.getElementById('balance_fixed_net').innerHTML = fixedNet.toFixed(0);
+  document.getElementById('balance_stock').innerHTML = stocks.toFixed(0);
+  document.getElementById('balance_receivables').innerHTML = receivables.toFixed(0);
+  document.getElementById('balance_cash').innerHTML = cashEnd.toFixed(0);
+  
+  const totalAssets = fixedNet + stocks + receivables + cashEnd;
+  document.getElementById('balance_total_assets').innerHTML = totalAssets.toFixed(0);
+  
+  document.getElementById('balance_equity_capital').innerHTML = equity.toFixed(0);
+  document.getElementById('balance_net_income').innerHTML = netProfit.toFixed(0);
+  document.getElementById('balance_equity').innerHTML = (equity + netProfit).toFixed(0);
+  
+  // Capital restant dû
+  let capitalRestant = debt;
+  for (let m = 0; m < 12; m++) {
+    if (m >= graceMonths) {
+      const interet = interestYear1 / 12;
+      const capital = monthlyPayment - interet;
+      capitalRestant -= capital;
+    }
+  }
+  document.getElementById('balance_debt').innerHTML = Math.max(0, capitalRestant).toFixed(0);
+  document.getElementById('balance_suppliers').innerHTML = suppliers.toFixed(0);
+  document.getElementById('balance_taxes').innerHTML = (taxesCost / 4).toFixed(0);
+  document.getElementById('balance_grants').innerHTML = grants.toFixed(0);
+  document.getElementById('balance_other').innerHTML = (interestYear1 * 0.5).toFixed(0);
+  
+  document.getElementById('balance_total_liabilities').innerHTML = totalAssets.toFixed(0);
+  
+  // IA Alertes globales
+  const iaAlerts = document.getElementById('ia-finance-alerts');
+  let iaHtml = '<div style="display:flex; align-items:flex-start; gap:12px;">';
+  iaHtml += '<div style="width:40px; height:40px; background:rgba(76,201,240,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center;">';
+  iaHtml += '<i class="fa-solid fa-robot" style="color:#4cc9f0;"></i></div><div>';
+  
+  if (netProfit < 0) {
+    iaHtml += '<p style="color:#f72585; margin:0 0 5px 0;"><b>⚠️ Alerte rouge</b> — Résultat net négatif. Revoyez votre pricing ou réduisez vos charges.</p>';
+  } else if (netProfit/revenueTarget < 0.05) {
+    iaHtml += '<p style="color:#fbbf24; margin:0 0 5px 0;"><b>⚠️ Marge nette très faible</b> — ' + Math.round(netProfit/revenueTarget*100) + '%. Objectif minimal : 10%.</p>';
+  } else if (netProfit/revenueTarget < 0.1) {
+    iaHtml += '<p style="color:#fbbf24; margin:0 0 5px 0;"><b>⚠️ Marge nette faible</b> — ' + Math.round(netProfit/revenueTarget*100) + '%. Idéalement 15%+ pour rassurer les banques.</p>';
+  } else {
+    iaHtml += '<p style="color:#4cc9f0; margin:0 0 5px 0;"><b>✅ Marge nette satisfaisante</b> — ' + Math.round(netProfit/revenueTarget*100) + '%.</p>';
+  }
+  
+  if (equity/totalCapex < 0.3) {
+    iaHtml += '<p style="color:#fbbf24; margin:5px 0;"><b>⚠️ Apport faible</b> — ' + Math.round(equity/totalCapex*100) + '%. Minimum recommandé : 30%.</p>';
+  }
+  
+  if (cashMin < 0) {
+    iaHtml += '<p style="color:#f72585; margin:5px 0;"><b>⚠️ Trou de trésorerie</b> — Déficit de ' + (-cashMin).toFixed(0) + ' USD au mois le plus bas. Augmentez le BFR.</p>';
+  }
+  
+  if (debt > 3 * ebitda) {
+    iaHtml += '<p style="color:#fbbf24; margin:5px 0;"><b>⚠️ Endettement élevé</b> — Dette = ' + (debt/ebitda).toFixed(1) + '× EBITDA. Capacité de remboursement à surveiller.</p>';
+  }
+  
+  iaHtml += '</div></div>';
+  iaAlerts.innerHTML = iaHtml;
+}
+
+// Gestionnaire du multiplicateur
+document.getElementById('revenue_multiplier')?.addEventListener('change', function() {
+  const baseCA = parseFloat(document.getElementById('base_ca_value')?.value) || 180000;
+  const multiplier = parseFloat(this.value);
+  const newCA = Math.round(baseCA * multiplier);
+  document.getElementById('revenue').value = newCA;
+  calculateAll();
+});
+
+// Attacher les événements
+document.querySelectorAll('.finance-input, .pl-input').forEach(el => {
+  el.addEventListener('input', calculateAll);
+  el.addEventListener('change', calculateAll);
+});
+
+// Charger les données UP et lancer les calculs
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() {
+    loadUPData();
+    setTimeout(calculateAll, 300);
+  });
+} else {
+  loadUPData();
+  setTimeout(calculateAll, 300);
+}
+</script>
+
+
+        <!-- P7 -->
+        <section class="section" id="p7" data-block="7">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-rocket"></i></div>
+              <div>
+                <h2>Bloc 7 — Stratégie & risques</h2>
+                <p>Marketing, opérations, planning d’implantation, risques & mitigation.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Plan marketing</label>
+            <textarea id="f_mkt" placeholder="Canaux, actions, budget, calendrier, KPIs"></textarea>
+          </div>
+          <div class="field">
+            <label>Plan opérationnel</label>
+            <textarea id="f_ops" placeholder="Organisation, RH, production, qualité, maintenance"></textarea>
+          </div>
+
+          <div class="section blurred" id="riskBox" style="margin-top:12px;">
+            <div class="section-head">
+              <div class="hgroup">
+                <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div>
+                  <h2>Risques & mitigation (aperçu)</h2>
+                  <p>Risques marché, supply, qualité, FX… + réponses.</p>
+                </div>
+              </div>
+            </div>
+            <div class="field"><label>Risques</label><textarea placeholder="(contenu détaillé)"></textarea></div>
+            <div class="field"><label>Mitigation</label><textarea placeholder="(contenu détaillé)"></textarea></div>
+            <span class="blur-label"><i class="fa-solid fa-eye-slash"></i> Aperçu flouté en mode simulation</span>
+          </div>
+
+          <div class="pager">
+            <div class="left">
+              <button class="btn" data-prev><i class="fa-solid fa-arrow-left"></i> Retour</button>
+            </div>
+            <div class="right">
+              <button class="btn primary" data-next>Suivant <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- P8 -->
+        <section class="section" id="p8" data-block="8">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-file-shield"></i></div>
+              <div>
+                <h2>Bloc 8 — Documents requis</h2>
+                <p>Checklist pour dossiers bancaires / bailleurs (non fournie à P2I).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Checklist société (exemples)</label>
+            <textarea id="f_docs_company" placeholder="RCCM, statuts, NIF, registre fiscal, PV, etc."></textarea>
+          </div>
+          <div class="field">
+            <label>Checklist projet (exemples)</label>
+            <textarea id="f_docs_project" placeholder="Titre foncier/bail, autorisations, devis, contrats, conformité, etc."></textarea>
+          </div>
+
+          <div class="pager">
+            <div class="left">
+              <button class="btn" data-prev><i class="fa-solid fa-arrow-left"></i> Retour</button>
+            </div>
+            <div class="right">
+              <button class="btn primary" id="btnFinish"><i class="fa-solid fa-circle-check"></i> Terminer</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- FINAL -->
+        <div class="final" id="fin">
+          <div class="left">
+            <h3>Business Plan Pro — prêt à générer ?</h3>
+            <p id="finalText">
+              Complète le questionnaire pour générer un <b>document bancable complet (40+ pages)</b> : étude de marché, SWOT, plan marketing,
+              plan opérationnel, plan de financement, prévisionnels 5 ans, risques, mitigation, annexes.
+            </p>
+          </div>
+          <div class="right">
+            <button class="btn primary" id="btnGenerateBottom"><i class="fa-solid fa-file-pdf"></i> Générer</button>
+            <a class="btn" id="btnServices" href="fiche-production.html"><i class="fa-solid fa-screwdriver-wrench"></i> Services additionnels</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // =========================================================
+  // P2I — BP PRO (anti-mélange comptes A/B)
+  // Remplacement complet du script fourni
+  // =========================================================
+
+  // =============================
+  // Helpers
+  // =============================
+  function getParam(name){
+    const u = new URL(window.location.href);
+    return u.searchParams.get(name) || "";
+  }
+  function parseJsonSafe(raw){
+    try { return JSON.parse(raw); } catch(_) { return null; }
+  }
+  function setText(id, val){
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = (val && String(val).trim()) ? val : "—";
+  }
+  function nowFR(){
+    const d = new Date();
+    return d.toLocaleString("fr-FR", { dateStyle:"short", timeStyle:"short" });
+  }
+  function isFilled(v){ return String(v ?? "").trim().length > 0; }
+
+  // =============================
+  // USER SCOPE (anti mélange A/B)
+  // - On résout 1 fois au démarrage (storage -> supabase session -> guest)
+  // - Ensuite tout localStorage est scoppé par : prefix:u:<uid>:<upKey>
+  // =============================
+  let USER_SCOPE_ID = "guest";
+  let USER_SCOPE_READY = false;
+
+  function getSupabaseClientSafe(){
+    // Tolérant : différentes apps exposent supabase différemment
+    try{
+      if (window.supabaseClient && window.supabaseClient.auth) return window.supabaseClient;
+      if (window.supabase && window.supabase.auth) return window.supabase;
+    }catch(_){}
+    return null;
+  }
+
+  function readUidFromStoredUser(obj){
+    if (!obj || typeof obj !== "object") return "";
+    const direct =
+      obj.id || obj.user_id || obj.uid || obj.uuid ||
+      (obj.user && (obj.user.id || obj.user.user_id || obj.user.uid || obj.user.uuid));
+    return direct ? String(direct) : "";
+  }
+
+  async function resolveUserScopeId(){
+    if (USER_SCOPE_READY) return USER_SCOPE_ID;
+
+    // 1) userP2I (projet P2I)
+    const u1 = parseJsonSafe(localStorage.getItem("userP2I")) || parseJsonSafe(sessionStorage.getItem("userP2I"));
+    const uid1 = readUidFromStoredUser(u1);
+    if (uid1){
+      USER_SCOPE_ID = uid1;
+      USER_SCOPE_READY = true;
+      return USER_SCOPE_ID;
+    }
+
+    // 2) "user" générique
+    const u2 = parseJsonSafe(localStorage.getItem("user")) || parseJsonSafe(sessionStorage.getItem("user"));
+    const uid2 = readUidFromStoredUser(u2);
+    if (uid2){
+      USER_SCOPE_ID = uid2;
+      USER_SCOPE_READY = true;
+      return USER_SCOPE_ID;
+    }
+
+    // 3) Supabase session (robuste)
+    try{
+      const sb = getSupabaseClientSafe();
+      if (sb?.auth?.getSession){
+        const { data } = await sb.auth.getSession();
+        const uid = data?.session?.user?.id;
+        const email = data?.session?.user?.email || "";
+        if (uid){
+          USER_SCOPE_ID = String(uid);
+          USER_SCOPE_READY = true;
+
+          // Pont utile pour les autres pages (dashboard, etc.)
+          try{
+            localStorage.setItem("userP2I", JSON.stringify({ id: USER_SCOPE_ID, email }));
+            if (email){
+              localStorage.setItem("p2i_active_user", email);
+              localStorage.setItem("p2i_user_email", email);
+            }
+          }catch(_){}
+
+          return USER_SCOPE_ID;
+        }
+      }
+    }catch(_){}
+
+    // Fallback : guest
+    USER_SCOPE_ID = "guest";
+    USER_SCOPE_READY = true;
+    return USER_SCOPE_ID;
+  }
+
+  function scopeKey(prefix, upKey){
+    const safeUp = (upKey || "unknown_up").trim() || "unknown_up";
+    return `${prefix}:u:${USER_SCOPE_ID}:${safeUp}`;
+  }
+
+  // =============================
+  // UP (compat BP Découverte)
+  // =============================
+  function getCurrentProduction(){
+    return (
+      parseJsonSafe(localStorage.getItem("currentProduction")) ||
+      parseJsonSafe(sessionStorage.getItem("currentProduction")) ||
+      {}
+    );
+  }
+
+  function getUpKeyFromUrlOrStorage(){
+    const p = new URLSearchParams(window.location.search);
+    const unitParam = (p.get("unit_id") || p.get("id") || "").trim();
+    if (unitParam) return unitParam;
+
+    return (
+      (localStorage.getItem("currentProductionKey") || "") ||
+      (sessionStorage.getItem("currentProductionKey") || "")
+    ).trim();
+  }
+
+  function buildFicheUrl(tab){
+    const upKey = getUpKeyFromUrlOrStorage();
+    if (!upKey) return "fiche-production.html";
+    return `fiche-production.html?unit_id=${encodeURIComponent(upKey)}&tab=${encodeURIComponent(tab || "")}`;
+  }
+
+  // =============================
+  // Mode : preview vs full
+  // =============================
+  function getMode(){
+    const mode = (getParam("mode") || "").toLowerCase();
+    const orderId = getParam("order_id");
+    if (mode === "full" || orderId) return "full";
+    return "preview";
+  }
+
+  function applyMode(mode){
+    const badge = document.getElementById("modeBadge");
+    const paywallInfo = document.getElementById("paywallInfo");
+    const kpiMode = document.getElementById("kpiMode");
+
+    const unlockTop = document.getElementById("btnUnlockTop");
+    const genTop = document.getElementById("btnGenerateTop");
+    const genBottom = document.getElementById("btnGenerateBottom");
+
+    if (mode === "full"){
+      if (badge){
+        badge.innerHTML = '<i class="fa-solid fa-circle-check"></i><span>Mode complet — génération activée</span>';
+      }
+      if (kpiMode){
+        kpiMode.innerHTML = '<i class="fa-solid fa-circle-check"></i> Mode : complet';
+      }
+      if (paywallInfo) paywallInfo.style.display = "none";
+
+      document.querySelectorAll(".blurred").forEach(el => el.classList.remove("blurred"));
+
+      if (unlockTop) unlockTop.style.display = "none";
+      if (genTop) genTop.disabled = false;
+      if (genBottom) genBottom.disabled = false;
+
+    } else {
+      if (badge){
+        badge.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i><span>Mode simulation — aperçu flouté</span>';
+      }
+      if (kpiMode){
+        kpiMode.innerHTML = '<i class="fa-solid fa-eye-slash"></i> Mode : preview';
+      }
+
+      if (unlockTop) unlockTop.style.display = "inline-flex";
+      if (genTop) genTop.disabled = true;
+      if (genBottom) genBottom.disabled = true;
+    }
+  }
+
+  // =============================
+  // Meta header
+  // =============================
+  function initMeta(){
+    const prod = getCurrentProduction();
+
+    const unit = getParam("unit") || getParam("unit_name") || prod.nom || prod.unitName || prod.titre || "Unité industrielle";
+    const filiere = getParam("filiere") || getParam("filiere_name") || prod.filiereNom || prod.filiere || "Filière";
+
+    setText("metaUnit", unit);
+    setText("metaFiliere", filiere);
+    setText("metaDate", nowFR());
+
+    const bpTitle = document.getElementById("bpTitle");
+    if (bpTitle && unit && unit !== "Unité industrielle"){
+      bpTitle.textContent = `Business Plan Pro — ${unit}`;
+    }
+  }
+
+  // =============================
+  // Form collect/save/restore
+  // =============================
+  const FIELD_IDS = [
+    // (anciens champs)
+    "f_company","f_legal","f_owner","f_exp",
+    "f_geo","f_site","f_permits",
+    "f_offer","f_process","f_supply",
+    "f_segments","f_pricing",
+    "f_comp",
+    "f_capex",
+    "f_mkt","f_ops",
+    "f_docs_company","f_docs_project",
+
+    // SECTION 1
+    "s1_proj_name","s1_proj_status","s1_start_date","s1_proj_type","s1_project_horizon",
+    "s1_prom_last","s1_prom_first","s1_prom_marital","s1_id_type","s1_id_number","s1_id_expiry","s1_is_lead",
+    "s1_legal_form","s1_capital_amount","s1_capital_currency","s1_share_pact","s1_decision_rights",
+    "s1_age","s1_education","s1_exp_years","s1_exp_sectors","s1_exp_link","s1_time_commit","s1_time_detail",
+    "s1_prev_entrepreneur","s1_key_team",
+
+    // cap table (hidden)
+    "s1_cap_table_json",
+
+    // localisation CI (optionnel)
+    "f_ci_location"
+  ];
+
+  function draftKey(){
+    const upKey = getUpKeyFromUrlOrStorage() || "unknown_up";
+    return scopeKey("bpProDraft", upKey);
+  }
+
+  function savedAtKey(){
+    const upKey = getUpKeyFromUrlOrStorage() || "unknown_up";
+    return scopeKey("bpProSavedAt", upKey);
+  }
+
+  function collectForm(){
+    const out = {};
+    FIELD_IDS.forEach(id=>{
+      const el = document.getElementById(id);
+      if (el) out[id] = el.value;
+    });
+
+    out.s1_cap_table = readCapTable();
+
+    const prod = getCurrentProduction();
+    out.meta = {
+      unit_id: getParam("unit_id") || prod.id || prod.slug || "",
+      unit_name: prod.nom || prod.unitName || prod.titre || getParam("unit") || "",
+      filiere: prod.filiereNom || prod.filiere || getParam("filiere") || "",
+      saved_at: new Date().toISOString(),
+      user_scope: USER_SCOPE_ID
+    };
+    return out;
+  }
+
+  function updateSavedAt(){
+    const raw = localStorage.getItem(savedAtKey());
+    const kpiSaved = document.getElementById("kpiSaved");
+    if (!kpiSaved) return;
+
+    if (!raw){
+      kpiSaved.innerHTML = '<i class="fa-solid fa-clock"></i> Dernière sauvegarde : —';
+      return;
+    }
+    const d = new Date(raw);
+    const label = d.toLocaleString("fr-FR", { dateStyle:"short", timeStyle:"short" });
+    kpiSaved.innerHTML = `<i class="fa-solid fa-clock"></i> Dernière sauvegarde : ${label}`;
+  }
+
+  // Migration : évite contamination A/B via anciennes clés globales
+  function migrateLegacyDraftOnce(){
+    const upKey = getUpKeyFromUrlOrStorage() || "unknown_up";
+
+    // 1) Ancienne clé globale draft
+    const legacyDraft = localStorage.getItem("bpProDraft");
+    if (legacyDraft){
+      if (!localStorage.getItem(draftKey())){
+        localStorage.setItem(draftKey(), legacyDraft);
+      }
+      localStorage.removeItem("bpProDraft");
+    }
+
+    // 2) Ancienne clé globale savedAt
+    const legacySavedAt = localStorage.getItem("bpProSavedAt");
+    if (legacySavedAt){
+      if (!localStorage.getItem(savedAtKey())){
+        localStorage.setItem(savedAtKey(), legacySavedAt);
+      }
+      localStorage.removeItem("bpProSavedAt");
+    }
+
+    // 3) Ancienne clé globale localisation (si existait)
+    const legacyLoc = localStorage.getItem("p2i_bp_pro_location");
+    if (legacyLoc){
+      const scoped = scopeKey("p2i_bp_pro_location", upKey);
+      if (!localStorage.getItem(scoped)){
+        localStorage.setItem(scoped, legacyLoc);
+      }
+      localStorage.removeItem("p2i_bp_pro_location");
+    }
+  }
+
+  function saveDraft(manual){
+    const payload = collectForm();
+    localStorage.setItem(draftKey(), JSON.stringify(payload));
+    localStorage.setItem(savedAtKey(), new Date().toISOString());
+    updateSavedAt();
+    if (manual) alert("Brouillon BP Pro enregistré ✅");
+  }
+
+  function restoreDraft(){
+    const raw = localStorage.getItem(draftKey());
+    const d = parseJsonSafe(raw);
+    if (!d) { updateSavedAt(); return; }
+
+    Object.keys(d).forEach(k=>{
+      const el = document.getElementById(k);
+      if (el && typeof d[k] === "string") el.value = d[k];
+    });
+
+    hydrateCapTableFromDraft(d);
+    updateSavedAt();
+  }
+
+  let autosaveTimer = null;
+  function scheduleAutosave(){
+    if (autosaveTimer) clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(()=>saveDraft(false), 450);
+  }
+
+  // =============================
+  // Navigation : 1 bloc à la fois
+  // =============================
+  const TOTAL_BLOCKS = 8;
+  let activeBlock = 1;
+
+  function showBlock(n, opts={scroll:true, updateHash:true}){
+    const nb = Math.min(TOTAL_BLOCKS, Math.max(1, Number(n||1)));
+    activeBlock = nb;
+
+    document.querySelectorAll(".section[data-block]").forEach(s=>{
+      s.classList.toggle("is-active", Number(s.dataset.block) === activeBlock);
+    });
+
+    const kpiActive = document.getElementById("kpiActive");
+    if (kpiActive) kpiActive.textContent = `Bloc : ${activeBlock}/${TOTAL_BLOCKS}`;
+
+    if (opts.updateHash){
+      history.replaceState(null, "", `#p${activeBlock}`);
+    }
+    if (opts.scroll){
+      const anchor = document.getElementById("sommaire");
+      if (anchor) anchor.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    refreshProgress();
+  }
+
+  function initNav(){
+    document.querySelectorAll(".toc a[data-goto]").forEach(a=>{
+      a.addEventListener("click", (e)=>{
+        e.preventDefault();
+        showBlock(a.dataset.goto);
+      });
+    });
+
+    document.querySelectorAll("[data-prev]").forEach(b=>{
+      b.addEventListener("click", ()=>showBlock(activeBlock - 1));
+    });
+
+    document.querySelectorAll("[data-next]").forEach(btn=>{
+      btn.addEventListener("click", (e)=>{
+        const inBlock1 = activeBlock === 1;
+        if (!inBlock1){
+          showBlock(activeBlock + 1);
+          return;
+        }
+
+        if (!isCapTableSatisfied()){
+          e.preventDefault();
+          const warn = document.getElementById("s1_cap_warning");
+          if (warn) warn.style.display = "flex";
+
+          const cap = document.getElementById("s1_cap_table");
+          if (cap) cap.scrollIntoView({behavior:"smooth", block:"center"});
+
+          alert("La répartition du capital doit être égale à 100% pour valider le Bloc 1.");
+          return;
+        }
+
+        showBlock(activeBlock + 1);
+      });
+    });
+
+    const btnFinish = document.getElementById("btnFinish");
+    if (btnFinish){
+      btnFinish.addEventListener("click", ()=>{
+        alert("Terminé ✅ (placeholder)\n\nProchaine étape : diagnostic global + paiement + génération.");
+      });
+    }
+
+    const h = (location.hash || "").replace("#","");
+    const m = h.match(/^p(\d+)$/);
+    if (m) showBlock(Number(m[1]), {scroll:false, updateHash:true});
+    else showBlock(1, {scroll:false, updateHash:true});
+  }
+
+  // =============================
+  // Tracking / Progress
+  // =============================
+  function setStateBadge(blockNo, state){
+    const el = document.getElementById(`s${blockNo}`);
+    if (!el) return;
+
+    el.classList.remove("todo","run","ok");
+    if (state === "ok"){
+      el.classList.add("ok");
+      el.textContent = "Complété";
+    } else if (state === "run"){
+      el.classList.add("run");
+      el.textContent = "En cours";
+    } else {
+      el.classList.add("todo");
+      el.textContent = "À faire";
+    }
+  }
+
+  function refreshProgress(){
+    let doneBlocks = 0;
+    let missingReq = 0;
+
+    for (let b=1; b<=TOTAL_BLOCKS; b++){
+      const section = document.querySelector(`.section[data-block="${b}"]`);
+      if (!section) continue;
+
+      const reqs = Array.from(section.querySelectorAll("[data-req='1']"));
+      if (reqs.length === 0){
+        const anyInput = Array.from(section.querySelectorAll("input,select,textarea"))
+          .some(el=>isFilled(el.value));
+        setStateBadge(b, anyInput ? "run" : "todo");
+        continue;
+      }
+
+      let ok = 0;
+      let any = false;
+      reqs.forEach(el=>{
+        if (isFilled(el.value)) ok++;
+        else missingReq++;
+        if (isFilled(el.value)) any = true;
+      });
+
+      if (ok === reqs.length){
+        doneBlocks++;
+        setStateBadge(b, "ok");
+      } else if (any){
+        setStateBadge(b, "run");
+      } else {
+        setStateBadge(b, "todo");
+      }
+    }
+
+    const pct = Math.round((doneBlocks / TOTAL_BLOCKS) * 100);
+    const bar = document.getElementById("barFill");
+    if (bar) bar.style.width = `${pct}%`;
+
+    const kpiDone = document.getElementById("kpiDone");
+    const kpiReq = document.getElementById("kpiReq");
+    if (kpiDone) kpiDone.textContent = `${doneBlocks}/${TOTAL_BLOCKS} blocs complétés`;
+    if (kpiReq) kpiReq.textContent = `${missingReq} champs critiques manquants`;
+  }
+
+  // =============================
+  // Liens
+  // =============================
+  function wireLinks(){
+    const btnBackUPTop = document.getElementById("btnBackUPTop");
+    const btnServices = document.getElementById("btnServices");
+
+    if (btnBackUPTop) btnBackUPTop.href = buildFicheUrl("bp-pro");
+    if (btnServices) btnServices.href = buildFicheUrl("services");
+  }
+
+  // =============================
+  // Generate (placeholder) + gating
+  // =============================
+  function wireGenerate(mode){
+    const btnSaveTop = document.getElementById("btnSaveTop");
+    const genTop = document.getElementById("btnGenerateTop");
+    const genBottom = document.getElementById("btnGenerateBottom");
+
+    function blocked(){
+      alert("La génération complète est disponible après paiement / validation de commande.");
+    }
+    function allowed(){
+      const payload = collectForm();
+      console.log("BP Pro payload:", payload);
+      alert("OK ✅ (placeholder) — ici tu branches la génération PDF + PPT + Excel + snapshot version.");
+    }
+
+    if (btnSaveTop) btnSaveTop.addEventListener("click", ()=>saveDraft(true));
+
+    if (mode === "full"){
+      if (genTop) genTop.addEventListener("click", allowed);
+      if (genBottom) genBottom.addEventListener("click", allowed);
+    } else {
+      if (genTop) genTop.addEventListener("click", blocked);
+      if (genBottom) genBottom.addEventListener("click", blocked);
+    }
+  }
+
+  // =========================================================
+  // SECTION 1 — CAP TABLE DYNAMIQUE (Répartition du capital)
+  // =========================================================
+  function safeNum(v){
+    const n = Number(String(v ?? "").replace(",", "."));
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  function readCapTable(){
+    const hidden = document.getElementById("s1_cap_table_json");
+    if (!hidden) return [];
+    const raw = String(hidden.value || "");
+    const json = raw.startsWith("OK:") ? raw.slice(3) : raw;
+    try{
+      const arr = JSON.parse(json || "[]");
+      return Array.isArray(arr) ? arr : [];
+    }catch(_){
+      return [];
+    }
+  }
+
+  function writeCapTable(arr){
+    const hidden = document.getElementById("s1_cap_table_json");
+    if (!hidden) return;
+    hidden.value = JSON.stringify(arr || []);
+  }
+
+  function calcCapTotal(arr){
+    return (arr || []).reduce((sum, r)=> sum + safeNum(r.pct), 0);
+  }
+
+  function isCapTableSatisfied(){
+    const arr = readCapTable();
+    const total = calcCapTotal(arr);
+    return arr.length > 0 && total >= 99.5 && total <= 100.5;
+  }
+
+  function refreshCapKpis(){
+    const arr = readCapTable();
+    const total = calcCapTotal(arr);
+    const totalEl = document.getElementById("s1_cap_total");
+    const warnEl = document.getElementById("s1_cap_warning");
+
+    if (totalEl) totalEl.textContent = `Total : ${total.toFixed(2)}%`;
+    const ok = (total >= 99.5 && total <= 100.5);
+    if (warnEl){
+      warnEl.style.display = ok ? "none" : "flex";
+      warnEl.style.color = ok ? "" : "#ff4d6d";
+    }
+  }
+
+  function syncHiddenForTracking(){
+    const hidden = document.getElementById("s1_cap_table_json");
+    if (!hidden) return;
+    hidden.setAttribute("data-req", "1");
+
+    const arr = readCapTable();
+    const json = JSON.stringify(arr || []);
+    if (isCapTableSatisfied()){
+      hidden.value = "OK:" + json;
+    } else {
+      hidden.value = "";
+      writeCapTable(arr);
+    }
+  }
+
+  function escapeHtml(str){
+    return String(str ?? "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  function capRowTemplate(row, idx){
+    const name = row.name ?? "";
+    const pct = row.pct ?? "";
+    const role = row.role ?? "";
+
+    return `
+      <div class="cap-row" data-idx="${idx}">
+        <div class="field">
+          <label>Nom / entité</label>
+          <input type="text" class="cap-name" placeholder="Ex : Porteur principal / Société X" value="${escapeHtml(name)}">
+        </div>
+
+        <div class="field">
+          <label>%</label>
+          <input type="number" class="cap-pct" min="0" max="100" step="0.01" placeholder="%" value="${escapeHtml(pct)}">
+        </div>
+
+        <div class="field">
+          <label>Rôle (optionnel)</label>
+          <div class="inline">
+            <input type="text" class="cap-role" placeholder="Ex : Porteur / Associé / Investisseur" value="${escapeHtml(role)}">
+            <div class="cap-actions">
+              <button type="button" class="icon-btn cap-del" title="Supprimer">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderCapTable(){
+    const host = document.getElementById("s1_cap_table");
+    const hidden = document.getElementById("s1_cap_table_json");
+    if (!host || !hidden) return;
+
+    const arr = readCapTable();
+    host.innerHTML = arr.map((r, i)=>capRowTemplate(r, i)).join("");
+
+    const bubble = ()=>{
+      hidden.dispatchEvent(new Event("input", { bubbles:true }));
+      hidden.dispatchEvent(new Event("change", { bubbles:true }));
+    };
+
+    host.querySelectorAll(".cap-row").forEach(rowEl=>{
+      const idx = Number(rowEl.dataset.idx);
+      const nameEl = rowEl.querySelector(".cap-name");
+      const pctEl  = rowEl.querySelector(".cap-pct");
+      const roleEl = rowEl.querySelector(".cap-role");
+      const delBtn = rowEl.querySelector(".cap-del");
+
+      const commit = ()=>{
+        const arr2 = readCapTable();
+        if (!arr2[idx]) return;
+        arr2[idx].name = nameEl ? nameEl.value : "";
+        arr2[idx].pct  = pctEl ? pctEl.value : "";
+        arr2[idx].role = roleEl ? roleEl.value : "";
+        writeCapTable(arr2);
+        refreshCapKpis();
+        syncHiddenForTracking();
+        bubble();
+      };
+
+      if (nameEl) nameEl.addEventListener("input", commit);
+      if (pctEl)  pctEl.addEventListener("input", commit);
+      if (roleEl) roleEl.addEventListener("input", commit);
+
+      if (delBtn){
+        delBtn.addEventListener("click", ()=>{
+          const arr2 = readCapTable();
+          arr2.splice(idx, 1);
+          writeCapTable(arr2);
+          renderCapTable();
+          refreshCapKpis();
+          syncHiddenForTracking();
+          bubble();
+        });
+      }
+    });
+
+    refreshCapKpis();
+    syncHiddenForTracking();
+  }
+
+  function addPartnerRow(prefill){
+    const arr = readCapTable();
+    arr.push({
+      name: (prefill && prefill.name) ? prefill.name : "",
+      pct: (prefill && prefill.pct) ? prefill.pct : "",
+      role: (prefill && prefill.role) ? prefill.role : ""
+    });
+    writeCapTable(arr);
+    renderCapTable();
+    syncHiddenForTracking();
+  }
+
+  function initSection1CapTable(){
+    const host = document.getElementById("s1_cap_table");
+    const btnAdd = document.getElementById("s1_add_partner");
+    const hidden = document.getElementById("s1_cap_table_json");
+    if (!host || !btnAdd || !hidden) return;
+
+    const arr = readCapTable();
+    if (!arr.length){
+      writeCapTable([{ name:"Porteur principal", pct:"100", role:"Porteur" }]);
+    }
+
+    renderCapTable();
+
+    btnAdd.addEventListener("click", ()=>{
+      addPartnerRow({ name:"", pct:"", role:"Associé" });
+      setTimeout(()=>{
+        const rows = host.querySelectorAll(".cap-row");
+        const last = rows[rows.length-1];
+        const nameEl = last ? last.querySelector(".cap-name") : null;
+        if (nameEl) nameEl.focus();
+      }, 0);
+    });
+  }
+
+  function hydrateCapTableFromDraft(draftObj){
+    try{
+      if (draftObj && Array.isArray(draftObj.s1_cap_table)){
+        writeCapTable(draftObj.s1_cap_table);
+        renderCapTable();
+        syncHiddenForTracking();
+        return;
+      }
+      if (draftObj && typeof draftObj.s1_cap_table_json === "string"){
+        const raw = draftObj.s1_cap_table_json.startsWith("OK:")
+          ? draftObj.s1_cap_table_json.slice(3)
+          : draftObj.s1_cap_table_json;
+        const arr = JSON.parse(raw || "[]");
+        if (Array.isArray(arr)){
+          writeCapTable(arr);
+          renderCapTable();
+          syncHiddenForTracking();
+        }
+      }
+    }catch(_){}
+  }
+
+  // =============================
+  // SECTION 1 — Temps partiel
+  // =============================
+  function initSection1TimePart(){
+    const timeSel = document.getElementById("s1_time_commit");
+    const timeBox = document.getElementById("s1_timePartBox");
+    if (!timeSel || !timeBox) return;
+
+    const refresh = ()=>{
+      timeBox.style.display = (timeSel.value === "Temps partiel") ? "block" : "none";
+    };
+    timeSel.addEventListener("change", refresh);
+    refresh();
+  }
+
+  // =========================================================
+  // Localisation CI (sécurisé : ne casse rien si absent)
+  // => SCOPÉ USER pour éviter le même bug A/B
+  // =========================================================
+  const coteIvoireLocations = window.coteIvoireLocations || {
+    regions: [{ name: "Abidjan" },{ name: "Yamoussoukro" },{ name: "Bouaké" },{ name: "San-Pédro" }],
+    cities:  [{ name: "Abidjan" },{ name: "Yopougon" },{ name: "Cocody" },{ name: "Treichville" }]
+  };
+
+  function locationKey(){
+    const upKey = getUpKeyFromUrlOrStorage() || "unknown_up";
+    return scopeKey("p2i_bp_pro_location", upKey);
+  }
+
+  function saveLocationChoice(val, source){
+    const payload = { value: val || "", source: source || "manual", saved_at: new Date().toISOString() };
+    localStorage.setItem(locationKey(), JSON.stringify(payload));
+  }
+
+  function readLocationChoice(){
+    try{
+      const raw = localStorage.getItem(locationKey());
+      const d = raw ? JSON.parse(raw) : null;
+      return d && typeof d === "object" ? d : null;
+    }catch(_){
+      return null;
+    }
+  }
+
+  function setModal(open){
+    const m = document.getElementById("locModal");
+    if (!m) return;
+    m.setAttribute("aria-hidden", open ? "false" : "true");
+  }
+
+  function fillLocSelect(type){
+    const sel = document.getElementById("locSelect");
+    if (!sel) return;
+
+    let list = [];
+    if (type === "region") list = coteIvoireLocations.regions || [];
+    else list = coteIvoireLocations.cities || [];
+
+    sel.innerHTML = `<option value="">Sélectionner…</option>` +
+      list.map(x => `<option value="${String(x.name).replaceAll('"','&quot;')}">${x.name}</option>`).join("");
+  }
+
+  function getLocationFromProduction(prod){
+    if (!prod || typeof prod !== "object") return "";
+    const candidates = [
+      prod.lieu, prod.localisation, prod.location,
+      prod.ville, prod.city,
+      prod.region, prod.région,
+      prod.geo
+    ];
+    for (const c of candidates){
+      if (c && String(c).trim()) return String(c).trim();
+    }
+    return "";
+  }
+
+  function initLocation(){
+    const input = document.getElementById("f_ci_location");
+    const tag = document.getElementById("locSourceTag");
+    if (!input) return;
+
+    const saved = readLocationChoice();
+    if (saved?.value){
+      input.value = saved.value;
+      if (tag) tag.innerHTML = `<i class="fa-solid fa-circle-info"></i> Source : ${saved.source === "manual" ? "choix utilisateur" : saved.source}`;
+      return;
+    }
+
+    const prod = getCurrentProduction();
+    const fromProd = getLocationFromProduction(prod);
+    if (fromProd){
+      input.value = fromProd;
+      saveLocationChoice(fromProd, "fiche_production");
+      if (tag) tag.innerHTML = `<i class="fa-solid fa-circle-info"></i> Source : fiche production`;
+      return;
+    }
+
+    input.value = "";
+    if (tag) tag.innerHTML = `<i class="fa-solid fa-circle-info"></i> Source : —`;
+  }
+
+  function wireLocationModal(){
+    const input = document.getElementById("f_ci_location");
+    if (!input) return;
+
+    const btnEdit = document.getElementById("btnEditLocation");
+    const btnClose = document.getElementById("btnCloseLoc");
+    const btnCancel = document.getElementById("btnCancelLoc");
+    const btnSave = document.getElementById("btnSaveLoc");
+    const typeSel = document.getElementById("locType");
+    const select = document.getElementById("locSelect");
+    const tag = document.getElementById("locSourceTag");
+
+    if (typeSel){
+      fillLocSelect(typeSel.value);
+      typeSel.addEventListener("change", ()=>fillLocSelect(typeSel.value));
+    }
+
+    if (btnEdit) btnEdit.addEventListener("click", ()=> setModal(true));
+
+    const closeAll = ()=>setModal(false);
+    if (btnClose) btnClose.addEventListener("click", closeAll);
+    if (btnCancel) btnCancel.addEventListener("click", closeAll);
+
+    const modal = document.getElementById("locModal");
+    if (modal){
+      modal.addEventListener("click", (e)=>{
+        if (e.target === modal) closeAll();
+      });
+    }
+
+    if (btnSave) btnSave.addEventListener("click", ()=>{
+      const v = (select?.value || "").trim();
+      if (!v){
+        alert("Merci de sélectionner une région ou une ville.");
+        return;
+      }
+      input.value = v;
+      saveLocationChoice(v, "manual");
+      if (tag) tag.innerHTML = `<i class="fa-solid fa-circle-info"></i> Source : choix utilisateur`;
+      closeAll();
+    });
+  }
+
+  // =============================
+  // Init (IMPORTANT : async)
+  // =============================
+  document.addEventListener("DOMContentLoaded", async ()=>{
+    // 0) Résout le user scope AVANT tout accès clés scoppées
+    await resolveUserScopeId();
+
+    initMeta();
+    wireLinks();
+
+    // ✅ Migration anti-contamination (clé globale -> clé scoped)
+    migrateLegacyDraftOnce();
+
+    // 1) restore scoped
+    restoreDraft();
+
+    // 2) init section 1 UI
+    initSection1CapTable();
+    initSection1TimePart();
+
+    // 3) localisation (optionnel) — scoped user
+    initLocation();
+    wireLocationModal();
+
+    // 4) nav + mode + génération
+    initNav();
+
+    const mode = getMode();
+    applyMode(mode);
+    wireGenerate(mode);
+
+    // 5) progress
+    refreshProgress();
+
+    // Autosave + refresh progress
+    document.querySelectorAll("input, select, textarea").forEach(el=>{
+      el.addEventListener("input", ()=>{ scheduleAutosave(); refreshProgress(); });
+      el.addEventListener("change", ()=>{ scheduleAutosave(); refreshProgress(); });
+    });
+
+    // 6) Petit debug soft (optionnel)
+    // console.log("[P2I] USER_SCOPE_ID =", USER_SCOPE_ID);
+  });
+</script>
+
+</body>
+</html>
