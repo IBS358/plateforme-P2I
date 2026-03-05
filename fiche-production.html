@@ -726,6 +726,9 @@
                 <button class="btn" onclick="addToCart('businessPlanPro')">
                     <i class="fas fa-cart-plus"></i> Ajouter au panier - 399 $
                 </button>
+                <button class="btn-secondary" onclick="goToBpPro()" style="margin-top:12px;">
+  <i class="fas fa-arrow-right"></i> Aller au BP Pro
+</button>
             </div>
         </div>
 
@@ -934,11 +937,16 @@
                 <p style="color: #b8c1ec; margin-top: 15px; font-size: 0.9rem;">
                     Consultez votre boîte de réception. Vérifiez aussi les spams si vous ne le voyez pas.
                 </p>
-            </div>
-            
+<p style="color: #b8c1ec; margin-top: 12px; font-size: 0.95rem; line-height: 1.5;">
+  👉 Vous pouvez aussi retrouver votre Business Plan à tout moment dans votre
+  <a href="dashboard.html" style="color: #4cc9f0; font-weight: 600; text-decoration: underline;">
+    Dashboard
+  </a>.
+</p>
+            </div>           
             <button class="btn" onclick="closeModal('modal-bp-email-confirm')" style="width: 100%;">
-                <i class="fas fa-check"></i> OK
-            </button>
+  <i class="fas fa-check"></i> OK
+</button>
         </div>
     </div>
 
@@ -3182,13 +3190,22 @@ function pushLocalFreeBpDownload() {
     downloads = [];
   }
 
+  // ✅ AJOUT (snapshot UP complète, dont la description)
+  const prodSnapshot = (() => {
+    try { return JSON.parse(localStorage.getItem("currentProduction") || "null"); }
+    catch(_) { return null; }
+  })();
+
+  // ✅ MODIF : on stocke aussi unite_data + filiere_name
   downloads.push({
     type: "bp_gratuit",
     code,
     unit: unitName,
     date: new Date().toISOString(),
     url,
-    mode: "web_preview"
+    mode: "web_preview",
+    unite_data: prodSnapshot,
+    filiere_name: localStorage.getItem("currentFiliereName") || ""
   });
 
   localStorage.setItem(key, JSON.stringify(downloads));
@@ -3610,7 +3627,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 </script>
-<script>
+</script>
 (function () {
   // ========= Helpers =========
   function qs(name) {
@@ -3647,66 +3664,233 @@ document.addEventListener("DOMContentLoaded", async () => {
     return u.toString();
   }
 
-  // ========= Hook bouton OK de la modal =========
-  function tryHookOkButton() {
-    const bodyText = (document.body.innerText || "");
+  // ========= Hook OK modal "BP envoyé" — version ultra robuste (iPad/Safari/Modales) =========
+(function () {
+  if (window.__p2iBpOkGlobalHookInstalled) return;
+  window.__p2iBpOkGlobalHookInstalled = true;
 
-    // On n'agit que si on voit le message de confirmation
-    if (!bodyText.includes("Business Plan envoyé") && !bodyText.includes("Business Plan envoy")) return;
+  function modalLooksLikeBpSent() {
+    // On vérifie si le texte de confirmation est présent (souvent dans la modal)
+    const t = (document.body && document.body.innerText) ? document.body.innerText : "";
+    return t.includes("Business Plan envoyé") || t.includes("Business Plan envoy");
+  }
 
-    const candidates = Array.from(document.querySelectorAll("button, a, [role='button']"));
-    const okButtons = candidates.filter(el => {
-      const t = (el.textContent || "").trim().toLowerCase();
-      return t === "ok" || t === "okay";
-    });
+  function isOkElementFromEvent(e) {
+    // Supporte shadow DOM via composedPath
+    const path = (typeof e.composedPath === "function") ? e.composedPath() : [];
+    const nodes = path.length ? path : [e.target];
 
-    okButtons.forEach(btn => {
-      if (btn.dataset.p2iOkHooked === "1") return;
-      btn.dataset.p2iOkHooked = "1";
+    for (const n of nodes) {
+      if (!n) continue;
 
-      btn.addEventListener("click", () => {
-        const url = buildBpUrl();
+      // Boutons / liens / role=button
+      const isClickable =
+        (n.tagName && (n.tagName.toLowerCase() === "button" || n.tagName.toLowerCase() === "a")) ||
+        (n.getAttribute && n.getAttribute("role") === "button");
 
-        // Optionnel : enrichir l'entrée dashboard avec l'URL (pour que "Ouvrir" soit parfait)
-        try {
-  const email =
-    localStorage.getItem("p2i_user_email") ||
-    localStorage.getItem("p2i_active_user") ||
-    "";
-  const key = email ? `p2i_downloads__${email}` : "p2i_downloads__guest";
+      if (!isClickable) continue;
 
-  const raw = localStorage.getItem(key) || "[]";
-  const arr = JSON.parse(raw);
+      const txt = ((n.textContent || "").trim().toLowerCase());
+      if (txt === "ok" || txt === "okay") return true;
+    }
+    return false;
+  }
 
-  if (Array.isArray(arr) && arr.length) {
-    const unitName = localStorage.getItem("currentUnitName") || "";
+  function buildTargetUrl() {
+    let url = "";
+    try {
+      if (typeof buildBpUrl === "function") url = buildBpUrl();
+    } catch (_) {}
 
-    // Met à jour la dernière entrée BP gratuite correspondant à l’unité
-    for (let i = arr.length - 1; i >= 0; i--) {
-      const d = arr[i];
-      if (!d) continue;
-      if (d.type !== "bp_gratuit") continue;
-
-      if (!unitName || d.unit === unitName || !d.url) {
-        d.url = url;
-        d.mode = "web_preview";
-        break;
-      }
+    if (!url) {
+      try {
+        if (typeof safeBuildBpUrl === "function") url = safeBuildBpUrl();
+      } catch (_) {}
     }
 
-    localStorage.setItem(key, JSON.stringify(arr));
-  }
-} catch (_) {}
-        // Redirection iPad-friendly
-        window.location.href = url;
-      }, { passive: true });
-    });
+    if (!url) url = "business-plan-decouverte.html";
+    return url;
   }
 
-  const obs = new MutationObserver(() => tryHookOkButton());
-  obs.observe(document.body, { childList: true, subtree: true });
+  function goToBpPage() {
+    // 🔒 Nettoyage de toute ancienne logique “target”
+    try {
+      localStorage.removeItem("p2i_bp_ok_target");
+      sessionStorage.removeItem("p2i_bp_ok_target");
+    } catch (_) {}
 
+    // ✅ Garantir que l'UP est bien en mémoire
+    try {
+      const prodRaw = localStorage.getItem("currentProduction");
+      if (prodRaw) localStorage.setItem("currentProduction", prodRaw);
+    } catch (_) {}
+
+    // ✅ Autoriser le remplissage du BP après redirection
+    try {
+      localStorage.setItem("bp_open_from_dashboard", "1");
+    } catch (_) {}
+
+    const url = buildTargetUrl();
+
+    // ✅ iPad/Safari/Modales : on laisse la modal se fermer puis on navigue
+    setTimeout(() => {
+      // href est parfois plus fiable que assign selon certaines libs
+      window.location.href = url;
+    }, 250);
+  }
+
+  // ✅ Un seul écouteur global (capture) : marche même si le bouton est recréé
+  function globalHandler(e) {
+    try {
+      // On ne déclenche QUE si on est bien dans le contexte "BP envoyé"
+      if (!modalLooksLikeBpSent()) return;
+
+      // On ne déclenche QUE si l’utilisateur clique un élément OK
+      if (!isOkElementFromEvent(e)) return;
+
+      // ✅ Bloquer les handlers de la modal (sans casser le clic)
+      e.preventDefault();
+      e.stopPropagation();
+
+      goToBpPage();
+    } catch (_) {
+      // Fallback de sécurité
+      setTimeout(() => {
+        window.location.href = "business-plan-decouverte.html";
+      }, 250);
+    }
+  }
+
+  // Click + touchend (iPad)
+  document.addEventListener("click", globalHandler, true);
+  document.addEventListener("touchend", globalHandler, true);
 })();
+<script>
+  // ======================================================
+// BP PRO : enregistrement + redirection (VERSION FINALE)
+// ======================================================
+
+function getUpKeyFromUrlOrStorage(){
+  const params = new URLSearchParams(window.location.search);
+  let key = (params.get("unit_id") || params.get("id") || "").trim();
+  if (!key) key = (localStorage.getItem("currentProductionKey") || "").trim();
+  if (!key) key = (localStorage.getItem("currentUnitId") || "").trim();
+  return key;
+}
+
+// ✅ Version qui utilise l'email de l'utilisateur connecté
+function getP2IBusinessPlans(){
+  const email = localStorage.getItem("p2i_user_email") || "guest";
+  const userKey = `p2i_business_plans__${email}`;
+  
+  try { 
+    return JSON.parse(localStorage.getItem(userKey) || "[]"); 
+  }
+  catch(e){ 
+    return []; 
+  }
+}
+
+// ✅ Version qui utilise l'email de l'utilisateur connecté
+function upsertP2IBusinessPlan(plan){
+  const email = localStorage.getItem("p2i_user_email") || "guest";
+  const userKey = `p2i_business_plans__${email}`;
+  
+  let arr = [];
+  try { 
+    arr = JSON.parse(localStorage.getItem(userKey) || "[]"); 
+    if (!Array.isArray(arr)) arr = [];
+  } catch(e){ 
+    arr = []; 
+  }
+
+  const key = `${plan.type}__${plan.unit_id || ""}`;
+  const idx = arr.findIndex(x => (`${x.type}__${x.unit_id || ""}`) === key);
+
+  const nowIso = new Date().toISOString();
+
+  if (idx >= 0) {
+    arr[idx] = { ...arr[idx], ...plan, updated_at: nowIso };
+  } else {
+    arr.push({ ...plan, created_at: nowIso, updated_at: nowIso });
+  }
+
+  arr.sort((a,b) => new Date(b.updated_at) - new Date(a.updated_at));
+  localStorage.setItem(userKey, JSON.stringify(arr));
+  
+  // Pour compatibilité
+  localStorage.setItem("p2i_business_plans", JSON.stringify(arr));
+}
+
+// ✅ VERSION CORRIGÉE : comme handleDownloadBP()
+async function goToBpPro(){
+  // 1) Vérifier si l'utilisateur est connecté
+  const email = localStorage.getItem("p2i_user_email");
+  
+  // ❌ PAS CONNECTÉ : on stocke l'intention et on redirige
+  if (!email) {
+    // Récupérer les infos de l'UP
+    const upKey = getUpKeyFromUrlOrStorage();
+    let prod = null;
+    try { prod = JSON.parse(localStorage.getItem("currentProduction") || "null"); } catch(e){}
+    
+    const unitName = prod?.nom || prod?.unitName || prod?.titre || "";
+    const filiere  = prod?.filiereNom || prod?.filiere || prod?.sector || "";
+    
+    // Construire l'URL de retour
+    let returnUrl = "business-plan-pro.html";
+    if (upKey) {
+      returnUrl += `?unit_id=${encodeURIComponent(upKey)}&mode=preview`;
+      if (unitName) returnUrl += `&unit=${encodeURIComponent(unitName)}`;
+      if (filiere) returnUrl += `&filiere=${encodeURIComponent(filiere)}`;
+    }
+    
+    // Stocker l'intention (COMME LE BP GRATUIT)
+    localStorage.setItem("p2i_pending_action", JSON.stringify({
+      action: "bp_pro",
+      unit_id: upKey || "",
+      unit_name: unitName || "",
+      filiere: filiere || "",
+      return_url: returnUrl,
+      ts: new Date().toISOString()
+    }));
+    
+    // Rediriger vers login
+    window.location.href = "login.html?mode=login";
+    return;
+  }
+
+  // ✅ CONNECTÉ : récupérer les infos et enregistrer
+  const upKey = getUpKeyFromUrlOrStorage();
+
+  let prod = null;
+  try { prod = JSON.parse(localStorage.getItem("currentProduction") || "null"); } catch(e){}
+
+  const unitName = prod?.nom || prod?.unitName || prod?.titre || "";
+  const filiere  = prod?.filiereNom || prod?.filiere || prod?.sector || "";
+
+  if (upKey) localStorage.setItem("p2i_last_unit_ref", upKey);
+
+  // Enregistrer le BP Pro (MAINTENANT on a l'email)
+  upsertP2IBusinessPlan({
+    type: "BP_PRO",
+    unit_id: upKey || "",
+    unit: unitName || "—",
+    filiere: filiere || "—",
+    status: "draft"
+  });
+
+  // Redirection
+  let url = "business-plan-pro.html";
+  if (upKey){
+    url += `?unit_id=${encodeURIComponent(upKey)}&mode=preview`;
+    if (unitName) url += `&unit=${encodeURIComponent(unitName)}`;
+    if (filiere)  url += `&filiere=${encodeURIComponent(filiere)}`;
+  }
+
+  window.location.href = url;
+}
 </script>
-</body>
+</body> 
 </html>
+ 
