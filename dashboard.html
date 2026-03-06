@@ -93,6 +93,26 @@
       .main-content{margin-left:0;}
       .section-header{flex-direction:column;align-items:flex-start;gap:12px;}
     }
+/* ===== Tag Type BP (Découverte / Pro) ===== */
+.bp-type-pill{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  font-weight:800;
+  font-size:0.85rem;
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+}
+.bp-type-free{
+  border-color: rgba(76,201,240,0.35);
+  background: rgba(76,201,240,0.10);
+  color: rgba(76,201,240,0.95);
+}
+.bp-type-pro{
+  border-color: rgba(34,197,94,0.35);
+  background: rgba(34,197,94,0.10);
+  color: #86efac;
+}
   </style>
 </head>
 
@@ -180,212 +200,341 @@
   </div>
 
   <script>
-    // ========= Supabase (garde session) =========
-    const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18';
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  // ========= Supabase (garde session) =========
+  const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18';
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // ========= Helpers =========
-    function $(id){ return document.getElementById(id); }
-    function safeText(id, txt){ const el = $(id); if (el) el.innerText = txt; }
-    function pad2(n){ return String(n).padStart(2,'0'); }
-    function redirectToLogin(){ window.location.href = 'login.html?mode=login'; }
-    function formatDateFR(iso){
-      try{ return new Date(iso).toLocaleString("fr-FR",{dateStyle:"short", timeStyle:"short"}); }
-      catch(_){ return ""; }
+  // ========= Helpers =========
+  function $(id){ return document.getElementById(id); }
+  function safeText(id, txt){ const el = $(id); if (el) el.innerText = txt; }
+  function pad2(n){ return String(n).padStart(2,'0'); }
+  function redirectToLogin(){ window.location.href = 'login.html?mode=login'; }
+  function formatDateFR(iso){
+    try{ return new Date(iso).toLocaleString("fr-FR",{dateStyle:"short", timeStyle:"short"}); }
+    catch(_){ return ""; }
+  }
+
+  // ========= LocalStorage BP GRATUIT =========
+  function getActiveDownloadsKey(){
+    const email =
+      localStorage.getItem("p2i_active_user") ||
+      localStorage.getItem("p2i_user_email") ||
+      "";
+    return email ? `p2i_downloads__${email}` : "p2i_downloads__guest";
+  }
+
+  function readLocalDownloads(){
+    const key = getActiveDownloadsKey();
+    try{
+      const raw = localStorage.getItem(key);
+      const arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr : [];
+    } catch(_){
+      return [];
+    }
+  }
+
+  // ========= COMPTEURS =========
+  function countFreeBPs(){
+    return readLocalDownloads()
+      .filter(d => d && (
+        d.type === "bp_gratuit" ||
+        d.type === "bp_free" ||
+        d.kind === "free_bp" ||
+        d.mode === "web_preview" ||
+        d.mode === "web_preview_fallback"
+      ))
+      .length;
+  }
+
+  // ✅ NOUVELLE VERSION : Lit les BP Pro dans la clé de l'utilisateur connecté
+  function getMyBusinessPlansKey(){
+    const email = localStorage.getItem("p2i_user_email") ||
+                  localStorage.getItem("p2i_active_user") ||
+                  "";
+    return email ? `p2i_business_plans__${email}` : "p2i_business_plans__guest";
+  }
+
+  // ✅ NOUVELLE VERSION : Récupère tous les BP Pro de l'utilisateur
+  function getMyBusinessPlans(){
+    const key = getMyBusinessPlansKey();
+    try {
+      const data = localStorage.getItem(key);
+      return data ? JSON.parse(data) : [];
+    } catch(e){
+      return [];
+    }
+  }
+
+  // ✅ NOUVELLE VERSION : Compte les BP Pro (pour le compteur)
+  function countProBPs(){
+    const plans = getMyBusinessPlans();
+    return Array.isArray(plans) ? plans.filter(p => p && p.type === "BP_PRO").length : 0;
+  }
+
+  // ✅ NOUVELLE VERSION : Lit les BP Pro pour le tableau
+  function readLocalProPlans(){
+    const plans = getMyBusinessPlans();
+    return Array.isArray(plans) ? plans.filter(p => p && p.type === "BP_PRO") : [];
+  }
+
+  function updateBpCounter(){
+    const el = $("totalSims");
+    if (!el) return;
+    el.innerText = pad2(countFreeBPs() + countProBPs());
+  }
+
+  function buildProOpenUrl(p){
+    let url = "business-plan-pro.html?mode=preview";
+    if (p.unit_id) url += `&unit_id=${encodeURIComponent(p.unit_id)}`;
+    if (p.unit) url += `&unit=${encodeURIComponent(p.unit)}`;
+    if (p.filiere) url += `&filiere=${encodeURIComponent(p.filiere)}`;
+    return url;
+  }
+
+  function getOpenUrlFromDownload(d){
+    return (
+      d?.url ||
+      d?.pdf_url ||
+      d?.pdfUrl ||
+      d?.href ||
+      d?.path ||
+      d?.file ||
+      d?.pdf ||
+      ""
+    );
+  }
+
+  // ========= Ouvrir BP GRATUIT =========
+  function openBP(d){
+    try{
+      if (d?.unite_data){
+        localStorage.setItem("currentProduction", JSON.stringify(d.unite_data));
+        if (d.unite_data?.nom) localStorage.setItem("currentUnitName", d.unite_data.nom);
+      }
+
+      const unitName = d?.unit || d?.unit_name || d?.up_name || "";
+      if (unitName) localStorage.setItem("currentUnitName", unitName);
+
+      if (d?.filiere_name) localStorage.setItem("currentFiliereName", d.filiere_name);
+    } catch(_){}
+
+    localStorage.setItem("bp_open_from_dashboard", "1");
+    window.location.href = getOpenUrlFromDownload(d) || "business-plan-decouverte.html";
+  }
+
+  // ========= RENDU TABLE BP (GRATUIT + PRO) =========
+  function renderBusinessPlans(){
+    const tbody = $("bpActionsList");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+
+    // BP Gratuit (déjà par utilisateur)
+    const free = readLocalDownloads()
+      .filter(d => d && (
+        d.type === "bp_gratuit" ||
+        d.type === "bp_free" ||
+        d.kind === "free_bp" ||
+        d.mode === "web_preview" ||
+        d.mode === "web_preview_fallback"
+      ))
+      .map(d => ({
+        source: "FREE",
+        raw: d,
+        unit: d.unit || d.unit_name || d.up_name || "—",
+        date: d.date || "",
+        openUrl: getOpenUrlFromDownload(d)
+      }));
+
+    // ✅ BP Pro (maintenant par utilisateur aussi)
+    const pro = readLocalProPlans().map(p => ({
+      source: "PRO",
+      raw: p,
+      unit: p.unit || "—",
+      date: p.updated_at || p.created_at || "",
+      openUrl: buildProOpenUrl(p)
+    }));
+
+    const all = [...pro, ...free]
+      .sort((a,b) => (b.date || "").localeCompare(a.date || ""))
+      .slice(0,10);
+
+    if (!all.length){
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="4" style="padding:16px;color:var(--text-dim)">
+            Aucun business plan pour le moment
+          </td>
+        </tr>`;
+      return;
     }
 
-    // ========= LocalStorage BP (fusion user + legacy) =========
-function getActiveDownloadsKey(){
-  const email =
-    localStorage.getItem("p2i_active_user") ||
-    localStorage.getItem("p2i_user_email") ||
-    "";
-  return email ? `p2i_downloads__${email}` : "p2i_downloads__guest";
-}
+    tbody.innerHTML = all.map((x,i) => `
+      <tr>
+        <td><strong>${x.unit}</strong></td>
+        <td>
+          ${x.source === "PRO"
+            ? '<span class="bp-type-pill bp-type-pro">BP Pro</span>'
+            : '<span class="bp-type-pill bp-type-free">BP Découverte</span>'}
+        </td>
+        <td style="color:var(--text-dim)">${formatDateFR(x.date)}</td>
+        <td>
+          <a class="btn-view" href="${x.openUrl}" data-idx="${i}">Ouvrir</a>
+        </td>
+      </tr>
+    `).join("");
 
-function safeParseArray(raw){
-  try{
-    const arr = raw ? JSON.parse(raw) : [];
-    return Array.isArray(arr) ? arr : [];
-  } catch(_){
-    return [];
+    tbody.querySelectorAll("a.btn-view").forEach((a,i)=>{
+      a.addEventListener("click",(e)=>{
+        e.preventDefault();
+        const item = all[i];
+        if (item.source === "FREE") openBP(item.raw);
+        else window.location.href = item.openUrl;
+      });
+    });
   }
-}
 
-function dedupeByUrlOrCode(items){
-  const seen = new Set();
-  const out = [];
-  for (const it of items){
-    if (!it) continue;
-    const k = it.url || it.code || (it.type + "|" + it.unit + "|" + it.date);
-    if (seen.has(k)) continue;
-    seen.add(k);
-    out.push(it);
+  // ========= RAFRAÎCHISSEMENT =========
+  function refreshDashboard(){
+    renderBusinessPlans();
+    updateBpCounter();
   }
-  return out;
-}
 
-function getActiveDownloadsKey(){
-  const email =
-    localStorage.getItem("p2i_active_user") ||
-    localStorage.getItem("p2i_user_email") ||
-    "";
-  return email ? `p2i_downloads__${email}` : "p2i_downloads__guest";
-}
+  document.addEventListener("DOMContentLoaded", refreshDashboard);
+  window.addEventListener("pageshow", refreshDashboard);
+  document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) refreshDashboard(); });
 
-function readLocalDownloads(){
-  const key = getActiveDownloadsKey();
-  try{
-    const raw = localStorage.getItem(key);
-    const arr = raw ? JSON.parse(raw) : [];
-    return Array.isArray(arr) ? arr : [];
-  } catch(_){
-    return [];
-  }
-}
+  // ========= AUTH =========
+  async function init(){
+    try{
+      const { data } = await supabaseClient.auth.getSession();
+      const session = data?.session ?? null;
 
-function updateTotalFromLocal(){
-  const downloads = readLocalDownloads().filter(Boolean);
-  safeText("totalSims", pad2(downloads.length));
-}
-
-    function updateTotalFromLocal(){
-      const downloads = readLocalDownloads().filter(Boolean);
-      safeText("totalSims", pad2(downloads.length));
-    }
-
-    function getOpenUrlFromDownload(d){
-      return (
-        d?.url ||            // <-- page web business-plan-decouverte.html?... (prioritaire)
-        d?.pdf_url ||
-        d?.pdfUrl ||
-        d?.href ||
-        d?.path ||
-        d?.file ||
-        d?.pdf ||
-        ""
-      );
-    }
-
-    function renderBusinessPlans(){
-      const tbody = $("bpActionsList");
-      if (!tbody) return;
-tbody.innerHTML = ""; // ✅ iPad : force nettoyage avant rerender
-
-      const downloads = readLocalDownloads()
-        .filter(d => d && (d.type === "bp_gratuit" || d.type === "bp_free" || d.kind === "free_bp" || d.mode === "web_preview" || d.mode === "web_preview_fallback"))
-        .sort((a,b) => (b.date || "").localeCompare(a.date || ""));
-
-      if (!downloads.length){
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="4" style="color: var(--text-dim); padding: 16px;">
-              Aucun business plan pour le moment
-            </td>
-          </tr>
-        `;
+      if (!session){
+        redirectToLogin();
         return;
       }
 
-      const slice = downloads.slice(0, 10);
+      const email = session.user?.email || "";
+      const pseudo = email.includes("@") ? email.split("@")[0] : "Utilisateur";
+      safeText("userName", `Bonjour, ${pseudo} !`);
 
-      tbody.innerHTML = slice.map(d => {
-        const unit = d.unit || d.unit_name || d.up_name || "—";
-        const typeLabel = "BP Découverte";
-        const dt = d.date ? formatDateFR(d.date) : "";
-
-        // Ouvre la page web si disponible
-        const openUrl = getOpenUrlFromDownload(d) || "business-plan-decouverte.html";
-
-        return `
+      refreshDashboard();
+    }catch(e){
+      const tbody = $("bpActionsList");
+      if (tbody){
+        tbody.innerHTML = `
           <tr>
-            <td><strong>${unit}</strong></td>
-            <td style="color: var(--text-dim)">${typeLabel}</td>
-            <td style="color: var(--text-dim)">${dt}</td>
-            <td>
-              <a class="btn-view" href="${openUrl}">Ouvrir</a>
+            <td colspan="4" style="padding:16px;color:var(--text-dim)">
+              Erreur Dashboard : ${String(e?.message || e)}
             </td>
-          </tr>
-        `;
-      }).join("");
+          </tr>`;
+      }
     }
-// ==============================================
-// ✅ PATCH 1 : Forcer le rafraîchissement iPad (table + compteur)
-// ==============================================
-function refreshDashboard(){
-  try{
-    // 1) Compteur
-    if (typeof updateTotalFromLocal === "function") {
-      updateTotalFromLocal();
+  }
+
+  window.addEventListener("load", init);
+</script>
+
+<script src="js/auth-ui.js"></script>
+
+<script>
+  // =============================
+  // LOGOUT Dashboard (robuste)
+  // =============================
+  function parseJsonSafe(raw){
+    try { return JSON.parse(raw); } catch(_) { return null; }
+  }
+
+  function clearAuthStorage(){
+    // Identité / session
+    localStorage.removeItem("userP2I");
+    sessionStorage.removeItem("userP2I");
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
+
+    // Flags
+    localStorage.removeItem("isLoggedIn");
+    sessionStorage.removeItem("isLoggedIn");
+  }
+
+  async function doLogout(){
+    try{
+      if (window.supabase && window.supabase.auth && window.supabase.auth.signOut){
+        await window.supabase.auth.signOut();
+      }
+    }catch(e){
+      console.warn("Supabase signOut a échoué, fallback nettoyage local.", e);
     }
 
-    // 2) Table BP
-    if (typeof renderBusinessPlans === "function") {
-      renderBusinessPlans();
+    clearAuthStorage();
+    window.location.href = "login.html";
+  }
+
+  function wireLogout(){
+    const candidates = ["btnLogout", "logoutBtn", "btnDeconnexion", "deconnexionBtn"];
+    let btn = null;
+
+    for (const id of candidates){
+      const el = document.getElementById(id);
+      if (el) { btn = el; break; }
     }
-  } catch (_) {}
-}
 
-// Charge normal
-document.addEventListener("DOMContentLoaded", refreshDashboard);
+    if (!btn){
+      const links = Array.from(document.querySelectorAll("a,button"));
+      btn = links.find(x => (x.textContent || "").toLowerCase().includes("déconnexion")) || null;
+    }
 
-// iPad/Safari : retour depuis le cache (bfcache)
-window.addEventListener("pageshow", refreshDashboard);
+    if (!btn){
+      console.warn("Bouton Déconnexion introuvable");
+      return;
+    }
 
-// Retour onglet
-document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) refreshDashboard();
-});
-
-    // ========= Init =========
-    async function init(){
-      // IMPORTANT : pas de redirect automatique en cas de simple erreur JS
+    btn.addEventListener("click", async (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      btn.setAttribute("aria-busy","true");
+      btn.style.pointerEvents = "none";
       try{
-        const { data } = await supabaseClient.auth.getSession();
-        const session = data?.session ?? null;
-
-        if (!session){
-          redirectToLogin();
-          return;
-        }
-
-        const user = session.user;
-        const email = user?.email || "";
-        const pseudo = email.includes("@") ? email.split("@")[0] : "Utilisateur";
-        safeText("userName", `Bonjour, ${pseudo} !`);
-
-        updateTotalFromLocal();
-        renderBusinessPlans();
-
-      } catch (e){
-        // En cas d'erreur inattendue, on affiche un message au lieu de boucler sur login
-        const tbody = $("bpActionsList");
-        if (tbody){
-          tbody.innerHTML = `
-            <tr>
-              <td colspan="4" style="color: var(--text-dim); padding: 16px;">
-                Erreur Dashboard : ${String(e && e.message ? e.message : e)}
-              </td>
-            </tr>
-          `;
-        }
+        await doLogout();
+      } finally {
+        btn.removeAttribute("aria-busy");
+        btn.style.pointerEvents = "";
       }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", wireLogout);
+</script>
+
+<script>
+  // =============================
+  // LOGOUT — Dashboard (fallback)
+  // =============================
+  function clearAuthStorage(){
+    localStorage.removeItem("userP2I");
+    sessionStorage.removeItem("userP2I");
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
+    localStorage.removeItem("isLoggedIn");
+    sessionStorage.removeItem("isLoggedIn");
+  }
+
+  async function handleLogout(){
+    try{
+      if (window.supabase && window.supabase.auth && window.supabase.auth.signOut){
+        await window.supabase.auth.signOut();
+      }
+    }catch(e){
+      console.warn("Supabase signOut échoué, fallback local.", e);
     }
 
-    async function handleLogout(){
-      try{ await supabaseClient.auth.signOut(); } catch(_){}
-      finally{
-        localStorage.removeItem("p2i_user_logged_in");
-        localStorage.removeItem("p2i_user_email");
-        localStorage.removeItem("pending_bp");
-        window.location.href = "index.html";
-      }
-    }
-
-    window.addEventListener("load", init);
-  </script>
-
-  <script src="js/auth-ui.js"></script>
+    clearAuthStorage();
+    window.location.href = "login.html";
+  }
+</script>
+</body>
+</html>
 </body>
 </html>
