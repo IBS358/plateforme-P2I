@@ -18,6 +18,16 @@
       --text-main:#ffffff;
       --text-dim:#94a3b8;
     }
+html {
+  scroll-behavior: smooth;
+}
+.dashboard-section {
+  display: none;
+}
+
+.dashboard-section.active-section {
+  display: block;
+}
     *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
     body{background-color:var(--dark-bg);color:var(--text-main);display:flex;min-height:100vh;}
 
@@ -121,20 +131,20 @@
     <div class="logo-text">P2I Dashboard</div>
 
     <ul class="nav-links">
-      <li><a href="#" class="active"><i class="fas fa-user-circle"></i> Mon Profil</a></li>
-      <li><a href="#"><i class="fas fa-rocket"></i> Mes Projets / Simulations</a></li>
-      <li><a href="#"><i class="fas fa-file-contract"></i> Mes Business Plans</a></li>
-      <li><a href="#"><i class="fas fa-shopping-basket"></i> Mes Commandes</a></li>
-      <li><a href="#"><i class="fas fa-tools"></i> Mes Services</a></li>
-      <li><a href="#"><i class="fas fa-briefcase"></i> Mon Réseau / Emploi</a></li>
-      <li><a href="#"><i class="fas fa-graduation-cap"></i> Mes Tutoriels & Ressources</a></li>
+      <li><a href="#section-profil" class="active nav-section-link"><i class="fas fa-user-circle"></i> Mon Profil</a></li>
+      <li><a href="#mes-simulations" class="nav-section-link"><i class="fas fa-rocket"></i> Mes Projets / Simulations</a></li>
+      <li><a href="#mes-business-plans" class="nav-section-link"><i class="fas fa-file-contract"></i> Mes Business Plans</a></li>
+      <li><a href="#mes-commandes" class="nav-section-link"><i class="fas fa-shopping-basket"></i> Mes Commandes</a></li>
+      <li><a href="#mes-services" class="nav-section-link"><i class="fas fa-tools"></i> Mes Services</a></li>
+      <li><a href="#mon-reseau" class="nav-section-link"><i class="fas fa-briefcase"></i> Mon Réseau / Emploi</a></li>
+      <li><a href="#mes-ressources" class="nav-section-link"><i class="fas fa-graduation-cap"></i> Mes Tutoriels & Ressources</a></li>
     </ul>
 
     <div class="sidebar-footer">
       <a href="index.html" class="btn-nav-footer btn-home">
         <i class="fas fa-home"></i> Retour à l'accueil
       </a>
-      <div class="btn-nav-footer btn-logout" onclick="handleLogout()">
+      <div class="btn-nav-footer btn-logout">
         <i class="fas fa-power-off"></i> Déconnexion
       </div>
     </div>
@@ -142,7 +152,7 @@
 
   <div class="main-content">
 
-    <div class="header-top">
+    <div class="header-top dashboard-section" id="section-profil">
       <div class="welcome-text">
         <h1 id="userName">Bonjour !</h1>
         <p>Espace personnel - vos activités industrielles</p>
@@ -170,7 +180,7 @@
       </div>
     </div>
 
-    <div class="section-box">
+    <div class="section-box dashboard-section" id="mes-business-plans">
       <div class="section-header">
         <h2>Mes Business Plans</h2>
         <button class="btn-new" onclick="window.location.href='filieres.html'">
@@ -197,46 +207,205 @@
       </table>
     </div>
 
+    <div class="section-box dashboard-section" id="mes-simulations" style="margin-top:30px;">
+      <div class="section-header">
+        <h2>Mes Projets / Mes Simulations</h2>
+      </div>
+
+      <table class="project-table">
+        <thead>
+          <tr>
+            <th style="width: 30%;">Unité</th>
+            <th style="width: 30%;">Type</th>
+            <th style="width: 25%;">Date</th>
+            <th style="width: 15%;">Action</th>
+          </tr>
+        </thead>
+        <tbody id="simulationsList">
+          <tr>
+            <td colspan="4" style="color: var(--text-dim); padding: 16px;">
+              Chargement…
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-box dashboard-section" id="mes-commandes" style="margin-top:30px;">
+      <div class="section-header">
+        <h2>Mes Commandes</h2>
+      </div>
+      <p style="color: var(--text-dim);">Aucune commande pour le moment.</p>
+    </div>
+
+    <div class="section-box dashboard-section" id="mes-services" style="margin-top:30px;">
+      <div class="section-header">
+        <h2>Mes Services</h2>
+      </div>
+      <p style="color: var(--text-dim);">Aucun service enregistré pour le moment.</p>
+    </div>
+
+    <div class="section-box dashboard-section" id="mon-reseau" style="margin-top:30px;">
+      <div class="section-header">
+        <h2>Mon Réseau / Emploi</h2>
+      </div>
+      <p style="color: var(--text-dim);">Aucun élément disponible pour le moment.</p>
+    </div>
+
+    <div class="section-box dashboard-section" id="mes-ressources" style="margin-top:30px;">
+      <div class="section-header">
+        <h2>Mes Tutoriels & Ressources</h2>
+      </div>
+      <p style="color: var(--text-dim);">Aucune ressource enregistrée pour le moment.</p>
+    </div>
+
   </div>
 
   <script>
-  // ========= Supabase (garde session) =========
+  // =============================
+  // CONFIG SUPABASE
+  // =============================
   const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18';
+
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  // ========= Helpers =========
-  function $(id){ return document.getElementById(id); }
-  function safeText(id, txt){ const el = $(id); if (el) el.innerText = txt; }
-  function pad2(n){ return String(n).padStart(2,'0'); }
-  function redirectToLogin(){ window.location.href = 'login.html?mode=login'; }
-  function formatDateFR(iso){
-    try{ return new Date(iso).toLocaleString("fr-FR",{dateStyle:"short", timeStyle:"short"}); }
-    catch(_){ return ""; }
+  // =============================
+  // HELPERS
+  // =============================
+  function $(id) {
+    return document.getElementById(id);
   }
 
-  // ========= LocalStorage BP GRATUIT =========
-  function getActiveDownloadsKey(){
-    const email =
-      localStorage.getItem("p2i_active_user") ||
-      localStorage.getItem("p2i_user_email") ||
-      "";
-    return email ? `p2i_downloads__${email}` : "p2i_downloads__guest";
+  function safeText(id, txt) {
+    const el = $(id);
+    if (el) el.innerText = txt;
   }
 
-  function readLocalDownloads(){
-    const key = getActiveDownloadsKey();
-    try{
-      const raw = localStorage.getItem(key);
-      const arr = raw ? JSON.parse(raw) : [];
-      return Array.isArray(arr) ? arr : [];
-    } catch(_){
-      return [];
+  function pad2(n) {
+    return String(Number(n) || 0).padStart(2, '0');
+  }
+
+  function safeParseJSON(raw, fallback = null) {
+    try {
+      const parsed = JSON.parse(raw);
+      return parsed == null ? fallback : parsed;
+    } catch (_) {
+      return fallback;
     }
   }
 
-  // ========= COMPTEURS =========
-  function countFreeBPs(){
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function formatDateFR(iso) {
+    try {
+      if (!iso) return "—";
+      return new Date(iso).toLocaleString("fr-FR", {
+        dateStyle: "short",
+        timeStyle: "short"
+      });
+    } catch (_) {
+      return "—";
+    }
+  }
+
+  function redirectToLogin() {
+    window.location.replace("login.html?mode=login");
+  }
+
+  // =============================
+  // IDENTITÉ ACTIVE
+  // =============================
+  function getActiveEmail() {
+    return (
+      localStorage.getItem("p2i_active_user") ||
+      localStorage.getItem("p2i_user_email") ||
+      sessionStorage.getItem("p2i_user_email") ||
+      (safeParseJSON(localStorage.getItem("userP2I"), {}) || {}).email ||
+      (safeParseJSON(sessionStorage.getItem("userP2I"), {}) || {}).email ||
+      ""
+    ).trim();
+  }
+
+  function hasLocalAuthMarker() {
+    return (
+      localStorage.getItem("p2i_user_logged_in") === "true" ||
+      localStorage.getItem("p2i_is_logged_in") === "1" ||
+      sessionStorage.getItem("p2i_is_logged_in") === "1" ||
+      !!getActiveEmail()
+    );
+  }
+
+  function setLocalAuthFromSession(session) {
+    const user = session?.user || null;
+    const email = user?.email || "";
+    if (!email) return;
+
+    const userData = {
+      id: user?.id || "",
+      email: email,
+      role: user?.role || "authenticated",
+      savedAt: new Date().toISOString()
+    };
+
+    localStorage.setItem("userP2I", JSON.stringify(userData));
+    sessionStorage.setItem("userP2I", JSON.stringify(userData));
+
+    localStorage.setItem("p2i_user_email", email);
+    sessionStorage.setItem("p2i_user_email", email);
+
+    localStorage.setItem("p2i_active_user", email);
+
+    localStorage.setItem("p2i_user_logged_in", "true");
+    localStorage.setItem("p2i_is_logged_in", "1");
+    sessionStorage.setItem("p2i_is_logged_in", "1");
+  }
+
+  // =============================
+  // CLÉS UTILISATEUR
+  // =============================
+  function getActiveDownloadsKey() {
+    const email = getActiveEmail();
+    return email ? `p2i_downloads__${email}` : "p2i_downloads__guest";
+  }
+
+  function getMyBusinessPlansKey() {
+    const email = getActiveEmail();
+    return email ? `p2i_business_plans__${email}` : "p2i_business_plans__guest";
+  }
+
+  // =============================
+  // LECTURE LOCALSTORAGE
+  // =============================
+  function readLocalDownloads() {
+    const key = getActiveDownloadsKey();
+    const arr = safeParseJSON(localStorage.getItem(key), []);
+    return Array.isArray(arr) ? arr : [];
+  }
+
+  function getMyBusinessPlans() {
+    const scoped = safeParseJSON(localStorage.getItem(getMyBusinessPlansKey()), []);
+    if (Array.isArray(scoped) && scoped.length) return scoped;
+
+    const legacy = safeParseJSON(localStorage.getItem("p2i_business_plans"), []);
+    return Array.isArray(legacy) ? legacy : [];
+  }
+
+  function readLocalProPlans() {
+    return getMyBusinessPlans().filter(p => p && p.type === "BP_PRO");
+  }
+
+  // =============================
+  // COMPTEURS
+  // =============================
+  function countFreeBPs() {
     return readLocalDownloads()
       .filter(d => d && (
         d.type === "bp_gratuit" ||
@@ -248,44 +417,20 @@
       .length;
   }
 
-  // ✅ NOUVELLE VERSION : Lit les BP Pro dans la clé de l'utilisateur connecté
-  function getMyBusinessPlansKey(){
-    const email = localStorage.getItem("p2i_user_email") ||
-                  localStorage.getItem("p2i_active_user") ||
-                  "";
-    return email ? `p2i_business_plans__${email}` : "p2i_business_plans__guest";
+  function countProBPs() {
+    return readLocalProPlans().length;
   }
 
-  // ✅ NOUVELLE VERSION : Récupère tous les BP Pro de l'utilisateur
-  function getMyBusinessPlans(){
-    const key = getMyBusinessPlansKey();
-    try {
-      const data = localStorage.getItem(key);
-      return data ? JSON.parse(data) : [];
-    } catch(e){
-      return [];
-    }
-  }
-
-  // ✅ NOUVELLE VERSION : Compte les BP Pro (pour le compteur)
-  function countProBPs(){
-    const plans = getMyBusinessPlans();
-    return Array.isArray(plans) ? plans.filter(p => p && p.type === "BP_PRO").length : 0;
-  }
-
-  // ✅ NOUVELLE VERSION : Lit les BP Pro pour le tableau
-  function readLocalProPlans(){
-    const plans = getMyBusinessPlans();
-    return Array.isArray(plans) ? plans.filter(p => p && p.type === "BP_PRO") : [];
-  }
-
-  function updateBpCounter(){
+  function updateBpCounter() {
     const el = $("totalSims");
     if (!el) return;
     el.innerText = pad2(countFreeBPs() + countProBPs());
   }
 
-  function buildProOpenUrl(p){
+  // =============================
+  // URLS D'OUVERTURE
+  // =============================
+  function buildProOpenUrl(p) {
     let url = "business-plan-pro.html?mode=preview";
     if (p.unit_id) url += `&unit_id=${encodeURIComponent(p.unit_id)}`;
     if (p.unit) url += `&unit=${encodeURIComponent(p.unit)}`;
@@ -293,7 +438,7 @@
     return url;
   }
 
-  function getOpenUrlFromDownload(d){
+  function getOpenUrlFromDownload(d) {
     return (
       d?.url ||
       d?.pdf_url ||
@@ -302,35 +447,46 @@
       d?.path ||
       d?.file ||
       d?.pdf ||
-      ""
+      "business-plan-decouverte.html"
     );
   }
 
-  // ========= Ouvrir BP GRATUIT =========
-  function openBP(d){
-    try{
-      if (d?.unite_data){
+  // =============================
+  // OUVERTURE BP DÉCOUVERTE
+  // =============================
+  function openBP(d) {
+    try {
+      if (d?.unite_data) {
         localStorage.setItem("currentProduction", JSON.stringify(d.unite_data));
-        if (d.unite_data?.nom) localStorage.setItem("currentUnitName", d.unite_data.nom);
+        if (d.unite_data?.nom) {
+          localStorage.setItem("currentUnitName", d.unite_data.nom);
+        }
       }
 
       const unitName = d?.unit || d?.unit_name || d?.up_name || "";
       if (unitName) localStorage.setItem("currentUnitName", unitName);
 
-      if (d?.filiere_name) localStorage.setItem("currentFiliereName", d.filiere_name);
-    } catch(_){}
+      const filiereName = d?.filiere_name || d?.filiere || "";
+      if (filiereName) localStorage.setItem("currentFiliereName", filiereName);
+
+      if (d?.unit_id) localStorage.setItem("currentUnitId", d.unit_id);
+    } catch (e) {
+      console.warn("Impossible de préparer l'ouverture du BP découverte :", e);
+    }
 
     localStorage.setItem("bp_open_from_dashboard", "1");
-    window.location.href = getOpenUrlFromDownload(d) || "business-plan-decouverte.html";
+    window.location.href = getOpenUrlFromDownload(d);
   }
 
-  // ========= RENDU TABLE BP (GRATUIT + PRO) =========
-  function renderBusinessPlans(){
+  // =============================
+  // RENDU TABLEAU
+  // =============================
+  function renderBusinessPlans() {
     const tbody = $("bpActionsList");
     if (!tbody) return;
+
     tbody.innerHTML = "";
 
-    // BP Gratuit (déjà par utilisateur)
     const free = readLocalDownloads()
       .filter(d => d && (
         d.type === "bp_gratuit" ||
@@ -343,11 +499,10 @@
         source: "FREE",
         raw: d,
         unit: d.unit || d.unit_name || d.up_name || "—",
-        date: d.date || "",
+        date: d.date || d.created_at || d.updated_at || "",
         openUrl: getOpenUrlFromDownload(d)
       }));
 
-    // ✅ BP Pro (maintenant par utilisateur aussi)
     const pro = readLocalProPlans().map(p => ({
       source: "PRO",
       raw: p,
@@ -356,11 +511,23 @@
       openUrl: buildProOpenUrl(p)
     }));
 
-    const all = [...pro, ...free]
-      .sort((a,b) => (b.date || "").localeCompare(a.date || ""))
-      .slice(0,10);
+    const sorted = [...pro, ...free]
+  .sort((a, b) => {
+    const da = new Date(a.date || 0).getTime();
+    const db = new Date(b.date || 0).getTime();
+    return db - da;
+  });
 
-    if (!all.length){
+// 👉 10 derniers = Business Plans visibles
+const all = sorted.slice(0, 10);
+
+// 👉 le reste = simulations
+localStorage.setItem(
+  "p2i_archived_simulations",
+  JSON.stringify(sorted.slice(10))
+);
+
+    if (!all.length) {
       tbody.innerHTML = `
         <tr>
           <td colspan="4" style="padding:16px;color:var(--text-dim)">
@@ -370,9 +537,9 @@
       return;
     }
 
-    tbody.innerHTML = all.map((x,i) => `
+    tbody.innerHTML = all.map((x, i) => `
       <tr>
-        <td><strong>${x.unit}</strong></td>
+        <td><strong>${escapeHtml(x.unit)}</strong></td>
         <td>
           ${x.source === "PRO"
             ? '<span class="bp-type-pill bp-type-pro">BP Pro</span>'
@@ -385,156 +552,212 @@
       </tr>
     `).join("");
 
-    tbody.querySelectorAll("a.btn-view").forEach((a,i)=>{
-      a.addEventListener("click",(e)=>{
+    tbody.querySelectorAll("a.btn-view").forEach((a, i) => {
+      a.addEventListener("click", (e) => {
         e.preventDefault();
         const item = all[i];
-        if (item.source === "FREE") openBP(item.raw);
-        else window.location.href = item.openUrl;
+        if (!item) return;
+
+        if (item.source === "FREE") {
+          openBP(item.raw);
+        } else {
+          window.location.href = item.openUrl;
+        }
       });
     });
   }
 
-  // ========= RAFRAÎCHISSEMENT =========
-  function refreshDashboard(){
+  // =============================
+  // HYDRATATION UI
+  // =============================
+  function hydrateDashboardFromEmail(email, role = "USER") {
+    const pseudo = email && email.includes("@") ? email.split("@")[0] : "Utilisateur";
+    safeText("userName", `Bonjour, ${pseudo} !`);
+
+    const accountTypeEl = $("accountType");
+    if (accountTypeEl) accountTypeEl.innerText = String(role || "USER").toUpperCase();
+
+    refreshDashboard();
+  }
+
+  function showAuthWarning() {
+    const tbody = $("bpActionsList");
+    if (!tbody) return;
+
+    const warningId = "auth-warning-row";
+    if (document.getElementById(warningId)) return;
+
+    const row = document.createElement("tr");
+    row.id = warningId;
+    row.innerHTML = `
+      <td colspan="4" style="padding:14px;color:#fbbf24;">
+        Session Supabase non retrouvée dans cet environnement de prévisualisation.
+        Le dashboard est affiché en mode local de secours.
+      </td>
+    `;
+    tbody.prepend(row);
+  }
+
+  // =============================
+  // RAFRAÎCHISSEMENT DASHBOARD
+  // =============================
+  function refreshDashboard() {
     renderBusinessPlans();
     updateBpCounter();
   }
+function forceLoginIfLoggedOut() {
+  const hasAuth =
+    localStorage.getItem("p2i_user_logged_in") === "true" ||
+    localStorage.getItem("p2i_is_logged_in") === "1" ||
+    sessionStorage.getItem("p2i_is_logged_in") === "1" ||
+    !!localStorage.getItem("p2i_active_user") ||
+    !!localStorage.getItem("p2i_user_email");
 
-  document.addEventListener("DOMContentLoaded", refreshDashboard);
-  window.addEventListener("pageshow", refreshDashboard);
-  document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) refreshDashboard(); });
+  if (!hasAuth) {
+    window.location.replace("login.html?mode=login");
+    return true;
+  }
+  return false;
+}
 
-  // ========= AUTH =========
-  async function init(){
-    try{
-      const { data } = await supabaseClient.auth.getSession();
+  // =============================
+  // INIT AUTH + DASHBOARD
+  // =============================
+  async function initDashboard() {
+    const tbody = $("bpActionsList");
+
+    try {
+      const { data, error } = await supabaseClient.auth.getSession();
+      if (error) throw error;
+
       const session = data?.session ?? null;
 
-      if (!session){
-        redirectToLogin();
+      if (session) {
+        setLocalAuthFromSession(session);
+        const role = session.user?.user_metadata?.role || "USER";
+        hydrateDashboardFromEmail(session.user?.email || "", role);
         return;
       }
 
-      const email = session.user?.email || "";
-      const pseudo = email.includes("@") ? email.split("@")[0] : "Utilisateur";
-      safeText("userName", `Bonjour, ${pseudo} !`);
+      if (hasLocalAuthMarker()) {
+        const email = getActiveEmail();
+        hydrateDashboardFromEmail(email, "USER");
+        showAuthWarning();
+        return;
+      }
 
-      refreshDashboard();
-    }catch(e){
-      const tbody = $("bpActionsList");
-      if (tbody){
+      redirectToLogin();
+    } catch (e) {
+      console.error("Erreur Dashboard :", e);
+
+      if (hasLocalAuthMarker()) {
+        const email = getActiveEmail();
+        hydrateDashboardFromEmail(email, "USER");
+        showAuthWarning();
+        return;
+      }
+
+      if (tbody) {
         tbody.innerHTML = `
           <tr>
             <td colspan="4" style="padding:16px;color:var(--text-dim)">
-              Erreur Dashboard : ${String(e?.message || e)}
+              Erreur Dashboard : ${escapeHtml(String(e?.message || e))}
             </td>
           </tr>`;
       }
     }
   }
 
-  window.addEventListener("load", init);
-</script>
-
-<script src="js/auth-ui.js"></script>
-
-<script>
   // =============================
-  // LOGOUT Dashboard (robuste)
+  // LOGOUT
   // =============================
-  function parseJsonSafe(raw){
-    try { return JSON.parse(raw); } catch(_) { return null; }
-  }
-
-  function clearAuthStorage(){
-    // Identité / session
-    localStorage.removeItem("userP2I");
-    sessionStorage.removeItem("userP2I");
-    localStorage.removeItem("user");
-    sessionStorage.removeItem("user");
-
-    // Flags
-    localStorage.removeItem("isLoggedIn");
-    sessionStorage.removeItem("isLoggedIn");
-  }
-
-  async function doLogout(){
-    try{
-      if (window.supabase && window.supabase.auth && window.supabase.auth.signOut){
-        await window.supabase.auth.signOut();
-      }
-    }catch(e){
-      console.warn("Supabase signOut a échoué, fallback nettoyage local.", e);
-    }
-
-    clearAuthStorage();
-    window.location.href = "login.html";
-  }
-
-  function wireLogout(){
-    const candidates = ["btnLogout", "logoutBtn", "btnDeconnexion", "deconnexionBtn"];
-    let btn = null;
-
-    for (const id of candidates){
-      const el = document.getElementById(id);
-      if (el) { btn = el; break; }
-    }
-
-    if (!btn){
-      const links = Array.from(document.querySelectorAll("a,button"));
-      btn = links.find(x => (x.textContent || "").toLowerCase().includes("déconnexion")) || null;
-    }
-
-    if (!btn){
-      console.warn("Bouton Déconnexion introuvable");
-      return;
-    }
-
-    btn.addEventListener("click", async (e)=>{
-      e.preventDefault();
-      e.stopPropagation();
-      btn.setAttribute("aria-busy","true");
-      btn.style.pointerEvents = "none";
-      try{
-        await doLogout();
-      } finally {
-        btn.removeAttribute("aria-busy");
-        btn.style.pointerEvents = "";
-      }
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", wireLogout);
-</script>
-
-<script>
-  // =============================
-  // LOGOUT — Dashboard (fallback)
-  // =============================
-  function clearAuthStorage(){
+  function clearAuthStorage() {
     localStorage.removeItem("userP2I");
     sessionStorage.removeItem("userP2I");
     localStorage.removeItem("user");
     sessionStorage.removeItem("user");
     localStorage.removeItem("isLoggedIn");
     sessionStorage.removeItem("isLoggedIn");
+
+    localStorage.removeItem("p2i_user_logged_in");
+    localStorage.removeItem("p2i_active_user");
+    localStorage.removeItem("p2i_user_email");
+    localStorage.removeItem("p2i_is_logged_in");
+    sessionStorage.removeItem("p2i_is_logged_in");
+    sessionStorage.removeItem("p2i_user_email");
   }
 
-  async function handleLogout(){
-    try{
-      if (window.supabase && window.supabase.auth && window.supabase.auth.signOut){
-        await window.supabase.auth.signOut();
-      }
-    }catch(e){
+  async function handleLogout() {
+    try {
+      await supabaseClient.auth.signOut();
+    } catch (e) {
       console.warn("Supabase signOut échoué, fallback local.", e);
     }
 
     clearAuthStorage();
-    window.location.href = "login.html";
+    window.location.href = "login.html?mode=login";
   }
+
+  function wireLogout() {
+    const btn = document.querySelector(".btn-logout");
+    if (!btn) return;
+
+    btn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      btn.style.pointerEvents = "none";
+      try {
+        await handleLogout();
+      } finally {
+        btn.style.pointerEvents = "";
+      }
+    });
+  }
+function wireSectionNavigation() {
+  const links = Array.from(document.querySelectorAll(".nav-section-link"));
+  const sections = Array.from(document.querySelectorAll(".dashboard-section"));
+
+  if (!links.length || !sections.length) return;
+
+  function showSection(id) {
+    sections.forEach(section => {
+      section.classList.toggle("active-section", section.id === id);
+    });
+
+    links.forEach(link => {
+      const isActive = link.getAttribute("href") === `#${id}`;
+      link.classList.toggle("active", isActive);
+    });
+  }
+
+  links.forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const href = link.getAttribute("href") || "";
+      const id = href.replace("#", "").trim();
+      if (!id) return;
+      showSection(id);
+    });
+  });
+
+  showSection("section-profil");
+}
+  // =============================
+  // EVENTS
+  // =============================
+  document.addEventListener("DOMContentLoaded", () => {
+  wireLogout();
+  wireSectionNavigation();
+});
+
+  window.addEventListener("load", initDashboard);
+  window.addEventListener("pageshow", () => {
+  if (forceLoginIfLoggedOut()) return;
+  refreshDashboard();
+});
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) refreshDashboard();
+  });
 </script>
-</body>
-</html>
 </body>
 </html>
