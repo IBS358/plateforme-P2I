@@ -1,1 +1,4006 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unité de Production - P2I Côte d'Ivoire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        /* ===== STYLES DE BASE P2I ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
+        /* ===== HEADER & NAVIGATION P2I ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(76, 201, 240, 0.1);
+            padding: 15px 0;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+        .gear {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #4cc9f0;
+        }
+        .gear-large { animation: rotate 20s linear infinite; }
+        .gear-medium {
+            width: 70%; height: 70%; top: 15%; left: 15%;
+            animation: rotate 15s linear infinite reverse;
+        }
+        .gear-small {
+            width: 40%; height: 40%; top: 30%; left: 30%;
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        nav ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        nav a {
+            color: #b8c1ec;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        nav a:hover { color: #4cc9f0; }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after { width: 100%; }
+
+        /* ===== CART COUNTER ===== */
+        .cart-counter {
+            position: fixed;
+            top: 90px;
+            right: 30px;
+            background: linear-gradient(to right, #f72585, #4cc9f0);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            font-weight: bold;
+            z-index: 999;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+        .cart-counter:hover {
+            transform: scale(1.1);
+        }
+
+        /* ===== CONTENU PRINCIPAL ===== */
+        .main-content {
+            padding: 40px 0;
+        }
+
+        /* Header de la fiche */
+        .fiche-header {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(76, 201, 240, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .fiche-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+        }
+        .fiche-title {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+        .filiere-badge {
+            display: inline-block;
+            background: rgba(76, 201, 240, 0.1);
+            color: #4cc9f0;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 1rem;
+            border: 1px solid #4cc9f0;
+        }
+        .fiche-description {
+            color: #b8c1ec;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            max-width: 800px;
+        }
+
+        /* Grille d'informations */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: #4cc9f0;
+        }
+        .info-card h3 {
+            color: #4cc9f0;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .info-card h3 i {
+            font-size: 1.5rem;
+        }
+        .info-list {
+            list-style: none;
+        }
+        .info-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #b8c1ec;
+        }
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Carte financière */
+        .financial-card {
+            background: linear-gradient(135deg, rgba(76, 201, 240, 0.1), rgba(247, 37, 133, 0.1));
+            border: 1px solid rgba(76, 201, 240, 0.3);
+            text-align: center;
+            padding: 40px 30px;
+        }
+        .capex-title {
+            font-size: 1.3rem;
+            color: #b8c1ec;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .capex-badge {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 10px 0 30px;
+            text-align: center;
+        }
+        .financial-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .metric {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4cc9f0;
+        }
+        .metric-label {
+            font-size: 0.9rem;
+            color: #b8c1ec;
+            margin-top: 5px;
+        }
+
+        /* Section Business Plans */
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin: 60px 0 40px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .bp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .bp-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            transition: all 0.3s;
+        }
+        .bp-card:hover {
+            transform: translateY(-10px);
+            border-color: #4cc9f0;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .bp-card.featured {
+            border: 2px solid #f72585;
+            transform: scale(1.05);
+        }
+        .bp-card.featured::before {
+            content: 'RECOMMANDÉ';
+            position: absolute;
+            top: -12px;
+            right: 30px;
+            background: #f72585;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .bp-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .bp-title {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+        .bp-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .bp-price.gratuit {
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .bp-price.pro {
+            color: #f72585;
+        }
+        .bp-includes {
+            list-style: none;
+            margin: 25px 0;
+        }
+        .bp-includes li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #b8c1ec;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .bp-includes li i {
+            color: #4cc9f0;
+        }
+        .bp-note {
+            font-style: italic;
+            color: #b8c1ec;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+
+        /* ===== CORRECTIONS BOUTONS BUSINESS PLAN ===== */
+        .btn {
+            display: inline-block;
+            padding: 16px 40px !important;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 1.2rem !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(76, 201, 240, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(76, 201, 240, 0.7);
+            color: white !important;
+            font-size: 1.2rem !important;
+            padding: 16px 40px !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(76, 201, 240, 0.3);
+            border-color: #4cc9f0;
+        }
+        
+        .btn-success {
+            background: linear-gradient(to right, #27ae60, #2ecc71);
+            color: white;
+            font-size: 1.3rem !important;
+            padding: 22px 50px !important;
+            border-radius: 12px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(39, 174, 96, 0.4);
+            background: linear-gradient(to right, #219653, #27ae60);
+        }
+        
+        .services-grid .btn-secondary {
+            font-size: 1rem !important;
+            padding: 12px 25px !important;
+            margin-top: 15px;
+        }
+
+        /* Services additionnels */
+        #services-additionnels {
+            display: none;
+            margin: 50px 0;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .service-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .service-price {
+            color: #4cc9f0;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(76, 201, 240, 0.3);
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #b8c1ec;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-modal:hover {
+            color: #f72585;
+        }
+
+        /* Footer P2I */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(76, 201, 240, 0.1);
+            margin-top: 80px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a {
+            color: #b8c1ec;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .footer-links a:hover {
+            color: #4cc9f0;
+            padding-left: 5px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b8c1ec;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE MOBILE ===== */
+        @media (max-width: 768px) {
+            body { padding-top: 150px; }
+            .fiche-title { font-size: 1.8rem; }
+            .info-grid { grid-template-columns: 1fr; }
+            .bp-grid { grid-template-columns: 1fr; }
+            .bp-card.featured { transform: none; }
+            .financial-metrics { grid-template-columns: 1fr; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .nav-container { flex-direction: column; gap: 20px; }
+            .cart-counter { top: 140px; }
+            .capex-badge { font-size: 2.2rem; }
+            
+            .btn, .btn-secondary, .btn-success {
+                padding: 14px 30px !important;
+                font-size: 1.1rem !important;
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .services-grid .btn-secondary {
+                font-size: 0.95rem !important;
+                padding: 10px 20px !important;
+            }
+        }
+    </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <!-- Header avec Navigation P2I -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="gear gear-large"></div>
+                    <div class="gear gear-medium"></div>
+                    <div class="gear gear-small"></div>
+                </div>
+                <div class="logo-text">P2I</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="filieres.html">Filières</a></li>
+                    <li><a href="secteur-industriel.html">Secteur industriel</a></li>
+                    <li><a href="reseau.html">Réseautage</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li>
+    <a href="dashboard.html" class="nav-auth-btn" data-personal-space>
+    <i class="fas fa-user-circle"></i> Mon Espace Personnel
+</a>
+</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Compteur panier -->
+    <div id="cart-counter" class="cart-counter" onclick="openCart()">0</div>
+
+    <div class="container main-content">
+        <!-- Header de la fiche -->
+        <div class="fiche-header" id="fiche-header">
+            <h1 class="fiche-title" id="production-title">Chargement...</h1>
+            <div class="filiere-badge" id="filiere-badge"></div>
+            <p class="fiche-description" id="description"></p>
+        </div>
+
+        <!-- Alerte succès -->
+        <div id="success-alert" style="display: none; background: rgba(39, 174, 96, 0.2); color: #27ae60; padding: 15px; border-radius: 8px; border: 1px solid #27ae60; margin: 20px 0;">
+            <i class="fas fa-check"></i> Service ajouté au panier avec succès !
+        </div>
+
+        <!-- Grille d'informations -->
+        <div class="info-grid">
+            <!-- Informations clés -->
+            <div class="info-card">
+                <h3><i class="fas fa-info-circle"></i> Informations clés</h3>
+                <ul class="info-list">
+                    <li><strong>Superficie :</strong> <span id="superficie"></span></li>
+                    <li><strong>Personnel :</strong> <span id="personnel"></span></li>
+                    <li><strong>Marché cible :</strong> <span id="marche"></span></li>
+                    <li><strong>Production annuelle :</strong> <span id="production-annuelle"></span></li>
+                </ul>
+            </div>
+
+            <!-- Processus de production -->
+            <div class="info-card">
+                <h3><i class="fas fa-cogs"></i> Processus de production</h3>
+                <ul class="info-list" id="processus"></ul>
+            </div>
+
+            <!-- Produits & Avantages -->
+            <div class="info-card">
+                <h3><i class="fas fa-box"></i> Produits principaux</h3>
+                <ul class="info-list" id="produits"></ul>
+                
+                <h3 style="margin-top: 25px;"><i class="fas fa-check-circle"></i> Avantages</h3>
+                <ul class="info-list" id="avantages"></ul>
+            </div>
+        </div>
+
+        <!-- Section financière -->
+        <div class="info-card financial-card">
+            <h3><i class="fas fa-chart-line"></i> Analyse Financière</h3>
+            
+            <div class="capex-title">Investissement CAPEX minimum recommandé</div>
+            <div class="capex-badge" id="capex-min">90,000 $</div>
+            
+            <div class="financial-metrics">
+                <div class="metric">
+                    <div class="metric-value" id="chiffre-affaires">300-750k $</div>
+                    <div class="metric-label">CA annuel estimé</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="marge-brute">35-45%</div>
+                    <div class="metric-label">Marge brute</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="roi-estime">2-3 ans</div>
+                    <div class="metric-label">Retour sur investissement</div>
+                </div>
+            </div>
+
+            <button class="btn-secondary" onclick="openSimulator()">
+                <i class="fas fa-calculator"></i> Simuler le financement
+            </button>
+        </div>
+
+        <!-- SECTION BUSINESS PLANS -->
+        <h2 class="section-title">Choisissez votre accompagnement</h2>
+        
+        <div class="bp-grid">
+            <!-- Business Plan Gratuit -->
+            <div class="bp-card">
+                <div class="bp-header">
+                    <div class="bp-title">Business Plan Découverte</div>
+                    <div class="bp-price gratuit">GRATUIT</div>
+                    <p style="color: #b8c1ec;">Pour évaluer la faisabilité de votre projet</p>
+                </div>
+                
+                <ul class="bp-includes">
+                    <li><i class="fas fa-check"></i> Description détaillée de l'activité</li>
+                    <li><i class="fas fa-check"></i> Analyse du marché cible</li>
+                    <li><i class="fas fa-check"></i> Liste des machines et équipements nécessaires</li>
+                    <li><i class="fas fa-check"></i> Investissements CAPEX estimés</li>
+                    <li><i class="fas fa-check"></i> Compte de résultat prévisionnel sommaire</li>
+                    <li><i class="fas fa-check"></i> Bilan prévisionnel simplifié</li>
+                    <li><i class="fas fa-check"></i> Calcul du ROI approximatif</li>
+                    <li><i class="fas fa-check"></i> Recommandations stratégiques</li>
+                </ul>
+                
+                <p class="bp-note">
+                    ⚠️ Ce plan sommaire vous donne une première vision. 
+                    Pour soumettre aux banques, optez pour notre Business Plan Pro.
+                </p>
+                
+                <button class="btn-secondary" onclick="goToBpFree()" id="btn-download-bp">
+                    <i class="fas fa-download"></i> Télécharger gratuitement
+                </button>
+            </div>
+
+            <!-- Business Plan Pro -->
+            <div class="bp-card featured">
+                <div class="bp-header">
+                    <div class="bp-title">Business Plan Pro</div>
+                    <div class="bp-price pro">399 $</div>
+                    <p style="color: #b8c1ec;">Document bancable complet (40+ pages)</p>
+                </div>
+                
+                <ul class="bp-includes">
+                    <li><i class="fas fa-check"></i> <strong>Tout le contenu du BP Découverte +</strong></li>
+                    <li><i class="fas fa-check"></i> Étude de marché approfondie avec données récentes</li>
+                    <li><i class="fas fa-check"></i> Analyse SWOT complète</li>
+                    <li><i class="fas fa-check"></i> Plan marketing détaillé</li>
+                    <li><i class="fas fa-check"></i> Plan opérationnel avec planning d'implantation</li>
+                    <li><i class="fas fa-check"></i> Plan de financement détaillé (tableaux d'amortissement)</li>
+                    <li><i class="fas fa-check"></i> Comptes prévisionnels sur 5 ans</li>
+                    <li><i class="fas fa-check"></i> Analyse de sensibilité et scénarios</li>
+                    <li><i class="fas fa-check"></i> Étude des risques et mitigation</li>
+                    <li><i class="fas fa-check"></i> Présentation PowerPoint pour investisseurs</li>
+                    <li><i class="fas fa-check"></i> Fichier Excel financier modifiable</li>
+                    <li><i class="fas fa-check"></i> Format adapté aux banques et bailleurs</li>
+                    <li><i class="fas fa-check"></i> 2 révisions incluses</li>
+                    <li><i class="fas fa-check"></i> Accès à notre réseau de partenaires financiers</li>
+                </ul>
+                
+                <p class="bp-note">
+                    ✅ Recommandé pour les soumissions bancaires et auprès des bailleurs de fonds
+                </p>
+                
+                <button class="btn" onclick="addToCart('businessPlanPro')">
+                    <i class="fas fa-cart-plus"></i> Ajouter au panier - 399 $
+                </button>
+                <button class="btn-secondary" onclick="goToBpPro()" style="margin-top:12px;">
+  <i class="fas fa-arrow-right"></i> Aller au BP Pro
+</button>
+            </div>
+        </div>
+
+        <!-- Bouton Services Additionnels -->
+        <div style="text-align: center; margin: 50px 0;">
+            <button class="btn-secondary" onclick="toggleServices()" style="padding: 15px 40px; font-size: 1.1rem;">
+                <i class="fas fa-plus-circle"></i> Voir les services additionnels
+            </button>
+        </div>
+
+        <!-- Services additionnels (masqués par défaut) -->
+        <div id="services-additionnels">
+            <h3 style="text-align: center; color: #4cc9f0; margin-bottom: 30px; font-size: 1.5rem;">
+                Services additionnels pour votre projet
+            </h3>
+            
+            <div class="services-grid">
+                <div class="service-item">
+                    <h4><i class="fas fa-file-invoice-dollar"></i> Accompagnement Comptable</h4>
+                    <p style="color: #b8c1ec; font-size: 0.9rem;">Mise en place et suivi de votre comptabilité</p>
+                    <div class="service-price">50 $ / mois</div>
+                    <button class="btn-secondary" onclick="addToCart('comptable')" style="padding: 10px 15px; margin-top: 10px;">
+                        Ajouter au panier
+                    </button>
+                </div>
+                
+                <div class="service-item">
+                    <h4><i class="fas fa-clipboard-check"></i> Audit Technique</h4>
+                    <p style="color: #b8c1ec; font-size: 0.9rem;">Vérification complète avant installation</p>
+                    <div class="service-price">499 $</div>
+                    <button class="btn-secondary" onclick="addToCart('audit')" style="padding: 10px 15px; margin-top: 10px;">
+                        Ajouter au panier
+                    </button>
+                </div>
+                
+                <div class="service-item">
+                    <h4><i class="fas fa-cogs"></i> Achat de Machines via P2I</h4>
+                    <p style="color: #b8c1ec; font-size: 0.9rem;">
+                        Sourcing, négociation, garantie, pièces de rechange
+                    </p>
+                    <div class="service-price">
+                        <span style="color: #27ae60;">3-5% de commission</span><br>
+                        <small style="color: #b8c1ec; font-size: 0.8rem;">
+                            Facturé lors de l'achat effectif
+                        </small>
+                    </div>
+                    <button class="btn-secondary" onclick="addMachineService()" style="padding: 10px 15px; margin-top: 10px; width: 100%;">
+                        <i class="fas fa-cogs"></i> Demander ce service
+                    </button>
+                </div>
+                
+                <div class="service-item">
+                    <h4><i class="fas fa-robot"></i> Tutoriel IA Personnalisé</h4>
+                    <p style="color: #b8c1ec; font-size: 0.9rem;">Formation adaptée à votre unité de production</p>
+                    <div class="service-price">299 $</div>
+                    <button class="btn-secondary" onclick="addToCart('tutoriel')" style="padding: 10px 15px; margin-top: 10px;">
+                        Ajouter au panier
+                    </button>
+                </div>
+            </div>
+            
+            <div style="background: rgba(76, 201, 240, 0.1); padding: 20px; border-radius: 10px; margin-top: 30px; border-left: 4px solid #4cc9f0;">
+                <h4 style="color: #4cc9f0; margin-bottom: 10px;">⚠️ Pourquoi acheter vos machines via P2I ?</h4>
+                <ul style="color: #b8c1ec; list-style: none;">
+                    <li><i class="fas fa-check" style="color: #27ae60;"></i> Machines garanties et testées</li>
+                    <li><i class="fas fa-check" style="color: #27ae60;"></i> Pièces de rechange disponibles localement</li>
+                    <li><i class="fas fa-check" style="color: #27ae60;"></i> Rabais sur les prix grâce à nos volumes</li>
+                    <li><i class="fas fa-check" style="color: #27ae60;"></i> Fret optimisé et moins cher</li>
+                    <li><i class="fas fa-check" style="color: #27ae60;"></i> Assistance technique permanente</li>
+                    <li><i class="fas fa-check" style="color: #27ae60;"></i> Paiements sécurisés</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Boutons d'action -->
+        <div style="text-align: center; margin: 60px 0 40px;">
+            <button class="btn" onclick="openContactModal()" style="padding: 18px 50px; font-size: 1.2rem;">
+                <i class="fas fa-file-alt"></i> Demander un devis personnalisé
+            </button>
+            
+            <button class="btn-secondary" onclick="window.history.back()" style="margin-left: 20px; padding: 18px 50px;">
+                <i class="fas fa-arrow-left"></i> Retour aux filières
+            </button>
+        </div>
+
+        <!-- Note sur la stratégie P2I -->
+        <div style="background: rgba(247, 37, 133, 0.1); padding: 25px; border-radius: 10px; border: 1px solid rgba(247, 37, 133, 0.3); margin-top: 50px;">
+            <h4 style="color: #f72585; margin-bottom: 15px;">🏭 Pourquoi créer un compte P2I ?</h4>
+            <p style="color: #b8c1ec;">
+                En créant votre compte gratuit sur la P2I, vous bénéficiez d'un <strong>écosystème complet</strong> :
+                Tous les éléments de votre activité (business plans, documents, contacts, historique d'achat, tutoriels) 
+                seront centralisés sur une seule plateforme. Plus besoin de chercher des informations éparpillées ou 
+                de gérer plusieurs fournisseurs. La P2I devient votre <strong>partenaire unique</strong> pour réussir 
+                votre projet industriel en Côte d'Ivoire.
+            </p>
+            
+            <div style="text-align: center; margin-top: 25px;">
+                <button class="btn-success" onclick="window.location.href='login.html?mode=register'">
+                    <i class="fas fa-user-plus"></i> Créer mon compte gratuit
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer P2I -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Plateforme Industrielle Ivoirienne</h3>
+                    <p style="color: #b8c1ec; line-height: 1.7;">
+                        <strong>Vision :</strong> Faire de la Côte d'Ivoire un hub industriel leader en Afrique de l'Ouest.<br>
+                        <strong>Mission :</strong> De l'idée à l'usine, nous accompagnons chaque étape de votre projet industriel.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="filieres.html">Filières Industrielles</a></li>
+                        <li><a href="secteur-industriel.html">Secteur Industriel</a></li>
+                        <li><a href="reseau.html">Réseautage</a></li>
+                        <li><a href="apropos.html">À Propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Nos Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#bp-gratuit">Business Plans</a></li>
+                        <li><a href="#services">Services Additionnels</a></li>
+                        <li><a href="#machines">Achat de Machines</a></li>
+                        <li><a href="#formations">Formations & Tutoriels</a></li>
+                        <li><a href="#accompagnement">Accompagnement</a></li>
+                        <li><a href="#financement">Aide au Financement</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Plateforme Industrielle Ivoirienne (P2I). Tous droits réservés.</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">
+                    Tous les prix sont en dollars US (USD) pour cohérence internationale. 
+                    <br>Conversion FCFA indicative : 1 USD ≈ 600 FCFA.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================== -->
+    <!-- MODALS -->
+    <!-- ============================================== -->
+
+    <!-- Modal Téléchargement BP -->
+    <div id="modal-bp-download" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-bp-download')">&times;</span>
+            <h3 style="color: #4cc9f0; margin-bottom: 20px; text-align: center;">
+                <i class="fas fa-user-circle"></i> Création de compte requise
+            </h3>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <i class="fas fa-lock" style="font-size: 4rem; color: #4cc9f0; margin-bottom: 20px;"></i>
+                <p style="color: #b8c1ec; font-size: 1.1rem; line-height: 1.6;">
+                    Pour télécharger gratuitement votre Business Plan Découverte, 
+                    vous devez créer un compte P2I.
+                </p>
+            </div>
+            
+            <div style="background: rgba(39, 174, 96, 0.1); padding: 20px; border-radius: 10px; margin: 25px 0; border-left: 4px solid #27ae60;">
+                <h4 style="color: #27ae60; margin-bottom: 10px;">Avantages de votre compte P2I :</h4>
+                <ul style="color: #b8c1ec; list-style: none;">
+                    <li><i class="fas fa-check" style="color: #27ae60;"></i> Téléchargement immédiat du BP</li>
+                    <li><i class="fas fa-check" style="color: #27ae60;"></i> Sauvegarde de tous vos projets</li>
+                    <li><i class="fas fa-check" style="color: #27ae60;"></i> Accès aux mises à jour futures</li>
+                    <li><i class="fas fa-check" style="color: #27ae60;"></i> Support personnalisé</li>
+                    <li><i class="fas fa-check" style="color: #27ae60;"></i> Offres exclusives réservées aux membres</li>
+                </ul>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn-success" onclick="window.location.href='register.html'" style="padding: 20px 50px; font-size: 1.3rem; width: 100%;">
+                    <i class="fas fa-user-plus"></i> Créer mon compte gratuitement
+                </button>
+            </div>
+            
+            <p style="text-align: center; color: #b8c1ec; margin-top: 20px; font-size: 0.9rem;">
+                Déjà un compte ? <a href="login.html" style="color: #4cc9f0;">Connectez-vous</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal Confirmation Email BP Gratuit -->
+    <div id="modal-bp-email-confirm" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-bp-email-confirm')">&times;</span>
+            <h3 style="color: #4cc9f0; margin-bottom: 20px; text-align: center;">
+                <i class="fas fa-envelope"></i> Business Plan envoyé par email
+            </h3>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <i class="fas fa-check-circle" style="font-size: 4rem; color: #27ae60; margin-bottom: 20px;"></i>
+                <p style="color: #b8c1ec; font-size: 1.1rem; line-height: 1.6;">
+                    Votre Business Plan Découverte a été envoyé à :<br>
+                    <strong id="user-email-display">chargement...</strong>
+                </p>
+                <p style="color: #b8c1ec; margin-top: 15px; font-size: 0.9rem;">
+                    Consultez votre boîte de réception. Vérifiez aussi les spams si vous ne le voyez pas.
+                </p>
+<p style="color: #b8c1ec; margin-top: 12px; font-size: 0.95rem; line-height: 1.5;">
+  👉 Vous pouvez aussi retrouver votre Business Plan à tout moment dans votre
+  <a href="dashboard.html" style="color: #4cc9f0; font-weight: 600; text-decoration: underline;">
+    Dashboard
+  </a>.
+</p>
+            </div>           
+            <button class="btn" onclick="closeModal('modal-bp-email-confirm')" style="width: 100%;">
+  <i class="fas fa-check"></i> OK
+</button>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('cart-modal')">&times;</span>
+            <h3 style="color: #4cc9f0; margin-bottom: 20px;">Votre panier P2I</h3>
+            <div id="cart-items">
+                <!-- Items ajoutés dynamiquement -->
+            </div>
+            <div id="cart-total" style="font-size: 1.5rem; font-weight: bold; color: white; text-align: right; margin: 30px 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                Total : 0 $
+            </div>
+            <button class="btn" onclick="proceedToCheckout()">
+                <i class="fas fa-lock"></i> Procéder au paiement sécurisé
+            </button>
+            <p style="color: #b8c1ec; font-size: 0.9rem; text-align: center; margin-top: 20px;">
+                Paiement sécurisé par Stripe | PayPal | Mobile Money
+            </p>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('contact-modal')">&times;</span>
+            <h3 style="color: #4cc9f0; margin-bottom: 20px;">Demande de devis personnalisé</h3>
+            <form onsubmit="submitContactForm(event)">
+                <div style="margin-bottom: 20px;">
+                    <label style="color: #b8c1ec; display: block; margin-bottom: 8px;">Nom complet *</label>
+                    <input type="text" required style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="color: #b8c1ec; display: block; margin-bottom: 8px;">Email *</label>
+                    <input type="email" required style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="color: #b8c1ec; display: block; margin-bottom: 8px;">Budget estimé (USD)</label>
+                    <select style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white;">
+                        <option>Moins de 50,000 $</option>
+                        <option>50,000 - 100,000 $</option>
+                        <option>100,000 - 200,000 $</option>
+                        <option>Plus de 200,000 $</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 25px;">
+                    <label style="color: #b8c1ec; display: block; margin-bottom: 8px;">Votre message</label>
+                    <textarea rows="4" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white;" placeholder="Décrivez votre projet..."></textarea>
+                </div>
+                <button type="submit" class="btn">
+                    <i class="fas fa-paper-plane"></i> Envoyer la demande
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ==============================================
+    // CONFIGURATION SUPABASE
+    // ==============================================
+    const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18';
+
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    
+    // ==============================================
+    // FONCTION SIMPLE POUR TÉLÉCHARGEMENT
+    // ==============================================
+    
+    function handleDownloadBP() {
+        // Récupérer l'ID de la production
+        const urlParams = new URLSearchParams(window.location.search);
+        const productionId = urlParams.get('id') || '46';
+        
+        // Rediriger vers login avec paramètres
+        window.location.href = `login.html?redirect=bp-free&id=${productionId}`;
+    }
+    
+    function addToCart(product) {
+        // Récupérer l'ID de la production
+        const urlParams = new URLSearchParams(window.location.search);
+        const productionId = urlParams.get('id') || '46';
+        
+        // Rediriger vers login avec paramètres
+        alert('Veuillez vous connecter pour acheter le Business Plan Pro');
+        window.location.href = `login.html?redirect=bp-pro&id=${productionId}`;
+    }
+    
+    // ==============================================
+    // GESTION DES DONNÉES DE L'UNITÉ DE PRODUCTION
+    // ==============================================
+    
+    // Mettre tes fonctions originales de chargement des données UP ici
+    // (celles qui chargeaient les données avant les modifications)
+    
+    // ==============================================
+    // INITIALISATION
+    // ==============================================
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Page fiche-production chargée');
+        
+        // Charger les données de l'UP
+        loadProductionData();
+        
+        // Vérifier si on revient d'une connexion
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirect = urlParams.get('redirect');
+        
+        if (redirect === 'bp-free') {
+            // Télécharger le BP après connexion
+            downloadAfterLogin();
+        } else if (redirect === 'bp-pro') {
+            // Ajouter au panier après connexion
+            addToCartAfterLogin();
+        }
+    });
+        // ==============================================
+        // BASE DE DONNÉES COMPLÈTE DES 96 UNITÉS (FALLBACK)
+        // ==============================================
+        const productionsData = {
+            // ===== AGRO-ALIMENTAIRE & BOISSONS (16 unités) =====
+            conserverie_legumes: {
+                nom: "Conserverie de légumes",
+                filiereNom: "Agro-alimentaire & Boissons",
+                capex_min: 90000,
+                description: "Transformation industrielle de légumes locaux en conserves",
+                superficie: "500-800 m²",
+                personnel: "15-25 personnes",
+                marche: "Marché local, supermarchés, export régional",
+                production_annuelle: "200,000-500,000 boîtes",
+                chiffre_affaires_estime: "300,000-750,000 $/an",
+                marge_brute: "35-45%",
+                processus: ["Réception et tri", "Lavage", "Blanchiement", "Mise en conserve", "Étiquetage"],
+                produits: ["Tomates en conserve", "Haricots verts", "Gombos", "Légumes mélangés"],
+                avantages: ["Valorisation surplus", "Conservation longue", "Marges intéressantes", "Débouchés constants"],
+                challenges: ["Saisonnalité", "Normes sanitaires", "Concurrence importations"]
+            },
+            biscuiterie: {
+                nom: "Biscuiterie industrielle",
+                filiereNom: "Agro-alimentaire & Boissons",
+                capex_min: 120000,
+                description: "Biscuits à base de farines locales enrichies, cacao et café",
+                superficie: "600-900 m²",
+                personnel: "20-30 personnes",
+                marche: "Supermarchés, écoles, entreprises, détaillants",
+                production_annuelle: "100-200 tonnes",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "30-40%",
+                processus: ["Mélange ingrédients", "Pétrissage", "Cuisson", "Conditionnement"],
+                produits: ["Biscuits secs", "Biscuits fourrés", "Biscuits pour enfants"],
+                avantages: ["Demande constante", "Export possible", "Matières premières locales"],
+                challenges: ["Concurrence grandes marques", "Prix matières premières", "Marketing"]
+            },
+            boulangerie_industrielle: {
+                nom: "Boulangerie industrielle",
+                filiereNom: "Agro-alimentaire & Boissons",
+                capex_min: 150000,
+                description: "Production industrielle de pains, croissants et viennoiseries",
+                superficie: "800-1200 m²",
+                personnel: "25-40 personnes",
+                marche: "Grande distribution, hôtels, restaurants, cantines",
+                production_annuelle: "500-1,000 tonnes",
+                chiffre_affaires_estime: "600,000-1,200,000 $/an",
+                marge_brute: "25-35%",
+                processus: ["Pétrissage", "Fermentation", "Cuisson", "Conditionnement"],
+                produits: ["Pain de mie", "Pains spéciaux", "Croissants"],
+                avantages: ["Volume élevé", "Économies d'échelle", "Contrats distribution"],
+                challenges: ["Investissement important", "Concurrence artisanale", "Gestion invendus"]
+            },
+            jus_boissons: {
+                nom: "Production de jus et boissons",
+                filiereNom: "Agro-alimentaire & Boissons",
+                capex_min: 100000,
+                description: "Transformation de fruits locaux en jus et boissons",
+                superficie: "400-700 m²",
+                personnel: "12-20 personnes",
+                marche: "Supermarchés, hôtels, restaurants, écoles",
+                production_annuelle: "200,000-500,000 litres",
+                chiffre_affaires_estime: "350,000-850,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Pressage fruits", "Filtration", "Pasteurisation", "Conditionnement"],
+                produits: ["Jus d'ananas", "Jus de mangue", "Nectar de fruits"],
+                avantages: ["Valorisation fruits locaux", "Demande forte", "Export possible"],
+                challenges: ["Saisonnalité fruits", "Concurrence multinationales"]
+            },
+            mini_laiterie: {
+                nom: "Mini-laiterie",
+                filiereNom: "Agro-alimentaire & Boissons",
+                capex_min: 110000,
+                description: "Transformation du lait en produits laitiers",
+                superficie: "450-750 m²",
+                personnel: "15-25 personnes",
+                marche: "Supermarchés, crèches, hôpitaux, restaurants",
+                production_annuelle: "150,000-300,000 litres",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "30-40%",
+                processus: ["Contrôle lait", "Standardisation", "Pasteurisation", "Fermentation"],
+                produits: ["Lait pasteurisé", "Yaourt", "Fromage frais"],
+                avantages: ["Nutrition importante", "Demande croissante", "Sous-traitance possible"],
+                challenges: ["Chaîne du froid", "Normes strictes", "Périssabilité"]
+            },
+            huiles_alimentaires: {
+                nom: "Huiles alimentaires",
+                filiereNom: "Agro-alimentaire & Boissons",
+                capex_min: 130000,
+                description: "Production d'huiles végétales locales",
+                superficie: "600-1000 m²",
+                personnel: "20-35 personnes",
+                marche: "Supermarchés, industries agroalimentaires, restaurants",
+                production_annuelle: "100-250 tonnes",
+                chiffre_affaires_estime: "400,000-1,000,000 $/an",
+                marge_brute: "25-35%",
+                processus: ["Nettoyage graines", "Pressage", "Filtration", "Raffinage"],
+                produits: ["Huile de palme", "Huile de tournesol", "Huile d'arachide"],
+                avantages: ["Matières premières abondantes", "Demande constante"],
+                challenges: ["Concurrence importations", "Prix matières premières"]
+            },
+            epices: {
+                nom: "Transformation d'épices",
+                filiereNom: "Agro-alimentaire & Boissons",
+                capex_min: 70000,
+                description: "Transformation et conditionnement d'épices locales",
+                superficie: "300-500 m²",
+                personnel: "10-18 personnes",
+                marche: "Supermarchés, industries agroalimentaires, export",
+                production_annuelle: "20-50 tonnes",
+                chiffre_affaires_estime: "150,000-400,000 $/an",
+                marge_brute: "40-55%",
+                processus: ["Tri épices", "Séchage", "Broyage", "Conditionnement"],
+                produits: ["Piment en poudre", "Gingembre moulu", "Curcuma"],
+                avantages: ["Valeur ajoutée importante", "Export Europe", "Conservation longue"],
+                challenges: ["Contrôle humidité", "Maintenance couleur/saveur"]
+            },
+            aliments_betail: {
+                nom: "Aliments pour bétail",
+                filiereNom: "Agro-alimentaire & Boissons",
+                capex_min: 95000,
+                description: "Production d'aliments composés pour l'élevage",
+                superficie: "500-800 m²",
+                personnel: "15-25 personnes",
+                marche: "Éleveurs, coopératives agricoles, distributeurs",
+                production_annuelle: "500-1,000 tonnes",
+                chiffre_affaires_estime: "250,000-500,000 $/an",
+                marge_brute: "20-30%",
+                processus: ["Réception matières", "Broyage", "Mélange", "Granulation"],
+                produits: ["Aliments volailles", "Aliments porcs", "Aliments bovins"],
+                avantages: ["Développement élevage", "Demande croissante"],
+                challenges: ["Formulation nutritionnelle", "Variabilité matières premières"]
+            },
+
+            // ===== CHIMIE, COSMÉTIQUES & DÉTERGENTS (8 unités) =====
+            detergents: {
+                nom: "Détergents & produits ménagers",
+                filiereNom: "Chimie, Cosmétiques & Détergents",
+                capex_min: 80000,
+                description: "Fabrication de détergents et produits d'hygiène",
+                superficie: "400-700 m²",
+                personnel: "12-20 personnes",
+                marche: "Grande distribution, hôtels, entreprises de nettoyage",
+                production_annuelle: "100-200 tonnes",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Dosage ingrédients", "Réaction", "Neutralisation", "Conditionnement"],
+                produits: ["Lessive en poudre", "Détergent liquide", "Nettoyants surfaces"],
+                avantages: ["Demande constante", "Processus simple"],
+                challenges: ["Concurrence grandes marques", "Sécurité chimique"]
+            },
+            savonnerie: {
+                nom: "Savonnerie industrielle",
+                filiereNom: "Chimie, Cosmétiques & Détergents",
+                capex_min: 70000,
+                description: "Production de savons solides et liquides",
+                superficie: "350-600 m²",
+                personnel: "10-18 personnes",
+                marche: "Supermarchés, pharmacies, hôtels, écoles",
+                production_annuelle: "50-100 tonnes",
+                chiffre_affaires_estime: "200,000-400,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Saponification", "Cuisson", "Moulage", "Séchage"],
+                produits: ["Savon de toilette", "Savon de ménage", "Savon liquide"],
+                avantages: ["Huile de palme locale", "Coûts compétitifs", "Export possible"],
+                challenges: ["Maîtrise saponification", "Concurrence importations"]
+            },
+            cosmetiques: {
+                nom: "Cosmétiques naturels",
+                filiereNom: "Chimie, Cosmétiques & Détergents",
+                capex_min: 85000,
+                description: "Cosmétiques à base de matières premières locales",
+                superficie: "300-550 m²",
+                personnel: "8-15 personnes",
+                marche: "Pharmacies, boutiques spécialisées, supermarchés",
+                production_annuelle: "20,000-50,000 unités",
+                chiffre_affaires_estime: "250,000-600,000 $/an",
+                marge_brute: "40-60%",
+                processus: ["Extraction principes actifs", "Émulsification", "Conditionnement"],
+                produits: ["Crèmes hydratantes", "Huiles corporelles", "Shampooings"],
+                avantages: ["Tendance naturelle", "Valorisation plantes locales", "Marges élevées"],
+                challenges: ["Tests sanitaires", "Stabilité formulations", "Marketing"]
+            },
+            peintures: {
+                nom: "Peintures industrielles & BTP",
+                filiereNom: "Chimie, Cosmétiques & Détergents",
+                capex_min: 140000,
+                description: "Peintures pour bâtiment et industrie",
+                superficie: "600-1000 m²",
+                personnel: "20-35 personnes",
+                marche: "Quincailleries, entreprises BTP, industries",
+                production_annuelle: "100-250 tonnes",
+                chiffre_affaires_estime: "400,000-1,000,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Dispersion pigments", "Mélange", "Contrôle viscosité", "Conditionnement"],
+                produits: ["Peintures glycérophtaliques", "Peintures acryliques", "Peintures anti-rouille"],
+                avantages: ["Développement BTP", "Demande industrielle"],
+                challenges: ["Concurrence multinationales", "R&D formulations"]
+            },
+            adhesifs: {
+                nom: "Adhésifs & colles",
+                filiereNom: "Chimie, Cosmétiques & Détergents",
+                capex_min: 120000,
+                description: "Colles industrielles et adhésifs techniques",
+                superficie: "500-800 m²",
+                personnel: "15-25 personnes",
+                marche: "Industries du meuble, emballage, BTP",
+                production_annuelle: "50-100 tonnes",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Polymerisation résines", "Formulation", "Homogénéisation"],
+                produits: ["Colle vinylique", "Colle contact", "Adhésifs industriels"],
+                avantages: ["Réduction importations", "Demande industrielle"],
+                challenges: ["Maîtrise formulations", "Tests performance"]
+            },
+            engrais: {
+                nom: "Engrais & pesticides",
+                filiereNom: "Chimie, Cosmétiques & Détergents",
+                capex_min: 180000,
+                description: "Intrants agricoles et ménagers",
+                superficie: "800-1200 m²",
+                personnel: "25-40 personnes",
+                marche: "Agriculteurs, coopératives, jardineries",
+                production_annuelle: "500-1,000 tonnes",
+                chiffre_affaires_estime: "600,000-1,200,000 $/an",
+                marge_brute: "25-35%",
+                processus: ["Mélange composants", "Granulation", "Séchage", "Conditionnement"],
+                produits: ["Engrais NPK", "Engrais organiques", "Insecticides"],
+                avantages: ["Soutien agriculture", "Demande constante"],
+                challenges: ["Normes environnementales", "Autorisations sanitaires"]
+            },
+            javel: {
+                nom: "Eau de javel & désinfectants",
+                filiereNom: "Chimie, Cosmétiques & Détergents",
+                capex_min: 60000,
+                description: "Produits désinfectants industriels",
+                superficie: "300-500 m²",
+                personnel: "8-15 personnes",
+                marche: "Hôpitaux, industries agroalimentaires, collectivités",
+                production_annuelle: "50-100 tonnes",
+                chiffre_affaires_estime: "150,000-300,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Chloration soude", "Contrôle concentration", "Stabilisation"],
+                produits: ["Eau de javel", "Désinfectants surfaces", "Désinfectants instruments"],
+                avantages: ["Demande post-COVID", "Processus simple"],
+                challenges: ["Sécurité chimique", "Corrosion équipements"]
+            },
+            produits_industriels: {
+                nom: "Produits chimiques industriels",
+                filiereNom: "Chimie, Cosmétiques & Détergents",
+                capex_min: 150000,
+                description: "Produits chimiques à usage industriel",
+                superficie: "600-900 m²",
+                personnel: "20-30 personnes",
+                marche: "Industries diverses, laboratoires, centres de recherche",
+                production_annuelle: "100-200 tonnes",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "40-55%",
+                processus: ["Synthèse ou dilution", "Purification", "Contrôle qualité"],
+                produits: ["Acides dilués", "Soude caustique", "Solvants industriels"],
+                avantages: ["Réduction importations", "Support tissu industriel"],
+                challenges: ["Exigences pureté", "Sécurité extrême"]
+            },
+
+            // ===== TEXTILE, HABILLEMENT & CUIR (8 unités) =====
+            confection: {
+                nom: "Confection de vêtements",
+                filiereNom: "Textile, Habillement & Cuir",
+                capex_min: 60000,
+                description: "Vêtements prêts-à-porter et tenues modernes",
+                superficie: "400-700 m²",
+                personnel: "30-50 personnes",
+                marche: "Boutiques, marchés, export régional",
+                production_annuelle: "20,000-50,000 pièces",
+                chiffre_affaires_estime: "300,000-750,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Coupe", "Assemblage", "Finitions", "Repassage"],
+                produits: ["Vêtements homme", "Vêtements femme", "Vêtements enfants"],
+                avantages: ["Main d'œuvre disponible", "Tendance 'Made in Côte d'Ivoire'"],
+                challenges: ["Concurrence asiatique", "Approvisionnement tissus"]
+            },
+            tissage: {
+                nom: "Tissage industriel",
+                filiereNom: "Textile, Habillement & Cuir",
+                capex_min: 100000,
+                description: "Production de tissus à partir de coton local",
+                superficie: "600-900 m²",
+                personnel: "25-40 personnes",
+                marche: "Confectionneurs, export, grande distribution",
+                production_annuelle: "50-100 tonnes",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Filature", "Tissage", "Ennoblissement", "Contrôle"],
+                produits: ["Tissus coton", "Tissus mélangés", "Tissus techniques"],
+                avantages: ["Coton local", "Chaîne de valeur complète"],
+                challenges: ["Investissement machines", "Concurrence importations"]
+            },
+            maroquinerie: {
+                nom: "Maroquinerie & articles en cuir",
+                filiereNom: "Textile, Habillement & Cuir",
+                capex_min: 75000,
+                description: "Fabrication d'articles en cuir et simili-cuir",
+                superficie: "400-650 m²",
+                personnel: "15-25 personnes",
+                marche: "Boutiques de luxe, export, tourisme",
+                production_annuelle: "10,000-25,000 pièces",
+                chiffre_affaires_estime: "250,000-600,000 $/an",
+                marge_brute: "40-60%",
+                processus: ["Découpe cuir", "Assemblage", "Couture", "Finition"],
+                produits: ["Sacs à main", "Portefeuilles", "Ceintures", "Accessoires"],
+                avantages: ["Valeur ajoutée élevée", "Export haut de gamme"],
+                challenges: ["Qualité cuir", "Design compétitif"]
+            },
+            teinture: {
+                nom: "Teinturerie industrielle",
+                filiereNom: "Textile, Habillement & Cuir",
+                capex_min: 40000,
+                description: "Teinture et ennoblissement de textiles",
+                superficie: "300-500 m²",
+                personnel: "10-18 personnes",
+                marche: "Tisserands, confectionneurs, industries",
+                production_annuelle: "100-200 tonnes",
+                chiffre_affaires_estime: "200,000-400,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Préparation", "Teinture", "Fixation", "Séchage"],
+                produits: ["Tissus teints", "Tissus imprimés", "Traitements spéciaux"],
+                avantages: ["Service essentiel", "Marges intéressantes"],
+                challenges: ["Gestion eaux usées", "Normes environnementales"]
+            },
+            broderie: {
+                nom: "Broderie industrielle",
+                filiereNom: "Textile, Habillement & Cuir",
+                capex_min: 55000,
+                description: "Broderie automatique sur textiles",
+                superficie: "250-450 m²",
+                personnel: "8-15 personnes",
+                marche: "Confectionneurs, uniformes, promotionnel",
+                production_annuelle: "50,000-100,000 pièces",
+                chiffre_affaires_estime: "150,000-300,000 $/an",
+                marge_brute: "40-55%",
+                processus: ["Numérisation design", "Paramétrage", "Broderie", "Finitions"],
+                produits: ["Broderies personnalisées", "Logos entreprises", "Broderies décoratives"],
+                avantages: ["Valeur ajoutée importante", "Demande croissante"],
+                challenges: ["Maintenance machines", "Design numériques"]
+            },
+            chaussures: {
+                nom: "Fabrication de chaussures",
+                filiereNom: "Textile, Habillement & Cuir",
+                capex_min: 120000,
+                description: "Production de chaussures en cuir et matériaux synthétiques",
+                superficie: "600-900 m²",
+                personnel: "30-50 personnes",
+                marche: "Détaillants, export, marchés locaux",
+                production_annuelle: "50,000-100,000 paires",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Découpe", "Montage", "Couture", "Finitions"],
+                produits: ["Chaussures homme", "Chaussures femme", "Chaussures enfants"],
+                avantages: ["Demande constante", "Export possible"],
+                challenges: ["Concurrence importations", "Qualité matériaux"]
+            },
+            uniformes: {
+                nom: "Confection d'uniformes",
+                filiereNom: "Textile, Habillement & Cuir",
+                capex_min: 70000,
+                description: "Production d'uniformes professionnels et scolaires",
+                superficie: "400-700 m²",
+                personnel: "25-40 personnes",
+                marche: "Écoles, entreprises, administrations, hôpitaux",
+                production_annuelle: "30,000-60,000 pièces",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Coupe", "Assemblage", "Broderie logos", "Conditionnement"],
+                produits: ["Uniformes scolaires", "Tenues professionnelles", "Équipements de travail"],
+                avantages: ["Commandes institutionnelles", "Demande régulière"],
+                challenges: ["Appels d'offres", "Délais de livraison"]
+            },
+            linge: {
+                nom: "Linge de maison",
+                filiereNom: "Textile, Habillement & Cuir",
+                capex_min: 90000,
+                description: "Fabrication de linge de maison et tissus d'ameublement",
+                superficie: "500-800 m²",
+                personnel: "20-35 personnes",
+                marche: "Supermarchés, hôtels, boutiques spécialisées",
+                production_annuelle: "20,000-40,000 pièces",
+                chiffre_affaires_estime: "350,000-700,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Tissage", "Confection", "Finitions", "Conditionnement"],
+                produits: ["Draps", "Serviettes", "Nappes", "Rideaux"],
+                avantages: ["Marché en croissance", "Marges intéressantes"],
+                challenges: ["Concurrence importations", "Marketing"]
+            },
+
+            // ===== MÉTALLURGIE & MÉCANIQUE (8 unités) =====
+            serrurerie: {
+                nom: "Serrurerie industrielle",
+                filiereNom: "Métallurgie & Mécanique",
+                capex_min: 55000,
+                description: "Fabrication de serrures, clés et systèmes de sécurité",
+                superficie: "300-500 m²",
+                personnel: "12-20 personnes",
+                marche: "Quincailleries, BTP, particuliers",
+                production_annuelle: "50,000-100,000 unités",
+                chiffre_affaires_estime: "200,000-400,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Usinage", "Assemblage", "Test sécurité", "Conditionnement"],
+                produits: ["Serrures", "Cylindres", "Systèmes de sécurité"],
+                avantages: ["Demande BTP", "Import substitution"],
+                challenges: ["Concurrence importations", "Innovation continue"]
+            },
+            outillage: {
+                nom: "Outillage manuel",
+                filiereNom: "Métallurgie & Mécanique",
+                capex_min: 85000,
+                description: "Fabrication d'outils manuels pour BTP et industrie",
+                superficie: "500-800 m²",
+                personnel: "20-30 personnes",
+                marche: "Quincailleries, entreprises BTP, industries",
+                production_annuelle: "100,000-200,000 pièces",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Forgeage", "Usinage", "Trempe", "Finition"],
+                produits: ["Marteaux", "Pinces", "Clés", "Tournevis"],
+                avantages: ["Demande constante", "Marché local important"],
+                challenges: ["Qualité acier", "Concurrence asiatique"]
+            },
+            recyclage_metaux: {
+                nom: "Recyclage de métaux",
+                filiereNom: "Métallurgie & Mécanique",
+                capex_min: 110000,
+                description: "Recyclage et transformation de métaux ferreux et non-ferreux",
+                superficie: "800-1200 m²",
+                personnel: "15-25 personnes",
+                marche: "Fonderies, industries, export",
+                production_annuelle: "500-1,000 tonnes",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Tri", "Broyage", "Séparation", "Compactage"],
+                produits: ["Ferraille", "Aluminium recyclé", "Cuivre recyclé"],
+                avantages: ["Écologique", "Demande industries", "Subventions possibles"],
+                challenges: ["Logistique collecte", "Qualité matières premières"]
+            },
+            chaudronnerie: {
+                nom: "Chaudronnerie industrielle",
+                filiereNom: "Métallurgie & Mécanique",
+                capex_min: 95000,
+                description: "Fabrication de cuves, réservoirs et équipements pression",
+                superficie: "600-900 m²",
+                personnel: "20-35 personnes",
+                marche: "Industries chimiques, agroalimentaires, énergie",
+                production_annuelle: "100-200 tonnes",
+                chiffre_affaires_estime: "350,000-700,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Découpe", "Formage", "Soudage", "Contrôle"],
+                produits: ["Cuves", "Réservoirs", "Échangeurs thermiques"],
+                avantages: ["Demande industrielle", "Marges intéressantes"],
+                challenges: ["Normes pression", "Qualification personnel"]
+            },
+            mecanosoudure: {
+                nom: "Mécanosoudure",
+                filiereNom: "Métallurgie & Mécanique",
+                capex_min: 65000,
+                description: "Travaux de soudure et fabrication métallique",
+                superficie: "400-700 m²",
+                personnel: "15-25 personnes",
+                marche: "BTP, industries, particuliers",
+                production_annuelle: "50-100 tonnes",
+                chiffre_affaires_estime: "200,000-400,000 $/an",
+                marge_brute: "40-55%",
+                processus: ["Mesurage", "Découpe", "Soudage", "Finition"],
+                produits: ["Structures métalliques", "Garde-corps", "Portails"],
+                avantages: ["Demande BTP", "Flexibilité production"],
+                challenges: ["Concurrence informelle", "Qualité soudure"]
+            },
+            structures: {
+                nom: "Structures métalliques",
+                filiereNom: "Métallurgie & Mécanique",
+                capex_min: 100000,
+                description: "Fabrication de structures métalliques pour BTP",
+                superficie: "700-1000 m²",
+                personnel: "25-40 personnes",
+                marche: "Bâtiment, travaux publics, industrie",
+                production_annuelle: "200-400 tonnes",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Conception", "Découpe", "Assemblage", "Galbage"],
+                produits: ["Charpentes", "Poutres", "Poteaux", "Treillis"],
+                avantages: ["Développement BTP", "Commandes importantes"],
+                challenges: ["Logistique transport", "Concurrence étrangère"]
+            },
+            pieces: {
+                nom: "Pièces détachées automobiles",
+                filiereNom: "Métallurgie & Mécanique",
+                capex_min: 140000,
+                description: "Fabrication de pièces automobiles",
+                superficie: "600-900 m²",
+                personnel: "30-50 personnes",
+                marche: "Garages, concessionnaires, réparateurs",
+                production_annuelle: "50,000-100,000 pièces",
+                chiffre_affaires_estime: "600,000-1,200,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Usinage", "Estampage", "Traitement thermique", "Contrôle"],
+                produits: ["Pièces moteur", "Pièces suspension", "Pièces freinage"],
+                avantages: ["Import substitution", "Marché automobile en croissance"],
+                challenges: ["Normes qualité automobiles", "Concurrence importations"]
+            },
+            quincaillerie: {
+                nom: "Quincaillerie industrielle",
+                filiereNom: "Métallurgie & Mécanique",
+                capex_min: 75000,
+                description: "Fabrication d'articles de quincaillerie",
+                superficie: "400-700 m²",
+                personnel: "20-30 personnes",
+                marche: "Quincailleries, BTP, grande distribution",
+                production_annuelle: "100,000-200,000 unités",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Estampage", "Usinage", "Trempe", "Finition"],
+                produits: ["Vis", "Boulons", "Écrous", "Rondelles"],
+                avantages: ["Demande constante", "Import substitution"],
+                challenges: ["Concurrence asiatique", "Qualité standardisée"]
+            },
+
+            // ===== PLASTIQUE & CAOUTCHOUC (8 unités) =====
+            sacs: {
+                nom: "Sacs en plastique",
+                filiereNom: "Plastique & Caoutchouc",
+                capex_min: 75000,
+                description: "Production de sacs en plastique biodégradables",
+                superficie: "400-700 m²",
+                personnel: "15-25 personnes",
+                marche: "Supermarchés, commerces, industries",
+                production_annuelle: "500-1,000 tonnes",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Extrusion", "Soufflage", "Impression", "Découpe"],
+                produits: ["Sacs biodégradables", "Sacs poubelle", "Sacs shopping"],
+                avantages: ["Demande constante", "Processus maîtrisé"],
+                challenges: ["Réglementation environnementale", "Concurrence"]
+            },
+            bouteilles_pet: {
+                nom: "Bouteilles PET",
+                filiereNom: "Plastique & Caoutchouc",
+                capex_min: 110000,
+                description: "Production de bouteilles en PET pour boissons",
+                superficie: "500-800 m²",
+                personnel: "20-30 personnes",
+                marche: "Industries boissons, eau minérale, jus",
+                production_annuelle: "10-20 millions d'unités",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Injection-soufflage", "Contrôle qualité", "Conditionnement"],
+                produits: ["Bouteilles eau", "Bouteilles soda", "Bouteilles jus"],
+                avantages: ["Demande croissante", "Contrats industries"],
+                challenges: ["Concurrence multinationales", "Qualité PET"]
+            },
+            tuyaux_pvc: {
+                nom: "Tuyaux PVC",
+                filiereNom: "Plastique & Caoutchouc",
+                capex_min: 130000,
+                description: "Fabrication de tuyaux PVC pour construction",
+                superficie: "600-900 m²",
+                personnel: "25-40 personnes",
+                marche: "BTP, agricole, industries",
+                production_annuelle: "500-1,000 tonnes",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Extrusion", "Refroidissement", "Découpe", "Contrôle"],
+                produits: ["Tuyaux irrigation", "Tuyaux drainage", "Tuyaux construction"],
+                avantages: ["Développement BTP", "Demande agricole"],
+                challenges: ["Concurrence importations", "Qualité matières premières"]
+            },
+            emballages: {
+                nom: "Emballages plastique",
+                filiereNom: "Plastique & Caoutchouc",
+                capex_min: 85000,
+                description: "Fabrication d'emballages plastique pour industries",
+                superficie: "500-800 m²",
+                personnel: "20-30 personnes",
+                marche: "Industries agroalimentaires, pharmaceutiques, cosmétiques",
+                production_annuelle: "200-400 tonnes",
+                chiffre_affaires_estime: "350,000-700,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Thermoformage", "Impression", "Découpe", "Conditionnement"],
+                produits: ["Barquettes", "Pots", "Blisters", "Sachets"],
+                avantages: ["Demande industries", "Marges intéressantes"],
+                challenges: ["Normes alimentaires", "Concurrence"]
+            },
+            profilés: {
+                nom: "Profilés plastique",
+                filiereNom: "Plastique & Caoutchouc",
+                capex_min: 120000,
+                description: "Production de profilés plastique pour construction",
+                superficie: "600-900 m²",
+                personnel: "25-40 personnes",
+                marche: "BTP, menuiserie, ameublement",
+                production_annuelle: "300-600 tonnes",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Extrusion", "Calibrage", "Découpe", "Contrôle"],
+                produits: ["Profilés fenêtres", "Plinthes", "Corniches", "Goulottes"],
+                avantages: ["Substitution bois", "Durabilité"],
+                challenges: ["Concurrence importations", "Marketing"]
+            },
+            jouets: {
+                nom: "Jouets en plastique",
+                filiereNom: "Plastique & Caoutchouc",
+                capex_min: 70000,
+                description: "Fabrication de jouets éducatifs en plastique",
+                superficie: "400-700 m²",
+                personnel: "20-30 personnes",
+                marche: "Supermarchés, boutiques jouets, écoles",
+                production_annuelle: "50,000-100,000 unités",
+                chiffre_affaires_estime: "250,000-500,000 $/an",
+                marge_brute: "40-55%",
+                processus: ["Injection", "Assemblage", "Peinture", "Contrôle"],
+                produits: ["Jouets éducatifs", "Poupées", "Véhicules miniatures"],
+                avantages: ["Demande croissante", "Valeur éducative"],
+                challenges: ["Normes sécurité", "Concurrence asiatique"]
+            },
+            joints: {
+                nom: "Joints et pièces caoutchouc",
+                filiereNom: "Plastique & Caoutchouc",
+                capex_min: 60000,
+                description: "Fabrication de joints et pièces en caoutchouc",
+                superficie: "300-500 m²",
+                personnel: "15-25 personnes",
+                marche: "Industries automobile, BTP, mécanique",
+                production_annuelle: "100,000-200,000 pièces",
+                chiffre_affaires_estime: "200,000-400,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Moulage", "Vulcanisation", "Découpe", "Contrôle"],
+                produits: ["Joints d'étanchéité", "Silentblocs", "Pièces techniques"],
+                avantages: ["Demande industrielle", "Import substitution"],
+                challenges: ["Qualité caoutchouc", "Concurrence"]
+            },
+            granules: {
+                nom: "Granulés plastique recyclé",
+                filiereNom: "Plastique & Caoutchouc",
+                capex_min: 150000,
+                description: "Recyclage plastique en granulés réutilisables",
+                superficie: "800-1200 m²",
+                personnel: "20-35 personnes",
+                marche: "Industries plastique, export",
+                production_annuelle: "500-1,000 tonnes",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Tri", "Broyage", "Lavage", "Extrusion"],
+                produits: ["Granulés PET", "Granulés PEHD", "Granulés PP"],
+                avantages: ["Écologique", "Demande croissante", "Subventions"],
+                challenges: ["Qualité déchets", "Logistique collecte"]
+            },
+
+            // ===== ÉLECTRONIQUE & ÉLECTRICITÉ (8 unités) =====
+            cables: {
+                nom: "Câbles électriques",
+                filiereNom: "Électronique & Électricité",
+                capex_min: 125000,
+                description: "Fabrication de câbles électriques et conducteurs",
+                superficie: "600-900 m²",
+                personnel: "25-40 personnes",
+                marche: "BTP, industries, distributeurs électricité",
+                production_annuelle: "100-200 tonnes",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Tréfilage", "Isolation", "Tressage", "Contrôle"],
+                produits: ["Câbles bâtiment", "Câbles industriels", "Câbles basse tension"],
+                avantages: ["Développement BTP", "Demande énergie"],
+                challenges: ["Normes sécurité", "Concurrence importations"]
+            },
+            panneaux_solaires: {
+                nom: "Panneaux solaires",
+                filiereNom: "Électronique & Électricité",
+                capex_min: 180000,
+                description: "Assemblage de panneaux solaires photovoltaïques",
+                superficie: "800-1200 m²",
+                personnel: "30-50 personnes",
+                marche: "Particuliers, entreprises, projets publics",
+                production_annuelle: "5,000-10,000 unités",
+                chiffre_affaires_estime: "600,000-1,200,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Découpe cellules", "Soudure", "Encapsulation", "Test"],
+                produits: ["Panneaux solaires", "Kits solaires", "Onduleurs"],
+                avantages: ["Énergie renouvelable", "Subventions possibles"],
+                challenges: ["Import composants", "Concurrence chinoise"]
+            },
+            appareils: {
+                nom: "Appareils électroménagers",
+                filiereNom: "Électronique & Électricité",
+                capex_min: 95000,
+                description: "Assemblage d'appareils électroménagers",
+                superficie: "600-900 m²",
+                personnel: "30-50 personnes",
+                marche: "Supermarchés, électroménagers, particuliers",
+                production_annuelle: "10,000-20,000 unités",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Assemblage", "Câblage", "Test", "Conditionnement"],
+                produits: ["Ventilateurs", "Chauffe-eau", "Réfrigérateurs", "Cuisinières"],
+                avantages: ["Import substitution", "Demande croissante"],
+                challenges: ["Import composants", "Concurrence"]
+            },
+            led: {
+                nom: "Éclairage LED",
+                filiereNom: "Électronique & Électricité",
+                capex_min: 65000,
+                description: "Fabrication de luminaires et ampoules LED",
+                superficie: "400-700 m²",
+                personnel: "20-30 personnes",
+                marche: "BTP, particuliers, collectivités",
+                production_annuelle: "50,000-100,000 unités",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Assemblage circuits", "Montage", "Test", "Conditionnement"],
+                produits: ["Ampoules LED", "Tubes LED", "Luminaires LED"],
+                avantages: ["Économie énergie", "Demande croissante"],
+                challenges: ["Import composants", "Concurrence asiatique"]
+            },
+            tableaux: {
+                nom: "Tableaux électriques",
+                filiereNom: "Électronique & Électricité",
+                capex_min: 85000,
+                description: "Fabrication de tableaux électriques et armoires",
+                superficie: "500-800 m²",
+                personnel: "20-35 personnes",
+                marche: "BTP, industries, électriciens",
+                production_annuelle: "5,000-10,000 unités",
+                chiffre_affaires_estime: "350,000-700,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Découpe tôles", "Peinture", "Câblage", "Test"],
+                produits: ["Tableaux divisionnaires", "Armoires industrielles", "Coffrets"],
+                avantages: ["Développement BTP", "Demande constante"],
+                challenges: ["Normes électriques", "Concurrence"]
+            },
+            onduleurs: {
+                nom: "Onduleurs et convertisseurs",
+                filiereNom: "Électronique & Électricité",
+                capex_min: 110000,
+                description: "Fabrication d'onduleurs et convertisseurs de puissance",
+                superficie: "500-800 m²",
+                personnel: "25-40 personnes",
+                marche: "Télécoms, industries, solaire",
+                production_annuelle: "5,000-10,000 unités",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Assemblage électronique", "Programmation", "Test", "Calibration"],
+                produits: ["Onduleurs solaires", "Convertisseurs DC/AC", "Stabilisateurs"],
+                avantages: ["Développement énergie", "Demande croissante"],
+                challenges: ["Technologie complexe", "Import composants"]
+            },
+            compteurs: {
+                nom: "Compteurs électriques",
+                filiereNom: "Électronique & Électricité",
+                capex_min: 150000,
+                description: "Fabrication de compteurs électriques intelligents",
+                superficie: "600-900 m²",
+                personnel: "30-50 personnes",
+                marche: "Distributeurs électricité, industries, BTP",
+                production_annuelle: "20,000-40,000 unités",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Assemblage électronique", "Programmation", "Test", "Étalonnage"],
+                produits: ["Compteurs monophasés", "Compteurs triphasés", "Compteurs intelligents"],
+                avantages: ["Modernisation réseaux", "Contrats institutionnels"],
+                challenges: ["Normes précises", "Concurrence internationale"]
+            },
+            batteries: {
+                nom: "Batteries et accumulateurs",
+                filiereNom: "Électronique & Électricité",
+                capex_min: 200000,
+                description: "Fabrication de batteries et accumulateurs",
+                superficie: "800-1200 m²",
+                personnel: "40-60 personnes",
+                marche: "Automobile, solaire, télécoms, industries",
+                production_annuelle: "10,000-20,000 unités",
+                chiffre_affaires_estime: "600,000-1,200,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Assemblage cellules", "Remplissage électrolyte", "Charge", "Test"],
+                produits: ["Batteries automobiles", "Batteries solaires", "Batteries industrielles"],
+                avantages: ["Demande énergie", "Import substitution"],
+                challenges: ["Import composants", "Recyclage"]
+            },
+
+            // ===== BTP & MATÉRIAUX CONSTRUCTION (8 unités) =====
+            cimenterie: {
+                nom: "Mini-cimenterie",
+                filiereNom: "BTP & Matériaux Construction",
+                capex_min: 600000,
+                description: "Production de ciment à échelle régionale",
+                superficie: "2000-3000 m²",
+                personnel: "50-80 personnes",
+                marche: "BTP, projets publics, particuliers",
+                production_annuelle: "50,000-100,000 tonnes",
+                chiffre_affaires_estime: "3,000,000-6,000,000 $/an",
+                marge_brute: "20-35%",
+                processus: ["Broyage clinker", "Ajout additifs", "Broyage fin", "Conditionnement"],
+                produits: ["Ciment Portland", "Ciment pouzzolanique", "Ciments spéciaux"],
+                avantages: ["Développement BTP", "Demande forte"],
+                challenges: ["Investissement élevé", "Concurrence multinationales"]
+            },
+            briques: {
+                nom: "Briques et tuiles",
+                filiereNom: "BTP & Matériaux Construction",
+                capex_min: 55000,
+                description: "Fabrication de briques et tuiles en terre cuite",
+                superficie: "500-800 m²",
+                personnel: "20-30 personnes",
+                marche: "BTP, particuliers, projets publics",
+                production_annuelle: "1-2 millions d'unités",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Malaxage argile", "Moulage", "Séchage", "Cuisson"],
+                produits: ["Briques pleines", "Briques creuses", "Tuiles"],
+                avantages: ["Matériaux locaux", "Développement BTP"],
+                challenges: ["Consommation énergie", "Concurrence"]
+            },
+            prefab: {
+                nom: "Éléments préfabriqués",
+                filiereNom: "BTP & Matériaux Construction",
+                capex_min: 110000,
+                description: "Fabrication d'éléments préfabriqués en béton",
+                superficie: "800-1200 m²",
+                personnel: "25-40 personnes",
+                marche: "BTP, construction modulaire, projets publics",
+                production_annuelle: "5,000-10,000 m²",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Préparation moules", "Bétonnage", "Compactage", "Démoulage"],
+                produits: ["Dalles", "Poutres", "Murs préfabriqués", "Escaliers"],
+                avantages: ["Gain de temps chantier", "Qualité constante"],
+                challenges: ["Logistique transport", "Concurrence"]
+            },
+            tuiles: {
+                nom: "Tuiles et éléments toiture",
+                filiereNom: "BTP & Matériaux Construction",
+                capex_min: 85000,
+                description: "Fabrication de tuiles et éléments de toiture",
+                superficie: "600-900 m²",
+                personnel: "20-35 personnes",
+                marche: "BTP, particuliers, rénovation",
+                production_annuelle: "500,000-1,000,000 unités",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Malaxage", "Extrusion", "Découpe", "Cuisson"],
+                produits: ["Tuiles terre cuite", "Tuiles béton", "Éléments toiture"],
+                avantages: ["Matériaux locaux", "Demande construction"],
+                challenges: ["Investissement fours", "Concurrence"]
+            },
+            agglos: {
+                nom: "Agglos et parpaings",
+                filiereNom: "BTP & Matériaux Construction",
+                capex_min: 75000,
+                description: "Fabrication d'agglos et parpaings en béton",
+                superficie: "500-800 m²",
+                personnel: "15-25 personnes",
+                marche: "BTP, particuliers, maçons",
+                production_annuelle: "500,000-1,000,000 unités",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Mélange béton", "Vibration", "Séchage", "Stockage"],
+                produits: ["Agglos creux", "Parpaings", "Blocs de béton"],
+                avantages: ["Processus simple", "Demande constante"],
+                challenges: ["Concurrence locale", "Prix ciment"]
+            },
+            peintures_btp: {
+                nom: "Peintures BTP",
+                filiereNom: "BTP & Matériaux Construction",
+                capex_min: 95000,
+                description: "Fabrication de peintures pour bâtiment",
+                superficie: "500-800 m²",
+                personnel: "20-30 personnes",
+                marche: "Quincailleries, BTP, particuliers",
+                production_annuelle: "100-200 tonnes",
+                chiffre_affaires_estime: "350,000-700,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Dispersion pigments", "Mélange", "Homogénéisation", "Conditionnement"],
+                produits: ["Peintures façade", "Peintures intérieures", "Enduits"],
+                avantages: ["Développement BTP", "Demande locale"],
+                challenges: ["Import pigments", "Concurrence"]
+            },
+            centrale_beton: {
+                nom: "Centrale à béton",
+                filiereNom: "BTP & Matériaux Construction",
+                capex_min: 150000,
+                description: "Production et livraison de béton prêt à l'emploi",
+                superficie: "1000-1500 m²",
+                personnel: "20-35 personnes",
+                marche: "BTP, projets publics, grands chantiers",
+                production_annuelle: "20,000-40,000 m³",
+                chiffre_affaires_estime: "800,000-1,600,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Dosage", "Malaxage", "Contrôle", "Livraison"],
+                produits: ["Béton prêt à l'emploi", "Bétons spéciaux", "Mortiers"],
+                avantages: ["Gain de temps chantier", "Qualité contrôlée"],
+                challenges: ["Logistique camions", "Concurrence"]
+            },
+            menuiserie: {
+                nom: "Menuiserie aluminium/PVC",
+                filiereNom: "BTP & Matériaux Construction",
+                capex_min: 150000,
+                description: "Fabrication de menuiseries aluminium et PVC",
+                superficie: "800-1200 m²",
+                personnel: "30-50 personnes",
+                marche: "BTP, particuliers, rénovation",
+                production_annuelle: "10,000-20,000 m²",
+                chiffre_affaires_estime: "600,000-1,200,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Découpe profilés", "Assemblage", "Montage vitrage", "Finition"],
+                produits: ["Fenêtres", "Portes-fenêtres", "Vérandas", "Façades"],
+                avantages: ["Isolation thermique", "Développement BTP"],
+                challenges: ["Import profilés", "Concurrence"]
+            },
+
+            // ===== MÉDICAL & PHARMACEUTIQUE (8 unités) =====
+            masques: {
+                nom: "Masques et protections",
+                filiereNom: "Médical & Pharmaceutique",
+                capex_min: 35000,
+                description: "Fabrication de masques et équipements de protection",
+                superficie: "300-500 m²",
+                personnel: "15-25 personnes",
+                marche: "Hôpitaux, pharmacies, entreprises",
+                production_annuelle: "1-2 millions d'unités",
+                chiffre_affaires_estime: "200,000-400,000 $/an",
+                marge_brute: "40-55%",
+                processus: ["Découpe", "Assemblage", "Stérilisation", "Conditionnement"],
+                produits: ["Masques chirurgicaux", "Masques FFP2", "Blouses"],
+                avantages: ["Demande santé", "Normes locales adaptées"],
+                challenges: ["Normes sanitaires", "Concurrence importations"]
+            },
+            pansements: {
+                nom: "Pansements et compresses",
+                filiereNom: "Médical & Pharmaceutique",
+                capex_min: 45000,
+                description: "Fabrication de pansements et matériels stériles",
+                superficie: "400-700 m²",
+                personnel: "20-30 personnes",
+                marche: "Hôpitaux, cliniques, pharmacies",
+                production_annuelle: "500,000-1,000,000 unités",
+                chiffre_affaires_estime: "250,000-500,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Découpe", "Stérilisation", "Conditionnement stérile", "Contrôle"],
+                produits: ["Compresses", "Pansements", "Sutures", "Bandages"],
+                avantages: ["Demande constante", "Import substitution"],
+                challenges: ["Normes stérilité", "Certifications"]
+            },
+            mobilier: {
+                nom: "Mobilier médical",
+                filiereNom: "Médical & Pharmaceutique",
+                capex_min: 70000,
+                description: "Fabrication de mobilier pour établissements de santé",
+                superficie: "500-800 m²",
+                personnel: "25-40 personnes",
+                marche: "Hôpitaux, cliniques, laboratoires",
+                production_annuelle: "5,000-10,000 unités",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Découpe", "Assemblage", "Finitions", "Contrôle"],
+                produits: ["Lits médicaux", "Tables d'examen", "Armoires pharmacies"],
+                avantages: ["Développement santé", "Commandes institutionnelles"],
+                challenges: ["Normes spécifiques", "Concurrence"]
+            },
+            fauteuils: {
+                nom: "Fauteuils roulants",
+                filiereNom: "Médical & Pharmaceutique",
+                capex_min: 85000,
+                description: "Fabrication de fauteuils roulants et aides mobilité",
+                superficie: "600-900 m²",
+                personnel: "30-50 personnes",
+                marche: "Hôpitaux, particuliers, associations",
+                production_annuelle: "2,000-5,000 unités",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Découpe tubes", "Soudage", "Montage", "Test"],
+                produits: ["Fauteuils manuels", "Fauteuils électriques", "Déambulateurs"],
+                avantages: ["Demande santé", "Aide personnes handicapées"],
+                challenges: ["Normes sécurité", "Import composants"]
+            },
+            instruments: {
+                nom: "Instruments médicaux",
+                filiereNom: "Médical & Pharmaceutique",
+                capex_min: 120000,
+                description: "Fabrication d'instruments médicaux stérilisables",
+                superficie: "500-800 m²",
+                personnel: "25-40 personnes",
+                marche: "Hôpitaux, cliniques, cabinets médicaux",
+                production_annuelle: "50,000-100,000 unités",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "40-60%",
+                processus: ["Usinage", "Polissage", "Stérilisation", "Contrôle"],
+                produits: ["Pinces", "Scalpels", "Ciseaux chirurgicaux", "Speculums"],
+                avantages: ["Import substitution", "Marges élevées"],
+                challenges: ["Précision usinage", "Normes médicales"]
+            },
+            bequilles: {
+                nom: "Béquilles et cannes",
+                filiereNom: "Médical & Pharmaceutique",
+                capex_min: 55000,
+                description: "Fabrication d'aides à la marche",
+                superficie: "400-700 m²",
+                personnel: "20-30 personnes",
+                marche: "Pharmacies, hôpitaux, particuliers",
+                production_annuelle: "20,000-40,000 unités",
+                chiffre_affaires_estime: "250,000-500,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Découpe aluminium", "Formage", "Assemblage", "Test"],
+                produits: ["Béquilles", "Cannes anglaises", "Canes", "Marchettes"],
+                avantages: ["Demande constante", "Processus simple"],
+                challenges: ["Confort utilisateur", "Concurrence importations"]
+            },
+            antiseptiques: {
+                nom: "Antiseptiques et désinfectants",
+                filiereNom: "Médical & Pharmaceutique",
+                capex_min: 65000,
+                description: "Fabrication de produits antiseptiques et désinfectants",
+                superficie: "400-700 m²",
+                personnel: "15-25 personnes",
+                marche: "Hôpitaux, pharmacies, collectivités",
+                production_annuelle: "50-100 tonnes",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "40-55%",
+                processus: ["Formulation", "Mélange", "Conditionnement", "Contrôle"],
+                produits: ["Solution hydroalcoolique", "Bétadine", "Chlorhexidine", "Désinfectants"],
+                avantages: ["Demande santé", "Normes locales"],
+                challenges: ["Normes pharmaceutiques", "Concurrence"]
+            },
+            kits: {
+                nom: "Kits médicaux et premiers secours",
+                filiereNom: "Médical & Pharmaceutique",
+                capex_min: 50000,
+                description: "Assemblage de kits médicaux et de premiers secours",
+                superficie: "300-500 m²",
+                personnel: "20-30 personnes",
+                marche: "Entreprises, écoles, collectivités, particuliers",
+                production_annuelle: "50,000-100,000 kits",
+                chiffre_affaires_estime: "200,000-400,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Assemblage", "Contrôle", "Conditionnement", "Étiquetage"],
+                produits: ["Kits premiers secours", "Kits voyage", "Kits spécialisés"],
+                avantages: ["Demande prévention", "Valeur ajoutée assemblage"],
+                challenges: ["Normes contenu", "Concurrence"]
+            },
+
+            // ===== ASSEMBLAGE & MONTAGE (8 unités) =====
+            smartphones: {
+                nom: "Assemblage smartphones",
+                filiereNom: "Assemblage & Montage",
+                capex_min: 250000,
+                description: "Assemblage de smartphones et tablettes",
+                superficie: "1000-1500 m²",
+                personnel: "50-80 personnes",
+                marche: "Distributeurs, opérateurs télécoms, détaillants",
+                production_annuelle: "50,000-100,000 unités",
+                chiffre_affaires_estime: "2,000,000-4,000,000 $/an",
+                marge_brute: "20-35%",
+                processus: ["Assemblage composants", "Test logiciel", "Contrôle qualité", "Conditionnement"],
+                produits: ["Smartphones", "Tablettes", "Accessoires"],
+                avantages: ["Marché en croissance", "Création emplois"],
+                challenges: ["Import composants", "Concurrence asiatique"]
+            },
+            ordinateurs: {
+                nom: "Assemblage ordinateurs",
+                filiereNom: "Assemblage & Montage",
+                capex_min: 150000,
+                description: "Assemblage d'ordinateurs et périphériques",
+                superficie: "800-1200 m²",
+                personnel: "30-50 personnes",
+                marche: "Entreprises, écoles, administrations, particuliers",
+                production_annuelle: "10,000-20,000 unités",
+                chiffre_affaires_estime: "1,000,000-2,000,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Assemblage", "Installation logiciels", "Test", "Conditionnement"],
+                produits: ["Ordinateurs fixes", "Ordinateurs portables", "Serveurs"],
+                avantages: ["Import substitution", "Demande numérique"],
+                challenges: ["Import composants", "Évolution technologique"]
+            },
+            electromenager: {
+                nom: "Assemblage électroménager",
+                filiereNom: "Assemblage & Montage",
+                capex_min: 220000,
+                description: "Assemblage d'appareils électroménagers",
+                superficie: "1000-1500 m²",
+                personnel: "40-60 personnes",
+                marche: "Supermarchés, détaillants, particuliers",
+                production_annuelle: "20,000-40,000 unités",
+                chiffre_affaires_estime: "1,500,000-3,000,000 $/an",
+                marge_brute: "20-35%",
+                processus: ["Assemblage", "Câblage", "Test sécurité", "Conditionnement"],
+                produits: ["Réfrigérateurs", "Cuisinières", "Lave-linges", "Climatiseurs"],
+                avantages: ["Import substitution", "Demande ménages"],
+                challenges: ["Import composants", "Concurrence multinationales"]
+            },
+            climatiseurs: {
+                nom: "Assemblage climatiseurs",
+                filiereNom: "Assemblage & Montage",
+                capex_min: 220000,
+                description: "Assemblage de climatiseurs et systèmes de refroidissement",
+                superficie: "800-1200 m²",
+                personnel: "30-50 personnes",
+                marche: "Bâtiment, industries, particuliers",
+                production_annuelle: "10,000-20,000 unités",
+                chiffre_affaires_estime: "1,200,000-2,400,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Assemblage", "Remplissage gaz", "Test", "Calibration"],
+                produits: ["Climatiseurs split", "Climatiseurs window", "Systèmes VRV"],
+                avantages: ["Climat tropical", "Demande croissante"],
+                challenges: ["Import compresseurs", "Normes efficacité énergétique"]
+            },
+            motos: {
+                nom: "Assemblage motos",
+                filiereNom: "Assemblage & Montage",
+                capex_min: 280000,
+                description: "Assemblage de motos et deux-roues",
+                superficie: "1500-2000 m²",
+                personnel: "50-80 personnes",
+                marche: "Distributeurs, locations, particuliers",
+                production_annuelle: "5,000-10,000 unités",
+                chiffre_affaires_estime: "2,500,000-5,000,000 $/an",
+                marge_brute: "20-35%",
+                processus: ["Assemblage châssis", "Montage moteur", "Câblage", "Test"],
+                produits: ["Motos 125cc", "Scooters", "Tricycles", "Quads"],
+                avantages: ["Transport urbain", "Demande mobilité"],
+                challenges: ["Import moteurs", "Concurrence asiatique"]
+            },
+            velos: {
+                nom: "Assemblage vélos",
+                filiereNom: "Assemblage & Montage",
+                capex_min: 100000,
+                description: "Assemblage de vélos et cycles",
+                superficie: "600-900 m²",
+                personnel: "25-40 personnes",
+                marche: "Distributeurs, locations, particuliers",
+                production_annuelle: "20,000-40,000 unités",
+                chiffre_affaires_estime: "800,000-1,600,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Assemblage cadre", "Montage roues", "Réglage", "Test"],
+                produits: ["Vélos adultes", "Vélos enfants", "Vélos électriques"],
+                avantages: ["Mobilité durable", "Demande loisirs"],
+                challenges: ["Import pièces", "Concurrence"]
+            },
+            meubles: {
+                nom: "Assemblage meubles",
+                filiereNom: "Assemblage & Montage",
+                capex_min: 70000,
+                description: "Assemblage de meubles en kit et modulaires",
+                superficie: "500-800 m²",
+                personnel: "20-35 personnes",
+                marche: "Supermarchés, boutiques meubles, particuliers",
+                production_annuelle: "50,000-100,000 unités",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Découpe panneaux", "Perçage", "Assemblage", "Conditionnement"],
+                produits: ["Meubles cuisine", "Meubles salon", "Meubles bureau", "Armoires"],
+                avantages: ["Décoration intérieure", "Demande croissante"],
+                challenges: ["Import panneaux", "Concurrence"]
+            },
+            equipements: {
+                nom: "Équipements sportifs",
+                filiereNom: "Assemblage & Montage",
+                capex_min: 180000,
+                description: "Assemblage d'équipements sportifs et de fitness",
+                superficie: "800-1200 m²",
+                personnel: "30-50 personnes",
+                marche: "Salles de sport, écoles, particuliers",
+                production_annuelle: "10,000-20,000 unités",
+                chiffre_affaires_estime: "600,000-1,200,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Découpe tubes", "Soudage", "Montage", "Test"],
+                produits: ["Appareils fitness", "Buts football", "Paniers basketball", "Équipements gym"],
+                avantages: ["Développement sport", "Demande santé"],
+                challenges: ["Normes sécurité", "Import composants"]
+            },
+
+            // ===== RECYCLAGE & ENVIRONNEMENT (8 unités) =====
+            plastique: {
+                nom: "Recyclage plastique",
+                filiereNom: "Recyclage & Environnement",
+                capex_min: 110000,
+                description: "Recyclage et transformation de déchets plastiques",
+                superficie: "800-1200 m²",
+                personnel: "20-35 personnes",
+                marche: "Industries plastique, export",
+                production_annuelle: "500-1,000 tonnes",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Collecte", "Tri", "Broyage", "Extrusion"],
+                produits: ["Granulés recyclés", "Paillettes", "Produits finis recyclés"],
+                avantages: ["Écologique", "Subventions possibles"],
+                challenges: ["Qualité déchets", "Logistique collecte"]
+            },
+            papier: {
+                nom: "Recyclage papier/carton",
+                filiereNom: "Recyclage & Environnement",
+                capex_min: 120000,
+                description: "Recyclage de papier et carton",
+                superficie: "800-1200 m²",
+                personnel: "25-40 personnes",
+                marche: "Industries emballage, papeteries",
+                production_annuelle: "1,000-2,000 tonnes",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Tri", "Désencrage", "Pulpage", "Séchage"],
+                produits: ["Pâte recyclée", "Carton ondulé", "Papier recyclé"],
+                avantages: ["Écologique", "Demande emballage"],
+                challenges: ["Consommation eau", "Traitement effluents"]
+            },
+            metaux: {
+                nom: "Recyclage métaux",
+                filiereNom: "Recyclage & Environnement",
+                capex_min: 130000,
+                description: "Recyclage de métaux ferreux et non-ferreux",
+                superficie: "1000-1500 m²",
+                personnel: "20-35 personnes",
+                marche: "Fonderies, industries, export",
+                production_annuelle: "1,000-2,000 tonnes",
+                chiffre_affaires_estime: "600,000-1,200,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Collecte", "Tri", "Broyage", "Compactage"],
+                produits: ["Ferraille", "Aluminium", "Cuivre", "Laiton"],
+                avantages: ["Économie ressources", "Export possible"],
+                challenges: ["Logistique collecte", "Qualité tri"]
+            },
+            compost: {
+                nom: "Compost et engrais organiques",
+                filiereNom: "Recyclage & Environnement",
+                capex_min: 55000,
+                description: "Transformation de déchets organiques en compost",
+                superficie: "500-800 m²",
+                personnel: "15-25 personnes",
+                marche: "Agriculture, jardineries, collectivités",
+                production_annuelle: "500-1,000 tonnes",
+                chiffre_affaires_estime: "200,000-400,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Collecte", "Tri", "Compostage", "Maturation"],
+                produits: ["Compost", "Engrais organiques", "Terreaux"],
+                avantages: ["Écologique", "Agriculture biologique"],
+                challenges: ["Contrôle qualité", "Logistique collecte"]
+            },
+            verre: {
+                nom: "Recyclage verre",
+                filiereNom: "Recyclage & Environnement",
+                capex_min: 150000,
+                description: "Recyclage de verre usagé",
+                superficie: "800-1200 m²",
+                personnel: "20-35 personnes",
+                marche: "Verreries, industries, BTP",
+                production_annuelle: "1,000-2,000 tonnes",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Collecte", "Tri", "Broyage", "Fonte"],
+                produits: ["Calcin", "Verre recyclé", "Produits verriers"],
+                avantages: ["Écologique", "Économie énergie"],
+                challenges: ["Tri par couleur", "Logistique collecte"]
+            },
+            pneus: {
+                nom: "Recyclage pneus",
+                filiereNom: "Recyclage & Environnement",
+                capex_min: 150000,
+                description: "Recyclage et valorisation de pneus usagés",
+                superficie: "1000-1500 m²",
+                personnel: "25-40 personnes",
+                marche: "BTP, industries, énergie",
+                production_annuelle: "500-1,000 tonnes",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Collecte", "Découpe", "Broyage", "Granulation"],
+                produits: ["Granulés caoutchouc", "Poudre caoutchouc", "Combustible"],
+                avantages: ["Problème environnemental", "Valorisation déchets"],
+                challenges: ["Équipements spécialisés", "Logistique collecte"]
+            },
+            huiles: {
+                nom: "Recyclage huiles usagées",
+                filiereNom: "Recyclage & Environnement",
+                capex_min: 85000,
+                description: "Recyclage et régénération d'huiles usagées",
+                superficie: "500-800 m²",
+                personnel: "15-25 personnes",
+                marche: "Industries, garages, énergie",
+                production_annuelle: "500-1,000 m³",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Collecte", "Filtration", "Déshydratation", "Raffinage"],
+                produits: ["Huiles régénérées", "Combustibles", "Bases lubrifiantes"],
+                avantages: ["Écologique", "Réduction importations"],
+                challenges: ["Contamination huiles", "Normes environnementales"]
+            },
+            deee: {
+                nom: "Recyclage DEEE",
+                filiereNom: "Recyclage & Environnement",
+                capex_min: 160000,
+                description: "Recyclage de déchets électriques et électroniques",
+                superficie: "1000-1500 m²",
+                personnel: "30-50 personnes",
+                marche: "Récupération métaux, composants, export",
+                production_annuelle: "500-1,000 tonnes",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Collecte", "Démantèlement", "Tri", "Valorisation"],
+                produits: ["Métaux précieux", "Plastiques", "Composants réutilisables"],
+                avantages: ["Déchets toxiques", "Valeur métaux précieux"],
+                challenges: ["Traitement déchets dangereux", "Logistique collecte"]
+            },
+
+            // ===== SERVICES INDUSTRIELS (8 unités) =====
+            nettoyage: {
+                nom: "Services de nettoyage industriel",
+                filiereNom: "Services Industriels",
+                capex_min: 40000,
+                description: "Services de nettoyage pour industries et entreprises",
+                superficie: "200-400 m²",
+                personnel: "20-50 personnes",
+                marche: "Industries, centres commerciaux, bureaux",
+                production_annuelle: "Services continus",
+                chiffre_affaires_estime: "200,000-400,000 $/an",
+                marge_brute: "40-60%",
+                processus: ["Évaluation", "Planification", "Exécution", "Contrôle"],
+                produits: ["Nettoyage industriel", "Nettoyage bureaux", "Services spécialisés"],
+                avantages: ["Récurent", "Faible investissement"],
+                challenges: ["Gestion personnel", "Concurrence"]
+            },
+            maintenance: {
+                nom: "Maintenance industrielle",
+                filiereNom: "Services Industriels",
+                capex_min: 90000,
+                description: "Services de maintenance préventive et curative",
+                superficie: "300-500 m²",
+                personnel: "15-30 personnes",
+                marche: "Industries, BTP, énergie",
+                production_annuelle: "Services continus",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Diagnostic", "Intervention", "Pièces de rechange", "Suivi"],
+                produits: ["Maintenance préventive", "Dépannage", "Contrats annuels"],
+                avantages: ["Récurent", "Expertise technique"],
+                challenges: ["Qualification personnel", "Gestion pièces"]
+            },
+            logistique: {
+                nom: "Logistique industrielle",
+                filiereNom: "Services Industriels",
+                capex_min: 120000,
+                description: "Services logistiques et gestion d'entrepôts",
+                superficie: "1000-2000 m²",
+                personnel: "20-40 personnes",
+                marche: "Industries, distribution, commerce",
+                production_annuelle: "Services continus",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Réception", "Stockage", "Préparation commandes", "Expédition"],
+                produits: ["Stockage", "Gestion stocks", "Transport", "Cross-docking"],
+                avantages: ["Développement commerce", "Contrats long terme"],
+                challenges: ["Investissement entrepôts", "Gestion flux"]
+            },
+            formation: {
+                nom: "Formation industrielle",
+                filiereNom: "Services Industriels",
+                capex_min: 70000,
+                description: "Formation technique et professionnelle",
+                superficie: "300-500 m²",
+                personnel: "10-20 personnes",
+                marche: "Entreprises, institutions, particuliers",
+                production_annuelle: "500-1,000 stagiaires",
+                chiffre_affaires_estime: "250,000-500,000 $/an",
+                marge_brute: "40-60%",
+                processus: ["Évaluation besoins", "Développement programmes", "Animation", "Évaluation"],
+                produits: ["Formations techniques", "Certifications", "Ateliers pratiques"],
+                avantages: ["Développement compétences", "Répétitif"],
+                challenges: ["Qualification formateurs", "Accréditation"]
+            },
+            qualite: {
+                nom: "Services qualité",
+                filiereNom: "Services Industriels",
+                capex_min: 60000,
+                description: "Services de contrôle qualité et certification",
+                superficie: "200-400 m²",
+                personnel: "10-20 personnes",
+                marche: "Industries, agroalimentaire, BTP",
+                production_annuelle: "Services continus",
+                chiffre_affaires_estime: "200,000-400,000 $/an",
+                marge_brute: "45-65%",
+                processus: ["Audit", "Contrôle", "Analyses", "Certification"],
+                produits: ["Audits qualité", "Contrôles produits", "Certifications", "Accompagnement"],
+                avantages: ["Expertise spécialisée", "Marges élevées"],
+                challenges: ["Accréditation laboratoires", "Concurrence internationale"]
+            },
+            etudes: {
+                nom: "Études et conseil",
+                filiereNom: "Services Industriels",
+                capex_min: 55000,
+                description: "Services d'études techniques et conseil industriel",
+                superficie: "200-400 m²",
+                personnel: "8-15 personnes",
+                marche: "Industries, investisseurs, institutions",
+                production_annuelle: "50-100 études",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "50-70%",
+                processus: ["Analyse besoins", "Recherche", "Rédaction", "Présentation"],
+                produits: ["Études de faisabilité", "Business plans", "Audits techniques", "Conseil stratégique"],
+                avantages: ["Hautes marges", "Expertise intellectuelle"],
+                challenges: ["Recrutement experts", "Concurrence bureaux d'études"]
+            },
+            securite: {
+                nom: "Sécurité industrielle",
+                filiereNom: "Services Industriels",
+                capex_min: 50000,
+                description: "Services de sécurité et surveillance",
+                superficie: "200-400 m²",
+                personnel: "20-50 personnes",
+                marche: "Industries, sites sensibles, événements",
+                production_annuelle: "Services continus",
+                chiffre_affaires_estime: "250,000-500,000 $/an",
+                marge_brute: "35-55%",
+                processus: ["Évaluation risques", "Planification", "Surveillance", "Intervention"],
+                produits: ["Garde statique", "Surveillance électronique", "Transports de fonds", "Événementiel"],
+                avantages: ["Récurent", "Faible investissement"],
+                challenges: ["Formation agents", "Responsabilité"]
+            },
+            energie: {
+                nom: "Services énergétiques",
+                filiereNom: "Services Industriels",
+                capex_min: 100000,
+                description: "Services d'efficacité énergétique et énergies renouvelables",
+                superficie: "300-500 m²",
+                personnel: "15-30 personnes",
+                marche: "Industries, bâtiments, collectivités",
+                production_annuelle: "Services continus",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Audit énergétique", "Conception", "Installation", "Maintenance"],
+                produits: ["Audits énergétiques", "Installations solaires", "Efficacité énergétique", "Contrats performance"],
+                avantages: ["Énergies renouvelables", "Subventions possibles"],
+                challenges: ["Investissement installations", "Retour sur investissement"]
+            },
+
+            // ===== ÉNERGIE & EAU (8 unités) =====
+            poteaux: {
+                nom: "Poteaux électriques",
+                filiereNom: "Énergie & Eau",
+                capex_min: 150000,
+                description: "Fabrication de poteaux électriques en béton",
+                superficie: "800-1200 m²",
+                personnel: "30-50 personnes",
+                marche: "Sociétés électriques, BTP, projets publics",
+                production_annuelle: "5,000-10,000 unités",
+                chiffre_affaires_estime: "800,000-1,600,000 $/an",
+                marge_brute: "25-40%",
+                processus: ["Préparation moules", "Bétonnage", "Vibration", "Démoulage"],
+                produits: ["Poteaux béton", "Poteaux luminaires", "Supports câbles"],
+                avantages: ["Développement réseaux électriques", "Commandes institutionnelles"],
+                challenges: ["Logistique transport", "Normes électriques"]
+            },
+            compteurs_eau: {
+                nom: "Compteurs d'eau",
+                filiereNom: "Énergie & Eau",
+                capex_min: 120000,
+                description: "Fabrication de compteurs d'eau résidentiels et industriels",
+                superficie: "500-800 m²",
+                personnel: "25-40 personnes",
+                marche: "Sociétés des eaux, BTP, particuliers",
+                production_annuelle: "20,000-40,000 unités",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Moulage plastique", "Assemblage mécanique", "Étalonnage", "Test"],
+                produits: ["Compteurs eau froide", "Compteurs eau chaude", "Compteurs industriels"],
+                avantages: ["Développement réseaux eau", "Import substitution"],
+                challenges: ["Précision mesure", "Concurrence importations"]
+            },
+            kits_solaires: {
+                nom: "Kits solaires domestiques",
+                filiereNom: "Énergie & Eau",
+                capex_min: 100000,
+                description: "Assemblage de kits solaires pour domiciles",
+                superficie: "600-900 m²",
+                personnel: "25-40 personnes",
+                marche: "Zones rurales, particuliers, petits commerces",
+                production_annuelle: "5,000-10,000 kits",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Assemblage panneaux", "Câblage", "Test", "Conditionnement"],
+                produits: ["Kits solaires 100W", "Kits solaires 300W", "Kits solaires 500W"],
+                avantages: ["Électrification rurale", "Énergie renouvelable"],
+                challenges: ["Import composants", "Financement clients"]
+            },
+            lampadaires: {
+                nom: "Lampadaires solaires",
+                filiereNom: "Énergie & Eau",
+                capex_min: 130000,
+                description: "Fabrication de lampadaires solaires autonomes",
+                superficie: "600-900 m²",
+                personnel: "30-50 personnes",
+                marche: "Collectivités, routes, parcs, espaces publics",
+                production_annuelle: "2,000-5,000 unités",
+                chiffre_affaires_estime: "600,000-1,200,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Fabrication mâts", "Assemblage solaire", "Câblage", "Test"],
+                produits: ["Lampadaires solaires", "Éclairage public autonome", "Bornes solaires"],
+                avantages: ["Éclairage public durable", "Contrats collectivités"],
+                challenges: ["Import panneaux solaires", "Maintenance après-vente"]
+            },
+            forage: {
+                nom: "Forage et équipements eau",
+                filiereNom: "Énergie & Eau",
+                capex_min: 160000,
+                description: "Services de forage et équipements hydrauliques",
+                superficie: "800-1200 m²",
+                personnel: "20-35 personnes",
+                marche: "Agriculture, villages, industries",
+                production_annuelle: "50-100 forages",
+                chiffre_affaires_estime: "500,000-1,000,000 $/an",
+                marge_brute: "30-45%",
+                processus: ["Étude géologique", "Forage", "Installation pompes", "Mise en service"],
+                produits: ["Forages manuels", "Forages motorisés", "Pompes solaires", "Réseaux hydrauliques"],
+                avantages: ["Accès eau potable", "Développement agricole"],
+                challenges: ["Équipements spécialisés", "Risques géologiques"]
+            },
+            eau: {
+                nom: "Traitement eau potable",
+                filiereNom: "Énergie & Eau",
+                capex_min: 110000,
+                description: "Unités de traitement d'eau potable",
+                superficie: "500-800 m²",
+                personnel: "20-30 personnes",
+                marche: "Villages, écoles, petites villes, industries",
+                production_annuelle: "10-20 unités",
+                chiffre_affaires_estime: "400,000-800,000 $/an",
+                marge_brute: "35-50%",
+                processus: ["Conception", "Fabrication", "Installation", "Formation"],
+                produits: ["Unités traitement eau", "Stations de potabilisation", "Systèmes filtration"],
+                avantages: ["Santé publique", "Projets développement"],
+                challenges: ["Normes qualité eau", "Maintenance systèmes"]
+            },
+            maintenance_energie: {
+                nom: "Maintenance énergétique",
+                filiereNom: "Énergie & Eau",
+                capex_min: 80000,
+                description: "Services de maintenance pour installations énergétiques",
+                superficie: "300-500 m²",
+                personnel: "15-30 personnes",
+                marche: "Industries, bâtiments, collectivités",
+                production_annuelle: "Services continus",
+                chiffre_affaires_estime: "300,000-600,000 $/an",
+                marge_brute: "40-60%",
+                processus: ["Diagnostic", "Intervention", "Pièces rechange", "Suivi"],
+                produits: ["Maintenance solaire", "Maintenance groupes électrogènes", "Maintenance réseaux"],
+                avantages: ["Récurent", "Expertise spécialisée"],
+                challenges: ["Qualification techniciens", "Gestion pièces"]
+            },
+            audit: {
+                nom: "Audits énergétiques",
+                filiereNom: "Énergie & Eau",
+                capex_min: 60000,
+                description: "Services d'audit et optimisation énergétique",
+                superficie: "200-400 m²",
+                personnel: "10-20 personnes",
+                marche: "Industries, bâtiments, institutions",
+                production_annuelle: "100-200 audits",
+                chiffre_affaires_estime: "250,000-500,000 $/an",
+                marge_brute: "50-70%",
+                processus: ["Analyse consommation", "Mesures", "Recommandations", "Suivi"],
+                produits: ["Audits énergétiques", "Plans d'optimisation", "Certifications", "Formations"],
+                avantages: ["Économies énergie", "Hautes marges"],
+                challenges: ["Expertise technique", "Concurrence"]
+            }
+        };
+
+        // ==============================================
+        // VARIABLES GLOBALES
+        // ==============================================
+        let cart = JSON.parse(localStorage.getItem('p2i_cart')) || [];
+
+        // ==============================================
+        // FONCTIONS UTILITAIRES
+        // ==============================================
+        function formatUSD(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function generateProjectCode(unitId) {
+            const date = new Date().getFullYear().toString().slice(-2);
+            const random = Math.floor(1000 + Math.random() * 9000);
+            return `P2I-${date}-${(unitId || 'PROJ').toUpperCase().slice(0, 3)}-${random}`;
+        }
+
+        // ==============================================
+// MAPPING COMPLET DES IDs (96 unités)
+// ==============================================
+const unitIdMapping = {
+    // ID numérique Supabase → Clé données locales
+    1: "conserverie_legumes",
+    2: "biscuiterie", 
+    3: "boulangerie_industrielle",
+    4: "jus_boissons",
+    5: "mini_laiterie",
+    6: "huiles_alimentaires",
+    7: "epices",
+    8: "aliments_betail",  // IMPORTANT: ID 8 = Usine d'aliments pour bétail
+    9: "detergents",
+    10: "savonnerie",
+    11: "cosmetiques",
+    12: "peintures",
+    13: "adhesifs",
+    14: "engrais",
+    15: "javel",
+    16: "produits_industriels",
+    17: "confection",
+    18: "tissage",
+    19: "maroquinerie",
+    20: "teinture",
+    21: "broderie",
+    22: "chaussures",
+    23: "uniformes",
+    24: "linge",
+    25: "serrurerie",
+    26: "outillage",
+    27: "recyclage_metaux",
+    28: "chaudronnerie",
+    29: "mecanosoudure",
+    30: "structures",
+    31: "pieces",
+    32: "quincaillerie",
+    33: "sacs",
+    34: "bouteilles_pet",
+    35: "tuyaux_pvc",
+    36: "emballages",
+    37: "profiles",
+    38: "jouets",
+    39: "joints",
+    40: "granules",
+    41: "cables",
+    42: "panneaux_solaires",
+    43: "appareils",
+    44: "led",
+    45: "tableaux",
+    46: "onduleurs",  // ID 46 = Onduleurs, PAS conserverie_legumes
+    47: "compteurs",
+    48: "batteries",
+    49: "cimenterie",
+    50: "briques",
+    51: "prefab",
+    52: "tuiles",
+    53: "agglos",
+    54: "peintures_btp",
+    55: "centrale_beton",
+    56: "menuiserie",
+    57: "masques",
+    58: "pansements",
+    59: "mobilier",
+    60: "fauteuils",
+    61: "instruments",
+    62: "bequilles",
+    63: "antiseptiques",
+    64: "kits",
+    65: "smartphones",
+    66: "ordinateurs",
+    67: "electromenager",
+    68: "climatiseurs",
+    69: "motos",
+    // ❌ SUPPRIMÉ: 70: "aliments_betail" était un DOUBLON de l'ID 8
+    // L'ID 70 doit pointer vers une autre unité (à définir selon ta vraie liste)
+    71: "velos",
+    72: "meubles",
+    73: "equipements",
+    74: "plastique",
+    75: "papier",
+    76: "metaux",
+    77: "compost",
+    78: "verre",
+    79: "pneus",
+    80: "huiles",
+    81: "deee",
+    82: "nettoyage",
+    83: "maintenance",
+    84: "logistique",
+    85: "formation",
+    86: "qualite",
+    87: "etudes",
+    88: "securite",
+    89: "energie",
+    90: "poteaux",
+    91: "compteurs_eau",
+    92: "kits_solaires",
+    93: "lampadaires",
+    94: "forage",
+    95: "eau",
+    96: "maintenance_energie",
+    97: "audit"
+};
+
+// Mapping inverse (clé locale → ID numérique)
+const reverseMapping = {};
+Object.keys(unitIdMapping).forEach(id => {
+    reverseMapping[unitIdMapping[id]] = parseInt(id);
+});
+
+// ==============================================
+// CHARGEMENT DES DONNÉES DE L'UNITÉ (VERSION SIMPLIFIÉE)
+// ==============================================
+async function loadProductionData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // ✅ CORRECTION: On lit maintenant 'unit_id' au lieu de 'id'
+    const unitIdParam = urlParams.get('unit_id') || urlParams.get('id'); // Fallback sur 'id' pour compatibilité
+    const simulationId = urlParams.get('simulation_id'); // Optionnel
+    
+    console.log("Chargement pour unité ID:", unitIdParam, "simulation:", simulationId);
+
+    // 2. DÉTERMINER LE VRAI ID DE L'UNITÉ
+    let realUnitId = unitIdParam;
+    let isNumericId = false;
+    
+    // Si l'ID est numérique (venant de Supabase ou URL)
+    if (unitIdParam && /^\d+$/.test(unitIdParam)) {
+        isNumericId = true;
+        realUnitId = parseInt(unitIdParam);
+        console.log("ID numérique détecté:", realUnitId);
+    }
+    
+    // 3. TENTER LE CHARGEMENT DEPUIS SUPABASE
+    try {
+        console.log("Tentative de chargement depuis Supabase...");
+        
+        let unitData = null;
+        
+        if (isNumericId) {
+            // Recherche directe par ID numérique
+            const { data, error } = await supabaseClient
+                .from('unites_production')
+                .select('*')
+                .eq('id', realUnitId)
+                .single();
+                
+            if (error) {
+                console.log("Supabase error:", error.message);
+                // Fallback: chercher dans données locales
+                loadFromLocalDatabase(realUnitId, true);
+                return;
+            }
+            
+            unitData = data;
+        } else {
+            // ID textuel: chercher par slug ou nom
+            const { data, error } = await supabaseClient
+                .from('unites_production')
+                .select('*')
+                .or(`slug.eq.${unitIdParam},nom.eq.${unitIdParam}`)
+                .single();
+                
+            if (error) {
+                console.log("Supabase error pour ID textuel:", error.message);
+                loadFromLocalDatabase(unitIdParam, false);
+                return;
+            }
+            
+            unitData = data;
+        }
+        
+        if (unitData) {
+            console.log("✅ Données récupérées depuis Supabase:", unitData.nom);
+            
+            // ✅ VALIDATION: Vérifier que les données sont complètes
+            const isDataComplete = unitData.capex_min && unitData.superficie && unitData.personnel;
+            
+            if (!isDataComplete) {
+                console.log("⚠️ Données Supabase incomplètes (NULL), fallback vers données locales...");
+                loadFromLocalDatabase(unitIdParam, isNumericId);
+                return;
+            }
+            
+            // Déterminer la clé locale pour sauvegarde
+            let localKey = unitIdParam;
+            if (isNumericId && unitIdMapping[realUnitId]) {
+                localKey = unitIdMapping[realUnitId];
+            }
+            
+            // Sauvegarde locale
+            localStorage.setItem('currentProduction', JSON.stringify(unitData));
+            localStorage.setItem('currentProductionKey', localKey);
+            localStorage.setItem('currentUnitId', realUnitId);
+            
+            // Mise à jour UI
+            updateUI(unitData, realUnitId);
+            
+        } else {
+            console.log("❌ Aucune donnée Supabase trouvée, fallback local...");
+            loadFromLocalDatabase(unitIdParam, isNumericId);
+        }
+        
+    } catch (err) {
+        console.error("❌ Erreur critique:", err);
+        loadFromLocalDatabase(unitIdParam, isNumericId);
+    }
+}
+
+// ==============================================
+// FONCTION FALLBACK: CHARGEMENT LOCAL
+// ==============================================
+function loadFromLocalDatabase(unitId, isNumeric = false) {
+    console.log("Chargement depuis base locale:", { unitId, isNumeric });
+    
+    let data = null;
+    let localKey = unitId;
+    
+    // 1. Si ID numérique: utiliser le mapping
+    if (isNumeric && unitIdMapping[unitId]) {
+        localKey = unitIdMapping[unitId];
+        data = productionsData[localKey];
+    }
+    // 2. Si ID textuel: chercher directement
+    else if (!isNumeric && productionsData[unitId]) {
+        data = productionsData[unitId];
+    }
+    // 3. Si ID numérique mais pas dans mapping: chercher par valeur numérique
+    else if (isNumeric) {
+        // Parcourir toutes les unités pour trouver correspondance
+        for (const [key, value] of Object.entries(productionsData)) {
+            if (value.id === parseInt(unitId) || value.capex_min === parseInt(unitId)) {
+                data = value;
+                localKey = key;
+                break;
+            }
+        }
+    }
+    
+    if (data) {
+        console.log("✅ Données trouvées localement:", data.nom);
+        
+        // Sauvegarde locale
+        localStorage.setItem('currentProduction', JSON.stringify(data));
+        localStorage.setItem('currentProductionKey', localKey);
+        localStorage.setItem('currentUnitId', unitId);
+        
+        // Mise à jour UI
+        updateUI(data, unitId);
+        
+        // Avertissement démo
+        showDemoWarning();
+        
+    } else {
+        console.error("❌ Aucune donnée trouvée localement pour:", unitId);
+        
+        // Message d'erreur utilisateur
+        document.getElementById('production-title').textContent = "Unité non disponible";
+        document.getElementById('description').textContent = 
+            "Désolé, les données de cette unité de production ne sont pas disponibles pour le moment.";
+        
+        // Afficher liste des unités disponibles
+        showAvailableUnits();
+    }
+}
+
+// ==============================================
+// FONCTIONS UTILITAIRES
+// ==============================================
+function showDemoWarning() {
+    // ✅ MASQUÉ: Messages "Mode démo" désactivés
+    // Les données locales fonctionnent parfaitement
+    return;
+}
+
+function showAvailableUnits() {
+    const container = document.getElementById('description');
+    if (!container) return;
+    
+    container.innerHTML = `
+        <p style="color: #f72585; font-weight: bold;">Unité de production non trouvée (ID: ${new URLSearchParams(window.location.search).get('id')})</p>
+        <p style="color: #b8c1ec;">Veuillez sélectionner une unité disponible :</p>
+        <ul style="color: #b8c1ec; margin-left: 20px;">
+            <li><a href="fiche-production.html?id=1" style="color: #4cc9f0;">Conserverie de légumes (ID: 1)</a></li>
+            <li><a href="fiche-production.html?id=8" style="color: #4cc9f0;">Usine d'aliments pour bétail (ID: 8)</a></li>
+            <li><a href="fiche-production.html?id=46" style="color: #4cc9f0;">Onduleurs et convertisseurs (ID: 46)</a></li>
+            <li><a href="fiche-production.html?id=70" style="color: #4cc9f0;">Usine d'aliments pour bétail (ID: 70)</a></li>
+        </ul>
+    `;
+}
+
+// ==============================================
+// INITIALISATION
+// ==============================================
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page fiche-production chargée');
+    
+    // Charger les données de l'UP
+    loadProductionData();
+    
+    // Initialiser le panier
+    updateCartDisplay();
+});
+
+        // ✅ SUPPRIMÉ: Deuxième fonction showDemoWarning() dupliquée
+        // La première version (désactivée) suffit
+
+        function updateUI(data, unitId) {
+            // ✅ PANNEAU DE DIAGNOSTIC DÉSACTIVÉ
+            // Pour le réactiver, décommente les lignes ci-dessous
+            /*
+            // Créer un panneau de diagnostic visible
+            const diagnosticPanel = document.createElement('div');
+            diagnosticPanel.id = 'diagnostic-panel';
+            diagnosticPanel.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: rgba(13, 27, 42, 0.95);
+                border: 3px solid #4cc9f0;
+                border-radius: 15px;
+                padding: 20px;
+                max-width: 400px;
+                max-height: 80vh;
+                overflow-y: auto;
+                z-index: 9999;
+                color: white;
+                font-size: 12px;
+                font-family: monospace;
+            `;
+            
+            let diagnosticHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="color: #4cc9f0; margin: 0;">🔍 DIAGNOSTIC</h3>
+                    <button onclick="document.getElementById('diagnostic-panel').remove()" style="background: #f72585; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">✕</button>
+                </div>
+                <hr style="border-color: #4cc9f0; margin: 10px 0;">
+            `;
+            
+            diagnosticHTML += `<p style="color: #00ff88;"><strong>📊 DONNÉES REÇUES:</strong></p>`;
+            diagnosticHTML += `<p>Nom: ${data.nom || "❌ VIDE"}</p>`;
+            diagnosticHTML += `<p>CAPEX: ${data.capex_min || "❌ VIDE"}</p>`;
+            diagnosticHTML += `<p>Superficie: ${data.superficie || "❌ VIDE"}</p>`;
+            diagnosticHTML += `<p>Personnel: ${data.personnel || "❌ VIDE"}</p>`;
+            diagnosticHTML += `<p>Marché: ${data.marche || "❌ VIDE"}</p>`;
+            diagnosticHTML += `<p>Production: ${data.production_annuelle || "❌ VIDE"}</p>`;
+            
+            diagnosticHTML += `<hr style="border-color: #4cc9f0; margin: 10px 0;">`;
+            diagnosticHTML += `<p style="color: #00ff88;"><strong>🎯 ÉLÉMENTS HTML:</strong></p>`;
+            
+            const superficieEl = document.getElementById('superficie');
+            diagnosticHTML += `<p>superficie: ${superficieEl ? "✅ TROUVÉ" : "❌ NON TROUVÉ"}</p>`;
+            
+            const personnelEl = document.getElementById('personnel');
+            diagnosticHTML += `<p>personnel: ${personnelEl ? "✅ TROUVÉ" : "❌ NON TROUVÉ"}</p>`;
+            
+            const marcheEl = document.getElementById('marche');
+            diagnosticHTML += `<p>marche: ${marcheEl ? "✅ TROUVÉ" : "❌ NON TROUVÉ"}</p>`;
+            
+            const capexEl = document.getElementById('capex-min');
+            diagnosticHTML += `<p>capex-min: ${capexEl ? "✅ TROUVÉ" : "❌ NON TROUVÉ"}</p>`;
+            
+            diagnosticPanel.innerHTML = diagnosticHTML;
+            document.body.appendChild(diagnosticPanel);
+            */
+            
+            // Les éléments sont toujours récupérés pour le code fonctionnel
+            const superficieEl = document.getElementById('superficie');
+            const personnelEl = document.getElementById('personnel');
+            const marcheEl = document.getElementById('marche');
+            const capexEl = document.getElementById('capex-min');
+            
+            console.log("🔍 DIAGNOSTIC - Données:", data);
+            
+            // 1. Textes de présentation
+            const titleEl = document.getElementById('production-title');
+            if (titleEl) titleEl.textContent = data.nom || "Unité de Production";
+            
+            const descEl = document.getElementById('description');
+            if (descEl) descEl.textContent = data.description || "";
+
+            // 2. Informations clés
+            if (superficieEl) superficieEl.textContent = data.superficie || "À définir";
+            if (personnelEl) personnelEl.textContent = data.personnel || "À définir";
+            if (marcheEl) marcheEl.textContent = data.marche || "À définir";
+            
+            const prodAnnuelleEl = document.getElementById('production-annuelle');
+            if (prodAnnuelleEl) prodAnnuelleEl.textContent = data.production_annuelle || "À définir";
+
+            // 3. Section Financière
+            const capex = parseInt(data.capex_min) || 0;
+            
+            if (capexEl) {
+                const capexText = capex > 0 ? `$${capex.toLocaleString()}` : "$0";
+                capexEl.textContent = capexText;
+            }
+            
+            const caEl = document.getElementById('chiffre-affaires');
+            const margeEl = document.getElementById('marge-brute');
+            
+            console.log("💹 Elements Financiers:", {
+                ca: caEl,
+                marge: margeEl
+            });
+            
+            if (caEl) caEl.textContent = data.chiffre_affaires_estime || "À définir";
+            if (margeEl) margeEl.textContent = data.marge_brute || "À définir";
+
+            // 4. CALCUL DU ROI DYNAMIQUE
+            try {
+                if (capex > 0 && data.chiffre_affaires_estime && data.marge_brute) {
+                    const caMin = parseInt(data.chiffre_affaires_estime.split('-')[0].replace(/[^0-9]/g, ''));
+                    const margeMin = parseInt(data.marge_brute.split('-')[0].replace(/[^0-9]/g, ''));
+
+                    if (caMin > 0 && margeMin > 0) {
+                        const beneficeAnnuel = caMin * (margeMin / 100);
+                        const roiCalculé = (capex / beneficeAnnuel).toFixed(1);
+                        document.getElementById('roi-estime').textContent = `${roiCalculé} ans`;
+                    }
+                }
+            } catch (e) {
+                console.error("Erreur ROI:", e);
+            }
+
+            // 5. Gestion des listes (Processus, etc.)
+            const formatList = (id, text) => {
+                const container = document.getElementById(id);
+                if (container && text) {
+                    // Si c'est déjà un tableau, l'utiliser directement
+                    if (Array.isArray(text)) {
+                        const items = text.map(i => `<li>${i.trim()}</li>`).join('');
+                        container.innerHTML = `<ul style="list-style-type: disc; margin-left: 20px;">${items}</ul>`;
+                    } 
+                    // Sinon, split par virgule
+                    else if (typeof text === 'string') {
+                        const items = text.split(',').map(i => `<li>${i.trim()}</li>`).join('');
+                        container.innerHTML = `<ul style="list-style-type: disc; margin-left: 20px;">${items}</ul>`;
+                    }
+                }
+            };
+            
+            formatList('processus', data.processus);
+            formatList('produits', data.produits);
+            formatList('avantages', data.avantages);
+            
+            // Sauvegarder l'ID actuel pour le panier
+            localStorage.setItem('currentUnitId', unitId);
+            localStorage.setItem('currentUnitName', data.nom || "Unité de Production");
+        }
+
+// ==============================================
+// ✅ GESTION BUSINESS PLANS (VERSION ROBUSTE iPad)
+// ==============================================
+
+async function getConnectedEmail() {
+  // 1) Trouver le client Supabase, quel que soit son nom
+  const sb =
+    (typeof supabaseClient !== "undefined" && supabaseClient) ||
+    (typeof supabase !== "undefined" && supabase) ||
+    (window && (window.supabaseClient || window.supabase)) ||
+    null;
+
+  // 2) Essayer la session Supabase si possible
+  try {
+    if (sb?.auth?.getSession) {
+      const { data } = await sb.auth.getSession();
+      const email = data?.session?.user?.email || "";
+      if (email) {
+        localStorage.setItem("p2i_user_logged_in", "true");
+        localStorage.setItem("p2i_user_email", email);
+        return email;
+      }
+    }
+  } catch (_) {}
+
+  // 3) Fallback localStorage
+  try {
+    return localStorage.getItem("p2i_user_email") || "";
+  } catch (_) {
+    return "";
+  }
+}
+
+function getCurrentUnitIdSafe() {
+  const params = new URLSearchParams(window.location.search);
+  // priorité à unit_id (ton système actuel), fallback id
+  return params.get("unit_id") || params.get("id") || localStorage.getItem("currentUnitId") || "";
+}
+
+function getCurrentUnitNameSafe() {
+  return localStorage.getItem("currentUnitName") || "Unité de Production";
+}
+
+function safeBuildBpUrl() {
+  const unitId = getCurrentUnitIdSafe();
+  const unitName = getCurrentUnitNameSafe();
+
+  const params = new URLSearchParams(window.location.search);
+  const filiere = params.get("filiere") || localStorage.getItem("currentFiliereName") || "";
+
+  const u = new URL("business-plan-decouverte.html", window.location.href);
+  if (unitId) u.searchParams.set("unit_id", unitId);
+  if (unitName) u.searchParams.set("unit", unitName);
+  if (filiere) u.searchParams.set("filiere", filiere);
+  u.searchParams.set("src", "free");
+  return u.toString();
+}
+
+function getDownloadsKeyForCurrentUser(){
+  const email =
+    localStorage.getItem("p2i_user_email") ||
+    localStorage.getItem("p2i_active_user") ||
+    "";
+  return email ? `p2i_downloads__${email}` : "p2i_downloads__guest";
+}
+
+function pushLocalFreeBpDownload() {
+  const unitId = getCurrentUnitIdSafe();
+  const unitName = getCurrentUnitNameSafe();
+
+  const code =
+    (typeof generateProjectCode === "function")
+      ? generateProjectCode(unitId)
+      : "P2I-BP-TEMP";
+
+  const url = safeBuildBpUrl();
+  const key = getDownloadsKeyForCurrentUser();
+
+  let downloads = [];
+  try {
+    downloads = JSON.parse(localStorage.getItem(key) || "[]");
+    if (!Array.isArray(downloads)) downloads = [];
+  } catch (_) {
+    downloads = [];
+  }
+
+  // ✅ AJOUT (snapshot UP complète, dont la description)
+  const prodSnapshot = (() => {
+    try { return JSON.parse(localStorage.getItem("currentProduction") || "null"); }
+    catch(_) { return null; }
+  })();
+
+  // ✅ MODIF : on stocke aussi unite_data + filiere_name
+  downloads.push({
+    type: "bp_gratuit",
+    code,
+    unit: unitName,
+    date: new Date().toISOString(),
+    url,
+    mode: "web_preview",
+    unite_data: prodSnapshot,
+    filiere_name: localStorage.getItem("currentFiliereName") || ""
+  });
+
+  localStorage.setItem(key, JSON.stringify(downloads));
+}
+
+async function handleDownloadBP() {
+  const email = await getConnectedEmail();
+
+  // ❌ Pas connecté => on mémorise l’UP + l’action, puis on affiche la modal / login
+  if (!email) {
+
+    // ============================
+    // ✅ PATCH 1 : mémoriser l’intention avant le login
+    // ============================
+    try {
+      localStorage.setItem("p2i_pending_action", JSON.stringify({
+        action: "bp_gratuit",
+        unit_id: getCurrentUnitIdSafe(),
+        unit_name: getCurrentUnitNameSafe(),
+        filiere: (new URLSearchParams(window.location.search)).get("filiere") || localStorage.getItem("currentFiliereName") || "",
+        return_url: safeBuildBpUrl(),      // URL du BP découverte déjà prête
+        ts: new Date().toISOString()
+      }));
+    } catch (_) {}
+    // ============================
+
+    // Si tu as showModal, on l’utilise (ta page le prévoit)
+    if (typeof showModal === "function") {
+      const htmlMessage = `
+        <div style="text-align:center; padding: 20px;">
+          <i class="fas fa-lock" style="font-size: 3rem; color: #f72585; margin-bottom: 20px;"></i>
+          <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">Accès Réservé</h3>
+          <p style="color: #b8c1ec; margin-bottom: 25px;">
+            Pour télécharger gratuitement le Business Plan Découverte, vous devez être connecté.
+          </p>
+          <div style="display:flex; flex-direction:column; gap:15px;">
+            <a href="login.html?mode=register" style="background: linear-gradient(to right, #4cc9f0, #4361ee); color: white; padding: 14px; border-radius: 12px; text-decoration:none; font-weight:bold;">
+              <i class="fas fa-user-plus"></i> Créer mon espace gratuitement
+            </a>
+            <p style="color:#b8c1ec; font-size:0.9rem;">
+              Déjà inscrit ? <a href="login.html?mode=login" style="color:#4cc9f0; font-weight:bold; text-decoration:underline;">Se connecter</a>
+            </p>
+          </div>
+        </div>
+      `;
+      showModal(htmlMessage);
+      return;
+    }
+
+    // Fallback simple
+    window.location.href = "login.html?mode=login";
+    return;
+  }
+
+  // ✅ Connecté => on affiche la modal moderne + on enregistre dans le dashboard
+  const emailEl = document.getElementById("user-email-display");
+  if (emailEl) emailEl.textContent = email;
+
+  // Ouvre ta modal de confirmation existante (celle que tu décris)
+  if (typeof openModal === "function") {
+    openModal("modal-bp-email-confirm");
+  }
+
+  // ✅ Enregistrement local (dashboard)
+  pushLocalFreeBpDownload();
+}
+
+        // ==============================================
+        // GESTION DU PANIER
+        // ==============================================
+        function updateCartDisplay() {
+            const counter = document.getElementById('cart-counter');
+            const totalElement = document.getElementById('cart-total');
+            const itemsContainer = document.getElementById('cart-items');
+            
+            counter.textContent = cart.length;
+            counter.style.display = cart.length > 0 ? 'flex' : 'none';
+            
+            let total = 0;
+            itemsContainer.innerHTML = '';
+            
+            cart.forEach((item, index) => {
+                total += item.prix;
+                
+                const itemDiv = document.createElement('div');
+                itemDiv.style.cssText = `
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 15px;
+                    background: rgba(255,255,255,0.05);
+                    border-radius: 8px;
+                    margin-bottom: 10px;
+                `;
+                
+                if (item.id === 'achat_machines') {
+                    itemDiv.innerHTML = `
+                        <div>
+                            <div style="font-weight: bold;">${item.nom}</div>
+                            <div style="font-size: 0.8rem; color: #b8c1ec;">
+                                ${item.description}<br>
+                                <em style="color: #4cc9f0;">Facturé lors de l'achat (3-5%)</em>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="font-weight: bold; color: #27ae60;">Sur devis</div>
+                            <button onclick="removeFromCart(${index})" style="color: #f72585; background: none; border: none; cursor: pointer; font-size: 1.2rem;">×</button>
+                        </div>
+                    `;
+                } else {
+                    itemDiv.innerHTML = `
+                        <div>
+                            <div style="font-weight: bold;">${item.nom}</div>
+                            <div style="font-size: 0.8rem; color: #b8c1ec;">Ajouté le ${new Date(item.date).toLocaleDateString('fr-FR')}</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="font-weight: bold; color: #4cc9f0;">${formatUSD(item.prix)}</div>
+                            <button onclick="removeFromCart(${index})" style="color: #f72585; background: none; border: none; cursor: pointer; font-size: 1.2rem;">×</button>
+                        </div>
+                    `;
+                }
+                itemsContainer.appendChild(itemDiv);
+            });
+            
+            totalElement.textContent = `Total : ${formatUSD(total)}`;
+            localStorage.setItem('p2i_cart', JSON.stringify(cart));
+        }
+
+        function addToCart(serviceId) {
+            const services = {
+                'businessPlanPro': { nom: "Business Plan Pro", prix: 399 },
+                'comptable': { nom: "Accompagnement Comptable", prix: 50 },
+                'audit': { nom: "Audit Technique", prix: 499 },
+                'tutoriel': { nom: "Tutoriel IA Personnalisé", prix: 299 }
+            };
+            
+            const service = services[serviceId];
+            if (!service) return;
+            
+            const alreadyInCart = cart.find(item => item.id === serviceId);
+            
+            if (alreadyInCart) {
+                alert(`Le service "${service.nom}" est déjà dans votre panier.`);
+                return;
+            }
+            
+            cart.push({
+                id: serviceId,
+                nom: service.nom,
+                prix: service.prix,
+                date: new Date().toISOString(),
+                unitId: localStorage.getItem('currentUnitId')
+            });
+            
+            updateCartDisplay();
+            
+            const alertDiv = document.getElementById('success-alert');
+            alertDiv.style.display = 'block';
+            alertDiv.innerHTML = `<i class="fas fa-check"></i> ${service.nom} ajouté au panier !`;
+            
+            setTimeout(() => {
+                alertDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        function addMachineService() {
+            const alreadyInCart = cart.find(item => item.id === 'achat_machines');
+            
+            if (alreadyInCart) {
+                alert('Vous avez déjà demandé ce service. Nous vous contacterons bientôt.');
+                return;
+            }
+            
+            cart.push({
+                id: 'achat_machines',
+                nom: 'Achat de Machines via P2I',
+                prix: 0,
+                description: 'Commission de 3-5% sur achat machines',
+                date: new Date().toISOString(),
+                unitId: localStorage.getItem('currentUnitId'),
+                status: 'en_attente'
+            });
+            
+            updateCartDisplay();
+            
+            const alertDiv = document.getElementById('success-alert');
+            alertDiv.style.display = 'block';
+            alertDiv.innerHTML = `
+                <i class="fas fa-check-circle"></i> 
+                <strong>Service "Achat de Machines" enregistré !</strong><br>
+                <small style="font-size: 0.9rem;">
+                Votre demande a été prise en compte. Le montant de cette prestation 
+                (3-5% de commission) sera facturé lors de l'achat effectif de vos machines et matériels via la P2I.
+                </small>
+            `;
+            
+            setTimeout(() => {
+                alertDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        // ==============================================
+        // CHECKOUT ET PAIEMENT
+        // ==============================================
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert('Votre panier est vide');
+                return;
+            }
+            
+            const userHasAccount = localStorage.getItem('p2i_user_logged_in') === 'true';
+            
+            if (!userHasAccount) {
+                if (confirm('Pour finaliser votre achat, vous devez créer un compte gratuit. Souhaitez-vous vous inscrire maintenant ?')) {
+                    window.location.href = 'register.html?redirect=paiement';
+                }
+            } else {
+                window.location.href = 'paiement.html';
+            }
+        }
+
+        // ==============================================
+        // FONCTIONS MODALES
+        // ==============================================
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function openCart() {
+            if (cart.length > 0) {
+                openModal('cart-modal');
+            }
+        }
+
+        function openContactModal() {
+            openModal('contact-modal');
+        }
+
+        function openSimulator() {
+            alert('Simulateur de financement - En développement...');
+        }
+
+        function toggleServices() {
+            const servicesDiv = document.getElementById('services-additionnels');
+            servicesDiv.style.display = servicesDiv.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function submitContactForm(event) {
+            event.preventDefault();
+            alert('Votre demande de devis a été envoyée ! Un conseiller P2I vous contactera dans les 24h.');
+            closeModal('contact-modal');
+        }
+
+        // ==============================================
+        // INITIALISATION
+        // ==============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialiser l'état de connexion
+            if (!localStorage.getItem('p2i_user_logged_in')) {
+                localStorage.setItem('p2i_user_logged_in', 'false');
+            }
+            
+            // Charger les données et mettre à jour le panier
+            loadProductionData();
+            updateCartDisplay();
+        });
+    </script>
+<script>
+// ================================
+// CONFIG SUPABASE (si pas déjà présent)
+// ================================
+const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18';
+
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ================================
+// RÉCUPÉRER ID UP
+// ================================
+function getUpId() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
+}
+</script>
+<script>
+/**
+ * Récupère l'UP courante depuis l'URL (ex: ?id=12 ou ?up_id=12).
+ * Adapte ici si ton paramètre s’appelle autrement.
+ */
+function getCurrentUpId() {
+  const url = new URL(window.location.href);
+  return url.searchParams.get("id") || url.searchParams.get("up_id");
+}
+
+/**
+ * Nettoie l’URL : enlève un paramètre (anti-boucle), sans recharger la page.
+ */
+function removeQueryParam(paramName) {
+  const url = new URL(window.location.href);
+  url.searchParams.delete(paramName);
+  window.history.replaceState({}, "", url.toString());
+}
+
+/**
+ * Enregistre une demande de BP gratuit (optionnel).
+ * - Si tu as une table Supabase, garde ce code.
+ * - Sinon, tu peux commenter ce bloc : ça n’empêchera pas le flow de marcher.
+ */
+async function logFreeBpRequest({ upId, userEmail }) {
+  try {
+    // Exemple : table "bp_requests" (à créer côté Supabase si tu veux)
+    // colonnes possibles: up_id (text/int), email (text), created_at (timestamp default now())
+    const { error } = await supabaseClient
+      .from("bp_requests")
+      .insert([{ up_id: upId ?? null, email: userEmail ?? null, kind: "free_bp" }]);
+
+    // Si la table n’existe pas encore, ça va renvoyer une erreur : on ignore pour ne pas bloquer l’utilisateur.
+    if (error) console.warn("[BP] logFreeBpRequest ignored:", error.message);
+  } catch (e) {
+    console.warn("[BP] logFreeBpRequest failed:", e);
+  }
+}
+
+/**
+ * UI : remplace par ta modal existante si tu en as une.
+ */
+function showBpNotReadyMessage() {
+  alert(
+    "✅ Demande enregistrée.\n\nLe business plan gratuit n’est pas encore disponible. " +
+    "Nous te notifierons dès qu’il sera prêt."
+  );
+}
+
+/**
+ * Stocke l’intention de téléchargement, puis envoie sur login.
+ */
+function redirectToLoginForFreeBp(upId) {
+  const returnTo = window.location.href;
+
+  localStorage.setItem(
+    "pending_bp",
+    JSON.stringify({
+      kind: "free_bp",
+      up_id: upId ?? null,
+      return_to: returnTo
+    })
+  );
+
+  // Important : une seule page de login dans tout le site
+  window.location.href = "login.html?mode=login";
+}
+
+async function handleDownloadBP() {
+  const upId = getCurrentUpId();
+
+  let session = null;
+  try {
+    const { data, error } = await supabaseClient.auth.getSession();
+    if (error) console.warn("[BP] getSession error:", error.message);
+    session = data?.session ?? null;
+  } catch (e) {
+    console.warn("[BP] getSession exception:", e);
+  }
+
+  // ❌ PAS CONNECTÉ → LOGIN
+  if (!session) {
+    redirectToLoginForFreeBp(upId);
+    return;
+  }
+
+  // ✅ CONNECTÉ → FLOW NORMAL
+  const userEmail = session.user?.email ?? null;
+
+  localStorage.setItem("p2i_user_logged_in", "true");
+  if (userEmail) localStorage.setItem("p2i_user_email", userEmail);
+
+  // ✅ Enregistrement Dashboard
+  upsertP2IBusinessPlan({
+    type: "BP_FREE",
+    unit_id: upId || "",
+    unit: localStorage.getItem("currentUnitName") || "Unité",
+    filiere: localStorage.getItem("currentFiliereName") || "",
+    status: "generated"
+  });
+
+  // ✅ URL BP gratuit
+  const url = buildBpUrl();
+
+  // ✅ Redirection directe
+  window.location.href = url;
+}
+
+/**
+ * ✅ AUTODOWNLOAD (anti-boucle)
+ * Quand login renvoie vers la fiche avec ?autodownload=1, on déclenche une fois, puis on nettoie l’URL.
+ */
+document.addEventListener("DOMContentLoaded", async () => {
+  const url = new URL(window.location.href);
+  const auto = url.searchParams.get("autodownload");
+
+  if (auto === "1") {
+    // Important : enlever tout de suite pour éviter boucle si quelque chose relance le chargement
+    removeQueryParam("autodownload");
+
+    // Si on arrive ici suite au login, on peut aussi supprimer pending_bp (propre)
+    try {
+      const pb = localStorage.getItem("pending_bp");
+      if (pb) localStorage.removeItem("pending_bp");
+    } catch (_) {}
+
+    // Déclenche le flow
+    await handleDownloadBP();
+  }
+});
+</script>
+<script>
+(function () {
+  // ========= Helpers =========
+  function qs(name) {
+    return new URL(window.location.href).searchParams.get(name) || "";
+  }
+
+  function pickFirstText(selectors) {
+    for (const sel of selectors) {
+      const el = document.querySelector(sel);
+      if (el && el.textContent && el.textContent.trim()) return el.textContent.trim();
+    }
+    return "";
+  }
+
+  function buildBpUrl() {
+    // Ta fiche utilise surtout unit_id ou id (fallback)
+    const unitId = qs("unit_id") || qs("id") || localStorage.getItem("currentUnitId") || "";
+
+    const unitName =
+      localStorage.getItem("currentUnitName") ||
+      pickFirstText(["#production-title", "#unitTitle", ".unit-title", "h1", "h2"]) ||
+      "Unité";
+
+    const filiereName =
+      localStorage.getItem("currentFiliereName") ||
+      qs("filiere") || qs("filiere_name") ||
+      "";
+
+    const u = new URL("business-plan-decouverte.html", window.location.href);
+    if (unitId) u.searchParams.set("unit_id", unitId);
+    if (unitName) u.searchParams.set("unit", unitName);
+    if (filiereName) u.searchParams.set("filiere", filiereName);
+    u.searchParams.set("src", "free");
+    return u.toString();
+  }
+
+  // ========= Hook OK modal "BP envoyé" — version ultra robuste (iPad/Safari/Modales) =========
+(function () {
+  if (window.__p2iBpOkGlobalHookInstalled) return;
+  window.__p2iBpOkGlobalHookInstalled = true;
+
+  function modalLooksLikeBpSent() {
+    // On vérifie si le texte de confirmation est présent (souvent dans la modal)
+    const t = (document.body && document.body.innerText) ? document.body.innerText : "";
+    return t.includes("Business Plan envoyé") || t.includes("Business Plan envoy");
+  }
+
+  function isOkElementFromEvent(e) {
+    // Supporte shadow DOM via composedPath
+    const path = (typeof e.composedPath === "function") ? e.composedPath() : [];
+    const nodes = path.length ? path : [e.target];
+
+    for (const n of nodes) {
+      if (!n) continue;
+
+      // Boutons / liens / role=button
+      const isClickable =
+        (n.tagName && (n.tagName.toLowerCase() === "button" || n.tagName.toLowerCase() === "a")) ||
+        (n.getAttribute && n.getAttribute("role") === "button");
+
+      if (!isClickable) continue;
+
+      const txt = ((n.textContent || "").trim().toLowerCase());
+      if (txt === "ok" || txt === "okay") return true;
+    }
+    return false;
+  }
+
+  function buildTargetUrl() {
+    let url = "";
+    try {
+      if (typeof buildBpUrl === "function") url = buildBpUrl();
+    } catch (_) {}
+
+    if (!url) {
+      try {
+        if (typeof safeBuildBpUrl === "function") url = safeBuildBpUrl();
+      } catch (_) {}
+    }
+
+    if (!url) url = "business-plan-decouverte.html";
+    return url;
+  }
+
+  function goToBpPage() {
+    // 🔒 Nettoyage de toute ancienne logique “target”
+    try {
+      localStorage.removeItem("p2i_bp_ok_target");
+      sessionStorage.removeItem("p2i_bp_ok_target");
+    } catch (_) {}
+
+    // ✅ Garantir que l'UP est bien en mémoire
+    try {
+      const prodRaw = localStorage.getItem("currentProduction");
+      if (prodRaw) localStorage.setItem("currentProduction", prodRaw);
+    } catch (_) {}
+
+    // ✅ Autoriser le remplissage du BP après redirection
+    try {
+      localStorage.setItem("bp_open_from_dashboard", "1");
+    } catch (_) {}
+
+    const url = buildTargetUrl();
+
+    // ✅ iPad/Safari/Modales : on laisse la modal se fermer puis on navigue
+    setTimeout(() => {
+      // href est parfois plus fiable que assign selon certaines libs
+      window.location.href = url;
+    }, 250);
+  }
+
+  // ✅ Un seul écouteur global (capture) : marche même si le bouton est recréé
+  function globalHandler(e) {
+    try {
+      // On ne déclenche QUE si on est bien dans le contexte "BP envoyé"
+      if (!modalLooksLikeBpSent()) return;
+
+      // On ne déclenche QUE si l’utilisateur clique un élément OK
+      if (!isOkElementFromEvent(e)) return;
+
+      // ✅ Bloquer les handlers de la modal (sans casser le clic)
+      e.preventDefault();
+      e.stopPropagation();
+
+      goToBpPage();
+    } catch (_) {
+      // Fallback de sécurité
+      setTimeout(() => {
+        window.location.href = "business-plan-decouverte.html";
+      }, 250);
+    }
+  }
+
+  // Click + touchend (iPad)
+  document.addEventListener("click", globalHandler, true);
+  document.addEventListener("touchend", globalHandler, true);
+})();
+})();
+</script>
+<script>
+function getUpKeyFromUrlOrStorage(){
+  const params = new URLSearchParams(window.location.search);
+  let key = (params.get("unit_id") || params.get("id") || "").trim();
+  if (!key) key = (localStorage.getItem("currentProductionKey") || "").trim();
+  if (!key) key = (localStorage.getItem("currentUnitId") || "").trim();
+  return key;
+}
+
+function getP2IBusinessPlans(){
+  const email = localStorage.getItem("p2i_user_email") || "guest";
+  const userKey = `p2i_business_plans__${email}`;
+
+  try {
+    return JSON.parse(localStorage.getItem(userKey) || "[]");
+  } catch(e){
+    return [];
+  }
+}
+
+function upsertP2IBusinessPlan(plan){
+  const email = localStorage.getItem("p2i_user_email") || "guest";
+  const userKey = `p2i_business_plans__${email}`;
+
+  let arr = [];
+  try {
+    arr = JSON.parse(localStorage.getItem(userKey) || "[]");
+    if (!Array.isArray(arr)) arr = [];
+  } catch(e){
+    arr = [];
+  }
+
+  const key = `${plan.type}__${plan.unit_id || ""}`;
+  const idx = arr.findIndex(x => (`${x.type}__${x.unit_id || ""}`) === key);
+
+  const nowIso = new Date().toISOString();
+
+  if (idx >= 0) {
+    arr[idx] = { ...arr[idx], ...plan, updated_at: nowIso };
+  } else {
+    arr.push({ ...plan, created_at: nowIso, updated_at: nowIso });
+  }
+
+  arr.sort((a,b) => new Date(b.updated_at) - new Date(a.updated_at));
+  localStorage.setItem(userKey, JSON.stringify(arr));
+
+  // Compatibilité
+  localStorage.setItem("p2i_business_plans", JSON.stringify(arr));
+}
+async function goToBpFree() {
+  const email = localStorage.getItem("p2i_user_email");
+  const upKey = getUpKeyFromUrlOrStorage();
+
+  let prod = null;
+  try {
+    prod = JSON.parse(localStorage.getItem("currentProduction") || "null");
+  } catch (e) {
+    prod = null;
+  }
+
+  const unitName =
+    prod?.nom ||
+    prod?.unitName ||
+    prod?.titre ||
+    localStorage.getItem("currentUnitName") ||
+    "—";
+
+  const filiere =
+    prod?.filiereNom ||
+    prod?.filiere ||
+    prod?.sector ||
+    localStorage.getItem("currentFiliereName") ||
+    "—";
+
+  let url = "business-plan-decouverte.html";
+  if (upKey) {
+    url += `?unit_id=${encodeURIComponent(upKey)}`;
+    if (unitName && unitName !== "—") url += `&unit=${encodeURIComponent(unitName)}`;
+    if (filiere && filiere !== "—") url += `&filiere=${encodeURIComponent(filiere)}`;
+  }
+
+  // ❌ PAS CONNECTÉ → LOGIN + action homogène
+  if (!email) {
+    localStorage.setItem("p2i_pending_action", JSON.stringify({
+      action: "bp_gratuit",
+      unit_id: upKey || "",
+      unit_name: unitName || "",
+      filiere: filiere || "",
+      return_url: url,
+      ts: new Date().toISOString()
+    }));
+
+    window.location.href = "login.html?mode=login";
+    return;
+  }
+
+  // ✅ CONNECTÉ → on enregistre partout où le Dashboard peut lire
+  if (upKey) localStorage.setItem("p2i_last_unit_ref", upKey);
+
+  // 1) Enregistrement format business plans
+  if (typeof upsertP2IBusinessPlan === "function") {
+    upsertP2IBusinessPlan({
+      type: "BP_FREE",
+      unit_id: upKey || "",
+      unit: unitName || "—",
+      filiere: filiere || "—",
+      status: "generated"
+    });
+  }
+
+  // 2) Enregistrement format downloads (certains dashboards lisent ça)
+  if (typeof pushLocalFreeBpDownload === "function") {
+    try {
+      pushLocalFreeBpDownload();
+    } catch (e) {
+      console.warn("pushLocalFreeBpDownload error:", e);
+    }
+  }
+
+  window.location.href = url;
+}
+async function goToBpPro(){
+  const email = localStorage.getItem("p2i_user_email");
+
+  if (!email) {
+    const upKey = getUpKeyFromUrlOrStorage();
+    let prod = null;
+    try { prod = JSON.parse(localStorage.getItem("currentProduction") || "null"); } catch(e){}
+
+    const unitName = prod?.nom || prod?.unitName || prod?.titre || "";
+    const filiere  = prod?.filiereNom || prod?.filiere || prod?.sector || "";
+
+    let returnUrl = "business-plan-pro.html";
+    if (upKey) {
+      returnUrl += `?unit_id=${encodeURIComponent(upKey)}&mode=preview`;
+      if (unitName) returnUrl += `&unit=${encodeURIComponent(unitName)}`;
+      if (filiere) returnUrl += `&filiere=${encodeURIComponent(filiere)}`;
+    }
+
+    localStorage.setItem("p2i_pending_action", JSON.stringify({
+      action: "bp_pro",
+      unit_id: upKey || "",
+      unit_name: unitName || "",
+      filiere: filiere || "",
+      return_url: returnUrl,
+      ts: new Date().toISOString()
+    }));
+
+    window.location.href = "login.html?mode=login";
+    return;
+  }
+
+  const upKey = getUpKeyFromUrlOrStorage();
+
+  let prod = null;
+  try { prod = JSON.parse(localStorage.getItem("currentProduction") || "null"); } catch(e){}
+
+  const unitName = prod?.nom || prod?.unitName || prod?.titre || "";
+  const filiere  = prod?.filiereNom || prod?.filiere || prod?.sector || "";
+
+  if (upKey) localStorage.setItem("p2i_last_unit_ref", upKey);
+
+  upsertP2IBusinessPlan({
+    type: "BP_PRO",
+    unit_id: upKey || "",
+    unit: unitName || "—",
+    filiere: filiere || "—",
+    status: "draft"
+  });
+
+  // ============================
+  // PATCH LOCALISATION -> BP PRO
+  // ============================
+  try {
+    const candidates = [
+      prod?.localisation,
+      prod?.ville,
+      prod?.city,
+      prod?.commune,
+      prod?.region,
+      prod?.zone,
+      prod?.site_location,
+      prod?.lieu_implantation,
+      prod?.implantation,
+      prod?.adresse_zone
+    ];
+
+    const rawLocation = candidates.find(v => v != null && String(v).trim() !== "");
+
+    if (rawLocation) {
+      const txt = String(rawLocation).trim();
+      localStorage.setItem("selectedLocation", txt);
+
+      const lower = txt.toLowerCase();
+      const knownRegions = [
+        "lagunes",
+        "comoé",
+        "comoe",
+        "sassandra-marahoué",
+        "sassandra marahoué",
+        "sassandra-marahoue",
+        "sassandra marahoue",
+        "vallée du bandama",
+        "vallee du bandama",
+        "montagnes",
+        "lacs",
+        "zanzan",
+        "denguélé",
+        "denguele"
+      ];
+
+      const isRegion =
+        lower.startsWith("région ") ||
+        lower.startsWith("region ") ||
+        knownRegions.includes(lower);
+
+      localStorage.setItem("selectedLocationType", isRegion ? "region" : "city");
+    }
+  } catch (e) {
+    console.warn("[P2I] impossible de préparer la localisation pour BP Pro:", e);
+  }
+
+  let url = "business-plan-pro.html";
+  if (upKey){
+    url += `?unit_id=${encodeURIComponent(upKey)}&mode=preview`;
+    if (unitName) url += `&unit=${encodeURIComponent(unitName)}`;
+    if (filiere)  url += `&filiere=${encodeURIComponent(filiere)}`;
+  }
+
+  window.location.href = url;
+}
+</script>
+</body> 
+</html>
