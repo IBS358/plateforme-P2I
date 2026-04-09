@@ -494,5 +494,34 @@ nav a {
 <script src="js/business-plan.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/auth-ui.js"></script>
+
+<script>
+function isUserLoggedIn() {
+  return (
+    localStorage.getItem("p2i_user_logged_in") === "true" ||
+    localStorage.getItem("p2i_is_logged_in") === "1" ||
+    sessionStorage.getItem("p2i_is_logged_in") === "1" ||
+    !!localStorage.getItem("p2i_active_user") ||
+    !!localStorage.getItem("p2i_user_email")
+  );
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const personalSpaceBtn = document.querySelector("[data-personal-space]");
+  if (!personalSpaceBtn) return;
+
+  personalSpaceBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (isUserLoggedIn()) {
+      window.location.href = "dashboard.html";
+    } else {
+      window.location.href = "login.html?mode=login";
+    }
+  }, true);
+});
+</script>
+
 </body>
 </html>
