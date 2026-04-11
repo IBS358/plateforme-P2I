@@ -123,6 +123,65 @@ html {
   background: rgba(34,197,94,0.10);
   color: #86efac;
 }
+/* Correction ciblée uniquement pour les 2 tableaux */
+#mes-business-plans .project-table,
+#mes-simulations .project-table{
+  width: 100%;
+  table-layout: fixed;
+}
+
+#mes-business-plans .project-table th,
+#mes-business-plans .project-table td,
+#mes-simulations .project-table th,
+#mes-simulations .project-table td{
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  padding: 10px 8px;
+  vertical-align: middle;
+}
+
+#mes-business-plans .section-header,
+#mes-simulations .section-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+#mes-business-plans .btn-new{
+  flex: 0 0 auto;
+}
+/* Colonne Action : ne jamais casser le texte */
+#mes-business-plans .project-table th:last-child,
+#mes-business-plans .project-table td:last-child,
+#mes-simulations .project-table th:last-child,
+#mes-simulations .project-table td:last-child{
+  width: 110px;
+  min-width: 110px;
+  text-align: center;
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* Bouton Ouvrir : compact et sur une seule ligne */
+#mes-business-plans .project-table td:last-child button,
+#mes-business-plans .project-table td:last-child .btn-open,
+#mes-simulations .project-table td:last-child button,
+#mes-simulations .project-table td:last-child .btn-open{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 86px;
+  padding: 8px 12px;
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
+  line-height: 1;
+}
   </style>
 </head>
 
@@ -152,7 +211,8 @@ html {
 
   <div class="main-content">
 
-    <div class="header-top dashboard-section" id="section-profil">
+  <div class="dashboard-top">
+    <div class="header-top">
       <div class="welcome-text">
         <h1 id="userName">Bonjour !</h1>
         <p>Espace personnel - vos activités industrielles</p>
@@ -179,87 +239,101 @@ html {
         <span class="stat-label">Progression BP global</span>
       </div>
     </div>
+  </div>
+
+  <div class="dashboard-sections">
+    <div class="section-box dashboard-section" id="section-profil">
+      <div class="section-header">
+        <h2>Mon Profil</h2>
+      </div>
+      <p style="color: var(--text-dim);">Bienvenue dans votre espace personnel.</p>
+    </div>
 
     <div class="section-box dashboard-section" id="mes-business-plans">
-      <div class="section-header">
-        <h2>Mes Business Plans</h2>
-        <button class="btn-new" onclick="window.location.href='filieres.html'">
-          + Nouvelle Simulation
-        </button>
-      </div>
+  <div class="section-header">
+    <h2>Mes Business Plans</h2>
+    <button class="btn-new" onclick="window.location.href='filieres.html'">
+      + Nouvelle Simulation
+    </button>
+  </div>
 
-      <table class="project-table">
-        <thead>
-          <tr>
-            <th style="width: 30%;">Unité</th>
-            <th style="width: 30%;">Type</th>
-            <th style="width: 25%;">Date</th>
-            <th style="width: 15%;">Action</th>
-          </tr>
-        </thead>
-        <tbody id="bpActionsList">
-          <tr>
-            <td colspan="4" style="color: var(--text-dim); padding: 16px;">
-              Chargement…
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="table-wrap">
+    <table class="project-table">
+      <thead>
+        <tr>
+          <th style="width: 30%;">Unité</th>
+          <th style="width: 30%;">Type</th>
+          <th style="width: 25%;">Date</th>
+          <th style="width: 15%;">Action</th>
+        </tr>
+      </thead>
+      <tbody id="bpActionsList">
+        <tr>
+          <td colspan="4" style="color: var(--text-dim); padding: 16px;">
+            Chargement…
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-    <div class="section-box dashboard-section" id="mes-simulations" style="margin-top:30px;">
-      <div class="section-header">
-        <h2>Mes Projets / Mes Simulations</h2>
-      </div>
+<div class="section-box dashboard-section" id="mes-simulations" style="margin-top:30px;">
+  <div class="section-header">
+    <h2>Mes Projets / Mes Simulations</h2>
+  </div>
 
-      <table class="project-table">
-        <thead>
-          <tr>
-            <th style="width: 30%;">Unité</th>
-            <th style="width: 30%;">Type</th>
-            <th style="width: 25%;">Date</th>
-            <th style="width: 15%;">Action</th>
-          </tr>
-        </thead>
-        <tbody id="simulationsList">
-          <tr>
-            <td colspan="4" style="color: var(--text-dim); padding: 16px;">
-              Chargement…
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="table-wrap">
+    <table class="project-table">
+      <thead>
+        <tr>
+          <th style="width: 30%;">Unité</th>
+          <th style="width: 30%;">Type</th>
+          <th style="width: 25%;">Date</th>
+          <th style="width: 15%;">Action</th>
+        </tr>
+      </thead>
+      <tbody id="simulationsList">
+        <tr>
+          <td colspan="4" style="color: var(--text-dim); padding: 16px;">
+            Chargement…
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-    <div class="section-box dashboard-section" id="mes-commandes" style="margin-top:30px;">
+    <div class="section-box dashboard-section" id="mes-commandes">
       <div class="section-header">
         <h2>Mes Commandes</h2>
       </div>
       <p style="color: var(--text-dim);">Aucune commande pour le moment.</p>
     </div>
 
-    <div class="section-box dashboard-section" id="mes-services" style="margin-top:30px;">
+    <div class="section-box dashboard-section" id="mes-services">
       <div class="section-header">
         <h2>Mes Services</h2>
       </div>
       <p style="color: var(--text-dim);">Aucun service enregistré pour le moment.</p>
     </div>
 
-    <div class="section-box dashboard-section" id="mon-reseau" style="margin-top:30px;">
+    <div class="section-box dashboard-section" id="mon-reseau">
       <div class="section-header">
         <h2>Mon Réseau / Emploi</h2>
       </div>
       <p style="color: var(--text-dim);">Aucun élément disponible pour le moment.</p>
     </div>
 
-    <div class="section-box dashboard-section" id="mes-ressources" style="margin-top:30px;">
+    <div class="section-box dashboard-section" id="mes-ressources">
       <div class="section-header">
         <h2>Mes Tutoriels & Ressources</h2>
       </div>
       <p style="color: var(--text-dim);">Aucune ressource enregistrée pour le moment.</p>
     </div>
-
   </div>
+
+</div>
 
   <script>
   // =============================
@@ -566,7 +640,81 @@ localStorage.setItem(
       });
     });
   }
+function renderSimulations() {
+  const tbody = $("simulationsList");
+  if (!tbody) return;
 
+  tbody.innerHTML = "";
+
+  const free = readLocalDownloads()
+    .filter(d => d && (
+      d.type === "bp_gratuit" ||
+      d.type === "bp_free" ||
+      d.kind === "free_bp" ||
+      d.mode === "web_preview" ||
+      d.mode === "web_preview_fallback"
+    ))
+    .map(d => ({
+      source: "FREE",
+      raw: d,
+      unit: d.unit || d.unit_name || d.up_name || "—",
+      date: d.date || d.created_at || d.updated_at || "",
+      openUrl: getOpenUrlFromDownload(d)
+    }));
+
+  const pro = readLocalProPlans().map(p => ({
+    source: "PRO",
+    raw: p,
+    unit: p.unit || "—",
+    date: p.updated_at || p.created_at || "",
+    openUrl: buildProOpenUrl(p)
+  }));
+
+  const all = [...pro, ...free].sort((a, b) => {
+    const da = new Date(a.date || 0).getTime();
+    const db = new Date(b.date || 0).getTime();
+    return db - da;
+  });
+
+  if (!all.length) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="4" style="padding:16px;color:var(--text-dim)">
+          Aucune simulation pour le moment
+        </td>
+      </tr>`;
+    return;
+  }
+
+  tbody.innerHTML = all.map((x, i) => `
+    <tr>
+      <td><strong>${escapeHtml(x.unit)}</strong></td>
+      <td>
+        ${x.source === "PRO"
+          ? '<span class="bp-type-pill bp-type-pro">BP Pro</span>'
+          : '<span class="bp-type-pill bp-type-free">BP Découverte</span>'}
+      </td>
+      <td style="color:var(--text-dim)">${formatDateFR(x.date)}</td>
+      <td>
+        <a class="btn-view" href="${x.openUrl}" data-idx="${i}">Ouvrir</a>
+      </td>
+    </tr>
+  `).join("");
+
+  tbody.querySelectorAll("a.btn-view").forEach((a, i) => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      const item = all[i];
+      if (!item) return;
+
+      if (item.source === "FREE") {
+        openBP(item.raw);
+      } else {
+        window.location.href = item.openUrl;
+      }
+    });
+  });
+}
   // =============================
   // HYDRATATION UI
   // =============================
@@ -581,30 +729,17 @@ localStorage.setItem(
   }
 
   function showAuthWarning() {
-    const tbody = $("bpActionsList");
-    if (!tbody) return;
-
-    const warningId = "auth-warning-row";
-    if (document.getElementById(warningId)) return;
-
-    const row = document.createElement("tr");
-    row.id = warningId;
-    row.innerHTML = `
-      <td colspan="4" style="padding:14px;color:#fbbf24;">
-        Session Supabase non retrouvée dans cet environnement de prévisualisation.
-        Le dashboard est affiché en mode local de secours.
-      </td>
-    `;
-    tbody.prepend(row);
-  }
+  return;
+}
 
   // =============================
   // RAFRAÎCHISSEMENT DASHBOARD
   // =============================
   function refreshDashboard() {
-    renderBusinessPlans();
-    updateBpCounter();
-  }
+  renderBusinessPlans();
+  renderSimulations();
+  updateBpCounter();
+}
 function forceLoginIfLoggedOut() {
   const hasAuth =
     localStorage.getItem("p2i_user_logged_in") === "true" ||
