@@ -182,6 +182,36 @@ html {
   overflow-wrap: normal;
   line-height: 1;
 }
+.profile-card{
+  width:100%;
+}
+
+.profile-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:16px;
+}
+
+.profile-item{
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.profile-label{
+  display:block;
+  font-size:12px;
+  opacity:0.75;
+  margin-bottom:6px;
+}
+
+.profile-value{
+  display:block;
+  font-size:15px;
+  font-weight:600;
+  word-break:break-word;
+}
   </style>
 </head>
 
@@ -243,11 +273,94 @@ html {
 
   <div class="dashboard-sections">
     <div class="section-box dashboard-section" id="section-profil">
-      <div class="section-header">
-        <h2>Mon Profil</h2>
-      </div>
-      <p style="color: var(--text-dim);">Bienvenue dans votre espace personnel.</p>
+  <div class="section-header">
+  <h2>Mon Profil</h2>
+  <button class="btn-new" onclick="toggleProfileEdit()">
+    Modifier mon profil
+  </button>
+</div>
+
+  <p style="color: var(--text-dim); margin-bottom: 18px;">
+    Bienvenue dans votre espace personnel.
+  </p>
+
+  <div class="profile-card">
+
+  <div class="profile-grid">
+    <div class="profile-item">
+      <span class="profile-label">Nom</span>
+      <span class="profile-value" id="profileLastName">—</span>
     </div>
+
+    <div class="profile-item">
+      <span class="profile-label">Prénom</span>
+      <span class="profile-value" id="profileFirstName">—</span>
+    </div>
+
+    <div class="profile-item">
+      <span class="profile-label">Email</span>
+      <span class="profile-value" id="profileEmail">—</span>
+    </div>
+
+    <div class="profile-item">
+      <span class="profile-label">Total simulations</span>
+      <span class="profile-value" id="profileTotalSims">00</span>
+    </div>
+  </div>
+
+  <!-- ✅ FORMULAIRE MODIFICATION -->
+  <div id="profileEditBox" style="display:none; margin-top:20px;">
+
+    <div class="profile-grid">
+      <div class="profile-item">
+        <span class="profile-label">Prénom</span>
+        <input type="text" id="editFirstName" />
+      </div>
+
+      <div class="profile-item">
+        <span class="profile-label">Nom</span>
+        <input type="text" id="editLastName" />
+      </div>
+    </div>
+
+    <div style="margin-top:15px;">
+      <button class="btn-new" onclick="saveProfile()">Enregistrer</button>
+    </div>
+
+  </div>
+
+</div>
+
+    <div style="margin-top:24px;">
+  <div class="section-header" style="margin-bottom:12px;">
+    <h3 style="margin:0;">10 dernières simulations</h3>
+    <button class="btn-new" onclick="window.location.href='filieres.html'">
+      + Nouvelle Simulation
+    </button>
+  </div>
+
+  <div class="table-wrap">
+        <table class="project-table">
+          <thead>
+            <tr>
+              <th style="width: 30%;">Unité</th>
+              <th style="width: 25%;">Type</th>
+              <th style="width: 25%;">Date</th>
+              <th style="width: 20%;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="profileRecentSims">
+            <tr>
+              <td colspan="4" style="padding:16px;color:var(--text-dim);">
+                Chargement…
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
     <div class="section-box dashboard-section" id="mes-business-plans">
   <div class="section-header">
@@ -417,15 +530,76 @@ html {
     );
   }
 
+  // =============================
+  // PROFIL PERSISTANT PAR EMAIL
+  // =============================
+  function getProfileStorageKey(email) {
+    const cleanEmail = String(email || "").trim().toLowerCase();
+    return cleanEmail ? `p2i_profile__${cleanEmail}` : "p2i_profile__guest";
+  }
+
+  function readPersistentProfile(email = "") {
+    const finalEmail = String(email || getActiveEmail() || "").trim().toLowerCase();
+    if (!finalEmail) return {};
+
+    const local = safeParseJSON(localStorage.getItem(getProfileStorageKey(finalEmail)), {});
+    const session = safeParseJSON(sessionStorage.getItem(getProfileStorageKey(finalEmail)), {});
+    return { ...(local || {}), ...(session || {}) };
+  }
+
+  function savePersistentProfile(profile = {}, email = "") {
+    const finalEmail = String(email || getActiveEmail() || "").trim().toLowerCase();
+    if (!finalEmail) return;
+
+    const existing = readPersistentProfile(finalEmail);
+
+    const merged = {
+      ...existing,
+      ...profile,
+      email: finalEmail,
+      updated_at: new Date().toISOString()
+    };
+
+    localStorage.setItem(getProfileStorageKey(finalEmail), JSON.stringify(merged));
+    sessionStorage.setItem(getProfileStorageKey(finalEmail), JSON.stringify(merged));
+  }
+
   function setLocalAuthFromSession(session) {
     const user = session?.user || null;
-    const email = user?.email || "";
+    const email = String(user?.email || "").trim().toLowerCase();
     if (!email) return;
+
+    const meta = user?.user_metadata || {};
+    const persisted = readPersistentProfile(email);
+
+    const firstName =
+      meta.first_name ||
+      meta.firstname ||
+      meta.firstName ||
+      meta.prenom ||
+      persisted.first_name ||
+      persisted.firstname ||
+      persisted.firstName ||
+      persisted.prenom ||
+      "";
+
+    const lastName =
+      meta.last_name ||
+      meta.lastname ||
+      meta.lastName ||
+      meta.nom ||
+      persisted.last_name ||
+      persisted.lastname ||
+      persisted.lastName ||
+      persisted.nom ||
+      "";
 
     const userData = {
       id: user?.id || "",
       email: email,
       role: user?.role || "authenticated",
+      first_name: String(firstName || "").trim(),
+      last_name: String(lastName || "").trim(),
       savedAt: new Date().toISOString()
     };
 
@@ -434,12 +608,16 @@ html {
 
     localStorage.setItem("p2i_user_email", email);
     sessionStorage.setItem("p2i_user_email", email);
-
     localStorage.setItem("p2i_active_user", email);
 
     localStorage.setItem("p2i_user_logged_in", "true");
     localStorage.setItem("p2i_is_logged_in", "1");
     sessionStorage.setItem("p2i_is_logged_in", "1");
+
+    savePersistentProfile({
+      first_name: userData.first_name,
+      last_name: userData.last_name
+    }, email);
   }
 
   // =============================
@@ -464,16 +642,126 @@ html {
     return Array.isArray(arr) ? arr : [];
   }
 
-  function getMyBusinessPlans() {
-    const scoped = safeParseJSON(localStorage.getItem(getMyBusinessPlansKey()), []);
-    if (Array.isArray(scoped) && scoped.length) return scoped;
+  function getStoredProfile() {
+    const activeEmail = getActiveEmail();
+    const persisted = readPersistentProfile(activeEmail);
 
+    const sources = [
+      safeParseJSON(localStorage.getItem("userP2I"), {}),
+      safeParseJSON(sessionStorage.getItem("userP2I"), {}),
+      safeParseJSON(localStorage.getItem("user"), {}),
+      safeParseJSON(sessionStorage.getItem("user"), {}),
+      persisted
+    ];
+
+    let merged = {};
+    sources.forEach(src => {
+      if (src && typeof src === "object") {
+        merged = { ...merged, ...src };
+      }
+    });
+
+    const firstName =
+      merged.first_name ||
+      merged.firstname ||
+      merged.firstName ||
+      merged.prenom ||
+      merged.given_name ||
+      "";
+
+    const lastName =
+      merged.last_name ||
+      merged.lastname ||
+      merged.lastName ||
+      merged.nom ||
+      merged.family_name ||
+      "";
+
+    return {
+      firstName: String(firstName || "").trim(),
+      lastName: String(lastName || "").trim(),
+      email: String(activeEmail || merged.email || "").trim()
+    };
+  }
+
+  function getMyBusinessPlans() {
+    const scopedKey = getMyBusinessPlansKey();
+
+    const scoped = safeParseJSON(localStorage.getItem(scopedKey), []);
     const legacy = safeParseJSON(localStorage.getItem("p2i_business_plans"), []);
-    return Array.isArray(legacy) ? legacy : [];
+
+    let arr = [];
+
+    if (Array.isArray(scoped) && scoped.length) {
+      arr = scoped;
+    } else if (Array.isArray(legacy) && legacy.length) {
+      arr = legacy;
+    }
+
+    return arr
+      .filter(Boolean)
+      .sort((a, b) => {
+        const da = new Date(b?.updated_at || b?.created_at || 0).getTime();
+        const db = new Date(a?.updated_at || a?.created_at || 0).getTime();
+        return da - db;
+      });
   }
 
   function readLocalProPlans() {
     return getMyBusinessPlans().filter(p => p && p.type === "BP_PRO");
+  }
+
+  function getOpenUrlFromDownload(d) {
+    return (
+      d?.url ||
+      d?.pdf_url ||
+      d?.pdfUrl ||
+      d?.href ||
+      d?.path ||
+      d?.file ||
+      d?.pdf ||
+      "business-plan-decouverte.html"
+    );
+  }
+
+  function buildProOpenUrl(p) {
+    let url = "business-plan-pro.html?mode=preview";
+    if (p.unit_id) url += `&unit_id=${encodeURIComponent(p.unit_id)}`;
+    if (p.unit) url += `&unit=${encodeURIComponent(p.unit)}`;
+    if (p.filiere) url += `&filiere=${encodeURIComponent(p.filiere)}`;
+    return url;
+  }
+
+  function getAllSimulations() {
+    const free = readLocalDownloads()
+      .filter(d => d && (
+        d.type === "bp_gratuit" ||
+        d.type === "bp_free" ||
+        d.kind === "free_bp" ||
+        d.mode === "web_preview" ||
+        d.mode === "web_preview_fallback"
+      ))
+      .map(d => ({
+        source: "FREE",
+        raw: d,
+        unit: d.unit || d.unit_name || d.up_name || "—",
+        date: d.date || d.created_at || d.updated_at || "",
+        openUrl: getOpenUrlFromDownload(d)
+      }));
+
+    const pro = readLocalProPlans().map(p => ({
+      source: "PRO",
+      raw: p,
+      unit: p.unit || "—",
+      date: p.updated_at || p.created_at || "",
+      openUrl: buildProOpenUrl(p)
+    }));
+
+    return [...pro, ...free].sort((a, b) => {
+      const da = new Date(a.date || 0).getTime();
+      const db = new Date(b.date || 0).getTime();
+      return db - da;
+    });
   }
 
   // =============================
@@ -499,30 +787,6 @@ html {
     const el = $("totalSims");
     if (!el) return;
     el.innerText = pad2(countFreeBPs() + countProBPs());
-  }
-
-  // =============================
-  // URLS D'OUVERTURE
-  // =============================
-  function buildProOpenUrl(p) {
-    let url = "business-plan-pro.html?mode=preview";
-    if (p.unit_id) url += `&unit_id=${encodeURIComponent(p.unit_id)}`;
-    if (p.unit) url += `&unit=${encodeURIComponent(p.unit)}`;
-    if (p.filiere) url += `&filiere=${encodeURIComponent(p.filiere)}`;
-    return url;
-  }
-
-  function getOpenUrlFromDownload(d) {
-    return (
-      d?.url ||
-      d?.pdf_url ||
-      d?.pdfUrl ||
-      d?.href ||
-      d?.path ||
-      d?.file ||
-      d?.pdf ||
-      "business-plan-decouverte.html"
-    );
   }
 
   // =============================
@@ -553,10 +817,123 @@ html {
   }
 
   // =============================
-  // RENDU TABLEAU
+  // RENDU PROFIL
+  // =============================
+  function renderProfileSection() {
+    const profile = getStoredProfile();
+
+    safeText("profileLastName", profile.lastName || "—");
+    safeText("profileFirstName", profile.firstName || "—");
+    safeText("profileEmail", profile.email || "—");
+
+    const all = getAllSimulations();
+    safeText("profileTotalSims", pad2(all.length));
+
+    const tbody = $("profileRecentSims");
+    if (!tbody) return;
+
+    if (!all.length) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="4" style="padding:16px;color:var(--text-dim);">
+            Aucune simulation pour le moment
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    const latest = all.slice(0, 10);
+
+    tbody.innerHTML = latest.map((x, i) => `
+      <tr>
+        <td><strong>${escapeHtml(x.unit)}</strong></td>
+        <td>
+          ${x.source === "PRO"
+            ? '<span class="bp-type-pill bp-type-pro">BP Pro</span>'
+            : '<span class="bp-type-pill bp-type-free">BP Découverte</span>'}
+        </td>
+        <td style="color:var(--text-dim)">${formatDateFR(x.date)}</td>
+        <td>
+          <a class="btn-view" href="${x.openUrl}" data-profile-idx="${i}">Ouvrir</a>
+        </td>
+      </tr>
+    `).join("");
+
+    tbody.querySelectorAll("a.btn-view").forEach((a, i) => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        const item = latest[i];
+        if (!item) return;
+
+        if (item.source === "FREE") {
+          openBP(item.raw);
+        } else {
+          window.location.href = item.openUrl;
+        }
+      });
+    });
+  }
+
+  // =============================
+  // RENDU BUSINESS PLANS
   // =============================
   function renderBusinessPlans() {
     const tbody = $("bpActionsList");
+    if (!tbody) return;
+
+    tbody.innerHTML = "";
+
+    const pro = readLocalProPlans()
+      .map(p => ({
+        source: "PRO",
+        raw: p,
+        unit: p.unit || "—",
+        date: p.updated_at || p.created_at || "",
+        openUrl: buildProOpenUrl(p)
+      }))
+      .sort((a, b) => {
+        const da = new Date(a.date || 0).getTime();
+        const db = new Date(b.date || 0).getTime();
+        return db - da;
+      });
+
+    if (!pro.length) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="4" style="padding:16px;color:var(--text-dim)">
+            Aucun business plan pour le moment
+          </td>
+        </tr>`;
+      return;
+    }
+
+    tbody.innerHTML = pro.map((x, i) => `
+      <tr>
+        <td><strong>${escapeHtml(x.unit)}</strong></td>
+        <td><span class="bp-type-pill bp-type-pro">BP Pro</span></td>
+        <td style="color:var(--text-dim)">${formatDateFR(x.date)}</td>
+        <td>
+          <a class="btn-view" href="${x.openUrl}" data-idx="${i}">Ouvrir</a>
+        </td>
+      </tr>
+    `).join("");
+
+    tbody.querySelectorAll("a.btn-view").forEach((a, i) => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        const item = pro[i];
+        if (!item) return;
+        window.location.href = item.openUrl;
+      });
+    });
+  }
+
+  // =============================
+  // RENDU SIMULATIONS
+  // =============================
+  function renderSimulations() {
+    const tbody = $("simulationsList");
     if (!tbody) return;
 
     tbody.innerHTML = "";
@@ -585,27 +962,17 @@ html {
       openUrl: buildProOpenUrl(p)
     }));
 
-    const sorted = [...pro, ...free]
-  .sort((a, b) => {
-    const da = new Date(a.date || 0).getTime();
-    const db = new Date(b.date || 0).getTime();
-    return db - da;
-  });
-
-// 👉 10 derniers = Business Plans visibles
-const all = sorted.slice(0, 10);
-
-// 👉 le reste = simulations
-localStorage.setItem(
-  "p2i_archived_simulations",
-  JSON.stringify(sorted.slice(10))
-);
+    const all = [...pro, ...free].sort((a, b) => {
+      const da = new Date(a.date || 0).getTime();
+      const db = new Date(b.date || 0).getTime();
+      return db - da;
+    });
 
     if (!all.length) {
       tbody.innerHTML = `
         <tr>
           <td colspan="4" style="padding:16px;color:var(--text-dim)">
-            Aucun business plan pour le moment
+            Aucune simulation pour le moment
           </td>
         </tr>`;
       return;
@@ -640,120 +1007,56 @@ localStorage.setItem(
       });
     });
   }
-function renderSimulations() {
-  const tbody = $("simulationsList");
-  if (!tbody) return;
 
-  tbody.innerHTML = "";
-
-  const free = readLocalDownloads()
-    .filter(d => d && (
-      d.type === "bp_gratuit" ||
-      d.type === "bp_free" ||
-      d.kind === "free_bp" ||
-      d.mode === "web_preview" ||
-      d.mode === "web_preview_fallback"
-    ))
-    .map(d => ({
-      source: "FREE",
-      raw: d,
-      unit: d.unit || d.unit_name || d.up_name || "—",
-      date: d.date || d.created_at || d.updated_at || "",
-      openUrl: getOpenUrlFromDownload(d)
-    }));
-
-  const pro = readLocalProPlans().map(p => ({
-    source: "PRO",
-    raw: p,
-    unit: p.unit || "—",
-    date: p.updated_at || p.created_at || "",
-    openUrl: buildProOpenUrl(p)
-  }));
-
-  const all = [...pro, ...free].sort((a, b) => {
-    const da = new Date(a.date || 0).getTime();
-    const db = new Date(b.date || 0).getTime();
-    return db - da;
-  });
-
-  if (!all.length) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="4" style="padding:16px;color:var(--text-dim)">
-          Aucune simulation pour le moment
-        </td>
-      </tr>`;
-    return;
-  }
-
-  tbody.innerHTML = all.map((x, i) => `
-    <tr>
-      <td><strong>${escapeHtml(x.unit)}</strong></td>
-      <td>
-        ${x.source === "PRO"
-          ? '<span class="bp-type-pill bp-type-pro">BP Pro</span>'
-          : '<span class="bp-type-pill bp-type-free">BP Découverte</span>'}
-      </td>
-      <td style="color:var(--text-dim)">${formatDateFR(x.date)}</td>
-      <td>
-        <a class="btn-view" href="${x.openUrl}" data-idx="${i}">Ouvrir</a>
-      </td>
-    </tr>
-  `).join("");
-
-  tbody.querySelectorAll("a.btn-view").forEach((a, i) => {
-    a.addEventListener("click", (e) => {
-      e.preventDefault();
-      const item = all[i];
-      if (!item) return;
-
-      if (item.source === "FREE") {
-        openBP(item.raw);
-      } else {
-        window.location.href = item.openUrl;
-      }
-    });
-  });
-}
   // =============================
   // HYDRATATION UI
   // =============================
   function hydrateDashboardFromEmail(email, role = "USER") {
-    const pseudo = email && email.includes("@") ? email.split("@")[0] : "Utilisateur";
+    const profile = getStoredProfile();
+
+    const firstName = profile.firstName || "";
+    const pseudo =
+      firstName ||
+      (email && email.includes("@") ? email.split("@")[0] : "Utilisateur");
+
     safeText("userName", `Bonjour, ${pseudo} !`);
 
     const accountTypeEl = $("accountType");
-    if (accountTypeEl) accountTypeEl.innerText = String(role || "USER").toUpperCase();
+    if (accountTypeEl) {
+      accountTypeEl.innerText = String(role || "USER").toUpperCase();
+    }
 
     refreshDashboard();
   }
 
   function showAuthWarning() {
-  return;
-}
+    return;
+  }
 
   // =============================
   // RAFRAÎCHISSEMENT DASHBOARD
   // =============================
   function refreshDashboard() {
-  renderBusinessPlans();
-  renderSimulations();
-  updateBpCounter();
-}
-function forceLoginIfLoggedOut() {
-  const hasAuth =
-    localStorage.getItem("p2i_user_logged_in") === "true" ||
-    localStorage.getItem("p2i_is_logged_in") === "1" ||
-    sessionStorage.getItem("p2i_is_logged_in") === "1" ||
-    !!localStorage.getItem("p2i_active_user") ||
-    !!localStorage.getItem("p2i_user_email");
-
-  if (!hasAuth) {
-    window.location.replace("login.html?mode=login");
-    return true;
+    renderBusinessPlans();
+    renderSimulations();
+    renderProfileSection();
+    updateBpCounter();
   }
-  return false;
-}
+
+  function forceLoginIfLoggedOut() {
+    const hasAuth =
+      localStorage.getItem("p2i_user_logged_in") === "true" ||
+      localStorage.getItem("p2i_is_logged_in") === "1" ||
+      sessionStorage.getItem("p2i_is_logged_in") === "1" ||
+      !!localStorage.getItem("p2i_active_user") ||
+      !!localStorage.getItem("p2i_user_email");
+
+    if (!hasAuth) {
+      window.location.replace("login.html?mode=login");
+      return true;
+    }
+    return false;
+  }
 
   // =============================
   // INIT AUTH + DASHBOARD
@@ -807,6 +1110,9 @@ function forceLoginIfLoggedOut() {
   // LOGOUT
   // =============================
   function clearAuthStorage() {
+    // IMPORTANT : on efface l'authentification,
+    // mais on ne supprime PAS les profils persistants p2i_profile__email
+
     localStorage.removeItem("userP2I");
     sessionStorage.removeItem("userP2I");
     localStorage.removeItem("user");
@@ -848,48 +1154,156 @@ function forceLoginIfLoggedOut() {
       }
     });
   }
-function wireSectionNavigation() {
-  const links = Array.from(document.querySelectorAll(".nav-section-link"));
-  const sections = Array.from(document.querySelectorAll(".dashboard-section"));
 
-  if (!links.length || !sections.length) return;
+  function wireSectionNavigation() {
+    const links = Array.from(document.querySelectorAll(".nav-section-link"));
+    const sections = Array.from(document.querySelectorAll(".dashboard-section"));
 
-  function showSection(id) {
-    sections.forEach(section => {
-      section.classList.toggle("active-section", section.id === id);
-    });
+    if (!links.length || !sections.length) return;
+
+    function showSection(id) {
+      sections.forEach(section => {
+        section.classList.toggle("active-section", section.id === id);
+      });
+
+      links.forEach(link => {
+        const isActive = link.getAttribute("href") === `#${id}`;
+        link.classList.toggle("active", isActive);
+      });
+    }
 
     links.forEach(link => {
-      const isActive = link.getAttribute("href") === `#${id}`;
-      link.classList.toggle("active", isActive);
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const href = link.getAttribute("href") || "";
+        const id = href.replace("#", "").trim();
+        if (!id) return;
+        showSection(id);
+      });
     });
+
+    showSection("section-profil");
   }
 
-  links.forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const href = link.getAttribute("href") || "";
-      const id = href.replace("#", "").trim();
-      if (!id) return;
-      showSection(id);
-    });
-  });
+  // =============================
+  // PROFIL
+  // =============================
+  function toggleProfileEdit() {
+    const box = document.getElementById("profileEditBox");
+    if (!box) return;
 
-  showSection("section-profil");
-}
+    const isVisible = box.style.display === "block";
+
+    if (!isVisible) {
+      const first = document.getElementById("profileFirstName")?.innerText || "";
+      const last = document.getElementById("profileLastName")?.innerText || "";
+
+      document.getElementById("editFirstName").value = first === "—" ? "" : first;
+      document.getElementById("editLastName").value = last === "—" ? "" : last;
+    }
+
+    box.style.display = isVisible ? "none" : "block";
+  }
+
+  async function saveProfile() {
+    const firstName = document.getElementById("editFirstName")?.value.trim() || "";
+    const lastName = document.getElementById("editLastName")?.value.trim() || "";
+    const saveBtn = document.querySelector('#profileEditBox .btn-new');
+
+    try {
+      if (saveBtn) {
+        saveBtn.disabled = true;
+        saveBtn.innerText = "Enregistrement...";
+      }
+
+      const currentEmail =
+        String(
+          getActiveEmail() ||
+          document.getElementById("profileEmail")?.innerText ||
+          ""
+        ).trim().toLowerCase();
+
+      let user = {};
+      try {
+        user = JSON.parse(localStorage.getItem("userP2I") || "{}");
+      } catch (_) {
+        user = {};
+      }
+
+      user.first_name = firstName;
+      user.last_name = lastName;
+      user.updated_at = new Date().toISOString();
+      if (currentEmail) user.email = currentEmail;
+
+      localStorage.setItem("userP2I", JSON.stringify(user));
+      sessionStorage.setItem("userP2I", JSON.stringify(user));
+
+      // Sauvegarde persistante par email
+      savePersistentProfile({
+        first_name: firstName,
+        last_name: lastName
+      }, currentEmail);
+
+      document.getElementById("profileFirstName").innerText = firstName || "—";
+      document.getElementById("profileLastName").innerText = lastName || "—";
+      document.getElementById("profileEmail").innerText = currentEmail || "—";
+      document.getElementById("profileEditBox").style.display = "none";
+
+      const titleName =
+        firstName ||
+        (currentEmail.includes("@") ? currentEmail.split("@")[0] : "Utilisateur");
+
+      document.getElementById("userName").innerText = `Bonjour, ${titleName} !`;
+
+      try {
+        const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+
+        if (!sessionError && sessionData?.session?.user) {
+          const currentMeta = sessionData.session.user.user_metadata || {};
+
+          const { error: updateError } = await supabaseClient.auth.updateUser({
+            data: {
+              ...currentMeta,
+              first_name: firstName,
+              last_name: lastName
+            }
+          });
+
+          if (updateError) {
+            console.warn("Sync Supabase profil non effectuée :", updateError.message);
+          }
+        }
+      } catch (syncErr) {
+        console.warn("Erreur de synchronisation Supabase du profil :", syncErr);
+      }
+
+      alert("Profil mis à jour avec succès.");
+    } catch (err) {
+      console.error("Erreur saveProfile :", err);
+      alert("Impossible d'enregistrer le profil pour le moment.");
+    } finally {
+      if (saveBtn) {
+        saveBtn.disabled = false;
+        saveBtn.innerText = "Enregistrer";
+      }
+    }
+  }
+
   // =============================
   // EVENTS
   // =============================
   document.addEventListener("DOMContentLoaded", () => {
-  wireLogout();
-  wireSectionNavigation();
-});
+    wireLogout();
+    wireSectionNavigation();
+  });
 
   window.addEventListener("load", initDashboard);
+
   window.addEventListener("pageshow", () => {
-  if (forceLoginIfLoggedOut()) return;
-  refreshDashboard();
-});
+    if (forceLoginIfLoggedOut()) return;
+    refreshDashboard();
+  });
+
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) refreshDashboard();
   });
