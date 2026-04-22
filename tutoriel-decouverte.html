@@ -1,0 +1,3791 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script src="up-data.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutoriel Découverte - P2I</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* TON CSS EXISTANT - Je le garde identique */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #0b132b 0%, #1b263b 100%);
+      color: white;
+      min-height: 100vh;
+    }m
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #94a3b8;
+      padding: 10px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+    .btn-back:hover {
+      background: rgba(76, 201, 240, 0.2);
+      border-color: #4cc9f0;
+      color: #4cc9f0;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .icon-main {
+      font-size: 3rem;
+      color: #4cc9f0;
+      margin-bottom: 15px;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      margin-bottom: 10px;
+    }
+    .up-info {
+      color: #4cc9f0;
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+    .filiere-info {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+    }
+    .progress-container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      height: 8px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      background: linear-gradient(90deg, #4cc9f0, #f72585);
+      width: 0%;
+      height: 100%;
+      border-radius: 20px;
+      transition: width 0.3s ease;
+    }
+    .progress-stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+    .step-summary {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 25px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 50px;
+    }
+    .step-pill {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 55px;
+      padding: 8px 0;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .step-pill:hover {
+      background: rgba(76, 201, 240, 0.2);
+      transform: translateY(-2px);
+    }
+    .step-pill.active {
+      background: linear-gradient(135deg, #4cc9f0, #f72585);
+      border-color: transparent;
+    }
+    .step-pill.checked {
+      border-color: #22c55e;
+      background: rgba(34, 197, 94, 0.15);
+    }
+    .step-pill.checked .step-pill-icon {
+      color: #22c55e;
+    }
+    .step-pill.active .step-pill-icon,
+    .step-pill.active .step-pill-number {
+      color: white;
+    }
+    .step-pill-icon {
+      font-size: 1rem;
+      color: #4cc9f0;
+    }
+    .step-pill-number {
+      font-size: 0.65rem;
+      margin-top: 4px;
+      color: #94a3b8;
+    }
+    .bp-status-banner {
+      background: rgba(76, 201, 240, 0.1);
+      border-radius: 16px;
+      padding: 15px 25px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      border: 1px solid rgba(76, 201, 240, 0.2);
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .bp-status-banner .info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+    .bp-status-banner .score {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #4cc9f0;
+      background: rgba(76, 201, 240, 0.15);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .bp-status-banner .eligible {
+      color: #22c55e;
+      background: rgba(34, 197, 94, 0.15);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .bp-status-banner .not-eligible {
+      color: #fbbf24;
+      background: rgba(251, 191, 36, 0.15);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .btn-bp {
+      background: linear-gradient(135deg, #4cc9f0, #f72585);
+      border: none;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-validate {
+      background: #22c55e;
+      border: none;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-validate:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: #94a3b8;
+    }
+    .btn-save {
+      background: #22c55e;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .step-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      padding: 30px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .step-number {
+      display: inline-block;
+      background: linear-gradient(135deg, #4cc9f0, #f72585);
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .step-title {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .step-icon {
+      font-size: 2.5rem;
+      color: #4cc9f0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .step-content {
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .machines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .machine-card {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .machine-card h4 {
+      color: #4cc9f0;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+    .machine-card .role {
+      font-size: 0.8rem;
+      color: #fbbf24;
+      margin-bottom: 5px;
+    }
+    .machine-card .capacity, .machine-card .utilities {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin: 3px 0;
+    }
+    .btn-quote {
+      background: #f72585;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+      transition: all 0.2s ease;
+    }
+    .btn-quote:hover {
+      background: #ff4d9e;
+      transform: translateY(-2px);
+    }
+    .btn-p2i {
+      background: #4cc9f0;
+      color: #0b132b;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+    }
+    .checklist {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .checklist h4 {
+      color: #4cc9f0;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+    }
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
+    .checklist-item i {
+      width: 22px;
+      color: #4cc9f0;
+    }
+    .checklist-item.checked i {
+      color: #22c55e;
+    }
+    .checklist-item.checked span {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+    .checklist-item span {
+      flex: 1;
+    }
+    .tip {
+      background: rgba(76, 201, 240, 0.1);
+      border-left: 3px solid #4cc9f0;
+      padding: 15px;
+      border-radius: 12px;
+      margin: 15px 0;
+      font-size: 0.9rem;
+    }
+    .incitation {
+      background: rgba(247, 37, 133, 0.1);
+      border-left: 4px solid #f72585;
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+    .incitation p {
+      color: #fbbf24;
+      margin-bottom: 10px;
+    }
+    .incitation button {
+      background: linear-gradient(135deg, #f72585, #4cc9f0);
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-btn-primary {
+      background: linear-gradient(135deg, #4cc9f0, #f72585);
+      border: none;
+    }
+    .expert-section {
+      background: linear-gradient(135deg, rgba(247, 37, 133, 0.15), rgba(76, 201, 240, 0.15));
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      margin-top: 20px;
+      border: 1px solid rgba(247, 37, 133, 0.3);
+    }
+    .expert-section h3 {
+      color: #f72585;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+    .expert-price {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #4cc9f0;
+      margin: 10px 0;
+    }
+    .btn-expert {
+      background: linear-gradient(135deg, #f72585, #4cc9f0);
+      border: none;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 15px;
+    }
+    .btn-expert:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .p2i-badge {
+      background: rgba(76, 201, 240, 0.15);
+      border: 1px solid #4cc9f0;
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 15px;
+      text-align: center;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 15px 0;
+    }
+    .info-card {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .info-card .label {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-bottom: 5px;
+    }
+    .info-card .value {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #4cc9f0;
+    }
+    @media (max-width: 768px) {
+      .container { padding: 20px; }
+      .machines-grid { grid-template-columns: 1fr; }
+      .nav-buttons { flex-direction: column; }
+      .nav-btn { justify-content: center; }
+      .step-summary { gap: 5px; }
+      .step-pill { width: 45px; padding: 6px 0; }
+      .bp-status-banner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <body>
+  <div class="container">
+    <button onclick="goBack()" class="btn-back" style="display: flex !important; visibility: visible !important;">
+      <i class="fas fa-arrow-left"></i> Retour aux services
+    </button>
+    <div id="content">
+      <div style="text-align: center; padding: 50px;">
+        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #4cc9f0;"></i>
+        <p>Chargement du tutoriel...</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    // ==============================================
+    // ==============================================
+// DONNÉES DES UNITÉS DE PRODUCTION
+// ==============================================
+
+const productionsData = (typeof P2I_UP_DATA !== 'undefined' && P2I_UP_DATA) ? P2I_UP_DATA : {
+  huiles_alimentaires: {
+  id: "huiles_alimentaires",
+  nom: "Huiles alimentaires",
+  filiereNom: "Agro-alimentaire & Boissons",
+  type: "production",
+  description: "Production d'huiles végétales à partir de graines locales (palme, arachide, tournesol, colza).",
+  capex_min: 130000,
+  chiffre_affaires_estime: "400000-1000000",
+  marge_brute: "25-35",
+  emplois_directs: "8-12",
+  emplois_indirects: "5-8",
+  roi_estime: "3-4 ans",
+  investment_breakdown: {
+    machines: 65000,
+    installation: 20000,
+    working_capital: 30000,
+    training: 15000,
+    total: 130000
+  },
+  monthly_capacity: "20,000 L",
+  estimated_revenue: 700000,
+  gross_margin: 30,
+  net_profitability: 20,
+  machines: [
+    { name: "Décortiqueuse", role: "Décorticage des graines", capacity: "1,000 kg/h", utilities: "Électricité", price: 10000 },
+    { name: "Broyeur", role: "Broyage des graines", capacity: "800 kg/h", utilities: "Électricité", price: 8000 },
+    { name: "Presse à huile", role: "Extraction de l'huile", capacity: "500 L/h", utilities: "Électricité", price: 20000 },
+    { name: "Filtre", role: "Filtration de l'huile", capacity: "500 L/h", utilities: "Électricité", price: 8000 },
+    { name: "Cuve de décantation", role: "Décantation", capacity: "10,000 L", utilities: "—", price: 5000 },
+    { name: "Remplisseuse", role: "Conditionnement", capacity: "1,000 bouteilles/h", utilities: "Électricité", price: 12000 },
+    { name: "Étiqueteuse", role: "Étiquetage", capacity: "1,000 bouteilles/h", utilities: "Électricité", price: 5000 }
+  ],
+  processus: [
+    "Réception des graines",
+    "Nettoyage",
+    "Décorticage",
+    "Broyage",
+    "Pressage",
+    "Filtration",
+    "Décantation",
+    "Conditionnement"
+  ],
+  avantages: [
+    "Matières premières locales",
+    "Demande constante",
+    "Export possible",
+    "Sous-produits valorisables",
+    "🇨🇮 Huile de palme (1er producteur africain)",
+    "Huile d'arachide (production locale)",
+    "Tourteaux pour alimentation animale"
+  ],
+  challenges: [
+    "Concurrence des importations",
+    "Prix des matières premières",
+    "Normes de qualité",
+    "Stockage"
+  ],
+  sanitaires: [
+    "Respecter les normes alimentaires",
+    "Contrôler la qualité de l'huile",
+    "Nettoyer les équipements régulièrement",
+    "Former le personnel aux bonnes pratiques",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser le pressage",
+    "Récupérer la chaleur",
+    "Utiliser des moteurs à haut rendement",
+    "Isoler les cuves",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones de production et stockage",
+    "Prévoir zone de stockage",
+    "Aménager laboratoire de contrôle qualité",
+    "Faciliter la circulation des chariots"
+  ],
+  marketing: [
+    "Cibler supermarchés et restaurants",
+    "Proposer des formats variés",
+    "Soigner l'emballage",
+    "Communiquer sur l'origine locale",
+    "Développer des marques propres"
+  ],
+  raw_materials: [
+    "Graines de palme (producteurs locaux)",
+    "Arachides",
+    "Tournesol",
+    "Colza",
+    "Emballages (bouteilles PET, bidons, étiquettes)"
+  ],
+  target_markets: [
+    "Supermarchés",
+    "Restaurants",
+    "Industrie alimentaire",
+    "Export vers pays voisins"
+  ],
+  competitive_advantages: [
+    "Huile fraîche (pas de stockage long)",
+    "Prix compétitifs",
+    "Origine locale",
+    "Qualité garantie"
+  ]
+},
+  epices: {
+  id: "epices",
+  nom: "Transformation d'épices",
+  filiereNom: "Agro-alimentaire & Boissons",
+  type: "production",
+  description: "Transformation et conditionnement d'épices locales en poudre fine, mélanges et condiments.",
+  capex_min: 70000,
+  chiffre_affaires_estime: "150000-400000",
+  marge_brute: "40-55",
+  emplois_directs: "4-8",
+  emplois_indirects: "2-4",
+  roi_estime: "2-3 ans",
+  investment_breakdown: {
+    machines: 35000,
+    installation: 10000,
+    working_capital: 15000,
+    training: 10000,
+    total: 70000
+  },
+  monthly_capacity: "5,000 kg",
+  estimated_revenue: 250000,
+  gross_margin: 48,
+  net_profitability: 30,
+  machines: [
+    { name: "Table de tri", role: "Tri des épices", capacity: "Petites séries", utilities: "—", price: 2000 },
+    { name: "Séchoir", role: "Séchage", capacity: "Selon flux", utilities: "Électricité ou solaire", price: 8000 },
+    { name: "Broyeur", role: "Broyage", capacity: "200 kg/h", utilities: "Électricité", price: 5000 },
+    { name: "Tamis", role: "Tamisage", capacity: "200 kg/h", utilities: "Électricité", price: 3000 },
+    { name: "Mélangeur", role: "Assemblage de mélanges", capacity: "Batch", utilities: "Électricité", price: 4000 },
+    { name: "Ensacheuse", role: "Conditionnement", capacity: "500 sachets/h", utilities: "Électricité", price: 6000 }
+  ],
+  processus: [
+    "Réception des épices",
+    "Tri",
+    "Séchage",
+    "Broyage",
+    "Tamisage",
+    "Mélange",
+    "Conditionnement"
+  ],
+  avantages: [
+    "Valeur ajoutée importante",
+    "Export Europe",
+    "Conservation longue",
+    "Faible investissement",
+    "🇨🇮 Poivre, gingembre, piment, curcuma locaux",
+    "Mélanges d'épices 'Made in Côte d'Ivoire'"
+  ],
+  challenges: [
+    "Contrôle humidité",
+    "Maintenance couleur/saveur",
+    "Concurrence",
+    "Normes sanitaires"
+  ],
+  sanitaires: [
+    "Respecter les normes alimentaires",
+    "Contrôler l'humidité",
+    "Nettoyer les équipements régulièrement",
+    "Former le personnel aux bonnes pratiques",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser le séchage",
+    "Utiliser le séchage solaire",
+    "Isoler les séchoirs",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones propres et sales",
+    "Prévoir zone de stockage sec",
+    "Aménager zone de conditionnement",
+    "Faciliter la circulation du personnel"
+  ],
+  marketing: [
+    "Cibler supermarchés et épiceries fines",
+    "Développer des mélanges originaux",
+    "Soigner l'emballage",
+    "Communiquer sur l'origine locale",
+    "Exporter vers l'Europe"
+  ],
+  raw_materials: [
+    "Poivre (producteurs locaux)",
+    "Gingembre",
+    "Piment",
+    "Curcuma",
+    "Cannelle (import)",
+    "Sachets et emballages"
+  ],
+  target_markets: [
+    "Supermarchés",
+    "Épiceries fines",
+    "Restauration",
+    "Export Europe"
+  ],
+  competitive_advantages: [
+    "Épices fraîches",
+    "Origine locale",
+    "Conditionnement sur mesure",
+    "Prix compétitifs",
+    "Certification bio possible"
+  ]
+},
+  biscuiterie: {
+  id: "biscuiterie",
+  nom: "Biscuiterie industrielle",
+  filiereNom: "Agro-alimentaire & Boissons",
+  type: "production",
+  description: "Production industrielle de biscuits à base de farines locales. Spécialisation possible dans les biscuits au cacao et au café, produits phares de la Côte d'Ivoire.",
+  capex_min: 120000,
+  chiffre_affaires_estime: "400000-800000",
+  marge_brute: "30-40",
+  emplois_directs: "8-15",
+  emplois_indirects: "5-10",
+  roi_estime: "3-5 ans",
+  investment_breakdown: {
+    machines: 65000,
+    installation: 20000,
+    working_capital: 25000,
+    training: 10000,
+    total: 120000
+  },
+  monthly_capacity: "15,000 kg",
+  estimated_revenue: 550000,
+  gross_margin: 35,
+  net_profitability: 20,
+  machines: [
+    { name: "Mélangeur industriel", role: "Préparation de la pâte", capacity: "200 kg/batch", utilities: "Électricité 15kW", price: 12000 },
+    { name: "Laminoir / formeuse", role: "Façonnage et découpe", capacity: "500 kg/h", utilities: "Électricité 10kW", price: 18000 },
+    { name: "Four tunnel", role: "Cuisson continue", capacity: "500 kg/h", utilities: "Électricité ou gaz", price: 25000 },
+    { name: "Refroidisseur à convoyeur", role: "Refroidissement", capacity: "Standard", utilities: "Électricité 5kW", price: 8000 },
+    { name: "Conditionneuse", role: "Emballage sous atmosphère", capacity: "200 packs/min", utilities: "Électricité + air", price: 12000 }
+  ],
+  processus: [
+    "Mélange des ingrédients (farine, sucre, œufs, beurre)",
+    "Pétrissage et repos de la pâte",
+    "Laminage et formage des biscuits",
+    "Cuisson au four tunnel (200-220°C)",
+    "Refroidissement sur convoyeur",
+    "Conditionnement sous atmosphère protectrice",
+    "Étiquetage et cartonnage"
+  ],
+  avantages: [
+    "Demande alimentaire constante",
+    "Export possible vers pays voisins",
+    "Matières premières locales (farine, sucre, œufs)",
+    "Large réseau de distribution",
+    "🇨🇮 Cacao ivoirien : biscuits au cacao (pâte à tartiner, fourrés)",
+    "🇨🇮 Café ivoirien : biscuits au café (energy, petit-déjeuner)",
+    "Innovation : biscuits aux fruits locaux (ananas, mangue, noix de cajou)"
+  ],
+  challenges: [
+    "Concurrence des grandes marques internationales",
+    "Prix volatil des matières premières",
+    "Marketing nécessaire pour se faire connaître",
+    "Gestion des invendus et dates de péremption"
+  ],
+  sanitaires: [
+    "Respecter les normes HACCP",
+    "Contrôler la température des fours",
+    "Nettoyer les équipements quotidiennement",
+    "Former le personnel aux bonnes pratiques",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser la cuisson pour réduire la consommation",
+    "Récupérer la chaleur des fours",
+    "Isoler les fours et canalisations",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux linéaire",
+    "Séparer zones de production et stockage",
+    "Prévoir zone de refroidissement",
+    "Aménager laboratoire de contrôle qualité",
+    "Faciliter la circulation du personnel"
+  ],
+  marketing: [
+    "Cibler supermarchés et épiceries",
+    "Développer des gammes premium cacao/café",
+    "Soigner l'emballage (chocolat, café)",
+    "Communiquer sur les ingrédients locaux",
+    "Proposer des échantillons pour tests"
+  ],
+  raw_materials: [
+    "Farine de blé (locale ou import)",
+    "Sucre",
+    "Œufs (producteurs locaux)",
+    "Beurre ou margarine",
+    "Cacao en poudre (produit local)",
+    "Café soluble (produit local)",
+    "Emballages (sachets, boîtes, cartons)"
+  ],
+  target_markets: [
+    "Supermarchés et grandes surfaces",
+    "Épiceries et boutiques",
+    "Écoles (goûters)",
+    "Hôtels et restaurants",
+    "Export vers pays voisins"
+  ],
+  competitive_advantages: [
+    "Biscuits fraîchement produits",
+    "Ingrédients locaux (cacao, café)",
+    "Produits 'Made in Côte d'Ivoire'",
+    "Flexibilité des lots",
+    "Prix compétitifs"
+  ]
+},
+mini_laiterie: {
+  id: "mini_laiterie",
+  nom: "Mini-laiterie",
+  filiereNom: "Agro-alimentaire & Boissons",
+  type: "production",
+  description: "Transformation du lait en produits laitiers frais (yaourts, fromages, beurre). Développement de l'élevage laitier local.",
+  capex_min: 110000,
+  chiffre_affaires_estime: "300000-600000",
+  marge_brute: "30-40",
+  emplois_directs: "5-10",
+  emplois_indirects: "3-5",
+  roi_estime: "4-6 ans",
+  investment_breakdown: {
+    machines: 55000,
+    installation: 15000,
+    working_capital: 25000,
+    training: 15000,
+    total: 110000
+  },
+  monthly_capacity: "30,000 L",
+  estimated_revenue: 450000,
+  gross_margin: 35,
+  net_profitability: 22,
+  machines: [
+    { name: "Cuve de réception", role: "Réception et filtration du lait", capacity: "5,000 L", utilities: "Électricité", price: 10000 },
+    { name: "Pasteurisateur", role: "Pasteurisation du lait", capacity: "1,000 L/h", utilities: "Électricité + eau", price: 20000 },
+    { name: "Écrémeuse", role: "Séparation de la crème", capacity: "1,000 L/h", utilities: "Électricité", price: 8000 },
+    { name: "Cuve de maturation", role: "Maturation du yaourt", capacity: "1,000 L", utilities: "Électricité", price: 12000 },
+    { name: "Remplisseuse", role: "Conditionnement", capacity: "2,000 pots/h", utilities: "Électricité", price: 10000 },
+    { name: "Chambre froide", role: "Stockage", capacity: "20,000 L", utilities: "Électricité", price: 15000 }
+  ],
+  processus: [
+    "Réception du lait",
+    "Filtration",
+    "Standardisation",
+    "Pasteurisation",
+    "Homogénéisation",
+    "Fermentation",
+    "Conditionnement",
+    "Stockage réfrigéré"
+  ],
+  avantages: [
+    "Demande croissante (produits laitiers)",
+    "Produits frais locaux",
+    "Fidélisation client",
+    "Distribution régulière",
+    "🇨🇮 Développement de l'élevage laitier local",
+    "Yaourts aux fruits locaux (ananas, mangue, papaye)"
+  ],
+  challenges: [
+    "Chaîne du froid",
+    "Normes sanitaires strictes",
+    "Saisonnalité de la production",
+    "Concurrence des grandes marques"
+  ],
+  sanitaires: [
+    "Respecter les normes laitières",
+    "Contrôler la température de pasteurisation",
+    "Nettoyer les équipements après chaque production",
+    "Former le personnel aux bonnes pratiques",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser les cycles de pasteurisation",
+    "Récupérer la chaleur",
+    "Isoler les cuves et chambres froides",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones propres et sales",
+    "Prévoir zone de stockage réfrigéré",
+    "Aménager laboratoire de contrôle qualité",
+    "Faciliter la circulation du personnel"
+  ],
+  marketing: [
+    "Cibler supermarchés, crèches et écoles",
+    "Développer des gammes variées",
+    "Soigner l'emballage",
+    "Communiquer sur la fraîcheur",
+    "Proposer des contrats réguliers"
+  ],
+  raw_materials: [
+    "Lait frais (producteurs locaux)",
+    "Ferments lactiques",
+    "Sucre",
+    "Fruits (ananas, mangue, papaye)",
+    "Pots et opercules",
+    "Étiquettes"
+  ],
+  target_markets: [
+    "Supermarchés",
+    "Crèches et écoles",
+    "Hôpitaux",
+    "Hôtels et restaurants",
+    "Particuliers"
+  ],
+  competitive_advantages: [
+    "Produits laitiers frais",
+    "Lait local (traçabilité)",
+    "Yaourts aux fruits locaux",
+    "Prix compétitifs",
+    "Chaîne du froid maîtrisée"
+  ]
+},
+conserverie_legumes: {
+  id: "conserverie_legumes",
+  nom: "Conserverie de légumes",
+  filiereNom: "Agro-alimentaire & Boissons",
+  type: "production",
+  description: "Transformation industrielle de légumes locaux en conserves (tomates, haricots verts, maïs doux, okra, gombo). Valorisation des produits agricoles ivoiriens pour le marché local et l'export.",
+  capex_min: 90000,
+  chiffre_affaires_estime: "300000-750000",
+  marge_brute: "35-45",
+  emplois_directs: "6-10",
+  emplois_indirects: "4-6",
+  roi_estime: "3-4 ans",
+  investment_breakdown: {
+    machines: 45000,
+    installation: 15000,
+    working_capital: 20000,
+    training: 10000,
+    total: 90000
+  },
+  monthly_capacity: "20,000 boîtes",
+  estimated_revenue: 500000,
+  gross_margin: 40,
+  net_profitability: 25,
+  machines: [
+    { name: "Laveuse industrielle", role: "Nettoyage des légumes", capacity: "1,000 kg/h", utilities: "Eau + électricité", price: 8000 },
+    { name: "Blanchisseur", role: "Traitement thermique", capacity: "500 kg/batch", utilities: "Électricité + eau", price: 12000 },
+    { name: "Remplisseuse + doseuse", role: "Mise en bocaux", capacity: "2,000 boîtes/h", utilities: "Électricité", price: 15000 },
+    { name: "Autoclave", role: "Stérilisation", capacity: "1,000 boîtes/batch", utilities: "Électricité + eau", price: 25000 },
+    { name: "Étiqueteuse", role: "Étiquetage / traçabilité", capacity: "2,000 boîtes/h", utilities: "Électricité", price: 5000 }
+  ],
+  processus: [
+    "Réception et tri des légumes",
+    "Lavage et calibrage",
+    "Blanchiement",
+    "Mise en conserve",
+    "Stérilisation",
+    "Étiquetage",
+    "Stockage"
+  ],
+  avantages: [
+    "Valorisation des surplus agricoles ivoiriens",
+    "Conservation longue durée (12-24 mois)",
+    "Marges intéressantes (40-50%)",
+    "Export possible vers l'Europe (normes UE)",
+    "🇨🇮 Légumes locaux : tomate, haricot vert, maïs doux, okra, gombo"
+  ],
+  challenges: [
+    "Saisonnalité des légumes (prévoir stockage)",
+    "Normes sanitaires strictes (HACCP, ISO)",
+    "Concurrence des importations (Italie, Espagne)",
+    "Gestion des déchets organiques"
+  ],
+  sanitaires: [
+    "Respecter les normes HACCP",
+    "Nettoyer les équipements après chaque production",
+    "Contrôler la température de stérilisation (121°C)",
+    "Former le personnel aux bonnes pratiques d'hygiène",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser les cycles de stérilisation",
+    "Récupérer la chaleur des autoclaves",
+    "Isoler les canalisations et cuves",
+    "Utiliser des variateurs de vitesse",
+    "Installer un chauffe-eau solaire"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones propres et sales",
+    "Prévoir zone de stockage climatisée",
+    "Aménager laboratoire de contrôle qualité",
+    "Faciliter la circulation des chariots"
+  ],
+  marketing: [
+    "Cibler supermarchés, hôtels et restaurants",
+    "Développer une gamme premium (bio, sans additifs)",
+    "Proposer des conditionnements variés (verre, métal)",
+    "Communiquer sur l'origine locale et la fraîcheur",
+    "Participer aux salons agroalimentaires (SARA, SIAL)",
+    "Exporter vers l'Europe (certification bio)"
+  ],
+  raw_materials: [
+    "Tomates (production locale)",
+    "Haricots verts (producteurs locaux)",
+    "Maïs doux (régions du nord)",
+    "Okra, gombo (sud)",
+    "Sel, sucre, vinaigre",
+    "Boîtes de conserve, bocaux en verre, étiquettes"
+  ],
+  target_markets: [
+    "Supermarchés (Carrefour, Casino)",
+    "Hôtels et restaurants",
+    "Cantines scolaires et universitaires",
+    "Export vers l'Europe",
+    "Marché institutionnel (hôpitaux, prisons)"
+  ],
+  competitive_advantages: [
+    "Première conserverie moderne dans la région",
+    "Légumes frais (pas d'importation)",
+    "Coûts de production 25% inférieurs aux importations",
+    "Soutien technique et formation P2I",
+    "Certification bio possible"
+  ]
+},
+boulangerie_industrielle: {
+  id: "boulangerie_industrielle",
+  nom: "Boulangerie industrielle",
+  filiereNom: "Agro-alimentaire & Boissons",
+  type: "production",
+  description: "Production industrielle de pains, viennoiseries et pâtisseries pour le marché local et institutionnel.",
+  capex_min: 150000,
+  chiffre_affaires_estime: "600000-1200000",
+  marge_brute: "25-35",
+  emplois_directs: "10-20",
+  emplois_indirects: "5-8",
+  roi_estime: "4-6 ans",
+  investment_breakdown: {
+    machines: 80000,
+    installation: 25000,
+    working_capital: 30000,
+    training: 15000,
+    total: 150000
+  },
+  monthly_capacity: "50,000 pains",
+  estimated_revenue: 800000,
+  gross_margin: 30,
+  net_profitability: 18,
+  machines: [
+    { name: "Pétrin spiral", role: "Pétrissage de la pâte", capacity: "200 kg/batch", utilities: "Électricité 10kW", price: 15000 },
+    { name: "Diviseuse-bouleuse", role: "Division et boulage", capacity: "1,000 pains/h", utilities: "Électricité", price: 12000 },
+    { name: "Façonneuse", role: "Façonnage des pains", capacity: "1,000 pains/h", utilities: "Électricité", price: 10000 },
+    { name: "Chambre de fermentation", role: "Pousse contrôlée", capacity: "500 kg", utilities: "Électricité + vapeur", price: 20000 },
+    { name: "Four rotatif", role: "Cuisson", capacity: "500 pains/batch", utilities: "Électricité ou gaz", price: 35000 },
+    { name: "Trancheuse", role: "Tranchage du pain", capacity: "1,000 pains/h", utilities: "Électricité", price: 8000 },
+    { name: "Ensacheuse", role: "Conditionnement", capacity: "1,000 pains/h", utilities: "Électricité", price: 10000 }
+  ],
+  processus: [
+    "Pesée et mélange des ingrédients",
+    "Pétrissage",
+    "Fermentation",
+    "Façonnage",
+    "Cuisson",
+    "Refroidissement",
+    "Tranchage",
+    "Conditionnement"
+  ],
+  avantages: [
+    "Demande quotidienne (pain de première nécessité)",
+    "Produits frais locaux",
+    "Fidélisation client possible",
+    "Distribution large",
+    "🇨🇮 Farine locale (soutien aux minoteries)",
+    "Pain enrichi aux céréales locales (mil, maïs)"
+  ],
+  challenges: [
+    "Concurrence artisanale",
+    "Gestion des invendus",
+    "Prix des matières premières",
+    "Logistique de livraison"
+  ],
+  sanitaires: [
+    "Respecter les normes de boulangerie",
+    "Nettoyer les équipements quotidiennement",
+    "Contrôler la température des fours",
+    "Former le personnel aux bonnes pratiques",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser les cycles de cuisson",
+    "Récupérer la chaleur des fours",
+    "Isoler les chambres de fermentation",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones de production et stockage",
+    "Prévoir zone de refroidissement",
+    "Aménager zone de livraison",
+    "Faciliter la circulation du personnel"
+  ],
+  marketing: [
+    "Cibler supermarchés et boulangeries",
+    "Proposer des pains spéciaux (complet, céréales)",
+    "Soigner l'emballage",
+    "Communiquer sur la qualité",
+    "Développer des contrats réguliers"
+  ],
+  raw_materials: [
+    "Farine de blé (locale)",
+    "Levure",
+    "Sel",
+    "Sucre",
+    "Eau",
+    "Améliorants",
+    "Emballages (sachets, films)"
+  ],
+  target_markets: [
+    "Supermarchés et grandes surfaces",
+    "Boulangeries locales",
+    "Cantines scolaires",
+    "Hôtels et restaurants",
+    "Hôpitaux et prisons"
+  ],
+  competitive_advantages: [
+    "Pain frais livré quotidiennement",
+    "Qualité constante (process industriel)",
+    "Prix compétitifs",
+    "Capacité de production importante",
+    "Respect des normes"
+  ]
+},
+jus_boissons: {
+  id: "jus_boissons",
+  nom: "Production de jus et boissons",
+  filiereNom: "Agro-alimentaire & Boissons",
+  type: "production",
+  description: "Transformation de fruits locaux en jus et boissons (ananas, mangue, orange, bissap, gingembre). Valorisation des fruits tropicaux ivoiriens.",
+  capex_min: 100000,
+  chiffre_affaires_estime: "350000-850000",
+  marge_brute: "35-50",
+  emplois_directs: "6-12",
+  emplois_indirects: "3-5",
+  roi_estime: "3-5 ans",
+  investment_breakdown: {
+    machines: 50000,
+    installation: 15000,
+    working_capital: 25000,
+    training: 10000,
+    total: 100000
+  },
+  monthly_capacity: "50,000 L",
+  estimated_revenue: 600000,
+  gross_margin: 42,
+  net_profitability: 28,
+  machines: [
+    { name: "Laveuse", role: "Nettoyage des fruits", capacity: "2,000 kg/h", utilities: "Eau + électricité", price: 10000 },
+    { name: "Broyeur", role: "Broyage des fruits", capacity: "1,500 kg/h", utilities: "Électricité", price: 8000 },
+    { name: "Presse", role: "Extraction du jus", capacity: "1,000 L/h", utilities: "Électricité", price: 12000 },
+    { name: "Pasteurisateur", role: "Stabilisation du jus", capacity: "1,000 L/h", utilities: "Électricité + eau", price: 20000 },
+    { name: "Remplisseuse", role: "Embouteillage", capacity: "2,000 bouteilles/h", utilities: "Électricité + air", price: 15000 },
+    { name: "Capsuleuse", role: "Fermeture des bouteilles", capacity: "2,000 bouteilles/h", utilities: "Électricité", price: 5000 },
+    { name: "Étiqueteuse", role: "Étiquetage", capacity: "2,000 bouteilles/h", utilities: "Électricité", price: 5000 }
+  ],
+  processus: [
+    "Réception et tri des fruits",
+    "Lavage",
+    "Broyage",
+    "Pressage",
+    "Filtration",
+    "Pasteurisation",
+    "Embouteillage",
+    "Étiquetage",
+    "Stockage"
+  ],
+  avantages: [
+    "Valorisation des fruits locaux (ananas, mangue, orange)",
+    "Demande croissante (jus naturels)",
+    "Export possible (Europe)",
+    "Marges intéressantes",
+    "🇨🇮 Fruits tropicaux : ananas (1er producteur africain), mangue, bissap, gingembre",
+    "Innovation : jus de bissap, gingembre, tamarin"
+  ],
+  challenges: [
+    "Saisonnalité des fruits",
+    "Concurrence des multinationales",
+    "Normes sanitaires strictes",
+    "Logistique de distribution"
+  ],
+  sanitaires: [
+    "Respecter les normes HACCP",
+    "Contrôler la température de pasteurisation",
+    "Nettoyer les équipements après chaque production",
+    "Former le personnel aux bonnes pratiques",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser les cycles de pasteurisation",
+    "Récupérer la chaleur",
+    "Isoler les cuves et canalisations",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones propres et sales",
+    "Prévoir zone de stockage climatisée",
+    "Aménager laboratoire de contrôle qualité",
+    "Faciliter la circulation des chariots"
+  ],
+  marketing: [
+    "Cibler supermarchés, hôtels et restaurants",
+    "Développer des recettes originales",
+    "Soigner l'emballage (bouteilles, briques)",
+    "Communiquer sur l'origine locale",
+    "Proposer des formats variés"
+  ],
+  raw_materials: [
+    "Ananas (production locale)",
+    "Mangue (producteurs locaux)",
+    "Orange (régions du nord)",
+    "Bissap (fleurs d'hibiscus)",
+    "Gingembre",
+    "Sucre",
+    "Emballages (bouteilles PET, briques, étiquettes)"
+  ],
+  target_markets: [
+    "Supermarchés",
+    "Hôtels et restaurants",
+    "Écoles",
+    "Cantines",
+    "Export vers l'Europe"
+  ],
+  competitive_advantages: [
+    "Jus frais sans conservateurs",
+    "Fruits locaux de qualité",
+    "Prix compétitifs",
+    "Authenticité des saveurs",
+    "Certification bio possible"
+  ]
+},
+aliments_betail: {
+  id: "aliments_betail",
+  nom: "Aliments pour bétail",
+  filiereNom: "Agro-alimentaire & Boissons",
+  type: "production",
+  description: "Production d'aliments composés pour l'élevage (volailles, bovins, porcins). Valorisation des sous-produits agricoles locaux.",
+  capex_min: 95000,
+  chiffre_affaires_estime: "250000-500000",
+  marge_brute: "20-30",
+  emplois_directs: "5-8",
+  emplois_indirects: "3-5",
+  roi_estime: "4-5 ans",
+  investment_breakdown: {
+    machines: 45000,
+    installation: 15000,
+    working_capital: 25000,
+    training: 10000,
+    total: 95000
+  },
+  monthly_capacity: "100,000 kg",
+  estimated_revenue: 350000,
+  gross_margin: 25,
+  net_profitability: 15,
+  machines: [
+    { name: "Broyeur", role: "Broyage des matières premières", capacity: "1,000 kg/h", utilities: "Électricité", price: 15000 },
+    { name: "Mélangeur", role: "Mélange des ingrédients", capacity: "1,000 kg/batch", utilities: "Électricité", price: 20000 },
+    { name: "Granulateur", role: "Granulation", capacity: "500 kg/h", utilities: "Électricité", price: 25000 },
+    { name: "Ensacheuse", role: "Conditionnement", capacity: "500 sacs/h", utilities: "Électricité + air", price: 15000 }
+  ],
+  processus: [
+    "Réception des matières premières",
+    "Broyage",
+    "Dosage",
+    "Mélange",
+    "Granulation",
+    "Refroidissement",
+    "Conditionnement"
+  ],
+  avantages: [
+    "Développement de l'élevage",
+    "Demande croissante",
+    "Matières premières locales",
+    "Contrats réguliers",
+    "🇨🇮 Valorisation des sous-produits (tourteaux, son, issues de maïs)",
+    "Soutien aux éleveurs locaux"
+  ],
+  challenges: [
+    "Formulation nutritionnelle",
+    "Variabilité des matières premières",
+    "Concurrence",
+    "Logistique"
+  ],
+  sanitaires: [
+    "Respecter les normes alimentaires pour animaux",
+    "Contrôler la qualité des matières",
+    "Nettoyer les équipements régulièrement",
+    "Former le personnel aux bonnes pratiques",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser le broyage",
+    "Utiliser des moteurs à haut rendement",
+    "Isoler les équipements",
+    "Récupérer la chaleur",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones de production et stockage",
+    "Prévoir zone de stockage des matières",
+    "Aménager zone de conditionnement",
+    "Faciliter la circulation des camions"
+  ],
+  marketing: [
+    "Cibler les éleveurs et coopératives",
+    "Développer des formulations adaptées",
+    "Proposer des sacs de différents formats",
+    "Communiquer sur la qualité",
+    "Développer des contrats réguliers"
+  ],
+  raw_materials: [
+    "Maïs (producteurs locaux)",
+    "Tourteau de soja",
+    "Son de blé",
+    "Issues de céréales",
+    "Compléments minéraux",
+    "Sacs d'emballage"
+  ],
+  target_markets: [
+    "Éleveurs de volailles",
+    "Éleveurs de bovins",
+    "Éleveurs de porcins",
+    "Coopératives agricoles"
+  ],
+  competitive_advantages: [
+    "Formulations adaptées au climat tropical",
+    "Matières premières locales",
+    "Prix compétitifs",
+    "Conseils techniques aux éleveurs",
+    "Livraison possible"
+  ]
+},
+// ==============================================
+// 2. CHIMIE, COSMÉTIQUES & DÉTERGENTS (8 UP enrichies)
+// ==============================================
+
+detergents: {
+  id: "detergents",
+  nom: "Détergents & produits ménagers",
+  filiereNom: "Chimie, Cosmétiques & Détergents",
+  type: "production",
+  description: "Fabrication de détergents liquides et poudre pour lessive, vaisselle, nettoyage multi-usages. Production de produits ménagers écologiques et conventionnels.",
+  capex_min: 80000,
+  chiffre_affaires_estime: "300000-600000",
+  marge_brute: "35-50",
+  emplois_directs: "5-10",
+  emplois_indirects: "2-4",
+  roi_estime: "3-5 ans",
+  investment_breakdown: {
+    machines: 40000,
+    installation: 15000,
+    working_capital: 20000,
+    training: 5000,
+    total: 80000
+  },
+  monthly_capacity: "30,000 L",
+  estimated_revenue: 450000,
+  gross_margin: 42,
+  net_profitability: 28,
+  machines: [
+    { name: "Cuve de mélange", role: "Formulation des produits", capacity: "2,000 L", utilities: "Électricité", price: 15000 },
+    { name: "Système de dosage", role: "Dosage précis des ingrédients", capacity: "Automatique", utilities: "Électricité", price: 10000 },
+    { name: "Homogénéisateur", role: "Mélange et émulsification", capacity: "2,000 L/h", utilities: "Électricité", price: 12000 },
+    { name: "Remplisseuse", role: "Conditionnement", capacity: "2,000 bouteilles/h", utilities: "Électricité + air", price: 15000 },
+    { name: "Étiqueteuse", role: "Étiquetage réglementaire", capacity: "2,000 bouteilles/h", utilities: "Électricité", price: 8000 },
+    { name: "Poste contrôle qualité", role: "Tests de conformité", capacity: "Standard", utilities: "Électricité", price: 10000 }
+  ],
+  processus: [
+    "Dosage des matières premières",
+    "Mélange et agitation",
+    "Homogénéisation",
+    "Contrôle qualité (pH, viscosité)",
+    "Conditionnement en bouteilles/bidons",
+    "Étiquetage (pictogrammes, INCI)",
+    "Stockage sécurisé"
+  ],
+  avantages: [
+    "Demande constante (produits de première nécessité)",
+    "Large réseau de distribution",
+    "Marges correctes (35-50%)",
+    "Possibilité de gamme écologique",
+    "🇨🇮 Matières premières locales (huile de palme, soude)"
+  ],
+  challenges: [
+    "Concurrence des grandes marques (Omo, Skip, Ariel)",
+    "Sécurité chimique (manipulation de soude, acides)",
+    "Prix volatil des matières premières",
+    "Marketing nécessaire pour se faire connaître",
+    "Gestion des déchets chimiques"
+  ],
+  sanitaires: [
+    "Respecter les normes de sécurité chimique",
+    "Utiliser des équipements de protection (gants, lunettes, masque)",
+    "Nettoyer les équipements régulièrement",
+    "Former le personnel aux risques chimiques",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser le mélange (variateurs de vitesse)",
+    "Utiliser des moteurs à haut rendement",
+    "Récupérer la chaleur des cuves",
+    "Isoler les canalisations",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones de production et stockage",
+    "Prévoir zone de stockage des produits chimiques",
+    "Aménager laboratoire de contrôle qualité",
+    "Faciliter la circulation du personnel"
+  ],
+  marketing: [
+    "Cibler supermarchés, grossistes et boutiques",
+    "Proposer des formats variés (petits et grands conditionnements)",
+    "Soigner l'emballage avec étiquetage clair",
+    "Communiquer sur l'efficacité et l'écologie",
+    "Développer des marques propres",
+    "Proposer des échantillons pour tests"
+  ],
+  raw_materials: [
+    "Eau déminéralisée",
+    "Tensioactifs (SLS, LES)",
+    "Soude caustique",
+    "Acide citrique",
+    "Parfums",
+    "Conservateurs",
+    "Emballages (bouteilles PET, bidons, étiquettes)"
+  ],
+  target_markets: [
+    "Supermarchés et grandes surfaces",
+    "Grossistes en produits d'entretien",
+    "Hôtels et restaurants",
+    "Collectivités (écoles, hôpitaux)",
+    "Industries (nettoyage industriel)"
+  ],
+  competitive_advantages: [
+    "Produits efficaces à prix compétitifs",
+    "Formulations adaptées aux eaux locales",
+    "Fabrication locale (livraison rapide)",
+    "Possibilité de conditionnement personnalisé",
+    "Gamme écologique (biodégradable)"
+  ],
+  reglementation: [
+    "Respecter le règlement CLP (étiquetage des dangers)",
+    "Déclaration auprès du ministère de l'Environnement",
+    "Fiches de données de sécurité (FDS)",
+    "Registre des ingrédients",
+    "Respecter les normes ISO 9001"
+  ],
+  securite: [
+    "Formation du personnel aux risques chimiques",
+    "Équipements de protection individuelle (EPI)",
+    "Douches de sécurité et lave-yeux",
+    "Ventilation et extraction des poussières",
+    "Stockage sécurisé des produits dangereux"
+  ],
+  environnement: [
+    "Traitement des effluents avant rejet",
+    "Gestion des déchets chimiques (filières agréées)",
+    "Réduction des emballages plastiques",
+    "Utilisation d'ingrédients biodégradables",
+    "Éco-conception des produits"
+  ],
+  etiquetage: [
+    "Pictogrammes de danger (GHS)",
+    "Mentions de danger (H) et conseils de prudence (P)",
+    "Liste des ingrédients",
+    "Coordonnées du responsable",
+    "Numéro de lot et date de durabilité"
+  ]
+},
+
+savonnerie: {
+  id: "savonnerie",
+  nom: "Savonnerie industrielle",
+  filiereNom: "Chimie, Cosmétiques & Détergents",
+  type: "production",
+  description: "Production de savons solides (savon de Marseille, savon noir) et liquides (savon mains, douche). Valorisation de l'huile de palme locale.",
+  capex_min: 70000,
+  chiffre_affaires_estime: "200000-400000",
+  marge_brute: "40-55",
+  emplois_directs: "4-8",
+  emplois_indirects: "2-3",
+  roi_estime: "3-4 ans",
+  investment_breakdown: {
+    machines: 35000,
+    installation: 10000,
+    working_capital: 15000,
+    training: 10000,
+    total: 70000
+  },
+  monthly_capacity: "10,000 kg",
+  estimated_revenue: 300000,
+  gross_margin: 48,
+  net_profitability: 30,
+  machines: [
+    { name: "Cuve de saponification", role: "Réaction chimique", capacity: "1,000 L", utilities: "Électricité + eau", price: 20000 },
+    { name: "Moules", role: "Moulage des savons", capacity: "500 kg/batch", utilities: "—", price: 5000 },
+    { name: "Cutter", role: "Découpe des savons", capacity: "500 kg/h", utilities: "Électricité", price: 8000 },
+    { name: "Séchoir", role: "Séchage", capacity: "1,000 kg/batch", utilities: "Ventilation", price: 10000 },
+    { name: "Mélangeur", role: "Savon liquide", capacity: "1,000 L", utilities: "Électricité", price: 12000 },
+    { name: "Remplisseuse", role: "Conditionnement", capacity: "1,000 bouteilles/h", utilities: "Électricité", price: 10000 }
+  ],
+  processus: [
+    "Dosage des ingrédients (huiles, soude)",
+    "Saponification à chaud",
+    "Moulage et repos",
+    "Découpe",
+    "Séchage (4-6 semaines)",
+    "Conditionnement sous vide",
+    "Étiquetage"
+  ],
+  avantages: [
+    "Huile de palme locale (premier producteur africain)",
+    "Coûts de production compétitifs",
+    "Export possible vers l'Europe",
+    "Demande constante (hygiène)",
+    "Possibilité de savons bio et artisanaux"
+  ],
+  challenges: [
+    "Maîtrise de la saponification (qualité)",
+    "Concurrence des importations",
+    "Prix des matières premières",
+    "Normes cosmétiques strictes",
+    "Gestion des effluents (soude)"
+  ],
+  sanitaires: [
+    "Respecter les normes cosmétiques",
+    "Utiliser des équipements de protection (gants, lunettes)",
+    "Nettoyer les équipements régulièrement",
+    "Former le personnel à la sécurité chimique",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser la saponification (température)",
+    "Récupérer la chaleur des cuves",
+    "Isoler les équipements",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones de production et stockage",
+    "Prévoir zone de séchage ventilée",
+    "Aménager laboratoire de contrôle",
+    "Faciliter la circulation du personnel"
+  ],
+  marketing: [
+    "Cibler supermarchés, pharmacies et boutiques bio",
+    "Développer des gammes variées (savon noir, savon de Marseille)",
+    "Soigner l'emballage (papier kraft, biodégradable)",
+    "Communiquer sur les ingrédients naturels",
+    "Proposer des savons artisanaux et personnalisés"
+  ],
+  raw_materials: [
+    "Huile de palme (locale)",
+    "Soude caustique",
+    "Eau déminéralisée",
+    "Parfums et huiles essentielles",
+    "Colorants naturels",
+    "Emballages (films biodégradables, cartons)"
+  ],
+  target_markets: [
+    "Supermarchés",
+    "Pharmacies et parapharmacies",
+    "Boutiques bio et artisanales",
+    "Hôtels (savons d'accueil)",
+    "Export Europe (savon noir)"
+  ],
+  competitive_advantages: [
+    "Savon frais (qualité supérieure)",
+    "Ingrédients locaux (huile de palme)",
+    "Produits 'Made in Côte d'Ivoire'",
+    "Savon noir ivoirien (traditionnel)",
+    "Certification bio possible"
+  ],
+  reglementation: [
+    "Respecter le règlement cosmétique (INCI)",
+    "Déclaration des produits cosmétiques",
+    "Fiches de données de sécurité",
+    "Registre des ingrédients",
+    "Certification ISO 22716 (GMP)"
+  ],
+  securite: [
+    "Formation du personnel aux risques chimiques",
+    "Équipements de protection (gants, lunettes, tablier)",
+    "Douches de sécurité",
+    "Ventilation des ateliers",
+    "Stockage sécurisé de la soude"
+  ],
+  environnement: [
+    "Traitement des effluents (neutralisation)",
+    "Gestion des déchets chimiques",
+    "Utilisation d'emballages biodégradables",
+    "Réduction de la consommation d'eau",
+    "Valorisation des sous-produits"
+  ],
+  etiquetage: [
+    "Liste INCI (ingrédients)",
+    "Allergènes à déclarer",
+    "Numéro de lot",
+    "Date de durabilité minimale (DDM)",
+    "Coordonnées du fabricant"
+  ]
+},
+
+cosmetiques: {
+  id: "cosmetiques",
+  nom: "Cosmétiques naturels",
+  filiereNom: "Chimie, Cosmétiques & Détergents",
+  type: "production",
+  description: "Fabrication de cosmétiques naturels à base de matières premières locales (beurre de karité, huile de coco, aloé vera). Crèmes, lotions, baumes et huiles de soin.",
+  capex_min: 85000,
+  chiffre_affaires_estime: "250000-600000",
+  marge_brute: "45-65",
+  emplois_directs: "3-8",
+  emplois_indirects: "2-4",
+  roi_estime: "2-4 ans",
+  investment_breakdown: {
+    machines: 45000,
+    installation: 10000,
+    working_capital: 20000,
+    training: 10000,
+    total: 85000
+  },
+  monthly_capacity: "5,000 L",
+  estimated_revenue: 400000,
+  gross_margin: 55,
+  net_profitability: 35,
+  machines: [
+    { name: "Cuve de mélange", role: "Formulation", capacity: "500 L", utilities: "Électricité", price: 15000 },
+    { name: "Bain-marie", role: "Chauffe contrôlée", capacity: "100 L", utilities: "Électricité + eau", price: 8000 },
+    { name: "Homogénéisateur", role: "Émulsions", capacity: "500 L/h", utilities: "Électricité", price: 20000 },
+    { name: "Remplisseuse", role: "Conditionnement", capacity: "1,000 pots/h", utilities: "Électricité + air", price: 12000 },
+    { name: "Étiqueteuse", role: "Étiquetage INCI", capacity: "1,000 pots/h", utilities: "Électricité", price: 8000 },
+    { name: "Poste contrôle qualité", role: "Tests de stabilité", capacity: "Standard", utilities: "Électricité", price: 10000 }
+  ],
+  processus: [
+    "Dosage des ingrédients",
+    "Chauffe des phases",
+    "Émulsion (mélange eau/huile)",
+    "Refroidissement",
+    "Ajout des actifs et conservateurs",
+    "Contrôle qualité (pH, viscosité)",
+    "Conditionnement",
+    "Étiquetage INCI"
+  ],
+  avantages: [
+    "Tendance naturelle et bio (forte demande)",
+    "Valorisation des plantes locales (karité, aloé vera)",
+    "Marges élevées (45-65%)",
+    "Export possible vers l'Europe",
+    "Labels bio (Ecocert) valorisants"
+  ],
+  challenges: [
+    "Tests sanitaires obligatoires",
+    "Stabilité des formulations",
+    "Marketing et branding nécessaires",
+    "Concurrence des grandes marques",
+    "Approvisionnement en matières premières de qualité"
+  ],
+  sanitaires: [
+    "Respecter les normes cosmétiques (ISO 22716)",
+    "Contrôler la stabilité (test challenge)",
+    "Nettoyer les équipements rigoureusement",
+    "Former le personnel aux bonnes pratiques",
+    "Assurer la traçabilité des lots",
+    "Tests dermatologiques"
+  ],
+  energie: [
+    "Optimiser le mélange (variateurs)",
+    "Récupérer la chaleur des bains-marie",
+    "Isoler les cuves",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones propres et sales",
+    "Prévoir zone de stockage des matières premières",
+    "Aménager laboratoire de contrôle",
+    "Atelier blanc (normes cosmétiques)"
+  ],
+  marketing: [
+    "Cibler pharmacies, parapharmacies, boutiques bio",
+    "Développer des gammes adaptées (visage, corps, cheveux)",
+    "Soigner l'emballage (verre, biodégradable)",
+    "Communiquer sur les ingrédients naturels locaux",
+    "Certification bio (Ecocert)",
+    "Utiliser les réseaux sociaux (Instagram, Facebook)"
+  ],
+  raw_materials: [
+    "Beurre de karité (local)",
+    "Huile de coco",
+    "Aloé vera",
+    "Huiles essentielles",
+    "Émulsifiants naturels",
+    "Conservateurs écologiques",
+    "Pots et flacons (verre, plastique recyclé)"
+  ],
+  target_markets: [
+    "Pharmacies et parapharmacies",
+    "Boutiques bio",
+    "Spas et instituts de beauté",
+    "Export Europe",
+    "E-commerce"
+  ],
+  competitive_advantages: [
+    "Cosmétiques naturels 'Made in Côte d'Ivoire'",
+    "Ingrédients locaux (karité, aloé vera)",
+    "Certification bio possible",
+    "Fabrication à la demande (fraîcheur)",
+    "Prix compétitifs face aux importations"
+  ],
+  reglementation: [
+    "Respecter le règlement cosmétique européen",
+    "Déclaration des produits (CPNP)",
+    "Fiches de données de sécurité",
+    "Registre des ingrédients (INCI)",
+    "Certification ISO 22716 (GMP)",
+    "Tests de stabilité et challenge"
+  ],
+  securite: [
+    "Formation du personnel aux bonnes pratiques",
+    "Équipements de protection (gants, blouse)",
+    "Ventilation des ateliers",
+    "Stockage sécurisé des matières",
+    "Protocole de nettoyage rigoureux"
+  ],
+  environnement: [
+    "Utilisation d'emballages écologiques (verre, carton)",
+    "Réduction des déchets",
+    "Ingrédients biodégradables",
+    "Éco-conception des produits",
+    "Valorisation des sous-produits"
+  ],
+  etiquetage: [
+    "Liste INCI (ingrédients en latin)",
+    "Allergènes à déclarer",
+    "Numéro de lot",
+    "Date de péremption (PAO)",
+    "Coordonnées du fabricant",
+    "Labels bio (Ecocert)"
+  ]
+},
+
+peintures: {
+  id: "peintures",
+  nom: "Peintures industrielles & BTP",
+  filiereNom: "Chimie, Cosmétiques & Détergents",
+  type: "production",
+  description: "Fabrication de peintures pour bâtiment (intérieur, extérieur) et industrielles (anticorrosion, sols). Formulations adaptées au climat tropical.",
+  capex_min: 140000,
+  chiffre_affaires_estime: "400000-1000000",
+  marge_brute: "30-45",
+  emplois_directs: "6-12",
+  emplois_indirects: "3-5",
+  roi_estime: "4-6 ans",
+  investment_breakdown: {
+    machines: 70000,
+    installation: 20000,
+    working_capital: 30000,
+    training: 20000,
+    total: 140000
+  },
+  monthly_capacity: "50,000 L",
+  estimated_revenue: 700000,
+  gross_margin: 38,
+  net_profitability: 25,
+  machines: [
+    { name: "Disperseur", role: "Dispersion des pigments", capacity: "2,000 L/batch", utilities: "Électricité", price: 25000 },
+    { name: "Broyeur à billes", role: "Broyage fin", capacity: "500 L/h", utilities: "Électricité", price: 30000 },
+    { name: "Cuve de formulation", role: "Mélange final", capacity: "5,000 L", utilities: "Électricité", price: 20000 },
+    { name: "Filtre", role: "Filtration", capacity: "2,000 L/h", utilities: "Électricité", price: 10000 },
+    { name: "Remplisseuse", role: "Conditionnement", capacity: "1,000 seaux/h", utilities: "Électricité + air", price: 15000 },
+    { name: "Étiqueteuse", role: "Étiquetage", capacity: "1,000 seaux/h", utilities: "Électricité", price: 10000 }
+  ],
+  processus: [
+    "Dispersion des pigments dans la résine",
+    "Broyage pour finesse",
+    "Formulation (ajout des additifs)",
+    "Contrôle qualité (viscosité, couleur)",
+    "Filtration",
+    "Conditionnement en seaux",
+    "Étiquetage (nuances, précautions)"
+  ],
+  avantages: [
+    "Développement du BTP en Côte d'Ivoire",
+    "Demande locale forte",
+    "Import substitution (peintures importées chères)",
+    "Marges correctes (30-45%)",
+    "Formulations adaptées au climat tropical"
+  ],
+  challenges: [
+    "Concurrence des multinationales (Sika, AkzoNobel)",
+    "Importation des pigments et résines",
+    "Normes de qualité (résistance UV, tenue)",
+    "Marketing et distribution",
+    "Gestion des déchets chimiques"
+  ],
+  sanitaires: [
+    "Respecter les normes de sécurité",
+    "Utiliser des équipements de protection (masque, gants)",
+    "Nettoyer les équipements régulièrement",
+    "Former le personnel aux risques chimiques",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser la dispersion et le broyage",
+    "Utiliser des moteurs à haut rendement",
+    "Récupérer la chaleur",
+    "Isoler les cuves",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones de production et stockage",
+    "Prévoir zone de stockage des pigments",
+    "Aménager laboratoire de contrôle couleur",
+    "Faciliter la circulation du personnel"
+  ],
+  marketing: [
+    "Cibler quincailleries, BTP, particuliers",
+    "Proposer des nuanciers complets",
+    "Soigner l'emballage (seaux, étiquettes)",
+    "Garantir la qualité (résistance UV)",
+    "Communiquer sur la couverture et la durabilité"
+  ],
+  raw_materials: [
+    "Résines (acrylique, alkyde)",
+    "Pigments (oxydes de fer, dioxyde de titane)",
+    "Solvants (eau pour acrylique)",
+    "Additifs (antimousse, dispersants)",
+    "Seaux en plastique, étiquettes"
+  ],
+  target_markets: [
+    "Quincailleries",
+    "Entreprises de BTP",
+    "Particuliers (maisons, appartements)",
+    "Industries (peinture anticorrosion)",
+    "Collectivités"
+  ],
+  competitive_advantages: [
+    "Peinture adaptée au climat tropical (résistance UV)",
+    "Prix compétitifs (30% moins cher que l'import)",
+    "Large gamme de couleurs",
+    "Qualité garantie",
+    "Livraison rapide"
+  ],
+  reglementation: [
+    "Respecter les normes de COV (composés organiques volatils)",
+    "Fiches de données de sécurité",
+    "Étiquetage des dangers (CLP)",
+    "Déclaration environnementale",
+    "Normes de qualité (ISO 9001)"
+  ],
+  securite: [
+    "Formation du personnel aux risques chimiques",
+    "Équipements de protection (masque, gants, combinaison)",
+    "Ventilation des ateliers",
+    "Stockage sécurisé des solvants",
+    "Douches de sécurité"
+  ],
+  environnement: [
+    "Réduction des COV (peintures à l'eau)",
+    "Gestion des déchets chimiques",
+    "Recyclage des seaux",
+    "Traitement des effluents",
+    "Utilisation de pigments non toxiques"
+  ],
+  etiquetage: [
+    "Pictogrammes de danger (GHS)",
+    "Mentions de danger (H)",
+    "Conseils de prudence (P)",
+    "Nuance et finition",
+    "Numéro de lot",
+    "Date de péremption"
+  ]
+},
+
+adhesifs: {
+  id: "adhesifs",
+  nom: "Adhésifs & colles",
+  filiereNom: "Chimie, Cosmétiques & Détergents",
+  type: "production",
+  description: "Fabrication d'adhésifs et colles industrielles (colle à bois, colle à papier peint, colle universelle, néoprène). Formulations adaptées aux usages locaux.",
+  capex_min: 120000,
+  chiffre_affaires_estime: "300000-600000",
+  marge_brute: "35-50",
+  emplois_directs: "4-8",
+  emplois_indirects: "2-3",
+  roi_estime: "4-5 ans",
+  investment_breakdown: {
+    machines: 60000,
+    installation: 15000,
+    working_capital: 30000,
+    training: 15000,
+    total: 120000
+  },
+  monthly_capacity: "20,000 L",
+  estimated_revenue: 450000,
+  gross_margin: 42,
+  net_profitability: 28,
+  machines: [
+    { name: "Réacteur", role: "Formulation", capacity: "2,000 L", utilities: "Électricité + eau", price: 25000 },
+    { name: "Agitateur", role: "Mélange", capacity: "2,000 L/h", utilities: "Électricité", price: 15000 },
+    { name: "Système de dosage", role: "Dosage précis", capacity: "Automatique", utilities: "Électricité", price: 15000 },
+    { name: "Remplisseuse", role: "Conditionnement", capacity: "1,000 pots/h", utilities: "Électricité + air", price: 15000 },
+    { name: "Étiqueteuse", role: "Étiquetage", capacity: "1,000 pots/h", utilities: "Électricité", price: 8000 }
+  ],
+  processus: [
+    "Dosage des polymères et solvants",
+    "Mélange sous agitation",
+    "Réaction chimique (température contrôlée)",
+    "Contrôle qualité (viscosité, adhérence)",
+    "Conditionnement en pots/bidons",
+    "Étiquetage (précautions d'usage)"
+  ],
+  avantages: [
+    "Demande industrielle (bois, emballage, BTP)",
+    "Import substitution (colles importées chères)",
+    "Marges correctes (35-50%)",
+    "Marché porteur",
+    "Formulations adaptées aux besoins locaux"
+  ],
+  challenges: [
+    "Maîtrise des formulations (qualité constante)",
+    "Concurrence des grandes marques (Bostik, Sader)",
+    "Prix des matières premières (polymères)",
+    "Normes de sécurité",
+    "Marketing et distribution"
+  ],
+  sanitaires: [
+    "Respecter les normes de sécurité",
+    "Utiliser des équipements de protection (gants, masque)",
+    "Nettoyer les équipements régulièrement",
+    "Former le personnel aux risques chimiques",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser le mélange (variateurs)",
+    "Récupérer la chaleur des réacteurs",
+    "Isoler les cuves",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones de production et stockage",
+    "Prévoir zone de stockage des solvants",
+    "Aménager laboratoire de contrôle",
+    "Faciliter la circulation du personnel"
+  ],
+  marketing: [
+    "Cibler les industries du bois, de l'emballage et du BTP",
+    "Développer des formulations adaptées (colle à bois, néoprène)",
+    "Proposer des conditionnements variés (petits pots, bidons, fûts)",
+    "Garantir la qualité (tenue dans le temps)",
+    "Communiquer sur la prise rapide"
+  ],
+  raw_materials: [
+    "Polymères (PVAc, néoprène)",
+    "Solvants (acétone, toluène)",
+    "Eau pour colles vinyliques",
+    "Additifs (épaississants, conservateurs)",
+    "Emballages (pots, bidons, étiquettes)"
+  ],
+  target_markets: [
+    "Menuiseries",
+    "Industries de l'emballage",
+    "Entreprises de BTP",
+    "Particuliers (bricolage)",
+    "Imprimeries"
+  ],
+  competitive_advantages: [
+    "Colles de qualité à prix compétitifs",
+    "Formulations adaptées au climat tropical",
+    "Fabrication locale (livraison rapide)",
+    "Conditionnement personnalisé",
+    "Service technique après-vente"
+  ],
+  reglementation: [
+    "Respecter le règlement REACH",
+    "Fiches de données de sécurité",
+    "Étiquetage des dangers (CLP)",
+    "Déclaration environnementale",
+    "Normes de qualité (ISO 9001)"
+  ],
+  securite: [
+    "Formation du personnel aux risques chimiques",
+    "Équipements de protection (gants, masque, lunettes)",
+    "Ventilation des ateliers",
+    "Stockage sécurisé des solvants",
+    "Douches de sécurité"
+  ],
+  environnement: [
+    "Réduction des solvants (colles à l'eau)",
+    "Gestion des déchets chimiques",
+    "Recyclage des emballages",
+    "Traitement des effluents",
+    "Utilisation de matières premières biosourcées"
+  ],
+  etiquetage: [
+    "Pictogrammes de danger (GHS)",
+    "Mentions de danger (H)",
+    "Conseils de prudence (P)",
+    "Mode d'emploi",
+    "Numéro de lot",
+    "Date de péremption"
+  ]
+},
+
+engrais: {
+  id: "engrais",
+  nom: "Engrais & pesticides",
+  filiereNom: "Chimie, Cosmétiques & Détergents",
+  type: "production",
+  description: "Fabrication d'engrais minéraux et organiques, pesticides et herbicides pour l'agriculture. Soutien au développement agricole ivoirien.",
+  capex_min: 180000,
+  chiffre_affaires_estime: "600000-1200000",
+  marge_brute: "25-35",
+  emplois_directs: "8-15",
+  emplois_indirects: "5-10",
+  roi_estime: "5-7 ans",
+  investment_breakdown: {
+    machines: 100000,
+    installation: 25000,
+    working_capital: 40000,
+    training: 15000,
+    total: 180000
+  },
+  monthly_capacity: "100,000 kg",
+  estimated_revenue: 900000,
+  gross_margin: 30,
+  net_profitability: 20,
+  machines: [
+    { name: "Broyeur", role: "Broyage des matières", capacity: "2,000 kg/h", utilities: "Électricité", price: 25000 },
+    { name: "Mélangeur", role: "Mélange des ingrédients", capacity: "2,000 kg/batch", utilities: "Électricité", price: 20000 },
+    { name: "Granulateur", role: "Granulation", capacity: "1,000 kg/h", utilities: "Électricité", price: 35000 },
+    { name: "Séchoir", role: "Séchage", capacity: "1,000 kg/h", utilities: "Électricité", price: 25000 },
+    { name: "Tamis", role: "Tamisage", capacity: "1,000 kg/h", utilities: "Électricité", price: 15000 },
+    { name: "Ensacheuse", role: "Conditionnement", capacity: "500 sacs/h", utilities: "Électricité + air", price: 20000 }
+  ],
+  processus: [
+    "Réception des matières premières",
+    "Broyage",
+    "Dosage (NPK, oligoéléments)",
+    "Mélange",
+    "Granulation",
+    "Séchage",
+    "Tamisage",
+    "Conditionnement en sacs"
+  ],
+  avantages: [
+    "Soutien à l'agriculture (cacao, café, hévéa)",
+    "Demande constante",
+    "Subventions possibles (État)",
+    "Marché porteur",
+    "Valorisation des déchets organiques"
+  ],
+  challenges: [
+    "Normes environnementales strictes",
+    "Autorisations sanitaires (pesticides)",
+    "Concurrence des multinationales (Yara, OCP)",
+    "Logistique (distribution en zones rurales)",
+    "Prix des matières premières"
+  ],
+  sanitaires: [
+    "Respecter les normes environnementales",
+    "Utiliser des équipements de protection (masque, combinaison)",
+    "Nettoyer les équipements régulièrement",
+    "Former le personnel à la sécurité",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser le broyage et le séchage",
+    "Utiliser des moteurs à haut rendement",
+    "Récupérer la chaleur des séchoirs",
+    "Isoler les équipements",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones de production et stockage",
+    "Prévoir zone de stockage des matières",
+    "Aménager laboratoire d'analyse",
+    "Faciliter la circulation des camions"
+  ],
+  marketing: [
+    "Cibler les agriculteurs et coopératives",
+    "Développer des formulations adaptées aux cultures locales (cacao, café)",
+    "Proposer des sacs de différents formats",
+    "Communiquer sur l'efficacité et les rendements",
+    "Développer des contrats réguliers"
+  ],
+  raw_materials: [
+    "Azote (urée)",
+    "Phosphore (phosphate)",
+    "Potassium (potasse)",
+    "Oligoéléments (zinc, bore)",
+    "Matières organiques (compost)",
+    "Sacs d'emballage (50 kg)"
+  ],
+  target_markets: [
+    "Agriculteurs de cacao",
+    "Agriculteurs de café",
+    "Plantations d'hévéa",
+    "Cultures vivrières (maïs, riz)",
+    "Coopératives agricoles"
+  ],
+  competitive_advantages: [
+    "Engrais adaptés aux sols ivoiriens",
+    "Prix compétitifs (moins de transport)",
+    "Conseils techniques aux agriculteurs",
+    "Livraison en zones rurales",
+    "Formulations spécifiques (cacao, café)"
+  ],
+  reglementation: [
+    "Respecter la réglementation des engrais",
+    "Autorisation des pesticides",
+    "Fiches de données de sécurité",
+    "Étiquetage des dangers (CLP)",
+    "Normes de qualité (ISO 9001)"
+  ],
+  securite: [
+    "Formation du personnel aux risques chimiques",
+    "Équipements de protection (masque, combinaison, gants)",
+    "Ventilation des ateliers",
+    "Stockage sécurisé des produits",
+    "Douches de sécurité"
+  ],
+  environnement: [
+    "Gestion des eaux de ruissellement",
+    "Traitement des poussières",
+    "Recyclage des déchets",
+    "Utilisation de matières biosourcées",
+    "Réduction des émissions"
+  ],
+  etiquetage: [
+    "Composition (NPK)",
+    "Mode d'emploi",
+    "Précautions d'utilisation",
+    "Numéro de lot",
+    "Date de fabrication",
+    "Pictogrammes de danger"
+  ]
+},
+
+javel: {
+  id: "javel",
+  nom: "Eau de javel & désinfectants",
+  filiereNom: "Chimie, Cosmétiques & Détergents",
+  type: "production",
+  description: "Fabrication d'eau de javel (hypochlorite de sodium), désinfectants et produits d'hygiène. Demande forte depuis la COVID-19.",
+  capex_min: 60000,
+  chiffre_affaires_estime: "150000-300000",
+  marge_brute: "40-55",
+  emplois_directs: "3-6",
+  emplois_indirects: "2-3",
+  roi_estime: "2-3 ans",
+  investment_breakdown: {
+    machines: 30000,
+    installation: 10000,
+    working_capital: 15000,
+    training: 5000,
+    total: 60000
+  },
+  monthly_capacity: "50,000 L",
+  estimated_revenue: 250000,
+  gross_margin: 48,
+  net_profitability: 32,
+  machines: [
+    { name: "Cuve de mélange", role: "Préparation", capacity: "5,000 L", utilities: "Électricité", price: 15000 },
+    { name: "Système de dosage", role: "Dosage du chlore", capacity: "Automatique", utilities: "Électricité", price: 10000 },
+    { name: "Remplisseuse", role: "Conditionnement", capacity: "2,000 bouteilles/h", utilities: "Électricité + air", price: 15000 },
+    { name: "Étiqueteuse", role: "Étiquetage", capacity: "2,000 bouteilles/h", utilities: "Électricité", price: 8000 },
+    { name: "Poste contrôle", role: "Contrôle qualité (chlore actif)", capacity: "Standard", utilities: "Électricité", price: 12000 }
+  ],
+  processus: [
+    "Dosage du chlore et de la soude",
+    "Mélange sous agitation",
+    "Dilution à la concentration souhaitée",
+    "Contrôle qualité (taux de chlore actif)",
+    "Conditionnement en bouteilles/bidons",
+    "Étiquetage (précautions d'usage)"
+  ],
+  avantages: [
+    "Demande post-COVID (hygiène)",
+    "Processus simple",
+    "Faible investissement",
+    "Large distribution (supermarchés, pharmacies)",
+    "Marges intéressantes"
+  ],
+  challenges: [
+    "Sécurité chimique (chlore, soude)",
+    "Concurrence (importations)",
+    "Prix des matières premières",
+    "Normes sanitaires (taux de chlore)",
+    "Stabilité du produit (dégradation)"
+  ],
+  sanitaires: [
+    "Respecter les normes de sécurité",
+    "Utiliser des équipements de protection (gants, lunettes, masque)",
+    "Nettoyer les équipements régulièrement",
+    "Former le personnel aux risques chimiques",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser le mélange",
+    "Utiliser des moteurs à haut rendement",
+    "Isoler les cuves",
+    "Éteindre les équipements hors production",
+    "Récupérer la chaleur"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones de production et stockage",
+    "Prévoir zone de stockage des produits chimiques",
+    "Aménager zone de conditionnement",
+    "Faciliter la circulation du personnel"
+  ],
+  marketing: [
+    "Cibler supermarchés, pharmacies, grossistes",
+    "Proposer des formats variés (bouteilles, bidons, jerrycans)",
+    "Soigner l'emballage",
+    "Communiquer sur l'efficacité désinfectante",
+    "Développer des marques propres"
+  ],
+  raw_materials: [
+    "Hypochlorite de sodium (chlore)",
+    "Soude caustique",
+    "Eau déminéralisée",
+    "Stabilisants",
+    "Emballages (bouteilles PET, bidons, étiquettes)"
+  ],
+  target_markets: [
+    "Supermarchés",
+    "Pharmacies",
+    "Grossistes",
+    "Hôpitaux et cliniques",
+    "Écoles et collectivités"
+  ],
+  competitive_advantages: [
+    "Eau de javel fraîche (plus efficace)",
+    "Prix compétitifs",
+    "Conditionnement adapté",
+    "Qualité garantie (taux de chlore)",
+    "Livraison rapide"
+  ],
+  reglementation: [
+    "Respecter les normes de désinfectants",
+    "Fiches de données de sécurité",
+    "Étiquetage des dangers (CLP)",
+    "Contrôle du taux de chlore actif",
+    "Déclaration environnementale"
+  ],
+  securite: [
+    "Formation du personnel aux risques chimiques",
+    "Équipements de protection (gants, lunettes, masque)",
+    "Ventilation des ateliers",
+    "Stockage sécurisé du chlore",
+    "Douches de sécurité"
+  ],
+  environnement: [
+    "Neutralisation des effluents",
+    "Gestion des déchets chimiques",
+    "Réduction des emballages plastiques",
+    "Utilisation de bouteilles recyclées",
+    "Traitement des eaux usées"
+  ],
+  etiquetage: [
+    "Pictogrammes de danger (corrosif)",
+    "Mentions de danger (H)",
+    "Conseils de prudence (P)",
+    "Taux de chlore actif",
+    "Numéro de lot",
+    "Date de péremption"
+  ]
+},
+
+produits_industriels: {
+  id: "produits_industriels",
+  nom: "Produits chimiques industriels",
+  filiereNom: "Chimie, Cosmétiques & Détergents",
+  type: "production",
+  description: "Fabrication de produits chimiques à usage industriel (acides, solvants, dégraissants, antirouille). Fourniture aux industries locales.",
+  capex_min: 150000,
+  chiffre_affaires_estime: "500000-1000000",
+  marge_brute: "40-55",
+  emplois_directs: "5-10",
+  emplois_indirects: "3-5",
+  roi_estime: "4-6 ans",
+  investment_breakdown: {
+    machines: 80000,
+    installation: 20000,
+    working_capital: 35000,
+    training: 15000,
+    total: 150000
+  },
+  monthly_capacity: "30,000 L",
+  estimated_revenue: 750000,
+  gross_margin: 45,
+  net_profitability: 30,
+  machines: [
+    { name: "Cuve de mélange", role: "Formulation", capacity: "5,000 L", utilities: "Électricité", price: 25000 },
+    { name: "Réacteur", role: "Réaction chimique", capacity: "2,000 L", utilities: "Électricité + eau", price: 35000 },
+    { name: "Système de dosage", role: "Dosage", capacity: "Automatique", utilities: "Électricité", price: 20000 },
+    { name: "Remplisseuse", role: "Conditionnement", capacity: "1,000 bidons/h", utilities: "Électricité + air", price: 20000 },
+    { name: "Étiqueteuse", role: "Étiquetage", capacity: "1,000 bidons/h", utilities: "Électricité", price: 10000 }
+  ],
+  processus: [
+    "Dosage des ingrédients",
+    "Mélange ou réaction",
+    "Contrôle qualité (pH, densité)",
+    "Conditionnement en bidons/fûts",
+    "Étiquetage (pictogrammes)",
+    "Stockage sécurisé"
+  ],
+  avantages: [
+    "Réduction des importations (produits chimiques)",
+    "Support au tissu industriel local",
+    "Marges élevées (40-55%)",
+    "Marché porteur",
+    "Formulations adaptées"
+  ],
+  challenges: [
+    "Exigences de pureté (qualité)",
+    "Sécurité extrême (produits dangereux)",
+    "Concurrence internationale",
+    "Normes strictes (REACH)",
+    "Gestion des déchets"
+  ],
+  sanitaires: [
+    "Respecter les normes de sécurité",
+    "Utiliser des équipements de protection (combinaison, masque)",
+    "Nettoyer les équipements régulièrement",
+    "Former le personnel aux risques chimiques",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser le mélange",
+    "Utiliser des moteurs à haut rendement",
+    "Isoler les réacteurs",
+    "Récupérer la chaleur",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones de production et stockage",
+    "Prévoir zone de stockage des produits chimiques",
+    "Aménager laboratoire d'analyse",
+    "Faciliter la circulation du personnel"
+  ],
+  marketing: [
+    "Cibler les industries locales (agroalimentaire, BTP, métallurgie)",
+    "Développer des formulations adaptées",
+    "Proposer des conditionnements industriels (bidons, fûts, cuves)",
+    "Garantir la qualité et la pureté",
+    "Développer des contrats réguliers"
+  ],
+  raw_materials: [
+    "Acides (chlorhydrique, sulfurique)",
+    "Solvants (acétone, éthanol)",
+    "Bases (soude)",
+    "Additifs",
+    "Emballages (bidons, fûts, étiquettes)"
+  ],
+  target_markets: [
+    "Industries agroalimentaires",
+    "Entreprises de BTP",
+    "Métallurgies",
+    "Imprimeries",
+    "Laboratoires"
+  ],
+  competitive_advantages: [
+    "Produits de qualité (haute pureté)",
+    "Prix compétitifs (moins de transport)",
+    "Livraison rapide",
+    "Conditionnement personnalisé",
+    "Service technique"
+  ],
+  reglementation: [
+    "Respecter le règlement REACH",
+    "Fiches de données de sécurité",
+    "Étiquetage des dangers (CLP)",
+    "Autorisations de production",
+    "Normes ISO 9001"
+  ],
+  securite: [
+    "Formation du personnel aux risques chimiques",
+    "Équipements de protection (combinaison, masque, gants)",
+    "Ventilation des ateliers",
+    "Stockage sécurisé (rétention)",
+    "Douches de sécurité et lave-yeux"
+  ],
+  environnement: [
+    "Traitement des effluents",
+    "Gestion des déchets chimiques (filières agréées)",
+    "Récupération des solvants",
+    "Neutralisation des acides",
+    "Réduction des émissions"
+  ],
+  etiquetage: [
+    "Pictogrammes de danger (GHS)",
+    "Mentions de danger (H)",
+    "Conseils de prudence (P)",
+    "Composition",
+    "Numéro de lot",
+    "Date de péremption"
+  ]
+},
+// ==============================================
+// 3. TEXTILE, HABILLEMENT & CUIR (8 UP enrichies)
+// ==============================================
+
+confection: {
+  id: "confection",
+  nom: "Confection de vêtements",
+  filiereNom: "Textile, Habillement & Cuir",
+  type: "production",
+  description: "Fabrication de vêtements prêts-à-porter pour hommes, femmes et enfants. Spécialisation possible en pagne, tenues traditionnelles, casual et professionnel.",
+  capex_min: 60000,
+  chiffre_affaires_estime: "300000-750000",
+  marge_brute: "35-50",
+  emplois_directs: "8-20",
+  emplois_indirects: "3-6",
+  roi_estime: "3-5 ans",
+  investment_breakdown: {
+    machines: 35000,
+    installation: 10000,
+    working_capital: 10000,
+    training: 5000,
+    total: 60000
+  },
+  monthly_capacity: "5,000 pièces",
+  estimated_revenue: 500000,
+  gross_margin: 42,
+  net_profitability: 25,
+  machines: [
+    { name: "Table de coupe", role: "Découpe des tissus", capacity: "Standard", utilities: "Électricité", price: 8000 },
+    { name: "Machine à coudre industrielle", role: "Assemblage", capacity: "Standard", utilities: "Électricité", price: 5000 },
+    { name: "Surjeteuse", role: "Surfilage et finition", capacity: "Standard", utilities: "Électricité", price: 6000 },
+    { name: "Machine à boutonnières", role: "Boutonnières", capacity: "Standard", utilities: "Électricité", price: 8000 },
+    { name: "Presse à repasser", role: "Repassage et finition", capacity: "Standard", utilities: "Électricité + vapeur", price: 5000 },
+    { name: "Poste contrôle qualité", role: "Contrôle des finitions", capacity: "Standard", utilities: "—", price: 2000 }
+  ],
+  processus: [
+    "Réception des tissus (pagne, coton, polyester)",
+    "Découpe selon patron",
+    "Assemblage des pièces",
+    "Surfilage et finitions",
+    "Pose des boutons/fermetures",
+    "Repassage",
+    "Contrôle qualité",
+    "Conditionnement"
+  ],
+  avantages: [
+    "Main-d'œuvre disponible",
+    "Tendance 'Made in Côte d'Ivoire' (fierté locale)",
+    "Marché local important (classe moyenne croissante)",
+    "Export régional possible (UEMOA/CEDEAO)",
+    "🇨🇮 Coton local (1er producteur africain après le Mali)",
+    "Personnalisation possible (sur mesure, séries limitées)"
+  ],
+  challenges: [
+    "Concurrence de la friperie (lo GN) et des importations chinoises",
+    "Prix très bas des concurrents (qualité souvent médiocre)",
+    "Qualité des finissons (ourlets, boutonnières)",
+    "Marketing et distribution",
+    "Gestion des invendus et des tailles"
+  ],
+  sanitaires: [
+    "Nettoyer les postes de travail",
+    "Former le personnel aux règles d'hygiène",
+    "Entretenir régulièrement les machines",
+    "Gérer les chutes de tissus (recyclage ou revente)",
+    "Assurer la traçabilité des productions"
+  ],
+  energie: [
+    "Optimiser la découpe pour réduire les chutes",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production",
+    "Isoler les zones de production",
+    "Utiliser un éclairage LED"
+  ],
+  amenagement: [
+    "Organiser en flux linéaire (coupe → couture → finition)",
+    "Séparer les zones de coupe et de couture",
+    "Prévoir une zone de stockage des tissus",
+    "Aménager une zone de contrôle qualité",
+    "Faciliter la circulation du personnel"
+  ],
+  marketing: [
+    "Cibler boutiques, marchés et supermarchés",
+    "Développer des collections adaptées aux saisons",
+    "Soigner les finitions pour se démarquer",
+    "Communiquer sur l'origine locale ('Made in Côte d'Ivoire')",
+    "Utiliser les réseaux sociaux (Instagram, Facebook, TikTok)",
+    "Proposer des séries limitées et personnalisées"
+  ],
+  raw_materials: [
+    "Pagne (tissus locaux)",
+    "Coton (production locale)",
+    "Polyester (import)",
+    "Fils, boutons, fermetures éclair",
+    "Emballages (sachets, cartons)"
+  ],
+  target_markets: [
+    "Boutiques de mode",
+    "Marchés traditionnels",
+    "Supermarchés",
+    "Entreprises (uniformes)",
+    "Particuliers (sur mesure)"
+  ],
+  competitive_advantages: [
+    "Vêtements fraîchement produits (qualité supérieure à la friperie)",
+    "Ingrédients locaux (pagne, coton)",
+    "Produits 'Made in Côte d'Ivoire'",
+    "Flexibilité des lots (petites séries, personnalisation)",
+    "Délais courts vs importations (2-3 mois)"
+  ],
+  positionnement: "Milieu de gamme premium - qualité supérieure à la friperie, prix compétitifs face aux importations",
+  opportunites_niche: [
+    "Vêtements en pagne (tissus locaux) → forte demande",
+    "Tenues traditionnelles (baptêmes, mariages)",
+    "Mode éco-responsable (recyclage, coton bio)",
+    "Uniformes scolaires (marché institutionnel stable)"
+  ]
+},
+
+tissage: {
+  id: "tissage",
+  nom: "Tissage industriel",
+  filiereNom: "Textile, Habillement & Cuir",
+  type: "production",
+  description: "Production de tissus à partir de coton local. Fabrication de pagnes, tissus wax, bazin et cotonnades pour le marché local et régional.",
+  capex_min: 100000,
+  chiffre_affaires_estime: "400000-800000",
+  marge_brute: "30-45",
+  emplois_directs: "10-25",
+  emplois_indirects: "4-8",
+  roi_estime: "5-7 ans",
+  investment_breakdown: {
+    machines: 60000,
+    installation: 15000,
+    working_capital: 15000,
+    training: 10000,
+    total: 100000
+  },
+  monthly_capacity: "50,000 mètres",
+  estimated_revenue: 600000,
+  gross_margin: 35,
+  net_profitability: 20,
+  machines: [
+    { name: "Ourdissoir", role: "Préparation des fils", capacity: "Standard", utilities: "Électricité", price: 15000 },
+    { name: "Métier à tisser", role: "Tissage", capacity: "Selon nombre", utilities: "Électricité", price: 30000 },
+    { name: "Bobinoir", role: "Préparation des bobines", capacity: "Standard", utilities: "Électricité", price: 10000 },
+    { name: "Encolleuse", role: "Encolage des fils", capacity: "Option", utilities: "Électricité + eau", price: 15000 },
+    { name: "Table de contrôle", role: "Contrôle qualité", capacity: "Standard", utilities: "Éclairage", price: 5000 }
+  ],
+  processus: [
+    "Réception des fils de coton",
+    "Ourdissage (préparation des chaînes)",
+    "Encolage (renforcement des fils)",
+    "Tissage",
+    "Contrôle qualité",
+    "Conditionnement en rouleaux"
+  ],
+  avantages: [
+    "Coton local (premier producteur africain après le Mali)",
+    "Chaîne de valeur complète (du coton au tissu)",
+    "Export possible vers l'UEMOA/CEDEAO",
+    "Marché porteur (pagnes, wax)",
+    "Substitution aux importations (tissus chinois)",
+    "🇨🇮 Valorisation du coton ivoirien"
+  ],
+  challenges: [
+    "Investissement machines lourd (métiers à tisser)",
+    "Concurrence des tissus importés (Chine, Inde, Pakistan)",
+    "Qualité constante (irrégularités possibles)",
+    "Entretien des métiers à tisser (spécialistes rares)",
+    "Consommation d'énergie élevée"
+  ],
+  sanitaires: [
+    "Nettoyer les métiers quotidiennement",
+    "Contrôler la qualité des fils",
+    "Entretenir les machines régulièrement",
+    "Former le personnel à la sécurité",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser le tissage (variateurs de vitesse)",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production",
+    "Isoler les zones de production",
+    "Récupérer la chaleur"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones de préparation et tissage",
+    "Prévoir zone de stockage des rouleaux",
+    "Aménager zone de contrôle qualité",
+    "Faciliter la circulation des chariots"
+  ],
+  marketing: [
+    "Cibler les confectionneurs et couturiers",
+    "Développer des tissus aux motifs locaux",
+    "Proposer des motifs personnalisés",
+    "Communiquer sur l'origine locale",
+    "Exporter vers la sous-région"
+  ],
+  raw_materials: [
+    "Coton ivoirien (fils)",
+    "Fils de chaîne et de trame",
+    "Colorants et teintures",
+    "Rouleaux d'emballage"
+  ],
+  target_markets: [
+    "Confectionneurs de vêtements",
+    "Couturiers et ateliers",
+    "Grossistes en tissus",
+    "Export vers UEMOA/CEDEAO"
+  ],
+  competitive_advantages: [
+    "Tissus 'Made in Côte d'Ivoire' (qualité supérieure aux importations)",
+    "Circuit court (du coton local au tissu fini)",
+    "Motifs exclusifs et personnalisables",
+    "Délais courts vs importations",
+    "Prix compétitifs"
+  ],
+  positionnement: "Qualité premium - tissus locaux face aux importations asiatiques",
+  opportunites_niche: [
+    "Tissus bio (coton non OGM)",
+    "Teinture naturelle (indigo, écorces)",
+    "Tissage de pagnes de cérémonie haut de gamme"
+  ]
+},
+
+maroquinerie: {
+  id: "maroquinerie",
+  nom: "Maroquinerie & articles en cuir",
+  filiereNom: "Textile, Habillement & Cuir",
+  type: "production",
+  description: "Fabrication d'articles en cuir et simili-cuir : sacs, ceintures, portefeuilles, chaussures, accessoires. Valorisation des peaux locales.",
+  capex_min: 75000,
+  chiffre_affaires_estime: "250000-600000",
+  marge_brute: "40-60",
+  emplois_directs: "5-15",
+  emplois_indirects: "2-4",
+  roi_estime: "3-5 ans",
+  investment_breakdown: {
+    machines: 40000,
+    installation: 10000,
+    working_capital: 15000,
+    training: 10000,
+    total: 75000
+  },
+  monthly_capacity: "2,000 pièces",
+  estimated_revenue: 400000,
+  gross_margin: 50,
+  net_profitability: 30,
+  machines: [
+    { name: "Table de découpe", role: "Découpe cuir", capacity: "Petites séries", utilities: "—", price: 5000 },
+    { name: "Machine à refendre", role: "Amincissement", capacity: "Standard", utilities: "Électricité", price: 15000 },
+    { name: "Machine à coudre cuir", role: "Assemblage", capacity: "Standard", utilities: "Électricité", price: 12000 },
+    { name: "Presse", role: "Collage et marquage", capacity: "Standard", utilities: "Électricité", price: 8000 },
+    { name: "Poste finition", role: "Finition et polissage", capacity: "Standard", utilities: "Électricité", price: 5000 }
+  ],
+  processus: [
+    "Réception du cuir (local)",
+    "Découpe des patrons",
+    "Amincissement (refendage)",
+    "Assemblage et couture",
+    "Collage et marquage",
+    "Finition et polissage",
+    "Contrôle qualité",
+    "Conditionnement"
+  ],
+  avantages: [
+    "Cuir local (peaux de bovins, chèvres, moutons)",
+    "Valeur ajoutée élevée (matière → produit fini)",
+    "Export possible vers l'Europe (luxe)",
+    "Marché porteur (accessoires de mode)",
+    "Tendance 'Made in Côte d'Ivoire'",
+    "Artisanat haut de gamme valorisé"
+  ],
+  challenges: [
+    "Concurrence des importations (Turquie, Chine, Maroc)",
+    "Qualité du cuir local (à améliorer)",
+    "Design compétitif (tendances actuelles)",
+    "Marketing et image de marque",
+    "Main-d'œuvre qualifiée rare (maroquiniers)"
+  ],
+  sanitaires: [
+    "Nettoyer les postes de travail",
+    "Former le personnel aux techniques du cuir",
+    "Entretenir les machines",
+    "Gérer les chutes de cuir (recyclage)",
+    "Assurer la traçabilité"
+  ],
+  energie: [
+    "Optimiser la découpe (placement des patrons)",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production",
+    "Isoler les zones",
+    "Utiliser un éclairage LED"
+  ],
+  amenagement: [
+    "Organiser en flux linéaire",
+    "Séparer zones de découpe et assemblage",
+    "Prévoir zone de stockage du cuir",
+    "Aménager zone de finition",
+    "Faciliter la circulation"
+  ],
+  marketing: [
+    "Cibler boutiques de luxe et concept stores",
+    "Développer des collections capsule",
+    "Soigner les finitions (coutures, teinture)",
+    "Communiquer sur l'artisanat local",
+    "Exporter vers l'Europe (luxe)",
+    "Utiliser les réseaux sociaux (Instagram, Pinterest)"
+  ],
+  raw_materials: [
+    "Cuir de bovin (local)",
+    "Cuir de chèvre/mouton",
+    "Simili-cuir (import)",
+    "Fils cirés, colle",
+    "Métaux (boucles, rivets)",
+    "Emballages (boîtes, pochettes)"
+  ],
+  target_markets: [
+    "Boutiques de luxe",
+    "Concept stores",
+    "Export Europe",
+    "Particuliers (haut de gamme)",
+    "Entreprises (cadeaux d'affaires)"
+  ],
+  competitive_advantages: [
+    "Cuir local (traçabilité, authenticité)",
+    "Artisanat haut de gamme 'Made in Côte d'Ivoire'",
+    "Finitions soignées (coutures, polissage)",
+    "Design exclusif (créateurs locaux)",
+    "Prix compétitifs face aux marques européennes"
+  ],
+  positionnement: "Haut de gamme - luxe accessible 'Made in Côte d'Ivoire'",
+  opportunites_niche: [
+    "Maroquinerie éco-responsable (cuir végétal, recyclé)",
+    "Personnalisation (gravure, initiales)",
+    "Collaboration avec créateurs de mode"
+  ]
+},
+
+teinture: {
+  id: "teinture",
+  nom: "Teinturerie industrielle",
+  filiereNom: "Textile, Habillement & Cuir",
+  type: "service",
+  description: "Services de teinture et ennoblissement de textiles. Teinture de pagnes, tissus, vêtements. Blanchisserie industrielle pour hôtels et restaurants.",
+  capex_min: 40000,
+  chiffre_affaires_estime: "200000-400000",
+  marge_brute: "35-50",
+  emplois_directs: "4-10",
+  emplois_indirects: "2-4",
+  roi_estime: "3-4 ans",
+  investment_breakdown: {
+    machines: 20000,
+    installation: 5000,
+    working_capital: 10000,
+    training: 5000,
+    total: 40000
+  },
+  monthly_capacity: "10,000 pièces",
+  estimated_revenue: 300000,
+  gross_margin: 45,
+  net_profitability: 28,
+  machines: [
+    { name: "Cuve de teinture", role: "Teinture", capacity: "Batch", utilities: "Électricité + eau", price: 15000 },
+    { name: "Système de chauffage", role: "Chauffage", capacity: "Standard", utilities: "Électricité", price: 5000 },
+    { name: "Essoreuse", role: "Extraction eau", capacity: "Standard", utilities: "Électricité", price: 8000 },
+    { name: "Séchoir", role: "Séchage", capacity: "Selon flux", utilities: "Électricité", price: 12000 }
+  ],
+  processus: [
+    "Réception des textiles",
+    "Tri par couleur et matière",
+    "Préparation (détachage)",
+    "Teinture en cuve",
+    "Rinçage",
+    "Essorage",
+    "Séchage",
+    "Repassage",
+    "Conditionnement"
+  ],
+  avantages: [
+    "Service essentiel (teinture de pagnes, vêtements)",
+    "Demande constante (mariages, cérémonies)",
+    "Marges intéressantes (35-50%)",
+    "Faible investissement initial",
+    "Écologique (moins d'eau que la teinture artisanale)"
+  ],
+  challenges: [
+    "Concurrence informelle (teinturiers artisanaux)",
+    "Gestion des eaux usées (normes environnementales)",
+    "Concurrence des importations (tissus déjà teints)",
+    "Qualité de teinture (tenue des couleurs)",
+    "Saisonnalité (pics avant fêtes)"
+  ],
+  sanitaires: [
+    "Traiter les eaux usées (station d'épuration)",
+    "Utiliser des produits certifiés (non toxiques)",
+    "Nettoyer les cuves régulièrement",
+    "Former le personnel à la sécurité chimique",
+    "Assurer la traçabilité des lots"
+  ],
+  energie: [
+    "Optimiser la teinture (température, durée)",
+    "Récupérer la chaleur des cuves",
+    "Isoler les équipements",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production"
+  ],
+  amenagement: [
+    "Organiser en flux continu",
+    "Séparer zones de teinture et séchage",
+    "Prévoir zone de stockage",
+    "Aménager station de traitement des eaux",
+    "Faciliter la circulation"
+  ],
+  marketing: [
+    "Cibler particuliers (cérémonies, mariages)",
+    "Proposer des coloris tendance",
+    "Garantir la tenue des couleurs",
+    "Communiquer sur l'écologie (moins d'eau)",
+    "Proposer des contrats réguliers (hôtels, restaurants)"
+  ],
+  raw_materials: [
+    "Colorants et teintures",
+    "Eau (importante quantité)",
+    "Produits de fixation",
+    "Détachants",
+    "Emballages (sachets, housses)"
+  ],
+  target_markets: [
+    "Particuliers (mariages, baptêmes)",
+    "Hôtels et restaurants",
+    "Collectivités",
+    "Confectionneurs",
+    "Grossistes en pagnes"
+  ],
+  competitive_advantages: [
+    "Teinture professionnelle (tenue des couleurs, uniformité)",
+    "Écologique (moins d'eau, produits certifiés)",
+    "Délais rapides (24-48h)",
+    "Service personnalisé (conseil colorimétrie)",
+    "Prix compétitifs"
+  ],
+  positionnement: "Service professionnel de qualité - alternative écologique à la teinture artisanale",
+  opportunites_niche: [
+    "Teinture naturelle (indigo, écorces)",
+    "Blanchisserie industrielle (hôtels)",
+    "Nettoyage à sec haut de gamme"
+  ]
+},
+
+broderie: {
+  id: "broderie",
+  nom: "Broderie industrielle",
+  filiereNom: "Textile, Habillement & Cuir",
+  type: "service",
+  description: "Broderie automatisée sur textiles : logos d'entreprises, initiales, motifs décoratifs. Service pour confectionneurs, entreprises et particuliers.",
+  capex_min: 55000,
+  chiffre_affaires_estime: "150000-300000",
+  marge_brute: "40-55",
+  emplois_directs: "3-8",
+  emplois_indirects: "1-3",
+  roi_estime: "3-5 ans",
+  investment_breakdown: {
+    machines: 35000,
+    installation: 5000,
+    working_capital: 10000,
+    training: 5000,
+    total: 55000
+  },
+  monthly_capacity: "5,000 pièces",
+  estimated_revenue: 220000,
+  gross_margin: 48,
+  net_profitability: 30,
+  machines: [
+    { name: "Machine à broder", role: "Broderie", capacity: "Multi-têtes", utilities: "Électricité", price: 25000 },
+    { name: "Ordinateur", role: "Programmation", capacity: "Standard", utilities: "Électricité + logiciel", price: 8000 },
+    { name: "Cadres", role: "Maintien des textiles", capacity: "Standard", utilities: "—", price: 5000 },
+    { name: "Poste finition", role: "Coupe des fils", capacity: "Standard", utilities: "—", price: 2000 }
+  ],
+  processus: [
+    "Programmation du motif (logiciel DAO)",
+    "Préparation du textile (cadrage)",
+    "Broderie automatisée",
+    "Finition (coupe des fils)",
+    "Contrôle qualité",
+    "Conditionnement"
+  ],
+  avantages: [
+    "Valeur ajoutée importante (personnalisation)",
+    "Demande croissante (logos, événements)",
+    "Service B2B (entreprises, confectionneurs)",
+    "Faible investissement relatif",
+    "Marge élevée (40-55%)"
+  ],
+  challenges: [
+    "Maintenance des machines (spécialistes rares)",
+    "Design numériques (qualification nécessaire)",
+    "Concurrence (petits brodeurs artisanaux)",
+    "Qualité des finitions (fils coupés)",
+    "Délais de production"
+  ],
+  sanitaires: [
+    "Nettoyer les machines quotidiennement",
+    "Former le personnel à la programmation",
+    "Entretenir les équipements",
+    "Gérer les déchets (fils, chutes)",
+    "Assurer la traçabilité"
+  ],
+  energie: [
+    "Optimiser la broderie (vitesse, motifs)",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production",
+    "Isoler les zones",
+    "Utiliser un éclairage LED"
+  ],
+  amenagement: [
+    "Organiser par postes",
+    "Prévoir zone de programmation",
+    "Aménager zone de contrôle qualité",
+    "Faciliter la circulation",
+    "Prévoir zone de stockage"
+  ],
+  marketing: [
+    "Cibler confectionneurs et entreprises",
+    "Développer des motifs variés (logos, initiales)",
+    "Proposer de la personnalisation",
+    "Communiquer sur la qualité (fils, finitions)",
+    "Utiliser les réseaux sociaux (exemples de réalisations)"
+  ],
+  raw_materials: [
+    "Fils de broderie (coton, polyester, métallisés)",
+    "Textiles supports (pagnes, tissus)",
+    "Logiciels de programmation",
+    "Emballages (boîtes, sachets)"
+  ],
+  target_markets: [
+    "Confectionneurs de vêtements",
+    "Entreprises (logos sur uniformes)",
+    "Particuliers (initiales, prénoms)",
+    "Événementiel (mariages, baptêmes)",
+    "Écoles (blasons, logos)"
+  ],
+  competitive_advantages: [
+    "Broderie professionnelle (finition soignée)",
+    "Délais rapides (24-48h)",
+    "Motifs personnalisables",
+    "Qualité des fils (tenue, brillance)",
+    "Prix compétitifs"
+  ],
+  positionnement: "Service professionnel de broderie - qualité, délais, personnalisation",
+  opportunites_niche: [
+    "Broderie 3D (effet relief)",
+    "Broderie sur cuir (maroquinerie)",
+    "Création de patchs personnalisés"
+  ]
+},
+
+chaussures: {
+  id: "chaussures",
+  nom: "Fabrication de chaussures",
+  filiereNom: "Textile, Habillement & Cuir",
+  type: "production",
+  description: "Fabrication de chaussures en cuir et matériaux synthétiques. Chaussures habillées, casual, sécurité, enfants.",
+  capex_min: 120000,
+  chiffre_affaires_estime: "500000-1000000",
+  marge_brute: "35-50",
+  emplois_directs: "10-25",
+  emplois_indirects: "4-8",
+  roi_estime: "4-6 ans",
+  investment_breakdown: {
+    machines: 70000,
+    installation: 15000,
+    working_capital: 25000,
+    training: 10000,
+    total: 120000
+  },
+  monthly_capacity: "10,000 paires",
+  estimated_revenue: 750000,
+  gross_margin: 40,
+  net_profitability: 25,
+  machines: [
+    { name: "Table de découpe", role: "Découpe cuir/tissu", capacity: "Standard", utilities: "—", price: 10000 },
+    { name: "Machine à piquer", role: "Couture", capacity: "Standard", utilities: "Électricité", price: 15000 },
+    { name: "Presse d'assemblage", role: "Assemblage semelle/tige", capacity: "Standard", utilities: "Électricité + air", price: 20000 },
+    { name: "Formes", role: "Mise en forme", capacity: "Selon modèles", utilities: "Électricité", price: 15000 },
+    { name: "Poste finition", role: "Finition et polissage", capacity: "Standard", utilities: "Électricité", price: 10000 }
+  ],
+  processus: [
+    "Réception des matériaux (cuir, tissu, semelles)",
+    "Découpe des pièces",
+    "Couture de la tige",
+    "Assemblage tige/semelle",
+    "Mise en forme",
+    "Finition et polissage",
+    "Contrôle qualité",
+    "Conditionnement"
+  ],
+  avantages: [
+    "Demande constante (chaussures de première nécessité)",
+    "Cuir local (peaux de bovins)",
+    "Export possible vers UEMOA/CEDEAO",
+    "Marché porteur (classe moyenne croissante)",
+    "Substitution aux importations (Asie, Maroc)"
+  ],
+  challenges: [
+    "Concurrence des importations (Chine, Vietnam, Maroc)",
+    "Qualité du cuir local (à améliorer)",
+    "Design (tendances actuelles)",
+    "Marketing et image de marque",
+    "Gestion des tailles et stocks"
+  ],
+  sanitaires: [
+    "Nettoyer les postes",
+    "Former le personnel",
+    "Entretenir les machines",
+    "Gérer les chutes (cuir, tissu)",
+    "Assurer la traçabilité"
+  ],
+  energie: [
+    "Optimiser la découpe (placement des patrons)",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production",
+    "Isoler les zones",
+    "Utiliser un éclairage LED"
+  ],
+  amenagement: [
+    "Organiser en flux linéaire",
+    "Séparer zones de découpe et assemblage",
+    "Prévoir zone de stockage",
+    "Aménager zone de finition",
+    "Faciliter la circulation"
+  ],
+  marketing: [
+    "Cibler boutiques de chaussures et supermarchés",
+    "Développer des collections (habillées, casual)",
+    "Soigner les finitions",
+    "Communiquer sur le confort et la durabilité",
+    "Utiliser les réseaux sociaux"
+  ],
+  raw_materials: [
+    "Cuir (local)",
+    "Tissus (coton, synthétique)",
+    "Semelles (caoutchouc, EVA)",
+    "Colles, fils",
+    "Emballages (boîtes à chaussures)"
+  ],
+  target_markets: [
+    "Boutiques de chaussures",
+    "Supermarchés",
+    "Marchés",
+    "Entreprises (chaussures de sécurité)",
+    "Export UEMOA/CEDEAO"
+  ],
+  competitive_advantages: [
+    "Chaussures 'Made in Côte d'Ivoire' (qualité)",
+    "Confort adapté au climat tropical",
+    "Durabilité (semelles robustes)",
+    "Prix compétitifs",
+    "Délais courts vs importations"
+  ],
+  positionnement: "Milieu de gamme - qualité et confort 'Made in Côte d'Ivoire'",
+  opportunites_niche: [
+    "Chaussures éco-responsables (matériaux recyclés)",
+    "Chaussures orthopédiques",
+    "Chaussures de sécurité (EPI)"
+  ]
+},
+
+uniformes: {
+  id: "uniformes",
+  nom: "Confection d'uniformes",
+  filiereNom: "Textile, Habillement & Cuir",
+  type: "production",
+  description: "Fabrication d'uniformes professionnels et scolaires : tenues d'entreprise, uniformes scolaires, vêtements de travail, EPI.",
+  capex_min: 70000,
+  chiffre_affaires_estime: "300000-600000",
+  marge_brute: "30-45",
+  emplois_directs: "10-25",
+  emplois_indirects: "3-6",
+  roi_estime: "3-5 ans",
+  investment_breakdown: {
+    machines: 40000,
+    installation: 10000,
+    working_capital: 15000,
+    training: 5000,
+    total: 70000
+  },
+  monthly_capacity: "10,000 pièces",
+  estimated_revenue: 450000,
+  gross_margin: 38,
+  net_profitability: 22,
+  machines: [
+    { name: "Table de coupe", role: "Découpe des tissus", capacity: "Standard", utilities: "Électricité", price: 10000 },
+    { name: "Machine à coudre", role: "Assemblage", capacity: "Standard", utilities: "Électricité", price: 8000 },
+    { name: "Surjeteuse", role: "Surfilage", capacity: "Standard", utilities: "Électricité", price: 8000 },
+    { name: "Presse", role: "Repassage", capacity: "Standard", utilities: "Électricité + vapeur", price: 6000 },
+    { name: "Machine à broder", role: "Logo (option)", capacity: "Option", utilities: "Électricité", price: 15000 }
+  ],
+  processus: [
+    "Réception des tissus",
+    "Découpe",
+    "Assemblage",
+    "Finition",
+    "Broderie logo (option)",
+    "Contrôle qualité",
+    "Conditionnement"
+  ],
+  avantages: [
+    "Commandes institutionnelles (écoles, entreprises)",
+    "Demande régulière (chaque année)",
+    "Volume important (contrats longs)",
+    "Stabilité des revenus",
+    "Opportunité de fidélisation"
+  ],
+  challenges: [
+    "Appels d'offres (concurrence intense)",
+    "Délais de livraison serrés",
+    "Qualité constante exigée",
+    "Concurrence sur les prix (importations)",
+    "Gestion des tailles"
+  ],
+  sanitaires: [
+    "Nettoyer les postes",
+    "Former le personnel",
+    "Entretenir les machines",
+    "Gérer les chutes",
+    "Assurer la traçabilité"
+  ],
+  energie: [
+    "Optimiser la coupe",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production",
+    "Isoler les zones",
+    "Utiliser un éclairage LED"
+  ],
+  amenagement: [
+    "Organiser en flux linéaire",
+    "Séparer zones de coupe et couture",
+    "Prévoir zone de stockage",
+    "Aménager zone de contrôle qualité",
+    "Faciliter la circulation"
+  ],
+  marketing: [
+    "Cibler écoles, entreprises, administrations",
+    "Répondre aux appels d'offres",
+    "Proposer des échantillons",
+    "Garantir les délais",
+    "Communiquer sur la qualité"
+  ],
+  raw_materials: [
+    "Tissus (coton, polyester, mélanges)",
+    "Fils",
+    "Boutons, fermetures",
+    "Broderie logos",
+    "Emballages"
+  ],
+  target_markets: [
+    "Écoles (uniformes scolaires)",
+    "Entreprises (tenues de travail)",
+    "Administrations",
+    "Hôtels et restaurants",
+    "Hôpitaux"
+  ],
+  competitive_advantages: [
+    "Qualité constante (finitions soignées)",
+    "Respect des délais (production locale)",
+    "Service personnalisé (adaptation tailles)",
+    "Prix compétitifs",
+    "Livraison directe"
+  ],
+  positionnement: "Qualité et fiabilité - partenaire institutionnel de confiance",
+  opportunites_niche: [
+    "Uniformes éco-responsables (coton bio)",
+    "Vêtements de travail techniques (EPI)",
+    "Location d'uniformes (hôtels, hôpitaux)"
+  ]
+},
+
+linge: {
+  id: "linge",
+  nom: "Linge de maison",
+  filiereNom: "Textile, Habillement & Cuir",
+  type: "production",
+  description: "Fabrication de linge de maison : draps, taies d'oreiller, nappes, serviettes, torchons. Valorisation du coton local.",
+  capex_min: 90000,
+  chiffre_affaires_estime: "350000-700000",
+  marge_brute: "35-50",
+  emplois_directs: "8-20",
+  emplois_indirects: "3-5",
+  roi_estime: "4-6 ans",
+  investment_breakdown: {
+    machines: 50000,
+    installation: 15000,
+    working_capital: 15000,
+    training: 10000,
+    total: 90000
+  },
+  monthly_capacity: "20,000 pièces",
+  estimated_revenue: 500000,
+  gross_margin: 42,
+  net_profitability: 25,
+  machines: [
+    { name: "Table de coupe", role: "Découpe", capacity: "Standard", utilities: "—", price: 10000 },
+    { name: "Machine à coudre", role: "Assemblage", capacity: "Standard", utilities: "Électricité", price: 8000 },
+    { name: "Surjeteuse", role: "Ourlet", capacity: "Standard", utilities: "Électricité", price: 8000 },
+    { name: "Presse", role: "Repassage", capacity: "Standard", utilities: "Électricité + vapeur", price: 6000 }
+  ],
+  processus: [
+    "Réception des tissus (coton, percale)",
+    "Découpe",
+    "Assemblage",
+    "Ourlet",
+    "Repassage",
+    "Contrôle qualité",
+    "Conditionnement"
+  ],
+  avantages: [
+    "Coton local (qualité, traçabilité)",
+    "Marché en croissance (hôtellerie, particuliers)",
+    "Export possible (UEMOA, Europe)",
+    "Produits de première nécessité",
+    "Tendance 'Made in Côte d'Ivoire'"
+  ],
+  challenges: [
+    "Concurrence des importations (Chine, Inde, Pakistan)",
+    "Qualité des finissons (ourlets)",
+    "Design et packaging",
+    "Marketing",
+    "Gestion des tailles (draps, nappes)"
+  ],
+  sanitaires: [
+    "Nettoyer les postes",
+    "Former le personnel",
+    "Entretenir les machines",
+    "Gérer les chutes",
+    "Assurer la traçabilité"
+  ],
+  energie: [
+    "Optimiser la coupe",
+    "Utiliser des moteurs à haut rendement",
+    "Éteindre les équipements hors production",
+    "Isoler les zones",
+    "Utiliser un éclairage LED"
+  ],
+  amenagement: [
+    "Organiser en flux linéaire",
+    "Séparer zones de coupe et couture",
+    "Prévoir zone de stockage",
+    "Aménager zone de repassage",
+    "Faciliter la circulation"
+  ],
+  marketing: [
+    "Cibler supermarchés, boutiques, hôtels",
+    "Développer des collections (couleurs, motifs)",
+    "Soigner les finitions",
+    "Communiquer sur le coton local",
+    "Proposer des packs (draps + taies)"
+  ],
+  raw_materials: [
+    "Coton (local)",
+    "Percale, satin (import)",
+    "Fils",
+    "Emballages (sachets, boîtes)"
+  ],
+  target_markets: [
+    "Supermarchés",
+    "Boutiques de linge de maison",
+    "Hôtels et restaurants",
+    "Particuliers",
+    "Export UEMOA"
+  ],
+  competitive_advantages: [
+    "Linge 'Made in Côte d'Ivoire' (coton local)",
+    "Qualité supérieure aux importations",
+    "Prix compétitifs",
+    "Délais courts",
+    "Personnalisation possible (broderie initiales)"
+  ],
+  positionnement: "Qualité et confort - linge de maison 'Made in Côte d'Ivoire'",
+  opportunites_niche: [
+    "Linge éco-responsable (coton bio)",
+    "Linge personnalisé (hôtels, entreprises)",
+    "Draps en pagne (tissus locaux)"
+  ]
+}
+};
+
+console.log("📦 productionsData chargé avec", Object.keys(productionsData).length, "UP");
+    
+    let currentStep = 1;
+    let currentUp = null;
+    let currentUpData = null;
+    let totalSteps = 0;
+    let stepsList = [];
+    let checklistState = {};
+    let bpValidated = false;
+    
+    function getUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      return { upId: params.get('up'), upNom: params.get('nom') };
+    }
+    
+    function formatNumber(value) {
+      return parseInt(value).toLocaleString('fr-FR');
+    }
+    
+    function calculerROI(caMin, capex, margeMin) {
+      const beneficeAnnuel = caMin * (margeMin / 100);
+      const roi = (beneficeAnnuel / capex) * 100;
+      const payback = capex / beneficeAnnuel;
+      return { roi: Math.round(roi), payback: payback.toFixed(1) };
+    }
+    
+    function getActiveEmail() {
+      return localStorage.getItem('p2i_user_email') || localStorage.getItem('p2i_active_user') || '';
+    }
+    
+    function checkBpProExists(upId) {
+  try {
+    const email = getActiveEmail() || 'guest';
+    const storageKey = `p2i_business_plans__${email}`;
+    const plans = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    
+    // Chercher par ID ou par nom
+    const bpPro = plans.find(p => {
+      if (p.type !== 'BP_PRO') return false;
+      if (p.unit_id === upId) return true;
+      if (p.unit === currentUpData?.nom) return true;
+      return false;
+    });
+    
+    if (bpPro) {
+      return { exists: true, score: bpPro.score || 0, validated: bpPro.validated || false, data: bpPro };
+    }
+    return { exists: false, score: 0, validated: false, data: null };
+  } catch(e) { 
+    return { exists: false, score: 0, validated: false, data: null }; 
+  }
+}
+    
+    function validateBpPro(upId) {
+      try {
+        const email = getActiveEmail() || 'guest';
+        const storageKey = `p2i_business_plans__${email}`;
+        const plans = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        const index = plans.findIndex(p => p.type === 'BP_PRO' && p.unit_id === upId);
+        if (index !== -1 && plans[index].score >= 76) {
+          plans[index].validated = true;
+          localStorage.setItem(storageKey, JSON.stringify(plans));
+          alert("✅ Félicitations ! Votre Business Plan Pro a été validé.");
+          renderFullTutoriel();
+          return true;
+        } else {
+          alert("⚠️ Votre BP Pro n'atteint pas encore le score minimum de 76/100.");
+          return false;
+        }
+      } catch(e) { return false; }
+    }
+    
+    function redirectToBpPro(upId, upNom, filiere) {
+  // 🔥 CORRECTION : Garder l'ID exact sans transformation
+  // Pour epices, on force 'epices' (déjà correct d'après ton URL)
+  // Pour huiles_alimentaires, on garde 'huiles_alimentaires'
+  
+  const filiereParam = filiere && filiere !== "undefined" ? filiere : "Agro-alimentaire & Boissons";
+  
+  // Construction de l'URL
+  const url = `business-plan-pro.html?unit_id=${encodeURIComponent(upId)}&unit=${encodeURIComponent(upNom)}&filiere=${encodeURIComponent(filiereParam)}&mode=preview&intention=tutoriel_expert`;
+  
+  // Redirection directe (sans alerte)
+  window.location.href = url;
+}
+    
+    function redirectToPayment(upId, upNom) {
+      alert(`Redirection vers paiement sécurisé pour le Tutoriel Expert Premium : ${upNom} (299$)`);
+    }
+    
+    function requestQuote(upId, upNom, machineName) {
+      const email = getActiveEmail();
+      if (!email) {
+        alert("Veuillez vous connecter pour demander un devis.");
+        window.location.href = "login.html?mode=login";
+        return;
+      }
+      let quotes = JSON.parse(localStorage.getItem(`p2i_quotes_${email}`) || '[]');
+      quotes.push({ id: Date.now(), up_id: upId, up_nom: upNom, machine: machineName, status: "pending", date: new Date().toISOString() });
+      localStorage.setItem(`p2i_quotes_${email}`, JSON.stringify(quotes));
+      alert(`✅ Demande de devis pour "${machineName}" enregistrée ! Un conseiller P2I vous contactera.`);
+    }
+    
+    function requestGlobalQuote(upId, upNom) {
+      const email = getActiveEmail();
+      if (!email) {
+        alert("Veuillez vous connecter pour demander un devis.");
+        window.location.href = "login.html?mode=login";
+        return;
+      }
+      let quotes = JSON.parse(localStorage.getItem(`p2i_quotes_${email}`) || '[]');
+      quotes.push({ id: Date.now(), up_id: upId, up_nom: upNom, machine: "TOUS LES ÉQUIPEMENTS", status: "pending", date: new Date().toISOString() });
+      localStorage.setItem(`p2i_quotes_${email}`, JSON.stringify(quotes));
+      alert(`✅ Demande de devis pour l'ensemble des équipements enregistrée !`);
+    }
+    
+    function goBack() { 
+      window.location.href = 'service-detail.html?id=tutoriel';
+    }
+    
+    function loadChecklistState() {
+      const saved = localStorage.getItem(`tutoriel_checklist_${currentUp}`);
+      if (saved) checklistState = JSON.parse(saved);
+      else { checklistState = {}; stepsList.forEach((_, idx) => { checklistState[idx] = false; }); }
+    }
+    
+    function saveChecklistState() { localStorage.setItem(`tutoriel_checklist_${currentUp}`, JSON.stringify(checklistState)); }
+    
+    function toggleChecklistItem(stepIdx) {
+      checklistState[stepIdx] = !checklistState[stepIdx];
+      saveChecklistState();
+      renderStep(currentStep);
+      updateProgress();
+      updateStepSummary();
+    }
+    
+    function updateProgress() {
+      const progress = (currentStep / totalSteps) * 100;
+      const progressBar = document.getElementById('progressBar');
+      if (progressBar) progressBar.style.width = `${progress}%`;
+      const checkedCount = Object.values(checklistState).filter(v => v === true).length;
+      const stepsValidated = document.getElementById('stepsValidated');
+      if (stepsValidated) stepsValidated.innerHTML = `${checkedCount}/${totalSteps}`;
+    }
+    
+    function updateStepSummary() {
+      for (let i = 1; i <= totalSteps; i++) {
+        const pill = document.querySelector(`.step-pill[data-step="${i}"]`);
+        if (pill) checklistState[i-1] ? pill.classList.add('checked') : pill.classList.remove('checked');
+      }
+    }
+    
+    function goToStep(step) {
+      if (step < 1) step = 1;
+      if (step > totalSteps) step = totalSteps;
+      currentStep = step;
+      renderStep(currentStep);
+      updateProgress();
+      updateStepSummary();
+      document.querySelectorAll('.step-pill').forEach(pill => {
+        pill.classList.remove('active');
+        if (parseInt(pill.dataset.step) === currentStep) pill.classList.add('active');
+      });
+    }
+    
+    function nextStep() { if (currentStep < totalSteps) goToStep(currentStep + 1); }
+    function prevStep() { if (currentStep > 1) goToStep(currentStep - 1); }
+    
+    function renderStep(stepIdx) {
+      const step = stepsList[stepIdx - 1];
+      if (!step) return;
+      const isChecked = checklistState[stepIdx - 1] || false;
+      const checklistHtml = `
+        <div class="checklist">
+          <h4><i class="fas fa-check-double"></i> Validation de l'étape</h4>
+          <div class="checklist-item ${isChecked ? 'checked' : ''}" onclick="toggleChecklistItem(${stepIdx - 1})">
+            <i class="fas ${isChecked ? 'fa-check-circle' : 'fa-circle'}"></i>
+            <span>${isChecked ? 'Étape validée' : 'Marquer cette étape comme terminée'}</span>
+          </div>
+        </div>
+      `;
+      const html = `
+        <div class="step-card">
+          <div class="step-number">${stepIdx}</div>
+          <div class="step-icon"><i class="${step.icon}"></i></div>
+          <h2 class="step-title">${step.title}</h2>
+          <div class="step-content">
+            ${step.content}
+            ${checklistHtml}
+            ${step.incitation}
+          </div>
+        </div>
+      `;
+      document.getElementById('stepContent').innerHTML = html;
+    }
+    
+    function renderStepSummary() {
+      const stepIcons = [
+        { icon: "fas fa-info-circle", label: "Présentation" },
+        { icon: "fas fa-microchip", label: "Machines" },
+        { icon: "fas fa-cogs", label: "Processus" },
+        { icon: "fas fa-chart-line", label: "Avantages" },
+        { icon: "fas fa-leaf", label: "Sanitaire" },
+        { icon: "fas fa-bolt", label: "Énergie" },
+        { icon: "fas fa-building", label: "Aménagement" },
+        { icon: "fas fa-chart-simple", label: "Marketing" },
+        { icon: "fas fa-lightbulb", label: "Astuces" }
+      ];
+      let summaryHtml = '<div class="step-summary">';
+      for (let i = 0; i < stepIcons.length; i++) {
+        const stepNum = i + 1;
+        const isChecked = checklistState[i] || false;
+        const isActive = currentStep === stepNum;
+        summaryHtml += `
+          <div class="step-pill ${isActive ? 'active' : ''} ${isChecked ? 'checked' : ''}" data-step="${stepNum}" onclick="goToStep(${stepNum})">
+            <i class="step-pill-icon ${stepIcons[i].icon}"></i>
+            <span class="step-pill-number">${stepNum}</span>
+          </div>
+        `;
+      }
+      summaryHtml += '</div>';
+      const summaryContainer = document.getElementById('stepSummary');
+      if (summaryContainer) summaryContainer.innerHTML = summaryHtml;
+    }
+    
+    function saveTutorielToDashboard() {
+      const email = getActiveEmail();
+      if (!email) { alert("Veuillez vous connecter."); window.location.href = "login.html?mode=login"; return; }
+      const upData = currentUpData;
+      const bpStatus = checkBpProExists(currentUp);
+      const tutorielData = {
+        id: `tutoriel_${currentUp}_${Date.now()}`,
+        type: "TUTORIEL_DECOUVERTE",
+        unit_id: currentUp,
+        unit: upData.nom,
+        filiere: upData.filiereNom,
+        saved_at: new Date().toISOString(),
+        url: window.location.href,
+        bp_score: bpStatus.score || 0,
+        bp_validated: bpStatus.validated || false
+      };
+      const storageKey = `p2i_business_plans__${email}`;
+      let plans = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      const existingIndex = plans.findIndex(p => p.type === "TUTORIEL_DECOUVERTE" && p.unit_id === currentUp);
+      if (existingIndex !== -1) plans[existingIndex] = { ...plans[existingIndex], ...tutorielData };
+      else plans.push(tutorielData);
+      localStorage.setItem(storageKey, JSON.stringify(plans));
+      alert(`✅ Tutoriel "${upData.nom}" enregistré dans votre Dashboard !`);
+    }
+    
+    function renderFullTutoriel() {
+  // Forcer l'affichage du bouton retour
+  const backBtn = document.querySelector('.btn-back');
+  if (backBtn) backBtn.style.display = 'flex';
+const data = currentUpData;
+  const caMin = parseInt(data.chiffre_affaires_estime.split('-')[0]);
+  const caMax = parseInt(data.chiffre_affaires_estime.split('-')[1]);
+  const margeMin = data.marge_brute ? parseInt(data.marge_brute.split('-')[0]) : 35;
+  const capex = data.capex_min;
+  const roi = calculerROI(caMin, capex, margeMin);
+  const bpStatus = checkBpProExists(currentUp);
+  
+  stepsList = [];
+  stepsList.push({
+    title: "Présentation de l'activité",
+    icon: "fas fa-info-circle",
+    content: `<p>${data.description}</p><div class="info-grid"><div class="info-card"><div class="label">CAPEX minimum</div><div class="value">${formatNumber(capex)} $</div></div><div class="info-card"><div class="label">CA estimé</div><div class="value">${formatNumber(caMin)} - ${formatNumber(caMax)} $</div></div><div class="info-card"><div class="label">Marge brute</div><div class="value">${margeMin} - ${parseInt(data.marge_brute.split('-')[1])}%</div></div><div class="info-card"><div class="label">ROI estimé</div><div class="value">${roi.roi}% / an</div></div></div><div class="tip"><i class="fas fa-lightbulb"></i> <strong>Le saviez-vous ?</strong> Le marché de cette filière connaît une croissance annuelle d'environ 8% en Afrique de l'Ouest.</div>`,
+    incitation: `<div class="incitation"><p><i class="fas fa-crown"></i> <strong>Version Expert Premium :</strong> Description complète du modèle économique, process détaillé, capacités de production, contraintes qualité et hypothèses chiffrées.</p></div>`
+  });
+  
+  const machinesList = (data.machines || []).map(machine => `
+    <div class="machine-card">
+      <h4><i class="fas fa-microchip"></i> ${machine.name}</h4>
+      <div class="role">📋 Rôle : ${machine.role}</div>
+      <div class="capacity">⚙️ Capacité : ${machine.capacity}</div>
+      <div class="utilities">🔌 Utilités : ${machine.utilities}</div>
+      <button class="btn-quote" onclick="requestQuote('${currentUp}', '${data.nom}', '${machine.name}')">
+        <i class="fas fa-file-invoice"></i> Demander un devis
+      </button>
+    </div>
+  `).join('');
+  
+  stepsList.push({
+    title: "Machines & équipements",
+    icon: "fas fa-microchip",
+    content: `<div class="machines-grid">${machinesList}</div><div class="p2i-badge"><i class="fas fa-star" style="color: #fbbf24;"></i> <strong>Pourquoi acheter vos machines via P2I ?</strong><br>✓ Machines garanties et testées<br>✓ Pièces de rechange disponibles localement<br>✓ Rabais sur les prix grâce à nos volumes<br>✓ Fret optimisé et moins cher<br>✓ Assistance technique permanente<br><button class="btn-p2i" onclick="requestGlobalQuote('${currentUp}', '${data.nom}')"><i class="fas fa-paper-plane"></i> Demander un devis pour l'ensemble des équipements</button></div>`,
+    incitation: `<div class="incitation"><p><i class="fas fa-crown"></i> <strong>Version Expert Premium :</strong> Détail technique de chaque machine, planning de maintenance, liste des pièces de rechange, fournisseurs recommandés, schémas d'installation.</p></div>`
+  });
+  
+  stepsList.push({
+    title: "Processus " + (data.type === 'production' ? 'de production' : "d'exécution"),
+    icon: "fas fa-cogs",
+    content: `<ul>${data.processus.map(etape => `<li>${etape}</li>`).join('')}</ul>`,
+    incitation: `<div class="incitation"><p><i class="fas fa-crown"></i> <strong>Version Expert Premium :</strong> Schéma détaillé du processus, optimisation des flux, gestion des goulots d'étranglement, planning détaillé.</p></div>`
+  });
+  
+  stepsList.push({
+    title: "Avantages & Défis",
+    icon: "fas fa-chart-line",
+    content: `<h3 style="color: #4cc9f0;">Avantages & Opportunités</h3><ul>${data.avantages.map(a => `<li>${a}</li>`).join('')}</ul><h3 style="color: #f72585; margin-top: 15px;">Défis à anticiper</h3><ul>${data.challenges.map(c => `<li>${c}</li>`).join('')}</ul>`,
+    incitation: `<div class="incitation"><p><i class="fas fa-crown"></i> <strong>Version Expert Premium :</strong> Analyse SWOT complète, plan d'action personnalisé, stratégies de mitigation.</p></div>`
+  });
+  
+  stepsList.push({
+    title: "Sanitaire & Environnement",
+    icon: "fas fa-leaf",
+    content: `<ul>${data.sanitaires.map(s => `<li>${s}</li>`).join('')}</ul>`,
+    incitation: `<div class="incitation"><p><i class="fas fa-crown"></i> <strong>Version Expert Premium :</strong> Plan HSE complet, procédures détaillées, checklists de contrôle, accompagnement certification.</p></div>`
+  });
+  
+  stepsList.push({
+    title: "Gestion de l'énergie",
+    icon: "fas fa-bolt",
+    content: `<ul>${data.energie.map(e => `<li>${e}</li>`).join('')}</ul>`,
+    incitation: `<div class="incitation"><p><i class="fas fa-crown"></i> <strong>Version Expert Premium :</strong> Audit énergétique complet, solutions sur mesure, calcul du retour sur investissement, subventions disponibles.</p></div>`
+  });
+  
+  stepsList.push({
+    title: "Aménagement spatial",
+    icon: "fas fa-building",
+    content: `<ul>${data.amenagement.map(a => `<li>${a}</li>`).join('')}</ul>`,
+    incitation: `<div class="incitation"><p><i class="fas fa-crown"></i> <strong>Version Expert Premium :</strong> Plans d'atelier 3D, optimisation des flux selon la méthode Lean, recommandations d'équipements de manutention.</p></div>`
+  });
+  
+  stepsList.push({
+    title: "Marketing & Communication",
+    icon: "fas fa-chart-simple",
+    content: `<ul>${data.marketing.map(m => `<li>${m}</li>`).join('')}</ul>`,
+    incitation: `<div class="incitation"><p><i class="fas fa-crown"></i> <strong>Version Expert Premium :</strong> Stratégie marketing complète, branding, étude de marché personnalisée, plan d'acquisition client, packaging design.</p></div>`
+  });
+  
+  stepsList.push({
+    title: "Conseils & Astuces",
+    icon: "fas fa-lightbulb",
+    content: `
+      <ul>
+        <li><strong>💰 Financement :</strong> Préparez un dossier solide avec prévisionnels sur 3 ans</li>
+        <li><strong>🤝 Partenariats :</strong> Identifiez des fournisseurs de confiance et négociez des délais de paiement</li>
+        <li><strong>📊 Suivi :</strong> Mettez en place des indicateurs clés (CA, marge, taux de service)</li>
+        <li><strong>👥 Équipe :</strong> Recrutez des profils complémentaires et formez-les régulièrement</li>
+        <li><strong>📈 Innovation :</strong> Restez à l'affût des nouvelles technologies de votre secteur</li>
+      </ul>
+      <div class="incitation" style="background: rgba(76, 201, 240, 0.15); border-left-color: #4cc9f0; margin-top: 20px;">
+        <p><i class="fas fa-star" style="color: #fbbf24;"></i> <strong>💡 ASTUCE SPÉCIALE : Passez à la vitesse supérieure !</strong></p>
+        <p>Votre Business Plan Pro est la clé pour :</p>
+        <ul style="margin-left: 20px; margin-bottom: 10px;">
+          <li>📊 Obtenir un <strong>score bancable (≥ 76/100)</strong></li>
+          <li>🔓 Débloquer le <strong>Tutoriel Expert Premium</strong></li>
+          <li>🏦 Présenter un <strong>dossier solide aux banques et bailleurs</strong></li>
+        </ul>
+        <button onclick="redirectToBpPro('${currentUp}', '${data.nom}', '${data.filiereNom}')">
+          <i class="fas fa-file-alt"></i> Créer/Améliorer mon BP Pro
+        </button>
+        ${bpStatus.exists && bpStatus.score >= 76 ? `<button onclick="validateBpPro('${currentUp}')" class="btn-validate" style="background: #22c55e; margin-left: 10px;">VALIDER MON BP PRO (${bpStatus.score}/100)</button>` : `<button disabled class="btn-validate" style="background: #94a3b8; margin-left: 10px;">⚠️ Score requis : 76/100 (actuel : ${bpStatus.score}/100)</button>`}
+      </div>
+    `,
+    incitation: `<div class="incitation"><p><i class="fas fa-crown"></i> <strong>Version Expert Premium :</strong> 50+ astuces personnalisées selon votre secteur, templates d'outils de gestion, checklists opérationnelles.</p></div>`
+  });
+  
+  totalSteps = stepsList.length;
+  
+  // Fonction pour obtenir l'URL fixe du BP Pro
+function getBpProFixedUrl(upId) {
+  const urls = {
+    'huiles_alimentaires': 'business-plan-pro.html?unit_id=huiles_alimentaires&unit=Huiles%20alimentaires&filiere=Agro-alimentaire%20%26%20Boissons&mode=preview&intention=tutoriel_expert',
+    'epices': 'business-plan-pro.html?mode=preview&unit_id=epices&unit=Transformation%20d%27%C3%A9pices&filiere=Agro-alimentaire%20%26%20Boissons&intention=tutoriel_expert'
+  };
+  return urls[upId] || `business-plan-pro.html?unit_id=${encodeURIComponent(upId)}&unit=${encodeURIComponent(currentUpData.nom)}&filiere=${encodeURIComponent(currentUpData.filiereNom)}&mode=preview&intention=tutoriel_expert`;
+}
+  
+  let bpBannerHtml = '';
+  if (bpStatus.exists) {
+    bpBannerHtml = `
+      <div class="bp-status-banner">
+        <div class="info">
+          <i class="fas fa-check-circle" style="color: #22c55e; font-size: 1.2rem;"></i>
+          <span><strong>Business Plan Pro détecté</strong></span>
+          <span class="score">${bpStatus.score}/100</span>
+          ${bpStatus.score >= 76 ? '<span class="eligible">✅ Éligible au Tutoriel Expert Premium</span>' : '<span class="not-eligible">⚠️ Score insuffisant (76 requis)</span>'}
+        </div>
+        <a href="${getBpProFixedUrl(currentUp)}" class="btn-bp" style="display: inline-block; text-decoration: none; text-align: center; background: linear-gradient(135deg, #4cc9f0, #f72585); color: white; padding: 10px 24px; border-radius: 10px; font-weight: bold;">Améliorer mon BP Pro</a>
+        ${bpStatus.score >= 76 && !bpStatus.validated ? `<button class="btn-validate" onclick="validateBpPro('${currentUp}')">VALIDER</button>` : ''}
+      </div>
+    `;
+  } else {
+    bpBannerHtml = `
+      <div class="bp-status-banner">
+        <div class="info">
+          <i class="fas fa-info-circle" style="color: #fbbf24; font-size: 1.2rem;"></i>
+          <span><strong>Aucun Business Plan Pro trouvé</strong></span>
+          <span class="not-eligible">Le Tutoriel Expert Premium nécessite un BP Pro (score ≥ 76)</span>
+        </div>
+        <a href="${getBpProFixedUrl(currentUp)}" class="btn-bp" style="display: inline-block; text-decoration: none; text-align: center; background: linear-gradient(135deg, #4cc9f0, #f72585); color: white; padding: 10px 24px; border-radius: 10px; font-weight: bold;">Créer mon BP Pro</a>
+      </div>
+    `;
+  }
+  
+  const headerHtml = `
+    <div class="header">
+      <div class="icon-main"><i class="fas fa-graduation-cap"></i></div>
+      <h1>Tutoriel Découverte</h1>
+      <div class="badge">GRATUIT</div>
+      <div class="up-info">${data.nom}</div>
+      <div class="filiere-info">Filière : ${data.filiereNom}</div>
+    </div>
+    <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+      <button id="saveTutorielBtn" class="btn-save" onclick="saveTutorielToDashboard()"><i class="fas fa-save"></i> Enregistrer ce tutoriel</button>
+    </div>
+    ${bpBannerHtml}
+    <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="progress-stats"><span>📊 Progression : <span id="progressPercent">0</span>%</span><span>✅ Étapes validées : <span id="stepsValidated">0/${totalSteps}</span></span></div>
+    <div id="stepSummary"></div>
+    <div id="stepContent"></div>
+    <div class="nav-buttons"><button class="nav-btn" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Étape précédente</button><button class="nav-btn nav-btn-primary" onclick="nextStep()">Étape suivante <i class="fas fa-arrow-right"></i></button></div>
+    <div class="expert-section">
+      <h3><i class="fas fa-crown"></i> Tutoriel Expert Premium</h3>
+      <p>Version complète avec vidéos, checklists, support personnalisé, analyses financières, scoring IA, plans 3D, stratégie marketing...</p>
+      <div class="expert-price">299 $</div>
+      ${bpStatus.validated ? `<button class="btn-expert" onclick="redirectToPayment('${currentUp}', '${data.nom}')">Débloquer l'Expert Premium (299$)</button>` : `<button class="btn-expert" disabled><i class="fas fa-lock"></i> ${bpStatus.exists ? 'Validez votre BP Pro (score ≥ 76)' : 'Créez votre BP Pro pour débloquer'}</button>`}
+    </div>
+  `;
+  
+  document.getElementById('content').innerHTML = headerHtml;
+  loadChecklistState();
+  renderStepSummary();
+  renderStep(currentStep);
+  updateProgress();
+}
+    
+    function init() {
+  const { upId } = getUrlParams();
+  console.log("🔍 upId reçu:", upId);
+  console.log("📋 productionsData disponible:", Object.keys(productionsData));
+  
+  if (!upId) {
+    document.getElementById('content').innerHTML = `<div class="header"><h1>Unité non spécifiée</h1><button onclick="goBack()" class="btn-back">Retour aux services</button></div>`;
+    return;
+  }
+  currentUp = upId;
+  
+  if (productionsData[upId]) {
+    currentUpData = productionsData[upId];
+    console.log("✅ UP trouvée:", upId);
+    currentStep = 1;
+    renderFullTutoriel();
+  } else {
+    document.getElementById('content').innerHTML = `
+      <div class="header">
+        <h1>Unité non trouvée</h1>
+        <p>ID: ${upId}</p>
+        <p>UP disponibles: ${Object.keys(productionsData).join(', ')}</p>
+        <button onclick="goBack()" class="btn-back">Retour aux services</button>
+      </div>
+    `;
+  }
+}
+    
+    window.goBack = goBack;
+    window.requestQuote = requestQuote;
+    window.requestGlobalQuote = requestGlobalQuote;
+    window.redirectToBpPro = redirectToBpPro;
+    window.validateBpPro = validateBpPro;
+    window.saveTutorielToDashboard = saveTutorielToDashboard;
+    window.prevStep = prevStep;
+    window.nextStep = nextStep;
+    window.goToStep = goToStep;
+    window.toggleChecklistItem = toggleChecklistItem;
+    
+    init();
+  </script>
+</body>
+</html>
