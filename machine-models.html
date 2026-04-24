@@ -323,9 +323,18 @@
     function escapeHtml(str) { if (!str) return ''; return String(str).replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;'); }
     
     function getUrlParams() {
-      const p = new URLSearchParams(window.location.search);
-      return { upId: p.get('up_id') || '', upNom: decodeURIComponent(p.get('up_nom') || ''), filiere: decodeURIComponent(p.get('filiere') || ''), machineId: p.get('machine_id') || '', machineName: decodeURIComponent(p.get('machine_name') || ''), machineRole: decodeURIComponent(p.get('machine_role') || ''), machineCapacity: decodeURIComponent(p.get('machine_capacity') || ''), machineUtilities: decodeURIComponent(p.get('machine_utilities') || '') };
-    }
+  const p = new URLSearchParams(window.location.search);
+  return { 
+    upId: p.get('up_id') || '', 
+    upNom: decodeURIComponent(p.get('up_nom') || ''), 
+    filiere: decodeURIComponent(p.get('filiere') || ''), 
+    machineId: p.get('machine_id') || '', 
+    machineName: decodeURIComponent(p.get('machine_name') || ''), 
+    machineRole: decodeURIComponent(p.get('machine_role') || ''), 
+    machineCapacity: decodeURIComponent(p.get('machine_capacity') || ''), 
+    machineUtilities: decodeURIComponent(p.get('machine_utilities') || '') 
+  };
+}
 
     function displayMachineInfo(params) {
       document.getElementById('upName').textContent = params.upNom || 'Unité inconnue';
@@ -499,12 +508,7 @@
     }
     
     function goBack() {
-  const params = getUrlParams();
-  if (params.upId && params.filiere) {
-    window.location.href = `service-achat-machines.html?preselect_up=${params.upId}&preselect_filiere=${encodeURIComponent(params.filiere)}`;
-  } else {
-    window.location.href = 'service-achat-machines.html';
-  }
+  window.history.back();
 }
 
     function init() {
