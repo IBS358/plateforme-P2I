@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>P2I - Modèles disponibles</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body {
+      background: linear-gradient(135deg, #0b132b 0%, #1b263b 100%);
+      color: white;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #94a3b8;
+      padding: 12px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+    .btn-back:hover {
+      background: rgba(76, 201, 240, 0.2);
+      border-color: #4cc9f0;
+      color: #4cc9f0;
+    }
+    .page-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .page-header h1 {
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, #4cc9f0, #f72585);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+    }
+    .up-info {
+      background: rgba(76, 201, 240, 0.1);
+      border-radius: 16px;
+      padding: 15px 20px;
+      margin-bottom: 30px;
+      text-align: center;
+      border: 1px solid rgba(76, 201, 240, 0.2);
+    }
+    .up-info h3 { color: #4cc9f0; margin-bottom: 5px; }
+    .machine-info {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .machine-specs { flex: 2; }
+    .machine-specs h2 { color: #4cc9f0; font-size: 1.4rem; margin-bottom: 10px; }
+    .machine-specs p { color: #94a3b8; font-size: 0.85rem; margin: 5px 0; }
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+    .model-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .model-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(76, 201, 240, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .model-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #fbbf24;
+      color: #0b132b;
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      z-index: 10;
+    }
+    .model-image {
+      width: 100%;
+      height: 200px;
+      background: #1a2535;
+      overflow: hidden;
+    }
+    .model-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .model-content {
+      padding: 20px;
+    }
+    .model-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; padding-right: 70px; }
+    .model-price { font-size: 1.3rem; color: #22c55e; font-weight: 700; margin: 10px 0; }
+    .model-price small { font-size: 0.8rem; color: #94a3b8; }
+    .rating { display: flex; align-items: center; gap: 5px; margin: 10px 0; }
+    .star { color: #fbbf24; font-size: 0.8rem; }
+    .supplier-info { font-size: 0.7rem; color: #4cc9f0; margin: 8px 0; }
+    .delivery-info { font-size: 0.7rem; color: #fbbf24; margin: 5px 0; }
+    .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 12px 0;
+      padding: 10px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 12px;
+    }
+    .spec-item { font-size: 0.7rem; color: #cbd5e1; }
+    .spec-item span { color: #4cc9f0; font-weight: 600; }
+    .model-actions { display: flex; gap: 8px; margin-top: 15px; flex-wrap: wrap; }
+    .btn-sm {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-quote { background: rgba(76,201,240,0.15); border: 1px solid #4cc9f0; color: #4cc9f0; }
+    .btn-quote:hover { background: #4cc9f0; color: #0b132b; }
+    .btn-cart { background: rgba(247,37,133,0.15); border: 1px solid #f72585; color: #f72585; }
+    .btn-cart:hover { background: #f72585; color: #fff; }
+    .btn-save { background: rgba(34,197,94,0.15); border: 1px solid #22c55e; color: #22c55e; }
+    .btn-save:hover { background: #22c55e; color: #fff; }
+    .cart-badge {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, #4cc9f0, #f72585);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      z-index: 1000;
+      transition: transform 0.2s;
+    }
+    .cart-badge:hover { transform: scale(1.05); }
+    .cart-badge i { font-size: 1.5rem; color: white; }
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #f72585;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: bold;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cart-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1100;
+    }
+    .cart-modal-content {
+      background: #1c2541;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 25px;
+      border: 1px solid rgba(76,201,240,0.3);
+    }
+    .cart-modal-content h3 { color: #4cc9f0; margin-bottom: 15px; }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .cart-item-info { flex: 2; }
+    .cart-item-name { font-size: 0.9rem; font-weight: 600; }
+    .cart-item-price { font-size: 0.8rem; color: #22c55e; }
+    .cart-item-remove { background: none; border: none; color: #f72585; cursor: pointer; font-size: 1rem; padding: 5px; }
+    .cart-total { padding-top: 15px; margin-top: 15px; border-top: 2px solid #4cc9f0; display: flex; justify-content: space-between; font-weight: bold; }
+    .cart-actions { display: flex; gap: 10px; margin-top: 20px; }
+    .btn-cart-action { flex: 1; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; border: none; }
+    .btn-checkout { background: linear-gradient(135deg, #4cc9f0, #f72585); color: white; }
+    .btn-close { background: rgba(255,255,255,0.1); color: white; }
+    .empty-cart { text-align: center; padding: 30px; color: #94a3b8; }
+    @media (max-width: 768px) {
+      .models-grid { grid-template-columns: 1fr; }
+      .machine-info { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button onclick="goBack()" class="btn-back"><i class="fas fa-arrow-left"></i> Retour au catalogue</button>
+
+    <div class="page-header">
+      <h1><i class="fas fa-microchip"></i> Modèles disponibles</h1>
+      <p>Sélectionnez le modèle qui correspond à vos besoins</p>
+    </div>
+
+    <div id="upInfo" class="up-info"><h3 id="upName">—</h3><p id="upFiliere">—</p></div>
+
+    <div id="machineInfo" class="machine-info">
+      <div class="machine-specs">
+        <h2 id="machineName">—</h2>
+        <p id="machineRole">📋 Rôle : —</p>
+        <p id="machineCapacity">⚙️ Capacité : —</p>
+        <p id="machineUtilities">🔌 Utilités : —</p>
+      </div>
+      <div><span style="background: #22c55e; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem;"><i class="fas fa-shield-alt"></i> Garantie P2I</span></div>
+    </div>
+
+    <div id="modelsGrid" class="models-grid"><div style="text-align:center;padding:50px;"><i class="fas fa-spinner fa-spin" style="font-size:2rem;"></i><p>Chargement...</p></div></div>
+
+    <!-- Panier badge flottant -->
+    <div class="cart-badge" id="cartBadge" onclick="openCartModal()">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+    <!-- Modale panier -->
+    <div id="cartModal" class="cart-modal" onclick="if(event.target===this) closeCartModal()">
+      <div class="cart-modal-content">
+        <h3><i class="fas fa-shopping-cart"></i> Mon panier</h3>
+        <div id="cartItemsList" class="cart-items-list"><div class="empty-cart">Aucun article</div></div>
+        <div id="cartTotalDisplay" class="cart-total"><span>Total TTC</span><span>0 $</span></div>
+        <div class="cart-actions">
+          <button class="btn-cart-action btn-checkout" onclick="checkoutCart()"><i class="fas fa-credit-card"></i> Commander</button>
+          <button class="btn-cart-action btn-close" onclick="closeCartModal()">Fermer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Partenaires -->
+    <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 16px; text-align: center;">
+      <p style="color: #94a3b8; margin-bottom: 15px;">Paiement sécurisé via :</p>
+      <div style="display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Alibaba_logo.svg" alt="Alibaba" style="height: 40px; filter: brightness(0) invert(1);">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Made-in-China_logo.svg/2560px-Made-in-China_logo.svg.png" alt="Made-in-China" style="height: 30px; filter: brightness(0) invert(1);">
+        <span style="color: #22c55e;"><i class="fas fa-shield-alt"></i> Trade Assurance</span>
+        <span style="color: #22c55e;"><i class="fas fa-lock"></i> Secure Payment</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==============================================
+    // IMAGES PAR TYPE DE MACHINE
+    // ==============================================
+    const MACHINE_IMAGES = {
+      "petrin": "https://images.pexels.com/photos/851912/pexels-photo-851912.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "diviseuse": "https://images.pexels.com/photos/851918/pexels-photo-851918.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "four": "https://images.pexels.com/photos/851922/pexels-photo-851922.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "default": "https://images.pexels.com/photos/851915/pexels-photo-851915.jpeg?auto=compress&cs=tinysrgb&w=600"
+    };
+
+    const MODELS_DB = {
+      "petrin_spiral": {
+        machine_ref: "petrin_spiral",
+        image_type: "petrin",
+        models: [
+          { id: "petrin_std", name: "Pétrin spiral - Modèle standard", price_ttc: 15000, brand: "Jinfeng Machinery", supplier: "Henan Jinfeng Machinery Co.", supplier_status: "Gold Supplier (8 ans)", rating: 4.5, review_count: 128, specs: { power: "11 kW", capacity: "200 kg/batch", dimensions: "1800x1100x1400 mm", weight: "950 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "12 mois" },
+          { id: "petrin_premium", name: "Pétrin spiral - Modèle premium", price_ttc: 22000, brand: "Jinfeng Machinery", supplier: "Henan Jinfeng Machinery Co.", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 89, specs: { power: "15 kW", capacity: "300 kg/batch", dimensions: "2000x1250x1550 mm", weight: "1200 kg", material: "Acier inoxydable 304" }, delivery: "30-45 jours", warranty: "24 mois" }
+        ]
+      },
+      "diviseuse_bouleuse": {
+        machine_ref: "diviseuse_bouleuse",
+        image_type: "diviseuse",
+        models: [
+          { id: "diviseuse_std", name: "Diviseuse-bouleuse - Standard", price_ttc: 12000, brand: "Sainty Machinery", supplier: "Sainty Co., Ltd", supplier_status: "Verified Supplier", rating: 4.3, review_count: 67, specs: { power: "3 kW", capacity: "1000 pains/h", dimensions: "1500x800x1200 mm", weight: "600 kg", material: "Acier" }, delivery: "45 jours", warranty: "12 mois" },
+          { id: "diviseuse_premium", name: "Diviseuse-bouleuse - Premium", price_ttc: 18000, brand: "Sainty Machinery", supplier: "Sainty Co., Ltd", supplier_status: "Verified Supplier", rating: 4.7, review_count: 112, specs: { power: "5.5 kW", capacity: "2000 pains/h", dimensions: "1800x900x1350 mm", weight: "800 kg", material: "Acier inoxydable" }, delivery: "60 jours", warranty: "24 mois" }
+        ]
+      }
+    };
+
+    let cart = [];
+
+    function escapeHtml(str) { if (!str) return ''; return String(str).replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;'); }
+    
+    function getUrlParams() {
+      const p = new URLSearchParams(window.location.search);
+      return { upId: p.get('up_id') || '', upNom: decodeURIComponent(p.get('up_nom') || ''), filiere: decodeURIComponent(p.get('filiere') || ''), machineId: p.get('machine_id') || '', machineName: decodeURIComponent(p.get('machine_name') || ''), machineRole: decodeURIComponent(p.get('machine_role') || ''), machineCapacity: decodeURIComponent(p.get('machine_capacity') || ''), machineUtilities: decodeURIComponent(p.get('machine_utilities') || '') };
+    }
+
+    function displayMachineInfo(params) {
+      document.getElementById('upName').textContent = params.upNom || 'Unité inconnue';
+      document.getElementById('upFiliere').textContent = `Filière : ${params.filiere || 'Agro-alimentaire & Boissons'}`;
+      document.getElementById('machineName').textContent = params.machineName || 'Machine inconnue';
+      document.getElementById('machineRole').innerHTML = `📋 Rôle : ${escapeHtml(params.machineRole || 'Non spécifié')}`;
+      document.getElementById('machineCapacity').innerHTML = `⚙️ Capacité : ${escapeHtml(params.machineCapacity || '—')}`;
+      document.getElementById('machineUtilities').innerHTML = `🔌 Utilités : ${escapeHtml(params.machineUtilities || '—')}`;
+    }
+
+    function getMachineRefKey(name) {
+      const n = (name || '').toLowerCase();
+      if (n.includes('pétrin') || n.includes('petrin')) return 'petrin_spiral';
+      if (n.includes('diviseuse')) return 'diviseuse_bouleuse';
+      return null;
+    }
+
+    function getMachineImage(machineKey) {
+      const imageType = MODELS_DB[machineKey]?.image_type || 'default';
+      return MACHINE_IMAGES[imageType] || MACHINE_IMAGES.default;
+    }
+
+    function displayModels(params) {
+      const grid = document.getElementById('modelsGrid');
+      const machineKey = getMachineRefKey(params.machineName);
+      if (!machineKey || !MODELS_DB[machineKey]) {
+        grid.innerHTML = '<div style="text-align:center;padding:50px;"><i class="fas fa-search" style="font-size:2rem;"></i><p>Aucun modèle pré-sélectionné.</p></div>';
+        return;
+      }
+      const imageUrl = getMachineImage(machineKey);
+      grid.innerHTML = MODELS_DB[machineKey].models.map(m => `
+        <div class="model-card">
+          <div class="model-badge"><i class="fas fa-star"></i> Sélection P2I</div>
+          <div class="model-image"><img src="${imageUrl}" alt="${escapeHtml(m.name)}" loading="lazy" onerror="this.src='https://images.pexels.com/photos/851915/pexels-photo-851915.jpeg?auto=compress&cs=tinysrgb&w=600'"></div>
+          <div class="model-content">
+            <h3 class="model-name">${escapeHtml(m.name)}</h3>
+            <div class="model-price">${m.price_ttc.toLocaleString()} $ <small>TTC</small></div>
+            <div class="rating">${Array(5).fill().map(() => '<i class="fas fa-star star"></i>').join('')} <span style="color:#94a3b8;">(${m.rating} - ${m.review_count} avis)</span></div>
+            <div class="supplier-info"><i class="fas fa-store"></i> ${escapeHtml(m.supplier)} (${escapeHtml(m.supplier_status)})</div>
+            <div class="specs-grid">
+              <div class="spec-item"><span>⚡ Puissance :</span> ${escapeHtml(m.specs.power)}</div>
+              <div class="spec-item"><span>📦 Capacité :</span> ${escapeHtml(m.specs.capacity)}</div>
+              <div class="spec-item"><span>📐 Dimensions :</span> ${escapeHtml(m.specs.dimensions)}</div>
+              <div class="spec-item"><span>⚖️ Poids :</span> ${escapeHtml(m.specs.weight)}</div>
+              <div class="spec-item"><span>🔩 Matériau :</span> ${escapeHtml(m.specs.material)}</div>
+              <div class="spec-item"><span>🛡️ Garantie :</span> ${escapeHtml(m.warranty)}</div>
+            </div>
+            <div class="delivery-info"><i class="fas fa-truck"></i> Délai : ${escapeHtml(m.delivery)}</div>
+            <div class="model-actions">
+              <button class="btn-sm btn-quote" onclick="requestQuote('${params.upId}', '${escapeHtml(params.upNom)}', '${escapeHtml(params.machineName)}', '${escapeHtml(m.name)}', ${m.price_ttc})"><i class="fas fa-file-invoice"></i> Devis</button>
+              <button class="btn-sm btn-cart" onclick="addToCart('${escapeHtml(m.name)}', ${m.price_ttc})"><i class="fas fa-cart-plus"></i> Panier</button>
+              <button class="btn-sm btn-save" onclick="saveToDashboard('${params.upId}', '${escapeHtml(params.upNom)}', '${escapeHtml(params.machineName)}', '${escapeHtml(m.name)}', ${m.price_ttc})"><i class="fas fa-save"></i> Enregistrer</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function loadCart() { const saved = localStorage.getItem('p2i_machines_cart'); if (saved) try { cart = JSON.parse(saved); } catch(e) { cart = []; } updateCartBadge(); }
+    function saveCart() { localStorage.setItem('p2i_machines_cart', JSON.stringify(cart)); updateCartBadge(); }
+    function updateCartBadge() { document.getElementById('cartCount').textContent = cart.length; }
+    function addToCart(name, price) { cart.push({ name, price, date: new Date().toISOString() }); saveCart(); showToast(`✓ "${name}" ajouté au panier`); renderCartModal(); }
+    function removeFromCart(index) { cart.splice(index, 1); saveCart(); renderCartModal(); showToast("Article retiré du panier"); }
+    
+    function renderCartModal() {
+      const container = document.getElementById('cartItemsList');
+      const totalSpan = document.getElementById('cartTotalDisplay');
+      if (!container) return;
+      if (cart.length === 0) { container.innerHTML = '<div class="empty-cart">Aucun article</div>'; totalSpan.innerHTML = '<span>Total TTC</span><span>0 $</span>'; return; }
+      let total = 0;
+      container.innerHTML = cart.map((item, idx) => { total += item.price; return `<div class="cart-item"><div class="cart-item-info"><div class="cart-item-name">${escapeHtml(item.name)}</div><div class="cart-item-price">${item.price.toLocaleString()} $</div></div><button class="cart-item-remove" onclick="removeFromCart(${idx})"><i class="fas fa-trash"></i></button></div>`; }).join('');
+      totalSpan.innerHTML = `<span>Total TTC</span><span>${total.toLocaleString()} $</span>`;
+    }
+    
+    function openCartModal() { 
+      document.getElementById('cartModal').style.display = 'flex'; 
+      renderCartModal(); 
+    }
+    
+    function closeCartModal() { 
+      document.getElementById('cartModal').style.display = 'none'; 
+    }
+    
+    function checkoutCart() {
+      if (cart.length === 0) {
+        alert('Votre panier est vide.');
+        return;
+      }
+      
+      // Demander à l'utilisateur de choisir sa plateforme
+      const platform = confirm(
+        `🛒 ${cart.length} article(s) dans votre panier.\n\n` +
+        `Choisissez votre plateforme :\n` +
+        `• OK → Alibaba (Trade Assurance)\n` +
+        `• Annuler → Made-in-China (Secure Payment)\n\n` +
+        `Souhaitez-vous continuer ?`
+      );
+      
+      const useAlibaba = platform;
+      const searchTerms = cart.map(item => encodeURIComponent(item.name)).join('+');
+      let url = useAlibaba 
+        ? `https://www.alibaba.com/trade/search?SearchText=${searchTerms}`
+        : `https://fr.made-in-china.com/recherche/recherche.do?word=${searchTerms}`;
+      const platformName = useAlibaba ? 'Alibaba' : 'Made-in-China';
+      const guarantee = useAlibaba ? 'Trade Assurance' : 'Secure Payment';
+      
+      const confirmMsg = `Vous allez être redirigé vers ${platformName} avec ${cart.length} article(s).\n\n` +
+                         `Sur ${platformName}, vous pourrez :\n` +
+                         `✓ Comparer les prix de plusieurs fournisseurs\n` +
+                         `✓ Bénéficier de la protection ${guarantee}\n` +
+                         `✓ Négocier directement avec les vendeurs\n` +
+                         `✓ Finaliser votre achat en toute sécurité\n\n` +
+                         `Souhaitez-vous continuer ?`;
+      
+      if (confirm(confirmMsg)) {
+        window.open(url, '_blank');
+        
+        const email = getActiveEmail();
+        if (email) {
+          const order = {
+            id: 'order_' + Date.now(),
+            date: new Date().toISOString(),
+            items: [...cart],
+            platform: platformName,
+            status: 'redirected_to_' + platformName.toLowerCase(),
+            search_url: url
+          };
+          let orders = JSON.parse(localStorage.getItem(`p2i_orders_${email}`) || '[]');
+          orders.push(order);
+          localStorage.setItem(`p2i_orders_${email}`, JSON.stringify(orders));
+        }
+        
+        const cartCount = cart.length;
+        cart = [];
+        saveCart();
+        updateCartBadge();
+        renderCartModal();
+        closeCartModal();
+        showToast(`✓ Redirection vers ${platformName} avec ${cartCount} article(s)`);
+      }
+    }
+
+    function getActiveEmail() { return localStorage.getItem('p2i_user_email') || localStorage.getItem('p2i_active_user') || ''; }
+    
+    function showToast(msg) {
+      let t = document.getElementById('toast');
+      if (!t) { t = document.createElement('div'); t.id = 'toast'; t.style.cssText = 'position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#0f172a; color:white; padding:10px 20px; border-radius:50px; z-index:1100; font-size:0.85rem;'; document.body.appendChild(t); }
+      t.textContent = msg; t.style.opacity = '1'; setTimeout(() => t.style.opacity = '0', 3000);
+    }
+    
+    function requestQuote(upId, upNom, machineName, modelName, price) {
+      const email = getActiveEmail();
+      if (!email) { alert('Veuillez vous connecter.'); window.location.href = 'login.html?mode=login'; return; }
+      const quote = { id: 'quote_' + Date.now(), date: new Date().toISOString(), up_id: upId, up_nom: upNom, machine: machineName, model: modelName, price, status: 'pending' };
+      let quotes = JSON.parse(localStorage.getItem(`p2i_quotes_${email}`) || '[]');
+      quotes.push(quote);
+      localStorage.setItem(`p2i_quotes_${email}`, JSON.stringify(quotes));
+      showToast(`✅ Devis demandé pour "${modelName}"`);
+    }
+    
+    function saveToDashboard(upId, upNom, machineName, modelName, price) {
+      const email = getActiveEmail();
+      if (!email) { alert('Veuillez vous connecter.'); window.location.href = 'login.html?mode=login'; return; }
+      const savedKey = `p2i_saved_machines__${email}`;
+      let saved = JSON.parse(localStorage.getItem(savedKey) || '[]');
+      if (!saved.some(m => m.model === modelName)) {
+        saved.push({ up_id: upId, up_nom: upNom, machine: machineName, model: modelName, price, saved_at: new Date().toISOString() });
+        localStorage.setItem(savedKey, JSON.stringify(saved));
+        showToast(`✅ "${modelName}" enregistré dans le Dashboard`);
+      } else showToast(`ℹ️ "${modelName}" déjà enregistré`);
+    }
+    
+    function goBack() {
+  const params = getUrlParams();
+  if (params.upId && params.filiere) {
+    window.location.href = `service-achat-machines.html?preselect_up=${params.upId}&preselect_filiere=${encodeURIComponent(params.filiere)}`;
+  } else {
+    window.location.href = 'service-achat-machines.html';
+  }
+}
+
+    function init() {
+      const params = getUrlParams();
+      displayMachineInfo(params);
+      displayModels(params);
+      loadCart();
+      window.addToCart = addToCart; window.removeFromCart = removeFromCart; window.requestQuote = requestQuote; window.saveToDashboard = saveToDashboard; window.checkoutCart = checkoutCart; window.goBack = goBack; window.openCartModal = openCartModal; window.closeCartModal = closeCartModal;
+    }
+    init();
+  </script>
+</body>
+</html>
