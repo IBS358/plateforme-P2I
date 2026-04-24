@@ -671,73 +671,73 @@
 
       <!-- SECTION SERVICES (NOUVEAU DESIGN) -->
       <div class="section-box dashboard-section" id="mes-services">
-        <div class="section-header">
-          <h2>Mes Services</h2>
-        </div>
-        <div class="services-catalog">
-          
-          <!-- 1. Tutoriel IA Personnalisé -->
-          <div class="service-card-modern" data-service="tutoriel" onclick="handleCardClick(event, 'tutoriel')">
-            <div class="service-icon"><i class="fas fa-robot"></i></div>
-            <h3>Tutoriel IA Personnalisé</h3>
-            <p class="service-desc">Formation adaptée à votre unité de production</p>
-            <div class="service-rating">
-              <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-              <span class="review-count">(203 avis)</span>
-            </div>
-            <div class="service-actions">
-              <button class="btn-outline" onclick="event.stopPropagation(); discoverService('tutoriel')"><i class="fas fa-info-circle"></i> Découvrir</button>
-              <button class="btn-secondary" onclick="event.stopPropagation(); addServiceToCart('tutoriel', 'Tutoriel IA Personnalisé')"><i class="fas fa-cart-plus"></i> Ajouter</button>
-            </div>
-          </div>
-
-          <!-- 2. Achat de Machines via P2I -->
-          <div class="service-card-modern" data-service="machines" onclick="handleCardClick(event, 'machines')">
-            <div class="service-icon"><i class="fas fa-cogs"></i></div>
-            <h3>Achat de Machines via P2I</h3>
-            <p class="service-desc">Sourcing, négociation, garantie, pièces de rechange</p>
-            <div class="service-rating">
-              <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-              <span class="review-count">(67 avis)</span>
-            </div>
-            <div class="service-actions">
-              <button class="btn-outline" onclick="event.stopPropagation(); discoverService('machines')"><i class="fas fa-info-circle"></i> Découvrir</button>
-              <button class="btn-secondary" onclick="event.stopPropagation(); requestMachineService()"><i class="fas fa-paper-plane"></i> Demander</button>
-            </div>
-          </div>
-
-          <!-- 3. Accompagnement Comptable -->
-          <div class="service-card-modern" data-service="comptable" onclick="handleCardClick(event, 'comptable')">
-            <div class="service-icon"><i class="fas fa-file-invoice-dollar"></i></div>
-            <h3>Accompagnement Comptable</h3>
-            <p class="service-desc">Mise en place et suivi de votre comptabilité</p>
-            <div class="service-rating">
-              <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-              <span class="review-count">(124 avis)</span>
-            </div>
-            <div class="service-actions">
-              <button class="btn-outline" onclick="event.stopPropagation(); discoverService('comptable')"><i class="fas fa-info-circle"></i> Découvrir</button>
-              <button class="btn-secondary" onclick="event.stopPropagation(); addServiceToCart('comptable', 'Accompagnement Comptable')"><i class="fas fa-cart-plus"></i> Ajouter</button>
-            </div>
-          </div>
-
-          <!-- 4. Audit Technique -->
-          <div class="service-card-modern" data-service="audit" onclick="handleCardClick(event, 'audit')">
-            <div class="service-icon"><i class="fas fa-clipboard-check"></i></div>
-            <h3>Audit Technique</h3>
-            <p class="service-desc">Vérification complète avant installation</p>
-            <div class="service-rating">
-              <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-              <span class="review-count">(89 avis)</span>
-            </div>
-            <div class="service-actions">
-              <button class="btn-outline" onclick="event.stopPropagation(); discoverService('audit')"><i class="fas fa-info-circle"></i> Découvrir</button>
-              <button class="btn-secondary" onclick="event.stopPropagation(); addServiceToCart('audit', 'Audit Technique')"><i class="fas fa-cart-plus"></i> Ajouter</button>
-            </div>
-          </div>
-
-        </div>
+  <div class="section-header">
+    <h2>Mes Services</h2>
+  </div>
+  <div class="services-catalog">
+    
+    <!-- 1. Tutoriel IA Personnalisé -->
+    <div class="service-card-modern" data-service="tutoriel" onclick="window.location.href='service-detail.html?id=tutoriel'">
+      <div class="service-icon"><i class="fas fa-robot"></i></div>
+      <h3>Tutoriel IA Personnalisé</h3>
+      <p class="service-desc">Formation adaptée à votre unité de production</p>
+      <div class="service-rating">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <span class="review-count">(203 avis)</span>
       </div>
+      <div class="service-actions">
+        <button class="btn-outline" onclick="event.stopPropagation(); window.location.href='service-detail.html?id=tutoriel'"><i class="fas fa-info-circle"></i> Découvrir</button>
+        <button class="btn-secondary" onclick="event.stopPropagation(); addServiceToCart('tutoriel', 'Tutoriel IA Personnalisé')"><i class="fas fa-cart-plus"></i> Ajouter</button>
+      </div>
+    </div>
+
+    <!-- 2. Achat de Machines via P2I -->
+    <div class="service-card-modern" data-service="machines" onclick="window.location.href='service-achat-machines.html'">
+      <div class="service-icon"><i class="fas fa-cogs"></i></div>
+      <h3>Achat de Machines via P2I</h3>
+      <p class="service-desc">Sourcing, négociation, garantie, pièces de rechange</p>
+      <div class="service-rating">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <span class="review-count">(67 avis)</span>
+      </div>
+      <div class="service-actions">
+        <button class="btn-outline" onclick="event.stopPropagation(); window.location.href='service-achat-machines.html'"><i class="fas fa-info-circle"></i> Découvrir</button>
+        <button class="btn-secondary" onclick="event.stopPropagation(); requestMachineService()"><i class="fas fa-paper-plane"></i> Demander</button>
+      </div>
+    </div>
+
+    <!-- 3. Accompagnement Comptable -->
+    <div class="service-card-modern" data-service="comptable" onclick="window.location.href='service-comptable.html'">
+      <div class="service-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+      <h3>Accompagnement Comptable</h3>
+      <p class="service-desc">Mise en place et suivi de votre comptabilité</p>
+      <div class="service-rating">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <span class="review-count">(124 avis)</span>
+      </div>
+      <div class="service-actions">
+        <button class="btn-outline" onclick="event.stopPropagation(); window.location.href='service-comptable.html'"><i class="fas fa-info-circle"></i> Découvrir</button>
+        <button class="btn-secondary" onclick="event.stopPropagation(); addServiceToCart('comptable', 'Accompagnement Comptable')"><i class="fas fa-cart-plus"></i> Ajouter</button>
+      </div>
+    </div>
+
+    <!-- 4. Audit Technique -->
+    <div class="service-card-modern" data-service="audit" onclick="window.location.href='service-audit.html'">
+      <div class="service-icon"><i class="fas fa-clipboard-check"></i></div>
+      <h3>Audit Technique</h3>
+      <p class="service-desc">Vérification complète avant installation</p>
+      <div class="service-rating">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <span class="review-count">(89 avis)</span>
+      </div>
+      <div class="service-actions">
+        <button class="btn-outline" onclick="event.stopPropagation(); window.location.href='service-audit.html'"><i class="fas fa-info-circle"></i> Découvrir</button>
+        <button class="btn-secondary" onclick="event.stopPropagation(); addServiceToCart('audit', 'Audit Technique')"><i class="fas fa-cart-plus"></i> Ajouter</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
       <!-- SECTION RESEAU -->
       <div class="section-box dashboard-section" id="mon-reseau">
