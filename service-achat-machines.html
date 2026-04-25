@@ -332,15 +332,19 @@
     La P2I est fière de collaborer avec les plus grandes plateformes de sourcing industriel mondial.
   </p>
   <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
-    <div style="text-align: center;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Alibaba_logo.svg" alt="Alibaba" style="height: 60px; filter: brightness(0) invert(1);">
-      <p style="color: #4cc9f0; margin-top: 10px; font-size: 0.8rem;">Premium Partner</p>
-    </div>
-    <div style="text-align: center;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Made-in-China_logo.svg/2560px-Made-in-China_logo.svg.png" alt="Made-in-China" style="height: 50px; filter: brightness(0) invert(1);">
-      <p style="color: #4cc9f0; margin-top: 10px; font-size: 0.8rem;">Verified Partner</p>
-    </div>
+  <div style="text-align: center;">
+    <i class="fas fa-shopping-cart" style="font-size: 3rem; color: #4cc9f0;"></i>
+    <p style="color: #4cc9f0; margin-top: 10px; font-size: 0.8rem;">Alibaba</p>
   </div>
+  <div style="text-align: center;">
+    <i class="fas fa-industry" style="font-size: 3rem; color: #4cc9f0;"></i>
+    <p style="color: #4cc9f0; margin-top: 10px; font-size: 0.8rem;">Made-in-China</p>
+  </div>
+  <div style="text-align: center;">
+    <i class="fas fa-shield-alt" style="font-size: 3rem; color: #22c55e;"></i>
+    <p style="color: #22c55e; margin-top: 10px; font-size: 0.8rem;">Garantie P2I</p>
+  </div>
+</div>
 </div>
     <div class="card">
   <h2><i class="fas fa-chart-line"></i> Comment ça marche ?</h2>
@@ -559,36 +563,61 @@ function preselectFromUrl() {
   const upId = params.get('preselect_up');
   const filiere = params.get('preselect_filiere');
   
-  if (filiere) {
-    const filiereSelect = document.getElementById('filiereSelect');
-    for (let i = 0; i < filiereSelect.options.length; i++) {
-      if (filiereSelect.options[i].value === filiere) {
-        filiereSelect.value = filiere;
-        updateUnitesList();
-        break;
-      }
-    }
-  }
+  console.log("🔍 preselectFromUrl - upId:", upId, "filiere:", filiere);
   
-  if (upId) {
-    setTimeout(() => {
-      const upSelect = document.getElementById('upSelect');
-      for (let i = 0; i < upSelect.options.length; i++) {
-        if (upSelect.options[i].value === upId) {
-          upSelect.value = upId;
-          loadMachines();
-          break;
+  if (!upId && !filiere) return;
+  
+  // Attendre que les listes soient chargées
+  const waitForLists = setInterval(() => {
+    const filiereSelect = document.getElementById('filiereSelect');
+    const upSelect = document.getElementById('upSelect');
+    
+    if (filiereSelect && filiereSelect.options.length > 1 && upSelect) {
+      clearInterval(waitForLists);
+      
+      // Sélectionner la filière
+      if (filiere) {
+        for (let i = 0; i < filiereSelect.options.length; i++) {
+          if (filiereSelect.options[i].value === filiere) {
+            filiereSelect.value = filiere;
+            updateUnitesList();
+            break;
+          }
         }
       }
-    }, 500);
-  }
+      
+      // Sélectionner l'UP après un court délai
+      setTimeout(() => {
+        if (upId) {
+          for (let i = 0; i < upSelect.options.length; i++) {
+            if (upSelect.options[i].value === upId) {
+              upSelect.value = upId;
+              loadMachines();
+              break;
+            }
+          }
+        }
+      }, 300);
+    }
+  }, 200);
+}
+function waitForMachinesData() {
+  return new Promise((resolve) => {
+    const checkInterval = setInterval(() => {
+      if (Object.keys(machinesData).length > 0) {
+        clearInterval(checkInterval);
+        resolve();
+      }
+    }, 100);
+  });
 }
     
-    function init() {
+    async function init() {
   if (!loadMachinesData()) return;
+  await waitForMachinesData();
   buildFilieresList();
   populateFiliereSelect();
-  preselectFromUrl();  // ← AJOUTE CETTE LIGNE
+  preselectFromUrl();
   
   window.updateUnitesList = updateUnitesList;
   window.loadMachines = loadMachines;
