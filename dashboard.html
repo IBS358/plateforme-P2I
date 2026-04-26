@@ -497,6 +497,40 @@
     text-align: center;
   }
 }
+/* Uniformisation des sections Devis et Machines */
+#mes-devis .project-table th,
+#mes-devis .project-table td,
+#mes-machines .project-table th,
+#mes-machines .project-table td {
+  white-space: normal;
+  word-break: break-word;
+  padding: 10px 8px;
+  vertical-align: middle;
+}
+
+#mes-devis .project-table th:last-child,
+#mes-devis .project-table td:last-child,
+#mes-machines .project-table th:last-child,
+#mes-machines .project-table td:last-child {
+  white-space: nowrap;
+  text-align: left;
+}
+
+#mes-devis .btn-view,
+#mes-machines .btn-view {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  #mes-devis .project-table,
+  #mes-machines .project-table {
+    min-width: 500px;
+  }
+}
+
   </style>
 </head>
 
@@ -512,7 +546,10 @@
       <li><a href="#mes-services" class="nav-section-link"><i class="fas fa-tools"></i> Mes Services</a></li>
       <li><a href="#mon-reseau" class="nav-section-link"><i class="fas fa-briefcase"></i> Mon Réseau / Emploi</a></li>
       <li><a href="#mes-ressources" class="nav-section-link"><i class="fas fa-graduation-cap"></i> Mes Tutoriels & Ressources</a></li>
+<li><a href="#mes-devis" class="nav-section-link"><i class="fas fa-file-invoice"></i> Mes devis</a></li>
+<li><a href="#mes-machines" class="nav-section-link"><i class="fas fa-microchip"></i> Mes machines</a></li>
     </ul>
+
 
     <div class="sidebar-footer">
       <a href="index.html" class="btn-nav-footer btn-home">
@@ -744,6 +781,55 @@
         <div class="section-header"><h2>Mon Réseau / Emploi</h2></div>
         <p style="color: var(--text-dim);">Aucun élément disponible pour le moment.</p>
       </div>
+<!-- SECTION MES DEVIS -->
+<div class="section-box dashboard-section" id="mes-devis">
+  <div class="section-header">
+    <h2><i class="fas fa-file-invoice"></i> Mes devis</h2>
+    <button class="btn-new" onclick="window.location.href='service-achat-machines.html'">
+      <i class="fas fa-plus"></i> Nouvelle demande
+    </button>
+  </div>
+  <div class="table-wrap" style="overflow-x: auto;">
+    <table class="project-table" style="min-width: 650px;">
+      <thead>
+        <tr>
+          <th style="width: 30%;">Machine / Modèle</th>
+          <th style="width: 25%;">UP associée</th>
+          <th style="width: 20%;">Date</th>
+          <th style="width: 15%;">Statut</th>
+          <th style="width: 10%;">Action</th>
+        </tr>
+      </thead>
+      <tbody id="devisList">
+        <tr><td colspan="5" style="text-align:center; color:#94a3b8;">Chargement...</td</tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- SECTION MES MACHINES -->
+<div class="section-box dashboard-section" id="mes-machines">
+  <div class="section-header">
+    <h2><i class="fas fa-microchip"></i> Mes machines enregistrées</h2>
+    <button class="btn-new" onclick="window.location.href='service-achat-machines.html'">
+      <i class="fas fa-plus"></i> Explorer le catalogue
+    </button>
+  </div>
+  <div class="table-wrap" style="overflow-x: auto;">
+    <table class="project-table" style="min-width: 600px;">
+      <thead>
+        <tr>
+          <th style="width: 35%;">Machine / Modèle</th>
+          <th style="width: 35%;">UP associée</th>
+          <th style="width: 20%;">Date</th>
+          <th style="width: 10%;">Action</th>
+        </tr>
+      </thead>
+      <tbody id="machinesList">
+        <tr><td colspan="4" style="text-align:center; color:#94a3b8;">Chargement...</td</tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
       <div class="section-box dashboard-section" id="mes-ressources">
   <div class="section-header">
@@ -1064,12 +1150,14 @@
 }
     
     function refreshDashboard() {
-      renderBusinessPlans();
-      renderSimulations();
-      renderProfileSection();
-      renderTutoriels();  // ← NOUVEAU
-      updateBpCounter();
-    }
+  renderBusinessPlans();
+  renderSimulations();
+  renderProfileSection();
+  renderTutoriels();
+  loadDevis();           // ← AJOUTE
+  loadSavedMachines();   // ← AJOUTE
+  updateBpCounter();
+}
     
     function hydrateDashboardFromEmail(email, role = "USER") {
       const profile = getStoredProfile();
@@ -1578,6 +1666,125 @@ function deleteSimulation(simId, simNom, source) {
 // ==============================================
 
 // Ta fonction deleteTutoriel existante reste ici, inchangée
+// ==============================================
+// MES DEVIS
+// ==============================================
+
+function loadDevis() {
+  const email = getActiveEmail();
+  if (!email) return;
+  
+  const quotes = JSON.parse(localStorage.getItem(`p2i_quotes_${email}`) || '[]');
+  const tbody = document.getElementById('devisList');
+  
+  if (!tbody) return;
+  
+  if (quotes.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#94a3b8;">Aucun devis demandé</td></tr>';
+    return;
+  }
+  
+  quotes.sort((a, b) => new Date(b.date) - new Date(a.date));
+  
+  tbody.innerHTML = quotes.map(quote => `
+    <tr>
+      <td><strong>${escapeHtml(quote.model || quote.machine)}</strong></td>
+      <td>${escapeHtml(quote.up_nom || '—')}</td>
+      <td>${formatDateFR(quote.date)}</td>
+      <td><span class="status-badge status-${quote.status}">${getStatusLabel(quote.status)}</span></td>
+      <td style="white-space: nowrap;">
+        <a class="btn-view" href="#" onclick="viewDevis('${quote.id}'); return false;">Voir</a>
+        <a class="btn-view" href="#" onclick="deleteDevis('${quote.id}'); return false;" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.3); color:#f87171;">Supprimer</a>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function getStatusLabel(status) {
+  const labels = {
+    'pending': '⏳ Attente',
+    'received': '📩 Reçu',
+    'accepted': '✅ Accepté',
+    'ordered': '📦 Commandé'
+  };
+  return labels[status] || '📝 En cours';
+}
+
+function viewDevis(quoteId) {
+  window.location.href = `devis-detail.html?id=${quoteId}`;
+}
+
+function deleteDevis(quoteId) {
+  if (!confirm('Supprimer ce devis ?')) return;
+  const email = getActiveEmail();
+  if (!email) return;
+  let quotes = JSON.parse(localStorage.getItem(`p2i_quotes_${email}`) || '[]');
+  quotes = quotes.filter(q => q.id !== quoteId);
+  localStorage.setItem(`p2i_quotes_${email}`, JSON.stringify(quotes));
+  loadDevis();
+  showToastMessage('Devis supprimé');
+}
+
+// ==============================================
+// MES MACHINES ENREGISTRÉES
+// ==============================================
+
+function loadSavedMachines() {
+  const email = getActiveEmail();
+  if (!email) return;
+  
+  const saved = JSON.parse(localStorage.getItem(`p2i_saved_machines__${email}`) || '[]');
+  const tbody = document.getElementById('machinesList');
+  
+  if (!tbody) return;
+  
+  if (saved.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#94a3b8;">Aucune machine enregistrée</td></tr>';
+    return;
+  }
+  
+  saved.sort((a, b) => new Date(b.saved_at) - new Date(a.saved_at));
+  
+  tbody.innerHTML = saved.map(item => `
+    <tr>
+      <td><strong>${escapeHtml(item.model || item.machine)}</strong></td>
+      <td>${escapeHtml(item.up_nom || '—')}</td>
+      <td>${formatDateFR(item.saved_at)}</td>
+      <td style="white-space: nowrap;">
+        <a class="btn-view" href="#" onclick="viewSavedMachine('${item.up_id}', '${escapeHtml(item.model || item.machine)}'); return false;">Voir</a>
+        <a class="btn-view" href="#" onclick="deleteSavedMachine('${item.up_id}', '${escapeHtml(item.model || item.machine)}'); return false;" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.3); color:#f87171;">Supprimer</a>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function viewSavedMachine(upId, modelName) {
+  window.location.href = `machine-models.html?up_id=${upId}&up_nom=&machine_name=${encodeURIComponent(modelName)}`;
+}
+
+function deleteSavedMachine(upId, modelName) {
+  if (!confirm(`Supprimer "${modelName}" des machines enregistrées ?`)) return;
+  const email = getActiveEmail();
+  if (!email) return;
+  let saved = JSON.parse(localStorage.getItem(`p2i_saved_machines__${email}`) || '[]');
+  saved = saved.filter(item => !(item.up_id === upId && (item.model === modelName || item.machine === modelName)));
+  localStorage.setItem(`p2i_saved_machines__${email}`, JSON.stringify(saved));
+  loadSavedMachines();
+  showToastMessage('Machine supprimée');
+}
+
+function showToastMessage(message) {
+  let toast = document.getElementById('toast-message');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast-message';
+    toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#4cc9f0; color:#0b132b; padding:12px 24px; border-radius:50px; z-index:9999; font-weight:bold;';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.style.opacity = '1';
+  setTimeout(() => { toast.style.opacity = '0'; }, 3000);
+}
   </script>
 </body>
 </html>
