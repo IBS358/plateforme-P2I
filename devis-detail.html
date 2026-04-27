@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P2I - Devis professionnel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #0b132b 0%, #1b263b 100%);
+      color: white;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #94a3b8;
+      padding: 12px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+    .btn-back:hover {
+      background: rgba(76, 201, 240, 0.2);
+      border-color: #4cc9f0;
+      color: #4cc9f0;
+    }
+    .btn-pdf {
+      background: linear-gradient(135deg, #4cc9f0, #f72585);
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 15px;
+    }
+    .devis-container {
+      background: white;
+      color: #1e293b;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .devis-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .logo-section h1 {
+      color: #0b132b;
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+    .logo-section p {
+      color: #64748b;
+      font-size: 0.8rem;
+    }
+    .devis-number {
+      text-align: right;
+    }
+    .devis-number h3 {
+      color: #4cc9f0;
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    .devis-number p {
+      color: #64748b;
+      font-size: 0.8rem;
+    }
+    .parties {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 12px;
+    }
+    .partie h4 {
+      color: #4cc9f0;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+    .partie p {
+      color: #1e293b;
+      font-size: 0.9rem;
+      margin: 5px 0;
+    }
+    .info-machine {
+      background: #f1f5f9;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    .info-machine h3 {
+      color: #0b132b;
+      margin-bottom: 15px;
+    }
+    .machine-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .machine-detail-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .machine-detail-item .label {
+      font-weight: 600;
+      color: #64748b;
+    }
+    .machine-detail-item .value {
+      color: #1e293b;
+    }
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    .specs-table td {
+      padding: 8px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .specs-table td:first-child {
+      font-weight: 600;
+      color: #64748b;
+      width: 40%;
+    }
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    .price-table th, .price-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .price-table th {
+      background: #f1f5f9;
+      font-weight: 600;
+    }
+    .price-table .total-row {
+      font-weight: bold;
+      background: #f8fafc;
+    }
+    .conditions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin: 30px 0;
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 12px;
+    }
+    .condition-item h4 {
+      color: #4cc9f0;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+    }
+    .condition-item p {
+      color: #1e293b;
+      font-size: 0.85rem;
+    }
+    .footer-devis {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #e2e8f0;
+      text-align: center;
+    }
+    .signature {
+      margin-top: 30px;
+      padding: 20px;
+      text-align: right;
+      border-top: 1px dashed #cbd5e1;
+    }
+    .legal {
+      margin-top: 20px;
+      font-size: 0.7rem;
+      color: #94a3b8;
+      text-align: center;
+    }
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+        margin: 0;
+      }
+      .btn-back, .btn-pdf {
+        display: none;
+      }
+      .devis-container {
+        box-shadow: none;
+        padding: 20px;
+      }
+    }
+    @media (max-width: 768px) {
+      .devis-container { padding: 20px; }
+      .parties { grid-template-columns: 1fr; }
+      .machine-details { grid-template-columns: 1fr; }
+      .conditions { grid-template-columns: 1fr; }
+      .devis-header { flex-direction: column; gap: 15px; }
+      .devis-number { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+      <button onclick="goBack()" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Retour au Dashboard
+      </button>
+      <button onclick="printDevis()" class="btn-pdf">
+        <i class="fas fa-print"></i> Exporter en PDF / Imprimer
+      </button>
+    </div>
+
+    <div id="devisContent" class="devis-container">
+      <!-- Contenu généré par JavaScript -->
+      <div style="text-align: center; padding: 50px;">
+        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #4cc9f0;"></i>
+        <p>Chargement du devis...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function getUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        quoteId: params.get('id'),
+        upId: params.get('up_id'),
+        upNom: decodeURIComponent(params.get('up_nom') || ''),
+        machineName: decodeURIComponent(params.get('machine_name') || ''),
+        modelName: decodeURIComponent(params.get('model_name') || ''),
+        price: params.get('price')
+      };
+    }
+
+    function getActiveEmail() {
+      return localStorage.getItem('p2i_user_email') || localStorage.getItem('p2i_active_user') || '';
+    }
+
+    function getQuoteData(quoteId) {
+      const email = getActiveEmail();
+      if (!email) return null;
+      
+      const quotes = JSON.parse(localStorage.getItem(`p2i_quotes_${email}`) || '[]');
+      return quotes.find(q => q.id === quoteId);
+    }
+
+    function getMachineSpecs(machineName, modelName) {
+      const specsDB = {
+        'Pétrin spiral': {
+          brand: 'Jinfeng Machinery',
+          power: '11-15 kW',
+          capacity: '200-300 kg/batch',
+          dimensions: '1800x1100x1400 mm / 2000x1250x1550 mm',
+          weight: '950-1200 kg',
+          material: 'Acier inoxydable 304'
+        },
+        'Diviseuse-bouleuse': {
+          brand: 'Sainty Machinery',
+          power: '3-5.5 kW',
+          capacity: '1000-2000 pains/h',
+          dimensions: '1500x800x1200 mm / 1800x900x1350 mm',
+          weight: '600-800 kg',
+          material: 'Acier / Acier inoxydable'
+        },
+        'Four rotatif': {
+          brand: 'Doyon',
+          power: '45-65 kW',
+          capacity: '500-800 pains/batch',
+          dimensions: '2200x1800x2000 mm / 2600x2000x2200 mm',
+          weight: '2500-3200 kg',
+          material: 'Acier inoxydable'
+        }
+      };
+      
+      for (const [key, specs] of Object.entries(specsDB)) {
+        if (machineName.includes(key)) return specs;
+      }
+      return {
+        brand: 'Fournisseur certifié P2I',
+        power: 'Consultable sur demande',
+        capacity: 'Consultable sur demande',
+        dimensions: 'Consultable sur demande',
+        weight: 'Consultable sur demande',
+        material: 'Acier industriel'
+      };
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '—';
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function generateDevisNumber() {
+      const year = new Date().getFullYear();
+      const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+      return `DEV-${year}-${random}`;
+    }
+
+    function renderDevis() {
+      const params = getUrlParams();
+      let quote = null;
+      
+      if (params.quoteId) {
+        quote = getQuoteData(params.quoteId);
+      }
+      
+      const upNom = quote?.up_nom || params.upNom || 'Unité industrielle';
+      const machineName = quote?.machine || params.machineName || 'Machine';
+      const modelName = quote?.model || params.modelName || 'Modèle standard';
+      const price = quote?.price || parseInt(params.price) || 0;
+      const date = quote?.date || new Date().toISOString();
+      const devisNumber = generateDevisNumber();
+      const validUntil = new Date();
+      validUntil.setDate(validUntil.getDate() + 30);
+      
+      const specs = getMachineSpecs(machineName, modelName);
+      
+      const html = `
+        <div class="devis-header">
+          <div class="logo-section">
+            <h1>P2I</h1>
+            <p>Plateforme Industrielle Guinéenne</p>
+            <p style="margin-top: 10px;">📍 Conakry, Guinée<br>📞 +224 000 000 000<br>✉ contact@p2i.com</p>
+          </div>
+          <div class="devis-number">
+            <h3>DEVIS N° ${devisNumber}</h3>
+            <p>Date : ${formatDate(date)}</p>
+            <p>Validité : ${validUntil.toLocaleDateString('fr-FR')}</p>
+          </div>
+        </div>
+
+        <div class="parties">
+          <div class="partie">
+            <h4>Émetteur</h4>
+            <p><strong>P2I - Plateforme Industrielle Guinéenne</strong></p>
+            <p>RCCM : GC-KAL-2024-00123</p>
+            <p>NIF : 1234567890</p>
+            <p>Capital social : 100 000 000 GNF</p>
+          </div>
+          <div class="partie">
+            <h4>Destinataire</h4>
+            <p><strong>${getActiveEmail() || 'Client P2I'}</strong></p>
+            <p>Email : ${getActiveEmail() || 'Non renseigné'}</p>
+          </div>
+        </div>
+
+        <div class="info-machine">
+          <h3>📦 Machine concernée</h3>
+          <div class="machine-details">
+            <div class="machine-detail-item"><span class="label">UP associée :</span><span class="value">${upNom}</span></div>
+            <div class="machine-detail-item"><span class="label">Machine :</span><span class="value">${machineName}</span></div>
+            <div class="machine-detail-item"><span class="label">Modèle :</span><span class="value">${modelName}</span></div>
+            <div class="machine-detail-item"><span class="label">Marque :</span><span class="value">${specs.brand}</span></div>
+          </div>
+        </div>
+
+        <div class="info-machine">
+          <h3>⚙️ Caractéristiques techniques</h3>
+          <table class="specs-table">
+            <tr><td>Puissance installée</td><td>${specs.power}</td></tr>
+            <tr><td>Capacité de production</td><td>${specs.capacity}</td></tr>
+            <tr><td>Dimensions (Lxlxh)</td><td>${specs.dimensions}</td></tr>
+            <tr><td>Poids</td><td>${specs.weight}</td></tr>
+            <tr><td>Matériau</td><td>${specs.material}</td></tr>
+          </table>
+        </div>
+
+        <div class="info-machine">
+          <h3>💰 Conditions tarifaires</h3>
+          <table class="price-table">
+            <thead><tr><th>Désignation</th><th>Quantité</th><th>Prix unitaire TTC</th><th>Total TTC</th></tr></thead>
+            <tbody>
+              <tr><td>${modelName}</td><td>1</td><td>${price.toLocaleString()} USD</td><td>${price.toLocaleString()} USD</td></tr>
+              <tr class="total-row"><td colspan="3" style="text-align:right; font-weight:bold;">TOTAL TTC</td><td style="font-weight:bold;">${price.toLocaleString()} USD</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="conditions">
+          <div class="condition-item">
+            <h4><i class="fas fa-truck"></i> Livraison</h4>
+            <p>Délai : 45-60 jours après confirmation<br>Incoterm : FOB Shanghai<br>Fret maritime à la charge de l'acheteur</p>
+          </div>
+          <div class="condition-item">
+            <h4><i class="fas fa-credit-card"></i> Paiement</h4>
+            <p>30% à la commande<br>70% avant expédition<br>Paiement via Alibaba Trade Assurance</p>
+          </div>
+          <div class="condition-item">
+            <h4><i class="fas fa-shield-alt"></i> Garantie</h4>
+            <p>12 mois pièces et main-d'œuvre<br>Assistance technique incluse<br>Stock local de pièces détachées</p>
+          </div>
+          <div class="condition-item">
+            <h4><i class="fas fa-tools"></i> Services inclus</h4>
+            <p>Formation opérateurs (3 jours)<br>Documentation technique<br>Installation supervisée à distance</p>
+          </div>
+        </div>
+
+        <div class="signature">
+          <p>Bon pour accord,</p>
+          <p style="margin-top: 30px;"><strong>P2I - Plateforme Industrielle Guinéenne</strong></p>
+          <p style="margin-top: 20px;"><i>Cachet et signature</i></p>
+        </div>
+
+        <div class="legal">
+          <p>Ce devis est valable 30 jours à compter de sa date d'émission. Les conditions générales de vente sont disponibles sur demande.</p>
+          <p>P2I - RCCM GC-KAL-2024-00123 - NIF 1234567890</p>
+        </div>
+      `;
+      
+      document.getElementById('devisContent').innerHTML = html;
+    }
+
+    function goBack() {
+      window.location.href = 'dashboard.html#mes-devis';
+    }
+
+    function printDevis() {
+      window.print();
+    }
+
+    window.goBack = goBack;
+    window.printDevis = printDevis;
+    
+    renderDevis();
+  </script>
+</body>
+</html>
