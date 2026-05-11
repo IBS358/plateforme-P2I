@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P2I - Modèles de machines industrielles</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+      color: white;
+      min-height: 100vh;
+      padding: 100px 20px 40px;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header navigation */
+    .nav-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(13, 27, 42, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(76, 201, 240, 0.2);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #4cc9f0, #f72585);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #4cc9f0;
+      transition: all 0.3s;
+    }
+    .cart-icon:hover { transform: scale(1.1); }
+    .cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #f72585;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    /* Info machine */
+    .machine-info {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(76, 201, 240, 0.2);
+    }
+    .machine-info h2 { color: #4cc9f0; margin-bottom: 10px; }
+    .machine-badge {
+      display: inline-block;
+      background: rgba(76, 201, 240, 0.2);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-right: 10px;
+    }
+    .specs-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin: 5px 5px 0 0;
+    }
+
+    /* Grille des modèles */
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+    .model-card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+    .model-card:hover {
+      transform: translateY(-8px);
+      border-color: #4cc9f0;
+      box-shadow: 0 20px 30px rgba(76, 201, 240, 0.2);
+    }
+    .model-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(135deg, #4cc9f0, #f72585);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.65rem;
+  font-weight: bold;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.model-content { 
+  padding: 20px;
+  overflow: hidden; /* Évite les débordements */
+}
+
+.model-name { 
+  font-size: clamp(0.95rem, 4vw, 1.2rem); /* Taille responsive */
+  margin-bottom: 10px;
+  margin-right: 85px; /* Place réservée pour le badge */
+  color: #4cc9f0;
+  font-weight: bold;
+  line-height: 1.3;
+  word-break: break-word; /* Coupe les mots trop longs */
+  min-height: 50px; /* Stabilité sur toutes les cartes */
+}
+    .model-price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #22c55e;
+      margin-bottom: 10px;
+    }
+    .model-price small { font-size: 0.8rem; color: #94a3b8; }
+    
+    .rating {
+      color: #fbbf24;
+      margin-bottom: 10px;
+    }
+    .supplier-info {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px;
+      border-radius: 10px;
+      margin: 10px 0;
+      font-size: 0.85rem;
+    }
+    .supplier-status {
+      color: #22c55e;
+      font-weight: bold;
+    }
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin: 15px 0;
+      font-size: 0.8rem;
+    }
+    .spec-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 6px 8px;
+      border-radius: 8px;
+    }
+    .spec-item span { color: #94a3b8; }
+    .delivery-info {
+      font-size: 0.8rem;
+      color: #4cc9f0;
+      margin: 10px 0;
+    }
+    .warranty-badge {
+      display: inline-block;
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      margin-right: 5px;
+    }
+    .after-sales {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin: 8px 0;
+    }
+    .model-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+    .btn-sm {
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+      flex: 1;
+      text-align: center;
+    }
+    .btn-quote {
+      background: linear-gradient(135deg, #4cc9f0, #4361ee);
+      color: white;
+    }
+    .btn-quote:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(76, 201, 240, 0.4); }
+    .btn-cart {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .btn-cart:hover { background: rgba(76, 201, 240, 0.3); }
+    .btn-save {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+    .btn-save:hover { background: rgba(34, 197, 94, 0.4); }
+    .btn-back {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      transition: all 0.3s;
+    }
+    .btn-back:hover { background: rgba(76, 201, 240, 0.3); }
+
+    /* Modal panier */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #1e293b;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .cart-items { max-height: 300px; overflow-y: auto; }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .cart-total {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid rgba(255,255,255,0.2);
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+    .btn-checkout {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #4cc9f0, #f72585);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .close-modal {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f172a;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      z-index: 1100;
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .models-grid { grid-template-columns: 1fr; }
+      .specs-grid { grid-template-columns: 1fr; }
+      .model-actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-header">
+    <div class="logo">🏭 P2I - Modèles Industriels</div>
+    <div class="cart-icon" onclick="openCartModal()">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-count" id="cartCount">0</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <button class="btn-back" onclick="goBack()">
+      <i class="fas fa-arrow-left"></i> Retour
+    </button>
+
+    <div class="machine-info" id="machineInfo">
+      <h2 id="machineName">Machine</h2>
+      <div><span class="machine-badge" id="upName"></span> <span class="machine-badge" id="upFiliere"></span></div>
+      <div style="margin-top: 15px;">
+        <span class="specs-tag" id="machineRole"></span>
+        <span class="specs-tag" id="machineCapacity"></span>
+        <span class="specs-tag" id="machineUtilities"></span>
+      </div>
+    </div>
+
+    <div class="models-grid" id="modelsGrid"></div>
+  </div>
+
+  <!-- Modal panier -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-shopping-cart"></i> Mon panier</h3>
+        <button class="close-modal" onclick="closeCartModal()">&times;</button>
+      </div>
+      <div class="cart-items" id="cartItemsList"></div>
+      <div class="cart-total" id="cartTotalDisplay"></div>
+      <button class="btn-checkout" onclick="checkoutCart()">
+        <i class="fab fa-alipay"></i> Voir sur Alibaba / Made-in-China
+      </button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // ==============================================
+    // BASE DE DONNÉES COMPLÈTE DES MODÈLES
+    // ==============================================
+
+    const MODELS_DB = {
+
+  // ==================== BOULANGERIE INDUSTRIELLE ====================
+  
+  "petrin_spiral": {
+    machine_ref: "petrin_spiral",
+    machine_name: "Pétrin spiral",
+    machine_role: "Pétrissage de la pâte",
+    default_capacity: "100-300 kg/batch",
+    default_utilities: "Électricité",
+    models: [
+      { id: "petrin_econo", name: "Pétrin Pro-100", price_ttc: 8900, brand: "Jinfeng", supplier: "Henan Jinfeng Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.2, review_count: 156, specs: { power: "7.5 kW", capacity: "100 kg/batch", dimensions: "1500x900x1200 mm", weight: "650 kg", material: "Acier traité" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support WhatsApp + documentation" },
+      { id: "petrin_std", name: "Pétrin Pro-200", price_ttc: 14500, brand: "Jinfeng", supplier: "Henan Jinfeng Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.6, review_count: 328, specs: { power: "11 kW", capacity: "200 kg/batch", dimensions: "1800x1100x1400 mm", weight: "950 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan + Chine", after_sales: "Formation + visio + pièces 72h" },
+      { id: "petrin_premium", name: "Pétrin Pro-350", price_ttc: 22900, brand: "Jinfeng", supplier: "Henan Jinfeng Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 89, specs: { power: "15 kW", capacity: "350 kg/batch", dimensions: "2000x1250x1550 mm", weight: "1250 kg", material: "Acier inoxydable 316L" }, delivery: "30-45 jours", warranty: "24 mois", parts_available: "Dépôt France + Chine", after_sales: "Technicien local + hotline" }
+    ]
+  },
+  
+  "diviseuse_bouleuse": {
+    machine_ref: "diviseuse_bouleuse",
+    machine_name: "Diviseuse-bouleuse",
+    machine_role: "Division et boulage de la pâte",
+    default_capacity: "800-2000 pains/h",
+    default_utilities: "Électricité",
+    models: [
+      { id: "diviseuse_econo", name: "Diviseuse DB-800", price_ttc: 9900, brand: "Sainty", supplier: "Sainty Co., Ltd", supplier_status: "Verified Supplier (4 ans)", rating: 4.1, review_count: 95, specs: { power: "2.2 kW", capacity: "800 pains/h", dimensions: "1300x700x1100 mm", weight: "480 kg", material: "Acier" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique en ligne" },
+      { id: "diviseuse_std", name: "Diviseuse DB-1200", price_ttc: 12800, brand: "Sainty", supplier: "Sainty Co., Ltd", supplier_status: "Verified Supplier (6 ans)", rating: 4.3, review_count: 187, specs: { power: "3 kW", capacity: "1200 pains/h", dimensions: "1500x800x1200 mm", weight: "580 kg", material: "Acier" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique 24/7" },
+      { id: "diviseuse_premium", name: "Diviseuse DB-2000", price_ttc: 19500, brand: "Sainty", supplier: "Sainty Co., Ltd", supplier_status: "Verified Supplier (6 ans)", rating: 4.7, review_count: 112, specs: { power: "5.5 kW", capacity: "2000 pains/h", dimensions: "1800x900x1350 mm", weight: "820 kg", material: "Acier inoxydable" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock Abidjan", after_sales: "Technicien sur site sous 7 jours" }
+    ]
+  },
+  
+  "faconneuse": {
+    machine_ref: "faconneuse",
+    machine_name: "Façonneuse",
+    machine_role: "Façonnage des pâtons (baguettes, pains)",
+    default_capacity: "1000-3000 pains/h",
+    default_utilities: "Électricité",
+    models: [
+      { id: "faconneuse_std", name: "Façonneuse F-1500", price_ttc: 8900, brand: "Sainty", supplier: "Sainty Co., Ltd", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 78, specs: { power: "1.5 kW", capacity: "1500 pains/h", dimensions: "1800x600x1200 mm", weight: "350 kg", material: "Acier inoxydable" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+      { id: "faconneuse_premium", name: "Façonneuse F-3000", price_ttc: 14900, brand: "Sainty", supplier: "Sainty Co., Ltd", supplier_status: "Verified Supplier (6 ans)", rating: 4.7, review_count: 56, specs: { power: "2.2 kW", capacity: "3000 pains/h", dimensions: "2200x700x1350 mm", weight: "480 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock Abidjan", after_sales: "Technicien sur site" }
+    ]
+  },
+  
+  "chambre_pousse": {
+    machine_ref: "chambre_pousse",
+    machine_name: "Chambre de pousse",
+    machine_role: "Fermentation contrôlée de la pâte",
+    default_capacity: "50-200 plateaux",
+    default_utilities: "Électricité + eau",
+    models: [
+      { id: "pousse_std", name: "Chambre CP-48", price_ttc: 12500, brand: "Doyon", supplier: "Doyon Équipements", supplier_status: "Certified Partner", rating: 4.4, review_count: 67, specs: { power: "3 kW", capacity: "48 plateaux", dimensions: "1800x1500x2200 mm", weight: "650 kg", material: "Acier inoxydable" }, delivery: "60 jours", warranty: "12 mois", parts_available: "Stock France", after_sales: "SAV France" },
+      { id: "pousse_premium", name: "Chambre CP-96", price_ttc: 19800, brand: "Doyon", supplier: "Doyon Équipements", supplier_status: "Premium Partner", rating: 4.8, review_count: 42, specs: { power: "5 kW", capacity: "96 plateaux", dimensions: "2200x1800x2500 mm", weight: "950 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+    ]
+  },
+  
+  "four_tunnel": {
+    machine_ref: "four_tunnel",
+    machine_name: "Four à tunnel",
+    machine_role: "Cuisson continue",
+    default_capacity: "200-500 pains/batch",
+    default_utilities: "Électricité ou gaz",
+    models: [
+      { id: "four_econo", name: "Four T-200", price_ttc: 18900, brand: "Doyon", supplier: "Doyon Équipements", supplier_status: "Certified Partner", rating: 4.2, review_count: 67, specs: { power: "25 kW", capacity: "200 pains/batch", dimensions: "2200x1600x1600 mm", weight: "1400 kg", material: "Acier" }, delivery: "60-75 jours", warranty: "12 mois", parts_available: "Stock France", after_sales: "SAV France" },
+      { id: "four_std", name: "Four T-300", price_ttc: 24800, brand: "Doyon", supplier: "Doyon Équipements", supplier_status: "Premium Partner", rating: 4.5, review_count: 89, specs: { power: "35 kW", capacity: "300 pains/batch", dimensions: "2500x1800x1800 mm", weight: "1800 kg", material: "Acier inoxydable" }, delivery: "60-75 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "SAV France + pièces 48h" },
+      { id: "four_premium", name: "Four T-500", price_ttc: 37500, brand: "Doyon", supplier: "Doyon Équipements", supplier_status: "Premium Partner", rating: 4.9, review_count: 45, specs: { power: "55 kW", capacity: "500 pains/batch", dimensions: "3000x2000x2000 mm", weight: "2500 kg", material: "Acier inoxydable 316L" }, delivery: "45-60 jours", warranty: "36 mois", parts_available: "Stock France + expédition rapide", after_sales: "Contrat maintenance inclus" }
+    ]
+  },
+  
+  "trancheuse": {
+    machine_ref: "trancheuse",
+    machine_name: "Trancheuse à pain",
+    machine_role: "Tranchage du pain cuit",
+    default_capacity: "800-2000 pains/h",
+    default_utilities: "Électricité",
+    models: [
+      { id: "trancheuse_std", name: "Trancheuse TR-1000", price_ttc: 4900, brand: "Jinfeng", supplier: "Henan Jinfeng Machinery", supplier_status: "Verified Supplier (4 ans)", rating: 4.2, review_count: 112, specs: { power: "0.75 kW", capacity: "1000 pains/h", dimensions: "1200x800x1400 mm", weight: "180 kg", material: "Acier inoxydable" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+      { id: "trancheuse_premium", name: "Trancheuse TR-2000", price_ttc: 7900, brand: "Jinfeng", supplier: "Henan Jinfeng Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.6, review_count: 78, specs: { power: "1.1 kW", capacity: "2000 pains/h", dimensions: "1500x900x1550 mm", weight: "250 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées disponibles" }
+    ]
+  },
+  
+  "emballeuse": {
+    machine_ref: "emballeuse",
+    machine_name: "Emballeuse sous vide",
+    machine_role: "Conditionnement du pain",
+    default_capacity: "500-1500 pains/h",
+    default_utilities: "Électricité",
+    models: [
+      { id: "emballeuse_std", name: "Emballeuse EM-800", price_ttc: 6900, brand: "Jinfeng", supplier: "Henan Jinfeng Machinery", supplier_status: "Verified Supplier (4 ans)", rating: 4.3, review_count: 95, specs: { power: "1.5 kW", capacity: "800 pains/h", dimensions: "2000x900x1400 mm", weight: "380 kg", material: "Acier inoxydable" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+      { id: "emballeuse_premium", name: "Emballeuse EM-1500", price_ttc: 10900, brand: "Jinfeng", supplier: "Henan Jinfeng Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.7, review_count: 64, specs: { power: "2.2 kW", capacity: "1500 pains/h", dimensions: "2500x1000x1550 mm", weight: "520 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock Abidjan", after_sales: "SAV local" }
+    ]
+  },
+// ==================== CONSERVERIE DE LÉGUMES ====================
+
+"laveuse_decoupeuse": {
+  machine_ref: "laveuse_decoupeuse",
+  machine_name: "Laveuse-découpeuse",
+  machine_role: "Nettoyage et découpe des légumes",
+  default_capacity: "500-2000 kg/h",
+  default_utilities: "Électricité + eau",
+  models: [
+    { id: "laveuse_econo", name: "Laveuse LD-500", price_ttc: 8900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.2, review_count: 89, specs: { power: "3 kW", capacity: "500 kg/h", dimensions: "2500x800x1200 mm", weight: "380 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "laveuse_std", name: "Laveuse LD-1000", price_ttc: 14900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.5, review_count: 156, specs: { power: "5.5 kW", capacity: "1000 kg/h", dimensions: "3200x1000x1400 mm", weight: "580 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces 72h" },
+    { id: "laveuse_premium", name: "Laveuse LD-2000", price_ttc: 23900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.8, review_count: 67, specs: { power: "7.5 kW", capacity: "2000 kg/h", dimensions: "4000x1200x1600 mm", weight: "850 kg", material: "Acier inoxydable 316L" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "SAV local" }
+  ]
+},
+
+"blanchisseur": {
+  machine_ref: "blanchisseur",
+  machine_name: "Blanchisseur",
+  machine_role: "Traitement thermique (blanchiment)",
+  default_capacity: "500-2000 kg/h",
+  default_utilities: "Électricité + eau + vapeur",
+  models: [
+    { id: "blanchisseur_std", name: "Blanchisseur BL-800", price_ttc: 12500, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 78, specs: { power: "9 kW", capacity: "800 kg/h", dimensions: "3500x900x1500 mm", weight: "620 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "blanchisseur_premium", name: "Blanchisseur BL-1500", price_ttc: 19800, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.7, review_count: 112, specs: { power: "15 kW", capacity: "1500 kg/h", dimensions: "4500x1100x1700 mm", weight: "950 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées" }
+  ]
+},
+
+"remplisseuse_doseuse": {
+  machine_ref: "remplisseuse_doseuse",
+  machine_name: "Remplisseuse-doseuse",
+  machine_role: "Mise en boîtes/bocaux",
+  default_capacity: "1000-5000 unités/h",
+  default_utilities: "Électricité + air comprimé",
+  models: [
+    { id: "remplisseuse_std", name: "Remplisseuse RD-2000", price_ttc: 15900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Verified Supplier (6 ans)", rating: 4.4, review_count: 134, specs: { power: "2.2 kW", capacity: "2000 unités/h", dimensions: "1800x1000x1800 mm", weight: "480 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "remplisseuse_premium", name: "Remplisseuse RD-5000", price_ttc: 28900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 89, specs: { power: "4 kW", capacity: "5000 unités/h", dimensions: "2500x1200x2000 mm", weight: "780 kg", material: "Acier inoxydable 316L" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock Abidjan", after_sales: "SAV local" }
+  ]
+},
+
+"scelleuse_operculieuse": {
+  machine_ref: "scelleuse_operculieuse",
+  machine_name: "Scelleuse-operculieuse",
+  machine_role: "Fermeture hermétique",
+  default_capacity: "1000-5000 unités/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "scelleuse_std", name: "Scelleuse SC-2000", price_ttc: 9900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 98, specs: { power: "1.5 kW", capacity: "2000 unités/h", dimensions: "1200x800x1600 mm", weight: "320 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "scelleuse_premium", name: "Scelleuse SC-5000", price_ttc: 17900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 76, specs: { power: "2.2 kW", capacity: "5000 unités/h", dimensions: "1600x1000x1800 mm", weight: "520 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces disponibles" }
+  ]
+},
+
+"autoclave": {
+  machine_ref: "autoclave",
+  machine_name: "Autoclave (stérilisateur)",
+  machine_role: "Stérilisation haute température",
+  default_capacity: "500-2000 boîtes/batch",
+  default_utilities: "Électricité + vapeur + eau",
+  models: [
+    { id: "autoclave_std", name: "Autoclave AT-500", price_ttc: 22500, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.5, review_count: 112, specs: { power: "18 kW", capacity: "500 boîtes/batch", dimensions: "2200x1500x2000 mm", weight: "1200 kg", material: "Acier inoxydable 304" }, delivery: "60-75 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "autoclave_premium", name: "Autoclave AT-1200", price_ttc: 38500, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 67, specs: { power: "30 kW", capacity: "1200 boîtes/batch", dimensions: "2800x1800x2200 mm", weight: "2100 kg", material: "Acier inoxydable 316L" }, delivery: "75 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"etiqueteuse": {
+  machine_ref: "etiqueteuse",
+  machine_name: "Étiqeteuse",
+  machine_role: "Pose des étiquettes",
+  default_capacity: "1000-5000 unités/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "etiqueteuse_std", name: "Étiqeteuse ET-2000", price_ttc: 5900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Verified Supplier (4 ans)", rating: 4.2, review_count: 145, specs: { power: "0.75 kW", capacity: "2000 unités/h", dimensions: "1500x800x1400 mm", weight: "180 kg", material: "Acier inoxydable" }, delivery: "30 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "etiqueteuse_premium", name: "Étiqeteuse ET-5000", price_ttc: 10900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.7, review_count: 89, specs: { power: "1.1 kW", capacity: "5000 unités/h", dimensions: "2000x1000x1600 mm", weight: "280 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "SAV local" }
+  ]
+},
+
+"cartonneuse_emballeuse": {
+  machine_ref: "cartonneuse_emballeuse",
+  machine_name: "Cartonneuse / Emballeuse",
+  machine_role: "Conditionnement secondaire en cartons",
+  default_capacity: "500-2000 cartons/h",
+  default_utilities: "Électricité + air comprimé",
+  models: [
+    { id: "cartonneuse_std", name: "Cartonneuse CA-500", price_ttc: 18900, brand: "Jinfeng Pack", supplier: "Henan Jinfeng Packaging", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 78, specs: { power: "3 kW", capacity: "500 cartons/h", dimensions: "3000x1500x1800 mm", weight: "850 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "cartonneuse_premium", name: "Cartonneuse CA-1500", price_ttc: 32900, brand: "Jinfeng Pack", supplier: "Henan Jinfeng Packaging", supplier_status: "Gold Supplier (7 ans)", rating: 4.8, review_count: 56, specs: { power: "5.5 kW", capacity: "1500 cartons/h", dimensions: "4000x2000x2000 mm", weight: "1450 kg", material: "Acier inoxydable 304" }, delivery: "75 jours", warranty: "24 mois", parts_available: "Stock Abidjan", after_sales: "Contrat maintenance" }
+  ]
+},
+// ==================== BISCUITERIE INDUSTRIELLE ====================
+
+"melangeur_biscuiterie": {
+  machine_ref: "melangeur_biscuiterie",
+  machine_name: "Mélangeur industriel",
+  machine_role: "Mélange des ingrédients (farine, sucre, beurre)",
+  default_capacity: "100-500 kg/batch",
+  default_utilities: "Électricité",
+  models: [
+    { id: "melangeur_econo", name: "Mélangeur MB-200", price_ttc: 7900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Verified Supplier (4 ans)", rating: 4.2, review_count: 112, specs: { power: "5.5 kW", capacity: "150 kg/batch", dimensions: "1400x800x1500 mm", weight: "450 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "melangeur_std", name: "Mélangeur MB-350", price_ttc: 12900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 234, specs: { power: "11 kW", capacity: "300 kg/batch", dimensions: "1800x1000x1700 mm", weight: "780 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces 72h" },
+    { id: "melangeur_premium", name: "Mélangeur MB-500", price_ttc: 18900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 78, specs: { power: "15 kW", capacity: "500 kg/batch", dimensions: "2200x1200x1900 mm", weight: "1200 kg", material: "Acier inoxydable 316L" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Dépôt France", after_sales: "Technicien local" }
+  ]
+},
+
+"lamineuse_biscuiterie": {
+  machine_ref: "lamineuse_biscuiterie",
+  machine_name: "Lamineuse",
+  machine_role: "Aplatissement de la pâte",
+  default_capacity: "500-2000 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "lamineuse_std", name: "Lamineuse LM-1000", price_ttc: 10900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 89, specs: { power: "3 kW", capacity: "800 kg/h", dimensions: "2500x1000x1200 mm", weight: "650 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "lamineuse_premium", name: "Lamineuse LM-2000", price_ttc: 18900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.7, review_count: 56, specs: { power: "5.5 kW", capacity: "1600 kg/h", dimensions: "3200x1200x1400 mm", weight: "950 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock Abidjan", after_sales: "SAV local" }
+  ]
+},
+
+"faconneuse_rotative": {
+  machine_ref: "faconneuse_rotative",
+  machine_name: "Façonneuse rotative",
+  machine_role: "Formage des biscuits (découpe, formage)",
+  default_capacity: "500-3000 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "rotative_std", name: "Rotative RC-1000", price_ttc: 14900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Verified Supplier (6 ans)", rating: 4.4, review_count: 134, specs: { power: "4 kW", capacity: "800 kg/h", dimensions: "2200x900x1500 mm", weight: "850 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "rotative_std_plus", name: "Rotative RC-2000", price_ttc: 23900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.7, review_count: 98, specs: { power: "7.5 kW", capacity: "1600 kg/h", dimensions: "2800x1100x1700 mm", weight: "1250 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées" },
+    { id: "rotative_premium", name: "Rotative RC-3500", price_ttc: 35900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 67, specs: { power: "11 kW", capacity: "2500 kg/h", dimensions: "3500x1300x1900 mm", weight: "1850 kg", material: "Acier inoxydable 316L" }, delivery: "75 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"four_biscuiterie": {
+  machine_ref: "four_biscuiterie",
+  machine_name: "Four à biscuits (tunnel)",
+  machine_role: "Cuisson continue des biscuits",
+  default_capacity: "500-3000 kg/h",
+  default_utilities: "Électricité ou gaz",
+  models: [
+    { id: "four_biscuit_econo", name: "Four BT-500", price_ttc: 22900, brand: "Doyon Foods", supplier: "Doyon Équipements Alimentaires", supplier_status: "Certified Partner", rating: 4.3, review_count: 78, specs: { power: "30 kW", capacity: "500 kg/h", dimensions: "8000x1800x1600 mm", weight: "3500 kg", material: "Acier inoxydable 304" }, delivery: "60-75 jours", warranty: "12 mois", parts_available: "Stock France", after_sales: "SAV France" },
+    { id: "four_biscuit_std", name: "Four BT-1200", price_ttc: 38900, brand: "Doyon Foods", supplier: "Doyon Équipements Alimentaires", supplier_status: "Premium Partner", rating: 4.7, review_count: 112, specs: { power: "55 kW", capacity: "1200 kg/h", dimensions: "12000x2000x1800 mm", weight: "5800 kg", material: "Acier inoxydable 304" }, delivery: "75-90 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "SAV France + pièces 48h" },
+    { id: "four_biscuit_premium", name: "Four BT-2500", price_ttc: 58900, brand: "Doyon Foods", supplier: "Doyon Équipements Alimentaires", supplier_status: "Premium Partner", rating: 4.9, review_count: 45, specs: { power: "85 kW", capacity: "2500 kg/h", dimensions: "18000x2400x2000 mm", weight: "8500 kg", material: "Acier inoxydable 316L" }, delivery: "90 jours", warranty: "36 mois", parts_available: "Dépôt France", after_sales: "Contrat maintenance inclus" }
+  ]
+},
+
+"refroidisseur_biscuiterie": {
+  machine_ref: "refroidisseur_biscuiterie",
+  machine_name: "Refroidisseur à bande",
+  machine_role: "Refroidissement après cuisson",
+  default_capacity: "500-3000 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "refroidisseur_std", name: "Refroidisseur RF-800", price_ttc: 8900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.2, review_count: 67, specs: { power: "4 kW", capacity: "800 kg/h", dimensions: "6000x1200x1500 mm", weight: "1850 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "refroidisseur_premium", name: "Refroidisseur RF-2000", price_ttc: 15900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 89, specs: { power: "7.5 kW", capacity: "2000 kg/h", dimensions: "9000x1500x1700 mm", weight: "3200 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées" }
+  ]
+},
+
+"enrobeuse_saupoudreuse": {
+  machine_ref: "enrobeuse_saupoudreuse",
+  machine_name: "Enrobeuse / Saupoudreuse",
+  machine_role: "Ajout sucre, chocolat, garniture",
+  default_capacity: "500-2000 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "enrobeuse_std", name: "Enrobeuse EN-500", price_ttc: 12900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.4, review_count: 98, specs: { power: "2.2 kW", capacity: "500 kg/h", dimensions: "3000x1000x1800 mm", weight: "650 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "enrobeuse_premium", name: "Enrobeuse EN-1500", price_ttc: 22900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.8, review_count: 76, specs: { power: "4 kW", capacity: "1500 kg/h", dimensions: "4500x1200x2000 mm", weight: "1200 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock Abidjan", after_sales: "SAV local" }
+  ]
+},
+
+"emballeuse_horizontale": {
+  machine_ref: "emballeuse_horizontale",
+  machine_name: "Emballeuse horizontale",
+  machine_role: "Conditionnement en sachets",
+  default_capacity: "100-500 sachets/min",
+  default_utilities: "Électricité",
+  models: [
+    { id: "emballeuse_biscuit_std", name: "Emballeuse EH-150", price_ttc: 15900, brand: "Jinfeng Pack", supplier: "Henan Jinfeng Packaging", supplier_status: "Verified Supplier (6 ans)", rating: 4.5, review_count: 145, specs: { power: "3 kW", capacity: "150 sachets/min", dimensions: "4000x1000x1500 mm", weight: "850 kg", material: "Acier inoxydable" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "emballeuse_biscuit_premium", name: "Emballeuse EH-400", price_ttc: 28900, brand: "Jinfeng Pack", supplier: "Henan Jinfeng Packaging", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 98, specs: { power: "5.5 kW", capacity: "400 sachets/min", dimensions: "5500x1200x1700 mm", weight: "1450 kg", material: "Acier inoxydable 304" }, delivery: "60-75 jours", warranty: "24 mois", parts_available: "Stock Abidjan", after_sales: "Contrat maintenance" }
+  ]
+},
+// ==================== JUS & BOISSONS ====================
+
+"laveuse_trieuse": {
+  machine_ref: "laveuse_trieuse",
+  machine_name: "Laveuse-trieuse",
+  machine_role: "Nettoyage et tri des fruits",
+  default_capacity: "1-5 tonnes/h",
+  default_utilities: "Eau + électricité",
+  models: [
+    { id: "laveuse_econo", name: "Laveuse LT-ECO", price_ttc: 5900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Verified Supplier (4 ans)", rating: 4.1, review_count: 89, specs: { power: "2.2 kW", capacity: "1000 kg/h", dimensions: "2500x800x1200 mm", weight: "350 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "laveuse_std", name: "Laveuse LT-STD", price_ttc: 9900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.5, review_count: 167, specs: { power: "4 kW", capacity: "2500 kg/h", dimensions: "3500x1000x1400 mm", weight: "550 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces 72h", last_price_update: "2025-03-15" },
+    { id: "laveuse_premium", name: "Laveuse LT-PRO", price_ttc: 15900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 78, specs: { power: "7.5 kW", capacity: "5000 kg/h", dimensions: "4500x1200x1600 mm", weight: "850 kg", material: "Acier inoxydable 316L" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "SAV local + hotline", last_price_update: "2025-03-15" }
+  ]
+},
+
+"eplucheuse_denoyauteuse": {
+  machine_ref: "eplucheuse_denoyauteuse",
+  machine_name: "Éplucheuse-dénoyauteuse",
+  machine_role: "Préparation des fruits (épluchage, dénoyautage)",
+  default_capacity: "500-2000 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "eplucheuse_econo", name: "Éplucheuse ED-ECO", price_ttc: 7900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Verified Supplier (4 ans)", rating: 4.2, review_count: 112, specs: { power: "3 kW", capacity: "500 kg/h", dimensions: "2000x800x1400 mm", weight: "420 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "eplucheuse_std", name: "Éplucheuse ED-STD", price_ttc: 12900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 234, specs: { power: "5.5 kW", capacity: "1200 kg/h", dimensions: "2800x1000x1600 mm", weight: "680 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces", last_price_update: "2025-03-15" },
+    { id: "eplucheuse_premium", name: "Éplucheuse ED-PRO", price_ttc: 22900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 89, specs: { power: "9 kW", capacity: "2000 kg/h", dimensions: "3500x1200x1800 mm", weight: "1050 kg", material: "Acier inoxydable 316L" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Dépôt France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+"broyeur_raspeur": {
+  machine_ref: "broyeur_raspeur",
+  machine_name: "Broyeur-raspeur",
+  machine_role: "Extraction pulpe/jus",
+  default_capacity: "500-3000 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "broyeur_econo", name: "Broyeur BR-ECO", price_ttc: 6900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 145, specs: { power: "5.5 kW", capacity: "500 kg/h", dimensions: "1200x600x1300 mm", weight: "280 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "broyeur_std", name: "Broyeur BR-STD", price_ttc: 11900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 278, specs: { power: "11 kW", capacity: "1500 kg/h", dimensions: "1600x800x1500 mm", weight: "520 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées", last_price_update: "2025-03-15" },
+    { id: "broyeur_premium", name: "Broyeur BR-PRO", price_ttc: 18900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 112, specs: { power: "18.5 kW", capacity: "3000 kg/h", dimensions: "2000x1000x1700 mm", weight: "850 kg", material: "Acier inoxydable 316L" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "SAV local", last_price_update: "2025-03-15" }
+  ]
+},
+
+"filtreuse_tamiseuse": {
+  machine_ref: "filtreuse_tamiseuse",
+  machine_name: "Filtreuse / Tamiseuse",
+  machine_role: "Séparation pulpe/liquide",
+  default_capacity: "1000-5000 L/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "filtreuse_econo", name: "Filtreuse FI-ECO", price_ttc: 4900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Verified Supplier (4 ans)", rating: 4.2, review_count: 98, specs: { power: "1.5 kW", capacity: "1000 L/h", dimensions: "1500x600x1200 mm", weight: "180 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "filtreuse_std", name: "Filtreuse FI-STD", price_ttc: 8900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.5, review_count: 189, specs: { power: "2.2 kW", capacity: "2500 L/h", dimensions: "2000x800x1400 mm", weight: "320 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation", last_price_update: "2025-03-15" },
+    { id: "filtreuse_premium", name: "Filtreuse FI-PRO", price_ttc: 14900, brand: "Sainty Foods", supplier: "Sainty Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.9, review_count: 67, specs: { power: "4 kW", capacity: "5000 L/h", dimensions: "2800x1000x1600 mm", weight: "580 kg", material: "Acier inoxydable 316L" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "SAV local", last_price_update: "2025-03-15" }
+  ]
+},
+
+"melangeuse_doseuse": {
+  machine_ref: "melangeuse_doseuse",
+  machine_name: "Mélangeuse / Doseuse",
+  machine_role: "Ajout sucre, arômes, conservateurs",
+  default_capacity: "500-3000 L/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "melangeuse_econo", name: "Mélangeuse MD-ECO", price_ttc: 8900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 134, specs: { power: "3 kW", capacity: "500 L/h", dimensions: "1800x900x1800 mm", weight: "480 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "melangeuse_std", name: "Mélangeuse MD-STD", price_ttc: 14900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.7, review_count: 267, specs: { power: "5.5 kW", capacity: "1500 L/h", dimensions: "2500x1200x2200 mm", weight: "850 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées", last_price_update: "2025-03-15" },
+    { id: "melangeuse_premium", name: "Mélangeuse MD-PRO", price_ttc: 24900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 89, specs: { power: "9 kW", capacity: "3000 L/h", dimensions: "3200x1500x2500 mm", weight: "1250 kg", material: "Acier inoxydable 316L" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+"pasteurisateur": {
+  machine_ref: "pasteurisateur",
+  machine_name: "Pasteurisateur",
+  machine_role: "Traitement thermique (pasteurisation)",
+  default_capacity: "1000-5000 L/h",
+  default_utilities: "Électricité + eau + vapeur",
+  models: [
+    { id: "pasteurisateur_econo", name: "Pasteurisateur PA-ECO", price_ttc: 12900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 112, specs: { power: "12 kW", capacity: "1000 L/h", dimensions: "3000x1000x1800 mm", weight: "850 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "pasteurisateur_std", name: "Pasteurisateur PA-STD", price_ttc: 22900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.7, review_count: 198, specs: { power: "22 kW", capacity: "3000 L/h", dimensions: "4500x1200x2000 mm", weight: "1450 kg", material: "Acier inoxydable 304" }, delivery: "60-75 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces", last_price_update: "2025-03-15" },
+    { id: "pasteurisateur_premium", name: "Pasteurisateur PA-PRO", price_ttc: 39900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 78, specs: { power: "37 kW", capacity: "5000 L/h", dimensions: "6000x1500x2200 mm", weight: "2200 kg", material: "Acier inoxydable 316L" }, delivery: "75-90 jours", warranty: "24 mois", parts_available: "Dépôt France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+"remplisseuse_scelleuse": {
+  machine_ref: "remplisseuse_scelleuse",
+  machine_name: "Remplisseuse-scelleuse",
+  machine_role: "Mise en bouteilles/briques/canettes",
+  default_capacity: "1000-5000 unités/h",
+  default_utilities: "Électricité + air comprimé",
+  models: [
+    { id: "remplisseuse_econo", name: "Remplisseuse RS-ECO", price_ttc: 15900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.2, review_count: 156, specs: { power: "3 kW", capacity: "1000 unités/h", dimensions: "2500x1000x2000 mm", weight: "650 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "remplisseuse_std", name: "Remplisseuse RS-STD", price_ttc: 28900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 278, specs: { power: "5.5 kW", capacity: "3000 unités/h", dimensions: "3500x1200x2200 mm", weight: "1200 kg", material: "Acier inoxydable 304" }, delivery: "60-75 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées", last_price_update: "2025-03-15" },
+    { id: "remplisseuse_premium", name: "Remplisseuse RS-PRO", price_ttc: 49900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 98, specs: { power: "9 kW", capacity: "5000 unités/h", dimensions: "4500x1500x2500 mm", weight: "1850 kg", material: "Acier inoxydable 316L" }, delivery: "75-90 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+"concentrateur_evaporateur": {
+  machine_ref: "concentrateur_evaporateur",
+  machine_name: "Concentrateur / Évaporateur",
+  machine_role: "Production de jus concentré (module export)",
+  default_capacity: "500-3000 L/h",
+  default_utilities: "Électricité + vapeur + eau",
+  models: [
+    { id: "concentrateur_econo", name: "Concentrateur CE-ECO", price_ttc: 29900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Verified Supplier (6 ans)", rating: 4.3, review_count: 67, specs: { power: "22 kW", capacity: "500 L/h", dimensions: "4000x1500x3000 mm", weight: "2500 kg", material: "Acier inoxydable 304" }, delivery: "75-90 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "concentrateur_std", name: "Concentrateur CE-STD", price_ttc: 49900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.7, review_count: 89, specs: { power: "45 kW", capacity: "1500 L/h", dimensions: "5500x2000x3500 mm", weight: "4200 kg", material: "Acier inoxydable 304" }, delivery: "90-105 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces", last_price_update: "2025-03-15" },
+    { id: "concentrateur_premium", name: "Concentrateur CE-PRO", price_ttc: 89900, brand: "Jinfeng Foods", supplier: "Henan Jinfeng Food Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 45, specs: { power: "75 kW", capacity: "3000 L/h", dimensions: "7000x2500x4000 mm", weight: "6500 kg", material: "Acier inoxydable 316L" }, delivery: "100-120 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+// ==================== HUILES ALIMENTAIRES ====================
+
+"nettoyeur_decortiqueur": {
+  machine_ref: "nettoyeur_decortiqueur",
+  machine_name: "Nettoyeur-décortiqueur",
+  machine_role: "Nettoyage et décorticage des graines/noix",
+  default_capacity: "500-3000 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "nettoyeur_econo", name: "Nettoyeur ND-500", price_ttc: 5900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.2, review_count: 89, specs: { power: "4 kW", capacity: "500 kg/h", dimensions: "2500x900x1500 mm", weight: "450 kg", material: "Acier carbone" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "nettoyeur_std", name: "Nettoyeur ND-1500", price_ttc: 10900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 167, specs: { power: "7.5 kW", capacity: "1500 kg/h", dimensions: "3500x1200x1800 mm", weight: "780 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces", last_price_update: "2025-03-15" },
+    { id: "nettoyeur_premium", name: "Nettoyeur ND-3000", price_ttc: 17900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 78, specs: { power: "11 kW", capacity: "3000 kg/h", dimensions: "4500x1500x2200 mm", weight: "1200 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "SAV local", last_price_update: "2025-03-15" }
+  ]
+},
+
+"broyeur_concasseur_huile": {
+  machine_ref: "broyeur_concasseur_huile",
+  machine_name: "Broyeur / Concasseur",
+  machine_role: "Concassage des graines",
+  default_capacity: "500-3000 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "broyeur_huile_econo", name: "Concasseur BC-500", price_ttc: 6900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 112, specs: { power: "7.5 kW", capacity: "500 kg/h", dimensions: "1500x800x1400 mm", weight: "520 kg", material: "Acier traité" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "broyeur_huile_std", name: "Concasseur BC-1500", price_ttc: 12900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 234, specs: { power: "15 kW", capacity: "1500 kg/h", dimensions: "2000x1000x1600 mm", weight: "850 kg", material: "Acier traité" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées", last_price_update: "2025-03-15" },
+    { id: "broyeur_huile_premium", name: "Concasseur BC-3000", price_ttc: 19900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 98, specs: { power: "22 kW", capacity: "3000 kg/h", dimensions: "2500x1200x1800 mm", weight: "1300 kg", material: "Acier inoxydable" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+"cuiseur_huile": {
+  machine_ref: "cuiseur_huile",
+  machine_name: "Cuiseur",
+  machine_role: "Chauffage avant pressage (optionnel selon graine)",
+  default_capacity: "500-2000 kg/h",
+  default_utilities: "Électricité + vapeur",
+  models: [
+    { id: "cuiseur_std", name: "Cuiseur CU-1000", price_ttc: 7900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Verified Supplier (6 ans)", rating: 4.3, review_count: 78, specs: { power: "15 kW", capacity: "1000 kg/h", dimensions: "2500x1000x1800 mm", weight: "950 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "cuiseur_premium", name: "Cuiseur CU-2000", price_ttc: 13900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.7, review_count: 56, specs: { power: "22 kW", capacity: "2000 kg/h", dimensions: "3200x1200x2000 mm", weight: "1450 kg", material: "Acier inoxydable 304" }, delivery: "60-75 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation", last_price_update: "2025-03-15" }
+  ]
+},
+
+"presse_huile": {
+  machine_ref: "presse_huile",
+  machine_name: "Presse à huile",
+  machine_role: "Extraction de l'huile des graines",
+  default_capacity: "500-2000 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "presse_econo", name: "Presse PH-500", price_ttc: 12900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Verified Supplier (6 ans)", rating: 4.4, review_count: 145, specs: { power: "11 kW", capacity: "500 kg/h", dimensions: "2000x800x1400 mm", weight: "850 kg", material: "Acier traité" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "presse_std", name: "Presse PH-1200", price_ttc: 22900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.7, review_count: 267, specs: { power: "18.5 kW", capacity: "1200 kg/h", dimensions: "2800x1000x1600 mm", weight: "1450 kg", material: "Acier inoxydable" }, delivery: "60-75 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées", last_price_update: "2025-03-15" },
+    { id: "presse_premium", name: "Presse PH-2000", price_ttc: 35900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 89, specs: { power: "30 kW", capacity: "2000 kg/h", dimensions: "3500x1200x1800 mm", weight: "2200 kg", material: "Acier inoxydable 304" }, delivery: "75-90 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+"filtre_presse_huile": {
+  machine_ref: "filtre_presse_huile",
+  machine_name: "Filtre-presse",
+  machine_role: "Filtration des impuretés solides",
+  default_capacity: "1000-5000 L/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "filtre_huile_econo", name: "Filtre FP-1000", price_ttc: 5900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.2, review_count: 98, specs: { power: "2.2 kW", capacity: "1000 L/h", dimensions: "1500x800x1200 mm", weight: "380 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "filtre_huile_std", name: "Filtre FP-3000", price_ttc: 10900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.5, review_count: 189, specs: { power: "4 kW", capacity: "3000 L/h", dimensions: "2000x1000x1400 mm", weight: "620 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation", last_price_update: "2025-03-15" },
+    { id: "filtre_huile_premium", name: "Filtre FP-5000", price_ttc: 17900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 67, specs: { power: "5.5 kW", capacity: "5000 L/h", dimensions: "2500x1200x1600 mm", weight: "890 kg", material: "Acier inoxydable 316L" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "SAV local", last_price_update: "2025-03-15" }
+  ]
+},
+
+"clarificateur_decanteuse": {
+  machine_ref: "clarificateur_decanteuse",
+  machine_name: "Clarificateur / Décanteuse",
+  machine_role: "Séparation eau / huile et sédiments",
+  default_capacity: "1000-5000 L/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "clarificateur_std", name: "Clarificateur CD-2000", price_ttc: 15900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.4, review_count: 112, specs: { power: "5.5 kW", capacity: "2000 L/h", dimensions: "2500x1000x1800 mm", weight: "850 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "clarificateur_premium", name: "Clarificateur CD-5000", price_ttc: 28900, brand: "Jinfeng Oil", supplier: "Henan Jinfeng Oil Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.7, review_count: 78, specs: { power: "11 kW", capacity: "5000 L/h", dimensions: "3200x1200x2200 mm", weight: "1450 kg", material: "Acier inoxydable 304" }, delivery: "75 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées", last_price_update: "2025-03-15" }
+  ]
+},
+
+"remplisseuse_huile": {
+  machine_ref: "remplisseuse_huile",
+  machine_name: "Remplisseuse-scelleuse",
+  machine_role: "Mise en bidons / bouteilles",
+  default_capacity: "500-2000 unités/h",
+  default_utilities: "Électricité + air comprimé",
+  models: [
+    { id: "remplisseuse_huile_econo", name: "Remplisseuse RH-500", price_ttc: 12900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.2, review_count: 134, specs: { power: "2.2 kW", capacity: "500 unités/h", dimensions: "2200x1000x1800 mm", weight: "580 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "remplisseuse_huile_std", name: "Remplisseuse RH-1200", price_ttc: 22900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 245, specs: { power: "4 kW", capacity: "1200 unités/h", dimensions: "3000x1200x2000 mm", weight: "950 kg", material: "Acier inoxydable 304" }, delivery: "60-75 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées", last_price_update: "2025-03-15" },
+    { id: "remplisseuse_huile_premium", name: "Remplisseuse RH-2000", price_ttc: 38900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 89, specs: { power: "5.5 kW", capacity: "2000 unités/h", dimensions: "4000x1500x2200 mm", weight: "1450 kg", material: "Acier inoxydable 316L" }, delivery: "75-90 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+// ==================== MODULE RAFFINERIE HUILE ====================
+
+"neutraliseur_huile": {
+  machine_ref: "neutraliseur_huile",
+  machine_name: "Neutraliseur",
+  machine_role: "Élimination des acides gras libres",
+  default_capacity: "1000-5000 L/h",
+  default_utilities: "Électricité + vapeur + eau",
+  models: [
+    { id: "neutraliseur_std", name: "Neutraliseur NE-2000", price_ttc: 18900, brand: "Jinfeng Refining", supplier: "Henan Jinfeng Oil Refinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.5, review_count: 78, specs: { power: "11 kW", capacity: "2000 L/h", dimensions: "4000x1500x2500 mm", weight: "1850 kg", material: "Acier inoxydable 304" }, delivery: "75-90 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "neutraliseur_premium", name: "Neutraliseur NE-5000", price_ttc: 34900, brand: "Jinfeng Refining", supplier: "Henan Jinfeng Oil Refinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 45, specs: { power: "18.5 kW", capacity: "5000 L/h", dimensions: "5500x2000x3000 mm", weight: "3200 kg", material: "Acier inoxydable 316L" }, delivery: "90-105 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+"decoloreur_huile": {
+  machine_ref: "decoloreur_huile",
+  machine_name: "Décoloreur",
+  machine_role: "Élimination des pigments et chlorophylles",
+  default_capacity: "1000-5000 L/h",
+  default_utilities: "Électricité + vapeur",
+  models: [
+    { id: "decoloreur_std", name: "Décoloreur DC-2000", price_ttc: 15900, brand: "Jinfeng Refining", supplier: "Henan Jinfeng Oil Refinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.4, review_count: 67, specs: { power: "7.5 kW", capacity: "2000 L/h", dimensions: "3500x1500x2200 mm", weight: "1450 kg", material: "Acier inoxydable 304" }, delivery: "75-90 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "decoloreur_premium", name: "Décoloreur DC-5000", price_ttc: 29900, brand: "Jinfeng Refining", supplier: "Henan Jinfeng Oil Refinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.7, review_count: 56, specs: { power: "15 kW", capacity: "5000 L/h", dimensions: "4800x2000x2800 mm", weight: "2800 kg", material: "Acier inoxydable 316L" }, delivery: "90-105 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+"desodoriseur_huile": {
+  machine_ref: "desodoriseur_huile",
+  machine_name: "Désodoriseur",
+  machine_role: "Élimination des odeurs et acides gras volatils",
+  default_capacity: "1000-5000 L/h",
+  default_utilities: "Électricité + vapeur + eau",
+  models: [
+    { id: "desodoriseur_std", name: "Désodoriseur DS-2000", price_ttc: 25900, brand: "Jinfeng Refining", supplier: "Henan Jinfeng Oil Refinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 89, specs: { power: "15 kW", capacity: "2000 L/h", dimensions: "4500x1800x2800 mm", weight: "2450 kg", material: "Acier inoxydable 304" }, delivery: "90-105 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces", last_price_update: "2025-03-15" },
+    { id: "desodoriseur_premium", name: "Désodoriseur DS-5000", price_ttc: 45900, brand: "Jinfeng Refining", supplier: "Henan Jinfeng Oil Refinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 67, specs: { power: "22 kW", capacity: "5000 L/h", dimensions: "6000x2200x3500 mm", weight: "4200 kg", material: "Acier inoxydable 316L" }, delivery: "105-120 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+"fractionneur_huile": {
+  machine_ref: "fractionneur_huile",
+  machine_name: "Fractionneur",
+  machine_role: "Séparation fractions (oléine/stéarine)",
+  default_capacity: "1000-5000 L/h",
+  default_utilities: "Électricité + froid",
+  models: [
+    { id: "fractionneur_std", name: "Fractionneur FR-2000", price_ttc: 34900, brand: "Jinfeng Refining", supplier: "Henan Jinfeng Oil Refinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.5, review_count: 56, specs: { power: "22 kW", capacity: "2000 L/h", dimensions: "5000x2000x3000 mm", weight: "3200 kg", material: "Acier inoxydable 304" }, delivery: "90-105 jours", warranty: "18 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "fractionneur_premium", name: "Fractionneur FR-5000", price_ttc: 59900, brand: "Jinfeng Refining", supplier: "Henan Jinfeng Oil Refinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 45, specs: { power: "37 kW", capacity: "5000 L/h", dimensions: "6800x2500x3500 mm", weight: "5500 kg", material: "Acier inoxydable 316L" }, delivery: "105-120 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+// ==================== TRANSFORMATION D'ÉPICES ====================
+
+"laveuse_decanteuse_epices": {
+  machine_ref: "laveuse_decanteuse_epices",
+  machine_name: "Laveuse-décanteuse",
+  machine_role: "Nettoyage des épices brutes (pierre, sable, impuretés)",
+  default_capacity: "100-500 kg/h",
+  default_utilities: "Eau + électricité",
+  models: [
+    { id: "laveuse_epices_econo", name: "Laveuse LE-100", price_ttc: 4900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Verified Supplier (4 ans)", rating: 4.2, review_count: 67, specs: { power: "1.5 kW", capacity: "100 kg/h", dimensions: "1800x700x1200 mm", weight: "280 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "laveuse_epices_std", name: "Laveuse LE-300", price_ttc: 8900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.5, review_count: 134, specs: { power: "2.2 kW", capacity: "300 kg/h", dimensions: "2500x900x1400 mm", weight: "480 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces", last_price_update: "2025-03-15" },
+    { id: "laveuse_epices_premium", name: "Laveuse LE-500", price_ttc: 13900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.8, review_count: 56, specs: { power: "4 kW", capacity: "500 kg/h", dimensions: "3200x1100x1600 mm", weight: "750 kg", material: "Acier inoxydable 316L" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "SAV local", last_price_update: "2025-03-15" }
+  ]
+},
+
+"sechoir_epices": {
+  machine_ref: "sechoir_epices",
+  machine_name: "Séchoir à épices (chambre / four)",
+  machine_role: "Séchage des épices après nettoyage",
+  default_capacity: "50-200 kg/batch",
+  default_utilities: "Électricité ou gaz",
+  models: [
+    { id: "sechoir_epices_econo", name: "Séchoir SE-50", price_ttc: 6900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Verified Supplier (4 ans)", rating: 4.1, review_count: 89, specs: { power: "6 kW", capacity: "50 kg/batch", dimensions: "1500x1200x1800 mm", weight: "450 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "sechoir_epices_std", name: "Séchoir SE-120", price_ttc: 12900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.5, review_count: 178, specs: { power: "12 kW", capacity: "120 kg/batch", dimensions: "2200x1500x2200 mm", weight: "850 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation", last_price_update: "2025-03-15" },
+    { id: "sechoir_epices_premium", name: "Séchoir SE-200", price_ttc: 19900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.8, review_count: 78, specs: { power: "18 kW", capacity: "200 kg/batch", dimensions: "2800x1800x2500 mm", weight: "1250 kg", material: "Acier inoxydable 316L" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+"broyeur_epices": {
+  machine_ref: "broyeur_epices",
+  machine_name: "Broyeur (moulin à épices)",
+  machine_role: "Broyage des épices pour obtenir une poudre fine",
+  default_capacity: "50-200 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "broyeur_epices_econo", name: "Broyeur BE-50", price_ttc: 5900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 112, specs: { power: "4 kW", capacity: "50 kg/h", dimensions: "1000x600x1300 mm", weight: "220 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "broyeur_epices_std", name: "Broyeur BE-120", price_ttc: 10900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 256, specs: { power: "7.5 kW", capacity: "120 kg/h", dimensions: "1300x800x1500 mm", weight: "420 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées", last_price_update: "2025-03-15" },
+    { id: "broyeur_epices_premium", name: "Broyeur BE-200", price_ttc: 17900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 89, specs: { power: "11 kW", capacity: "200 kg/h", dimensions: "1600x1000x1700 mm", weight: "650 kg", material: "Acier inoxydable 316L" }, delivery: "60-75 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+"tamiseuse_epices": {
+  machine_ref: "tamiseuse_epices",
+  machine_name: "Tamiseuse vibrante",
+  machine_role: "Classification granulométrique de la poudre",
+  default_capacity: "100-500 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "tamiseuse_epices_std", name: "Tamiseuse TV-200", price_ttc: 4900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 78, specs: { power: "0.75 kW", capacity: "200 kg/h", dimensions: "1200x800x1100 mm", weight: "180 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "tamiseuse_epices_premium", name: "Tamiseuse TV-500", price_ttc: 8900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.7, review_count: 112, specs: { power: "1.1 kW", capacity: "500 kg/h", dimensions: "1500x1000x1300 mm", weight: "320 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées", last_price_update: "2025-03-15" }
+  ]
+},
+
+"melangeuse_epices": {
+  machine_ref: "melangeuse_epices",
+  machine_name: "Mélangeuse (spice blender)",
+  machine_role: "Mélange personnalisé d'épices (innovation)",
+  default_capacity: "100-500 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "melangeuse_epices_std", name: "Mélangeuse MX-200", price_ttc: 8900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.5, review_count: 98, specs: { power: "2.2 kW", capacity: "200 kg/h", dimensions: "1800x800x1500 mm", weight: "380 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "melangeuse_epices_premium", name: "Mélangeuse MX-500", price_ttc: 15900, brand: "Jinfeng Spice", supplier: "Henan Jinfeng Spice Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.8, review_count: 67, specs: { power: "4 kW", capacity: "500 kg/h", dimensions: "2400x1000x1800 mm", weight: "620 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock Abidjan", after_sales: "Formation recettes", last_price_update: "2025-03-15" }
+  ]
+},
+
+"conditionneuse_sachets": {
+  machine_ref: "conditionneuse_sachets",
+  machine_name: "Conditionneuse (malsachets)",
+  machine_role: "Mise en sachets / pots / boîtes",
+  default_capacity: "500-2000 sachets/h",
+  default_utilities: "Électricité + air comprimé",
+  models: [
+    { id: "conditionneuse_econo", name: "Condi. EP-500", price_ttc: 10900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.2, review_count: 134, specs: { power: "1.5 kW", capacity: "500 sachets/h", dimensions: "2000x800x1800 mm", weight: "450 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "conditionneuse_std", name: "Condi. EP-1200", price_ttc: 19900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 245, specs: { power: "2.2 kW", capacity: "1200 sachets/h", dimensions: "2800x1000x2000 mm", weight: "780 kg", material: "Acier inoxydable 304" }, delivery: "60-75 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées", last_price_update: "2025-03-15" },
+    { id: "conditionneuse_premium", name: "Condi. EP-2000", price_ttc: 32900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 89, specs: { power: "3 kW", capacity: "2000 sachets/h", dimensions: "3500x1200x2200 mm", weight: "1200 kg", material: "Acier inoxydable 316L" }, delivery: "75-90 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance", last_price_update: "2025-03-15" }
+  ]
+},
+
+"etiqueteuse_epices": {
+  machine_ref: "etiqueteuse_epices",
+  machine_name: "Étiqeteuse",
+  machine_role: "Pose étiquettes / numéros de lot",
+  default_capacity: "500-2000 unités/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "etiqueteuse_epices_std", name: "Étiqeteuse ET-800", price_ttc: 5900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Verified Supplier (4 ans)", rating: 4.3, review_count: 112, specs: { power: "0.75 kW", capacity: "800 unités/h", dimensions: "1500x700x1400 mm", weight: "180 kg", material: "Acier inoxydable" }, delivery: "30-45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "etiqueteuse_epices_premium", name: "Étiqeteuse ET-2000", price_ttc: 10900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.7, review_count: 89, specs: { power: "1.1 kW", capacity: "2000 unités/h", dimensions: "2000x900x1600 mm", weight: "280 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation", last_price_update: "2025-03-15" }
+  ]
+},
+"laboratoire_qualite": {
+  machine_ref: "laboratoire_qualite",
+  machine_name: "Laboratoire qualité",
+  machine_role: "Analyse, contrôle et développement de recettes",
+  default_capacity: "Analyse batch",
+  default_utilities: "Électricité",
+  models: [
+    { id: "lab_std", name: "Labo Qualité (base)", price_ttc: 14900, brand: "Labtech", supplier: "Labtech Analytics", supplier_status: "Certified Partner", rating: 4.5, review_count: 45, specs: { power: "1.5 kW", capacity: "Kit analyse", dimensions: "2000x800x2000 mm", weight: "180 kg", material: "Equipement labo" }, delivery: "60 jours", warranty: "12 mois", parts_available: "Stock France", after_sales: "Formation", last_price_update: "2025-03-15" },
+    { id: "lab_premium", name: "Labo Qualité (complet)", price_ttc: 34900, brand: "Labtech", supplier: "Labtech Analytics", supplier_status: "Premium Partner", rating: 4.9, review_count: 28, specs: { power: "3 kW", capacity: "Analyse complète", dimensions: "3000x1500x2200 mm", weight: "380 kg", material: "Equipement labo certifié" }, delivery: "75-90 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance + formation", last_price_update: "2025-03-15" }
+  ]
+},
+
+"micro_doseuse": {
+  machine_ref: "micro_doseuse",
+  machine_name: "Micro-doseuse",
+  machine_role: "Micro-dosage pour petites séries (innovation, R&D)",
+  default_capacity: "10-50 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "micro_doseuse_std", name: "Micro-doseuse MD-25", price_ttc: 7900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.4, review_count: 34, specs: { power: "0.5 kW", capacity: "25 kg/h", dimensions: "1000x600x1200 mm", weight: "120 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique", last_price_update: "2025-03-15" },
+    { id: "micro_doseuse_premium", name: "Micro-doseuse MD-50", price_ttc: 12900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.7, review_count: 28, specs: { power: "0.75 kW", capacity: "50 kg/h", dimensions: "1200x800x1400 mm", weight: "180 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation recettes", last_price_update: "2025-03-15" }
+  ]
+},
+// ==================== MINI-LAITERIE ====================
+
+"cuve_reception": {
+  machine_ref: "cuve_reception",
+  machine_name: "Cuve de réception",
+  machine_role: "Réception et filtration du lait",
+  default_capacity: "5000-20000 L",
+  default_utilities: "Électricité",
+  models: [
+    { id: "cuve_econo", name: "Cuve R-5000", price_ttc: 7900, brand: "Jinfeng Dairy", supplier: "Henan Jinfeng Dairy Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.2, review_count: 67, specs: { power: "1.5 kW", capacity: "5000 L", dimensions: "2500x2000x2500 mm", weight: "800 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "cuve_std", name: "Cuve R-10000", price_ttc: 12900, brand: "Jinfeng Dairy", supplier: "Henan Jinfeng Dairy Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 112, specs: { power: "2.2 kW", capacity: "10000 L", dimensions: "3000x2500x2800 mm", weight: "1200 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces" },
+    { id: "cuve_premium", name: "Cuve R-20000", price_ttc: 19900, brand: "Jinfeng Dairy", supplier: "Henan Jinfeng Dairy Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 45, specs: { power: "3 kW", capacity: "20000 L", dimensions: "3500x3000x3200 mm", weight: "1800 kg", material: "Acier inoxydable 316L" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"pasteurisateur_lait": {
+  machine_ref: "pasteurisateur_lait",
+  machine_name: "Pasteurisateur",
+  machine_role: "Pasteurisation du lait",
+  default_capacity: "500-2000 L/h",
+  default_utilities: "Électricité + eau + vapeur",
+  models: [
+    { id: "pasteurisateur_lait_econo", name: "Pasteurisateur PL-500", price_ttc: 16900, brand: "Jinfeng Dairy", supplier: "Henan Jinfeng Dairy Machinery", supplier_status: "Verified Supplier (6 ans)", rating: 4.3, review_count: 89, specs: { power: "9 kW", capacity: "500 L/h", dimensions: "2000x1000x1800 mm", weight: "650 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "pasteurisateur_lait_std", name: "Pasteurisateur PL-1200", price_ttc: 25900, brand: "Jinfeng Dairy", supplier: "Henan Jinfeng Dairy Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.7, review_count: 156, specs: { power: "15 kW", capacity: "1200 L/h", dimensions: "2800x1200x2000 mm", weight: "950 kg", material: "Acier inoxydable 304" }, delivery: "60-75 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces" },
+    { id: "pasteurisateur_lait_premium", name: "Pasteurisateur PL-2000", price_ttc: 39900, brand: "Jinfeng Dairy", supplier: "Henan Jinfeng Dairy Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 78, specs: { power: "22 kW", capacity: "2000 L/h", dimensions: "3500x1500x2200 mm", weight: "1450 kg", material: "Acier inoxydable 316L" }, delivery: "75-90 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"ecremeuse": {
+  machine_ref: "ecremeuse",
+  machine_name: "Écrémeuse",
+  machine_role: "Séparation de la crème",
+  default_capacity: "500-2000 L/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "ecremeuse_std", name: "Écrémeuse EC-1000", price_ttc: 8900, brand: "Jinfeng Dairy", supplier: "Henan Jinfeng Dairy Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.4, review_count: 78, specs: { power: "3 kW", capacity: "1000 L/h", dimensions: "1200x800x1400 mm", weight: "280 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "ecremeuse_premium", name: "Écrémeuse EC-2000", price_ttc: 14900, brand: "Jinfeng Dairy", supplier: "Henan Jinfeng Dairy Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.8, review_count: 56, specs: { power: "5.5 kW", capacity: "2000 L/h", dimensions: "1500x1000x1600 mm", weight: "420 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées" }
+  ]
+},
+
+"cuve_maturation": {
+  machine_ref: "cuve_maturation",
+  machine_name: "Cuve de maturation",
+  machine_role: "Maturation du yaourt",
+  default_capacity: "500-2000 L",
+  default_utilities: "Électricité + froid",
+  models: [
+    { id: "maturation_std", name: "Cuve MT-1000", price_ttc: 12900, brand: "Jinfeng Dairy", supplier: "Henan Jinfeng Dairy Machinery", supplier_status: "Verified Supplier (6 ans)", rating: 4.5, review_count: 89, specs: { power: "2 kW", capacity: "1000 L", dimensions: "1800x1500x2000 mm", weight: "550 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "maturation_premium", name: "Cuve MT-2000", price_ttc: 19900, brand: "Jinfeng Dairy", supplier: "Henan Jinfeng Dairy Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 67, specs: { power: "3 kW", capacity: "2000 L", dimensions: "2200x1800x2200 mm", weight: "850 kg", material: "Acier inoxydable 304" }, delivery: "60-75 jours", warranty: "24 mois", parts_available: "Stock Abidjan", after_sales: "Formation" }
+  ]
+},
+
+"remplisseuse_lait": {
+  machine_ref: "remplisseuse_lait",
+  machine_name: "Remplisseuse",
+  machine_role: "Conditionnement en pots/bouteilles",
+  default_capacity: "1000-5000 pots/h",
+  default_utilities: "Électricité + air comprimé",
+  models: [
+    { id: "remplisseuse_lait_econo", name: "Remplisseuse RL-1000", price_ttc: 10900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 112, specs: { power: "1.5 kW", capacity: "1000 pots/h", dimensions: "2000x1000x1800 mm", weight: "450 kg", material: "Acier inoxydable 304" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "remplisseuse_lait_std", name: "Remplisseuse RL-3000", price_ttc: 18900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 178, specs: { power: "2.2 kW", capacity: "3000 pots/h", dimensions: "2800x1200x2000 mm", weight: "720 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées" },
+    { id: "remplisseuse_lait_premium", name: "Remplisseuse RL-5000", price_ttc: 28900, brand: "Sainty Pack", supplier: "Sainty Packaging Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.8, review_count: 89, specs: { power: "3 kW", capacity: "5000 pots/h", dimensions: "3500x1500x2200 mm", weight: "1100 kg", material: "Acier inoxydable 316L" }, delivery: "60-75 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"chambre_froide": {
+  machine_ref: "chambre_froide",
+  machine_name: "Chambre froide",
+  machine_role: "Stockage réfrigéré",
+  default_capacity: "20000-50000 L",
+  default_utilities: "Électricité",
+  models: [
+    { id: "froid_std", name: "Chambre CF-20000", price_ttc: 15900, brand: "Jinfeng Dairy", supplier: "Henan Jinfeng Dairy Machinery", supplier_status: "Verified Supplier (6 ans)", rating: 4.4, review_count: 78, specs: { power: "3 kW", capacity: "20000 L", dimensions: "4000x3000x2500 mm", weight: "1200 kg", material: "Panneaux sandwich" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "froid_premium", name: "Chambre CF-50000", price_ttc: 25900, brand: "Jinfeng Dairy", supplier: "Henan Jinfeng Dairy Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.7, review_count: 56, specs: { power: "5 kW", capacity: "50000 L", dimensions: "6000x4000x3000 mm", weight: "2200 kg", material: "Panneaux sandwich isolés" }, delivery: "60-75 jours", warranty: "24 mois", parts_available: "Stock Abidjan", after_sales: "Contrat maintenance" }
+  ]
+},
+// ==================== SMARTPHONES & TABLETTES ====================
+
+"ligne_smt": {
+  machine_ref: "ligne_smt",
+  machine_name: "Ligne SMT",
+  machine_role: "CMS cartes mères",
+  default_capacity: "50000 comp/heure",
+  default_utilities: "Électricité 20kW",
+  models: [
+    { id: "smt_econo", name: "Ligne SMT-ECO", price_ttc: 120000, brand: "JUKI", supplier: "JUKI Automation", supplier_status: "Gold Supplier (8 ans)", rating: 4.3, review_count: 89, specs: { power: "15 kW", capacity: "30000 comp/h", dimensions: "8000x1500x1800 mm", weight: "2500 kg", material: "Acier" }, delivery: "60-75 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "smt_std", name: "Ligne SMT-STD", price_ttc: 200000, brand: "JUKI", supplier: "JUKI Automation", supplier_status: "Gold Supplier (8 ans)", rating: 4.7, review_count: 145, specs: { power: "20 kW", capacity: "50000 comp/h", dimensions: "10000x1800x2000 mm", weight: "3500 kg", material: "Acier inoxydable" }, delivery: "75-90 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces" },
+    { id: "smt_premium", name: "Ligne SMT-PRO", price_ttc: 320000, brand: "JUKI", supplier: "JUKI Automation", supplier_status: "Platinum Partner (10 ans)", rating: 4.9, review_count: 67, specs: { power: "25 kW", capacity: "80000 comp/h", dimensions: "12000x2000x2200 mm", weight: "5000 kg", material: "Acier inoxydable 316L" }, delivery: "90-105 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"four_refusion": {
+  machine_ref: "four_refusion",
+  machine_name: "Four à refusion",
+  machine_role: "Brasage CMS",
+  default_capacity: "Standard",
+  default_utilities: "Électricité",
+  models: [
+    { id: "refusion_econo", name: "Four RF-ECO", price_ttc: 25000, brand: "Heller", supplier: "Heller Industries", supplier_status: "Verified Supplier (6 ans)", rating: 4.2, review_count: 78, specs: { power: "8 kW", capacity: "2000 x 400 mm", dimensions: "3000x1000x1500 mm", weight: "800 kg", material: "Acier" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "refusion_std", name: "Four RF-STD", price_ttc: 40000, brand: "Heller", supplier: "Heller Industries", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 134, specs: { power: "12 kW", capacity: "3000 x 500 mm", dimensions: "4000x1200x1600 mm", weight: "1200 kg", material: "Acier inoxydable" }, delivery: "60-75 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation" },
+    { id: "refusion_premium", name: "Four RF-PRO", price_ttc: 60000, brand: "Heller", supplier: "Heller Industries", supplier_status: "Platinum Partner (9 ans)", rating: 4.9, review_count: 56, specs: { power: "15 kW", capacity: "4000 x 600 mm", dimensions: "5000x1500x1800 mm", weight: "1800 kg", material: "Acier inoxydable 304" }, delivery: "75-90 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"robot_encollage": {
+  machine_ref: "robot_encollage",
+  machine_name: "Robot encollage",
+  machine_role: "Pose glue",
+  default_capacity: "200 cartes/heure",
+  default_utilities: "Air comprimé",
+  models: [
+    { id: "encollage_econo", name: "Robot EN-ECO", price_ttc: 30000, brand: "Musashi", supplier: "Musashi Engineering", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 67, specs: { power: "0.5 kW", capacity: "150 cartes/h", dimensions: "1200x800x1400 mm", weight: "250 kg", material: "Aluminium" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "encollage_std", name: "Robot EN-STD", price_ttc: 50000, brand: "Musashi", supplier: "Musashi Engineering", supplier_status: "Gold Supplier (7 ans)", rating: 4.7, review_count: 112, specs: { power: "0.8 kW", capacity: "200 cartes/h", dimensions: "1500x1000x1600 mm", weight: "380 kg", material: "Aluminium renforcé" }, delivery: "60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées" },
+    { id: "encollage_premium", name: "Robot EN-PRO", price_ttc: 80000, brand: "Musashi", supplier: "Musashi Engineering", supplier_status: "Platinum Partner (8 ans)", rating: 4.9, review_count: 45, specs: { power: "1 kW", capacity: "300 cartes/h", dimensions: "2000x1200x1800 mm", weight: "550 kg", material: "Aluminium anodisé" }, delivery: "75 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"presse_ecran": {
+  machine_ref: "presse_ecran",
+  machine_name: "Presse écran",
+  machine_role: "Montage écran",
+  default_capacity: "100 smartphones/heure",
+  default_utilities: "Air comprimé",
+  models: [
+    { id: "presse_ecran_econo", name: "Presse PE-ECO", price_ttc: 18000, brand: "Shenzhen Xinyi", supplier: "Xinyi Machinery", supplier_status: "Verified Supplier (4 ans)", rating: 4.1, review_count: 89, specs: { power: "0.8 kW", capacity: "80 smartphones/h", dimensions: "1000x800x1500 mm", weight: "200 kg", material: "Acier" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "presse_ecran_std", name: "Presse PE-STD", price_ttc: 30000, brand: "Shenzhen Xinyi", supplier: "Xinyi Machinery", supplier_status: "Gold Supplier (6 ans)", rating: 4.5, review_count: 156, specs: { power: "1.2 kW", capacity: "100 smartphones/h", dimensions: "1200x1000x1600 mm", weight: "320 kg", material: "Acier inoxydable" }, delivery: "60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation" },
+    { id: "presse_ecran_premium", name: "Presse PE-PRO", price_ttc: 48000, brand: "Shenzhen Xinyi", supplier: "Xinyi Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.8, review_count: 78, specs: { power: "1.5 kW", capacity: "150 smartphones/h", dimensions: "1500x1200x1800 mm", weight: "500 kg", material: "Acier inoxydable 304" }, delivery: "75 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "SAV local" }
+  ]
+},
+
+"testeur_fonctionnel_smartphone": {
+  machine_ref: "testeur_fonctionnel_smartphone",
+  machine_name: "Testeur fonctionnel",
+  machine_role: "Tests complets",
+  default_capacity: "80 smartphones/heure",
+  default_utilities: "Électricité",
+  models: [
+    { id: "testeur_smart_econo", name: "Testeur TF-ECO", price_ttc: 36000, brand: "Keysight", supplier: "Keysight Technologies", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 78, specs: { power: "0.5 kW", capacity: "60 smartphones/h", dimensions: "800x600x1400 mm", weight: "80 kg", material: "Plastique renforcé" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "testeur_smart_std", name: "Testeur TF-STD", price_ttc: 60000, brand: "Keysight", supplier: "Keysight Technologies", supplier_status: "Gold Supplier (7 ans)", rating: 4.7, review_count: 134, specs: { power: "0.8 kW", capacity: "80 smartphones/h", dimensions: "1000x800x1600 mm", weight: "120 kg", material: "Aluminium" }, delivery: "60-75 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées" },
+    { id: "testeur_smart_premium", name: "Testeur TF-PRO", price_ttc: 90000, brand: "Keysight", supplier: "Keysight Technologies", supplier_status: "Platinum Partner (8 ans)", rating: 4.9, review_count: 56, specs: { power: "1 kW", capacity: "120 smartphones/h", dimensions: "1200x1000x1800 mm", weight: "180 kg", material: "Aluminium anodisé" }, delivery: "75-90 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"etiqueteuse_imei": {
+  machine_ref: "etiqueteuse_imei",
+  machine_name: "Machine à étiqueter IMEI",
+  machine_role: "Marquage IMEI",
+  default_capacity: "100 smartphones/heure",
+  default_utilities: "Électricité",
+  models: [
+    { id: "imei_std", name: "Étiqueteuse IMEI-STD", price_ttc: 10000, brand: "Cab", supplier: "Cab Produkttechnik", supplier_status: "Verified Supplier (5 ans)", rating: 4.4, review_count: 89, specs: { power: "0.3 kW", capacity: "100 smartphones/h", dimensions: "600x500x1200 mm", weight: "50 kg", material: "Acier inoxydable" }, delivery: "30-45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "imei_premium", name: "Étiqueteuse IMEI-PRO", price_ttc: 15000, brand: "Cab", supplier: "Cab Produkttechnik", supplier_status: "Gold Supplier (6 ans)", rating: 4.8, review_count: 67, specs: { power: "0.5 kW", capacity: "200 smartphones/h", dimensions: "800x600x1400 mm", weight: "80 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation" }
+  ]
+},
+
+"controle_optique": {
+  machine_ref: "controle_optique",
+  machine_name: "Poste contrôle optique",
+  machine_role: "Auto-inspection",
+  default_capacity: "100 smartphones/heure",
+  default_utilities: "Électricité",
+  models: [
+    { id: "optique_std", name: "Contrôle AOI-STD", price_ttc: 25000, brand: "Omron", supplier: "Omron Automation", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 98, specs: { power: "0.5 kW", capacity: "100 smartphones/h", dimensions: "1000x800x1500 mm", weight: "200 kg", material: "Acier" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "optique_premium", name: "Contrôle AOI-PRO", price_ttc: 40000, brand: "Omron", supplier: "Omron Automation", supplier_status: "Platinum Partner (9 ans)", rating: 4.9, review_count: 78, specs: { power: "0.8 kW", capacity: "200 smartphones/h", dimensions: "1200x1000x1700 mm", weight: "300 kg", material: "Acier inoxydable" }, delivery: "60-75 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+// ==================== ALIMENTS POUR BÉTAIL ====================
+
+"granulateur": {
+  machine_ref: "granulateur",
+  machine_name: "Granulateur",
+  machine_role: "Granulation des aliments pour bétail",
+  default_capacity: "500-2000 kg/h",
+  default_utilities: "Électricité",
+  models: [
+    { id: "granulateur_econo", name: "Granulateur G-500", price_ttc: 18900, brand: "Jinfeng Feed", supplier: "Henan Jinfeng Feed Machinery", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 78, specs: { power: "30 kW", capacity: "500 kg/h", dimensions: "2000x1000x1800 mm", weight: "1200 kg", material: "Acier inoxydable 304" }, delivery: "45-60 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "granulateur_std", name: "Granulateur G-1200", price_ttc: 28900, brand: "Jinfeng Feed", supplier: "Henan Jinfeng Feed Machinery", supplier_status: "Gold Supplier (7 ans)", rating: 4.7, review_count: 134, specs: { power: "55 kW", capacity: "1200 kg/h", dimensions: "2800x1200x2200 mm", weight: "2200 kg", material: "Acier inoxydable 304" }, delivery: "60-75 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation + pièces" },
+    { id: "granulateur_premium", name: "Granulateur G-2000", price_ttc: 45900, brand: "Jinfeng Feed", supplier: "Henan Jinfeng Feed Machinery", supplier_status: "Gold Supplier (8 ans)", rating: 4.9, review_count: 67, specs: { power: "90 kW", capacity: "2000 kg/h", dimensions: "3500x1500x2500 mm", weight: "3500 kg", material: "Acier inoxydable 316L" }, delivery: "75-90 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+// ==================== ASSEMBLAGE D'ORDINATEURS ====================
+
+"poste_assemblage_pc": {
+  machine_ref: "poste_assemblage_pc",
+  machine_name: "Poste assemblage",
+  machine_role: "Montage manuel",
+  default_capacity: "100 PC/jour",
+  default_utilities: "Standard",
+  models: [
+    { id: "poste_assemblage_econo", name: "Poste ECO", price_ttc: 8000, brand: "Ikeuchi", supplier: "Ikeuchi Assembly", supplier_status: "Verified Supplier (4 ans)", rating: 4.2, review_count: 67, specs: { power: "0.2 kW", capacity: "80 PC/jour", dimensions: "1500x800x1800 mm", weight: "80 kg", material: "Acier" }, delivery: "30 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "poste_assemblage_std", name: "Poste STD", price_ttc: 10000, brand: "Ikeuchi", supplier: "Ikeuchi Assembly", supplier_status: "Gold Supplier (6 ans)", rating: 4.5, review_count: 112, specs: { power: "0.3 kW", capacity: "100 PC/jour", dimensions: "1800x900x1900 mm", weight: "100 kg", material: "Acier inoxydable" }, delivery: "45 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation" },
+    { id: "poste_assemblage_premium", name: "Poste PRO", price_ttc: 15000, brand: "Ikeuchi", supplier: "Ikeuchi Assembly", supplier_status: "Platinum Partner (8 ans)", rating: 4.8, review_count: 56, specs: { power: "0.5 kW", capacity: "150 PC/jour", dimensions: "2000x1000x2000 mm", weight: "120 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"machine_visser": {
+  machine_ref: "machine_visser",
+  machine_name: "Machine à visser",
+  machine_role: "Vissage automatique",
+  default_capacity: "50 PC/heure",
+  default_utilities: "Air comprimé",
+  models: [
+    { id: "visser_econo", name: "Visseuse ECO", price_ttc: 15000, brand: "Nitto", supplier: "Nitto Seiko", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 78, specs: { power: "0.5 kW", capacity: "40 PC/h", dimensions: "800x600x1400 mm", weight: "150 kg", material: "Acier" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "visser_std", name: "Visseuse STD", price_ttc: 20000, brand: "Nitto", supplier: "Nitto Seiko", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 134, specs: { power: "0.8 kW", capacity: "50 PC/h", dimensions: "1000x800x1500 mm", weight: "200 kg", material: "Acier inoxydable" }, delivery: "60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées" },
+    { id: "visser_premium", name: "Visseuse PRO", price_ttc: 30000, brand: "Nitto", supplier: "Nitto Seiko", supplier_status: "Platinum Partner (8 ans)", rating: 4.9, review_count: 67, specs: { power: "1 kW", capacity: "70 PC/h", dimensions: "1200x1000x1600 mm", weight: "280 kg", material: "Acier inoxydable 304" }, delivery: "75 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"testeur_alimentation": {
+  machine_ref: "testeur_alimentation",
+  machine_name: "Testeur alimentation",
+  machine_role: "Test PSU",
+  default_capacity: "50 PC/heure",
+  default_utilities: "Électricité",
+  models: [
+    { id: "testeur_alim_econo", name: "Testeur ALIM-ECO", price_ttc: 10000, brand: "Chroma", supplier: "Chroma ATE", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 89, specs: { power: "0.3 kW", capacity: "40 PC/h", dimensions: "600x500x1200 mm", weight: "50 kg", material: "Plastique renforcé" }, delivery: "45 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "testeur_alim_std", name: "Testeur ALIM-STD", price_ttc: 15000, brand: "Chroma", supplier: "Chroma ATE", supplier_status: "Gold Supplier (7 ans)", rating: 4.7, review_count: 156, specs: { power: "0.5 kW", capacity: "50 PC/h", dimensions: "800x600x1400 mm", weight: "80 kg", material: "Aluminium" }, delivery: "60 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation" },
+    { id: "testeur_alim_premium", name: "Testeur ALIM-PRO", price_ttc: 25000, brand: "Chroma", supplier: "Chroma ATE", supplier_status: "Platinum Partner (8 ans)", rating: 4.9, review_count: 78, specs: { power: "0.8 kW", capacity: "70 PC/h", dimensions: "1000x800x1600 mm", weight: "120 kg", material: "Aluminium anodisé" }, delivery: "75 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"testeur_ram": {
+  machine_ref: "testeur_ram",
+  machine_name: "Testeur mémoire RAM",
+  machine_role: "Test RAM",
+  default_capacity: "100 barrettes/heure",
+  default_utilities: "Électricité",
+  models: [
+    { id: "testeur_ram_econo", name: "RAM Test ECO", price_ttc: 8000, brand: "ADATA", supplier: "ADATA Technology", supplier_status: "Verified Supplier (4 ans)", rating: 4.2, review_count: 67, specs: { power: "0.2 kW", capacity: "80 barrettes/h", dimensions: "400x400x1000 mm", weight: "30 kg", material: "Plastique" }, delivery: "30 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "testeur_ram_std", name: "RAM Test STD", price_ttc: 12000, brand: "ADATA", supplier: "ADATA Technology", supplier_status: "Gold Supplier (6 ans)", rating: 4.5, review_count: 112, specs: { power: "0.3 kW", capacity: "100 barrettes/h", dimensions: "500x500x1200 mm", weight: "50 kg", material: "Aluminium" }, delivery: "45 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation" },
+    { id: "testeur_ram_premium", name: "RAM Test PRO", price_ttc: 18000, brand: "ADATA", supplier: "ADATA Technology", supplier_status: "Platinum Partner (7 ans)", rating: 4.8, review_count: 56, specs: { power: "0.5 kW", capacity: "150 barrettes/h", dimensions: "600x600x1400 mm", weight: "80 kg", material: "Acier inoxydable" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"bruleur_bios": {
+  machine_ref: "bruleur_bios",
+  machine_name: "Brûleur BIOS",
+  machine_role: "Flash BIOS",
+  default_capacity: "50 PC/heure",
+  default_utilities: "Électricité",
+  models: [
+    { id: "bios_econo", name: "Flash BIOS ECO", price_ttc: 6000, brand: "Dediprog", supplier: "Dediprog Programmer", supplier_status: "Verified Supplier (5 ans)", rating: 4.3, review_count: 78, specs: { power: "0.2 kW", capacity: "40 PC/h", dimensions: "300x300x800 mm", weight: "20 kg", material: "Plastique" }, delivery: "30 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "bios_std", name: "Flash BIOS STD", price_ttc: 10000, brand: "Dediprog", supplier: "Dediprog Programmer", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 134, specs: { power: "0.3 kW", capacity: "50 PC/h", dimensions: "400x400x900 mm", weight: "35 kg", material: "Aluminium" }, delivery: "45 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées" },
+    { id: "bios_premium", name: "Flash BIOS PRO", price_ttc: 15000, brand: "Dediprog", supplier: "Dediprog Programmer", supplier_status: "Platinum Partner (8 ans)", rating: 4.9, review_count: 67, specs: { power: "0.5 kW", capacity: "70 PC/h", dimensions: "500x500x1000 mm", weight: "50 kg", material: "Acier inoxydable" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"config_os": {
+  machine_ref: "config_os",
+  machine_name: "Configuration OS",
+  machine_role: "Installation OS",
+  default_capacity: "50 PC/heure",
+  default_utilities: "Électricité",
+  models: [
+    { id: "config_os_econo", name: "Config OS ECO", price_ttc: 10000, brand: "Microsoft", supplier: "Microsoft Partner", supplier_status: "Verified Supplier (5 ans)", rating: 4.2, review_count: 89, specs: { power: "0.5 kW", capacity: "40 PC/h", dimensions: "800x600x1400 mm", weight: "60 kg", material: "Acier" }, delivery: "30 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "config_os_std", name: "Config OS STD", price_ttc: 15000, brand: "Microsoft", supplier: "Microsoft Partner", supplier_status: "Gold Supplier (7 ans)", rating: 4.6, review_count: 156, specs: { power: "0.8 kW", capacity: "50 PC/h", dimensions: "1000x800x1600 mm", weight: "90 kg", material: "Acier inoxydable" }, delivery: "45 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Formation" },
+    { id: "config_os_premium", name: "Config OS PRO", price_ttc: 25000, brand: "Microsoft", supplier: "Microsoft Partner", supplier_status: "Platinum Partner (8 ans)", rating: 4.9, review_count: 78, specs: { power: "1 kW", capacity: "70 PC/h", dimensions: "1200x1000x1800 mm", weight: "120 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+},
+
+"poste_emballage_pc": {
+  machine_ref: "poste_emballage_pc",
+  machine_name: "Poste emballage",
+  machine_role: "Conditionnement",
+  default_capacity: "50 PC/heure",
+  default_utilities: "Électricité",
+  models: [
+    { id: "emballage_pc_econo", name: "Emballage ECO", price_ttc: 6000, brand: "Sealed Air", supplier: "Sealed Air Packaging", supplier_status: "Verified Supplier (4 ans)", rating: 4.2, review_count: 67, specs: { power: "0.5 kW", capacity: "40 PC/h", dimensions: "1500x800x1800 mm", weight: "150 kg", material: "Acier" }, delivery: "30 jours", warranty: "12 mois", parts_available: "Stock Chine", after_sales: "Support technique" },
+    { id: "emballage_pc_std", name: "Emballage STD", price_ttc: 8000, brand: "Sealed Air", supplier: "Sealed Air Packaging", supplier_status: "Gold Supplier (6 ans)", rating: 4.5, review_count: 134, specs: { power: "0.8 kW", capacity: "50 PC/h", dimensions: "1800x1000x2000 mm", weight: "200 kg", material: "Acier inoxydable" }, delivery: "45 jours", warranty: "18 mois", parts_available: "Stock Abidjan", after_sales: "Pièces détachées" },
+    { id: "emballage_pc_premium", name: "Emballage PRO", price_ttc: 12000, brand: "Sealed Air", supplier: "Sealed Air Packaging", supplier_status: "Platinum Partner (7 ans)", rating: 4.8, review_count: 56, specs: { power: "1 kW", capacity: "70 PC/h", dimensions: "2000x1200x2200 mm", weight: "280 kg", material: "Acier inoxydable 304" }, delivery: "60 jours", warranty: "24 mois", parts_available: "Stock France", after_sales: "Contrat maintenance" }
+  ]
+}
+};
+
+    let cart = [];
+    let compareList = [];
+
+    function escapeHtml(str) { if (!str) return ''; return String(str).replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;'); }
+    
+    function getActiveEmail() { return localStorage.getItem('p2i_user_email') || localStorage.getItem('p2i_active_user') || ''; }
+    
+    function getUrlParams() {
+      const p = new URLSearchParams(window.location.search);
+      return { 
+        upId: p.get('up_id') || '', 
+        upNom: decodeURIComponent(p.get('up_nom') || ''), 
+        filiere: decodeURIComponent(p.get('filiere') || ''), 
+        machineId: p.get('machine_id') || '', 
+        machineName: decodeURIComponent(p.get('machine_name') || ''), 
+        machineRole: decodeURIComponent(p.get('machine_role') || ''), 
+        machineCapacity: decodeURIComponent(p.get('machine_capacity') || ''), 
+        machineUtilities: decodeURIComponent(p.get('machine_utilities') || '')
+      };
+    }
+
+function getMachineRefKey(name) {
+  const n = (name || '').toLowerCase(); 
+  
+  // ==============================================
+  // ASSEMBLAGE D'ORDINATEURS (priorité absolue)
+  // ==============================================
+  if (name === "Poste assemblage") return 'poste_assemblage_pc';
+  if (name === "Machine à visser") return 'machine_visser';
+  if (name === "Testeur alimentation") return 'testeur_alimentation';
+  if (name === "Testeur mémoire RAM") return 'testeur_ram';
+  if (name === "Brûleur BIOS") return 'bruleur_bios';
+  if (name === "Configuration OS") return 'config_os';
+  if (name === "Poste emballage") return 'poste_emballage_pc';
+  
+  // Fallback pour assemblage ordinateurs (recherche partielle)
+  if (n.includes('poste assemblage')) return 'poste_assemblage_pc';
+  if (n.includes('visser')) return 'machine_visser';
+  if (n.includes('testeur alimentation')) return 'testeur_alimentation';
+  if (n.includes('testeur mémoire') || n.includes('testeur ram')) return 'testeur_ram';
+  if (n.includes('bios')) return 'bruleur_bios';
+  if (n.includes('configuration') || n.includes('os')) return 'config_os';
+  if (n.includes('emballage')) return 'poste_emballage_pc';
+  
+  // ==============================================
+  // PRESSE À HUILE
+  // ==============================================
+  if (name === "Presse à huile") return 'presse_huile';
+  if (n === 'presse à huile') return 'presse_huile';
+  if (n.includes('presse à huile')) return 'presse_huile';
+  
+  // ==============================================
+  // TRANSFORMATION D'ÉPICES
+  // ==============================================
+  if (name === "Laveuse-décanteuse") return 'laveuse_decanteuse_epices';
+  if (name === "Séchoir") return 'sechoir_epices';
+  if (name === "Broyeur (moulin à épices)") return 'broyeur_epices';
+  if (name === "Tamiseuse vibrante") return 'tamiseuse_epices';
+  if (name === "Mélangeuse (spice blender)") return 'melangeuse_epices';
+  if (name === "Conditionneuse") return 'conditionneuse_sachets';
+  if (name === "Étiqeteuse") return 'etiqueteuse_epices';
+  if (name === "Laboratoire qualité (module innovation)") return 'laboratoire_qualite';
+  if (name === "Micro-doseuse (module innovation)") return 'micro_doseuse';
+  
+  // Fallback pour épices (recherche partielle)
+  if (n.includes('laveuse')) return 'laveuse_decanteuse_epices';
+  if (n.includes('séchoir') || n.includes('sechoir')) return 'sechoir_epices';
+  if (n.includes('broyeur')) return 'broyeur_epices';
+  if (n.includes('tamiseuse')) return 'tamiseuse_epices';
+  if (n.includes('mélangeuse') || n.includes('melangeuse')) return 'melangeuse_epices';
+  if (n.includes('conditionneuse')) return 'conditionneuse_sachets';
+  if (n.includes('étiqueteuse') || n.includes('etiqueteuse')) return 'etiqueteuse_epices';
+  if (n.includes('laboratoire') || n.includes('labo')) return 'laboratoire_qualite';
+  if (n.includes('micro-doseuse') || n.includes('micro doseuse')) return 'micro_doseuse';
+  
+  // ==============================================
+  // SMARTPHONES & TABLETTES
+  // ==============================================
+  if (n.includes('four à refusion') || n.includes('four refusion')) return 'four_refusion';
+  if (n.includes('ligne smt') || (n.includes('smt') && n.includes('ligne'))) return 'ligne_smt';
+  if (n.includes('robot encollage')) return 'robot_encollage';
+  if (n.includes('presse écran')) return 'presse_ecran';
+  if (n.includes('testeur fonctionnel')) return 'testeur_fonctionnel_smartphone';
+  if (n.includes('étiqueter imei') || n.includes('etiqueter imei')) return 'etiqueteuse_imei';
+  if (n.includes('contrôle optique') || n.includes('controle optique')) return 'controle_optique';
+  
+  // ==============================================
+  // BOULANGERIE INDUSTRIELLE
+  // ==============================================
+  
+  // Pétrin
+  if (n.includes('pétrin') || n.includes('petrin')) return 'petrin_spiral';
+  
+  // Diviseuse
+  if (n.includes('diviseuse')) return 'diviseuse_bouleuse';
+  
+  // Façonneuse
+  if (n.includes('façonneuse') || n.includes('faconneuse')) return 'faconneuse';
+  
+  // Chambre de pousse / fermentation
+  if ((n.includes('chambre') && n.includes('pousse')) || 
+      (n.includes('chambre') && n.includes('fermentation'))) return 'chambre_pousse';
+  
+  // Four tunnel / rotatif
+  if ((n.includes('four') && n.includes('tunnel')) || 
+      (n.includes('four') && n.includes('rotatif'))) return 'four_tunnel';
+  
+  // Trancheuse
+  if (n.includes('trancheuse')) return 'trancheuse';
+  
+  // Emballeuse / ensacheuse
+  if (n.includes('emballeuse') || n.includes('ensacheuse')) return 'emballeuse';
+  
+  // ==============================================
+  // CONSERVERIE DE LÉGUMES
+  // ==============================================
+  
+  // Laveuse-découpeuse
+  if (n.includes('laveuse') || n.includes('découpeuse') || n.includes('decoupeuse')) return 'laveuse_decoupeuse';
+  
+  // Blanchisseur
+  if (n.includes('blanchisseur') || n.includes('blanchiment')) return 'blanchisseur';
+  
+  // Remplisseuse-doseuse
+  if (n.includes('remplisseuse') || n.includes('doseuse')) return 'remplisseuse_doseuse';
+  
+  // Scelleuse-operculieuse
+  if (n.includes('scelleuse') || n.includes('operculieuse')) return 'scelleuse_operculieuse';
+  
+  // Autoclave / stérilisateur
+  if (n.includes('autoclave') || n.includes('stérilisateur') || n.includes('sterilisateur')) return 'autoclave';
+  
+  // Étiqeteuse
+  if (n.includes('étiqueteuse') || n.includes('etiqueteuse')) return 'etiqueteuse';
+  
+  // Cartonneuse / emballeuse secondaire
+  if (n.includes('cartonneuse') || (n.includes('conditionnement') && n.includes('secondaire'))) return 'cartonneuse_emballeuse';
+  
+  // ==============================================
+  // BISCUITERIE INDUSTRIELLE
+  // ==============================================
+  
+  // Mélangeur / pétrin biscuiterie
+  if (n.includes('mélangeur') || n.includes('melangeur') || (n.includes('pétrin') && n.includes('biscuit'))) return 'melangeur_biscuiterie';
+  
+  // Lamineuse
+  if (n.includes('lamineuse')) return 'lamineuse_biscuiterie';
+  
+  // Façonneuse rotative
+  if ((n.includes('façonneuse') || n.includes('faconneuse')) && n.includes('rotative')) return 'faconneuse_rotative';
+  if (n.includes('rotative') && n.includes('biscuit')) return 'faconneuse_rotative';
+  
+  // Four à biscuits
+  if (n.includes('four') && (n.includes('biscuit') || n.includes('biscuiterie'))) return 'four_biscuiterie';
+  
+  // Refroidisseur
+  if (n.includes('refroidisseur')) return 'refroidisseur_biscuiterie';
+  
+  // Enrobeuse / saupoudreuse
+  if (n.includes('enrobeuse') || n.includes('saupoudreuse')) return 'enrobeuse_saupoudreuse';
+  
+  // Emballeuse horizontale
+  if (n.includes('emballeuse') && n.includes('horizontale')) return 'emballeuse_horizontale';
+  
+  // ==============================================
+  // JUS & BOISSONS
+  // ==============================================
+  
+  // Laveuse-trieuse
+  if (n.includes('laveuse') || (n.includes('trieuse'))) return 'laveuse_trieuse';
+  
+  // Éplucheuse-dénoyauteuse
+  if (n.includes('éplucheuse') || n.includes('eplucheuse') || n.includes('dénoyauteuse')) return 'eplucheuse_denoyauteuse';
+  
+  // Broyeur-raspeur
+  if (n.includes('broyeur') || n.includes('raspeur')) return 'broyeur_raspeur';
+  
+  // Filtreuse / tamiseuse
+  if (n.includes('filtreuse') || n.includes('tamiseuse')) return 'filtreuse_tamiseuse';
+  
+  // Mélangeuse / doseuse
+  if ((n.includes('mélangeuse') || n.includes('melangeuse')) || n.includes('doseuse')) return 'melangeuse_doseuse';
+  
+  // Pasteurisateur
+  if (n.includes('pasteurisateur')) return 'pasteurisateur';
+  
+  // Remplisseuse-scelleuse
+  if ((n.includes('remplisseuse') || n.includes('scelleuse'))) return 'remplisseuse_scelleuse';
+  
+  // Concentrateur / évaporateur
+  if (n.includes('concentrateur') || n.includes('évaporateur') || n.includes('evaporateur')) return 'concentrateur_evaporateur';
+  
+  // ==============================================
+  // HUILES ALIMENTAIRES
+  // ==============================================
+  
+  // Nettoyeur-décortiqueur
+  if (n.includes('nettoyeur') || n.includes('décortiqueur') || n.includes('decortiqueur')) return 'nettoyeur_decortiqueur';
+  
+  // Broyeur / concasseur
+  if (n.includes('concasseur')) return 'broyeur_concasseur_huile';
+  if ((n.includes('broyeur') && n.includes('huile')) || (n.includes('broyeur') && n.includes('graine'))) return 'broyeur_concasseur_huile';
+  
+  // Cuiseur
+  if (n.includes('cuiseur')) return 'cuiseur_huile';
+  
+  // Presse à huile
+  if (n.includes('presse') && n.includes('huile') && !n.includes('filtre')) return 'presse_huile';
+  
+  // Filtre-presse
+  if (n.includes('filtre') && n.includes('presse')) return 'filtre_presse_huile';
+  
+  // Clarificateur / décanteuse
+  if (n.includes('clarificateur') || n.includes('décanteuse') || n.includes('decanteuse')) return 'clarificateur_decanteuse';
+  
+  // Remplisseuse (huile)
+  if (n.includes('remplisseuse') && (n.includes('huile') || n.includes('bidon'))) return 'remplisseuse_huile';
+  
+  // MODULE RAFFINERIE
+  if (n.includes('neutraliseur')) return 'neutraliseur_huile';
+  if (n.includes('décoloreur') || n.includes('decoloreur')) return 'decoloreur_huile';
+  if (n.includes('désodoriseur') || n.includes('desodoriseur')) return 'desodoriseur_huile';
+  if (n.includes('fractionneur')) return 'fractionneur_huile';
+  
+  // ==============================================
+  // MINI-LAITERIE
+  // ==============================================
+  
+  if (n.includes('cuve') && n.includes('réception')) return 'cuve_reception';
+  if (n.includes('pasteurisateur')) return 'pasteurisateur_lait';
+  if (n.includes('écrémeuse') || n.includes('ecremeuse')) return 'ecremeuse';
+  if (n.includes('maturation')) return 'cuve_maturation';
+  if (n.includes('remplisseuse')) return 'remplisseuse_lait';
+  if (n.includes('chambre') && n.includes('froide')) return 'chambre_froide';  
+  
+  // ==============================================
+  // ALIMENTS POUR BÉTAIL
+  // ==============================================
+  
+  if (n.includes('granulateur')) return 'granulateur';
+  
+  // ==============================================
+  // FALLBACK (anciens noms)
+  // ==============================================
+  if (n.includes('boulangerie') || n.includes('boulangerie industrielle')) return 'petrin_spiral';
+  
+  return null;
+} 
+   
+function displayMachineInfo(params) {
+      document.getElementById('upName').innerHTML = `<i class="fas fa-building"></i> ${escapeHtml(params.upNom || 'Unité inconnue')}`;
+      document.getElementById('upFiliere').innerHTML = `<i class="fas fa-chart-line"></i> ${escapeHtml(params.filiere || 'Filière non spécifiée')}`;
+      document.getElementById('machineName').innerHTML = `<i class="fas fa-industry"></i> ${escapeHtml(params.machineName || 'Machine inconnue')}`;
+      document.getElementById('machineRole').innerHTML = `<i class="fas fa-tasks"></i> ${escapeHtml(params.machineRole || 'Rôle non spécifié')}`;
+      document.getElementById('machineCapacity').innerHTML = `<i class="fas fa-weight-hanging"></i> ${escapeHtml(params.machineCapacity || 'Capacité non spécifiée')}`;
+      document.getElementById('machineUtilities').innerHTML = `<i class="fas fa-bolt"></i> ${escapeHtml(params.machineUtilities || 'Utilités non spécifiées')}`;
+    }
+
+    function getMachineImage(modelName) {
+      return '';
+    }
+
+    function displayModels(params) {
+  const grid = document.getElementById('modelsGrid');
+  
+  // PRIORITÉ ABSOLUE au machine_key
+  let machineKey = null;
+  if (params.machine_key && MODELS_DB[params.machine_key]) {
+    machineKey = params.machine_key;
+  }
+  
+  // Fallback : rechercher par nom
+  if (!machineKey) {
+    machineKey = getMachineRefKey(params.machineName);
+  }
+  
+  // Fallback 2 : recherche dans MODELS_DB
+  if (!machineKey) {
+    for (const key in MODELS_DB) {
+      const machine = MODELS_DB[key];
+      if (machine.machine_name && params.machineName && 
+          machine.machine_name.toLowerCase() === params.machineName.toLowerCase()) {
+        machineKey = key;
+        break;
+      }
+    }
+  }
+  
+  if (!machineKey || !MODELS_DB[machineKey]) {
+    grid.innerHTML = '<div style="text-align:center;padding:50px;"><i class="fas fa-search" style="font-size:2rem;"></i><p>Aucun modèle disponible pour cette machine.</p><p style="font-size:0.8rem;">Contactez-nous pour un devis personnalisé.</p></div>';
+    return;
+  }
+    
+  const machine = MODELS_DB[machineKey];
+  const models = machine.models;
+  
+  // Affichage des infos machine
+  document.getElementById('machineName').innerHTML = `<i class="fas fa-industry"></i> ${escapeHtml(machine.machine_name || params.machineName)}`;
+  document.getElementById('machineRole').innerHTML = `<i class="fas fa-tasks"></i> ${escapeHtml(machine.machine_role || params.machineRole || 'Rôle non spécifié')}`;
+  document.getElementById('machineCapacity').innerHTML = `<i class="fas fa-weight-hanging"></i> ${escapeHtml(machine.default_capacity || params.machineCapacity || 'Capacité non spécifiée')}`;
+  document.getElementById('machineUtilities').innerHTML = `<i class="fas fa-bolt"></i> ${escapeHtml(machine.default_utilities || params.machineUtilities || 'Utilités non spécifiées')}`;
+  
+  // Affichage des modèles
+  grid.innerHTML = models.map(m => {
+    const fullStars = Math.floor(m.rating);
+    const hasHalfStar = m.rating % 1 >= 0.5;
+    let ratingStars = '';
+    for (let i = 0; i < fullStars; i++) ratingStars += '<i class="fas fa-star" style="color:#fbbf24"></i>';
+    if (hasHalfStar) ratingStars += '<i class="fas fa-star-half-alt" style="color:#fbbf24"></i>';
+    const emptyStars = 5 - Math.ceil(m.rating);
+    for (let i = 0; i < emptyStars; i++) ratingStars += '<i class="far fa-star" style="color:#4b5563"></i>';
+    
+    return `
+      <div class="model-card">
+        <div class="model-badge"><i class="fas fa-check-circle"></i> Certifié P2I</div>
+        <div class="model-content">
+          <h3 class="model-name">${escapeHtml(m.name)}</h3>
+          <div class="model-price">${m.price_ttc.toLocaleString()} $ <small>TTC / FOB</small></div>
+          <div class="rating">${ratingStars} <span style="color:#94a3b8;">(${m.rating} - ${m.review_count} avis)</span></div>
+          <div class="supplier-info">
+            <i class="fas fa-store"></i> <strong>${escapeHtml(m.supplier)}</strong><br>
+            <span class="supplier-status"><i class="fas fa-certificate"></i> ${escapeHtml(m.supplier_status)}</span>
+          </div>
+          <div class="specs-grid">
+            <div class="spec-item"><span>⚡ Puissance :</span> ${escapeHtml(m.specs.power)}</div>
+            <div class="spec-item"><span>📦 Capacité :</span> ${escapeHtml(m.specs.capacity)}</div>
+            <div class="spec-item"><span>📐 Dimensions :</span> ${escapeHtml(m.specs.dimensions)}</div>
+            <div class="spec-item"><span>⚖️ Poids :</span> ${escapeHtml(m.specs.weight)}</div>
+            <div class="spec-item"><span>🔩 Matériau :</span> ${escapeHtml(m.specs.material)}</div>
+            <div class="spec-item"><span>🛡️ Garantie :</span> ${escapeHtml(m.warranty)}</div>
+          </div>
+          <div class="delivery-info"><i class="fas fa-truck"></i> Délai : ${escapeHtml(m.delivery)}</div>
+          <div class="after-sales"><i class="fas fa-tools"></i> Pièces détachées : ${escapeHtml(m.parts_available)}<br><i class="fas fa-headset"></i> SAV : ${escapeHtml(m.after_sales)}</div>
+          <div class="model-actions">
+            <button class="btn-sm btn-quote" onclick="requestQuoteAndRedirect('${params.upId}', '${escapeHtml(params.upNom)}', '${escapeHtml(machine.machine_name || params.machineName)}', '${escapeHtml(m.name)}', ${m.price_ttc})">
+              <i class="fas fa-file-invoice"></i> Devis officiel
+            </button>
+            <button class="btn-sm btn-cart" onclick="addToCart('${escapeHtml(m.name)}', ${m.price_ttc})">
+              <i class="fas fa-cart-plus"></i> Panier
+            </button>
+            <button class="btn-sm btn-save" onclick="saveToDashboard('${params.upId}', '${escapeHtml(params.upNom)}', '${escapeHtml(machine.machine_name || params.machineName)}', '${escapeHtml(m.name)}', ${m.price_ttc}, '${escapeHtml(machine.machine_role || params.machineRole)}', '${escapeHtml(machine.default_capacity || params.machineCapacity)}', '${escapeHtml(machine.default_utilities || params.machineUtilities)}')">
+              <i class="fas fa-save"></i> Enregistrer
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+    function requestQuoteAndRedirect(upId, upNom, machineName, modelName, price) {
+      const email = getActiveEmail();
+      if (!email) {
+        alert('Veuillez vous connecter pour générer un devis officiel.');
+        window.location.href = 'login.html?mode=login&redirect=' + encodeURIComponent(window.location.href);
+        return;
+      }
+      
+      const url = `devis-detail.html?up_id=${upId}&up_nom=${encodeURIComponent(upNom)}&machine_name=${encodeURIComponent(machineName)}&model_name=${encodeURIComponent(modelName)}&price=${price}`;
+      window.location.href = url;
+    }
+
+    // Gestion du panier
+    function loadCart() { const saved = localStorage.getItem('p2i_machines_cart'); if (saved) try { cart = JSON.parse(saved); } catch(e) { cart = []; } updateCartBadge(); }
+    function saveCart() { localStorage.setItem('p2i_machines_cart', JSON.stringify(cart)); updateCartBadge(); }
+    function updateCartBadge() { document.getElementById('cartCount').textContent = cart.length; }
+    function addToCart(name, price) { cart.push({ name, price, date: new Date().toISOString() }); saveCart(); showToast(`✓ "${name}" ajouté au panier`); renderCartModal(); }
+    function removeFromCart(index) { cart.splice(index, 1); saveCart(); renderCartModal(); showToast("Article retiré du panier"); }
+    
+    function renderCartModal() {
+      const container = document.getElementById('cartItemsList');
+      const totalSpan = document.getElementById('cartTotalDisplay');
+      if (!container) return;
+      if (cart.length === 0) { container.innerHTML = '<div class="empty-cart">Aucun article</div>'; totalSpan.innerHTML = '<span>Total TTC</span><span>0 $</span>'; return; }
+      let total = 0;
+      container.innerHTML = cart.map((item, idx) => { total += item.price; return `<div class="cart-item"><div class="cart-item-info"><div class="cart-item-name">${escapeHtml(item.name)}</div><div class="cart-item-price">${item.price.toLocaleString()} $</div></div><button class="cart-item-remove" onclick="removeFromCart(${idx})"><i class="fas fa-trash"></i></button></div>`; }).join('');
+      totalSpan.innerHTML = `<span>Total TTC</span><span>${total.toLocaleString()} $</span>`;
+    }
+    
+    function openCartModal() { document.getElementById('cartModal').style.display = 'flex'; renderCartModal(); }
+    function closeCartModal() { document.getElementById('cartModal').style.display = 'none'; }
+    
+    function checkoutCart() {
+      if (cart.length === 0) { alert('Votre panier est vide.'); return; }
+      const useAlibaba = confirm(`🛒 ${cart.length} article(s) dans votre panier.\n\n• OK → Alibaba (Trade Assurance)\n• Annuler → Made-in-China (Secure Payment)`);
+      const searchTerms = cart.map(item => encodeURIComponent(item.name)).join('+');
+      const url = useAlibaba ? `https://www.alibaba.com/trade/search?SearchText=${searchTerms}` : `https://fr.made-in-china.com/recherche/recherche.do?word=${searchTerms}`;
+      window.open(url, '_blank');
+      
+      // Sauvegarder la commande
+      const email = getActiveEmail();
+      if (email) {
+        const order = { id: 'order_' + Date.now(), date: new Date().toISOString(), items: [...cart], platform: useAlibaba ? 'Alibaba' : 'Made-in-China' };
+        let orders = JSON.parse(localStorage.getItem(`p2i_orders_${email}`) || '[]');
+        orders.push(order);
+        localStorage.setItem(`p2i_orders_${email}`, JSON.stringify(orders));
+      }
+      
+      cart = [];
+      saveCart();
+      closeCartModal();
+      showToast("Redirection vers la plateforme de vente");
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.opacity = '1';
+      setTimeout(() => t.style.opacity = '0', 3000);
+    }
+function saveToDashboard(upId, upNom, machineName, modelName, price, machineRole, machineCapacity, machineUtilities) {
+  const email = getActiveEmail();
+  if (!email) { alert('Veuillez vous connecter.'); window.location.href = 'login.html?mode=login'; return; }
+  
+  const savedKey = `p2i_saved_machines__${email}`;
+  let saved = JSON.parse(localStorage.getItem(savedKey) || '[]');
+  
+  if (!saved.some(m => m.model === modelName)) {
+    saved.push({ 
+      up_id: upId, 
+      up_nom: upNom, 
+      machine: machineName, 
+      model: modelName, 
+      price: price,
+      machine_role: machineRole,
+      machine_capacity: machineCapacity,
+      machine_utilities: machineUtilities,
+      saved_at: new Date().toISOString() 
+    });
+    localStorage.setItem(savedKey, JSON.stringify(saved));
+    showToast(`✅ "${modelName}" enregistré dans le Dashboard`);
+  } else {
+    showToast(`ℹ️ "${modelName}" déjà enregistré`);
+  }
+}
+
+    function goBack() { window.history.back(); }
+
+    function init() {
+      const params = getUrlParams();
+      displayMachineInfo(params);
+      displayModels(params);
+      loadCart();
+      
+      window.addToCart = addToCart;
+      window.removeFromCart = removeFromCart;
+      window.saveToDashboard = saveToDashboard;
+      window.checkoutCart = checkoutCart;
+      window.goBack = goBack;
+      window.openCartModal = openCartModal;
+      window.closeCartModal = closeCartModal;
+      window.requestQuoteAndRedirect = requestQuoteAndRedirect;
+    }
+    
+    init();
+  </script>
+</body>
+</html>
