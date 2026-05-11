@@ -179,7 +179,15 @@
         <div id="role-entrepreneur" class="role-option" onclick="setRole('entrepreneur')">Entrepreneur</div>
       </div>
     </div>
+    <div class="form-group" id="firstNameGroup" style="display:none;">
+  <label>Prénom</label>
+  <input type="text" id="firstName" placeholder="Votre prénom (facultatif)">
+</div>
 
+<div class="form-group" id="lastNameGroup" style="display:none;">
+  <label>Nom</label>
+  <input type="text" id="lastName" placeholder="Votre nom (facultatif)">
+</div>
     <form id="authForm" novalidate>
       <div class="form-group">
         <label>Email</label>
@@ -208,238 +216,325 @@
   </div>
 
   <script>
-    const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18';
+  const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18';
 
-    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-      auth: {
-        persistSession: true,
-        autoRefreshToken: false,
-        detectSessionInUrl: false
-      }
-    });
-
-    const params = new URLSearchParams(window.location.search);
-    let currentRole = params.get('role') || 'user';
-    let isLogin = (params.get('mode') !== 'register');
-
-    function setRole(role) {
-      currentRole = role;
-      document.getElementById('role-user').classList.toggle('active', role === 'user');
-      document.getElementById('role-entrepreneur').classList.toggle('active', role === 'entrepreneur');
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: false,
+      detectSessionInUrl: false
     }
+  });
 
-    function toggleMode() {
-      isLogin = !isLogin;
-      updateUI();
-      hideMessages();
-    }
+  const params = new URLSearchParams(window.location.search);
+  let currentRole = params.get('role') || 'user';
+  let isLogin = (params.get('mode') !== 'register');
 
-    function updateUI() {
-      document.getElementById('formTitle').innerText = isLogin ? 'Connexion' : 'Inscription';
-      document.getElementById('submitBtn').innerText = isLogin ? 'Se connecter' : 'Créer mon compte';
-      document.getElementById('toggleText').innerHTML = isLogin
+  function setRole(role) {
+    currentRole = role;
+    document.getElementById('role-user')?.classList.toggle('active', role === 'user');
+    document.getElementById('role-entrepreneur')?.classList.toggle('active', role === 'entrepreneur');
+  }
+
+  function toggleMode() {
+    isLogin = !isLogin;
+    updateUI();
+    hideMessages();
+  }
+
+  function updateUI() {
+    const formTitle = document.getElementById('formTitle');
+    const submitBtn = document.getElementById('submitBtn');
+    const toggleText = document.getElementById('toggleText');
+    const firstNameGroup = document.getElementById('firstNameGroup');
+    const lastNameGroup = document.getElementById('lastNameGroup');
+
+    if (formTitle) formTitle.innerText = isLogin ? 'Connexion' : 'Inscription';
+    if (submitBtn) submitBtn.innerText = isLogin ? 'Se connecter' : 'Créer mon compte';
+
+    if (toggleText) {
+      toggleText.innerHTML = isLogin
         ? "Pas encore de compte ? <span onclick='toggleMode()'>S'inscrire</span>"
         : "Déjà un compte ? <span onclick='toggleMode()'>Se connecter</span>";
     }
 
-    function showMessage(id, msg) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.innerText = msg;
-      el.style.display = 'block';
-    }
-
-    function hideMessages() {
-      const err = document.getElementById('errorDisplay');
-      const ok = document.getElementById('successDisplay');
-      if (err) {
-        err.style.display = 'none';
-        err.innerText = '';
-      }
-      if (ok) {
-        ok.style.display = 'none';
-        ok.innerText = '';
-      }
-    }
-
-    async function testSupabaseNetwork() {
-      try {
-        const res = await fetch(SUPABASE_URL + '/auth/v1/health', { method: 'GET' });
-        console.log('Supabase health OK:', res.status);
-        return true;
-      } catch (e) {
-        console.error('Supabase health failed:', e);
-        return false;
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      setRole(currentRole);
-      updateUI();
-    });
-
-    document.getElementById('authForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      hideMessages();
-
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      const btn = document.getElementById('submitBtn');
-      const spinner = document.getElementById('spinner');
-
-      if (!email || !password) {
-        showMessage('errorDisplay', "Tous les champs sont obligatoires");
-        return;
-      }
-
-      btn.disabled = true;
-      spinner.style.display = 'block';
-
-      try {
-        const networkOk = await testSupabaseNetwork();
-        if (!networkOk) {
-          throw new Error("Connexion réseau à Supabase impossible dans cet environnement. Le problème ne vient probablement pas du mot de passe mais du mode preview / webview.");
-        }
-
-        if (isLogin) {
-          const { error } = await sb.auth.signInWithPassword({ email, password });
-          if (error) throw error;
-
-          showMessage('successDisplay', "Connexion réussie !");
-
-          localStorage.setItem("p2i_user_email", email);
-          localStorage.setItem("p2i_active_user", email);
-          localStorage.setItem("p2i_user_logged_in", "true");
-
-          setTimeout(() => {
-  (function setActiveUserSafely() {
-    try {
-      const emailLS = (localStorage.getItem("p2i_user_email") || "").trim().toLowerCase();
-      if (emailLS) {
-        localStorage.setItem("p2i_active_user", emailLS);
-        localStorage.setItem("p2i_user_logged_in", "true");
-      } else {
-        localStorage.setItem("p2i_active_user", "");
-      }
-    } catch (_) {}
-  })();
-
-  let pending = null;
-  try {
-    pending = JSON.parse(localStorage.getItem("p2i_pending_action") || "null");
-  } catch (_) {
-    pending = null;
+    const displayMode = isLogin ? 'none' : 'block';
+    if (firstNameGroup) firstNameGroup.style.display = displayMode;
+    if (lastNameGroup) lastNameGroup.style.display = displayMode;
   }
 
-  if (pending && pending.action === "bp_gratuit") {
+  function showMessage(id, msg) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.innerText = msg;
+    el.style.display = 'block';
+  }
+
+  function hideMessages() {
+    const err = document.getElementById('errorDisplay');
+    const ok = document.getElementById('successDisplay');
+
+    if (err) {
+      err.style.display = 'none';
+      err.innerText = '';
+    }
+
+    if (ok) {
+      ok.style.display = 'none';
+      ok.innerText = '';
+    }
+  }
+
+  function normalizeEmail(value) {
+    return String(value || '').trim().toLowerCase();
+  }
+
+  function saveUserProfileLocally(profile) {
     try {
-      if (pending.unit_id) localStorage.setItem("currentUnitId", pending.unit_id);
-      if (pending.unit_name) localStorage.setItem("currentUnitName", pending.unit_name);
-      if (pending.filiere) localStorage.setItem("currentFiliereName", pending.filiere);
+      const existingLocal = JSON.parse(localStorage.getItem('userP2I') || '{}');
+      const existingSession = JSON.parse(sessionStorage.getItem('userP2I') || '{}');
 
-      const activeEmail = (localStorage.getItem("p2i_active_user") || "").trim().toLowerCase();
-      const downloadsKey = activeEmail
-        ? `p2i_downloads__${activeEmail}`
-        : "p2i_downloads__guest";
+      const merged = {
+        ...existingLocal,
+        ...existingSession,
+        ...profile
+      };
 
-      const unitId = pending.unit_id || "";
-      const unitName = pending.unit_name || "Unité de Production";
-      const filiere = pending.filiere || "";
-      const bpUrl =
-        pending.file_url ||
-        pending.bp_url ||
-        (unitId
-          ? `business-plan-decouverte.html?unit_id=${encodeURIComponent(unitId)}`
-          : "business-plan-decouverte.html");
-
-      const code = pending.code || ("P2I-BP-" + (unitId || "TEMP"));
-
-      let downloads = [];
-      try {
-        downloads = JSON.parse(localStorage.getItem(downloadsKey) || "[]");
-        if (!Array.isArray(downloads)) downloads = [];
-      } catch (_) {
-        downloads = [];
-      }
-
-      const exists = downloads.some(item =>
-        item &&
-        item.type === "bp_gratuit" &&
-        String(item.code || "") === String(code)
-      );
-
-      if (!exists) {
-        downloads.unshift({
-          type: "bp_gratuit",
-          code,
-          unit_id: unitId,
-          unit: unitName,
-          filiere,
-          date: new Date().toISOString(),
-          url: bpUrl,
-          mode: "web_preview",
-          status: "disponible"
-        });
-      }
-
-      localStorage.setItem(downloadsKey, JSON.stringify(downloads));
-      localStorage.removeItem("p2i_pending_action");
-      localStorage.removeItem("p2i_downloads");
-      localStorage.removeItem("p2i_downloads__guest");
-
-      window.location.href = bpUrl;
-      return;
+      localStorage.setItem('userP2I', JSON.stringify(merged));
+      sessionStorage.setItem('userP2I', JSON.stringify(merged));
     } catch (e) {
-      console.error("Erreur redirection BP gratuit après connexion :", e);
+      console.warn('Impossible de sauvegarder userP2I localement :', e);
     }
   }
 
-  const pendingRaw = localStorage.getItem("pending_bp");
-
-  if (pendingRaw) {
+  async function testSupabaseNetwork() {
     try {
-      const pendingOld = JSON.parse(pendingRaw);
-      const url = new URL(
-        pendingOld.return_to || `fiche-production.html?id=${pendingOld.up_id}`,
-        window.location.origin
-      );
-      url.searchParams.set("autodownload", "1");
-      window.location.href = url.toString();
-      return;
-    } catch (_) {}
+      const res = await fetch(SUPABASE_URL + '/auth/v1/health', { method: 'GET' });
+      console.log('Supabase health OK:', res.status);
+      return true;
+    } catch (e) {
+      console.error('Supabase health failed:', e);
+      return false;
+    }
   }
 
-  localStorage.removeItem("p2i_downloads");
-  localStorage.removeItem("p2i_downloads__guest");
+  async function enrichLocalProfileFromSession() {
+    try {
+      const { data, error } = await sb.auth.getUser();
+      if (error) throw error;
 
-  window.location.href = "dashboard.html";
-}, 800);
+      const user = data?.user;
+      if (!user) return;
 
-        } else {
-          if (password.length < 6) throw new Error("Min 6 caractères.");
+      const md = user.user_metadata || {};
 
-          const { error } = await sb.auth.signUp({
-            email,
-            password,
-            options: {
-              data: { role: currentRole }
+      saveUserProfileLocally({
+        id: user.id || '',
+        email: normalizeEmail(user.email || ''),
+        first_name: String(md.first_name || '').trim(),
+        last_name: String(md.last_name || '').trim(),
+        role: String(md.role || currentRole || 'user').trim(),
+        updated_at: new Date().toISOString()
+      });
+    } catch (e) {
+      console.warn('Impossible de récupérer le profil Supabase :', e);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setRole(currentRole);
+    updateUI();
+  });
+
+  document.getElementById('authForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideMessages();
+
+    const email = normalizeEmail(document.getElementById('email')?.value);
+    const password = document.getElementById('password')?.value || '';
+    const firstName = String(document.getElementById('firstName')?.value || '').trim();
+    const lastName = String(document.getElementById('lastName')?.value || '').trim();
+    const btn = document.getElementById('submitBtn');
+    const spinner = document.getElementById('spinner');
+
+    if (!email || !password) {
+      showMessage('errorDisplay', "Email et mot de passe obligatoires.");
+      return;
+    }
+
+    btn.disabled = true;
+    spinner.style.display = 'block';
+
+    try {
+      const networkOk = await testSupabaseNetwork();
+      if (!networkOk) {
+        throw new Error("Connexion réseau à Supabase impossible dans cet environnement. Le problème ne vient probablement pas du mot de passe mais du mode preview / webview.");
+      }
+
+      if (isLogin) {
+        const { error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+
+        localStorage.setItem("p2i_user_email", email);
+        sessionStorage.setItem("p2i_user_email", email);
+        localStorage.setItem("p2i_active_user", email);
+        localStorage.setItem("p2i_user_logged_in", "true");
+        localStorage.setItem("p2i_is_logged_in", "1");
+        sessionStorage.setItem("p2i_is_logged_in", "1");
+
+        await enrichLocalProfileFromSession();
+
+        showMessage('successDisplay', "Connexion réussie !");
+
+        setTimeout(() => {
+          (function setActiveUserSafely() {
+            try {
+              const emailLS = normalizeEmail(localStorage.getItem("p2i_user_email"));
+              if (emailLS) {
+                localStorage.setItem("p2i_active_user", emailLS);
+                localStorage.setItem("p2i_user_logged_in", "true");
+                localStorage.setItem("p2i_is_logged_in", "1");
+                sessionStorage.setItem("p2i_is_logged_in", "1");
+              } else {
+                localStorage.setItem("p2i_active_user", "");
+              }
+            } catch (_) {}
+          })();
+
+          let pending = null;
+          try {
+            pending = JSON.parse(localStorage.getItem("p2i_pending_action") || "null");
+          } catch (_) {
+            pending = null;
+          }
+
+          if (pending && pending.action === "bp_gratuit") {
+            try {
+              if (pending.unit_id) localStorage.setItem("currentUnitId", pending.unit_id);
+              if (pending.unit_name) localStorage.setItem("currentUnitName", pending.unit_name);
+              if (pending.filiere) localStorage.setItem("currentFiliereName", pending.filiere);
+
+              const activeEmail = normalizeEmail(localStorage.getItem("p2i_active_user"));
+              const downloadsKey = activeEmail
+                ? `p2i_downloads__${activeEmail}`
+                : "p2i_downloads__guest";
+
+              const unitId = pending.unit_id || "";
+              const unitName = pending.unit_name || "Unité de Production";
+              const filiere = pending.filiere || "";
+              const bpUrl =
+                pending.file_url ||
+                pending.bp_url ||
+                (unitId
+                  ? `business-plan-decouverte.html?unit_id=${encodeURIComponent(unitId)}`
+                  : "business-plan-decouverte.html");
+
+              const code = pending.code || ("P2I-BP-" + (unitId || "TEMP"));
+
+              let downloads = [];
+              try {
+                downloads = JSON.parse(localStorage.getItem(downloadsKey) || "[]");
+                if (!Array.isArray(downloads)) downloads = [];
+              } catch (_) {
+                downloads = [];
+              }
+
+              const exists = downloads.some(item =>
+                item &&
+                item.type === "bp_gratuit" &&
+                String(item.code || "") === String(code)
+              );
+
+              if (!exists) {
+                downloads.unshift({
+                  type: "bp_gratuit",
+                  code,
+                  unit_id: unitId,
+                  unit: unitName,
+                  filiere,
+                  date: new Date().toISOString(),
+                  url: bpUrl,
+                  mode: "web_preview",
+                  status: "disponible"
+                });
+              }
+
+              localStorage.setItem(downloadsKey, JSON.stringify(downloads));
+              localStorage.removeItem("p2i_pending_action");
+              localStorage.removeItem("p2i_downloads");
+              localStorage.removeItem("p2i_downloads__guest");
+
+              window.location.href = bpUrl;
+              return;
+            } catch (e) {
+              console.error("Erreur redirection BP gratuit après connexion :", e);
             }
-          });
+          }
 
-          if (error) throw error;
+          const pendingRaw = localStorage.getItem("pending_bp");
 
-          showMessage('successDisplay', "Compte créé ! Vérifiez vos emails.");
+          if (pendingRaw) {
+            try {
+              const pendingOld = JSON.parse(pendingRaw);
+              const url = new URL(
+                pendingOld.return_to || `fiche-production.html?id=${pendingOld.up_id}`,
+                window.location.origin
+              );
+              url.searchParams.set("autodownload", "1");
+              window.location.href = url.toString();
+              return;
+            } catch (_) {}
+          }
+
+          localStorage.removeItem("p2i_downloads");
+          localStorage.removeItem("p2i_downloads__guest");
+
+          window.location.href = "dashboard.html";
+        }, 800);
+
+      } else {
+        if (password.length < 6) {
+          throw new Error("Min 6 caractères.");
         }
 
-      } catch (err) {
-        const msg = String(err?.message || err || "Erreur inconnue");
-        showMessage('errorDisplay', msg);
-      } finally {
-        btn.disabled = false;
-        spinner.style.display = 'none';
+        const { data, error } = await sb.auth.signUp({
+          email,
+          password,
+          options: {
+            data: {
+              role: currentRole,
+              first_name: firstName,
+              last_name: lastName
+            }
+          }
+        });
+
+        if (error) throw error;
+
+        saveUserProfileLocally({
+          id: data?.user?.id || '',
+          email,
+          first_name: firstName,
+          last_name: lastName,
+          role: currentRole,
+          created_at: new Date().toISOString()
+        });
+
+        localStorage.setItem("p2i_user_email", email);
+        localStorage.setItem("p2i_active_user", email);
+
+        showMessage('successDisplay', "Compte créé ! Vérifiez vos emails.");
       }
-    });
-  </script>
+
+    } catch (err) {
+      const msg = String(err?.message || err || "Erreur inconnue");
+      showMessage('errorDisplay', msg);
+    } finally {
+      btn.disabled = false;
+      spinner.style.display = 'none';
+    }
+  });
+</script>
 </body>
 </html>
