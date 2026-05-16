@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réseautage Industriel | Plateforme Industrielle Ivoirienne (P2I)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(76, 201, 240, 0.2);
+            padding: 15px 0;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+        .gear {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #4cc9f0;
+        }
+        .gear-large { animation: rotate 20s linear infinite; }
+        .gear-medium { width: 70%; height: 70%; top: 15%; left: 15%; animation: rotate 15s linear infinite reverse; }
+        .gear-small { width: 40%; height: 40%; top: 30%; left: 30%; animation: rotate 10s linear infinite; }
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        nav ul {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        nav a {
+            color: #b8c1ec;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 5px 0;
+        }
+        nav a:hover { color: #4cc9f0; }
+        nav a.active {
+            color: #4cc9f0;
+            font-weight: 600;
+        }
+        .nav-auth-btn {
+            color: #4cc9f0 !important;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 22px;
+            border: 2px solid #4cc9f0;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .nav-auth-btn:hover {
+            background: rgba(76, 201, 240, 0.15);
+            transform: translateY(-2px);
+        }
+        .hero {
+            min-height: 35vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 40px 0;
+        }
+        .hero-content h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: #b8c1ec;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #b8c1ec;
+            margin-bottom: 40px;
+        }
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        @media (max-width: 1000px) {
+            .forms-grid { grid-template-columns: 1fr; }
+            body { padding-top: 130px; }
+            .hero-content h1 { font-size: 1.8rem; }
+        }
+        .form-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .form-card:hover {
+            transform: translateY(-5px);
+            border-color: #4cc9f0;
+        }
+        .form-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .form-header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .form-icon { font-size: 2.5rem; color: #4cc9f0; }
+        .form-title { font-size: 1.5rem; color: white; }
+        .form-badge {
+            background: #28a745;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        .form-badge.payant { background: #f72585; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #b8c1ec;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            font-size: 0.95rem;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #4cc9f0;
+        }
+        textarea.form-control { min-height: 100px; resize: vertical; }
+        .file-upload {
+            background: rgba(76, 201, 240, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px dashed #4cc9f0;
+        }
+        .file-upload:hover { background: rgba(76, 201, 240, 0.2); }
+        .file-upload label {
+            cursor: pointer;
+            display: block;
+            padding: 15px;
+            margin-bottom: 0;
+            color: #4cc9f0;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #4361ee, #f72585);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+        }
+        .offres-section { margin-top: 60px; }
+        .offres-table-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .offres-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+        .offres-table thead { background: rgba(76, 201, 240, 0.15); }
+        .offres-table th {
+            padding: 15px;
+            text-align: left;
+            color: #4cc9f0;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(76, 201, 240, 0.3);
+        }
+        .offres-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #b8c1ec;
+        }
+        .statut-ouvert {
+            background: rgba(0, 230, 118, 0.2);
+            color: #00e676;
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+        .btn-postuler {
+            padding: 6px 15px;
+            background: rgba(76, 201, 240, 0.1);
+            color: #4cc9f0;
+            border: 1px solid #4cc9f0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(76, 201, 240, 0.1);
+            margin-top: 80px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a {
+            color: #b8c1ec;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b8c1ec;
+            font-size: 0.9rem;
+        }
+        #photoPreview, #cvPreview, #kbisPreview {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        #photoPreviewImg {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .delete-btn {
+            background: rgba(247, 37, 133, 0.2);
+            border: 1px solid #f72585;
+            color: #f72585;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .delete-btn:hover { background: rgba(247, 37, 133, 0.4); }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            z-index: 1100;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .payment-info {
+            background: rgba(40, 167, 69, 0.15);
+            border: 1px solid #28a745;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .payment-info p {
+            margin: 5px 0;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="gear gear-large"></div>
+                    <div class="gear gear-medium"></div>
+                    <div class="gear gear-small"></div>
+                </div>
+                <div class="logo-text">P2I</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="filieres.html">Filières</a></li>
+                    <li><a href="secteur-industriel.html">Secteur industriel</a></li>
+                    <li><a href="reseau.html" class="active">Réseautage</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" id="personalSpaceBtn" class="nav-auth-btn"><i class="fas fa-user-circle"></i> Mon Espace Personnel</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Réseautage Industriel</h1>
+                <p class="hero-subtitle">
+                    Lieu de rencontre entre les talents ivoiriens et les opportunités industrielles.
+                    Déposez votre CV, publiez une offre d'emploi et connectez-vous avec l'écosystème industriel de Côte d'Ivoire.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container main-content">
+        <h2 class="section-title">Connectez-vous à l'Industrie de Demain</h2>
+        <p class="section-subtitle">La P2I facilite la mise en relation entre les chercheurs d'emploi, les entrepreneurs et les industriels.</p>
+
+        <div class="forms-grid">
+            <!-- Formulaire Dépôt de CV -->
+            <div class="form-card">
+                <div class="form-header">
+                    <div class="form-header-left">
+                        <div class="form-icon">📄</div>
+                        <h3 class="form-title">Déposer votre CV</h3>
+                    </div>
+                    <span class="form-badge"><i class="fas fa-gem"></i> Gratuit</span>
+                </div>
+                <form id="demandeForm" onsubmit="event.preventDefault(); soumettreCV();">
+                    <div class="form-group">
+                        <label for="cvNom">Nom complet *</label>
+                        <input type="text" id="cvNom" class="form-control" required placeholder="Ex: Kouamé Jean">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvEmail">Email *</label>
+                        <input type="email" id="cvEmail" class="form-control" required placeholder="exemple@email.ci">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvTelephone">Téléphone</label>
+                        <input type="tel" id="cvTelephone" class="form-control" placeholder="+225 00 00 00 00">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvFiliere">Filière industrielle recherchée *</label>
+                        <select id="cvFiliere" class="form-control" required>
+                            <option value="">Sélectionnez une filière</option>
+                            <option value="Agro-alimentaire & Boissons">Agro-alimentaire & Boissons</option>
+                            <option value="Chimie, Cosmétiques & Détergents">Chimie, Cosmétiques & Détergents</option>
+                            <option value="Textile, Habillement & Cuir">Textile, Habillement & Cuir</option>
+                            <option value="Métallurgie & Mécanique">Métallurgie & Mécanique</option>
+                            <option value="Plastique & Caoutchouc">Plastique & Caoutchouc</option>
+                            <option value="Électronique & Électricité">Électronique & Électricité</option>
+                            <option value="BTP & Matériaux de Construction">BTP & Matériaux de Construction</option>
+                            <option value="Petits Matériels Médicaux">Petits Matériels Médicaux</option>
+                            <option value="Assemblage & Montage">Assemblage & Montage</option>
+                            <option value="Recyclage & Valorisation">Recyclage & Valorisation</option>
+                            <option value="Services Industriels">Services Industriels</option>
+                            <option value="Énergie, Eau & Environnement">Énergie, Eau & Environnement</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvExperience">Expérience & Compétences *</label>
+                        <textarea id="cvExperience" class="form-control" required placeholder="Décrivez votre parcours, vos compétences techniques et vos aspirations..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvFichier">Téléverser votre CV (PDF ou DOC, max 5MB)</label>
+                        <div class="file-upload">
+                            <input type="file" id="cvFichier" accept=".pdf,.doc,.docx" style="display: none;">
+                            <label for="cvFichier" style="cursor: pointer; display: block; padding: 15px;">
+                                <i class="fas fa-cloud-upload-alt"></i> Cliquez pour sélectionner un fichier
+                            </label>
+                        </div>
+                        <div id="cvPreview" style="margin-top: 10px; display: none; align-items: center; gap: 15px; flex-wrap: wrap;">
+                            <span id="cvFileName" style="color: #4cc9f0;"><i class="fas fa-file-pdf"></i> </span>
+                            <button type="button" id="btnDeleteCV" class="delete-btn"><i class="fas fa-trash"></i> Supprimer le CV</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvPhoto">Photo de profil (optionnel, JPG/PNG, max 2MB)</label>
+                        <div class="file-upload">
+                            <input type="file" id="cvPhoto" accept="image/jpeg,image/png,image/jpg" style="display: none;">
+                            <label for="cvPhoto" style="cursor: pointer; display: block; padding: 15px;">
+                                <i class="fas fa-camera"></i> Cliquez pour sélectionner une photo
+                            </label>
+                        </div>
+                        <div id="photoPreview" style="margin-top: 10px; display: none; align-items: center; gap: 15px; flex-wrap: wrap;">
+                            <img id="photoPreviewImg" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+                            <button type="button" id="btnDeletePhoto" class="delete-btn"><i class="fas fa-trash"></i> Supprimer la photo</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit" id="submitBtn"><i class="fas fa-paper-plane"></i> Soumettre mon profil</button>
+                </form>
+            </div>
+
+            <!-- Formulaire Publication Offre avec RCCM, IFU et KBIS -->
+            <div class="form-card">
+                <div class="form-header">
+                    <div class="form-header-left">
+                        <div class="form-icon">💼</div>
+                        <h3 class="form-title">Publier une offre d'emploi</h3>
+                    </div>
+                    <span class="form-badge payant"><i class="fas fa-credit-card"></i> 6 500 FCFA / 30j</span>
+                </div>
+                <form id="offreForm">
+                    <div class="form-group">
+                        <label for="offreEntreprise">Nom de l'entreprise *</label>
+                        <input type="text" id="offreEntreprise" class="form-control" required placeholder="Ex: Industries CI SA">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="offreRccm">N° RCCM (Registre du Commerce) *</label>
+                        <input type="text" id="offreRccm" class="form-control" required placeholder="Ex: CI-ABJ-2025-12345">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="offreIfu">N° IFU (Identifiant Fiscal Unique) *</label>
+                        <input type="text" id="offreIfu" class="form-control" required placeholder="Ex: 123456789ABCDEF">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="offrePoste">Intitulé du poste *</label>
+                        <input type="text" id="offrePoste" class="form-control" required placeholder="Ex: Responsable de production">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="offreFiliere">Filière concernée *</label>
+                        <select id="offreFiliere" class="form-control" required>
+                            <option value="">Sélectionnez une filière</option>
+                            <option value="Agro-alimentaire & Boissons">Agro-alimentaire & Boissons</option>
+                            <option value="Chimie, Cosmétiques & Détergents">Chimie, Cosmétiques & Détergents</option>
+                            <option value="Textile, Habillement & Cuir">Textile, Habillement & Cuir</option>
+                            <option value="Métallurgie & Mécanique">Métallurgie & Mécanique</option>
+                            <option value="Plastique & Caoutchouc">Plastique & Caoutchouc</option>
+                            <option value="Électronique & Électricité">Électronique & Électricité</option>
+                            <option value="BTP & Matériaux de Construction">BTP & Matériaux de Construction</option>
+                            <option value="Petits Matériels Médicaux">Petits Matériels Médicaux</option>
+                            <option value="Assemblage & Montage">Assemblage & Montage</option>
+                            <option value="Recyclage & Valorisation">Recyclage & Valorisation</option>
+                            <option value="Services Industriels">Services Industriels</option>
+                            <option value="Énergie, Eau & Environnement">Énergie, Eau & Environnement</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="offreLocalisation">Localisation *</label>
+                        <input type="text" id="offreLocalisation" class="form-control" required placeholder="Ex: Zone Industrielle Yopougon, Abidjan">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="offreDescription">Description du poste *</label>
+                        <textarea id="offreDescription" class="form-control" required placeholder="Décrivez les missions, responsabilités et exigences du poste..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="offreContact">Contact (email ou téléphone) *</label>
+                        <input type="text" id="offreContact" class="form-control" required placeholder="Ex: rh@entreprise.ci ou +225 00 00 00 00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="offreKbis">Extrait RIB / KBIS (moins de 3 mois) *</label>
+                        <div class="file-upload">
+                            <input type="file" id="offreKbis" accept=".pdf,.jpg,.png" style="display: none;" required>
+                            <label for="offreKbis" style="cursor: pointer; display: block; padding: 15px;">
+                                <i class="fas fa-building"></i> Cliquez pour déposer le justificatif
+                            </label>
+                        </div>
+                        <div id="kbisPreview" style="margin-top: 10px; display: none; align-items: center; gap: 15px; flex-wrap: wrap;">
+                            <span id="kbisFileName" style="color: #4cc9f0;"><i class="fas fa-file"></i> </span>
+                            <button type="button" id="btnDeleteKbis" class="delete-btn"><i class="fas fa-trash"></i> Supprimer</button>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-info">
+                        <p><i class="fas fa-credit-card"></i> <strong>Paiement de 6 500 FCFA</strong></p>
+                        <p>Après soumission, vous serez redirigé vers le paiement (Orange Money / Wave)</p>
+                        <p style="font-size: 0.75rem; color: #b8c1ec;">💡 Le justificatif et les informations seront vérifiés par notre équipe</p>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit" id="publishOfferBtn"><i class="fas fa-bullhorn"></i> Publier l'offre (6 500 FCFA)</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="offres-section">
+            <h2 class="section-title">Offres d'emploi récentes</h2>
+            <p class="section-subtitle">Découvrez les opportunités disponibles sur le marché ivoirien</p>
+            <div class="offres-table-container">
+                <table class="offres-table">
+                    <thead>
+                        <tr><th>Poste</th><th>Entreprise</th><th>Filière</th><th>Localisation</th><th>Date</th><th>Statut</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="offresTableBody"><tr><td colspan="7" style="text-align:center;">Chargement des offres...</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column"><h3>Plateforme Industrielle Ivoirienne</h3><p>De l'idée à l'usine : la première plateforme intelligente.</p></div>
+                <div class="footer-column"><h3>Navigation</h3><ul class="footer-links"><li><a href="index.html">Accueil</a></li><li><a href="filieres.html">Filières</a></li><li><a href="reseau.html">Réseautage</a></li></ul></div>
+                <div class="footer-column"><h3>Contact</h3><ul class="footer-links"><li>contact@p2i.ci</li><li>Abidjan, Côte d'Ivoire</li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 P2I - Démonstration</p></div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== CONFIGURATION ==========
+        const DB_RESEAU_KEY = 'p2i_reseau_data_v3';
+        const TARIF_OFFRE_FCFA = 6500;
+
+        function getActiveEmail() {
+            const email = localStorage.getItem('p2i_user_email') || 
+                          localStorage.getItem('p2i_active_user') || 
+                          sessionStorage.getItem('p2i_user_email') ||
+                          localStorage.getItem('user_email') ||
+                          sessionStorage.getItem('user_email');
+            return email;
+        }
+
+        function showToast(msg, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.backgroundColor = isError ? '#dc3545' : '#0f172a';
+            toast.style.opacity = '1';
+            setTimeout(() => toast.style.opacity = '0', 3000);
+        }
+
+        function getDatabase() {
+            const defaultDB = { cvs: [], offres: [] };
+            const saved = localStorage.getItem(DB_RESEAU_KEY);
+            if (saved) {
+                try { return { ...defaultDB, ...JSON.parse(saved) }; }
+                catch(e) { return defaultDB; }
+            }
+            return defaultDB;
+        }
+
+        function saveDatabase(db) { localStorage.setItem(DB_RESEAU_KEY, JSON.stringify(db)); }
+
+        function convertFileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // ========== DÉPÔT CV ==========
+        async function deposerCV(formData, photoBase64, cvBase64, cvFileName) {
+            const email = getActiveEmail();
+            if (!email) {
+                showToast('❌ Veuillez vous connecter.', true);
+                window.location.href = 'login.html?mode=login&redirect=' + encodeURIComponent(window.location.href);
+                return false;
+            }
+            const db = getDatabase();
+            const newCV = {
+                id: 'cv_' + Date.now(),
+                userId: email,
+                nom: formData.nom,
+                email: formData.email,
+                telephone: formData.telephone || '',
+                filiere: formData.filiere,
+                experience: formData.experience,
+                cvFileName: cvFileName || null,
+                hasCv: !!cvBase64,
+                hasPhoto: !!photoBase64,
+                statut: 'en_attente',
+                date: new Date().toLocaleDateString('fr-FR'),
+                dateDepot: new Date().toISOString()
+            };
+            db.cvs.push(newCV);
+            saveDatabase(db);
+            showToast('✅ CV déposé avec succès ! En attente de modération.');
+            return true;
+        }
+
+        // ========== SOUMISSION CV ==========
+        window.soumettreCV = async function() {
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            
+            const nom = document.getElementById('cvNom')?.value.trim();
+            const email = document.getElementById('cvEmail')?.value.trim();
+            const telephone = document.getElementById('cvTelephone')?.value.trim();
+            const filiere = document.getElementById('cvFiliere')?.value;
+            const experience = document.getElementById('cvExperience')?.value.trim();
+
+            if (!nom || !email || !filiere || !experience) {
+                showToast('❌ Veuillez remplir tous les champs obligatoires.', true);
+                return;
+            }
+
+            const userId = getActiveEmail();
+            if (!userId) {
+                showToast('❌ Veuillez vous connecter.', true);
+                window.location.href = 'login.html?mode=login&redirect=' + encodeURIComponent(window.location.href);
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner"></span> Envoi en cours...';
+
+            const cvFileInput = document.getElementById('cvFichier');
+            const photoInput = document.getElementById('cvPhoto');
+            let cvBase64 = null, photoBase64 = null, cvFileName = null;
+
+            try {
+                if (cvFileInput && cvFileInput.files && cvFileInput.files[0]) {
+                    const cvFile = cvFileInput.files[0];
+                    if (cvFile.size > 5 * 1024 * 1024) {
+                        showToast('❌ CV trop volumineux (max 5MB)', true);
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                        return;
+                    }
+                    cvFileName = cvFile.name;
+                    cvBase64 = await convertFileToBase64(cvFile);
+                }
+
+                if (photoInput && photoInput.files && photoInput.files[0]) {
+                    const photoFile = photoInput.files[0];
+                    if (photoFile.size > 2 * 1024 * 1024) {
+                        showToast('❌ Photo trop volumineuse (max 2MB)', true);
+                    } else {
+                        photoBase64 = await convertFileToBase64(photoFile);
+                    }
+                }
+
+                const formData = { nom, email, telephone: telephone || '', filiere, experience };
+                const success = await deposerCV(formData, photoBase64, cvBase64, cvFileName);
+
+                if (success) {
+                    document.getElementById('cvNom').value = '';
+                    document.getElementById('cvEmail').value = '';
+                    document.getElementById('cvTelephone').value = '';
+                    document.getElementById('cvFiliere').value = '';
+                    document.getElementById('cvExperience').value = '';
+                    if (cvFileInput) cvFileInput.value = '';
+                    if (photoInput) photoInput.value = '';
+                    document.getElementById('cvPreview').style.display = 'none';
+                    document.getElementById('photoPreview').style.display = 'none';
+                }
+            } catch (error) {
+                console.error("Erreur:", error);
+                showToast('❌ Erreur: ' + error.message, true);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        };
+
+        // ========== AFFICHAGE DES OFFRES ==========
+        function afficherOffres() {
+            const db = getDatabase();
+            const tbody = document.getElementById('offresTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            const offresActives = db.offres.filter(o => o.statut === 'active');
+            if (offresActives.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Aucune offre active. Vous pouvez en publier une.</td></tr>';
+                return;
+            }
+            offresActives.forEach(offre => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${offre.poste || ''}</td>
+                    <td>${offre.entreprise || ''}</td>
+                    <td>${offre.filiere || ''}</td>
+                    <td>${offre.localisation || ''}</td>
+                    <td>${offre.datePublication || ''}</td>
+                    <td><span class="statut-ouvert">Active</span></td>
+                    <td><button class="btn-postuler" onclick="postulerOffre('${offre.id}')">Postuler</button></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        window.postulerOffre = function(offreId) {
+            const db = getDatabase();
+            const offre = db.offres.find(o => o.id === offreId);
+            if (offre) alert(`📧 Postuler à :\n${offre.contact}\nObjet: Candidature - ${offre.poste}`);
+        };
+
+        // ========== PUBLICATION OFFRE avec KBIS en Base64 ==========
+        async function preparerOffre(offreData, kbisBase64, kbisFileName) {
+            const email = getActiveEmail();
+            if (!email) {
+                showToast('❌ Veuillez vous connecter.', true);
+                window.location.href = 'login.html?mode=login&redirect=' + encodeURIComponent(window.location.href);
+                return false;
+            }
+            
+            const offre = {
+                id: 'offre_' + Date.now(),
+                entrepriseId: email,
+                entreprise: offreData.entreprise,
+                rccm: offreData.rccm,
+                ifu: offreData.ifu,
+                poste: offreData.poste,
+                filiere: offreData.filiere,
+                localisation: offreData.localisation,
+                description: offreData.description,
+                contact: offreData.contact,
+                kbisBase64: kbisBase64,
+                kbisFileName: kbisFileName,
+                datePublication: new Date().toLocaleDateString('fr-FR'),
+                dateExpiration: new Date(Date.now() + 30*24*60*60*1000).toLocaleDateString('fr-FR'),
+                statut: 'en_attente_validation',
+                paiement: { 
+                    montant: TARIF_OFFRE_FCFA, 
+                    devise: 'XOF', 
+                    statut: 'en_attente_paiement',
+                    transactionId: null,
+                    datePaiement: null
+                }
+            };
+            
+            const db = getDatabase();
+            db.offres.push(offre);
+            saveDatabase(db);
+            
+            // Simuler redirection vers paiement
+            showToast('📲 Redirection vers la page de paiement...');
+            setTimeout(() => {
+                window.location.href = `paiement.html?offreId=${offre.id}&montant=${TARIF_OFFRE_FCFA}`;
+            }, 1500);
+            
+            return true;
+        }
+
+        // ========== INITIALISATION ==========
+        function initForms() {
+            // Aperçu photo
+            const photoInput = document.getElementById('cvPhoto');
+            const btnDeletePhoto = document.getElementById('btnDeletePhoto');
+            const photoPreview = document.getElementById('photoPreview');
+            const photoPreviewImg = document.getElementById('photoPreviewImg');
+            if (photoInput && photoPreview) {
+                photoInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        if (file.size > 2*1024*1024) { alert('Photo max 2MB'); photoInput.value = ''; photoPreview.style.display = 'none'; return; }
+                        const reader = new FileReader();
+                        reader.onload = (ev) => { photoPreviewImg.src = ev.target.result; photoPreview.style.display = 'flex'; };
+                        reader.readAsDataURL(file);
+                    } else { photoPreview.style.display = 'none'; }
+                });
+                if (btnDeletePhoto) btnDeletePhoto.addEventListener('click', () => { photoInput.value = ''; photoPreview.style.display = 'none'; photoPreviewImg.src = ''; });
+            }
+
+            // Aperçu CV
+            const cvInput = document.getElementById('cvFichier');
+            const btnDeleteCV = document.getElementById('btnDeleteCV');
+            const cvPreview = document.getElementById('cvPreview');
+            const cvFileNameSpan = document.getElementById('cvFileName');
+            if (cvInput && cvPreview) {
+                cvInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        if (file.size > 5*1024*1024) { alert('CV max 5MB'); cvInput.value = ''; cvPreview.style.display = 'none'; return; }
+                        cvFileNameSpan.innerHTML = `<i class="fas fa-file-pdf"></i> ${file.name}`;
+                        cvPreview.style.display = 'flex';
+                    } else { cvPreview.style.display = 'none'; }
+                });
+                if (btnDeleteCV) btnDeleteCV.addEventListener('click', () => { cvInput.value = ''; cvPreview.style.display = 'none'; cvFileNameSpan.innerHTML = ''; });
+            }
+
+            // Aperçu KBIS
+            const kbisInput = document.getElementById('offreKbis');
+            const btnDeleteKbis = document.getElementById('btnDeleteKbis');
+            const kbisPreview = document.getElementById('kbisPreview');
+            const kbisFileNameSpan = document.getElementById('kbisFileName');
+            if (kbisInput && kbisPreview) {
+                kbisInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        if (file.size > 5 * 1024 * 1024) {
+                            alert('Fichier trop volumineux (max 5MB)');
+                            kbisInput.value = '';
+                            kbisPreview.style.display = 'none';
+                            return;
+                        }
+                        kbisFileNameSpan.innerHTML = `<i class="fas fa-file"></i> ${file.name}`;
+                        kbisPreview.style.display = 'flex';
+                    } else {
+                        kbisPreview.style.display = 'none';
+                    }
+                });
+                if (btnDeleteKbis) {
+                    btnDeleteKbis.addEventListener('click', () => {
+                        kbisInput.value = '';
+                        kbisPreview.style.display = 'none';
+                    });
+                }
+            }
+
+            // Formulaire offre
+            const offreForm = document.getElementById('offreForm');
+            if (offreForm) {
+                offreForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        entreprise: document.getElementById('offreEntreprise').value,
+                        rccm: document.getElementById('offreRccm').value,
+                        ifu: document.getElementById('offreIfu').value,
+                        poste: document.getElementById('offrePoste').value,
+                        filiere: document.getElementById('offreFiliere').value,
+                        localisation: document.getElementById('offreLocalisation').value,
+                        description: document.getElementById('offreDescription').value,
+                        contact: document.getElementById('offreContact').value
+                    };
+                    
+                    const kbisInputField = document.getElementById('offreKbis');
+                    const kbisFile = kbisInputField.files[0];
+                    
+                    if (!formData.entreprise || !formData.rccm || !formData.ifu || !formData.poste || 
+                        !formData.filiere || !formData.localisation || !formData.description || !formData.contact) {
+                        showToast('❌ Remplissez tous les champs', true);
+                        return;
+                    }
+                    
+                    if (!kbisFile) {
+                        showToast('❌ Veuillez joindre un justificatif (RIB/KBIS)', true);
+                        return;
+                    }
+                    
+                    if (kbisFile.size > 5 * 1024 * 1024) {
+                        showToast('❌ Fichier trop volumineux (max 5MB)', true);
+                        return;
+                    }
+                    
+                    const publishBtn = document.getElementById('publishOfferBtn');
+                    const originalText = publishBtn.innerHTML;
+                    publishBtn.disabled = true;
+                    publishBtn.innerHTML = '<span class="spinner"></span> Préparation...';
+                    
+                    const kbisBase64 = await convertFileToBase64(kbisFile);
+                    const kbisFileName = kbisFile.name;
+                    
+                    await preparerOffre(formData, kbisBase64, kbisFileName);
+                    
+                    publishBtn.disabled = false;
+                    publishBtn.innerHTML = originalText;
+                });
+            }
+
+            // Espace personnel
+            const personalBtn = document.getElementById('personalSpaceBtn');
+            if (personalBtn) {
+                personalBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const userEmail = getActiveEmail();
+                    if (!userEmail) window.location.href = 'login.html?mode=login&redirect=' + encodeURIComponent(window.location.href);
+                    else window.location.href = 'dashboard.html#section-profil';
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initForms();
+            afficherOffres();
+        });
+    </script>
+</body>
+</html>
