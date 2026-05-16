@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement | P2I</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .payment-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(76, 201, 240, 0.3);
+        }
+        h1 { color: white; margin-bottom: 20px; }
+        .amount { font-size: 2rem; color: #4cc9f0; margin: 20px 0; }
+        .btn-pay {
+            background: linear-gradient(90deg, #28a745, #20c997);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .btn-cancel {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 15px 30px;
+            border: 1px solid #f72585;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .info { color: #b8c1ec; margin: 20px 0; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <div class="payment-card">
+        <h1>💳 Paiement de l'offre</h1>
+        <p style="color: #b8c1ec;">Plateforme Industrielle Ivoirienne</p>
+        <div class="amount">6 500 FCFA</div>
+        <div class="info">
+            <i class="fas fa-mobile-alt"></i> Orange Money / MTN Mobile Money / Wave
+        </div>
+        <button class="btn-pay" onclick="simulerPaiement()">✅ Simuler le paiement</button>
+        <br>
+        <button class="btn-cancel" onclick="annuler()">❌ Annuler</button>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const offreId = urlParams.get('offreId');
+        
+        function simulerPaiement() {
+            if (!offreId) {
+                alert('Erreur : offre non trouvée');
+                window.location.href = 'reseau.html';
+                return;
+            }
+            
+            const db = JSON.parse(localStorage.getItem('p2i_reseau_data_v3') || '{"offres":[]}');
+            const offreIndex = db.offres.findIndex(o => o.id === offreId);
+            
+            if (offreIndex !== -1) {
+                db.offres[offreIndex].paiement.statut = 'paye';
+                db.offres[offreIndex].paiement.transactionId = 'SIM_' + Date.now();
+                db.offres[offreIndex].paiement.datePaiement = new Date().toISOString();
+                localStorage.setItem('p2i_reseau_data_v3', JSON.stringify(db));
+                
+                alert('✅ Paiement simulé avec succès ! L\'offre sera vérifiée par notre équipe.');
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('❌ Erreur : offre non trouvée');
+                window.location.href = 'reseau.html';
+            }
+        }
+        
+        function annuler() {
+            window.location.href = 'reseau.html';
+        }
+    </script>
+</body>
+</html>
