@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filières Industrielles | Plateforme Industrielle Ivoirienne (P2I)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== STYLES DE BASE P2I ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER & NAVIGATION P2I ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(76, 201, 240, 0.1);
+            padding: 15px 0;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+        .gear {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #4cc9f0;
+        }
+        .gear-large { animation: rotate 20s linear infinite; }
+        .gear-medium {
+            width: 70%; height: 70%; top: 15%; left: 15%;
+            animation: rotate 15s linear infinite reverse;
+        }
+        .gear-small {
+            width: 40%; height: 40%; top: 30%; left: 30%;
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        nav ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        nav a {
+            color: #b8c1ec;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        nav a:hover { color: #4cc9f0; }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after { width: 100%; }
+        nav a.active {
+            color: #4cc9f0;
+            font-weight: 600;
+        }
+        nav a.active::after {
+            width: 100%;
+        }
+ /* NOUVEAU : Style du bouton Connexion */
+        .btn-login-nav {
+            background: rgba(76, 201, 240, 0.1);
+            border: 1px solid #4cc9f0;
+            color: #4cc9f0;
+            padding: 8px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 10px;
+        }
+        .btn-login-nav:hover {
+            background: #4cc9f0;
+            color: #0d1b2a;
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.4);
+        }
+
+        /* ===== HERO SECTION FILIÈRES ===== */
+        .hero {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            padding: 60px 0 40px;
+            position: relative;
+            text-align: center;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #b8c1ec;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        /* ===== ÉTAPES DE SÉLECTION ===== */
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            gap: 20px;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #b8c1ec;
+            transition: all 0.3s;
+        }
+        .step:hover {
+            transform: translateY(-5px);
+        }
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .step.active .step-circle {
+            background: #4361ee;
+            color: white;
+            box-shadow: 0 0 20px rgba(67, 97, 238, 0.7);
+            border-color: #4cc9f0;
+        }
+        .step.completed .step-circle {
+            background: #28a745;
+            color: white;
+            box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
+        }
+
+        /* ===== SECTIONS DE SÉLECTION ===== */
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #4cc9f0, transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .section:hover::before {
+            opacity: 1;
+        }
+        .section:hover {
+            border-color: rgba(76, 201, 240, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px);
+        }
+        .section.active {
+            display: block;
+            border-color: rgba(76, 201, 240, 0.2);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: #b8c1ec;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== FILIÈRES GRID ===== */
+        .filiere-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .filiere-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .filiere-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 201, 240, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        .filiere-card:hover::before {
+            left: 100%;
+        }
+        .filiere-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(76, 201, 240, 0.5);
+            box-shadow: 0 15px 30px rgba(76, 201, 240, 0.2);
+        }
+        .filiere-card.selected {
+            border-color: #4361ee;
+            background: rgba(67, 97, 238, 0.15);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.3);
+            animation: selectedGlow 2s infinite alternate;
+        }
+        @keyframes selectedGlow {
+            from { box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3); }
+            to { box-shadow: 0 15px 30px rgba(67, 97, 238, 0.5); }
+        }
+        .filiere-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .filiere-title {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .filiere-desc {
+            color: #b8c1ec;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .filiere-count {
+            color: #4cc9f0;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* ===== UNITÉS DE PRODUCTION ===== */
+        .unite-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .unite-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .unite-card:hover {
+            border-color: rgba(76, 201, 240, 0.7);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(76, 201, 240, 0.3);
+        }
+        .unite-card.selected {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.15);
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+            animation: selectedPulse 1.5s infinite alternate;
+        }
+        @keyframes selectedPulse {
+            from { background: rgba(40, 167, 69, 0.15); }
+            to { background: rgba(40, 167, 69, 0.25); }
+        }
+        .capex-badge {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        .unite-name {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        .unite-desc {
+            color: #b8c1ec;
+            font-size: 0.9rem;
+        }
+
+        /* ===== LOCALISATION CÔTE D'IVOIRE ===== */
+        .location-container {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .location-container:hover {
+            border-color: rgba(76, 201, 240, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .location-title {
+            color: #4cc9f0;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .location-title i {
+            margin-right: 10px;
+            text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+        }
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .location-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .location-card:hover {
+            background: rgba(76, 201, 240, 0.25);
+            transform: translateY(-5px) scale(1.05);
+            border-color: rgba(76, 201, 240, 0.7);
+            box-shadow: 0 10px 20px rgba(76, 201, 240, 0.3);
+        }
+        .location-card.selected {
+            background: rgba(67, 97, 238, 0.35);
+            border-color: #4361ee;
+            color: #4cc9f0;
+            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.4);
+            animation: cardGlow 2s infinite alternate;
+        }
+        @keyframes cardGlow {
+            from { box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3); }
+            to { box-shadow: 0 10px 25px rgba(67, 97, 238, 0.5); }
+        }
+        .location-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .location-type {
+            font-size: 0.8rem;
+            color: #b8c1ec;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        .location-type.region {
+            background: rgba(40, 167, 69, 0.25);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        .location-type.city {
+            background: rgba(76, 201, 240, 0.25);
+            color: #4cc9f0;
+            border: 1px solid rgba(76, 201, 240, 0.3);
+        }
+
+        /* ===== FORMULAIRES INVESTISSEMENT ===== */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .form-group {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .form-group:hover {
+            border-color: rgba(76, 201, 240, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+        .form-title {
+            color: #4cc9f0;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .form-title i {
+            margin-right: 10px;
+            text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+        }
+
+        .investment-input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+        .investment-input:focus {
+            outline: none;
+            border-color: #4cc9f0;
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.3);
+        }
+        .investment-range {
+            width: 100%;
+            margin: 20px 0;
+            -webkit-appearance: none;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            outline: none;
+        }
+        .investment-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #4361ee;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 0 15px rgba(67, 97, 238, 0.8);
+            transition: all 0.3s;
+        }
+        .investment-range::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(67, 97, 238, 1);
+        }
+
+        /* ===== RÉCAPITULATIF ===== */
+        .recap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .recap-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .recap-card:hover {
+            border-color: rgba(76, 201, 240, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(76, 201, 240, 0.2);
+        }
+        .recap-label {
+            color: #b8c1ec;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        .recap-value {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .recap-capex {
+            color: #28a745;
+            text-shadow: 0 0 10px rgba(40, 167, 69, 0.3);
+        }
+        .recap-opex {
+            color: #ff6b6b;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+        }
+
+        /* ===== BOUTONS ===== */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        .btn {
+            padding: 18px 35px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn:hover::before {
+            left: 100%;
+        }
+        .btn-prev {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-prev:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+            border-color: rgba(76, 201, 240, 0.5);
+        }
+        .btn-next {
+            background: linear-gradient(to right, #4361ee, #3a0ca3);
+            color: white;
+            border: 1px solid rgba(67, 97, 238, 0.5);
+        }
+        .btn-next:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.4);
+        }
+        .btn-confirm {
+            background: linear-gradient(to right, #28a745, #20c997);
+            color: white;
+            width: 100%;
+            max-width: 400px;
+            margin: 40px auto 0;
+            display: block;
+            min-width: 250px;
+            border: 1px solid rgba(40, 167, 69, 0.5);
+        }
+        .btn-confirm:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(40, 167, 69, 0.4);
+        }
+        .btn-modify {
+            background: linear-gradient(to right, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 250px;
+            border: 1px solid rgba(255, 107, 107, 0.5);
+        }
+        .btn-modify:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(to right, #ff5252, #ff3838);
+        }
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        /* ===== FOOTER P2I ===== */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(76, 201, 240, 0.1);
+            margin-top: 80px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a {
+            color: #b8c1ec;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .footer-links a:hover {
+            color: #4cc9f0;
+            padding-left: 5px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b8c1ec;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            body { padding-top: 140px; }
+            .hero { padding: 40px 0; }
+            .hero-content h1 { font-size: 2.5rem; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .nav-container { flex-direction: column; gap: 20px; }
+            .filiere-grid, .unite-list, .form-grid, .recap-grid, .location-grid {
+                grid-template-columns: 1fr;
+            }
+            .step-indicator { flex-wrap: wrap; }
+            .navigation-buttons { flex-direction: column; gap: 15px; }
+            .btn, .btn-modify { width: 100%; min-width: unset; }
+            .action-buttons { flex-direction: column; align-items: center; }
+            .location-card { min-width: 150px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header avec Navigation P2I -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="gear gear-large"></div>
+                    <div class="gear gear-medium"></div>
+                    <div class="gear gear-small"></div>
+                </div>
+                <div class="logo-text">P2I</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="filieres.html" class="active">Filières</a></li>
+                    <li><a href="secteur-industriel.html">Secteur industriel</a></li>
+                    <li><a href="reseau.html">Réseautage</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li>
+  <a href="#" class="nav-auth-btn" data-personal-space>
+    <i class="fas fa-user-circle"></i> Mon Espace Personnel
+  </a>
+</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Héro Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Explorez les Filières Industrielles</h1>
+                <p class="hero-subtitle">
+                    Sélectionnez votre filière, découvrez les unités de production adaptées au marché ivoirien, 
+                    choisissez votre localisation et définissez votre investissement. En 5 étapes, construisez votre projet industriel.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Indicateur d'étapes -->
+    <div class="container">
+        <div class="step-indicator">
+            <div class="step active" id="step1">
+                <div class="step-circle">1</div>
+                <span>Filière</span>
+            </div>
+            <div class="step" id="step2">
+                <div class="step-circle">2</div>
+                <span>Unité</span>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-circle">3</div>
+                <span>Localisation</span>
+            </div>
+            <div class="step" id="step4">
+                <div class="step-circle">4</div>
+                <span>Investissement</span>
+            </div>
+            <div class="step" id="step5">
+                <div class="step-circle">5</div>
+                <span>Récapitulatif</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Étape 1 : Sélection de la filière -->
+    <div class="container">
+        <div class="section active" id="section1">
+            <h2 class="section-title">Sélectionnez une Filière Industrielle</h2>
+            <p class="section-subtitle">
+                Choisissez parmi nos 12 filières industrielles. Chaque filière contient 8 unités de production spécifiques adaptées au marché ivoirien.
+            </p>
+            <div class="filiere-grid" id="filiereGrid">
+                <!-- Généré par JavaScript -->
+            </div>
+            <div class="navigation-buttons">
+                <div></div> <!-- Espace vide à gauche -->
+                <button class="btn btn-next" onclick="nextStep(2)">
+                    Suivant <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Étape 2 : Sélection de l'unité -->
+        <div class="section" id="section2">
+            <h2 class="section-title">Sélectionnez une Unité de Production</h2>
+            <p class="section-subtitle" id="selectedFiliereText">
+                <!-- Texte dynamique -->
+            </p>
+            <div class="unite-list" id="uniteList">
+                <!-- Généré par JavaScript -->
+            </div>
+            <div class="navigation-buttons">
+                <button class="btn btn-prev" onclick="prevStep(1)">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </button>
+                <button class="btn btn-next" onclick="nextStep(3)">
+                    Suivant <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Étape 3 : Choix de la localisation CÔTE D'IVOIRE -->
+        <div class="section" id="section3">
+            <h2 class="section-title">Sélectionnez votre Localisation en Côte d'Ivoire</h2>
+            <p class="section-subtitle">
+                Choisissez une région naturelle ou une ville spécifique pour l'implantation de votre unité de production.
+            </p>
+            
+            <!-- Régions naturelles de Côte d'Ivoire -->
+            <div class="location-container">
+                <h3 class="location-title"><i class="fas fa-mountain"></i> Régions Naturelles de Côte d'Ivoire</h3>
+                <div class="location-grid" id="regionsGrid">
+                    <!-- Généré par JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Villes principales de Côte d'Ivoire -->
+            <div class="location-container" style="margin-top: 30px;">
+                <h3 class="location-title"><i class="fas fa-city"></i> Villes Principales</h3>
+                <div class="location-grid" id="citiesGrid">
+                    <!-- Généré par JavaScript -->
+                </div>
+            </div>
+            
+            <div class="navigation-buttons">
+                <button class="btn btn-prev" onclick="prevStep(2)">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </button>
+                <button class="btn btn-next" onclick="nextStep(4)">
+                    Suivant <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Étape 4 : Montant d'investissement -->
+        <div class="section" id="section4">
+            <h2 class="section-title">Montant d'Investissement</h2>
+            <p class="section-subtitle">
+                Définissez votre budget d'investissement (CAPEX) pour cette unité de production.
+            </p>
+            <div class="form-grid">
+                <div class="form-group">
+                    <h3 class="form-title"><i class="fas fa-chart-line"></i> Budget CAPEX</h3>
+                    <p style="color: #b8c1ec; margin-bottom: 20px;">
+                        CAPEX minimum recommandé : <span id="minCapex" style="color: #28a745; font-weight: bold;">80k $</span>
+                    </p>
+                    <input type="range" class="investment-range" id="capexRange" min="50" max="1000" step="10" value="200">
+                    <input type="number" class="investment-input" id="capexInput" value="200" min="50" max="1000">
+                    <p style="color: #b8c1ec; margin-top: 15px; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> Le CAPEX comprend les équipements, machines et installations.
+                    </p>
+                </div>
+                
+                <div class="form-group">
+                    <h3 class="form-title"><i class="fas fa-calculator"></i> Estimation OPEX</h3>
+                    <p style="color: #b8c1ec; margin-bottom: 20px;">
+                        Coûts opérationnels estimés (par an) :
+                    </p>
+                    <div style="background: rgba(255, 107, 107, 0.1); padding: 20px; border-radius: 10px; margin-top: 20px;">
+                        <h4 style="color: #ff6b6b; margin-bottom: 10px;">OPEX Annuel Estimé</h4>
+                        <div style="font-size: 2rem; color: #ff6b6b; font-weight: bold;" id="opexEstimation">
+                            -- k $
+                        </div>
+                        <p style="color: #b8c1ec; margin-top: 10px; font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> Inclut matières premières, salaires, énergie, maintenance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation-buttons">
+                <button class="btn btn-prev" onclick="prevStep(3)">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </button>
+                <button class="btn btn-next" onclick="nextStep(5)">
+                    Suivant <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Étape 5 : Récapitulatif -->
+        <div class="section" id="section5">
+            <h2 class="section-title">Récapitulatif de votre Sélection</h2>
+            <p class="section-subtitle">
+                Vérifiez les informations ci-dessous avant de confirmer votre sélection.
+            </p>
+            
+            <div class="recap-grid">
+                <div class="recap-card">
+                    <div class="recap-label">Filière Sélectionnée</div>
+                    <div class="recap-value" id="recapFiliere">--</div>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-label">Unité de Production</div>
+                    <div class="recap-value" id="recapUnite" data-unit-id="">--</div>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-label">Localisation</div>
+                    <div class="recap-value" id="recapLocation">--</div>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-label">Type de Localisation</div>
+                    <div class="recap-value" id="recapLocationType">--</div>
+                </div>
+            </div>
+            
+            <div class="recap-grid" style="margin-top: 40px;">
+                <div class="recap-card">
+                    <div class="recap-label">Investissement CAPEX</div>
+                    <div class="recap-value recap-capex" id="recapCapex">-- k $</div>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-label">OPEX Annuel Estimé</div>
+                    <div class="recap-value recap-opex" id="recapOpex">-- k $</div>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-label">Surface Estimée</div>
+                    <div class="recap-value" id="recapSurface">-- m²</div>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-label">Personnel Estimé</div>
+                    <div class="recap-value" id="recapPersonnel">-- personnes</div>
+                </div>
+            </div>
+            
+            <!-- Boutons d'action -->
+            <div class="action-buttons">
+                <button class="btn btn-modify" onclick="modifyChoices()">
+                    <i class="fas fa-redo-alt"></i> Modifier vos choix
+                </button>
+                
+                <button class="btn btn-confirm" onclick="confirmerSelection()">
+                    <i class="fas fa-check-circle"></i> Confirmer la sélection et voir la fiche
+                </button>
+            </div>
+            
+            <div class="navigation-buttons">
+                <button class="btn btn-prev" onclick="prevStep(4)">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer P2I -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Plateforme Industrielle Ivoirienne</h3>
+                    <p style="color: #b8c1ec; line-height: 1.7;">
+                        <strong>Vision :</strong> Faire de la Côte d'Ivoire un hub industriel leader en Afrique de l'Ouest.<br>
+                        <strong>Mission :</strong> De l'idée à l'usine, nous accompagnons chaque étape de votre projet industriel.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="filieres.html">Filières Industrielles</a></li>
+                        <li><a href="secteur-industriel.html">Secteur Industriel</a></li>
+                        <li><a href="reseau.html">Réseautage</a></li>
+                        <li><a href="apropos.html">À Propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal & Information</h3>
+                    <ul class="footer-links">
+                        <li><a href="#cgu">Conditions Générales</a></li>
+                        <li><a href="#confidentialite">Politique de Confidentialité</a></li>
+                        <li><a href="#mentions">Mentions Légales</a></li>
+                        <li>Immatriculation : RC Abidjan 2025-00123</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Plateforme Industrielle Ivoirienne (P2I). Tous droits réservés.</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">
+                    Ce site est une démonstration. Les données sont simulées à des fins d'illustration.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== DONNÉES DES FILIÈRES P2I COTE D'IVOIRE =====
+        const filieresData = [
+            {
+                id: "agro",
+                name: "Agro-alimentaire & Boissons",
+                icon: "🌾",
+                description: "Transformation industrielle des produits agricoles locaux",
+                units: [
+                    { id: "conserverie_legumes", name: "Conserverie de légumes", minCapex: 90, description: "Transformation industrielle de légumes locaux en conserves" },
+                    { id: "biscuiterie", name: "Biscuiterie industrielle", minCapex: 120, description: "Biscuits à base de farines locales enrichies, cacao et café" },
+                    { id: "boulangerie_industrielle", name: "Boulangerie industrielle", minCapex: 150, description: "Production industrielle de pains, croissants et viennoiseries" },
+                    { id: "jus_boissons", name: "Production de jus et boissons", minCapex: 100, description: "Transformation de fruits locaux en jus et boissons" },
+                    { id: "mini_laiterie", name: "Mini-laiterie", minCapex: 110, description: "Transformation du lait en produits laitiers" },
+                    { id: "huiles_alimentaires", name: "Huiles alimentaires", minCapex: 130, description: "Production d'huiles végétales locales" },
+                    { id: "epices", name: "Transformation d'épices", minCapex: 70, description: "Transformation et conditionnement d'épices locales" },
+                    { id: "aliments_betail", name: "Aliments pour bétail", minCapex: 95, description: "Production d'aliments composés pour l'élevage" }
+                ]
+            },
+            {
+                id: "chimie",
+                name: "Chimie, Cosmétiques & Détergents",
+                icon: "🧪",
+                description: "Produits chimiques, hygiène et solutions industrielles",
+                units: [
+                    { id: "detergents", name: "Détergents & produits ménagers", minCapex: 80, description: "Fabrication de détergents et produits d'hygiène" },
+                    { id: "savonnerie", name: "Savonnerie industrielle", minCapex: 70, description: "Production de savons solides et liquides" },
+                    { id: "cosmetiques", name: "Cosmétiques naturels", minCapex: 85, description: "Cosmétiques à base de matières premières locales" },
+                    { id: "peintures", name: "Peintures industrielles & BTP", minCapex: 140, description: "Peintures pour bâtiment et industrie" },
+                    { id: "adhesifs", name: "Adhésifs & colles", minCapex: 120, description: "Colles industrielles et adhésifs techniques" },
+                    { id: "engrais", name: "Engrais & pesticides", minCapex: 180, description: "Intrants agricoles et ménagers" },
+                    { id: "javel", name: "Eau de javel & désinfectants", minCapex: 60, description: "Produits désinfectants industriels" },
+                    { id: "produits_industriels", name: "Produits chimiques industriels", minCapex: 150, description: "Produits chimiques à usage industriel" }
+                ]
+            },
+            {
+                id: "textile",
+                name: "Textile, Habillement & Cuir",
+                icon: "🧵",
+                description: "Textile, cuir et habillement pour marchés locaux et régionaux",
+                units: [
+                    { id: "confection", name: "Confection de vêtements", minCapex: 60, description: "Vêtements prêts-à-porter et tenues modernes" },
+                    { id: "tissage", name: "Tissage & pagnes", minCapex: 100, description: "Production de tissus et pagnes locaux" },
+                    { id: "maroquinerie", name: "Maroquinerie cuir", minCapex: 75, description: "Articles en cuir pour marchés locaux et export" },
+                    { id: "teinture", name: "Teinture textile", minCapex: 40, description: "Teinture textile industrielle et artisanale" },
+                    { id: "broderie", name: "Broderie industrielle", minCapex: 55, description: "Broderie automatisée sur textiles" },
+                    { id: "chaussures", name: "Chaussures & sandales", minCapex: 120, description: "Production de chaussures et sandales" },
+                    { id: "uniformes", name: "Confection d'uniformes", minCapex: 70, description: "Uniformes scolaires et professionnels" },
+                    { id: "linge", name: "Linge de maison", minCapex: 90, description: "Linge domestique et hôtelier" }
+                ]
+            },
+            {
+                id: "metal",
+                name: "Métallurgie & Mécanique",
+                icon: "⚙️",
+                description: "Travail des métaux et mécanique industrielle",
+                units: [
+                    { id: "serrurerie", name: "Serrurerie métallique", minCapex: 55, description: "Portes, fenêtres et grilles métalliques" },
+                    { id: "outillage", name: "Outillage agricole", minCapex: 85, description: "Outils et équipements agricoles" },
+                    { id: "recyclage_metaux", name: "Recyclage de métaux", minCapex: 110, description: "Transformation de métaux ferreux et non ferreux" },
+                    { id: "chaudronnerie", name: "Chaudronnerie industrielle", minCapex: 95, description: "Cuves, silos et équipements métalliques" },
+                    { id: "mecanosoudure", name: "Mécanosoudure", minCapex: 65, description: "Soudure industrielle et fabrication sur mesure" },
+                    { id: "structures", name: "Structures métalliques", minCapex: 100, description: "Charpentes et pylônes métalliques" },
+                    { id: "pieces", name: "Pièces mécaniques", minCapex: 140, description: "Usinage de pièces mécaniques" },
+                    { id: "quincaillerie", name: "Quincaillerie métallique", minCapex: 75, description: "Vis, boulons et pièces de fixation" }
+                ]
+            },
+            {
+                id: "plastique",
+                name: "Plastique & Caoutchouc",
+                icon: "🧴",
+                description: "Transformation plastique et caoutchouc industriel",
+                units: [
+                    { id: "sacs", name: "Production de sacs plastiques", minCapex: 75, description: "Sacs biodégradables et réutilisables" },
+                    { id: "bouteilles_pet", name: "Soufflage de bouteilles PET", minCapex: 110, description: "Bouteilles pour eau et boissons" },
+                    { id: "tuyaux_pvc", name: "Tuyaux PVC", minCapex: 130, description: "Tuyaux pour irrigation et BTP" },
+                    { id: "emballages", name: "Emballages plastiques", minCapex: 85, description: "Films et emballages alimentaires" },
+                    { id: "profilés", name: "Profilés plastiques", minCapex: 120, description: "Profilés pour construction et industrie" },
+                    { id: "jouets", name: "Jouets en plastique", minCapex: 70, description: "Jouets éducatifs et articles enfants" },
+                    { id: "joints", name: "Joints en caoutchouc", minCapex: 60, description: "Joints d'étanchéité et pièces techniques" },
+                    { id: "granules", name: "Granulés plastiques recyclés", minCapex: 150, description: "Granulés pour industrie, sols sportifs et collectivités" }
+                ]
+            },
+            {
+                id: "electronique",
+                name: "Électronique & Électricité",
+                icon: "💡",
+                description: "Équipements électriques et électroniques",
+                units: [
+                    { id: "cables", name: "Câbles électriques", minCapex: 125, description: "Câbles pour bâtiment et industrie" },
+                    { id: "panneaux_solaires", name: "Assemblage de panneaux solaires", minCapex: 180, description: "Kits photovoltaïques pour électrification" },
+                    { id: "appareils", name: "Assemblage d'appareils électroniques", minCapex: 95, description: "Radios, chargeurs et petits équipements" },
+                    { id: "led", name: "Lampes LED", minCapex: 65, description: "Lampes LED basse consommation" },
+                    { id: "tableaux", name: "Tableaux électriques", minCapex: 85, description: "Tableaux de distribution électrique" },
+                    { id: "onduleurs", name: "Onduleurs solaires", minCapex: 110, description: "Onduleurs et régulateurs de tension" },
+                    { id: "compteurs", name: "Compteurs électriques", minCapex: 150, description: "Compteurs d'énergie électrique" },
+                    { id: "batteries", name: "Batteries", minCapex: 200, description: "Batteries automobiles et stationnaires" }
+                ]
+            },
+            {
+                id: "btp",
+                name: "BTP & Matériaux de Construction",
+                icon: "🏗️",
+                description: "Matériaux et solutions pour le bâtiment",
+                units: [
+                    { id: "cimenterie", name: "Mini-cimenterie", minCapex: 600, description: "Production locale de ciment" },
+                    { id: "briques", name: "Briques & BTC", minCapex: 55, description: "Briques en terre cuite et BTC" },
+                    { id: "prefab", name: "Éléments préfabriqués béton", minCapex: 110, description: "Poutrelles et éléments béton" },
+                    { id: "tuiles", name: "Tuiles", minCapex: 85, description: "Tuiles béton ou céramique" },
+                    { id: "agglos", name: "Agglos & parpaings", minCapex: 75, description: "Blocs de béton" },
+                    { id: "peintures_btp", name: "Peintures BTP", minCapex: 95, description: "Peintures pour bâtiment" },
+                    { id: "centrale_beton", name: "Centrale à béton", minCapex: 150, description: "Béton prêt à l'emploi" },
+                    { id: "menuiserie", name: "Menuiserie aluminium & PVC", minCapex: 150, description: "Portes et fenêtres aluminium/PVC" }
+                ]
+            },
+            {
+                id: "medical",
+                name: "Petits Matériels Médicaux",
+                icon: "🏥",
+                description: "Équipements médicaux et consommables",
+                units: [
+                    { id: "masques", name: "Masques médicaux", minCapex: 35, description: "Masques chirurgicaux et de protection" },
+                    { id: "pansements", name: "Bandages & pansements", minCapex: 45, description: "Pansements et compresses" },
+                    { id: "mobilier", name: "Mobilier médical", minCapex: 70, description: "Lits et équipements hospitaliers" },
+                    { id: "fauteuils", name: "Fauteuils roulants", minCapex: 85, description: "Fauteuils roulants et aides à la mobilité" },
+                    { id: "instruments", name: "Instruments médicaux de base", minCapex: 120, description: "Instruments non invasifs" },
+                    { id: "bequilles", name: "Béquilles & cannes", minCapex: 55, description: "Aides à la marche" },
+                    { id: "antiseptiques", name: "Solutions antiseptiques", minCapex: 65, description: "Solutions hydroalcooliques" },
+                    { id: "kits", name: "Kits médicaux", minCapex: 50, description: "Trousse de premiers secours" }
+                ]
+            },
+            {
+                id: "assemblage",
+                name: "Assemblage & Montage",
+                icon: "🛠️",
+                description: "Assemblage industriel CKD / SKD avec SAV",
+                units: [
+                    { id: "smartphones", name: "Assemblage de smartphones & tablettes", minCapex: 250, description: "Assemblage CKD avec SAV structuré" },
+                    { id: "ordinateurs", name: "Assemblage d'ordinateurs", minCapex: 150, description: "PC pour écoles et administrations" },
+                    { id: "electromenager", name: "Électroménager", minCapex: 220, description: "Réfrigérateurs et cuisinières" },
+                    { id: "climatiseurs", name: "Climatiseurs", minCapex: 220, description: "Climatiseurs split et mobiles" },
+                    { id: "motos", name: "Motos & scooters", minCapex: 280, description: "Mobilité urbaine et rurale" },
+                    { id: "velos", name: "Bicyclettes", minCapex: 100, description: "Vélos urbains et ruraux" },
+                    { id: "meubles", name: "Meubles", minCapex: 70, description: "Meubles en kit" },
+                    { id: "equipements", name: "Équipements divers", minCapex: 180, description: "Assemblage industriel diversifié" }
+                ]
+            },
+            {
+                id: "recyclage",
+                name: "Recyclage & Valorisation",
+                icon: "♻️",
+                description: "Économie circulaire et valorisation des déchets",
+                units: [
+                    { id: "plastique", name: "Recyclage du plastique", minCapex: 110, description: "Granulés plastiques recyclés" },
+                    { id: "papier", name: "Recyclage du papier", minCapex: 120, description: "Pâte et produits papier" },
+                    { id: "metaux", name: "Recyclage des métaux", minCapex: 130, description: "Métaux recyclés pour industrie" },
+                    { id: "compost", name: "Production de compost", minCapex: 55, description: "Valorisation des déchets organiques" },
+                    { id: "verre", name: "Recyclage du verre", minCapex: 150, description: "Granulats de verre recyclé" },
+                    { id: "pneus", name: "Recyclage de pneus", minCapex: 150, description: "Granulats de caoutchouc" },
+                    { id: "huiles", name: "Recyclage d'huiles usagées", minCapex: 85, description: "Régénération d'huiles" },
+                    { id: "deee", name: "Recyclage DEEE", minCapex: 160, description: "Déchets électroniques" }
+                ]
+            },
+            {
+                id: "services",
+                name: "Services Industriels",
+                icon: "📊",
+                description: "Services techniques et organisationnels industriels",
+                units: [
+                    { id: "nettoyage", name: "Nettoyage industriel", minCapex: 40, description: "Nettoyage et dépollution industrielle" },
+                    { id: "maintenance", name: "Maintenance industrielle", minCapex: 90, description: "Maintenance des équipements" },
+                    { id: "logistique", name: "Logistique industrielle", minCapex: 120, description: "Entreposage et transport industriel" },
+                    { id: "formation", name: "Centre de formation industrielle", minCapex: 70, description: "Formation aux métiers industriels" },
+                    { id: "qualite", name: "Contrôle qualité", minCapex: 60, description: "Essais, tests et audits" },
+                    { id: "etudes", name: "Bureau d'études", minCapex: 55, description: "Ingénierie et études techniques" },
+                    { id: "securite", name: "Sécurité industrielle", minCapex: 50, description: "Audit HSE et prévention" },
+                    { id: "energie", name: "Services énergétiques", minCapex: 100, description: "Audit et optimisation énergétique" }
+                ]
+            },
+            {
+                id: "energie",
+                name: "Énergie, Eau & Environnement",
+                icon: "⚡",
+                description: "Solutions énergétiques et environnementales",
+                units: [
+                    { id: "poteaux", name: "Poteaux électriques en béton", minCapex: 150, description: "Poteaux pour réseaux électriques" },
+                    { id: "compteurs_eau", name: "Compteurs d'eau", minCapex: 120, description: "Compteurs pour réseaux urbains" },
+                    { id: "kits_solaires", name: "Kits solaires domestiques", minCapex: 100, description: "Systèmes solaires autonomes" },
+                    { id: "lampadaires", name: "Lampadaires solaires", minCapex: 130, description: "Éclairage public solaire" },
+                    { id: "forage", name: "Forage & hydraulique", minCapex: 160, description: "Équipements hydrauliques" },
+                    { id: "eau", name: "Traitement de l'eau", minCapex: 110, description: "Stations de traitement d'eau" },
+                    { id: "maintenance_energie", name: "Maintenance énergétique", minCapex: 80, description: "Maintenance des installations" },
+                    { id: "audit", name: "Audit énergétique & environnemental", minCapex: 60, description: "Études d'impact et diagnostics" }
+                ]
+            }
+        ];
+
+        // ===== DONNÉES DE LOCALISATION CÔTE D'IVOIRE =====
+        const coteIvoireLocations = {
+            regions: [
+                { id: "sud_forestier", name: "Sud Forestier", type: "Région Naturelle", description: "Zone forestière avec forêts denses et production de cacao" },
+                { id: "centre_savanicole", name: "Centre Savanicole", type: "Région Naturelle", description: "Zone de savane avec agriculture diversifiée" },
+                { id: "nord_soudanais", name: "Nord Soudanais", type: "Région Naturelle", description: "Zone soudanaise avec élevage et coton" },
+                { id: "region_lac", name: "Région du Lac", type: "Région Naturelle", description: "Zone lacustre avec pêche et activités connexes" },
+                { id: "littoral", name: "Littoral", type: "Région Naturelle", description: "Zone côtière avec ports et activités maritimes" },
+                { id: "ouest_montagneux", name: "Ouest Montagneux", type: "Région Naturelle", description: "Zone montagneuse avec mines et agriculture" }
+            ],
+            cities: [
+                { id: "abidjan", name: "Abidjan", type: "Ville", region: "Littoral", description: "Capitale économique, principal centre industriel" },
+                { id: "bouake", name: "Bouaké", type: "Ville", region: "Centre Savanicole", description: "Deuxième ville du pays, carrefour commercial" },
+                { id: "daloa", name: "Daloa", type: "Ville", region: "Sud Forestier", description: "Centre cacaoyer et commercial important" },
+                { id: "korhogo", name: "Korhogo", type: "Ville", region: "Nord Soudanais", description: "Capitale du Nord, centre culturel et commercial" },
+                { id: "yamoussoukro", name: "Yamoussoukro", type: "Ville", region: "Centre Savanicole", description: "Capitale politique" },
+                { id: "sanpedro", name: "San-Pédro", type: "Ville", region: "Littoral", description: "Deuxième port du pays, centre industriel" },
+                { id: "gagnoa", name: "Gagnoa", type: "Ville", region: "Sud Forestier", description: "Centre agricole et commercial" },
+                { id: "man", name: "Man", type: "Ville", region: "Ouest Montagneux", description: "Capitale de la région des Montagnes" },
+                { id: "divo", name: "Divo", type: "Ville", region: "Sud Forestier", description: "Important centre de production de caoutchouc" },
+                { id: "abengourou", name: "Abengourou", type: "Ville", region: "Sud Forestier", description: "Centre de production de café et cacao" },
+                { id: "agboville", name: "Agboville", type: "Ville", region: "Sud Forestier", description: "Centre industriel et commercial" },
+                { id: "dabou", name: "Dabou", type: "Ville", region: "Littoral", description: "Port et centre de pêche important" },
+                { id: "grandbassam", name: "Grand-Bassam", type: "Ville", region: "Littoral", description: "Ancienne capitale, site historique" },
+                { id: "bondoukou", name: "Bondoukou", type: "Ville", region: "Nord Soudanais", description: "Ville historique et commerciale" },
+                { id: "odienne", name: "Odienné", type: "Ville", region: "Nord Soudanais", description: "Centre aurifère et commercial" },
+                { id: "seguela", name: "Séguéla", type: "Ville", region: "Nord Soudanais", description: "Centre de production de coton" },
+                { id: "touba", name: "Touba", type: "Ville", region: "Nord Soudanais", description: "Ville commerciale et agricole" },
+                { id: "ferkessedougou", name: "Ferkessédougou", type: "Ville", region: "Nord Soudanais", description: "Centre de commerce transfrontalier" },
+                { id: "bingerville", name: "Bingerville", type: "Ville", region: "Littoral", description: "Ancienne capitale, ville administrative" },
+                { id: "anyama", name: "Anyama", type: "Ville", region: "Littoral", description: "Banlieue industrielle d'Abidjan" }
+            ]
+        };
+
+        // Variables globales
+        let selectedFiliere = null;
+        let selectedUnite = null;
+        let selectedLocation = null;
+        let selectedLocationType = null;
+        let selectedCapex = 200; // Valeur par défaut
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            chargerFilieres();
+            chargerLocations();
+            setupEventListeners();
+        });
+
+        // Charger les filières
+        function chargerFilieres() {
+            const filiereGrid = document.getElementById('filiereGrid');
+            filiereGrid.innerHTML = '';
+            
+            filieresData.forEach(filiere => {
+                const card = document.createElement('div');
+                card.className = 'filiere-card';
+                card.dataset.id = filiere.id;
+                card.onclick = () => selectFiliere(filiere, card);
+                
+                card.innerHTML = `
+                    <div class="filiere-icon">${filiere.icon}</div>
+                    <h3 class="filiere-title">${filiere.name}</h3>
+                    <p class="filiere-desc">${filiere.description}</p>
+                    <div class="filiere-count">
+                        <i class="fas fa-industry"></i> ${filiere.units.length} unités disponibles
+                    </div>
+                `;
+                
+                filiereGrid.appendChild(card);
+            });
+        }
+
+        // Charger les localisations de Côte d'Ivoire
+        function chargerLocations() {
+            const regionsGrid = document.getElementById('regionsGrid');
+            const citiesGrid = document.getElementById('citiesGrid');
+            
+            regionsGrid.innerHTML = '';
+            citiesGrid.innerHTML = '';
+            
+            // Charger les régions
+            coteIvoireLocations.regions.forEach(region => {
+                const card = document.createElement('div');
+                card.className = 'location-card';
+                card.dataset.id = region.id;
+                card.dataset.type = 'region';
+                card.onclick = () => selectLocation(region, card);
+                
+                card.innerHTML = `
+                    <div class="location-name">${region.name}</div>
+                    <div class="location-type region">${region.type}</div>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: #b8c1ec;">${region.description}</p>
+                `;
+                
+                regionsGrid.appendChild(card);
+            });
+            
+            // Charger les villes
+            coteIvoireLocations.cities.forEach(city => {
+                const card = document.createElement('div');
+                card.className = 'location-card';
+                card.dataset.id = city.id;
+                card.dataset.type = 'city';
+                card.onclick = () => selectLocation(city, card);
+                
+                card.innerHTML = `
+                    <div class="location-name">${city.name}</div>
+                    <div class="location-type city">${city.type}</div>
+                    <div style="font-size: 0.8rem; margin-top: 5px; color: #4cc9f0;">
+                        <i class="fas fa-map-pin"></i> ${city.region}
+                    </div>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: #b8c1ec;">${city.description}</p>
+                `;
+                
+                citiesGrid.appendChild(card);
+            });
+        }
+
+        // Sélectionner une filière
+        function selectFiliere(filiere, element) {
+            // Désélectionner toutes les filières
+            document.querySelectorAll('.filiere-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Sélectionner la filière choisie
+            element.classList.add('selected');
+            selectedFiliere = filiere;
+            localStorage.setItem("currentFiliereName", filiere.name);
+            // Mettre à jour le texte de l'étape 2
+            document.getElementById('selectedFiliereText').innerHTML = `
+                Filière sélectionnée : <strong style="color: #4cc9f0;">${filiere.name}</strong><br>
+                ${filiere.description}
+            `;
+            
+            // Charger les unités de cette filière
+            chargerUnites(filiere);
+        }
+
+        // Charger les unités d'une filière
+        function chargerUnites(filiere) {
+            const uniteList = document.getElementById('uniteList');
+            uniteList.innerHTML = '';
+            
+            filiere.units.forEach(unite => {
+                const card = document.createElement('div');
+                card.className = 'unite-card';
+                card.style.cursor = "pointer";
+                card.onclick = (e) => {
+                    e.stopPropagation();
+                    selectUnite(unite, card);
+                };
+                
+                card.innerHTML = `
+                    <div class="capex-badge">CAPEX minimum: ${unite.minCapex}k $</div>
+                    <h4 class="unite-name">${unite.name}</h4>
+                    <p class="unite-desc">${unite.description}</p>
+                `;
+                
+                uniteList.appendChild(card);
+            });
+        }
+
+        // Sélectionner une unité
+        function selectUnite(unite, element) {
+            // Désélectionner toutes les unités
+            document.querySelectorAll('.unite-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Sélectionner l'unité choisie
+            element.classList.add('selected');
+            selectedUnite = unite;
+            
+            // Mettre à jour le CAPEX minimum dans l'étape 4
+            document.getElementById('minCapex').textContent = `${unite.minCapex}k $`;
+            document.getElementById('capexRange').min = unite.minCapex;
+            document.getElementById('capexInput').min = unite.minCapex;
+            document.getElementById('capexRange').value = Math.max(unite.minCapex, selectedCapex);
+            document.getElementById('capexInput').value = Math.max(unite.minCapex, selectedCapex);
+            
+            // Mettre à jour l'estimation OPEX
+            updateOpexEstimation();
+        }
+
+        // Sélectionner une localisation
+        function selectLocation(location, element) {
+            // Désélectionner toutes les localisations
+            document.querySelectorAll('.location-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Sélectionner la localisation choisie
+            element.classList.add('selected');
+            selectedLocation = location.name;
+            selectedLocationType = location.type;
+            
+            // Mettre à jour le récapitulatif
+            updateRecap();
+        }
+
+        // Configurer les événements
+        function setupEventListeners() {
+            // Slider CAPEX
+            const capexRange = document.getElementById('capexRange');
+            const capexInput = document.getElementById('capexInput');
+            
+            capexRange.addEventListener('input', function() {
+                capexInput.value = this.value;
+                selectedCapex = parseInt(this.value);
+                updateOpexEstimation();
+                updateRecap();
+            });
+            
+            capexInput.addEventListener('input', function() {
+                const minCapex = selectedUnite ? selectedUnite.minCapex : 50;
+                let value = parseInt(this.value) || minCapex;
+                value = Math.max(minCapex, Math.min(1000, value));
+                
+                this.value = value;
+                capexRange.value = value;
+                selectedCapex = value;
+                updateOpexEstimation();
+                updateRecap();
+            });
+        }
+
+        // Mettre à jour l'estimation OPEX
+        function updateOpexEstimation() {
+            if (!selectedUnite) return;
+            
+            // OPEX estimé = 40-60% du CAPEX par an
+            const opexRatio = 0.5; // 50%
+            const opexEstime = Math.round(selectedCapex * opexRatio);
+            
+            document.getElementById('opexEstimation').textContent = `${opexEstime}k $`;
+        }
+
+        // Mettre à jour le récapitulatif
+        function updateRecap() {
+            if (selectedFiliere) {
+                document.getElementById('recapFiliere').textContent = selectedFiliere.name;
+            }
+            
+            if (selectedUnite) {
+                document.getElementById('recapUnite').textContent = selectedUnite.name;
+            }
+            
+            if (selectedLocation) {
+                document.getElementById('recapLocation').textContent = selectedLocation;
+            }
+            
+            if (selectedLocationType) {
+                document.getElementById('recapLocationType').textContent = selectedLocationType;
+            }
+            
+            // CAPEX et OPEX
+            document.getElementById('recapCapex').textContent = `${selectedCapex}k $`;
+            
+            const opexEstime = Math.round(selectedCapex * 0.5);
+            document.getElementById('recapOpex').textContent = `${opexEstime}k $`;
+            
+            // Surface et personnel estimés
+            const surface = Math.round(selectedCapex * 10 + 100);
+            const personnel = Math.max(3, Math.round(selectedCapex / 20));
+            
+            document.getElementById('recapSurface').textContent = `${surface} m²`;
+            document.getElementById('recapPersonnel').textContent = `${personnel} personnes`;
+        }
+
+        // Navigation entre les étapes
+        function nextStep(step) {
+    // Validation
+    if (step === 2 && !selectedFiliere) {
+        alert("Veuillez sélectionner une filière avant de continuer.");
+        return;
+    }
+    if (step === 3 && !selectedUnite) {
+        alert("Veuillez sélectionner une unité de production avant de continuer.");
+        return;
+    }
+    if (step === 5) {
+        if (!selectedLocation) {
+            alert("Veuillez sélectionner une localisation avant de continuer.");
+            return;
+        }
+        updateRecap();
+    }
+    
+    // Cacher toutes les sections
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Afficher la section demandée
+    document.getElementById(`section${step}`).classList.add('active');
+    
+    // Mettre à jour les indicateurs d'étape
+    updateStepIndicators(step);
+    
+    // === SCROLLER VERS LE HAUT DE LA SECTION ACTIVE ===
+    const activeSection = document.getElementById(`section${step}`);
+    if (activeSection) {
+        activeSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+        function prevStep(step) {
+    // Cacher toutes les sections
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Afficher la section demandée
+    document.getElementById(`section${step}`).classList.add('active');
+    
+    // Mettre à jour les indicateurs d'étape
+    updateStepIndicators(step);
+    
+    // === SCROLLER EN HAUT ===
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+        function updateStepIndicators(currentStep) {
+            // Réinitialiser tous les indicateurs
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                
+                const stepNumber = index + 1;
+                if (stepNumber < currentStep) {
+                    step.classList.add('completed');
+                } else if (stepNumber === currentStep) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        // Fonction pour modifier les choix - Retour au début
+        function modifyChoices() {
+            // Réinitialiser toutes les sélections
+            selectedFiliere = null;
+            selectedUnite = null;
+            selectedLocation = null;
+            selectedLocationType = null;
+            selectedCapex = 200;
+            
+            // Désélectionner visuellement tous les éléments
+            document.querySelectorAll('.filiere-card, .unite-card, .location-card').forEach(element => {
+                element.classList.remove('selected');
+            });
+            
+            // Réinitialiser les valeurs d'entrée
+            document.getElementById('capexRange').value = 200;
+            document.getElementById('capexInput').value = 200;
+            
+            // Retourner à la première étape
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('section1').classList.add('active');
+            
+            // Réinitialiser les indicateurs d'étape
+            updateStepIndicators(1);
+            
+            // Réinitialiser le texte de l'étape 2
+            document.getElementById('selectedFiliereText').innerHTML = 
+                "Filière sélectionnée : <strong style='color: #4cc9f0;'>--</strong><br>";
+            
+            // Réinitialiser le récapitulatif
+            document.getElementById('recapFiliere').textContent = "--";
+            document.getElementById('recapUnite').textContent = "--";
+            document.getElementById('recapLocation').textContent = "--";
+            document.getElementById('recapLocationType').textContent = "--";
+            document.getElementById('recapCapex').textContent = "-- k $";
+            document.getElementById('recapOpex').textContent = "-- k $";
+            document.getElementById('recapSurface').textContent = "-- m²";
+            document.getElementById('recapPersonnel').textContent = "-- personnes";
+            
+            // Réinitialiser l'estimation OPEX
+            document.getElementById('opexEstimation').textContent = "-- k $";
+            document.getElementById('minCapex').textContent = "80k $";
+            
+            // Vider la grille des unités
+            document.getElementById('uniteList').innerHTML = "";
+            
+        console.log("Recherche réinitialisée. Vous pouvez recommencer.");
+        }
+   </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        // CONFIGURATION MISE À JOUR (Clé de l'image IMG_1143)
+        const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18'; // <-- TA NOUVELLE CLÉ ICI
+
+       <!-- ✅ Supabase SDK (UNE SEULE FOIS) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- ✅ auth-ui (navigation "Mon espace personnel") -->
+<script src="js/auth-ui.js"></script>
+
+<script>
+  /*
+    PATCH FINAL (SANS CASSER TON SCRIPT) :
+    - On s’assure que l’UP sélectionnée (selectedUnite.id) est stockée dans :
+      1) #recapUnite[data-unit-id]
+      2) localStorage (backup)
+    - Et confirmerSelection redirige TOUJOURS vers CETTE UP.
+  */
+
+  const UNIT_STORAGE_KEY = "p2i_selected_unit_id";
+
+  function setSelectedUnitId(id) {
+    if (!id) return;
+
+    // 1) Récap = source de vérité visible
+    const recapUniteEl = document.getElementById("recapUnite");
+    if (recapUniteEl) recapUniteEl.setAttribute("data-unit-id", String(id));
+
+    // 2) Backup storage
+    localStorage.setItem(UNIT_STORAGE_KEY, String(id));
+  }
+
+  function getSelectedUnitId() {
+    const recapUniteEl = document.getElementById("recapUnite");
+    const fromRecap = recapUniteEl?.getAttribute("data-unit-id") || "";
+    if (fromRecap.trim()) return fromRecap.trim();
+
+    // fallback sur la variable globale (ton script)
+    if (window.selectedUnite && window.selectedUnite.id) return String(window.selectedUnite.id);
+
+    // fallback storage
+    const fromStorage = localStorage.getItem(UNIT_STORAGE_KEY) || "";
+    return fromStorage.trim() || null;
+  }
+
+  // 1) On “wrap” ta fonction selectUnite sans la modifier
+  (function wrapSelectUnite() {
+    if (typeof window.selectUnite !== "function") return;
+
+    const _selectUnite = window.selectUnite;
+    window.selectUnite = function (unite, element) {
+      _selectUnite(unite, element);
+
+      // Dès qu’une UP est choisie, on verrouille son id
+      if (unite && unite.id) setSelectedUnitId(unite.id);
+
+      // Et on met à jour le récap (ton script le fait parfois plus tard)
+      if (typeof window.updateRecap === "function") window.updateRecap();
+    };
+  })();
+
+  // 2) On “wrap” updateRecap aussi (au cas où l’UP change ailleurs)
+  (function wrapUpdateRecap() {
+    if (typeof window.updateRecap !== "function") return;
+
+    const _updateRecap = window.updateRecap;
+    window.updateRecap = function () {
+      _updateRecap();
+
+      // Si selectedUnite est défini, on écrit son id dans le récap
+      if (window.selectedUnite && window.selectedUnite.id) {
+        setSelectedUnitId(window.selectedUnite.id);
+      }
+    };
+  })();
+
+  // 3) ✅ Fonction demandée : confirmerSelection (elle n’existait pas chez toi)
+  function confirmerSelection() {
+    const unitId = getSelectedUnitId();
+
+    if (!unitId) {
+      alert("Veuillez sélectionner une unité de production avant de continuer.");
+      return;
+    }
+
+    // Redirection fiable vers la fiche de l’UP sélectionnée
+    window.location.href = `fiche-production.html?unit_id=${encodeURIComponent(unitId)}`;
+  }
+
+  // exposer au global pour ton bouton onclick="confirmerSelection()"
+  window.confirmerSelection = confirmerSelection;
+
+  // 4) Au chargement : si une UP est déjà sélectionnée, on la synchronise
+  document.addEventListener("DOMContentLoaded", () => {
+    if (window.selectedUnite && window.selectedUnite.id) {
+      setSelectedUnitId(window.selectedUnite.id);
+    }
+  });
+</script>
+<script>
+// ===== NAVIGATION PAR CLIC POUR TOUTES LES ÉTAPES =====
+
+// Étape 1 : Filières
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.filiere-card').forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function(e) {
+            if(e.target.tagName === 'BUTTON') return;
+            const filiereId = this.dataset.id;
+            if(filiereId) {
+                this.onclick();
+                if(typeof nextStep === 'function') nextStep(2);
+            }
+        });
+    });
+});
+
+// Étape 2 : Unités de production
+const observerUnites = new MutationObserver(function() {
+    document.querySelectorAll('.unite-card').forEach(card => {
+        if(card.hasAttribute('data-click-listener')) return;
+        card.setAttribute('data-click-listener', 'true');
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function(e) {
+            if(e.target.tagName === 'BUTTON') return;
+            if(this.onclick) this.onclick(e);
+            if(typeof nextStep === 'function') nextStep(3);
+        });
+    });
+});
+const uniteList = document.getElementById('uniteList');
+if(uniteList) observerUnites.observe(uniteList, { childList: true, subtree: true });
+
+// Étape 3 : Localisations
+const observerLocations = new MutationObserver(function() {
+    document.querySelectorAll('.location-card').forEach(card => {
+        if(card.hasAttribute('data-click-listener')) return;
+        card.setAttribute('data-click-listener', 'true');
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function(e) {
+            if(e.target.tagName === 'BUTTON') return;
+            if(this.onclick) this.onclick(e);
+            if(typeof nextStep === 'function') nextStep(4);
+        });
+    });
+});
+const regionsGrid = document.getElementById('regionsGrid');
+const citiesGrid = document.getElementById('citiesGrid');
+if(regionsGrid) observerLocations.observe(regionsGrid, { childList: true, subtree: true });
+if(citiesGrid) observerLocations.observe(citiesGrid, { childList: true, subtree: true });
+
+// Étape 4 : Investissement (validation automatique)
+function setupInvestmentAutoNext() {
+    const capexRange = document.getElementById('capexRange');
+    const capexInput = document.getElementById('capexInput');
+    if(!capexRange) return;
+    
+    capexRange.addEventListener('mouseup', () => { if(typeof nextStep === 'function') nextStep(5); });
+    capexInput.addEventListener('keypress', (e) => { if(e.key === 'Enter' && typeof nextStep === 'function') nextStep(5); });
+    capexInput.addEventListener('blur', () => { if(typeof nextStep === 'function') nextStep(5); });
+}
+if(document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupInvestmentAutoNext);
+} else {
+    setupInvestmentAutoNext();
+}
+</script>
+
+</body>
+</html>
