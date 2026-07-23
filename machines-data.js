@@ -1232,7 +1232,7 @@ forage: {
   ]
 },
 
-eau: {
+eau_traitement: {
   up_nom: "Traitement de l'eau",
   machines: [
     { name: "Filtre à sable", role: "Filtration", capacity: "10 m³/heure", utilities: "Électricité", price: 15000 },
