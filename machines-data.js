@@ -959,12 +959,12 @@ plastique_recyclage: {
     { name: "Séparateur densimétrique", role: "Séparation PP/PE/PET", capacity: "500 kg/heure", utilities: "Électricité + air", price: 20000 },
     { name: "Sécheur centrifuge", role: "Séchage", capacity: "500 kg/heure", utilities: "Électricité 20kW", price: 18000 },
     { name: "Extrudeuse granulation", role: "Granulation", capacity: "300 kg/heure", utilities: "Électricité 75kW", price: 80000 },
-    { name: "Silor stockage", role: "Stockage granulés", capacity: "50 tonnes", utilities: "Électricité", price: 30000 },
+    { name: "Silo stockage", role: "Stockage granulés", capacity: "50 tonnes", utilities: "Électricité", price: 30000 },
     { name: "Ensacheuse big bag", role: "Conditionnement", capacity: "20 big bags/heure", utilities: "Électricité + air", price: 20000 }
   ]
 },
 
-papier: {
+papier_recyclage: {
   up_nom: "Recyclage du papier",
   machines: [
     { name: "Pulpeur", role: "Mise en pâte", capacity: "2 tonnes/heure", utilities: "Électricité 75kW", price: 60000 },
@@ -1003,7 +1003,7 @@ compost: {
   ]
 },
 
-verre: {
+verre_recyclage: {
   up_nom: "Recyclage du verre",
   machines: [
     { name: "Concasseur verre", role: "Concassage", capacity: "3 tonnes/heure", utilities: "Électricité 30kW", price: 35000 },
@@ -1012,11 +1012,11 @@ verre: {
     { name: "Séparateur optique", role: "Tri calcin", capacity: "2 tonnes/heure", utilities: "Électricité + air", price: 80000 },
     { name: "Nettoyeur", role: "Nettoyage", capacity: "2 tonnes/heure", utilities: "Eau + électricité", price: 25000 },
     { name: "Four de fusion", role: "Fusion", capacity: "1 tonne/heure", utilities: "Gaz 200kW", price: 120000 },
-    { name: "Silor", role: "Stockage", capacity: "200 tonnes", utilities: "Électricité", price: 30000 }
+    { name: "Silo", role: "Stockage", capacity: "200 tonnes", utilities: "Électricité", price: 30000 }
   ]
 },
 
-pneus: {
+pneus_recyclage: {
   up_nom: "Recyclage de pneus",
   machines: [
     { name: "Découpeuse pneus", role: "Découpe", capacity: "500 pneus/heure", utilities: "Électricité 30kW", price: 50000 },
@@ -1029,7 +1029,7 @@ pneus: {
   ]
 },
 
-huiles: {
+huiles_recyclage: {
   up_nom: "Recyclage d'huiles usagées",
   machines: [
     { name: "Décanteur centrifuge", role: "Séparation eau/sédiments", capacity: "1000 L/heure", utilities: "Électricité 15kW", price: 40000 },
@@ -1042,7 +1042,7 @@ huiles: {
   ]
 },
 
-deee: {
+deee_recyclage: {
   up_nom: "Recyclage DEEE",
   machines: [
     { name: "Broyeur lent", role: "Prébroyage", capacity: "1 tonne/heure", utilities: "Électricité 55kW", price: 60000 },
