@@ -2671,15 +2671,28 @@
                 localStorage.setItem('currentProduction', JSON.stringify(data));
             }
 
-            function buildUrl(base, unitData) {
-    const url = new URL(base, window.location.origin);
-    const id = unitData?.id || new URLSearchParams(window.location.search).get('unit_id') || '';
-    if (id) url.searchParams.set('unit_id', id);
+           function buildUrl(base, unitData) {
+    // Conserve automatiquement le chemin de base du site
+    // (ex. /plateforme-P2I/ sur GitHub Pages)
+    const url = new URL(base, window.location.href);
+
+    const id =
+        unitData?.id ||
+        new URLSearchParams(window.location.search).get('unit_id') ||
+        '';
+
+    if (id) {
+        url.searchParams.set('unit_id', id);
+    }
+
     if (unitData?.nom) {
         url.searchParams.set('unit', unitData.nom);
-        url.searchParams.set('nom', unitData.nom); // Ajout pour compatibilité
     }
-    if (unitData?.filiereNom) url.searchParams.set('filiere', unitData.filiereNom);
+
+    if (unitData?.filiereNom) {
+        url.searchParams.set('filiere', unitData.filiereNom);
+    }
+
     return url.toString();
 }
 
