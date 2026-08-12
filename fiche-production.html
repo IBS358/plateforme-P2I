@@ -2825,9 +2825,9 @@
 
     // Ouvrir le Business Plan Découverte
     const url = new URL(
-        'business-plan-decouverte.html',
-        window.location.origin
-    );
+    'business-plan-decouverte.html',
+    window.location.href
+);
 
     url.searchParams.set('unit_id', unitId);
     url.searchParams.set('unit', unitName);
