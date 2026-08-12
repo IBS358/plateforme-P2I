@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>P2I - Administration | Gestion des mises en relation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #b8c1ec;
+            font-size: 0.9rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 15px 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(76, 201, 240, 0.3);
+        }
+        
+        .stat-card .count {
+            font-size: 2rem;
+            font-weight: 800;
+            display: block;
+        }
+        
+        .stat-card .label {
+            font-size: 0.75rem;
+            color: #b8c1ec;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .stat-total .count { color: #4cc9f0; }
+        .stat-pending .count { color: #fbbf24; }
+        .stat-contacting .count { color: #f97316; }
+        .stat-contacted .count { color: #60a5fa; }
+        .stat-concluded .count { color: #34d399; }
+        
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 20px;
+            border-radius: 15px;
+            align-items: center;
+        }
+        
+        .filters select, .filters input {
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            font-size: 0.9rem;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .filters select option {
+            background: #1b263b;
+            color: white;
+        }
+        
+        .filters input::placeholder {
+            color: #94a3b8;
+        }
+        
+        .filters .filter-label {
+            color: #b8c1ec;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .relation-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .relation-card:hover {
+            border-color: rgba(76, 201, 240, 0.2);
+            background: rgba(255, 255, 255, 0.11);
+        }
+        
+        .relation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .relation-product {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4cc9f0;
+        }
+        
+        .relation-user {
+            font-size: 0.85rem;
+            color: #b8c1ec;
+        }
+        
+        .relation-user i {
+            margin-right: 4px;
+        }
+        
+        .relation-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .status-pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .status-contacting_supplier {
+            background: rgba(249, 115, 22, 0.15);
+            color: #fb923c;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+        .status-contacted {
+            background: rgba(96, 165, 250, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+        .status-concluded {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+        .status-cancelled {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        
+        .relation-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin: 8px 0 12px 0;
+        }
+        
+        .relation-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .relation-meta i {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        
+        .machine-details {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin: 10px 0 14px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .machine-detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .machine-detail-item .label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+        }
+        
+        .machine-detail-item .value {
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            font-weight: 500;
+            word-break: break-word;
+        }
+        
+        .relation-notes {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin: 8px 0 14px 0;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            border-left: 3px solid #4cc9f0;
+        }
+        
+        .relation-notes .note-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .relation-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .btn-action {
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-action:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-contact {
+            background: rgba(76, 201, 240, 0.15);
+            color: #4cc9f0;
+            border: 1px solid rgba(76, 201, 240, 0.3);
+        }
+        .btn-contact:hover {
+            background: rgba(76, 201, 240, 0.25);
+        }
+        
+        .btn-contacting {
+            background: rgba(249, 115, 22, 0.15);
+            color: #fb923c;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+        .btn-contacting:hover {
+            background: rgba(249, 115, 22, 0.25);
+        }
+        
+        .btn-contacted {
+            background: rgba(96, 165, 250, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+        .btn-contacted:hover {
+            background: rgba(96, 165, 250, 0.25);
+        }
+        
+        .btn-concluded {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+        .btn-concluded:hover {
+            background: rgba(52, 211, 153, 0.25);
+        }
+        
+        .btn-cancel {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .btn-cancel:hover {
+            background: rgba(239, 68, 68, 0.25);
+        }
+        
+        .btn-add-note {
+            background: rgba(255, 255, 255, 0.08);
+            color: #b8c1ec;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .btn-add-note:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+        }
+        
+        .empty-state .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .empty-state p {
+            color: #b8c1ec;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            text-align: center;
+            width: 100%;
+            color: #4cc9f0;
+            text-decoration: none;
+            padding: 12px;
+            border: 1px solid #4cc9f0;
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .back-link:hover {
+            background: rgba(76, 201, 240, 0.1);
+        }
+        
+        .access-denied {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+        }
+        
+        .access-denied .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .access-denied h2 {
+            color: #f72585;
+            margin-bottom: 10px;
+        }
+        
+        .access-denied p {
+            color: #b8c1ec;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #28a745;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            z-index: 1100;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        .toast.error {
+            background: #dc3545;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: #1b263b;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .modal textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 0.9rem;
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .modal textarea::placeholder {
+            color: #64748b;
+        }
+        
+        .modal .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: flex-end;
+        }
+        
+        .modal .btn-modal {
+            padding: 10px 24px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .modal .btn-modal:hover {
+            transform: translateY(-2px);
+        }
+        
+        .modal .btn-primary {
+            background: #4cc9f0;
+            color: #0d1b2a;
+        }
+        
+        .modal .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #b8c1ec;
+        }
+        
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .filters { flex-direction: column; }
+            .filters select, .filters input { width: 100%; min-width: unset; }
+            .machine-details { grid-template-columns: 1fr; }
+            .relation-header { flex-direction: column; align-items: stretch; }
+            .toast { white-space: normal; text-align: center; width: 90%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <div id="pageContent">
+            <div class="header">
+                <h1>🔧 Administration - Mises en relation</h1>
+                <p>Gérez les demandes de mise en relation des utilisateurs avec les fournisseurs</p>
+            </div>
+            
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card stat-total">
+                    <span class="count" id="statTotal">0</span>
+                    <span class="label">Total</span>
+                </div>
+                <div class="stat-card stat-pending">
+                    <span class="count" id="statPending">0</span>
+                    <span class="label">⏳ En attente</span>
+                </div>
+                <div class="stat-card stat-contacting">
+                    <span class="count" id="statContacting">0</span>
+                    <span class="label">📞 En attente fournisseur</span>
+                </div>
+                <div class="stat-card stat-contacted">
+                    <span class="count" id="statContacted">0</span>
+                    <span class="label">🤝 En cours</span>
+                </div>
+                <div class="stat-card stat-concluded">
+                    <span class="count" id="statConcluded">0</span>
+                    <span class="label">✅ Conclus</span>
+                </div>
+            </div>
+            
+            <div class="filters">
+                <span class="filter-label">🔍 Filtrer</span>
+                <select id="filterStatus" onchange="applyFilters()">
+                    <option value="all">Tous les statuts</option>
+                    <option value="pending">⏳ En attente</option>
+                    <option value="contacting_supplier">📞 En attente fournisseur</option>
+                    <option value="contacted">🤝 En cours</option>
+                    <option value="concluded">✅ Conclus</option>
+                    <option value="cancelled">❌ Annulés</option>
+                </select>
+                <input type="text" id="filterSearch" placeholder="🔎 Rechercher (produit, utilisateur, fournisseur...)" oninput="applyFilters()">
+            </div>
+            
+            <div id="relationsList"></div>
+            
+            <a href="#" class="back-link" onclick="window.location.href='dashboard.html?' + Date.now(); return false;">← Retour au Dashboard</a>
+        </div>
+    </div>
+    
+    <!-- Modal pour ajouter une note -->
+    <div class="modal-overlay" id="noteModal">
+        <div class="modal">
+            <h3>✏️ Ajouter une note interne</h3>
+            <textarea id="noteInput" placeholder="Saisissez votre note ici..."></textarea>
+            <div class="modal-actions">
+                <button class="btn-modal btn-secondary" onclick="closeNoteModal()">Annuler</button>
+                <button class="btn-modal btn-primary" onclick="saveNote()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast">✅ Action effectuée !</div>
+    
+    <script>
+        // =============================
+        // LISTE DES ADMINISTRATEURS
+        // =============================
+        const ADMIN_EMAILS = [
+            'admin@p2i.com',
+            'superadmin@p2i.com',
+            'contact@p2i.com'
+        ];
+        
+        // =============================
+        // STATUTS ET LIBELLÉS
+        // =============================
+        const STATUS_LABELS = {
+            'pending': { label: '⏳ En attente', class: 'status-pending' },
+            'contacting_supplier': { label: '📞 En attente réponse fournisseur', class: 'status-contacting_supplier' },
+            'contacted': { label: '🤝 En cours de discussion', class: 'status-contacted' },
+            'concluded': { label: '✅ Partenariat établi', class: 'status-concluded' },
+            'cancelled': { label: '❌ Annulée', class: 'status-cancelled' }
+        };
+        
+        const ORIGIN_LABELS = {
+            'chinese': '🇨🇳 Chine',
+            'korean': '🇰🇷 Corée du Sud',
+            'europe': '🇪🇺 Europe'
+        };
+        
+        // =============================
+        // AUTH
+        // =============================
+        function getActiveEmail() {
+            return localStorage.getItem('p2i_user_email') || 
+                   localStorage.getItem('p2i_active_user') || 
+                   sessionStorage.getItem('p2i_user_email') ||
+                   localStorage.getItem('user_email') ||
+                   sessionStorage.getItem('user_email') ||
+                   (() => {
+                       try {
+                           const user = JSON.parse(localStorage.getItem('userP2I') || '{}');
+                           return user.email || '';
+                       } catch(e) { return ''; }
+                   })();
+        }
+        
+        function isUserAdmin(email) {
+            if (!email) return false;
+            return ADMIN_EMAILS.includes(email.toLowerCase().trim());
+        }
+        
+        function checkAdminAccess() {
+            const email = getActiveEmail();
+            if (!isUserAdmin(email)) {
+                const container = document.getElementById('mainContainer');
+                container.innerHTML = `
+                    <div class="access-denied">
+                        <div class="icon">⛔</div>
+                        <h2>Accès réservé aux administrateurs</h2>
+                        <p>Vous n'avez pas les droits nécessaires pour accéder à cette page.</p>
+                        <br>
+                        <a href="dashboard.html" class="back-link" style="max-width: 300px; margin: 0 auto;">← Retour au Dashboard</a>
+                    </div>
+                `;
+                return false;
+            }
+            return true;
+        }
+        
+        // =============================
+        // HELPERS
+        // =============================
+        function escapeHtml(value) {
+            if (!value) return '';
+            return String(value).replace(/[&<>"]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                if (m === '"') return '&quot;';
+                return m;
+            });
+        }
+        
+        function formatDateFR(iso) {
+            try {
+                if (!iso) return '—';
+                return new Date(iso).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' });
+            } catch(e) { return '—'; }
+        }
+        
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast' + (isError ? ' error' : '');
+            toast.style.opacity = '1';
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 3000);
+        }
+        
+        function generateId() {
+            return 'rel_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+        }
+        
+        // =============================
+        // BASE DE DONNÉES
+        // =============================
+        const DB_RELATIONS_KEY = 'p2i_relations_v1';
+        
+        function getAllRelations() {
+            try {
+                const data = localStorage.getItem(DB_RELATIONS_KEY);
+                return data ? JSON.parse(data) : [];
+            } catch(e) {
+                return [];
+            }
+        }
+        
+        function saveAllRelations(relations) {
+            localStorage.setItem(DB_RELATIONS_KEY, JSON.stringify(relations));
+        }
+        
+        function getRelationById(id) {
+            const all = getAllRelations();
+            return all.find(r => r.id === id);
+        }
+        
+        function updateRelationStatus(id, newStatus, note = null) {
+            const all = getAllRelations();
+            const index = all.findIndex(r => r.id === id);
+            if (index === -1) return false;
+            
+            all[index].status = newStatus;
+            all[index].updatedAt = new Date().toISOString();
+            
+            if (note) {
+                if (!all[index].internalNotes) all[index].internalNotes = [];
+                all[index].internalNotes.push({
+                    date: new Date().toISOString(),
+                    note: note,
+                    author: getActiveEmail() || 'admin'
+                });
+            }
+            
+            saveAllRelations(all);
+            return true;
+        }
+        
+        function addInternalNote(id, note) {
+            const all = getAllRelations();
+            const index = all.findIndex(r => r.id === id);
+            if (index === -1) return false;
+            
+            if (!all[index].internalNotes) all[index].internalNotes = [];
+            all[index].internalNotes.push({
+                date: new Date().toISOString(),
+                note: note,
+                author: getActiveEmail() || 'admin'
+            });
+            all[index].updatedAt = new Date().toISOString();
+            
+            saveAllRelations(all);
+            return true;
+        }
+        
+        // =============================
+        // AFFICHAGE
+        // =============================
+        let currentFilter = 'all';
+        let currentSearch = '';
+        let noteTargetId = null;
+        
+        function applyFilters() {
+            currentFilter = document.getElementById('filterStatus').value;
+            currentSearch = document.getElementById('filterSearch').value.toLowerCase();
+            renderRelations();
+        }
+        
+        function renderRelations() {
+            const all = getAllRelations();
+            const container = document.getElementById('relationsList');
+            
+            // Mettre à jour les stats
+            updateStats(all);
+            
+            // Filtrer
+            let filtered = all;
+            
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(r => r.status === currentFilter);
+            }
+            
+            if (currentSearch) {
+                filtered = filtered.filter(r => {
+                    const searchStr = (r.product + ' ' + r.supplier + ' ' + r.userDisplayName + ' ' + r.userId + ' ' + (r.machineDetails?.role || '')).toLowerCase();
+                    return searchStr.includes(currentSearch);
+                });
+            }
+            
+            // Trier par date (plus récent en premier)
+            filtered.sort((a, b) => new Date(b.date || b.createdAt || 0) - new Date(a.date || a.createdAt || 0));
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <span class="icon">📭</span>
+                        <p>Aucune demande de mise en relation</p>
+                        <p style="font-size:0.8rem; margin-top:8px; color:#64748b;">
+                            Les demandes apparaîtront ici lorsque les utilisateurs en feront.
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filtered.map(rel => {
+                const statusInfo = STATUS_LABELS[rel.status] || STATUS_LABELS['pending'];
+                const originLabel = ORIGIN_LABELS[rel.origin] || rel.origin || '🌍';
+                const userDisplay = rel.userDisplayName || rel.userFirstName || rel.userId || 'Utilisateur';
+                const hasMachineDetails = rel.machineDetails && Object.keys(rel.machineDetails).length > 0;
+                const hasNotes = rel.internalNotes && rel.internalNotes.length > 0;
+                
+                return `
+                    <div class="relation-card" data-id="${rel.id}">
+                        <div class="relation-header">
+                            <div>
+                                <div class="relation-product">${escapeHtml(rel.product)}</div>
+                                <div class="relation-user">
+                                    <i class="fas fa-user"></i> 
+                                    ${escapeHtml(userDisplay)}
+                                    ${rel.userFirstName && rel.userLastName ? ` (${escapeHtml(rel.userFirstName)} ${escapeHtml(rel.userLastName)})` : ''}
+                                    <span style="color:#64748b; font-size:0.75rem;">${escapeHtml(rel.userId)}</span>
+                                </div>
+                            </div>
+                            <span class="relation-status ${statusInfo.class}">${statusInfo.label}</span>
+                        </div>
+                        
+                        <div class="relation-meta">
+                            <span><i class="fas fa-building"></i> ${escapeHtml(rel.supplier)}</span>
+                            <span>${originLabel}</span>
+                            <span><i class="fas fa-calendar-alt"></i> ${formatDateFR(rel.date || rel.createdAt)}</span>
+                            ${rel.updatedAt ? `<span><i class="fas fa-clock"></i> Mis à jour le ${formatDateFR(rel.updatedAt)}</span>` : ''}
+                        </div>
+                        
+                        ${hasMachineDetails ? `
+                            <div class="machine-details">
+                                ${rel.machineDetails.role ? `
+                                    <div class="machine-detail-item">
+                                        <span class="label">Type / Rôle</span>
+                                        <span class="value">${escapeHtml(rel.machineDetails.role)}</span>
+                                    </div>
+                                ` : ''}
+                                ${rel.machineDetails.capacity ? `
+                                    <div class="machine-detail-item">
+                                        <span class="label">Capacité</span>
+                                        <span class="value">${escapeHtml(rel.machineDetails.capacity)}</span>
+                                    </div>
+                                ` : ''}
+                                ${rel.machineDetails.utilities ? `
+                                    <div class="machine-detail-item">
+                                        <span class="label">Utilités requises</span>
+                                        <span class="value">${escapeHtml(rel.machineDetails.utilities)}</span>
+                                    </div>
+                                ` : ''}
+                                ${rel.machineDetails.price ? `
+                                    <div class="machine-detail-item">
+                                        <span class="label">Prix estimé</span>
+                                        <span class="value">${escapeHtml(rel.machineDetails.price)}</span>
+                                    </div>
+                                ` : ''}
+                                ${rel.machineDetails.dimensions ? `
+                                    <div class="machine-detail-item">
+                                        <span class="label">Dimensions</span>
+                                        <span class="value">${escapeHtml(rel.machineDetails.dimensions)}</span>
+                                    </div>
+                                ` : ''}
+                                ${rel.machineDetails.description ? `
+                                    <div class="machine-detail-item" style="grid-column: 1 / -1;">
+                                        <span class="label">Description</span>
+                                        <span class="value">${escapeHtml(rel.machineDetails.description)}</span>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        ` : ''}
+                        
+                        ${rel.userNotes ? `
+                            <div class="relation-notes" style="border-left-color: #fbbf24;">
+                                <span class="note-label">📝 Note de l'utilisateur</span>
+                                ${escapeHtml(rel.userNotes)}
+                            </div>
+                        ` : ''}
+                        
+                        ${hasNotes ? `
+                            <div class="relation-notes">
+                                <span class="note-label">📋 Notes internes (${rel.internalNotes.length})</span>
+                                ${rel.internalNotes.slice(-3).map(n => `
+                                    <div style="font-size:0.75rem; color:#94a3b8; margin-top:4px; border-top: 1px solid rgba(255,255,255,0.05); padding-top:4px;">
+                                        <strong>${formatDateFR(n.date)}</strong> - ${escapeHtml(n.note)}
+                                        <span style="color:#64748b; font-size:0.65rem;"> (${escapeHtml(n.author)})</span>
+                                    </div>
+                                `).join('')}
+                                ${rel.internalNotes.length > 3 ? `<div style="font-size:0.7rem; color:#64748b; margin-top:4px;">+ ${rel.internalNotes.length - 3} note(s) supplémentaire(s)</div>` : ''}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="relation-actions">
+                            ${rel.status === 'pending' ? `
+                                <button class="btn-action btn-contacting" onclick="changeStatus('${rel.id}', 'contacting_supplier')">
+                                    📞 En attente réponse fournisseur
+                                </button>
+                                <button class="btn-action btn-contact" onclick="changeStatus('${rel.id}', 'contacted')">
+                                    🤝 Passer en cours
+                                </button>
+                            ` : ''}
+                            
+                            ${rel.status === 'contacting_supplier' ? `
+                                <button class="btn-action btn-contacted" onclick="changeStatus('${rel.id}', 'contacted')">
+                                    🤝 Passer en cours de discussion
+                                </button>
+                            ` : ''}
+                            
+                            ${rel.status === 'contacted' ? `
+                                <button class="btn-action btn-concluded" onclick="changeStatus('${rel.id}', 'concluded')">
+                                    ✅ Partenariat établi
+                                </button>
+                            ` : ''}
+                            
+                            ${rel.status !== 'cancelled' && rel.status !== 'concluded' ? `
+                                <button class="btn-action btn-cancel" onclick="changeStatus('${rel.id}', 'cancelled')">
+                                    ❌ Annuler
+                                </button>
+                            ` : ''}
+                            
+                            <button class="btn-action btn-add-note" onclick="openNoteModal('${rel.id}')">
+                                ✏️ Ajouter une note
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function updateStats(relations) {
+            document.getElementById('statTotal').textContent = relations.length;
+            document.getElementById('statPending').textContent = relations.filter(r => r.status === 'pending').length;
+            document.getElementById('statContacting').textContent = relations.filter(r => r.status === 'contacting_supplier').length;
+            document.getElementById('statContacted').textContent = relations.filter(r => r.status === 'contacted').length;
+            document.getElementById('statConcluded').textContent = relations.filter(r => r.status === 'concluded').length;
+        }
+        
+        // =============================
+        // ACTIONS
+        // =============================
+        function changeStatus(id, newStatus) {
+            const relation = getRelationById(id);
+            if (!relation) {
+                showToast('❌ Demande non trouvée', true);
+                return;
+            }
+            
+            const statusLabels = {
+                'pending': 'en attente',
+                'contacting_supplier': 'en attente réponse fournisseur',
+                'contacted': 'en cours de discussion',
+                'concluded': 'partenariat établi',
+                'cancelled': 'annulée'
+            };
+            
+            const confirmMsg = `Passer la demande "${relation.product}" en statut "${statusLabels[newStatus]}" ?`;
+            if (!confirm(confirmMsg)) return;
+            
+            const success = updateRelationStatus(id, newStatus);
+            if (success) {
+                showToast(`✅ Statut mis à jour : ${statusLabels[newStatus]}`);
+                renderRelations();
+            } else {
+                showToast('❌ Erreur lors de la mise à jour', true);
+            }
+        }
+        
+        function openNoteModal(id) {
+            noteTargetId = id;
+            document.getElementById('noteInput').value = '';
+            document.getElementById('noteModal').classList.add('active');
+        }
+        
+        function closeNoteModal() {
+            document.getElementById('noteModal').classList.remove('active');
+            noteTargetId = null;
+        }
+        
+        function saveNote() {
+            const note = document.getElementById('noteInput').value.trim();
+            if (!note) {
+                showToast('⚠️ Veuillez saisir une note', true);
+                return;
+            }
+            
+            if (!noteTargetId) {
+                showToast('❌ Erreur: aucune demande ciblée', true);
+                return;
+            }
+            
+            const success = addInternalNote(noteTargetId, note);
+            if (success) {
+                showToast('✅ Note ajoutée avec succès');
+                closeNoteModal();
+                renderRelations();
+            } else {
+                showToast('❌ Erreur lors de l\'ajout de la note', true);
+            }
+        }
+        
+        // Fermer le modal en cliquant à l'extérieur
+        document.getElementById('noteModal').addEventListener('click', function(e) {
+            if (e.target === this) closeNoteModal();
+        });
+        
+        // =============================
+        // INIT
+        // =============================
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!checkAdminAccess()) return;
+            renderRelations();
+        });
+    </script>
+</body>
+</html>
