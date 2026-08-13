@@ -1029,39 +1029,61 @@
     // CHARGEMENT DES DEMANDES DEPUIS SUPABASE
     // ============================================================
 
-    async function loadRelations() {
+    // ============================================================
+// CHARGEMENT DES DEMANDES DEPUIS SUPABASE
+// ============================================================
+
+async function loadRelations() {
 
     const container =
         document.getElementById('relationsList');
 
+    if (!container) {
+        console.error('❌ relationsList introuvable.');
+        return;
+    }
+
     container.innerHTML = `
-        <div class="empty-state">
-            <span class="icon">⏳</span>
+        <div class="loading-state">
+            <i class="fas fa-spinner fa-spin"></i>
             <p>Chargement des demandes...</p>
         </div>
     `;
 
     try {
 
+        console.log('🔄 Chargement des demandes depuis user_contacts...');
+
+        // ========================================================
+        // 1. RÉCUPÉRATION DES DEMANDES
+        // ========================================================
+
         const {
             data,
             error
         } = await supabaseClient
             .from('user_contacts')
-            .select('*')
-            .order('created_at', {
-                ascending: false
-            });
+            .select(`
+                id,
+                user_id,
+                product_name,
+                supplier_name,
+                origin,
+                model_id,
+                status,
+                created_at
+            `)
+            .order(
+                'created_at',
+                {
+                    ascending: false
+                }
+            );
 
-        console.log(
-            '📦 DONNÉES BRUTES user_contacts :',
-            data
-        );
 
-        console.log(
-            '❌ ERREUR user_contacts :',
-            error
-        );
+        // ========================================================
+        // 2. VÉRIFICATION DE L'ERREUR SUPABASE
+        // ========================================================
 
         if (error) {
 
@@ -1082,11 +1104,9 @@
                     <p style="
                         font-size:0.8rem;
                         margin-top:8px;
-                        color:#f87171;
+                        color:#64748b;
                     ">
-                        ${escapeHtml(
-                            error.message || 'Erreur inconnue'
-                        )}
+                        ${escapeHtml(error.message || '')}
                     </p>
 
                 </div>
@@ -1095,43 +1115,190 @@
             return;
         }
 
+
         console.log(
-            '✅ Nombre de demandes :',
-            data?.length || 0
+            '✅ Connexion à user_contacts réussie.',
+            data
         );
 
         console.log(
-            '📋 Première demande :',
-            data?.[0]
+            `📊 ${data ? data.length : 0} demande(s) trouvée(s).`
         );
 
-        // TEST UNIQUEMENT
-        container.innerHTML = `
-            <div class="empty-state">
 
-                <span class="icon">✅</span>
+        // ========================================================
+        // 3. TRANSFORMATION DES DONNÉES
+        // ========================================================
 
-                <p>
-                    Connexion à user_contacts réussie.
-                </p>
+        allRelations =
+            (data || []).map(row => {
 
-                <p style="
-                    font-size:0.9rem;
-                    margin-top:10px;
-                    color:#4cc9f0;
-                ">
-                    ${data?.length || 0} demande(s) trouvée(s).
-                </p>
+                return {
 
-            </div>
-        `;
+                    id: row.id,
+
+                    userId: row.user_id,
+
+                    product:
+                        row.product_name ||
+                        'Produit non spécifié',
+
+                    supplier:
+                        row.supplier_name ||
+                        'Fournisseur non précisé',
+
+                    origin:
+                        row.origin || '',
+
+                    modelId:
+                        row.model_id || '',
+
+                    status:
+                        row.status || 'pending',
+
+                    createdAt:
+                        row.created_at,
+
+                    date:
+                        row.created_at,
+
+                    userDisplayName:
+                        'Utilisateur',
+
+                    telephone:
+                        '',
+
+                    role:
+                        '',
+
+                    internalNotes:
+                        [],
+
+                    machineDetails:
+                        {}
+
+                };
+
+            });
+
+
+        // ========================================================
+        // 4. RÉCUPÉRATION DES PROFILS UTILISATEURS
+        // ========================================================
+
+        const uniqueUserIds = [
+            ...new Set(
+                allRelations
+                    .map(relation => relation.userId)
+                    .filter(Boolean)
+            )
+        ];
+
+
+        console.log(
+            '👤 Utilisateurs à rechercher :',
+            uniqueUserIds
+        );
+
+
+        if (uniqueUserIds.length > 0) {
+
+            const {
+                data: profiles,
+                error: profilesError
+            } = await supabaseClient
+                .from('profiles')
+                .select(`
+                    id,
+                    full_name,
+                    telephone,
+                    role
+                `)
+                .in(
+                    'id',
+                    uniqueUserIds
+                );
+
+
+            if (profilesError) {
+
+                console.warn(
+                    '⚠️ Impossible de récupérer les profils :',
+                    profilesError
+                );
+
+                /*
+                 * Ce n'est PAS bloquant.
+                 *
+                 * Les demandes restent affichées même si
+                 * les profils ne peuvent pas être récupérés.
+                 */
+
+            } else if (profiles) {
+
+                const profileMap = {};
+
+
+                profiles.forEach(profile => {
+
+                    profileMap[profile.id] =
+                        profile;
+
+                });
+
+
+                allRelations =
+                    allRelations.map(relation => {
+
+                        const profile =
+                            profileMap[
+                                relation.userId
+                            ];
+
+
+                        if (profile) {
+
+                            relation.userDisplayName =
+                                profile.full_name ||
+                                'Utilisateur';
+
+                            relation.telephone =
+                                profile.telephone ||
+                                '';
+
+                            relation.role =
+                                profile.role ||
+                                '';
+                        }
+
+
+                        return relation;
+
+                    });
+            }
+        }
+
+
+        // ========================================================
+        // 5. AFFICHAGE DES DEMANDES
+        // ========================================================
+
+        console.log(
+            '✅ Demandes prêtes pour affichage :',
+            allRelations
+        );
+
+
+        renderRelations();
+
 
     } catch (error) {
 
         console.error(
-            '❌ ERREUR INATTENDUE :',
+            '❌ Erreur inattendue chargement relations :',
             error
         );
+
 
         container.innerHTML = `
             <div class="empty-state">
@@ -1145,10 +1312,11 @@
                 <p style="
                     font-size:0.8rem;
                     margin-top:8px;
-                    color:#f87171;
+                    color:#64748b;
                 ">
                     ${escapeHtml(
-                        error.message || 'Erreur inconnue'
+                        error.message ||
+                        'Erreur inconnue'
                     )}
                 </p>
 
@@ -1156,7 +1324,6 @@
         `;
     }
 }
-
 
     // ============================================================
     // CHARGEMENT DE SECOURS SANS JOINTURE PROFILES
