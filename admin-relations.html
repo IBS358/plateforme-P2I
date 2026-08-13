@@ -1031,141 +1031,42 @@
 
     async function loadRelations() {
 
-        const container =
-            document.getElementById('relationsList');
+    const container =
+        document.getElementById('relationsList');
 
+    container.innerHTML = `
+        <div class="empty-state">
+            <span class="icon">⏳</span>
+            <p>Chargement des demandes...</p>
+        </div>
+    `;
 
-        container.innerHTML = `
-            <div class="empty-state">
-                <span class="icon">⏳</span>
-                <p>Chargement des demandes...</p>
-            </div>
-        `;
+    try {
 
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from('user_contacts')
+            .select('*')
+            .order('created_at', {
+                ascending: false
+            });
 
-        try {
+        console.log(
+            '📦 DONNÉES BRUTES user_contacts :',
+            data
+        );
 
-            /*
-             * On récupère les demandes dans user_contacts
-             * et le nom de l'utilisateur dans profiles.
-             *
-             * Relation :
-             *
-             * user_contacts.user_id
-             *          ↓
-             * profiles.id
-             */
+        console.log(
+            '❌ ERREUR user_contacts :',
+            error
+        );
 
-            const {
-                data,
-                error
-            } = await supabaseClient
-                .from('user_contacts')
-                .select(`
-                    id,
-                    user_id,
-                    product_name,
-                    supplier_name,
-                    origin,
-                    model_id,
-                    status,
-                    created_at,
-                    profiles (
-                        id,
-                        full_name,
-                        telephone,
-                        role
-                    )
-                `)
-                .order(
-                    'created_at',
-                    {
-                        ascending: false
-                    }
-                );
-
-
-            if (error) {
-
-                console.error(
-                    '❌ Erreur Supabase chargement user_contacts:',
-                    error
-                );
-
-                /*
-                 * Si la relation profiles n'est pas reconnue
-                 * par Supabase, on tente une seconde requête
-                 * sans jointure.
-                 */
-
-                await loadRelationsWithoutProfile();
-
-                return;
-            }
-
-
-            allRelations =
-                (data || []).map(row => {
-
-                    const profile =
-                        Array.isArray(row.profiles)
-                            ? row.profiles[0]
-                            : row.profiles;
-
-
-                    return {
-
-                        id: row.id,
-
-                        userId: row.user_id,
-
-                        product: row.product_name,
-
-                        supplier: row.supplier_name,
-
-                        origin: row.origin,
-
-                        modelId: row.model_id,
-
-                        status:
-                            row.status || 'pending',
-
-                        createdAt: row.created_at,
-
-                        date: row.created_at,
-
-                        userDisplayName:
-                            profile?.full_name ||
-                            'Utilisateur',
-
-                        telephone:
-                            profile?.telephone || '',
-
-                        role:
-                            profile?.role || '',
-
-                        internalNotes: [],
-
-                        machineDetails: {}
-
-                    };
-
-                });
-
-
-            console.log(
-                '✅ Demandes chargées depuis Supabase :',
-                allRelations
-            );
-
-
-            renderRelations();
-
-
-        } catch (error) {
+        if (error) {
 
             console.error(
-                '❌ Erreur inattendue chargement relations:',
+                '❌ Erreur Supabase user_contacts :',
                 error
             );
 
@@ -1181,15 +1082,80 @@
                     <p style="
                         font-size:0.8rem;
                         margin-top:8px;
-                        color:#64748b;
+                        color:#f87171;
                     ">
-                        ${escapeHtml(error.message || '')}
+                        ${escapeHtml(
+                            error.message || 'Erreur inconnue'
+                        )}
                     </p>
 
                 </div>
             `;
+
+            return;
         }
+
+        console.log(
+            '✅ Nombre de demandes :',
+            data?.length || 0
+        );
+
+        console.log(
+            '📋 Première demande :',
+            data?.[0]
+        );
+
+        // TEST UNIQUEMENT
+        container.innerHTML = `
+            <div class="empty-state">
+
+                <span class="icon">✅</span>
+
+                <p>
+                    Connexion à user_contacts réussie.
+                </p>
+
+                <p style="
+                    font-size:0.9rem;
+                    margin-top:10px;
+                    color:#4cc9f0;
+                ">
+                    ${data?.length || 0} demande(s) trouvée(s).
+                </p>
+
+            </div>
+        `;
+
+    } catch (error) {
+
+        console.error(
+            '❌ ERREUR INATTENDUE :',
+            error
+        );
+
+        container.innerHTML = `
+            <div class="empty-state">
+
+                <span class="icon">❌</span>
+
+                <p>
+                    Impossible de charger les demandes.
+                </p>
+
+                <p style="
+                    font-size:0.8rem;
+                    margin-top:8px;
+                    color:#f87171;
+                ">
+                    ${escapeHtml(
+                        error.message || 'Erreur inconnue'
+                    )}
+                </p>
+
+            </div>
+        `;
     }
+}
 
 
     // ============================================================
