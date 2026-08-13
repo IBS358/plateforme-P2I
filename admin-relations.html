@@ -1,0 +1,2234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>P2I - Administration | Gestion des mises en relation</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #b8c1ec;
+            font-size: 0.9rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 15px 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(76, 201, 240, 0.3);
+        }
+
+        .stat-card .count {
+            font-size: 2rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .stat-card .label {
+            font-size: 0.75rem;
+            color: #b8c1ec;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-total .count {
+            color: #4cc9f0;
+        }
+
+        .stat-pending .count {
+            color: #fbbf24;
+        }
+
+        .stat-contacting .count {
+            color: #f97316;
+        }
+
+        .stat-contacted .count {
+            color: #60a5fa;
+        }
+
+        .stat-concluded .count {
+            color: #34d399;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 20px;
+            border-radius: 15px;
+            align-items: center;
+        }
+
+        .filters select,
+        .filters input {
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            font-size: 0.9rem;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .filters select option {
+            background: #1b263b;
+            color: white;
+        }
+
+        .filters input::placeholder {
+            color: #94a3b8;
+        }
+
+        .filters .filter-label {
+            color: #b8c1ec;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .relation-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .relation-card:hover {
+            border-color: rgba(76, 201, 240, 0.2);
+            background: rgba(255, 255, 255, 0.11);
+        }
+
+        .relation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .relation-product {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4cc9f0;
+        }
+
+        .relation-user {
+            font-size: 0.85rem;
+            color: #b8c1ec;
+            margin-top: 5px;
+        }
+
+        .relation-user i {
+            margin-right: 4px;
+        }
+
+        .relation-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .status-contacting_supplier {
+            background: rgba(249, 115, 22, 0.15);
+            color: #fb923c;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .status-contacted {
+            background: rgba(96, 165, 250, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+
+        .status-concluded {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .status-cancelled {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .relation-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin: 8px 0 12px 0;
+        }
+
+        .relation-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .relation-meta i {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .relation-model {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin: 10px 0 14px 0;
+        }
+
+        .relation-model .label {
+            display: block;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .relation-model .value {
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .relation-notes {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin: 8px 0 14px 0;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            border-left: 3px solid #4cc9f0;
+        }
+
+        .relation-notes .note-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .relation-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-action {
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-contact {
+            background: rgba(76, 201, 240, 0.15);
+            color: #4cc9f0;
+            border: 1px solid rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-contact:hover {
+            background: rgba(76, 201, 240, 0.25);
+        }
+
+        .btn-contacting {
+            background: rgba(249, 115, 22, 0.15);
+            color: #fb923c;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .btn-contacting:hover {
+            background: rgba(249, 115, 22, 0.25);
+        }
+
+        .btn-contacted {
+            background: rgba(96, 165, 250, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+
+        .btn-contacted:hover {
+            background: rgba(96, 165, 250, 0.25);
+        }
+
+        .btn-concluded {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .btn-concluded:hover {
+            background: rgba(52, 211, 153, 0.25);
+        }
+
+        .btn-cancel {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-cancel:hover {
+            background: rgba(239, 68, 68, 0.25);
+        }
+
+        .btn-add-note {
+            background: rgba(255, 255, 255, 0.08);
+            color: #b8c1ec;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-add-note:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+        }
+
+        .empty-state .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .empty-state p {
+            color: #b8c1ec;
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #b8c1ec;
+        }
+
+        .loading-state i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #4cc9f0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            text-align: center;
+            width: 100%;
+            color: #4cc9f0;
+            text-decoration: none;
+            padding: 12px;
+            border: 1px solid #4cc9f0;
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            background: rgba(76, 201, 240, 0.1);
+        }
+
+        .access-denied {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+        }
+
+        .access-denied .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .access-denied h2 {
+            color: #f72585;
+            margin-bottom: 10px;
+        }
+
+        .access-denied p {
+            color: #b8c1ec;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #28a745;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            z-index: 1100;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .toast.error {
+            background: #dc3545;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: #1b263b;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .modal textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 0.9rem;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .modal textarea::placeholder {
+            color: #64748b;
+        }
+
+        .modal .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: flex-end;
+        }
+
+        .modal .btn-modal {
+            padding: 10px 24px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal .btn-modal:hover {
+            transform: translateY(-2px);
+        }
+
+        .modal .btn-primary {
+            background: #4cc9f0;
+            color: #0d1b2a;
+        }
+
+        .modal .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #b8c1ec;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .filters select,
+            .filters input {
+                width: 100%;
+                min-width: unset;
+            }
+
+            .relation-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .toast {
+                white-space: normal;
+                text-align: center;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container" id="mainContainer">
+
+    <div id="pageContent">
+
+        <div class="header">
+            <h1>🔧 Administration - Mises en relation</h1>
+            <p>
+                Gérez les demandes de mise en relation des utilisateurs avec les fournisseurs
+            </p>
+        </div>
+
+        <!-- STATISTIQUES -->
+        <div class="stats-grid" id="statsGrid">
+
+            <div class="stat-card stat-total">
+                <span class="count" id="statTotal">0</span>
+                <span class="label">Total</span>
+            </div>
+
+            <div class="stat-card stat-pending">
+                <span class="count" id="statPending">0</span>
+                <span class="label">⏳ En attente</span>
+            </div>
+
+            <div class="stat-card stat-contacting">
+                <span class="count" id="statContacting">0</span>
+                <span class="label">📞 En attente fournisseur</span>
+            </div>
+
+            <div class="stat-card stat-contacted">
+                <span class="count" id="statContacted">0</span>
+                <span class="label">🤝 En cours</span>
+            </div>
+
+            <div class="stat-card stat-concluded">
+                <span class="count" id="statConcluded">0</span>
+                <span class="label">✅ Conclus</span>
+            </div>
+
+        </div>
+
+        <!-- FILTRES -->
+        <div class="filters">
+
+            <span class="filter-label">🔍 Filtrer</span>
+
+            <select id="filterStatus" onchange="applyFilters()">
+                <option value="all">Tous les statuts</option>
+                <option value="pending">⏳ En attente</option>
+                <option value="contacting_supplier">
+                    📞 En attente fournisseur
+                </option>
+                <option value="contacted">
+                    🤝 En cours
+                </option>
+                <option value="concluded">
+                    ✅ Conclus
+                </option>
+                <option value="cancelled">
+                    ❌ Annulés
+                </option>
+            </select>
+
+            <input
+                type="text"
+                id="filterSearch"
+                placeholder="🔎 Rechercher (produit, utilisateur, fournisseur...)"
+                oninput="applyFilters()"
+            >
+
+        </div>
+
+        <!-- LISTE -->
+        <div id="relationsList"></div>
+
+        <a
+            href="#"
+            class="back-link"
+            onclick="window.location.href='dashboard.html?' + Date.now(); return false;"
+        >
+            ← Retour au Dashboard
+        </a>
+
+    </div>
+</div>
+
+
+<!-- MODAL NOTE -->
+<div class="modal-overlay" id="noteModal">
+
+    <div class="modal">
+
+        <h3>✏️ Ajouter une note interne</h3>
+
+        <textarea
+            id="noteInput"
+            placeholder="Saisissez votre note ici..."
+        ></textarea>
+
+        <div class="modal-actions">
+
+            <button
+                class="btn-modal btn-secondary"
+                onclick="closeNoteModal()"
+            >
+                Annuler
+            </button>
+
+            <button
+                class="btn-modal btn-primary"
+                onclick="saveNote()"
+            >
+                Enregistrer
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="toast" class="toast">
+    ✅ Action effectuée !
+</div>
+
+
+<script>
+
+/* ============================================================
+   IMPORTANT
+   ============================================================
+
+   Cette page utilise maintenant Supabase.
+
+   Elle attend que ton projet ait déjà créé :
+
+       const supabaseClient = ...
+
+   comme c'est déjà le cas dans ton code
+   demanderMiseEnRelation().
+
+   ============================================================ */
+
+
+/* ============================================================
+   LISTE DES ADMINISTRATEURS
+   ============================================================ */
+
+const ADMIN_EMAILS = [
+    'admin@p2i.com',
+    'superadmin@p2i.com',
+    'contact@p2i.com'
+];
+
+
+/* ============================================================
+   STATUTS
+   ============================================================ */
+
+const STATUS_LABELS = {
+
+    pending: {
+        label: '⏳ En attente',
+        class: 'status-pending'
+    },
+
+    contacting_supplier: {
+        label: '📞 En attente réponse fournisseur',
+        class: 'status-contacting_supplier'
+    },
+
+    contacted: {
+        label: '🤝 En cours de discussion',
+        class: 'status-contacted'
+    },
+
+    concluded: {
+        label: '✅ Partenariat établi',
+        class: 'status-concluded'
+    },
+
+    cancelled: {
+        label: '❌ Annulée',
+        class: 'status-cancelled'
+    }
+
+};
+
+
+/* ============================================================
+   ORIGINES
+   ============================================================ */
+
+const ORIGIN_LABELS = {
+
+    chinese: '🇨🇳 Chine',
+    korean: '🇰🇷 Corée du Sud',
+    europe: '🇪🇺 Europe'
+
+};
+
+
+/* ============================================================
+   VARIABLES GLOBALES
+   ============================================================ */
+
+let relations = [];
+
+let currentFilter = 'all';
+
+let currentSearch = '';
+
+let noteTargetId = null;
+
+
+/* ============================================================
+   AUTH
+   ============================================================ */
+
+function getActiveEmail() {
+
+    return localStorage.getItem('p2i_user_email') ||
+           localStorage.getItem('p2i_active_user') ||
+           sessionStorage.getItem('p2i_user_email') ||
+           localStorage.getItem('user_email') ||
+           sessionStorage.getItem('user_email') ||
+           (() => {
+
+                try {
+
+                    const user = JSON.parse(
+                        localStorage.getItem('userP2I') || '{}'
+                    );
+
+                    return user.email || '';
+
+                } catch(e) {
+
+                    return '';
+
+                }
+
+           })();
+
+}
+
+
+/* ============================================================
+   VÉRIFICATION ADMIN
+   ============================================================ */
+
+function isUserAdmin(email) {
+
+    if (!email) {
+        return false;
+    }
+
+    return ADMIN_EMAILS.includes(
+        email.toLowerCase().trim()
+    );
+
+}
+
+
+async function checkAdminAccess() {
+
+    try {
+
+        /*
+         * On utilise Supabase Auth comme source principale.
+         */
+
+        const {
+            data: { user },
+            error
+        } = await supabaseClient.auth.getUser();
+
+
+        if (error || !user) {
+
+            showAccessDenied();
+
+            return false;
+
+        }
+
+
+        const email = user.email || getActiveEmail();
+
+
+        if (!isUserAdmin(email)) {
+
+            showAccessDenied();
+
+            return false;
+
+        }
+
+
+        return true;
+
+    } catch(e) {
+
+        console.error(
+            'Erreur vérification administrateur :',
+            e
+        );
+
+        showAccessDenied();
+
+        return false;
+
+    }
+
+}
+
+
+function showAccessDenied() {
+
+    const container =
+        document.getElementById('mainContainer');
+
+    container.innerHTML = `
+
+        <div class="access-denied">
+
+            <div class="icon">⛔</div>
+
+            <h2>
+                Accès réservé aux administrateurs
+            </h2>
+
+            <p>
+                Vous n'avez pas les droits nécessaires
+                pour accéder à cette page.
+            </p>
+
+            <br>
+
+            <a
+                href="dashboard.html"
+                class="back-link"
+                style="max-width:300px;margin:0 auto;"
+            >
+                ← Retour au Dashboard
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+
+function escapeHtml(value) {
+
+    if (value === null || value === undefined) {
+        return '';
+    }
+
+    return String(value).replace(/[&<>"]/g, function(m) {
+
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        if (m === '"') return '&quot;';
+
+        return m;
+
+    });
+
+}
+
+
+function formatDateFR(iso) {
+
+    try {
+
+        if (!iso) {
+            return '—';
+        }
+
+        return new Date(iso).toLocaleString(
+            'fr-FR',
+            {
+                dateStyle: 'short',
+                timeStyle: 'short'
+            }
+        );
+
+    } catch(e) {
+
+        return '—';
+
+    }
+
+}
+
+
+function showToast(message, isError = false) {
+
+    const toast =
+        document.getElementById('toast');
+
+    toast.textContent = message;
+
+    toast.className =
+        'toast' + (isError ? ' error' : '');
+
+    toast.style.opacity = '1';
+
+    clearTimeout(toast._timeout);
+
+    toast._timeout = setTimeout(() => {
+
+        toast.style.opacity = '0';
+
+    }, 3000);
+
+}
+
+
+/* ============================================================
+   NOTES INTERNES
+   ============================================================
+
+   IMPORTANT :
+
+   La table user_contacts actuelle ne contient PAS
+   de colonne internal_notes.
+
+   On conserve donc les notes dans localStorage
+   uniquement pour le navigateur administrateur.
+
+   Les demandes elles-mêmes, ainsi que leur statut,
+   sont entièrement gérés par Supabase.
+   ============================================================ */
+
+const ADMIN_NOTES_KEY =
+    'p2i_admin_relation_notes_v1';
+
+
+function getAllNotes() {
+
+    try {
+
+        const data =
+            localStorage.getItem(ADMIN_NOTES_KEY);
+
+        return data ? JSON.parse(data) : {};
+
+    } catch(e) {
+
+        return {};
+
+    }
+
+}
+
+
+function saveAllNotes(notes) {
+
+    localStorage.setItem(
+        ADMIN_NOTES_KEY,
+        JSON.stringify(notes)
+    );
+
+}
+
+
+function getNotesForRelation(id) {
+
+    const allNotes = getAllNotes();
+
+    return allNotes[id] || [];
+
+}
+
+
+function addInternalNote(id, note) {
+
+    const allNotes = getAllNotes();
+
+    if (!allNotes[id]) {
+        allNotes[id] = [];
+    }
+
+    allNotes[id].push({
+
+        date: new Date().toISOString(),
+
+        note: note,
+
+        author: getActiveEmail() || 'admin'
+
+    });
+
+    saveAllNotes(allNotes);
+
+    return true;
+
+}
+
+
+/* ============================================================
+   CHARGEMENT DES DEMANDES DEPUIS SUPABASE
+   ============================================================ */
+
+async function loadRelations() {
+
+    const container =
+        document.getElementById('relationsList');
+
+
+    container.innerHTML = `
+
+        <div class="loading-state">
+
+            <i class="fas fa-spinner fa-spin"></i>
+
+            <p>
+                Chargement des demandes de mise en relation...
+            </p>
+
+        </div>
+
+    `;
+
+
+    try {
+
+        /*
+         * 1. Récupérer toutes les demandes
+         *    depuis user_contacts.
+         */
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from('user_contacts')
+
+            .select(`
+                id,
+                user_id,
+                product_name,
+                supplier_name,
+                origin,
+                model_id,
+                status,
+                created_at
+            `)
+
+            .order(
+                'created_at',
+                {
+                    ascending: false
+                }
+            );
+
+
+        if (error) {
+
+            console.error(
+                '❌ Erreur Supabase user_contacts:',
+                error
+            );
+
+            container.innerHTML = `
+
+                <div class="empty-state">
+
+                    <span class="icon">⚠️</span>
+
+                    <p>
+                        Impossible de charger les demandes.
+                    </p>
+
+                    <p
+                        style="
+                            font-size:0.8rem;
+                            margin-top:10px;
+                            color:#f87171;
+                        "
+                    >
+                        ${escapeHtml(error.message)}
+                    </p>
+
+                </div>
+
+            `;
+
+            showToast(
+                '❌ Erreur lors du chargement des demandes',
+                true
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * 2. Récupérer les profils utilisateurs.
+         */
+
+        let profilesMap = {};
+
+
+        const userIds = [
+            ...new Set(
+                (data || [])
+                    .map(r => r.user_id)
+                    .filter(Boolean)
+            )
+        ];
+
+
+        if (userIds.length > 0) {
+
+            const {
+                data: profiles,
+                error: profilesError
+            } = await supabaseClient
+
+                .from('profiles')
+
+                .select(`
+                    id,
+                    full_name,
+                    telephone,
+                    role
+                `)
+
+                .in('id', userIds);
+
+
+            if (profilesError) {
+
+                console.warn(
+                    '⚠️ Impossible de récupérer les profils :',
+                    profilesError
+                );
+
+            } else {
+
+                (profiles || []).forEach(profile => {
+
+                    profilesMap[profile.id] =
+                        profile;
+
+                });
+
+            }
+
+        }
+
+
+        /*
+         * 3. Transformer les données Supabase
+         *    dans un format pratique pour l'affichage.
+         */
+
+        relations = (data || []).map(row => {
+
+            const profile =
+                profilesMap[row.user_id] || {};
+
+
+            return {
+
+                id: String(row.id),
+
+                userId: row.user_id,
+
+                product: row.product_name,
+
+                supplier: row.supplier_name,
+
+                origin: row.origin,
+
+                modelId: row.model_id,
+
+                status: row.status || 'pending',
+
+                date: row.created_at,
+
+                userDisplayName:
+                    profile.full_name ||
+                    'Utilisateur',
+
+                telephone:
+                    profile.telephone || '',
+
+                role:
+                    profile.role || 'user'
+
+            };
+
+        });
+
+
+        renderRelations();
+
+
+    } catch(e) {
+
+        console.error(
+            '❌ Erreur inattendue chargement relations:',
+            e
+        );
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <span class="icon">⚠️</span>
+
+                <p>
+                    Une erreur est survenue lors du chargement.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ============================================================
+   FILTRES
+   ============================================================ */
+
+function applyFilters() {
+
+    currentFilter =
+        document.getElementById(
+            'filterStatus'
+        ).value;
+
+
+    currentSearch =
+        document.getElementById(
+            'filterSearch'
+        ).value
+        .toLowerCase()
+        .trim();
+
+
+    renderRelations();
+
+}
+
+
+/* ============================================================
+   AFFICHAGE
+   ============================================================ */
+
+function renderRelations() {
+
+    const container =
+        document.getElementById('relationsList');
+
+
+    /*
+     * STATISTIQUES
+     */
+
+    updateStats(relations);
+
+
+    /*
+     * FILTRE STATUT
+     */
+
+    let filtered = [...relations];
+
+
+    if (currentFilter !== 'all') {
+
+        filtered =
+            filtered.filter(
+                r => r.status === currentFilter
+            );
+
+    }
+
+
+    /*
+     * RECHERCHE
+     */
+
+    if (currentSearch) {
+
+        filtered = filtered.filter(r => {
+
+            const searchStr = [
+
+                r.product || '',
+
+                r.supplier || '',
+
+                r.userDisplayName || '',
+
+                r.userId || '',
+
+                r.modelId || '',
+
+                r.origin || ''
+
+            ]
+                .join(' ')
+                .toLowerCase();
+
+
+            return searchStr.includes(
+                currentSearch
+            );
+
+        });
+
+    }
+
+
+    /*
+     * TRI : plus récent en premier
+     */
+
+    filtered.sort((a, b) => {
+
+        return new Date(
+            b.date || 0
+        ) - new Date(
+            a.date || 0
+        );
+
+    });
+
+
+    /*
+     * AUCUNE DEMANDE
+     */
+
+    if (filtered.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <span class="icon">📭</span>
+
+                <p>
+                    Aucune demande de mise en relation
+                </p>
+
+                <p
+                    style="
+                        font-size:0.8rem;
+                        margin-top:8px;
+                        color:#64748b;
+                    "
+                >
+                    Les demandes apparaîtront ici
+                    lorsqu'un utilisateur en fera.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+     * AFFICHAGE DES CARTES
+     */
+
+    container.innerHTML = filtered.map(rel => {
+
+        const statusInfo =
+            STATUS_LABELS[rel.status] ||
+            STATUS_LABELS.pending;
+
+
+        const originLabel =
+            ORIGIN_LABELS[rel.origin] ||
+            rel.origin ||
+            '🌍';
+
+
+        const userDisplay =
+            rel.userDisplayName ||
+            'Utilisateur';
+
+
+        const notes =
+            getNotesForRelation(rel.id);
+
+
+        const hasNotes =
+            notes.length > 0;
+
+
+        return `
+
+            <div
+                class="relation-card"
+                data-id="${escapeHtml(rel.id)}"
+            >
+
+                <!-- EN-TÊTE -->
+
+                <div class="relation-header">
+
+                    <div>
+
+                        <div class="relation-product">
+
+                            ${escapeHtml(rel.product)}
+
+                        </div>
+
+
+                        <div class="relation-user">
+
+                            <i class="fas fa-user"></i>
+
+                            ${escapeHtml(userDisplay)}
+
+                            <span
+                                style="
+                                    color:#64748b;
+                                    font-size:0.75rem;
+                                    display:block;
+                                    margin-top:3px;
+                                "
+                            >
+                                ID :
+                                ${escapeHtml(rel.userId)}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <span
+                        class="
+                            relation-status
+                            ${statusInfo.class}
+                        "
+                    >
+
+                        ${statusInfo.label}
+
+                    </span>
+
+                </div>
+
+
+                <!-- INFORMATIONS -->
+
+                <div class="relation-meta">
+
+                    <span>
+
+                        <i class="fas fa-building"></i>
+
+                        ${escapeHtml(rel.supplier)}
+
+                    </span>
+
+
+                    <span>
+
+                        ${originLabel}
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="fas fa-calendar-alt"></i>
+
+                        ${formatDateFR(rel.date)}
+
+                    </span>
+
+
+                    ${
+                        rel.telephone
+                        ?
+                        `
+                        <span>
+
+                            <i class="fas fa-phone"></i>
+
+                            ${escapeHtml(rel.telephone)}
+
+                        </span>
+                        `
+                        :
+                        ''
+                    }
+
+                </div>
+
+
+                <!-- MODEL ID -->
+
+                ${
+                    rel.modelId
+                    ?
+                    `
+                    <div class="relation-model">
+
+                        <span class="label">
+                            Modèle / Référence
+                        </span>
+
+                        <span class="value">
+
+                            ${escapeHtml(rel.modelId)}
+
+                        </span>
+
+                    </div>
+                    `
+                    :
+                    ''
+                }
+
+
+                <!-- NOTES INTERNES -->
+
+                ${
+                    hasNotes
+                    ?
+                    `
+                    <div class="relation-notes">
+
+                        <span class="note-label">
+
+                            📋 Notes internes
+                            (${notes.length})
+
+                        </span>
+
+
+                        ${
+                            notes
+                                .slice(-3)
+                                .map(n => {
+
+                                    return `
+
+                                        <div
+                                            style="
+                                                font-size:0.75rem;
+                                                color:#94a3b8;
+                                                margin-top:4px;
+                                                border-top:
+                                                    1px solid
+                                                    rgba(255,255,255,0.05);
+                                                padding-top:4px;
+                                            "
+                                        >
+
+                                            <strong>
+
+                                                ${formatDateFR(n.date)}
+
+                                            </strong>
+
+                                            -
+
+                                            ${escapeHtml(n.note)}
+
+                                            <span
+                                                style="
+                                                    color:#64748b;
+                                                    font-size:0.65rem;
+                                                "
+                                            >
+
+                                                (${escapeHtml(n.author)})
+
+                                            </span>
+
+                                        </div>
+
+                                    `;
+
+                                })
+                                .join('')
+                        }
+
+
+                        ${
+                            notes.length > 3
+                            ?
+                            `
+                            <div
+                                style="
+                                    font-size:0.7rem;
+                                    color:#64748b;
+                                    margin-top:4px;
+                                "
+                            >
+
+                                +
+                                ${notes.length - 3}
+                                note(s) supplémentaire(s)
+
+                            </div>
+                            `
+                            :
+                            ''
+                        }
+
+                    </div>
+                    `
+                    :
+                    ''
+                }
+
+
+                <!-- ACTIONS -->
+
+                <div class="relation-actions">
+
+
+                    ${
+                        rel.status === 'pending'
+                        ?
+                        `
+
+                        <button
+                            class="
+                                btn-action
+                                btn-contacting
+                            "
+                            onclick="
+                                changeStatus(
+                                    '${escapeHtml(rel.id)}',
+                                    'contacting_supplier'
+                                )
+                            "
+                        >
+
+                            📞 En attente réponse fournisseur
+
+                        </button>
+
+
+                        <button
+                            class="
+                                btn-action
+                                btn-contact
+                            "
+                            onclick="
+                                changeStatus(
+                                    '${escapeHtml(rel.id)}',
+                                    'contacted'
+                                )
+                            "
+                        >
+
+                            🤝 Passer en cours
+
+                        </button>
+
+                        `
+                        :
+                        ''
+                    }
+
+
+                    ${
+                        rel.status === 'contacting_supplier'
+                        ?
+                        `
+
+                        <button
+                            class="
+                                btn-action
+                                btn-contacted
+                            "
+                            onclick="
+                                changeStatus(
+                                    '${escapeHtml(rel.id)}',
+                                    'contacted'
+                                )
+                            "
+                        >
+
+                            🤝 Passer en cours de discussion
+
+                        </button>
+
+                        `
+                        :
+                        ''
+                    }
+
+
+                    ${
+                        rel.status === 'contacted'
+                        ?
+                        `
+
+                        <button
+                            class="
+                                btn-action
+                                btn-concluded
+                            "
+                            onclick="
+                                changeStatus(
+                                    '${escapeHtml(rel.id)}',
+                                    'concluded'
+                                )
+                            "
+                        >
+
+                            ✅ Partenariat établi
+
+                        </button>
+
+                        `
+                        :
+                        ''
+                    }
+
+
+                    ${
+                        rel.status !== 'cancelled' &&
+                        rel.status !== 'concluded'
+                        ?
+                        `
+
+                        <button
+                            class="
+                                btn-action
+                                btn-cancel
+                            "
+                            onclick="
+                                changeStatus(
+                                    '${escapeHtml(rel.id)}',
+                                    'cancelled'
+                                )
+                            "
+                        >
+
+                            ❌ Annuler
+
+                        </button>
+
+                        `
+                        :
+                        ''
+                    }
+
+
+                    <button
+                        class="
+                            btn-action
+                            btn-add-note
+                        "
+                        onclick="
+                            openNoteModal(
+                                '${escapeHtml(rel.id)}'
+                            )
+                        "
+                    >
+
+                        ✏️ Ajouter une note
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+        `;
+
+    }).join('');
+
+}
+
+
+/* ============================================================
+   STATISTIQUES
+   ============================================================ */
+
+function updateStats(relations) {
+
+    document.getElementById(
+        'statTotal'
+    ).textContent = relations.length;
+
+
+    document.getElementById(
+        'statPending'
+    ).textContent =
+        relations.filter(
+            r => r.status === 'pending'
+        ).length;
+
+
+    document.getElementById(
+        'statContacting'
+    ).textContent =
+        relations.filter(
+            r => r.status === 'contacting_supplier'
+        ).length;
+
+
+    document.getElementById(
+        'statContacted'
+    ).textContent =
+        relations.filter(
+            r => r.status === 'contacted'
+        ).length;
+
+
+    document.getElementById(
+        'statConcluded'
+    ).textContent =
+        relations.filter(
+            r => r.status === 'concluded'
+        ).length;
+
+}
+
+
+/* ============================================================
+   CHANGEMENT DE STATUT
+   ============================================================ */
+
+async function changeStatus(id, newStatus) {
+
+    const relation =
+        relations.find(
+            r => String(r.id) === String(id)
+        );
+
+
+    if (!relation) {
+
+        showToast(
+            '❌ Demande non trouvée',
+            true
+        );
+
+        return;
+
+    }
+
+
+    const statusLabels = {
+
+        pending:
+            'en attente',
+
+        contacting_supplier:
+            'en attente réponse fournisseur',
+
+        contacted:
+            'en cours de discussion',
+
+        concluded:
+            'partenariat établi',
+
+        cancelled:
+            'annulée'
+
+    };
+
+
+    const confirmMsg =
+        `Passer la demande "${relation.product}" en statut "${statusLabels[newStatus]}" ?`;
+
+
+    if (!confirm(confirmMsg)) {
+        return;
+    }
+
+
+    try {
+
+        /*
+         * MISE À JOUR DIRECTEMENT DANS SUPABASE
+         */
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from('user_contacts')
+
+            .update({
+                status: newStatus
+            })
+
+            .eq('id', id)
+
+            .select()
+            .single();
+
+
+        if (error) {
+
+            console.error(
+                '❌ Erreur mise à jour statut:',
+                error
+            );
+
+            showToast(
+                '❌ Erreur lors de la mise à jour du statut',
+                true
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Mettre à jour immédiatement
+         * la donnée locale en mémoire.
+         */
+
+        relation.status = data.status;
+
+
+        showToast(
+            `✅ Statut mis à jour : ${statusLabels[newStatus]}`
+        );
+
+
+        renderRelations();
+
+
+    } catch(e) {
+
+        console.error(
+            '❌ Erreur inattendue:',
+            e
+        );
+
+        showToast(
+            '❌ Une erreur est survenue',
+            true
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   MODAL NOTES
+   ============================================================ */
+
+function openNoteModal(id) {
+
+    noteTargetId = id;
+
+    document.getElementById(
+        'noteInput'
+    ).value = '';
+
+
+    document.getElementById(
+        'noteModal'
+    ).classList.add('active');
+
+}
+
+
+function closeNoteModal() {
+
+    document.getElementById(
+        'noteModal'
+    ).classList.remove('active');
+
+
+    noteTargetId = null;
+
+}
+
+
+function saveNote() {
+
+    const note =
+        document.getElementById(
+            'noteInput'
+        ).value.trim();
+
+
+    if (!note) {
+
+        showToast(
+            '⚠️ Veuillez saisir une note',
+            true
+        );
+
+        return;
+
+    }
+
+
+    if (!noteTargetId) {
+
+        showToast(
+            '❌ Erreur : aucune demande ciblée',
+            true
+        );
+
+        return;
+
+    }
+
+
+    const success =
+        addInternalNote(
+            noteTargetId,
+            note
+        );
+
+
+    if (success) {
+
+        showToast(
+            '✅ Note ajoutée avec succès'
+        );
+
+        closeNoteModal();
+
+        renderRelations();
+
+    } else {
+
+        showToast(
+            '❌ Erreur lors de l’ajout de la note',
+            true
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   FERMETURE DU MODAL
+   ============================================================ */
+
+document
+    .getElementById('noteModal')
+    .addEventListener(
+        'click',
+        function(e) {
+
+            if (e.target === this) {
+
+                closeNoteModal();
+
+            }
+
+        }
+    );
+
+
+/* ============================================================
+   INITIALISATION
+   ============================================================ */
+
+document.addEventListener(
+    'DOMContentLoaded',
+    async function() {
+
+        /*
+         * Vérifier que Supabase existe.
+         */
+
+        if (
+            typeof supabaseClient ===
+            'undefined'
+        ) {
+
+            console.error(
+                '❌ supabaseClient est introuvable.'
+            );
+
+            document.getElementById(
+                'relationsList'
+            ).innerHTML = `
+
+                <div class="empty-state">
+
+                    <span class="icon">⚠️</span>
+
+                    <p>
+                        Connexion Supabase non disponible.
+                    </p>
+
+                    <p
+                        style="
+                            font-size:0.8rem;
+                            margin-top:10px;
+                            color:#f87171;
+                        "
+                    >
+                        Vérifiez que le script
+                        d'initialisation Supabase
+                        est chargé avant ce script.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /*
+         * Vérification administrateur
+         */
+
+        const access =
+            await checkAdminAccess();
+
+
+        if (!access) {
+            return;
+        }
+
+
+        /*
+         * CHARGEMENT DES DEMANDES SUPABASE
+         */
+
+        await loadRelations();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
