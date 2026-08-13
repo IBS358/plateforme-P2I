@@ -842,55 +842,95 @@
 
     async function checkAdminAccess() {
 
-        try {
+    try {
 
-            // Vérification Supabase
-            const {
-                data: { user },
-                error
-            } = await supabaseClient.auth.getUser();
+        // =====================================================
+        // 1. Récupérer l'utilisateur de l'application P2I
+        // =====================================================
 
-            if (error || !user) {
+        const activeEmail = getActiveEmail();
 
-                showAccessDenied(
-                    'Vous devez être connecté pour accéder à cette page.'
-                );
-
-                return false;
-            }
+        console.log('👤 Email utilisateur P2I détecté :', activeEmail);
 
 
-            // On utilise en priorité l'email Supabase
-            const email = user.email || getActiveEmail();
+        // =====================================================
+        // 2. Si un email P2I existe, vérifier les droits admin
+        // =====================================================
 
+        if (activeEmail && isUserAdmin(activeEmail)) {
 
-            if (!isUserAdmin(email)) {
-
-                showAccessDenied(
-                    'Vous n\'avez pas les droits nécessaires pour accéder à cette page.'
-                );
-
-                return false;
-            }
-
+            console.log(
+                '✅ Accès administrateur autorisé pour :',
+                activeEmail
+            );
 
             return true;
-
-        } catch (error) {
-
-            console.error(
-                '❌ Erreur vérification administrateur :',
-                error
-            );
-
-            showAccessDenied(
-                'Impossible de vérifier vos droits administrateur.'
-            );
-
-            return false;
         }
-    }
 
+
+        // =====================================================
+        // 3. Sinon, essayer Supabase Auth
+        // =====================================================
+
+        const {
+            data,
+            error
+        } = await supabaseClient.auth.getUser();
+
+
+        if (!error && data && data.user) {
+
+            const supabaseEmail =
+                data.user.email || '';
+
+
+            console.log(
+                '👤 Email Supabase détecté :',
+                supabaseEmail
+            );
+
+
+            if (isUserAdmin(supabaseEmail)) {
+
+                console.log(
+                    '✅ Administrateur Supabase reconnu :',
+                    supabaseEmail
+                );
+
+                return true;
+            }
+        }
+
+
+        // =====================================================
+        // 4. Aucun administrateur reconnu
+        // =====================================================
+
+        showAccessDenied(
+            activeEmail
+                ? 'Vous n’avez pas les droits nécessaires pour accéder à cette page.'
+                : 'Vous devez être connecté pour accéder à cette page.'
+        );
+
+        return false;
+
+
+    } catch (error) {
+
+        console.error(
+            '❌ Erreur vérification administrateur :',
+            error
+        );
+
+
+        showAccessDenied(
+            'Impossible de vérifier vos droits administrateur.'
+        );
+
+
+        return false;
+    }
+}
 
     function showAccessDenied(message) {
 
