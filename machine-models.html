@@ -2703,12 +2703,11 @@ async function demanderMiseEnRelation(productName, supplier, origin, modelId) {
     const modal = document.getElementById('p2i-supplier-modal');
     if (modal) modal.remove();
 
-    showToast(`✅ Demande de mise en relation avec ${supplier} enregistrée !`);
+   showToast(`✅ Demande de mise en relation avec ${supplier} enregistrée !`);
 
-    setTimeout(() => {
-      window.location.href = 'dashboard.html#mes-demandes';
-    }, 1500);
-
+setTimeout(() => {
+  window.location.href = 'dashboard.html#mes-mises-en-relation';
+}, 1500);
   } catch(e) {
     console.error('❌ Erreur inattendue:', e);
     alert('Une erreur est survenue.');
