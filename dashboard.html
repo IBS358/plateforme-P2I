@@ -1932,24 +1932,34 @@ async function initDashboard() {
           );
 
 
-        if (profileError) {
+       if (profileError) {
 
-          console.error(
-            "❌ Erreur synchronisation public.profiles :",
-            profileError
-          );
+  console.error(
+    "❌ Erreur synchronisation public.profiles :",
+    profileError
+  );
 
-        } else {
+  console.error(
+    "🔎 Détails erreur profiles :",
+    {
+      message: profileError.message,
+      details: profileError.details,
+      hint: profileError.hint,
+      code: profileError.code
+    }
+  );
 
-          console.log(
-            "✅ Profil synchronisé dans public.profiles :",
-            {
-              id: authUser.id,
-              full_name: fullName
-            }
-          );
+} else {
 
-        }
+  console.log(
+    "✅ Profil synchronisé dans public.profiles :",
+    {
+      id: authUser.id,
+      full_name: fullName
+    }
+  );
+
+}
 
       } else {
 
