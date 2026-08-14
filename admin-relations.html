@@ -1047,7 +1047,9 @@ async function loadRelations() {
 
     try {
 
-        console.log('🔄 Chargement des demandes depuis user_contacts...');
+        console.log(
+            '🔄 Chargement des demandes depuis user_contacts...'
+        );
 
         // ========================================================
         // 1. RÉCUPÉRATION DES DEMANDES
@@ -1122,7 +1124,7 @@ async function loadRelations() {
 
 
         // ========================================================
-        // 3. TRANSFORMATION DES DONNÉES
+        // 3. TRANSFORMATION DES DEMANDES
         // ========================================================
 
         allRelations =
@@ -1157,8 +1159,12 @@ async function loadRelations() {
                     date:
                         row.created_at,
 
+                    // Informations utilisateur
                     userDisplayName:
-                        'Utilisateur',
+                        'Nom non renseigné',
+
+                    email:
+                        '',
 
                     telephone:
                         '',
@@ -1178,104 +1184,111 @@ async function loadRelations() {
 
 
         // ========================================================
-        // 4. RÉCUPÉRATION DES PROFILS UTILISATEURS
+        // 4. RÉCUPÉRATION DES PROFILS + EMAILS
+        //    VIA LA RPC ADMIN
         // ========================================================
 
-        const uniqueUserIds = [
-            ...new Set(
-                allRelations
-                    .map(relation => relation.userId)
-                    .filter(Boolean)
-            )
-        ];
-
-
         console.log(
-            '👤 Utilisateurs à rechercher :',
-            uniqueUserIds
+            '👤 Récupération des profils utilisateurs via RPC...'
         );
 
 
-        if (uniqueUserIds.length > 0) {
-
-            const {
-                data: profiles,
-                error: profilesError
-            } = await supabaseClient
-                .from('profiles')
-                .select(`
-                    id,
-                    full_name,
-                    telephone,
-                    role
-                `)
-                .in(
-                    'id',
-                    uniqueUserIds
-                );
+        const {
+            data: profiles,
+            error: profilesError
+        } = await supabaseClient
+            .rpc(
+                'get_user_profiles_for_admin'
+            );
 
 
-            if (profilesError) {
+        // ========================================================
+        // 5. VÉRIFICATION DE LA RPC
+        // ========================================================
 
-                console.warn(
-                    '⚠️ Impossible de récupérer les profils :',
-                    profilesError
-                );
+        if (profilesError) {
 
-                /*
-                 * Ce n'est PAS bloquant.
-                 *
-                 * Les demandes restent affichées même si
-                 * les profils ne peuvent pas être récupérés.
-                 */
+            console.error(
+                '❌ Erreur RPC get_user_profiles_for_admin :',
+                profilesError
+            );
 
-            } else if (profiles) {
+            /*
+             * Ce n'est pas bloquant pour les demandes.
+             * Elles restent affichées, mais sans informations
+             * complémentaires sur le demandeur.
+             */
 
-                const profileMap = {};
+        } else if (profiles) {
+
+            console.log(
+                `✅ ${profiles.length} profil(s) récupéré(s) via RPC.`
+            );
 
 
-                profiles.forEach(profile => {
+            // ====================================================
+            // CRÉATION D'UNE CARTE :
+            // user_id → profil
+            // ====================================================
 
-                    profileMap[profile.id] =
-                        profile;
+            const profileMap = {};
+
+
+            profiles.forEach(profile => {
+
+                profileMap[profile.id] =
+                    profile;
+
+            });
+
+
+            console.log(
+                '🗺️ Profile map créée :',
+                profileMap
+            );
+
+
+            // ====================================================
+            // ASSOCIATION PROFIL ↔ DEMANDE
+            // ====================================================
+
+            allRelations =
+                allRelations.map(relation => {
+
+                    const profile =
+                        profileMap[
+                            relation.userId
+                        ];
+
+
+                    if (profile) {
+
+                        relation.userDisplayName =
+                            profile.full_name ||
+                            'Nom non renseigné';
+
+                        relation.email =
+                            profile.email ||
+                            '';
+
+                        relation.telephone =
+                            profile.telephone ||
+                            '';
+
+                        relation.role =
+                            profile.role ||
+                            '';
+                    }
+
+
+                    return relation;
 
                 });
-
-
-                allRelations =
-                    allRelations.map(relation => {
-
-                        const profile =
-                            profileMap[
-                                relation.userId
-                            ];
-
-
-                        if (profile) {
-
-                            relation.userDisplayName =
-                                profile.full_name ||
-                                'Utilisateur';
-
-                            relation.telephone =
-                                profile.telephone ||
-                                '';
-
-                            relation.role =
-                                profile.role ||
-                                '';
-                        }
-
-
-                        return relation;
-
-                    });
-            }
         }
 
 
         // ========================================================
-        // 5. AFFICHAGE DES DEMANDES
+        // 6. AFFICHAGE DES DEMANDES
         // ========================================================
 
         console.log(
@@ -1319,7 +1332,6 @@ async function loadRelations() {
         `;
     }
 }
-
     // ============================================================
     // CHARGEMENT DE SECOURS SANS JOINTURE PROFILES
     // ============================================================
