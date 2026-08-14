@@ -1769,36 +1769,235 @@ async function initDashboard() {
       box.style.display = isVisible ? "none" : "block";
     }
 
-    async function saveProfile() {
-      const firstName = $("editFirstName")?.value.trim() || "";
-      const lastName = $("editLastName")?.value.trim() || "";
-      const saveBtn = document.querySelector('#profileEditBox .btn-new');
-      try {
-        if (saveBtn) { saveBtn.disabled = true; saveBtn.innerText = "Enregistrement..."; }
-        const currentEmail = String(getActiveEmail() || $("profileEmail")?.innerText || "").trim().toLowerCase();
-        let user = {};
-        try { user = JSON.parse(localStorage.getItem("userP2I") || "{}"); } catch(_) { user = {}; }
-        user.first_name = firstName; user.last_name = lastName; user.updated_at = new Date().toISOString();
-        if (currentEmail) user.email = currentEmail;
-        localStorage.setItem("userP2I", JSON.stringify(user)); sessionStorage.setItem("userP2I", JSON.stringify(user));
-        savePersistentProfile({ first_name: firstName, last_name: lastName }, currentEmail);
-        if ($("profileFirstName")) $("profileFirstName").innerText = firstName || "—";
-        if ($("profileLastName")) $("profileLastName").innerText = lastName || "—";
-        if ($("profileEmail")) $("profileEmail").innerText = currentEmail || "—";
-        if ($("profileEditBox")) $("profileEditBox").style.display = "none";
-        const titleName = firstName || (currentEmail.includes("@") ? currentEmail.split("@")[0] : "Utilisateur");
-        if ($("userName")) $("userName").innerText = `Bonjour, ${titleName} !`;
-        try {
-          const { data: sessionData } = await supabaseClient.auth.getSession();
-          if (sessionData?.session?.user) {
-            const currentMeta = sessionData.session.user.user_metadata || {};
-            await supabaseClient.auth.updateUser({ data: { ...currentMeta, first_name: firstName, last_name: lastName } });
-          }
-        } catch(syncErr) { console.warn("Sync Supabase profil non effectuée :", syncErr); }
-        alert("Profil mis à jour avec succès.");
-      } catch(err) { console.error("Erreur saveProfile :", err); alert("Impossible d'enregistrer le profil pour le moment."); }
-      finally { if (saveBtn) { saveBtn.disabled = false; saveBtn.innerText = "Enregistrer"; } }
+   async function saveProfile() {
+  const firstName = $("editFirstName")?.value.trim() || "";
+  const lastName = $("editLastName")?.value.trim() || "";
+  const saveBtn = document.querySelector('#profileEditBox .btn-new');
+
+  try {
+    if (saveBtn) {
+      saveBtn.disabled = true;
+      saveBtn.innerText = "Enregistrement...";
     }
+
+    const currentEmail = String(
+      getActiveEmail() ||
+      $("profileEmail")?.innerText ||
+      ""
+    ).trim().toLowerCase();
+
+    let user = {};
+
+    try {
+      user = JSON.parse(
+        localStorage.getItem("userP2I") || "{}"
+      );
+    } catch (_) {
+      user = {};
+    }
+
+    // =====================================================
+    // 1. MISE À JOUR DU PROFIL LOCAL
+    // =====================================================
+
+    user.first_name = firstName;
+    user.last_name = lastName;
+    user.updated_at = new Date().toISOString();
+
+    if (currentEmail) {
+      user.email = currentEmail;
+    }
+
+    localStorage.setItem(
+      "userP2I",
+      JSON.stringify(user)
+    );
+
+    sessionStorage.setItem(
+      "userP2I",
+      JSON.stringify(user)
+    );
+
+    savePersistentProfile(
+      {
+        first_name: firstName,
+        last_name: lastName
+      },
+      currentEmail
+    );
+
+
+    // =====================================================
+    // 2. MISE À JOUR DE L'AFFICHAGE DU PROFIL
+    // =====================================================
+
+    if ($("profileFirstName")) {
+      $("profileFirstName").innerText =
+        firstName || "—";
+    }
+
+    if ($("profileLastName")) {
+      $("profileLastName").innerText =
+        lastName || "—";
+    }
+
+    if ($("profileEmail")) {
+      $("profileEmail").innerText =
+        currentEmail || "—";
+    }
+
+    if ($("profileEditBox")) {
+      $("profileEditBox").style.display = "none";
+    }
+
+    const titleName =
+      firstName ||
+      (
+        currentEmail.includes("@")
+          ? currentEmail.split("@")[0]
+          : "Utilisateur"
+      );
+
+    if ($("userName")) {
+      $("userName").innerText =
+        `Bonjour, ${titleName} !`;
+    }
+
+
+    // =====================================================
+    // 3. RÉCUPÉRATION DE LA SESSION SUPABASE
+    // =====================================================
+
+    try {
+
+      const {
+        data: sessionData,
+        error: sessionError
+      } = await supabaseClient.auth.getSession();
+
+      if (sessionError) {
+        console.warn(
+          "⚠️ Impossible de récupérer la session Supabase :",
+          sessionError
+        );
+      }
+
+      const authUser =
+        sessionData?.session?.user;
+
+
+      if (authUser) {
+
+        // =================================================
+        // 4. MISE À JOUR DES USER_METADATA
+        // =================================================
+
+        const currentMeta =
+          authUser.user_metadata || {};
+
+        await supabaseClient.auth.updateUser({
+          data: {
+            ...currentMeta,
+            first_name: firstName,
+            last_name: lastName
+          }
+        });
+
+
+        // =================================================
+        // 5. SYNCHRONISATION AVEC public.profiles
+        // =================================================
+
+        const fullName = [
+          firstName,
+          lastName
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .trim();
+
+
+        const {
+          error: profileError
+        } = await supabaseClient
+          .from("profiles")
+          .upsert(
+            {
+              id: authUser.id,
+              full_name: fullName
+            },
+            {
+              onConflict: "id"
+            }
+          );
+
+
+        if (profileError) {
+
+          console.error(
+            "❌ Erreur synchronisation public.profiles :",
+            profileError
+          );
+
+        } else {
+
+          console.log(
+            "✅ Profil synchronisé dans public.profiles :",
+            {
+              id: authUser.id,
+              full_name: fullName
+            }
+          );
+
+        }
+
+      } else {
+
+        console.warn(
+          "⚠️ Aucun utilisateur Supabase connecté."
+        );
+
+      }
+
+    } catch (syncErr) {
+
+      console.warn(
+        "⚠️ Synchronisation Supabase du profil non effectuée :",
+        syncErr
+      );
+
+    }
+
+
+    // =====================================================
+    // 6. CONFIRMATION
+    // =====================================================
+
+    alert(
+      "Profil mis à jour avec succès."
+    );
+
+
+  } catch (err) {
+
+    console.error(
+      "❌ Erreur saveProfile :",
+      err
+    );
+
+    alert(
+      "Impossible d'enregistrer le profil pour le moment."
+    );
+
+  } finally {
+
+    if (saveBtn) {
+      saveBtn.disabled = false;
+      saveBtn.innerText = "Enregistrer";
+    }
+
+  }
+}
 
     // =============================
     // GESTION DES SERVICES
