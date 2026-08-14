@@ -1769,12 +1769,13 @@ async function initDashboard() {
       box.style.display = isVisible ? "none" : "block";
     }
 
-   async function saveProfile() {
+  async function saveProfile() {
   const firstName = $("editFirstName")?.value.trim() || "";
   const lastName = $("editLastName")?.value.trim() || "";
   const saveBtn = document.querySelector('#profileEditBox .btn-new');
 
   try {
+
     if (saveBtn) {
       saveBtn.disabled = true;
       saveBtn.innerText = "Enregistrement...";
@@ -1795,6 +1796,7 @@ async function initDashboard() {
     } catch (_) {
       user = {};
     }
+
 
     // =====================================================
     // 1. MISE À JOUR DU PROFIL LOCAL
@@ -1876,10 +1878,12 @@ async function initDashboard() {
       } = await supabaseClient.auth.getSession();
 
       if (sessionError) {
+
         console.warn(
           "⚠️ Impossible de récupérer la session Supabase :",
           sessionError
         );
+
       }
 
       const authUser =
@@ -1895,17 +1899,31 @@ async function initDashboard() {
         const currentMeta =
           authUser.user_metadata || {};
 
-        await supabaseClient.auth.updateUser({
+        const {
+          error: metadataError
+        } = await supabaseClient.auth.updateUser({
+
           data: {
             ...currentMeta,
             first_name: firstName,
             last_name: lastName
           }
+
         });
 
 
+        if (metadataError) {
+
+          console.warn(
+            "⚠️ Erreur mise à jour user_metadata :",
+            metadataError
+          );
+
+        }
+
+
         // =================================================
-        // 5. SYNCHRONISATION AVEC public.profiles
+        // 5. SYNCHRONISATION public.profiles
         // =================================================
 
         const fullName = [
@@ -1932,45 +1950,43 @@ async function initDashboard() {
           );
 
 
-       if (profileError) {
+        if (profileError) {
 
-  if (profileError) {
+          console.error(
+            "❌ Erreur synchronisation public.profiles"
+          );
 
-  console.error(
-    "❌ Erreur synchronisation public.profiles"
-  );
+          console.error(
+            "🔴 message :",
+            profileError.message
+          );
 
-  console.error(
-    "🔴 message :",
-    profileError.message
-  );
+          console.error(
+            "🔴 details :",
+            profileError.details
+          );
 
-  console.error(
-    "🔴 details :",
-    profileError.details
-  );
+          console.error(
+            "🔴 hint :",
+            profileError.hint
+          );
 
-  console.error(
-    "🔴 hint :",
-    profileError.hint
-  );
+          console.error(
+            "🔴 code :",
+            profileError.code
+          );
 
-  console.error(
-    "🔴 code :",
-    profileError.code
-  );
+        } else {
 
-} else {
+          console.log(
+            "✅ Profil synchronisé dans public.profiles :",
+            {
+              id: authUser.id,
+              full_name: fullName
+            }
+          );
 
-  console.log(
-    "✅ Profil synchronisé dans public.profiles :",
-    {
-      id: authUser.id,
-      full_name: fullName
-    }
-  );
-
-}
+        }
 
       } else {
 
