@@ -1772,6 +1772,7 @@ async function initDashboard() {
   async function saveProfile() {
   const firstName = $("editFirstName")?.value.trim() || "";
   const lastName = $("editLastName")?.value.trim() || "";
+  const telephone = $("editTelephone")?.value.trim() || "";
   const saveBtn = document.querySelector('#profileEditBox .btn-new');
 
   try {
@@ -1821,12 +1822,13 @@ async function initDashboard() {
     );
 
     savePersistentProfile(
-      {
-        first_name: firstName,
-        last_name: lastName
-      },
-      currentEmail
-    );
+  {
+    first_name: firstName,
+    last_name: lastName,
+    telephone: telephone
+  },
+  currentEmail
+);
 
 
     // =====================================================
@@ -1940,14 +1942,15 @@ async function initDashboard() {
         } = await supabaseClient
           .from("profiles")
           .upsert(
-            {
-              id: authUser.id,
-              full_name: fullName
-            },
-            {
-              onConflict: "id"
-            }
-          );
+  {
+    id: authUser.id,
+    full_name: fullName,
+    telephone: telephone
+  },
+  {
+    onConflict: "id"
+  }
+);
 
 
         if (profileError) {
