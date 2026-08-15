@@ -1,0 +1,2912 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>P2I | Business Plan Découverte (Gratuit)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root{
+      --bg:#0b132b;
+      --panel:#121c36;
+      --card:#1c2541;
+      --stroke:rgba(255,255,255,0.08);
+      --text:#ffffff;
+      --muted:#94a3b8;
+      --p2i-blue:#4cc9f0;
+      --p2i-pink:#f72585;
+
+      --cta-bg:rgba(34,197,94,0.10);
+      --cta-stroke:rgba(34,197,94,0.35);
+      --cta-text:#86efac;
+
+      --warn-bg:rgba(245,158,11,0.10);
+      --warn-stroke:rgba(245,158,11,0.35);
+      --warn-text:#fbbf24;
+
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --grad: linear-gradient(135deg, rgba(76,201,240,0.22), rgba(247,37,133,0.18));
+      --grad-strong: linear-gradient(135deg, var(--p2i-blue), var(--p2i-pink));
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
+    body{background:radial-gradient(1000px 800px at 20% 0%, rgba(76,201,240,0.14), transparent 60%),
+                  radial-gradient(900px 700px at 80% 10%, rgba(247,37,133,0.12), transparent 60%),
+                  var(--bg);
+         color:var(--text);}
+    a{color:inherit;text-decoration:none;}
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      background: rgba(11,19,43,0.72);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid var(--stroke);
+    }
+    .topbar-inner{
+      max-width:1100px;margin:0 auto;padding:16px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      font-weight:800; letter-spacing:0.4px;
+    }
+    .logo{
+      width:36px;height:36px;border-radius:12px;
+      background: var(--grad);
+      border:1px solid var(--stroke);
+      display:grid;place-items:center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+    .logo i{color:var(--p2i-blue);}
+    .brand .name{
+      display:flex;align-items:baseline;gap:8px;
+      font-size:1.05rem;
+    }
+    .pill{
+      font-size:0.78rem;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(247,37,133,0.35);
+      color: rgba(247,37,133,0.95);
+      background: rgba(247,37,133,0.08);
+      font-weight:800;
+    }
+
+    .actions{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;
+    }
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:12px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      cursor:pointer;
+      transition: 0.2s ease;
+      font-weight:800;
+      font-size:0.92rem;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,0.16);}
+    .btn.primary{
+      border:none;
+      background: var(--grad-strong);
+      color: #07101f;
+      box-shadow: 0 14px 35px rgba(76,201,240,0.18);
+    }
+    .btn.primary:hover{filter: brightness(1.02);}
+
+    /* Layout */
+    .wrap{max-width:1100px;margin:0 auto;padding:26px 18px 60px;}
+    .hero{
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-top{
+      padding:26px 26px 18px;
+      background: radial-gradient(800px 450px at 20% 0%, rgba(76,201,240,0.14), transparent 60%),
+                  radial-gradient(800px 450px at 80% 0%, rgba(247,37,133,0.12), transparent 60%);
+      border-bottom:1px solid var(--stroke);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap:18px;
+      align-items:start;
+    }
+    .title{
+      font-size:2.05rem;
+      letter-spacing:0.2px;
+      margin-bottom:10px;
+    }
+    .subtitle{color:var(--muted);font-size:1.02rem;line-height:1.45;}
+    .meta{
+      display:grid;gap:10px;justify-items:end;
+    }
+    .meta-card{
+      width:100%;
+      background: rgba(28,37,65,0.55);
+      border: 1px solid var(--stroke);
+      border-radius:18px;
+      padding:14px 14px;
+      display:grid;gap:6px;
+    }
+    .meta-k{color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.9px;}
+    .meta-v{font-weight:900;font-size:0.98rem;}
+    .free-badge{
+      display:inline-flex;align-items:center;gap:10px;
+      border-radius:999px;
+      padding:10px 14px;
+      border:1px solid rgba(76,201,240,0.35);
+      background: rgba(76,201,240,0.10);
+      color: rgba(76,201,240,0.95);
+      font-weight:900;
+      width:max-content;
+      margin-top:14px;
+    }
+
+    /* Content */
+    .content{padding:22px 26px 26px;}
+    .toc{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin: 0 0 18px;
+    }
+    .toc a{
+      display:flex;align-items:center;gap:10px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.02);
+      transition:0.2s ease;
+    }
+    .toc a:hover{border-color:rgba(76,201,240,0.35);transform:translateY(-1px);}
+    .toc i{color:var(--p2i-blue);}
+    .toc span{color:var(--muted);font-size:0.95rem;}
+
+    .section{
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      background: rgba(28,37,65,0.35);
+      padding:18px 18px;
+      margin-top:14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+    .section-head{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+      margin-bottom:10px;
+    }
+    .hgroup{
+      display:flex;gap:12px;align-items:flex-start;
+    }
+    .icon{
+      width:40px;height:40px;border-radius:14px;
+      background: var(--grad);
+      border:1px solid var(--stroke);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+    }
+    .icon i{color:var(--p2i-blue);}
+    .section h2{
+      font-size:1.25rem;
+      margin-bottom:4px;
+      letter-spacing:0.2px;
+    }
+    .section p, .section li{
+      color:var(--muted);
+      line-height:1.55;
+      font-size:0.98rem;
+    }
+    .section ul{padding-left:18px;margin-top:8px;}
+    .mini{
+      font-size:0.85rem;color:rgba(148,163,184,0.85);
+      border-left: 3px solid rgba(76,201,240,0.35);
+      padding-left:10px;margin-top:10px;
+    }
+
+    /* CTA Box */
+    .cta{
+      margin-top:14px;
+      border-radius:18px;
+      border:1px solid var(--cta-stroke);
+      background: var(--cta-bg);
+      padding:14px 14px;
+      display:grid;gap:10px;
+    }
+    .cta .row{
+      display:flex;gap:10px;align-items:flex-start;
+    }
+    .cta i{color: var(--cta-text);margin-top:2px;}
+    .cta b{color: var(--cta-text);}
+    .cta p{color: rgba(134,239,172,0.9);}
+
+    /* Disclaimer box (small) */
+    .disclaimer{
+      border-radius:16px;
+      border:1px dashed rgba(255,255,255,0.16);
+      padding:10px 12px;
+      color: rgba(148,163,184,0.95);
+      font-size:0.88rem;
+      line-height:1.45;
+      background: rgba(255,255,255,0.02);
+    }
+    .disclaimer b{color:#cbd5e1;}
+
+    /* Footer CTA */
+    .final{
+      margin-top:18px;
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(76,201,240,0.10), rgba(247,37,133,0.08));
+      padding:18px;
+      display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+    }
+    .final .left{display:grid;gap:6px;}
+    .final .left h3{font-size:1.18rem;}
+    .final .left p{color:var(--muted);max-width:760px;line-height:1.45;}
+    .final .right{display:flex;gap:10px;flex-wrap:wrap;}
+
+    /* Print helpers */
+    @media print{
+      .topbar, .final .right, .btn{display:none !important;}
+      body{background:#fff;color:#111;}
+      .hero, .section{box-shadow:none;}
+      .section, .hero{border-color:#ddd;}
+      .section p, .section li, .subtitle, .meta-k{color:#333 !important;}
+      .cta{border-color:#2e7d32;background:#e8f5e9;}
+      .cta p{color:#1b5e20;}
+    }
+
+    @media (max-width: 860px){
+      .hero-grid{grid-template-columns:1fr;}
+      .meta{justify-items:start;}
+      .toc{grid-template-columns:1fr;}
+    }
+  </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo"><i class="fa-solid fa-bullseye"></i></div>
+        <div class="name">
+          <span>P2I</span>
+          <span class="pill">BP Découverte</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn" id="btnBack" href="dashboard.html"><i class="fa-solid fa-arrow-left"></i> Tableau de bord</a>
+        <a class="btn" href="#sommaire"><i class="fa-solid fa-list-check"></i> Sommaire</a>
+        <a class="btn primary" id="btnPro" href="#passer-pro"><i class="fa-solid fa-rocket"></i> Passer au BP Pro</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-top">
+        <div class="hero-grid">
+          <div>
+            <div class="title" id="bpTitle">Business Plan Découverte</div>
+            <div class="subtitle" id="bpSub">
+              Une première vision structurée pour évaluer la faisabilité de votre projet industriel, avec un design moderne P2I.
+            </div>
+            <div class="free-badge">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>GRATUIT — version “Découverte”</span>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div class="meta-card">
+              <div class="meta-k">Unité industrielle</div>
+              <div class="meta-v" id="metaUnit">—</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-k">Filière</div>
+              <div class="meta-v" id="metaFiliere">—</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-k">Date</div>
+              <div class="meta-v" id="metaDate">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content" id="sommaire">
+        <!-- TOC -->
+        <div class="toc">
+          <a href="#s1"><i class="fa-solid fa-file-lines"></i><span>Description (sommaire) de l’activité</span></a>
+          <a href="#s2"><i class="fa-solid fa-chart-line"></i><span>Analyse du marché cible</span></a>
+          <a href="#s3"><i class="fa-solid fa-gears"></i><span>Machines & équipements nécessaires</span></a>
+          <a href="#s4"><i class="fa-solid fa-coins"></i><span>Investissements CAPEX estimés</span></a>
+          <a href="#s5"><i class="fa-solid fa-receipt"></i><span>Compte de résultat prévisionnel sommaire</span></a>
+          <a href="#s6"><i class="fa-solid fa-scale-balanced"></i><span>Bilan prévisionnel simplifié</span></a>
+          <a href="#s7"><i class="fa-solid fa-arrow-trend-up"></i><span>Calcul du ROI approximatif</span></a>
+          <a href="#s8"><i class="fa-solid fa-compass"></i><span>Recommandations stratégiques</span></a>
+        </div>
+
+        <div class="disclaimer">
+          <b>Important :</b> le <b>Business Plan Pro</b> (document bancable +40 pages + accompagnement) <b>n’inclut pas automatiquement</b> les services additionnels (sourcing machines, tutoriels/formations, accompagnement comptable, etc.).
+          Ces services peuvent être disponibles <b>séparément</b> selon l’UP et vos besoins.
+        </div>
+
+        <!-- SECTION 1 -->
+        <section class="section" id="s1">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-file-lines"></i></div>
+              <div>
+                <h2>Description (sommaire) de l’activité</h2>
+                <p id="s1_text">
+                  <b>À compléter dynamiquement</b> : activité, produits/services, clients visés, chaîne de valeur, principaux facteurs de réussite.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini">
+            Astuce : dans la version Découverte, le contenu reste volontairement synthétique pour vous donner une vision rapide et actionnable.
+          </div>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> avec le <b>Business Plan Pro</b>, obtenez une description complète du modèle économique, du process, des capacités, des contraintes qualité et des hypothèses chiffrées, au format bancable (+40 pages) avec accompagnement.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : le BP Pro n’inclut pas automatiquement les services additionnels (machines, formations, compta, etc.).</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section class="section" id="s2">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+              <div>
+                <h2>Analyse du marché cible</h2>
+                <p id="s2_text">
+                  <b>À compléter dynamiquement</b> : taille du marché (ordre de grandeur), segments clients, concurrence (niveau), canaux, tendances.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s2_list">
+            <li>Segments clients prioritaires (à remplir).</li>
+            <li>Principaux concurrents et positionnement (à remplir).</li>
+            <li>Hypothèses clés (prix/volume) (à remplir).</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> intègre une étude de marché approfondie avec données récentes, segmentation, SWOT et stratégie de positionnement pour convaincre banques et bailleurs.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : l’accès à des services (réseautage, formations, etc.) est indépendant de la souscription BP Pro.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section class="section" id="s3">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-gears"></i></div>
+              <div>
+                <h2>Liste des machines & équipements nécessaires</h2>
+                <p id="s3_text">
+                  <b>À compléter dynamiquement</b> : liste indicative des équipements, fonctions, niveau de capacité, besoins utilités (énergie/eau/air).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s3_list">
+            <li>Équipement 1 — rôle / capacité (à remplir).</li>
+            <li>Équipement 2 — rôle / capacité (à remplir).</li>
+            <li>Équipement 3 — rôle / capacité (à remplir).</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> ajoute un dimensionnement détaillé (capacités, rendements, contraintes), et un planning d’implantation (layout, phasage).</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <p><b>Service additionnel (optionnel) :</b> sourcing machines via P2I (sourcing, prix négociés, fret, garanties, pièces, interlocuteur). <b>Service séparé</b> du BP Pro.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : le BP Pro n’inclut pas automatiquement le sourcing machines.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section class="section" id="s4">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-coins"></i></div>
+              <div>
+                <h2>Investissements CAPEX estimés</h2>
+                <p id="s4_text">
+                  <b>À compléter dynamiquement</b> : estimation CAPEX (fourchettes), installation, travaux, utilités, équipements critiques.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s4_list">
+            <li>Machines & équipements : — (à remplir)</li>
+            <li>Installation & mise en service : — (à remplir)</li>
+            <li>Aménagement/Travaux : — (à remplir)</li>
+            <li>Fret & douane : — (à remplir)</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> détaille CAPEX + plan de financement (apport/dette/aides), tableaux d’amortissement et justification bancable.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : certains services additionnels (accompagnement comptable, formations, etc.) sont proposés séparément.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5 -->
+        <section class="section" id="s5">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-receipt"></i></div>
+              <div>
+                <h2>Compte de résultat prévisionnel sommaire</h2>
+                <p id="s5_text">
+                  <b>À compléter dynamiquement</b> : CA estimé, coût matière, charges clés, marge brute, résultat (ordre de grandeur).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s5_list">
+            <li>Chiffre d’affaires estimé : —</li>
+            <li>Marge brute : —</li>
+            <li>Charges principales : —</li>
+            <li>Résultat estimé : —</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> fournit des prévisionnels sur 5 ans, une analyse de sensibilité (scénarios), et un fichier Excel financier modifiable.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : le BP Pro n’inclut pas automatiquement l’accompagnement comptable (service additionnel séparé).</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 6 -->
+        <section class="section" id="s6">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-scale-balanced"></i></div>
+              <div>
+                <h2>Bilan prévisionnel simplifié (Situation de départ-Ordres de grandeur avant exploitation)</h2>
+                <p id="s6_text">
+                  <b>À compléter dynamiquement</b> : actifs principaux, dettes, capitaux propres (très simplifié).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s6_list">
+            <li>Actifs (machines, stock, trésorerie) : —</li>
+            <li>Passifs (dettes, fournisseurs) : —</li>
+            <li>Capitaux propres : —</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> ajoute BFR, trésorerie, ratios clés, stress tests et structure financière attendue par les institutions.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : les services additionnels (formations, compta, etc.) sont indépendants de la souscription BP Pro.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 7 -->
+        <section class="section" id="s7">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+              <div>
+                <h2>Calcul du ROI approximatif</h2>
+                <p id="s7_text">
+                  <b>À compléter dynamiquement</b> : ROI indicatif selon hypothèses simples (prudentes), risques principaux.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s7_list">
+            <li>Hypothèses (prix/volume/marge) : —</li>
+            <li>ROI approximatif : —</li>
+            <li>Risques principaux : —</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> affine le ROI (scénarios, risques, sensibilité) et propose une trajectoire de rentabilité réaliste + plan d’action opérationnel.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : certains services peuvent accélérer l’exécution (machines, formation) mais sont proposés séparément.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 8 -->
+        <section class="section" id="s8">
+          <div class="section-head">
+            <div class="hgroup">
+              <div class="icon"><i class="fa-solid fa-compass"></i></div>
+              <div>
+                <h2>Recommandations stratégiques</h2>
+                <p id="s8_text">
+                  <b>À compléter dynamiquement</b> : recommandations actionnables (positionnement, prix, go-to-market, priorités 30/60/90 jours).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul id="s8_list">
+            <li>Priorité 1 : —</li>
+            <li>Priorité 2 : —</li>
+            <li>Priorité 3 : —</li>
+          </ul>
+
+          <div class="cta">
+            <div class="row">
+              <i class="fa-solid fa-leaf"></i>
+              <p><b>Aller plus loin :</b> le <b>Business Plan Pro</b> inclut plan marketing détaillé, plan opérationnel, risques & mitigation, et un format adapté aux banques, institutions financières, aides gouvernementales et bailleurs de fonds.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <p><b>Services additionnels (optionnels) :</b> tutoriels & formations, accompagnements, etc. <b>Services séparés</b> du BP Pro.</p>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Note : la souscription BP Pro ne comprend pas automatiquement tous les services additionnels.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- FINAL CTA -->
+<div class="final" id="s9">
+  <div class="left">
+    <h3>Prêt à passer à une version bancable (+40 pages) ?</h3>
+    <p id="s9_text">
+      Le <b>Business Plan Pro</b> est conçu pour les soumissions auprès des
+      <b>banques</b>, <b>institutions financières</b>,
+      <b>programmes d’aides</b> et <b>bailleurs de fonds</b>,
+      avec un accompagnement et un format complet.
+    </p>
+  </div>
+
+  <div class="right">
+    <a class="btn primary" href="#" id="btn_bp_pro">
+      <i class="fa-solid fa-rocket"></i> Découvrir le BP Pro
+    </a>
+    <a class="btn" href="#" id="btn_services">
+      <i class="fa-solid fa-screwdriver-wrench"></i> Services additionnels
+    </a>
+  </div>
+</div>
+<script>
+(function () {
+  function parseJsonSafe(raw){
+    try { return JSON.parse(raw); } catch(_) { return null; }
+  }
+
+  // Récupération UP (robuste)
+  const prod =
+    parseJsonSafe(localStorage.getItem("currentProduction")) ||
+    parseJsonSafe(sessionStorage.getItem("currentProduction")) || {};
+
+  // Nom de l’UP (priorités claires)
+  const upName =
+    (prod.nom || prod.unitName || prod.titre || "").toString().trim();
+
+  // Injection texte
+  const s9Text = document.getElementById("s9_text");
+  if (s9Text && upName) {
+    s9Text.innerHTML =
+      `Le <b>Business Plan Pro</b> pour <b>${upName}</b> est conçu pour les soumissions auprès des
+       <b>banques</b>, <b>institutions financières</b>,
+       <b>programmes d’aides</b> et <b>bailleurs de fonds</b>,
+       avec un accompagnement et un format complet.`;
+  }
+
+  // Liens CTA vers la fiche UP
+  const urlParams = new URLSearchParams(window.location.search);
+  const unitParam = (urlParams.get("unit_id") || urlParams.get("id") || "").trim();
+
+  let upKey = "";
+  if (unitParam && !/^\d+$/.test(unitParam)) upKey = unitParam;
+  if (!upKey) {
+    upKey =
+      localStorage.getItem("currentProductionKey") ||
+      sessionStorage.getItem("currentProductionKey") ||
+      "";
+  }
+
+  const bpProUrl = upKey
+    ? `fiche-production.html?unit_id=${encodeURIComponent(upKey)}&tab=bp-pro`
+    : `fiche-production.html`;
+
+  const servicesUrl = upKey
+    ? `fiche-production.html?unit_id=${encodeURIComponent(upKey)}&tab=services`
+    : `fiche-production.html`;
+
+  const btnPro = document.getElementById("btn_bp_pro");
+  const btnSrv = document.getElementById("btn_services");
+  if (btnPro) btnPro.setAttribute("href", bpProUrl);
+  if (btnSrv) btnSrv.setAttribute("href", servicesUrl);
+})();
+</script>
+      </div>
+    </div>
+  </div>
+
+  <script>
+const SUPABASE_URL = 'https://cfbbpmxdtiuicaitssjp.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // -------------------------------------------------------
+    // OBJECTIF : gabarit prêt à brancher sur tes données UP.
+    // Ce fichier fonctionne déjà "visuellement" sans données.
+    //
+    // On lit quelques infos simples :
+    // - unit / filiere via query string: ?unit=...&filiere=...
+    // - ou via localStorage (si tu ajoutes plus tard)
+    // -------------------------------------------------------
+
+    function getParam(name){
+      const u = new URL(window.location.href);
+      return u.searchParams.get(name) || "";
+    }
+
+    function setText(id, val){
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    }
+
+    // 1) Meta
+    const unit = getParam("unit") || getParam("unit_name") || getParam("up") || "Unité industrielle";
+    const filiere = getParam("filiere") || getParam("filiere_name") || "Filière";
+    const now = new Date();
+    const dateFR = now.toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" });
+
+    setText("metaUnit", unit);
+    setText("metaFiliere", filiere);
+    setText("metaDate", dateFR);
+
+    // 2) Liens retour / pro / services : on garde les params
+    const back = document.getElementById("btnBack");
+    if (back) back.href = "dashboard.html";
+
+    const proLink = document.getElementById("goProBtn");
+    const srvLink = document.getElementById("goServicesBtn");
+    const baseFiche = "fiche-production.html";
+    const qs = new URLSearchParams();
+    if (getParam("unit_id")) qs.set("unit_id", getParam("unit_id"));
+    if (getParam("unit")) qs.set("unit", getParam("unit"));
+    if (getParam("filiere")) qs.set("filiere", getParam("filiere"));
+    const qstr = qs.toString() ? ("?" + qs.toString()) : "";
+
+    if (proLink) proLink.href = baseFiche + qstr + (qstr ? "#bp-pro" : "#bp-pro");
+    if (srvLink) srvLink.href = baseFiche + qstr + (qstr ? "#services" : "#services");
+
+    // 3) Option : pré-remplir un peu de texte si unit/filiere existent
+    // (juste pour que ça fasse "vivant" sans brancher les vraies données)
+    const s1 = document.getElementById("s1_text");
+    if (s1 && unit && unit !== "Unité industrielle"){
+      s1.innerHTML = `Ce document présente une <b>vision synthétique</b> du projet <b>${unit}</b>, afin d’évaluer la faisabilité et les principaux besoins (marché, équipements, CAPEX, prévisionnels simplifiés).`;
+    }
+
+    const s2 = document.getElementById("s2_text");
+    if (s2 && filiere && filiere !== "Filière"){
+      s2.innerHTML = `Analyse sommaire du marché cible pour la filière <b>${filiere}</b> : segments prioritaires, concurrence (niveau), tendances et hypothèses de démarrage.`;
+    }
+
+  // ==============================================
+  // ✅ BP Découverte - Base stable (anti "Pansements")
+  // ==============================================
+
+  function getParam(name){
+    const u = new URL(window.location.href);
+    return u.searchParams.get(name) || "";
+  }
+
+  function safeJsonParse(raw){
+    try { return JSON.parse(raw); } catch(_) { return null; }
+  }
+
+  function setText(id, val){
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = (val ?? "—");
+  }
+
+  function loadCurrentProductionFromLocal(){
+    const raw = localStorage.getItem("currentProduction");
+    const obj = raw ? safeJsonParse(raw) : null;
+    return (obj && typeof obj === "object") ? obj : null;
+  }
+async function ensureCurrentProductionLoaded() {
+  // Si déjà en mémoire, on ne fait rien
+  const existing = loadCurrentProductionFromLocal();
+  if (existing) return existing;
+
+  const unitIdParam = getParam("unit_id") || getParam("id") || "";
+  if (!unitIdParam) return null;
+
+  // Si unit_id est numérique => recherche par id
+  const isNumeric = /^\d+$/.test(unitIdParam);
+
+  let query = supabaseClient.from("unites_production").select("*");
+
+  if (isNumeric) {
+    query = query.eq("id", parseInt(unitIdParam, 10));
+  } else {
+    // unit_id texte => recherche par slug OU nom (comme dans fiche-production)
+    query = query.or(`slug.eq.${unitIdParam},nom.eq.${unitIdParam}`);
+  }
+
+  const { data, error } = await query.single();
+
+  if (error || !data) {
+    // Pas de console sur iPad, donc on reste silencieux
+    return null;
+  }
+
+  // ✅ On sauvegarde pour que S1/S2/S3... puissent se remplir
+  localStorage.setItem("currentProduction", JSON.stringify(data));
+  if (data?.nom) localStorage.setItem("currentUnitName", data.nom);
+
+  return data;
+}
+
+  function getProdId(prod){
+  // on essaie plusieurs noms possibles (id numérique)
+  return String(
+    prod?.id ??
+    prod?.unit_id ??
+    prod?.up_id ??
+    prod?.production_id ??
+    ""
+  );
+}
+
+function getProdSlug(prod){
+  // slug texte (ex: "pneus")
+  return String(
+    prod?.slug ??
+    prod?.code ??
+    prod?.identifiant ??
+    ""
+  );
+}
+
+  function initMetaFromUrl(){
+    const unit = getParam("unit") || getParam("unit_name") || getParam("up") || "Unité industrielle";
+    const filiere = getParam("filiere") || getParam("filiere_name") || "Filière";
+    const now = new Date();
+    const dateFR = now.toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" });
+
+    setText("metaUnit", unit);
+    setText("metaFiliere", filiere);
+    setText("metaDate", dateFR);
+
+    // Titre (au moins via URL)
+    if (unit && unit !== "Unité industrielle") {
+      setText("bpTitle", `Business Plan Découverte — ${unit}`);
+    }
+  }
+
+  function fillBPFromLocalOnlyIfMatchingUnit(){
+    const prod = loadCurrentProductionFromLocal();
+    if (!prod) return false;
+
+    const unitIdFromUrl = getParam("unit_id") || getParam("id") || "";
+const prodId = getProdId(prod);
+const prodSlug = getProdSlug(prod);
+
+// ✅ RÈGLE ANTI-BUG (améliorée) :
+// On accepte la correspondance si unit_id = prod.id OU unit_id = prod.slug
+if (unitIdFromUrl) {
+  const matchById = prodId && String(unitIdFromUrl) === String(prodId);
+  const matchBySlug = prodSlug && String(unitIdFromUrl) === String(prodSlug);
+
+  if (!matchById && !matchBySlug) {
+    // ✅ Exception : si on arrive depuis Dashboard, on remplit quand même
+    const fromDash = localStorage.getItem("bp_open_from_dashboard") === "1";
+    if (!fromDash) return false;
+  }
+}
+
+// ✅ On consomme le drapeau (une seule fois)
+localStorage.removeItem("bp_open_from_dashboard");
+
+    // ✅ Unité
+    const unitName = prod.nom || prod.name || localStorage.getItem("currentUnitName") || "";
+    if (unitName) {
+      setText("bpTitle", `Business Plan Découverte — ${unitName}`);
+      setText("metaUnit", unitName);
+    }
+
+    // ✅ Filière
+    const filiereName =
+      getParam("filiere") ||
+      prod.filiereNom ||
+      prod.filiere_name ||
+      prod.filiere ||
+      localStorage.getItem("currentFiliereName") ||
+      "";
+    if (filiereName) setText("metaFiliere", filiereName);
+
+    // ✅ Description
+    const desc = prod.description || prod.description_up || prod.resume || "";
+    if (desc) setText("s1_text", desc);
+
+    return true;
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
+  initMetaFromUrl();
+
+  // ✅ si on arrive du Dashboard et currentProduction n'existe pas, on recharge depuis Supabase
+  const prod = loadCurrentProductionFromLocal();
+  if (!prod) {
+    await ensureCurrentProductionLoaded();
+  }
+
+  // puis on remplit
+  fillBPFromLocalOnlyIfMatchingUnit();
+
+  const back = document.getElementById("btnBack");
+  if (back) back.href = "dashboard.html";
+});
+</script>
+<script>
+// ==================================================
+// BP GRATUIT — SECTION 2 : Analyse du marché cible
+// ==================================================
+(function () {
+  function $(id) { return document.getElementById(id); }
+
+  function parseJsonSafe(raw) {
+    try { return JSON.parse(raw); } catch (_) { return null; }
+  }
+
+  // ---- Récupération UP courante
+  const prod =
+    parseJsonSafe(localStorage.getItem("currentProduction")) ||
+    parseJsonSafe(sessionStorage.getItem("currentProduction"));
+
+  const filiere =
+    (localStorage.getItem("currentFiliereName") ||
+     (prod && (prod.filiereNom || prod.filiere)) ||
+     "votre filière").trim();
+
+  const marche = prod && prod.marche ? String(prod.marche).trim() : "";
+
+  // ---- Segments clients (varie par UP)
+  function buildSegments(marcheStr) {
+    if (!marcheStr) {
+      return [
+        "PME et acteurs locaux ayant des besoins récurrents ou ponctuels.",
+        "Clients professionnels recherchant un prestataire fiable et réactif.",
+        "Structures avec contraintes de délais et de qualité."
+      ];
+    }
+
+    return marcheStr
+      .split(/,|;|\/|\bet\b/gi)
+      .map(s => s.trim())
+      .filter(Boolean)
+      .slice(0, 4)
+      .map(p => `Acteurs du segment : <b>${p}</b> (besoins fiables, délais maîtrisés).`);
+  }
+
+  // ---- Concurrence (identique pour les 8 UP d’une filière)
+  function buildCompetitionText(f) {
+    const x = f.toLowerCase();
+
+    if (x.includes("agro") || x.includes("boisson"))
+      return "Concurrence élevée (producteurs locaux, PME, importations). Différenciation par la qualité, la traçabilité, la régularité et la distribution.";
+
+    if (x.includes("chimie") || x.includes("cosm") || x.includes("déter"))
+      return "Concurrence élevée avec marques établies. Positionnement basé sur la conformité, la sécurité, la performance produit et la confiance.";
+
+    if (x.includes("textile") || x.includes("habil") || x.includes("cuir"))
+      return "Concurrence élevée souvent tirée par les prix. Différenciation par la qualité, le design, la personnalisation et les délais.";
+
+    if (x.includes("métall") || x.includes("mecan"))
+      return "Concurrence modérée à élevée. Différenciation par la qualité d’usinage, la précision, la réactivité et le SAV.";
+
+    if (x.includes("plast") || x.includes("caout"))
+      return "Concurrence modérée à élevée. Avantage concurrentiel via la qualité matière, la stabilité et la capacité de production.";
+
+    if (x.includes("électron") || x.includes("électric"))
+      return "Concurrence élevée. Différenciation par la qualité, la sécurité (normes), la disponibilité et le SAV.";
+
+    if (x.includes("btp") || x.includes("construction"))
+      return "Concurrence locale modérée à élevée. Différenciation par la qualité, la disponibilité, les délais et l’adaptation chantier.";
+
+    if (x.includes("médic") || x.includes("medical") || x.includes("santé"))
+      return "Concurrence élevée avec acteurs spécialisés. Différenciation par la conformité, la traçabilité, la qualité et la disponibilité.";
+
+    if (x.includes("assemblage") || x.includes("montage"))
+      return "Concurrence modérée à élevée. Différenciation par la qualité d’assemblage, la tenue des délais et le SAV.";
+
+    if (x.includes("recycl") || x.includes("valoris"))
+      return "Concurrence variable selon les flux. Différenciation par la sécurisation des gisements, la qualité du tri et la traçabilité.";
+
+    if (x.includes("services"))
+      return "Concurrence modérée à élevée. Différenciation par l’expertise, la méthode, les délais et la qualité du suivi.";
+
+    if (x.includes("énergie") || x.includes("eau") || x.includes("environnement"))
+      return "Concurrence structurée. Différenciation par la fiabilité, la sécurité, la maintenance et le SAV.";
+
+    return "Concurrence modérée à élevée. Différenciation par la qualité, les délais et la fiabilité.";
+  }
+
+  // ---- Hypothèses (identiques pour les 8 UP d’une filière)
+  function buildHypothesesText(f) {
+    const x = f.toLowerCase();
+
+    if (x.includes("agro") || x.includes("boisson"))
+      return "Prix alignés sur le marché local, volumes progressifs via réseaux de distribution. Priorité à la qualité, l’hygiène et la logistique.";
+
+    if (x.includes("chimie") || x.includes("cosm") || x.includes("déter"))
+      return "Prix par gamme, volumes progressifs via revendeurs et clients professionnels. Priorité à la conformité et à la sécurité.";
+
+    if (x.includes("textile") || x.includes("habil") || x.includes("cuir"))
+      return "Tarification par produit/série, volumes progressifs via commandes récurrentes. Priorité aux délais et à la finition.";
+
+    if (x.includes("métall") || x.includes("mecan"))
+      return "Facturation au devis, montée en charge par sous-traitance locale. Priorité à la précision et à la qualité.";
+
+    if (x.includes("plast") || x.includes("caout"))
+      return "Prix liés aux matières et à la transformation. Volumes progressifs via contrats B2B.";
+
+    if (x.includes("électron") || x.includes("électric"))
+      return "Tarification par produit ou prestation. Volumes progressifs via revendeurs et clients professionnels.";
+
+    if (x.includes("btp") || x.includes("construction"))
+      return "Prix au devis ou à l’unité. Volumes liés à la saisonnalité des chantiers.";
+
+    if (x.includes("médic") || x.includes("medical") || x.includes("santé"))
+      return "Prix par gamme, volumes progressifs via pharmacies, cabinets et établissements. Priorité à la conformité et au stock.";
+
+    if (x.includes("assemblage") || x.includes("montage"))
+      return "Tarification à la prestation ou au temps. Volumes progressifs via contrats de sous-traitance.";
+
+    if (x.includes("recycl") || x.includes("valoris"))
+      return "Volumes progressifs sécurisés par gisements. Prix dépendant des débouchés et des cours.";
+
+    if (x.includes("services"))
+      return "Tarification au forfait ou au temps. Volumes progressifs via contrats récurrents.";
+
+    if (x.includes("énergie") || x.includes("eau") || x.includes("environnement"))
+      return "Prix au devis avec revenus récurrents via maintenance.";
+
+    return "Tarification à la prestation, montée en charge progressive.";
+  }
+
+  // ---- Injection dans la page
+  const s2Text = $("s2_text");
+  const s2List = $("s2_list");
+
+  if (s2Text) {
+    s2Text.innerHTML =
+      `Analyse sommaire du marché cible pour la filière <b>${filiere}</b> : ` +
+      `segments prioritaires, concurrence (niveau), tendances et hypothèses de démarrage.`;
+  }
+
+  if (s2List) {
+    const segments = buildSegments(marche);
+    s2List.innerHTML = `
+      <li><b>Segments clients prioritaires :</b>
+        <ul>${segments.map(s => `<li>${s}</li>`).join("")}</ul>
+      </li>
+      <li><b>Principaux concurrents et positionnement :</b> ${buildCompetitionText(filiere)}</li>
+      <li><b>Hypothèses clés (prix/volume) :</b> ${buildHypothesesText(filiere)}</li>
+    `;
+  }
+})();
+</script>
+<script>
+// ==================================================
+// BP GRATUIT — SECTION 3 : Machines & équipements nécessaires (v2 PAR UP)
+// ✅ UpKey fiable : priorité URL (unit_id/id), mapping si numérique, fallback localStorage
+// ==================================================
+(function () {
+  function $(id) { return document.getElementById(id); }
+
+  function parseJsonSafe(raw) {
+    try { return JSON.parse(raw); } catch (_) { return null; }
+  }
+
+  // ==============================================
+  // MAPPING COMPLET DES IDs (96 unités)
+  // (Copié depuis fiche-production.html)
+  // ==============================================
+  const unitIdMapping = {
+    1: "conserverie_legumes",
+    2: "biscuiterie",
+    3: "boulangerie_industrielle",
+    4: "jus_boissons",
+    5: "mini_laiterie",
+    6: "huiles_alimentaires",
+    7: "epices",
+    8: "aliments_betail",
+    9: "detergents",
+    10: "savonnerie",
+    11: "cosmetiques",
+    12: "peintures",
+    13: "adhesifs",
+    14: "engrais",
+    15: "javel",
+    16: "produits_industriels",
+    17: "confection",
+    18: "tissage",
+    19: "maroquinerie",
+    20: "teinture",
+    21: "broderie",
+    22: "chaussures",
+    23: "uniformes",
+    24: "linge",
+    25: "serrurerie",
+    26: "outillage",
+    27: "recyclage_metaux",
+    28: "chaudronnerie",
+    29: "mecanosoudure",
+    30: "structures",
+    31: "pieces",
+    32: "quincaillerie",
+    33: "sacs",
+    34: "bouteilles_pet",
+    35: "tuyaux_pvc",
+    36: "emballages",
+    37: "profiles",
+    38: "jouets",
+    39: "joints",
+    40: "granules",
+    41: "cables",
+    42: "panneaux_solaires",
+    43: "appareils",
+    44: "led",
+    45: "tableaux",
+    46: "onduleurs",
+    47: "compteurs",
+    48: "batteries",
+    49: "cimenterie",
+    50: "briques",
+    51: "prefab",
+    52: "tuiles",
+    53: "agglos",
+    54: "peintures_btp",
+    55: "centrale_beton",
+    56: "menuiserie",
+    57: "masques",
+    58: "pansements",
+    59: "mobilier",
+    60: "fauteuils",
+    61: "instruments",
+    62: "bequilles",
+    63: "antiseptiques",
+    64: "kits",
+    65: "smartphones",
+    66: "ordinateurs",
+    67: "electromenager",
+    68: "climatiseurs",
+    69: "motos",
+    71: "velos",
+    72: "meubles",
+    73: "equipements",
+    74: "plastique",
+    75: "papier",
+    76: "metaux",
+    77: "compost",
+    78: "verre",
+    79: "pneus",
+    80: "huiles",
+    81: "deee",
+    82: "nettoyage",
+    83: "maintenance",
+    84: "logistique",
+    85: "formation",
+    86: "qualite",
+    87: "etudes",
+    88: "securite",
+    89: "energie",
+    90: "poteaux",
+    91: "compteurs_eau",
+    92: "kits_solaires",
+    93: "lampadaires",
+    94: "forage",
+    95: "eau",
+    96: "maintenance_energie",
+    97: "audit"
+  };
+
+  // ---- 1) Récupérer l'UP en cours
+  const prod =
+    parseJsonSafe(localStorage.getItem("currentProduction")) ||
+    parseJsonSafe(sessionStorage.getItem("currentProduction"));
+
+  // ✅ UP KEY : priorité URL (fiable), puis fallback storage
+  const urlParams = new URLSearchParams(window.location.search);
+  const unitParam = (urlParams.get("unit_id") || urlParams.get("id") || "").trim();
+
+  let upKey = "";
+
+  // 1) URL contient une clé texte (ex: "chaussures", "antiseptiques")
+  if (unitParam && !/^\d+$/.test(unitParam)) {
+    upKey = unitParam;
+  }
+
+  // 2) URL contient un ID numérique (ex: "63")
+  if (!upKey && unitParam && /^\d+$/.test(unitParam)) {
+    const n = parseInt(unitParam, 10);
+    if (unitIdMapping[n]) upKey = unitIdMapping[n];
+  }
+
+  // 3) Fallback si l'URL ne suffit pas
+  if (!upKey) {
+    upKey = (localStorage.getItem("currentProductionKey") || sessionStorage.getItem("currentProductionKey") || "").trim();
+  }
+
+  // 4) Resynchroniser pour éviter les valeurs bloquées (iPad)
+  if (upKey) {
+    try { localStorage.setItem("currentProductionKey", upKey); } catch(_) {}
+    try { sessionStorage.setItem("currentProductionKey", upKey); } catch(_) {}
+  }
+
+  const filiere =
+    (localStorage.getItem("currentFiliereName") ||
+     (prod && (prod.filiereNom || prod.filiere)) ||
+     "votre filière").trim();
+
+  const upName =
+    (prod && (prod.nom || prod.unitName || prod.titre)) ? String(prod.nom || prod.unitName || prod.titre).trim()
+    : "cette unité";
+
+  // ==================================================
+  // 2) BIBLIOTHÈQUE MACHINES PAR UP
+  // ==================================================
+  const P2I_MACHINES_BY_UP = {
+"conserverie_legumes": [
+  { name: "Bacs + table de tri", role: "Réception, tri, parage", capacity: "Petites & moyennes séries", utilities: "Eau + électricité" },
+  { name: "Laveuse / éplucheuse (selon légumes)", role: "Lavage / préparation", capacity: "Standard", utilities: "Eau + électricité" },
+  { name: "Blanchisseur / cuiseur", role: "Pré-cuisson / blanchiment", capacity: "Batch", utilities: "Électricité (ou gaz) + eau" },
+  { name: "Remplisseuse + doseuse", role: "Mise en bocaux/boîtes (produit + saumure)", capacity: "Semi-automatique", utilities: "Électricité" },
+  { name: "Capsuleuse / sertisseuse", role: "Fermeture contenants", capacity: "Standard", utilities: "Électricité + air (option)" },
+  { name: "Autoclave / stérilisateur", role: "Stérilisation", capacity: "Selon volume", utilities: "Électricité + eau" },
+  { name: "Étiqueteuse + dateur", role: "Étiquetage / traçabilité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"biscuiterie": [
+  { name: "Pétrin / mélangeur", role: "Préparation pâte", capacity: "Batch", utilities: "Électricité" },
+  { name: "Laminoir / formeuse", role: "Façonnage / découpe", capacity: "Standard", utilities: "Électricité" },
+  { name: "Four (tunnel ou rotatif)", role: "Cuisson", capacity: "Selon cadence", utilities: "Électricité (ou gaz)" },
+  { name: "Table de refroidissement / convoyeur", role: "Refroidissement", capacity: "Standard", utilities: "Électricité" },
+  { name: "Enrobeuse (option cacao)", role: "Enrobage / nappage", capacity: "Option", utilities: "Électricité" },
+  { name: "Balance + ensacheuse/flowpack", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité + air (option)" },
+  { name: "Étiqueteuse + dateur", role: "Étiquetage / traçabilité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"boulangerie_industrielle": [
+  { name: "Pétrin spiral / mélangeur", role: "Pétrissage", capacity: "Batch", utilities: "Électricité" },
+  { name: "Diviseuse-bouleuse", role: "Division / boulage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Façonneuse", role: "Façonnage pains/viennoiseries", capacity: "Standard", utilities: "Électricité" },
+  { name: "Chambre de fermentation / étuve", role: "Pousse contrôlée", capacity: "Selon production", utilities: "Électricité + eau (vapeur option)" },
+  { name: "Four (à soles / rotatif / tunnel)", role: "Cuisson", capacity: "Selon cadence", utilities: "Électricité (ou gaz)" },
+  { name: "Refroidissement (grilles/convoyeur)", role: "Refroidissement", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Trancheuse + ensacheuse", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité + air (option)" }
+],
+
+"jus_boissons": [
+  { name: "Bacs + table de tri", role: "Réception / tri fruits", capacity: "Petites & moyennes séries", utilities: "Eau + électricité" },
+  { name: "Laveuse", role: "Lavage", capacity: "Standard", utilities: "Eau + électricité" },
+  { name: "Broyeur / pulpeur", role: "Broyage / extraction pulpe", capacity: "Standard", utilities: "Électricité" },
+  { name: "Presse / extracteur", role: "Extraction jus", capacity: "Selon fruit", utilities: "Électricité" },
+  { name: "Filtration / clarificateur (option)", role: "Clarification", capacity: "Option", utilities: "Électricité" },
+  { name: "Pasteurisateur", role: "Stabilisation", capacity: "Batch ou continu", utilities: "Électricité (ou gaz) + eau" },
+  { name: "Remplisseuse + capsuleuse", role: "Embouteillage", capacity: "Semi-automatique", utilities: "Électricité + air (option)" },
+  { name: "Étiqueteuse + dateur", role: "Étiquetage / traçabilité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"mini_laiterie": [
+  { name: "Cuve de réception + filtration", role: "Réception / filtration lait", capacity: "Selon collecte", utilities: "Électricité" },
+  { name: "Pasteurisateur", role: "Pasteurisation", capacity: "Batch", utilities: "Électricité (ou gaz) + eau" },
+  { name: "Cuve de maturation", role: "Maturation / mélange", capacity: "Standard", utilities: "Électricité" },
+  { name: "Écrémeuse (option)", role: "Séparation crème", capacity: "Option", utilities: "Électricité" },
+  { name: "Fermenteurs / yaourtière (selon produits)", role: "Fermentation (yaourt)", capacity: "Selon gamme", utilities: "Électricité" },
+  { name: "Fromagère (moule/pressage) (option)", role: "Fabrication fromages", capacity: "Option", utilities: "Électricité" },
+  { name: "Remplisseuse (pots/bouteilles)", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité" },
+  { name: "Chambre froide / réfrigération", role: "Stockage froid", capacity: "Selon volume", utilities: "Électricité" }
+],
+
+"huiles_alimentaires": [
+  { name: "Décortiqueuse / nettoyeur (selon graines)", role: "Préparation matières", capacity: "Standard", utilities: "Électricité" },
+  { name: "Broyeur / floconneur (option)", role: "Pré-traitement", capacity: "Option", utilities: "Électricité" },
+  { name: "Presse à huile", role: "Extraction huile", capacity: "Selon cadence", utilities: "Électricité" },
+  { name: "Filtration (filtres)", role: "Clarification", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Cuve de décantation", role: "Décantation", capacity: "Batch", utilities: "—" },
+  { name: "Remplisseuse + boucheuse", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité" },
+  { name: "Étiqueteuse + dateur", role: "Étiquetage / traçabilité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"epices": [
+  { name: "Table de tri + bacs", role: "Tri / préparation", capacity: "Petites séries", utilities: "—" },
+  { name: "Séchoir (si besoin)", role: "Séchage", capacity: "Selon flux", utilities: "Électricité (ou solaire selon modèle)" },
+  { name: "Broyeur / moulin", role: "Broyage / mouture", capacity: "Standard", utilities: "Électricité" },
+  { name: "Tamis / calibreur", role: "Tamisage / granulométrie", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Mélangeur (option)", role: "Assemblage de mélanges", capacity: "Option", utilities: "Électricité" },
+  { name: "Ensacheuse / doseuse", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité" },
+  { name: "Étiqueteuse + dateur", role: "Étiquetage / traçabilité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"aliments_betail": [
+  { name: "Broyeur / concasseur", role: "Broyage matières premières", capacity: "Selon cadence", utilities: "Électricité" },
+  { name: "Mélangeur", role: "Mélange formulation", capacity: "Batch", utilities: "Électricité" },
+  { name: "Doseurs / trémies", role: "Dosage ingrédients", capacity: "Standard", utilities: "Électricité" },
+  { name: "Granulateur / pelletiseur (option selon produit)", role: "Granulation", capacity: "Option", utilities: "Électricité" },
+  { name: "Refroidisseur / tamis (si pellets)", role: "Refroidissement / calibrage", capacity: "Option", utilities: "Électricité" },
+  { name: "Ensacheuse + balance", role: "Conditionnement sacs", capacity: "Semi-automatique", utilities: "Électricité + air (option)" },
+  { name: "Stockage (silos / racks)", role: "Stockage matières et produits finis", capacity: "Selon volume", utilities: "—" }
+],
+
+"detergents": [
+  { name: "Cuve(s) de mélange avec agitateur", role: "Formulation / mélange", capacity: "Batch", utilities: "Électricité" },
+  { name: "Système de dosage (pompes / balances)", role: "Dosage matières premières", capacity: "Standard", utilities: "Électricité" },
+  { name: "Homogénéisateur / mélangeur haute vitesse (option)", role: "Stabilité / homogénéité", capacity: "Option", utilities: "Électricité" },
+  { name: "Filtration simple (option)", role: "Clarification", capacity: "Option", utilities: "Électricité (option)" },
+  { name: "Remplisseuse (liquides) + boucheuse", role: "Conditionnement bidons/flacons", capacity: "Semi-automatique", utilities: "Électricité + air (option)" },
+  { name: "Étiqueteuse + dateur", role: "Étiquetage / traçabilité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste contrôle qualité (pH, viscosité)", role: "Contrôle conformité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"savonnerie": [
+  { name: "Cuve(s) chauffée(s) avec agitation", role: "Saponification / mélange", capacity: "Batch", utilities: "Électricité (ou gaz) + eau" },
+  { name: "Pompe de transfert / tuyauterie", role: "Transfert produit", capacity: "Standard", utilities: "Électricité" },
+  { name: "Moules + table de coulage (savon solide)", role: "Moulage", capacity: "Standard", utilities: "—" },
+  { name: "Cutter / trancheuse (savon)", role: "Découpe", capacity: "Standard", utilities: "Électricité" },
+  { name: "Séchoir / zone de cure", role: "Séchage / cure", capacity: "Selon volume", utilities: "Ventilation (option)" },
+  { name: "Mélangeur + remplisseuse (savon liquide) (option)", role: "Formulation + conditionnement", capacity: "Option", utilities: "Électricité" },
+  { name: "Conditionnement (film/boîtes) + étiquetage", role: "Emballage / traçabilité", capacity: "Semi-automatique", utilities: "Électricité" }
+],
+
+"cosmetiques": [
+  { name: "Cuves inox (mélange) avec agitation", role: "Formulation / mélange", capacity: "Batch", utilities: "Électricité" },
+  { name: "Bain-marie / cuve chauffée (si émulsions)", role: "Chauffe contrôlée", capacity: "Option selon gamme", utilities: "Électricité + eau" },
+  { name: "Homogénéisateur (émulsions)", role: "Stabilité / texture", capacity: "Standard", utilities: "Électricité" },
+  { name: "Filtration (option)", role: "Clarification", capacity: "Option", utilities: "Électricité (option)" },
+  { name: "Remplisseuse (crèmes/liquides) + sertisseuse/boucheuse", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité + air (option)" },
+  { name: "Étiqueteuse + dateur", role: "Étiquetage / traçabilité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste contrôle qualité (pH, viscosité, aspect)", role: "Contrôle conformité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"peintures": [
+  { name: "Mélangeur / disperseur (haute vitesse)", role: "Dispersion pigments", capacity: "Batch", utilities: "Électricité" },
+  { name: "Broyeur à billes (option selon exigence)", role: "Finesse de broyage", capacity: "Option", utilities: "Électricité" },
+  { name: "Cuves de formulation / dilution", role: "Ajustement viscosité / teintes", capacity: "Standard", utilities: "Électricité" },
+  { name: "Filtration (tamis / filtres)", role: "Élimination particules", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Remplisseuse (pots/seaux) + sertisseuse", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité + air (option)" },
+  { name: "Étiqueteuse + dateur", role: "Étiquetage / traçabilité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste contrôle (viscosité, teinte, pouvoir couvrant)", role: "Contrôle qualité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"adhesifs": [
+  { name: "Réacteur / cuve de mélange (chauffée si besoin)", role: "Formulation / réaction (selon produits)", capacity: "Batch", utilities: "Électricité (ou gaz) + eau" },
+  { name: "Agitateur + contrôle température", role: "Homogénéité / sécurité process", capacity: "Standard", utilities: "Électricité" },
+  { name: "Système de dosage (pompes / balances)", role: "Dosage composants", capacity: "Standard", utilities: "Électricité" },
+  { name: "Dégazage (option) / filtration", role: "Qualité / bulles", capacity: "Option", utilities: "Électricité (option)" },
+  { name: "Remplisseuse (cartouches/seaux) + sertisseuse", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité + air (option)" },
+  { name: "Étiqueteuse + dateur", role: "Traçabilité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Contrôle qualité (viscosité, adhérence tests simples)", role: "Contrôle conformité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"engrais": [
+  { name: "Broyeur / concasseur", role: "Réduction granulométrie", capacity: "Standard", utilities: "Électricité" },
+  { name: "Mélangeur", role: "Mélange formulation", capacity: "Batch", utilities: "Électricité" },
+  { name: "Granulateur (option selon produit)", role: "Granulation", capacity: "Option", utilities: "Électricité" },
+  { name: "Séchoir / refroidisseur (si granulation)", role: "Stabilisation", capacity: "Option", utilities: "Électricité (ou gaz)" },
+  { name: "Tamis / calibreur", role: "Calibrage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Ensacheuse + balance", role: "Conditionnement sacs", capacity: "Semi-automatique", utilities: "Électricité + air (option)" },
+  { name: "Poste sécurité (EPI, ventilation) + contrôle humidité", role: "Sécurité / qualité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"javel": [
+  { name: "Cuve(s) de mélange (compatibles chimie)", role: "Préparation / dilution", capacity: "Batch", utilities: "Électricité" },
+  { name: "Système de dosage (pompes)", role: "Dosage contrôlé", capacity: "Standard", utilities: "Électricité" },
+  { name: "Filtration simple (option)", role: "Clarification", capacity: "Option", utilities: "Électricité (option)" },
+  { name: "Remplisseuse + boucheuse", role: "Conditionnement flacons/bidons", capacity: "Semi-automatique", utilities: "Électricité + air (option)" },
+  { name: "Étiqueteuse + dateur", role: "Étiquetage / traçabilité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste contrôle (chlore actif, pH)", role: "Contrôle qualité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Ventilation / zone de stockage sécurisée", role: "Sécurité (émanations)", capacity: "Standard", utilities: "Électricité (ventilation)" }
+],
+
+"produits_industriels": [
+  { name: "Cuves de mélange (compatibles produits)", role: "Formulation / mélange", capacity: "Batch", utilities: "Électricité" },
+  { name: "Système de dosage (pompes/ balances)", role: "Dosage composants", capacity: "Standard", utilities: "Électricité" },
+  { name: "Réacteur / cuve chauffée (selon produits)", role: "Process réactionnel (option)", capacity: "Option", utilities: "Électricité (ou gaz) + eau" },
+  { name: "Filtration / tamisage (selon produit)", role: "Qualité / particules", capacity: "Option", utilities: "Électricité (option)" },
+  { name: "Remplisseuse (bidons/fûts) + bouchage", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité + air (option)" },
+  { name: "Étiqueteuse + marquage", role: "Traçabilité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste contrôle qualité (densité, viscosité, pH selon cas)", role: "Contrôle conformité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"confection": [
+  { name: "Table de coupe + cutter / ciseaux électriques", role: "Découpe tissus", capacity: "Petites & moyennes séries", utilities: "Électricité" },
+  { name: "Machines à coudre industrielles (plates)", role: "Assemblage vêtements", capacity: "Standard", utilities: "Électricité" },
+  { name: "Surjeteuse", role: "Surfilage / finition bords", capacity: "Standard", utilities: "Électricité" },
+  { name: "Recouvreuse (option)", role: "Ourlets / finitions", capacity: "Option", utilities: "Électricité" },
+  { name: "Presse / fer industriel", role: "Repassage / mise en forme", capacity: "Standard", utilities: "Électricité (vapeur option)" },
+  { name: "Poste contrôle qualité + emballage", role: "Contrôle / conditionnement", capacity: "Standard", utilities: "Électricité" }
+],
+
+"tissage": [
+  { name: "Métiers à tisser (mécaniques ou semi-automatiques)", role: "Tissage des étoffes", capacity: "Selon nombre de métiers", utilities: "Électricité" },
+  { name: "Ourdissoir", role: "Préparation des fils de chaîne", capacity: "Standard", utilities: "Électricité" },
+  { name: "Bobinoir", role: "Préparation des bobines", capacity: "Standard", utilities: "Électricité" },
+  { name: "Encolleuse (option)", role: "Renforcement des fils", capacity: "Option", utilities: "Électricité + eau" },
+  { name: "Table de contrôle / inspection tissu", role: "Contrôle défauts", capacity: "Standard", utilities: "Éclairage" },
+  { name: "Plieuse / rouleuse", role: "Conditionnement tissus", capacity: "Standard", utilities: "Électricité" }
+],
+
+"maroquinerie": [
+  { name: "Table de découpe cuir + emporte-pièces", role: "Découpe cuir", capacity: "Petites & moyennes séries", utilities: "—" },
+  { name: "Machine à refendre / parer", role: "Amincissement du cuir", capacity: "Standard", utilities: "Électricité" },
+  { name: "Machines à coudre cuir", role: "Assemblage pièces cuir", capacity: "Standard", utilities: "Électricité" },
+  { name: "Presse / collage", role: "Assemblage / collage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste teinture / finition bords", role: "Finition esthétique", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Poste contrôle qualité + emballage", role: "Contrôle / conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"teinture": [
+  { name: "Cuves de teinture (inox ou plastifiées)", role: "Teinture textile", capacity: "Batch", utilities: "Électricité + eau" },
+  { name: "Système de chauffage (résistances / vapeur)", role: "Contrôle température", capacity: "Standard", utilities: "Électricité (ou gaz)" },
+  { name: "Essoreuse / centrifugeuse", role: "Extraction eau", capacity: "Standard", utilities: "Électricité" },
+  { name: "Séchoir / étendoirs ventilés", role: "Séchage textiles", capacity: "Selon flux", utilities: "Électricité (ventilation)" },
+  { name: "Poste préparation bains (dosage colorants)", role: "Dosage / formulation", capacity: "Standard", utilities: "Électricité" },
+  { name: "Zone contrôle teinte / lavage final", role: "Contrôle qualité", capacity: "Standard", utilities: "Eau" }
+],
+
+"broderie": [
+  { name: "Machines à broder multi-têtes (numériques)", role: "Broderie automatisée", capacity: "Selon nombre de têtes", utilities: "Électricité" },
+  { name: "Ordinateur + logiciel de broderie", role: "Programmation motifs", capacity: "Standard", utilities: "Électricité" },
+  { name: "Cadres / supports textiles", role: "Maintien tissus", capacity: "Standard", utilities: "—" },
+  { name: "Table de préparation textile", role: "Préparation supports", capacity: "Standard", utilities: "—" },
+  { name: "Poste contrôle qualité / retouches", role: "Finition", capacity: "Standard", utilities: "Éclairage" }
+],
+
+"chaussures": [
+  { name: "Table de découpe + emporte-pièces", role: "Découpe cuir / textile", capacity: "Petites & moyennes séries", utilities: "—" },
+  { name: "Machine à piquer cuir", role: "Couture tiges", capacity: "Standard", utilities: "Électricité" },
+  { name: "Encollage + presse d’assemblage", role: "Assemblage semelle-tige", capacity: "Standard", utilities: "Électricité + air (option)" },
+  { name: "Formes + machine de montage", role: "Mise en forme", capacity: "Selon modèles", utilities: "Électricité" },
+  { name: "Poste finition (ponçage, polissage)", role: "Finition chaussures", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste contrôle qualité + emballage", role: "Contrôle / conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"uniformes": [
+  { name: "Table de coupe + cutter", role: "Découpe tissus", capacity: "Petites & moyennes séries", utilities: "Électricité" },
+  { name: "Machines à coudre industrielles", role: "Assemblage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Surjeteuse", role: "Finition bords", capacity: "Standard", utilities: "Électricité" },
+  { name: "Presse / fer industriel", role: "Repassage / mise en forme", capacity: "Standard", utilities: "Électricité (vapeur option)" },
+  { name: "Poste marquage / écussons (option)", role: "Personnalisation", capacity: "Option", utilities: "Électricité" },
+  { name: "Contrôle qualité + emballage", role: "Conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"linge": [
+  { name: "Table de coupe textile", role: "Découpe draps / serviettes", capacity: "Standard", utilities: "—" },
+  { name: "Machines à coudre industrielles", role: "Assemblage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Surjeteuse / ourleuse", role: "Finitions", capacity: "Standard", utilities: "Électricité" },
+  { name: "Presse / calandre textile", role: "Repassage / finition", capacity: "Standard", utilities: "Électricité (vapeur option)" },
+  { name: "Poste pliage / emballage", role: "Conditionnement", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Contrôle qualité", role: "Vérification dimensions / finitions", capacity: "Standard", utilities: "Éclairage" }
+],
+
+"serrurerie": [
+  { name: "Postes à souder (MMA/MIG)", role: "Assemblage / soudage", capacity: "Petites & moyennes séries", utilities: "Électricité" },
+  { name: "Scie à ruban / tronçonneuse métal", role: "Découpe profilés", capacity: "Standard", utilities: "Électricité" },
+  { name: "Cisaille / grignoteuse (option)", role: "Découpe tôles", capacity: "Option", utilities: "Électricité" },
+  { name: "Perceuse à colonne", role: "Perçage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Meuleuses / outillage portatif", role: "Finition / ébavurage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Presse/outil de cintrage (option)", role: "Cintrage / formage simple", capacity: "Option", utilities: "Électricité" },
+  { name: "Poste peinture / traitement (option)", role: "Finition anticorrosion", capacity: "Option", utilities: "Électricité + ventilation" }
+],
+
+"outillage": [
+  { name: "Scie à ruban / tronçonneuse métal", role: "Découpe matière", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste à souder (MIG/MMA)", role: "Assemblage cadres/structures", capacity: "Standard", utilities: "Électricité" },
+  { name: "Perceuse à colonne + taraudage", role: "Perçage / taraudage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Petite plieuse / presse (option)", role: "Pliage pièces", capacity: "Option", utilities: "Électricité" },
+  { name: "Meuleuses / ponceuse métal", role: "Finition", capacity: "Standard", utilities: "Électricité" },
+  { name: "Tour conventionnel (option)", role: "Petites pièces / axes", capacity: "Option", utilities: "Électricité" },
+  { name: "Poste peinture / traitement", role: "Protection / finition", capacity: "Standard", utilities: "Électricité + ventilation" }
+],
+
+"recyclage_metaux": [
+  { name: "Zone de tri + aimant (option)", role: "Tri ferreux/non-ferreux", capacity: "Selon gisements", utilities: "Électricité (option)" },
+  { name: "Cisaille / découpeuse (ou oxycoupage)", role: "Découpe ferrailles", capacity: "Standard", utilities: "Électricité (ou gaz)" },
+  { name: "Broyeur / presse à balles", role: "Réduction volume / compactage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Balance / pont-bascule (option)", role: "Pesée / traçabilité", capacity: "Option", utilities: "Électricité" },
+  { name: "Séparateurs (courants de Foucault) (option)", role: "Séparation non-ferreux", capacity: "Option", utilities: "Électricité" },
+  { name: "Bennes / racks de stockage", role: "Stockage par catégories", capacity: "Selon volume", utilities: "—" },
+  { name: "Manutention (chariot/aimant) (option)", role: "Chargement / logistique", capacity: "Option", utilities: "Carburant/électricité selon matériel" }
+],
+
+"chaudronnerie": [
+  { name: "Rouleur / rouleuse de tôle", role: "Cylindrage viroles", capacity: "Standard", utilities: "Électricité" },
+  { name: "Plieuse / presse-plieuse", role: "Pliage tôles", capacity: "Standard", utilities: "Électricité" },
+  { name: "Cisaille guillotine (option)", role: "Découpe tôles", capacity: "Option", utilities: "Électricité" },
+  { name: "Postes à souder (MIG/TIG)", role: "Assemblage / soudage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Perceuse + outillage de traçage", role: "Perçage / traçage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Meuleuses / ébavurage", role: "Finition soudures", capacity: "Standard", utilities: "Électricité" },
+  { name: "Contrôle (étanchéité) (option)", role: "Tests / qualité", capacity: "Option", utilities: "Air/eau selon test" }
+],
+
+"mecanosoudure": [
+  { name: "Postes à souder (MMA/MIG)", role: "Soudage structures", capacity: "Standard", utilities: "Électricité" },
+  { name: "Scie à ruban / tronçonneuse métal", role: "Découpe profilés/tubes", capacity: "Standard", utilities: "Électricité" },
+  { name: "Établis + gabarits / bridage", role: "Montage / précision", capacity: "Standard", utilities: "—" },
+  { name: "Perceuse à colonne", role: "Perçage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Meuleuses / ponçage", role: "Finition", capacity: "Standard", utilities: "Électricité" },
+  { name: "Compresseur (option)", role: "Outillage pneumatique", capacity: "Option", utilities: "Électricité" },
+  { name: "Poste peinture (option)", role: "Finition", capacity: "Option", utilities: "Électricité + ventilation" }
+],
+
+"structures": [
+  { name: "Scie à ruban / tronçonneuse", role: "Découpe poutrelles/profilés", capacity: "Standard", utilities: "Électricité" },
+  { name: "Perceuse radiale / perceuse à colonne", role: "Perçage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Postes à souder (MIG)", role: "Assemblage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Équipements de levage (palan/pont roulant) (option)", role: "Manutention lourde", capacity: "Option", utilities: "Électricité" },
+  { name: "Gabarits / tables d’assemblage", role: "Montage / équerrage", capacity: "Standard", utilities: "—" },
+  { name: "Meuleuses / finition", role: "Finition soudures", capacity: "Standard", utilities: "Électricité" },
+  { name: "Traitement anticorrosion (peinture) (option)", role: "Protection", capacity: "Option", utilities: "Électricité + ventilation" }
+],
+
+"pieces": [
+  { name: "Tour conventionnel", role: "Usinage cylindrique", capacity: "Petites & moyennes séries", utilities: "Électricité" },
+  { name: "Fraiseuse (ou centre d’usinage) (option)", role: "Usinage formes / rainures", capacity: "Option", utilities: "Électricité" },
+  { name: "Perceuse + taraudage", role: "Perçage / taraudage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Rectifieuse (option)", role: "Finition précision", capacity: "Option", utilities: "Électricité" },
+  { name: "Scie à ruban", role: "Découpe brut", capacity: "Standard", utilities: "Électricité" },
+  { name: "Outillage de mesure (pied à coulisse, micromètre)", role: "Contrôle dimensionnel", capacity: "Standard", utilities: "—" },
+  { name: "Étau / établi / outillage", role: "Montage / finition", capacity: "Standard", utilities: "—" }
+],
+
+"quincaillerie": [
+  { name: "Presses (excentrique/hydraulique) (option)", role: "Découpe/emboutissage (selon produits)", capacity: "Option", utilities: "Électricité" },
+  { name: "Perceuse + taraudage", role: "Perçage / filetages simples", capacity: "Standard", utilities: "Électricité" },
+  { name: "Tour (option)", role: "Pièces tournées (boulonnerie)", capacity: "Option", utilities: "Électricité" },
+  { name: "Machine de filetage / roulage (option)", role: "Filetage", capacity: "Option", utilities: "Électricité" },
+  { name: "Traitement de surface (option)", role: "Protection anticorrosion", capacity: "Option", utilities: "Électricité + eau" },
+  { name: "Poste contrôle (mesures / calibres)", role: "Contrôle qualité", capacity: "Standard", utilities: "—" },
+  { name: "Conditionnement (sachets/boîtes) + étiquetage", role: "Conditionnement / traçabilité", capacity: "Standard", utilities: "Électricité (option)" }
+],
+
+"sacs": [
+  { name: "Extrudeuse film plastique (mono-couche)", role: "Production film", capacity: "Petites & moyennes séries", utilities: "Électricité" },
+  { name: "Machine de coupe-soudure", role: "Découpe / soudure sacs", capacity: "Standard", utilities: "Électricité" },
+  { name: "Bobinoir / dérouleur", role: "Gestion film", capacity: "Standard", utilities: "Électricité" },
+  { name: "Impression simple (option)", role: "Marquage sacs", capacity: "Option", utilities: "Électricité" },
+  { name: "Broyeur chutes (recyclage interne)", role: "Valorisation rebuts", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste contrôle qualité + conditionnement", role: "Contrôle / emballage", capacity: "Standard", utilities: "—" }
+],
+
+"bouteilles_pet": [
+  { name: "Machine d’injection préformes PET", role: "Fabrication préformes", capacity: "Standard", utilities: "Électricité" },
+  { name: "Souffleuse PET", role: "Soufflage bouteilles", capacity: "Selon cadence", utilities: "Électricité + air comprimé" },
+  { name: "Compresseur haute pression", role: "Air pour soufflage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Refroidisseur / chiller", role: "Refroidissement moules", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Convoyeur / table d’accumulation", role: "Manutention bouteilles", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste contrôle qualité + conditionnement", role: "Contrôle / emballage", capacity: "Standard", utilities: "—" }
+],
+
+"tuyaux_pvc": [
+  { name: "Extrudeuse PVC", role: "Extrusion tuyaux", capacity: "Selon diamètre", utilities: "Électricité" },
+  { name: "Bac de refroidissement / calibration", role: "Stabilisation dimensions", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Unité de traction", role: "Avance contrôlée", capacity: "Standard", utilities: "Électricité" },
+  { name: "Scie de coupe automatique", role: "Découpe longueurs", capacity: "Standard", utilities: "Électricité" },
+  { name: "Impression marquage (option)", role: "Identification produits", capacity: "Option", utilities: "Électricité" },
+  { name: "Poste contrôle dimensionnel + stockage", role: "Contrôle / stockage", capacity: "Standard", utilities: "—" }
+],
+
+"emballages": [
+  { name: "Extrudeuse film plastique", role: "Production film", capacity: "Standard", utilities: "Électricité" },
+  { name: "Lamineuse / complexeuse (option)", role: "Films multicouches", capacity: "Option", utilities: "Électricité" },
+  { name: "Machine de découpe / refente", role: "Découpe formats", capacity: "Standard", utilities: "Électricité" },
+  { name: "Machine de formage / scellage", role: "Fabrication emballages", capacity: "Standard", utilities: "Électricité" },
+  { name: "Impression flexo simple (option)", role: "Impression logos", capacity: "Option", utilities: "Électricité" },
+  { name: "Contrôle qualité + conditionnement", role: "Contrôle / emballage", capacity: "Standard", utilities: "—" }
+],
+
+"profiles": [
+  { name: "Extrudeuse profils plastiques", role: "Extrusion profils", capacity: "Selon sections", utilities: "Électricité" },
+  { name: "Banc de calibration / refroidissement", role: "Stabilité dimensions", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Unité de traction", role: "Avance produit", capacity: "Standard", utilities: "Électricité" },
+  { name: "Scie de coupe", role: "Découpe longueurs", capacity: "Standard", utilities: "Électricité" },
+  { name: "Table de réception", role: "Réception profils", capacity: "Standard", utilities: "—" },
+  { name: "Contrôle qualité + stockage", role: "Contrôle / stockage", capacity: "Standard", utilities: "—" }
+],
+
+"jouets": [
+  { name: "Machine d’injection plastique", role: "Moulage jouets", capacity: "Petites & moyennes séries", utilities: "Électricité" },
+  { name: "Moules (selon modèles)", role: "Formes jouets", capacity: "Selon gamme", utilities: "—" },
+  { name: "Convoyeur / table d’assemblage", role: "Assemblage pièces", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste finition (ébavurage)", role: "Finition pièces", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste décoration / marquage (option)", role: "Décoration", capacity: "Option", utilities: "Électricité" },
+  { name: "Contrôle qualité + emballage", role: "Contrôle sécurité / conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"joints": [
+  { name: "Presse de moulage caoutchouc (compression/injection)", role: "Moulage joints", capacity: "Standard", utilities: "Électricité" },
+  { name: "Moules (joints)", role: "Formes / dimensions", capacity: "Selon gamme", utilities: "—" },
+  { name: "Four de vulcanisation (option)", role: "Vulcanisation", capacity: "Option", utilities: "Électricité" },
+  { name: "Poste découpe / finition", role: "Découpe bavures", capacity: "Standard", utilities: "Électricité" },
+  { name: "Contrôle dimensionnel / étanchéité", role: "Contrôle qualité", capacity: "Standard", utilities: "—" },
+  { name: "Conditionnement (sachets/boîtes)", role: "Emballage", capacity: "Standard", utilities: "—" }
+],
+
+"granules": [
+  { name: "Broyeur plastique", role: "Broyage déchets plastiques", capacity: "Selon flux", utilities: "Électricité" },
+  { name: "Laveuse / cuve de lavage", role: "Nettoyage matière", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Essoreuse / sécheur", role: "Séchage paillettes", capacity: "Standard", utilities: "Électricité" },
+  { name: "Extrudeuse de granulation", role: "Transformation en granulés", capacity: "Standard", utilities: "Électricité" },
+  { name: "Coupe-granulés", role: "Granulation", capacity: "Standard", utilities: "Électricité" },
+  { name: "Tamis / ensacheuse", role: "Conditionnement granulés", capacity: "Standard", utilities: "Électricité" },
+  { name: "Contrôle qualité + stockage", role: "Contrôle / stockage", capacity: "Standard", utilities: "—" }
+],
+
+"cables": [
+  { name: "Machine de tréfilage (cuivre/aluminium)", role: "Réduction diamètre conducteurs", capacity: "Standard", utilities: "Électricité" },
+  { name: "Machine de toronnage", role: "Assemblage brins conducteurs", capacity: "Standard", utilities: "Électricité" },
+  { name: "Extrudeuse d’isolant (PVC/XLPE)", role: "Isolation des câbles", capacity: "Selon sections", utilities: "Électricité" },
+  { name: "Bac de refroidissement", role: "Stabilisation isolant", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Machine de coupe / enroulage", role: "Mise en longueurs / bobines", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste tests électriques (continuité/isolation)", role: "Contrôle qualité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Conditionnement (bobines/rouleaux)", role: "Emballage", capacity: "Standard", utilities: "—" }
+],
+
+"panneaux_solaires": [
+  { name: "Table d’assemblage modules", role: "Assemblage cellules", capacity: "Standard", utilities: "Électricité" },
+  { name: "Soudeuse / stringer cellules", role: "Connexion cellules", capacity: "Standard", utilities: "Électricité" },
+  { name: "Lamineuse", role: "Lamination modules", capacity: "Standard", utilities: "Électricité" },
+  { name: "Cadreuse aluminium", role: "Montage cadres", capacity: "Standard", utilities: "Électricité" },
+  { name: "Boîtier de jonction + sertissage", role: "Connexions électriques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Testeur flash / performance", role: "Contrôle puissance", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste emballage / stockage", role: "Conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"appareils": [
+  { name: "Postes d’assemblage électronique", role: "Assemblage composants", capacity: "Petites & moyennes séries", utilities: "Électricité" },
+  { name: "Fer à souder / station soudage", role: "Soudure composants", capacity: "Standard", utilities: "Électricité" },
+  { name: "Alimentation de test / banc d’essai", role: "Tests fonctionnels", capacity: "Standard", utilities: "Électricité" },
+  { name: "Tournevis électriques / outillage", role: "Assemblage mécanique", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste programmation (option)", role: "Configuration firmware", capacity: "Option", utilities: "Électricité" },
+  { name: "Contrôle qualité + emballage", role: "Contrôle / conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"led": [
+  { name: "Poste d’assemblage LED", role: "Montage composants LED", capacity: "Standard", utilities: "Électricité" },
+  { name: "Station soudage (CMS ou manuel)", role: "Soudure circuits", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste insertion drivers", role: "Montage alimentation", capacity: "Standard", utilities: "Électricité" },
+  { name: "Banc de test lumineux", role: "Tests intensité / durée", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste assemblage boîtiers", role: "Montage mécanique", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste emballage", role: "Conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"tableaux": [
+  { name: "Table d’assemblage électrique", role: "Montage tableaux", capacity: "Standard", utilities: "Électricité" },
+  { name: "Perceuse / poinçonneuse coffrets", role: "Préparation coffrets", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste câblage", role: "Câblage interne", capacity: "Standard", utilities: "Électricité" },
+  { name: "Sertisseuse cosses", role: "Connexions électriques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Banc de test (isolement / continuité)", role: "Tests sécurité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste étiquetage / documentation", role: "Traçabilité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"onduleurs": [
+  { name: "Postes assemblage électronique", role: "Assemblage cartes et modules", capacity: "Standard", utilities: "Électricité" },
+  { name: "Stations soudage électronique", role: "Soudure composants", capacity: "Standard", utilities: "Électricité" },
+  { name: "Bancs de test charge / décharge", role: "Tests puissance", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste assemblage boîtiers", role: "Montage mécanique", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste programmation / calibration", role: "Réglages paramètres", capacity: "Standard", utilities: "Électricité" },
+  { name: "Contrôle qualité + emballage", role: "Contrôle / conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"compteurs": [
+  { name: "Poste d’assemblage électronique", role: "Assemblage circuits", capacity: "Standard", utilities: "Électricité" },
+  { name: "Station soudage (CMS ou manuel)", role: "Soudure composants", capacity: "Standard", utilities: "Électricité" },
+  { name: "Banc de calibration métrologique", role: "Étalonnage compteurs", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste programmation firmware", role: "Configuration logicielle", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste assemblage boîtier", role: "Montage mécanique", capacity: "Standard", utilities: "Électricité" },
+  { name: "Contrôle qualité + scellage", role: "Conformité / sécurité", capacity: "Standard", utilities: "—" }
+],
+
+"batteries": [
+  { name: "Poste préparation électrodes", role: "Préparation plaques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste assemblage cellules", role: "Assemblage batteries", capacity: "Standard", utilities: "Électricité" },
+  { name: "Remplissage électrolyte (selon technologie)", role: "Activation batteries", capacity: "Standard", utilities: "Électricité + ventilation" },
+  { name: "Chargeurs / bancs de formation", role: "Formation / charge initiale", capacity: "Standard", utilities: "Électricité" },
+  { name: "Bancs de test capacité / sécurité", role: "Tests performance", capacity: "Standard", utilities: "Électricité" },
+  { name: "Zone stockage sécurisée + ventilation", role: "Sécurité / stockage", capacity: "Standard", utilities: "Électricité (ventilation)" }
+],
+
+"cimenterie": [
+  { name: "Concasseur primaire", role: "Broyage matières premières", capacity: "Selon capacité locale", utilities: "Électricité" },
+  { name: "Broyeur cru", role: "Broyage / homogénéisation", capacity: "Standard", utilities: "Électricité" },
+  { name: "Four rotatif / four vertical", role: "Clinkérisation", capacity: "Selon débit", utilities: "Électricité (ou combustible)" },
+  { name: "Refroidisseur clinker", role: "Refroidissement", capacity: "Standard", utilities: "Électricité" },
+  { name: "Broyeur ciment", role: "Broyage clinker + ajouts", capacity: "Standard", utilities: "Électricité" },
+  { name: "Ensacheuse ciment + balance", role: "Conditionnement sacs", capacity: "Standard", utilities: "Électricité + air (option)" },
+  { name: "Silos + convoyeurs", role: "Stockage / manutention", capacity: "Selon volume", utilities: "Électricité" }
+],
+
+"briques": [
+  { name: "Concasseur / broyeur argile", role: "Préparation matière", capacity: "Standard", utilities: "Électricité" },
+  { name: "Malaxeur", role: "Mélange argile/eau", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Presse à briques / moule BTC", role: "Moulage briques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Séchoir (naturel ou ventilé)", role: "Séchage briques", capacity: "Selon flux", utilities: "Ventilation (option)" },
+  { name: "Four (briques cuites) (option)", role: "Cuisson", capacity: "Option", utilities: "Combustible" },
+  { name: "Zone cure / stockage", role: "Stabilisation", capacity: "Standard", utilities: "—" },
+  { name: "Contrôle qualité + manutention", role: "Contrôle / stockage", capacity: "Standard", utilities: "—" }
+],
+
+"prefab": [
+  { name: "Centrale de malaxage béton", role: "Préparation béton", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Moules poutrelles / éléments", role: "Moulage", capacity: "Selon gamme", utilities: "—" },
+  { name: "Vibreur / table vibrante", role: "Compactage béton", capacity: "Standard", utilities: "Électricité" },
+  { name: "Zone de cure (arrosage / vapeur)", role: "Durcissement contrôlé", capacity: "Standard", utilities: "Eau (vapeur option)" },
+  { name: "Démoulage + manutention", role: "Extraction produits", capacity: "Standard", utilities: "Électricité (levage)" },
+  { name: "Contrôle qualité dimensionnel", role: "Contrôle conformité", capacity: "Standard", utilities: "—" }
+],
+
+"tuiles": [
+  { name: "Malaxeur (argile ou béton)", role: "Préparation mélange", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Presse à tuiles", role: "Moulage tuiles", capacity: "Standard", utilities: "Électricité" },
+  { name: "Séchoir tuiles", role: "Séchage", capacity: "Standard", utilities: "Électricité (ventilation)" },
+  { name: "Four (tuiles céramiques) (option)", role: "Cuisson", capacity: "Option", utilities: "Combustible" },
+  { name: "Zone cure (tuiles béton)", role: "Durcissement", capacity: "Standard", utilities: "Eau" },
+  { name: "Contrôle qualité + stockage", role: "Contrôle / stockage", capacity: "Standard", utilities: "—" }
+],
+
+"agglos": [
+  { name: "Malaxeur béton", role: "Préparation béton", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Machine à parpaings / blocs", role: "Moulage agglos", capacity: "Standard", utilities: "Électricité" },
+  { name: "Table vibrante", role: "Compactage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Zone de cure humide", role: "Durcissement", capacity: "Standard", utilities: "Eau" },
+  { name: "Démoulage + empilage", role: "Manutention", capacity: "Standard", utilities: "—" },
+  { name: "Contrôle qualité + stockage", role: "Contrôle / stockage", capacity: "Standard", utilities: "—" }
+],
+
+"peintures_btp": [
+  { name: "Mélangeur / disperseur pigments", role: "Dispersion pigments", capacity: "Standard", utilities: "Électricité" },
+  { name: "Cuves de formulation", role: "Mélange peinture", capacity: "Standard", utilities: "Électricité" },
+  { name: "Broyeur à billes (option)", role: "Finesse broyage", capacity: "Option", utilities: "Électricité" },
+  { name: "Filtration / tamisage", role: "Clarification", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Remplisseuse (pots/seaux)", role: "Conditionnement", capacity: "Standard", utilities: "Électricité" },
+  { name: "Étiqueteuse + dateur", role: "Traçabilité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste contrôle qualité (viscosité/couleur)", role: "Contrôle", capacity: "Standard", utilities: "Électricité" }
+],
+
+"centrale_beton": [
+  { name: "Silos ciment + vis sans fin", role: "Stockage / dosage ciment", capacity: "Standard", utilities: "Électricité" },
+  { name: "Trémies agrégats", role: "Stockage sable/gravier", capacity: "Standard", utilities: "—" },
+  { name: "Malaxeur central", role: "Mélange béton", capacity: "Selon débit", utilities: "Électricité + eau" },
+  { name: "Système de dosage eau/adjuvants", role: "Dosage précis", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Convoyeurs / skip", role: "Transfert béton", capacity: "Standard", utilities: "Électricité" },
+  { name: "Salle de contrôle", role: "Pilotage production", capacity: "Standard", utilities: "Électricité" }
+],
+
+"menuiserie": [
+  { name: "Scie double tête aluminium/PVC", role: "Découpe profilés", capacity: "Standard", utilities: "Électricité" },
+  { name: "Fraiseuse / perceuse profilés", role: "Usinage profils", capacity: "Standard", utilities: "Électricité" },
+  { name: "Soudeuse PVC / sertisseuse alu", role: "Assemblage cadres", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste montage vitrages", role: "Insertion vitrages", capacity: "Standard", utilities: "—" },
+  { name: "Poste quincaillerie", role: "Pose accessoires", capacity: "Standard", utilities: "—" },
+  { name: "Contrôle qualité + emballage", role: "Contrôle / conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"masques": [
+  { name: "Machine de fabrication masques (3 plis / type chirurgical)", role: "Formation + soudure ultrason", capacity: "Standard", utilities: "Électricité + air (option)" },
+  { name: "Module pose élastiques", role: "Fixation élastiques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Module pince-nez", role: "Insertion barrette nasale", capacity: "Standard", utilities: "Électricité" },
+  { name: "Stérilisation / désinfection (option selon norme)", role: "Hygiène / conformité", capacity: "Option", utilities: "Électricité" },
+  { name: "Ensachage / flowpack", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité" },
+  { name: "Poste contrôle qualité", role: "Contrôle visuel / dimensionnel", capacity: "Standard", utilities: "Éclairage" }
+],
+
+"pansements": [
+  { name: "Table de découpe / emporte-pièces", role: "Découpe compresses / supports", capacity: "Standard", utilities: "—" },
+  { name: "Machine de fabrication pansements (lamination)", role: "Assemblage couches + adhésif", capacity: "Standard", utilities: "Électricité" },
+  { name: "Machine de découpe / refente", role: "Découpe formats", capacity: "Standard", utilities: "Électricité" },
+  { name: "Stérilisation (autoclave/EO) (option selon norme)", role: "Conformité", capacity: "Option", utilities: "Électricité + eau" },
+  { name: "Ensachage / scellage sachets", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité" },
+  { name: "Poste contrôle qualité", role: "Contrôle propreté / dimensions", capacity: "Standard", utilities: "Éclairage" }
+],
+
+"mobilier": [
+  { name: "Scie à ruban / tronçonneuse métal", role: "Découpe tubes/profilés", capacity: "Standard", utilities: "Électricité" },
+  { name: "Postes à souder (MIG)", role: "Assemblage structures", capacity: "Standard", utilities: "Électricité" },
+  { name: "Perceuse à colonne", role: "Perçage / ajustage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Meuleuses / ponçage", role: "Finition", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste peinture / traitement anticorrosion (option)", role: "Protection", capacity: "Option", utilities: "Électricité + ventilation" },
+  { name: "Montage accessoires + contrôle", role: "Assemblage final", capacity: "Standard", utilities: "—" }
+],
+
+"fauteuils": [
+  { name: "Scie à ruban / découpe métal", role: "Découpe tubes/profilés", capacity: "Standard", utilities: "Électricité" },
+  { name: "Postes à souder (MIG)", role: "Assemblage châssis", capacity: "Standard", utilities: "Électricité" },
+  { name: "Perceuse + taraudage", role: "Perçage / fixations", capacity: "Standard", utilities: "Électricité" },
+  { name: "Meuleuses / finition", role: "Finition soudures", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste peinture / traitement (option)", role: "Protection", capacity: "Option", utilities: "Électricité + ventilation" },
+  { name: "Poste montage roues/freins", role: "Assemblage final", capacity: "Standard", utilities: "—" },
+  { name: "Contrôle sécurité + essais roulage", role: "Contrôle qualité", capacity: "Standard", utilities: "—" }
+],
+
+"instruments": [
+  { name: "Établi + outillage de précision", role: "Assemblage / montage", capacity: "Petites séries", utilities: "—" },
+  { name: "Perceuse / micro-perceuse", role: "Perçage / ajustage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Polisseuse / finition", role: "Finition surfaces", capacity: "Standard", utilities: "Électricité" },
+  { name: "Nettoyage ultrason (option)", role: "Nettoyage pièces", capacity: "Option", utilities: "Électricité + eau" },
+  { name: "Stérilisation (autoclave)", role: "Conformité / hygiène", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Poste contrôle qualité", role: "Contrôle visuel / dimensionnel", capacity: "Standard", utilities: "Éclairage" }
+],
+
+"bequilles": [
+  { name: "Scie / découpe tubes (alu ou acier)", role: "Découpe éléments", capacity: "Standard", utilities: "Électricité" },
+  { name: "Perceuse + gabarits", role: "Perçage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste montage (rivets/vis)", role: "Assemblage", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Poste injection / moulage embouts (option)", role: "Embouts caoutchouc", capacity: "Option", utilities: "Électricité" },
+  { name: "Finition + contrôle", role: "Contrôle qualité", capacity: "Standard", utilities: "—" },
+  { name: "Conditionnement", role: "Emballage", capacity: "Standard", utilities: "—" }
+],
+
+"antiseptiques": [
+  { name: "Cuve(s) inox de mélange", role: "Formulation / mélange", capacity: "Batch", utilities: "Électricité" },
+  { name: "Système de dosage (pompes/balances)", role: "Dosage ingrédients", capacity: "Standard", utilities: "Électricité" },
+  { name: "Filtration simple (option)", role: "Clarification", capacity: "Option", utilities: "Électricité (option)" },
+  { name: "Remplisseuse flacons + boucheuse", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité" },
+  { name: "Étiqueteuse + dateur", role: "Traçabilité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste contrôle qualité (alcool, pH)", role: "Contrôle conformité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"kits": [
+  { name: "Table d’assemblage", role: "Préparation kits", capacity: "Petites & moyennes séries", utilities: "—" },
+  { name: "Poste de pesée / dosage", role: "Dosage consommables", capacity: "Standard", utilities: "Électricité" },
+  { name: "Ensacheuse / scellage sachets", role: "Conditionnement composants", capacity: "Standard", utilities: "Électricité" },
+  { name: "Étiqueteuse + traçabilité", role: "Étiquetage / lot", capacity: "Standard", utilities: "Électricité" },
+  { name: "Zone hygiène / contrôle qualité", role: "Contrôle conformité", capacity: "Standard", utilities: "Éclairage" },
+  { name: "Stockage propre", role: "Stockage", capacity: "Standard", utilities: "—" }
+],
+
+"smartphones": [
+  { name: "Postes d’assemblage (ESD)", role: "Assemblage composants / modules", capacity: "Standard", utilities: "Électricité" },
+  { name: "Outillage de précision (tournevis dynamiques)", role: "Assemblage mécanique", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Stations soudage / reprise (micro-soudure)", role: "Réparations / retouches", capacity: "Option", utilities: "Électricité" },
+  { name: "Banc de test fonctionnel", role: "Tests (écran, caméra, charge, réseau)", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste flash / configuration (logiciel)", role: "Installation OS / calibration", capacity: "Standard", utilities: "Électricité + internet" },
+  { name: "Poste contrôle qualité + emballage", role: "Contrôle / conditionnement", capacity: "Standard", utilities: "—" },
+  { name: "Atelier SAV (retours, diagnostic)", role: "SAV structuré", capacity: "Standard", utilities: "Électricité" }
+],
+
+"ordinateurs": [
+  { name: "Postes d’assemblage", role: "Montage PC", capacity: "Standard", utilities: "Électricité" },
+  { name: "Outillage (tournevis, clés, ESD)", role: "Assemblage / sécurité ESD", capacity: "Standard", utilities: "—" },
+  { name: "Banc de test (POST, stress test)", role: "Tests matériels", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste imagerie / déploiement", role: "Installation OS & logiciels", capacity: "Standard", utilities: "Électricité + internet" },
+  { name: "Poste étiquetage / traçabilité", role: "Sérialisation / inventaire", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste emballage + contrôle final", role: "Conditionnement", capacity: "Standard", utilities: "—" },
+  { name: "Zone SAV (diagnostic)", role: "Maintenance / retours", capacity: "Standard", utilities: "Électricité" }
+],
+
+"electromenager": [
+  { name: "Lignes / postes d’assemblage", role: "Assemblage CKD", capacity: "Standard", utilities: "Électricité" },
+  { name: "Outillage pneumatique (option) + compresseur", role: "Vissage / montage", capacity: "Option", utilities: "Électricité" },
+  { name: "Poste sertissage / câblage", role: "Connexions électriques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Banc de test sécurité électrique", role: "Tests isolement/continuité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Banc test fonctionnel (froid/chauffe) (option)", role: "Essais produit", capacity: "Option", utilities: "Électricité" },
+  { name: "Poste contrôle qualité + emballage", role: "Contrôle / conditionnement", capacity: "Standard", utilities: "—" },
+  { name: "Atelier SAV", role: "Diagnostic / réparations", capacity: "Standard", utilities: "Électricité" }
+],
+
+"climatiseurs": [
+  { name: "Postes d’assemblage CKD", role: "Montage unités indoor/outdoor", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste brasage cuivre (option)", role: "Connexions frigorifiques", capacity: "Option", utilities: "Électricité (ou gaz)" },
+  { name: "Pompe à vide + manifold", role: "Mise sous vide / préparation circuit", capacity: "Standard", utilities: "Électricité" },
+  { name: "Station charge fluide (option selon process)", role: "Charge réfrigérant", capacity: "Option", utilities: "Électricité" },
+  { name: "Banc test étanchéité / pression", role: "Contrôle fuites", capacity: "Standard", utilities: "Électricité" },
+  { name: "Banc test fonctionnement", role: "Test froid / ventilation", capacity: "Standard", utilities: "Électricité" },
+  { name: "Contrôle qualité + emballage", role: "Conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"motos": [
+  { name: "Postes d’assemblage CKD", role: "Assemblage châssis + moteur", capacity: "Standard", utilities: "Électricité" },
+  { name: "Outillage (clés dynamométriques)", role: "Serrage au couple", capacity: "Standard", utilities: "—" },
+  { name: "Poste câblage / faisceaux", role: "Connexions électriques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Compresseur (option) + outils pneumatiques", role: "Montage", capacity: "Option", utilities: "Électricité" },
+  { name: "Banc de test moteur / roulage (option)", role: "Essais fonctionnement", capacity: "Option", utilities: "Électricité" },
+  { name: "Contrôle qualité + check sécurité", role: "Contrôle final", capacity: "Standard", utilities: "—" },
+  { name: "Atelier SAV + pièces", role: "Maintenance", capacity: "Standard", utilities: "Électricité" }
+],
+
+"velos": [
+  { name: "Postes d’assemblage", role: "Montage vélos", capacity: "Standard", utilities: "Électricité" },
+  { name: "Outillage (clés, tournevis, presse)", role: "Montage / réglages", capacity: "Standard", utilities: "—" },
+  { name: "Poste montage roues", role: "Rayonnage / centrage (option)", capacity: "Option", utilities: "Électricité (option)" },
+  { name: "Poste réglage freins / vitesses", role: "Réglages", capacity: "Standard", utilities: "—" },
+  { name: "Contrôle qualité + essai", role: "Contrôle sécurité", capacity: "Standard", utilities: "—" },
+  { name: "Emballage / mise en carton", role: "Conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"meubles": [
+  { name: "Postes d’assemblage (meubles en kit)", role: "Assemblage / montage", capacity: "Standard", utilities: "—" },
+  { name: "Perceuse / visseuse (jigs)", role: "Préparation / assemblage", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Outillage de serrage / presse (option)", role: "Assemblage", capacity: "Option", utilities: "Électricité (option)" },
+  { name: "Poste contrôle qualité", role: "Contrôle finitions", capacity: "Standard", utilities: "—" },
+  { name: "Poste emballage / mise en carton", role: "Conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"equipements": [
+  { name: "Postes d’assemblage modulaires", role: "Assemblage multi-produits", capacity: "Standard", utilities: "Électricité" },
+  { name: "Outillage polyvalent + gabarits", role: "Montage / précision", capacity: "Standard", utilities: "—" },
+  { name: "Poste câblage (si besoin)", role: "Connexions électriques", capacity: "Option", utilities: "Électricité" },
+  { name: "Banc de test (selon produit)", role: "Contrôle fonctionnel", capacity: "Option", utilities: "Électricité" },
+  { name: "Poste traçabilité / étiquetage", role: "Sérialisation", capacity: "Standard", utilities: "Électricité" },
+  { name: "Contrôle qualité + emballage", role: "Conditionnement", capacity: "Standard", utilities: "—" },
+  { name: "Zone SAV (option)", role: "Support / retours", capacity: "Option", utilities: "Électricité" }
+],
+
+"plastique": [
+  { name: "Broyeur plastique", role: "Broyage déchets plastiques", capacity: "Selon flux", utilities: "Électricité" },
+  { name: "Ligne de lavage (cuves + friction)", role: "Nettoyage matière", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Essoreuse / sécheur", role: "Séchage paillettes", capacity: "Standard", utilities: "Électricité" },
+  { name: "Extrudeuse de recyclage", role: "Fusion / extrusion", capacity: "Standard", utilities: "Électricité" },
+  { name: "Coupe-granulés", role: "Granulation", capacity: "Standard", utilities: "Électricité" },
+  { name: "Ensacheuse / big-bag", role: "Conditionnement", capacity: "Standard", utilities: "Électricité" },
+  { name: "Contrôle qualité + stockage", role: "Contrôle / stockage", capacity: "Standard", utilities: "—" }
+],
+
+"papier": [
+  { name: "Déchiqueteur / broyeur papier", role: "Préparation matière", capacity: "Standard", utilities: "Électricité" },
+  { name: "Pulpeur", role: "Mise en pâte", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Système de tamisage / épuration", role: "Élimination impuretés", capacity: "Standard", utilities: "Électricité" },
+  { name: "Presse / égouttage", role: "Extraction eau", capacity: "Standard", utilities: "Électricité" },
+  { name: "Machine à papier (feuilles/carton) (option)", role: "Formation produits", capacity: "Option", utilities: "Électricité" },
+  { name: "Séchage / bobinage", role: "Finition", capacity: "Standard", utilities: "Électricité" },
+  { name: "Stockage produits finis", role: "Stockage", capacity: "Standard", utilities: "—" }
+],
+
+"metaux": [
+  { name: "Zone de tri + aimant", role: "Séparation ferreux", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Cisaille / oxycoupage", role: "Découpe ferrailles", capacity: "Standard", utilities: "Électricité (ou gaz)" },
+  { name: "Broyeur / presse à balles", role: "Réduction volume", capacity: "Standard", utilities: "Électricité" },
+  { name: "Séparateur non-ferreux (option)", role: "Tri aluminium/cuivre", capacity: "Option", utilities: "Électricité" },
+  { name: "Balance / pont-bascule", role: "Pesée", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Bennes / stockage", role: "Stockage matière", capacity: "Standard", utilities: "—" }
+],
+
+"compost": [
+  { name: "Zone de réception / tri", role: "Préparation déchets", capacity: "Standard", utilities: "—" },
+  { name: "Broyeur déchets organiques", role: "Broyage matière", capacity: "Standard", utilities: "Électricité" },
+  { name: "Aire de compostage (andains/bacs)", role: "Fermentation", capacity: "Selon volume", utilities: "Eau (option)" },
+  { name: "Retourneur d’andains (option)", role: "Aération compost", capacity: "Option", utilities: "Carburant" },
+  { name: "Crible / tamis", role: "Affinage compost", capacity: "Standard", utilities: "Électricité" },
+  { name: "Ensacheuse compost", role: "Conditionnement", capacity: "Standard", utilities: "Électricité" },
+  { name: "Stockage produit fini", role: "Stockage", capacity: "Standard", utilities: "—" }
+],
+
+"verre": [
+  { name: "Concasseur / broyeur verre", role: "Broyage verre", capacity: "Standard", utilities: "Électricité" },
+  { name: "Crible / tamis", role: "Calibration granulats", capacity: "Standard", utilities: "Électricité" },
+  { name: "Séparateur impuretés (option)", role: "Nettoyage matière", capacity: "Option", utilities: "Électricité" },
+  { name: "Convoyeurs", role: "Manutention", capacity: "Standard", utilities: "Électricité" },
+  { name: "Ensacheuse / big-bag", role: "Conditionnement", capacity: "Standard", utilities: "Électricité" },
+  { name: "Zone stockage sécurisée", role: "Stockage", capacity: "Standard", utilities: "—" }
+],
+
+"pneus": [
+  { name: "Découpeur / déchiqueteur pneus", role: "Pré-découpe pneus", capacity: "Standard", utilities: "Électricité" },
+  { name: "Broyeur secondaire", role: "Broyage caoutchouc", capacity: "Standard", utilities: "Électricité" },
+  { name: "Séparateur acier / textile", role: "Séparation composants", capacity: "Standard", utilities: "Électricité" },
+  { name: "Granulateur", role: "Granulation caoutchouc", capacity: "Standard", utilities: "Électricité" },
+  { name: "Crible / calibration", role: "Tri granulométrique", capacity: "Standard", utilities: "Électricité" },
+  { name: "Ensacheuse / big-bag", role: "Conditionnement", capacity: "Standard", utilities: "Électricité" }
+],
+
+"huiles": [
+  { name: "Cuves de stockage huiles usagées", role: "Stockage matière", capacity: "Standard", utilities: "—" },
+  { name: "Système de filtration / décantation", role: "Pré-traitement", capacity: "Standard", utilities: "Électricité" },
+  { name: "Réacteur de traitement / régénération", role: "Régénération huiles", capacity: "Standard", utilities: "Électricité" },
+  { name: "Centrifugeuse (option)", role: "Séparation fine", capacity: "Option", utilities: "Électricité" },
+  { name: "Remplisseuse fûts / bidons", role: "Conditionnement", capacity: "Standard", utilities: "Électricité" },
+  { name: "Contrôle qualité (viscosité)", role: "Contrôle conformité", capacity: "Standard", utilities: "Électricité" }
+],
+
+"deee": [
+  { name: "Zone de démontage manuel", role: "Démontage équipements", capacity: "Standard", utilities: "—" },
+  { name: "Bancs de tri composants", role: "Tri matières", capacity: "Standard", utilities: "—" },
+  { name: "Broyeur DEEE", role: "Broyage déchets électroniques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Séparateurs (magnétique / densimétrique)", role: "Séparation métaux/plastiques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Système aspiration poussières", role: "Sécurité environnement", capacity: "Standard", utilities: "Électricité" },
+  { name: "Stockage fractions valorisables", role: "Stockage", capacity: "Standard", utilities: "—" }
+],
+
+"nettoyage": [
+  { name: "Nettoyeurs haute pression industriels", role: "Nettoyage surfaces / équipements", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Aspirateurs industriels (poussières/liquides)", role: "Aspiration déchets", capacity: "Standard", utilities: "Électricité" },
+  { name: "Machines de lavage sols (autotractées)", role: "Nettoyage sols industriels", capacity: "Standard", utilities: "Électricité" },
+  { name: "Équipements de dépollution (option)", role: "Décontamination ciblée", capacity: "Option", utilities: "Électricité" },
+  { name: "Équipements EPI + sécurité", role: "Protection opérateurs", capacity: "Standard", utilities: "—" },
+  { name: "Véhicule utilitaire (option)", role: "Déplacements sites clients", capacity: "Option", utilities: "Carburant" }
+],
+
+"maintenance": [
+  { name: "Outillage de maintenance mécanique", role: "Interventions mécaniques", capacity: "Standard", utilities: "—" },
+  { name: "Outillage électrique / électroportatif", role: "Maintenance électrique", capacity: "Standard", utilities: "Électricité" },
+  { name: "Postes à souder (maintenance)", role: "Réparations métalliques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Équipements de mesure (multimètres, pinces)", role: "Diagnostics", capacity: "Standard", utilities: "—" },
+  { name: "Stock pièces détachées", role: "Disponibilité pièces", capacity: "Standard", utilities: "—" },
+  { name: "Véhicule atelier (option)", role: "Maintenance sur site", capacity: "Option", utilities: "Carburant" }
+],
+
+"logistique": [
+  { name: "Rayonnages industriels", role: "Stockage marchandises", capacity: "Standard", utilities: "—" },
+  { name: "Chariots élévateurs / transpalettes", role: "Manutention", capacity: "Standard", utilities: "Électricité ou carburant" },
+  { name: "Quais de chargement", role: "Chargement / déchargement", capacity: "Standard", utilities: "—" },
+  { name: "Système de gestion de stock (logiciel)", role: "Traçabilité", capacity: "Standard", utilities: "Électricité + internet" },
+  { name: "Zone préparation commandes", role: "Préparation expéditions", capacity: "Standard", utilities: "—" },
+  { name: "Véhicules de transport (option)", role: "Distribution", capacity: "Option", utilities: "Carburant" }
+],
+
+"formation": [
+  { name: "Salles de formation équipées", role: "Cours théoriques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Atelier pédagogique", role: "Travaux pratiques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Équipements didactiques industriels", role: "Apprentissage machines", capacity: "Standard", utilities: "Électricité" },
+  { name: "Matériel informatique (PC/projection)", role: "Support pédagogique", capacity: "Standard", utilities: "Électricité + internet" },
+  { name: "Équipements sécurité / EPI", role: "Formation sécurité", capacity: "Standard", utilities: "—" }
+],
+
+"qualite": [
+  { name: "Bancs d’essais / test", role: "Tests produits/process", capacity: "Standard", utilities: "Électricité" },
+  { name: "Instruments de mesure (calibres, micromètres)", role: "Contrôle dimensionnel", capacity: "Standard", utilities: "—" },
+  { name: "Équipements essais mécaniques (option)", role: "Essais résistance", capacity: "Option", utilities: "Électricité" },
+  { name: "Poste informatique (rapports/audits)", role: "Analyse / reporting", capacity: "Standard", utilities: "Électricité + internet" },
+  { name: "Documentation normes / procédures", role: "Conformité", capacity: "Standard", utilities: "—" }
+],
+
+"etudes": [
+  { name: "Postes informatiques (CAO/DAO)", role: "Conception / études", capacity: "Standard", utilities: "Électricité + internet" },
+  { name: "Logiciels techniques (CAO, simulation)", role: "Modélisation", capacity: "Standard", utilities: "Licence logicielle" },
+  { name: "Imprimantes / traceurs", role: "Édition plans", capacity: "Standard", utilities: "Électricité" },
+  { name: "Équipements topographiques (option)", role: "Relevés terrain", capacity: "Option", utilities: "—" },
+  { name: "Salle réunion / présentation", role: "Réunions clients", capacity: "Standard", utilities: "Électricité" }
+],
+
+"securite": [
+  { name: "Équipements de mesure HSE (gaz, bruit, poussières)", role: "Évaluation risques", capacity: "Standard", utilities: "—" },
+  { name: "Équipements EPI démonstration", role: "Prévention / formation", capacity: "Standard", utilities: "—" },
+  { name: "Poste informatique (audits / rapports)", role: "Reporting HSE", capacity: "Standard", utilities: "Électricité + internet" },
+  { name: "Matériel signalisation / balisage", role: "Prévention risques", capacity: "Standard", utilities: "—" },
+  { name: "Véhicule terrain (option)", role: "Audits sur site", capacity: "Option", utilities: "Carburant" }
+],
+
+"energie": [
+  { name: "Instruments de mesure énergétique", role: "Audit consommation", capacity: "Standard", utilities: "Électricité" },
+  { name: "Analyseurs réseaux / compteurs portables", role: "Analyse électrique", capacity: "Standard", utilities: "Électricité" },
+  { name: "Logiciels d’analyse énergétique", role: "Optimisation / reporting", capacity: "Standard", utilities: "Électricité + internet" },
+  { name: "Poste informatique", role: "Études / recommandations", capacity: "Standard", utilities: "Électricité + internet" },
+  { name: "Équipements test efficacité (option)", role: "Mesures terrain", capacity: "Option", utilities: "Électricité" }
+],
+
+"poteaux": [
+  { name: "Centrale de malaxage béton", role: "Préparation béton", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Moules poteaux béton (acier)", role: "Moulage poteaux", capacity: "Selon modèles", utilities: "—" },
+  { name: "Vibreurs / table vibrante", role: "Compactage béton", capacity: "Standard", utilities: "Électricité" },
+  { name: "Zone de cure humide", role: "Durcissement béton", capacity: "Standard", utilities: "Eau" },
+  { name: "Démoulage + manutention", role: "Extraction / déplacement", capacity: "Standard", utilities: "Électricité (levage)" },
+  { name: "Contrôle qualité (résistance)", role: "Contrôle conformité", capacity: "Standard", utilities: "—" }
+],
+
+"compteurs_eau": [
+  { name: "Postes d’assemblage mécanique", role: "Assemblage compteurs", capacity: "Standard", utilities: "—" },
+  { name: "Poste d’assemblage électronique (si smart)", role: "Montage modules", capacity: "Option", utilities: "Électricité" },
+  { name: "Banc d’essai hydraulique", role: "Calibration débit", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Poste étanchéité / pression", role: "Tests sécurité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste étiquetage / traçabilité", role: "Identification", capacity: "Standard", utilities: "Électricité" },
+  { name: "Contrôle qualité final", role: "Conformité", capacity: "Standard", utilities: "—" }
+],
+
+"kits_solaires": [
+  { name: "Postes d’assemblage kits", role: "Assemblage modules/batteries", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste câblage / sertissage", role: "Connexions électriques", capacity: "Standard", utilities: "Électricité" },
+  { name: "Banc de test charge/décharge", role: "Tests batteries", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste configuration régulateurs", role: "Paramétrage", capacity: "Standard", utilities: "Électricité" },
+  { name: "Contrôle qualité + emballage", role: "Conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"lampadaires": [
+  { name: "Postes d’assemblage lampadaires", role: "Assemblage structures", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste montage panneaux solaires", role: "Fixation panneaux", capacity: "Standard", utilities: "—" },
+  { name: "Poste intégration batteries / contrôleurs", role: "Assemblage électrique", capacity: "Standard", utilities: "Électricité" },
+  { name: "Banc de test éclairage", role: "Test fonctionnement", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste montage mâts", role: "Assemblage final", capacity: "Standard", utilities: "—" },
+  { name: "Contrôle qualité + emballage", role: "Conditionnement", capacity: "Standard", utilities: "—" }
+],
+
+"forage": [
+  { name: "Atelier montage équipements hydrauliques", role: "Assemblage matériel", capacity: "Standard", utilities: "—" },
+  { name: "Poste soudure / mécanique", role: "Fabrication supports", capacity: "Standard", utilities: "Électricité" },
+  { name: "Pompes d’essai / banc hydraulique", role: "Tests débit / pression", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Outillage terrain (forage)", role: "Intervention sites", capacity: "Standard", utilities: "Carburant" },
+  { name: "Véhicule atelier (option)", role: "Déplacements chantier", capacity: "Option", utilities: "Carburant" }
+],
+
+"eau": [
+  { name: "Cuves de traitement", role: "Décantation / filtration", capacity: "Standard", utilities: "Électricité + eau" },
+  { name: "Filtres (sable, charbon)", role: "Filtration eau", capacity: "Standard", utilities: "Électricité (option)" },
+  { name: "Système dosage produits", role: "Traitement chimique", capacity: "Standard", utilities: "Électricité" },
+  { name: "Pompes de transfert", role: "Circulation eau", capacity: "Standard", utilities: "Électricité" },
+  { name: "Bancs d’analyse eau", role: "Contrôle qualité", capacity: "Standard", utilities: "Électricité" },
+  { name: "Poste supervision / contrôle", role: "Pilotage station", capacity: "Standard", utilities: "Électricité" }
+],
+
+"maintenance_energie": [
+  { name: "Outillage électrique / mécanique", role: "Maintenance installations", capacity: "Standard", utilities: "—" },
+  { name: "Analyseurs réseaux portables", role: "Diagnostic électrique", capacity: "Standard", utilities: "Électricité" },
+  { name: "Équipements de sécurité (EPI)", role: "Protection opérateurs", capacity: "Standard", utilities: "—" },
+  { name: "Véhicule maintenance (option)", role: "Interventions terrain", capacity: "Option", utilities: "Carburant" }
+],
+
+"audit": [
+  { name: "Instruments de mesure énergétique", role: "Mesures consommation", capacity: "Standard", utilities: "Électricité" },
+  { name: "Analyseurs eau/air/bruit", role: "Diagnostics environnementaux", capacity: "Standard", utilities: "—" },
+  { name: "Postes informatiques (rapports)", role: "Analyse / reporting", capacity: "Standard", utilities: "Électricité + internet" },
+  { name: "Logiciels d’analyse & SIG (option)", role: "Études d’impact", capacity: "Option", utilities: "Licence logicielle" },
+  { name: "Équipements terrain (option)", role: "Relevés sites", capacity: "Option", utilities: "—" }
+],
+    "chaussures": [
+      { name: "Table de découpe + emporte-pièces (ou presse de découpe)", role: "Découpe cuir/synthétique/textile", capacity: "Petites & moyennes séries", utilities: "Électricité + air (option)" },
+      { name: "Machine à piquer / piqûreuse", role: "Couture des pièces (tige)", capacity: "Standard", utilities: "Électricité" },
+      { name: "Encollage + presse d’assemblage", role: "Assemblage semelle–tige (collage/pressage)", capacity: "Standard", utilities: "Électricité + air (option)" },
+      { name: "Formes + machine de mise en forme", role: "Mise en forme / montage sur forme", capacity: "Selon modèles", utilities: "Électricité" },
+      { name: "Finition (ponçage/polissage) + poste contrôle", role: "Finition + contrôle qualité", capacity: "Standard", utilities: "Électricité + aspiration (option)" }
+    ],
+
+    "confection": [
+      { name: "Table de coupe + machine de coupe (cutter / ciseau électrique)", role: "Découpe tissus", capacity: "Petites & moyennes séries", utilities: "Électricité" },
+      { name: "Machines à coudre industrielles (plate + accessoires)", role: "Assemblage des pièces", capacity: "Standard", utilities: "Électricité" },
+      { name: "Surjeteuse / recouvreuse", role: "Finition (surfilage, recouvrement)", capacity: "Standard", utilities: "Électricité" },
+      { name: "Presse / fer industriel", role: "Repassage, mise en forme, finition", capacity: "Standard", utilities: "Électricité (vapeur option)" },
+      { name: "Poste contrôle qualité + emballage", role: "Contrôle, étiquetage, conditionnement", capacity: "Standard", utilities: "Électricité" }
+    ]
+  };
+
+  // ---- 3) Normalisation d’une liste machines
+  function normalize(list) {
+    if (!Array.isArray(list)) return [];
+    return list
+      .map(m => {
+        if (!m) return null;
+        if (typeof m === "string") return { name: m };
+        return {
+          name: (m.name || m.nom || "").trim(),
+          role: (m.role || m.fonction || "").trim(),
+          capacity: (m.capacity || m.capacite || m.niveau || "").trim(),
+          utilities: (m.utilities || m.utilites || m.besoins || "").trim()
+        };
+      })
+      .filter(m => m && m.name);
+  }
+
+  // ---- 4) Récupérer la liste machines de l’UP
+  const machinesForThisUp = normalize(P2I_MACHINES_BY_UP[upKey]);
+
+  // ---- 5) Injection HTML
+  const s3Text = $("s3_text");
+  const s3List = $("s3_list");
+
+  if (s3Text) {
+    s3Text.innerHTML =
+      `<b>Liste des machines & équipements nécessaires</b> (indicatif) pour <b>${upName}</b> — filière <b>${filiere}</b>. ` +
+      `Cette liste est spécifique à l’unité sélectionnée. ` +
+      `<span style="opacity:.75;font-size:.9rem;">(clé UP : ${upKey || "—"})</span>`;
+  }
+
+  if (s3List) {
+    if (!upKey) {
+      s3List.innerHTML = `
+        <li><b>Liste machines :</b> non disponible (clé UP introuvable).</li>
+        <li>Revenir à la fiche de l’unité puis relancer le BP gratuit.</li>
+      `;
+      return;
+    }
+
+    if (!machinesForThisUp.length) {
+      s3List.innerHTML = `
+        <li><b>Liste en cours de définition</b> pour cette unité (${upKey}).</li>
+        <li>Cette section sera progressivement enrichie UP par UP pour garantir des données fiables.</li>
+      `;
+      return;
+    }
+
+    s3List.innerHTML = machinesForThisUp.map((m) => {
+      const role = m.role ? ` — <i>${m.role}</i>` : "";
+      const cap  = m.capacity ? ` • <b>Capacité :</b> ${m.capacity}` : "";
+      const util = m.utilities ? ` • <b>Utilités :</b> ${m.utilities}` : "";
+      return `<li><b>${m.name}</b>${role}${cap}${util}</li>`;
+    }).join("");
+  }
+})();
+</script>
+<script>
+// ==================================================
+// BP GRATUIT — SECTION 4 : Investissements CAPEX estimés — v3 (Option B)
+// ✅ Référence : CAPEX minimum de l'UP (borne basse = capex_min)
+// ✅ Borne haute : SOMME des bornes hautes des postes (mMax+iMax+tMax+fMax)
+// ✅ Ventilation : fourchettes par postes + "Imprévus/Autres" pour boucler la borne basse
+// ✅ Montant utilisateur (simulation) : contrôle "dans la fourchette"
+// ✅ UpKey robuste : URL -> mapping -> fallback (iPad-safe)
+// ==================================================
+(function () {
+  function $(id) { return document.getElementById(id); }
+  function parseJsonSafe(raw){ try { return JSON.parse(raw); } catch(_) { return null; } }
+
+  // ---- Mapping (si déjà défini ailleurs sur la page, on le réutilise)
+  const unitIdMappingLocal = (typeof unitIdMapping === "object" && unitIdMapping) ? unitIdMapping : {
+    1:"conserverie_legumes",2:"biscuiterie",3:"boulangerie_industrielle",4:"jus_boissons",5:"mini_laiterie",6:"huiles_alimentaires",7:"epices",8:"aliments_betail",
+    9:"detergents",10:"savonnerie",11:"cosmetiques",12:"peintures",13:"adhesifs",14:"engrais",15:"javel",16:"produits_industriels",
+    17:"confection",18:"tissage",19:"maroquinerie",20:"teinture",21:"broderie",22:"chaussures",23:"uniformes",24:"linge",
+    25:"serrurerie",26:"outillage",27:"recyclage_metaux",28:"chaudronnerie",29:"mecanosoudure",30:"structures",31:"pieces",32:"quincaillerie",
+    33:"sacs",34:"bouteilles_pet",35:"tuyaux_pvc",36:"emballages",37:"profiles",38:"jouets",39:"joints",40:"granules",
+    41:"cables",42:"panneaux_solaires",43:"appareils",44:"led",45:"tableaux",46:"onduleurs",47:"compteurs",48:"batteries",
+    49:"cimenterie",50:"briques",51:"prefab",52:"tuiles",53:"agglos",54:"peintures_btp",55:"centrale_beton",56:"menuiserie",
+    57:"masques",58:"pansements",59:"mobilier",60:"fauteuils",61:"instruments",62:"bequilles",63:"antiseptiques",64:"kits",
+    65:"smartphones",66:"ordinateurs",67:"electromenager",68:"climatiseurs",69:"motos",71:"velos",72:"meubles",73:"equipements",
+    74:"plastique",75:"papier",76:"metaux",77:"compost",78:"verre",79:"pneus",80:"huiles",81:"deee",
+    82:"nettoyage",83:"maintenance",84:"logistique",85:"formation",86:"qualite",87:"etudes",88:"securite",89:"energie",
+    90:"poteaux",91:"compteurs_eau",92:"kits_solaires",93:"lampadaires",94:"forage",95:"eau",96:"maintenance_energie",97:"audit"
+  };
+
+  // ---- UP key fiable (URL puis fallback storage)
+  const urlParams = new URLSearchParams(window.location.search);
+  const unitParam = (urlParams.get("unit_id") || urlParams.get("id") || "").trim();
+  let upKey = "";
+
+  if (unitParam && !/^\d+$/.test(unitParam)) upKey = unitParam;
+  if (!upKey && unitParam && /^\d+$/.test(unitParam)) {
+    const n = parseInt(unitParam, 10);
+    if (unitIdMappingLocal[n]) upKey = unitIdMappingLocal[n];
+  }
+  if (!upKey) upKey = (localStorage.getItem("currentProductionKey") || "").trim();
+  if (upKey) {
+    try { localStorage.setItem("currentProductionKey", upKey); } catch(_) {}
+    try { sessionStorage.setItem("currentProductionKey", upKey); } catch(_) {}
+  }
+
+  // ---- Données UP
+  const prod =
+    parseJsonSafe(localStorage.getItem("currentProduction")) ||
+    parseJsonSafe(sessionStorage.getItem("currentProduction"));
+
+  const filiere =
+    (localStorage.getItem("currentFiliereName") ||
+     (prod && (prod.filiereNom || prod.filiere)) ||
+     "votre filière").trim();
+
+  const upName =
+    (prod && (prod.nom || prod.unitName || prod.titre)) ? String(prod.nom || prod.unitName || prod.titre).trim()
+    : "cette unité";
+
+  // ---- Helpers nombres
+  function toNumber(v){
+    if (v === null || v === undefined) return NaN;
+    if (typeof v === "number") return v;
+    const s = String(v).replace(/[^\d.]/g, "");
+    const n = parseFloat(s);
+    return isNaN(n) ? NaN : n;
+  }
+  function fmt(n){ return Number(n).toLocaleString("fr-FR"); }
+
+  // ---- Base capex_min (USD)
+  let capexMin = NaN;
+  if (prod) capexMin = toNumber(prod.capex_min || prod.capexMin || prod.capex);
+
+  const s4Text = $("s4_text");
+  const s4List = $("s4_list");
+
+  if (s4Text) {
+    s4Text.innerHTML =
+      `<b>Investissements CAPEX estimés</b> pour <b>${upName}</b> — filière <b>${filiere}</b>. ` +
+      `Référence : <b>CAPEX minimum</b> de l’unité. (Option B) La borne haute du total correspond à la <b>somme des bornes hautes</b> des postes.`;
+  }
+
+  if (!s4List) return;
+
+  if (!isFinite(capexMin) || capexMin <= 0) {
+    s4List.innerHTML = `
+      <li><b>CAPEX minimum (référence UP) :</b> —</li>
+      <li><b>Machines & équipements :</b> —</li>
+      <li><b>Installation & mise en service :</b> —</li>
+      <li><b>Aménagement/Travaux :</b> —</li>
+      <li><b>Fret & douane :</b> —</li>
+    `;
+    return;
+  }
+
+  // ==================================================
+  // OPTION B
+  // ==================================================
+  const totalMin = Math.round(capexMin); // ✅ borne basse = capex_min
+
+  // ---- Ventilation (fourchettes) sur totalMin pour les mins,
+  // et sur une borne haute indicative (ici: totalMin*1.30) UNIQUEMENT pour construire les max de postes,
+  // puis le totalMax devient la SOMME de ces max.
+  // (On pourrait aussi baser les max sur totalMin directement: à toi d'ajuster si besoin.)
+  const baseForMax = Math.round(totalMin * 1.30);
+
+  // Machines: 65–80%
+  const mMin = Math.round(totalMin * 0.65);
+  const mMax = Math.round(baseForMax * 0.80);
+
+  // Installation: 5–10%
+  const iMin = Math.round(totalMin * 0.05);
+  const iMax = Math.round(baseForMax * 0.10);
+
+  // Travaux: 10–20%
+  const tMin = Math.round(totalMin * 0.10);
+  const tMax = Math.round(baseForMax * 0.20);
+
+  // Fret & douane: 5–15%
+  const fMin = Math.round(totalMin * 0.05);
+  const fMax = Math.round(baseForMax * 0.15);
+
+  // ---- Borne haute du total = SOMME des max par poste (Option B)
+  const totalMax = Math.round(mMax + iMax + tMax + fMax);
+
+  // ---- "Imprévus / autres" pour que la somme des mins = totalMin
+  const sumMin = mMin + iMin + tMin + fMin;
+  const otherMin = Math.max(0, Math.round(totalMin - sumMin));
+
+  // (Option B) pas besoin de compléter en haut (totalMax est déjà la somme des max)
+  const otherMax = 0;
+
+  // ---- Montant choisi par l'utilisateur (simulation)
+  function readSelectedCapex() {
+    const candidates = [
+      localStorage.getItem("p2i_capex_selected"),
+      localStorage.getItem("p2i_simulation_capex"),
+      localStorage.getItem("simulation_capex"),
+      localStorage.getItem("capex_selected"),
+      prod && (prod.capex_selected || prod.capexChosen || prod.capex_user)
+    ];
+    for (const c of candidates) {
+      const n = toNumber(c);
+      if (isFinite(n) && n > 0) return Math.round(n);
+    }
+    return null;
+  }
+
+  const chosen = readSelectedCapex();
+  let chosenLine = "";
+
+  if (chosen) {
+    const ok = (chosen >= totalMin && chosen <= totalMax);
+    const status = ok
+      ? `<span style="color:#1a7f37;"><b>✅ Dans la fourchette</b></span>`
+      : (chosen < totalMin
+          ? `<span style="color:#b54708;"><b>⚠️ En dessous du minimum</b></span>`
+          : `<span style="color:#b54708;"><b>⚠️ Au-dessus de la fourchette</b></span>`);
+
+    chosenLine = `
+      <li style="margin-top:10px;">
+        <b>Votre montant indicatif (simulation) :</b> ${fmt(chosen)} $ — ${status}
+      </li>
+    `;
+  }
+
+  const otherLine = (otherMin > 0 || otherMax > 0)
+    ? `<li><b>Imprévus / autres :</b> <span>${fmt(otherMin)} – ${fmt(otherMax)} $</span></li>`
+    : "";
+
+  // ---- Affichage final
+  s4List.innerHTML = `
+    <li><b>CAPEX minimum (référence UP) :</b> <span>${fmt(totalMin)} $</span></li>
+    <li><b>Machines & équipements :</b> <span>${fmt(mMin)} – ${fmt(mMax)} $</span></li>
+    <li><b>Installation & mise en service :</b> <span>${fmt(iMin)} – ${fmt(iMax)} $</span></li>
+    <li><b>Aménagement/Travaux :</b> <span>${fmt(tMin)} – ${fmt(tMax)} $</span></li>
+    <li><b>Fret & douane :</b> <span>${fmt(fMin)} – ${fmt(fMax)} $</span></li>
+    ${otherLine}
+    <li style="margin-top:10px; opacity:.9;">
+      <b>Fourchette CAPEX indicative :</b> ${fmt(totalMin)} – ${fmt(totalMax)} $
+    </li>
+    ${chosenLine}
+  `;
+})();
+</script>
+<script>
+// ==================================================
+// BP GRATUIT — SECTION 5 : Compte de résultat prévisionnel sommaire (SIG) — v6
+// ✅ Fourchettes COHÉRENTES (pairées) :
+//    - scénario bas : CA_min + taux_bas
+//    - scénario haut : CA_max + taux_haut
+// ✅ Libellé : "Achats de matières premières" (au lieu de Charges d’exploitation)
+// ✅ Salaires & charges sociales après Valeur Ajoutée
+// ✅ Dotations : CAPEX_min / durée (ici 8 ans fixe si [8,8])
+// ✅ Parsing fourchettes : "300,000-750,000 $/an" sans négatifs
+// ✅ Cible : id="s5_text" et id="s5_list"
+// ==================================================
+(function () {
+  function $(id){ return document.getElementById(id); }
+  function parseJsonSafe(raw){ try { return JSON.parse(raw); } catch(_) { return null; } }
+
+  // ---- Données UP
+  const prod =
+    parseJsonSafe(localStorage.getItem("currentProduction")) ||
+    parseJsonSafe(sessionStorage.getItem("currentProduction"));
+
+  const filiere =
+    (localStorage.getItem("currentFiliereName") ||
+     (prod && (prod.filiereNom || prod.filiere)) ||
+     "votre filière").trim();
+
+  const upName =
+    (prod && (prod.nom || prod.unitName || prod.titre)) ? String(prod.nom || prod.unitName || prod.titre).trim()
+    : "cette unité";
+
+  // ---- Formats
+  function fmtMoney(n){
+    return Number(n).toLocaleString("fr-FR", { maximumFractionDigits: 0 });
+  }
+  function fmtPct(p){
+    return (p*100).toLocaleString("fr-FR", { maximumFractionDigits: 0 }) + " %";
+  }
+
+  // ---- Parsing fourchettes montants (positifs)
+  function parseAmountToken(tok){
+    let s = String(tok).trim().replace(/[\s\u00A0]/g, "");
+    s = s.replace(/[,\.]/g, "");   // milliers
+    s = s.replace(/[^\d]/g, "");   // chiffres only
+    if (!s) return NaN;
+    const n = parseInt(s, 10);
+    return Number.isFinite(n) ? n : NaN;
+  }
+
+  function parseRange(raw){
+    if (raw === null || raw === undefined) return null;
+    const s0 = String(raw).replace(/[–—]/g, "-");
+
+    const parts = s0.split("-").map(x => x.trim()).filter(Boolean);
+    const nums = [];
+    for (const p of parts) {
+      const n = parseAmountToken(p);
+      if (Number.isFinite(n)) nums.push(n);
+      if (nums.length >= 2) break;
+    }
+    if (nums.length === 2) {
+      const a = Math.min(nums[0], nums[1]);
+      const b = Math.max(nums[0], nums[1]);
+      return [a,b];
+    }
+
+    const m = s0.match(/\d[\d\s\u00A0,\.]*/);
+    if (!m) return null;
+    const single = parseAmountToken(m[0]);
+    if (!Number.isFinite(single)) return null;
+    return [single, single];
+  }
+
+  function toNumber(v){
+    if (v === null || v === undefined) return NaN;
+    if (typeof v === "number") return v;
+    const s = String(v).replace(/[\s\u00A0]/g, "").replace(/[,\.]/g, "").replace(/[^\d]/g, "");
+    const n = parseInt(s, 10);
+    return Number.isFinite(n) ? n : NaN;
+  }
+
+  // ==================================================
+  // ✅ TES COEFFICIENTS (avec normalisation automatique min/max)
+  // ==================================================
+  const rates = {
+    achats_matieres_premieres: [0.50, 0.55], // CA - achats MP = Marge brute
+    charges_externes:          [0.10, 0.08], // Marge brute - charges externes = VA
+    salaires_charges:          [0.12, 0.10], // VA - salaires = (VA après personnel)
+    impots_taxes:              [0.01, 0.02], // - impôts & taxes = EBE
+    charges_financieres:       [0.02, 0.03]  // EBE - charges fin - dotations = Résultat avant IS
+  };
+
+  // Dotations (CAPEX / durée)
+  const amortYearsRange = [8, 8]; // ✅ TES PARAMÈTRES (8 ans fixe)
+
+  // ---- Entrées UP
+  const caRange = parseRange(prod && (prod.chiffre_affaires_estime || prod.ca_estime || prod.chiffreAffairesEstime));
+  const capexMin = toNumber(prod && (prod.capex_min || prod.capexMin || prod.capex));
+
+  // ---- DOM
+  const s5Text = $("s5_text");
+  const s5List = $("s5_list");
+
+  if (s5Text) {
+    s5Text.innerHTML =
+      `<b>Compte de résultat prévisionnel sommaire</b> (SIG simplifié) pour <b>${upName}</b> — filière <b>${filiere}</b>. ` +
+      `Fourchettes cohérentes (bas=CA bas & taux bas ; haut=CA haut & taux haut). Dotations sur CAPEX minimum.`;
+  }
+  if (!s5List) return;
+
+  if (!caRange) {
+    s5List.innerHTML = `
+      <li><b>Chiffre d’affaires estimé :</b> —</li>
+      <li><b>Achats de matières premières :</b> —</li>
+      <li><b>Marge brute :</b> —</li>
+      <li><b>Charges externes :</b> —</li>
+      <li><b>Valeur ajoutée :</b> —</li>
+      <li><b>Salaires & charges sociales :</b> —</li>
+      <li><b>Impôts & taxes :</b> —</li>
+      <li><b>EBE :</b> —</li>
+      <li><b>Charges financières :</b> —</li>
+      <li><b>Dotations aux amortissements :</b> —</li>
+      <li><b>Résultat avant IS :</b> —</li>
+    `;
+    return;
+  }
+
+  const CA = { low: caRange[0], high: caRange[1] };
+
+  // ---- Outils "pairés"
+  function pctAmountPair(ca, [pLow, pHigh]){
+    return { low: Math.round(ca.low * pLow), high: Math.round(ca.high * pHigh) };
+  }
+  function subPair(a, b){
+    return { low: Math.round(a.low - b.low), high: Math.round(a.high - b.high) };
+  }
+  function addPair(a, b){
+    return { low: Math.round(a.low + b.low), high: Math.round(a.high + b.high) };
+  }
+  function line(label, pair, note){
+    return `<li><b>${label} :</b> <span>${fmtMoney(pair.low)} – ${fmtMoney(pair.high)} $/an</span>${note ? ` <span style="opacity:.85;">${note}</span>` : ""}</li>`;
+  }
+
+  // ---- Calcul SIG (pairé)
+  const achatsMP = pctAmountPair(CA, rates.achats_matieres_premieres);
+  const margeBrute = subPair(CA, achatsMP);
+
+  const chExt = pctAmountPair(CA, rates.charges_externes);
+  const valeurAjoutee = subPair(margeBrute, chExt);
+
+  const salaires = pctAmountPair(CA, rates.salaires_charges);
+  const vaApresPersonnel = subPair(valeurAjoutee, salaires);
+
+  const impTaxes = pctAmountPair(CA, rates.impots_taxes);
+  const ebe = subPair(vaApresPersonnel, impTaxes);
+
+  const chFin = pctAmountPair(CA, rates.charges_financieres);
+
+  // Dotations sur CAPEX min : [capex/amax ; capex/amin]
+  let dotAmort = null;
+  if (isFinite(capexMin) && capexMin > 0) {
+    const yMin = Math.min(amortYearsRange[0], amortYearsRange[1]);
+    const yMax = Math.max(amortYearsRange[0], amortYearsRange[1]);
+    dotAmort = { low: Math.round(capexMin / yMax), high: Math.round(capexMin / yMin) };
+  }
+
+  const finPlusDot = dotAmort ? addPair(chFin, dotAmort) : chFin;
+  const resAvantIS = subPair(ebe, finPlusDot);
+try { sessionStorage.setItem("p2i_result_before_is_range", JSON.stringify(resAvantIS)); } catch(e) {}
+try { sessionStorage.setItem("p2i_capex_min", String(capexMin || "")); } catch(e) {}
+
+  // ---- Affichage
+  const dotLine = dotAmort
+    ? line("Dotations aux amortissements", dotAmort, `(CAPEX min ${fmtMoney(capexMin)} $ sur ${amortYearsRange[0]} an(s))`)
+    : `<li><b>Dotations aux amortissements :</b> — <span style="opacity:.85;">(CAPEX min non disponible)</span></li>`;
+
+  s5List.innerHTML = `
+    ${line("Chiffre d’affaires estimé", CA, "")}
+    ${line("Achats de matières premières", achatsMP, `(${fmtPct(rates.achats_matieres_premieres[0])}–${fmtPct(rates.achats_matieres_premieres[1])} du CA)`)}
+    ${line("Marge brute", margeBrute, "")}
+    ${line("Charges externes", chExt, `(${fmtPct(rates.charges_externes[0])}–${fmtPct(rates.charges_externes[1])} du CA)`)}
+    ${line("Valeur ajoutée", valeurAjoutee, "")}
+    ${line("Salaires & charges sociales", salaires, `(${fmtPct(rates.salaires_charges[0])}–${fmtPct(rates.salaires_charges[1])} du CA)`)}
+    ${line("Impôts & taxes", impTaxes, `(${fmtPct(rates.impots_taxes[0])}–${fmtPct(rates.impots_taxes[1])} du CA)`)}
+    ${line("EBE", ebe, "")}
+    ${line("Charges financières", chFin, `(${fmtPct(rates.charges_financieres[0])}–${fmtPct(rates.charges_financieres[1])} du CA)`)}
+    ${dotLine}
+    ${line("Résultat avant IS", resAvantIS, "<span style='opacity:.85;'>(ordre de grandeur)</span>")}
+    <li style="margin-top:10px; opacity:.9;">
+      <b>Note :</b> fourchettes “pairées” (bas=CA bas & taux bas ; haut=CA haut & taux haut). Ajuste les taux dans <code>rates</code>.
+    </li>
+  `;
+})();
+</script>
+<script>
+// ==================================================
+// BP GRATUIT — SECTION 6 : Bilan prévisionnel simplifié — v2
+// ✅ Actifs : Machines (CAPEX min), Stock OU Créances clients (% CA), Trésorerie (% CA)
+// ✅ Passifs : Dettes (% CAPEX), Fournisseurs (% CA)
+// ✅ Capitaux propres : Actifs - Passifs
+// ✅ Détection "service" -> label "Créances clients" (au lieu de Stock)
+// ✅ Pas de mention BFR/plan de financement (BP gratuit)
+// ✅ Cible : id="s6_text" et id="s6_list"
+// ==================================================
+(function () {
+  function $(id){ return document.getElementById(id); }
+  function parseJsonSafe(raw){ try { return JSON.parse(raw); } catch(_) { return null; } }
+
+  const prod =
+    parseJsonSafe(localStorage.getItem("currentProduction")) ||
+    parseJsonSafe(sessionStorage.getItem("currentProduction"));
+
+  const filiere =
+    (localStorage.getItem("currentFiliereName") ||
+     (prod && (prod.filiereNom || prod.filiere)) ||
+     "votre filière").trim();
+
+  const upName =
+    (prod && (prod.nom || prod.unitName || prod.titre)) ? String(prod.nom || prod.unitName || prod.titre).trim()
+    : "cette unité";
+
+  function fmtMoney(n){
+    return Number(n).toLocaleString("fr-FR", { maximumFractionDigits: 0 });
+  }
+  function fmtPct(p){
+    return (p*100).toLocaleString("fr-FR", { maximumFractionDigits: 0 }) + " %";
+  }
+
+  function parseAmountToken(tok){
+    let s = String(tok).trim().replace(/[\s\u00A0]/g, "");
+    s = s.replace(/[,\.]/g, "");
+    s = s.replace(/[^\d]/g, "");
+    if (!s) return NaN;
+    const n = parseInt(s, 10);
+    return Number.isFinite(n) ? n : NaN;
+  }
+  function parseRange(raw){
+    if (raw === null || raw === undefined) return null;
+    const s0 = String(raw).replace(/[–—]/g, "-");
+    const parts = s0.split("-").map(x => x.trim()).filter(Boolean);
+    const nums = [];
+    for (const p of parts) {
+      const n = parseAmountToken(p);
+      if (Number.isFinite(n)) nums.push(n);
+      if (nums.length >= 2) break;
+    }
+    if (nums.length === 2) return [Math.min(nums[0], nums[1]), Math.max(nums[0], nums[1])];
+    const m = s0.match(/\d[\d\s\u00A0,\.]*/);
+    if (!m) return null;
+    const single = parseAmountToken(m[0]);
+    if (!Number.isFinite(single)) return null;
+    return [single, single];
+  }
+  function toNumber(v){
+    if (v === null || v === undefined) return NaN;
+    if (typeof v === "number") return v;
+    const s = String(v).replace(/[\s\u00A0]/g, "").replace(/[,\.]/g, "").replace(/[^\d]/g, "");
+    const n = parseInt(s, 10);
+    return Number.isFinite(n) ? n : NaN;
+  }
+
+  // ---- Détection simple "service"
+  function isServiceActivity() {
+    const name = (upName || "").toLowerCase();
+    const fil = (filiere || "").toLowerCase();
+    const keywords = [
+      "service","audit","maintenance","logistique","formation","qualite","qualité",
+      "etudes","études","securite","sécurité","nettoyage","energie","énergie"
+    ];
+    return keywords.some(k => name.includes(k) || fil.includes(k));
+  }
+  const isService = isServiceActivity();
+
+  // ---- Entrées
+  const capexMin = toNumber(prod && (prod.capex_min || prod.capexMin || prod.capex));
+  const caRange = parseRange(prod && (prod.chiffre_affaires_estime || prod.ca_estime || prod.chiffreAffairesEstime));
+
+  // ---- Hypothèses BP gratuit (modifiables)
+  const exploRate = [0.05, 0.12];      // Stock OU Créances clients : 5–12% du CA
+  const cashRate = [0.03, 0.08];       // Trésorerie : 3–8% du CA
+  const suppliersRate = [0.03, 0.08];  // Fournisseurs : 3–8% du CA
+  const debtRate = [0.50, 0.70];       // Dette : 50–70% du CAPEX
+
+  // ---- Pair helpers
+  function pairFromSingle(x){ return { low: Math.round(x), high: Math.round(x) }; }
+  function pctOfCA(caPair, [pLow, pHigh]){
+    return { low: Math.round(caPair.low * pLow), high: Math.round(caPair.high * pHigh) };
+  }
+  function pctOfCapex(capex, [pLow, pHigh]){
+    return { low: Math.round(capex * pLow), high: Math.round(capex * pHigh) };
+  }
+  function addPair(a,b){ return { low: a.low + b.low, high: a.high + b.high }; }
+  function subPair(a,b){ return { low: a.low - b.low, high: a.high - b.high }; }
+
+  const s6Text = $("s6_text");
+  const s6List = $("s6_list");
+  if (s6Text) {
+    s6Text.innerHTML =
+      `<b>Bilan prévisionnel simplifié (situation de départ)</b> pour <b>${upName}</b> — filière <b>${filiere}</b>. ` +
+      `Ordres de grandeur (BP gratuit) basés sur CAPEX minimum et CA estimé.`;
+  }
+  if (!s6List) return;
+
+  const hasCapex = isFinite(capexMin) && capexMin > 0;
+  const hasCA = !!caRange;
+  const CA = hasCA ? { low: caRange[0], high: caRange[1] } : null;
+
+  // ---- Actifs
+  const machines = hasCapex ? pairFromSingle(capexMin) : null;
+  const exploAsset = hasCA ? pctOfCA(CA, exploRate) : null; // Stock OU Créances
+  const cash = hasCA ? pctOfCA(CA, cashRate) : null;
+
+  let actifs = { low: 0, high: 0 };
+  if (machines) actifs = addPair(actifs, machines);
+  if (exploAsset) actifs = addPair(actifs, exploAsset);
+  if (cash) actifs = addPair(actifs, cash);
+
+  // ---- Passifs
+  const debt = hasCapex ? pctOfCapex(capexMin, debtRate) : null;
+  const suppliers = hasCA ? pctOfCA(CA, suppliersRate) : null;
+
+  let passifs = { low: 0, high: 0 };
+  if (debt) passifs = addPair(passifs, debt);
+  if (suppliers) passifs = addPair(passifs, suppliers);
+
+  const equity = subPair(actifs, passifs);
+
+  function line(label, pair){
+    if (!pair) return `<li><b>${label} :</b> —</li>`;
+    return `<li><b>${label} :</b> <span>${fmtMoney(pair.low)} – ${fmtMoney(pair.high)} $</span></li>`;
+  }
+
+  const exploLabel = isService ? "Créances clients" : "Stock";
+  const exploExplain = isService
+    ? `(${fmtPct(exploRate[0])}–${fmtPct(exploRate[1])} du CA)`
+    : `(${fmtPct(exploRate[0])}–${fmtPct(exploRate[1])} du CA)`;
+
+  s6List.innerHTML = `
+    ${line("Actifs (machines, " + exploLabel.toLowerCase() + ", trésorerie)", actifs)}
+    ${line("Passifs (dettes, fournisseurs)", passifs)}
+    ${line("Capitaux propres (estimés)", equity)}
+    <li style="margin-top:10px; opacity:.9;">
+      <b>Détail :</b>
+      <div style="margin-top:6px;">
+        • Machines & équipements (CAPEX min) : ${machines ? `${fmtMoney(machines.low)} $` : "—"}<br/>
+        • ${exploLabel} ${exploAsset ? `: ${fmtMoney(exploAsset.low)} – ${fmtMoney(exploAsset.high)} $` : ": —"} <span style="opacity:.85;">${exploExplain}</span><br/>
+        • Trésorerie : ${cash ? `${fmtMoney(cash.low)} – ${fmtMoney(cash.high)} $` : "—"} <span style="opacity:.85;">(≈ ${fmtPct(cashRate[0])}–${fmtPct(cashRate[1])} du CA)</span><br/>
+        • Dettes financières : ${debt ? `${fmtMoney(debt.low)} – ${fmtMoney(debt.high)} $` : "—"} <span style="opacity:.85;">(≈ ${fmtPct(debtRate[0])}–${fmtPct(debtRate[1])} du CAPEX)</span><br/>
+        • Fournisseurs : ${suppliers ? `${fmtMoney(suppliers.low)} – ${fmtMoney(suppliers.high)} $` : "—"} <span style="opacity:.85;">(≈ ${fmtPct(suppliersRate[0])}–${fmtPct(suppliersRate[1])} du CA)</span>
+      </div>
+    </li>
+  `;
+})();
+</script>
+<script>
+// ==================================================
+// BP GRATUIT — SECTION 7 : Calcul du ROI approximatif — v3
+// ✅ ROI annuel ≈ Résultat NET (après IS) / CAPEX minimum
+// ✅ Payback ≈ CAPEX minimum / Résultat NET (après IS)
+// ✅ IS Côte d’Ivoire : 25% (standard) ; 30% secteurs télécom/IT/communication (modifiable)
+// ✅ Note : on ne modélise pas la taxe minimum (0,5% CA) dans le BP gratuit (trop “fiscal”)
+// ==================================================
+(function () {
+  function $(id){ return document.getElementById(id); }
+  function parseJsonSafe(raw){ try { return JSON.parse(raw); } catch(_) { return null; } }
+  function toNumber(v){
+    if (v === null || v === undefined) return NaN;
+    if (typeof v === "number") return v;
+    const s = String(v).replace(/[\s\u00A0]/g, "").replace(/[,\.]/g, "").replace(/[^\d]/g, "");
+    const n = parseInt(s, 10);
+    return Number.isFinite(n) ? n : NaN;
+  }
+  function fmtPct(p){ return (p*100).toLocaleString("fr-FR", { maximumFractionDigits: 0 }) + " %"; }
+  function fmtYears(y){ return y.toLocaleString("fr-FR", { maximumFractionDigits: 1 }) + " an(s)"; }
+
+  const s7Text = $("s7_text");
+  const s7List = $("s7_list");
+  if (!s7List) return;
+
+  const prod =
+    parseJsonSafe(localStorage.getItem("currentProduction")) ||
+    parseJsonSafe(sessionStorage.getItem("currentProduction")) || {};
+
+  const upName = String(prod.nom || prod.unitName || prod.titre || "cette activité").trim();
+
+  // Résultat avant IS calculé en S5 (range pairé {low,high})
+  const resAvantIS = parseJsonSafe(sessionStorage.getItem("p2i_result_before_is_range"));
+
+  // CAPEX min
+  const capexMin =
+    toNumber(prod.capex_min || prod.capexMin || prod.capex) ||
+    toNumber(sessionStorage.getItem("p2i_capex_min"));
+
+  // --- IS Côte d’Ivoire (prudent / standard)
+  // Taux standard: 25% ; certains secteurs: 30% (télécom/IT/communication).
+  // Tu peux forcer un taux via prod.is_rate (ex: 0.25) si tu veux.
+  let isRate = (typeof prod.is_rate === "number") ? prod.is_rate : 0.25;
+
+  // Petite détection secteur (si jamais utile)
+  const filiere = String(prod.filiereNom || prod.filiere || "").toLowerCase();
+  const name = upName.toLowerCase();
+  const looksTelecomIT = (filiere.includes("télécom") || filiere.includes("telecom") || filiere.includes("it") || filiere.includes("communication")
+                        || name.includes("télécom") || name.includes("telecom") || name.includes("informatique") || name.includes("communication"));
+  if (looksTelecomIT) isRate = Math.max(isRate, 0.30);
+
+  // --- (Option prudence) facteur de montée en régime / aléas (facultatif)
+  // 1.00 = pas de prudence supplémentaire
+  // 0.80 = on considère que la 1ère année on réalise ~80% du potentiel net
+  const prudenceFactor = 1.00;
+
+  if (s7Text) {
+    s7Text.innerHTML =
+      `<b>Calcul du ROI approximatif</b> pour <b>${upName}</b>. ` +
+      `Indicateur prudent basé sur le Résultat <b>après IS</b> et le CAPEX minimum.`;
+  }
+
+  if (!resAvantIS || !isFinite(resAvantIS.low) || !isFinite(resAvantIS.high) || !isFinite(capexMin) || capexMin <= 0) {
+    s7List.innerHTML = `
+      <li><b>Hypothèses (prix/volume/marge) :</b> issues de la fiche unité et du compte de résultat sommaire.</li>
+      <li><b>ROI approximatif :</b> —</li>
+      <li><b>Risques principaux :</b> —</li>
+    `;
+    return;
+  }
+
+  // On ne prend pas de résultat négatif pour calculer ROI/payback (sinon infini/absurde)
+  const resLowBT = Math.max(0, resAvantIS.low);
+  const resHighBT = Math.max(0, resAvantIS.high);
+
+  // Résultat net après IS
+  const resLowAT = resLowBT * (1 - isRate) * prudenceFactor;
+  const resHighAT = resHighBT * (1 - isRate) * prudenceFactor;
+
+  const roiLow = resLowAT / capexMin;
+  const roiHigh = resHighAT / capexMin;
+
+  const paybackBest = (resHighAT > 0) ? (capexMin / resHighAT) : null; // le plus rapide
+  const paybackWorst = (resLowAT > 0) ? (capexMin / resLowAT) : null;  // le plus lent
+
+  // Risques
+  let risks = [];
+  if (Array.isArray(prod.challenges) && prod.challenges.length) {
+    risks = prod.challenges;
+  } else {
+    risks = [
+      "Variabilité de la demande",
+      "Hausse des coûts des intrants",
+      "Contraintes techniques / qualité",
+      "Dépendance fournisseurs / clients",
+      "Risque réglementaire"
+    ];
+  }
+
+  s7List.innerHTML = `
+    <li><b>Hypothèses (prix/volume/marge) :</b> CA issu de la fiche UP + structure de charges (S5) + CAPEX minimum (S4).</li>
+    <li><b>ROI approximatif :</b>
+      <span>${fmtPct(roiLow)} – ${fmtPct(roiHigh)} / an</span>
+      <span style="opacity:.85;">(Résultat net après IS / CAPEX min — IS appliqué : ${fmtPct(isRate)})</span>
+    </li>
+    <li><b>Temps de retour (payback) :</b>
+      <span>${(paybackBest && paybackWorst) ? `${fmtYears(paybackBest)} – ${fmtYears(paybackWorst)}` : "—"}</span>
+      <span style="opacity:.85;">(sur résultat net après IS)</span>
+    </li>
+    <li><b>Risques principaux :</b>
+      <ul style="margin-top:6px;">
+        ${risks.map(r => `<li>${r}</li>`).join("")}
+      </ul>
+    </li>
+  `;
+})();
+</script>
+<script>
+// ==================================================
+// BP GRATUIT — SECTION 8 : Recommandations stratégiques — v1
+// ✅ 3 priorités actionnables (30 / 60 / 90 jours)
+// ✅ Adaptation automatique : activité de service vs production
+// ✅ Enrichissement avec prod.challenges si disponibles
+// ✅ Cible : id="s8_text" et id="s8_list"
+// ==================================================
+(function () {
+  function $(id){ return document.getElementById(id); }
+  function parseJsonSafe(raw){ try { return JSON.parse(raw); } catch(_) { return null; } }
+
+  const prod =
+    parseJsonSafe(localStorage.getItem("currentProduction")) ||
+    parseJsonSafe(sessionStorage.getItem("currentProduction")) || {};
+
+  const upName = String(prod.nom || prod.unitName || prod.titre || "cette activité").trim();
+  const filiere = String(prod.filiereNom || prod.filiere || "").trim();
+
+  // ---- Détection simple activité de service
+  function isServiceActivity() {
+    const txt = (upName + " " + filiere).toLowerCase();
+    const keywords = [
+      "service","audit","maintenance","logistique","formation","qualite","qualité",
+      "etudes","études","securite","sécurité","nettoyage","energie","énergie"
+    ];
+    return keywords.some(k => txt.includes(k));
+  }
+  const isService = isServiceActivity();
+
+  // ---- Défis / risques connus
+  const challenges = Array.isArray(prod.challenges) ? prod.challenges : [];
+
+  // ---- Recommandations par défaut
+  let p1 = "";
+  let p2 = "";
+  let p3 = "";
+
+  if (isService) {
+    p1 = "Clarifier le positionnement de l’offre, la cible client prioritaire et la proposition de valeur (résultat attendu pour le client).";
+    p2 = "Structurer l’exécution : process de vente, méthodologie de prestation, organisation du temps et des ressources clés.";
+    p3 = "Accélérer l’acquisition client via partenariats, références, premiers contrats récurrents et amélioration continue de la rentabilité.";
+  } else {
+    p1 = "Valider le positionnement marché, les segments clients prioritaires et la politique de prix en cohérence avec les coûts réels.";
+    p2 = "Sécuriser l’exécution industrielle : approvisionnements, qualité, organisation de la production et montée en cadence maîtrisée.";
+    p3 = "Optimiser la distribution et la traction commerciale (réseau, contrats, volumes) afin d’améliorer durablement la rentabilité.";
+  }
+
+  // ---- Enrichissement avec les challenges (si présents)
+  if (challenges.length > 0) {
+    const focus = challenges.slice(0,2).join(" / ");
+    p2 += ` Une attention particulière devra être portée à : ${focus}.`;
+  }
+
+  const s8Text = $("s8_text");
+  const s8List = $("s8_list");
+  if (!s8List) return;
+
+  if (s8Text) {
+    s8Text.innerHTML =
+      `<b>Recommandations stratégiques</b> pour <b>${upName}</b>. ` +
+      `Priorités actionnables sur les 90 premiers jours (BP gratuit).`;
+  }
+
+  s8List.innerHTML = `
+    <li><b>Priorité 1 (0–30 jours) :</b> ${p1}</li>
+    <li><b>Priorité 2 (30–60 jours) :</b> ${p2}</li>
+    <li><b>Priorité 3 (60–90 jours) :</b> ${p3}</li>
+  `;
+})();
+</script>
+</body>
+</html>
