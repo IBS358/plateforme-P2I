@@ -1536,144 +1536,168 @@ async function loadRelations() {
 
     function renderRelations() {
 
-        const container =
-            document.getElementById(
-                'relationsList'
+    const container =
+        document.getElementById('relationsList');
+
+    if (!container) {
+        console.error('❌ relationsList introuvable.');
+        return;
+    }
+
+    updateStats(allRelations);
+
+    let filtered = [...allRelations];
+
+
+    // ========================================================
+    // FILTRE STATUT
+    // ========================================================
+
+    if (currentFilter !== 'all') {
+
+        filtered =
+            filtered.filter(
+                r => r.status === currentFilter
             );
+    }
 
 
-        updateStats(allRelations);
+    // ========================================================
+    // RECHERCHE
+    // ========================================================
+
+    if (currentSearch) {
+
+        filtered =
+            filtered.filter(rel => {
+
+                const searchStr = [
+
+                    rel.product,
+                    rel.supplier,
+                    rel.userDisplayName,
+                    rel.email,
+                    rel.userId,
+                    rel.modelId,
+                    rel.origin,
+                    rel.telephone,
+                    rel.role
+
+                ]
+                .filter(Boolean)
+                .join(' ')
+                .toLowerCase();
 
 
-        let filtered =
-            [...allRelations];
-
-
-        // Filtre statut
-        if (currentFilter !== 'all') {
-
-            filtered =
-                filtered.filter(
-                    r =>
-                        r.status === currentFilter
+                return searchStr.includes(
+                    currentSearch
                 );
-        }
+            });
+    }
 
 
-        // Recherche
-        if (currentSearch) {
+    // ========================================================
+    // TRI : PLUS RÉCENT EN PREMIER
+    // ========================================================
 
-            filtered =
-                filtered.filter(rel => {
-
-                    const searchStr = [
-
-                        rel.product,
-
-                        rel.supplier,
-
-                        rel.userDisplayName,
-
-                        rel.userId,
-
-                        rel.modelId,
-
-                        rel.origin,
-
-                        rel.telephone
-
-                    ]
-                    .filter(Boolean)
-                    .join(' ')
-                    .toLowerCase();
+    filtered.sort(
+        (a, b) =>
+            new Date(b.createdAt || 0) -
+            new Date(a.createdAt || 0)
+    );
 
 
-                    return searchStr.includes(
-                        currentSearch
-                    );
-                });
-        }
+    // ========================================================
+    // AUCUNE DEMANDE
+    // ========================================================
+
+    if (filtered.length === 0) {
+
+        container.innerHTML = `
+            <div class="empty-state">
+
+                <span class="icon">📭</span>
+
+                <p>
+                    Aucune demande de mise en relation
+                </p>
+
+                <p style="
+                    font-size:0.8rem;
+                    margin-top:8px;
+                    color:#64748b;
+                ">
+                    Les demandes apparaîtront ici
+                    lorsqu'un utilisateur en fera.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
 
 
-        // Tri : plus récent en premier
-        filtered.sort(
-            (a, b) =>
-                new Date(
-                    b.createdAt || 0
-                ) -
-                new Date(
-                    a.createdAt || 0
-                )
-        );
+    // ========================================================
+    // AFFICHAGE
+    // ========================================================
+
+    container.innerHTML =
+        filtered.map(rel => {
+
+            const statusInfo =
+                STATUS_LABELS[rel.status] ||
+                STATUS_LABELS.pending;
 
 
-        if (filtered.length === 0) {
-
-            container.innerHTML = `
-                <div class="empty-state">
-
-                    <span class="icon">📭</span>
-
-                    <p>
-                        Aucune demande de mise en relation
-                    </p>
-
-                    <p style="
-                        font-size:0.8rem;
-                        margin-top:8px;
-                        color:#64748b;
-                    ">
-                        Les demandes apparaîtront ici
-                        lorsqu'un utilisateur en fera.
-                    </p>
-
-                </div>
-            `;
-
-            return;
-        }
+            const originLabel =
+                ORIGIN_LABELS[rel.origin] ||
+                rel.origin ||
+                '🌍 Non précisée';
 
 
-        container.innerHTML =
-            filtered.map(rel => {
-
-                const statusInfo =
-                    STATUS_LABELS[
-                        rel.status
-                    ] ||
-                    STATUS_LABELS.pending;
+            const userDisplay =
+                rel.userDisplayName ||
+                'Nom non renseigné';
 
 
-                const originLabel =
-                    ORIGIN_LABELS[
-                        rel.origin
-                    ] ||
-                    rel.origin ||
-                    '🌍 Non précisée';
+            return `
+
+                <div class="relation-card"
+                     data-id="${escapeHtml(rel.id)}">
 
 
-                const userDisplay =
-                    rel.userDisplayName ||
-                    'Utilisateur';
+                    <!-- ================================================= -->
+                    <!-- EN-TÊTE -->
+                    <!-- ================================================= -->
+
+                    <div class="relation-header">
+
+                        <div>
+
+                            <div class="relation-product">
+                                ${escapeHtml(
+                                    rel.product ||
+                                    'Produit non spécifié'
+                                )}
+                            </div>
 
 
-                return `
+                            <!-- ============================= -->
+                            <!-- DEMANDEUR -->
+                            <!-- ============================= -->
 
-                    <div class="relation-card"
-                         data-id="${escapeHtml(rel.id)}">
+                            <div class="relation-user"
+                                 style="
+                                    margin-top:8px;
+                                    line-height:1.5;
+                                 ">
 
-                        <div class="relation-header">
-
-                            <div>
-
-                                <div class="relation-product">
-                                    ${escapeHtml(
-                                        rel.product ||
-                                        'Produit non spécifié'
-                                    )}
-                                </div>
-
-                                <div class="relation-user">
+                                <div style="
+                                    font-weight:600;
+                                    color:#e2e8f0;
+                                    font-size:0.95rem;
+                                ">
 
                                     <i class="fas fa-user"></i>
 
@@ -1681,237 +1705,306 @@ async function loadRelations() {
                                         userDisplay
                                     )}
 
-                                    <span style="
-                                        color:#64748b;
-                                        font-size:0.75rem;
-                                        display:block;
-                                        margin-top:3px;
-                                    ">
-                                        ID :
-                                        ${escapeHtml(
-                                            rel.userId
-                                        )}
-                                    </span>
+                                </div>
 
-                                    ${
-                                        rel.telephone
-                                            ? `
-                                                <span style="
-                                                    color:#64748b;
-                                                    font-size:0.75rem;
-                                                    display:block;
-                                                    margin-top:3px;
-                                                ">
-                                                    <i class="fas fa-phone"></i>
-                                                    ${escapeHtml(
-                                                        rel.telephone
-                                                    )}
-                                                </span>
-                                              `
-                                            : ''
-                                    }
+
+                                ${
+                                    rel.email
+                                        ? `
+                                            <div style="
+                                                color:#94a3b8;
+                                                font-size:0.8rem;
+                                                margin-top:4px;
+                                            ">
+
+                                                <i class="fas fa-envelope"></i>
+
+                                                ${escapeHtml(
+                                                    rel.email
+                                                )}
+
+                                            </div>
+                                          `
+                                        : ''
+                                }
+
+
+                                ${
+                                    rel.telephone
+                                        ? `
+                                            <div style="
+                                                color:#94a3b8;
+                                                font-size:0.8rem;
+                                                margin-top:4px;
+                                            ">
+
+                                                <i class="fas fa-phone"></i>
+
+                                                ${escapeHtml(
+                                                    rel.telephone
+                                                )}
+
+                                            </div>
+                                          `
+                                        : `
+                                            <div style="
+                                                color:#64748b;
+                                                font-size:0.75rem;
+                                                margin-top:4px;
+                                            ">
+
+                                                <i class="fas fa-phone-slash"></i>
+
+                                                Téléphone non renseigné
+
+                                            </div>
+                                          `
+                                }
+
+
+                                <div style="
+                                    color:#64748b;
+                                    font-size:0.7rem;
+                                    margin-top:4px;
+                                ">
+
+                                    ID :
+                                    ${escapeHtml(
+                                        rel.userId || ''
+                                    )}
 
                                 </div>
 
                             </div>
 
-
-                            <span class="
-                                relation-status
-                                ${statusInfo.class}
-                            ">
-                                ${statusInfo.label}
-                            </span>
-
                         </div>
 
 
-                        <div class="relation-meta">
+                        <!-- ============================= -->
+                        <!-- STATUT -->
+                        <!-- ============================= -->
 
-                            <span>
-                                <i class="fas fa-building"></i>
+                        <span class="
+                            relation-status
+                            ${statusInfo.class}
+                        ">
 
-                                ${escapeHtml(
-                                    rel.supplier ||
-                                    'Fournisseur non précisé'
-                                )}
-                            </span>
+                            ${statusInfo.label}
 
-
-                            <span>
-                                ${originLabel}
-                            </span>
-
-
-                            <span>
-                                <i class="fas fa-calendar-alt"></i>
-
-                                ${formatDateFR(
-                                    rel.createdAt
-                                )}
-                            </span>
-
-                        </div>
-
-
-                        <!-- Détails de la demande -->
-
-                        <div class="machine-details">
-
-                            <div class="machine-detail-item">
-
-                                <span class="label">
-                                    Modèle / ID
-                                </span>
-
-                                <span class="value">
-                                    ${escapeHtml(
-                                        rel.modelId ||
-                                        'Non spécifié'
-                                    )}
-                                </span>
-
-                            </div>
-
-
-                            ${
-                                rel.role
-                                    ? `
-                                        <div class="machine-detail-item">
-
-                                            <span class="label">
-                                                Rôle utilisateur
-                                            </span>
-
-                                            <span class="value">
-                                                ${escapeHtml(
-                                                    rel.role
-                                                )}
-                                            </span>
-
-                                        </div>
-                                      `
-                                    : ''
-                            }
-
-                        </div>
-
-
-                        <!-- Actions -->
-
-                        <div class="relation-actions">
-
-
-                            ${
-                                rel.status === 'pending'
-                                    ? `
-
-                                        <button
-                                            class="btn-action btn-contacting"
-                                            onclick="changeStatus(
-                                                ${rel.id},
-                                                'contacting_supplier'
-                                            )">
-
-                                            📞 En attente réponse fournisseur
-
-                                        </button>
-
-
-                                        <button
-                                            class="btn-action btn-contact"
-                                            onclick="changeStatus(
-                                                ${rel.id},
-                                                'contacted'
-                                            )">
-
-                                            🤝 Passer en cours
-
-                                        </button>
-
-                                      `
-                                    : ''
-                            }
-
-
-                            ${
-                                rel.status === 'contacting_supplier'
-                                    ? `
-
-                                        <button
-                                            class="btn-action btn-contacted"
-                                            onclick="changeStatus(
-                                                ${rel.id},
-                                                'contacted'
-                                            )">
-
-                                            🤝 Passer en cours de discussion
-
-                                        </button>
-
-                                      `
-                                    : ''
-                            }
-
-
-                            ${
-                                rel.status === 'contacted'
-                                    ? `
-
-                                        <button
-                                            class="btn-action btn-concluded"
-                                            onclick="changeStatus(
-                                                ${rel.id},
-                                                'concluded'
-                                            )">
-
-                                            ✅ Partenariat établi
-
-                                        </button>
-
-                                      `
-                                    : ''
-                            }
-
-
-                            ${
-                                rel.status !== 'cancelled' &&
-                                rel.status !== 'concluded'
-                                    ? `
-
-                                        <button
-                                            class="btn-action btn-cancel"
-                                            onclick="changeStatus(
-                                                ${rel.id},
-                                                'cancelled'
-                                            )">
-
-                                            ❌ Annuler
-
-                                        </button>
-
-                                      `
-                                    : ''
-                            }
-
-
-                            <button
-                                class="btn-action btn-add-note"
-                                onclick="openNoteModal(
-                                    ${rel.id}
-                                )">
-
-                                ✏️ Ajouter une note
-
-                            </button>
-
-                        </div>
+                        </span>
 
                     </div>
-                `;
 
-            }).join('');
-    }
+
+                    <!-- ================================================= -->
+                    <!-- INFORMATIONS PRINCIPALES -->
+                    <!-- ================================================= -->
+
+                    <div class="relation-meta">
+
+                        <span>
+
+                            <i class="fas fa-building"></i>
+
+                            ${escapeHtml(
+                                rel.supplier ||
+                                'Fournisseur non précisé'
+                            )}
+
+                        </span>
+
+
+                        <span>
+
+                            ${originLabel}
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="fas fa-calendar-alt"></i>
+
+                            ${formatDateFR(
+                                rel.createdAt
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- ================================================= -->
+                    <!-- DÉTAILS DE LA DEMANDE -->
+                    <!-- ================================================= -->
+
+                    <div class="machine-details">
+
+
+                        <div class="machine-detail-item">
+
+                            <span class="label">
+                                Modèle / ID
+                            </span>
+
+                            <span class="value">
+
+                                ${escapeHtml(
+                                    rel.modelId ||
+                                    'Non spécifié'
+                                )}
+
+                            </span>
+
+                        </div>
+
+
+                        ${
+                            rel.role
+                                ? `
+                                    <div class="machine-detail-item">
+
+                                        <span class="label">
+                                            Rôle utilisateur
+                                        </span>
+
+                                        <span class="value">
+
+                                            ${escapeHtml(
+                                                rel.role
+                                            )}
+
+                                        </span>
+
+                                    </div>
+                                  `
+                                : ''
+                        }
+
+
+                    </div>
+
+
+                    <!-- ================================================= -->
+                    <!-- ACTIONS ADMINISTRATEUR -->
+                    <!-- ================================================= -->
+
+                    <div class="relation-actions">
+
+
+                        ${
+                            rel.status === 'pending'
+                                ? `
+
+                                    <button
+                                        class="btn-action btn-contacting"
+                                        onclick="changeStatus(
+                                            '${rel.id}',
+                                            'contacting_supplier'
+                                        )">
+
+                                        📞 En attente réponse fournisseur
+
+                                    </button>
+
+
+                                    <button
+                                        class="btn-action btn-contact"
+                                        onclick="changeStatus(
+                                            '${rel.id}',
+                                            'contacted'
+                                        )">
+
+                                        🤝 Passer en cours
+
+                                    </button>
+
+                                  `
+                                : ''
+                        }
+
+
+                        ${
+                            rel.status === 'contacting_supplier'
+                                ? `
+
+                                    <button
+                                        class="btn-action btn-contacted"
+                                        onclick="changeStatus(
+                                            '${rel.id}',
+                                            'contacted'
+                                        )">
+
+                                        🤝 Passer en cours de discussion
+
+                                    </button>
+
+                                  `
+                                : ''
+                        }
+
+
+                        ${
+                            rel.status === 'contacted'
+                                ? `
+
+                                    <button
+                                        class="btn-action btn-concluded"
+                                        onclick="changeStatus(
+                                            '${rel.id}',
+                                            'concluded'
+                                        )">
+
+                                        ✅ Partenariat établi
+
+                                    </button>
+
+                                  `
+                                : ''
+                        }
+
+
+                        ${
+                            rel.status !== 'cancelled' &&
+                            rel.status !== 'concluded'
+                                ? `
+
+                                    <button
+                                        class="btn-action btn-cancel"
+                                        onclick="changeStatus(
+                                            '${rel.id}',
+                                            'cancelled'
+                                        )">
+
+                                        ❌ Annuler
+
+                                    </button>
+
+                                  `
+                                : ''
+                        }
+
+
+                        <button
+                            class="btn-action btn-add-note"
+                            onclick="openNoteModal(
+                                '${rel.id}'
+                            )">
+
+                            ✏️ Ajouter une note
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+        }).join('');
+}
 
 
     // ============================================================
