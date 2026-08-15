@@ -1778,17 +1778,21 @@ async function initDashboard() {
     }
 
     function toggleProfileEdit() {
+
   const box = $("profileEditBox");
 
   if (!box) return;
 
-  const isVisible = box.style.display === "block";
+  const isHidden =
+    box.style.display === "none" ||
+    getComputedStyle(box).display === "none";
 
-  if (!isVisible) {
+  if (isHidden) {
 
-    // =============================
+    // ================================
     // PRÉNOM
-    // =============================
+    // ================================
+
     const first =
       $("profileFirstName")?.innerText || "";
 
@@ -1801,9 +1805,10 @@ async function initDashboard() {
     }
 
 
-    // =============================
+    // ================================
     // NOM
-    // =============================
+    // ================================
+
     const last =
       $("profileLastName")?.innerText || "";
 
@@ -1816,9 +1821,10 @@ async function initDashboard() {
     }
 
 
-    // =============================
+    // ================================
     // TÉLÉPHONE
-    // =============================
+    // ================================
+
     const telephone =
       $("profileTelephone")?.innerText || "";
 
@@ -1827,14 +1833,21 @@ async function initDashboard() {
 
     if (editTelephone) {
       editTelephone.value =
-        telephone === "—"
-          ? ""
-          : telephone;
+        telephone === "—" ? "" : telephone;
     }
-  }
 
-  box.style.display =
-    isVisible ? "none" : "block";
+
+    // AFFICHER LE FORMULAIRE
+
+    box.style.display = "block";
+
+  } else {
+
+    // MASQUER LE FORMULAIRE
+
+    box.style.display = "none";
+
+  }
 }
 
   async function saveProfile() {
