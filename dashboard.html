@@ -792,6 +792,10 @@
               <span class="profile-value" id="profileEmail">—</span>
             </div>
             <div class="profile-item">
+  <span class="profile-label">Téléphone</span>
+  <span class="profile-value" id="profileTelephone">—</span>
+</div>
+            <div class="profile-item">
               <span class="profile-label">Total simulations</span>
               <span class="profile-value" id="profileTotalSims">00</span>
             </div>
@@ -1868,6 +1872,10 @@ async function initDashboard() {
       $("profileEmail").innerText =
         currentEmail || "—";
     }
+    if ($("profileTelephone")) {
+  $("profileTelephone").innerText =
+    telephone || "—";
+}
 
     if ($("profileEditBox")) {
       $("profileEditBox").style.display = "none";
