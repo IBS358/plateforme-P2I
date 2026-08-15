@@ -1369,9 +1369,50 @@ localStorage.setItem = function(key, value) {
     // =============================
     async function renderProfileSection() {
   const profile = getStoredProfile();
+
   safeText("profileLastName", profile.lastName || "—");
   safeText("profileFirstName", profile.firstName || "—");
   safeText("profileEmail", profile.email || "—");
+
+  // =====================================================
+  // RÉCUPÉRATION DU TÉLÉPHONE DEPUIS public.profiles
+  // =====================================================
+
+  let telephone = "";
+
+  try {
+    const {
+      data: { user },
+      error: userError
+    } = await supabaseClient.auth.getUser();
+
+    if (!userError && user) {
+
+      const {
+        data: profileData,
+        error: profileError
+      } = await supabaseClient
+        .from("profiles")
+        .select("telephone")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      if (!profileError && profileData) {
+        telephone = profileData.telephone || "";
+      }
+    }
+
+  } catch (err) {
+    console.warn(
+      "⚠️ Impossible de récupérer le téléphone du profil :",
+      err
+    );
+  }
+
+  safeText(
+    "profileTelephone",
+    telephone || "—"
+  );
 
   const tbody = $("profileRecentSims");
   if (!tbody) return;
