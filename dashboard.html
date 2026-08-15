@@ -1778,19 +1778,64 @@ async function initDashboard() {
     }
 
     function toggleProfileEdit() {
-      const box = $("profileEditBox");
-      if (!box) return;
-      const isVisible = box.style.display === "block";
-      if (!isVisible) {
-        const first = $("profileFirstName")?.innerText || "";
-        const last = $("profileLastName")?.innerText || "";
-        const editFirst = $("editFirstName");
-        const editLast = $("editLastName");
-        if (editFirst) editFirst.value = first === "—" ? "" : first;
-        if (editLast) editLast.value = last === "—" ? "" : last;
-      }
-      box.style.display = isVisible ? "none" : "block";
+  const box = $("profileEditBox");
+
+  if (!box) return;
+
+  const isVisible = box.style.display === "block";
+
+  if (!isVisible) {
+
+    // =============================
+    // PRÉNOM
+    // =============================
+    const first =
+      $("profileFirstName")?.innerText || "";
+
+    const editFirst =
+      $("editFirstName");
+
+    if (editFirst) {
+      editFirst.value =
+        first === "—" ? "" : first;
     }
+
+
+    // =============================
+    // NOM
+    // =============================
+    const last =
+      $("profileLastName")?.innerText || "";
+
+    const editLast =
+      $("editLastName");
+
+    if (editLast) {
+      editLast.value =
+        last === "—" ? "" : last;
+    }
+
+
+    // =============================
+    // TÉLÉPHONE
+    // =============================
+    const telephone =
+      $("profileTelephone")?.innerText || "";
+
+    const editTelephone =
+      $("editTelephone");
+
+    if (editTelephone) {
+      editTelephone.value =
+        telephone === "—"
+          ? ""
+          : telephone;
+    }
+  }
+
+  box.style.display =
+    isVisible ? "none" : "block";
+}
 
   async function saveProfile() {
   const firstName = $("editFirstName")?.value.trim() || "";
