@@ -796,17 +796,36 @@
               <span class="profile-value" id="profileTotalSims">00</span>
             </div>
           </div>
-          <div id="profileEditBox" style="display:none; margin-top:20px;">
-            <div class="profile-grid">
-              <div class="profile-item">
-                <span class="profile-label">Prénom</span>
-                <input type="text" id="editFirstName" style="width:100%; padding:8px; border-radius:8px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:white;" />
-              </div>
-              <div class="profile-item">
-                <span class="profile-label">Nom</span>
-                <input type="text" id="editLastName" style="width:100%; padding:8px; border-radius:8px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:white;" />
-              </div>
-            </div>
+          <div class="profile-grid">
+
+  <div class="profile-item">
+    <span class="profile-label">Prénom</span>
+    <input
+      type="text"
+      id="editFirstName"
+      style="width:100%; padding:8px; border-radius:8px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:white;"
+    />
+  </div>
+
+  <div class="profile-item">
+    <span class="profile-label">Nom</span>
+    <input
+      type="text"
+      id="editLastName"
+      style="width:100%; padding:8px; border-radius:8px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:white;"
+    />
+  </div>
+
+  <div class="profile-item">
+    <span class="profile-label">Téléphone</span>
+    <input
+      type="tel"
+      id="editTelephone"
+      placeholder="Ex. 06 12 34 56 78"
+      style="width:100%; padding:8px; border-radius:8px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:white;"
+    />
+  </div>
+</div>
             <div style="margin-top:15px;">
               <button class="btn-new" onclick="saveProfile()">Enregistrer</button>
             </div>
