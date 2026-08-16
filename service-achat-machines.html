@@ -305,163 +305,623 @@
   </style>
 </head>
 <body>
- <div class="container">
+  <div class="container">
+
     <button onclick="goBackToDashboard()" class="btn-back">
       <i class="fas fa-arrow-left"></i> Retour au Dashboard
     </button>
 
+    <!-- =========================================================
+         EN-TÊTE DU SERVICE
+    ========================================================== -->
     <div class="service-header">
-      <div class="service-icon"><i class="fas fa-cogs"></i></div>
+      <div class="service-icon">
+        <i class="fas fa-cogs"></i>
+      </div>
+
       <h1 class="service-title">Achat de Machines via P2I</h1>
-      <p class="service-subtitle">Sourcing, négociation, garantie et pièces de rechange</p>
+
+      <p class="service-subtitle">
+        Sélection, sourcing, négociation et mise en relation avec les fournisseurs
+      </p>
     </div>
 
+
+    <!-- =========================================================
+         LES AVANTAGES P2I
+    ========================================================== -->
     <div class="card">
-      <h2><i class="fas fa-info-circle"></i> Pourquoi acheter vos machines avec P2I ?</h2>
-      <p style="color: #cbd5e1; line-height: 1.7; margin-bottom: 20px;">
-        La P2I vous accompagne dans l'acquisition de vos équipements industriels en vous donnant accès aux meilleurs fournisseurs mondiaux : 
-        <strong>Chine</strong> (Alibaba / Made-in-China), <strong>Corée du Sud</strong> et <strong>Europe</strong>. 
-        Nous vous garantissons des prix compétitifs, une qualité certifiée et un service après-vente réactif, grâce à notre réseau de partenaires sélectionnés pour leur fiabilité.
+
+      <h2>
+        <i class="fas fa-star"></i> Les avantages P2I
+      </h2>
+
+      <p style="color:#cbd5e1; line-height:1.7; margin-bottom:20px;">
+        La P2I n'est pas une boutique en ligne. Notre rôle est de vous
+        <strong>orienter vers des fournisseurs et fabricants adaptés à votre projet</strong>,
+        puis de faciliter votre démarche d'acquisition.
       </p>
+
+      <p style="color:#cbd5e1; line-height:1.7; margin-bottom:20px;">
+        La P2I travaille à la sélection et à la négociation de conditions
+        adaptées avec ses fournisseurs partenaires. Lorsque vous passez par
+        la P2I, vous pouvez ainsi bénéficier des <strong>conditions négociées
+        pour les utilisateurs de la plateforme</strong>, selon le fournisseur,
+        la machine et le projet concernés.
+      </p>
+
+
       <div class="features-grid">
-        <div class="feature"><i class="fas fa-dollar-sign"></i><h3>Prix négociés</h3><p>Jusqu'à 30% de réduction</p></div>
-        <div class="feature"><i class="fas fa-check-circle"></i><h3>Machines garanties</h3><p>Garantie 12 à 24 mois</p></div>
-        <div class="feature"><i class="fas fa-truck"></i><h3>Logistique intégrée</h3><p>Fret, dédouanement, livraison</p></div>
-        <div class="feature"><i class="fas fa-tools"></i><h3>Pièces de rechange</h3><p>Stock local pour maintenance</p></div>
-      </div>
-    </div>
 
-    <!-- Section Partenaires -->
-    <div class="card">
-      <h2><i class="fas fa-handshake"></i> Nos partenaires fournisseurs</h2>
-      <p style="color: #cbd5e1; margin-bottom: 20px; text-align: center;">
-        La P2I est fière de collaborer avec les meilleures plateformes et fabricants industriels mondiaux.
-      </p>
-      <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
-        <div style="text-align: center;">
-          <i class="fas fa-shopping-cart" style="font-size: 3rem; color: #ffc107;"></i>
-          <p style="color: #ffc107; margin-top: 10px; font-size: 0.8rem;">🇨🇳 Chine</p>
-          <p style="color: #94a3b8; font-size: 0.65rem;">Alibaba / Made-in-China</p>
-        </div>
-        <div style="text-align: center;">
-          <i class="fas fa-industry" style="font-size: 3rem; color: #4cc9f0;"></i>
-          <p style="color: #4cc9f0; margin-top: 10px; font-size: 0.8rem;">🇰🇷 Corée du Sud</p>
-          <p style="color: #94a3b8; font-size: 0.65rem;">Fabricants certifiés</p>
-        </div>
-        <div style="text-align: center;">
-          <i class="fas fa-shield-alt" style="font-size: 3rem; color: #28a745;"></i>
-          <p style="color: #28a745; margin-top: 10px; font-size: 0.8rem;">🇪🇺 Europe</p>
-          <p style="color: #94a3b8; font-size: 0.65rem;">Neuf & Reconditionné</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2><i class="fas fa-chart-line"></i> Comment ça marche ?</h2>
-      <div class="process-steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h4>Recherche</h4>
-          <p>Sélectionnez votre filière, votre UP et vos machines</p>
-        </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h4>Sélection</h4>
-          <p>Choisissez le modèle qui vous convient</p>
-        </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h4>Paiement sécurisé</h4>
-          <p>Paiement via les plateformes de vos fournisseurs</p>
-        </div>
-        <div class="step">
-          <div class="step-number">4</div>
-          <h4>Livraison</h4>
-          <p>Fret maritime ou aérien, dédouanement, livraison sur site</p>
-        </div>
-        <div class="step">
-          <div class="step-number">5</div>
-          <h4>Installation</h4>
-          <p>Formation et assistance technique incluses</p>
-        </div>
-      </div>
-      
-      <!-- Informations complémentaires sur le paiement -->
-      <div style="margin-top: 25px; padding: 15px; background: rgba(76,201,240,0.1); border-radius: 12px;">
-        <h4 style="color: #4cc9f0; margin-bottom: 10px;"><i class="fas fa-lock"></i> Paiement sécurisé</h4>
-        <p style="color: #cbd5e1; font-size: 0.85rem; line-height: 1.6;">
-          Tous les paiements sont effectués directement sur les plateformes de vos fournisseurs : 
-          <strong>Alibaba</strong> / <strong>Made-in-China</strong> (Chine) ou directement auprès des fabricants 
-          <strong>sud-coréens</strong> et <strong>européens</strong> via leurs systèmes de paiement sécurisés.
-          La P2I ne conserve ni vos informations bancaires ni vos fonds.
-        </p>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2><i class="fas fa-microchip"></i> Catalogue des machines</h2>
-      <p style="color: #94a3b8; margin-bottom: 20px;">Sélectionnez votre filière et votre unité de production.</p>
-      
-      <div class="filters">
-        <div class="filters-row">
-          <div class="filter-group">
-            <label><i class="fas fa-chart-line"></i> Filière</label>
-            <select id="filiereSelect" onchange="updateUnitesList()">
-              <option value="">Sélectionnez une filière...</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <label><i class="fas fa-industry"></i> Unités de production</label>
-            <select id="upSelect" onchange="loadMachines()">
-              <option value="">Sélectionnez une UP...</option>
-            </select>
-          </div>
-        </div>
-        <div id="upInfo" class="info-message" style="display: none;"></div>
-      </div>
-      
-      <div id="machineCountInfo" style="margin-top: 15px; font-size: 0.85rem; color: #4cc9f0;">
-        <i class="fas fa-microchip"></i> <span id="machineCountValue">0</span> machines disponibles
-      </div>
-
-      <div id="machinesGrid" class="machines-grid">
-        <div class="empty-state"><i class="fas fa-microchip" style="font-size: 3rem; margin-bottom: 15px; display: block;"></i><p>Sélectionnez une filière et une unité de production.</p></div>
-      </div>
-
-      <!-- Explication de la commande -->
-      <div style="margin-top: 25px; padding: 15px; background: rgba(34,197,94,0.1); border-radius: 12px; border-left: 3px solid #22c55e;">
-        <h4 style="color: #22c55e; margin-bottom: 10px;"><i class="fas fa-info-circle"></i> Comment se passe la commande ?</h4>
-        
-        <p style="color: #22c55e; font-size: 0.85rem; line-height: 1.6;">
-          La P2I vous donne accès à un réseau mondial de fournisseurs de machines industrielles, sélectionnés pour leur fiabilité et leur compétitivité :
-        </p>
-        
-        <ul style="color: #cbd5e1; font-size: 0.85rem; margin-top: 10px; margin-left: 20px; line-height: 1.8;">
-          <li>🇨🇳 <strong>Chine</strong> : Alibaba / Made-in-China — Large gamme, prix compétitifs, protection acheteur</li>
-          <li>🇰🇷 <strong>Corée du Sud</strong> : Fabricants sud-coréens — Haute fiabilité, qualité premium, garanties longues durée</li>
-          <li>🇪🇺 <strong>Europe</strong> : Fabricants européens — Machines neuves et reconditionnées, pièces disponibles</li>
-        </ul>
-        
-        <p style="color: #cbd5e1; font-size: 0.85rem; margin-top: 12px;">
-          <i class="fas fa-arrow-right" style="color: #22c55e;"></i> 
-          Pour chaque modèle, cliquez sur le bouton <strong>"Fournisseur"</strong> pour accéder directement au site du fabricant avec vos critères pré-remplis.
-        </p>
-        
-        <div style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 8px;">
-          <p style="color: #94a3b8; font-size: 0.75rem; margin: 0; text-align: center;">
-            <i class="fas fa-handshake" style="color: #22c55e;"></i> 
-            La P2I développe actuellement des partenariats exclusifs avec les meilleurs fabricants mondiaux.
+        <!-- Prix -->
+        <div class="feature">
+          <i class="fas fa-dollar-sign"></i>
+          <h3>Prix négociés</h3>
+          <p>
+            La P2I négocie en amont des conditions tarifaires préférentielles
+            avec ses fournisseurs partenaires.
           </p>
         </div>
-        
-        <p style="color: #22c55e; font-size: 0.8rem; margin-top: 12px;">
-          <i class="fas fa-check-circle"></i> La P2I ne conserve jamais vos informations bancaires.
-        </p>
-      </div>
-    </div>
-  </div>
-  </div>
 
+
+        <!-- Garantie -->
+        <div class="feature">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Garantie</h3>
+          <p>
+            Les conditions de garantie sont vérifiées et présentées
+            selon le fournisseur et le modèle sélectionné.
+          </p>
+        </div>
+
+
+        <!-- Pièces -->
+        <div class="feature">
+          <i class="fas fa-cogs"></i>
+          <h3>Pièces de rechange</h3>
+          <p>
+            La disponibilité des pièces et les conditions de maintenance
+            peuvent être vérifiées avant la mise en relation.
+          </p>
+        </div>
+
+
+        <!-- Assistance -->
+        <div class="feature">
+          <i class="fas fa-headset"></i>
+          <h3>Assistance technique</h3>
+          <p>
+            Les possibilités d'assistance, d'installation et de mise en service
+            sont étudiées avec le fournisseur.
+          </p>
+        </div>
+
+
+        <!-- Formation -->
+        <div class="feature">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <h3>Formation</h3>
+          <p>
+            Les possibilités de formation à l'utilisation de la machine
+            peuvent être négociées avec le fournisseur.
+          </p>
+        </div>
+
+
+        <!-- Documentation -->
+        <div class="feature">
+          <i class="fas fa-book"></i>
+          <h3>Documentation technique</h3>
+          <p>
+            Documentation, manuels et informations techniques peuvent être
+            demandés et vérifiés avant la commande.
+          </p>
+        </div>
+
+
+        <!-- Livraison -->
+        <div class="feature">
+          <i class="fas fa-truck"></i>
+          <h3>Conditions de livraison</h3>
+          <p>
+            Les conditions et modalités de livraison sont étudiées
+            avec le fournisseur selon votre projet.
+          </p>
+        </div>
+
+
+        <!-- SAV -->
+        <div class="feature">
+          <i class="fas fa-tools"></i>
+          <h3>SAV & maintenance</h3>
+          <p>
+            Les conditions de service après-vente et de maintenance
+            sont examinées avant la mise en relation.
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- Encadré important -->
+      <div style="
+        margin-top:25px;
+        padding:18px;
+        background:rgba(76,201,240,0.08);
+        border-left:3px solid #4cc9f0;
+        border-radius:10px;
+      ">
+
+        <h4 style="color:#4cc9f0; margin-bottom:10px;">
+          <i class="fas fa-handshake"></i>
+          Le rôle de la P2I
+        </h4>
+
+        <p style="
+          color:#cbd5e1;
+          font-size:0.9rem;
+          line-height:1.7;
+          margin:0;
+        ">
+          La P2I agit comme <strong>intermédiaire et facilitateur</strong>.
+          Elle vous aide à identifier une machine et un fournisseur adaptés,
+          puis transmet votre demande au fournisseur.
+          <strong>La P2I ne vend pas directement la machine et n'encaisse pas
+          le prix de celle-ci.</strong>
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         NOS PARTENAIRES FOURNISSEURS
+    ========================================================== -->
+    <div class="card">
+
+      <h2>
+        <i class="fas fa-handshake"></i> Nos partenaires fournisseurs
+      </h2>
+
+      <p style="
+        color:#cbd5e1;
+        margin-bottom:20px;
+        text-align:center;
+        line-height:1.6;
+      ">
+        La P2I développe progressivement un réseau de fournisseurs et
+        fabricants industriels afin de proposer des solutions adaptées
+        aux différents projets de production.
+      </p>
+
+
+      <div style="
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:40px;
+        flex-wrap:wrap;
+      ">
+
+        <!-- Chine -->
+        <div style="text-align:center;">
+
+          <i class="fas fa-shopping-cart"
+             style="font-size:3rem;color:#ffc107;"></i>
+
+          <p style="
+            color:#ffc107;
+            margin-top:10px;
+            font-size:0.85rem;
+          ">
+            🇨🇳 Chine
+          </p>
+
+          <p style="
+            color:#94a3b8;
+            font-size:0.7rem;
+          ">
+            Plateformes et fabricants industriels
+          </p>
+
+        </div>
+
+
+        <!-- Corée -->
+        <div style="text-align:center;">
+
+          <i class="fas fa-industry"
+             style="font-size:3rem;color:#4cc9f0;"></i>
+
+          <p style="
+            color:#4cc9f0;
+            margin-top:10px;
+            font-size:0.85rem;
+          ">
+            🇰🇷 Corée du Sud
+          </p>
+
+          <p style="
+            color:#94a3b8;
+            font-size:0.7rem;
+          ">
+            Fabricants industriels
+          </p>
+
+        </div>
+
+
+        <!-- Europe -->
+        <div style="text-align:center;">
+
+          <i class="fas fa-globe-europe"
+             style="font-size:3rem;color:#28a745;"></i>
+
+          <p style="
+            color:#28a745;
+            margin-top:10px;
+            font-size:0.85rem;
+          ">
+            🇪🇺 Europe
+          </p>
+
+          <p style="
+            color:#94a3b8;
+            font-size:0.7rem;
+          ">
+            Fabricants et distributeurs
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div style="
+        margin-top:25px;
+        padding:15px;
+        background:rgba(255,255,255,0.03);
+        border-radius:10px;
+        text-align:center;
+      ">
+
+        <p style="
+          color:#94a3b8;
+          font-size:0.8rem;
+          line-height:1.6;
+          margin:0;
+        ">
+          <i class="fas fa-info-circle" style="color:#4cc9f0;"></i>
+          Les conditions proposées dépendent du fournisseur,
+          du modèle de machine et des caractéristiques de votre projet.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         COMMENT FONCTIONNE LE SERVICE ACHAT MACHINES P2I ?
+    ========================================================== -->
+    <div class="card">
+
+      <h2>
+        <i class="fas fa-chart-line"></i>
+        Comment fonctionne le service Achat Machines P2I ?
+      </h2>
+
+
+      <p style="
+        color:#cbd5e1;
+        line-height:1.7;
+        margin-bottom:25px;
+        text-align:center;
+      ">
+        La P2I vous accompagne étape par étape jusqu'à la mise en relation
+        avec le fournisseur.
+      </p>
+
+
+      <div class="process-steps">
+
+
+        <!-- ÉTAPE 1 -->
+        <div class="step">
+
+          <div class="step-number">1</div>
+
+          <h4>Choisissez votre filière</h4>
+
+          <p>
+            Sélectionnez la filière industrielle correspondant
+            à votre projet.
+          </p>
+
+        </div>
+
+
+        <!-- ÉTAPE 2 -->
+        <div class="step">
+
+          <div class="step-number">2</div>
+
+          <h4>Choisissez votre UP</h4>
+
+          <p>
+            Sélectionnez l'unité de production
+            que vous souhaitez équiper.
+          </p>
+
+        </div>
+
+
+        <!-- ÉTAPE 3 -->
+        <div class="step">
+
+          <div class="step-number">3</div>
+
+          <h4>Choisissez votre machine</h4>
+
+          <p>
+            Consultez les machines disponibles et sélectionnez
+            le modèle correspondant à vos besoins.
+          </p>
+
+        </div>
+
+
+        <!-- ÉTAPE 4 -->
+        <div class="step">
+
+          <div class="step-number">4</div>
+
+          <h4>Demandez un devis provisoire P2I</h4>
+
+          <p>
+            Obtenez une première estimation des caractéristiques
+            et du coût de la machine sélectionnée.
+          </p>
+
+        </div>
+
+
+        <!-- ÉTAPE 5 -->
+        <div class="step">
+
+          <div class="step-number">5</div>
+
+          <h4>Enregistrez la machine</h4>
+
+          <p>
+            Retrouvez votre sélection dans la rubrique
+            <strong>« Mes machines »</strong> de votre Dashboard.
+          </p>
+
+        </div>
+
+
+        <!-- ÉTAPE 6 -->
+        <div class="step">
+
+          <div class="step-number">6</div>
+
+          <h4>Demandez la mise en relation</h4>
+
+          <p>
+            Envoyez votre demande à la P2I afin que celle-ci
+            puisse la transmettre au fournisseur concerné.
+          </p>
+
+        </div>
+
+
+        <!-- ÉTAPE 7 -->
+        <div class="step">
+
+          <div class="step-number">7</div>
+
+          <h4>Le fournisseur vous contacte</h4>
+
+          <p>
+            La P2I transmet votre demande au fournisseur.
+            Celui-ci vous contacte directement pour établir
+            l'offre définitive.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- Modèle économique -->
+      <div style="
+        margin-top:25px;
+        padding:18px;
+        background:rgba(76,201,240,0.1);
+        border-radius:12px;
+        border-left:3px solid #4cc9f0;
+      ">
+
+        <h4 style="
+          color:#4cc9f0;
+          margin-bottom:10px;
+        ">
+          <i class="fas fa-info-circle"></i>
+          À retenir
+        </h4>
+
+        <p style="
+          color:#cbd5e1;
+          font-size:0.88rem;
+          line-height:1.7;
+          margin:0;
+        ">
+          La P2I facilite la recherche, la sélection et la mise en relation
+          avec les fournisseurs.
+          <strong>Le fournisseur établit ensuite l'offre définitive
+          directement avec vous.</strong>
+          Vous bénéficiez, lorsque cela est applicable, des conditions
+          négociées par la P2I avec ses fournisseurs partenaires.
+        </p>
+
+      </div>
+
+
+      <!-- Paiement -->
+      <div style="
+        margin-top:18px;
+        padding:15px;
+        background:rgba(255,255,255,0.03);
+        border-radius:10px;
+      ">
+
+        <h4 style="
+          color:#94a3b8;
+          margin-bottom:8px;
+        ">
+          <i class="fas fa-lock"></i>
+          Paiement
+        </h4>
+
+        <p style="
+          color:#94a3b8;
+          font-size:0.82rem;
+          line-height:1.6;
+          margin:0;
+        ">
+          Les modalités de paiement sont définies directement entre
+          l'utilisateur et le fournisseur dans le cadre de l'offre
+          définitive. La P2I ne conserve pas les informations bancaires
+          de l'utilisateur et n'encaisse pas le prix de la machine.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         CATALOGUE DES MACHINES
+    ========================================================== -->
+    <div class="card">
+
+      <h2>
+        <i class="fas fa-microchip"></i>
+        Catalogue des machines
+      </h2>
+
+      <p style="
+        color:#94a3b8;
+        margin-bottom:20px;
+      ">
+        Sélectionnez votre filière et votre unité de production
+        pour consulter les machines disponibles.
+      </p>
+
+
+      <div class="filters">
+
+        <div class="filters-row">
+
+          <!-- FILIÈRE -->
+          <div class="filter-group">
+
+            <label>
+              <i class="fas fa-chart-line"></i>
+              Filière
+            </label>
+
+            <select
+              id="filiereSelect"
+              onchange="updateUnitesList()"
+            >
+              <option value="">
+                Sélectionnez une filière...
+              </option>
+            </select>
+
+          </div>
+
+
+          <!-- UP -->
+          <div class="filter-group">
+
+            <label>
+              <i class="fas fa-industry"></i>
+              Unités de production
+            </label>
+
+            <select
+              id="upSelect"
+              onchange="loadMachines()"
+            >
+              <option value="">
+                Sélectionnez une UP...
+              </option>
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="upInfo"
+          class="info-message"
+          style="display:none;"
+        ></div>
+
+      </div>
+
+
+      <!-- Nombre de machines -->
+      <div
+        id="machineCountInfo"
+        style="
+          margin-top:15px;
+          font-size:0.85rem;
+          color:#4cc9f0;
+        "
+      >
+
+        <i class="fas fa-microchip"></i>
+
+        <span id="machineCountValue">0</span>
+        machines disponibles
+
+      </div>
+
+
+      <!-- Grille des machines -->
+      <div
+        id="machinesGrid"
+        class="machines-grid"
+      >
+
+        <div class="empty-state">
+
+          <i
+            class="fas fa-microchip"
+            style="
+              font-size:3rem;
+              margin-bottom:15px;
+              display:block;
+            "
+          ></i>
+
+          <p>
+            Sélectionnez une filière et une unité de production.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
   <script>
     let machinesData = {};
     let filieresList = [];
