@@ -1979,119 +1979,144 @@ function renderRelations() {
                     </div>
 
 
-                    <!-- ======================================== -->
-                    <!-- ACTIONS ADMINISTRATEUR -->
-                    <!-- ======================================== -->
+                    <!-- ================================================= -->
+<!-- ACTIONS ADMINISTRATEUR -->
+<!-- ================================================= -->
 
-                    <div class="relation-actions">
+<div class="relation-actions">
 
+    ${
+        rel.status === 'pending'
+            ? `
 
-                        ${
-                            rel.status === 'pending'
-                                ? `
+                <button
+                    class="btn-action btn-contacting"
+                    onclick="changeStatus(
+                        '${rel.id}',
+                        'supplier_to_contact'
+                    )">
 
-                                    <button
-                                        class="btn-action btn-contacting"
-                                        onclick="changeStatus(
-                                            '${rel.id}',
-                                            'contacting_supplier'
-                                        )">
+                    📞 Contacter le fournisseur
 
-                                        📞 Fournisseur contacté
+                </button>
 
-                                    </button>
-
-
-                                    <button
-                                        class="btn-action btn-contact"
-                                        onclick="changeStatus(
-                                            '${rel.id}',
-                                            'contacted'
-                                        )">
-
-                                        🤝 Mise en relation en cours
-
-                                    </button>
-
-                                  `
-                                : ''
-                        }
+              `
+            : ''
+    }
 
 
-                        ${
-                            rel.status === 'contacting_supplier'
-                                ? `
+    ${
+        rel.status === 'supplier_to_contact'
+            ? `
 
-                                    <button
-                                        class="btn-action btn-contacted"
-                                        onclick="changeStatus(
-                                            '${rel.id}',
-                                            'contacted'
-                                        )">
+                <button
+                    class="btn-action btn-contacting"
+                    onclick="changeStatus(
+                        '${rel.id}',
+                        'supplier_contacted'
+                    )">
 
-                                        🤝 Mise en relation en cours
+                    ✅ Fournisseur contacté
 
-                                    </button>
+                </button>
 
-                                  `
-                                : ''
-                        }
-
-
-                        ${
-                            rel.status === 'contacted'
-                                ? `
-
-                                    <button
-                                        class="btn-action btn-concluded"
-                                        onclick="changeStatus(
-                                            '${rel.id}',
-                                            'concluded'
-                                        )">
-
-                                        ✅ Demande conclue
-
-                                    </button>
-
-                                  `
-                                : ''
-                        }
+              `
+            : ''
+    }
 
 
-                        ${
-                            rel.status !== 'cancelled' &&
-                            rel.status !== 'concluded'
-                                ? `
+    ${
+        rel.status === 'supplier_contacted'
+            ? `
 
-                                    <button
-                                        class="btn-action btn-cancel"
-                                        onclick="changeStatus(
-                                            '${rel.id}',
-                                            'cancelled'
-                                        )">
+                <button
+                    class="btn-action btn-contacted"
+                    onclick="changeStatus(
+                        '${rel.id}',
+                        'offer_preparation'
+                    )">
 
-                                        ❌ Annuler
+                    📄 Offre en préparation
 
-                                    </button>
+                </button>
 
-                                  `
-                                : ''
-                        }
-
-
-                        <button
-                            class="btn-action btn-add-note"
-                            onclick="openNoteModal(
-                                '${rel.id}'
-                            )">
-
-                            ✏️ Ajouter une note
-
-                        </button>
+              `
+            : ''
+    }
 
 
-                    </div>
+    ${
+        rel.status === 'offer_preparation'
+            ? `
 
+                <button
+                    class="btn-action btn-contacted"
+                    onclick="changeStatus(
+                        '${rel.id}',
+                        'user_connected'
+                    )">
+
+                    🤝 Mettre le demandeur en relation
+
+                </button>
+
+              `
+            : ''
+    }
+
+
+    ${
+        rel.status === 'user_connected'
+            ? `
+
+                <button
+                    class="btn-action btn-concluded"
+                    onclick="changeStatus(
+                        '${rel.id}',
+                        'concluded'
+                    )">
+
+                    ✅ Conclure la demande
+
+                </button>
+
+              `
+            : ''
+    }
+
+
+    ${
+        rel.status !== 'cancelled' &&
+        rel.status !== 'concluded'
+            ? `
+
+                <button
+                    class="btn-action btn-cancel"
+                    onclick="changeStatus(
+                        '${rel.id}',
+                        'cancelled'
+                    )">
+
+                    ❌ Annuler
+
+                </button>
+
+              `
+            : ''
+    }
+
+
+    <button
+        class="btn-action btn-add-note"
+        onclick="openNoteModal(
+            '${rel.id}'
+        )">
+
+        ✏️ Ajouter une note
+
+    </button>
+
+</div>
 
                 </div>
 
