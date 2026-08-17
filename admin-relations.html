@@ -746,32 +746,42 @@
     // ============================================================
 
     const STATUS_LABELS = {
-        pending: {
-            label: '⏳ En attente',
-            class: 'status-pending'
-        },
 
-        contacting_supplier: {
-            label: '📞 En attente réponse fournisseur',
-            class: 'status-contacting_supplier'
-        },
+    pending: {
+        label: '🟡 Demande reçue',
+        class: 'status-pending'
+    },
 
-        contacted: {
-            label: '🤝 En cours de discussion',
-            class: 'status-contacted'
-        },
+    supplier_to_contact: {
+        label: '🟠 Fournisseur à contacter',
+        class: 'status-supplier_to_contact'
+    },
 
-        concluded: {
-            label: '✅ Partenariat établi',
-            class: 'status-concluded'
-        },
+    supplier_contacted: {
+        label: '🔵 Fournisseur contacté',
+        class: 'status-supplier_contacted'
+    },
 
-        cancelled: {
-            label: '❌ Annulée',
-            class: 'status-cancelled'
-        }
-    };
+    offer_preparation: {
+        label: '🟣 Offre en préparation',
+        class: 'status-offer_preparation'
+    },
 
+    user_connected: {
+        label: '🟢 Demandeur mis en relation',
+        class: 'status-user_connected'
+    },
+
+    concluded: {
+        label: '✅ Demande conclue',
+        class: 'status-concluded'
+    },
+
+    cancelled: {
+        label: '❌ Annulée',
+        class: 'status-cancelled'
+    }
+};
 
     // ============================================================
     // ORIGINES
