@@ -613,15 +613,12 @@
 
             <span class="filter-label">🔍 Filtrer</span>
 
-           <select id="filterStatus" onchange="applyFilters()">
+          <select id="filterStatus" onchange="applyFilters()">
+
     <option value="all">Tous les statuts</option>
 
     <option value="pending">
         🟡 Demandes reçues
-    </option>
-
-    <option value="supplier_to_contact">
-        🟠 Fournisseurs à contacter
     </option>
 
     <option value="supplier_contacted">
@@ -643,6 +640,7 @@
     <option value="cancelled">
         ❌ Annulées
     </option>
+
 </select>
             <input
                 type="text"
@@ -759,16 +757,11 @@
     // STATUTS
     // ============================================================
 
-    const STATUS_LABELS = {
+   const STATUS_LABELS = {
 
     pending: {
         label: '🟡 Demande reçue',
         class: 'status-pending'
-    },
-
-    supplier_to_contact: {
-        label: '🟠 Fournisseur à contacter',
-        class: 'status-supplier_to_contact'
     },
 
     supplier_contacted: {
@@ -2013,7 +2006,7 @@ function renderRelations() {
                     class="btn-action btn-contacting"
                     onclick="changeStatus(
                         '${rel.id}',
-                        'supplier_contacted'
+                       'supplier_contacted'
                     )">
 
                     ✅ Fournisseur contacté
@@ -2203,9 +2196,6 @@ function renderRelations() {
     pending:
         'demande reçue',
 
-    supplier_to_contact:
-        'fournisseur à contacter',
-
     supplier_contacted:
         'fournisseur contacté',
 
@@ -2221,7 +2211,6 @@ function renderRelations() {
     cancelled:
         'annulée'
 };
-
 
         const confirmMsg =
             `Passer la demande "${relation.product}" ` +
