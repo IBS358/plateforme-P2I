@@ -2127,7 +2127,7 @@ function renderRelations() {
             relations.filter(
                 r =>
                     r.status ===
-                    'contacting_supplier'
+                   'supplier_to_contact'
             ).length;
 
 
@@ -2136,7 +2136,7 @@ function renderRelations() {
         ).textContent =
             relations.filter(
                 r =>
-                    r.status === 'contacted'
+                    r.status === 'supplier_contacted'
             ).length;
 
 
