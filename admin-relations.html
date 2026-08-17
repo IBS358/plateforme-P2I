@@ -1531,10 +1531,10 @@ async function loadRelations() {
 
 
     // ============================================================
-    // AFFICHAGE
-    // ============================================================
+// AFFICHAGE DES DEMANDES
+// ============================================================
 
-    function renderRelations() {
+function renderRelations() {
 
     const container =
         document.getElementById('relationsList');
@@ -1555,10 +1555,9 @@ async function loadRelations() {
 
     if (currentFilter !== 'all') {
 
-        filtered =
-            filtered.filter(
-                r => r.status === currentFilter
-            );
+        filtered = filtered.filter(
+            r => r.status === currentFilter
+        );
     }
 
 
@@ -1568,31 +1567,27 @@ async function loadRelations() {
 
     if (currentSearch) {
 
-        filtered =
-            filtered.filter(rel => {
+        filtered = filtered.filter(rel => {
 
-                const searchStr = [
+            const searchStr = [
 
-                    rel.product,
-                    rel.supplier,
-                    rel.userDisplayName,
-                    rel.email,
-                    rel.userId,
-                    rel.modelId,
-                    rel.origin,
-                    rel.telephone,
-                    rel.role
+                rel.product,
+                rel.supplier,
+                rel.userDisplayName,
+                rel.email,
+                rel.userId,
+                rel.modelId,
+                rel.origin,
+                rel.telephone,
+                rel.role
 
-                ]
-                .filter(Boolean)
-                .join(' ')
-                .toLowerCase();
+            ]
+            .filter(Boolean)
+            .join(' ')
+            .toLowerCase();
 
-
-                return searchStr.includes(
-                    currentSearch
-                );
-            });
+            return searchStr.includes(currentSearch);
+        });
     }
 
 
@@ -1661,128 +1656,39 @@ async function loadRelations() {
                 'Nom non renseigné';
 
 
+            // ==================================================
+            // CARTE DE DEMANDE
+            // ==================================================
+
             return `
 
                 <div class="relation-card"
                      data-id="${escapeHtml(rel.id)}">
 
 
-                    <!-- ================================================= -->
+                    <!-- ======================================== -->
                     <!-- EN-TÊTE -->
-                    <!-- ================================================= -->
+                    <!-- ======================================== -->
 
                     <div class="relation-header">
 
                         <div>
 
                             <div class="relation-product">
+
+                                <i class="fas fa-cogs"></i>
+
                                 ${escapeHtml(
                                     rel.product ||
-                                    'Produit non spécifié'
+                                    'Machine non spécifiée'
                                 )}
-                            </div>
-
-
-                            <!-- ============================= -->
-                            <!-- DEMANDEUR -->
-                            <!-- ============================= -->
-
-                            <div class="relation-user"
-                                 style="
-                                    margin-top:8px;
-                                    line-height:1.5;
-                                 ">
-
-                                <div style="
-                                    font-weight:600;
-                                    color:#e2e8f0;
-                                    font-size:0.95rem;
-                                ">
-
-                                    <i class="fas fa-user"></i>
-
-                                    ${escapeHtml(
-                                        userDisplay
-                                    )}
-
-                                </div>
-
-
-                                ${
-                                    rel.email
-                                        ? `
-                                            <div style="
-                                                color:#94a3b8;
-                                                font-size:0.8rem;
-                                                margin-top:4px;
-                                            ">
-
-                                                <i class="fas fa-envelope"></i>
-
-                                                ${escapeHtml(
-                                                    rel.email
-                                                )}
-
-                                            </div>
-                                          `
-                                        : ''
-                                }
-
-
-                                ${
-                                    rel.telephone
-                                        ? `
-                                            <div style="
-                                                color:#94a3b8;
-                                                font-size:0.8rem;
-                                                margin-top:4px;
-                                            ">
-
-                                                <i class="fas fa-phone"></i>
-
-                                                ${escapeHtml(
-                                                    rel.telephone
-                                                )}
-
-                                            </div>
-                                          `
-                                        : `
-                                            <div style="
-                                                color:#64748b;
-                                                font-size:0.75rem;
-                                                margin-top:4px;
-                                            ">
-
-                                                <i class="fas fa-phone-slash"></i>
-
-                                                Téléphone non renseigné
-
-                                            </div>
-                                          `
-                                }
-
-
-                                <div style="
-                                    color:#64748b;
-                                    font-size:0.7rem;
-                                    margin-top:4px;
-                                ">
-
-                                    ID :
-                                    ${escapeHtml(
-                                        rel.userId || ''
-                                    )}
-
-                                </div>
 
                             </div>
 
                         </div>
 
 
-                        <!-- ============================= -->
                         <!-- STATUT -->
-                        <!-- ============================= -->
 
                         <span class="
                             relation-status
@@ -1796,34 +1702,249 @@ async function loadRelations() {
                     </div>
 
 
-                    <!-- ================================================= -->
-                    <!-- INFORMATIONS PRINCIPALES -->
-                    <!-- ================================================= -->
+                    <!-- ======================================== -->
+                    <!-- DEMANDEUR -->
+                    <!-- ======================================== -->
 
-                    <div class="relation-meta">
+                    <div style="
+                        margin-top:15px;
+                        padding:15px;
+                        background:rgba(76,201,240,0.06);
+                        border-radius:12px;
+                        border-left:3px solid #4cc9f0;
+                    ">
 
-                        <span>
+                        <div style="
+                            color:#4cc9f0;
+                            font-size:0.7rem;
+                            font-weight:700;
+                            text-transform:uppercase;
+                            letter-spacing:0.6px;
+                            margin-bottom:10px;
+                        ">
 
-                            <i class="fas fa-building"></i>
+                            <i class="fas fa-user"></i>
+                            Demandeur
+
+                        </div>
+
+
+                        <div style="
+                            color:#e2e8f0;
+                            font-size:0.95rem;
+                            font-weight:600;
+                            margin-bottom:6px;
+                        ">
+
+                            ${escapeHtml(userDisplay)}
+
+                        </div>
+
+
+                        ${
+                            rel.email
+                                ? `
+                                    <div style="
+                                        color:#94a3b8;
+                                        font-size:0.8rem;
+                                        margin-top:4px;
+                                    ">
+
+                                        <i class="fas fa-envelope"></i>
+
+                                        ${escapeHtml(rel.email)}
+
+                                    </div>
+                                  `
+                                : `
+                                    <div style="
+                                        color:#64748b;
+                                        font-size:0.8rem;
+                                    ">
+
+                                        <i class="fas fa-envelope"></i>
+
+                                        Email non renseigné
+
+                                    </div>
+                                  `
+                        }
+
+
+                        ${
+                            rel.telephone
+                                ? `
+                                    <div style="
+                                        color:#94a3b8;
+                                        font-size:0.8rem;
+                                        margin-top:4px;
+                                    ">
+
+                                        <i class="fas fa-phone"></i>
+
+                                        ${escapeHtml(rel.telephone)}
+
+                                    </div>
+                                  `
+                                : `
+                                    <div style="
+                                        color:#64748b;
+                                        font-size:0.8rem;
+                                        margin-top:4px;
+                                    ">
+
+                                        <i class="fas fa-phone-slash"></i>
+
+                                        Téléphone non renseigné
+
+                                    </div>
+                                  `
+                        }
+
+
+                        <div style="
+                            color:#64748b;
+                            font-size:0.7rem;
+                            margin-top:8px;
+                        ">
+
+                            ID utilisateur :
+                            ${escapeHtml(rel.userId || '—')}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ======================================== -->
+                    <!-- ÉQUIPEMENT -->
+                    <!-- ======================================== -->
+
+                    <div style="
+                        margin-top:12px;
+                        padding:15px;
+                        background:rgba(255,255,255,0.04);
+                        border-radius:12px;
+                    ">
+
+                        <div style="
+                            color:#4cc9f0;
+                            font-size:0.7rem;
+                            font-weight:700;
+                            text-transform:uppercase;
+                            letter-spacing:0.6px;
+                            margin-bottom:10px;
+                        ">
+
+                            <i class="fas fa-industry"></i>
+                            Équipement demandé
+
+                        </div>
+
+
+                        <div style="
+                            color:#e2e8f0;
+                            font-size:0.9rem;
+                            font-weight:600;
+                        ">
+
+                            ${escapeHtml(
+                                rel.product ||
+                                'Machine non spécifiée'
+                            )}
+
+                        </div>
+
+
+                        <div style="
+                            color:#94a3b8;
+                            font-size:0.8rem;
+                            margin-top:6px;
+                        ">
+
+                            <i class="fas fa-microchip"></i>
+
+                            Modèle / ID :
+
+                            <strong style="color:#cbd5e1;">
+
+                                ${escapeHtml(
+                                    rel.modelId ||
+                                    'Non spécifié'
+                                )}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ======================================== -->
+                    <!-- FOURNISSEUR -->
+                    <!-- ======================================== -->
+
+                    <div style="
+                        margin-top:12px;
+                        padding:15px;
+                        background:rgba(255,255,255,0.04);
+                        border-radius:12px;
+                    ">
+
+                        <div style="
+                            color:#4cc9f0;
+                            font-size:0.7rem;
+                            font-weight:700;
+                            text-transform:uppercase;
+                            letter-spacing:0.6px;
+                            margin-bottom:10px;
+                        ">
+
+                            <i class="fas fa-handshake"></i>
+                            Fournisseur identifié
+
+                        </div>
+
+
+                        <div style="
+                            color:#e2e8f0;
+                            font-size:0.9rem;
+                            font-weight:600;
+                        ">
 
                             ${escapeHtml(
                                 rel.supplier ||
                                 'Fournisseur non précisé'
                             )}
 
-                        </span>
+                        </div>
 
 
-                        <span>
+                        <div style="
+                            color:#94a3b8;
+                            font-size:0.8rem;
+                            margin-top:6px;
+                        ">
 
                             ${originLabel}
 
-                        </span>
+                        </div>
 
+                    </div>
+
+
+                    <!-- ======================================== -->
+                    <!-- INFORMATIONS DE SUIVI -->
+                    <!-- ======================================== -->
+
+                    <div class="relation-meta"
+                         style="margin-top:14px;">
 
                         <span>
 
                             <i class="fas fa-calendar-alt"></i>
+
+                            Demande reçue :
 
                             ${formatDateFR(
                                 rel.createdAt
@@ -1834,60 +1955,9 @@ async function loadRelations() {
                     </div>
 
 
-                    <!-- ================================================= -->
-                    <!-- DÉTAILS DE LA DEMANDE -->
-                    <!-- ================================================= -->
-
-                    <div class="machine-details">
-
-
-                        <div class="machine-detail-item">
-
-                            <span class="label">
-                                Modèle / ID
-                            </span>
-
-                            <span class="value">
-
-                                ${escapeHtml(
-                                    rel.modelId ||
-                                    'Non spécifié'
-                                )}
-
-                            </span>
-
-                        </div>
-
-
-                        ${
-                            rel.role
-                                ? `
-                                    <div class="machine-detail-item">
-
-                                        <span class="label">
-                                            Rôle utilisateur
-                                        </span>
-
-                                        <span class="value">
-
-                                            ${escapeHtml(
-                                                rel.role
-                                            )}
-
-                                        </span>
-
-                                    </div>
-                                  `
-                                : ''
-                        }
-
-
-                    </div>
-
-
-                    <!-- ================================================= -->
+                    <!-- ======================================== -->
                     <!-- ACTIONS ADMINISTRATEUR -->
-                    <!-- ================================================= -->
+                    <!-- ======================================== -->
 
                     <div class="relation-actions">
 
@@ -1903,7 +1973,7 @@ async function loadRelations() {
                                             'contacting_supplier'
                                         )">
 
-                                        📞 En attente réponse fournisseur
+                                        📞 Fournisseur contacté
 
                                     </button>
 
@@ -1915,7 +1985,7 @@ async function loadRelations() {
                                             'contacted'
                                         )">
 
-                                        🤝 Passer en cours
+                                        🤝 Mise en relation en cours
 
                                     </button>
 
@@ -1935,7 +2005,7 @@ async function loadRelations() {
                                             'contacted'
                                         )">
 
-                                        🤝 Passer en cours de discussion
+                                        🤝 Mise en relation en cours
 
                                     </button>
 
@@ -1955,7 +2025,7 @@ async function loadRelations() {
                                             'concluded'
                                         )">
 
-                                        ✅ Partenariat établi
+                                        ✅ Demande conclue
 
                                     </button>
 
@@ -2005,7 +2075,6 @@ async function loadRelations() {
 
         }).join('');
 }
-
 
     // ============================================================
     // STATISTIQUES
