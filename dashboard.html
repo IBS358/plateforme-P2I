@@ -1691,9 +1691,6 @@ function openSimulationFromSupabase(id, type) {
 }
 
     // =============================
-    // AUTH INIT
-    // =============================
-    // =============================
 // AUTH INIT - VERSION CORRIGÉE
 // =============================
 async function initDashboard() {
@@ -2897,114 +2894,391 @@ async function deleteDevisSupabase(id) {
     }
 
     // ==============================================
-    // GESTION DES MISES EN RELATION (Supabase)
+// GESTION DES MISES EN RELATION (Supabase)
+// ==============================================
+async function loadRelations() {
+
+  const container = document.getElementById('relationsContainer');
+  if (!container) return;
+
+  try {
+
+    const {
+      data: { user },
+      error: userError
+    } = await supabaseClient.auth.getUser();
+
+    if (userError || !user) {
+
+      container.innerHTML = `
+        <div class="empty-relations">
+          <i class="fas fa-handshake"></i>
+          <p>Connectez-vous pour voir vos demandes de mise en relation.</p>
+
+          <button
+            class="btn-new"
+            onclick="window.location.href='login.html?mode=login'"
+            style="margin-top:15px;">
+            Se connecter
+          </button>
+        </div>
+      `;
+
+      return;
+    }
+
+
     // ==============================================
-    async function loadRelations() {
-      const container = document.getElementById('relationsContainer');
-      if (!container) return;
+    // RÉCUPÉRATION DES DEMANDES
+    // ==============================================
 
-      try {
-        const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
-        if (userError || !user) {
-          container.innerHTML = `
-            <div class="empty-relations">
-              <i class="fas fa-handshake"></i>
-              <p>Connectez-vous pour voir vos demandes de mise en relation.</p>
-              <button class="btn-new" onclick="window.location.href='login.html?mode=login'" style="margin-top:15px;">Se connecter</button>
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from('user_contacts')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('created_at', {
+        ascending: false
+      });
+
+
+    if (error) {
+
+      console.error(
+        'Erreur chargement relations:',
+        error
+      );
+
+      container.innerHTML =
+        '<p style="color:#ef4444;">Erreur de chargement.</p>';
+
+      return;
+    }
+
+
+    // ==============================================
+    // AUCUNE DEMANDE
+    // ==============================================
+
+    if (!data || data.length === 0) {
+
+      container.innerHTML = `
+        <div class="empty-relations">
+
+          <i class="fas fa-handshake"></i>
+
+          <p>
+            Vous n'avez pas encore de demande
+            de mise en relation.
+          </p>
+
+          <p style="
+            font-size:0.85rem;
+            margin-top:5px;
+          ">
+            Explorez les machines et cliquez sur
+            <strong>"Demander la mise en relation"</strong>.
+          </p>
+
+          <button
+            class="btn-new"
+            onclick="window.location.href='service-achat-machines.html'"
+            style="margin-top:15px;">
+
+            <i class="fas fa-search"></i>
+            Explorer les machines
+
+          </button>
+
+        </div>
+      `;
+
+      return;
+    }
+
+
+    // ==============================================
+    // ORIGINES
+    // ==============================================
+
+    const originLabels = {
+
+      chinese: '🇨🇳 Chine',
+
+      korean: '🇰🇷 Corée du Sud',
+
+      europe: '🇪🇺 Europe',
+
+      china: '🇨🇳 Chine',
+
+      korea: '🇰🇷 Corée du Sud'
+
+    };
+
+
+    // ==============================================
+    // NOUVEAUX STATUTS P2I
+    // ==============================================
+
+    const statusLabels = {
+
+      pending: {
+        label: '🟡 Demande reçue',
+        class: 'status-pending'
+      },
+
+      supplier_to_contact: {
+        label: '🟠 Fournisseur à contacter',
+        class: 'status-supplier_to_contact'
+      },
+
+      supplier_contacted: {
+        label: '🔵 Fournisseur contacté',
+        class: 'status-supplier_contacted'
+      },
+
+      offer_preparation: {
+        label: '🟣 Offre en préparation',
+        class: 'status-offer_preparation'
+      },
+
+      user_connected: {
+        label: '🟢 Demandeur mis en relation',
+        class: 'status-user_connected'
+      },
+
+      concluded: {
+        label: '✅ Demande conclue',
+        class: 'status-concluded'
+      },
+
+      cancelled: {
+        label: '❌ Demande annulée',
+        class: 'status-cancelled'
+      }
+
+    };
+
+
+    // ==============================================
+    // AFFICHAGE DES DEMANDES
+    // ==============================================
+
+    container.innerHTML = data.map(rel => {
+
+      const status =
+        statusLabels[rel.status] ||
+        statusLabels.pending;
+
+
+      return `
+
+        <div
+          class="relation-card"
+          data-id="${escapeHtml(rel.id)}">
+
+          <div class="relation-info">
+
+            <div class="relation-product">
+
+              ${escapeHtml(
+                rel.product_name ||
+                'Machine non spécifiée'
+              )}
+
             </div>
-          `;
-          return;
-        }
 
-        const { data, error } = await supabaseClient
-          .from('user_contacts')
-          .select('*')
-          .eq('user_id', user.id)
-          .order('created_at', { ascending: false });
 
-        if (error) {
-          console.error('Erreur chargement relations:', error);
-          container.innerHTML = '<p style="color:#ef4444;">Erreur de chargement.</p>';
-          return;
-        }
+            <div class="relation-supplier">
 
-        if (!data || data.length === 0) {
-          container.innerHTML = `
-            <div class="empty-relations">
-              <i class="fas fa-handshake"></i>
-              <p>Vous n'avez pas encore de demande de mise en relation.</p>
-              <p style="font-size:0.85rem; margin-top:5px;">Explorez les machines et cliquez sur <strong>"Demander la mise en relation"</strong>.</p>
-              <button class="btn-new" onclick="window.location.href='service-achat-machines.html'" style="margin-top:15px;">
-                <i class="fas fa-search"></i> Explorer les machines
-              </button>
+              <i class="fas fa-building"></i>
+
+              ${escapeHtml(
+                rel.supplier_name ||
+                'Fournisseur non précisé'
+              )}
+
+              <span style="
+                margin-left:12px;
+                font-size:0.8rem;
+                color:#64748b;
+              ">
+
+                ${
+                  originLabels[rel.origin] ||
+                  rel.origin ||
+                  '🌍'
+                }
+
+              </span>
+
             </div>
-          `;
-          return;
-        }
 
-        const originLabels = { chinese: '🇨🇳 Chine', korean: '🇰🇷 Corée du Sud', europe: '🇪🇺 Europe' };
-        const statusLabels = {
-          pending: { label: '⏳ En attente', class: 'status-pending' },
-          contacted: { label: '🤝 En cours de discussion', class: 'status-contacted' },
-          concluded: { label: '✅ Partenariat établi', class: 'status-concluded' },
-          cancelled: { label: '❌ Annulée', class: 'status-cancelled' }
-        };
 
-        container.innerHTML = data.map(rel => {
-          const status = statusLabels[rel.status] || statusLabels['pending'];
-          return `
-            <div class="relation-card" data-id="${rel.id}">
-              <div class="relation-info">
-                <div class="relation-product">${escapeHtml(rel.product_name)}</div>
-                <div class="relation-supplier">
-                  <i class="fas fa-building"></i> ${escapeHtml(rel.supplier_name)}
-                  <span style="margin-left:12px;font-size:0.8rem;color:#64748b;">${originLabels[rel.origin] || rel.origin || '🌍'}</span>
-                </div>
-                <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px;">
-                  <i class="fas fa-cogs"></i> Réf: ${escapeHtml(rel.model_id || 'Non spécifié')}
-                </div>
-                <div class="relation-date">
-                  <i class="fas fa-calendar-alt"></i> Demandé le ${new Date(rel.created_at).toLocaleDateString('fr-FR')} à ${new Date(rel.created_at).toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'})}
-                </div>
-              </div>
-              <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-                <span class="relation-status ${status.class}">${status.label}</span>
-                ${rel.status === 'pending' ? `
-                  <button class="btn-relation-sm btn-relation-cancel" onclick="cancelRelation('${rel.id}')">
-                    <i class="fas fa-times"></i> Annuler
+            <div style="
+              font-size:0.8rem;
+              color:#94a3b8;
+              margin-top:4px;
+            ">
+
+              <i class="fas fa-cogs"></i>
+
+              Réf:
+
+              ${escapeHtml(
+                rel.model_id ||
+                'Non spécifié'
+              )}
+
+            </div>
+
+
+            <div class="relation-date">
+
+              <i class="fas fa-calendar-alt"></i>
+
+              Demandé le
+
+              ${new Date(
+                rel.created_at
+              ).toLocaleDateString(
+                'fr-FR'
+              )}
+
+              à
+
+              ${new Date(
+                rel.created_at
+              ).toLocaleTimeString(
+                'fr-FR',
+                {
+                  hour: '2-digit',
+                  minute: '2-digit'
+                }
+              )}
+
+            </div>
+
+          </div>
+
+
+          <div style="
+            display:flex;
+            align-items:center;
+            gap:12px;
+            flex-wrap:wrap;
+          ">
+
+            <span class="
+              relation-status
+              ${status.class}
+            ">
+
+              ${status.label}
+
+            </span>
+
+
+            ${
+              rel.status === 'pending'
+                ? `
+
+                  <button
+                    class="btn-relation-sm btn-relation-cancel"
+                    onclick="cancelRelation('${escapeHtml(rel.id)}')">
+
+                    <i class="fas fa-times"></i>
+                    Annuler
+
                   </button>
-                ` : ''}
-              </div>
-            </div>
-          `;
-        }).join('');
 
-      } catch(e) {
-        console.error('Erreur inattendue:', e);
-        container.innerHTML = '<p style="color:#ef4444;">Une erreur est survenue.</p>';
-      }
-    }
+                `
+                : ''
+            }
 
-    async function cancelRelation(relationId) {
-      if (!confirm('Voulez-vous vraiment annuler cette demande de mise en relation ?')) return;
+          </div>
 
-      const { data: { user } } = await supabaseClient.auth.getUser();
-      if (!user) return;
+        </div>
 
-      const { error } = await supabaseClient
-        .from('user_contacts')
-        .update({ status: 'cancelled' })
-        .eq('id', relationId)
-        .eq('user_id', user.id);
+      `;
 
-      if (error) {
-        console.error('Erreur annulation:', error);
-        showToastMessage('Erreur lors de l\'annulation.');
-      } else {
-        showToastMessage('Demande annulée.');
-        loadRelations();
-      }
-    }
+    }).join('');
+
+
+  } catch (e) {
+
+    console.error(
+      'Erreur inattendue:',
+      e
+    );
+
+    container.innerHTML =
+      '<p style="color:#ef4444;">Une erreur est survenue.</p>';
+
+  }
+}
+
+
+// ==============================================
+// ANNULATION D'UNE DEMANDE
+// ==============================================
+
+async function cancelRelation(relationId) {
+
+  if (
+    !confirm(
+      'Voulez-vous vraiment annuler cette demande de mise en relation ?'
+    )
+  ) {
+    return;
+  }
+
+
+  const {
+    data: { user }
+  } = await supabaseClient.auth.getUser();
+
+
+  if (!user) {
+    return;
+  }
+
+
+  const {
+    error
+  } = await supabaseClient
+    .from('user_contacts')
+    .update({
+      status: 'cancelled'
+    })
+    .eq('id', relationId)
+    .eq('user_id', user.id);
+
+
+  if (error) {
+
+    console.error(
+      'Erreur annulation:',
+      error
+    );
+
+    showToastMessage(
+      'Erreur lors de l\'annulation.'
+    );
+
+  } else {
+
+    showToastMessage(
+      'Demande annulée.'
+    );
+
+    loadRelations();
+
+  }
+
+}
 
     // ==============================================
     // ADMIN BADGE (Supabase)
