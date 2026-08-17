@@ -2119,175 +2119,217 @@ function renderRelations() {
 }
 
     // ============================================================
-    // STATISTIQUES
-    // ============================================================
+// STATISTIQUES
+// ============================================================
 
-    function updateStats(relations) {
+function updateStats(relations) {
 
-        document.getElementById(
-            'statTotal'
-        ).textContent =
-            relations.length;
-
-
-        document.getElementById(
-            'statPending'
-        ).textContent =
-            relations.filter(
-                r =>
-                    r.status === 'pending'
-            ).length;
+    document.getElementById(
+        'statTotal'
+    ).textContent =
+        relations.length;
 
 
-        document.getElementById(
-            'statContacting'
-        ).textContent =
-            relations.filter(
-                r =>
-                    r.status ===
-                   'supplier_to_contact'
-            ).length;
+    document.getElementById(
+        'statPending'
+    ).textContent =
+        relations.filter(
+            r => r.status === 'pending'
+        ).length;
 
 
-        document.getElementById(
-            'statContacted'
-        ).textContent =
-            relations.filter(
-                r =>
-                    r.status === 'supplier_contacted'
-            ).length;
+    document.getElementById(
+        'statContacting'
+    ).textContent =
+        relations.filter(
+            r => r.status === 'supplier_to_contact'
+        ).length;
 
 
-        document.getElementById(
-            'statConcluded'
-        ).textContent =
-            relations.filter(
-                r =>
-                    r.status === 'concluded'
-            ).length;
+    document.getElementById(
+        'statContacted'
+    ).textContent =
+        relations.filter(
+            r => r.status === 'supplier_contacted'
+        ).length;
+
+
+    document.getElementById(
+        'statConcluded'
+    ).textContent =
+        relations.filter(
+            r => r.status === 'concluded'
+        ).length;
+}
+
+
+// ============================================================
+// MODIFICATION DU STATUT DANS SUPABASE
+// ============================================================
+
+async function changeStatus(id, newStatus) {
+
+    const relation =
+        allRelations.find(
+            r => String(r.id) === String(id)
+        );
+
+
+    if (!relation) {
+
+        showToast(
+            '❌ Demande non trouvée',
+            true
+        );
+
+        return;
     }
 
 
-    // ============================================================
-    // MODIFICATION DU STATUT DANS SUPABASE
-    // ============================================================
+    // ========================================================
+    // LIBELLÉS DES STATUTS
+    // ========================================================
 
-    async function changeStatus(id, newStatus) {
+    const statusLabels = {
 
-        const relation =
-            allRelations.find(
-                r => Number(r.id) === Number(id)
+        pending:
+            'demande reçue',
+
+        supplier_to_contact:
+            'fournisseur à contacter',
+
+        supplier_contacted:
+            'fournisseur contacté',
+
+        offer_preparation:
+            'offre en préparation',
+
+        user_connected:
+            'demandeur mis en relation',
+
+        concluded:
+            'demande conclue',
+
+        cancelled:
+            'annulée'
+    };
+
+
+    // ========================================================
+    // VÉRIFICATION DU STATUT DEMANDÉ
+    // ========================================================
+
+    if (!statusLabels[newStatus]) {
+
+        console.error(
+            '❌ Statut inconnu :',
+            newStatus
+        );
+
+        showToast(
+            '❌ Statut de demande inconnu.',
+            true
+        );
+
+        return;
+    }
+
+
+    // ========================================================
+    // CONFIRMATION
+    // ========================================================
+
+    const confirmMsg =
+        `Passer la demande "${relation.product}" ` +
+        `en statut "${statusLabels[newStatus]}" ?`;
+
+
+    if (!confirm(confirmMsg)) {
+        return;
+    }
+
+
+    // ========================================================
+    // MISE À JOUR SUPABASE
+    // ========================================================
+
+    try {
+
+        showToast(
+            '⏳ Mise à jour en cours...'
+        );
+
+
+        const {
+            error
+        } = await supabaseClient
+            .from('user_contacts')
+            .update({
+                status: newStatus
+            })
+            .eq(
+                'id',
+                id
             );
 
 
-        if (!relation) {
+        // ====================================================
+        // ERREUR SUPABASE
+        // ====================================================
 
-            showToast(
-                '❌ Demande non trouvée',
-                true
-            );
-
-            return;
-        }
-
-
-        const statusLabels = {
-
-    pending:
-        'demande reçue',
-
-    supplier_contacted:
-        'fournisseur contacté',
-
-    offer_preparation:
-        'offre en préparation',
-
-    user_connected:
-        'demandeur mis en relation',
-
-    concluded:
-        'demande conclue',
-
-    cancelled:
-        'annulée'
-};
-
-        const confirmMsg =
-            `Passer la demande "${relation.product}" ` +
-            `en statut "${statusLabels[newStatus]}" ?`;
-
-
-        if (!confirm(confirmMsg)) {
-            return;
-        }
-
-
-        try {
-
-            showToast(
-                '⏳ Mise à jour en cours...'
-            );
-
-
-            const {
-                error
-            } = await supabaseClient
-                .from('user_contacts')
-                .update({
-                    status: newStatus
-                })
-                .eq(
-                    'id',
-                    id
-                );
-
-
-            if (error) {
-
-                console.error(
-                    '❌ Erreur UPDATE statut:',
-                    error
-                );
-
-                showToast(
-                    '❌ Erreur lors de la mise à jour du statut.',
-                    true
-                );
-
-                return;
-            }
-
-
-            /*
-             * Mise à jour locale immédiate
-             */
-
-            relation.status =
-                newStatus;
-
-
-            showToast(
-                `✅ Statut mis à jour : ${statusLabels[newStatus]}`
-            );
-
-
-            renderRelations();
-
-
-        } catch (error) {
+        if (error) {
 
             console.error(
-                '❌ Erreur inattendue:',
+                '❌ Erreur UPDATE statut :',
                 error
             );
 
             showToast(
-                '❌ Une erreur est survenue.',
+                '❌ Erreur lors de la mise à jour du statut.',
                 true
             );
-        }
-    }
 
+            return;
+        }
+
+
+        // ====================================================
+        // MISE À JOUR LOCALE
+        // ====================================================
+
+        relation.status =
+            newStatus;
+
+
+        // ====================================================
+        // CONFIRMATION
+        // ====================================================
+
+        showToast(
+            `✅ Statut mis à jour : ${statusLabels[newStatus]}`
+        );
+
+
+        // ====================================================
+        // RAFRAÎCHISSEMENT DE L'AFFICHAGE
+        // ====================================================
+
+        renderRelations();
+
+
+    } catch (error) {
+
+        console.error(
+            '❌ Erreur inattendue :',
+            error
+        );
+
+        showToast(
+            '❌ Une erreur est survenue.',
+            true
+        );
+    }
+}
 
     // ============================================================
     // NOTES INTERNES
