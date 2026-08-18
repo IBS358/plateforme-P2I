@@ -3171,14 +3171,30 @@ async function loadRelations() {
             flex-wrap:wrap;
           ">
 
-            <span class="
-              relation-status
-              ${status.class}
-            ">
+            <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
 
-              ${status.label}
+    <span class="relation-status ${status.class}">
+        ${status.label}
+    </span>
 
-            </span>
+    ${
+        rel.status === 'pending'
+            ? `
+                <div style="
+                    font-size:0.8rem;
+                    color:#94a3b8;
+                    line-height:1.5;
+                    max-width:420px;
+                ">
+                    Votre demande a bien été reçue par la P2I.
+                    Elle va maintenant être examinée et préparée
+                    avant d'être transmise au fournisseur.
+                </div>
+              `
+            : ''
+    }
+
+</div>
 
 
             ${
