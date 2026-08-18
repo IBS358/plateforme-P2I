@@ -3171,7 +3171,7 @@ async function loadRelations() {
             flex-wrap:wrap;
           ">
 
-            <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
+           <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
 
     <span class="relation-status ${status.class}">
         ${status.label}
@@ -3194,46 +3194,64 @@ async function loadRelations() {
             : ''
     }
 
+    ${
+        rel.status === 'supplier_to_contact'
+            ? `
+                <div style="
+                    font-size:0.8rem;
+                    color:#94a3b8;
+                    line-height:1.5;
+                    max-width:420px;
+                ">
+                    Votre demande est en cours de préparation
+                    pour être transmise au fournisseur.
+                    La P2I va prendre contact avec celui-ci
+                    afin de lui transmettre votre demande.
+                </div>
+              `
+            : ''
+    }
+
 </div>
 
 
-            ${
-              rel.status === 'pending'
-                ? `
+${
+    rel.status === 'pending'
+        ? `
 
-                  <button
-                    class="btn-relation-sm btn-relation-cancel"
-                    onclick="cancelRelation('${escapeHtml(rel.id)}')">
+            <button
+                class="btn-relation-sm btn-relation-cancel"
+                onclick="cancelRelation('${escapeHtml(rel.id)}')">
 
-                    <i class="fas fa-times"></i>
-                    Annuler
+                <i class="fas fa-times"></i>
+                Annuler
 
-                  </button>
+            </button>
 
-                `
-                : ''
-            }
+          `
+        : ''
+}
 
-          </div>
+</div>
 
-        </div>
+</div>
 
-      `;
+`;
 
-    }).join('');
+}).join('');
 
 
-  } catch (e) {
+} catch (e) {
 
     console.error(
-      'Erreur inattendue:',
-      e
+        'Erreur inattendue:',
+        e
     );
 
     container.innerHTML =
-      '<p style="color:#ef4444;">Une erreur est survenue.</p>';
+        '<p style="color:#ef4444;">Une erreur est survenue.</p>';
 
-  }
+}
 }
 
 
