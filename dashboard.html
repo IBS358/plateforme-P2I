@@ -3228,6 +3228,22 @@ async function loadRelations() {
           `
         : ''
 }
+${
+    rel.status === 'offer_preparation'
+        ? `
+            <div style="
+                font-size:0.8rem;
+                color:#94a3b8;
+                line-height:1.5;
+                max-width:420px;
+            ">
+                Le fournisseur prépare actuellement son offre.
+                La P2I suit la demande et vous informera
+                dès que l'offre sera disponible.
+            </div>
+          `
+        : ''
+}
 
 </div>
 
