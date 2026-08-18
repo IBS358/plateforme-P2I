@@ -3211,6 +3211,23 @@ async function loadRelations() {
               `
             : ''
     }
+    ${
+    rel.status === 'supplier_contacted'
+        ? `
+            <div style="
+                font-size:0.8rem;
+                color:#94a3b8;
+                line-height:1.5;
+                max-width:420px;
+            ">
+                Votre demande a été transmise au fournisseur.
+                La P2I reste dans l'attente de sa réponse.
+                Le délai de réponse dépend du fournisseur
+                et n'est pas garanti par la P2I.
+            </div>
+          `
+        : ''
+}
 
 </div>
 
