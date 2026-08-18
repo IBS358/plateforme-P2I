@@ -3246,6 +3246,25 @@ ${
 }
 
 </div>
+${
+    rel.status === 'user_connected'
+        ? `
+            <div style="
+                font-size:0.8rem;
+                color:#94a3b8;
+                line-height:1.5;
+                max-width:420px;
+            ">
+                L'offre officielle du fournisseur a été reçue
+                par la P2I. Nous vous transmettons le devis
+                afin que vous puissiez en prendre connaissance.
+                La P2I vous met ensuite en relation avec le
+                fournisseur pour poursuivre directement les
+                échanges et finaliser les conditions de votre achat.
+            </div>
+          `
+        : ''
+}
 
 
 ${
