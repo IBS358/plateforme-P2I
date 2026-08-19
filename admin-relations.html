@@ -1208,6 +1208,7 @@ async function loadRelations() {
             '🔄 Chargement des demandes depuis user_contacts...'
         );
 
+
         // ========================================================
         // 1. RÉCUPÉRATION DES DEMANDES
         // ========================================================
@@ -1316,7 +1317,11 @@ async function loadRelations() {
                     date:
                         row.created_at,
 
-                    // Informations utilisateur
+
+                    // ==================================================
+                    // INFORMATIONS UTILISATEUR
+                    // ==================================================
+
                     userDisplayName:
                         'Nom non renseigné',
 
@@ -1329,11 +1334,47 @@ async function loadRelations() {
                     role:
                         '',
 
+
+                    // ==================================================
+                    // NOTES INTERNES
+                    // ==================================================
+
                     internalNotes:
                         [],
 
+
+                    // ==================================================
+                    // DÉTAILS MACHINE
+                    // ==================================================
+
                     machineDetails:
-                        {}
+                        {},
+
+
+                    // ==================================================
+                    // INFORMATIONS DEVIS FOURNISSEUR
+                    // ==================================================
+
+                    offerId:
+                        null,
+
+                    offerFileUrl:
+                        '',
+
+                    offerFileName:
+                        '',
+
+                    offerSupplierReference:
+                        '',
+
+                    offerAmount:
+                        null,
+
+                    offerCurrency:
+                        '',
+
+                    offerReceivedAt:
+                        null
 
                 };
 
@@ -1445,11 +1486,155 @@ async function loadRelations() {
 
 
         // ========================================================
-        // 6. AFFICHAGE DES DEMANDES
+        // 6. RÉCUPÉRATION DES DEVIS FOURNISSEURS
         // ========================================================
 
         console.log(
-            '✅ Demandes prêtes pour affichage :',
+            '📄 Récupération des devis depuis supplier_offers...'
+        );
+
+
+        const {
+            data: offers,
+            error: offersError
+        } = await supabaseClient
+            .from('supplier_offers')
+            .select(`
+                id,
+                contact_id,
+                file_url,
+                file_name,
+                supplier_reference,
+                offer_amount,
+                currency,
+                received_at,
+                created_at
+            `)
+            .order(
+                'created_at',
+                {
+                    ascending: false
+                }
+            );
+
+
+        // ========================================================
+        // 7. VÉRIFICATION DES DEVIS
+        // ========================================================
+
+        if (offersError) {
+
+            console.error(
+                '❌ Erreur Supabase supplier_offers :',
+                offersError
+            );
+
+            /*
+             * Les demandes restent affichées même si les devis
+             * ne peuvent pas être récupérés.
+             */
+
+        } else {
+
+            console.log(
+                `✅ ${offers ? offers.length : 0} devis récupéré(s).`
+            );
+
+
+            // ====================================================
+            // CARTE :
+            // contact_id → devis
+            // ====================================================
+
+            const offerMap = {};
+
+
+            (offers || []).forEach(offer => {
+
+                /*
+                 * Le plus récent devis est conservé pour une
+                 * demande donnée.
+                 */
+
+                if (
+                    !offerMap[offer.contact_id]
+                ) {
+
+                    offerMap[offer.contact_id] =
+                        offer;
+
+                }
+
+            });
+
+
+            console.log(
+                '🗺️ Offer map créée :',
+                offerMap
+            );
+
+
+            // ====================================================
+            // ASSOCIATION DEVIS ↔ DEMANDE
+            // ====================================================
+
+            allRelations =
+                allRelations.map(relation => {
+
+                    const offer =
+                        offerMap[
+                            relation.id
+                        ];
+
+
+                    if (offer) {
+
+                        relation.offerId =
+                            offer.id;
+
+                        relation.offerFileUrl =
+                            offer.file_url ||
+                            '';
+
+                        relation.offerFileName =
+                            offer.file_name ||
+                            '';
+
+                        relation.offerSupplierReference =
+                            offer.supplier_reference ||
+                            '';
+
+                        relation.offerAmount =
+                            offer.offer_amount !== null
+                                ? Number(
+                                    offer.offer_amount
+                                )
+                                : null;
+
+                        relation.offerCurrency =
+                            offer.currency ||
+                            '';
+
+                        relation.offerReceivedAt =
+                            offer.received_at ||
+                            offer.created_at ||
+                            null;
+
+                    }
+
+
+                    return relation;
+
+                });
+        }
+
+
+        // ========================================================
+        // 8. AFFICHAGE DES DEMANDES
+        // ========================================================
+
+        console.log(
+            '✅ Demandes et devis prêts pour affichage :',
             allRelations
         );
 
