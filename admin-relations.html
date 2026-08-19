@@ -699,6 +699,146 @@
     </div>
 
 </div>
+    <!-- MODAL AJOUT DEVIS FOURNISSEUR -->
+<div class="modal-overlay" id="offerModal">
+
+    <div class="modal">
+
+        <h3>📎 Ajouter le devis fournisseur</h3>
+
+        <div style="margin-bottom:15px;">
+
+            <label
+                for="offerFile"
+                style="
+                    display:block;
+                    margin-bottom:6px;
+                    font-weight:600;
+                "
+            >
+                📄 Devis fournisseur (PDF)
+            </label>
+
+            <input
+                type="file"
+                id="offerFile"
+                accept="application/pdf"
+            >
+
+        </div>
+
+
+        <div style="margin-bottom:15px;">
+
+            <label
+                for="offerReference"
+                style="
+                    display:block;
+                    margin-bottom:6px;
+                    font-weight:600;
+                "
+            >
+                🔢 Référence fournisseur
+            </label>
+
+            <input
+                type="text"
+                id="offerReference"
+                placeholder="Ex. DEV-KR-1500-2026"
+            >
+
+        </div>
+
+
+        <div style="margin-bottom:15px;">
+
+            <label
+                for="offerAmount"
+                style="
+                    display:block;
+                    margin-bottom:6px;
+                    font-weight:600;
+                "
+            >
+                💰 Montant du devis
+            </label>
+
+            <input
+                type="number"
+                id="offerAmount"
+                placeholder="Ex. 8500"
+                min="0"
+                step="0.01"
+            >
+
+        </div>
+
+
+        <div style="margin-bottom:15px;">
+
+            <label
+                for="offerCurrency"
+                style="
+                    display:block;
+                    margin-bottom:6px;
+                    font-weight:600;
+                "
+            >
+                💱 Devise
+            </label>
+
+            <select id="offerCurrency">
+
+                <option value="EUR">
+                    EUR — Euro
+                </option>
+
+                <option value="USD">
+                    USD — Dollar américain
+                </option>
+
+                <option value="CNY">
+                    CNY — Yuan chinois
+                </option>
+
+                <option value="KRW">
+                    KRW — Won sud-coréen
+                </option>
+
+                <option value="GNF">
+                    GNF — Franc guinéen
+                </option>
+
+                <option value="XOF">
+                    XOF — Franc CFA
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn-modal btn-secondary"
+                onclick="closeOfferModal()"
+            >
+                Annuler
+            </button>
+
+            <button
+                class="btn-modal btn-primary"
+                onclick="saveOffer()"
+            >
+                📎 Enregistrer le devis
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 <div id="toast" class="toast">
