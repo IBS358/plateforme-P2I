@@ -2873,9 +2873,12 @@ async function saveOffer() {
         );
 
 
-        showToast(
-            '✅ Le devis fournisseur a été enregistré avec succès.'
-        );
+       showToast(
+    '✅ Le devis fournisseur a été enregistré avec succès.'
+);
+
+// Fermeture automatique du modal après succès
+closeOfferModal();
 
 
     } catch (error) {
