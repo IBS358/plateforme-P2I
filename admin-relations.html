@@ -2689,21 +2689,6 @@ async function saveOffer() {
 
 
     // ========================================================
-    // VÉRIFICATION DE LA DEVISE
-    // ========================================================
-
-    if (!currency) {
-
-        showToast(
-            '⚠️ Veuillez sélectionner une devise.',
-            true
-        );
-
-        return;
-    }
-
-
-    // ========================================================
     // RÉCUPÉRATION DE LA DEMANDE
     // ========================================================
 
@@ -2725,30 +2710,91 @@ async function saveOffer() {
 
 
     // ========================================================
-    // INFORMATIONS DE CONTRÔLE
+    // NOM DU FICHIER
     // ========================================================
 
-    console.log(
-        '📄 Devis prêt à être enregistré :',
-        {
-            contact_id: offerTargetId,
-            product: relation.product,
-            supplier: relation.supplier,
-            file_name: file.name,
-            supplier_reference: supplierReference || null,
-            offer_amount: Number(amount),
-            currency: currency
+    const safeFileName =
+        file.name
+            .replace(/[^a-zA-Z0-9._-]/g, '_');
+
+
+    const filePath =
+        `${relation.id}/${Date.now()}_${safeFileName}`;
+
+
+    // ========================================================
+    // UPLOAD STORAGE
+    // ========================================================
+
+    try {
+
+        showToast(
+            '⏳ Envoi du devis vers Supabase...'
+        );
+
+
+        const {
+            error: uploadError
+        } = await supabaseClient
+            .storage
+            .from('supplier-offers')
+            .upload(
+                filePath,
+                file,
+                {
+                    contentType: 'application/pdf',
+                    upsert: false
+                }
+            );
+
+
+        // ====================================================
+        // ERREUR UPLOAD
+        // ====================================================
+
+        if (uploadError) {
+
+            console.error(
+                '❌ Erreur upload devis :',
+                uploadError
+            );
+
+            showToast(
+                '❌ Impossible d’envoyer le devis vers Supabase.',
+                true
+            );
+
+            return;
         }
-    );
 
 
-    // ========================================================
-    // ÉTAPE TEMPORAIRE
-    // ========================================================
+        // ====================================================
+        // SUCCÈS
+        // ====================================================
 
-    showToast(
-        '✅ Les informations du devis sont valides. Prêt pour l’enregistrement.'
-    );
+        console.log(
+            '✅ Devis uploadé dans Storage :',
+            filePath
+        );
+
+
+        showToast(
+            '✅ Le devis a bien été envoyé dans Supabase.'
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            '❌ Erreur inattendue upload :',
+            error
+        );
+
+        showToast(
+            '❌ Une erreur est survenue lors de l’envoi du devis.',
+            true
+        );
+    }
 }
 
 
