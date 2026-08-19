@@ -2618,7 +2618,7 @@ async function saveOffer() {
 
 
     // ========================================================
-    // RÉCUPÉRATION DES DONNÉES
+    // RÉCUPÉRATION DES CHAMPS
     // ========================================================
 
     const fileInput =
@@ -2689,6 +2689,21 @@ async function saveOffer() {
 
 
     // ========================================================
+    // VÉRIFICATION DE LA DEVISE
+    // ========================================================
+
+    if (!currency) {
+
+        showToast(
+            '⚠️ Veuillez sélectionner une devise.',
+            true
+        );
+
+        return;
+    }
+
+
+    // ========================================================
     // RÉCUPÉRATION DE LA DEMANDE
     // ========================================================
 
@@ -2723,7 +2738,7 @@ async function saveOffer() {
 
 
     // ========================================================
-    // UPLOAD STORAGE
+    // UPLOAD DU PDF DANS STORAGE
     // ========================================================
 
     try {
@@ -2749,7 +2764,7 @@ async function saveOffer() {
 
 
         // ====================================================
-        // ERREUR UPLOAD
+        // ERREUR STORAGE
         // ====================================================
 
         if (uploadError) {
@@ -2768,35 +2783,114 @@ async function saveOffer() {
         }
 
 
-        // ====================================================
-        // SUCCÈS
-        // ====================================================
-
         console.log(
             '✅ Devis uploadé dans Storage :',
             filePath
         );
 
 
+        // ====================================================
+        // ENREGISTREMENT DANS supplier_offers
+        // ====================================================
+
         showToast(
-            '✅ Le devis a bien été envoyé dans Supabase.'
+            '⏳ Enregistrement des informations du devis...'
+        );
+
+
+        const {
+            data: offerData,
+            error: offerError
+        } = await supabaseClient
+            .from('supplier_offers')
+            .insert({
+
+                contact_id:
+                    Number(offerTargetId),
+
+                file_url:
+                    filePath,
+
+                file_name:
+                    file.name,
+
+                supplier_reference:
+                    supplierReference || null,
+
+                offer_amount:
+                    Number(amount),
+
+                currency:
+                    currency,
+
+                received_at:
+                    new Date().toISOString()
+
+            })
+            .select()
+            .single();
+
+
+        // ====================================================
+        // ERREUR supplier_offers
+        // ====================================================
+
+        if (offerError) {
+
+            console.error(
+                '❌ Erreur insertion supplier_offers :',
+                offerError
+            );
+
+
+            /*
+             * Le fichier est déjà dans Storage.
+             *
+             * On ne supprime volontairement pas le fichier
+             * automatiquement à cette étape.
+             *
+             * Cela nous permettra de diagnostiquer facilement
+             * un éventuel problème de policy ou de structure
+             * de table.
+             */
+
+            showToast(
+                '❌ Le PDF a été envoyé, mais les informations du devis n’ont pas pu être enregistrées.',
+                true
+            );
+
+            return;
+        }
+
+
+        // ====================================================
+        // SUCCÈS COMPLET
+        // ====================================================
+
+        console.log(
+            '✅ Devis enregistré dans supplier_offers :',
+            offerData
+        );
+
+
+        showToast(
+            '✅ Le devis fournisseur a été enregistré avec succès.'
         );
 
 
     } catch (error) {
 
         console.error(
-            '❌ Erreur inattendue upload :',
+            '❌ Erreur inattendue :',
             error
         );
 
         showToast(
-            '❌ Une erreur est survenue lors de l’envoi du devis.',
+            '❌ Une erreur est survenue lors de l’enregistrement du devis.',
             true
         );
     }
 }
-
 
     // ============================================================
     // FERMETURE DU MODAL
