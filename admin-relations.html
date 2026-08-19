@@ -2600,7 +2600,11 @@ function closeOfferModal() {
 // ENREGISTRER LE DEVIS
 // ============================================================
 
-function saveOffer() {
+async function saveOffer() {
+
+    // ========================================================
+    // VÉRIFICATION DE LA DEMANDE
+    // ========================================================
 
     if (!offerTargetId) {
 
@@ -2613,8 +2617,137 @@ function saveOffer() {
     }
 
 
+    // ========================================================
+    // RÉCUPÉRATION DES DONNÉES
+    // ========================================================
+
+    const fileInput =
+        document.getElementById('offerFile');
+
+    const referenceInput =
+        document.getElementById('offerReference');
+
+    const amountInput =
+        document.getElementById('offerAmount');
+
+    const currencyInput =
+        document.getElementById('offerCurrency');
+
+
+    const file =
+        fileInput.files[0];
+
+    const supplierReference =
+        referenceInput.value.trim();
+
+    const amount =
+        amountInput.value.trim();
+
+    const currency =
+        currencyInput.value;
+
+
+    // ========================================================
+    // VÉRIFICATION DU PDF
+    // ========================================================
+
+    if (!file) {
+
+        showToast(
+            '⚠️ Veuillez sélectionner le devis fournisseur en PDF.',
+            true
+        );
+
+        return;
+    }
+
+
+    if (file.type !== 'application/pdf') {
+
+        showToast(
+            '❌ Le fichier doit être au format PDF.',
+            true
+        );
+
+        return;
+    }
+
+
+    // ========================================================
+    // VÉRIFICATION DU MONTANT
+    // ========================================================
+
+    if (!amount || Number(amount) <= 0) {
+
+        showToast(
+            '⚠️ Veuillez saisir un montant valide.',
+            true
+        );
+
+        return;
+    }
+
+
+    // ========================================================
+    // VÉRIFICATION DE LA DEVISE
+    // ========================================================
+
+    if (!currency) {
+
+        showToast(
+            '⚠️ Veuillez sélectionner une devise.',
+            true
+        );
+
+        return;
+    }
+
+
+    // ========================================================
+    // RÉCUPÉRATION DE LA DEMANDE
+    // ========================================================
+
+    const relation =
+        allRelations.find(
+            r => String(r.id) === String(offerTargetId)
+        );
+
+
+    if (!relation) {
+
+        showToast(
+            '❌ Demande introuvable.',
+            true
+        );
+
+        return;
+    }
+
+
+    // ========================================================
+    // INFORMATIONS DE CONTRÔLE
+    // ========================================================
+
+    console.log(
+        '📄 Devis prêt à être enregistré :',
+        {
+            contact_id: offerTargetId,
+            product: relation.product,
+            supplier: relation.supplier,
+            file_name: file.name,
+            supplier_reference: supplierReference || null,
+            offer_amount: Number(amount),
+            currency: currency
+        }
+    );
+
+
+    // ========================================================
+    // ÉTAPE TEMPORAIRE
+    // ========================================================
+
     showToast(
-        'ℹ️ Le dépôt du devis sera connecté à Supabase à l’étape suivante.'
+        '✅ Les informations du devis sont valides. Prêt pour l’enregistrement.'
     );
 }
 
