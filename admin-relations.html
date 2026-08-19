@@ -2038,25 +2038,23 @@ function renderRelations() {
     }
 
 
-    ${
-        rel.status === 'offer_preparation'
-            ? `
+   ${
+    rel.status === 'offer_preparation'
+        ? `
 
-                <button
-                    class="btn-action btn-contacted"
-                    onclick="changeStatus(
-                        '${rel.id}',
-                        'user_connected'
-                    )">
+            <button
+                class="btn-action btn-contacted"
+                onclick="openOfferModal(
+                    '${rel.id}'
+                )">
 
-                    🤝 Mettre le demandeur en relation
+                📎 Ajouter le devis fournisseur
 
-                </button>
+            </button>
 
-              `
-            : ''
-    }
-
+          `
+        : ''
+}
 
     ${
         rel.status === 'user_connected'
