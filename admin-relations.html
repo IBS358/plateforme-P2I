@@ -2556,6 +2556,67 @@ async function changeStatus(id, newStatus) {
 
         closeNoteModal();
     }
+    // ============================================================
+// MODAL DEVIS FOURNISSEUR
+// ============================================================
+
+let offerTargetId = null;
+
+
+// ============================================================
+// OUVRIR LE MODAL
+// ============================================================
+
+function openOfferModal(id) {
+
+    offerTargetId = id;
+
+    document.getElementById('offerFile').value = '';
+    document.getElementById('offerReference').value = '';
+    document.getElementById('offerAmount').value = '';
+    document.getElementById('offerCurrency').value = 'EUR';
+
+    document
+        .getElementById('offerModal')
+        .classList.add('active');
+}
+
+
+// ============================================================
+// FERMER LE MODAL
+// ============================================================
+
+function closeOfferModal() {
+
+    document
+        .getElementById('offerModal')
+        .classList.remove('active');
+
+    offerTargetId = null;
+}
+
+
+// ============================================================
+// ENREGISTRER LE DEVIS
+// ============================================================
+
+function saveOffer() {
+
+    if (!offerTargetId) {
+
+        showToast(
+            '❌ Aucune demande ciblée.',
+            true
+        );
+
+        return;
+    }
+
+
+    showToast(
+        'ℹ️ Le dépôt du devis sera connecté à Supabase à l’étape suivante.'
+    );
+}
 
 
     // ============================================================
