@@ -2515,20 +2515,42 @@ ${
             : ''
     }
 
-
-   ${
+${
     rel.status === 'offer_preparation'
         ? `
 
-            <button
-                class="btn-action btn-contacted"
-                onclick="openOfferModal(
-                    '${rel.id}'
-                )">
+            ${
+                rel.offerId
+                    ? `
 
-                📎 Ajouter le devis fournisseur
+                        <button
+                            class="btn-action btn-contacted"
+                            type="button"
+                            disabled
+                            style="
+                                opacity:0.85;
+                                cursor:default;
+                            ">
 
-            </button>
+                            📄 Devis enregistré
+
+                        </button>
+
+                      `
+                    : `
+
+                        <button
+                            class="btn-action btn-contacted"
+                            onclick="openOfferModal(
+                                '${rel.id}'
+                            )">
+
+                            📎 Ajouter le devis fournisseur
+
+                        </button>
+
+                      `
+            }
 
           `
         : ''
