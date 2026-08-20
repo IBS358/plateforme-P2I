@@ -2425,7 +2425,7 @@ function renderRelations() {
 <!-- ======================================== -->
 
 ${
-    rel.offerId
+    rel.offers && rel.offers.length > 0
         ? `
 
             <div style="
@@ -2442,136 +2442,208 @@ ${
                     font-weight:700;
                     text-transform:uppercase;
                     letter-spacing:0.6px;
-                    margin-bottom:10px;
+                    margin-bottom:12px;
                 ">
 
                     <i class="fas fa-file-invoice"></i>
 
-                    Devis fournisseur enregistré
+                    Devis fournisseur
+                    ${
+                        rel.offers.length > 1
+                            ? `(${rel.offers.length})`
+                            : ''
+                    }
 
                 </div>
 
 
                 ${
-                    rel.offerFileName
-                        ? `
+                    rel.offers.map(
+                        (offer, index) => `
 
                             <div style="
-                                color:#e2e8f0;
-                                font-size:0.85rem;
-                                margin-bottom:7px;
+                                margin-top:${index > 0 ? '12px' : '0'};
+                                padding:12px;
+                                background:rgba(15,23,42,0.45);
+                                border-radius:10px;
+                                border:1px solid rgba(148,163,184,0.12);
                             ">
 
-                                📄
-
-                                ${escapeHtml(
-                                    rel.offerFileName
-                                )}
-
-                            </div>
-
-                          `
-                        : ''
-                }
-
-
-                ${
-                    rel.offerSupplierReference
-                        ? `
-
-                            <div style="
-                                color:#94a3b8;
-                                font-size:0.8rem;
-                                margin-top:5px;
-                            ">
-
-                                🔢 Référence fournisseur :
-
-                                <strong style="
+                                <div style="
                                     color:#cbd5e1;
+                                    font-size:0.75rem;
+                                    font-weight:700;
+                                    margin-bottom:9px;
                                 ">
 
-                                    ${escapeHtml(
-                                        rel.offerSupplierReference
-                                    )}
+                                    📄 Devis ${index + 1}
 
-                                </strong>
+                                </div>
+
+
+                                ${
+                                    offer.file_name
+                                        ? `
+
+                                            <div style="
+                                                color:#e2e8f0;
+                                                font-size:0.85rem;
+                                                margin-bottom:7px;
+                                            ">
+
+                                                📄
+
+                                                ${escapeHtml(
+                                                    offer.file_name
+                                                )}
+
+                                            </div>
+
+                                          `
+                                        : ''
+                                }
+
+
+                                ${
+                                    offer.supplier_reference
+                                        ? `
+
+                                            <div style="
+                                                color:#94a3b8;
+                                                font-size:0.8rem;
+                                                margin-top:5px;
+                                            ">
+
+                                                🔢 Référence fournisseur :
+
+                                                <strong style="
+                                                    color:#cbd5e1;
+                                                ">
+
+                                                    ${escapeHtml(
+                                                        offer.supplier_reference
+                                                    )}
+
+                                                </strong>
+
+                                            </div>
+
+                                          `
+                                        : ''
+                                }
+
+
+                                ${
+                                    offer.offer_amount !== null &&
+                                    offer.offer_amount !== undefined
+                                        ? `
+
+                                            <div style="
+                                                color:#94a3b8;
+                                                font-size:0.8rem;
+                                                margin-top:5px;
+                                            ">
+
+                                                💰 Montant :
+
+                                                <strong style="
+                                                    color:#cbd5e1;
+                                                ">
+
+                                                    ${Number(
+                                                        offer.offer_amount
+                                                    ).toLocaleString(
+                                                        'fr-FR'
+                                                    )}
+
+                                                    ${escapeHtml(
+                                                        offer.currency ||
+                                                        ''
+                                                    )}
+
+                                                </strong>
+
+                                            </div>
+
+                                          `
+                                        : ''
+                                }
+
+
+                                ${
+                                    offer.received_at ||
+                                    offer.created_at
+                                        ? `
+
+                                            <div style="
+                                                color:#64748b;
+                                                font-size:0.75rem;
+                                                margin-top:7px;
+                                            ">
+
+                                                <i class="fas fa-clock"></i>
+
+                                                Reçu le :
+
+                                                ${formatDateFR(
+                                                    offer.received_at ||
+                                                    offer.created_at
+                                                )}
+
+                                            </div>
+
+                                          `
+                                        : ''
+                                }
+
+
+                                ${
+                                    offer.transmissionId
+                                        ? `
+
+                                            <div style="
+                                                margin-top:10px;
+                                                color:#22c55e;
+                                                font-size:0.8rem;
+                                                font-weight:600;
+                                            ">
+
+                                                ✅ Devis transmis au demandeur
+
+                                            </div>
+
+                                          `
+                                        : `
+
+                                            <button
+                                                class="btn-action btn-contacted"
+                                                style="
+                                                    margin-top:10px;
+                                                    width:100%;
+                                                "
+                                                onclick="transmitOfferToUser(
+                                                    '${offer.id}',
+                                                    '${rel.id}'
+                                                )">
+
+                                                📤 Transmettre le devis au demandeur
+
+                                            </button>
+
+                                          `
+                                }
 
                             </div>
 
                           `
-                        : ''
+                    ).join('')
                 }
-
-
-                ${
-                    rel.offerAmount !== null &&
-                    rel.offerAmount !== undefined
-                        ? `
-
-                            <div style="
-                                color:#94a3b8;
-                                font-size:0.8rem;
-                                margin-top:5px;
-                            ">
-
-                                💰 Montant :
-
-                                <strong style="
-                                    color:#cbd5e1;
-                                ">
-
-                                    ${Number(
-                                        rel.offerAmount
-                                    ).toLocaleString(
-                                        'fr-FR'
-                                    )}
-
-                                    ${escapeHtml(
-                                        rel.offerCurrency ||
-                                        ''
-                                    )}
-
-                                </strong>
-
-                            </div>
-
-                          `
-                        : ''
-                }
-
-
-                ${
-                    rel.offerReceivedAt
-                        ? `
-
-                            <div style="
-                                color:#64748b;
-                                font-size:0.75rem;
-                                margin-top:7px;
-                            ">
-
-                                <i class="fas fa-clock"></i>
-
-                                Reçu le :
-
-                                ${formatDateFR(
-                                    rel.offerReceivedAt
-                                )}
-
-                            </div>
-
-                          `
-                        : ''
-                }
-
 
             </div>
 
           `
         : ''
 }
-
 
 <!-- ================================================= -->
 <!-- ACTIONS ADMINISTRATEUR -->
