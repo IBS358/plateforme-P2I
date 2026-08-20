@@ -3645,7 +3645,32 @@ async function transmitOfferToUser(offerId, contactId) {
             '✅ Transmission créée :',
             transmission
         );
+        // ====================================================
+// 4 BIS. PASSAGE DE LA DEMANDE À "USER_CONNECTED"
+// ====================================================
 
+const {
+    error: statusError
+} = await supabaseClient
+    .from('user_contacts')
+    .update({
+        status: 'user_connected'
+    })
+    .eq('id', contactId);
+
+if (statusError) {
+
+    console.error(
+        '❌ Erreur mise à jour du statut :',
+        statusError
+    );
+
+} else {
+
+    console.log(
+        '✅ Demande passée au statut user_connected.'
+    );
+}
 
         showToast(
             '✅ Le devis a été transmis au demandeur.'
