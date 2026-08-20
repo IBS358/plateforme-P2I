@@ -2691,66 +2691,42 @@ ${
     }
 
 
-    ${
-        rel.status === 'supplier_contacted'
-            ? `
-
-                <button
-                    class="btn-action btn-contacted"
-                    onclick="changeStatus(
-                        '${rel.id}',
-                        'offer_preparation'
-                    )">
-
-                    📄 Offre en préparation
-
-                </button>
-
-              `
-            : ''
-    }
-
-${
-    rel.status === 'offer_preparation'
+   ${
+    rel.status === 'supplier_contacted'
         ? `
 
-            ${
-                rel.offerId
-                    ? `
+            <button
+                class="btn-action btn-contacted"
+                onclick="changeStatus(
+                    '${rel.id}',
+                    'offer_preparation'
+                )">
 
-                        <button
-                            class="btn-action btn-contacted"
-                            type="button"
-                            disabled
-                            style="
-                                opacity:0.85;
-                                cursor:default;
-                            ">
+                📄 Offre en préparation
 
-                            📄 Devis enregistré
-
-                        </button>
-
-                      `
-                    : `
-
-                        <button
-                            class="btn-action btn-contacted"
-                            onclick="openOfferModal(
-                                '${rel.id}'
-                            )">
-
-                            📎 Ajouter le devis fournisseur
-
-                        </button>
-
-                      `
-            }
+            </button>
 
           `
         : ''
 }
 
+${
+    rel.status === 'offer_preparation'
+        ? `
+
+            <button
+                class="btn-action btn-contacted"
+                onclick="openOfferModal(
+                    '${rel.id}'
+                )">
+
+                📎 Ajouter le devis fournisseur
+
+            </button>
+
+          `
+        : ''
+}
     ${
         rel.status === 'user_connected'
             ? `
