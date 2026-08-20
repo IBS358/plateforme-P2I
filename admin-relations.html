@@ -3236,7 +3236,7 @@ async function saveOffer() {
        showToast(
     '✅ Le devis fournisseur a été enregistré avec succès.'
 );
-
+       
 // Fermeture automatique du modal après succès
 closeOfferModal();
 
@@ -3254,7 +3254,253 @@ closeOfferModal();
         );
     }
 }
+ // ============================================================
+// TRANSMISSION DU DEVIS AU DEMANDEUR
+// ============================================================
 
+async function transmitOfferToUser(offerId, contactId) {
+
+    if (!offerId || !contactId) {
+
+        showToast(
+            '❌ Informations du devis ou de la demande manquantes.',
+            true
+        );
+
+        return;
+    }
+
+
+    // ========================================================
+    // RÉCUPÉRATION DE LA DEMANDE
+    // ========================================================
+
+    const relation =
+        allRelations.find(
+            r => String(r.id) === String(contactId)
+        );
+
+
+    if (!relation) {
+
+        showToast(
+            '❌ Demande introuvable.',
+            true
+        );
+
+        return;
+    }
+
+
+    if (!relation.userId) {
+
+        showToast(
+            '❌ Impossible d’identifier le demandeur.',
+            true
+        );
+
+        return;
+    }
+
+
+    // ========================================================
+    // CONFIRMATION
+    // ========================================================
+
+    const confirmation =
+        confirm(
+            `Transmettre ce devis à ${relation.email || 'ce demandeur'} ?`
+        );
+
+
+    if (!confirmation) {
+        return;
+    }
+
+
+    try {
+
+        showToast(
+            '⏳ Vérification du devis...'
+        );
+
+
+        // ====================================================
+        // 1. VÉRIFIER QUE LE DEVIS EXISTE
+        // ====================================================
+
+        const {
+            data: offer,
+            error: offerError
+        } = await supabaseClient
+            .from('supplier_offers')
+            .select(`
+                id,
+                contact_id,
+                file_url,
+                file_name,
+                supplier_reference,
+                offer_amount,
+                currency,
+                received_at
+            `)
+            .eq('id', offerId)
+            .eq('contact_id', contactId)
+            .single();
+
+
+        if (offerError || !offer) {
+
+            console.error(
+                '❌ Devis introuvable :',
+                offerError
+            );
+
+            showToast(
+                '❌ Devis fournisseur introuvable.',
+                true
+            );
+
+            return;
+        }
+
+
+        // ====================================================
+        // 2. VÉRIFIER LES DOUBLONS
+        // ====================================================
+
+        const {
+            data: existingTransmission,
+            error: existingError
+        } = await supabaseClient
+            .from('supplier_offer_transmissions')
+            .select('id')
+            .eq('offer_id', offerId)
+            .eq('user_id', relation.userId)
+            .maybeSingle();
+
+
+        if (existingError) {
+
+            console.error(
+                '❌ Erreur vérification transmission :',
+                existingError
+            );
+
+            showToast(
+                '❌ Impossible de vérifier si le devis a déjà été transmis.',
+                true
+            );
+
+            return;
+        }
+
+
+        if (existingTransmission) {
+
+            showToast(
+                '⚠️ Ce devis a déjà été transmis à ce demandeur.',
+                true
+            );
+
+            return;
+        }
+
+
+        // ====================================================
+        // 3. CRÉATION DE LA TRANSMISSION
+        // ====================================================
+
+        showToast(
+            '⏳ Transmission du devis...'
+        );
+
+
+        const {
+            data: transmission,
+            error: transmissionError
+        } = await supabaseClient
+            .from('supplier_offer_transmissions')
+            .insert({
+
+                offer_id:
+                    offer.id,
+
+                contact_id:
+                    offer.contact_id,
+
+                user_id:
+                    relation.userId
+
+            })
+            .select()
+            .single();
+
+
+        if (transmissionError) {
+
+            console.error(
+                '❌ Erreur transmission devis :',
+                transmissionError
+            );
+
+            // Cas particulier : protection contre un doublon
+            if (
+                transmissionError.code === '23505'
+            ) {
+
+                showToast(
+                    '⚠️ Ce devis a déjà été transmis à ce demandeur.',
+                    true
+                );
+
+            } else {
+
+                showToast(
+                    '❌ Impossible de transmettre le devis.',
+                    true
+                );
+            }
+
+            return;
+        }
+
+
+        // ====================================================
+        // 4. SUCCÈS
+        // ====================================================
+
+        console.log(
+            '✅ Transmission créée :',
+            transmission
+        );
+
+
+        showToast(
+            '✅ Le devis a été transmis au demandeur.'
+        );
+
+
+        // ====================================================
+        // 5. RAFRAÎCHISSEMENT
+        // ====================================================
+
+        await loadRelations();
+
+
+    } catch (error) {
+
+        console.error(
+            '❌ Erreur inattendue transmission devis :',
+            error
+        );
+
+        showToast(
+            '❌ Une erreur est survenue lors de la transmission.',
+            true
+        );
+    }
+}
     // ============================================================
     // FERMETURE DU MODAL
     // ============================================================
