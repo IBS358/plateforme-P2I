@@ -1486,161 +1486,287 @@ async function loadRelations() {
 
 
         // ========================================================
-        // 6. RÉCUPÉRATION DES DEVIS FOURNISSEURS
-        // ========================================================
+// 6. RÉCUPÉRATION DES DEVIS FOURNISSEURS
+// ========================================================
 
-        console.log(
-            '📄 Récupération des devis depuis supplier_offers...'
-        );
+console.log(
+    '📄 Récupération des devis depuis supplier_offers...'
+);
 
-
-        const {
-            data: offers,
-            error: offersError
-        } = await supabaseClient
-            .from('supplier_offers')
-            .select(`
-                id,
-                contact_id,
-                file_url,
-                file_name,
-                supplier_reference,
-                offer_amount,
-                currency,
-                received_at,
-                created_at
-            `)
-            .order(
-                'created_at',
-                {
-                    ascending: false
-                }
-            );
-
-
-        // ========================================================
-        // 7. VÉRIFICATION DES DEVIS
-        // ========================================================
-
-        if (offersError) {
-
-            console.error(
-                '❌ Erreur Supabase supplier_offers :',
-                offersError
-            );
-
-            /*
-             * Les demandes restent affichées même si les devis
-             * ne peuvent pas être récupérés.
-             */
-
-        } else {
-
-            console.log(
-                `✅ ${offers ? offers.length : 0} devis récupéré(s).`
-            );
+const {
+    data: offers,
+    error: offersError
+} = await supabaseClient
+    .from('supplier_offers')
+    .select(`
+        id,
+        contact_id,
+        file_url,
+        file_name,
+        supplier_reference,
+        offer_amount,
+        currency,
+        received_at,
+        created_at
+    `)
+    .order(
+        'created_at',
+        {
+            ascending: false
+        }
+    );
 
 
-            // ====================================================
-            // CARTE :
-            // contact_id → devis
-            // ====================================================
+// ========================================================
+// 7. VÉRIFICATION DES DEVIS
+// ========================================================
 
-            const offerMap = {};
+if (offersError) {
 
+    console.error(
+        '❌ Erreur Supabase supplier_offers :',
+        offersError
+    );
 
-            (offers || []).forEach(offer => {
+} else {
 
-                /*
-                 * Le plus récent devis est conservé pour une
-                 * demande donnée.
-                 */
-
-                if (
-                    !offerMap[offer.contact_id]
-                ) {
-
-                    offerMap[offer.contact_id] =
-                        offer;
-
-                }
-
-            });
+    console.log(
+        `✅ ${offers ? offers.length : 0} devis récupéré(s).`
+    );
 
 
-            console.log(
-                '🗺️ Offer map créée :',
-                offerMap
-            );
+    // ====================================================
+    // ASSOCIATION :
+    // contact_id → PLUSIEURS devis
+    // ====================================================
+
+    const offerMap = {};
 
 
-            // ====================================================
-            // ASSOCIATION DEVIS ↔ DEMANDE
-            // ====================================================
+    (offers || []).forEach(offer => {
 
-            allRelations =
-                allRelations.map(relation => {
-
-                    const offer =
-                        offerMap[
-                            relation.id
-                        ];
+        const contactId =
+            String(offer.contact_id);
 
 
-                    if (offer) {
+        if (!offerMap[contactId]) {
 
-                        relation.offerId =
-                            offer.id;
+            offerMap[contactId] = [];
 
-                        relation.offerFileUrl =
-                            offer.file_url ||
-                            '';
-
-                        relation.offerFileName =
-                            offer.file_name ||
-                            '';
-
-                        relation.offerSupplierReference =
-                            offer.supplier_reference ||
-                            '';
-
-                        relation.offerAmount =
-                            offer.offer_amount !== null
-                                ? Number(
-                                    offer.offer_amount
-                                )
-                                : null;
-
-                        relation.offerCurrency =
-                            offer.currency ||
-                            '';
-
-                        relation.offerReceivedAt =
-                            offer.received_at ||
-                            offer.created_at ||
-                            null;
-
-                    }
-
-
-                    return relation;
-
-                });
         }
 
 
-        // ========================================================
-        // 8. AFFICHAGE DES DEMANDES
-        // ========================================================
-
-        console.log(
-            '✅ Demandes et devis prêts pour affichage :',
-            allRelations
+        offerMap[contactId].push(
+            offer
         );
 
+    });
 
-        renderRelations();
 
+    console.log(
+        '🗺️ Offer map créée :',
+        offerMap
+    );
+
+
+    // ====================================================
+    // ASSOCIATION DEVIS ↔ DEMANDE
+    // ====================================================
+
+    allRelations =
+        allRelations.map(relation => {
+
+            const relationOffers =
+                offerMap[
+                    String(relation.id)
+                ] || [];
+
+
+            // Tous les devis de cette demande
+            relation.offers =
+                relationOffers;
+
+
+            /*
+             * Compatibilité avec l'ancien affichage :
+             * on conserve également le devis le plus récent
+             * dans les anciennes propriétés.
+             */
+
+            const latestOffer =
+                relationOffers[0];
+
+
+            if (latestOffer) {
+
+                relation.offerId =
+                    latestOffer.id;
+
+                relation.offerFileUrl =
+                    latestOffer.file_url ||
+                    '';
+
+                relation.offerFileName =
+                    latestOffer.file_name ||
+                    '';
+
+                relation.offerSupplierReference =
+                    latestOffer.supplier_reference ||
+                    '';
+
+                relation.offerAmount =
+                    latestOffer.offer_amount !== null
+                        ? Number(
+                            latestOffer.offer_amount
+                        )
+                        : null;
+
+                relation.offerCurrency =
+                    latestOffer.currency ||
+                    '';
+
+                relation.offerReceivedAt =
+                    latestOffer.received_at ||
+                    latestOffer.created_at ||
+                    null;
+
+            }
+
+
+            return relation;
+
+        });
+}
+
+
+// ========================================================
+// 7 BIS. RÉCUPÉRATION DES TRANSMISSIONS
+// ========================================================
+
+console.log(
+    '📤 Récupération des transmissions de devis...'
+);
+
+
+const {
+    data: transmissions,
+    error: transmissionsError
+} = await supabaseClient
+    .from('supplier_offer_transmissions')
+    .select(`
+        id,
+        offer_id,
+        contact_id,
+        user_id,
+        created_at
+    `);
+
+
+if (transmissionsError) {
+
+    console.error(
+        '❌ Erreur récupération transmissions :',
+        transmissionsError
+    );
+
+} else {
+
+    console.log(
+        `✅ ${
+            transmissions
+                ? transmissions.length
+                : 0
+        } transmission(s) récupérée(s).`
+    );
+
+
+    // ====================================================
+    // CARTE :
+    // offer_id → transmission
+    // ====================================================
+
+    const transmissionMap = {};
+
+
+    (transmissions || []).forEach(
+        transmission => {
+
+            transmissionMap[
+                String(
+                    transmission.offer_id
+                )
+            ] = transmission;
+
+        }
+    );
+
+
+    console.log(
+        '🗺️ Transmission map créée :',
+        transmissionMap
+    );
+
+
+    // ====================================================
+    // ASSOCIATION TRANSMISSION ↔ DEVIS
+    // ====================================================
+
+    allRelations =
+        allRelations.map(relation => {
+
+            const relationOffers =
+                relation.offers || [];
+
+
+            relation.offers =
+                relationOffers.map(
+                    offer => {
+
+                        const transmission =
+                            transmissionMap[
+                                String(
+                                    offer.id
+                                )
+                            ] || null;
+
+
+                        return {
+
+                            ...offer,
+
+                            transmissionId:
+                                transmission
+                                    ? transmission.id
+                                    : null,
+
+                            transmittedAt:
+                                transmission
+                                    ? transmission.created_at
+                                    : null
+
+                        };
+
+                    }
+                );
+
+
+            return relation;
+
+        });
+}
+
+
+// ========================================================
+// 8. AFFICHAGE DES DEMANDES
+// ========================================================
+
+console.log(
+    '✅ Demandes, devis et transmissions prêts pour affichage :',
+    allRelations
+);
+
+
+renderRelations();
 
     } catch (error) {
 
