@@ -1731,19 +1731,17 @@ if (transmissionsError) {
 
                         return {
 
-                            ...offer,
+    ...offer,
 
-                            transmissionId:
-                                transmission
-                                    ? transmission.id
-                                    : null,
+    transmissionId:
+        transmission
+            ? transmission.id
+            : null,
 
-                            transmittedAt:
-                                transmission
-                                    ? transmission.created_at
-                                    : null
+    transmittedAt:
+        null
 
-                        };
+};
 
                     }
                 );
