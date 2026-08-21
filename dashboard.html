@@ -3520,29 +3520,65 @@ ${
                 </div>
 
 
-                ${
+                
+${
+    transmittedOffer.file_name
+        ? `
+
+            <div style="
+                color:#e2e8f0;
+                font-size:0.85rem;
+                margin-bottom:10px;
+            ">
+
+                📄
+
+                ${escapeHtml(
                     transmittedOffer.file_name
-                        ? `
+                )}
 
-                            <div style="
-                                color:#e2e8f0;
-                                font-size:0.85rem;
-                                margin-bottom:7px;
-                            ">
-
-                                📄
-
-                                ${escapeHtml(
-                                    transmittedOffer.file_name
-                                )}
-
-                            </div>
-
-                          `
-                        : ''
-                }
+            </div>
 
 
+            ${
+                transmittedOffer.file_url
+                    ? `
+
+                        <button
+                            type="button"
+                            onclick="openTransmittedOffer(
+                                '${escapeHtml(
+                                    transmittedOffer.file_url
+                                )}'
+                            )"
+                            style="
+                                display:inline-flex;
+                                align-items:center;
+                                gap:8px;
+                                padding:9px 14px;
+                                border:none;
+                                border-radius:8px;
+                                background:#4cc9f0;
+                                color:#0f172a;
+                                font-weight:700;
+                                font-size:0.8rem;
+                                cursor:pointer;
+                            "
+                        >
+
+                            <i class="fas fa-file-pdf"></i>
+
+                            Ouvrir le devis fournisseur
+
+                        </button>
+
+                      `
+                    : ''
+            }
+
+          `
+        : ''
+}
                 ${
                     transmittedOffer.supplier_reference
                         ? `
