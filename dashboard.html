@@ -2892,11 +2892,80 @@ async function deleteDevisSupabase(id) {
       showToastMessage('✅ Offre supprimée avec succès');
       loadMesOffres(); // rafraîchir
     }
-
-    // ==============================================
-// GESTION DES MISES EN RELATION (Supabase)
 // ==============================================
-async function loadRelations() {
+// OUVERTURE SÉCURISÉE D'UN DEVIS TRANSMIS
+// ==============================================
+async function openTransmittedOffer(fileUrl) {
+
+    if (!fileUrl) {
+
+        showToast(
+            '❌ Document indisponible.',
+            true
+        );
+
+        return;
+    }
+
+    try {
+
+        showToast(
+            '⏳ Ouverture du devis...'
+        );
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .storage
+            .from('supplier-offers')
+            .createSignedUrl(
+                fileUrl,
+                300
+            );
+
+        if (error || !data?.signedUrl) {
+
+            console.error(
+                '❌ Erreur création URL signée :',
+                error
+            );
+
+            showToast(
+                '❌ Impossible d’ouvrir le devis.',
+                true
+            );
+
+            return;
+        }
+
+        console.log(
+            '✅ URL signée créée pour le devis.'
+        );
+
+        window.open(
+            data.signedUrl,
+            '_blank'
+        );
+
+    } catch (error) {
+
+        console.error(
+            '❌ Erreur ouverture devis :',
+            error
+        );
+
+        showToast(
+            '❌ Impossible d’ouvrir le devis.',
+            true
+        );
+    }
+}
+
+// ==============================================
+// GESTION DES MISES EN RELATION
+// ==============================================
+async function loadRelations() 
 
   const container = document.getElementById('relationsContainer');
   if (!container) return;
