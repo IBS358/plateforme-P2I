@@ -3422,6 +3422,165 @@ ${
           `
         : ''
 }
+${
+    transmittedOffer
+        ? `
+
+            <div style="
+                margin-top:14px;
+                padding:15px;
+                background:rgba(76,201,240,0.06);
+                border-radius:12px;
+                border-left:3px solid #4cc9f0;
+                max-width:420px;
+            ">
+
+                <div style="
+                    color:#4cc9f0;
+                    font-size:0.75rem;
+                    font-weight:700;
+                    text-transform:uppercase;
+                    letter-spacing:0.6px;
+                    margin-bottom:10px;
+                ">
+
+                    <i class="fas fa-file-invoice"></i>
+
+                    Devis fournisseur
+
+                </div>
+
+
+                ${
+                    transmittedOffer.file_name
+                        ? `
+
+                            <div style="
+                                color:#e2e8f0;
+                                font-size:0.85rem;
+                                margin-bottom:7px;
+                            ">
+
+                                📄
+
+                                ${escapeHtml(
+                                    transmittedOffer.file_name
+                                )}
+
+                            </div>
+
+                          `
+                        : ''
+                }
+
+
+                ${
+                    transmittedOffer.supplier_reference
+                        ? `
+
+                            <div style="
+                                color:#94a3b8;
+                                font-size:0.8rem;
+                                margin-top:5px;
+                            ">
+
+                                🔢 Référence fournisseur :
+
+                                <strong style="
+                                    color:#cbd5e1;
+                                ">
+
+                                    ${escapeHtml(
+                                        transmittedOffer.supplier_reference
+                                    )}
+
+                                </strong>
+
+                            </div>
+
+                          `
+                        : ''
+                }
+
+
+                ${
+                    transmittedOffer.offer_amount !== null &&
+                    transmittedOffer.offer_amount !== undefined
+                        ? `
+
+                            <div style="
+                                color:#94a3b8;
+                                font-size:0.8rem;
+                                margin-top:5px;
+                            ">
+
+                                💰 Montant :
+
+                                <strong style="
+                                    color:#cbd5e1;
+                                ">
+
+                                    ${Number(
+                                        transmittedOffer.offer_amount
+                                    ).toLocaleString('fr-FR')}
+
+                                    ${escapeHtml(
+                                        transmittedOffer.currency || ''
+                                    )}
+
+                                </strong>
+
+                            </div>
+
+                          `
+                        : ''
+                }
+
+
+                ${
+                    transmittedOffer.received_at
+                        ? `
+
+                            <div style="
+                                color:#64748b;
+                                font-size:0.75rem;
+                                margin-top:7px;
+                            ">
+
+                                <i class="fas fa-clock"></i>
+
+                                Reçu le :
+
+                                ${new Date(
+                                    transmittedOffer.received_at
+                                ).toLocaleDateString(
+                                    'fr-FR'
+                                )}
+
+                                à
+
+                                ${new Date(
+                                    transmittedOffer.received_at
+                                ).toLocaleTimeString(
+                                    'fr-FR',
+                                    {
+                                        hour: '2-digit',
+                                        minute: '2-digit'
+                                    }
+                                )}
+
+                            </div>
+
+                          `
+                        : ''
+                }
+
+
+            </div>
+
+          `
+        : ''
+}
 
 
 ${
