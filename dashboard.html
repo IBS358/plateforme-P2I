@@ -2956,7 +2956,162 @@ async function loadRelations() {
 
       return;
     }
+// ==============================================
+// RÉCUPÉRATION DES DEVIS TRANSMIS
+// ==============================================
 
+console.log(
+  '📤 Recherche des devis transmis au demandeur...'
+);
+
+const {
+  data: transmissions,
+  error: transmissionsError
+} = await supabaseClient
+  .from('supplier_offer_transmissions')
+  .select(`
+    id,
+    offer_id,
+    contact_id,
+    user_id,
+    transmitted_at
+  `)
+  .eq('user_id', user.id);
+
+if (transmissionsError) {
+
+  console.error(
+    '❌ Erreur récupération transmissions:',
+    transmissionsError
+  );
+
+} else {
+
+  console.log(
+    `✅ ${transmissions ? transmissions.length : 0} transmission(s) trouvée(s).`
+  );
+}
+
+
+// ==============================================
+// RÉCUPÉRATION DES DEVIS
+// ==============================================
+
+let transmittedOffers = [];
+
+if (transmissions && transmissions.length > 0) {
+
+  const offerIds = [
+    ...new Set(
+      transmissions
+        .map(t => t.offer_id)
+        .filter(Boolean)
+    )
+  ];
+
+  if (offerIds.length > 0) {
+
+    const {
+      data: offers,
+      error: offersError
+    } = await supabaseClient
+      .from('supplier_offers')
+      .select(`
+        id,
+        contact_id,
+        file_url,
+        file_name,
+        supplier_reference,
+        offer_amount,
+        currency,
+        received_at
+      `)
+      .in('id', offerIds);
+
+    if (offersError) {
+
+      console.error(
+        '❌ Erreur récupération supplier_offers:',
+        offersError
+      );
+
+    } else {
+
+      transmittedOffers = offers || [];
+
+      console.log(
+        '📄 Devis transmis récupérés :',
+        transmittedOffers
+      );
+    }
+  }
+}
+
+
+// ==============================================
+// ASSOCIATION TRANSMISSION + DEVIS + DEMANDE
+// ==============================================
+
+const offerMap = {};
+
+(transmittedOffers || []).forEach(offer => {
+
+  offerMap[offer.id] = offer;
+
+});
+
+
+const transmissionMap = {};
+
+(transmissions || []).forEach(transmission => {
+
+  const offer =
+    offerMap[transmission.offer_id];
+
+  if (offer) {
+
+    transmissionMap[
+      transmission.contact_id
+    ] = {
+
+      ...offer,
+
+      transmissionId:
+        transmission.id,
+
+      transmittedAt:
+        transmission.transmitted_at
+
+    };
+
+  }
+
+});
+
+
+console.log(
+  '🗺️ Devis transmis associés aux demandes :',
+  transmissionMap
+);
+
+
+// ==============================================
+// AJOUT DES DEVIS AUX DEMANDES
+// ==============================================
+
+data.forEach(rel => {
+
+  const offer =
+    transmissionMap[rel.id];
+
+  if (offer) {
+
+    rel.transmittedOffer =
+      offer;
+
+  }
+
+});
 
     // ==============================================
     // AUCUNE DEMANDE
