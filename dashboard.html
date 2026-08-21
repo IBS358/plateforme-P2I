@@ -2898,20 +2898,20 @@ async function deleteDevisSupabase(id) {
 async function openTransmittedOffer(fileUrl) {
 
     if (!fileUrl) {
-
-        showToast(
-            '❌ Document indisponible.',
-            true
-        );
+     
+      showToastMessage(
+    '❌ Document indisponible.'
+);
+        
 
         return;
     }
 
     try {
 
-        showToast(
-            '⏳ Ouverture du devis...'
-        );
+        showToastMessage(
+    '⏳ Ouverture du devis...'
+);
 
         const {
             data,
@@ -2931,10 +2931,9 @@ async function openTransmittedOffer(fileUrl) {
                 error
             );
 
-            showToast(
-                '❌ Impossible d’ouvrir le devis.',
-                true
-            );
+           showToastMessage(
+    '❌ Impossible d’ouvrir le devis.'
+);
 
             return;
         }
@@ -2955,10 +2954,9 @@ async function openTransmittedOffer(fileUrl) {
             error
         );
 
-        showToast(
-            '❌ Impossible d’ouvrir le devis.',
-            true
-        );
+        showToastMessage(
+    '❌ Impossible d’ouvrir le devis.'
+);
     }
 }
 
