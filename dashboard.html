@@ -3226,6 +3226,8 @@ data.forEach(rel => {
       const status =
         statusLabels[rel.status] ||
         statusLabels.pending;
+      const transmittedOffer =
+    rel.transmittedOffer || null;
 
 
       return `
