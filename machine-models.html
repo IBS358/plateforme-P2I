@@ -2523,19 +2523,24 @@ if (n.includes('cartonneuse') || (n.includes('conditionnement') && n.includes('s
 // CONTACT FOURNISSEUR - VERSION PARTENARIAT
 // ==============================================
 
+```javascript
 function contactSupplier(origin, supplier, productName, modelId, price, capacity) {
-  // Afficher une boîte de dialogue informative
+  // ==============================================
+  // CONTACT FOURNISSEUR - PARCOURS P2I
+  // ==============================================
+
   const originLabels = {
-    'chinese': '🇨🇳 Chine',
-    'korean': '🇰🇷 Corée du Sud',
-    'europe': '🇪🇺 Europe'
+    chinese: '🇨🇳 Chine',
+    korean: '🇰🇷 Corée du Sud',
+    europe: '🇪🇺 Europe'
   };
 
   const existing = document.getElementById('p2i-supplier-modal');
   if (existing) existing.remove();
-  
+
   const modal = document.createElement('div');
   modal.id = 'p2i-supplier-modal';
+
   modal.style.cssText = `
     position: fixed;
     top: 0;
@@ -2550,13 +2555,31 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
     backdrop-filter: blur(8px);
     animation: fadeIn 0.3s ease;
   `;
-  
+
+  // ------------------------------------------------
+  // PRIX CATALOGUE
+  // ------------------------------------------------
+
+  let priceDisplay = 'Prix sur demande';
+
+  if (
+    price !== null &&
+    price !== undefined &&
+    price !== '' &&
+    !isNaN(Number(price))
+  ) {
+    priceDisplay =
+      Number(price).toLocaleString('fr-FR') + ' $ TTC';
+  } else if (price && price !== 'Prix sur demande') {
+    priceDisplay = escapeHtml(String(price));
+  }
+
   modal.innerHTML = `
     <div style="
       background: #1c2541;
-      max-width: 550px;
-      width: 90%;
-      padding: 35px 30px;
+      max-width: 600px;
+      width: 92%;
+      padding: 30px 25px;
       border-radius: 24px;
       border: 1px solid rgba(76, 201, 240, 0.3);
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
@@ -2564,101 +2587,518 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
       max-height: 90vh;
       overflow-y: auto;
     ">
-      <div style="text-align: center; margin-bottom: 20px;">
-        <div style="font-size: 3rem; margin-bottom: 10px;">🤝</div>
-        <h2 style="color: #4cc9f0; margin: 0; font-size: 1.4rem;">Partenariat en cours</h2>
-        <p style="color: #94a3b8; font-size: 0.9rem; margin: 5px 0 0;">
-          La P2I construit son réseau de fournisseurs
-        </p>
-      </div>
-      
-      <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; margin: 15px 0;">
-        <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-          <span style="color: #94a3b8;">Machine</span>
-          <span style="color: white; font-weight: 500;">${escapeHtml(productName)}</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-          <span style="color: #94a3b8;">Fournisseur</span>
-          <span style="color: white; font-weight: 500;">${escapeHtml(supplier)}</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; padding: 6px 0;">
-          <span style="color: #94a3b8;">Origine</span>
-          <span style="color: white; font-weight: 500;">${originLabels[origin] || origin}</span>
-        </div>
-      </div>
-      
-      <!-- ===== AVANTAGES P2I ===== -->
-      <div style="text-align: center; margin: 15px 0; padding: 15px; background: rgba(76,201,240,0.08); border-radius: 12px; border: 1px solid rgba(76,201,240,0.15);">
-        <p style="color: #cbd5e1; font-size: 0.85rem; margin: 0; line-height: 1.6;">
-          <i class="fas fa-handshake" style="color: #4cc9f0; margin-right: 8px;"></i>
-          <strong style="color: #4cc9f0;">La P2I vous facilite l'accès aux meilleurs fournisseurs :</strong>
-        </p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; text-align: left;">
-          <div style="color: #94a3b8; font-size: 0.75rem; display: flex; align-items: center; gap: 6px;">
-            <span style="color: #4cc9f0;">✅</span> Mise en relation directe
-          </div>
-          <div style="color: #94a3b8; font-size: 0.75rem; display: flex; align-items: center; gap: 6px;">
-            <span style="color: #4cc9f0;">✅</span> Prix négociés
-          </div>
-          <div style="color: #94a3b8; font-size: 0.75rem; display: flex; align-items: center; gap: 6px;">
-            <span style="color: #4cc9f0;">✅</span> Logistique & dédouanement
-          </div>
-          <div style="color: #94a3b8; font-size: 0.75rem; display: flex; align-items: center; gap: 6px;">
-            <span style="color: #4cc9f0;">✅</span> Fournisseurs vérifiés
-          </div>
-        </div>
-      </div>
-      
-      <!-- ===== BOUTONS D'ACTION ===== -->
-      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-        <button onclick="demanderMiseEnRelation('${escapeHtml(productName)}', '${escapeHtml(supplier)}', '${origin}', '${escapeHtml(modelId)}')" style="
-          width: 100%; padding: 14px;
-          background: linear-gradient(135deg, #22c55e, #16a34a);
-          color: white; border: none; border-radius: 12px;
-          font-weight: 600; font-size: 1rem; cursor: pointer;
-          transition: all 0.3s;
-        " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-          <i class="fas fa-handshake"></i> Demander la mise en relation
-        </button>
-        <button onclick="sauvegarderMachinePourPlusTard('${escapeHtml(productName)}', '${escapeHtml(supplier)}', '${origin}')" style="
-          width: 100%; padding: 12px;
-          background: rgba(255,255,255,0.05);
-          color: #94a3b8; border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 12px; font-weight: 500; font-size: 0.9rem; cursor: pointer;
-          transition: all 0.3s;
-        " onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
-          <i class="fas fa-bookmark"></i> Sauvegarder pour plus tard
-        </button>
-        <button onclick="document.getElementById('p2i-supplier-modal').remove()" style="
-          width: 100%; padding: 10px;
-          background: transparent;
-          color: #64748b; border: none;
-          border-radius: 12px; font-weight: 400; font-size: 0.8rem; cursor: pointer;
+
+      <!-- ==========================================
+           EN-TÊTE
+           ========================================== -->
+
+      <div style="
+        text-align:center;
+        margin-bottom:20px;
+      ">
+
+        <div style="
+          font-size:2.6rem;
+          margin-bottom:8px;
         ">
-          Fermer
+          🏭
+        </div>
+
+        <h2 style="
+          color:#4cc9f0;
+          margin:0;
+          font-size:1.35rem;
+        ">
+          Préparer votre projet d'achat
+        </h2>
+
+        <p style="
+          color:#94a3b8;
+          font-size:0.85rem;
+          margin:7px 0 0;
+          line-height:1.5;
+        ">
+          La P2I vous aide à évaluer votre projet avant
+          de solliciter une offre officielle du fournisseur.
+        </p>
+
+      </div>
+
+
+      <!-- ==========================================
+           INFORMATIONS MACHINE
+           ========================================== -->
+
+      <div style="
+        background:rgba(255,255,255,0.05);
+        border-radius:12px;
+        padding:15px;
+        margin:15px 0;
+      ">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:15px;
+          padding:7px 0;
+          border-bottom:1px solid rgba(255,255,255,0.05);
+        ">
+
+          <span style="color:#94a3b8;">
+            Machine
+          </span>
+
+          <span style="
+            color:white;
+            font-weight:600;
+            text-align:right;
+          ">
+            ${escapeHtml(productName)}
+          </span>
+
+        </div>
+
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:15px;
+          padding:7px 0;
+          border-bottom:1px solid rgba(255,255,255,0.05);
+        ">
+
+          <span style="color:#94a3b8;">
+            Fournisseur
+          </span>
+
+          <span style="
+            color:white;
+            font-weight:500;
+            text-align:right;
+          ">
+            ${escapeHtml(supplier)}
+          </span>
+
+        </div>
+
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:15px;
+          padding:7px 0;
+          border-bottom:1px solid rgba(255,255,255,0.05);
+        ">
+
+          <span style="color:#94a3b8;">
+            Origine
+          </span>
+
+          <span style="
+            color:white;
+            font-weight:500;
+            text-align:right;
+          ">
+            ${originLabels[origin] || escapeHtml(origin)}
+          </span>
+
+        </div>
+
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:15px;
+          padding:9px 0 2px;
+        ">
+
+          <span style="
+            color:#94a3b8;
+            font-size:0.85rem;
+          ">
+            Prix catalogue indicatif
+          </span>
+
+          <span style="
+            color:#22c55e;
+            font-weight:700;
+            font-size:1rem;
+            text-align:right;
+          ">
+            ${priceDisplay}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==========================================
+           ESTIMATION P2I
+           ========================================== -->
+
+      <div style="
+        margin:18px 0;
+        padding:17px;
+        background:rgba(76,201,240,0.07);
+        border:1px solid rgba(76,201,240,0.18);
+        border-radius:14px;
+      ">
+
+        <div style="
+          color:#4cc9f0;
+          font-size:0.95rem;
+          font-weight:700;
+          margin-bottom:9px;
+        ">
+          <i class="fas fa-calculator"></i>
+          Estimation provisoire P2I
+        </div>
+
+        <p style="
+          color:#cbd5e1;
+          font-size:0.82rem;
+          line-height:1.6;
+          margin:0 0 10px;
+        ">
+          La P2I peut vous aider à établir une première base
+          d'estimation de votre investissement en prenant en
+          compte, lorsque les informations sont disponibles,
+          différents postes liés à l'acquisition de la machine :
+        </p>
+
+        <div style="
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:7px 12px;
+          margin:10px 0;
+        ">
+
+          <div style="
+            color:#94a3b8;
+            font-size:0.75rem;
+          ">
+            ✓ Machine
+          </div>
+
+          <div style="
+            color:#94a3b8;
+            font-size:0.75rem;
+          ">
+            ✓ Transport
+          </div>
+
+          <div style="
+            color:#94a3b8;
+            font-size:0.75rem;
+          ">
+            ✓ Assurance
+          </div>
+
+          <div style="
+            color:#94a3b8;
+            font-size:0.75rem;
+          ">
+            ✓ Pièces de rechange
+          </div>
+
+          <div style="
+            color:#94a3b8;
+            font-size:0.75rem;
+          ">
+            ✓ Dédouanement / importation
+          </div>
+
+          <div style="
+            color:#94a3b8;
+            font-size:0.75rem;
+          ">
+            ✓ Autres coûts identifiables
+          </div>
+
+        </div>
+
+        <div style="
+          margin-top:12px;
+          padding:10px 12px;
+          background:rgba(255,255,255,0.04);
+          border-radius:9px;
+          color:#94a3b8;
+          font-size:0.74rem;
+          line-height:1.5;
+        ">
+
+          <strong style="color:#cbd5e1;">
+            Important :
+          </strong>
+
+          certains coûts ne peuvent pas être déterminés
+          à ce stade. Ils seront indiqués comme
+          <strong style="color:#fbbf24;">
+            « À confirmer »
+          </strong>
+          plutôt que d'être estimés artificiellement.
+
+        </div>
+
+      </div>
+
+
+      <!-- ==========================================
+           BP PRO
+           ========================================== -->
+
+      <div style="
+        margin:16px 0;
+        padding:15px;
+        background:rgba(34,197,94,0.06);
+        border:1px solid rgba(34,197,94,0.16);
+        border-radius:13px;
+      ">
+
+        <div style="
+          color:#22c55e;
+          font-size:0.9rem;
+          font-weight:700;
+          margin-bottom:8px;
+        ">
+
+          <i class="fas fa-file-alt"></i>
+          Conseil P2I — Business Plan Pro
+
+        </div>
+
+        <p style="
+          color:#cbd5e1;
+          font-size:0.8rem;
+          line-height:1.6;
+          margin:0;
+        ">
+
+          Si vous envisagez d'intégrer cette machine à votre
+          projet, conservez cette estimation. Elle pourra vous
+          servir de base de travail pour votre
+          <strong style="color:#22c55e;">
+            Business Plan Pro
+          </strong>.
+
+          Lorsque votre projet sera suffisamment avancé et que
+          vous serez prêt à engager les démarches d'achat,
+          nous vous recommandons de demander une mise en relation
+          avec le fournisseur afin d'obtenir
+          <strong style="color:#4cc9f0;">
+            une offre officielle actualisée
+          </strong>.
+
+        </p>
+
+      </div>
+
+
+      <!-- ==========================================
+           VALEUR AJOUTÉE P2I
+           ========================================== -->
+
+      <div style="
+        margin:16px 0;
+        padding:15px;
+        background:rgba(247,37,133,0.05);
+        border:1px solid rgba(247,37,133,0.14);
+        border-radius:13px;
+      ">
+
+        <div style="
+          color:#f472b6;
+          font-size:0.9rem;
+          font-weight:700;
+          margin-bottom:8px;
+        ">
+
+          <i class="fas fa-handshake"></i>
+          Pourquoi passer par la P2I ?
+
+        </div>
+
+        <p style="
+          color:#cbd5e1;
+          font-size:0.8rem;
+          line-height:1.6;
+          margin:0;
+        ">
+
+          La P2I développe et négocie en amont des conditions
+          commerciales avec ses fournisseurs partenaires.
+
+          <strong style="color:#f472b6;">
+            Lorsque vous passez par la P2I, les conditions
+            négociées applicables à votre demande peuvent
+            être prises en compte.
+          </strong>
+
+        </p>
+
+      </div>
+
+
+      <!-- ==========================================
+           AVERTISSEMENT
+           ========================================== -->
+
+      <div style="
+        margin:15px 0;
+        color:#64748b;
+        font-size:0.68rem;
+        line-height:1.5;
+        text-align:center;
+      ">
+
+        Les prix et conditions peuvent évoluer.
+        L'estimation P2I est indicative et ne constitue
+        pas une offre commerciale.
+
+      </div>
+
+
+      <!-- ==========================================
+           ACTIONS
+           ========================================== -->
+
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        margin-top:16px;
+      ">
+
+        <button
+          onclick="demanderMiseEnRelation(
+            '${escapeHtml(productName)}',
+            '${escapeHtml(supplier)}',
+            '${origin}',
+            '${escapeHtml(modelId)}'
+          )"
+          style="
+            width:100%;
+            padding:14px;
+            background:linear-gradient(135deg,#22c55e,#16a34a);
+            color:white;
+            border:none;
+            border-radius:12px;
+            font-weight:600;
+            font-size:0.95rem;
+            cursor:pointer;
+            transition:all 0.3s;
+          "
+          onmouseover="this.style.transform='scale(1.02)'"
+          onmouseout="this.style.transform='scale(1)'"
+        >
+
+          <i class="fas fa-handshake"></i>
+          Je souhaite envisager cet achat
+
         </button>
+
+
+        <button
+          onclick="sauvegarderMachinePourPlusTard(
+            '${escapeHtml(productName)}',
+            '${escapeHtml(supplier)}',
+            '${origin}'
+          )"
+          style="
+            width:100%;
+            padding:12px;
+            background:rgba(255,255,255,0.05);
+            color:#94a3b8;
+            border:1px solid rgba(255,255,255,0.1);
+            border-radius:12px;
+            font-weight:500;
+            font-size:0.88rem;
+            cursor:pointer;
+            transition:all 0.3s;
+          "
+          onmouseover="this.style.background='rgba(255,255,255,0.1)'"
+          onmouseout="this.style.background='rgba(255,255,255,0.05)'"
+        >
+
+          <i class="fas fa-bookmark"></i>
+          Sauvegarder pour plus tard
+
+        </button>
+
+
+        <button
+          onclick="document.getElementById('p2i-supplier-modal').remove()"
+          style="
+            width:100%;
+            padding:10px;
+            background:transparent;
+            color:#64748b;
+            border:none;
+            border-radius:12px;
+            font-weight:400;
+            font-size:0.8rem;
+            cursor:pointer;
+          "
+        >
+
+          Fermer
+
+        </button>
+
       </div>
-      
-      <div style="text-align: center; margin-top: 12px;">
-        <p style="color: #64748b; font-size: 0.65rem; margin: 0;">
-          <i class="fas fa-envelope"></i> contact@p2i.ci &nbsp;|&nbsp; <i class="fas fa-phone"></i> +225 62 200 0000
+
+
+      <!-- ==========================================
+           CONTACT
+           ========================================== -->
+
+      <div style="
+        text-align:center;
+        margin-top:13px;
+      ">
+
+        <p style="
+          color:#64748b;
+          font-size:0.65rem;
+          margin:0;
+        ">
+
+          <i class="fas fa-envelope"></i>
+          contact@p2i.ci
+          &nbsp;|&nbsp;
+          <i class="fas fa-phone"></i>
+          +225 62 200 0000
+
         </p>
-        <p style="color: #475569; font-size: 0.55rem; margin: 5px 0 0;">
-          La P2I facilite la mise en relation entre les acheteurs et les fournisseurs.
+
+        <p style="
+          color:#475569;
+          font-size:0.55rem;
+          margin:5px 0 0;
+        ">
+
+          La P2I facilite la mise en relation entre les acheteurs
+          et les fournisseurs.
+
         </p>
+
       </div>
+
     </div>
   `;
-  
+
   document.body.appendChild(modal);
-  
-  // Fermer en cliquant à l'extérieur (COMME DANS VOTRE CODE)
+
+  // Fermer en cliquant à l'extérieur
   modal.addEventListener('click', function(e) {
     if (e.target === modal) {
       modal.remove();
     }
   });
 }
+```
+
 // ==============================================
 // DEMANDER UNE MISE EN RELATION AVEC LE FOURNISSEUR
 // ==============================================
