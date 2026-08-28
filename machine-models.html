@@ -3390,19 +3390,20 @@ function showToast(message) {
 
 
     // ==============================================
-    // 2. RÉCUPÉRATION DE L'ORIGINE ET DU PRIX
+    // 2. ORIGINE ET PRIX DU MODÈLE SÉLECTIONNÉ
     // ==============================================
 
-    const selection = getSelectedOrigin(btn);
-
-    const price = selection.price || 'Prix sur demande';
-    const origin = selection.origin || 'chinese';
+    origin = origin || 'chinese';
+    price = price || 'Prix sur demande';
 
     const labels = {
       korean: '🇰🇷 Premium Corée',
       chinese: '🇨🇳 Standard Chine',
       europe: '🇪🇺 Occasion Europe'
     };
+
+    console.log('🌍 Origine du modèle:', origin);
+    console.log('💰 Prix catalogue:', price);
 
 
     // ==============================================
@@ -3439,7 +3440,10 @@ function showToast(message) {
 
       catalog_price_usd: price,
 
-      // Conservation de l'information d'origine
+      // ----------------------------------------------
+      // ORIGINE
+      // ----------------------------------------------
+
       origin: origin,
       origin_label: labels[origin] || origin,
 
@@ -3530,7 +3534,7 @@ function showToast(message) {
 
 
     showToast(
-      `✅ "${modelName}" (${labels[origin]}) enregistré dans le Dashboard`
+      `✅ "${modelName}" (${labels[origin] || origin}) enregistré dans le Dashboard`
     );
 
 
