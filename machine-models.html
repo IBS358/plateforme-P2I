@@ -3335,7 +3335,8 @@ function showToast(message) {
       renderCartModal();
     }
 
-    async function saveToDashboardWithOrigin(
+    ```javascript
+async function saveToDashboardWithOrigin(
   upId,
   upNom,
   machineName,
@@ -3347,7 +3348,7 @@ function showToast(message) {
   supplier,
   supplierStatus,
   origin,
-  price,
+  priceTtc,
   btn
 ) {
   const email = getActiveEmail();
@@ -3394,7 +3395,8 @@ function showToast(message) {
     // ==============================================
 
     origin = origin || 'chinese';
-    price = price || 'Prix sur demande';
+
+    const price = priceTtc || 'Prix sur demande';
 
     const labels = {
       korean: '🇰🇷 Premium Corée',
@@ -3555,10 +3557,12 @@ function showToast(message) {
     );
 
     alert(
-      '❌ Erreur lors de l\'enregistrement.'
+      '❌ Erreur lors de l'enregistrement.'
     );
   }
 }
+```
+
     // ==============================================
     // GESTION DU PANIER
     // ==============================================
