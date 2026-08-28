@@ -3320,85 +3320,224 @@ function showToast(message) {
       renderCartModal();
     }
 
-    async function saveToDashboardWithOrigin(upId, upNom, machineName, modelName, machineRole, machineCapacity, machineUtilities, btn) {
+    async function saveToDashboardWithOrigin(
+  upId,
+  upNom,
+  machineName,
+  modelName,
+  machineRole,
+  machineCapacity,
+  machineUtilities,
+  modelId,
+  supplier,
+  supplierStatus,
+  btn
+) {
   const email = getActiveEmail();
-  if (!email) { 
-    alert('Veuillez vous connecter.'); 
-    window.location.href = 'login.html?mode=login'; 
-    return; 
+
+  if (!email) {
+    alert('Veuillez vous connecter.');
+    window.location.href = 'login.html?mode=login';
+    return;
   }
-  
+
   console.log('🔍 1. Début de la sauvegarde pour:', email);
-  
+
   try {
+
+    // ==============================================
+    // 1. RÉCUPÉRATION DE L'UTILISATEUR SUPABASE
+    // ==============================================
+
     console.log('🔍 2. Récupération de l\'utilisateur Supabase...');
-    const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
-    
+
+    const {
+      data: { user },
+      error: userError
+    } = await supabaseClient.auth.getUser();
+
     if (userError) {
       console.error('❌ Erreur utilisateur:', userError);
       alert('Erreur de connexion.');
       return;
     }
-    
+
     if (!user) {
       console.log('❌ Utilisateur non connecté');
       alert('Veuillez vous reconnecter.');
       window.location.href = 'login.html?mode=login';
       return;
     }
-    
+
     console.log('✅ 3. Utilisateur trouvé:', user.id, user.email);
-    
+
+
+    // ==============================================
+    // 2. RÉCUPÉRATION DE L'ORIGINE ET DU PRIX
+    // ==============================================
+
     const selection = getSelectedOrigin(btn);
+
     const price = selection.price || 'Prix sur demande';
     const origin = selection.origin || 'chinese';
-    const labels = { korean: '🇰🇷 Premium Corée', chinese: '🇨🇳 Standard Chine', europe: '🇪🇺 Occasion Europe' };
-    
-    const machineData = { 
-      up_id: upId, 
-      up_nom: upNom, 
-      machine: machineName, 
+
+    const labels = {
+      korean: '🇰🇷 Premium Corée',
+      chinese: '🇨🇳 Standard Chine',
+      europe: '🇪🇺 Occasion Europe'
+    };
+
+
+    // ==============================================
+    // 3. CONSTRUCTION DES DONNÉES DE LA MACHINE
+    // ==============================================
+
+    const machineData = {
+
+      // ----------------------------------------------
+      // UNITÉ DE PRODUCTION
+      // ----------------------------------------------
+
+      up_id: upId,
+      up_nom: upNom,
+
+      // ----------------------------------------------
+      // MACHINE / MODÈLE
+      // ----------------------------------------------
+
+      machine: machineName,
       model: modelName,
+      model_id: modelId || null,
+
+      // ----------------------------------------------
+      // FOURNISSEUR
+      // ----------------------------------------------
+
+      supplier: supplier || null,
+      supplier_status: supplierStatus || 'identified',
+
+      // ----------------------------------------------
+      // PRIX CATALOGUE
+      // ----------------------------------------------
+
+      catalog_price_usd: price,
+
+      // Conservation de l'information d'origine
       origin: origin,
       origin_label: labels[origin] || origin,
-      price: price,
+
+      // ----------------------------------------------
+      // CARACTÉRISTIQUES
+      // ----------------------------------------------
+
       machine_role: machineRole,
       machine_capacity: machineCapacity,
       machine_utilities: machineUtilities,
-      saved_at: new Date().toISOString() 
+
+      // ----------------------------------------------
+      // STATUTS P2I
+      // ----------------------------------------------
+
+      estimation_status: 'pending',
+      relation_status: 'pending',
+
+      // ----------------------------------------------
+      // DATE D'ENREGISTREMENT
+      // ----------------------------------------------
+
+      saved_at: new Date().toISOString()
     };
-    
+
+
     console.log('📦 4. Données à sauvegarder:', machineData);
-    
-    // SAUVEGARDER DANS SUPABASE
-    console.log('🔍 5. Tentative de sauvegarde dans saved_machines...');
-    const { data: insertData, error } = await supabaseClient
+
+
+    // ==============================================
+    // 4. SAUVEGARDE DANS SUPABASE
+    // ==============================================
+
+    console.log(
+      '🔍 5. Tentative de sauvegarde dans saved_machines...'
+    );
+
+    const {
+      data: insertData,
+      error
+    } = await supabaseClient
       .from('saved_machines')
       .insert({
         user_id: user.id,
         data: machineData
-      });
-    
+      })
+      .select();
+
+
+    // ==============================================
+    // 5. GESTION D'ERREUR
+    // ==============================================
+
     if (error) {
-      console.error('❌ 6. Erreur sauvegarde Supabase:', error);
-      console.error('❌ Détails:', JSON.stringify(error, null, 2));
-      alert('❌ Erreur lors de l\'enregistrement: ' + error.message);
+
+      console.error(
+        '❌ 6. Erreur sauvegarde Supabase:',
+        error
+      );
+
+      console.error(
+        '❌ Détails:',
+        JSON.stringify(error, null, 2)
+      );
+
+      alert(
+        '❌ Erreur lors de l\'enregistrement: ' +
+        error.message
+      );
+
       return;
     }
-    
-    console.log('✅ 7. Machine sauvegardée avec succès:', insertData);
-    showToast(`✅ "${modelName}" (${labels[origin]}) enregistré dans le Dashboard`);
-    
+
+
+    // ==============================================
+    // 6. SUCCÈS
+    // ==============================================
+
+    console.log(
+      '✅ 7. Machine sauvegardée avec succès:',
+      insertData
+    );
+
+    console.log(
+      '📦 Données enregistrées dans saved_machines:',
+      machineData
+    );
+
+
+    showToast(
+      `✅ "${modelName}" (${labels[origin]}) enregistré dans le Dashboard`
+    );
+
+
+    // ==============================================
+    // 7. RETOUR VERS MES MACHINES
+    // ==============================================
+
     setTimeout(() => {
-      window.location.href = 'dashboard.html#mes-machines';
+      window.location.href =
+        'dashboard.html#mes-machines';
     }, 1500);
-    
-  } catch(e) {
-    console.error('❌ Erreur inattendue:', e);
-    alert('❌ Erreur lors de l\'enregistrement.');
+
+  } catch (e) {
+
+    console.error(
+      '❌ Erreur inattendue:',
+      e
+    );
+
+    alert(
+      '❌ Erreur lors de l\'enregistrement.'
+    );
   }
 }
-
     // ==============================================
     // GESTION DU PANIER
     // ==============================================
