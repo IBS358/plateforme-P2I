@@ -3704,20 +3704,36 @@ async function saveToDashboardWithOrigin(
     // ==============================================
     // RETOUR
     // ==============================================
+function goBack() {
+  const urlParams = new URLSearchParams(window.location.search);
 
-    function goBack() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const upId = urlParams.get('up_id');
-      const upNom = urlParams.get('up_nom');
-      
-      if (upId && upNom) {
-        const timestamp = Date.now();
-        window.location.replace(`service-achat-machines.html?up_id=${upId}&up_nom=${encodeURIComponent(upNom)}&_t=${timestamp}`);
-      } else {
-        window.location.replace('service-achat-machines.html');
-      }
-    }
+  const source = urlParams.get('source');
 
+  // ==============================================
+  // RETOUR DEPUIS "MES MACHINES"
+  // ==============================================
+
+  if (source === 'mes-machines') {
+    window.location.href = 'dashboard.html#mes-machines';
+    return;
+  }
+
+  // ==============================================
+  // COMPORTEMENT NORMAL : RETOUR AU SERVICE ACHAT
+  // ==============================================
+
+  const upId = urlParams.get('up_id');
+  const upNom = urlParams.get('up_nom');
+
+  if (upId && upNom) {
+    window.location.replace(
+      `service-achat-machines.html?up_id=${encodeURIComponent(upId)}&up_nom=${encodeURIComponent(upNom)}`
+    );
+  } else {
+    window.location.replace('service-achat-machines.html');
+  }
+}
+    
     // ==============================================
     // INITIALISATION
     // ==============================================
