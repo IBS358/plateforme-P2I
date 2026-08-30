@@ -2654,16 +2654,44 @@ async function deleteDevisSupabase(id) {
   if (error) { console.error(error); showToastMessage('Erreur'); } else { showToastMessage('Devis supprimé'); loadDevisSupabase(); }
 }
 
-    function viewSavedMachine(machineName, upNom, machineRole, machineCapacity, machineUtilities, price) {
-      const params = new URLSearchParams();
-      params.append('machine_name', machineName);
-      if (upNom) params.append('up_nom', upNom);
-      if (machineRole) params.append('machine_role', machineRole);
-      if (machineCapacity) params.append('machine_capacity', machineCapacity);
-      if (machineUtilities) params.append('machine_utilities', machineUtilities);
-      if (price) params.append('price', price);
-      window.location.href = `machine-models.html?${params.toString()}`;
-    }
+    function viewSavedMachine(
+  machineName,
+  upNom,
+  machineRole,
+  machineCapacity,
+  machineUtilities,
+  price
+) {
+  const params = new URLSearchParams();
+
+  params.append('machine_name', machineName);
+
+  if (upNom) {
+    params.append('up_nom', upNom);
+  }
+
+  if (machineRole) {
+    params.append('machine_role', machineRole);
+  }
+
+  if (machineCapacity) {
+    params.append('machine_capacity', machineCapacity);
+  }
+
+  if (machineUtilities) {
+    params.append('machine_utilities', machineUtilities);
+  }
+
+  if (price) {
+    params.append('price', price);
+  }
+
+  // Indique à machine-models.html que l'utilisateur
+  // vient de la section "Mes machines" du Dashboard.
+  params.append('return_to', 'dashboard_mes_machines');
+
+  window.location.href = `machine-models.html?${params.toString()}`;
+}
 
     async function deleteSavedMachineSupabase(id) {
       if (!confirm('Supprimer cette machine ?')) return;
