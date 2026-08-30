@@ -2686,9 +2686,9 @@ async function deleteDevisSupabase(id) {
     params.append('price', price);
   }
 
-  // Indique à machine-models.html que l'utilisateur
-  // vient de la section "Mes machines" du Dashboard.
-  params.append('return_to', 'dashboard_mes_machines');
+  // Indique que machine-models.html a été ouverte
+  // depuis la section "Mes machines" du Dashboard.
+  params.append('source', 'mes-machines');
 
   window.location.href = `machine-models.html?${params.toString()}`;
 }
