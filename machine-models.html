@@ -3348,7 +3348,119 @@ setTimeout(() => {
     alert('Une erreur est survenue.');
   }
 }
+// ==============================================
+// DEMANDER UNE ESTIMATION P2I
+// ==============================================
 
+async function demanderEstimationP2I(
+  productName,
+  supplier,
+  origin,
+  modelId,
+  price,
+  capacity,
+  supplierStatus
+) {
+
+  const email = getActiveEmail();
+
+  if (!email) {
+    alert('Veuillez vous connecter pour demander une Estimation P2I.');
+    window.location.href = 'login.html?mode=login';
+    return;
+  }
+
+  try {
+
+    // 1. Récupérer l'utilisateur connecté via Supabase
+    const {
+      data: { user },
+      error: userError
+    } = await supabaseClient.auth.getUser();
+
+    if (userError || !user) {
+      alert('Erreur de connexion. Veuillez vous reconnecter.');
+      window.location.href = 'login.html?mode=login';
+      return;
+    }
+
+
+    // 2. Préparer le prix catalogue
+    let catalogPrice = null;
+
+    if (price !== null && price !== undefined && price !== '') {
+      const parsedPrice = Number(price);
+
+      if (!isNaN(parsedPrice)) {
+        catalogPrice = parsedPrice;
+      }
+    }
+
+
+    // 3. Insérer la demande d'Estimation P2I
+    const { data, error } = await supabaseClient
+      .from('p2i_estimations')
+      .insert({
+        user_id: user.id,
+
+        product_name: productName,
+        supplier_name: supplier || null,
+        model_id: modelId || null,
+        origin: origin || null,
+        capacity: capacity || null,
+
+        supplier_status: supplierStatus || 'identified',
+
+        catalog_price_usd: catalogPrice,
+
+        // L'estimation vient d'être demandée
+        estimation_status: 'pending'
+      })
+      .select();
+
+    if (error) {
+      console.error('❌ Erreur Supabase Estimation P2I:', error);
+
+      alert(
+        'Erreur lors de l’enregistrement de votre demande d’Estimation P2I.'
+      );
+
+      return;
+    }
+
+
+    // 4. Fermer le modal
+    const modal = document.getElementById('p2i-supplier-modal');
+
+    if (modal) {
+      modal.remove();
+    }
+
+
+    // 5. Confirmation
+    showToast(
+      `✅ Votre demande d’Estimation P2I pour ${productName} a été enregistrée !`
+    );
+
+
+    // 6. Redirection vers Mes demandes / Mes estimations
+    setTimeout(() => {
+      window.location.href = 'dashboard.html#mes-demandes';
+    }, 1500);
+
+
+  } catch (e) {
+
+    console.error(
+      '❌ Erreur inattendue lors de la demande d’Estimation P2I:',
+      e
+    );
+
+    alert(
+      'Une erreur est survenue lors de la demande d’Estimation P2I.'
+    );
+  }
+}
 // ==============================================
 // SAUVEGARDER UNE MACHINE POUR PLUS TARD
 // ==============================================
