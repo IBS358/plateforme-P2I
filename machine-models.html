@@ -2573,13 +2573,23 @@ if (n.includes('cartonneuse') || (n.includes('conditionnement') && n.includes('s
     grid.innerHTML = html;
   }
 }
+```javascript
 // ==============================================
-// CONTACT FOURNISSEUR - VERSION PARTENARIAT
+// CONTACT FOURNISSEUR - PARCOURS P2I
 // ==============================================
 
-function contactSupplier(origin, supplier, productName, modelId, price, capacity) {
+function contactSupplier(
+  origin,
+  supplier,
+  productName,
+  modelId,
+  price,
+  capacity,
+  supplierStatus
+) {
+
   // ==============================================
-  // CONTACT FOURNISSEUR - PARCOURS P2I
+  // LIBELLÉS
   // ==============================================
 
   const originLabels = {
@@ -2588,32 +2598,89 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
     europe: '🇪🇺 Europe'
   };
 
-  const existing = document.getElementById('p2i-supplier-modal');
-  if (existing) existing.remove();
+  const supplierStatusInfo = {
 
-  const modal = document.createElement('div');
-  modal.id = 'p2i-supplier-modal';
+    identified: {
+      label: '🔵 Fournisseur identifié',
+      color: '#4cc9f0',
+      title: 'Fournisseur identifié par la P2I',
+      text:
+        'La P2I dispose d’informations permettant de référencer ce fournisseur et cette machine, ainsi que d’une référence de prix vérifiable.',
+      negotiation:
+        'Si vous demandez une mise en relation, la P2I pourra contacter le fournisseur et rechercher des conditions commerciales préférentielles pour votre projet, sous réserve de son acceptation.'
+    },
+
+    partner: {
+      label: '🟢 Fournisseur partenaire P2I',
+      color: '#22c55e',
+      title: 'Fournisseur partenaire P2I',
+      text:
+        'La P2I a établi une relation avec ce fournisseur et peut déjà disposer de certaines conditions commerciales négociées.',
+      negotiation:
+        'Si vous demandez une mise en relation, la P2I pourra rechercher et appliquer les conditions négociées susceptibles de bénéficier à votre projet.'
+    },
+
+    preferred: {
+      label: '⭐ Partenaire privilégié P2I',
+      color: '#fbbf24',
+      title: 'Partenaire privilégié P2I',
+      text:
+        'Ce fournisseur entretient une relation privilégiée avec la P2I.',
+      negotiation:
+        'La P2I pourra rechercher les conditions préférentielles disponibles dans le cadre de ce partenariat.'
+    }
+
+  };
+
+  const status =
+    supplierStatusInfo[supplierStatus] ||
+    supplierStatusInfo.identified;
+
+
+  // ==============================================
+  // SUPPRESSION D'UN ÉVENTUEL MODAL EXISTANT
+  // ==============================================
+
+  const existing =
+    document.getElementById('p2i-supplier-modal');
+
+  if (existing) {
+    existing.remove();
+  }
+
+
+  // ==============================================
+  // CRÉATION DU MODAL
+  // ==============================================
+
+  const modal =
+    document.createElement('div');
+
+  modal.id =
+    'p2i-supplier-modal';
 
   modal.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    backdrop-filter: blur(8px);
-    animation: fadeIn 0.3s ease;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.75);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:10000;
+    backdrop-filter:blur(8px);
+    animation:fadeIn 0.3s ease;
   `;
 
-  // ------------------------------------------------
-  // PRIX CATALOGUE
-  // ------------------------------------------------
 
-  let priceDisplay = 'Prix sur demande';
+  // ==============================================
+  // PRIX CATALOGUE
+  // ==============================================
+
+  let priceDisplay =
+    'Prix sur demande';
 
   if (
     price !== null &&
@@ -2621,37 +2688,53 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
     price !== '' &&
     !isNaN(Number(price))
   ) {
+
     priceDisplay =
-      Number(price).toLocaleString('fr-FR') + ' $ TTC';
-  } else if (price && price !== 'Prix sur demande') {
-    priceDisplay = escapeHtml(String(price));
+      Number(price).toLocaleString('fr-FR') +
+      ' $';
+
+  } else if (
+    price &&
+    price !== 'Prix sur demande'
+  ) {
+
+    priceDisplay =
+      escapeHtml(String(price));
+
   }
 
+
+  // ==============================================
+  // CONTENU DU MODAL
+  // ==============================================
+
   modal.innerHTML = `
+
     <div style="
-      background: #1c2541;
-      max-width: 600px;
-      width: 92%;
-      padding: 30px 25px;
-      border-radius: 24px;
-      border: 1px solid rgba(76, 201, 240, 0.3);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-      position: relative;
-      max-height: 90vh;
-      overflow-y: auto;
+      background:#1c2541;
+      max-width:650px;
+      width:92%;
+      padding:30px 25px;
+      border-radius:24px;
+      border:1px solid rgba(76,201,240,0.3);
+      box-shadow:0 25px 60px rgba(0,0,0,0.6);
+      position:relative;
+      max-height:90vh;
+      overflow-y:auto;
     ">
 
-      <!-- ==========================================
+
+      <!-- ========================================
            EN-TÊTE
-           ========================================== -->
+           ======================================== -->
 
       <div style="
         text-align:center;
-        margin-bottom:20px;
+        margin-bottom:22px;
       ">
 
         <div style="
-          font-size:2.6rem;
+          font-size:2.5rem;
           margin-bottom:8px;
         ">
           🏭
@@ -2662,25 +2745,25 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
           margin:0;
           font-size:1.35rem;
         ">
-          Préparer votre projet d'achat
+          Fournisseur & parcours P2I
         </h2>
 
         <p style="
           color:#94a3b8;
-          font-size:0.85rem;
-          margin:7px 0 0;
+          font-size:0.84rem;
+          margin:8px 0 0;
           line-height:1.5;
         ">
-          La P2I vous aide à évaluer votre projet avant
-          de solliciter une offre officielle du fournisseur.
+          Découvrez les informations disponibles sur ce fournisseur
+          et les possibilités d’accompagnement de la P2I.
         </p>
 
       </div>
 
 
-      <!-- ==========================================
+      <!-- ========================================
            INFORMATIONS MACHINE
-           ========================================== -->
+           ======================================== -->
 
       <div style="
         background:rgba(255,255,255,0.05);
@@ -2726,7 +2809,7 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
 
           <span style="
             color:white;
-            font-weight:500;
+            font-weight:600;
             text-align:right;
           ">
             ${escapeHtml(supplier)}
@@ -2767,9 +2850,9 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
 
           <span style="
             color:#94a3b8;
-            font-size:0.85rem;
+            font-size:0.84rem;
           ">
-            Prix catalogue indicatif
+            Prix catalogue de référence
           </span>
 
           <span style="
@@ -2786,9 +2869,54 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
       </div>
 
 
-      <!-- ==========================================
+      <!-- ========================================
+           STATUT FOURNISSEUR P2I
+           ======================================== -->
+
+      <div style="
+        margin:18px 0;
+        padding:16px;
+        background:${status.color}10;
+        border:1px solid ${status.color}35;
+        border-radius:14px;
+      ">
+
+        <div style="
+          color:${status.color};
+          font-size:0.95rem;
+          font-weight:700;
+          margin-bottom:8px;
+        ">
+
+          <i class="fas fa-handshake"></i>
+          ${status.label}
+
+        </div>
+
+        <div style="
+          color:#cbd5e1;
+          font-size:0.79rem;
+          font-weight:600;
+          margin-bottom:6px;
+        ">
+          ${status.title}
+        </div>
+
+        <p style="
+          color:#94a3b8;
+          font-size:0.76rem;
+          line-height:1.55;
+          margin:0;
+        ">
+          ${status.text}
+        </p>
+
+      </div>
+
+
+      <!-- ========================================
            ESTIMATION P2I
-           ========================================== -->
+           ======================================== -->
 
       <div style="
         margin:18px 0;
@@ -2804,20 +2932,26 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
           font-weight:700;
           margin-bottom:9px;
         ">
+
           <i class="fas fa-calculator"></i>
-          Estimation provisoire P2I
+          Estimation P2I
+
         </div>
 
         <p style="
           color:#cbd5e1;
-          font-size:0.82rem;
+          font-size:0.81rem;
           line-height:1.6;
           margin:0 0 10px;
         ">
-          La P2I peut vous aider à établir une première base
-          d'estimation de votre investissement en prenant en
-          compte, lorsque les informations sont disponibles,
-          différents postes liés à l'acquisition de la machine :
+
+          L’Estimation P2I permet d’établir une première
+          estimation du coût de votre projet à partir du
+          <strong style="color:#4cc9f0;">
+            prix catalogue de référence
+          </strong>
+          et des coûts complémentaires pouvant être identifiés.
+
         </p>
 
         <div style="
@@ -2827,45 +2961,27 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
           margin:10px 0;
         ">
 
-          <div style="
-            color:#94a3b8;
-            font-size:0.75rem;
-          ">
-            ✓ Machine
+          <div style="color:#94a3b8;font-size:0.75rem;">
+            ✓ Prix de référence
           </div>
 
-          <div style="
-            color:#94a3b8;
-            font-size:0.75rem;
-          ">
+          <div style="color:#94a3b8;font-size:0.75rem;">
             ✓ Transport
           </div>
 
-          <div style="
-            color:#94a3b8;
-            font-size:0.75rem;
-          ">
+          <div style="color:#94a3b8;font-size:0.75rem;">
             ✓ Assurance
           </div>
 
-          <div style="
-            color:#94a3b8;
-            font-size:0.75rem;
-          ">
-            ✓ Pièces de rechange
-          </div>
-
-          <div style="
-            color:#94a3b8;
-            font-size:0.75rem;
-          ">
+          <div style="color:#94a3b8;font-size:0.75rem;">
             ✓ Dédouanement / importation
           </div>
 
-          <div style="
-            color:#94a3b8;
-            font-size:0.75rem;
-          ">
+          <div style="color:#94a3b8;font-size:0.75rem;">
+            ✓ Port et acheminement
+          </div>
+
+          <div style="color:#94a3b8;font-size:0.75rem;">
             ✓ Autres coûts identifiables
           </div>
 
@@ -2877,80 +2993,30 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
           background:rgba(255,255,255,0.04);
           border-radius:9px;
           color:#94a3b8;
-          font-size:0.74rem;
+          font-size:0.73rem;
           line-height:1.5;
         ">
 
           <strong style="color:#cbd5e1;">
-            Important :
+            À retenir :
           </strong>
 
-          certains coûts ne peuvent pas être déterminés
-          à ce stade. Ils seront indiqués comme
+          l’Estimation P2I est une estimation indicative.
+          Lorsqu’une information n’est pas suffisamment fiable,
+          elle est indiquée comme
           <strong style="color:#fbbf24;">
             « À confirmer »
           </strong>
-          plutôt que d'être estimés artificiellement.
+          plutôt que d’être estimée artificiellement.
 
         </div>
 
       </div>
 
 
-      <!-- ==========================================
-           BP PRO
-           ========================================== -->
-
-      <div style="
-        margin:16px 0;
-        padding:15px;
-        background:rgba(34,197,94,0.06);
-        border:1px solid rgba(34,197,94,0.16);
-        border-radius:13px;
-      ">
-
-        <div style="
-          color:#22c55e;
-          font-size:0.9rem;
-          font-weight:700;
-          margin-bottom:8px;
-        ">
-
-          <i class="fas fa-file-alt"></i>
-          Conseil P2I — Business Plan Pro
-
-        </div>
-
-        <p style="
-          color:#cbd5e1;
-          font-size:0.8rem;
-          line-height:1.6;
-          margin:0;
-        ">
-
-          Si vous envisagez d'intégrer cette machine à votre
-          projet, conservez cette estimation. Elle pourra vous
-          servir de base de travail pour votre
-          <strong style="color:#22c55e;">
-            Business Plan Pro
-          </strong>.
-
-          Lorsque votre projet sera suffisamment avancé et que
-          vous serez prêt à engager les démarches d'achat,
-          nous vous recommandons de demander une mise en relation
-          avec le fournisseur afin d'obtenir
-          <strong style="color:#4cc9f0;">
-            une offre officielle actualisée
-          </strong>.
-
-        </p>
-
-      </div>
-
-
-      <!-- ==========================================
-           VALEUR AJOUTÉE P2I
-           ========================================== -->
+      <!-- ========================================
+           CONDITIONS P2I
+           ======================================== -->
 
       <div style="
         margin:16px 0;
@@ -2968,60 +3034,104 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
         ">
 
           <i class="fas fa-handshake"></i>
-          Pourquoi passer par la P2I ?
+          Ce que la P2I peut apporter
 
         </div>
 
         <p style="
           color:#cbd5e1;
-          font-size:0.8rem;
+          font-size:0.79rem;
           line-height:1.6;
           margin:0;
         ">
 
-          La P2I développe et négocie en amont des conditions
-          commerciales avec ses fournisseurs partenaires.
-
-          <strong style="color:#f472b6;">
-            Lorsque vous passez par la P2I, les conditions
-            négociées applicables à votre demande peuvent
-            être prises en compte.
-          </strong>
+          ${status.negotiation}
 
         </p>
 
       </div>
 
 
-      <!-- ==========================================
-           AVERTISSEMENT
-           ========================================== -->
+      <!-- ========================================
+           DISTINCTION ESTIMATION / MISE EN RELATION
+           ======================================== -->
 
       <div style="
-        margin:15px 0;
-        color:#64748b;
-        font-size:0.68rem;
-        line-height:1.5;
-        text-align:center;
+        margin:16px 0;
+        padding:15px;
+        background:rgba(255,255,255,0.035);
+        border:1px solid rgba(255,255,255,0.08);
+        border-radius:13px;
       ">
 
-        Les prix et conditions peuvent évoluer.
-        L'estimation P2I est indicative et ne constitue
-        pas une offre commerciale.
+        <div style="
+          color:#fbbf24;
+          font-size:0.88rem;
+          font-weight:700;
+          margin-bottom:9px;
+        ">
+
+          <i class="fas fa-info-circle"></i>
+          Deux démarches différentes
+
+        </div>
+
+        <div style="
+          margin-bottom:10px;
+          color:#94a3b8;
+          font-size:0.75rem;
+          line-height:1.55;
+        ">
+
+          <strong style="color:#4cc9f0;">
+            Estimation P2I
+          </strong>
+
+          <br>
+
+          Vous souhaitez connaître une première base
+          de coût pour votre projet.
+          Cette démarche ne constitue pas une commande
+          et ne déclenche pas de négociation avec le fournisseur.
+
+        </div>
+
+        <div style="
+          color:#94a3b8;
+          font-size:0.75rem;
+          line-height:1.55;
+        ">
+
+          <strong style="color:#22c55e;">
+            Demande de mise en relation
+          </strong>
+
+          <br>
+
+          Votre projet est suffisamment avancé et vous souhaitez
+          que la P2I intervienne auprès du fournisseur.
+          La P2I pourra alors rechercher les conditions
+          commerciales applicables et solliciter une offre
+          officielle actualisée.
+
+        </div>
 
       </div>
 
 
-      <!-- ==========================================
+      <!-- ========================================
            ACTIONS
-           ========================================== -->
+           ======================================== -->
 
       <div style="
         display:flex;
         flex-direction:column;
         gap:10px;
-        margin-top:16px;
+        margin-top:18px;
       ">
+
+
+        <!-- DEMANDE DE MISE EN RELATION -->
 
         <button
           onclick="demanderMiseEnRelation(
@@ -3038,7 +3148,7 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
             border:none;
             border-radius:12px;
             font-weight:600;
-            font-size:0.95rem;
+            font-size:0.92rem;
             cursor:pointer;
             transition:all 0.3s;
           "
@@ -3047,41 +3157,19 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
         >
 
           <i class="fas fa-handshake"></i>
-          Je souhaite envisager cet achat
+          Demander une mise en relation
 
         </button>
 
 
+        <!-- FERMER -->
+
         <button
-          onclick="sauvegarderMachinePourPlusTard(
-            '${escapeHtml(productName)}',
-            '${escapeHtml(supplier)}',
-            '${origin}'
-          )"
-          style="
-            width:100%;
-            padding:12px;
-            background:rgba(255,255,255,0.05);
-            color:#94a3b8;
-            border:1px solid rgba(255,255,255,0.1);
-            border-radius:12px;
-            font-weight:500;
-            font-size:0.88rem;
-            cursor:pointer;
-            transition:all 0.3s;
+          onclick="
+            document
+              .getElementById('p2i-supplier-modal')
+              ?.remove()
           "
-          onmouseover="this.style.background='rgba(255,255,255,0.1)'"
-          onmouseout="this.style.background='rgba(255,255,255,0.05)'"
-        >
-
-          <i class="fas fa-bookmark"></i>
-          Sauvegarder pour plus tard
-
-        </button>
-
-
-        <button
-          onclick="document.getElementById('p2i-supplier-modal').remove()"
           style="
             width:100%;
             padding:10px;
@@ -3102,13 +3190,13 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
       </div>
 
 
-      <!-- ==========================================
-           CONTACT
-           ========================================== -->
+      <!-- ========================================
+           CONTACT P2I
+           ======================================== -->
 
       <div style="
         text-align:center;
-        margin-top:13px;
+        margin-top:14px;
       ">
 
         <p style="
@@ -3131,25 +3219,42 @@ function contactSupplier(origin, supplier, productName, modelId, price, capacity
           margin:5px 0 0;
         ">
 
-          La P2I facilite la mise en relation entre les acheteurs
-          et les fournisseurs.
+          La P2I facilite et accompagne la mise en relation
+          entre les porteurs de projets et les fournisseurs.
 
         </p>
 
       </div>
 
+
     </div>
   `;
 
+
+  // ==============================================
+  // AFFICHAGE
+  // ==============================================
+
   document.body.appendChild(modal);
 
-  // Fermer en cliquant à l'extérieur
-  modal.addEventListener('click', function(e) {
-    if (e.target === modal) {
-      modal.remove();
+
+  // ==============================================
+  // FERMETURE EN CLIQUANT À L'EXTÉRIEUR
+  // ==============================================
+
+  modal.addEventListener(
+    'click',
+    function(e) {
+
+      if (e.target === modal) {
+        modal.remove();
+      }
+
     }
-  });
+  );
+
 }
+```
 
 // ==============================================
 // DEMANDER UNE MISE EN RELATION AVEC LE FOURNISSEUR
