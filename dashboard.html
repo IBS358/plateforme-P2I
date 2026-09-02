@@ -2686,6 +2686,39 @@ async function loadSavedMachines() {
   container.innerHTML = html;
 }
     // ==============================================
+// STATUT ESTIMATION P2I
+// ==============================================
+function getEstimationStatusLabel(status) {
+
+  const labels = {
+    pending: 'À demander',
+    requested: 'Demandée',
+    processing: 'En cours',
+    completed: 'Disponible',
+    done: 'Disponible'
+  };
+
+  return labels[status] || status || 'À demander';
+}
+
+
+// ==============================================
+// STATUT MISE EN RELATION
+// ==============================================
+function getRelationStatusLabel(status) {
+
+  const labels = {
+    pending: 'À demander',
+    requested: 'Demandée',
+    contacted: 'En cours',
+    concluded: 'Terminée',
+    cancelled: 'Annulée',
+    done: 'Terminée'
+  };
+
+  return labels[status] || status || 'À demander';
+}
+    // ==============================================
 // BUSINESS PLANS (Supabase)
 // ==============================================
 async function loadBusinessPlans() {
