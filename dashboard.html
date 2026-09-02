@@ -2215,54 +2215,476 @@ async function initDashboard() {
     // NOUVELLES FONCTIONS SUPABASE
     // ==============================================
 
-    // ==============================================
-    // MES MACHINES (Supabase)
-    // ==============================================
-    async function loadSavedMachines() {
-      const email = getActiveEmail();
-      if (!email) return;
-      
-      const { data: { user } } = await supabaseClient.auth.getUser();
-      if (!user) {
-        console.log('❌ Utilisateur non connecté');
-        return;
-      }
-      
-      const tbody = document.getElementById('machinesList');
-      if (!tbody) return;
-      
-      const { data: saved, error } = await supabaseClient
-        .from('saved_machines')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false });
-      
-      if (error) {
-        console.error('Erreur chargement machines:', error);
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#f87171;">Erreur de chargement</td></tr>';
-        return;
-      }
-      
-      if (!saved || saved.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#94a3b8;">Aucune machine enregistrée</td></tr>';
-        return;
-      }
-      
-      tbody.innerHTML = saved.map(item => {
-        const data = item.data || {};
-        return `
-          <tr>
-            <td><strong>${escapeHtml(data.model || data.machine || 'Machine')}</strong></td>
-            <td>${escapeHtml(data.up_nom || '—')}</td>
-            <td>${formatDateFR(item.created_at)}</td>
-            <td style="white-space: nowrap;">
-              <a class="btn-view" href="#" onclick="viewSavedMachine('${escapeHtml(data.model || data.machine)}', '${escapeHtml(data.up_nom || '')}', '${escapeHtml(data.machine_role || '')}', '${escapeHtml(data.machine_capacity || '')}', '${escapeHtml(data.machine_utilities || '')}', '${data.price || ''}'); return false;">Voir</a>
-              <a class="btn-view" href="#" onclick="deleteSavedMachineSupabase('${item.id}'); return false;" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.3); color:#f87171;">Supprimer</a>
-            </td>
-          </tr>
-        `;
-      }).join('');
+   // ==============================================
+// MES MACHINES (Supabase)
+// Organisation : Filière → UP → Machines
+// ==============================================
+async function loadSavedMachines() {
+
+  const email = getActiveEmail();
+  if (!email) return;
+
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+  if (!user) {
+    console.log('❌ Utilisateur non connecté');
+    return;
+  }
+
+  const container = document.getElementById('machinesProjectsContainer');
+
+  if (!container) {
+    console.warn('⚠️ Conteneur machinesProjectsContainer introuvable');
+    return;
+  }
+
+  // ----------------------------------------------
+  // Chargement des machines
+  // ----------------------------------------------
+
+  const { data: saved, error } = await supabaseClient
+    .from('saved_machines')
+    .select('*')
+    .eq('user_id', user.id)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+
+    console.error('Erreur chargement machines:', error);
+
+    container.innerHTML = `
+      <div style="
+        text-align:center;
+        padding:30px;
+        color:#f87171;
+      ">
+        <i class="fas fa-exclamation-triangle"></i>
+        Erreur de chargement des machines
+      </div>
+    `;
+
+    return;
+  }
+
+  // ----------------------------------------------
+  // Aucune machine
+  // ----------------------------------------------
+
+  if (!saved || saved.length === 0) {
+
+    container.innerHTML = `
+      <div style="
+        text-align:center;
+        padding:40px;
+        color:#94a3b8;
+      ">
+        <i class="fas fa-microchip"
+           style="font-size:36px; margin-bottom:15px;">
+        </i>
+
+        <p>Aucune machine enregistrée.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  // ----------------------------------------------
+  // Organisation des données
+  // ----------------------------------------------
+
+  const projets = {};
+
+  saved.forEach(item => {
+
+    const data = item.data || {};
+
+    // --------------------------------------------
+    // Filière
+    // --------------------------------------------
+
+    const filiereId =
+      data.filiere_id ||
+      data.filiere ||
+      'filiere_non_definie';
+
+    const filiereNom =
+      data.filiere_nom ||
+      data.filiere_name ||
+      data.filiere ||
+      'Filière non définie';
+
+    // --------------------------------------------
+    // UP
+    // --------------------------------------------
+
+    const upNom =
+      data.up_nom ||
+      data.up_name ||
+      'UP non définie';
+
+    const upId =
+      data.up_id ||
+      upNom
+        .toString()
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '_');
+
+    // --------------------------------------------
+    // Création de la filière
+    // --------------------------------------------
+
+    if (!projets[filiereId]) {
+
+      projets[filiereId] = {
+        nom: filiereNom,
+        ups: {}
+      };
+
     }
+
+    // --------------------------------------------
+    // Création de l'UP
+    // --------------------------------------------
+
+    if (!projets[filiereId].ups[upId]) {
+
+      projets[filiereId].ups[upId] = {
+        nom: upNom,
+        machines: []
+      };
+
+    }
+
+    // --------------------------------------------
+    // Enregistrement de la machine
+    // --------------------------------------------
+
+    projets[filiereId].ups[upId].machines.push({
+      id: item.id,
+      created_at: item.created_at,
+      data: data
+    });
+
+  });
+
+  console.log('📁 Organisation des machines :', projets);
+
+  // ----------------------------------------------
+  // Affichage
+  // ----------------------------------------------
+
+  let html = '';
+
+  Object.values(projets).forEach(projet => {
+
+    html += `
+      <div style="
+        margin-bottom:30px;
+        border:1px solid #e2e8f0;
+        border-radius:14px;
+        overflow:hidden;
+        background:#fff;
+      ">
+
+        <!-- FILIÈRE -->
+        <div style="
+          padding:18px 22px;
+          background:#f8fafc;
+          border-bottom:1px solid #e2e8f0;
+        ">
+
+          <h3 style="
+            margin:0;
+            color:#1e293b;
+            font-size:19px;
+          ">
+
+            <i class="fas fa-industry"
+               style="margin-right:8px;">
+            </i>
+
+            ${escapeHtml(projet.nom)}
+
+          </h3>
+
+        </div>
+
+        <div style="padding:20px;">
+    `;
+
+    Object.values(projet.ups).forEach(up => {
+
+      html += `
+
+        <!-- UP -->
+        <div style="
+          margin-bottom:25px;
+          border-left:4px solid #2563eb;
+          padding-left:18px;
+        ">
+
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:15px;
+            gap:10px;
+            flex-wrap:wrap;
+          ">
+
+            <h4 style="
+              margin:0;
+              color:#334155;
+              font-size:17px;
+            ">
+
+              <i class="fas fa-cogs"
+                 style="margin-right:7px;">
+              </i>
+
+              ${escapeHtml(up.nom)}
+
+            </h4>
+
+            <span style="
+              background:#eff6ff;
+              color:#2563eb;
+              padding:5px 10px;
+              border-radius:20px;
+              font-size:12px;
+              font-weight:600;
+            ">
+
+              ${up.machines.length}
+              machine${up.machines.length > 1 ? 's' : ''}
+
+            </span>
+
+          </div>
+
+          <div style="
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:15px;
+          ">
+      `;
+
+      up.machines.forEach(machine => {
+
+        const data = machine.data || {};
+
+        const model =
+          data.model ||
+          data.machine ||
+          'Machine';
+
+        const supplier =
+          data.supplier ||
+          data.fournisseur ||
+          data.supplier_name ||
+          '—';
+
+        const origin =
+          data.origin ||
+          data.origine ||
+          '';
+
+        const capacity =
+          data.machine_capacity ||
+          data.capacity ||
+          data.capacite ||
+          '';
+
+        const role =
+          data.machine_role ||
+          data.role ||
+          '';
+
+        const utilities =
+          data.machine_utilities ||
+          data.utilities ||
+          data.utilites ||
+          '';
+
+        const price =
+          data.price ||
+          data.price_catalogue ||
+          data.price_catalogue_verified ||
+          '';
+
+        const estimationStatus =
+          data.estimation_status ||
+          'pending';
+
+        const relationStatus =
+          data.relation_status ||
+          'pending';
+
+        html += `
+
+          <!-- CARTE MACHINE -->
+          <div style="
+            border:1px solid #e2e8f0;
+            border-radius:12px;
+            padding:18px;
+            background:#fff;
+            box-shadow:0 2px 6px rgba(15,23,42,.05);
+          ">
+
+            <h5 style="
+              margin:0 0 12px 0;
+              color:#1e293b;
+              font-size:16px;
+            ">
+
+              ${escapeHtml(model)}
+
+            </h5>
+
+            <div style="
+              font-size:13px;
+              color:#64748b;
+              line-height:1.7;
+            ">
+
+              <div>
+                <strong>Fournisseur :</strong>
+                ${escapeHtml(supplier)}
+              </div>
+
+              ${
+                origin
+                ? `
+                  <div>
+                    <strong>Origine :</strong>
+                    ${escapeHtml(origin)}
+                  </div>
+                `
+                : ''
+              }
+
+              ${
+                price
+                ? `
+                  <div>
+                    <strong>Prix catalogue :</strong>
+                    ${escapeHtml(String(price))}
+                  </div>
+                `
+                : ''
+              }
+
+              ${
+                capacity
+                ? `
+                  <div>
+                    <strong>Capacité :</strong>
+                    ${escapeHtml(capacity)}
+                  </div>
+                `
+                : ''
+              }
+
+              ${
+                role
+                ? `
+                  <div>
+                    <strong>Rôle :</strong>
+                    ${escapeHtml(role)}
+                  </div>
+                `
+                : ''
+              }
+
+            </div>
+
+            <div style="
+              margin-top:15px;
+              padding-top:12px;
+              border-top:1px solid #e2e8f0;
+              font-size:12px;
+              color:#64748b;
+            ">
+
+              <div>
+                <strong>Estimation P2I :</strong>
+                ${getEstimationStatusLabel(estimationStatus)}
+              </div>
+
+              <div style="margin-top:5px;">
+                <strong>Mise en relation :</strong>
+                ${getRelationStatusLabel(relationStatus)}
+              </div>
+
+            </div>
+
+            <div style="
+              display:flex;
+              gap:8px;
+              margin-top:15px;
+              flex-wrap:wrap;
+            ">
+
+              <a
+                class="btn-view"
+                href="#"
+                onclick="
+                  viewSavedMachine(
+                    '${escapeHtml(model)}',
+                    '${escapeHtml(data.up_nom || '')}',
+                    '${escapeHtml(role)}',
+                    '${escapeHtml(capacity)}',
+                    '${escapeHtml(utilities)}',
+                    '${escapeHtml(price)}'
+                  );
+                  return false;
+                "
+              >
+                Voir
+              </a>
+
+              <a
+                class="btn-view"
+                href="#"
+                onclick="
+                  deleteSavedMachineSupabase('${machine.id}');
+                  return false;
+                "
+                style="
+                  background:rgba(239,68,68,0.1);
+                  border-color:rgba(239,68,68,0.3);
+                  color:#f87171;
+                "
+              >
+                Supprimer
+              </a>
+
+            </div>
+
+          </div>
+
+        `;
+
+      });
+
+      html += `
+          </div>
+        </div>
+      `;
+
+    });
+
+    html += `
+        </div>
+      </div>
+    `;
+
+  });
+
+  container.innerHTML = html;
+}
     // ==============================================
 // BUSINESS PLANS (Supabase)
 // ==============================================
