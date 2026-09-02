@@ -2368,11 +2368,19 @@ async function loadSavedMachines() {
   });
 
   console.log('📁 Organisation des machines :', projets);
-  console.log('🔎 SAVED MACHINES BRUTES :', saved);
+  console.log('========================================');
+console.log('🔎 STRUCTURE DES MACHINES ENREGISTRÉES');
+console.log('========================================');
 
 saved.forEach((item, index) => {
-  console.log(`🔎 MACHINE ${index + 1} :`, item);
-  console.log(`🔎 DATA ${index + 1} :`, item.data);
+
+  console.log(`\n🔎 MACHINE ${index + 1}`);
+  console.log('ID Supabase :', item.id);
+  console.log('created_at :', item.created_at);
+
+  console.log('DATA complète :');
+  console.log(JSON.stringify(item.data, null, 2));
+
 });
 
   // ----------------------------------------------
