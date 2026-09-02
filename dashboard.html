@@ -2368,6 +2368,12 @@ async function loadSavedMachines() {
   });
 
   console.log('📁 Organisation des machines :', projets);
+  console.log('🔎 SAVED MACHINES BRUTES :', saved);
+
+saved.forEach((item, index) => {
+  console.log(`🔎 MACHINE ${index + 1} :`, item);
+  console.log(`🔎 DATA ${index + 1} :`, item.data);
+});
 
   // ----------------------------------------------
   // Affichage
