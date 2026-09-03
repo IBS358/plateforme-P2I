@@ -2313,22 +2313,23 @@ async function loadSavedMachines() {
       'Filière non définie';
 
     // --------------------------------------------
-    // UP
-    // --------------------------------------------
+// UP
+// --------------------------------------------
 
-    const upNom =
-      data.up_nom ||
-      data.up_name ||
-      'UP non définie';
+const upId =
+  data.up_id ||
+  '';
 
-    const upId =
-      data.up_id ||
-      upNom
-        .toString()
-        .toLowerCase()
-        .trim()
-        .replace(/\s+/g, '_');
+const machineData =
+  upId && MACHINES_DATA[upId]
+    ? MACHINES_DATA[upId]
+    : null;
 
+const upNom =
+  data.up_nom ||
+  data.up_name ||
+  machineData?.up_nom ||
+  'UP non définie';
     // --------------------------------------------
     // Création de la filière
     // --------------------------------------------
