@@ -2299,20 +2299,34 @@ async function loadSavedMachines() {
     const data = item.data || {};
 
     // --------------------------------------------
-    // Filière
-    // --------------------------------------------
+// Filière
+// --------------------------------------------
 
-    const filiereId =
-      data.filiere_id ||
-      data.filiere ||
-      'filiere_non_definie';
+const upIdForFiliere =
+  data.up_id ||
+  '';
 
-    const filiereNom =
-      data.filiere_nom ||
-      data.filiere_name ||
-      data.filiere ||
-      'Filière non définie';
+const upData =
+  upIdForFiliere && P2I_UP_DATA[upIdForFiliere]
+    ? P2I_UP_DATA[upIdForFiliere]
+    : null;
 
+const filiereNom =
+  data.filiere_nom ||
+  data.filiere_name ||
+  data.filiere ||
+  upData?.filiereNom ||
+  'Filière non définie';
+
+const filiereId =
+  data.filiere_id ||
+  data.filiere ||
+  filiereNom
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '_');
+    
     // --------------------------------------------
 // UP
 // --------------------------------------------
@@ -2387,6 +2401,20 @@ saved.forEach((item, index) => {
   console.log('🔎 TEST UP_ID MACHINE 1 :', saved[0]?.data?.up_id);
 console.log('🔎 TEST UP_NOM MACHINE 1 :', saved[0]?.data?.up_nom);
 console.log('🔎 TEST MACHINES_DATA :', typeof MACHINES_DATA);
+  console.log(
+  '🔎 TEST P2I_UP_DATA :',
+  typeof P2I_UP_DATA
+);
+
+console.log(
+  '🔎 TEST UP DANS P2I_UP_DATA :',
+  P2I_UP_DATA['conserverie_legumes']
+);
+
+console.log(
+  '🔎 TEST FILIÈRE UP :',
+  P2I_UP_DATA['conserverie_legumes']?.filiereNom
+);
 console.log('🔎 TEST PRODUCTIONS :', typeof PRODUCTIONS);
 console.log('🔎 TEST PRODUCTION_DATA :', typeof PRODUCTION_DATA);
   console.log(
