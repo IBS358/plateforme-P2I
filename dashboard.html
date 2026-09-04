@@ -2530,11 +2530,17 @@ console.log('🔎 TEST PRODUCTION_DATA :', typeof PRODUCTION_DATA);
         const data = machine.data || {};
 
         const model =
-          data.model ||
-          data.machine ||
-          'Machine';
+  data.model ||
+  data.machine ||
+  'Machine';
 
-        const supplier =
+const machineName =
+  data.machine ||
+  data.machine_name ||
+  data.model ||
+  'Machine';
+
+const supplier =
           data.supplier ||
           data.fournisseur ||
           data.supplier_name ||
@@ -2686,13 +2692,13 @@ console.log('🔎 TEST PRODUCTION_DATA :', typeof PRODUCTION_DATA);
                 href="#"
                 onclick="
                   viewSavedMachine(
-                    '${escapeHtml(model)}',
-                    '${escapeHtml(data.up_nom || '')}',
-                    '${escapeHtml(role)}',
-                    '${escapeHtml(capacity)}',
-                    '${escapeHtml(utilities)}',
-                    '${escapeHtml(price)}'
-                  );
+  '${escapeHtml(machineName)}',
+  '${escapeHtml(data.up_nom || '')}',
+  '${escapeHtml(role)}',
+  '${escapeHtml(capacity)}',
+  '${escapeHtml(utilities)}',
+  '${escapeHtml(price)}'
+);
                   return false;
                 "
               >
@@ -3180,7 +3186,8 @@ async function deleteDevisSupabase(id) {
   machineCapacity,
   machineUtilities,
   price
-) {
+) 
+    {
   const params = new URLSearchParams();
 
   params.append('machine_name', machineName);
