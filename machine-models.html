@@ -2105,208 +2105,756 @@
     // getMachineRefKey (version complète)
     // ==============================================
 
-    function getMachineRefKey(name) {
-  const n = (name || '').toLowerCase();
+   
+// ==============================================
+// getMachineRefKey
+// Correspondance machine → clé MODELS_DB
+// ==============================================
 
-  // ===== SMARTPHONES & TABLETTES (recherche partielle) =====
-if (n.includes('contrôle optique') || n.includes('controle optique') || n.includes('aoi')) return 'controle_optique';
-if (n.includes('smt')) return 'ligne_smt';
-if (n.includes('four') && n.includes('refusion')) return 'four_refusion';
-if (n.includes('robot encollage') || n.includes('encollage')) return 'robot_encollage';
-if (n.includes('presse écran') || n.includes('presse_ecran')) return 'presse_ecran';
-if (n.includes('testeur fonctionnel') || n.includes('testeur_fonctionnel')) return 'testeur_fonctionnel_smartphone';
-if (n.includes('imei') || n.includes('étiqueter imei')) return 'etiqueteuse_imei';
+function getMachineRefKey(name) {
+  const originalName = (name || '').trim();
+  const n = originalName.toLowerCase();
 
-  // ===== BICYCLETTES - CORRESPONDANCES EXACTES =====
-if (name === "Poste soudure cadre" || name === "Poste soudure") return 'poste_soudure_cadre';
-if (name === "Cabine peinture") return 'cabine_peinture';
-if (name === "Chaîne assemblage" || name === "Chaine assemblage") return 'chaine_assemblage_velos';
-if (name === "Machine à monter roues" || name === "Machine monter roues") return 'machine_monter_roues';
-if (name === "Poste réglage") return 'poste_reglage';
-if (name === "Banc de contrôle") return 'banc_controle';
-if (name === "Poste emballage") return 'poste_emballage_velos';
+  if (!originalName) return null;
+
+  // ==============================================
+  // 1. CORRESPONDANCES EXACTES — PRIORITÉ ABSOLUE
+  // ==============================================
+
+  // ===== CONSERVERIE DE LÉGUMES =====
+  // Ces correspondances doivent être testées AVANT
+  // toutes les recherches partielles.
+  if (originalName === "Remplisseuse-doseuse") return 'remplisseuse_doseuse';
+  if (originalName === "Étiqeteuse") return 'etiqueteuse';
+  if (originalName === "Etiqeteuse") return 'etiqueteuse';
+  if (originalName === "Étiqueteuse") return 'etiqueteuse';
+  if (originalName === "Etiqueteuse") return 'etiqueteuse';
+  if (originalName === "Laveuse-découpeuse") return 'laveuse_decoupeuse';
+  if (originalName === "Laveuse-decoupeuse") return 'laveuse_decoupeuse';
+  if (originalName === "Blanchisseur") return 'blanchisseur';
+  if (originalName === "Scelleuse-operculieuse") return 'scelleuse_operculieuse';
+  if (originalName === "Autoclave") return 'autoclave';
+  if (originalName === "Cartonneuse-emballeuse") return 'cartonneuse_emballeuse';
+
+
+  // ===== BICYCLETTES =====
+  if (originalName === "Poste soudure cadre" ||
+      originalName === "Poste soudure") {
+    return 'poste_soudure_cadre';
+  }
+
+  if (originalName === "Cabine peinture") {
+    return 'cabine_peinture';
+  }
+
+  if (originalName === "Chaîne assemblage" ||
+      originalName === "Chaine assemblage") {
+    return 'chaine_assemblage_velos';
+  }
+
+  if (originalName === "Machine à monter roues" ||
+      originalName === "Machine monter roues") {
+    return 'machine_monter_roues';
+  }
+
+  if (originalName === "Poste réglage") {
+    return 'poste_reglage';
+  }
+
+  if (originalName === "Banc de contrôle") {
+    return 'banc_controle';
+  }
+
+  // Attention : "Poste emballage" existe également
+  // dans l'assemblage PC. On conserve ici le comportement
+  // historique de ta fonction pour les bicyclettes.
+  if (originalName === "Poste emballage") {
+    return 'poste_emballage_velos';
+  }
+
 
   // ===== ASSEMBLAGE D'ORDINATEURS =====
-if (name === "Poste assemblage") return 'poste_assemblage_pc';
-if (name === "Machine à visser") return 'machine_visser';
-if (name === "Testeur alimentation") return 'testeur_alimentation';
-if (name === "Testeur mémoire RAM") return 'testeur_ram';
-if (name === "Brûleur BIOS") return 'bruleur_bios';
-if (name === "Configuration OS") return 'config_os';
-if (name === "Poste emballage") return 'poste_emballage_pc';
+  if (originalName === "Poste assemblage") {
+    return 'poste_assemblage_pc';
+  }
 
-// Recherche partielle
-if (n.includes('poste assemblage') || n.includes('assemblage')) return 'poste_assemblage_pc';
-if (n.includes('visser') || n.includes('visseuse')) return 'machine_visser';
-if (n.includes('testeur alimentation') || n.includes('alimentation')) return 'testeur_alimentation';
-if (n.includes('testeur mémoire') || n.includes('testeur ram')) return 'testeur_ram';
-if (n.includes('bios')) return 'bruleur_bios';
-if (n.includes('configuration os') || n === 'config os') return 'config_os';
-if (n.includes('emballage') && n.includes('poste')) return 'poste_emballage_pc';
+  if (originalName === "Machine à visser") {
+    return 'machine_visser';
+  }
 
-  // ===== CORRESPONDANCES EXACTES POUR HUILES ALIMENTAIRES =====
-  if (name === "Presse à huile" || name === "Presse a huile") return 'presse_huile';
-  if (name === "Nettoyeur-décortiqueur" || name === "Nettoyeur-decortiqueur") return 'nettoyeur_decortiqueur';
-  if (name === "Broyeur / Concasseur") return 'broyeur_concasseur_huile';
-  if (name === "Cuiseur (optionnel)") return 'cuiseur_huile';
-  if (name === "Filtre-presse") return 'filtre_presse_huile';
-  if (name === "Clarificateur / Décanteuse") return 'clarificateur_decanteuse';
-  if (name === "Remplisseuse-scelleuse") return 'remplisseuse_huile';
-  if (name === "Neutraliseur (module raffinerie)") return 'neutraliseur_huile';
-  if (name === "Décoloreur (module raffinerie)") return 'decoloreur_huile';
-  if (name === "Désodoriseur (module raffinerie)") return 'desodoriseur_huile';
-  if (name === "Fractionneur (module raffinerie)") return 'fractionneur_huile';
+  if (originalName === "Testeur alimentation") {
+    return 'testeur_alimentation';
+  }
 
-  // ===== JUS & BOISSONS - CORRESPONDANCES EXACTES =====
-  if (name === "Éplucheuse-dénoyauteuse" || name === "Eplucheuse-denoyauteuse") return 'eplucheuse_denoyauteuse';
-  if (name === "Broyeur-raspeur" || name === "Broyeur-raspeur") return 'broyeur_raspeur';
-  if (name === "Filtreuse / Tamiseuse" || name === "Filtreuse/Tamiseuse") return 'filtreuse_tamiseuse';
-  if (name === "Mélangeuse / Doseuse" || name === "Melangeuse / Doseuse") return 'melangeuse_doseuse';
-  if (name === "Pasteurisateur") return 'pasteurisateur';
-  if (name === "Concentrateur / Évaporateur" || name === "Concentrateur/Evaporateur") return 'concentrateur_evaporateur';
+  if (originalName === "Testeur mémoire RAM") {
+    return 'testeur_ram';
+  }
 
-  // === JUS & BOISSONS (recherche partielle) ===
-  if (n.includes('laveuse') || (n.includes('trieuse'))) return 'laveuse_trieuse';
-  if (n.includes('éplucheuse') || n.includes('eplucheuse') || n.includes('dénoyauteuse')) return 'eplucheuse_denoyauteuse';
-  if (n.includes('broyeur') || n.includes('raspeur')) return 'broyeur_raspeur';
-  if (n.includes('filtreuse') || n.includes('tamiseuse')) return 'filtreuse_tamiseuse';
+  if (originalName === "Brûleur BIOS") {
+    return 'bruleur_bios';
+  }
+
+  // IMPORTANT :
+  // On ne recherche surtout PAS simplement "os",
+  // car "doseuse" contient "os".
+  if (originalName === "Configuration OS") {
+    return 'config_os';
+  }
+
+  if (originalName === "Poste emballage PC") {
+    return 'poste_emballage_pc';
+  }
+
+
+  // ===== HUILES ALIMENTAIRES =====
+  if (originalName === "Presse à huile" ||
+      originalName === "Presse a huile") {
+    return 'presse_huile';
+  }
+
+  if (originalName === "Nettoyeur-décortiqueur" ||
+      originalName === "Nettoyeur-decortiqueur") {
+    return 'nettoyeur_decortiqueur';
+  }
+
+  if (originalName === "Broyeur / Concasseur") {
+    return 'broyeur_concasseur_huile';
+  }
+
+  if (originalName === "Cuiseur (optionnel)") {
+    return 'cuiseur_huile';
+  }
+
+  if (originalName === "Filtre-presse") {
+    return 'filtre_presse_huile';
+  }
+
+  if (originalName === "Clarificateur / Décanteuse") {
+    return 'clarificateur_decanteuse';
+  }
+
+  if (originalName === "Remplisseuse-scelleuse") {
+    return 'remplisseuse_huile';
+  }
+
+  if (originalName === "Neutraliseur (module raffinerie)") {
+    return 'neutraliseur_huile';
+  }
+
+  if (originalName === "Décoloreur (module raffinerie)") {
+    return 'decoloreur_huile';
+  }
+
+  if (originalName === "Désodoriseur (module raffinerie)") {
+    return 'desodoriseur_huile';
+  }
+
+  if (originalName === "Fractionneur (module raffinerie)") {
+    return 'fractionneur_huile';
+  }
+
+
+  // ===== JUS & BOISSONS =====
+  if (originalName === "Éplucheuse-dénoyauteuse" ||
+      originalName === "Eplucheuse-denoyauteuse") {
+    return 'eplucheuse_denoyauteuse';
+  }
+
+  if (originalName === "Broyeur-raspeur") {
+    return 'broyeur_raspeur';
+  }
+
+  if (originalName === "Filtreuse / Tamiseuse" ||
+      originalName === "Filtreuse/Tamiseuse") {
+    return 'filtreuse_tamiseuse';
+  }
+
+  if (originalName === "Mélangeuse / Doseuse" ||
+      originalName === "Melangeuse / Doseuse") {
+    return 'melangeuse_doseuse';
+  }
+
+  if (originalName === "Pasteurisateur") {
+    return 'pasteurisateur';
+  }
+
+  if (originalName === "Concentrateur / Évaporateur" ||
+      originalName === "Concentrateur/Evaporateur") {
+    return 'concentrateur_evaporateur';
+  }
+
+
+  // ===== TRANSFORMATION D'ÉPICES =====
+  if (originalName === "Laveuse-décanteuse") {
+    return 'laveuse_decanteuse_epices';
+  }
+
+  if (originalName === "Séchoir") {
+    return 'sechoir_epices';
+  }
+
+  if (originalName === "Broyeur (moulin à épices)") {
+    return 'broyeur_epices';
+  }
+
+  if (originalName === "Tamiseuse vibrante") {
+    return 'tamiseuse_epices';
+  }
+
+  if (originalName === "Mélangeuse (spice blender)") {
+    return 'melangeuse_epices';
+  }
+
+  if (originalName === "Conditionneuse") {
+    return 'conditionneuse_sachets';
+  }
+
+  if (originalName === "Étiqeteuse épices") {
+    return 'etiqueteuse_epices';
+  }
+
+  if (originalName === "Étiqueteuse épices") {
+    return 'etiqueteuse_epices';
+  }
+
+  if (originalName === "Laboratoire qualité (module innovation)") {
+    return 'laboratoire_qualite';
+  }
+
+  if (originalName === "Micro-doseuse (module innovation)") {
+    return 'micro_doseuse';
+  }
+
+
+  // ==============================================
+  // 2. CORRESPONDANCES PARTIELLES SPÉCIFIQUES
+  // ==============================================
+
+  // ===== CONSERVERIE =====
+
   if (
-  n.includes('mélangeuse') ||
-  n.includes('melangeuse') ||
-  (n.includes('doseuse') && !n.includes('remplisseuse'))
-) return 'melangeuse_doseuse';
-  if (n.includes('pasteurisateur')) return 'pasteurisateur';
-  if ((n.includes('remplisseuse') || n.includes('scelleuse'))) return 'remplisseuse_scelleuse';
-  if (n.includes('concentrateur') || n.includes('évaporateur') || n.includes('evaporateur')) return 'concentrateur_evaporateur';
+    n.includes('laveuse') &&
+    (n.includes('découpeuse') || n.includes('decoupeuse'))
+  ) {
+    return 'laveuse_decoupeuse';
+  }
 
-  // ===== CORRESPONDANCES PAR MOTS-CLÉS (PRIORITAIRES) =====
-  if (name.includes('Remplisseuse') && name.includes('doseuse')) return 'remplisseuse_doseuse';
-  if (name.includes('Étiqeteuse') || name.includes('Etiqeteuse')) return 'etiqueteuse';
-  if (name.includes('Laveuse') && name.includes('découpeuse')) return 'laveuse_decoupeuse';
-  if (name.includes('Laveuse') && name.includes('decoupeuse')) return 'laveuse_decoupeuse';
-  if (name.includes('Scelleuse') && name.includes('operculieuse')) return 'scelleuse_operculieuse';
-  if (name.includes('Cartonneuse') && name.includes('emballeuse')) return 'cartonneuse_emballeuse';
-  if (name.includes('Blanchisseur')) return 'blanchisseur';
-  if (name.includes('Autoclave')) return 'autoclave';
-      
-      // === HUILES ALIMENTAIRES ===
-if (n.includes('nettoyeur') || n.includes('décortiqueur') || n.includes('decortiqueur')) return 'nettoyeur_decortiqueur';
-if (n.includes('concasseur')) return 'broyeur_concasseur_huile';
-if ((n.includes('broyeur') && n.includes('huile')) || (n.includes('broyeur') && n.includes('graine'))) return 'broyeur_concasseur_huile';
-if (n.includes('cuiseur')) return 'cuiseur_huile';
-if (n.includes('presse') && n.includes('huile') && !n.includes('filtre')) return 'presse_huile';
-if (n.includes('filtre') && n.includes('presse')) return 'filtre_presse_huile';
-if (n.includes('clarificateur') || n.includes('décanteuse') || n.includes('decanteuse')) return 'clarificateur_decanteuse';
-if (n.includes('remplisseuse') && (n.includes('huile') || n.includes('bidon'))) return 'remplisseuse_huile';
-if (n.includes('neutraliseur')) return 'neutraliseur_huile';
-if (n.includes('décoloreur') || n.includes('decoloreur')) return 'decoloreur_huile';
-if (n.includes('désodoriseur') || n.includes('desodoriseur')) return 'desodoriseur_huile';
-if (n.includes('fractionneur')) return 'fractionneur_huile';
-      
-      // === TRANSFORMATION D'ÉPICES ===
-      if (name === "Laveuse-décanteuse") return 'laveuse_decanteuse_epices';
-      if (name === "Séchoir") return 'sechoir_epices';
-      if (name === "Broyeur (moulin à épices)") return 'broyeur_epices';
-      if (name === "Tamiseuse vibrante") return 'tamiseuse_epices';
-      if (name === "Mélangeuse (spice blender)") return 'melangeuse_epices';
-      if (name === "Conditionneuse") return 'conditionneuse_sachets';
-      if (name === "Étiqeteuse") return 'etiqueteuse_epices';
-      if (name === "Laboratoire qualité (module innovation)") return 'laboratoire_qualite';
-      if (name === "Micro-doseuse (module innovation)") return 'micro_doseuse';
-      
-      // === BOULANGERIE ===
-      if (n.includes('pétrin') || n.includes('petrin')) return 'petrin_spiral';
-      if (n.includes('diviseuse')) return 'diviseuse_bouleuse';
-      if (n.includes('façonneuse') || n.includes('faconneuse')) return 'faconneuse';
-      if ((n.includes('chambre') && n.includes('pousse')) || (n.includes('chambre') && n.includes('fermentation'))) return 'chambre_pousse';
-      if ((n.includes('four') && n.includes('tunnel')) || (n.includes('four') && n.includes('rotatif'))) return 'four_tunnel';
-      if (n.includes('trancheuse')) return 'trancheuse';
-      if (n.includes('emballeuse') || n.includes('ensacheuse')) return 'emballeuse';
-      
-      // ===== CORRESPONDANCES EXACTES (PRIORITAIRES) =====
-if (name === "Remplisseuse-doseuse") return 'remplisseuse_doseuse';
-if (name === "Étiqeteuse") return 'etiqueteuse';
-if (name === "Etiqeteuse") return 'etiqueteuse';
-if (name === "Laveuse-découpeuse") return 'laveuse_decoupeuse';
-if (name === "Laveuse-decoupeuse") return 'laveuse_decoupeuse';
-if (name === "Blanchisseur") return 'blanchisseur';
-if (name === "Scelleuse-operculieuse") return 'scelleuse_operculieuse';
-if (name === "Autoclave") return 'autoclave';
-if (name === "Cartonneuse-emballeuse") return 'cartonneuse_emballeuse';
+  if (
+    n.includes('blanchisseur') ||
+    n.includes('blanchiment')
+  ) {
+    return 'blanchisseur';
+  }
 
-// === CONSERVERIE (recherche partielle) ===
-if (n.includes('laveuse') || n.includes('découpeuse') || n.includes('decoupeuse')) return 'laveuse_decoupeuse';
-if (n.includes('blanchisseur') || n.includes('blanchiment')) return 'blanchisseur';
-if (n.includes('remplisseuse') || n.includes('doseuse')) return 'remplisseuse_doseuse';
-if (n.includes('scelleuse') || n.includes('operculieuse')) return 'scelleuse_operculieuse';
-if (n.includes('autoclave') || n.includes('stérilisateur') || n.includes('sterilisateur')) return 'autoclave';
-if (n.includes('étiqueteuse') || n.includes('etiqueteuse')) return 'etiqueteuse';
-if (n.includes('cartonneuse') || (n.includes('conditionnement') && n.includes('secondaire'))) return 'cartonneuse_emballeuse';
-      // === BISCUITERIE ===
-      if (n.includes('mélangeur') || n.includes('melangeur') || (n.includes('pétrin') && n.includes('biscuit'))) return 'melangeur_biscuiterie';
-      if (n.includes('lamineuse')) return 'lamineuse_biscuiterie';
-      if ((n.includes('façonneuse') || n.includes('faconneuse')) && n.includes('rotative')) return 'faconneuse_rotative';
-      if (n.includes('four') && (n.includes('biscuit') || n.includes('biscuiterie'))) return 'four_biscuiterie';
-      if (n.includes('refroidisseur')) return 'refroidisseur_biscuiterie';
-      if (n.includes('enrobeuse') || n.includes('saupoudreuse')) return 'enrobeuse_saupoudreuse';
-      if (n.includes('emballeuse') && n.includes('horizontale')) return 'emballeuse_horizontale';
-      
-      // === JUS & BOISSONS ===
-      if (n.includes('laveuse') || (n.includes('trieuse'))) return 'laveuse_trieuse';
-      if (n.includes('éplucheuse') || n.includes('eplucheuse') || n.includes('dénoyauteuse')) return 'eplucheuse_denoyauteuse';
-      if (n.includes('broyeur') || n.includes('raspeur')) return 'broyeur_raspeur';
-      if (n.includes('filtreuse') || n.includes('tamiseuse')) return 'filtreuse_tamiseuse';
-      if ((n.includes('mélangeuse') || n.includes('melangeuse')) || n.includes('doseuse')) return 'melangeuse_doseuse';
-      if (n.includes('pasteurisateur')) return 'pasteurisateur';
-      if ((n.includes('remplisseuse') || n.includes('scelleuse'))) return 'remplisseuse_scelleuse';
-      if (n.includes('concentrateur') || n.includes('évaporateur') || n.includes('evaporateur')) return 'concentrateur_evaporateur';
-      
-      // === HUILES ===
-      if (n.includes('nettoyeur') || n.includes('décortiqueur') || n.includes('decortiqueur')) return 'nettoyeur_decortiqueur';
-      if (n.includes('concasseur')) return 'broyeur_concasseur_huile';
-      if ((n.includes('broyeur') && n.includes('huile')) || (n.includes('broyeur') && n.includes('graine'))) return 'broyeur_concasseur_huile';
-      if (n.includes('cuiseur')) return 'cuiseur_huile';
-      if (n.includes('presse') && n.includes('huile') && !n.includes('filtre')) return 'presse_huile';
-      if (n.includes('filtre') && n.includes('presse')) return 'filtre_presse_huile';
-      if (n.includes('clarificateur') || n.includes('décanteuse') || n.includes('decanteuse')) return 'clarificateur_decanteuse';
-      if (n.includes('remplisseuse') && (n.includes('huile') || n.includes('bidon'))) return 'remplisseuse_huile';
-      if (n.includes('neutraliseur')) return 'neutraliseur_huile';
-      if (n.includes('décoloreur') || n.includes('decoloreur')) return 'decoloreur_huile';
-      if (n.includes('désodoriseur') || n.includes('desodoriseur')) return 'desodoriseur_huile';
-      if (n.includes('fractionneur')) return 'fractionneur_huile';
-      
-      // === MINI-LAITERIE ===
-      if (n.includes('cuve') && n.includes('réception')) return 'cuve_reception';
-      if (n.includes('pasteurisateur')) return 'pasteurisateur_lait';
-      if (n.includes('écrémeuse') || n.includes('ecremeuse')) return 'ecremeuse';
-      if (n.includes('maturation')) return 'cuve_maturation';
-      if (n.includes('remplisseuse')) return 'remplisseuse_lait';
-      if (n.includes('chambre') && n.includes('froide')) return 'chambre_froide';
+  // Remplisseuse + doseuse = remplisseuse-doseuse
+  // et NON melangeuse_doseuse.
+  if (
+    n.includes('remplisseuse') &&
+    n.includes('doseuse')
+  ) {
+    return 'remplisseuse_doseuse';
+  }
 
-      // === SMARTPHONES & TABLETTES ===
-      if (n.includes('smt')) return 'ligne_smt';
-      if (n.includes('four') && n.includes('refusion')) return 'four_refusion';  // ← AJOUTE CETTE LIGNE
-      if (n.includes('robot encollage') || n.includes('encollage')) return 'robot_encollage';
-      if (n.includes('presse écran') || n.includes('presse_ecran')) return 'presse_ecran';
-      if (n.includes('testeur fonctionnel') || n.includes('testeur_fonctionnel')) return 'testeur_fonctionnel_smartphone';
-      if (n.includes('imei') || n.includes('étiqueter imei')) return 'etiqueteuse_imei';
-      if (n.includes('contrôle optique') || n.includes('controle optique')) return 'controle_optique';
-      
-      // === BICYCLETTES ===
-      if (n.includes('soudure') || n.includes('soudure cadre')) return 'poste_soudure_cadre';
-      if (n.includes('cabine peinture') || n.includes('peinture')) return 'cabine_peinture';
-      if (n.includes('chaîne assemblage') || n.includes('chaine assemblage')) return 'chaine_assemblage_velos';
-      if (n.includes('monter roues') || n.includes('montage roues') || n.includes('monte-roues')) return 'machine_monter_roues';
-      if (n.includes('réglage') || n.includes('poste réglage')) return 'poste_reglage';
-      if (n.includes('banc contrôle') || n.includes('banc de contrôle') || n.includes('test freinage')) return 'banc_controle';
-      if (n.includes('emballage') && n.includes('poste')) return 'poste_emballage_velos';
-      // === AUTRES ===
-      if (n.includes('granulateur')) return 'granulateur';
-      if (n.includes('boulangerie') || n.includes('boulangerie industrielle')) return 'petrin_spiral';
-      
-      return null;
-    }
+  if (
+    n.includes('scelleuse') &&
+    n.includes('operculieuse')
+  ) {
+    return 'scelleuse_operculieuse';
+  }
 
+  if (
+    n.includes('autoclave') ||
+    n.includes('stérilisateur') ||
+    n.includes('sterilisateur')
+  ) {
+    return 'autoclave';
+  }
+
+  if (
+    n.includes('étiqeteuse') ||
+    n.includes('etiqeteuse') ||
+    n.includes('étiqueteuse') ||
+    n.includes('etiqueteuse')
+  ) {
+    return 'etiqueteuse';
+  }
+
+  if (
+    n.includes('cartonneuse') &&
+    n.includes('emballeuse')
+  ) {
+    return 'cartonneuse_emballeuse';
+  }
+
+
+  // ===== ASSEMBLAGE PC =====
+
+  if (
+    n.includes('poste assemblage') ||
+    n === 'assemblage'
+  ) {
+    return 'poste_assemblage_pc';
+  }
+
+  if (
+    n.includes('visser') ||
+    n.includes('visseuse')
+  ) {
+    return 'machine_visser';
+  }
+
+  if (
+    n.includes('testeur alimentation') ||
+    n.includes('alimentation')
+  ) {
+    return 'testeur_alimentation';
+  }
+
+  if (
+    n.includes('testeur mémoire') ||
+    n.includes('testeur memoire') ||
+    n.includes('testeur ram')
+  ) {
+    return 'testeur_ram';
+  }
+
+  if (n.includes('bios')) {
+    return 'bruleur_bios';
+  }
+
+  // IMPORTANT :
+  // "os" seul a été supprimé.
+  if (
+    n.includes('configuration os') ||
+    n === 'config os'
+  ) {
+    return 'config_os';
+  }
+
+
+  // ===== HUILES =====
+
+  if (
+    n.includes('nettoyeur') ||
+    n.includes('décortiqueur') ||
+    n.includes('decortiqueur')
+  ) {
+    return 'nettoyeur_decortiqueur';
+  }
+
+  if (n.includes('concasseur')) {
+    return 'broyeur_concasseur_huile';
+  }
+
+  if (
+    (n.includes('broyeur') && n.includes('huile')) ||
+    (n.includes('broyeur') && n.includes('graine'))
+  ) {
+    return 'broyeur_concasseur_huile';
+  }
+
+  if (n.includes('cuiseur')) {
+    return 'cuiseur_huile';
+  }
+
+  if (
+    n.includes('presse') &&
+    n.includes('huile') &&
+    !n.includes('filtre')
+  ) {
+    return 'presse_huile';
+  }
+
+  if (
+    n.includes('filtre') &&
+    n.includes('presse')
+  ) {
+    return 'filtre_presse_huile';
+  }
+
+  if (
+    n.includes('clarificateur') ||
+    n.includes('décanteuse') ||
+    n.includes('decanteuse')
+  ) {
+    return 'clarificateur_decanteuse';
+  }
+
+  if (
+    n.includes('remplisseuse') &&
+    (
+      n.includes('huile') ||
+      n.includes('bidon')
+    )
+  ) {
+    return 'remplisseuse_huile';
+  }
+
+  if (n.includes('neutraliseur')) {
+    return 'neutraliseur_huile';
+  }
+
+  if (
+    n.includes('décoloreur') ||
+    n.includes('decoloreur')
+  ) {
+    return 'decoloreur_huile';
+  }
+
+  if (
+    n.includes('désodoriseur') ||
+    n.includes('desodoriseur')
+  ) {
+    return 'desodoriseur_huile';
+  }
+
+  if (n.includes('fractionneur')) {
+    return 'fractionneur_huile';
+  }
+
+
+  // ===== JUS & BOISSONS =====
+
+  if (
+    n.includes('laveuse') ||
+    n.includes('trieuse')
+  ) {
+    return 'laveuse_trieuse';
+  }
+
+  if (
+    n.includes('éplucheuse') ||
+    n.includes('eplucheuse') ||
+    n.includes('dénoyauteuse') ||
+    n.includes('denoyauteuse')
+  ) {
+    return 'eplucheuse_denoyauteuse';
+  }
+
+  if (
+    n.includes('broyeur') ||
+    n.includes('raspeur')
+  ) {
+    return 'broyeur_raspeur';
+  }
+
+  if (
+    n.includes('filtreuse') ||
+    n.includes('tamiseuse')
+  ) {
+    return 'filtreuse_tamiseuse';
+  }
+
+  // IMPORTANT :
+  // "doseuse" seule ne suffit plus à déclencher
+  // melangeuse_doseuse si le nom contient "remplisseuse".
+  if (
+    n.includes('mélangeuse') ||
+    n.includes('melangeuse') ||
+    (
+      n.includes('doseuse') &&
+      !n.includes('remplisseuse')
+    )
+  ) {
+    return 'melangeuse_doseuse';
+  }
+
+  if (n.includes('pasteurisateur')) {
+    return 'pasteurisateur';
+  }
+
+  // IMPORTANT :
+  // "remplisseuse" OU "scelleuse" seul ne déclenche plus
+  // cette famille.
+  if (
+    n.includes('remplisseuse') &&
+    n.includes('scelleuse')
+  ) {
+    return 'remplisseuse_scelleuse';
+  }
+
+  if (
+    n.includes('concentrateur') ||
+    n.includes('évaporateur') ||
+    n.includes('evaporateur')
+  ) {
+    return 'concentrateur_evaporateur';
+  }
+
+
+  // ===== BISCUITERIE =====
+
+  if (
+    n.includes('mélangeur') ||
+    n.includes('melangeur') ||
+    (
+      n.includes('pétrin') &&
+      n.includes('biscuit')
+    )
+  ) {
+    return 'melangeur_biscuiterie';
+  }
+
+  if (n.includes('lamineuse')) {
+    return 'lamineuse_biscuiterie';
+  }
+
+  if (
+    (
+      n.includes('façonneuse') ||
+      n.includes('faconneuse')
+    ) &&
+    n.includes('rotative')
+  ) {
+    return 'faconneuse_rotative';
+  }
+
+  if (
+    n.includes('four') &&
+    (
+      n.includes('biscuit') ||
+      n.includes('biscuiterie')
+    )
+  ) {
+    return 'four_biscuiterie';
+  }
+
+  if (n.includes('refroidisseur')) {
+    return 'refroidisseur_biscuiterie';
+  }
+
+  if (
+    n.includes('enrobeuse') ||
+    n.includes('saupoudreuse')
+  ) {
+    return 'enrobeuse_saupoudreuse';
+  }
+
+  if (
+    n.includes('emballeuse') &&
+    n.includes('horizontale')
+  ) {
+    return 'emballeuse_horizontale';
+  }
+
+
+  // ===== BOULANGERIE =====
+
+  if (
+    n.includes('pétrin') ||
+    n.includes('petrin')
+  ) {
+    return 'petrin_spiral';
+  }
+
+  if (n.includes('diviseuse')) {
+    return 'diviseuse_bouleuse';
+  }
+
+  if (
+    n.includes('façonneuse') ||
+    n.includes('faconneuse')
+  ) {
+    return 'faconneuse';
+  }
+
+  if (
+    n.includes('chambre') &&
+    (
+      n.includes('pousse') ||
+      n.includes('fermentation')
+    )
+  ) {
+    return 'chambre_pousse';
+  }
+
+  if (
+    n.includes('four') &&
+    (
+      n.includes('tunnel') ||
+      n.includes('rotatif')
+    )
+  ) {
+    return 'four_tunnel';
+  }
+
+  if (n.includes('trancheuse')) {
+    return 'trancheuse';
+  }
+
+  if (
+    n.includes('emballeuse') ||
+    n.includes('ensacheuse')
+  ) {
+    return 'emballeuse';
+  }
+
+
+  // ===== MINI-LAITERIE =====
+
+  if (
+    n.includes('cuve') &&
+    n.includes('réception')
+  ) {
+    return 'cuve_reception';
+  }
+
+  if (n.includes('pasteurisateur')) {
+    return 'pasteurisateur_lait';
+  }
+
+  if (
+    n.includes('écrémeuse') ||
+    n.includes('ecremeuse')
+  ) {
+    return 'ecremeuse';
+  }
+
+  if (n.includes('maturation')) {
+    return 'cuve_maturation';
+  }
+
+  if (
+    n.includes('remplisseuse') &&
+    n.includes('lait')
+  ) {
+    return 'remplisseuse_lait';
+  }
+
+  if (
+    n.includes('chambre') &&
+    n.includes('froide')
+  ) {
+    return 'chambre_froide';
+  }
+
+
+  // ===== SMARTPHONES & TABLETTES =====
+
+  if (
+    n.includes('contrôle optique') ||
+    n.includes('controle optique') ||
+    n.includes('aoi')
+  ) {
+    return 'controle_optique';
+  }
+
+  if (n.includes('smt')) {
+    return 'ligne_smt';
+  }
+
+  if (
+    n.includes('four') &&
+    n.includes('refusion')
+  ) {
+    return 'four_refusion';
+  }
+
+  if (
+    n.includes('robot encollage') ||
+    n.includes('encollage')
+  ) {
+    return 'robot_encollage';
+  }
+
+  if (
+    n.includes('presse écran') ||
+    n.includes('presse ecran') ||
+    n.includes('presse_ecran')
+  ) {
+    return 'presse_ecran';
+  }
+
+  if (
+    n.includes('testeur fonctionnel') ||
+    n.includes('testeur_fonctionnel')
+  ) {
+    return 'testeur_fonctionnel_smartphone';
+  }
+
+  if (
+    n.includes('imei') ||
+    n.includes('étiqueter imei') ||
+    n.includes('etiqueter imei')
+  ) {
+    return 'etiqueteuse_imei';
+  }
+
+
+  // ===== BICYCLETTES =====
+
+  if (
+    n.includes('soudure cadre') ||
+    n === 'poste soudure'
+  ) {
+    return 'poste_soudure_cadre';
+  }
+
+  if (
+    n.includes('cabine peinture') ||
+    (
+      n.includes('peinture') &&
+      n.includes('cabine')
+    )
+  ) {
+    return 'cabine_peinture';
+  }
+
+  if (
+    n.includes('chaîne assemblage') ||
+    n.includes('chaine assemblage')
+  ) {
+    return 'chaine_assemblage_velos';
+  }
+
+  if (
+    n.includes('monter roues') ||
+    n.includes('montage roues') ||
+    n.includes('monte-roues')
+  ) {
+    return 'machine_monter_roues';
+  }
+
+  if (
+    n.includes('poste réglage') ||
+    n.includes('poste reglage')
+  ) {
+    return 'poste_reglage';
+  }
+
+  if (
+    n.includes('banc de contrôle') ||
+    n.includes('banc de controle') ||
+    n.includes('banc contrôle') ||
+    n.includes('banc controle') ||
+    n.includes('test freinage')
+  ) {
+    return 'banc_controle';
+  }
+
+
+  // ==============================================
+  // 3. AUTRES
+  // ==============================================
+
+  if (n.includes('granulateur')) {
+    return 'granulateur';
+  }
+
+  if (
+    n.includes('boulangerie') ||
+    n.includes('boulangerie industrielle')
+  ) {
+    return 'petrin_spiral';
+  }
+
+
+  // ==============================================
+  // AUCUNE CORRESPONDANCE
+  // ==============================================
+
+  return null;
+}  
     // ==============================================
     // AFFICHAGE DES MODÈLES
     // ==============================================
