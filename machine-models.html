@@ -4464,9 +4464,9 @@ async function saveToDashboardWithOrigin(
       setTimeout(() => t.style.opacity = '0', 3000);
     }
 
-    // ==============================================
-    // RETOUR
-    // ==============================================
+   // ==============================================
+// RETOUR
+// ==============================================
 function goBack() {
   const urlParams = new URLSearchParams(window.location.search);
 
@@ -4482,19 +4482,21 @@ function goBack() {
   }
 
   // ==============================================
-  // COMPORTEMENT NORMAL : RETOUR AU SERVICE ACHAT
+  // COMPORTEMENT NORMAL :
+  // RETOUR À LA PAGE PRÉCÉDENTE
   // ==============================================
 
-  const upId = urlParams.get('up_id');
-  const upNom = urlParams.get('up_nom');
-
-  if (upId && upNom) {
-    window.location.replace(
-      `service-achat-machines.html?up_id=${encodeURIComponent(upId)}&up_nom=${encodeURIComponent(upNom)}`
-    );
-  } else {
-    window.location.replace('service-achat-machines.html');
+  if (window.history.length > 1) {
+    window.history.back();
+    return;
   }
+
+  // ==============================================
+  // SÉCURITÉ :
+  // SI AUCUN HISTORIQUE N'EST DISPONIBLE
+  // ==============================================
+
+  window.location.href = 'service-achat-machines.html';
 }
     
     // ==============================================
