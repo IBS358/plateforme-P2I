@@ -2321,6 +2321,10 @@ if (n.includes('cartonneuse') || (n.includes('conditionnement') && n.includes('s
     // ==============================================
 
    function displayModels(params) {
+     console.log("🔎 PARAMÈTRES REÇUS :", params);
+console.log("🔎 machineName REÇU :", params.machineName);
+console.log("🔎 machine_key REÇU :", params.machine_key);
+console.log("🔎 getMachineRefKey() :", getMachineRefKey(params.machineName));
   const grid = document.getElementById('modelsGrid');
   
   let machineKey = null;
