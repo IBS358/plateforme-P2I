@@ -2562,12 +2562,12 @@ console.log('🔎 TEST PRODUCTION_DATA :', typeof PRODUCTION_DATA);
           data.utilites ||
           '';
 
-        const price =
-          data.price ||
-          data.price_catalogue ||
-          data.price_catalogue_verified ||
-          '';
-
+       const price =
+  data.catalog_price_usd ||
+  data.price ||
+  data.price_catalogue ||
+  data.price_catalogue_verified ||
+  '';
         const estimationStatus =
           data.estimation_status ||
           'pending';
