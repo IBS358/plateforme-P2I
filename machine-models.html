@@ -2141,7 +2141,7 @@ if (n.includes('visser') || n.includes('visseuse')) return 'machine_visser';
 if (n.includes('testeur alimentation') || n.includes('alimentation')) return 'testeur_alimentation';
 if (n.includes('testeur mémoire') || n.includes('testeur ram')) return 'testeur_ram';
 if (n.includes('bios')) return 'bruleur_bios';
-if (n.includes('configuration') || n.includes('os')) return 'config_os';
+if (n.includes('configuration os') || n === 'config os') return 'config_os';
 if (n.includes('emballage') && n.includes('poste')) return 'poste_emballage_pc';
 
   // ===== CORRESPONDANCES EXACTES POUR HUILES ALIMENTAIRES =====
@@ -2170,7 +2170,11 @@ if (n.includes('emballage') && n.includes('poste')) return 'poste_emballage_pc';
   if (n.includes('éplucheuse') || n.includes('eplucheuse') || n.includes('dénoyauteuse')) return 'eplucheuse_denoyauteuse';
   if (n.includes('broyeur') || n.includes('raspeur')) return 'broyeur_raspeur';
   if (n.includes('filtreuse') || n.includes('tamiseuse')) return 'filtreuse_tamiseuse';
-  if ((n.includes('mélangeuse') || n.includes('melangeuse')) || n.includes('doseuse')) return 'melangeuse_doseuse';
+  if (
+  n.includes('mélangeuse') ||
+  n.includes('melangeuse') ||
+  (n.includes('doseuse') && !n.includes('remplisseuse'))
+) return 'melangeuse_doseuse';
   if (n.includes('pasteurisateur')) return 'pasteurisateur';
   if ((n.includes('remplisseuse') || n.includes('scelleuse'))) return 'remplisseuse_scelleuse';
   if (n.includes('concentrateur') || n.includes('évaporateur') || n.includes('evaporateur')) return 'concentrateur_evaporateur';
