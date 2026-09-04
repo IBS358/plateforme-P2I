@@ -2737,7 +2737,13 @@ console.log('🔎 TEST PRODUCTION_DATA :', typeof PRODUCTION_DATA);
 
   });
 
-  container.innerHTML = html;
+  console.log('🚨 TEST AVANT AFFICHAGE - HTML longueur :', html.length);
+console.log('🚨 TEST CONTENEUR :', container);
+console.log('🚨 TEST HTML :', html.substring(0, 1000));
+
+container.innerHTML = html;
+
+console.log('✅ TEST APRÈS AFFICHAGE - innerHTML longueur :', container.innerHTML.length);
 }
     // ==============================================
 // STATUT ESTIMATION P2I
