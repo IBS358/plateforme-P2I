@@ -366,13 +366,12 @@
 
 <body>
 <script>
-  // Nettoyer les anciennes données de currentProduction uniquement
-  // lorsqu'une nouvelle UP est réellement identifiable dans l'URL.
+  // ==============================================
+  // SUIVI DE L'UP COURANTE — SANS SUPPRESSION
+  // ==============================================
   (function() {
     const urlParams = new URLSearchParams(window.location.search);
 
-    // L'URL du BP Pro peut transmettre soit un ID,
-    // soit simplement le nom de l'unité.
     const currentUpKey =
       urlParams.get('unit_id') ||
       urlParams.get('up_id') ||
@@ -382,27 +381,19 @@
     const lastUpKey =
       localStorage.getItem('last_bp_pro_up_id') || '';
 
-    // Ne jamais considérer une valeur absente/null
-    // comme un changement réel d'UP.
-    if (
-      currentUpKey &&
-      lastUpKey &&
-      lastUpKey !== currentUpKey
-    ) {
-      console.log(
-        "UP changée de",
-        lastUpKey,
-        "à",
-        currentUpKey,
-        "→ nettoyage des anciennes données"
-      );
-
-      localStorage.removeItem('currentProduction');
-      sessionStorage.removeItem('currentProduction');
-    }
-
-    // Mémoriser uniquement une UP réellement identifiée.
     if (currentUpKey) {
+
+      if (lastUpKey && lastUpKey !== currentUpKey) {
+        console.log(
+          "🔄 Nouvelle UP BP Pro :",
+          lastUpKey,
+          "→",
+          currentUpKey
+        );
+      }
+
+      // On mémorise la nouvelle UP,
+      // mais on NE SUPPRIME PAS currentProduction.
       localStorage.setItem(
         'last_bp_pro_up_id',
         currentUpKey
@@ -410,7 +401,6 @@
     }
   })();
 </script>
-
   <!-- TOPBAR -->
 <div class="topbar">
   <div class="topbar-inner">
