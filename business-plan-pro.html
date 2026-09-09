@@ -366,20 +366,47 @@
 
 <body>
 <script>
-  // Nettoyer les anciennes données de currentProduction si l'UP a changé
+  // Nettoyer les anciennes données de currentProduction uniquement
+  // lorsqu'une nouvelle UP est réellement identifiable dans l'URL.
   (function() {
     const urlParams = new URLSearchParams(window.location.search);
-    const currentUpId = urlParams.get('unit_id');
-    const lastUpId = localStorage.getItem('last_bp_pro_up_id');
-    
-    if (lastUpId && lastUpId !== currentUpId) {
-      console.log("UP changée de", lastUpId, "à", currentUpId, "→ nettoyage des données");
+
+    // L'URL du BP Pro peut transmettre soit un ID,
+    // soit simplement le nom de l'unité.
+    const currentUpKey =
+      urlParams.get('unit_id') ||
+      urlParams.get('up_id') ||
+      urlParams.get('unit') ||
+      '';
+
+    const lastUpKey =
+      localStorage.getItem('last_bp_pro_up_id') || '';
+
+    // Ne jamais considérer une valeur absente/null
+    // comme un changement réel d'UP.
+    if (
+      currentUpKey &&
+      lastUpKey &&
+      lastUpKey !== currentUpKey
+    ) {
+      console.log(
+        "UP changée de",
+        lastUpKey,
+        "à",
+        currentUpKey,
+        "→ nettoyage des anciennes données"
+      );
+
       localStorage.removeItem('currentProduction');
       sessionStorage.removeItem('currentProduction');
     }
-    
-    if (currentUpId) {
-      localStorage.setItem('last_bp_pro_up_id', currentUpId);
+
+    // Mémoriser uniquement une UP réellement identifiée.
+    if (currentUpKey) {
+      localStorage.setItem(
+        'last_bp_pro_up_id',
+        currentUpKey
+      );
     }
   })();
 </script>
