@@ -9825,21 +9825,58 @@ document.addEventListener("DOMContentLoaded", function () {
       planToRestore = pool.find(sameProject) || null;
     }
 
-    if (!planToRestore) return;
+   if (!planToRestore) return;
 
-    if (planToRestore.form_data && typeof planToRestore.form_data === "object") {
-      p2iApplyFormValues(planToRestore.form_data);
-    }
+// ==============================================
+// RESTAURATION DES DONNÉES DE L'UP
+// ==============================================
+if (
+  planToRestore.currentProduction &&
+  typeof planToRestore.currentProduction === "object"
+) {
+  localStorage.setItem(
+    "currentProduction",
+    JSON.stringify(planToRestore.currentProduction)
+  );
 
-    localStorage.setItem("p2i_current_bp_pro", JSON.stringify(planToRestore));
-    sessionStorage.setItem("p2i_current_bp_pro", JSON.stringify(planToRestore));
+  sessionStorage.setItem(
+    "currentProduction",
+    JSON.stringify(planToRestore.currentProduction)
+  );
 
-    p2iUpdateSavedBadge(
-      planToRestore.updated_at ||
-      planToRestore.saved_at ||
-      ""
-    );
-  }
+  console.log(
+    "✅ currentProduction restauré depuis le BP Pro :",
+    planToRestore.currentProduction.nom ||
+    planToRestore.unit ||
+    "UP"
+  );
+}
+
+// ==============================================
+// RESTAURATION DU FORMULAIRE
+// ==============================================
+if (
+  planToRestore.form_data &&
+  typeof planToRestore.form_data === "object"
+) {
+  p2iApplyFormValues(planToRestore.form_data);
+}
+
+localStorage.setItem(
+  "p2i_current_bp_pro",
+  JSON.stringify(planToRestore)
+);
+
+sessionStorage.setItem(
+  "p2i_current_bp_pro",
+  JSON.stringify(planToRestore)
+);
+
+p2iUpdateSavedBadge(
+  planToRestore.updated_at ||
+  planToRestore.saved_at ||
+  ""
+);
 
   async function p2iSaveBpProManually() {
     const btn = document.getElementById("btnSaveTop");
