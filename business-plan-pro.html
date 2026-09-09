@@ -2162,12 +2162,17 @@
 </div>
     <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px;">
       <div class="field">
-        <label>Machines & équipements</label>
+        <label>
+  Machines & équipements
+  <span style="color:#94a3b8; font-size:0.8rem; font-weight:normal;">
+    — estimation initiale
+  </span>
+</label>
         <input id="capex_machines" type="number" min="0" step="1000" value="45000" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
       </div>
 
       <div class="field">
-        <label>Terrain & construction</label>
+        <label>Terrain, bâtiment & aménagement du site</label>
         <input id="capex_land" type="number" min="0" step="1000" value="20000" class="finance-input" style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
       </div>
 
@@ -2207,8 +2212,12 @@
         </div>
         <span style="color:#4cc9f0; font-size:2rem; font-weight:bold;" id="total_capex_dynamic">0</span>
       </div>
-      <div class="hint" style="color:#4cc9f0;">La somme des investissements doit rester cohérente avec la référence de l’UP.</div>
-    </div>
+     <div class="hint" style="color:#4cc9f0; line-height:1.5;">
+  La référence UP constitue un ordre de grandeur initial.
+  Le montant réel du projet peut évoluer selon le plan d'équipement,
+  le site retenu, les conditions d'acquisition et les besoins spécifiques
+  de l'investisseur.
+</div>
 
     <div style="margin-top:15px; padding:15px; background:rgba(247,37,133,0.1); border-radius:10px;">
       <div style="display:flex; justify-content:space-between; align-items:center;">
