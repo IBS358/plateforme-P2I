@@ -2043,8 +2043,55 @@
   </div>
 
   <!-- ===== SCRIPT DE CHARGEMENT DES DONNÉES UP ===== -->
-  <script>
-  function loadUPData() {
+<script>
+
+// ==============================================
+// SOURCE DES DONNÉES D'ÉQUIPEMENT DU BP PRO
+// ==============================================
+
+let equipmentDataSource = "up_reference";
+
+function setEquipmentDataSource(source) {
+  equipmentDataSource = source || "up_reference";
+
+  localStorage.setItem(
+    "p2i_bp_pro_equipment_source",
+    equipmentDataSource
+  );
+
+  updateEquipmentSourceDisplay();
+}
+
+function getEquipmentDataSource() {
+  return (
+    localStorage.getItem("p2i_bp_pro_equipment_source") ||
+    equipmentDataSource ||
+    "up_reference"
+  );
+}
+
+function updateEquipmentSourceDisplay() {
+  const el = document.getElementById("equipment_source_badge");
+  if (!el) return;
+
+  const source = getEquipmentDataSource();
+
+  const labels = {
+    up_reference: "Estimation initiale P2I",
+    equipment_plan: "Plan d'équipement",
+    p2i_estimation: "Estimation P2I",
+    supplier_quote: "Devis fournisseur"
+  };
+
+  el.textContent = labels[source] || "Estimation initiale P2I";
+}
+
+
+// ==============================================
+// CHARGEMENT DES DONNÉES UP
+// ==============================================
+
+function loadUPData() {
     try {
       const up = JSON.parse(localStorage.getItem('currentProduction') || '{}');
       console.log('Chargement UP:', up.nom);
