@@ -20,16 +20,58 @@ const MACHINES_DATA = {
     ]
 },
   biscuiterie: {
-    up_nom: "Biscuiterie industrielle",
-    machines: [
-      { name: "Mélangeur industrielle", role: "Mélange des ingrédients", capacity: "100-500 kg/batch", utilities: "Électricité" },
-      { name: "Lamineuse", role: "Aplatissement de la pâte", capacity: "500-2000 kg/h", utilities: "Électricité" },
-      { name: "Façonneuse rotative", role: "Formage des biscuits", capacity: "500-3000 kg/h", utilities: "Électricité" },
-      { name: "Four à biscuits", role: "Cuisson continue", capacity: "500-3000 kg/h", utilities: "Électricité ou gaz" },
-      { name: "Refroidisseur", role: "Refroidissement post-cuisson", capacity: "500-3000 kg/h", utilities: "Électricité" },
-      { name: "Enrobeuse", role: "Ajout sucre / chocolat", capacity: "500-2000 kg/h", utilities: "Électricité" },
-      { name: "Emballeuse horizontale", role: "Conditionnement en sachets", capacity: "100-500 sachets/min", utilities: "Électricité" }
-    ]
+  up_nom: "Biscuiterie industrielle",
+  machines: [
+    {
+      machine_key: "melangeur_biscuiterie",
+      name: "Mélangeur industriel",
+      role: "Mélange des ingrédients",
+      capacity: "100-500 kg/batch",
+      utilities: "Électricité"
+    },
+    {
+      machine_key: "lamineuse_biscuiterie",
+      name: "Lamineuse",
+      role: "Aplatissement de la pâte",
+      capacity: "500-2000 kg/h",
+      utilities: "Électricité"
+    },
+    {
+      machine_key: "faconneuse_rotative",
+      name: "Façonneuse rotative",
+      role: "Formage des biscuits",
+      capacity: "500-3000 kg/h",
+      utilities: "Électricité"
+    },
+    {
+      machine_key: "four_biscuiterie",
+      name: "Four à biscuits",
+      role: "Cuisson continue",
+      capacity: "500-3000 kg/h",
+      utilities: "Électricité ou gaz"
+    },
+    {
+      machine_key: "refroidisseur_biscuiterie",
+      name: "Refroidisseur",
+      role: "Refroidissement post-cuisson",
+      capacity: "500-3000 kg/h",
+      utilities: "Électricité"
+    },
+    {
+      machine_key: "enrobeuse_saupoudreuse",
+      name: "Enrobeuse",
+      role: "Ajout sucre / chocolat",
+      capacity: "500-2000 kg/h",
+      utilities: "Électricité"
+    },
+    {
+      machine_key: "emballeuse_horizontale",
+      name: "Emballeuse horizontale",
+      role: "Conditionnement en sachets",
+      capacity: "100-500 sachets/min",
+      utilities: "Électricité"
+    }
+  ]
 },
   boulangerie_industrielle: {
     up_nom: "Boulangerie industrielle",
