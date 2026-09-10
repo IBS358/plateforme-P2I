@@ -19,59 +19,416 @@ const MACHINES_DATA = {
       { name: "Cartonneuse-emballeuse", role: "Conditionnement secondaire", capacity: "500-2000 cartons/h", utilities: "Électricité + air comprimé" }
     ]
 },
-  biscuiterie: {
+ biscuiterie: {
   up_nom: "Biscuiterie industrielle",
-  machines: [
+
+  // =====================================================
+  // CONFIGURATION INDUSTRIELLE P2I
+  // =====================================================
+
+  configuration_required: true,
+  configuration_label: "Type de biscuits à produire",
+  default_configuration: "biscuits_durs",
+
+  // Capacité de dimensionnement utilisée pour construire
+  // la configuration initiale P2I.
+  // Elle ne constitue pas encore une capacité fournisseur garantie.
+  capacity_reference: {
+    value: 500,
+    unit: "kg/h",
+    label: "Environ 500 kg/h",
+    status: "p2i_initial_reference"
+  },
+
+  // =====================================================
+  // ÉQUIPEMENTS COMMUNS À LA LIGNE
+  // =====================================================
+
+  base_machines: [
+
     {
       machine_key: "melangeur_biscuiterie",
-      name: "Mélangeur industriel",
-      role: "Mélange des ingrédients",
-      capacity: "100-500 kg/batch",
-      utilities: "Électricité"
+      name: "Mélangeur / pétrin industriel",
+      role: "Préparation et homogénéisation de la pâte",
+      capacity: "Dimensionné pour une ligne d'environ 500 kg/h",
+      utilities: "Électricité",
+      importance: "indispensable",
+      process_stage: "preparation"
     },
+
     {
-      machine_key: "lamineuse_biscuiterie",
-      name: "Lamineuse",
-      role: "Aplatissement de la pâte",
-      capacity: "500-2000 kg/h",
-      utilities: "Électricité"
+      machine_key: "alimentateur_pate_biscuiterie",
+      name: "Alimentateur de pâte",
+      role: "Alimentation régulière de la section de formage",
+      capacity: "Adaptée à la capacité de la ligne",
+      utilities: "Électricité",
+      importance: "indispensable",
+      process_stage: "transfert"
     },
+
     {
-      machine_key: "faconneuse_rotative",
-      name: "Façonneuse rotative",
-      role: "Formage des biscuits",
-      capacity: "500-3000 kg/h",
-      utilities: "Électricité"
+      machine_key: "convoyeur_alimentation_four_biscuiterie",
+      name: "Convoyeur d'alimentation du four",
+      role: "Transfert régulier des biscuits formés vers le four",
+      capacity: "Synchronisée avec la ligne",
+      utilities: "Électricité",
+      importance: "indispensable",
+      process_stage: "cuisson"
     },
+
     {
       machine_key: "four_biscuiterie",
-      name: "Four à biscuits",
-      role: "Cuisson continue",
-      capacity: "500-3000 kg/h",
-      utilities: "Électricité ou gaz"
+      name: "Four tunnel à biscuits",
+      role: "Cuisson continue des biscuits",
+      capacity: "Dimensionné pour une ligne d'environ 500 kg/h",
+      utilities: "Électricité ou combustible selon technologie",
+      importance: "indispensable",
+      process_stage: "cuisson"
     },
+
+    {
+      machine_key: "convoyeur_sortie_four_biscuiterie",
+      name: "Convoyeur de sortie du four",
+      role: "Réception et transfert des biscuits après cuisson",
+      capacity: "Synchronisée avec le four",
+      utilities: "Électricité",
+      importance: "indispensable",
+      process_stage: "sortie_four"
+    },
+
     {
       machine_key: "refroidisseur_biscuiterie",
-      name: "Refroidisseur",
-      role: "Refroidissement post-cuisson",
-      capacity: "500-3000 kg/h",
-      utilities: "Électricité"
+      name: "Convoyeur de refroidissement",
+      role: "Refroidissement des biscuits avant conditionnement",
+      capacity: "Adaptée à la capacité de cuisson",
+      utilities: "Électricité",
+      importance: "indispensable",
+      process_stage: "refroidissement"
     },
+
     {
-      machine_key: "enrobeuse_saupoudreuse",
-      name: "Enrobeuse",
-      role: "Ajout sucre / chocolat",
-      capacity: "500-2000 kg/h",
-      utilities: "Électricité"
+      machine_key: "empileur_biscuiterie",
+      name: "Système d'alignement / empilage",
+      role: "Alignement et préparation des biscuits avant emballage",
+      capacity: "Synchronisée avec l'emballage",
+      utilities: "Électricité",
+      importance: "recommended",
+      process_stage: "pre_conditionnement"
     },
+
     {
       machine_key: "emballeuse_horizontale",
       name: "Emballeuse horizontale",
-      role: "Conditionnement en sachets",
-      capacity: "100-500 sachets/min",
-      utilities: "Électricité"
+      role: "Conditionnement primaire des biscuits",
+      capacity: "Adaptée au format et au débit retenus",
+      utilities: "Électricité + air comprimé selon modèle",
+      importance: "indispensable",
+      process_stage: "conditionnement"
     }
-  ]
+
+  ],
+
+  // =====================================================
+  // CONFIGURATIONS PRODUITS
+  // =====================================================
+
+  configurations: {
+
+    // ---------------------------------------------------
+    // 1. BISCUITS MOUS / COOKIES
+    // ---------------------------------------------------
+
+    biscuits_mous: {
+      id: "biscuits_mous",
+      name: "Biscuits mous / cookies",
+
+      description:
+        "Configuration destinée aux biscuits à pâte souple, cookies et produits moulés ou déposés.",
+
+      specific_machines: [
+
+        {
+          machine_key: "mouleuse_rotative_biscuiterie",
+          name: "Mouleuse rotative",
+          role: "Formage des biscuits à pâte souple par moulage rotatif",
+          capacity: "Adaptée à une ligne d'environ 500 kg/h",
+          utilities: "Électricité",
+          importance: "conditional",
+          process_stage: "formage",
+          choice_group: "formage_biscuits_mous"
+        },
+
+        {
+          machine_key: "deposeuse_cookie_biscuiterie",
+          name: "Déposeuse / formeuse à cookies",
+          role: "Dépose ou extrusion de pâte pour cookies et biscuits similaires",
+          capacity: "Adaptée à une ligne d'environ 500 kg/h",
+          utilities: "Électricité + air comprimé selon modèle",
+          importance: "conditional",
+          process_stage: "formage",
+          choice_group: "formage_biscuits_mous"
+        }
+
+      ],
+
+      choice_groups: {
+        formage_biscuits_mous: {
+          label: "Technologie de formage",
+          min_choices: 1,
+          description:
+            "Le procédé de formage dépend du type précis de biscuit produit."
+        }
+      }
+    },
+
+    // ---------------------------------------------------
+    // 2. BISCUITS DURS / SECS
+    // ---------------------------------------------------
+
+    biscuits_durs: {
+      id: "biscuits_durs",
+      name: "Biscuits durs / secs",
+
+      description:
+        "Configuration destinée aux biscuits secs nécessitant étalage, calibrage et découpe de la pâte.",
+
+      specific_machines: [
+
+        {
+          machine_key: "etaleuse_pate_biscuiterie",
+          name: "Étaleuse de pâte",
+          role: "Formation initiale d'une feuille de pâte régulière",
+          capacity: "Adaptée à une ligne d'environ 500 kg/h",
+          utilities: "Électricité",
+          importance: "indispensable",
+          process_stage: "formage"
+        },
+
+        {
+          machine_key: "rouleaux_calibrage_biscuiterie",
+          name: "Rouleaux de calibrage",
+          role: "Réduction et contrôle progressif de l'épaisseur de la pâte",
+          capacity: "Adaptée à une ligne d'environ 500 kg/h",
+          utilities: "Électricité",
+          importance: "indispensable",
+          process_stage: "formage"
+        },
+
+        {
+          machine_key: "roto_decoupoir_biscuiterie",
+          name: "Roto-découpoir",
+          role: "Découpe et mise en forme des biscuits",
+          capacity: "Adaptée à une ligne d'environ 500 kg/h",
+          utilities: "Électricité",
+          importance: "indispensable",
+          process_stage: "formage"
+        },
+
+        {
+          machine_key: "retour_rognures_biscuiterie",
+          name: "Convoyeur de retour des rognures",
+          role: "Récupération et réintégration des chutes de pâte",
+          capacity: "Synchronisée avec la ligne",
+          utilities: "Électricité",
+          importance: "recommended",
+          process_stage: "formage"
+        }
+
+      ]
+    },
+
+    // ---------------------------------------------------
+    // 3. CRACKERS
+    // ---------------------------------------------------
+
+    crackers: {
+      id: "crackers",
+      name: "Crackers",
+
+      description:
+        "Configuration destinée aux crackers et produits laminés nécessitant une préparation et un formage spécifiques.",
+
+      specific_machines: [
+
+        {
+          machine_key: "laminateur_cracker_biscuiterie",
+          name: "Laminateur pour crackers",
+          role: "Laminage multicouche de la pâte",
+          capacity: "Adaptée à une ligne d'environ 500 kg/h",
+          utilities: "Électricité",
+          importance: "indispensable",
+          process_stage: "formage"
+        },
+
+        {
+          machine_key: "rouleaux_calibrage_biscuiterie",
+          name: "Rouleaux de calibrage",
+          role: "Réglage progressif de l'épaisseur de la pâte",
+          capacity: "Adaptée à une ligne d'environ 500 kg/h",
+          utilities: "Électricité",
+          importance: "indispensable",
+          process_stage: "formage"
+        },
+
+        {
+          machine_key: "decoupeuse_cracker_biscuiterie",
+          name: "Découpeuse à crackers",
+          role: "Découpe et mise en forme des crackers",
+          capacity: "Adaptée à une ligne d'environ 500 kg/h",
+          utilities: "Électricité",
+          importance: "indispensable",
+          process_stage: "formage"
+        },
+
+        {
+          machine_key: "retour_rognures_biscuiterie",
+          name: "Convoyeur de retour des rognures",
+          role: "Récupération des chutes de pâte",
+          capacity: "Synchronisée avec la ligne",
+          utilities: "Électricité",
+          importance: "recommended",
+          process_stage: "formage"
+        }
+
+      ]
+    }
+
+  },
+
+  // =====================================================
+  // MODULES COMPLÉMENTAIRES / OPTIONS
+  // =====================================================
+
+  optional_modules: [
+
+    {
+      machine_key: "fourreuse_sandwich_biscuiterie",
+      name: "Fourreuse / sandwich",
+      role: "Assemblage de biscuits avec crème ou autre fourrage",
+      utilities: "Électricité + air comprimé selon modèle",
+      importance: "optional",
+      applies_to: ["biscuits_mous", "biscuits_durs"]
+    },
+
+    {
+      machine_key: "enrobeuse_chocolat_biscuiterie",
+      name: "Enrobeuse chocolat",
+      role: "Enrobage total ou partiel des biscuits",
+      utilities: "Électricité + contrôle thermique",
+      importance: "optional",
+      applies_to: ["biscuits_mous", "biscuits_durs", "crackers"]
+    },
+
+    {
+      machine_key: "saupoudreuse_biscuiterie",
+      name: "Saupoudreuse",
+      role: "Application de sucre, sel, graines ou autres ingrédients de surface",
+      utilities: "Électricité",
+      importance: "optional",
+      applies_to: ["biscuits_mous", "biscuits_durs", "crackers"]
+    },
+
+    {
+      machine_key: "pulverisateur_huile_biscuiterie",
+      name: "Pulvérisateur d'huile",
+      role: "Application contrôlée d'huile après cuisson",
+      utilities: "Électricité + air comprimé selon technologie",
+      importance: "optional",
+      applies_to: ["crackers"]
+    }
+
+  ],
+
+  // =====================================================
+  // UTILITÉS ET INFRASTRUCTURES DE L'UP
+  // =====================================================
+
+  utilities_requirements: {
+
+    electricity: {
+      required: true,
+      value: null,
+      unit: "kW",
+      status: "to_confirm"
+    },
+
+    oven_energy: {
+      required: true,
+      options: ["électricité", "gaz", "autre combustible compatible"],
+      status: "to_confirm"
+    },
+
+    compressed_air: {
+      required: "depending_on_equipment",
+      value: null,
+      status: "to_confirm"
+    },
+
+    water: {
+      required: true,
+      use: "Nettoyage, hygiène et besoins de production selon procédé",
+      value: null,
+      status: "to_confirm"
+    },
+
+    ventilation_extraction: {
+      required: true,
+      status: "to_confirm"
+    },
+
+    cooling: {
+      required: true,
+      type: "refroidissement produit / ambiance selon configuration",
+      status: "to_confirm"
+    },
+
+    industrial_floor: {
+      required: true,
+      status: "to_confirm"
+    },
+
+    food_hygiene: {
+      required: true,
+      status: "required"
+    }
+
+  },
+
+  // =====================================================
+  // ÉTAT DE VALIDATION P2I
+  // =====================================================
+
+  p2i_validation: {
+    technical_process: "pilot_validated",
+    equipment_structure: "pilot_validated",
+    commercial_models: "verification_in_progress",
+    supplier_prices: "verification_in_progress",
+    status_label:
+      "Configuration technique P2I pilote — modèles et prix commerciaux en cours de vérification"
+  },
+
+  // =====================================================
+  // COMPATIBILITÉ TEMPORAIRE AVEC LE CODE ACTUEL
+  // =====================================================
+  //
+  // service-achat-machines.html utilise encore up.machines.
+  // On lui fournit donc automatiquement le socle commun +
+  // la configuration par défaut.
+  //
+  // Cette propriété sera remplacée lorsque l'écran de choix
+  // de configuration sera connecté.
+  // =====================================================
+
+  get machines() {
+    const config =
+      this.configurations[this.default_configuration] || {};
+
+    return [
+      ...this.base_machines,
+      ...(config.specific_machines || [])
+    ];
+  }
+
 },
   boulangerie_industrielle: {
     up_nom: "Boulangerie industrielle",
