@@ -362,45 +362,11 @@
       .tracking-actions .right{justify-content:flex-start;}
     }
   </style>
+  <script src="js/up-data.js"></script>
 </head>
 
 <body>
-<script>
-  // ==============================================
-  // SUIVI DE L'UP COURANTE — SANS SUPPRESSION
-  // ==============================================
-  (function() {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const currentUpKey =
-      urlParams.get('unit_id') ||
-      urlParams.get('up_id') ||
-      urlParams.get('unit') ||
-      '';
-
-    const lastUpKey =
-      localStorage.getItem('last_bp_pro_up_id') || '';
-
-    if (currentUpKey) {
-
-      if (lastUpKey && lastUpKey !== currentUpKey) {
-        console.log(
-          "🔄 Nouvelle UP BP Pro :",
-          lastUpKey,
-          "→",
-          currentUpKey
-        );
-      }
-
-      // On mémorise la nouvelle UP,
-      // mais on NE SUPPRIME PAS currentProduction.
-      localStorage.setItem(
-        'last_bp_pro_up_id',
-        currentUpKey
-      );
-    }
-  })();
-</script>
+  
   <!-- TOPBAR -->
 <div class="topbar">
   <div class="topbar-inner">
@@ -3176,10 +3142,118 @@ function updateMarketingBudget() {
     monthlyUSD
   };
 }
+// ==============================================
+// RÉSOLUTION DE L'UP DEPUIS L'URL / P2I_UP_DATA
+// ==============================================
 
+function normalizeP2IUPName(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[’']/g, '')
+    .replace(/[-_]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function resolveBPProUP() {
+  const params = new URLSearchParams(window.location.search);
+
+  const unitId =
+    params.get('unit_id') ||
+    params.get('up_id') ||
+    params.get('id') ||
+    '';
+
+  const unitName =
+    params.get('unit') ||
+    params.get('unit_name') ||
+    '';
+
+  // Base officielle des UP
+  const db =
+    typeof P2I_UP_DATA !== 'undefined'
+      ? P2I_UP_DATA
+      : (window.P2I_UP_DATA || {});
+
+  let up = null;
+
+  // 1. Recherche directe par ID
+  if (unitId && db[unitId]) {
+    up = db[unitId];
+  }
+
+  // 2. Recherche par nom
+  if (!up && unitName) {
+    const wantedName = normalizeP2IUPName(unitName);
+
+    up =
+      Object.values(db).find(item => {
+        if (!item) return false;
+
+        return (
+          normalizeP2IUPName(item.nom) === wantedName ||
+          normalizeP2IUPName(item.id) === wantedName
+        );
+      }) || null;
+  }
+
+  // 3. Si trouvé, currentProduction devient cohérent
+  if (up) {
+    localStorage.setItem(
+      'currentProduction',
+      JSON.stringify(up)
+    );
+
+    sessionStorage.setItem(
+      'currentProduction',
+      JSON.stringify(up)
+    );
+
+    if (up.id) {
+      localStorage.setItem('currentProductionKey', up.id);
+      sessionStorage.setItem('currentProductionKey', up.id);
+    }
+
+    console.log(
+      '✅ UP BP Pro résolue depuis P2I_UP_DATA :',
+      up.id,
+      up.nom
+    );
+
+    return up;
+  }
+
+  // 4. Secours : ancienne donnée locale
+  try {
+    const stored = JSON.parse(
+      localStorage.getItem('currentProduction') || '{}'
+    );
+
+    if (stored && Object.keys(stored).length) {
+      console.warn(
+        '⚠️ UP non retrouvée dans P2I_UP_DATA — utilisation de currentProduction',
+        stored
+      );
+
+      return stored;
+    }
+  } catch (e) {}
+
+  console.error(
+    '❌ Impossible de résoudre l’UP BP Pro :',
+    {
+      unitId,
+      unitName
+    }
+  );
+
+  return {};
+}
 function loadUPData() {
   try {
-    const up = JSON.parse(localStorage.getItem('currentProduction') || '{}');
+   const up = resolveBPProUP(); 
     console.log('Chargement UP:', up.nom);
     console.log('CAPEX UP:', up.capex_min);
     console.log('CA UP:', up.chiffre_affaires_estime);
