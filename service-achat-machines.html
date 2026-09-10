@@ -1213,9 +1213,9 @@ function loadMachines() {
     </div>
     ${machine.price ? `<div class="machine-price"><i class="fas fa-tag"></i> ${machine.price.toLocaleString()} $ TTC</div>` : ''}
     <div class="machine-actions">
-      <button class="btn-sm btn-view-sm" onclick="window.location.href='machine-models.html?up_id=${encodeURIComponent(upId)}&up_nom=${encodeURIComponent(upNom)}&machine_name=${encodeURIComponent(machine.name)}&machine_role=${encodeURIComponent(machine.role || '')}&machine_capacity=${encodeURIComponent(machine.capacity || '')}&machine_utilities=${encodeURIComponent(machine.utilities || '')}'">
-        <i class="fas fa-search"></i> Voir les modèles
-      </button>
+      <button class="btn-sm btn-view-sm" onclick="window.location.href='machine-models.html?up_id=${encodeURIComponent(upId)}&up_nom=${encodeURIComponent(upNom)}&machine_key=${encodeURIComponent(machine.machine_key || '')}&machine_name=${encodeURIComponent(machine.name)}&machine_role=${encodeURIComponent(machine.role || '')}&machine_capacity=${encodeURIComponent(machine.capacity || '')}&machine_utilities=${encodeURIComponent(machine.utilities || '')}'">
+  <i class="fas fa-search"></i> Voir les modèles
+</button>
     </div>
   </div>
 `).join('');
