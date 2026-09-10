@@ -3259,30 +3259,37 @@ function loadUPData() {
     console.log('CA UP:', up.chiffre_affaires_estime);
 
     // 1. Chargement CAPEX
-    if (up.capex_min) {
-      const capex = up.capex_min;
+if (up.capex_min) {
+  const capex = up.capex_min;
 
-      const machines = Math.round(capex * 0.45);
-      const land = Math.round(capex * 0.20);
-      const installation = Math.round(capex * 0.10);
-      const studies = Math.round(capex * 0.05);
-      const contingency = Math.max(0, capex - machines - land - installation - studies);
+  const machines = Math.round(capex * 0.55);
+  const land = Math.round(capex * 0.20);
+  const installation = Math.round(capex * 0.10);
+  const studies = Math.round(capex * 0.05);
 
-      const el1 = document.getElementById('capex_machines');
-      const el2 = document.getElementById('capex_land');
-      const el3 = document.getElementById('capex_installation');
-      const el4 = document.getElementById('capex_studies');
-      const el5 = document.getElementById('capex_contingency');
+  // Le reliquat garantit que le total reste exactement égal au CAPEX de référence
+  const contingency = Math.max(
+    0,
+    capex - machines - land - installation - studies
+  );
 
-      if (el1) el1.value = machines;
-      if (el2) el2.value = land;
-      if (el3) el3.value = installation;
-      if (el4) el4.value = studies;
-      if (el5) el5.value = contingency;
+  const el1 = document.getElementById('capex_machines');
+  const el2 = document.getElementById('capex_land');
+  const el3 = document.getElementById('capex_installation');
+  const el4 = document.getElementById('capex_studies');
+  const el5 = document.getElementById('capex_contingency');
 
-      const capexBadge = document.getElementById('capex_reference_badge');
-      if (capexBadge) capexBadge.innerHTML = formatNumber(capex);
-    }
+  if (el1) el1.value = machines;
+  if (el2) el2.value = land;
+  if (el3) el3.value = installation;
+  if (el4) el4.value = studies;
+  if (el5) el5.value = contingency;
+
+  const capexBadge = document.getElementById('capex_reference_badge');
+  if (capexBadge) {
+    capexBadge.innerHTML = formatNumber(capex);
+  }
+}
 
     // 2. Chargement CA
     if (up.chiffre_affaires_estime) {
