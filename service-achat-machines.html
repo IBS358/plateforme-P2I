@@ -964,6 +964,43 @@
 
   <div id="technicalChoiceGroups"></div>
 </div>
+      <!-- Modules optionnels de production -->
+<div
+  id="optionalModulesSelector"
+  style="
+    display:none;
+    margin-top:16px;
+    margin-bottom:20px;
+    padding:20px;
+    background:#172033;
+    border:1px solid #334155;
+    border-radius:14px;
+  "
+>
+  <div
+    style="
+      color:#ffffff;
+      font-size:1rem;
+      font-weight:700;
+      margin-bottom:6px;
+    "
+  >
+    Options de production
+  </div>
+
+  <div
+    style="
+      color:#94a3b8;
+      font-size:.9rem;
+      margin-bottom:16px;
+    "
+  >
+    Ces équipements ne sont pas indispensables au fonctionnement de la ligne de base.
+    Sélectionnez uniquement les options correspondant aux produits que vous souhaitez fabriquer.
+  </div>
+
+  <div id="optionalModulesChoices"></div>
+</div>
 
       <!-- Nombre de machines -->
       <div
@@ -1624,15 +1661,175 @@ else {
 }
 
 // ==============================================
+// MODULES OPTIONNELS
+// ==============================================
+
+const optionalModulesSelector =
+  document.getElementById('optionalModulesSelector');
+
+const optionalModulesChoices =
+  document.getElementById('optionalModulesChoices');
+
+// Options compatibles avec la configuration choisie
+const availableOptionalModules =
+  (up.optional_modules || []).filter(module => {
+
+    if (
+      !Array.isArray(module.applies_to) ||
+      module.applies_to.length === 0
+    ) {
+      return true;
+    }
+
+    return module.applies_to.includes(
+      selectedConfiguration
+    );
+  });
+
+// Options effectivement sélectionnées
+const selectedOptionalModules = [];
+
+availableOptionalModules.forEach(module => {
+
+  const optionStorageKey =
+    `p2i_optional_module_${upId}_${selectedConfiguration}_${module.machine_key}`;
+
+  const isSelected =
+    sessionStorage.getItem(optionStorageKey) === 'true';
+
+  if (isSelected) {
+    selectedOptionalModules.push(module);
+  }
+});
+
+// ==============================================
+// AFFICHAGE DES OPTIONS
+// ==============================================
+
+if (availableOptionalModules.length > 0) {
+
+  if (optionalModulesSelector) {
+    optionalModulesSelector.style.display = 'block';
+  }
+
+  if (optionalModulesChoices) {
+
+    optionalModulesChoices.innerHTML =
+      availableOptionalModules
+        .map(module => {
+
+          const optionStorageKey =
+            `p2i_optional_module_${upId}_${selectedConfiguration}_${module.machine_key}`;
+
+          const isSelected =
+            sessionStorage.getItem(optionStorageKey) === 'true';
+
+          return `
+            <button
+              type="button"
+              onclick="toggleOptionalModule(
+                '${selectedConfiguration}',
+                '${module.machine_key}'
+              )"
+              style="
+                width:100%;
+                margin-bottom:10px;
+                padding:14px;
+                text-align:left;
+                cursor:pointer;
+                border-radius:10px;
+                border:${
+                  isSelected
+                    ? '2px solid #4cc9f0'
+                    : '1px solid #475569'
+                };
+                background:${
+                  isSelected
+                    ? '#172554'
+                    : '#1e293b'
+                };
+                color:#ffffff;
+              "
+            >
+
+              <div
+                style="
+                  display:flex;
+                  justify-content:space-between;
+                  gap:12px;
+                  align-items:center;
+                "
+              >
+
+                <div>
+                  <div
+                    style="
+                      font-weight:700;
+                      margin-bottom:5px;
+                    "
+                  >
+                    ${escapeHtml(module.name)}
+                  </div>
+
+                  <div
+                    style="
+                      color:#cbd5e1;
+                      font-size:.82rem;
+                      line-height:1.4;
+                    "
+                  >
+                    ${escapeHtml(module.role || '')}
+                  </div>
+                </div>
+
+                <div
+                  style="
+                    font-size:1.2rem;
+                    flex-shrink:0;
+                  "
+                >
+                  ${isSelected ? '✓' : '+'}
+                </div>
+
+              </div>
+
+            </button>
+          `;
+        })
+        .join('');
+  }
+}
+
+// ==============================================
+// AUCUNE OPTION POUR CETTE CONFIGURATION
+// ==============================================
+
+else {
+
+  if (optionalModulesSelector) {
+    optionalModulesSelector.style.display = 'none';
+  }
+
+  if (optionalModulesChoices) {
+    optionalModulesChoices.innerHTML = '';
+  }
+}
+
+// ==============================================
 // LIGNE FINALE
 // ==============================================
 
 machinesToDisplay = [
   ...(up.base_machines || []),
   ...automaticSpecificMachines,
-  ...selectedChoiceMachines
+  ...selectedChoiceMachines,
+  ...selectedOptionalModules
 ];
 
+console.log(
+  "🧩 Options sélectionnées :",
+  selectedOptionalModules
+);
 console.log(
   "🏭 Configuration P2I :",
   selectedConfiguration
@@ -1819,6 +2016,78 @@ function selectTechnicalChoice(
     '✅ Choix technique P2I :',
     validMachine.name
   );
+
+  loadMachines();
+}
+    // ==============================================
+// ACTIVATION / DÉSACTIVATION D'UN MODULE OPTIONNEL
+// ==============================================
+
+function toggleOptionalModule(
+  configKey,
+  machineKey
+) {
+
+  const upSelect =
+    document.getElementById('upSelect');
+
+  const upId =
+    upSelect?.value || '';
+
+  if (
+    !upId ||
+    !configKey ||
+    !machineKey
+  ) {
+    return;
+  }
+
+  const up =
+    machinesData[upId];
+
+  const optionalModule =
+    (up?.optional_modules || [])
+      .find(module =>
+        module.machine_key === machineKey &&
+        (
+          !Array.isArray(module.applies_to) ||
+          module.applies_to.length === 0 ||
+          module.applies_to.includes(configKey)
+        )
+      );
+
+  if (!optionalModule) {
+    console.warn(
+      '⚠️ Module optionnel invalide :',
+      machineKey
+    );
+    return;
+  }
+
+  const storageKey =
+    `p2i_optional_module_${upId}_${configKey}_${machineKey}`;
+
+  const currentlySelected =
+    sessionStorage.getItem(storageKey) === 'true';
+
+  if (currentlySelected) {
+    sessionStorage.removeItem(storageKey);
+
+    console.log(
+      '➖ Option P2I retirée :',
+      optionalModule.name
+    );
+  } else {
+    sessionStorage.setItem(
+      storageKey,
+      'true'
+    );
+
+    console.log(
+      '➕ Option P2I ajoutée :',
+      optionalModule.name
+    );
+  }
 
   loadMachines();
 }
