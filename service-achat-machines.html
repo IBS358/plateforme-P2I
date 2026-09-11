@@ -1201,8 +1201,35 @@ function loadMachines() {
     machinesGrid.innerHTML = '<div class="empty-state"><p>Aucune machine disponible pour cette UP.</p></div>';
     return;
   }
+  // ==============================================
+// CONFIGURATION INDUSTRIELLE P2I
+// ==============================================
+
+// Par défaut : comportement historique des UP
+let machinesToDisplay = up.machines;
+
+// Pour les UP nécessitant une configuration de production
+// Exemple pilote : Biscuiterie industrielle
+if (up.configuration_required) {
+
+  const configKey =
+    sessionStorage.getItem("p2i_configuration") ||
+    up.default_configuration;
+
+  const config = up.configurations?.[configKey];
+
+  if (config) {
+    machinesToDisplay = [
+      ...(up.base_machines || []),
+      ...(config.specific_machines || [])
+    ];
+  }
+
+  console.log("🏭 Configuration P2I :", configKey);
+  console.log("⚙️ Machines affichées :", machinesToDisplay);
+}
   
-  machinesGrid.innerHTML = up.machines.map(machine => `
+  machinesGrid.innerHTML = machinesToDisplay.map(machine => `
   <div class="machine-card">
     <div class="machine-icon"><i class="fas fa-microchip"></i></div>
     <div class="machine-name">${escapeHtml(machine.name)}</div>
