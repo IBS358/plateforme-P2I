@@ -884,7 +884,50 @@
         ></div>
 
       </div>
+<!-- Configuration de production P2I -->
+<div
+  id="productionConfigurationSelector"
+  style="
+    display:none;
+    margin-top:20px;
+    margin-bottom:20px;
+    padding:20px;
+    background:#0f172a;
+    border:1px solid #334155;
+    border-radius:14px;
+  "
+>
+  <div
+    id="productionConfigurationLabel"
+    style="
+      color:#ffffff;
+      font-size:1.05rem;
+      font-weight:700;
+      margin-bottom:6px;
+    "
+  >
+    Configuration de production
+  </div>
 
+  <div
+    style="
+      color:#94a3b8;
+      font-size:0.9rem;
+      margin-bottom:16px;
+    "
+  >
+    Sélectionnez la configuration industrielle correspondant à votre production.
+  </div>
+
+  <div
+    id="productionConfigurationChoices"
+    style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+      gap:12px;
+    "
+  ></div>
+</div>
 
       <!-- Nombre de machines -->
       <div
@@ -1194,42 +1237,203 @@ function loadMachines() {
   }
   
   const up = machinesData[upId];
-  if (document.getElementById('machineCountValue')) {
-    document.getElementById('machineCountValue').textContent = up.machines.length;
-  }
-  if (!up || !up.machines) {
-    machinesGrid.innerHTML = '<div class="empty-state"><p>Aucune machine disponible pour cette UP.</p></div>';
-    return;
-  }
-  // ==============================================
+
+if (!up) {
+  machinesGrid.innerHTML =
+    '<div class="empty-state"><p>Aucune donnée disponible pour cette UP.</p></div>';
+  return;
+}
+
+// ==============================================
 // CONFIGURATION INDUSTRIELLE P2I
 // ==============================================
 
-// Par défaut : comportement historique des UP
-let machinesToDisplay = up.machines;
+const configurationSelector =
+  document.getElementById('productionConfigurationSelector');
 
-// Pour les UP nécessitant une configuration de production
-// Exemple pilote : Biscuiterie industrielle
-if (up.configuration_required) {
+const configurationChoices =
+  document.getElementById('productionConfigurationChoices');
 
-  const configKey =
-    sessionStorage.getItem("p2i_configuration") ||
-    up.default_configuration;
+const configurationLabel =
+  document.getElementById('productionConfigurationLabel');
 
-  const config = up.configurations?.[configKey];
+let machinesToDisplay = up.machines || [];
 
-  if (config) {
-    machinesToDisplay = [
-      ...(up.base_machines || []),
-      ...(config.specific_machines || [])
-    ];
+// ==============================================
+// UP AVEC CONFIGURATION DE PRODUCTION
+// ==============================================
+
+if (
+  up.configuration_required === true &&
+  up.configurations &&
+  Object.keys(up.configurations).length > 0
+) {
+
+  // Une configuration est mémorisée séparément pour chaque UP
+  const storageKey = `p2i_configuration_${upId}`;
+
+  let selectedConfiguration =
+    sessionStorage.getItem(storageKey);
+
+  // Si aucun choix utilisateur n'existe encore,
+  // on utilise provisoirement la configuration P2I par défaut
+  if (
+    !selectedConfiguration ||
+    !up.configurations[selectedConfiguration]
+  ) {
+    selectedConfiguration = up.default_configuration;
   }
 
-  console.log("🏭 Configuration P2I :", configKey);
-  console.log("⚙️ Machines affichées :", machinesToDisplay);
+  const selectedConfig =
+    up.configurations[selectedConfiguration];
+
+  // ----------------------------------------------
+  // Afficher le sélecteur
+  // ----------------------------------------------
+
+  if (configurationSelector) {
+    configurationSelector.style.display = 'block';
+  }
+
+  if (configurationLabel) {
+    configurationLabel.textContent =
+      up.configuration_label || 'Configuration de production';
+  }
+
+  if (configurationChoices) {
+
+    configurationChoices.innerHTML =
+      Object.entries(up.configurations)
+        .map(([configKey, config]) => {
+
+          const isSelected =
+            configKey === selectedConfiguration;
+
+          return `
+            <button
+              type="button"
+              onclick="selectProductionConfiguration('${configKey}')"
+              style="
+                width:100%;
+                padding:16px;
+                text-align:left;
+                cursor:pointer;
+                border-radius:12px;
+                border:${isSelected
+                  ? '2px solid #4cc9f0'
+                  : '1px solid #334155'};
+                background:${isSelected
+                  ? '#172554'
+                  : '#1e293b'};
+                color:#ffffff;
+                transition:all .2s ease;
+              "
+            >
+
+              <div
+                style="
+                  font-size:1rem;
+                  font-weight:700;
+                  margin-bottom:6px;
+                "
+              >
+                ${escapeHtml(config.name)}
+              </div>
+
+              <div
+                style="
+                  font-size:.82rem;
+                  line-height:1.4;
+                  color:#cbd5e1;
+                "
+              >
+                ${escapeHtml(config.description || '')}
+              </div>
+
+              ${
+                isSelected
+                  ? `
+                    <div
+                      style="
+                        margin-top:10px;
+                        color:#4cc9f0;
+                        font-size:.82rem;
+                        font-weight:600;
+                      "
+                    >
+                      ✓ Configuration sélectionnée
+                    </div>
+                  `
+                  : ''
+              }
+
+            </button>
+          `;
+        })
+        .join('');
+  }
+
+  // ----------------------------------------------
+  // Construire la ligne adaptée
+  // ----------------------------------------------
+
+  machinesToDisplay = [
+    ...(up.base_machines || []),
+    ...(selectedConfig?.specific_machines || [])
+  ];
+
+  console.log(
+    "🏭 Configuration P2I :",
+    selectedConfiguration
+  );
+
+  console.log(
+    "⚙️ Machines affichées :",
+    machinesToDisplay
+  );
 }
-  
-  machinesGrid.innerHTML = machinesToDisplay.map(machine => `
+
+// ==============================================
+// UP CLASSIQUE : PAS DE CONFIGURATION
+// ==============================================
+
+else {
+
+  if (configurationSelector) {
+    configurationSelector.style.display = 'none';
+  }
+
+  if (configurationChoices) {
+    configurationChoices.innerHTML = '';
+  }
+}
+
+// ==============================================
+// COMPTEUR
+// ==============================================
+
+if (document.getElementById('machineCountValue')) {
+  document.getElementById('machineCountValue').textContent =
+    machinesToDisplay.length;
+}
+
+// ==============================================
+// AUCUNE MACHINE
+// ==============================================
+
+if (!machinesToDisplay.length) {
+
+  machinesGrid.innerHTML =
+    '<div class="empty-state"><p>Aucune machine disponible pour cette UP.</p></div>';
+
+  return;
+}
+
+// ==============================================
+// AFFICHAGE DES MACHINES
+// ==============================================
+
+machinesGrid.innerHTML = machinesToDisplay.map(machine => `
   <div class="machine-card">
     <div class="machine-icon"><i class="fas fa-microchip"></i></div>
     <div class="machine-name">${escapeHtml(machine.name)}</div>
@@ -1246,6 +1450,52 @@ if (up.configuration_required) {
     </div>
   </div>
 `).join('');
+}
+    // ==============================================
+// CHOIX DE LA CONFIGURATION DE PRODUCTION
+// ==============================================
+
+function selectProductionConfiguration(configKey) {
+
+  const upSelect =
+    document.getElementById('upSelect');
+
+  const upId =
+    upSelect?.value || '';
+
+  if (!upId || !configKey) {
+    return;
+  }
+
+  const up =
+    machinesData[upId];
+
+  if (
+    !up ||
+    !up.configuration_required ||
+    !up.configurations?.[configKey]
+  ) {
+    console.warn(
+      '⚠️ Configuration P2I invalide :',
+      configKey
+    );
+    return;
+  }
+
+  const storageKey =
+    `p2i_configuration_${upId}`;
+
+  sessionStorage.setItem(
+    storageKey,
+    configKey
+  );
+
+  console.log(
+    '✅ Nouvelle configuration P2I :',
+    configKey
+  );
+
+  loadMachines();
 }
     
     // Fonction utilitaire
