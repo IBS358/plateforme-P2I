@@ -928,6 +928,42 @@
     "
   ></div>
 </div>
+      <!-- Choix techniques internes à une configuration -->
+<div
+  id="technicalChoiceSelector"
+  style="
+    display:none;
+    margin-top:16px;
+    margin-bottom:20px;
+    padding:20px;
+    background:#172033;
+    border:1px solid #334155;
+    border-radius:14px;
+  "
+>
+  <div
+    style="
+      color:#ffffff;
+      font-size:1rem;
+      font-weight:700;
+      margin-bottom:6px;
+    "
+  >
+    Choix technique
+  </div>
+
+  <div
+    style="
+      color:#94a3b8;
+      font-size:.9rem;
+      margin-bottom:16px;
+    "
+  >
+    Cette configuration nécessite de préciser certaines technologies de production.
+  </div>
+
+  <div id="technicalChoiceGroups"></div>
+</div>
 
       <!-- Nombre de machines -->
       <div
@@ -1374,23 +1410,243 @@ if (
   }
 
   // ----------------------------------------------
-  // Construire la ligne adaptée
-  // ----------------------------------------------
+// Construire la ligne adaptée
+// ----------------------------------------------
 
-  machinesToDisplay = [
-    ...(up.base_machines || []),
-    ...(selectedConfig?.specific_machines || [])
-  ];
+const technicalChoiceSelector =
+  document.getElementById('technicalChoiceSelector');
 
-  console.log(
-    "🏭 Configuration P2I :",
-    selectedConfiguration
-  );
+const technicalChoiceGroups =
+  document.getElementById('technicalChoiceGroups');
 
-  console.log(
-    "⚙️ Machines affichées :",
-    machinesToDisplay
-  );
+const specificMachines =
+  selectedConfig?.specific_machines || [];
+
+const choiceGroups =
+  selectedConfig?.choice_groups || {};
+
+// Machines spécifiques qui ne nécessitent
+// aucun choix entre plusieurs alternatives
+const automaticSpecificMachines =
+  specificMachines.filter(machine => !machine.choice_group);
+
+// Machines retenues à la suite des choix utilisateur
+const selectedChoiceMachines = [];
+
+// ==============================================
+// CONFIGURATION AVEC CHOIX TECHNIQUES
+// ==============================================
+
+if (Object.keys(choiceGroups).length > 0) {
+
+  if (technicalChoiceSelector) {
+    technicalChoiceSelector.style.display = 'block';
+  }
+
+  if (technicalChoiceGroups) {
+
+    technicalChoiceGroups.innerHTML =
+      Object.entries(choiceGroups)
+        .map(([groupKey, group]) => {
+
+          const alternatives =
+            specificMachines.filter(
+              machine =>
+                machine.choice_group === groupKey
+            );
+
+          const choiceStorageKey =
+            `p2i_technical_choice_${upId}_${selectedConfiguration}_${groupKey}`;
+
+          const selectedMachineKey =
+            sessionStorage.getItem(choiceStorageKey);
+
+          const selectedMachine =
+            alternatives.find(
+              machine =>
+                machine.machine_key === selectedMachineKey
+            );
+
+          if (selectedMachine) {
+            selectedChoiceMachines.push(selectedMachine);
+          }
+
+          return `
+            <div
+              style="
+                margin-bottom:18px;
+                padding-top:4px;
+              "
+            >
+
+              <div
+                style="
+                  color:#ffffff;
+                  font-weight:700;
+                  margin-bottom:4px;
+                "
+              >
+                ${escapeHtml(group.label || 'Choix technique')}
+              </div>
+
+              <div
+                style="
+                  color:#94a3b8;
+                  font-size:.85rem;
+                  margin-bottom:12px;
+                "
+              >
+                ${escapeHtml(group.description || '')}
+              </div>
+
+              <div
+                style="
+                  display:grid;
+                  grid-template-columns:repeat(
+                    auto-fit,
+                    minmax(190px,1fr)
+                  );
+                  gap:12px;
+                "
+              >
+
+                ${alternatives.map(machine => {
+
+                  const isSelected =
+                    machine.machine_key === selectedMachineKey;
+
+                  return `
+                    <button
+                      type="button"
+                      onclick="selectTechnicalChoice(
+                        '${selectedConfiguration}',
+                        '${groupKey}',
+                        '${machine.machine_key}'
+                      )"
+                      style="
+                        width:100%;
+                        padding:14px;
+                        text-align:left;
+                        cursor:pointer;
+                        border-radius:10px;
+                        border:${
+                          isSelected
+                            ? '2px solid #4cc9f0'
+                            : '1px solid #475569'
+                        };
+                        background:${
+                          isSelected
+                            ? '#172554'
+                            : '#1e293b'
+                        };
+                        color:#ffffff;
+                      "
+                    >
+
+                      <div
+                        style="
+                          font-weight:700;
+                          margin-bottom:5px;
+                        "
+                      >
+                        ${escapeHtml(machine.name)}
+                      </div>
+
+                      <div
+                        style="
+                          color:#cbd5e1;
+                          font-size:.8rem;
+                          line-height:1.4;
+                        "
+                      >
+                        ${escapeHtml(machine.role || '')}
+                      </div>
+
+                      ${
+                        isSelected
+                          ? `
+                            <div
+                              style="
+                                margin-top:9px;
+                                color:#4cc9f0;
+                                font-size:.8rem;
+                                font-weight:600;
+                              "
+                            >
+                              ✓ Technologie sélectionnée
+                            </div>
+                          `
+                          : ''
+                      }
+
+                    </button>
+                  `;
+                }).join('')}
+
+              </div>
+
+              ${
+                !selectedMachine
+                  ? `
+                    <div
+                      style="
+                        margin-top:10px;
+                        color:#fbbf24;
+                        font-size:.82rem;
+                      "
+                    >
+                      ⚠️ Sélectionnez une technologie pour compléter la ligne.
+                    </div>
+                  `
+                  : ''
+              }
+
+            </div>
+          `;
+        })
+        .join('');
+  }
+}
+
+// ==============================================
+// AUCUN CHOIX TECHNIQUE NÉCESSAIRE
+// ==============================================
+
+else {
+
+  if (technicalChoiceSelector) {
+    technicalChoiceSelector.style.display = 'none';
+  }
+
+  if (technicalChoiceGroups) {
+    technicalChoiceGroups.innerHTML = '';
+  }
+}
+
+// ==============================================
+// LIGNE FINALE
+// ==============================================
+
+machinesToDisplay = [
+  ...(up.base_machines || []),
+  ...automaticSpecificMachines,
+  ...selectedChoiceMachines
+];
+
+console.log(
+  "🏭 Configuration P2I :",
+  selectedConfiguration
+);
+
+console.log(
+  "🔧 Choix techniques :",
+  selectedChoiceMachines
+);
+
+console.log(
+  "⚙️ Machines affichées :",
+  machinesToDisplay
+);
 }
 
 // ==============================================
