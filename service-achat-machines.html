@@ -1753,6 +1753,75 @@ function selectProductionConfiguration(configKey) {
 
   loadMachines();
 }
+    // ==============================================
+// CHOIX D'UNE ALTERNATIVE TECHNIQUE
+// ==============================================
+
+function selectTechnicalChoice(
+  configKey,
+  groupKey,
+  machineKey
+) {
+
+  const upSelect =
+    document.getElementById('upSelect');
+
+  const upId =
+    upSelect?.value || '';
+
+  if (
+    !upId ||
+    !configKey ||
+    !groupKey ||
+    !machineKey
+  ) {
+    return;
+  }
+
+  const up =
+    machinesData[upId];
+
+  const config =
+    up?.configurations?.[configKey];
+
+  if (!config) {
+    console.warn(
+      '⚠️ Configuration inexistante :',
+      configKey
+    );
+    return;
+  }
+
+  const validMachine =
+    (config.specific_machines || [])
+      .find(machine =>
+        machine.machine_key === machineKey &&
+        machine.choice_group === groupKey
+      );
+
+  if (!validMachine) {
+    console.warn(
+      '⚠️ Choix technique invalide :',
+      machineKey
+    );
+    return;
+  }
+
+  const storageKey =
+    `p2i_technical_choice_${upId}_${configKey}_${groupKey}`;
+
+  sessionStorage.setItem(
+    storageKey,
+    machineKey
+  );
+
+  console.log(
+    '✅ Choix technique P2I :',
+    validMachine.name
+  );
+
+  loadMachines();
+}
     
     // Fonction utilitaire
     // Fonction utilitaire
