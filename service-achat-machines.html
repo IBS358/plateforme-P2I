@@ -1310,6 +1310,40 @@ function loadMachines() {
   }
   
   const up = machinesData[upId];
+  // ==============================================
+// RÉINITIALISATION DE L'INTERFACE DYNAMIQUE
+// ==============================================
+
+const resetDynamicBlock = (id, contentId = null) => {
+  const block = document.getElementById(id);
+
+  if (block) {
+    block.style.display = 'none';
+  }
+
+  if (contentId) {
+    const content = document.getElementById(contentId);
+
+    if (content) {
+      content.innerHTML = '';
+    }
+  }
+};
+
+resetDynamicBlock(
+  'productionConfigurationSelector',
+  'productionConfigurationChoices'
+);
+
+resetDynamicBlock(
+  'technicalChoiceSelector',
+  'technicalChoiceGroups'
+);
+
+resetDynamicBlock(
+  'optionalModulesSelector',
+  'optionalModulesChoices'
+);
 
 if (!up) {
   machinesGrid.innerHTML =
