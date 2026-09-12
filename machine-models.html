@@ -1275,6 +1275,414 @@ console.log("🔎 machineName REÇU :", params.machineName);
 console.log("🔎 machine_key REÇU :", params.machine_key);
 console.log("🔎 getMachineRefKey() :", getMachineRefKey(params.machineName));
   const grid = document.getElementById('modelsGrid');
+     // ==========================================================
+// PRIORITÉ AU NOUVEAU CATALOGUE P2I V2
+// ==========================================================
+
+const p2iV2DB =
+  window.P2I_MODELS_DB_V2 || {};
+
+if (
+  params.machine_key &&
+  p2iV2DB[params.machine_key]
+) {
+
+  const machineV2 =
+    p2iV2DB[params.machine_key];
+
+  console.log(
+    "✅ Machine trouvée dans P2I_MODELS_DB_V2 :",
+    params.machine_key,
+    machineV2
+  );
+
+  const modelsV2 =
+    machineV2.models || [];
+
+  // Informations générales de la machine
+  document.getElementById('machineName').innerHTML =
+    `<i class="fas fa-industry"></i> ${
+      escapeHtml(
+        machineV2.machine_name ||
+        params.machineName ||
+        'Machine inconnue'
+      )
+    }`;
+
+  document.getElementById('machineRole').innerHTML =
+    `<i class="fas fa-tasks"></i> ${
+      escapeHtml(
+        params.machineRole ||
+        'Rôle non spécifié'
+      )
+    }`;
+
+  document.getElementById('machineCapacity').innerHTML =
+    `<i class="fas fa-weight-hanging"></i> ${
+      escapeHtml(
+        params.machineCapacity ||
+        (
+          machineV2.target?.line_capacity_kg_h
+            ? `Ligne cible : ${machineV2.target.line_capacity_kg_h} kg/h`
+            : 'Capacité à confirmer'
+        )
+      )
+    }`;
+
+  document.getElementById('machineUtilities').innerHTML =
+    `<i class="fas fa-bolt"></i> ${
+      escapeHtml(
+        params.machineUtilities ||
+        'Utilités à confirmer'
+      )
+    }`;
+
+  if (!modelsV2.length) {
+
+    grid.innerHTML = `
+      <div style="text-align:center;padding:50px;">
+        <i
+          class="fas fa-search"
+          style="font-size:2rem;"
+        ></i>
+
+        <p>
+          Aucun modèle P2I qualifié disponible
+          pour cette machine.
+        </p>
+      </div>
+    `;
+
+    return;
+  }
+
+  const originLabels = {
+    chinese: '🇨🇳 Chine',
+    korean: '🇰🇷 Corée du Sud',
+    europe: '🇪🇺 Europe'
+  };
+
+  const originColors = {
+    chinese: '#ffc107',
+    korean: '#4cc9f0',
+    europe: '#28a745'
+  };
+
+  let html = '';
+
+  modelsV2.forEach(model => {
+
+    const origin =
+      model.origin || 'chinese';
+
+    const price =
+      model.price_reference || {};
+
+    let priceText =
+      'Prix sur demande';
+
+    if (
+      price.amount_min != null &&
+      price.amount_max != null
+    ) {
+
+      if (
+        price.amount_min ===
+        price.amount_max
+      ) {
+
+        priceText =
+          `${Number(
+            price.amount_min
+          ).toLocaleString()} ${price.currency || 'USD'}`;
+
+      } else {
+
+        priceText =
+          `${Number(
+            price.amount_min
+          ).toLocaleString()} – ${Number(
+            price.amount_max
+          ).toLocaleString()} ${price.currency || 'USD'}`;
+      }
+
+    } else if (
+      price.amount_min != null
+    ) {
+
+      priceText =
+        `À partir de ${Number(
+          price.amount_min
+        ).toLocaleString()} ${price.currency || 'USD'}`;
+    }
+
+    const supplierScore =
+      model.scores
+        ?.supplier_score
+        ?.value;
+
+    const technicalScore =
+      model.scores
+        ?.technical_score
+        ?.value;
+
+    const priceConfidence =
+      model.scores
+        ?.price_confidence_score
+        ?.value;
+
+    const capacity =
+      model.capacity || {};
+
+    let capacityText =
+      'À confirmer';
+
+    if (
+      capacity.claimed_throughput_kg_h_min != null &&
+      capacity.claimed_throughput_kg_h_max != null
+    ) {
+
+      capacityText =
+        `${capacity.claimed_throughput_kg_h_min}–${capacity.claimed_throughput_kg_h_max} kg/h`;
+
+    } else if (
+      capacity.configurable_batch_capacity_kg_min != null &&
+      capacity.configurable_batch_capacity_kg_max != null
+    ) {
+
+      capacityText =
+        `${capacity.configurable_batch_capacity_kg_min}–${capacity.configurable_batch_capacity_kg_max} kg/batch`;
+
+    } else if (
+      capacity.batch_capacity_kg_min != null &&
+      capacity.batch_capacity_kg_max != null
+    ) {
+
+      capacityText =
+        `${capacity.batch_capacity_kg_min}–${capacity.batch_capacity_kg_max} kg/batch`;
+    }
+
+    const priceStatus =
+      price.status === 'documented'
+        ? '🟢 Prix documenté'
+        : price.status === 'rfq_required'
+        ? '🟠 Cotation fournisseur requise'
+        : '⚪ Prix à confirmer';
+
+    html += `
+      <div
+        class="model-card"
+        style="
+          background:rgba(255,255,255,0.05);
+          border-radius:16px;
+          padding:20px;
+          margin-bottom:20px;
+          border:1px solid ${originColors[origin] || '#4cc9f0'}40;
+        "
+      >
+
+        <div
+          style="
+            display:flex;
+            justify-content:space-between;
+            gap:12px;
+            align-items:flex-start;
+          "
+        >
+
+          <div>
+
+            <h4
+              style="
+                color:#4cc9f0;
+                margin:0 0 5px;
+              "
+            >
+              ${escapeHtml(model.name)}
+            </h4>
+
+            <div
+              style="
+                font-size:0.8rem;
+                color:#94a3b8;
+              "
+            >
+              ${escapeHtml(
+                model.manufacturer ||
+                model.supplier ||
+                ''
+              )}
+            </div>
+
+          </div>
+
+          <span
+            style="
+              background:${originColors[origin] || '#4cc9f0'};
+              color:#0d1b2a;
+              padding:4px 10px;
+              border-radius:12px;
+              font-size:0.65rem;
+              font-weight:bold;
+            "
+          >
+            ${originLabels[origin] || origin}
+          </span>
+
+        </div>
+
+
+        <div
+          style="
+            font-size:1.25rem;
+            font-weight:bold;
+            color:#22c55e;
+            margin:15px 0 4px;
+          "
+        >
+          ${escapeHtml(priceText)}
+        </div>
+
+        <div
+          style="
+            font-size:0.72rem;
+            color:#fbbf24;
+            margin-bottom:15px;
+          "
+        >
+          ${priceStatus}
+        </div>
+
+
+        <div
+          style="
+            background:rgba(255,255,255,0.04);
+            padding:10px;
+            border-radius:10px;
+            font-size:0.82rem;
+            margin-bottom:12px;
+          "
+        >
+
+          <div>
+            <strong>Fournisseur :</strong>
+            ${escapeHtml(model.supplier || 'À confirmer')}
+          </div>
+
+          <div>
+            <strong>Statut P2I :</strong>
+            ${escapeHtml(model.supplier_status || 'identified')}
+          </div>
+
+          <div>
+            <strong>Capacité :</strong>
+            ${escapeHtml(capacityText)}
+          </div>
+
+        </div>
+
+
+        <div
+          style="
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:8px;
+            margin:12px 0;
+          "
+        >
+
+          <div
+            style="
+              background:rgba(255,255,255,0.04);
+              padding:8px;
+              border-radius:8px;
+              text-align:center;
+              font-size:0.7rem;
+            "
+          >
+            Fournisseur
+            <br>
+
+            <strong>
+              ${
+                supplierScore != null
+                  ? `${supplierScore}/100`
+                  : 'À évaluer'
+              }
+            </strong>
+          </div>
+
+
+          <div
+            style="
+              background:rgba(255,255,255,0.04);
+              padding:8px;
+              border-radius:8px;
+              text-align:center;
+              font-size:0.7rem;
+            "
+          >
+            Technique
+            <br>
+
+            <strong>
+              ${
+                technicalScore != null
+                  ? `${technicalScore}/100`
+                  : 'À confirmer'
+              }
+            </strong>
+          </div>
+
+
+          <div
+            style="
+              background:rgba(255,255,255,0.04);
+              padding:8px;
+              border-radius:8px;
+              text-align:center;
+              font-size:0.7rem;
+            "
+          >
+            Prix
+            <br>
+
+            <strong>
+              ${
+                priceConfidence != null
+                  ? `${priceConfidence}/100`
+                  : '—'
+              }
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div
+          style="
+            font-size:0.72rem;
+            color:#94a3b8;
+            margin-top:10px;
+          "
+        >
+          ${
+            escapeHtml(
+              capacity.compatibility_note ||
+              price.note ||
+              ''
+            )
+          }
+        </div>
+
+      </div>
+    `;
+  });
+
+  grid.innerHTML = html;
+
+  return;
+}
   
   let machineKey = null;
   if (params.machine_key && MODELS_DB[params.machine_key]) {
