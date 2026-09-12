@@ -2682,3 +2682,632 @@ window.P2I_MODELS_DB_V2["alimentateur_pate_biscuiterie"] = {
   }
 
 };
+// ============================================================
+// BISCUITERIE INDUSTRIELLE
+// CONVOYEUR D'ALIMENTATION DU FOUR
+// ============================================================
+
+window.P2I_MODELS_DB_V2["convoyeur_alimentation_four_biscuiterie"] = {
+
+  machine_key: "convoyeur_alimentation_four_biscuiterie",
+
+  machine_name: "Convoyeur d'alimentation du four",
+
+  up_id: "biscuiterie",
+
+  target: {
+    line_capacity_kg_h: 500,
+
+    applications: [
+      "biscuits_mous",
+      "biscuits_durs",
+      "crackers"
+    ]
+  },
+
+  commercial_positioning: {
+
+    technical_function:
+      "Transfert synchronisé des biscuits formés vers le convoyeur ou la bande du four tunnel.",
+
+    procurement_note:
+      "Cette fonction est souvent intégrée commercialement à la section de formage et/ou au système d'entrée du four. P2I doit vérifier le périmètre exact de l'offre fournisseur afin d'éviter tout double comptage CAPEX."
+  },
+
+  models: [
+
+    // ========================================================
+    // 1. CHINE — SINOBAKE
+    // ========================================================
+    {
+      model_id: "CN_SINOBAKE_ENTER_OVEN_SYSTEM",
+
+      machine_key:
+        "convoyeur_alimentation_four_biscuiterie",
+
+      name:
+        "Enter Oven Machine / Biscuit Feeding System",
+
+      manufacturer:
+        "SINOBAKE GROUP LIMITED",
+
+      supplier_id:
+        "SUP_SINOBAKE_CN",
+
+      supplier:
+        "SINOBAKE GROUP LIMITED",
+
+      supplier_country:
+        "China",
+
+      origin:
+        "chinese",
+
+      condition:
+        "new",
+
+      p2i_status:
+        "candidate",
+
+      supplier_status:
+        "identified",
+
+      applications: [
+        "soft_biscuit",
+        "hard_biscuit",
+        "cracker"
+      ],
+
+      role:
+        "Transfert des biscuits formés vers la bande du four tunnel avec synchronisation de la ligne.",
+
+      capacity: {
+
+        line_target_kg_h:
+          500,
+
+        claimed_throughput_kg_h_min:
+          150,
+
+        claimed_throughput_kg_h_max:
+          5000,
+
+        verified_throughput_kg_h:
+          null,
+
+        capacity_basis:
+          "complete_line_capacity",
+
+        compatibility_status:
+          "to_confirm",
+
+        compatibility_note:
+          "SINOBAKE annonce pour ses lignes complètes une capacité pouvant aller d'environ 150 à 5000 kg/h selon le type de biscuit et la longueur du four. Cette plage concerne la ligne complète et ne constitue pas un débit certifié du convoyeur d'entrée pris isolément."
+      },
+
+      specifications: {
+
+        equipment_type:
+          "oven_entry_feeding_system",
+
+        line_components_context: [
+          "transition_conveyor",
+          "oven_belt_drive",
+          "enter_oven_machine",
+          "tunnel_oven"
+        ],
+
+        synchronization_required:
+          true,
+
+        working_width_mm:
+          null,
+
+        conveyor_speed:
+          "to_confirm",
+
+        belt_type:
+          "to_confirm",
+
+        food_contact_material:
+          "to_confirm",
+
+        automation_level:
+          "industrial_line"
+      },
+
+      utilities: {
+        electricity:
+          true,
+
+        compressed_air:
+          "to_confirm",
+
+        water:
+          false,
+
+        steam:
+          false
+      },
+
+      acquisition: {
+
+        supply_mode:
+          "integrated_package",
+
+        package_id:
+          "PKG_BISCUIT_BAKING_ENTRY_CN_SINOBAKE",
+
+        can_be_integrated_in_line_package:
+          true,
+
+        likely_package:
+          "forming_to_oven_section",
+
+        quantity_reference:
+          1,
+
+        standalone_purchase_confirmed:
+          false,
+
+        capex_double_counting_risk:
+          true
+      },
+
+      price_reference: {
+
+        amount_min:
+          null,
+
+        amount_max:
+          null,
+
+        currency:
+          "USD",
+
+        basis:
+          null,
+
+        incoterm:
+          null,
+
+        status:
+          "rfq_required",
+
+        source_type:
+          "manufacturer",
+
+        source_name:
+          "SINOBAKE GROUP LIMITED",
+
+        source_url:
+          "https://www.sinobake.net/SINOBAKE-High-Capacity-Hard-And-Soft-Biscuit-Production-Line-pd528605398.html",
+
+        observed_at:
+          "2026-09-12",
+
+        included_items:
+          [],
+
+        excluded_items:
+          [],
+
+        confidence_score:
+          0,
+
+        note:
+          "Aucun prix public fiable n'est disponible pour le convoyeur ou système d'entrée de four pris isolément. Le fournisseur doit préciser s'il est inclus dans le lot formage/four."
+      },
+
+      p2i_commercial_conditions: {
+
+        status:
+          "not_negotiated",
+
+        negotiated_price:
+          null,
+
+        negotiated_currency:
+          null,
+
+        negotiated_discount_percent:
+          null,
+
+        validity_until:
+          null,
+
+        official_supplier_quote:
+          false
+      },
+
+      scores: {
+
+        supplier_score: {
+
+          value:
+            null,
+
+          status:
+            "pending_evaluation",
+
+          note:
+            "Le fabricant et ses lignes biscuits sont identifiés, mais le Score Fournisseur P2I complet n'est pas encore établi."
+        },
+
+        technical_score: {
+
+          value:
+            null,
+
+          status:
+            "configuration_pending",
+
+          note:
+            "Le convoyeur d'entrée doit être dimensionné avec la largeur de ligne, le type de four, la vitesse de bande et le système de formage."
+        },
+
+        price_confidence_score: {
+
+          value:
+            0,
+
+          status:
+            "rfq_required"
+        }
+      },
+
+      evidence: {
+
+        manufacturer_confirmed:
+          true,
+
+        function_confirmed:
+          true,
+
+        biscuit_application_confirmed:
+          true,
+
+        exact_standalone_model_confirmed:
+          false,
+
+        public_price_available:
+          false,
+
+        line_capacity_documented:
+          true,
+
+        standalone_capacity_verified:
+          false,
+
+        source_url:
+          "https://www.sinobake.net/SINOBAKE-High-Capacity-Hard-And-Soft-Biscuit-Production-Line-pd528605398.html",
+
+        last_reviewed_at:
+          "2026-09-12",
+
+        validation_status:
+          "manufacturer_line_component_confirmed"
+      }
+    },
+
+
+    // ========================================================
+    // 2. EUROPE — WP INDUSTRIAL BAKERY TECHNOLOGIES
+    // ========================================================
+    {
+      model_id:
+        "EU_WP_OVEN_FEED_INTEGRATED",
+
+      machine_key:
+        "convoyeur_alimentation_four_biscuiterie",
+
+      name:
+        "Integrated Biscuit Oven Feed System",
+
+      manufacturer:
+        "Werner & Pfleiderer Industrielle Backtechnik GmbH",
+
+      supplier_id:
+        "SUP_WP_GERMANY",
+
+      supplier:
+        "WP Industrial Bakery Technologies",
+
+      supplier_country:
+        "Germany",
+
+      origin:
+        "europe",
+
+      condition:
+        "new",
+
+      p2i_status:
+        "candidate",
+
+      supplier_status:
+        "identified",
+
+      applications: [
+        "hard_biscuit",
+        "cracker"
+      ],
+
+      role:
+        "Transfert synchronisé des produits formés ou découpés vers le tunnel oven dans une ligne WP intégrée.",
+
+      capacity: {
+
+        line_target_kg_h:
+          500,
+
+        claimed_throughput_kg_h_min:
+          null,
+
+        claimed_throughput_kg_h_max:
+          null,
+
+        verified_throughput_kg_h:
+          null,
+
+        capacity_basis:
+          "manufacturer_integrated_line",
+
+        compatibility_status:
+          "to_confirm",
+
+        compatibility_note:
+          "WP documente le transfert des produits de la section de formage vers le tunnel oven dans son architecture de ligne. Aucun modèle autonome ni débit propre au convoyeur d'entrée n'est publié dans la source retenue."
+      },
+
+      specifications: {
+
+        equipment_type:
+          "integrated_oven_feed",
+
+        line_integration:
+          true,
+
+        exact_model_reference:
+          null,
+
+        working_width_mm:
+          null,
+
+        conveyor_speed:
+          "to_confirm",
+
+        oven_interface:
+          "WP_SNK_or_configured_oven",
+
+        synchronization_required:
+          true,
+
+        food_contact_material:
+          "to_confirm"
+      },
+
+      utilities: {
+
+        electricity:
+          true,
+
+        compressed_air:
+          "to_confirm",
+
+        water:
+          false,
+
+        steam:
+          false
+      },
+
+      acquisition: {
+
+        supply_mode:
+          "integrated_package",
+
+        package_id:
+          "PKG_BISCUIT_BAKING_ENTRY_EU_WP",
+
+        can_be_integrated_in_line_package:
+          true,
+
+        likely_package:
+          "forming_and_baking_section",
+
+        quantity_reference:
+          1,
+
+        standalone_purchase_confirmed:
+          false,
+
+        capex_double_counting_risk:
+          true
+      },
+
+      price_reference: {
+
+        amount_min:
+          null,
+
+        amount_max:
+          null,
+
+        currency:
+          "EUR",
+
+        basis:
+          null,
+
+        incoterm:
+          null,
+
+        status:
+          "rfq_required",
+
+        source_type:
+          "manufacturer",
+
+        source_name:
+          "WP Industrial Bakery Technologies",
+
+        source_url:
+          "https://www.wpib.de/en/world-of-products/dry-baked-goods/hard-biscuit-lines.html",
+
+        observed_at:
+          "2026-09-12",
+
+        confidence_score:
+          0,
+
+        note:
+          "Pas de prix public pour cette fonction prise isolément. Le convoyage d'entrée doit être chiffré dans le périmètre réel de la ligne proposée par WP."
+      },
+
+      p2i_commercial_conditions: {
+
+        status:
+          "not_negotiated",
+
+        negotiated_price:
+          null,
+
+        negotiated_currency:
+          null,
+
+        negotiated_discount_percent:
+          null,
+
+        validity_until:
+          null,
+
+        official_supplier_quote:
+          false
+      },
+
+      scores: {
+
+        supplier_score: {
+
+          value:
+            95,
+
+          status:
+            "provisional"
+        },
+
+        technical_score: {
+
+          value:
+            null,
+
+          status:
+            "configuration_pending",
+
+          note:
+            "L'intégration industrielle est documentée, mais le dimensionnement exact pour la ligne P2I de 500 kg/h doit être défini avec WP."
+        },
+
+        price_confidence_score: {
+
+          value:
+            0,
+
+          status:
+            "rfq_required"
+        }
+      },
+
+      evidence: {
+
+        manufacturer_confirmed:
+          true,
+
+        function_confirmed:
+          true,
+
+        biscuit_application_confirmed:
+          true,
+
+        exact_standalone_model_confirmed:
+          false,
+
+        public_price_available:
+          false,
+
+        hourly_capacity_directly_verified:
+          false,
+
+        source_url:
+          "https://www.wpib.de/en/world-of-products/dry-baked-goods/hard-biscuit-lines.html",
+
+        last_reviewed_at:
+          "2026-09-12",
+
+        validation_status:
+          "manufacturer_integrated_function_confirmed"
+      }
+    }
+
+  ],
+
+
+  // ========================================================
+  // COUVERTURE RÉGIONALE
+  // ========================================================
+
+  regional_coverage: {
+
+    china: {
+
+      status:
+        "manufacturer_line_component_confirmed",
+
+      reference_model:
+        "CN_SINOBAKE_ENTER_OVEN_SYSTEM"
+    },
+
+    korea: {
+
+      status:
+        "research_pending",
+
+      reference_model:
+        null,
+
+      note:
+        "Des fabricants coréens de lignes biscuit/pâtisserie et de convoyage ont été identifiés, mais aucune référence exacte de convoyeur d'alimentation de four suffisamment documentée n'est encore retenue par P2I."
+    },
+
+    europe: {
+
+      status:
+        "manufacturer_integrated_solution_confirmed",
+
+      reference_model:
+        "EU_WP_OVEN_FEED_INTEGRATED"
+    }
+  },
+
+
+  // ========================================================
+  // RÈGLE CAPEX P2I
+  // ========================================================
+
+  capex_rule: {
+
+    standalone_cost_allowed:
+      false,
+
+    package_cost_preferred:
+      true,
+
+    avoid_double_counting:
+      true,
+
+    note:
+      "Ne pas additionner automatiquement un coût de convoyeur d'alimentation du four si ce composant est déjà compris dans le prix du lot de formage, du four tunnel ou de la ligne intégrée."
+  }
+
+};
