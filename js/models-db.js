@@ -2201,3 +2201,484 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
 
   ]
 };
+
+// ============================================================
+// BISCUITERIE INDUSTRIELLE
+// ALIMENTATEUR DE PÂTE
+// ============================================================
+
+window.P2I_MODELS_DB_V2["alimentateur_pate_biscuiterie"] = {
+
+  machine_key: "alimentateur_pate_biscuiterie",
+
+  machine_name: "Alimentateur / convoyeur de pâte",
+
+  up_id: "biscuiterie",
+
+  target: {
+    line_capacity_kg_h: 500,
+
+    applications: [
+      "biscuits_mous",
+      "biscuits_durs",
+      "crackers"
+    ]
+  },
+
+  models: [
+
+    // ========================================================
+    // 1. CHINE — SHANDONG PENGXIANG
+    // ========================================================
+    {
+      model_id: "CN_PENGXIANG_PXDFC",
+
+      machine_key: "alimentateur_pate_biscuiterie",
+
+      name: "PXDFC Dough Feeding Conveyor",
+
+      manufacturer:
+        "Shandong Pengxiang Machinery Technology Co., Ltd.",
+
+      supplier_id: "SUP_PENGXIANG_CN",
+
+      supplier:
+        "Shandong Pengxiang Machinery Technology Co., Ltd.",
+
+      supplier_country: "China",
+
+      origin: "chinese",
+
+      condition: "new",
+
+      p2i_status: "candidate",
+
+      supplier_status: "identified",
+
+      applications: [
+        "biscuit",
+        "cookie",
+        "cake"
+      ],
+
+      role:
+        "Transport de portions de pâte vers la trémie de la machine de formage.",
+
+      capacity: {
+        line_target_kg_h: 500,
+
+        claimed_throughput_kg_h_min: null,
+        claimed_throughput_kg_h_max: null,
+
+        verified_throughput_kg_h: null,
+
+        capacity_basis: "not_published",
+
+        compatibility_status: "to_confirm",
+
+        compatibility_note:
+          "Le fabricant documente la fonction d'alimentation de pâte mais ne publie pas de débit en kg/h. La compatibilité avec une ligne P2I de 500 kg/h doit être confirmée."
+      },
+
+      specifications: {
+        equipment_type: "dough_feeding_conveyor",
+
+        model: "PXDFC",
+
+        belt_material: "food-grade PU",
+
+        construction_material: "stainless steel",
+
+        power_kw: 1.5,
+
+        voltage: [
+          "220V",
+          "380V"
+        ],
+
+        dimensions: "customized",
+
+        automatic_operation: true,
+
+        food_contact_standard:
+          "food-grade belt declared by supplier",
+
+        downstream_function:
+          "feeding forming-machine hopper"
+      },
+
+      utilities: {
+        electricity: true,
+        compressed_air: false,
+        water: false,
+        steam: false
+      },
+
+      acquisition: {
+        supply_mode: "standalone_or_integrated",
+
+        package_id: null,
+
+        can_be_integrated_in_line_package: true,
+
+        likely_package:
+          "dough_preparation_and_forming_section",
+
+        quantity_reference: 1
+      },
+
+      price_reference: {
+        amount_min: 1500,
+        amount_max: 3000,
+
+        currency: "USD",
+
+        basis: "public_listing",
+
+        incoterm: null,
+
+        status: "documented",
+
+        source_type: "professional_marketplace",
+
+        source_name: "Made-in-China",
+
+        source_url:
+          "https://pengxiang-machinery.en.made-in-china.com/product/XmEUpvilvbrP/China-Automated-Biscuit-Production-Line-with-Dough-Feeding-Conveyor.html",
+
+        observed_at: "2026-09-12",
+
+        quantity_basis: 1,
+
+        included_items: [
+          "dough feeding conveyor"
+        ],
+
+        excluded_items: [
+          "international_freight",
+          "marine_insurance",
+          "customs",
+          "local_transport",
+          "installation",
+          "commissioning",
+          "forming_machine"
+        ],
+
+        confidence_score: 88,
+
+        note:
+          "Prix public documenté. Le débit réel de pâte et la configuration exacte pour une ligne de 500 kg/h doivent être confirmés."
+      },
+
+      p2i_commercial_conditions: {
+        status: "not_negotiated",
+
+        negotiated_price: null,
+        negotiated_currency: null,
+        negotiated_discount_percent: null,
+
+        validity_until: null,
+
+        official_supplier_quote: false
+      },
+
+      scores: {
+        supplier_score: {
+          value: null,
+
+          status: "pending_evaluation",
+
+          note:
+            "Fabricant réel identifié, mais Score Fournisseur P2I complet non encore établi."
+        },
+
+        technical_score: {
+          value: null,
+
+          status: "pending_capacity_confirmation",
+
+          note:
+            "Le débit de pâte doit être confirmé avant attribution d'un Score Technique définitif."
+        },
+
+        price_confidence_score: {
+          value: 88,
+
+          status: "documented"
+        }
+      },
+
+      evidence: {
+        manufacturer_confirmed: true,
+
+        model_confirmed: true,
+
+        biscuit_application_confirmed: true,
+
+        public_price_available: true,
+
+        hourly_capacity_directly_verified: false,
+
+        source_url:
+          "https://pengxiang-machinery.en.made-in-china.com/product/XmEUpvilvbrP/China-Automated-Biscuit-Production-Line-with-Dough-Feeding-Conveyor.html",
+
+        last_reviewed_at: "2026-09-12",
+
+        validation_status:
+          "documented_capacity_pending"
+      }
+    },
+
+
+    // ========================================================
+    // 2. EUROPE — WP INDUSTRIAL BAKERY TECHNOLOGIES
+    // ========================================================
+    {
+      model_id: "EU_WP_CONTINUOUS_DOUGH_FEED",
+
+      machine_key: "alimentateur_pate_biscuiterie",
+
+      name: "Continuous Dough Feed System",
+
+      manufacturer:
+        "Werner & Pfleiderer Industrielle Backtechnik GmbH",
+
+      supplier_id: "SUP_WP_GERMANY",
+
+      supplier:
+        "WP Industrial Bakery Technologies",
+
+      supplier_country: "Germany",
+
+      origin: "europe",
+
+      condition: "new",
+
+      p2i_status: "candidate",
+
+      supplier_status: "identified",
+
+      applications: [
+        "hard_biscuit",
+        "cracker"
+      ],
+
+      role:
+        "Alimentation continue de pâte entre la préparation de pâte et la section de formage.",
+
+      capacity: {
+        line_target_kg_h: 500,
+
+        claimed_throughput_kg_h_min: null,
+        claimed_throughput_kg_h_max: null,
+
+        verified_throughput_kg_h: null,
+
+        capacity_basis:
+          "manufacturer_line_documentation",
+
+        compatibility_status:
+          "to_confirm",
+
+        compatibility_note:
+          "WP documente le dough feed comme module de ses lignes hard biscuit/cracker, mais aucun débit ni modèle individuel n'est publié dans la source retenue."
+      },
+
+      specifications: {
+        equipment_type:
+          "continuous_dough_feed",
+
+        automation_level:
+          "industrial",
+
+        continuous_feed:
+          true,
+
+        line_integration:
+          true,
+
+        exact_model_reference:
+          null,
+
+        food_contact_material:
+          "to_confirm"
+      },
+
+      utilities: {
+        electricity: true,
+        compressed_air: "to_confirm",
+        water: false,
+        steam: false
+      },
+
+      acquisition: {
+        supply_mode:
+          "integrated_package",
+
+        package_id:
+          null,
+
+        can_be_integrated_in_line_package:
+          true,
+
+        likely_package:
+          "WP_dough_preparation_and_forming_section",
+
+        quantity_reference:
+          1,
+
+        standalone_purchase_confirmed:
+          false
+      },
+
+      price_reference: {
+        amount_min:
+          null,
+
+        amount_max:
+          null,
+
+        currency:
+          "EUR",
+
+        basis:
+          null,
+
+        incoterm:
+          null,
+
+        status:
+          "rfq_required",
+
+        source_type:
+          "manufacturer",
+
+        source_name:
+          "WP Industrial Bakery Technologies",
+
+        source_url:
+          "https://www.wpib.de/en/world-of-products/dry-baked-goods/hard-biscuit-lines.html",
+
+        observed_at:
+          "2026-09-12",
+
+        confidence_score:
+          0,
+
+        note:
+          "Prix non publié. Le dough feed semble appartenir à une solution de ligne intégrée ; le périmètre commercial doit être défini par WP."
+      },
+
+      p2i_commercial_conditions: {
+        status:
+          "not_negotiated",
+
+        negotiated_price:
+          null,
+
+        negotiated_currency:
+          null,
+
+        negotiated_discount_percent:
+          null,
+
+        validity_until:
+          null,
+
+        official_supplier_quote:
+          false
+      },
+
+      scores: {
+        supplier_score: {
+          value:
+            95,
+
+          status:
+            "provisional"
+        },
+
+        technical_score: {
+          value:
+            null,
+
+          status:
+            "configuration_pending",
+
+          note:
+            "La fonction est pertinente mais le modèle et le dimensionnement 500 kg/h doivent être définis par WP."
+        },
+
+        price_confidence_score: {
+          value:
+            0,
+
+          status:
+            "rfq_required"
+        }
+      },
+
+      evidence: {
+        manufacturer_confirmed:
+          true,
+
+        function_confirmed:
+          true,
+
+        exact_model_confirmed:
+          false,
+
+        biscuit_application_confirmed:
+          true,
+
+        public_price_available:
+          false,
+
+        hourly_capacity_directly_verified:
+          false,
+
+        source_url:
+          "https://www.wpib.de/en/world-of-products/dry-baked-goods/hard-biscuit-lines.html",
+
+        last_reviewed_at:
+          "2026-09-12",
+
+        validation_status:
+          "manufacturer_confirmed_exact_configuration_pending"
+      }
+    }
+
+  ],
+
+  regional_coverage: {
+
+    china: {
+      status:
+        "documented",
+
+      reference_model:
+        "CN_PENGXIANG_PXDFC"
+    },
+
+    korea: {
+      status:
+        "research_pending",
+
+      reference_model:
+        null,
+
+      note:
+        "Aucun modèle coréen exact suffisamment documenté n'est encore retenu par P2I pour cette fonction."
+    },
+
+    europe: {
+      status:
+        "manufacturer_solution_confirmed",
+
+      reference_model:
+        "EU_WP_CONTINUOUS_DOUGH_FEED"
+    }
+
+  }
+
+};
