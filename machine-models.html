@@ -1674,6 +1674,30 @@ if (
             )
           }
         </div>
+        <div
+  style="
+    margin-top:16px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  "
+>
+
+  <button
+    type="button"
+    class="btn-sm btn-view-sm"
+    data-model-id="${escapeHtml(model.model_id || '')}"
+    onclick="addV2ModelToEquipmentPlan(
+      '${escapeHtml(params.machine_key || '')}',
+      '${escapeHtml(model.model_id || '')}',
+      this
+    )"
+  >
+    <i class="fas fa-plus-circle"></i>
+    Ajouter au plan d'équipement
+  </button>
+
+</div>
 
       </div>
     `;
@@ -3213,6 +3237,553 @@ async function saveToDashboardWithOrigin(
    alert(
   "❌ Erreur lors de l'enregistrement."
 );
+  }
+}
+    // ==========================================================
+// AJOUT D'UN MODÈLE V2 AU PLAN D'ÉQUIPEMENT
+// ==========================================================
+
+async function addV2ModelToEquipmentPlan(
+  machineKey,
+  modelId,
+  btn
+) {
+
+  console.log(
+    '🧩 Ajout au plan d’équipement :',
+    machineKey,
+    modelId
+  );
+
+  // ========================================================
+  // 1. VÉRIFICATION DE LA BASE V2
+  // ========================================================
+
+  const db =
+    window.P2I_MODELS_DB_V2 || {};
+
+  const machineV2 =
+    db[machineKey];
+
+  if (!machineV2) {
+
+    console.error(
+      '❌ Machine V2 introuvable :',
+      machineKey
+    );
+
+    alert(
+      'Impossible de retrouver cette machine dans le catalogue P2I.'
+    );
+
+    return;
+  }
+
+
+  // ========================================================
+  // 2. RECHERCHE DU MODÈLE
+  // ========================================================
+
+  const model =
+    (machineV2.models || []).find(
+      item =>
+        item.model_id === modelId
+    );
+
+  if (!model) {
+
+    console.error(
+      '❌ Modèle V2 introuvable :',
+      modelId
+    );
+
+    alert(
+      'Impossible de retrouver ce modèle.'
+    );
+
+    return;
+  }
+
+
+  // ========================================================
+  // 3. UTILISATEUR CONNECTÉ
+  // ========================================================
+
+  const email =
+    getActiveEmail();
+
+  if (!email) {
+
+    alert(
+      'Veuillez vous connecter pour ajouter ce modèle à votre plan d’équipement.'
+    );
+
+    window.location.href =
+      'login.html?mode=login';
+
+    return;
+  }
+
+
+  try {
+
+    const {
+      data: { user },
+      error: userError
+    } =
+      await supabaseClient.auth.getUser();
+
+
+    if (userError) {
+
+      console.error(
+        '❌ Erreur utilisateur :',
+        userError
+      );
+
+      alert(
+        'Erreur de connexion.'
+      );
+
+      return;
+    }
+
+
+    if (!user) {
+
+      alert(
+        'Veuillez vous reconnecter.'
+      );
+
+      window.location.href =
+        'login.html?mode=login';
+
+      return;
+    }
+
+
+    // ======================================================
+    // 4. PARAMÈTRES DE LA PAGE
+    // ======================================================
+
+    const params =
+      getUrlParams();
+
+    const price =
+      model.price_reference || {};
+
+    const acquisition =
+      model.acquisition || {};
+
+
+    // ======================================================
+    // 5. LIBELLÉ DU PRIX
+    // ======================================================
+
+    let priceDisplay =
+      'Prix sur demande';
+
+    if (
+      price.amount_min != null &&
+      price.amount_max != null
+    ) {
+
+      if (
+        price.amount_min ===
+        price.amount_max
+      ) {
+
+        priceDisplay =
+          `${Number(
+            price.amount_min
+          ).toLocaleString()} ${
+            price.currency || 'USD'
+          }`;
+
+      } else {
+
+        priceDisplay =
+          `${Number(
+            price.amount_min
+          ).toLocaleString()} – ${Number(
+            price.amount_max
+          ).toLocaleString()} ${
+            price.currency || 'USD'
+          }`;
+      }
+
+    } else if (
+      price.amount_min != null
+    ) {
+
+      priceDisplay =
+        `À partir de ${Number(
+          price.amount_min
+        ).toLocaleString()} ${
+          price.currency || 'USD'
+        }`;
+    }
+
+
+    // ======================================================
+    // 6. PROTECTION CONTRE LES DOUBLONS
+    // ======================================================
+
+    const {
+      data: existingRows,
+      error: existingError
+    } =
+      await supabaseClient
+        .from('saved_machines')
+        .select('id, data')
+        .eq('user_id', user.id);
+
+
+    if (existingError) {
+
+      console.error(
+        '⚠️ Impossible de vérifier les doublons :',
+        existingError
+      );
+
+    } else {
+
+      const duplicate =
+        (existingRows || []).find(
+          row => {
+
+            const d =
+              row.data || {};
+
+            return (
+              d.up_id ===
+                (params.upId || machineV2.up_id) &&
+              d.machine_key ===
+                machineKey &&
+              d.model_id ===
+                modelId
+            );
+          }
+        );
+
+
+      if (duplicate) {
+
+        showToast(
+          `ℹ️ "${model.name}" est déjà présent dans votre plan d'équipement.`
+        );
+
+        if (btn) {
+
+          btn.disabled =
+            true;
+
+          btn.innerHTML =
+            '<i class="fas fa-check"></i> Déjà ajouté';
+        }
+
+        return;
+      }
+    }
+
+
+    // ======================================================
+    // 7. CONSTRUCTION DES DONNÉES
+    // ======================================================
+
+    const machineData = {
+
+      // ----------------------------------------------------
+      // TYPE / VERSION
+      // ----------------------------------------------------
+
+      data_version:
+        'p2i_v2',
+
+      record_type:
+        'equipment_plan_item',
+
+
+      // ----------------------------------------------------
+      // UNITÉ DE PRODUCTION
+      // ----------------------------------------------------
+
+      up_id:
+        params.upId ||
+        machineV2.up_id ||
+        '',
+
+      up_nom:
+        params.upNom ||
+        '',
+
+
+      // ----------------------------------------------------
+      // MACHINE
+      // ----------------------------------------------------
+
+      machine_key:
+        machineKey,
+
+      machine:
+        machineV2.machine_name ||
+        params.machineName ||
+        '',
+
+      machine_role:
+        params.machineRole ||
+        model.role ||
+        '',
+
+      machine_capacity:
+        params.machineCapacity ||
+        '',
+
+      machine_utilities:
+        params.machineUtilities ||
+        '',
+
+
+      // ----------------------------------------------------
+      // MODÈLE
+      // ----------------------------------------------------
+
+      model:
+        model.name ||
+        '',
+
+      model_id:
+        model.model_id ||
+        null,
+
+
+      // ----------------------------------------------------
+      // FOURNISSEUR
+      // ----------------------------------------------------
+
+      manufacturer:
+        model.manufacturer ||
+        null,
+
+      supplier:
+        model.supplier ||
+        model.manufacturer ||
+        null,
+
+      supplier_id:
+        model.supplier_id ||
+        null,
+
+      supplier_status:
+        model.supplier_status ||
+        'identified',
+
+      supplier_country:
+        model.supplier_country ||
+        null,
+
+
+      // ----------------------------------------------------
+      // ORIGINE
+      // ----------------------------------------------------
+
+      origin:
+        model.origin ||
+        null,
+
+
+      // ----------------------------------------------------
+      // PRIX DE RÉFÉRENCE
+      // ----------------------------------------------------
+
+      price_status:
+        price.status ||
+        'rfq_required',
+
+      price_min:
+        price.amount_min ??
+        null,
+
+      price_max:
+        price.amount_max ??
+        null,
+
+      price_currency:
+        price.currency ||
+        'USD',
+
+      price_display:
+        priceDisplay,
+
+      price_basis:
+        price.basis ||
+        null,
+
+      price_incoterm:
+        price.incoterm ||
+        null,
+
+      price_source_type:
+        price.source_type ||
+        null,
+
+      price_source_name:
+        price.source_name ||
+        null,
+
+      price_source_url:
+        price.source_url ||
+        null,
+
+      price_confidence_score:
+        price.confidence_score ??
+        model.scores
+          ?.price_confidence_score
+          ?.value ??
+        null,
+
+
+      // ----------------------------------------------------
+      // MODE D'ACQUISITION
+      // ----------------------------------------------------
+
+      supply_mode:
+        acquisition.supply_mode ||
+        'standalone',
+
+      package_id:
+        acquisition.package_id ||
+        null,
+
+      likely_package:
+        acquisition.likely_package ||
+        null,
+
+      can_be_integrated_in_line_package:
+        acquisition
+          .can_be_integrated_in_line_package ??
+        false,
+
+      capex_double_counting_risk:
+        acquisition
+          .capex_double_counting_risk ??
+        false,
+
+
+      // ----------------------------------------------------
+      // STATUT PLAN D'ÉQUIPEMENT
+      // ----------------------------------------------------
+
+      equipment_plan_status:
+        'selected',
+
+      is_selected_model:
+        true,
+
+
+      // ----------------------------------------------------
+      // STATUT ESTIMATION P2I
+      // ----------------------------------------------------
+
+      estimation_status:
+        'pending',
+
+
+      // ----------------------------------------------------
+      // STATUT MISE EN RELATION
+      // IMPORTANT :
+      // aucune demande n'est créée ici
+      // ----------------------------------------------------
+
+      relation_status:
+        'not_requested',
+
+
+      // ----------------------------------------------------
+      // DATE
+      // ----------------------------------------------------
+
+      saved_at:
+        new Date().toISOString()
+    };
+
+
+    console.log(
+      '📦 Données V2 à sauvegarder :',
+      machineData
+    );
+
+
+    // ======================================================
+    // 8. SAUVEGARDE SUPABASE
+    // ======================================================
+
+    const {
+      data: insertData,
+      error
+    } =
+      await supabaseClient
+        .from('saved_machines')
+        .insert({
+          user_id:
+            user.id,
+
+          data:
+            machineData
+        })
+        .select();
+
+
+    if (error) {
+
+      console.error(
+        '❌ Erreur Supabase :',
+        error
+      );
+
+      alert(
+        'Erreur lors de l’ajout au plan d’équipement : ' +
+        error.message
+      );
+
+      return;
+    }
+
+
+    // ======================================================
+    // 9. SUCCÈS
+    // ======================================================
+
+    console.log(
+      '✅ Modèle ajouté au plan d’équipement :',
+      insertData
+    );
+
+
+    if (btn) {
+
+      btn.disabled =
+        true;
+
+      btn.innerHTML =
+        '<i class="fas fa-check"></i> Ajouté au plan';
+    }
+
+
+    showToast(
+      `✅ "${model.name}" ajouté à votre plan d'équipement`
+    );
+
+  } catch (e) {
+
+    console.error(
+      '❌ Erreur addV2ModelToEquipmentPlan :',
+      e
+    );
+
+    alert(
+      "Erreur lors de l'ajout au plan d'équipement."
+    );
   }
 }
 
