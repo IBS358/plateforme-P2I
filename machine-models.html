@@ -3239,8 +3239,9 @@ async function saveToDashboardWithOrigin(
 );
   }
 }
-    // ==========================================================
-// AJOUT D'UN MODÈLE V2 AU PLAN D'ÉQUIPEMENT
+   // ==========================================================
+// AJOUT / REMPLACEMENT D'UN MODÈLE V2
+// DANS LE PLAN D'ÉQUIPEMENT
 // ==========================================================
 
 async function addV2ModelToEquipmentPlan(
@@ -3250,10 +3251,11 @@ async function addV2ModelToEquipmentPlan(
 ) {
 
   console.log(
-    '🧩 Ajout au plan d’équipement :',
+    '🧩 Ajout / mise à jour du plan d’équipement :',
     machineKey,
     modelId
   );
+
 
   // ========================================================
   // 1. VÉRIFICATION DE LA BASE V2
@@ -3369,6 +3371,16 @@ async function addV2ModelToEquipmentPlan(
     const params =
       getUrlParams();
 
+    const upId =
+      params.upId ||
+      machineV2.up_id ||
+      '';
+
+    const upNom =
+      params.upNom ||
+      machineV2.up_nom ||
+      '';
+
     const price =
       model.price_reference || {};
 
@@ -3382,6 +3394,7 @@ async function addV2ModelToEquipmentPlan(
 
     let priceDisplay =
       'Prix sur demande';
+
 
     if (
       price.amount_min != null &&
@@ -3426,75 +3439,13 @@ async function addV2ModelToEquipmentPlan(
 
 
     // ======================================================
-    // 6. PROTECTION CONTRE LES DOUBLONS
-    // ======================================================
-
-    const {
-      data: existingRows,
-      error: existingError
-    } =
-      await supabaseClient
-        .from('saved_machines')
-        .select('id, data')
-        .eq('user_id', user.id);
-
-
-    if (existingError) {
-
-      console.error(
-        '⚠️ Impossible de vérifier les doublons :',
-        existingError
-      );
-
-    } else {
-
-      const duplicate =
-        (existingRows || []).find(
-          row => {
-
-            const d =
-              row.data || {};
-
-            return (
-              d.up_id ===
-                (params.upId || machineV2.up_id) &&
-              d.machine_key ===
-                machineKey &&
-              d.model_id ===
-                modelId
-            );
-          }
-        );
-
-
-      if (duplicate) {
-
-        showToast(
-          `ℹ️ "${model.name}" est déjà présent dans votre plan d'équipement.`
-        );
-
-        if (btn) {
-
-          btn.disabled =
-            true;
-
-          btn.innerHTML =
-            '<i class="fas fa-check"></i> Déjà ajouté';
-        }
-
-        return;
-      }
-    }
-
-
-    // ======================================================
-    // 7. CONSTRUCTION DES DONNÉES
+    // 6. CONSTRUCTION DES DONNÉES DU MODÈLE RETENU
     // ======================================================
 
     const machineData = {
 
       // ----------------------------------------------------
-      // TYPE / VERSION
+      // VERSION / TYPE
       // ----------------------------------------------------
 
       data_version:
@@ -3509,17 +3460,14 @@ async function addV2ModelToEquipmentPlan(
       // ----------------------------------------------------
 
       up_id:
-        params.upId ||
-        machineV2.up_id ||
-        '',
+        upId,
 
       up_nom:
-        params.upNom ||
-        '',
+        upNom,
 
 
       // ----------------------------------------------------
-      // MACHINE
+      // MACHINE TECHNIQUE
       // ----------------------------------------------------
 
       machine_key:
@@ -3545,7 +3493,7 @@ async function addV2ModelToEquipmentPlan(
 
 
       // ----------------------------------------------------
-      // MODÈLE
+      // MODÈLE RETENU
       // ----------------------------------------------------
 
       model:
@@ -3671,7 +3619,7 @@ async function addV2ModelToEquipmentPlan(
 
 
       // ----------------------------------------------------
-      // STATUT PLAN D'ÉQUIPEMENT
+      // PLAN D'ÉQUIPEMENT
       // ----------------------------------------------------
 
       equipment_plan_status:
@@ -3682,7 +3630,7 @@ async function addV2ModelToEquipmentPlan(
 
 
       // ----------------------------------------------------
-      // STATUT ESTIMATION P2I
+      // ESTIMATION P2I
       // ----------------------------------------------------
 
       estimation_status:
@@ -3690,9 +3638,9 @@ async function addV2ModelToEquipmentPlan(
 
 
       // ----------------------------------------------------
-      // STATUT MISE EN RELATION
-      // IMPORTANT :
-      // aucune demande n'est créée ici
+      // MISE EN RELATION
+      //
+      // AUCUNE MISE EN RELATION N'EST CRÉÉE ICI
       // ----------------------------------------------------
 
       relation_status:
@@ -3709,41 +3657,126 @@ async function addV2ModelToEquipmentPlan(
 
 
     console.log(
-      '📦 Données V2 à sauvegarder :',
+      '📦 Nouveau choix V2 :',
       machineData
     );
 
 
     // ======================================================
-    // 8. SAUVEGARDE SUPABASE
+    // 7. RECHERCHE D'UN CHOIX EXISTANT
+    // POUR CETTE UP + CETTE MACHINE_KEY
     // ======================================================
 
     const {
-      data: insertData,
-      error
+      data: existingRows,
+      error: existingError
     } =
       await supabaseClient
         .from('saved_machines')
-        .insert({
-          user_id:
-            user.id,
-
-          data:
-            machineData
-        })
-        .select();
+        .select('id, data')
+        .eq(
+          'user_id',
+          user.id
+        );
 
 
-    if (error) {
+    if (existingError) {
 
       console.error(
-        '❌ Erreur Supabase :',
-        error
+        '❌ Erreur recherche du plan existant :',
+        existingError
       );
 
       alert(
-        'Erreur lors de l’ajout au plan d’équipement : ' +
-        error.message
+        'Impossible de vérifier votre plan d’équipement.'
+      );
+
+      return;
+    }
+
+
+    const sameMachineRows =
+      (existingRows || []).filter(
+        row => {
+
+          const d =
+            row.data || {};
+
+          return (
+            d.up_id === upId &&
+            d.machine_key === machineKey
+          );
+        }
+      );
+
+
+    console.log(
+      `🔎 ${sameMachineRows.length} ligne(s) existante(s) pour`,
+      upId,
+      machineKey
+    );
+
+
+    // ======================================================
+    // 8. CAS 1 :
+    // AUCUN MODÈLE N'EXISTE ENCORE
+    // → INSERT
+    // ======================================================
+
+    if (
+      sameMachineRows.length === 0
+    ) {
+
+      const {
+        data: insertData,
+        error: insertError
+      } =
+        await supabaseClient
+          .from('saved_machines')
+          .insert({
+            user_id:
+              user.id,
+
+            data:
+              machineData
+          })
+          .select();
+
+
+      if (insertError) {
+
+        console.error(
+          '❌ Erreur INSERT :',
+          insertError
+        );
+
+        alert(
+          'Erreur lors de l’ajout au plan d’équipement : ' +
+          insertError.message
+        );
+
+        return;
+      }
+
+
+      console.log(
+        '✅ Nouveau modèle ajouté au plan :',
+        insertData
+      );
+
+
+      if (btn) {
+
+        btn.disabled =
+          true;
+
+        btn.innerHTML =
+          '<i class="fas fa-check"></i> Ajouté au plan';
+      }
+
+
+      showToast(
+        `✅ "${model.name}" ajouté à votre plan d'équipement`
       );
 
       return;
@@ -3751,12 +3784,192 @@ async function addV2ModelToEquipmentPlan(
 
 
     // ======================================================
-    // 9. SUCCÈS
+    // 9. UN OU PLUSIEURS ENREGISTREMENTS EXISTENT
+    //
+    // On cherche d'abord si le modèle demandé existe déjà.
     // ======================================================
 
+    const exactModelRow =
+      sameMachineRows.find(
+        row =>
+          row.data?.model_id ===
+          modelId
+      );
+
+
+    // ======================================================
+    // 10. CHOIX DE LA LIGNE À CONSERVER
+    //
+    // Si le modèle demandé existe déjà,
+    // on conserve cette ligne.
+    //
+    // Sinon on conserve la première ligne,
+    // qui sera mise à jour.
+    // ======================================================
+
+    const rowToKeep =
+      exactModelRow ||
+      sameMachineRows[0];
+
+
+    const extraRows =
+      sameMachineRows.filter(
+        row =>
+          row.id !==
+          rowToKeep.id
+      );
+
+
+    // ======================================================
+    // 11. NETTOYAGE DES ÉVENTUELS DOUBLONS
+    //
+    // Cela permet notamment de corriger les deux lignes
+    // Skywin / ASAN créées pendant nos tests.
+    // ======================================================
+
+    if (
+      extraRows.length > 0
+    ) {
+
+      const extraIds =
+        extraRows.map(
+          row => row.id
+        );
+
+
+      console.warn(
+        '🧹 Doublons du plan détectés. Suppression :',
+        extraIds
+      );
+
+
+      const {
+        error: deleteError
+      } =
+        await supabaseClient
+          .from('saved_machines')
+          .delete()
+          .in(
+            'id',
+            extraIds
+          );
+
+
+      if (deleteError) {
+
+        console.error(
+          '❌ Erreur nettoyage des doublons :',
+          deleteError
+        );
+
+        alert(
+          'Le modèle a été trouvé, mais les doublons existants n’ont pas pu être nettoyés.'
+        );
+
+        return;
+      }
+
+
+      console.log(
+        '✅ Doublons supprimés :',
+        extraIds
+      );
+    }
+
+
+    // ======================================================
+    // 12. CAS 2 :
+    // LE MODÈLE DEMANDÉ EST DÉJÀ CELUI RETENU
+    // → AUCUNE NOUVELLE ÉCRITURE
+    // ======================================================
+
+    if (
+      rowToKeep.data?.model_id ===
+      modelId
+    ) {
+
+      console.log(
+        'ℹ️ Ce modèle est déjà le modèle actif du plan.'
+      );
+
+
+      if (btn) {
+
+        btn.disabled =
+          true;
+
+        btn.innerHTML =
+          '<i class="fas fa-check"></i> Déjà dans le plan';
+      }
+
+
+      showToast(
+        `ℹ️ "${model.name}" est déjà le modèle retenu pour cette machine.`
+      );
+
+      return;
+    }
+
+
+    // ======================================================
+    // 13. CAS 3 :
+    // UN AUTRE MODÈLE ÉTAIT RETENU
+    // → UPDATE DE LA LIGNE EXISTANTE
+    // ======================================================
+
+    const previousModel =
+      rowToKeep.data?.model ||
+      'ancien modèle';
+
+
     console.log(
-      '✅ Modèle ajouté au plan d’équipement :',
-      insertData
+      '🔄 Remplacement du modèle :',
+      previousModel,
+      '→',
+      model.name
+    );
+
+
+    const {
+      data: updateData,
+      error: updateError
+    } =
+      await supabaseClient
+        .from('saved_machines')
+        .update({
+          data:
+            machineData
+        })
+        .eq(
+          'id',
+          rowToKeep.id
+        )
+        .eq(
+          'user_id',
+          user.id
+        )
+        .select();
+
+
+    if (updateError) {
+
+      console.error(
+        '❌ Erreur UPDATE :',
+        updateError
+      );
+
+      alert(
+        'Erreur lors du changement de modèle : ' +
+        updateError.message
+      );
+
+      return;
+    }
+
+
+    console.log(
+      '✅ Modèle remplacé avec succès :',
+      updateData
     );
 
 
@@ -3766,13 +3979,14 @@ async function addV2ModelToEquipmentPlan(
         true;
 
       btn.innerHTML =
-        '<i class="fas fa-check"></i> Ajouté au plan';
+        '<i class="fas fa-check"></i> Modèle retenu';
     }
 
 
     showToast(
-      `✅ "${model.name}" ajouté à votre plan d'équipement`
+      `✅ "${model.name}" remplace "${previousModel}" dans votre plan d'équipement`
     );
+
 
   } catch (e) {
 
@@ -3782,11 +3996,10 @@ async function addV2ModelToEquipmentPlan(
     );
 
     alert(
-      "Erreur lors de l'ajout au plan d'équipement."
+      "Erreur lors de la mise à jour du plan d'équipement."
     );
   }
 }
-
     // ==============================================
     // GESTION DU PANIER
     // ==============================================
