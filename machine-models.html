@@ -1417,19 +1417,31 @@ if (
     }
 
     const supplierScore =
-      model.scores
-        ?.supplier_score
-        ?.value;
+  model.scores
+    ?.supplier_score
+    ?.value;
 
-    const technicalScore =
-      model.scores
-        ?.technical_score
-        ?.value;
+const technicalScore =
+  model.scores
+    ?.technical_score
+    ?.value;
 
-    const priceConfidence =
-      model.scores
-        ?.price_confidence_score
-        ?.value;
+const priceConfidenceValue =
+  model.scores
+    ?.price_confidence_score
+    ?.value;
+
+const priceConfidenceStatus =
+  model.scores
+    ?.price_confidence_score
+    ?.status || "";
+
+const priceConfidenceDisplay =
+  priceConfidenceStatus === "rfq_required" ||
+  priceConfidenceValue === null ||
+  priceConfidenceValue === undefined
+    ? "—"
+    : `${priceConfidenceValue}/100`;
 
     const capacity =
       model.capacity || {};
@@ -1647,13 +1659,9 @@ if (
             Prix
             <br>
 
-            <strong>
-              ${
-                priceConfidence != null
-                  ? `${priceConfidence}/100`
-                  : '—'
-              }
-            </strong>
+          <strong>
+  ${priceConfidenceDisplay}
+</strong>
           </div>
 
         </div>
