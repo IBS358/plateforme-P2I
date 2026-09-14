@@ -3239,6 +3239,40 @@ async function saveToDashboardWithOrigin(
 );
   }
 }
+function updateV2EquipmentPlanButtons(
+  machineKey,
+  selectedModelId
+) {
+
+  const buttons =
+    document.querySelectorAll(
+      `[data-machine-key="${machineKey}"]`
+    );
+
+  buttons.forEach(button => {
+
+    const buttonModelId =
+      button.dataset.modelId;
+
+    if (
+      buttonModelId === selectedModelId
+    ) {
+
+      button.disabled = true;
+
+      button.innerHTML =
+        '<i class="fas fa-check"></i> Modèle retenu';
+
+    } else {
+
+      button.disabled = false;
+
+      button.innerHTML =
+        '<i class="fas fa-plus-circle"></i> Ajouter au plan d\'équipement';
+    }
+
+  });
+}
    // ==========================================================
 // AJOUT / REMPLACEMENT D'UN MODÈLE V2
 // DANS LE PLAN D'ÉQUIPEMENT
