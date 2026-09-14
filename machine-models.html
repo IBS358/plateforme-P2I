@@ -3923,14 +3923,10 @@ async function addV2ModelToEquipmentPlan(
       );
 
 
-      if (btn) {
-
-        btn.disabled =
-          true;
-
-        btn.innerHTML =
-          '<i class="fas fa-check"></i> Déjà dans le plan';
-      }
+     updateV2EquipmentPlanButtons(
+  machineKey,
+  modelId
+);
 
 
       showToast(
@@ -4003,15 +3999,10 @@ async function addV2ModelToEquipmentPlan(
     );
 
 
-    if (btn) {
-
-      btn.disabled =
-        true;
-
-      btn.innerHTML =
-        '<i class="fas fa-check"></i> Modèle retenu';
-    }
-
+   updateV2EquipmentPlanButtons(
+  machineKey,
+  modelId
+);
 
     showToast(
       `✅ "${model.name}" remplace "${previousModel}" dans votre plan d'équipement`
