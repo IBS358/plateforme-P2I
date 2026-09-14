@@ -3800,15 +3800,10 @@ async function addV2ModelToEquipmentPlan(
       );
 
 
-      if (btn) {
-
-        btn.disabled =
-          true;
-
-        btn.innerHTML =
-          '<i class="fas fa-check"></i> Ajouté au plan';
-      }
-
+      updateV2EquipmentPlanButtons(
+  machineKey,
+  modelId
+);
 
       showToast(
         `✅ "${model.name}" ajouté à votre plan d'équipement`
