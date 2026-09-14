@@ -3291,6 +3291,175 @@ function updateV2EquipmentPlanButtons(
 
   });
 }
+    async function removeV2ModelFromEquipmentPlan(
+  machineKey,
+  modelId
+) {
+
+  console.log(
+    '🗑️ Retrait du plan d’équipement :',
+    machineKey,
+    modelId
+  );
+
+  try {
+
+    const {
+      data: { user },
+      error: userError
+    } =
+      await supabaseClient.auth.getUser();
+
+    if (userError || !user) {
+
+      console.error(
+        '❌ Utilisateur non connecté :',
+        userError
+      );
+
+      alert(
+        'Veuillez vous reconnecter.'
+      );
+
+      return;
+    }
+
+
+    const params =
+      getUrlParams();
+
+    const upId =
+      params.upId || '';
+
+
+    // ======================================================
+    // RECHERCHE DE LA LIGNE ACTIVE
+    // ======================================================
+
+    const {
+      data: rows,
+      error: searchError
+    } =
+      await supabaseClient
+        .from('saved_machines')
+        .select('id, data')
+        .eq(
+          'user_id',
+          user.id
+        );
+
+
+    if (searchError) {
+
+      console.error(
+        '❌ Erreur recherche saved_machines :',
+        searchError
+      );
+
+      alert(
+        'Impossible de retrouver le modèle sélectionné.'
+      );
+
+      return;
+    }
+
+
+    const row =
+      (rows || []).find(item => {
+
+        const d =
+          item.data || {};
+
+        return (
+          d.up_id === upId &&
+          d.machine_key === machineKey &&
+          d.model_id === modelId
+        );
+      });
+
+
+    if (!row) {
+
+      console.warn(
+        '⚠️ Aucun modèle correspondant trouvé.'
+      );
+
+      updateV2EquipmentPlanButtons(
+        machineKey,
+        null
+      );
+
+      return;
+    }
+
+
+    // ======================================================
+    // SUPPRESSION
+    // ======================================================
+
+    const {
+      error: deleteError
+    } =
+      await supabaseClient
+        .from('saved_machines')
+        .delete()
+        .eq(
+          'id',
+          row.id
+        )
+        .eq(
+          'user_id',
+          user.id
+        );
+
+
+    if (deleteError) {
+
+      console.error(
+        '❌ Erreur suppression :',
+        deleteError
+      );
+
+      alert(
+        'Erreur lors du retrait du modèle.'
+      );
+
+      return;
+    }
+
+
+    console.log(
+      '✅ Modèle retiré du plan.'
+    );
+
+
+    // ======================================================
+    // RETOUR À L'ÉTAT INITIAL
+    // ======================================================
+
+    updateV2EquipmentPlanButtons(
+      machineKey,
+      null
+    );
+
+
+    showToast(
+      '✅ Modèle retiré du plan d’équipement'
+    );
+
+
+  } catch (e) {
+
+    console.error(
+      '❌ Erreur removeV2ModelFromEquipmentPlan :',
+      e
+    );
+
+    alert(
+      'Erreur lors du retrait du modèle.'
+    );
+  }
+}
    // ==========================================================
 // AJOUT / REMPLACEMENT D'UN MODÈLE V2
 // DANS LE PLAN D'ÉQUIPEMENT
