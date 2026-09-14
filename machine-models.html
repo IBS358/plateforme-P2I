@@ -1687,6 +1687,7 @@ if (
     type="button"
     class="btn-sm btn-view-sm"
     data-model-id="${escapeHtml(model.model_id || '')}"
+    data-machine-key="${escapeHtml(params.machine_key || '')}"
     onclick="addV2ModelToEquipmentPlan(
       '${escapeHtml(params.machine_key || '')}',
       '${escapeHtml(model.model_id || '')}',
