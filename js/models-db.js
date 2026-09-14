@@ -1651,7 +1651,8 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
 
       name: "Vertical Dough Mixer 500 kg",
 
-      manufacturer: "Foshan Shunde Skywin Foodstuff Machinery Co., Ltd.",
+      manufacturer:
+        "Foshan Shunde Skywin Foodstuff Machinery Co., Ltd.",
 
       supplier_id: "SUP_SKYWIN_CN",
 
@@ -1744,15 +1745,24 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
       acquisition: {
         supply_mode: "standalone",
 
+        standalone_purchase_status: "confirmed",
+
         package_id: null,
+
+        package_name: null,
 
         can_be_integrated_in_line_package: true,
 
-        quantity_reference: 1
+        capex_double_counting_risk: false,
+
+        quantity_reference: 1,
+
+        note:
+          "Le mélangeur est documenté comme équipement commercial identifiable séparément. Il peut également être intégré dans une fourniture de ligne."
       },
 
       // ------------------------------------------------------
-      // PRIX DE RÉFÉRENCE
+      // PRIX FOURNISSEUR / PRIX DE RÉFÉRENCE DOCUMENTÉ
       // ------------------------------------------------------
       price_reference: {
         amount_min: 45000,
@@ -1792,6 +1802,36 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
 
         note:
           "Prix public documenté. L'incoterm exact et le périmètre commercial doivent être confirmés par offre fournisseur."
+      },
+
+      // ------------------------------------------------------
+      // RÉFÉRENCE BUDGÉTAIRE P2I
+      // ------------------------------------------------------
+      p2i_budget_reference: {
+        status: "documented_supplier_price",
+
+        amount_min: 45000,
+        amount_max: 48500,
+
+        currency: "USD",
+
+        source_model_id: "CN_SKYWIN_VDM_500",
+
+        methodology:
+          "Reprise du prix fournisseur public documenté comme référence budgétaire provisoire.",
+
+        confidence_score: 85,
+
+        usable_for_discovery_bp: true,
+
+        usable_for_p2i_estimation: true,
+
+        usable_for_initial_bp_pro: true,
+
+        usable_for_final_bankable_bp_pro: false,
+
+        note:
+          "Cette valeur constitue une référence budgétaire. Le BP Pro final nécessite un devis officiel fournisseur."
       },
 
       // ------------------------------------------------------
@@ -1935,18 +1975,30 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
         steam: false
       },
 
+      // ------------------------------------------------------
+      // MODE D'ACQUISITION
+      // ------------------------------------------------------
       acquisition: {
         supply_mode: "standalone",
 
+        standalone_purchase_status: "to_confirm",
+
         package_id: null,
+
+        package_name: null,
 
         can_be_integrated_in_line_package: true,
 
-        quantity_reference: 1
+        capex_double_counting_risk: false,
+
+        quantity_reference: 1,
+
+        note:
+          "La série ADM est identifiée comme équipement industriel. Les conditions exactes d'une fourniture séparée doivent être confirmées auprès du fabricant."
       },
 
       // ------------------------------------------------------
-      // AUCUN FAUX PRIX
+      // PRIX FOURNISSEUR — COTATION REQUISE
       // ------------------------------------------------------
       price_reference: {
         amount_min: null,
@@ -1964,7 +2016,8 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
 
         source_name: "ASAN ENG",
 
-        source_url: "https://asaneng.net/",
+        source_url:
+          "https://asaneng.net/",
 
         observed_at: "2026-09-12",
 
@@ -1978,6 +2031,38 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
           "Aucun prix public suffisamment fiable identifié. Une demande de cotation officielle est nécessaire."
       },
 
+      // ------------------------------------------------------
+      // RÉFÉRENCE BUDGÉTAIRE P2I
+      // ------------------------------------------------------
+      p2i_budget_reference: {
+        status: "unavailable",
+
+        amount_min: null,
+        amount_max: null,
+
+        currency: "USD",
+
+        source_model_id: null,
+
+        methodology: null,
+
+        confidence_score: null,
+
+        usable_for_discovery_bp: false,
+
+        usable_for_p2i_estimation: false,
+
+        usable_for_initial_bp_pro: false,
+
+        usable_for_final_bankable_bp_pro: false,
+
+        note:
+          "Aucune référence budgétaire P2I suffisamment documentée n'est encore établie pour cette configuration ASAN. Une cotation fournisseur ou une estimation P2I défendable est nécessaire."
+      },
+
+      // ------------------------------------------------------
+      // CONDITIONS COMMERCIALES P2I
+      // ------------------------------------------------------
       p2i_commercial_conditions: {
         status: "not_negotiated",
 
@@ -1992,6 +2077,9 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
         official_supplier_quote: false
       },
 
+      // ------------------------------------------------------
+      // ÉVALUATION P2I
+      // ------------------------------------------------------
       scores: {
         supplier_score: {
           value: 91,
@@ -2009,6 +2097,9 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
         }
       },
 
+      // ------------------------------------------------------
+      // PREUVES
+      // ------------------------------------------------------
       evidence: {
         manufacturer_confirmed: true,
 
@@ -2022,7 +2113,8 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
 
         last_reviewed_at: "2026-09-12",
 
-        validation_status: "manufacturer_confirmed_price_pending"
+        validation_status:
+          "manufacturer_confirmed_price_pending"
       }
     },
 
@@ -2042,7 +2134,8 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
 
       supplier_id: "SUP_WP_GERMANY",
 
-      supplier: "WP Industrial Bakery Technologies",
+      supplier:
+        "WP Industrial Bakery Technologies",
 
       supplier_country: "Germany",
 
@@ -2075,7 +2168,8 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
 
         verified_throughput_kg_h: null,
 
-        capacity_basis: "manufacturer_line_documentation",
+        capacity_basis:
+          "manufacturer_line_documentation",
 
         compatibility_status: "to_confirm",
 
@@ -2110,16 +2204,32 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
         steam: false
       },
 
+      // ------------------------------------------------------
+      // MODE D'ACQUISITION
+      // ------------------------------------------------------
       acquisition: {
-        supply_mode: "integrated_or_standalone",
+        supply_mode: "standalone_or_integrated",
+
+        standalone_purchase_status: "to_confirm",
 
         package_id: null,
 
+        package_name:
+          "WP biscuit processing line",
+
         can_be_integrated_in_line_package: true,
 
-        quantity_reference: 1
+        capex_double_counting_risk: true,
+
+        quantity_reference: 1,
+
+        note:
+          "Le mélangeur est documenté dans l'environnement des lignes industrielles WP. La disponibilité et le périmètre d'une fourniture séparée doivent être confirmés par le fabricant."
       },
 
+      // ------------------------------------------------------
+      // PRIX FOURNISSEUR — COTATION REQUISE
+      // ------------------------------------------------------
       price_reference: {
         amount_min: null,
         amount_max: null,
@@ -2134,7 +2244,8 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
 
         source_type: "manufacturer",
 
-        source_name: "WP Industrial Bakery Technologies",
+        source_name:
+          "WP Industrial Bakery Technologies",
 
         source_url:
           "https://www.wpib.de/en/world-of-products/dry-baked-goods/hard-biscuit-lines.html",
@@ -2151,6 +2262,38 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
           "Aucun prix public retenu. Le fabricant doit dimensionner la solution et établir une offre adaptée au débit P2I."
       },
 
+      // ------------------------------------------------------
+      // RÉFÉRENCE BUDGÉTAIRE P2I
+      // ------------------------------------------------------
+      p2i_budget_reference: {
+        status: "unavailable",
+
+        amount_min: null,
+        amount_max: null,
+
+        currency: "EUR",
+
+        source_model_id: null,
+
+        methodology: null,
+
+        confidence_score: null,
+
+        usable_for_discovery_bp: false,
+
+        usable_for_p2i_estimation: false,
+
+        usable_for_initial_bp_pro: false,
+
+        usable_for_final_bankable_bp_pro: false,
+
+        note:
+          "Aucune référence budgétaire P2I suffisamment documentée n'est encore établie pour cette solution WP. Le dimensionnement et le prix doivent être confirmés par une offre fabricant."
+      },
+
+      // ------------------------------------------------------
+      // CONDITIONS COMMERCIALES P2I
+      // ------------------------------------------------------
       p2i_commercial_conditions: {
         status: "not_negotiated",
 
@@ -2165,6 +2308,9 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
         official_supplier_quote: false
       },
 
+      // ------------------------------------------------------
+      // ÉVALUATION P2I
+      // ------------------------------------------------------
       scores: {
         supplier_score: {
           value: 95,
@@ -2182,6 +2328,9 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
         }
       },
 
+      // ------------------------------------------------------
+      // PREUVES
+      // ------------------------------------------------------
       evidence: {
         manufacturer_confirmed: true,
 
@@ -2195,7 +2344,8 @@ window.P2I_MODELS_DB_V2["melangeur_biscuiterie"] = {
 
         last_reviewed_at: "2026-09-12",
 
-        validation_status: "manufacturer_confirmed_configuration_pending"
+        validation_status:
+          "manufacturer_confirmed_configuration_pending"
       }
     }
 
