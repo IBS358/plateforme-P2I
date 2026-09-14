@@ -3256,13 +3256,21 @@ function updateV2EquipmentPlanButtons(
       button.dataset.modelId;
 
     if (
+      selectedModelId &&
       buttonModelId === selectedModelId
     ) {
 
-      button.disabled = true;
+      button.disabled = false;
 
       button.innerHTML =
-        '<i class="fas fa-check"></i> Modèle retenu';
+        '<i class="fas fa-times-circle"></i> Retirer du plan';
+
+      button.onclick = function () {
+        removeV2ModelFromEquipmentPlan(
+          machineKey,
+          buttonModelId
+        );
+      };
 
     } else {
 
@@ -3270,6 +3278,15 @@ function updateV2EquipmentPlanButtons(
 
       button.innerHTML =
         '<i class="fas fa-plus-circle"></i> Ajouter au plan d\'équipement';
+
+      button.onclick = function () {
+        addV2ModelToEquipmentPlan(
+          machineKey,
+          buttonModelId,
+          button
+        );
+      };
+
     }
 
   });
