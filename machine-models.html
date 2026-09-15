@@ -1299,7 +1299,10 @@ if (
   const modelsV2 =
     machineV2.models || [];
 
-  // Informations générales de la machine
+  // ========================================================
+  // INFORMATIONS GÉNÉRALES DE LA MACHINE
+  // ========================================================
+
   document.getElementById('machineName').innerHTML =
     `<i class="fas fa-industry"></i> ${
       escapeHtml(
@@ -1372,8 +1375,17 @@ if (
 
   modelsV2.forEach(model => {
 
+    // ======================================================
+    // ORIGINE
+    // ======================================================
+
     const origin =
       model.origin || 'chinese';
+
+
+    // ======================================================
+    // PRIX FOURNISSEUR
+    // ======================================================
 
     const price =
       model.price_reference || {};
@@ -1416,32 +1428,42 @@ if (
         ).toLocaleString()} ${price.currency || 'USD'}`;
     }
 
+
+    // ======================================================
+    // SCORES P2I
+    // ======================================================
+
     const supplierScore =
-  model.scores
-    ?.supplier_score
-    ?.value;
+      model.scores
+        ?.supplier_score
+        ?.value;
 
-const technicalScore =
-  model.scores
-    ?.technical_score
-    ?.value;
+    const technicalScore =
+      model.scores
+        ?.technical_score
+        ?.value;
 
-const priceConfidenceValue =
-  model.scores
-    ?.price_confidence_score
-    ?.value;
+    const priceConfidenceValue =
+      model.scores
+        ?.price_confidence_score
+        ?.value;
 
-const priceConfidenceStatus =
-  model.scores
-    ?.price_confidence_score
-    ?.status || "";
+    const priceConfidenceStatus =
+      model.scores
+        ?.price_confidence_score
+        ?.status || "";
 
-const priceConfidenceDisplay =
-  priceConfidenceStatus === "rfq_required" ||
-  priceConfidenceValue === null ||
-  priceConfidenceValue === undefined
-    ? "—"
-    : `${priceConfidenceValue}/100`;
+    const priceConfidenceDisplay =
+      priceConfidenceStatus === "rfq_required" ||
+      priceConfidenceValue === null ||
+      priceConfidenceValue === undefined
+        ? "—"
+        : `${priceConfidenceValue}/100`;
+
+
+    // ======================================================
+    // CAPACITÉ
+    // ======================================================
 
     const capacity =
       model.capacity || {};
@@ -1474,12 +1496,198 @@ const priceConfidenceDisplay =
         `${capacity.batch_capacity_kg_min}–${capacity.batch_capacity_kg_max} kg/batch`;
     }
 
+
+    // ======================================================
+    // STATUT DU PRIX FOURNISSEUR
+    // ======================================================
+
     const priceStatus =
       price.status === 'documented'
         ? '🟢 Prix documenté'
         : price.status === 'rfq_required'
         ? '🟠 Cotation fournisseur requise'
         : '⚪ Prix à confirmer';
+
+
+    // ======================================================
+    // MODE D'ACQUISITION
+    // ======================================================
+
+    const acquisition =
+      model.acquisition || {};
+
+    let acquisitionText =
+      '⚪ Mode d’acquisition à confirmer';
+
+    let acquisitionColor =
+      '#94a3b8';
+
+    if (
+      acquisition.supply_mode === 'standalone' &&
+      acquisition.standalone_purchase_status === 'confirmed'
+    ) {
+
+      acquisitionText =
+        '✅ Disponible séparément';
+
+      acquisitionColor =
+        '#22c55e';
+
+    } else if (
+      acquisition.supply_mode === 'integrated_package' ||
+      acquisition.standalone_purchase_status === 'not_available'
+    ) {
+
+      acquisitionText =
+        '🔗 Fourni dans un ensemble intégré';
+
+      acquisitionColor =
+        '#f59e0b';
+
+    } else if (
+      acquisition.standalone_purchase_status === 'to_confirm'
+    ) {
+
+      acquisitionText =
+        '🟡 Vente séparée à confirmer';
+
+      acquisitionColor =
+        '#fbbf24';
+    }
+
+
+    // ======================================================
+    // RÉFÉRENCE BUDGÉTAIRE P2I
+    // ======================================================
+
+    const budgetReference =
+      model.p2i_budget_reference || {};
+
+    let budgetReferenceText =
+      '⚪ Non disponible actuellement';
+
+    let budgetReferenceColor =
+      '#94a3b8';
+
+    if (
+      budgetReference.amount_min != null &&
+      budgetReference.amount_max != null
+    ) {
+
+      if (
+        budgetReference.amount_min ===
+        budgetReference.amount_max
+      ) {
+
+        budgetReferenceText =
+          `✅ ${Number(
+            budgetReference.amount_min
+          ).toLocaleString()} ${
+            budgetReference.currency || 'USD'
+          }`;
+
+      } else {
+
+        budgetReferenceText =
+          `✅ ${Number(
+            budgetReference.amount_min
+          ).toLocaleString()} – ${Number(
+            budgetReference.amount_max
+          ).toLocaleString()} ${
+            budgetReference.currency || 'USD'
+          }`;
+      }
+
+      budgetReferenceColor =
+        '#22c55e';
+
+    } else if (
+      budgetReference.amount_min != null
+    ) {
+
+      budgetReferenceText =
+        `✅ À partir de ${Number(
+          budgetReference.amount_min
+        ).toLocaleString()} ${
+          budgetReference.currency || 'USD'
+        }`;
+
+      budgetReferenceColor =
+        '#22c55e';
+    }
+
+
+    // ======================================================
+    // AVERTISSEMENT PACKAGE / DOUBLE COMPTAGE
+    // ======================================================
+
+    let packageWarningHtml = '';
+
+    if (
+      acquisition.supply_mode === 'integrated_package'
+    ) {
+
+      packageWarningHtml = `
+        <div
+          style="
+            margin-top:8px;
+            padding:8px 10px;
+            background:rgba(245,158,11,0.08);
+            border:1px solid rgba(245,158,11,0.25);
+            border-radius:8px;
+            color:#fbbf24;
+            font-size:0.72rem;
+          "
+        >
+          <strong>
+            <i class="fas fa-link"></i>
+            Ensemble intégré
+          </strong>
+
+          <div style="margin-top:4px;color:#cbd5e1;">
+            ${
+              escapeHtml(
+                acquisition.package_name ||
+                'Cet équipement fait partie d’un ensemble commercial.'
+              )
+            }
+          </div>
+        </div>
+      `;
+
+    } else if (
+      acquisition.capex_double_counting_risk === true
+    ) {
+
+      packageWarningHtml = `
+        <div
+          style="
+            margin-top:8px;
+            padding:8px 10px;
+            background:rgba(245,158,11,0.08);
+            border:1px solid rgba(245,158,11,0.25);
+            border-radius:8px;
+            color:#fbbf24;
+            font-size:0.72rem;
+          "
+        >
+          <strong>
+            <i class="fas fa-exclamation-triangle"></i>
+            Intégration dans une ligne possible
+          </strong>
+
+          <div style="margin-top:4px;color:#cbd5e1;">
+            Vérifier le périmètre commercial afin d’éviter
+            un double comptage du CAPEX.
+          </div>
+        </div>
+      `;
+    }
+
+
+    // ======================================================
+    // CARTE DU MODÈLE
+    // ======================================================
 
     html += `
       <div
@@ -1544,6 +1752,8 @@ const priceConfidenceDisplay =
         </div>
 
 
+        <!-- PRIX FOURNISSEUR -->
+
         <div
           style="
             font-size:1.25rem;
@@ -1565,6 +1775,8 @@ const priceConfidenceDisplay =
           ${priceStatus}
         </div>
 
+
+        <!-- INFORMATIONS FOURNISSEUR -->
 
         <div
           style="
@@ -1593,6 +1805,64 @@ const priceConfidenceDisplay =
 
         </div>
 
+
+        <!-- MODE D'ACQUISITION + RÉFÉRENCE BUDGÉTAIRE -->
+
+        <div
+          style="
+            background:rgba(76,201,240,0.05);
+            padding:10px;
+            border-radius:10px;
+            border:1px solid rgba(76,201,240,0.12);
+            font-size:0.78rem;
+            margin-bottom:12px;
+          "
+        >
+
+          <div style="margin-bottom:8px;">
+
+            <strong>
+              Mode d'acquisition :
+            </strong>
+
+            <div
+              style="
+                margin-top:3px;
+                color:${acquisitionColor};
+                font-weight:600;
+              "
+            >
+              ${acquisitionText}
+            </div>
+
+          </div>
+
+
+          <div>
+
+            <strong>
+              Référence budgétaire P2I :
+            </strong>
+
+            <div
+              style="
+                margin-top:3px;
+                color:${budgetReferenceColor};
+                font-weight:600;
+              "
+            >
+              ${budgetReferenceText}
+            </div>
+
+          </div>
+
+        </div>
+
+
+        ${packageWarningHtml}
+
+
+        <!-- SCORES -->
 
         <div
           style="
@@ -1659,13 +1929,16 @@ const priceConfidenceDisplay =
             Prix
             <br>
 
-          <strong>
-  ${priceConfidenceDisplay}
-</strong>
+            <strong>
+              ${priceConfidenceDisplay}
+            </strong>
+
           </div>
 
         </div>
 
+
+        <!-- NOTE TECHNIQUE -->
 
         <div
           style="
@@ -1682,31 +1955,35 @@ const priceConfidenceDisplay =
             )
           }
         </div>
+
+
+        <!-- ACTION -->
+
         <div
-  style="
-    margin-top:16px;
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-  "
->
+          style="
+            margin-top:16px;
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
+          "
+        >
 
-  <button
-    type="button"
-    class="btn-sm btn-view-sm"
-    data-model-id="${escapeHtml(model.model_id || '')}"
-    data-machine-key="${escapeHtml(params.machine_key || '')}"
-    onclick="addV2ModelToEquipmentPlan(
-      '${escapeHtml(params.machine_key || '')}',
-      '${escapeHtml(model.model_id || '')}',
-      this
-    )"
-  >
-    <i class="fas fa-plus-circle"></i>
-    Ajouter au plan d'équipement
-  </button>
+          <button
+            type="button"
+            class="btn-sm btn-view-sm"
+            data-model-id="${escapeHtml(model.model_id || '')}"
+            data-machine-key="${escapeHtml(params.machine_key || '')}"
+            onclick="addV2ModelToEquipmentPlan(
+              '${escapeHtml(params.machine_key || '')}',
+              '${escapeHtml(model.model_id || '')}',
+              this
+            )"
+          >
+            <i class="fas fa-plus-circle"></i>
+            Ajouter au plan d'équipement
+          </button>
 
-</div>
+        </div>
 
       </div>
     `;
