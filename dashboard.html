@@ -2458,9 +2458,13 @@ function buildEquipmentPlanForUp(up) {
   // ----------------------------------------------------
 
   const upReference =
-    window.MACHINES_DATA?.[up.id] ||
-    window.MACHINES_DATA?.[String(up.id)] ||
-    null;
+  typeof MACHINES_DATA !== 'undefined' && up.id
+    ? (
+        MACHINES_DATA[up.id] ||
+        MACHINES_DATA[String(up.id)] ||
+        null
+      )
+    : null;
 
   let requiredMachines = [];
 
