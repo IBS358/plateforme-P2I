@@ -1987,9 +1987,23 @@ if (
 
       </div>
     `;
-  });
+    });
+
+  // ==========================================================
+  // AFFICHAGE DES CARTES V2
+  // ==========================================================
 
   grid.innerHTML = html;
+
+
+  // ==========================================================
+  // RESTAURATION DU MODÈLE DÉJÀ RETENU DANS LE PLAN
+  // ==========================================================
+
+  await restoreV2EquipmentPlanSelection(
+    params.machine_key
+  );
+
 
   return;
 }
