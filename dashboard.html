@@ -2675,6 +2675,14 @@ function buildEquipmentPlanForUp(up) {
     `;
 
     Object.values(projet.ups).forEach(up => {
+      const equipmentPlan =
+  buildEquipmentPlanForUp(up);
+
+console.log(
+  '📋 PLAN FINAL POUR :',
+  up.nom,
+  equipmentPlan
+);
 
       html += `
 
