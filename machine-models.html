@@ -4100,31 +4100,72 @@ const budgetReference =
 
 
       // ----------------------------------------------------
-      // MODE D'ACQUISITION
+// MODE D'ACQUISITION
+// ----------------------------------------------------
+
+supply_mode:
+  acquisition.supply_mode ||
+  'standalone',
+
+standalone_purchase_status:
+  acquisition.standalone_purchase_status ||
+  'to_confirm',
+
+package_id:
+  acquisition.package_id ||
+  null,
+
+package_name:
+  acquisition.package_name ||
+  acquisition.likely_package ||
+  null,
+
+likely_package:
+  acquisition.likely_package ||
+  null,
+
+can_be_integrated_in_line_package:
+  acquisition
+    .can_be_integrated_in_line_package ??
+  false,
+
+capex_double_counting_risk:
+  acquisition
+    .capex_double_counting_risk ??
+  false,
+      
       // ----------------------------------------------------
+// RÉFÉRENCE BUDGÉTAIRE P2I
+// ----------------------------------------------------
 
-      supply_mode:
-        acquisition.supply_mode ||
-        'standalone',
+p2i_budget_status:
+  budgetReference.status ||
+  (
+    budgetReference.amount_min != null ||
+    budgetReference.amount_max != null
+      ? 'available'
+      : 'not_available'
+  ),
 
-      package_id:
-        acquisition.package_id ||
-        null,
+p2i_budget_min:
+  budgetReference.amount_min ??
+  null,
 
-      likely_package:
-        acquisition.likely_package ||
-        null,
+p2i_budget_max:
+  budgetReference.amount_max ??
+  null,
 
-      can_be_integrated_in_line_package:
-        acquisition
-          .can_be_integrated_in_line_package ??
-        false,
+p2i_budget_currency:
+  budgetReference.currency ||
+  'USD',
 
-      capex_double_counting_risk:
-        acquisition
-          .capex_double_counting_risk ??
-        false,
+p2i_budget_methodology:
+  budgetReference.methodology ||
+  null,
 
+p2i_budget_confidence_score:
+  budgetReference.confidence_score ??
+  null,
 
       // ----------------------------------------------------
       // PLAN D'ÉQUIPEMENT
