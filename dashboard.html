@@ -2454,41 +2454,146 @@ function buildEquipmentPlanForUp(up) {
       : [];
 
   // ----------------------------------------------------
-  // 2. Référentiel des machines nécessaires à l'UP
-  // ----------------------------------------------------
+// 2. PLAN D'ÉQUIPEMENT ACTIF DE L'UP
+// ----------------------------------------------------
 
-  const upReference =
-  typeof MACHINES_DATA !== 'undefined' && up.id
-    ? (
-        MACHINES_DATA[up.id] ||
-        MACHINES_DATA[String(up.id)] ||
-        null
-      )
-    : null;
+let activeEquipmentPlan = null;
 
-  let requiredMachines = [];
+try {
 
-  if (Array.isArray(upReference)) {
+  const storedPlan =
+    sessionStorage.getItem(
+      `p2i_equipment_plan_${up.id}`
+    );
 
-    requiredMachines = upReference;
+  if (storedPlan) {
 
-  } else if (
-    upReference &&
-    Array.isArray(upReference.machines)
-  ) {
+    activeEquipmentPlan =
+      JSON.parse(storedPlan);
 
-    requiredMachines = upReference.machines;
   }
 
-  console.log(
-    '🏭 Plan équipement UP :',
+} catch (e) {
+
+  console.warn(
+    '⚠️ Impossible de lire le plan actif de l’UP :',
     up.id,
-    {
-      required: requiredMachines.length,
-      saved: savedMachines.length,
-      reference: upReference
-    }
+    e
   );
+
+}
+
+
+// ----------------------------------------------------
+// 3. RÉFÉRENTIEL HISTORIQUE MACHINES_DATA
+//    utilisé comme solution de secours
+// ----------------------------------------------------
+
+const upReference =
+  window.MACHINES_DATA?.[up.id] ||
+  window.MACHINES_DATA?.[String(up.id)] ||
+  null;
+
+
+// ----------------------------------------------------
+// 4. DÉTERMINATION DES MACHINES NÉCESSAIRES
+// ----------------------------------------------------
+
+let requiredMachines = [];
+
+let equipmentPlanSource =
+  'none';
+
+
+// PRIORITÉ 1 : plan dynamique réellement configuré
+if (
+  activeEquipmentPlan &&
+  Array.isArray(activeEquipmentPlan.machines) &&
+  activeEquipmentPlan.machines.length > 0
+) {
+
+  requiredMachines =
+    activeEquipmentPlan.machines.map(machine => ({
+
+      machine_key:
+        machine.machine_key || '',
+
+      name:
+        machine.machine_name ||
+        machine.name ||
+        'Machine',
+
+      role:
+        machine.role || '',
+
+      capacity:
+        machine.capacity || '',
+
+      utilities:
+        machine.utilities || '',
+
+      price:
+        machine.price ?? null,
+
+      source:
+        machine.source ||
+        'configured_plan'
+
+    }));
+
+  equipmentPlanSource =
+    'active_configuration';
+
+}
+
+
+// PRIORITÉ 2 : ancien référentiel MACHINES_DATA
+else if (Array.isArray(upReference)) {
+
+  requiredMachines =
+    upReference;
+
+  equipmentPlanSource =
+    'machines_data';
+
+}
+
+else if (
+  upReference &&
+  Array.isArray(upReference.machines)
+) {
+
+  requiredMachines =
+    upReference.machines;
+
+  equipmentPlanSource =
+    'machines_data';
+
+}
+
+
+// ----------------------------------------------------
+// 5. CONTRÔLE CONSOLE
+// ----------------------------------------------------
+
+console.log(
+  '🏭 PLAN ACTIF DASHBOARD :',
+  up.id,
+  {
+    configuration:
+      activeEquipmentPlan?.configuration_id ||
+      null,
+
+    source:
+      equipmentPlanSource,
+
+    required:
+      requiredMachines.length,
+
+    saved:
+      savedMachines.length
+  }
+);
 
   // ----------------------------------------------------
   // 3. Si aucun référentiel n'est trouvé
