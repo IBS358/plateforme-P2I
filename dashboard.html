@@ -2437,6 +2437,199 @@ console.log('🔎 TEST PRODUCTION_DATA :', typeof PRODUCTION_DATA);
   '🔎 TEST UP DANS MACHINES_DATA :',
   MACHINES_DATA['conserverie_legumes']
 );
+  // ======================================================
+// CONSTRUCTION DU PLAN D'ÉQUIPEMENT D'UNE UP
+// ======================================================
+
+function buildEquipmentPlanForUp(up) {
+
+  // ----------------------------------------------------
+  // 1. Machines déjà sélectionnées par l'utilisateur
+  // ----------------------------------------------------
+
+  const savedMachines =
+    Array.isArray(up.machines)
+      ? up.machines
+      : [];
+
+  // ----------------------------------------------------
+  // 2. Référentiel des machines nécessaires à l'UP
+  // ----------------------------------------------------
+
+  const upReference =
+    window.MACHINES_DATA?.[up.id] ||
+    window.MACHINES_DATA?.[String(up.id)] ||
+    null;
+
+  let requiredMachines = [];
+
+  if (Array.isArray(upReference)) {
+
+    requiredMachines = upReference;
+
+  } else if (
+    upReference &&
+    Array.isArray(upReference.machines)
+  ) {
+
+    requiredMachines = upReference.machines;
+  }
+
+  console.log(
+    '🏭 Plan équipement UP :',
+    up.id,
+    {
+      required: requiredMachines.length,
+      saved: savedMachines.length,
+      reference: upReference
+    }
+  );
+
+  // ----------------------------------------------------
+  // 3. Si aucun référentiel n'est trouvé
+  // ----------------------------------------------------
+  // On conserve les machines sauvegardées afin de ne
+  // jamais faire disparaître les données utilisateur.
+  // ----------------------------------------------------
+
+  if (!requiredMachines.length) {
+
+    return savedMachines.map(saved => {
+
+      const data =
+        saved.data || {};
+
+      return {
+        machine_key:
+          data.machine_key ||
+          data.machine_ref ||
+          data.model_id ||
+          saved.id,
+
+        machine_name:
+          data.machine ||
+          data.machine_name ||
+          data.model ||
+          'Machine',
+
+        role:
+          data.machine_role ||
+          data.role ||
+          '',
+
+        capacity:
+          data.machine_capacity ||
+          data.capacity ||
+          '',
+
+        utilities:
+          data.machine_utilities ||
+          data.utilities ||
+          '',
+
+        required: true,
+
+        coverage_status:
+          'selected',
+
+        saved_machine:
+          saved
+      };
+    });
+  }
+
+  // ----------------------------------------------------
+  // 4. Fusion :
+  // machine nécessaire + choix utilisateur éventuel
+  // ----------------------------------------------------
+
+  return requiredMachines.map(required => {
+
+    const requiredKey =
+      required.machine_key ||
+      required.machine_ref ||
+      required.id ||
+      '';
+
+    const requiredName =
+      required.name ||
+      required.machine_name ||
+      required.machine ||
+      'Machine';
+
+    const selected =
+      savedMachines.find(saved => {
+
+        const data =
+          saved.data || {};
+
+        const savedKey =
+          data.machine_key ||
+          data.machine_ref ||
+          '';
+
+        // Priorité absolue à machine_key
+        if (
+          requiredKey &&
+          savedKey &&
+          requiredKey === savedKey
+        ) {
+          return true;
+        }
+
+        // Compatibilité temporaire avec les anciennes données
+        const savedName =
+          data.machine ||
+          data.machine_name ||
+          '';
+
+        return (
+          requiredName &&
+          savedName &&
+          requiredName
+            .trim()
+            .toLowerCase() ===
+          savedName
+            .trim()
+            .toLowerCase()
+        );
+      }) || null;
+
+    return {
+
+      machine_key:
+        requiredKey,
+
+      machine_name:
+        requiredName,
+
+      role:
+        required.role ||
+        required.machine_role ||
+        '',
+
+      capacity:
+        required.capacity ||
+        required.machine_capacity ||
+        '',
+
+      utilities:
+        required.utilities ||
+        required.machine_utilities ||
+        '',
+
+      required: true,
+
+      coverage_status:
+        selected
+          ? 'selected'
+          : 'undefined',
+
+      saved_machine:
+        selected
+    };
+  });
+}
 
   // ----------------------------------------------
   // Affichage
