@@ -2741,333 +2741,780 @@ console.log(
   });
 }
 
-  // ----------------------------------------------
-  // Affichage
-  // ----------------------------------------------
+ // ----------------------------------------------
+// AFFICHAGE DU PLAN D'ÉQUIPEMENT
+// ----------------------------------------------
 
-  let html = '';
+let html = '';
 
-  Object.values(projets).forEach(projet => {
+Object.values(projets).forEach(projet => {
 
-    html += `
+  html += `
+    <div style="
+      margin-bottom:32px;
+      border:1px solid rgba(76,201,240,0.18);
+      border-radius:18px;
+      overflow:hidden;
+      background:#0f1f33;
+      box-shadow:0 10px 30px rgba(0,0,0,0.16);
+    ">
+
+      <!-- FILIÈRE -->
       <div style="
-        margin-bottom:30px;
-        border:1px solid #e2e8f0;
-        border-radius:14px;
-        overflow:hidden;
-        background:#fff;
+        padding:16px 22px;
+        background:linear-gradient(
+          135deg,
+          rgba(37,99,235,0.22),
+          rgba(76,201,240,0.08)
+        );
+        border-bottom:1px solid rgba(76,201,240,0.15);
       ">
 
-        <!-- FILIÈRE -->
         <div style="
-          padding:18px 22px;
-          background:#f8fafc;
-          border-bottom:1px solid #e2e8f0;
+          font-size:11px;
+          color:#94a3b8;
+          text-transform:uppercase;
+          letter-spacing:1px;
+          margin-bottom:5px;
         ">
-
-          <h3 style="
-            margin:0;
-            color:#1e293b;
-            font-size:19px;
-          ">
-
-            <i class="fas fa-industry"
-               style="margin-right:8px;">
-            </i>
-
-            ${escapeHtml(projet.nom)}
-
-          </h3>
-
+          Filière
         </div>
 
-        <div style="padding:20px;">
-    `;
+        <h3 style="
+          margin:0;
+          color:#f8fafc;
+          font-size:19px;
+        ">
+          <i
+            class="fas fa-industry"
+            style="margin-right:8px;color:#4cc9f0;"
+          ></i>
 
-    Object.values(projet.ups).forEach(up => {
-      const equipmentPlan =
-  buildEquipmentPlanForUp(up);
+          ${escapeHtml(projet.nom)}
+        </h3>
 
-console.log(
-  '📋 PLAN FINAL POUR :',
-  up.nom,
-  equipmentPlan
-);
+      </div>
 
-      html += `
+      <div style="padding:20px;">
+  `;
 
-        <!-- UP -->
+
+  Object.values(projet.ups).forEach(up => {
+
+    // ==================================================
+    // PLAN TECHNIQUE COMPLET DE L'UP
+    // ==================================================
+
+    const equipmentPlan =
+      buildEquipmentPlanForUp(up);
+
+    console.log(
+      '📋 PLAN FINAL POUR :',
+      up.nom,
+      equipmentPlan
+    );
+
+
+    // ==================================================
+    // STATISTIQUES DU PLAN
+    // ==================================================
+
+    const totalMachines =
+      equipmentPlan.length;
+
+    const machinesRenseignees =
+      equipmentPlan.filter(item => {
+
+        return !!(
+          item.saved ||
+          item.selected ||
+          item.data ||
+          item.savedMachine
+        );
+
+      }).length;
+
+    const machinesATraiter =
+      Math.max(
+        0,
+        totalMachines - machinesRenseignees
+      );
+
+    const progress =
+      totalMachines > 0
+        ? Math.round(
+            (machinesRenseignees / totalMachines) * 100
+          )
+        : 0;
+
+
+    // ==================================================
+    // EN-TÊTE DE L'UP
+    // ==================================================
+
+    html += `
+
+      <div style="
+        margin-bottom:28px;
+        border:1px solid rgba(76,201,240,0.22);
+        border-radius:16px;
+        overflow:hidden;
+        background:rgba(255,255,255,0.025);
+      ">
+
         <div style="
-          margin-bottom:25px;
-          border-left:4px solid #2563eb;
-          padding-left:18px;
+          padding:20px;
+          background:linear-gradient(
+            135deg,
+            rgba(37,99,235,0.28),
+            rgba(14,165,233,0.08)
+          );
+          border-bottom:1px solid rgba(76,201,240,0.16);
         ">
 
           <div style="
             display:flex;
             justify-content:space-between;
-            align-items:center;
-            margin-bottom:15px;
-            gap:10px;
+            align-items:flex-start;
+            gap:15px;
             flex-wrap:wrap;
           ">
 
-            <h4 style="
-              margin:0;
-              color:#334155;
-              font-size:17px;
-            ">
+            <div>
 
-              <i class="fas fa-cogs"
-                 style="margin-right:7px;">
-              </i>
+              <div style="
+                color:#4cc9f0;
+                font-size:11px;
+                text-transform:uppercase;
+                letter-spacing:1px;
+                margin-bottom:6px;
+                font-weight:700;
+              ">
+                Unité de production
+              </div>
 
-              ${escapeHtml(up.nom)}
+              <h4 style="
+                margin:0;
+                color:#ffffff;
+                font-size:20px;
+              ">
+                <i
+                  class="fas fa-cogs"
+                  style="margin-right:8px;color:#4cc9f0;"
+                ></i>
 
-            </h4>
+                ${escapeHtml(up.nom)}
+              </h4>
 
-            <span style="
-              background:#eff6ff;
-              color:#2563eb;
-              padding:5px 10px;
+            </div>
+
+
+            <div style="
+              background:rgba(76,201,240,0.12);
+              border:1px solid rgba(76,201,240,0.25);
+              color:#7dd3fc;
+              padding:7px 12px;
               border-radius:20px;
               font-size:12px;
-              font-weight:600;
+              font-weight:700;
+            ">
+              ${totalMachines}
+              machine${totalMachines > 1 ? 's' : ''}
+              nécessaires
+            </div>
+
+          </div>
+
+
+          <!-- INDICATEURS -->
+
+          <div style="
+            display:grid;
+            grid-template-columns:
+              repeat(auto-fit,minmax(130px,1fr));
+            gap:10px;
+            margin-top:18px;
+          ">
+
+            <div style="
+              padding:12px;
+              border-radius:10px;
+              background:rgba(15,23,42,0.45);
+              border:1px solid rgba(148,163,184,0.12);
             ">
 
-              ${up.machines.length}
-              machine${up.machines.length > 1 ? 's' : ''}
+              <div style="
+                color:#94a3b8;
+                font-size:11px;
+              ">
+                Plan technique
+              </div>
 
+              <div style="
+                color:#ffffff;
+                font-size:20px;
+                font-weight:700;
+                margin-top:3px;
+              ">
+                ${totalMachines}
+              </div>
+
+            </div>
+
+
+            <div style="
+              padding:12px;
+              border-radius:10px;
+              background:rgba(34,197,94,0.08);
+              border:1px solid rgba(34,197,94,0.18);
+            ">
+
+              <div style="
+                color:#86efac;
+                font-size:11px;
+              ">
+                Renseignées
+              </div>
+
+              <div style="
+                color:#22c55e;
+                font-size:20px;
+                font-weight:700;
+                margin-top:3px;
+              ">
+                ${machinesRenseignees}
+              </div>
+
+            </div>
+
+
+            <div style="
+              padding:12px;
+              border-radius:10px;
+              background:rgba(245,158,11,0.08);
+              border:1px solid rgba(245,158,11,0.18);
+            ">
+
+              <div style="
+                color:#fcd34d;
+                font-size:11px;
+              ">
+                À traiter
+              </div>
+
+              <div style="
+                color:#f59e0b;
+                font-size:20px;
+                font-weight:700;
+                margin-top:3px;
+              ">
+                ${machinesATraiter}
+              </div>
+
+            </div>
+
+
+            <div style="
+              padding:12px;
+              border-radius:10px;
+              background:rgba(76,201,240,0.07);
+              border:1px solid rgba(76,201,240,0.18);
+            ">
+
+              <div style="
+                color:#7dd3fc;
+                font-size:11px;
+              ">
+                Avancement
+              </div>
+
+              <div style="
+                color:#4cc9f0;
+                font-size:20px;
+                font-weight:700;
+                margin-top:3px;
+              ">
+                ${progress} %
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- BARRE DE PROGRESSION -->
+
+          <div style="
+            height:6px;
+            background:rgba(255,255,255,0.08);
+            border-radius:10px;
+            overflow:hidden;
+            margin-top:15px;
+          ">
+
+            <div style="
+              width:${progress}%;
+              height:100%;
+              background:#4cc9f0;
+              border-radius:10px;
+            ">
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- LISTE DU PLAN -->
+
+        <div style="padding:18px;">
+
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:10px;
+            flex-wrap:wrap;
+            margin-bottom:14px;
+          ">
+
+            <strong style="
+              color:#f8fafc;
+              font-size:14px;
+            ">
+              Plan d'équipement
+            </strong>
+
+            <span style="
+              color:#94a3b8;
+              font-size:12px;
+            ">
+              ${machinesRenseignees} / ${totalMachines}
+              renseignées
             </span>
 
           </div>
 
           <div style="
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-            gap:15px;
+            gap:10px;
           ">
-      `;
+    `;
 
-      up.machines.forEach(machine => {
 
-        const data = machine.data || {};
+    // ==================================================
+    // LES MACHINES DU PLAN
+    // ==================================================
 
-        const model =
-  data.model ||
-  data.machine ||
-  'Machine';
+    equipmentPlan.forEach((planItem, index) => {
 
-const machineName =
-  data.machine ||
-  data.machine_name ||
-  data.model ||
-  'Machine';
+      // ------------------------------------------------
+      // Données de la machine de référence
+      // ------------------------------------------------
 
-const supplier =
-          data.supplier ||
-          data.fournisseur ||
-          data.supplier_name ||
-          '—';
+      const reference =
+        planItem.reference ||
+        planItem.machine ||
+        planItem.requiredMachine ||
+        planItem;
 
-        const origin =
-          data.origin ||
-          data.origine ||
-          '';
 
-        const capacity =
-          data.machine_capacity ||
-          data.capacity ||
-          data.capacite ||
-          '';
+      // ------------------------------------------------
+      // Machine éventuellement déjà enregistrée
+      // ------------------------------------------------
 
-        const role =
-          data.machine_role ||
-          data.role ||
-          '';
+      const savedMachine =
+        planItem.saved ||
+        planItem.selected ||
+        planItem.savedMachine ||
+        null;
 
-        const utilities =
-          data.machine_utilities ||
-          data.utilities ||
-          data.utilites ||
-          '';
+      const savedData =
+        savedMachine?.data ||
+        planItem.data ||
+        {};
 
-       const price =
-  data.catalog_price_usd ||
-  data.price ||
-  data.price_catalogue ||
-  data.price_catalogue_verified ||
-  '';
-        const estimationStatus =
-          data.estimation_status ||
-          'pending';
 
-        const relationStatus =
-          data.relation_status ||
-          'pending';
+      // ------------------------------------------------
+      // Identité technique
+      // ------------------------------------------------
 
-        html += `
+      const machineKey =
+        reference.machine_key ||
+        reference.key ||
+        reference.id ||
+        savedData.machine_key ||
+        '';
 
-          <!-- CARTE MACHINE -->
+      const machineName =
+        reference.machine_name ||
+        reference.name ||
+        reference.nom ||
+        savedData.machine ||
+        savedData.machine_name ||
+        'Machine';
+
+
+      const role =
+        reference.role ||
+        reference.machine_role ||
+        savedData.machine_role ||
+        savedData.role ||
+        '';
+
+
+      const capacity =
+        reference.capacity ||
+        reference.machine_capacity ||
+        savedData.machine_capacity ||
+        savedData.capacity ||
+        '';
+
+
+      const utilities =
+        reference.utilities ||
+        reference.machine_utilities ||
+        savedData.machine_utilities ||
+        savedData.utilities ||
+        '';
+
+
+      // ------------------------------------------------
+      // Modèle retenu
+      // ------------------------------------------------
+
+      const modelName =
+        savedData.model ||
+        savedData.model_name ||
+        '';
+
+
+      const supplier =
+        savedData.supplier ||
+        savedData.fournisseur ||
+        savedData.supplier_name ||
+        '';
+
+
+      const origin =
+        savedData.origin ||
+        savedData.origine ||
+        '';
+
+
+      const price =
+        savedData.catalog_price_usd ||
+        savedData.price ||
+        savedData.price_catalogue ||
+        savedData.price_catalogue_verified ||
+        '';
+
+
+      // ------------------------------------------------
+      // Détermine si la machine a déjà été renseignée
+      // ------------------------------------------------
+
+      const isConfigured =
+        !!(
+          savedMachine ||
+          modelName ||
+          savedData.model_id
+        );
+
+
+      // ------------------------------------------------
+      // URL vers les modèles
+      // ------------------------------------------------
+
+      const modelParams =
+        new URLSearchParams({
+          up_id: up.id || '',
+          up_nom: up.nom || '',
+          machine_key: machineKey || '',
+          machine_name: machineName || '',
+          machine_role: role || '',
+          machine_capacity: capacity || '',
+          machine_utilities: utilities || ''
+        });
+
+      const modelsUrl =
+        `machine-models.html?${modelParams.toString()}`;
+
+
+      // ------------------------------------------------
+      // CARTE / LIGNE MACHINE
+      // ------------------------------------------------
+
+      html += `
+
+        <div style="
+          display:grid;
+          grid-template-columns:
+            minmax(34px,auto)
+            minmax(180px,1.6fr)
+            minmax(160px,1.3fr)
+            auto;
+          gap:12px;
+          align-items:center;
+
+          padding:14px;
+
+          border-radius:12px;
+
+          border:
+            1px solid ${
+              isConfigured
+                ? 'rgba(34,197,94,0.22)'
+                : 'rgba(148,163,184,0.14)'
+            };
+
+          background:
+            ${
+              isConfigured
+                ? 'rgba(34,197,94,0.045)'
+                : 'rgba(255,255,255,0.025)'
+            };
+        ">
+
+
+          <!-- NUMÉRO / ÉTAT -->
+
           <div style="
-            border:1px solid #e2e8f0;
-            border-radius:12px;
-            padding:18px;
-            background:#fff;
-            box-shadow:0 2px 6px rgba(15,23,42,.05);
+            width:30px;
+            height:30px;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            background:${
+              isConfigured
+                ? 'rgba(34,197,94,0.16)'
+                : 'rgba(148,163,184,0.10)'
+            };
+
+            color:${
+              isConfigured
+                ? '#22c55e'
+                : '#94a3b8'
+            };
+
+            font-size:12px;
+            font-weight:700;
           ">
 
-            <h5 style="
-              margin:0 0 12px 0;
-              color:#1e293b;
-              font-size:16px;
-            ">
+            ${
+              isConfigured
+                ? '<i class="fas fa-check"></i>'
+                : index + 1
+            }
 
-              ${escapeHtml(model)}
+          </div>
 
-            </h5>
+
+          <!-- MACHINE -->
+
+          <div>
 
             <div style="
-              font-size:13px;
-              color:#64748b;
-              line-height:1.7;
+              color:#f8fafc;
+              font-size:14px;
+              font-weight:650;
             ">
+              ${escapeHtml(machineName)}
+            </div>
 
-              <div>
-                <strong>Fournisseur :</strong>
-                ${escapeHtml(supplier)}
-              </div>
-
-              ${
-                origin
+            ${
+              role
                 ? `
-                  <div>
-                    <strong>Origine :</strong>
-                    ${escapeHtml(origin)}
-                  </div>
-                `
-                : ''
-              }
-
-              ${
-                price
-                ? `
-                  <div>
-                    <strong>Prix catalogue :</strong>
-                    ${escapeHtml(String(price))}
-                  </div>
-                `
-                : ''
-              }
-
-              ${
-                capacity
-                ? `
-                  <div>
-                    <strong>Capacité :</strong>
-                    ${escapeHtml(capacity)}
-                  </div>
-                `
-                : ''
-              }
-
-              ${
-                role
-                ? `
-                  <div>
-                    <strong>Rôle :</strong>
+                  <div style="
+                    color:#64748b;
+                    font-size:11px;
+                    margin-top:3px;
+                  ">
                     ${escapeHtml(role)}
                   </div>
                 `
                 : ''
+            }
+
+          </div>
+
+
+          <!-- CHOIX UTILISATEUR -->
+
+          <div>
+
+            ${
+              isConfigured
+
+                ? `
+
+                  <div style="
+                    color:#86efac;
+                    font-size:11px;
+                    font-weight:700;
+                    margin-bottom:3px;
+                  ">
+                    MODÈLE RETENU
+                  </div>
+
+                  <div style="
+                    color:#e2e8f0;
+                    font-size:13px;
+                    font-weight:600;
+                  ">
+                    ${escapeHtml(
+                      modelName ||
+                      machineName
+                    )}
+                  </div>
+
+                  ${
+                    supplier
+                      ? `
+                        <div style="
+                          color:#94a3b8;
+                          font-size:11px;
+                          margin-top:3px;
+                        ">
+                          ${escapeHtml(supplier)}
+                        </div>
+                      `
+                      : ''
+                  }
+
+                  <div style="
+                    display:flex;
+                    gap:6px;
+                    flex-wrap:wrap;
+                    margin-top:5px;
+                  ">
+
+                    ${
+                      origin
+                        ? `
+                          <span style="
+                            color:#94a3b8;
+                            font-size:10px;
+                          ">
+                            ${escapeHtml(origin)}
+                          </span>
+                        `
+                        : ''
+                    }
+
+                    ${
+                      price
+                        ? `
+                          <span style="
+                            color:#22c55e;
+                            font-size:10px;
+                            font-weight:700;
+                          ">
+                            • ${escapeHtml(String(price))}
+                          </span>
+                        `
+                        : `
+                          <span style="
+                            color:#f59e0b;
+                            font-size:10px;
+                            font-weight:700;
+                          ">
+                            • Cotation à obtenir
+                          </span>
+                        `
+                    }
+
+                  </div>
+
+                `
+
+                : `
+
+                  <div style="
+                    color:#f59e0b;
+                    font-size:11px;
+                    font-weight:700;
+                  ">
+                    À TRAITER
+                  </div>
+
+                  <div style="
+                    color:#94a3b8;
+                    font-size:11px;
+                    margin-top:3px;
+                  ">
+                    Aucun modèle retenu
+                  </div>
+
+                `
+            }
+
+          </div>
+
+
+          <!-- ACTION -->
+
+          <div style="
+            display:flex;
+            justify-content:flex-end;
+          ">
+
+            <a
+              href="${modelsUrl}"
+              class="btn-view"
+              style="
+                white-space:nowrap;
+                font-size:11px;
+                padding:7px 10px;
+              "
+            >
+
+              <i
+                class="fas ${
+                  isConfigured
+                    ? 'fa-eye'
+                    : 'fa-search'
+                }"
+              ></i>
+
+              ${
+                isConfigured
+                  ? 'Voir'
+                  : 'Voir les modèles'
               }
 
-            </div>
-
-            <div style="
-              margin-top:15px;
-              padding-top:12px;
-              border-top:1px solid #e2e8f0;
-              font-size:12px;
-              color:#64748b;
-            ">
-
-              <div>
-                <strong>Estimation P2I :</strong>
-                ${getEstimationStatusLabel(estimationStatus)}
-              </div>
-
-              <div style="margin-top:5px;">
-                <strong>Mise en relation :</strong>
-                ${getRelationStatusLabel(relationStatus)}
-              </div>
-
-            </div>
-
-            <div style="
-              display:flex;
-              gap:8px;
-              margin-top:15px;
-              flex-wrap:wrap;
-            ">
-
-              <a
-                class="btn-view"
-                href="#"
-                onclick="
-                  viewSavedMachine(
-  '${escapeHtml(machineName)}',
-  '${escapeHtml(data.up_nom || '')}',
-  '${escapeHtml(role)}',
-  '${escapeHtml(capacity)}',
-  '${escapeHtml(utilities)}',
-  '${escapeHtml(price)}'
-);
-                  return false;
-                "
-              >
-                Voir
-              </a>
-
-              <a
-                class="btn-view"
-                href="#"
-                onclick="
-                  deleteSavedMachineSupabase('${machine.id}');
-                  return false;
-                "
-                style="
-                  background:rgba(239,68,68,0.1);
-                  border-color:rgba(239,68,68,0.3);
-                  color:#f87171;
-                "
-              >
-                Supprimer
-              </a>
-
-            </div>
+            </a>
 
           </div>
 
-        `;
-
-      });
-
-      html += `
-          </div>
         </div>
       `;
 
     });
 
+
     html += `
+
+          </div>
+
         </div>
+
       </div>
     `;
 
   });
 
-  container.innerHTML = html;
+
+  html += `
+      </div>
+    </div>
+  `;
+
+});
+
+container.innerHTML = html;
 }
     // ==============================================
 // STATUT ESTIMATION P2I
