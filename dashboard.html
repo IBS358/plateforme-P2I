@@ -2444,165 +2444,277 @@ console.log('🔎 TEST PRODUCTION_DATA :', typeof PRODUCTION_DATA);
 
 function buildEquipmentPlanForUp(up) {
 
-  // ----------------------------------------------------
-  // 1. Machines déjà sélectionnées par l'utilisateur
-  // ----------------------------------------------------
+  // ====================================================
+  // 1. MACHINES / MODÈLES DÉJÀ ENREGISTRÉS
+  // ====================================================
 
   const savedMachines =
     Array.isArray(up.machines)
       ? up.machines
       : [];
 
-  // ----------------------------------------------------
-// 2. PLAN D'ÉQUIPEMENT ACTIF DE L'UP
-// ----------------------------------------------------
 
-let activeEquipmentPlan = null;
+  // ====================================================
+  // 2. PLAN D'ÉQUIPEMENT ACTIF
+  //    créé dans service-achat-machines.html
+  // ====================================================
 
-try {
+  let activeEquipmentPlan = null;
 
-  const storedPlan =
-    sessionStorage.getItem(
-      `p2i_equipment_plan_${up.id}`
+  try {
+
+    const storageKey =
+      `p2i_equipment_plan_${up.id}`;
+
+    const storedPlan =
+      sessionStorage.getItem(storageKey);
+
+    if (storedPlan) {
+
+      activeEquipmentPlan =
+        JSON.parse(storedPlan);
+
+    }
+
+  } catch (error) {
+
+    console.warn(
+      '⚠️ Impossible de lire le plan actif :',
+      up.id,
+      error
     );
 
-  if (storedPlan) {
+  }
 
-    activeEquipmentPlan =
-      JSON.parse(storedPlan);
+
+  // ====================================================
+  // 3. RÉFÉRENTIEL HISTORIQUE
+  // ====================================================
+
+  const upReference =
+    (
+      typeof MACHINES_DATA !== 'undefined'
+        ? MACHINES_DATA?.[up.id]
+        : null
+    ) ||
+    window.MACHINES_DATA?.[up.id] ||
+    null;
+
+
+  // ====================================================
+  // 4. DÉTERMINER LE PLAN TECHNIQUE À UTILISER
+  // ====================================================
+
+  let requiredMachines = [];
+  let equipmentPlanSource = 'none';
+
+
+  // ----------------------------------------------------
+  // PRIORITÉ 1
+  // Plan dynamique réellement construit par
+  // service-achat-machines.html
+  // ----------------------------------------------------
+
+  if (
+    activeEquipmentPlan &&
+    Array.isArray(activeEquipmentPlan.machines) &&
+    activeEquipmentPlan.machines.length > 0
+  ) {
+
+    requiredMachines =
+      activeEquipmentPlan.machines.map(machine => ({
+
+        machine_key:
+          machine.machine_key ||
+          machine.key ||
+          machine.id ||
+          '',
+
+        machine_name:
+          machine.machine_name ||
+          machine.name ||
+          machine.nom ||
+          'Machine',
+
+        role:
+          machine.role ||
+          machine.machine_role ||
+          '',
+
+        capacity:
+          machine.capacity ||
+          machine.machine_capacity ||
+          '',
+
+        utilities:
+          machine.utilities ||
+          machine.machine_utilities ||
+          '',
+
+        price:
+          machine.price ??
+          null,
+
+        source:
+          machine.source ||
+          machine.type ||
+          'configured_plan'
+
+      }));
+
+    equipmentPlanSource =
+      'active_configuration';
 
   }
 
-} catch (e) {
 
-  console.warn(
-    '⚠️ Impossible de lire le plan actif de l’UP :',
+  // ----------------------------------------------------
+  // PRIORITÉ 2
+  // Ancien référentiel MACHINES_DATA
+  // ----------------------------------------------------
+
+  else if (
+    upReference &&
+    Array.isArray(upReference.machines)
+  ) {
+
+    requiredMachines =
+      upReference.machines.map(machine => ({
+
+        machine_key:
+          machine.machine_key ||
+          machine.key ||
+          machine.id ||
+          '',
+
+        machine_name:
+          machine.machine_name ||
+          machine.name ||
+          machine.nom ||
+          'Machine',
+
+        role:
+          machine.role ||
+          machine.machine_role ||
+          '',
+
+        capacity:
+          machine.capacity ||
+          machine.machine_capacity ||
+          '',
+
+        utilities:
+          machine.utilities ||
+          machine.machine_utilities ||
+          '',
+
+        price:
+          machine.price ??
+          null,
+
+        source:
+          'machines_data'
+
+      }));
+
+    equipmentPlanSource =
+      'machines_data';
+
+  }
+
+  else if (Array.isArray(upReference)) {
+
+    requiredMachines =
+      upReference.map(machine => ({
+
+        machine_key:
+          machine.machine_key ||
+          machine.key ||
+          machine.id ||
+          '',
+
+        machine_name:
+          machine.machine_name ||
+          machine.name ||
+          machine.nom ||
+          'Machine',
+
+        role:
+          machine.role ||
+          machine.machine_role ||
+          '',
+
+        capacity:
+          machine.capacity ||
+          machine.machine_capacity ||
+          '',
+
+        utilities:
+          machine.utilities ||
+          machine.machine_utilities ||
+          '',
+
+        price:
+          machine.price ??
+          null,
+
+        source:
+          'machines_data'
+
+      }));
+
+    equipmentPlanSource =
+      'machines_data';
+
+  }
+
+
+  // ====================================================
+  // 5. CONTRÔLE IMPORTANT
+  // ====================================================
+
+  console.log(
+    '🏭 SOURCE PLAN :',
     up.id,
-    e
+    equipmentPlanSource
   );
 
-}
+  console.log(
+    '⚙️ MACHINES REQUISES :',
+    up.id,
+    requiredMachines.length
+  );
 
+  if (up.id === 'biscuiterie') {
 
-// ----------------------------------------------------
-// 3. RÉFÉRENTIEL HISTORIQUE MACHINES_DATA
-//    utilisé comme solution de secours
-// ----------------------------------------------------
+    console.log(
+      '🍪 PLAN ACTIF BISCUITERIE :',
+      activeEquipmentPlan
+    );
 
-const upReference =
-  window.MACHINES_DATA?.[up.id] ||
-  window.MACHINES_DATA?.[String(up.id)] ||
-  null;
+    console.log(
+      '🍪 MACHINES PLAN ACTIF :',
+      activeEquipmentPlan?.machines?.length
+    );
 
+    console.log(
+      '🍪 MACHINES APRÈS NORMALISATION :',
+      requiredMachines.length
+    );
 
-// ----------------------------------------------------
-// 4. DÉTERMINATION DES MACHINES NÉCESSAIRES
-// ----------------------------------------------------
-
-let requiredMachines = [];
-
-let equipmentPlanSource =
-  'none';
-
-
-// PRIORITÉ 1 : plan dynamique réellement configuré
-if (
-  activeEquipmentPlan &&
-  Array.isArray(activeEquipmentPlan.machines) &&
-  activeEquipmentPlan.machines.length > 0
-) {
-
-  requiredMachines =
-    activeEquipmentPlan.machines.map(machine => ({
-
-      machine_key:
-        machine.machine_key || '',
-
-      name:
-        machine.machine_name ||
-        machine.name ||
-        'Machine',
-
-      role:
-        machine.role || '',
-
-      capacity:
-        machine.capacity || '',
-
-      utilities:
-        machine.utilities || '',
-
-      price:
-        machine.price ?? null,
-
-      source:
-        machine.source ||
-        'configured_plan'
-
-    }));
-
-  equipmentPlanSource =
-    'active_configuration';
-
-}
-
-
-// PRIORITÉ 2 : ancien référentiel MACHINES_DATA
-else if (Array.isArray(upReference)) {
-
-  requiredMachines =
-    upReference;
-
-  equipmentPlanSource =
-    'machines_data';
-
-}
-
-else if (
-  upReference &&
-  Array.isArray(upReference.machines)
-) {
-
-  requiredMachines =
-    upReference.machines;
-
-  equipmentPlanSource =
-    'machines_data';
-
-}
-
-
-// ----------------------------------------------------
-// 5. CONTRÔLE CONSOLE
-// ----------------------------------------------------
-
-console.log(
-  '🏭 PLAN ACTIF DASHBOARD :',
-  up.id,
-  {
-    configuration:
-      activeEquipmentPlan?.configuration_id ||
-      null,
-
-    source:
-      equipmentPlanSource,
-
-    required:
-      requiredMachines.length,
-
-    saved:
-      savedMachines.length
   }
-);
 
-  // ----------------------------------------------------
-  // 3. Si aucun référentiel n'est trouvé
-  // ----------------------------------------------------
-  // On conserve les machines sauvegardées afin de ne
-  // jamais faire disparaître les données utilisateur.
-  // ----------------------------------------------------
+
+  // ====================================================
+  // 6. AUCUN PLAN TECHNIQUE DISPONIBLE
+  // ====================================================
 
   if (!requiredMachines.length) {
+
+    console.warn(
+      '⚠️ Aucun plan technique trouvé pour :',
+      up.id
+    );
 
     return savedMachines.map(saved => {
 
@@ -2610,11 +2722,13 @@ console.log(
         saved.data || {};
 
       return {
+
         machine_key:
           data.machine_key ||
           data.machine_ref ||
           data.model_id ||
-          saved.id,
+          saved.id ||
+          '',
 
         machine_name:
           data.machine ||
@@ -2637,110 +2751,250 @@ console.log(
           data.utilities ||
           '',
 
-        required: true,
+        price:
+          data.catalog_price_usd ||
+          data.price ||
+          null,
+
+        source:
+          'saved_only',
+
+        required:
+          true,
 
         coverage_status:
           'selected',
 
-        saved_machine:
-          saved
+        // IMPORTANT :
+        // structure normalisée pour l'affichage
+        savedMachine:
+          saved,
+
+        data:
+          data
+
       };
+
     });
+
   }
 
-  // ----------------------------------------------------
-  // 4. Fusion :
-  // machine nécessaire + choix utilisateur éventuel
-  // ----------------------------------------------------
 
-  return requiredMachines.map(required => {
+  // ====================================================
+  // 7. FUSION PLAN TECHNIQUE + CHOIX UTILISATEUR
+  // ====================================================
 
-    const requiredKey =
-      required.machine_key ||
-      required.machine_ref ||
-      required.id ||
-      '';
+  const finalPlan =
+    requiredMachines.map(required => {
 
-    const requiredName =
-      required.name ||
-      required.machine_name ||
-      required.machine ||
-      'Machine';
+      const requiredKey =
+        required.machine_key ||
+        '';
 
-    const selected =
-      savedMachines.find(saved => {
+      const requiredName =
+        required.machine_name ||
+        required.name ||
+        'Machine';
 
-        const data =
-          saved.data || {};
 
-        const savedKey =
-          data.machine_key ||
-          data.machine_ref ||
-          '';
+      // ------------------------------------------------
+      // Recherche d'un modèle déjà enregistré
+      // ------------------------------------------------
 
-        // Priorité absolue à machine_key
-        if (
-          requiredKey &&
-          savedKey &&
-          requiredKey === savedKey
-        ) {
-          return true;
-        }
+      const selected =
+        savedMachines.find(saved => {
 
-        // Compatibilité temporaire avec les anciennes données
-        const savedName =
-          data.machine ||
-          data.machine_name ||
-          '';
+          const data =
+            saved.data || {};
 
-        return (
-          requiredName &&
-          savedName &&
-          requiredName
-            .trim()
-            .toLowerCase() ===
-          savedName
-            .trim()
-            .toLowerCase()
-        );
-      }) || null;
 
-    return {
+          const savedKey =
+            data.machine_key ||
+            data.machine_ref ||
+            '';
 
-      machine_key:
-        requiredKey,
 
-      machine_name:
-        requiredName,
+          // ============================================
+          // MÉTHODE 1
+          // machine_key identique
+          // ============================================
 
-      role:
-        required.role ||
-        required.machine_role ||
-        '',
+          if (
+            requiredKey &&
+            savedKey &&
+            requiredKey === savedKey
+          ) {
 
-      capacity:
-        required.capacity ||
-        required.machine_capacity ||
-        '',
+            return true;
 
-      utilities:
-        required.utilities ||
-        required.machine_utilities ||
-        '',
+          }
 
-      required: true,
 
-      coverage_status:
-        selected
-          ? 'selected'
-          : 'undefined',
+          // ============================================
+          // MÉTHODE 2
+          // Compatibilité anciennes données par nom
+          // ============================================
 
-      saved_machine:
-        selected
-    };
-  });
+          const savedName =
+            data.machine ||
+            data.machine_name ||
+            '';
+
+
+          if (
+            requiredName &&
+            savedName &&
+            requiredName
+              .trim()
+              .toLowerCase() ===
+            savedName
+              .trim()
+              .toLowerCase()
+          ) {
+
+            return true;
+
+          }
+
+
+          return false;
+
+        }) || null;
+
+
+      const selectedData =
+        selected?.data ||
+        {};
+
+
+      // ------------------------------------------------
+      // Élément final normalisé
+      // ------------------------------------------------
+
+      return {
+
+        machine_key:
+          requiredKey,
+
+        machine_name:
+          requiredName,
+
+        role:
+          required.role ||
+          '',
+
+        capacity:
+          required.capacity ||
+          '',
+
+        utilities:
+          required.utilities ||
+          '',
+
+        reference_price:
+          required.price ??
+          null,
+
+        source:
+          required.source ||
+          equipmentPlanSource,
+
+        required:
+          true,
+
+
+        // ==============================================
+        // ÉTAT DE COUVERTURE
+        // ==============================================
+
+        coverage_status:
+          selected
+            ? 'selected'
+            : 'undefined',
+
+
+        // ==============================================
+        // MACHINE / MODÈLE SÉLECTIONNÉ
+        // ==============================================
+
+        savedMachine:
+          selected,
+
+        data:
+          selectedData
+
+      };
+
+    });
+
+
+  // ====================================================
+  // 8. CONTRÔLE FINAL
+  // ====================================================
+
+  console.log(
+    '📦 PLAN CONSTRUIT :',
+    up.id,
+    {
+      source:
+        equipmentPlanSource,
+
+      required:
+        requiredMachines.length,
+
+      saved:
+        savedMachines.length,
+
+      final:
+        finalPlan.length,
+
+      selected:
+        finalPlan.filter(
+          item =>
+            item.coverage_status ===
+            'selected'
+        ).length
+    }
+  );
+
+
+  if (up.id === 'biscuiterie') {
+
+    console.table(
+      finalPlan.map((item, index) => ({
+
+        n:
+          index + 1,
+
+        machine_key:
+          item.machine_key,
+
+        machine:
+          item.machine_name,
+
+        source:
+          item.source,
+
+        status:
+          item.coverage_status,
+
+        model:
+          item.data?.model ||
+          ''
+
+      }))
+    );
+
+  }
+
+
+  // ====================================================
+  // 9. RETOUR
+  // ====================================================
+
+  return finalPlan;
+
 }
-
  // ----------------------------------------------
 // AFFICHAGE DU PLAN D'ÉQUIPEMENT
 // ----------------------------------------------
