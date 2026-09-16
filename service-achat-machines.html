@@ -1878,6 +1878,31 @@ console.log(
   "⚙️ Machines affichées :",
   machinesToDisplay
 );
+  console.table(
+  machinesToDisplay.map((m, index) => ({
+    n: index + 1,
+
+    machine_key:
+      m.machine_key ||
+      m.key ||
+      m.id ||
+      '',
+
+    machine_name:
+      m.machine_name ||
+      m.name ||
+      m.nom ||
+      '',
+
+    required:
+      m.required,
+
+    source:
+      m.source ||
+      m.type ||
+      ''
+  }))
+);
 }
 
 // ==============================================
