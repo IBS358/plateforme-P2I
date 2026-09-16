@@ -1859,6 +1859,61 @@ machinesToDisplay = [
   ...selectedChoiceMachines,
   ...selectedOptionalModules
 ];
+  // ==============================================
+// MÉMORISATION DU PLAN D'ÉQUIPEMENT ACTIF
+// ==============================================
+
+const equipmentPlan = {
+  up_id: upId || '',
+  up_nom: upNom || '',
+
+  configuration_id:
+    selectedConfiguration || null,
+
+  updated_at:
+    new Date().toISOString(),
+
+  machines: machinesToDisplay.map(machine => ({
+    machine_key:
+      machine.machine_key ||
+      machine.key ||
+      machine.id ||
+      '',
+
+    machine_name:
+      machine.name ||
+      machine.machine_name ||
+      machine.nom ||
+      '',
+
+    role:
+      machine.role || '',
+
+    capacity:
+      machine.capacity || '',
+
+    utilities:
+      machine.utilities || '',
+
+    price:
+      machine.price ?? null,
+
+    source:
+      machine.source ||
+      machine.type ||
+      ''
+  }))
+};
+
+sessionStorage.setItem(
+  `p2i_equipment_plan_${upId}`,
+  JSON.stringify(equipmentPlan)
+);
+
+console.log(
+  '💾 Plan équipement actif mémorisé :',
+  equipmentPlan
+);
 
 console.log(
   "🧩 Options sélectionnées :",
