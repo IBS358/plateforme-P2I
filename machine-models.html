@@ -3888,11 +3888,13 @@ async function addV2ModelToEquipmentPlan(
       '';
 
     const price =
-      model.price_reference || {};
+  model.price_reference || {};
 
-    const acquisition =
-      model.acquisition || {};
+const acquisition =
+  model.acquisition || {};
 
+const budgetReference =
+  model.p2i_budget_reference || {};
 
     // ======================================================
     // 5. LIBELLÉ DU PRIX
