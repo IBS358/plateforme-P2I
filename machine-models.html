@@ -3576,6 +3576,188 @@ function updateV2EquipmentPlanButtons(
 
   });
 }
+    // ==========================================================
+// RESTAURATION DU MODÈLE V2 RETENU AU CHARGEMENT DE LA PAGE
+// ==========================================================
+
+async function restoreV2EquipmentPlanSelection(machineKey) {
+
+  if (!machineKey) {
+    return;
+  }
+
+  console.log(
+    '🔄 Restauration du plan d’équipement :',
+    machineKey
+  );
+
+  try {
+
+    // ======================================================
+    // 1. UTILISATEUR SUPABASE
+    // ======================================================
+
+    const {
+      data: { user },
+      error: userError
+    } = await supabaseClient.auth.getUser();
+
+
+    // Utilisateur non connecté :
+    // on laisse simplement tous les boutons sur "Ajouter"
+    if (userError || !user) {
+
+      console.log(
+        'ℹ️ Aucun utilisateur connecté : état initial des boutons.'
+      );
+
+      updateV2EquipmentPlanButtons(
+        machineKey,
+        null
+      );
+
+      return;
+    }
+
+
+    // ======================================================
+    // 2. UP COURANTE
+    // ======================================================
+
+    const params =
+      getUrlParams();
+
+    const upId =
+      params.upId || '';
+
+
+    if (!upId) {
+
+      console.warn(
+        '⚠️ Impossible de restaurer le plan : up_id absent.'
+      );
+
+      updateV2EquipmentPlanButtons(
+        machineKey,
+        null
+      );
+
+      return;
+    }
+
+
+    // ======================================================
+    // 3. LECTURE DU PLAN D'ÉQUIPEMENT
+    // ======================================================
+
+    const {
+      data: rows,
+      error: searchError
+    } = await supabaseClient
+      .from('saved_machines')
+      .select('id, data')
+      .eq(
+        'user_id',
+        user.id
+      );
+
+
+    if (searchError) {
+
+      console.error(
+        '❌ Erreur restauration saved_machines :',
+        searchError
+      );
+
+      return;
+    }
+
+
+    // ======================================================
+    // 4. RECHERCHE DU MODÈLE ACTIF
+    // UP + MACHINE_KEY
+    // ======================================================
+
+    const matchingRows =
+      (rows || []).filter(row => {
+
+        const d =
+          row.data || {};
+
+        return (
+          d.up_id === upId &&
+          d.machine_key === machineKey &&
+          d.record_type === 'equipment_plan_item'
+        );
+      });
+
+
+    console.log(
+      `🔎 ${matchingRows.length} choix trouvé(s) pour`,
+      upId,
+      machineKey
+    );
+
+
+    // ======================================================
+    // 5. AUCUN MODÈLE RETENU
+    // ======================================================
+
+    if (matchingRows.length === 0) {
+
+      updateV2EquipmentPlanButtons(
+        machineKey,
+        null
+      );
+
+      console.log(
+        'ℹ️ Aucun modèle actuellement retenu.'
+      );
+
+      return;
+    }
+
+
+    // ======================================================
+    // 6. MODÈLE ACTIF
+    // ======================================================
+
+    const selectedRow =
+      matchingRows.find(row =>
+        row.data?.is_selected_model === true
+      ) ||
+      matchingRows[0];
+
+
+    const selectedModelId =
+      selectedRow.data?.model_id ||
+      null;
+
+
+    console.log(
+      '✅ Modèle actuellement retenu :',
+      selectedModelId
+    );
+
+
+    // ======================================================
+    // 7. SYNCHRONISATION DES BOUTONS
+    // ======================================================
+
+    updateV2EquipmentPlanButtons(
+      machineKey,
+      selectedModelId
+    );
+
+
+  } catch (e) {
+
+    console.error(
+      '❌ Erreur restoreV2EquipmentPlanSelection :',
+      e
+    );
+  }
+}
     async function removeV2ModelFromEquipmentPlan(
   machineKey,
   modelId
