@@ -2297,6 +2297,15 @@ async function loadSavedMachines() {
   saved.forEach(item => {
 
     const data = item.data || {};
+    // ======================================================
+// TYPE D'ENREGISTREMENT
+// ======================================================
+
+const recordType =
+  data.record_type || 'legacy_saved_machine';
+
+const isEquipmentPlanItem =
+  recordType === 'equipment_plan_item';
 
     // --------------------------------------------
 // Filière
@@ -2375,11 +2384,15 @@ const upNom =
     // Enregistrement de la machine
     // --------------------------------------------
 
-    projets[filiereId].ups[upId].machines.push({
-      id: item.id,
-      created_at: item.created_at,
-      data: data
-    });
+   projets[filiereId].ups[upId].machines.push({
+  id: item.id,
+  created_at: item.created_at,
+  data: data,
+
+  // Nouveau plan d'équipement P2I
+  record_type: recordType,
+  is_equipment_plan_item: isEquipmentPlanItem
+});
 
   });
 
