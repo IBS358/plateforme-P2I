@@ -2813,7 +2813,59 @@ Object.values(projets).forEach(projet => {
       up.nom,
       equipmentPlan
     );
+if (up.id === 'biscuiterie') {
 
+  console.log(
+    '🔬 EQUIPMENT PLAN BISCUITERIE COMPLET :',
+    equipmentPlan
+  );
+
+  console.table(
+    equipmentPlan.map((item, index) => ({
+      n: index + 1,
+
+      machine_key:
+        item.machine_key ||
+        item.reference?.machine_key ||
+        item.machine?.machine_key ||
+        item.requiredMachine?.machine_key ||
+        item.data?.machine_key ||
+        '',
+
+      machine_name:
+        item.machine_name ||
+        item.name ||
+        item.reference?.machine_name ||
+        item.reference?.name ||
+        item.machine?.machine_name ||
+        item.machine?.name ||
+        item.requiredMachine?.machine_name ||
+        item.requiredMachine?.name ||
+        item.data?.machine ||
+        item.data?.machine_name ||
+        '',
+
+      source:
+        item.source ||
+        item.type ||
+        item.record_type ||
+        '',
+
+      has_data:
+        !!item.data,
+
+      has_saved:
+        !!item.saved,
+
+      has_selected:
+        !!item.selected,
+
+      has_reference:
+        !!item.reference
+    }))
+  );
+
+}
 
     // ==================================================
     // STATISTIQUES DU PLAN
