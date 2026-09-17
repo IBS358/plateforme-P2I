@@ -3718,116 +3718,198 @@ const isP2ICatalog =
 
           <!-- CHOIX UTILISATEUR -->
 
-          <div>
+<div>
 
-            ${
-              isConfigured
+  ${
+    isConfigured
 
-                ? `
+      ? (
 
-                  <div style="
-                    color:#86efac;
-                    font-size:11px;
-                    font-weight:700;
-                    margin-bottom:3px;
-                  ">
-                    MODÈLE RETENU
-                  </div>
+          // ==========================================
+          // MACHINE DÉJÀ POSSÉDÉE
+          // ==========================================
 
-                  <div style="
-                    color:#e2e8f0;
-                    font-size:13px;
-                    font-weight:600;
-                  ">
-                    ${escapeHtml(
-                      modelName ||
-                      machineName
-                    )}
-                  </div>
+          isAlreadyOwned
+
+            ? `
+
+              <div style="
+                color:#60a5fa;
+                font-size:11px;
+                font-weight:700;
+                margin-bottom:3px;
+              ">
+                <i class="fas fa-check-circle"></i>
+                MACHINE DÉJÀ POSSÉDÉE
+              </div>
+
+              <div style="
+                color:#e2e8f0;
+                font-size:12px;
+                font-weight:600;
+              ">
+                Cette machine est déjà disponible
+                pour le projet.
+              </div>
+
+              <div style="
+                color:#94a3b8;
+                font-size:10px;
+                margin-top:4px;
+              ">
+                Aucun achat de machine à prévoir
+                dans le plan d'équipement.
+              </div>
+
+            `
+
+
+            // ==========================================
+            // ACQUISITION PAR L'UTILISATEUR
+            // ==========================================
+
+            : isSelfPurchase
+
+              ? `
+
+                <div style="
+                  color:#fbbf24;
+                  font-size:11px;
+                  font-weight:700;
+                  margin-bottom:3px;
+                ">
+                  <i class="fas fa-user-cog"></i>
+                  ACQUISITION PAR VOS PROPRES MOYENS
+                </div>
+
+                <div style="
+                  color:#e2e8f0;
+                  font-size:12px;
+                  font-weight:600;
+                ">
+                  Machine renseignée par l'utilisateur
+                </div>
+
+                <div style="
+                  color:#94a3b8;
+                  font-size:10px;
+                  margin-top:4px;
+                ">
+                  Prix et origine à préciser
+                </div>
+
+              `
+
+
+              // ==========================================
+              // MODÈLE DU CATALOGUE P2I
+              // ==========================================
+
+              : `
+
+                <div style="
+                  color:#86efac;
+                  font-size:11px;
+                  font-weight:700;
+                  margin-bottom:3px;
+                ">
+                  MODÈLE RETENU
+                </div>
+
+                <div style="
+                  color:#e2e8f0;
+                  font-size:13px;
+                  font-weight:600;
+                ">
+                  ${escapeHtml(
+                    modelName ||
+                    machineName
+                  )}
+                </div>
+
+                ${
+                  supplier
+                    ? `
+                      <div style="
+                        color:#94a3b8;
+                        font-size:11px;
+                        margin-top:3px;
+                      ">
+                        ${escapeHtml(supplier)}
+                      </div>
+                    `
+                    : ''
+                }
+
+                <div style="
+                  display:flex;
+                  gap:6px;
+                  flex-wrap:wrap;
+                  margin-top:5px;
+                ">
 
                   ${
-                    supplier
+                    origin
                       ? `
-                        <div style="
+                        <span style="
                           color:#94a3b8;
-                          font-size:11px;
-                          margin-top:3px;
+                          font-size:10px;
                         ">
-                          ${escapeHtml(supplier)}
-                        </div>
+                          ${escapeHtml(origin)}
+                        </span>
                       `
                       : ''
                   }
 
-                  <div style="
-                    display:flex;
-                    gap:6px;
-                    flex-wrap:wrap;
-                    margin-top:5px;
-                  ">
+                  ${
+                    price
+                      ? `
+                        <span style="
+                          color:#22c55e;
+                          font-size:10px;
+                          font-weight:700;
+                        ">
+                          • ${escapeHtml(String(price))}
+                        </span>
+                      `
+                      : `
+                        <span style="
+                          color:#f59e0b;
+                          font-size:10px;
+                          font-weight:700;
+                        ">
+                          • Cotation à obtenir
+                        </span>
+                      `
+                  }
 
-                    ${
-                      origin
-                        ? `
-                          <span style="
-                            color:#94a3b8;
-                            font-size:10px;
-                          ">
-                            ${escapeHtml(origin)}
-                          </span>
-                        `
-                        : ''
-                    }
+                </div>
 
-                    ${
-                      price
-                        ? `
-                          <span style="
-                            color:#22c55e;
-                            font-size:10px;
-                            font-weight:700;
-                          ">
-                            • ${escapeHtml(String(price))}
-                          </span>
-                        `
-                        : `
-                          <span style="
-                            color:#f59e0b;
-                            font-size:10px;
-                            font-weight:700;
-                          ">
-                            • Cotation à obtenir
-                          </span>
-                        `
-                    }
+              `
+        )
 
-                  </div>
+      : `
 
-                `
-
-                : `
-
-                  <div style="
-                    color:#f59e0b;
-                    font-size:11px;
-                    font-weight:700;
-                  ">
-                    À TRAITER
-                  </div>
-
-                  <div style="
-                    color:#94a3b8;
-                    font-size:11px;
-                    margin-top:3px;
-                  ">
-                    Aucun modèle retenu
-                  </div>
-
-                `
-            }
-
+          <div style="
+            color:#f59e0b;
+            font-size:11px;
+            font-weight:700;
+          ">
+            À TRAITER
           </div>
 
+          <div style="
+            color:#94a3b8;
+            font-size:11px;
+            margin-top:3px;
+          ">
+            Aucun mode d'acquisition renseigné
+          </div>
+
+        `
+  }
+
+</div>
 
          <!-- ACTION / MODE D'ACQUISITION -->
 
