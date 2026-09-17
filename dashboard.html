@@ -3184,7 +3184,21 @@ const progress =
         (machinesRenseignees / totalMachines) * 100
       )
     : 0;
+console.log(
+  '🔬 PREMIER ITEM DU PLAN :',
+  equipmentPlan[0]
+);
 
+console.log(
+  '🔬 DÉTAIL SÉLECTION PREMIER ITEM :',
+  {
+    coverage_status: equipmentPlan[0]?.coverage_status,
+    saved_machine: equipmentPlan[0]?.saved_machine,
+    saved: equipmentPlan[0]?.saved,
+    selected: equipmentPlan[0]?.selected,
+    data: equipmentPlan[0]?.data
+  }
+);
 console.log(
   '📊 AVANCEMENT PLAN :',
   {
