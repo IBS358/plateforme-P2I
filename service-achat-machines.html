@@ -1379,8 +1379,8 @@ if (
   // Une configuration est mémorisée séparément pour chaque UP
   const storageKey = `p2i_configuration_${upId}`;
 
-  let selectedConfiguration =
-    sessionStorage.getItem(storageKey);
+let selectedConfiguration =
+  localStorage.getItem(storageKey);
 
   // Si aucun choix utilisateur n'existe encore,
   // on utilise provisoirement la configuration P2I par défaut
