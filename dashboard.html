@@ -3921,23 +3921,110 @@ const isP2ICatalog =
 ">
 
   ${
-    isConfigured
-      ? `
-        <!-- Machine déjà renseignée -->
+   isConfigured
+  ? `
+    <!-- Machine déjà renseignée -->
 
-        <a
-          href="${modelsUrl}"
-          class="btn-view"
-          style="
-            white-space:nowrap;
-            font-size:11px;
-            padding:7px 10px;
-          "
-        >
-          <i class="fas fa-eye"></i>
-          Voir
-        </a>
-      `
+    <div style="
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    ">
+
+      ${
+        isP2ICatalog
+          ? `
+            <a
+              href="${modelsUrl}"
+              class="btn-view"
+              style="
+                white-space:nowrap;
+                font-size:11px;
+                padding:7px 10px;
+              "
+            >
+              <i class="fas fa-eye"></i>
+              Voir le modèle
+            </a>
+          `
+          : `
+            <button
+              type="button"
+              onclick="openAcquisitionChoiceEditor(
+                '${escapeHtml(up.id || '')}',
+                '${escapeHtml(up.nom || '')}',
+                '${escapeHtml(machineKey || '')}',
+                '${escapeHtml(machineName || '')}',
+                '${escapeHtml(role || '')}',
+                '${escapeHtml(capacity || '')}',
+                '${escapeHtml(utilities || '')}'
+              )"
+              style="
+                border:1px solid rgba(59,130,246,.35);
+                background:rgba(59,130,246,.08);
+                color:#60a5fa;
+                border-radius:7px;
+                padding:6px 8px;
+                font-size:10px;
+                cursor:pointer;
+              "
+            >
+              <i class="fas fa-pen"></i>
+              Modifier
+            </button>
+          `
+      }
+
+
+      <button
+        type="button"
+        onclick="openAcquisitionChoiceEditor(
+          '${escapeHtml(up.id || '')}',
+          '${escapeHtml(up.nom || '')}',
+          '${escapeHtml(machineKey || '')}',
+          '${escapeHtml(machineName || '')}',
+          '${escapeHtml(role || '')}',
+          '${escapeHtml(capacity || '')}',
+          '${escapeHtml(utilities || '')}'
+        )"
+        style="
+          border:1px solid rgba(245,158,11,.35);
+          background:rgba(245,158,11,.08);
+          color:#d97706;
+          border-radius:7px;
+          padding:6px 8px;
+          font-size:10px;
+          cursor:pointer;
+        "
+      >
+        <i class="fas fa-exchange-alt"></i>
+        Remplacer cette machine
+      </button>
+
+
+      <button
+        type="button"
+        onclick="removeEquipmentChoice(
+          '${escapeHtml(up.id || '')}',
+          '${escapeHtml(machineKey || '')}'
+        )"
+        style="
+          border:1px solid rgba(239,68,68,.35);
+          background:rgba(239,68,68,.08);
+          color:#ef4444;
+          border-radius:7px;
+          padding:6px 8px;
+          font-size:10px;
+          cursor:pointer;
+        "
+      >
+        <i class="fas fa-trash-alt"></i>
+        Supprimer mon choix
+      </button>
+
+    </div>
+  `
       : `
         <!-- Machine encore à traiter -->
 
