@@ -3166,8 +3166,7 @@ const machinesRenseignees =
   equipmentPlan.filter(item => {
 
     return (
-      item.coverage_status === 'selected' &&
-      !!item.saved_machine
+      item.coverage_status === 'selected'
     );
 
   }).length;
