@@ -2467,7 +2467,7 @@ function buildEquipmentPlanForUp(up) {
       `p2i_equipment_plan_${up.id}`;
 
     const storedPlan =
-      sessionStorage.getItem(storageKey);
+  localStorage.getItem(storageKey);
 
     if (storedPlan) {
 
