@@ -2105,13 +2105,12 @@ function selectProductionConfiguration(configKey) {
   }
 
   const storageKey =
-    `p2i_configuration_${upId}`;
+  `p2i_configuration_${upId}`;
 
-  sessionStorage.setItem(
-    storageKey,
-    configKey
-  );
-
+localStorage.setItem(
+  storageKey,
+  configKey
+);
   console.log(
     '✅ Nouvelle configuration P2I :',
     configKey
