@@ -3121,38 +3121,47 @@ if (up.id === 'biscuiterie') {
 
 }
 
-    // ==================================================
-    // STATISTIQUES DU PLAN
-    // ==================================================
+   // ==================================================
+// STATISTIQUES DU PLAN
+// ==================================================
 
-    const totalMachines =
-      equipmentPlan.length;
+const totalMachines =
+  equipmentPlan.length;
 
-    const machinesRenseignees =
-      equipmentPlan.filter(item => {
+// Une machine est "renseignée" uniquement si
+// une décision utilisateur existe réellement.
+const machinesRenseignees =
+  equipmentPlan.filter(item => {
 
-        return !!(
-          item.saved ||
-          item.selected ||
-          item.data ||
-          item.savedMachine
-        );
+    return (
+      item.coverage_status === 'selected' &&
+      !!item.saved_machine
+    );
 
-      }).length;
+  }).length;
 
-    const machinesATraiter =
-      Math.max(
-        0,
-        totalMachines - machinesRenseignees
-      );
+const machinesATraiter =
+  Math.max(
+    0,
+    totalMachines - machinesRenseignees
+  );
 
-    const progress =
-      totalMachines > 0
-        ? Math.round(
-            (machinesRenseignees / totalMachines) * 100
-          )
-        : 0;
+const progress =
+  totalMachines > 0
+    ? Math.round(
+        (machinesRenseignees / totalMachines) * 100
+      )
+    : 0;
 
+console.log(
+  '📊 AVANCEMENT PLAN :',
+  {
+    totalMachines,
+    machinesRenseignees,
+    machinesATraiter,
+    progress
+  }
+);
 
     // ==================================================
     // EN-TÊTE DE L'UP
