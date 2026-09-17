@@ -3120,7 +3120,39 @@ if (up.id === 'biscuiterie') {
   );
 
 }
+if (up.id === 'biscuiterie') {
 
+  console.log(
+    '🔬 STRUCTURE ITEM 1 BISCUITERIE :',
+    equipmentPlan[0]
+  );
+
+  console.log(
+    '🔬 CLÉS ITEM 1 :',
+    Object.keys(equipmentPlan[0] || {})
+  );
+
+  console.log(
+    '🔬 STATUT ITEM 1 :',
+    equipmentPlan[0]?.coverage_status
+  );
+
+  console.log(
+    '🔬 SAVED_MACHINE ITEM 1 :',
+    equipmentPlan[0]?.saved_machine
+  );
+
+  console.log(
+    '🔬 SAVED ITEM 1 :',
+    equipmentPlan[0]?.saved
+  );
+
+  console.log(
+    '🔬 SELECTED ITEM 1 :',
+    equipmentPlan[0]?.selected
+  );
+
+}
    // ==================================================
 // STATISTIQUES DU PLAN
 // ==================================================
