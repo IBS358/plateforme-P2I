@@ -4424,6 +4424,315 @@ async function deleteDevisSupabase(id) {
 
   window.location.href = `machine-models.html?${params.toString()}`;
 }
+    // ======================================================
+// CHOIX DU MODE D'ACQUISITION D'UNE MACHINE
+// ======================================================
+
+async function selectEquipmentAcquisitionMode(
+  upId,
+  upNom,
+  machineKey,
+  machineName,
+  role,
+  capacity,
+  utilities,
+  acquisitionMode
+) {
+
+  try {
+
+    // --------------------------------------------------
+    // 1. UTILISATEUR CONNECTÉ
+    // --------------------------------------------------
+
+    const {
+      data: { user },
+      error: authError
+    } = await supabaseClient.auth.getUser();
+
+    if (authError || !user) {
+      console.error(
+        '❌ Utilisateur non connecté :',
+        authError
+      );
+
+      showToastMessage(
+        'Veuillez vous connecter pour enregistrer ce choix.'
+      );
+
+      return;
+    }
+
+
+    // --------------------------------------------------
+    // 2. POUR L'INSTANT :
+    //    SEUL "MACHINE DÉJÀ POSSÉDÉE" EST TRAITÉ
+    // --------------------------------------------------
+
+    if (acquisitionMode !== 'already_owned') {
+
+      console.warn(
+        '⚠️ Mode acquisition pas encore traité :',
+        acquisitionMode
+      );
+
+      return;
+    }
+
+
+    // --------------------------------------------------
+    // 3. DONNÉES DU PLAN D'ÉQUIPEMENT
+    // --------------------------------------------------
+
+    const machineData = {
+
+      data_version:
+        'p2i_v2',
+
+      record_type:
+        'equipment_plan_item',
+
+      // UP
+      up_id:
+        upId || '',
+
+      up_nom:
+        upNom || '',
+
+      // Machine technique
+      machine_key:
+        machineKey || '',
+
+      machine:
+        machineName || 'Machine',
+
+      machine_role:
+        role || '',
+
+      machine_capacity:
+        capacity || '',
+
+      machine_utilities:
+        utilities || '',
+
+
+      // ----------------------------------------------
+      // STRATÉGIE D'ACQUISITION UTILISATEUR
+      // ----------------------------------------------
+
+      acquisition_mode:
+        'already_owned',
+
+      acquisition_source:
+        'user',
+
+      acquisition_status:
+        'already_owned',
+
+
+      // Aucun modèle catalogue P2I
+      model:
+        null,
+
+      model_id:
+        null,
+
+      manufacturer:
+        null,
+
+      supplier:
+        null,
+
+      supplier_id:
+        null,
+
+      supplier_status:
+        null,
+
+      supplier_country:
+        null,
+
+
+      // Informations utilisateur
+      user_price_estimate:
+        null,
+
+      user_price_currency:
+        null,
+
+      user_origin_country:
+        null,
+
+      user_supplier:
+        null,
+
+
+      // ----------------------------------------------
+      // PLAN D'ÉQUIPEMENT
+      // ----------------------------------------------
+
+      equipment_plan_status:
+        'selected',
+
+      is_selected_model:
+        false,
+
+
+      // Pas d'estimation d'achat de la machine
+      estimation_status:
+        'not_required',
+
+      // Pas de mise en relation fournisseur P2I
+      relation_status:
+        'not_required',
+
+      saved_at:
+        new Date().toISOString()
+    };
+
+
+    console.log(
+      '📦 Machine déjà possédée :',
+      machineData
+    );
+
+
+    // --------------------------------------------------
+    // 4. VÉRIFICATION D'UN CHOIX EXISTANT
+    // --------------------------------------------------
+
+    const {
+      data: existingRows,
+      error: searchError
+    } = await supabaseClient
+      .from('saved_machines')
+      .select('id,data')
+      .eq('user_id', user.id);
+
+    if (searchError) {
+      console.error(
+        '❌ Erreur recherche saved_machines :',
+        searchError
+      );
+
+      showToastMessage(
+        'Erreur lors de la vérification du plan.'
+      );
+
+      return;
+    }
+
+
+    const existingChoice =
+      (existingRows || []).find(row => {
+
+        const data =
+          row.data || {};
+
+        return (
+          data.up_id === upId &&
+          data.machine_key === machineKey &&
+          data.record_type === 'equipment_plan_item'
+        );
+
+      });
+
+
+    // --------------------------------------------------
+    // 5. REMPLACEMENT OU CRÉATION
+    // --------------------------------------------------
+
+    let saveError = null;
+
+    if (existingChoice) {
+
+      console.log(
+        '🔄 Remplacement du choix existant :',
+        existingChoice.id
+      );
+
+      const { error } =
+        await supabaseClient
+          .from('saved_machines')
+          .update({
+            data: machineData
+          })
+          .eq('id', existingChoice.id)
+          .eq('user_id', user.id);
+
+      saveError =
+        error;
+
+    } else {
+
+      console.log(
+        '➕ Création du choix machine déjà possédée'
+      );
+
+      const { error } =
+        await supabaseClient
+          .from('saved_machines')
+          .insert({
+            user_id: user.id,
+            data: machineData
+          });
+
+      saveError =
+        error;
+    }
+
+
+    // --------------------------------------------------
+    // 6. ERREUR SUPABASE
+    // --------------------------------------------------
+
+    if (saveError) {
+
+      console.error(
+        '❌ Erreur sauvegarde mode acquisition :',
+        saveError
+      );
+
+      showToastMessage(
+        'Erreur lors de l’enregistrement.'
+      );
+
+      return;
+    }
+
+
+    // --------------------------------------------------
+    // 7. SUCCÈS
+    // --------------------------------------------------
+
+    console.log(
+      '✅ Machine déclarée comme déjà possédée :',
+      machineName
+    );
+
+    showToastMessage(
+      'Machine indiquée comme déjà possédée.'
+    );
+
+
+    // --------------------------------------------------
+    // 8. ACTUALISATION DU PLAN
+    // --------------------------------------------------
+
+    await loadSavedMachines();
+
+  } catch (error) {
+
+    console.error(
+      '❌ Erreur selectEquipmentAcquisitionMode :',
+      error
+    );
+
+    showToastMessage(
+      'Une erreur est survenue.'
+    );
+  }
+}
 
     async function deleteSavedMachineSupabase(id) {
       if (!confirm('Supprimer cette machine ?')) return;
