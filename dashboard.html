@@ -3493,7 +3493,22 @@ console.log(
         savedMachine?.data ||
         planItem.data ||
         {};
+// ------------------------------------------------
+// STRATÉGIE D'ACQUISITION
+// ------------------------------------------------
 
+const acquisitionMode =
+  savedData.acquisition_mode ||
+  'p2i_catalog';
+
+const isAlreadyOwned =
+  acquisitionMode === 'already_owned';
+
+const isSelfPurchase =
+  acquisitionMode === 'self_purchase';
+
+const isP2ICatalog =
+  acquisitionMode === 'p2i_catalog';
 
       // ------------------------------------------------
       // Identité technique
