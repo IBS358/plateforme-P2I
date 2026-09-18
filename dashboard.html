@@ -4917,7 +4917,198 @@ async function selectEquipmentAcquisitionMode(
     );
   }
 }
+// ======================================================
+// SUPPRIMER LE CHOIX D'ACQUISITION D'UNE MACHINE
+// ======================================================
 
+async function removeEquipmentChoice(
+  upId,
+  machineKey
+) {
+
+  try {
+
+    // --------------------------------------------------
+    // 1. CONFIRMATION UTILISATEUR
+    // --------------------------------------------------
+
+    const confirmed = confirm(
+      "Supprimer votre choix pour cette machine ?\n\n" +
+      "La machine restera dans le plan d'équipement " +
+      "et repassera à l'état « À traiter »."
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    // --------------------------------------------------
+    // 2. UTILISATEUR CONNECTÉ
+    // --------------------------------------------------
+
+    const {
+      data: { user },
+      error: authError
+    } = await supabaseClient.auth.getUser();
+
+    if (authError || !user) {
+
+      console.error(
+        '❌ Utilisateur non connecté :',
+        authError
+      );
+
+      showToastMessage(
+        'Veuillez vous connecter.'
+      );
+
+      return;
+    }
+
+
+    // --------------------------------------------------
+    // 3. RECHERCHE DES ENREGISTREMENTS UTILISATEUR
+    // --------------------------------------------------
+
+    const {
+      data: rows,
+      error: searchError
+    } = await supabaseClient
+      .from('saved_machines')
+      .select('id,data')
+      .eq('user_id', user.id);
+
+
+    if (searchError) {
+
+      console.error(
+        '❌ Erreur recherche saved_machines :',
+        searchError
+      );
+
+      showToastMessage(
+        'Erreur lors de la recherche du choix.'
+      );
+
+      return;
+    }
+
+
+    // --------------------------------------------------
+    // 4. RETROUVER LE CHOIX DE CETTE MACHINE
+    // --------------------------------------------------
+
+    const matchingRows =
+      (rows || []).filter(row => {
+
+        const data =
+          row.data || {};
+
+        return (
+          data.up_id === upId &&
+          data.machine_key === machineKey &&
+          data.record_type === 'equipment_plan_item'
+        );
+
+      });
+
+
+    console.log(
+      '🗑️ Choix à supprimer :',
+      {
+        upId,
+        machineKey,
+        count: matchingRows.length,
+        rows: matchingRows
+      }
+    );
+
+
+    if (!matchingRows.length) {
+
+      console.warn(
+        '⚠️ Aucun choix trouvé pour cette machine.'
+      );
+
+      showToastMessage(
+        'Aucun choix enregistré pour cette machine.'
+      );
+
+      return;
+    }
+
+
+    // --------------------------------------------------
+    // 5. SUPPRESSION
+    // --------------------------------------------------
+
+    const ids =
+      matchingRows.map(row => row.id);
+
+
+    const {
+      error: deleteError
+    } = await supabaseClient
+      .from('saved_machines')
+      .delete()
+      .eq('user_id', user.id)
+      .in('id', ids);
+
+
+    if (deleteError) {
+
+      console.error(
+        '❌ Erreur suppression choix :',
+        deleteError
+      );
+
+      showToastMessage(
+        'Erreur lors de la suppression du choix.'
+      );
+
+      return;
+    }
+
+
+    // --------------------------------------------------
+    // 6. SUCCÈS
+    // --------------------------------------------------
+
+    console.log(
+      '✅ Choix supprimé :',
+      {
+        upId,
+        machineKey,
+        ids
+      }
+    );
+
+
+    showToastMessage(
+      'Choix supprimé. La machine reste à traiter.'
+    );
+
+
+    // --------------------------------------------------
+    // 7. ACTUALISATION DU DASHBOARD
+    // --------------------------------------------------
+
+    await loadSavedMachines();
+
+
+  } catch (error) {
+
+    console.error(
+      '❌ Erreur removeEquipmentChoice :',
+      error
+    );
+
+    showToastMessage(
+      'Une erreur est survenue.'
+    );
+  }
+}
     async function deleteSavedMachineSupabase(id) {
       if (!confirm('Supprimer cette machine ?')) return;
       const email = getActiveEmail();
