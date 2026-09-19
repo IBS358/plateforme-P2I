@@ -4885,6 +4885,290 @@ function closeSelfPurchaseEditor() {
 
 }
     // ======================================================
+// ENREGISTREMENT : MACHINE ACHETÉE PAR L'UTILISATEUR
+// ======================================================
+
+async function saveSelfPurchaseChoice(
+  upId,
+  upNom,
+  machineKey,
+  machineName,
+  role,
+  capacity,
+  utilities
+) {
+
+  try {
+
+    // --------------------------------------------------
+    // 1. UTILISATEUR CONNECTÉ
+    // --------------------------------------------------
+
+    const {
+      data: { user }
+    } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+      alert('Vous devez être connecté.');
+      return;
+    }
+
+
+    // --------------------------------------------------
+    // 2. LECTURE DU FORMULAIRE
+    // --------------------------------------------------
+
+    const priceValue =
+      document
+        .getElementById('selfPurchasePrice')
+        ?.value
+        ?.trim() || '';
+
+    const currency =
+      document
+        .getElementById('selfPurchaseCurrency')
+        ?.value || 'USD';
+
+    const supplier =
+      document
+        .getElementById('selfPurchaseSupplier')
+        ?.value
+        ?.trim() || '';
+
+    const country =
+      document
+        .getElementById('selfPurchaseCountry')
+        ?.value
+        ?.trim() || '';
+
+    const note =
+      document
+        .getElementById('selfPurchaseNote')
+        ?.value
+        ?.trim() || '';
+
+
+    // --------------------------------------------------
+    // 3. PRIX UTILISATEUR
+    // --------------------------------------------------
+
+    let userPriceEstimate = null;
+
+    if (priceValue !== '') {
+
+      const parsedPrice =
+        Number(priceValue);
+
+      if (
+        !Number.isFinite(parsedPrice) ||
+        parsedPrice < 0
+      ) {
+
+        alert(
+          'Veuillez saisir un prix estimé valide.'
+        );
+
+        return;
+      }
+
+      userPriceEstimate =
+        parsedPrice;
+    }
+
+
+    // --------------------------------------------------
+    // 4. DONNÉES À ENREGISTRER
+    // --------------------------------------------------
+
+    const machineData = {
+
+      data_version:
+        'p2i_v2',
+
+      record_type:
+        'equipment_plan_item',
+
+      up_id:
+        upId || '',
+
+      up_nom:
+        upNom || '',
+
+      machine_key:
+        machineKey || '',
+
+      machine:
+        machineName || 'Machine',
+
+      machine_role:
+        role || '',
+
+      machine_capacity:
+        capacity || '',
+
+      machine_utilities:
+        utilities || '',
+
+
+      // ----------------------------------------------
+      // STRATÉGIE D'ACQUISITION
+      // ----------------------------------------------
+
+      acquisition_mode:
+        'self_purchase',
+
+      acquisition_status:
+        'user_declared',
+
+      user_price_estimate:
+        userPriceEstimate,
+
+      user_price_currency:
+        currency,
+
+      user_origin_country:
+        country || null,
+
+      user_supplier:
+        supplier || null,
+
+      user_note:
+        note || null,
+
+
+      // ----------------------------------------------
+      // PAS DE MODÈLE P2I RETENU
+      // ----------------------------------------------
+
+      model:
+        null,
+
+      model_id:
+        null,
+
+      supplier:
+        null,
+
+      supplier_id:
+        null,
+
+      supplier_status:
+        null,
+
+      origin:
+        null,
+
+
+      // ----------------------------------------------
+      // PLAN D'ÉQUIPEMENT
+      // ----------------------------------------------
+
+      equipment_plan_status:
+        'selected',
+
+      is_selected_model:
+        false,
+
+
+      // ----------------------------------------------
+      // ESTIMATION / RELATION
+      // ----------------------------------------------
+
+      estimation_status:
+        'pending',
+
+      relation_status:
+        'not_requested',
+
+
+      // ----------------------------------------------
+      // DATE
+      // ----------------------------------------------
+
+      saved_at:
+        new Date().toISOString()
+    };
+
+
+    console.log(
+      '🛒 Acquisition utilisateur :',
+      machineData
+    );
+
+
+    // --------------------------------------------------
+    // 5. ENREGISTREMENT SUPABASE
+    // --------------------------------------------------
+
+    const {
+      data: insertData,
+      error
+    } = await supabaseClient
+      .from('saved_machines')
+      .insert({
+        user_id:
+          user.id,
+
+        data:
+          machineData
+      })
+      .select();
+
+
+    if (error) {
+
+      console.error(
+        '❌ Erreur acquisition utilisateur :',
+        error
+      );
+
+      alert(
+        "Erreur lors de l'enregistrement : " +
+        error.message
+      );
+
+      return;
+    }
+
+
+    console.log(
+      '✅ Acquisition utilisateur enregistrée :',
+      insertData
+    );
+
+
+    // --------------------------------------------------
+    // 6. FERMETURE + ACTUALISATION
+    // --------------------------------------------------
+
+    closeSelfPurchaseEditor();
+
+    if (
+      typeof showToastMessage ===
+      'function'
+    ) {
+
+      showToastMessage(
+        'Choix enregistré'
+      );
+
+    }
+
+    await loadSavedMachines();
+
+  } catch (error) {
+
+    console.error(
+      '❌ Erreur saveSelfPurchaseChoice :',
+      error
+    );
+
+    alert(
+      "Une erreur est survenue lors de l'enregistrement."
+    );
+  }
+}
+    // ======================================================
 // CHOIX DU MODE D'ACQUISITION D'UNE MACHINE
 // ======================================================
 
