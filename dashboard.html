@@ -4031,15 +4031,16 @@ const isP2ICatalog =
           : `
             <button
               type="button"
-              onclick="openAcquisitionChoiceEditor(
-                '${escapeHtml(up.id || '')}',
-                '${escapeHtml(up.nom || '')}',
-                '${escapeHtml(machineKey || '')}',
-                '${escapeHtml(machineName || '')}',
-                '${escapeHtml(role || '')}',
-                '${escapeHtml(capacity || '')}',
-                '${escapeHtml(utilities || '')}'
-              )"
+             onclick="openSelfPurchaseEditor(
+  '${escapeHtml(up.id || '')}',
+  '${escapeHtml(up.nom || '')}',
+  '${escapeHtml(machineKey || '')}',
+  '${escapeHtml(machineName || '')}',
+  '${escapeHtml(role || '')}',
+  '${escapeHtml(capacity || '')}',
+  '${escapeHtml(utilities || '')}',
+  '${escapeHtml(savedMachine?.id || '')}'
+)"
               style="
                 border:1px solid rgba(59,130,246,.35);
                 background:rgba(59,130,246,.08);
