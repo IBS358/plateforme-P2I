@@ -4624,19 +4624,33 @@ async function selectEquipmentAcquisitionMode(
 
 
     // --------------------------------------------------
-    // 2. POUR L'INSTANT :
-    //    SEUL "MACHINE DÉJÀ POSSÉDÉE" EST TRAITÉ
-    // --------------------------------------------------
+// 2. TRAITEMENT DU MODE D'ACQUISITION
+// --------------------------------------------------
 
-    if (acquisitionMode !== 'already_owned') {
+if (acquisitionMode === 'self_purchase') {
 
-      console.warn(
-        '⚠️ Mode acquisition pas encore traité :',
-        acquisitionMode
-      );
+  openSelfPurchaseEditor(
+    upId,
+    upNom,
+    machineKey,
+    machineName,
+    role,
+    capacity,
+    utilities
+  );
 
-      return;
-    }
+  return;
+}
+
+if (acquisitionMode !== 'already_owned') {
+
+  console.warn(
+    '⚠️ Mode acquisition inconnu :',
+    acquisitionMode
+  );
+
+  return;
+}
 
 
     // --------------------------------------------------
