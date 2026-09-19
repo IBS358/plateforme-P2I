@@ -3765,40 +3765,120 @@ const isP2ICatalog =
 
 
             // ==========================================
-            // ACQUISITION PAR L'UTILISATEUR
-            // ==========================================
+// ACQUISITION PAR L'UTILISATEUR
+// ==========================================
 
-            : isSelfPurchase
+: isSelfPurchase
 
-              ? `
+  ? `
 
-                <div style="
-                  color:#fbbf24;
-                  font-size:11px;
-                  font-weight:700;
-                  margin-bottom:3px;
-                ">
-                  <i class="fas fa-user-cog"></i>
-                  ACQUISITION PAR VOS PROPRES MOYENS
-                </div>
+    <div style="
+      color:#fbbf24;
+      font-size:11px;
+      font-weight:700;
+      margin-bottom:3px;
+    ">
+      <i class="fas fa-user-cog"></i>
+      ACQUISITION PAR VOS PROPRES MOYENS
+    </div>
 
-                <div style="
-                  color:#e2e8f0;
-                  font-size:12px;
-                  font-weight:600;
-                ">
-                  Machine renseignée par l'utilisateur
-                </div>
+    <div style="
+      color:#e2e8f0;
+      font-size:12px;
+      font-weight:600;
+    ">
+      Machine renseignée par l'utilisateur
+    </div>
 
-                <div style="
-                  color:#94a3b8;
-                  font-size:10px;
-                  margin-top:4px;
-                ">
-                  Prix et origine à préciser
-                </div>
 
-              `
+    ${
+      savedData.user_price_estimate != null
+        ? `
+          <div style="
+            color:#e2e8f0;
+            font-size:11px;
+            margin-top:5px;
+          ">
+            <strong>Prix déclaré :</strong>
+            ${escapeHtml(
+              String(savedData.user_price_estimate)
+            )}
+            ${escapeHtml(
+              savedData.user_price_currency || 'USD'
+            )}
+          </div>
+        `
+        : `
+          <div style="
+            color:#94a3b8;
+            font-size:10px;
+            margin-top:5px;
+          ">
+            Prix non renseigné
+          </div>
+        `
+    }
+
+
+    ${
+      savedData.user_supplier
+        ? `
+          <div style="
+            color:#94a3b8;
+            font-size:11px;
+            margin-top:3px;
+          ">
+            <strong>Fournisseur déclaré :</strong>
+            ${escapeHtml(savedData.user_supplier)}
+          </div>
+        `
+        : ''
+    }
+
+
+    ${
+      savedData.user_origin_country
+        ? `
+          <div style="
+            color:#94a3b8;
+            font-size:11px;
+            margin-top:3px;
+          ">
+            <strong>Origine déclarée :</strong>
+            ${escapeHtml(savedData.user_origin_country)}
+          </div>
+        `
+        : ''
+    }
+
+
+    ${
+      savedData.user_note
+        ? `
+          <div style="
+            color:#94a3b8;
+            font-size:10px;
+            margin-top:5px;
+            font-style:italic;
+          ">
+            ${escapeHtml(savedData.user_note)}
+          </div>
+        `
+        : ''
+    }
+
+
+    <div style="
+      color:#64748b;
+      font-size:9px;
+      margin-top:6px;
+      line-height:1.4;
+    ">
+      Informations déclarées par l'utilisateur —
+      non vérifiées par la P2I.
+    </div>
+
+  `
 
 
               // ==========================================
