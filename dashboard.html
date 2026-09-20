@@ -4673,7 +4673,7 @@ async function deleteDevisSupabase(id) {
 // ACQUISITION PERSONNELLE D'UNE MACHINE
 // ======================================================
 
-async function openSelfPurchaseEditor(
+async function saveSelfPurchaseChoice(
   upId,
   upNom,
   machineKey,
@@ -4683,7 +4683,6 @@ async function openSelfPurchaseEditor(
   utilities,
   savedMachineId = null
 ) {
-
   // --------------------------------------------------
   // DONNÉES EXISTANTES EN CAS DE MODIFICATION
   // --------------------------------------------------
@@ -5035,21 +5034,22 @@ async function openSelfPurchaseEditor(
 
   document.body.appendChild(modal);
 
-  document
-    .getElementById('saveSelfPurchaseButton')
-    .addEventListener('click', () => {
+ document
+  .getElementById('saveSelfPurchaseButton')
+  .addEventListener('click', () => {
 
-      saveSelfPurchaseChoice(
-        upId,
-        upNom,
-        machineKey,
-        machineName,
-        role,
-        capacity,
-        utilities
-      );
+    saveSelfPurchaseChoice(
+      upId,
+      upNom,
+      machineKey,
+      machineName,
+      role,
+      capacity,
+      utilities,
+      savedMachineId
+    );
 
-    });
+  });
 }
 
 
@@ -5071,9 +5071,9 @@ async function saveSelfPurchaseChoice(
   machineName,
   role,
   capacity,
-  utilities
+  utilities,
+  savedMachineId = null
 ) {
-
   try {
 
     // --------------------------------------------------
@@ -5276,19 +5276,55 @@ async function saveSelfPurchaseChoice(
     // 5. ENREGISTREMENT SUPABASE
     // --------------------------------------------------
 
-    const {
-      data: insertData,
-      error
-    } = await supabaseClient
-      .from('saved_machines')
-      .insert({
-        user_id:
-          user.id,
+    let savedResult;
+let error;
 
-        data:
-          machineData
-      })
-      .select();
+
+// --------------------------------------------------
+// MODIFICATION D'UN CHOIX EXISTANT
+// --------------------------------------------------
+
+if (savedMachineId) {
+
+  const result = await supabaseClient
+    .from('saved_machines')
+    .update({
+      data: machineData
+    })
+    .eq('id', savedMachineId)
+    .eq('user_id', user.id)
+    .select();
+
+  savedResult =
+    result.data;
+
+  error =
+    result.error;
+
+}
+
+
+// --------------------------------------------------
+// NOUVEAU CHOIX
+// --------------------------------------------------
+
+else {
+
+  const result = await supabaseClient
+    .from('saved_machines')
+    .insert({
+      user_id: user.id,
+      data: machineData
+    })
+    .select();
+
+  savedResult =
+    result.data;
+
+  error =
+    result.error;
+
+}
 
 
     if (error) {
@@ -5308,10 +5344,11 @@ async function saveSelfPurchaseChoice(
 
 
     console.log(
-      '✅ Acquisition utilisateur enregistrée :',
-      insertData
-    );
-
+  savedMachineId
+    ? '✅ Acquisition utilisateur modifiée :'
+    : '✅ Acquisition utilisateur enregistrée :',
+  savedResult
+);
 
     // --------------------------------------------------
     // 6. FERMETURE + ACTUALISATION
