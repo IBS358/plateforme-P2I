@@ -4129,58 +4129,58 @@ const isP2ICatalog =
           justify-content:flex-end;
         ">
 
-          <button
-            type="button"
-          onclick="selectEquipmentAcquisitionMode(
-  '${escapeHtml(up.id || '')}',
-  '${escapeHtml(up.nom || '')}',
-  '${escapeHtml(machineKey || '')}',
-  '${escapeHtml(machineName || '')}',
-  '${escapeHtml(role || '')}',
-  '${escapeHtml(capacity || '')}',
-  '${escapeHtml(utilities || '')}',
-  'already_owned'
-)"
-            style="
-              border:1px solid rgba(34,197,94,.35);
-              background:rgba(34,197,94,.08);
-              color:#16a34a;
-              border-radius:7px;
-              padding:6px 8px;
-              font-size:10px;
-              cursor:pointer;
-            "
-          >
-            <i class="fas fa-check-circle"></i>
-            Je possède cette machine
-          </button>
+         <button
+  type="button"
+  onclick="selectEquipmentAcquisitionMode(
+    '${escapeJsString(up.id || '')}',
+    '${escapeJsString(up.nom || '')}',
+    '${escapeJsString(machineKey || '')}',
+    '${escapeJsString(machineName || '')}',
+    '${escapeJsString(role || '')}',
+    '${escapeJsString(capacity || '')}',
+    '${escapeJsString(utilities || '')}',
+    'already_owned'
+  )"
+  style="
+    border:1px solid rgba(34,197,94,.35);
+    background:rgba(34,197,94,.08);
+    color:#16a34a;
+    border-radius:7px;
+    padding:6px 8px;
+    font-size:10px;
+    cursor:pointer;
+  "
+>
+  <i class="fas fa-check-circle"></i>
+  Je possède cette machine
+</button>
 
-          <button
-            type="button"
-            onclick="selectEquipmentAcquisitionMode(
-  '${escapeHtml(up.id || '')}',
-  '${escapeHtml(up.nom || '')}',
-  '${escapeHtml(machineKey || '')}',
-  '${escapeHtml(machineName || '')}',
-  '${escapeHtml(role || '')}',
-  '${escapeHtml(capacity || '')}',
-  '${escapeHtml(utilities || '')}',
-  'self_purchase'
-)"
-            style="
-              border:1px solid rgba(245,158,11,.35);
-              background:rgba(245,158,11,.08);
-              color:#d97706;
-              border-radius:7px;
-              padding:6px 8px;
-              font-size:10px;
-              cursor:pointer;
-            "
-          >
-            <i class="fas fa-user-cog"></i>
-            Je me la procure moi-même
-          </button>
 
+<button
+  type="button"
+  onclick="selectEquipmentAcquisitionMode(
+    '${escapeJsString(up.id || '')}',
+    '${escapeJsString(up.nom || '')}',
+    '${escapeJsString(machineKey || '')}',
+    '${escapeJsString(machineName || '')}',
+    '${escapeJsString(role || '')}',
+    '${escapeJsString(capacity || '')}',
+    '${escapeJsString(utilities || '')}',
+    'self_purchase'
+  )"
+  style="
+    border:1px solid rgba(245,158,11,.35);
+    background:rgba(245,158,11,.08);
+    color:#d97706;
+    border-radius:7px;
+    padding:6px 8px;
+    font-size:10px;
+    cursor:pointer;
+  "
+>
+  <i class="fas fa-user-cog"></i>
+  Je me la procure moi-même
+</button>
         </div>
       `
   }
