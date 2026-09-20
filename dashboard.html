@@ -4047,17 +4047,17 @@ const isP2ICatalog =
           `
           : `
             <button
-              type="button"
-             onclick="openSelfPurchaseEditor(
-  '${escapeHtml(up.id || '')}',
-  '${escapeHtml(up.nom || '')}',
-  '${escapeHtml(machineKey || '')}',
-  '${escapeHtml(machineName || '')}',
-  '${escapeHtml(role || '')}',
-  '${escapeHtml(capacity || '')}',
-  '${escapeHtml(utilities || '')}',
-  '${escapeHtml(savedMachine?.id || '')}'
-)"
+  type="button"
+  onclick="openSelfPurchaseEditor(
+    '${escapeJsString(up.id || '')}',
+    '${escapeJsString(up.nom || '')}',
+    '${escapeJsString(machineKey || '')}',
+    '${escapeJsString(machineName || '')}',
+    '${escapeJsString(role || '')}',
+    '${escapeJsString(capacity || '')}',
+    '${escapeJsString(utilities || '')}',
+    '${escapeJsString(savedMachine?.id || '')}'
+  )"
               style="
                 border:1px solid rgba(59,130,246,.35);
                 background:rgba(59,130,246,.08);
