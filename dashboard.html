@@ -4867,9 +4867,38 @@ async function openSelfPurchaseEditor(
             color:#f8fafc;
           "
         >
-          <option value="USD">USD</option>
-          <option value="XOF">FCFA</option>
-          <option value="EUR">EUR</option>
+          <option
+  value="USD"
+  ${
+    (existingData.user_price_currency || 'USD') === 'USD'
+      ? 'selected'
+      : ''
+  }
+>
+  USD
+</option>
+
+<option
+  value="XOF"
+  ${
+    existingData.user_price_currency === 'XOF'
+      ? 'selected'
+      : ''
+  }
+>
+  FCFA
+</option>
+
+<option
+  value="EUR"
+  ${
+    existingData.user_price_currency === 'EUR'
+      ? 'selected'
+      : ''
+  }
+>
+  EUR
+</option>
         </select>
 
       </div>
@@ -4886,6 +4915,9 @@ async function openSelfPurchaseEditor(
       <input
         id="selfPurchaseSupplier"
         type="text"
+        value="${escapeHtml(
+  existingData.user_supplier || ''
+)}"
         placeholder="Facultatif"
         style="
           width:100%;
@@ -4911,6 +4943,9 @@ async function openSelfPurchaseEditor(
       <input
         id="selfPurchaseCountry"
         type="text"
+        value="${escapeHtml(
+  existingData.user_origin_country || ''
+)}"
         placeholder="Facultatif"
         style="
           width:100%;
@@ -4947,7 +4982,9 @@ async function openSelfPurchaseEditor(
           background:#020617;
           color:#f8fafc;
         "
-      ></textarea>
+      >${escapeHtml(
+  existingData.user_note || ''
+)}</textarea>
 
       <div style="
         display:flex;
@@ -4984,7 +5021,11 @@ async function openSelfPurchaseEditor(
             cursor:pointer;
           "
         >
-          Enregistrer mon choix
+          ${
+  savedMachineId
+    ? 'Enregistrer les modifications'
+    : 'Enregistrer mon choix'
+}
         </button>
 
       </div>
