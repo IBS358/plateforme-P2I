@@ -4673,7 +4673,7 @@ async function deleteDevisSupabase(id) {
 // ACQUISITION PERSONNELLE D'UNE MACHINE
 // ======================================================
 
-function openSelfPurchaseEditor(
+async function openSelfPurchaseEditor(
   upId,
   upNom,
   machineKey,
@@ -4683,6 +4683,52 @@ function openSelfPurchaseEditor(
   utilities,
   savedMachineId = null
 ) {
+
+  // --------------------------------------------------
+  // DONNÉES EXISTANTES EN CAS DE MODIFICATION
+  // --------------------------------------------------
+
+  let existingData = {};
+
+  if (savedMachineId) {
+
+    try {
+
+      const {
+        data: existingMachine,
+        error
+      } = await supabaseClient
+        .from('saved_machines')
+        .select('id, data')
+        .eq('id', savedMachineId)
+        .single();
+
+      if (error) {
+
+        console.error(
+          '❌ Impossible de charger le choix existant :',
+          error
+        );
+
+      } else {
+
+        existingData =
+          existingMachine?.data || {};
+
+        console.log(
+          '✏️ Choix utilisateur à modifier :',
+          existingData
+        );
+      }
+
+    } catch (error) {
+
+      console.error(
+        '❌ Erreur chargement modification :',
+        error
+      );
+    }
+  }
 
   // Supprime une éventuelle ancienne fenêtre
   document
