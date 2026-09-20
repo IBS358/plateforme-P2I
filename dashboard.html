@@ -4840,6 +4840,13 @@ async function openSelfPurchaseEditor(
           type="number"
           min="0"
           step="0.01"
+          value="${
+  existingData.user_price_estimate != null
+    ? escapeHtml(
+        String(existingData.user_price_estimate)
+      )
+    : ''
+}"
           placeholder="Ex. 15000"
           style="
             padding:10px;
