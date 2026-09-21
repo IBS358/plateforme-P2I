@@ -4487,12 +4487,37 @@ const isP2ICatalog =
             margin-top:5px;
           ">
             <strong>Prix déclaré :</strong>
-            ${escapeHtml(
-              String(savedData.user_price_estimate)
-            )}
-            ${escapeHtml(
-              savedData.user_price_currency || 'USD'
-            )}
+${escapeHtml(
+  String(savedData.user_price_estimate)
+)}
+${escapeHtml(
+  savedData.user_price_currency || 'USD'
+)}
+${
+  savedData.user_price_basis
+    ? `
+      <span style="
+        color:#fbbf24;
+        font-weight:600;
+        margin-left:4px;
+      ">
+        — ${
+          savedData.user_price_basis === 'exw'
+            ? 'EXW'
+            : savedData.user_price_basis === 'fob'
+              ? 'FOB'
+              : savedData.user_price_basis === 'cif_abidjan'
+                ? 'CIF Abidjan'
+                : savedData.user_price_basis === 'delivered_site_ci'
+                  ? 'Rendu sur site'
+                  : savedData.user_price_basis === 'unknown'
+                    ? 'Base à confirmer'
+                    : escapeHtml(savedData.user_price_basis)
+        }
+      </span>
+    `
+    : ''
+}
           </div>
         `
         : `
