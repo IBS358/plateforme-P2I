@@ -3012,6 +3012,378 @@ function buildEquipmentPlanForUp(up) {
   return finalPlan;
 
 }
+  // ======================================================
+// SYNTHÈSE FINANCIÈRE DU PLAN D'ÉQUIPEMENT
+// ======================================================
+
+function buildP2IEquipmentEstimate(up, equipmentPlan) {
+
+  const plan =
+    Array.isArray(equipmentPlan)
+      ? equipmentPlan
+      : [];
+
+
+  const estimate = {
+
+    up_id:
+      up?.id || '',
+
+    up_nom:
+      up?.nom || 'Unité de production',
+
+    total_required:
+      plan.length,
+
+    configured:
+      0,
+
+    remaining:
+      0,
+
+
+    // ----------------------------------------------
+    // CATÉGORIES
+    // ----------------------------------------------
+
+    p2i_catalog:
+      [],
+
+    self_purchase:
+      [],
+
+    already_owned:
+      [],
+
+    pending:
+      [],
+
+
+    // ----------------------------------------------
+    // SYNTHÈSE FINANCIÈRE
+    // ----------------------------------------------
+
+    known_machine_cost_usd:
+      0,
+
+    p2i_known_cost_usd:
+      0,
+
+    user_declared_cost_usd:
+      0,
+
+    already_owned_cost_usd:
+      0,
+
+
+    // ----------------------------------------------
+    // CONTRÔLES
+    // ----------------------------------------------
+
+    has_unpriced_p2i_models:
+      false,
+
+    has_pending_machines:
+      false,
+
+    has_non_usd_user_prices:
+      false,
+
+    estimate_complete:
+      false
+  };
+
+
+  // ====================================================
+  // ANALYSE DE CHAQUE MACHINE
+  // ====================================================
+
+  plan.forEach(item => {
+
+    const data =
+      item?.data || {};
+
+
+    const machineName =
+      item?.machine_name ||
+      data.machine ||
+      'Machine';
+
+
+    const isConfigured =
+      item?.coverage_status === 'selected';
+
+
+    // --------------------------------------------------
+    // MACHINE NON RENSEIGNÉE
+    // --------------------------------------------------
+
+    if (!isConfigured) {
+
+      estimate.remaining += 1;
+
+      estimate.has_pending_machines =
+        true;
+
+      estimate.pending.push({
+
+        machine_key:
+          item?.machine_key || '',
+
+        machine:
+          machineName,
+
+        status:
+          'pending',
+
+        amount_usd:
+          null,
+
+        price_source:
+          null
+      });
+
+      return;
+    }
+
+
+    estimate.configured += 1;
+
+
+    // --------------------------------------------------
+    // MODE D'ACQUISITION
+    // --------------------------------------------------
+
+    const acquisitionMode =
+      data.acquisition_mode || 'p2i_catalog';
+
+
+    // ==================================================
+    // 1. MACHINE DÉJÀ POSSÉDÉE
+    // ==================================================
+
+    if (acquisitionMode === 'already_owned') {
+
+      estimate.already_owned.push({
+
+        machine_key:
+          item?.machine_key || '',
+
+        machine:
+          machineName,
+
+        acquisition_mode:
+          'already_owned',
+
+        amount_usd:
+          0,
+
+        price_source:
+          'already_owned',
+
+        verification_status:
+          'user_declared',
+
+        bp_pro_proof_required:
+          true
+      });
+
+      return;
+    }
+
+
+    // ==================================================
+    // 2. ACQUISITION PAR L'UTILISATEUR
+    // ==================================================
+
+    if (acquisitionMode === 'self_purchase') {
+
+      const price =
+        Number(
+          data.user_price_estimate
+        );
+
+
+      const currency =
+        String(
+          data.user_price_currency || 'USD'
+        ).toUpperCase();
+
+
+      const validPrice =
+        Number.isFinite(price) &&
+        price > 0;
+
+
+      // Pour l'instant, seul un prix USD peut être
+      // additionné directement au sous-total USD.
+      const usableUsdPrice =
+        validPrice &&
+        currency === 'USD';
+
+
+      if (usableUsdPrice) {
+
+        estimate.user_declared_cost_usd +=
+          price;
+
+        estimate.known_machine_cost_usd +=
+          price;
+
+      } else if (
+        validPrice &&
+        currency !== 'USD'
+      ) {
+
+        estimate.has_non_usd_user_prices =
+          true;
+      }
+
+
+      estimate.self_purchase.push({
+
+        machine_key:
+          item?.machine_key || '',
+
+        machine:
+          machineName,
+
+        acquisition_mode:
+          'self_purchase',
+
+        amount:
+          validPrice
+            ? price
+            : null,
+
+        currency:
+          currency,
+
+        amount_usd:
+          usableUsdPrice
+            ? price
+            : null,
+
+        supplier:
+          data.user_supplier || null,
+
+        origin_country:
+          data.user_origin_country || null,
+
+        note:
+          data.user_note || null,
+
+        price_source:
+          'user_declared',
+
+        verification_status:
+          'not_verified_by_p2i'
+      });
+
+      return;
+    }
+
+
+    // ==================================================
+    // 3. MODÈLE CATALOGUE P2I
+    // ==================================================
+
+    const rawP2IPrice =
+      data.catalog_price_usd ??
+      data.price_catalogue_verified ??
+      data.price_catalogue ??
+      data.price ??
+      null;
+
+
+    const parsedP2IPrice =
+      typeof rawP2IPrice === 'number'
+        ? rawP2IPrice
+        : Number(
+            String(rawP2IPrice ?? '')
+              .replace(/[^\d.,-]/g, '')
+              .replace(',', '.')
+          );
+
+
+    const validP2IPrice =
+      Number.isFinite(parsedP2IPrice) &&
+      parsedP2IPrice > 0;
+
+
+    if (validP2IPrice) {
+
+      estimate.p2i_known_cost_usd +=
+        parsedP2IPrice;
+
+      estimate.known_machine_cost_usd +=
+        parsedP2IPrice;
+
+    } else {
+
+      estimate.has_unpriced_p2i_models =
+        true;
+    }
+
+
+    estimate.p2i_catalog.push({
+
+      machine_key:
+        item?.machine_key || '',
+
+      machine:
+        machineName,
+
+      model:
+        data.model || null,
+
+      supplier:
+        data.supplier || null,
+
+      origin:
+        data.origin || null,
+
+      acquisition_mode:
+        'p2i_catalog',
+
+      amount_usd:
+        validP2IPrice
+          ? parsedP2IPrice
+          : null,
+
+      price_source:
+        validP2IPrice
+          ? 'p2i_reference'
+          : 'quotation_required',
+
+      verification_status:
+        validP2IPrice
+          ? 'p2i_reference'
+          : 'pending_quotation'
+    });
+
+  });
+
+
+  // ====================================================
+  // ÉTAT GLOBAL DE L'ESTIMATION MACHINES
+  // ====================================================
+
+  estimate.estimate_complete =
+    !estimate.has_pending_machines &&
+    !estimate.has_unpriced_p2i_models &&
+    !estimate.has_non_usd_user_prices;
+
+
+  console.log(
+    '💰 ESTIMATION ÉQUIPEMENT P2I :',
+    up?.id,
+    estimate
+  );
+
+
+  return estimate;
+}
  // ----------------------------------------------
 // AFFICHAGE DU PLAN D'ÉQUIPEMENT
 // ----------------------------------------------
