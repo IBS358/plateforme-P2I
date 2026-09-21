@@ -3456,6 +3456,21 @@ Object.values(projets).forEach(projet => {
       up.nom,
       equipmentPlan
     );
+    // ==================================================
+// SYNTHÈSE FINANCIÈRE P2I DU PLAN D'ÉQUIPEMENT
+// ==================================================
+
+const equipmentEstimate =
+  buildP2IEquipmentEstimate(
+    up,
+    equipmentPlan
+  );
+
+console.log(
+  '💰 SYNTHÈSE ESTIMATION P2I :',
+  up.nom,
+  equipmentEstimate
+);
 if (up.id === 'biscuiterie') {
 
   console.log(
