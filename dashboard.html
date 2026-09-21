@@ -3258,7 +3258,8 @@ function buildP2IEquipmentEstimate(up, equipmentPlan) {
 
         currency:
           currency,
-
+price_basis:
+    data.user_price_basis || null,
         amount_usd:
           usableUsdPrice
             ? price
