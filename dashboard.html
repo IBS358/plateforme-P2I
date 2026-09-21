@@ -5608,9 +5608,110 @@ async function openSelfPurchaseEditor(
         font-size:12px;
         margin-bottom:6px;
       ">
-        Fournisseur ou source d'approvisionnement
+        Base du prix déclaré *
       </label>
 
+      <select
+        id="selfPurchasePriceBasis"
+        required
+        style="
+          width:100%;
+          box-sizing:border-box;
+          padding:10px;
+          margin-bottom:6px;
+          border-radius:8px;
+          border:1px solid #334155;
+          background:#020617;
+          color:#f8fafc;
+        "
+      >
+
+        <option
+          value=""
+          ${
+            !existingData.user_price_basis
+              ? 'selected'
+              : ''
+          }
+        >
+          Sélectionner la base du prix
+        </option>
+
+        <option
+          value="exw"
+          ${
+            existingData.user_price_basis === 'exw'
+              ? 'selected'
+              : ''
+          }
+        >
+          EXW — départ usine
+        </option>
+
+        <option
+          value="fob"
+          ${
+            existingData.user_price_basis === 'fob'
+              ? 'selected'
+              : ''
+          }
+        >
+          FOB — port d'embarquement
+        </option>
+
+        <option
+          value="cif_abidjan"
+          ${
+            existingData.user_price_basis === 'cif_abidjan'
+              ? 'selected'
+              : ''
+          }
+        >
+          CIF — Port d'Abidjan
+        </option>
+
+        <option
+          value="delivered_site_ci"
+          ${
+            existingData.user_price_basis === 'delivered_site_ci'
+              ? 'selected'
+              : ''
+          }
+        >
+          Rendu sur site en Côte d'Ivoire
+        </option>
+
+        <option
+          value="unknown"
+          ${
+            existingData.user_price_basis === 'unknown'
+              ? 'selected'
+              : ''
+          }
+        >
+          Je ne sais pas
+        </option>
+
+      </select>
+
+      <div style="
+        color:#64748b;
+        font-size:9px;
+        line-height:1.4;
+        margin-bottom:15px;
+      ">
+        Cette information permet à la P2I de déterminer
+        quels frais logistiques doivent encore être ajoutés
+        à votre prix.
+      </div>
+      <label style="
+  display:block;
+  color:#cbd5e1;
+  font-size:12px;
+  margin-bottom:6px;
+">
+  Fournisseur ou source d'approvisionnement
+</label>
       <input
         id="selfPurchaseSupplier"
         type="text"
