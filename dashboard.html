@@ -4054,40 +4054,6 @@ console.log(
 
             </div>
 
-
-            ${
-              equipmentEstimate.has_unpriced_p2i_models
-                ? `
-                  <div style="
-                    color:#fbbf24;
-                    font-size:10px;
-                    margin-top:10px;
-                  ">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                    ${
-                      equipmentEstimate.p2i_catalog.filter(
-                        item => item.amount_usd == null
-                      ).length
-                    }
-                    modèle${
-                      equipmentEstimate.p2i_catalog.filter(
-                        item => item.amount_usd == null
-                      ).length > 1 ? 's' : ''
-                    }
-                    P2I ${
-                      equipmentEstimate.p2i_catalog.filter(
-                        item => item.amount_usd == null
-                      ).length > 1
-                        ? 'nécessitent'
-                        : 'nécessite'
-                    }
-                    encore une cotation.
-                  </div>
-                `
-                : ''
-            }
-
-
            ${
   !equipmentEstimate.estimate_complete
     ? `
