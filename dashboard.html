@@ -5905,7 +5905,10 @@ async function saveSelfPurchaseChoice(
       document
         .getElementById('selfPurchaseCurrency')
         ?.value || 'USD';
-
+const priceBasis =
+  document
+    .getElementById('selfPurchasePriceBasis')
+    ?.value || '';
     const supplier =
       document
         .getElementById('selfPurchaseSupplier')
@@ -5966,7 +5969,22 @@ if (
 
 const userPriceEstimate =
   parsedPrice;
+// --------------------------------------------------
+// 3 BIS. BASE DU PRIX OBLIGATOIRE
+// --------------------------------------------------
 
+if (!priceBasis) {
+
+  alert(
+    'Veuillez indiquer la base du prix déclaré.'
+  );
+
+  document
+    .getElementById('selfPurchasePriceBasis')
+    ?.focus();
+
+  return;
+}
     // --------------------------------------------------
     // 4. DONNÉES À ENREGISTRER
     // --------------------------------------------------
@@ -6016,7 +6034,8 @@ const userPriceEstimate =
 
       user_price_currency:
         currency,
-
+user_price_basis:
+  priceBasis,
       user_origin_country:
         country || null,
 
