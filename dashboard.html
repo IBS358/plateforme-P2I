@@ -3570,15 +3570,21 @@ estimate.self_purchase.push({
 
 shipping_package: {
 
-  // Machine principale
+  // ----------------------------------------------
+  // MACHINE PRINCIPALE
+  // ----------------------------------------------
+
   machine_weight_kg:
-    null,
+    data.user_logistics?.machine_weight_kg ?? null,
 
   machine_volume_m3:
-    null,
+    data.user_logistics?.machine_volume_m3 ?? null,
 
 
-  // Premier stock de pièces critiques
+  // ----------------------------------------------
+  // PREMIER STOCK DE PIÈCES CRITIQUES
+  // ----------------------------------------------
+
   spare_parts_included:
     false,
 
@@ -3592,7 +3598,10 @@ shipping_package: {
     null,
 
 
-  // Consommables spécifiques éventuels
+  // ----------------------------------------------
+  // CONSOMMABLES SPÉCIFIQUES ÉVENTUELS
+  // ----------------------------------------------
+
   consumables_included:
     false,
 
@@ -3606,7 +3615,10 @@ shipping_package: {
     null,
 
 
-  // Intrants / matières premières éventuels
+  // ----------------------------------------------
+  // INTRANTS / MATIÈRES PREMIÈRES ÉVENTUELS
+  // ----------------------------------------------
+
   initial_inputs_included:
     false,
 
@@ -3620,30 +3632,54 @@ shipping_package: {
     null,
 
 
-  // Totaux logistiques
+  // ----------------------------------------------
+  // TOTAUX LOGISTIQUES ACTUELS
+  // ----------------------------------------------
+
   total_shipping_weight_kg:
-    null,
+    data.user_logistics?.machine_weight_kg ?? null,
 
   total_shipping_volume_m3:
-    null,
+    data.user_logistics?.machine_volume_m3 ?? null,
 
 
-  // Départ de l'expédition
+  // ----------------------------------------------
+  // DÉPART DE L'EXPÉDITION
+  // ----------------------------------------------
+
   departure_country:
-    data.user_origin_country || null,
+    data.user_logistics?.departure_country ||
+    data.user_origin_country ||
+    null,
 
   departure_port:
-    null,
+    data.user_logistics?.departure_port || null,
 
 
-  // Date à laquelle l'ensemble peut être expédié
+  // ----------------------------------------------
+  // DISPONIBILITÉ
+  // ----------------------------------------------
+
   ready_date:
-    null,
+    data.user_logistics?.ready_date || null,
 
 
-  // État du colis logistique
+  // ----------------------------------------------
+  // ÉTAT DU COLIS LOGISTIQUE
+  // ----------------------------------------------
+
   status:
-    'to_complete'
+    (
+      data.user_logistics?.machine_weight_kg != null &&
+      data.user_logistics?.machine_volume_m3 != null &&
+      (
+        data.user_logistics?.departure_country ||
+        data.user_origin_country
+      ) &&
+      data.user_logistics?.departure_port
+    )
+      ? 'ready_for_freight_estimate'
+      : 'to_complete'
 
 },
 
