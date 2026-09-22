@@ -3582,20 +3582,44 @@ shipping_package: {
 
 
   // ----------------------------------------------
-  // PREMIER STOCK DE PIÈCES CRITIQUES
-  // ----------------------------------------------
+// PREMIER STOCK DE PIÈCES CRITIQUES
+// ----------------------------------------------
 
-  spare_parts_included:
-    false,
+spare_parts: {
 
-  spare_parts_weight_kg:
+  // not_specified
+  // included
+  // additional
+  status:
+    'not_specified',
+
+  // true  = inclus dans le prix de la machine
+  // false = coût supplémentaire
+  // null  = information non connue
+  included_in_machine_price:
     null,
 
-  spare_parts_volume_m3:
+  // Description du kit / des pièces critiques
+  description:
     null,
 
-  spare_parts_cost_usd:
+  // Coût supplémentaire éventuel
+  cost_usd:
     null,
+
+  // Caractéristiques physiques du kit
+  weight_kg:
+    null,
+
+  volume_m3:
+    null,
+
+  // true si le poids/volume communiqué pour la machine
+  // comprend déjà les pièces de rechange
+  included_in_shipping_dimensions:
+    null
+
+},
 
 
   // ----------------------------------------------
