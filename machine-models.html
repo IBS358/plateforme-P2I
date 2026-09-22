@@ -2183,10 +2183,10 @@ if (
   <button
     class="btn-sm btn-save"
     onclick="saveToDashboardWithOrigin(
-      '${params.upId}',
-      '${escapeHtml(params.upNom)}',
-      '${escapeHtml(machine.machine_name || params.machineName)}',
-      '${escapeHtml(m.name)}',
+  '${params.upId}',
+  '${escapeHtml(params.upNom)}',
+  '${escapeHtml(params.machine_key || '')}',
+  '${escapeHtml(machine.machine_name || params.machineName)}',
       '${escapeHtml(machine.machine_role || params.machineRole)}',
       '${escapeHtml(machine.default_capacity || params.machineCapacity)}',
       '${escapeHtml(machine.default_utilities || params.machineUtilities)}',
@@ -3319,6 +3319,7 @@ function showToast(message) {
 async function saveToDashboardWithOrigin(
   upId,
   upNom,
+  machineKey,
   machineName,
   modelName,
   machineRole,
@@ -3400,16 +3401,46 @@ async function saveToDashboardWithOrigin(
       // UNITÉ DE PRODUCTION
       // ----------------------------------------------
 
-      up_id: upId,
-      up_nom: upNom,
+    // ----------------------------------------------
+// STRUCTURE DU PLAN D'ÉQUIPEMENT
+// ----------------------------------------------
 
-      // ----------------------------------------------
-      // MACHINE / MODÈLE
-      // ----------------------------------------------
+data_version: 'p2i_v2',
 
-      machine: machineName,
-      model: modelName,
-      model_id: modelId || null,
+record_type: 'equipment_plan_item',
+
+// ----------------------------------------------
+// UNITÉ DE PRODUCTION
+// ----------------------------------------------
+
+up_id: upId,
+up_nom: upNom,
+
+// ----------------------------------------------
+// MACHINE / MODÈLE
+// ----------------------------------------------
+
+machine_key: machineKey || '',
+
+machine: machineName,
+
+model: modelName,
+
+model_id: modelId || null,
+
+// ----------------------------------------------
+// STRATÉGIE D'ACQUISITION
+// ----------------------------------------------
+
+acquisition_mode: 'p2i_catalog',
+
+acquisition_source: 'p2i',
+
+acquisition_status: 'selected',
+
+equipment_plan_status: 'selected',
+
+is_selected_model: true,
 
       // ----------------------------------------------
       // FOURNISSEUR
@@ -3474,16 +3505,152 @@ catalog_price_verified:
       '🔍 5. Tentative de sauvegarde dans saved_machines...'
     );
 
+    // ==============================================
+// 4. RECHERCHE D'UN CHOIX EXISTANT
+// ==============================================
+
+const {
+  data: existingRows,
+  error: searchError
+} = await supabaseClient
+  .from('saved_machines')
+  .select('id,data')
+  .eq('user_id', user.id);
+
+if (searchError) {
+
+  console.error(
+    '❌ Erreur recherche choix existant :',
+    searchError
+  );
+
+  alert(
+    'Erreur lors de la vérification du plan d’équipement.'
+  );
+
+  return;
+}
+
+
+const matchingRows =
+  (existingRows || []).filter(row => {
+
+    const data =
+      row.data || {};
+
+    return (
+      data.up_id === upId &&
+      (
+        data.machine_key === machineKey ||
+
+        (
+          !data.machine_key &&
+          data.machine === machineName
+        )
+      )
+    );
+
+  });
+
+
+console.log(
+  '🔎 Choix existants pour cette machine :',
+  matchingRows
+);
+
+
+// ==============================================
+// 5. UPDATE OU INSERT
+// ==============================================
+
+let insertData = null;
+let error = null;
+
+
+if (matchingRows.length > 0) {
+
+  // On conserve le premier enregistrement comme
+  // enregistrement actif.
+  const primaryRow =
+    matchingRows[0];
+
+
+  const result =
+    await supabaseClient
+      .from('saved_machines')
+      .update({
+        data: machineData
+      })
+      .eq('id', primaryRow.id)
+      .eq('user_id', user.id)
+      .select();
+
+
+  insertData =
+    result.data;
+
+  error =
+    result.error;
+
+
+  // ----------------------------------------------
+  // SUPPRESSION DES ANCIENS DOUBLONS
+  // ----------------------------------------------
+
+  if (!error && matchingRows.length > 1) {
+
+    const duplicateIds =
+      matchingRows
+        .slice(1)
+        .map(row => row.id);
+
+
     const {
-      data: insertData,
-      error
+      error: deleteError
     } = await supabaseClient
+      .from('saved_machines')
+      .delete()
+      .in('id', duplicateIds)
+      .eq('user_id', user.id);
+
+
+    if (deleteError) {
+
+      console.warn(
+        '⚠️ Choix principal enregistré, mais certains doublons n’ont pas pu être supprimés :',
+        deleteError
+      );
+
+    } else {
+
+      console.log(
+        '🧹 Doublons supprimés :',
+        duplicateIds
+      );
+
+    }
+
+  }
+
+} else {
+
+  const result =
+    await supabaseClient
       .from('saved_machines')
       .insert({
         user_id: user.id,
         data: machineData
       })
       .select();
+
+
+  insertData =
+    result.data;
+
+  error =
+    result.error;
+
+}
 
 
     // ==============================================
