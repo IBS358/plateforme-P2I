@@ -6771,7 +6771,46 @@ const priceBasis =
         ?.value
         ?.trim() || '';
 
+// --------------------------------------------------
+// INFORMATIONS LOGISTIQUES
+// --------------------------------------------------
 
+const departurePort =
+  document
+    .getElementById('selfPurchaseDeparturePort')
+    ?.value
+    ?.trim() || '';
+
+const readyDate =
+  document
+    .getElementById('selfPurchaseReadyDate')
+    ?.value || '';
+
+const weightValue =
+  document
+    .getElementById('selfPurchaseWeight')
+    ?.value
+    ?.trim() || '';
+
+const volumeValue =
+  document
+    .getElementById('selfPurchaseVolume')
+    ?.value
+    ?.trim() || '';
+
+const machineWeightKg =
+  weightValue !== '' &&
+  Number.isFinite(Number(weightValue)) &&
+  Number(weightValue) > 0
+    ? Number(weightValue)
+    : null;
+
+const machineVolumeM3 =
+  volumeValue !== '' &&
+  Number.isFinite(Number(volumeValue)) &&
+  Number(volumeValue) > 0
+    ? Number(volumeValue)
+    : null;
     // --------------------------------------------------
 // 3. PRIX UTILISATEUR OBLIGATOIRE
 // --------------------------------------------------
