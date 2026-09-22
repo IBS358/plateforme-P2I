@@ -3240,46 +3240,204 @@ function buildP2IEquipmentEstimate(up, equipmentPlan) {
       }
 
 
-      estimate.self_purchase.push({
+      // --------------------------------------------------
+// ANALYSE DE LA BASE DU PRIX
+// --------------------------------------------------
 
-        machine_key:
-          item?.machine_key || '',
+const priceBasis =
+  data.user_price_basis || null;
 
-        machine:
-          machineName,
+let logisticsStatus =
+  'price_basis_to_confirm';
 
-        acquisition_mode:
-          'self_purchase',
+let preCarriageRequired =
+  null;
 
-        amount:
-          validPrice
-            ? price
-            : null,
+let freightRequired =
+  null;
 
-        currency:
-          currency,
-price_basis:
-    data.user_price_basis || null,
-        amount_usd:
-          usableUsdPrice
-            ? price
-            : null,
+let insuranceRequired =
+  null;
 
-        supplier:
-          data.user_supplier || null,
+let cifStatus =
+  'not_calculable';
 
-        origin_country:
-          data.user_origin_country || null,
 
-        note:
-          data.user_note || null,
+// EXW — départ usine
+if (priceBasis === 'exw') {
 
-        price_source:
-          'user_declared',
+  logisticsStatus =
+    'exw_costs_to_estimate';
 
-        verification_status:
-          'not_verified_by_p2i'
-      });
+  preCarriageRequired =
+    true;
+
+  freightRequired =
+    true;
+
+  insuranceRequired =
+    true;
+
+  cifStatus =
+    'to_estimate';
+
+}
+
+
+// FOB — port d'embarquement
+else if (priceBasis === 'fob') {
+
+  logisticsStatus =
+    'freight_and_insurance_to_estimate';
+
+  preCarriageRequired =
+    false;
+
+  freightRequired =
+    true;
+
+  insuranceRequired =
+    true;
+
+  cifStatus =
+    'to_estimate';
+
+}
+
+
+// CIF — Port d'Abidjan
+else if (priceBasis === 'cif_abidjan') {
+
+  logisticsStatus =
+    'cif_already_included';
+
+  preCarriageRequired =
+    false;
+
+  freightRequired =
+    false;
+
+  insuranceRequired =
+    false;
+
+  cifStatus =
+    'already_available';
+
+}
+
+
+// RENDU SUR SITE EN CÔTE D'IVOIRE
+else if (priceBasis === 'delivered_site_ci') {
+
+  logisticsStatus =
+    'delivered_site_price';
+
+  preCarriageRequired =
+    false;
+
+  freightRequired =
+    false;
+
+  insuranceRequired =
+    false;
+
+  cifStatus =
+    'included_in_broader_price';
+
+}
+
+
+// BASE INCONNUE
+else if (
+  priceBasis === 'unknown' ||
+  !priceBasis
+) {
+
+  logisticsStatus =
+    'price_basis_to_confirm';
+
+  preCarriageRequired =
+    null;
+
+  freightRequired =
+    null;
+
+  insuranceRequired =
+    null;
+
+  cifStatus =
+    'not_calculable';
+
+}
+
+
+// --------------------------------------------------
+// ENREGISTREMENT DANS LA SYNTHÈSE
+// --------------------------------------------------
+
+estimate.self_purchase.push({
+
+  machine_key:
+    item?.machine_key || '',
+
+  machine:
+    machineName,
+
+  acquisition_mode:
+    'self_purchase',
+
+  amount:
+    validPrice
+      ? price
+      : null,
+
+  currency:
+    currency,
+
+  price_basis:
+    priceBasis,
+
+  amount_usd:
+    usableUsdPrice
+      ? price
+      : null,
+
+  supplier:
+    data.user_supplier || null,
+
+  origin_country:
+    data.user_origin_country || null,
+
+  note:
+    data.user_note || null,
+
+  price_source:
+    'user_declared',
+
+  verification_status:
+    'not_verified_by_p2i',
+
+
+  // ----------------------------------------------
+  // ANALYSE LOGISTIQUE
+  // ----------------------------------------------
+
+  logistics_status:
+    logisticsStatus,
+
+  pre_carriage_required:
+    preCarriageRequired,
+
+  freight_required:
+    freightRequired,
+
+  insurance_required:
+    insuranceRequired,
+
+  cif_status:
+    cifStatus
+
+});
 
       return;
     }
