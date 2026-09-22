@@ -3419,8 +3419,17 @@ async function saveToDashboardWithOrigin(
       supplier_status: supplierStatus || 'identified',
 
       // ----------------------------------------------
-      // PRIX CATALOGUE
-      // ----------------------------------------------
+// PRIX CATALOGUE P2I
+// ----------------------------------------------
+
+catalog_price_usd:
+  price,
+
+catalog_price_basis:
+  catalogPriceBasis || null,
+
+catalog_price_verified:
+  catalogPriceVerified === true,
 
       catalog_price_usd: price,
 
