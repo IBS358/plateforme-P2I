@@ -6610,6 +6610,168 @@ async function openSelfPurchaseEditor(
         margin-bottom:6px;
       ">
         Note
+        <div style="
+  margin:4px 0 14px;
+  padding:10px;
+  border-radius:8px;
+  background:rgba(59,130,246,.06);
+  border:1px solid rgba(59,130,246,.14);
+">
+
+  <div style="
+    color:#93c5fd;
+    font-size:11px;
+    font-weight:700;
+    margin-bottom:4px;
+  ">
+    Informations logistiques
+  </div>
+
+  <div style="
+    color:#64748b;
+    font-size:9px;
+    line-height:1.4;
+    margin-bottom:12px;
+  ">
+    Facultatif. Ces informations permettront à la P2I
+    d'estimer ultérieurement le transport de cette machine
+    jusqu'au Port d'Abidjan.
+  </div>
+
+
+  <label style="
+    display:block;
+    color:#cbd5e1;
+    font-size:12px;
+    margin-bottom:6px;
+  ">
+    Port de départ
+  </label>
+
+  <input
+    id="selfPurchaseDeparturePort"
+    type="text"
+    value="${escapeHtml(
+      existingData.user_logistics?.departure_port || ''
+    )}"
+    placeholder="Ex. Shanghai"
+    style="
+      width:100%;
+      box-sizing:border-box;
+      padding:10px;
+      margin-bottom:12px;
+      border-radius:8px;
+      border:1px solid #334155;
+      background:#020617;
+      color:#f8fafc;
+    "
+  >
+
+
+  <div style="
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  ">
+
+    <div>
+
+      <label style="
+        display:block;
+        color:#cbd5e1;
+        font-size:12px;
+        margin-bottom:6px;
+      ">
+        Poids expédié (kg)
+      </label>
+
+      <input
+        id="selfPurchaseWeight"
+        type="number"
+        min="0"
+        step="0.01"
+        value="${
+          existingData.user_logistics?.machine_weight_kg ?? ''
+        }"
+        placeholder="Ex. 1200"
+        style="
+          width:100%;
+          box-sizing:border-box;
+          padding:10px;
+          border-radius:8px;
+          border:1px solid #334155;
+          background:#020617;
+          color:#f8fafc;
+        "
+      >
+
+    </div>
+
+
+    <div>
+
+      <label style="
+        display:block;
+        color:#cbd5e1;
+        font-size:12px;
+        margin-bottom:6px;
+      ">
+        Volume expédié (m³)
+      </label>
+
+      <input
+        id="selfPurchaseVolume"
+        type="number"
+        min="0"
+        step="0.01"
+        value="${
+          existingData.user_logistics?.machine_volume_m3 ?? ''
+        }"
+        placeholder="Ex. 8.4"
+        style="
+          width:100%;
+          box-sizing:border-box;
+          padding:10px;
+          border-radius:8px;
+          border:1px solid #334155;
+          background:#020617;
+          color:#f8fafc;
+        "
+      >
+
+    </div>
+
+  </div>
+
+
+  <label style="
+    display:block;
+    color:#cbd5e1;
+    font-size:12px;
+    margin-top:12px;
+    margin-bottom:6px;
+  ">
+    Date de disponibilité prévue
+  </label>
+
+  <input
+    id="selfPurchaseReadyDate"
+    type="date"
+    value="${escapeHtml(
+      existingData.user_logistics?.ready_date || ''
+    )}"
+    style="
+      width:100%;
+      box-sizing:border-box;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid #334155;
+      background:#020617;
+      color:#f8fafc;
+    "
+  >
+
+</div>
       </label>
 
       <textarea
