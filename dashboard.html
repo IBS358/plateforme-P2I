@@ -3377,13 +3377,14 @@ else if (
   freightRequired =
     null;
 
-  insuranceRequired =
-    null;
+ insuranceRequired =
+  null;
 
-  cifStatus =
-    'not_calculable';
+cifStatus =
+  'not_calculable';
 
 }
+
 
 // --------------------------------------------------
 // NORMALISATION VERS UNE BASE FOB
@@ -3492,101 +3493,8 @@ else if (validPrice) {
     null;
 
 }
-      // --------------------------------------------------
-// NORMALISATION VERS UNE BASE FOB
-// --------------------------------------------------
-
-let fobNormalizationStatus =
-  'not_calculable';
-
-let fobSource =
-  null;
-
-let exwToFobRequired =
-  null;
 
 
-// EXW — des frais doivent être ajoutés
-// pour obtenir une base FOB
-if (
-  validPrice &&
-  priceBasis === 'exw'
-) {
-
-  fobNormalizationStatus =
-    'costs_to_estimate';
-
-  fobSource =
-    'p2i_estimate_required';
-
-  exwToFobRequired =
-    true;
-}
-
-
-// FOB — aucune normalisation nécessaire
-else if (
-  validPrice &&
-  priceBasis === 'fob'
-) {
-
-  fobNormalizationStatus =
-    'already_fob';
-
-  fobSource =
-    'user_declared';
-
-  exwToFobRequired =
-    false;
-}
-
-
-// CIF Abidjan — déjà au-delà du FOB
-else if (
-  validPrice &&
-  priceBasis === 'cif_abidjan'
-) {
-
-  fobNormalizationStatus =
-    'not_required_cif_available';
-
-  fobSource =
-    null;
-
-  exwToFobRequired =
-    false;
-}
-
-
-// Rendu site Côte d'Ivoire — déjà au-delà du FOB
-else if (
-  validPrice &&
-  priceBasis === 'delivered_site_ci'
-) {
-
-  fobNormalizationStatus =
-    'not_required_delivered_price';
-
-  fobSource =
-    null;
-
-  exwToFobRequired =
-    false;
-}
-
-
-// Prix présent mais base inconnue
-else if (validPrice) {
-
-  fobNormalizationStatus =
-    'price_basis_to_confirm';
-
-  fobSource =
-    null;
-
-  exwToFobRequired =
-    null;
-}
 // --------------------------------------------------
 // ENREGISTREMENT DANS LA SYNTHÈSE
 // --------------------------------------------------
@@ -3611,53 +3519,57 @@ estimate.self_purchase.push({
     currency,
 
   price_basis:
-  priceBasis,
-
-
-// ----------------------------------------------
-// NORMALISATION FOB
-// ----------------------------------------------
-
-fob_normalization: {
-
-  source_price_basis:
     priceBasis,
 
-  source_amount:
-    validPrice
+
+  // ----------------------------------------------
+  // NORMALISATION FOB
+  // ----------------------------------------------
+
+  fob_normalization: {
+
+    source_price_basis:
+      priceBasis,
+
+    source_amount:
+      validPrice
+        ? price
+        : null,
+
+    source_currency:
+      currency,
+
+    exw_to_fob_required:
+      exwToFobRequired,
+
+    // Sera calculé ultérieurement
+    // lorsque nous construirons le moteur EXW → FOB.
+    exw_to_fob_cost_usd:
+      null,
+
+    // Si le prix déclaré est déjà FOB en USD,
+    // il constitue directement notre base FOB.
+    estimated_fob_usd:
+      (
+        usableUsdPrice &&
+        priceBasis === 'fob'
+      )
+        ? price
+        : null,
+
+    status:
+      fobNormalizationStatus,
+
+    source:
+      fobSource
+
+  },
+
+
+  amount_usd:
+    usableUsdPrice
       ? price
       : null,
-
-  source_currency:
-    currency,
-
-  exw_to_fob_required:
-    exwToFobRequired,
-
-  exw_to_fob_cost_usd:
-    null,
-
-  estimated_fob_usd:
-    (
-      usableUsdPrice &&
-      priceBasis === 'fob'
-    )
-      ? price
-      : null,
-
-  status:
-    fobNormalizationStatus,
-
-  source:
-    fobSource
-
-},
-
-
-amount_usd:
-  usableUsdPrice
-    ? price
-    : null,
 
   supplier:
     data.user_supplier || null,
@@ -3696,11 +3608,11 @@ amount_usd:
 
 });
 
-      return;
-    }
+return;
+}
 
 
-    // ==================================================
+// ==================================================
 // 3. MODÈLE CATALOGUE P2I
 // ==================================================
 
@@ -3725,12 +3637,15 @@ const parsedP2IPrice =
 const validP2IPrice =
   Number.isFinite(parsedP2IPrice) &&
   parsedP2IPrice > 0;
+
+
 // --------------------------------------------------
 // VÉRIFICATION DU PRIX CATALOGUE P2I
 // --------------------------------------------------
 
 const catalogPriceVerified =
   data.catalog_price_verified === true;
+
 
 // --------------------------------------------------
 // BASE DU PRIX CATALOGUE P2I
