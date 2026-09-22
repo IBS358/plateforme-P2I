@@ -3648,16 +3648,62 @@ else if (
 
 if (validP2IPrice) {
 
+  // ----------------------------------------------
+  // TOTAL GLOBAL DES PRIX P2I CONNUS
+  // ----------------------------------------------
+
   estimate.p2i_known_cost_usd +=
     parsedP2IPrice;
 
   estimate.known_machine_cost_usd +=
     parsedP2IPrice;
 
+
+  // ----------------------------------------------
+  // PRIX P2I VÉRIFIÉ
+  // ----------------------------------------------
+
+  if (catalogPriceVerified) {
+
+    estimate.p2i_verified_cost_usd +=
+      parsedP2IPrice;
+
+  }
+
+  // ----------------------------------------------
+  // PRIX CATALOGUE NON ENCORE VÉRIFIÉ
+  // ----------------------------------------------
+
+  else {
+
+    estimate.p2i_unverified_cost_usd +=
+      parsedP2IPrice;
+
+    estimate.has_unverified_p2i_prices =
+      true;
+
+  }
+
+
+  // ----------------------------------------------
+  // BASE COMMERCIALE DU PRIX À CONFIRMER
+  // ----------------------------------------------
+
+  if (
+    !catalogPriceBasis ||
+    catalogPriceBasis === 'unknown'
+  ) {
+
+    estimate.has_unknown_p2i_price_basis =
+      true;
+
+  }
+
 } else {
 
   estimate.has_unpriced_p2i_models =
     true;
+
 }
 
 
@@ -3739,11 +3785,12 @@ verification_status:
   // ÉTAT GLOBAL DE L'ESTIMATION MACHINES
   // ====================================================
 
-  estimate.estimate_complete =
-    !estimate.has_pending_machines &&
-    !estimate.has_unpriced_p2i_models &&
-    !estimate.has_non_usd_user_prices;
-
+estimate.estimate_complete =
+  !estimate.has_pending_machines &&
+  !estimate.has_unpriced_p2i_models &&
+  !estimate.has_unverified_p2i_prices &&
+  !estimate.has_unknown_p2i_price_basis &&
+  !estimate.has_non_usd_user_prices;
 
   console.log(
     '💰 ESTIMATION ÉQUIPEMENT P2I :',
