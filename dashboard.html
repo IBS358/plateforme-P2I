@@ -3468,7 +3468,12 @@ const parsedP2IPrice =
 const validP2IPrice =
   Number.isFinite(parsedP2IPrice) &&
   parsedP2IPrice > 0;
+// --------------------------------------------------
+// VÉRIFICATION DU PRIX CATALOGUE P2I
+// --------------------------------------------------
 
+const catalogPriceVerified =
+  data.catalog_price_verified === true;
 
 // --------------------------------------------------
 // BASE DU PRIX CATALOGUE P2I
