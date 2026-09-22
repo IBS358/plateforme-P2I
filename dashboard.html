@@ -3492,6 +3492,101 @@ else if (validPrice) {
     null;
 
 }
+      // --------------------------------------------------
+// NORMALISATION VERS UNE BASE FOB
+// --------------------------------------------------
+
+let fobNormalizationStatus =
+  'not_calculable';
+
+let fobSource =
+  null;
+
+let exwToFobRequired =
+  null;
+
+
+// EXW — des frais doivent être ajoutés
+// pour obtenir une base FOB
+if (
+  validPrice &&
+  priceBasis === 'exw'
+) {
+
+  fobNormalizationStatus =
+    'costs_to_estimate';
+
+  fobSource =
+    'p2i_estimate_required';
+
+  exwToFobRequired =
+    true;
+}
+
+
+// FOB — aucune normalisation nécessaire
+else if (
+  validPrice &&
+  priceBasis === 'fob'
+) {
+
+  fobNormalizationStatus =
+    'already_fob';
+
+  fobSource =
+    'user_declared';
+
+  exwToFobRequired =
+    false;
+}
+
+
+// CIF Abidjan — déjà au-delà du FOB
+else if (
+  validPrice &&
+  priceBasis === 'cif_abidjan'
+) {
+
+  fobNormalizationStatus =
+    'not_required_cif_available';
+
+  fobSource =
+    null;
+
+  exwToFobRequired =
+    false;
+}
+
+
+// Rendu site Côte d'Ivoire — déjà au-delà du FOB
+else if (
+  validPrice &&
+  priceBasis === 'delivered_site_ci'
+) {
+
+  fobNormalizationStatus =
+    'not_required_delivered_price';
+
+  fobSource =
+    null;
+
+  exwToFobRequired =
+    false;
+}
+
+
+// Prix présent mais base inconnue
+else if (validPrice) {
+
+  fobNormalizationStatus =
+    'price_basis_to_confirm';
+
+  fobSource =
+    null;
+
+  exwToFobRequired =
+    null;
+}
 // --------------------------------------------------
 // ENREGISTREMENT DANS LA SYNTHÈSE
 // --------------------------------------------------
