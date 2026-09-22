@@ -3444,84 +3444,268 @@ estimate.self_purchase.push({
 
 
     // ==================================================
-    // 3. MODÈLE CATALOGUE P2I
-    // ==================================================
+// 3. MODÈLE CATALOGUE P2I
+// ==================================================
 
-    const rawP2IPrice =
-      data.catalog_price_usd ??
-      data.price_catalogue_verified ??
-      data.price_catalogue ??
-      data.price ??
-      null;
-
-
-    const parsedP2IPrice =
-      typeof rawP2IPrice === 'number'
-        ? rawP2IPrice
-        : Number(
-            String(rawP2IPrice ?? '')
-              .replace(/[^\d.,-]/g, '')
-              .replace(',', '.')
-          );
+const rawP2IPrice =
+  data.catalog_price_usd ??
+  data.price_catalogue_verified ??
+  data.price_catalogue ??
+  data.price ??
+  null;
 
 
-    const validP2IPrice =
-      Number.isFinite(parsedP2IPrice) &&
-      parsedP2IPrice > 0;
+const parsedP2IPrice =
+  typeof rawP2IPrice === 'number'
+    ? rawP2IPrice
+    : Number(
+        String(rawP2IPrice ?? '')
+          .replace(/[^\d.,-]/g, '')
+          .replace(',', '.')
+      );
 
 
-    if (validP2IPrice) {
-
-      estimate.p2i_known_cost_usd +=
-        parsedP2IPrice;
-
-      estimate.known_machine_cost_usd +=
-        parsedP2IPrice;
-
-    } else {
-
-      estimate.has_unpriced_p2i_models =
-        true;
-    }
+const validP2IPrice =
+  Number.isFinite(parsedP2IPrice) &&
+  parsedP2IPrice > 0;
 
 
-    estimate.p2i_catalog.push({
+// --------------------------------------------------
+// BASE DU PRIX CATALOGUE P2I
+// --------------------------------------------------
 
-      machine_key:
-        item?.machine_key || '',
+const catalogPriceBasis =
+  data.catalog_price_basis ||
+  data.price_basis ||
+  null;
 
-      machine:
-        machineName,
 
-      model:
-        data.model || null,
+// --------------------------------------------------
+// ANALYSE LOGISTIQUE DU PRIX P2I
+// --------------------------------------------------
 
-      supplier:
-        data.supplier || null,
+let p2iLogisticsStatus =
+  validP2IPrice
+    ? 'price_basis_to_confirm'
+    : 'quotation_required';
 
-      origin:
-        data.origin || null,
+let p2iPreCarriageRequired =
+  null;
 
-      acquisition_mode:
-        'p2i_catalog',
+let p2iFreightRequired =
+  null;
 
-      amount_usd:
-        validP2IPrice
-          ? parsedP2IPrice
-          : null,
+let p2iInsuranceRequired =
+  null;
 
-      price_source:
-        validP2IPrice
-          ? 'p2i_reference'
-          : 'quotation_required',
+let p2iCifStatus =
+  validP2IPrice
+    ? 'not_calculable'
+    : 'quotation_required';
 
-      verification_status:
-        validP2IPrice
-          ? 'p2i_reference'
-          : 'pending_quotation'
-    });
 
-  });
+// EXW — départ usine
+if (
+  validP2IPrice &&
+  catalogPriceBasis === 'exw'
+) {
+
+  p2iLogisticsStatus =
+    'exw_costs_to_estimate';
+
+  p2iPreCarriageRequired =
+    true;
+
+  p2iFreightRequired =
+    true;
+
+  p2iInsuranceRequired =
+    true;
+
+  p2iCifStatus =
+    'to_estimate';
+}
+
+
+// FOB — port d'embarquement
+else if (
+  validP2IPrice &&
+  catalogPriceBasis === 'fob'
+) {
+
+  p2iLogisticsStatus =
+    'freight_and_insurance_to_estimate';
+
+  p2iPreCarriageRequired =
+    false;
+
+  p2iFreightRequired =
+    true;
+
+  p2iInsuranceRequired =
+    true;
+
+  p2iCifStatus =
+    'to_estimate';
+}
+
+
+// CIF — PORT D'ABIDJAN
+else if (
+  validP2IPrice &&
+  catalogPriceBasis === 'cif_abidjan'
+) {
+
+  p2iLogisticsStatus =
+    'cif_already_included';
+
+  p2iPreCarriageRequired =
+    false;
+
+  p2iFreightRequired =
+    false;
+
+  p2iInsuranceRequired =
+    false;
+
+  p2iCifStatus =
+    'already_available';
+}
+
+
+// RENDU SUR SITE EN CÔTE D'IVOIRE
+else if (
+  validP2IPrice &&
+  catalogPriceBasis === 'delivered_site_ci'
+) {
+
+  p2iLogisticsStatus =
+    'delivered_site_price';
+
+  p2iPreCarriageRequired =
+    false;
+
+  p2iFreightRequired =
+    false;
+
+  p2iInsuranceRequired =
+    false;
+
+  p2iCifStatus =
+    'included_in_broader_price';
+}
+
+
+// PRIX CONNU MAIS BASE NON RENSEIGNÉE
+else if (
+  validP2IPrice &&
+  (
+    catalogPriceBasis === 'unknown' ||
+    !catalogPriceBasis
+  )
+) {
+
+  p2iLogisticsStatus =
+    'price_basis_to_confirm';
+
+  p2iPreCarriageRequired =
+    null;
+
+  p2iFreightRequired =
+    null;
+
+  p2iInsuranceRequired =
+    null;
+
+  p2iCifStatus =
+    'not_calculable';
+}
+
+
+// --------------------------------------------------
+// TOTAL DES PRIX MACHINES CONNUS
+// --------------------------------------------------
+
+if (validP2IPrice) {
+
+  estimate.p2i_known_cost_usd +=
+    parsedP2IPrice;
+
+  estimate.known_machine_cost_usd +=
+    parsedP2IPrice;
+
+} else {
+
+  estimate.has_unpriced_p2i_models =
+    true;
+}
+
+
+// --------------------------------------------------
+// ENREGISTREMENT DANS LA SYNTHÈSE
+// --------------------------------------------------
+
+estimate.p2i_catalog.push({
+
+  machine_key:
+    item?.machine_key || '',
+
+  machine:
+    machineName,
+
+  model:
+    data.model || null,
+
+  supplier:
+    data.supplier || null,
+
+  origin:
+    data.origin || null,
+
+  acquisition_mode:
+    'p2i_catalog',
+
+  amount_usd:
+    validP2IPrice
+      ? parsedP2IPrice
+      : null,
+
+  catalog_price_basis:
+    catalogPriceBasis,
+
+  price_source:
+    validP2IPrice
+      ? 'p2i_reference'
+      : 'quotation_required',
+
+  verification_status:
+    validP2IPrice
+      ? 'p2i_reference'
+      : 'pending_quotation',
+
+
+  // ----------------------------------------------
+  // ANALYSE LOGISTIQUE
+  // ----------------------------------------------
+
+  logistics_status:
+    p2iLogisticsStatus,
+
+  pre_carriage_required:
+    p2iPreCarriageRequired,
+
+  freight_required:
+    p2iFreightRequired,
+
+  insurance_required:
+    p2iInsuranceRequired,
+
+  cif_status:
+    p2iCifStatus
+
+});
+
+});
 
 
   // ====================================================
