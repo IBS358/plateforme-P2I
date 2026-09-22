@@ -6831,6 +6831,96 @@ async function openSelfPurchaseEditor(
   >
 
 </div>
+<div style="
+  margin:4px 0 14px;
+  padding:10px;
+  border-radius:8px;
+  background:rgba(34,197,94,.05);
+  border:1px solid rgba(34,197,94,.14);
+">
+
+  <div style="
+    color:#86efac;
+    font-size:11px;
+    font-weight:700;
+    margin-bottom:4px;
+  ">
+    Premier stock de pièces critiques
+  </div>
+
+  <div style="
+    color:#64748b;
+    font-size:9px;
+    line-height:1.4;
+    margin-bottom:12px;
+  ">
+    La P2I recommande de prévoir, lorsque cela est pertinent,
+    un premier stock de pièces critiques afin de limiter
+    le risque d'arrêt de production.
+  </div>
+
+
+  <label style="
+    display:block;
+    color:#cbd5e1;
+    font-size:12px;
+    margin-bottom:6px;
+  ">
+    Situation du premier stock
+  </label>
+
+  <select
+    id="selfPurchaseSparePartsStatus"
+    style="
+      width:100%;
+      box-sizing:border-box;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid #334155;
+      background:#020617;
+      color:#f8fafc;
+    "
+  >
+
+    <option
+      value="not_specified"
+      ${
+        (
+          existingData.user_spare_parts?.status ||
+          'not_specified'
+        ) === 'not_specified'
+          ? 'selected'
+          : ''
+      }
+    >
+      Pas encore renseigné
+    </option>
+
+    <option
+      value="included"
+      ${
+        existingData.user_spare_parts?.status === 'included'
+          ? 'selected'
+          : ''
+      }
+    >
+      Inclus dans l'offre de la machine
+    </option>
+
+    <option
+      value="additional"
+      ${
+        existingData.user_spare_parts?.status === 'additional'
+          ? 'selected'
+          : ''
+      }
+    >
+      À commander en supplément
+    </option>
+
+  </select>
+
+</div>
         Note  
       </label>
 
