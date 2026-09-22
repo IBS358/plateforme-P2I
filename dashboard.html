@@ -3611,12 +3611,53 @@ estimate.self_purchase.push({
     currency,
 
   price_basis:
+  priceBasis,
+
+
+// ----------------------------------------------
+// NORMALISATION FOB
+// ----------------------------------------------
+
+fob_normalization: {
+
+  source_price_basis:
     priceBasis,
 
-  amount_usd:
-    usableUsdPrice
+  source_amount:
+    validPrice
       ? price
       : null,
+
+  source_currency:
+    currency,
+
+  exw_to_fob_required:
+    exwToFobRequired,
+
+  exw_to_fob_cost_usd:
+    null,
+
+  estimated_fob_usd:
+    (
+      usableUsdPrice &&
+      priceBasis === 'fob'
+    )
+      ? price
+      : null,
+
+  status:
+    fobNormalizationStatus,
+
+  source:
+    fobSource
+
+},
+
+
+amount_usd:
+  usableUsdPrice
+    ? price
+    : null,
 
   supplier:
     data.user_supplier || null,
