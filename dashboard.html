@@ -3564,7 +3564,88 @@ estimate.self_purchase.push({
       fobSource
 
   },
+// ----------------------------------------------
+// COLIS LOGISTIQUE DE LA MACHINE
+// ----------------------------------------------
 
+shipping_package: {
+
+  // Machine principale
+  machine_weight_kg:
+    null,
+
+  machine_volume_m3:
+    null,
+
+
+  // Premier stock de pièces critiques
+  spare_parts_included:
+    false,
+
+  spare_parts_weight_kg:
+    null,
+
+  spare_parts_volume_m3:
+    null,
+
+  spare_parts_cost_usd:
+    null,
+
+
+  // Consommables spécifiques éventuels
+  consumables_included:
+    false,
+
+  consumables_weight_kg:
+    null,
+
+  consumables_volume_m3:
+    null,
+
+  consumables_cost_usd:
+    null,
+
+
+  // Intrants / matières premières éventuels
+  initial_inputs_included:
+    false,
+
+  initial_inputs_weight_kg:
+    null,
+
+  initial_inputs_volume_m3:
+    null,
+
+  initial_inputs_cost_usd:
+    null,
+
+
+  // Totaux logistiques
+  total_shipping_weight_kg:
+    null,
+
+  total_shipping_volume_m3:
+    null,
+
+
+  // Départ de l'expédition
+  departure_country:
+    data.user_origin_country || null,
+
+  departure_port:
+    null,
+
+
+  // Date à laquelle l'ensemble peut être expédié
+  ready_date:
+    null,
+
+
+  // État du colis logistique
+  status:
+    'to_complete'
+
+},
 
   amount_usd:
     usableUsdPrice
