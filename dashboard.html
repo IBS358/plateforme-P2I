@@ -3676,17 +3676,24 @@ estimate.p2i_catalog.push({
       : null,
 
   catalog_price_basis:
-    catalogPriceBasis,
+  catalogPriceBasis,
 
-  price_source:
-    validP2IPrice
-      ? 'p2i_reference'
-      : 'quotation_required',
+catalog_price_verified:
+  catalogPriceVerified,
 
-  verification_status:
-    validP2IPrice
-      ? 'p2i_reference'
-      : 'pending_quotation',
+price_source:
+  !validP2IPrice
+    ? 'quotation_required'
+    : catalogPriceVerified
+      ? 'p2i_verified_reference'
+      : 'catalog_price_unverified',
+
+verification_status:
+  !validP2IPrice
+    ? 'pending_quotation'
+    : catalogPriceVerified
+      ? 'verified'
+      : 'not_verified',
 
 
   // ----------------------------------------------
