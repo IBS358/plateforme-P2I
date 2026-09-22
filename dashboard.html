@@ -3066,11 +3066,21 @@ function buildP2IEquipmentEstimate(up, equipmentPlan) {
     known_machine_cost_usd:
       0,
 
-    p2i_known_cost_usd:
-      0,
+   p2i_known_cost_usd:
+  0,
 
-    user_declared_cost_usd:
-      0,
+// Prix catalogue dont la vérification P2I
+// est explicitement confirmée
+p2i_verified_cost_usd:
+  0,
+
+// Prix présents dans le catalogue,
+// mais pas encore vérifiés par la P2I
+p2i_unverified_cost_usd:
+  0,
+
+user_declared_cost_usd:
+  0,
 
     already_owned_cost_usd:
       0,
@@ -3082,6 +3092,11 @@ function buildP2IEquipmentEstimate(up, equipmentPlan) {
 
     has_unpriced_p2i_models:
       false,
+    has_unverified_p2i_prices:
+  false,
+
+has_unknown_p2i_price_basis:
+  false,
 
     has_pending_machines:
       false,
