@@ -2194,8 +2194,10 @@ if (
       '${escapeHtml(m.supplier)}',
       '${escapeHtml(m.supplier_status)}',
       '${m.origin || 'chinese'}',
-      '${m.price_ttc || 'Prix sur demande'}',
-      this
+'${m.price_ttc || 'Prix sur demande'}',
+'${m.catalog_price_basis || ''}',
+${m.catalog_price_verified === true},
+this
     )"
     style="
       flex:1;
