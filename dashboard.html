@@ -3793,6 +3793,17 @@ total_shipping_volume_m3:
     usableUsdPrice
       ? price
       : null,
+  // ----------------------------------------------
+// COÛT DES PIÈCES CRITIQUES
+// ----------------------------------------------
+
+spare_parts_additional_cost_usd:
+  additionalSparePartsCostUsd,
+
+equipment_cost_before_freight_usd:
+  usableUsdPrice
+    ? Number(price) + additionalSparePartsCostUsd
+    : null,
 
   supplier:
     data.user_supplier || null,
