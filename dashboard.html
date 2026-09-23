@@ -7327,6 +7327,62 @@ const sparePartsStatus =
     .getElementById('selfPurchaseSparePartsStatus')
     ?.value || 'not_specified';
     // --------------------------------------------------
+// DÉTAILS DU PREMIER STOCK DE PIÈCES CRITIQUES
+// --------------------------------------------------
+
+const sparePartsDescription =
+  document
+    .getElementById('selfPurchaseSparePartsDescription')
+    ?.value
+    ?.trim() || null;
+
+
+const sparePartsCostValue =
+  document
+    .getElementById('selfPurchaseSparePartsCost')
+    ?.value || '';
+
+const sparePartsCostUsd =
+  sparePartsCostValue !== '' &&
+  Number.isFinite(Number(sparePartsCostValue)) &&
+  Number(sparePartsCostValue) >= 0
+    ? Number(sparePartsCostValue)
+    : null;
+
+
+const sparePartsWeightValue =
+  document
+    .getElementById('selfPurchaseSparePartsWeight')
+    ?.value || '';
+
+const sparePartsWeightKg =
+  sparePartsWeightValue !== '' &&
+  Number.isFinite(Number(sparePartsWeightValue)) &&
+  Number(sparePartsWeightValue) > 0
+    ? Number(sparePartsWeightValue)
+    : null;
+
+
+const sparePartsVolumeValue =
+  document
+    .getElementById('selfPurchaseSparePartsVolume')
+    ?.value || '';
+
+const sparePartsVolumeM3 =
+  sparePartsVolumeValue !== '' &&
+  Number.isFinite(Number(sparePartsVolumeValue)) &&
+  Number(sparePartsVolumeValue) > 0
+    ? Number(sparePartsVolumeValue)
+    : null;
+
+
+const sparePartsIncludedInDimensions =
+  document
+    .getElementById(
+      'selfPurchaseSparePartsIncludedInDimensions'
+    )
+    ?.checked === true;
+    // --------------------------------------------------
 // 3. PRIX UTILISATEUR OBLIGATOIRE
 // --------------------------------------------------
 
