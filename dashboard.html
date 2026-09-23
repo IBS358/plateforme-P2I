@@ -3562,6 +3562,25 @@ if (
     Number(totalShippingVolumeM3) +
     sparePartsVolumeM3;
 }
+      // --------------------------------------------------
+// COÛT DU PREMIER STOCK DE PIÈCES CRITIQUES
+// --------------------------------------------------
+
+const sparePartsCostUsd =
+  Number.isFinite(Number(sparePartsData.cost_usd)) &&
+  Number(sparePartsData.cost_usd) >= 0
+    ? Number(sparePartsData.cost_usd)
+    : null;
+
+
+// Coût à ajouter uniquement lorsque les pièces
+// sont commandées en supplément de la machine.
+const additionalSparePartsCostUsd =
+  sparePartsData.status === 'additional' &&
+  sparePartsData.included_in_machine_price === false &&
+  sparePartsCostUsd != null
+    ? sparePartsCostUsd
+    : 0;
 // --------------------------------------------------
 // ENREGISTREMENT DANS LA SYNTHÈSE
 // --------------------------------------------------
