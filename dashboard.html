@@ -7269,6 +7269,38 @@ user_logistics: {
     machineVolumeM3
 
 },
+      // ----------------------------------------------
+// PREMIER STOCK DE PIÈCES CRITIQUES
+// ----------------------------------------------
+
+user_spare_parts: {
+
+  status:
+    sparePartsStatus,
+
+  included_in_machine_price:
+    sparePartsStatus === 'included'
+      ? true
+      : sparePartsStatus === 'additional'
+        ? false
+        : null,
+
+  description:
+    null,
+
+  cost_usd:
+    null,
+
+  weight_kg:
+    null,
+
+  volume_m3:
+    null,
+
+  included_in_shipping_dimensions:
+    null
+
+},
 
       // ----------------------------------------------
       // PAS DE MODÈLE P2I RETENU
