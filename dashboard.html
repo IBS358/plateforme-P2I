@@ -3494,7 +3494,74 @@ else if (validPrice) {
 
 }
 
+// --------------------------------------------------
+// CALCUL DU COLIS LOGISTIQUE RÉEL
+// MACHINE + PIÈCES CRITIQUES
+// --------------------------------------------------
 
+const sparePartsData =
+  data.user_spare_parts || {};
+
+const hasSpareParts =
+  sparePartsData.status === 'included' ||
+  sparePartsData.status === 'additional';
+
+const sparePartsWeightKg =
+  hasSpareParts &&
+  Number.isFinite(Number(sparePartsData.weight_kg)) &&
+  Number(sparePartsData.weight_kg) > 0
+    ? Number(sparePartsData.weight_kg)
+    : null;
+
+const sparePartsVolumeM3 =
+  hasSpareParts &&
+  Number.isFinite(Number(sparePartsData.volume_m3)) &&
+  Number(sparePartsData.volume_m3) > 0
+    ? Number(sparePartsData.volume_m3)
+    : null;
+
+
+// Les dimensions de la machine comprennent-elles
+// déjà les pièces ?
+const sparePartsAlreadyIncludedInShipping =
+  sparePartsData.included_in_shipping_dimensions === true;
+
+
+// ----------------------------------------------
+// POIDS TOTAL RETENU POUR LE FRET
+// ----------------------------------------------
+
+let totalShippingWeightKg =
+  data.user_logistics?.machine_weight_kg ?? null;
+
+if (
+  totalShippingWeightKg != null &&
+  sparePartsWeightKg != null &&
+  !sparePartsAlreadyIncludedInShipping
+) {
+
+  totalShippingWeightKg =
+    Number(totalShippingWeightKg) +
+    sparePartsWeightKg;
+}
+
+// ----------------------------------------------
+// VOLUME TOTAL RETENU POUR LE FRET
+// ----------------------------------------------
+
+let totalShippingVolumeM3 =
+  data.user_logistics?.machine_volume_m3 ?? null;
+
+if (
+  totalShippingVolumeM3 != null &&
+  sparePartsVolumeM3 != null &&
+  !sparePartsAlreadyIncludedInShipping
+) {
+
+  totalShippingVolumeM3 =
+    Number(totalShippingVolumeM3) +
+    sparePartsVolumeM3;
+}
 // --------------------------------------------------
 // ENREGISTREMENT DANS LA SYNTHÈSE
 // --------------------------------------------------
