@@ -7050,6 +7050,22 @@ async function openSelfPurchaseEditor(
 
   <select
     id="selfPurchaseSparePartsStatus"
+    onchange="
+  const details =
+    document.getElementById(
+      'selfPurchaseSparePartsDetails'
+    );
+
+  if (details) {
+    details.style.display =
+      (
+        this.value === 'included' ||
+        this.value === 'additional'
+      )
+        ? 'block'
+        : 'none';
+  }
+"
     style="
       width:100%;
       box-sizing:border-box;
