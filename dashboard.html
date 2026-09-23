@@ -6499,190 +6499,7 @@ async function openSelfPurchaseEditor(
   EUR
 </option>
         </select>
-<div
-  id="selfPurchaseSparePartsDetails"
-  style="
-    margin-top:12px;
-    display:${
-      (
-        existingData.user_spare_parts?.status === 'included' ||
-        existingData.user_spare_parts?.status === 'additional'
-      )
-        ? 'block'
-        : 'none'
-    };
-  "
->
 
-  <label style="
-    display:block;
-    color:#cbd5e1;
-    font-size:12px;
-    margin-bottom:6px;
-  ">
-    Description du kit de pièces
-  </label>
-
-  <input
-    id="selfPurchaseSparePartsDescription"
-    type="text"
-    value="${escapeHtml(
-      existingData.user_spare_parts?.description || ''
-    )}"
-    placeholder="Ex. courroies, roulements, capteurs, résistances..."
-    style="
-      width:100%;
-      box-sizing:border-box;
-      padding:10px;
-      margin-bottom:12px;
-      border-radius:8px;
-      border:1px solid #334155;
-      background:#020617;
-      color:#f8fafc;
-    "
-  >
-
-
-  <label style="
-    display:block;
-    color:#cbd5e1;
-    font-size:12px;
-    margin-bottom:6px;
-  ">
-    Coût du stock de pièces (USD)
-  </label>
-
-  <input
-    id="selfPurchaseSparePartsCost"
-    type="number"
-    min="0"
-    step="0.01"
-    value="${
-      existingData.user_spare_parts?.cost_usd ?? ''
-    }"
-    placeholder="Ex. 800"
-    style="
-      width:100%;
-      box-sizing:border-box;
-      padding:10px;
-      margin-bottom:12px;
-      border-radius:8px;
-      border:1px solid #334155;
-      background:#020617;
-      color:#f8fafc;
-    "
-  >
-
-
-  <div style="
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  ">
-
-    <div>
-
-      <label style="
-        display:block;
-        color:#cbd5e1;
-        font-size:12px;
-        margin-bottom:6px;
-      ">
-        Poids des pièces (kg)
-      </label>
-
-      <input
-        id="selfPurchaseSparePartsWeight"
-        type="number"
-        min="0"
-        step="0.01"
-        value="${
-          existingData.user_spare_parts?.weight_kg ?? ''
-        }"
-        placeholder="Ex. 80"
-        style="
-          width:100%;
-          box-sizing:border-box;
-          padding:10px;
-          border-radius:8px;
-          border:1px solid #334155;
-          background:#020617;
-          color:#f8fafc;
-        "
-      >
-
-    </div>
-
-
-    <div>
-
-      <label style="
-        display:block;
-        color:#cbd5e1;
-        font-size:12px;
-        margin-bottom:6px;
-      ">
-        Volume des pièces (m³)
-      </label>
-
-      <input
-        id="selfPurchaseSparePartsVolume"
-        type="number"
-        min="0"
-        step="0.01"
-        value="${
-          existingData.user_spare_parts?.volume_m3 ?? ''
-        }"
-        placeholder="Ex. 0.5"
-        style="
-          width:100%;
-          box-sizing:border-box;
-          padding:10px;
-          border-radius:8px;
-          border:1px solid #334155;
-          background:#020617;
-          color:#f8fafc;
-        "
-      >
-
-    </div>
-
-  </div>
-
-
-  <label style="
-    display:flex;
-    align-items:flex-start;
-    gap:8px;
-    color:#cbd5e1;
-    font-size:10px;
-    line-height:1.4;
-    margin-top:12px;
-    cursor:pointer;
-  ">
-
-    <input
-      id="selfPurchaseSparePartsIncludedInDimensions"
-      type="checkbox"
-      ${
-        existingData.user_spare_parts
-          ?.included_in_shipping_dimensions === true
-          ? 'checked'
-          : ''
-      }
-      style="
-        margin-top:2px;
-      "
-    >
-
-    <span>
-      Le poids et le volume indiqués pour la machine
-      comprennent déjà ces pièces de rechange.
-    </span>
-
-  </label>
-
-</div>
       </div>
 
       <label style="
@@ -7114,7 +6931,190 @@ async function openSelfPurchaseEditor(
     </option>
 
   </select>
+<div
+  id="selfPurchaseSparePartsDetails"
+  style="
+    margin-top:12px;
+    display:${
+      (
+        existingData.user_spare_parts?.status === 'included' ||
+        existingData.user_spare_parts?.status === 'additional'
+      )
+        ? 'block'
+        : 'none'
+    };
+  "
+>
 
+  <label style="
+    display:block;
+    color:#cbd5e1;
+    font-size:12px;
+    margin-bottom:6px;
+  ">
+    Description du kit de pièces
+  </label>
+
+  <input
+    id="selfPurchaseSparePartsDescription"
+    type="text"
+    value="${escapeHtml(
+      existingData.user_spare_parts?.description || ''
+    )}"
+    placeholder="Ex. courroies, roulements, capteurs, résistances..."
+    style="
+      width:100%;
+      box-sizing:border-box;
+      padding:10px;
+      margin-bottom:12px;
+      border-radius:8px;
+      border:1px solid #334155;
+      background:#020617;
+      color:#f8fafc;
+    "
+  >
+
+
+  <label style="
+    display:block;
+    color:#cbd5e1;
+    font-size:12px;
+    margin-bottom:6px;
+  ">
+    Coût du stock de pièces (USD)
+  </label>
+
+  <input
+    id="selfPurchaseSparePartsCost"
+    type="number"
+    min="0"
+    step="0.01"
+    value="${
+      existingData.user_spare_parts?.cost_usd ?? ''
+    }"
+    placeholder="Ex. 800"
+    style="
+      width:100%;
+      box-sizing:border-box;
+      padding:10px;
+      margin-bottom:12px;
+      border-radius:8px;
+      border:1px solid #334155;
+      background:#020617;
+      color:#f8fafc;
+    "
+  >
+
+
+  <div style="
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  ">
+
+    <div>
+
+      <label style="
+        display:block;
+        color:#cbd5e1;
+        font-size:12px;
+        margin-bottom:6px;
+      ">
+        Poids des pièces (kg)
+      </label>
+
+      <input
+        id="selfPurchaseSparePartsWeight"
+        type="number"
+        min="0"
+        step="0.01"
+        value="${
+          existingData.user_spare_parts?.weight_kg ?? ''
+        }"
+        placeholder="Ex. 80"
+        style="
+          width:100%;
+          box-sizing:border-box;
+          padding:10px;
+          border-radius:8px;
+          border:1px solid #334155;
+          background:#020617;
+          color:#f8fafc;
+        "
+      >
+
+    </div>
+
+
+    <div>
+
+      <label style="
+        display:block;
+        color:#cbd5e1;
+        font-size:12px;
+        margin-bottom:6px;
+      ">
+        Volume des pièces (m³)
+      </label>
+
+      <input
+        id="selfPurchaseSparePartsVolume"
+        type="number"
+        min="0"
+        step="0.01"
+        value="${
+          existingData.user_spare_parts?.volume_m3 ?? ''
+        }"
+        placeholder="Ex. 0.5"
+        style="
+          width:100%;
+          box-sizing:border-box;
+          padding:10px;
+          border-radius:8px;
+          border:1px solid #334155;
+          background:#020617;
+          color:#f8fafc;
+        "
+      >
+
+    </div>
+
+  </div>
+
+
+  <label style="
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    color:#cbd5e1;
+    font-size:10px;
+    line-height:1.4;
+    margin-top:12px;
+    cursor:pointer;
+  ">
+
+    <input
+      id="selfPurchaseSparePartsIncludedInDimensions"
+      type="checkbox"
+      ${
+        existingData.user_spare_parts
+          ?.included_in_shipping_dimensions === true
+          ? 'checked'
+          : ''
+      }
+      style="
+        margin-top:2px;
+      "
+    >
+
+    <span>
+      Le poids et le volume indiqués pour la machine
+      comprennent déjà ces pièces de rechange.
+    </span>
+
+  </label>
+
+</div>
 </div>
         Note  
       </label>
