@@ -3585,6 +3585,18 @@ const additionalSparePartsCostUsd =
   sparePartsCostUsd != null
     ? sparePartsCostUsd
     : 0;
+      // --------------------------------------------------
+// TOTAL DES PIÈCES CRITIQUES SUPPLÉMENTAIRES
+// --------------------------------------------------
+
+estimate.spare_parts_additional_cost_usd +=
+  additionalSparePartsCostUsd;
+
+
+// Le coût des pièces supplémentaires fait partie
+// du coût actuellement chiffré du plan d'équipement.
+estimate.known_machine_cost_usd +=
+  additionalSparePartsCostUsd;
 // --------------------------------------------------
 // ENREGISTREMENT DANS LA SYNTHÈSE
 // --------------------------------------------------
