@@ -3693,7 +3693,31 @@ freight_estimate: {
 
   shipping_mode:
     null,
+// ----------------------------------------------
+// ANALYSE DU MODE DE TRANSPORT
+// ----------------------------------------------
 
+shipping_mode_analysis: {
+
+  status:
+    'comparison_required',
+
+  primary_candidate:
+    'lcl',
+
+  alternative_candidate:
+    'fcl_or_consolidation',
+
+  reason:
+    'individual_volume_compatible_with_lcl_study',
+
+  consolidation_possible:
+    null,
+
+  consolidation_status:
+    'not_analyzed'
+
+},
   chargeable_weight_kg:
     null,
 
