@@ -4619,6 +4619,51 @@ const combinedLclBasis =
   combinedVolumeM3 >= combinedWeightTons
     ? 'measurement'
     : 'weight';
+      // ------------------------------------------
+// BASES LCL INDIVIDUELLES DES DEUX MACHINES
+// ------------------------------------------
+
+const machineAWeightTons =
+  Number(
+    shippingA.total_shipping_weight_kg
+  ) / 1000;
+
+const machineAVolumeM3 =
+  Number(
+    shippingA.total_shipping_volume_m3
+  );
+
+const machineALclRevenueTons =
+  Math.max(
+    machineAWeightTons,
+    machineAVolumeM3
+  );
+
+
+const machineBWeightTons =
+  Number(
+    shippingB.total_shipping_weight_kg
+  ) / 1000;
+
+const machineBVolumeM3 =
+  Number(
+    shippingB.total_shipping_volume_m3
+  );
+
+const machineBLclRevenueTons =
+  Math.max(
+    machineBWeightTons,
+    machineBVolumeM3
+  );
+
+
+const individualLclRevenueTons =
+  Number(
+    (
+      machineALclRevenueTons +
+      machineBLclRevenueTons
+    ).toFixed(3)
+  );
 
 
       // ------------------------------------------
