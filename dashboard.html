@@ -3597,6 +3597,49 @@ estimate.spare_parts_additional_cost_usd +=
 // du coût actuellement chiffré du plan d'équipement.
 estimate.known_machine_cost_usd +=
   additionalSparePartsCostUsd;
+      // --------------------------------------------------
+// BASE TAXABLE LCL — W/M
+// --------------------------------------------------
+
+// Convention de travail :
+// 1 tonne = 1 unité W
+// 1 m³     = 1 unité M
+// La base taxable est la valeur la plus élevée.
+
+const lclWeightTons =
+  totalShippingWeightKg != null
+    ? Number(totalShippingWeightKg) / 1000
+    : null;
+
+const lclVolumeM3 =
+  totalShippingVolumeM3 != null
+    ? Number(totalShippingVolumeM3)
+    : null;
+
+let lclRevenueTons =
+  null;
+
+let lclChargeableBasis =
+  null;
+
+
+if (
+  lclWeightTons != null &&
+  lclVolumeM3 != null
+) {
+
+  lclRevenueTons =
+    Math.max(
+      lclWeightTons,
+      lclVolumeM3
+    );
+
+  lclChargeableBasis =
+    lclVolumeM3 >= lclWeightTons
+      ? 'measurement'
+      : 'weight';
+
+}
 // --------------------------------------------------
 // ENREGISTREMENT DANS LA SYNTHÈSE
 // --------------------------------------------------
