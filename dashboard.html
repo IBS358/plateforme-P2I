@@ -4266,7 +4266,15 @@ estimate.estimate_complete =
   !estimate.has_unverified_p2i_prices &&
   !estimate.has_unknown_p2i_price_basis &&
   !estimate.has_non_usd_user_prices;
+// ==================================================
+// ANALYSE DES OPPORTUNITÉS DE REGROUPEMENT DU FRET
+// ==================================================
 
+estimate.freight_consolidation =
+  analyzeFreightConsolidation(
+    estimate,
+    7
+  );
   console.log(
     '💰 ESTIMATION ÉQUIPEMENT P2I :',
     up?.id,
