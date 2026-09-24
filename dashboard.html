@@ -4815,6 +4815,31 @@ freight_scenarios: {
 
     total_revenue_tons:
   individualLclRevenueTons,
+    shipments: [
+
+  {
+    machine_key:
+      machineA.machine_key,
+
+    machine:
+      machineA.machine,
+
+    revenue_tons:
+      machineALclRevenueTons
+  },
+
+  {
+    machine_key:
+      machineB.machine_key,
+
+    machine:
+      machineB.machine,
+
+    revenue_tons:
+      machineBLclRevenueTons
+  }
+
+],
 
     estimated_freight_usd:
       null,
