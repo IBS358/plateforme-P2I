@@ -4744,6 +4744,114 @@ lcl_chargeable: {
     combinedLclBasis
 
 },
+        // ------------------------------------------
+// SCÉNARIOS LOGISTIQUES À COMPARER
+// ------------------------------------------
+
+freight_scenarios: {
+
+  // ----------------------------------------
+  // 1. LCL — EXPÉDITIONS INDIVIDUELLES
+  // ----------------------------------------
+
+  lcl_individual: {
+
+    status:
+      'pending_rate',
+
+    shipping_mode:
+      'lcl',
+
+    consolidation:
+      false,
+
+    shipment_count:
+      2,
+
+    total_revenue_tons:
+      combinedLclRevenueTons,
+
+    estimated_freight_usd:
+      null,
+
+    estimated_insurance_usd:
+      null,
+
+    estimated_total_usd:
+      null
+
+  },
+
+
+  // ----------------------------------------
+  // 2. LCL — EXPÉDITION REGROUPÉE
+  // ----------------------------------------
+
+  lcl_consolidated: {
+
+    status:
+      'pending_rate',
+
+    shipping_mode:
+      'lcl',
+
+    consolidation:
+      true,
+
+    shipment_count:
+      1,
+
+    revenue_tons:
+      combinedLclRevenueTons,
+
+    estimated_freight_usd:
+      null,
+
+    estimated_insurance_usd:
+      null,
+
+    estimated_total_usd:
+      null
+
+  },
+
+
+  // ----------------------------------------
+  // 3. FCL — EXPÉDITION REGROUPÉE
+  // ----------------------------------------
+
+  fcl_consolidated: {
+
+    status:
+      'fit_to_verify',
+
+    shipping_mode:
+      'fcl',
+
+    consolidation:
+      true,
+
+    shipment_count:
+      1,
+
+    container_type:
+      null,
+
+    fit_status:
+      'unknown',
+
+    estimated_freight_usd:
+      null,
+
+    estimated_insurance_usd:
+      null,
+
+    estimated_total_usd:
+      null
+
+  }
+
+},
         combined_goods_value_usd:
           combinedGoodsValueUsd,
 
