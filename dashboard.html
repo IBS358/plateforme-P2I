@@ -4598,6 +4598,23 @@ function analyzeFreightConsolidation(
         Number(
           shippingB.total_shipping_volume_m3
         );
+      // ------------------------------------------
+// BASE TAXABLE LCL DU REGROUPEMENT — W/M
+// ------------------------------------------
+
+const combinedWeightTons =
+  combinedWeightKg / 1000;
+
+const combinedLclRevenueTons =
+  Math.max(
+    combinedWeightTons,
+    combinedVolumeM3
+  );
+
+const combinedLclBasis =
+  combinedVolumeM3 >= combinedWeightTons
+    ? 'measurement'
+    : 'weight';
 
 
       // ------------------------------------------
@@ -4704,7 +4721,25 @@ function analyzeFreightConsolidation(
 
         combined_volume_m3:
           combinedVolumeM3,
+// ------------------------------------------
+// BASE LCL DU LOT REGROUPÉ
+// ------------------------------------------
 
+lcl_chargeable: {
+
+  weight_tons:
+    combinedWeightTons,
+
+  volume_m3:
+    combinedVolumeM3,
+
+  revenue_tons:
+    combinedLclRevenueTons,
+
+  basis:
+    combinedLclBasis
+
+},
         combined_goods_value_usd:
           combinedGoodsValueUsd,
 
