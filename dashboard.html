@@ -3671,7 +3671,14 @@ estimate.self_purchase.push({
 // ----------------------------------------------
 
 shipping_package: {
+// ----------------------------------------------
+// VALEUR DES MARCHANDISES EXPÉDIÉES
+// ----------------------------------------------
 
+goods_value_usd:
+  usableUsdPrice
+    ? Number(price) + additionalSparePartsCostUsd
+    : null,
   // ----------------------------------------------
   // MACHINE PRINCIPALE
   // ----------------------------------------------
