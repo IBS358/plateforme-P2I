@@ -4592,12 +4592,16 @@ function analyzeFreightConsolidation(
         );
 
       const combinedVolumeM3 =
-        Number(
-          shippingA.total_shipping_volume_m3
-        ) +
-        Number(
-          shippingB.total_shipping_volume_m3
-        );
+  Number(
+    (
+      Number(
+        shippingA.total_shipping_volume_m3
+      ) +
+      Number(
+        shippingB.total_shipping_volume_m3
+      )
+    ).toFixed(3)
+  );
       // ------------------------------------------
 // BASE TAXABLE LCL DU REGROUPEMENT — W/M
 // ------------------------------------------
