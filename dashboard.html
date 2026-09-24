@@ -4422,6 +4422,150 @@ estimate.freight_consolidation =
   return estimate;
 }
   // ==================================================
+// CALCUL D'UNE ESTIMATION DE FRET LCL
+// ==================================================
+
+function calculateLclFreightEstimate({
+  revenueTons,
+  rate
+}) {
+
+  // ----------------------------------------------
+  // CONTRÔLES DE BASE
+  // ----------------------------------------------
+
+  const rt =
+    Number(revenueTons);
+
+  if (
+    !Number.isFinite(rt) ||
+    rt <= 0
+  ) {
+    return {
+      status: 'missing_chargeable_quantity',
+      estimated_freight_usd: null
+    };
+  }
+
+
+  if (
+    !rate ||
+    rate.status !== 'available'
+  ) {
+    return {
+      status: 'rate_not_available',
+      estimated_freight_usd: null
+    };
+  }
+
+
+  const ratePerRt =
+    Number(rate.rate_per_rt_usd);
+
+  if (
+    !Number.isFinite(ratePerRt) ||
+    ratePerRt <= 0
+  ) {
+    return {
+      status: 'invalid_rate',
+      estimated_freight_usd: null
+    };
+  }
+
+
+  // ----------------------------------------------
+  // PART VARIABLE DU FRET
+  // ----------------------------------------------
+
+  const variableFreightUsd =
+    rt * ratePerRt;
+
+
+  // ----------------------------------------------
+  // MINIMUM DE FACTURATION
+  // ----------------------------------------------
+
+  const minimumChargeUsd =
+    Number(rate.minimum_charge_usd) || 0;
+
+  const freightAfterMinimumUsd =
+    Math.max(
+      variableFreightUsd,
+      minimumChargeUsd
+    );
+
+
+  // ----------------------------------------------
+  // FRAIS COMPLÉMENTAIRES
+  // ----------------------------------------------
+
+  const fixedChargeUsd =
+    Number(
+      rate.fixed_charge_per_shipment_usd
+    ) || 0;
+
+  const surchargesUsd =
+    Number(rate.surcharges_usd) || 0;
+
+  const originChargesUsd =
+    Number(rate.origin_charges_usd) || 0;
+
+  const otherChargesUsd =
+    Number(rate.other_charges_usd) || 0;
+
+
+  // ----------------------------------------------
+  // TOTAL ESTIMATIF DU FRET
+  // ----------------------------------------------
+
+  const estimatedFreightUsd =
+    freightAfterMinimumUsd +
+    fixedChargeUsd +
+    surchargesUsd +
+    originChargesUsd +
+    otherChargesUsd;
+
+
+  return {
+
+    status:
+      'estimated',
+
+    revenue_tons:
+      rt,
+
+    rate_per_rt_usd:
+      ratePerRt,
+
+    variable_freight_usd:
+      variableFreightUsd,
+
+    minimum_charge_usd:
+      minimumChargeUsd,
+
+    minimum_applied:
+      minimumChargeUsd > variableFreightUsd,
+
+    fixed_charge_usd:
+      fixedChargeUsd,
+
+    surcharges_usd:
+      surchargesUsd,
+
+    origin_charges_usd:
+      originChargesUsd,
+
+    other_charges_usd:
+      otherChargesUsd,
+
+    estimated_freight_usd:
+      Number(
+        estimatedFreightUsd.toFixed(2)
+      )
+
+  };
+}
+  // ==================================================
 // ANALYSE DES OPPORTUNITÉS DE REGROUPEMENT DU FRET
 // ==================================================
 
