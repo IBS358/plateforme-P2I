@@ -4276,6 +4276,343 @@ estimate.estimate_complete =
 
   return estimate;
 }
+  // ==================================================
+// ANALYSE DES OPPORTUNITÉS DE REGROUPEMENT DU FRET
+// ==================================================
+
+function analyzeFreightConsolidation(
+  equipmentEstimate,
+  maxReadyDateGapDays = 7
+) {
+
+  // ----------------------------------------------
+  // RÉSULTAT DE L'ANALYSE
+  // ----------------------------------------------
+
+  const analysis = {
+
+    status:
+      'analyzed',
+
+    max_ready_date_gap_days:
+      maxReadyDateGapDays,
+
+    eligible_packages:
+      0,
+
+    consolidation_candidates:
+      []
+
+  };
+
+
+  // ----------------------------------------------
+  // MACHINES ACHETÉES PAR L'UTILISATEUR
+  // ----------------------------------------------
+
+  const machines =
+    Array.isArray(equipmentEstimate?.self_purchase)
+      ? equipmentEstimate.self_purchase
+      : [];
+
+
+  // ----------------------------------------------
+  // COLIS DISPOSANT DES INFORMATIONS MINIMALES
+  // ----------------------------------------------
+
+  const eligibleMachines =
+    machines.filter(item => {
+
+      const shipping =
+        item?.shipping_package;
+
+      if (!shipping) {
+        return false;
+      }
+
+      return (
+        shipping.status ===
+          'ready_for_freight_estimate' &&
+
+        shipping.departure_port &&
+
+        shipping.ready_date &&
+
+        Number.isFinite(
+          Number(
+            shipping.total_shipping_weight_kg
+          )
+        ) &&
+
+        Number.isFinite(
+          Number(
+            shipping.total_shipping_volume_m3
+          )
+        )
+      );
+
+    });
+
+
+  analysis.eligible_packages =
+    eligibleMachines.length;
+
+
+  // ----------------------------------------------
+  // COMPARAISON DE CHAQUE PAIRE DE MACHINES
+  // ----------------------------------------------
+
+  for (
+    let i = 0;
+    i < eligibleMachines.length;
+    i++
+  ) {
+
+    for (
+      let j = i + 1;
+      j < eligibleMachines.length;
+      j++
+    ) {
+
+      const machineA =
+        eligibleMachines[i];
+
+      const machineB =
+        eligibleMachines[j];
+
+      const shippingA =
+        machineA.shipping_package;
+
+      const shippingB =
+        machineB.shipping_package;
+
+
+      // ------------------------------------------
+      // COMPARAISON DES PORTS
+      // ------------------------------------------
+
+      const portA =
+        String(
+          shippingA.departure_port || ''
+        )
+          .trim()
+          .toLowerCase();
+
+      const portB =
+        String(
+          shippingB.departure_port || ''
+        )
+          .trim()
+          .toLowerCase();
+
+      const sameDeparturePort =
+        portA !== '' &&
+        portA === portB;
+
+
+      // ------------------------------------------
+      // ÉCART ENTRE LES DATES DE DISPONIBILITÉ
+      // ------------------------------------------
+
+      const dateA =
+        new Date(
+          `${shippingA.ready_date}T00:00:00Z`
+        );
+
+      const dateB =
+        new Date(
+          `${shippingB.ready_date}T00:00:00Z`
+        );
+
+      const validDates =
+        !Number.isNaN(dateA.getTime()) &&
+        !Number.isNaN(dateB.getTime());
+
+      const readyDateGapDays =
+        validDates
+          ? Math.round(
+              Math.abs(
+                dateA.getTime() -
+                dateB.getTime()
+              ) /
+              86400000
+            )
+          : null;
+
+
+      // ------------------------------------------
+      // COMPATIBILITÉ DE LA FENÊTRE TEMPORELLE
+      // ------------------------------------------
+
+      const compatibleReadyDates =
+        readyDateGapDays != null &&
+        readyDateGapDays <=
+          maxReadyDateGapDays;
+
+
+      // ------------------------------------------
+      // POIDS ET VOLUME COMBINÉS
+      // ------------------------------------------
+
+      const combinedWeightKg =
+        Number(
+          shippingA.total_shipping_weight_kg
+        ) +
+        Number(
+          shippingB.total_shipping_weight_kg
+        );
+
+      const combinedVolumeM3 =
+        Number(
+          shippingA.total_shipping_volume_m3
+        ) +
+        Number(
+          shippingB.total_shipping_volume_m3
+        );
+
+
+      // ------------------------------------------
+      // VALEUR TOTALE DES MARCHANDISES
+      // ------------------------------------------
+
+      const goodsValueA =
+        Number(
+          shippingA.goods_value_usd
+        );
+
+      const goodsValueB =
+        Number(
+          shippingB.goods_value_usd
+        );
+
+      const combinedGoodsValueUsd =
+        (
+          Number.isFinite(goodsValueA) &&
+          Number.isFinite(goodsValueB)
+        )
+          ? goodsValueA + goodsValueB
+          : null;
+
+
+      // ------------------------------------------
+      // CANDIDAT AU REGROUPEMENT
+      // ------------------------------------------
+
+      const isCandidate =
+        sameDeparturePort &&
+        compatibleReadyDates;
+
+
+      // On conserve uniquement les véritables
+      // candidats à étudier.
+      if (!isCandidate) {
+        continue;
+      }
+
+
+      analysis.consolidation_candidates.push({
+
+        status:
+          'consolidation_candidate',
+
+        machine_a: {
+
+          machine_key:
+            machineA.machine_key,
+
+          machine:
+            machineA.machine,
+
+          ready_date:
+            shippingA.ready_date,
+
+          weight_kg:
+            shippingA.total_shipping_weight_kg,
+
+          volume_m3:
+            shippingA.total_shipping_volume_m3
+
+        },
+
+        machine_b: {
+
+          machine_key:
+            machineB.machine_key,
+
+          machine:
+            machineB.machine,
+
+          ready_date:
+            shippingB.ready_date,
+
+          weight_kg:
+            shippingB.total_shipping_weight_kg,
+
+          volume_m3:
+            shippingB.total_shipping_volume_m3
+
+        },
+
+        departure_country:
+          shippingA.departure_country ||
+          shippingB.departure_country ||
+          null,
+
+        departure_port:
+          shippingA.departure_port,
+
+        same_departure_port:
+          sameDeparturePort,
+
+        ready_date_gap_days:
+          readyDateGapDays,
+
+        max_ready_date_gap_days:
+          maxReadyDateGapDays,
+
+        combined_weight_kg:
+          combinedWeightKg,
+
+        combined_volume_m3:
+          combinedVolumeM3,
+
+        combined_goods_value_usd:
+          combinedGoodsValueUsd,
+
+        decision:
+          'comparison_required'
+
+      });
+
+    }
+
+  }
+
+
+  // ----------------------------------------------
+  // STATUT GLOBAL
+  // ----------------------------------------------
+
+  if (
+    analysis.consolidation_candidates.length === 0
+  ) {
+
+    analysis.status =
+      'no_candidate';
+
+  }
+
+  else {
+
+    analysis.status =
+      'candidates_found';
+
+  }
+
+
+  return analysis;
+
+}
  // ----------------------------------------------
 // AFFICHAGE DU PLAN D'ÉQUIPEMENT
 // ----------------------------------------------
