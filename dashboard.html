@@ -3964,59 +3964,28 @@ estimated_freight_usd:
 estimated_insurance_usd:
   individualCifInsuranceEstimate
     ?.estimated_insurance_usd ?? null,
-  // ----------------------------------------------
-// ASSURANCE TRANSPORT — ESTIMATION CIF
+ 
+// ----------------------------------------------
+// ASSURANCE TRANSPORT — RÉFÉRENCE + CALCUL
 // ----------------------------------------------
 
 insurance_estimate: {
 
-  status:
-    'pending',
+  // Référence d'assurance utilisée
+  ...individualInsuranceReference,
 
-  // Base de couverture applicable au scénario CIF
-  coverage_basis:
-    'cif_contract_value',
+  // Résultat du moteur assurance / CIF
+  calculation_status:
+    individualCifInsuranceEstimate
+      ?.status || 'not_calculated',
 
-  // Niveau de couverture de référence CIF
-  coverage_percent:
-    110,
-
-  // Valeur effectivement assurée
-  // Calculée ultérieurement
   insured_value_usd:
-    null,
+    individualCifInsuranceEstimate
+      ?.insured_value_usd ?? null,
 
-  // Taux réel de prime d'assurance
-  // Ne pas confondre avec les 110 % de couverture
-  premium_rate_percent:
-    null,
-
-  // Prime minimale éventuelle
-  minimum_premium_usd:
-    null,
-
-  // Résultat du calcul d'assurance
   estimated_insurance_usd:
-    null,
-
-  // Niveau de couverture de référence
-  coverage_level:
-    'institute_cargo_clauses_c',
-
-  source_type:
-    null,
-
-  source_name:
-    null,
-
-  source_date:
-    null,
-
-  valid_until:
-    null,
-
-  verification_status:
-    'not_verified'
+    individualCifInsuranceEstimate
+      ?.estimated_insurance_usd ?? null
 
 },
 
