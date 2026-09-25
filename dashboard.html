@@ -3863,6 +3863,61 @@ fcl_analysis: {
 
   estimated_insurance_usd:
     null,
+  // ----------------------------------------------
+// ASSURANCE TRANSPORT — ESTIMATION CIF
+// ----------------------------------------------
+
+insurance_estimate: {
+
+  status:
+    'pending',
+
+  // Base de couverture applicable au scénario CIF
+  coverage_basis:
+    'cif_contract_value',
+
+  // Niveau de couverture de référence CIF
+  coverage_percent:
+    110,
+
+  // Valeur effectivement assurée
+  // Calculée ultérieurement
+  insured_value_usd:
+    null,
+
+  // Taux réel de prime d'assurance
+  // Ne pas confondre avec les 110 % de couverture
+  premium_rate_percent:
+    null,
+
+  // Prime minimale éventuelle
+  minimum_premium_usd:
+    null,
+
+  // Résultat du calcul d'assurance
+  estimated_insurance_usd:
+    null,
+
+  // Niveau de couverture de référence
+  coverage_level:
+    'institute_cargo_clauses_c',
+
+  source_type:
+    null,
+
+  source_name:
+    null,
+
+  source_date:
+    null,
+
+  valid_until:
+    null,
+
+  verification_status:
+    'not_verified'
+
+},
 
   estimated_cif_abidjan_usd:
     null,
