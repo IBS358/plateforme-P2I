@@ -3728,6 +3728,76 @@ const individualLclFreightEstimate =
       individualFreightRate
 
   });
+      // --------------------------------------------------
+// ASSURANCE DE RÉFÉRENCE — MACHINE INDIVIDUELLE
+// --------------------------------------------------
+
+const individualInsuranceReference = {
+
+  status:
+    'not_available',
+
+  coverage_basis:
+    'cif_contract_value',
+
+  coverage_percent:
+    110,
+
+  premium_rate_percent:
+    null,
+
+  minimum_premium_usd:
+    null,
+
+  coverage_level:
+    'institute_cargo_clauses_c',
+
+  source_type:
+    null,
+
+  source_name:
+    null,
+
+  source_date:
+    null,
+
+  valid_until:
+    null,
+
+  verification_status:
+    'not_verified'
+
+};
+
+
+// --------------------------------------------------
+// VALEUR FOB DES MARCHANDISES EXPÉDIÉES
+// --------------------------------------------------
+
+const individualGoodsValueUsd =
+  usableUsdPrice
+    ? Number(price) + additionalSparePartsCostUsd
+    : null;
+
+
+// --------------------------------------------------
+// CALCUL ASSURANCE + CIF
+// --------------------------------------------------
+
+const individualCifInsuranceEstimate =
+  calculateCifInsuranceEstimate({
+
+    fobValueUsd:
+      individualGoodsValueUsd,
+
+    freightUsd:
+      individualLclFreightEstimate
+        ?.estimated_freight_usd ?? null,
+
+    insurance:
+      individualInsuranceReference
+
+  });
 // --------------------------------------------------
 // ENREGISTREMENT DANS LA SYNTHÈSE
 // --------------------------------------------------
