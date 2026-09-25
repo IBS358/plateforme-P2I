@@ -3957,8 +3957,13 @@ estimated_freight_usd:
   individualLclFreightEstimate
     ?.estimated_freight_usd ?? null,
 
-  estimated_insurance_usd:
-    null,
+  insurance_calculation_status:
+  individualCifInsuranceEstimate
+    ?.status || 'not_calculated',
+
+estimated_insurance_usd:
+  individualCifInsuranceEstimate
+    ?.estimated_insurance_usd ?? null,
   // ----------------------------------------------
 // ASSURANCE TRANSPORT — ESTIMATION CIF
 // ----------------------------------------------
@@ -4016,7 +4021,8 @@ insurance_estimate: {
 },
 
   estimated_cif_abidjan_usd:
-    null,
+  individualCifInsuranceEstimate
+    ?.estimated_cif_abidjan_usd ?? null,
 
   rate_source:
     null,
