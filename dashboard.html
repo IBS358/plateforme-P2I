@@ -4725,46 +4725,70 @@ function calculateCifInsuranceEstimate({
   freightUsd,
   insurance
 }) {
+  
+// ----------------------------------------------
+// CONTRÔLE FOB
+// ----------------------------------------------
 
-  // ----------------------------------------------
-  // CONTRÔLE FOB
-  // ----------------------------------------------
+if (
+  fobValueUsd === null ||
+  fobValueUsd === undefined ||
+  fobValueUsd === ''
+) {
+  return {
+    status: 'missing_fob_value',
+    insured_value_usd: null,
+    estimated_insurance_usd: null,
+    estimated_cif_abidjan_usd: null
+  };
+}
 
-  const fob =
-    Number(fobValueUsd);
+const fob =
+  Number(fobValueUsd);
 
-  if (
-    !Number.isFinite(fob) ||
-    fob < 0
-  ) {
-    return {
-      status: 'missing_fob_value',
-      insured_value_usd: null,
-      estimated_insurance_usd: null,
-      estimated_cif_abidjan_usd: null
-    };
-  }
+if (
+  !Number.isFinite(fob) ||
+  fob < 0
+) {
+  return {
+    status: 'invalid_fob_value',
+    insured_value_usd: null,
+    estimated_insurance_usd: null,
+    estimated_cif_abidjan_usd: null
+  };
+}
 
+ // ----------------------------------------------
+// CONTRÔLE FRET
+// ----------------------------------------------
 
-  // ----------------------------------------------
-  // CONTRÔLE FRET
-  // ----------------------------------------------
+if (
+  freightUsd === null ||
+  freightUsd === undefined ||
+  freightUsd === ''
+) {
+  return {
+    status: 'missing_freight',
+    insured_value_usd: null,
+    estimated_insurance_usd: null,
+    estimated_cif_abidjan_usd: null
+  };
+}
 
-  const freight =
-    Number(freightUsd);
+const freight =
+  Number(freightUsd);
 
-  if (
-    !Number.isFinite(freight) ||
-    freight < 0
-  ) {
-    return {
-      status: 'missing_freight',
-      insured_value_usd: null,
-      estimated_insurance_usd: null,
-      estimated_cif_abidjan_usd: null
-    };
-  }
-
+if (
+  !Number.isFinite(freight) ||
+  freight < 0
+) {
+  return {
+    status: 'invalid_freight',
+    insured_value_usd: null,
+    estimated_insurance_usd: null,
+    estimated_cif_abidjan_usd: null
+  };
+}
 
   // ----------------------------------------------
   // CONTRÔLE DE L'ASSURANCE
