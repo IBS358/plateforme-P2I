@@ -5501,34 +5501,45 @@ analysis.consolidation_candidates.push({
   // 2. LCL — EXPÉDITION REGROUPÉE
   // ----------------------------------------
 
-  lcl_consolidated: {
+ lcl_consolidated: {
 
-    status:
-      'pending_rate',
+  status:
+    consolidatedLclFreightEstimate
+      ?.status || 'not_calculated',
 
-    shipping_mode:
-      'lcl',
+  shipping_mode:
+    'lcl',
 
-    consolidation:
-      true,
+  consolidation:
+    true,
 
-    shipment_count:
-      1,
+  shipment_count:
+    1,
 
-    revenue_tons:
-      combinedLclRevenueTons,
+  revenue_tons:
+    combinedLclRevenueTons,
 
-    estimated_freight_usd:
-      null,
+  // Référence tarifaire utilisée
+  freight_rate:
+    consolidatedLclFreightRate,
 
-    estimated_insurance_usd:
-      null,
+  // Résultat du calcul du fret
+  freight_calculation_status:
+    consolidatedLclFreightEstimate
+      ?.status || 'not_calculated',
 
-    estimated_total_usd:
-      null
+  estimated_freight_usd:
+    consolidatedLclFreightEstimate
+      ?.estimated_freight_usd ?? null,
 
-  },
+  // Assurance et total seront raccordés ensuite
+  estimated_insurance_usd:
+    null,
 
+  estimated_total_usd:
+    null
+
+},
 
   // ----------------------------------------
   // 3. FCL — EXPÉDITION REGROUPÉE
