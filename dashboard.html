@@ -5330,6 +5330,91 @@ lcl_chargeable: {
     combinedLclBasis
 
 },
+        // --------------------------------------------------
+// TARIF LCL DE RÉFÉRENCE — LOT CONSOLIDÉ
+// --------------------------------------------------
+
+const consolidatedLclFreightRate = {
+
+  status:
+    'not_available',
+
+  rate_type:
+    null,
+
+  shipping_mode:
+    'lcl',
+
+  // Nous raccorderons le vrai port ensuite
+  origin_port:
+    null,
+
+  destination_port:
+    'Abidjan',
+
+  currency:
+    'USD',
+
+  rate_amount:
+    null,
+
+  rate_unit:
+    null,
+
+  rate_per_rt_usd:
+    null,
+
+  minimum_charge_usd:
+    null,
+
+  fixed_charge_per_shipment_usd:
+    null,
+
+  surcharges_usd:
+    null,
+
+  origin_charges_usd:
+    null,
+
+  destination_charges_usd:
+    null,
+
+  other_charges_usd:
+    null,
+
+  source_type:
+    null,
+
+  source_name:
+    null,
+
+  source_date:
+    null,
+
+  valid_until:
+    null,
+
+  verification_status:
+    'not_verified',
+
+  notes:
+    null
+
+};
+      // --------------------------------------------------
+// CALCUL DU FRET LCL CONSOLIDÉ
+// --------------------------------------------------
+
+const consolidatedLclFreightEstimate =
+  calculateLclFreightEstimate({
+
+    revenueTons:
+      combinedLclRevenueTons,
+
+    rate:
+      consolidatedLclFreightRate
+
+  });
         // ------------------------------------------
 // SCÉNARIOS LOGISTIQUES À COMPARER
 // ------------------------------------------
