@@ -4621,6 +4621,237 @@ function calculateLclFreightEstimate({
   };
 }
   // ==================================================
+// CALCUL ASSURANCE + CIF PORT D'ABIDJAN
+// ==================================================
+
+function calculateCifInsuranceEstimate({
+  fobValueUsd,
+  freightUsd,
+  insurance
+}) {
+
+  // ----------------------------------------------
+  // CONTRÔLE FOB
+  // ----------------------------------------------
+
+  const fob =
+    Number(fobValueUsd);
+
+  if (
+    !Number.isFinite(fob) ||
+    fob < 0
+  ) {
+    return {
+      status: 'missing_fob_value',
+      insured_value_usd: null,
+      estimated_insurance_usd: null,
+      estimated_cif_abidjan_usd: null
+    };
+  }
+
+
+  // ----------------------------------------------
+  // CONTRÔLE FRET
+  // ----------------------------------------------
+
+  const freight =
+    Number(freightUsd);
+
+  if (
+    !Number.isFinite(freight) ||
+    freight < 0
+  ) {
+    return {
+      status: 'missing_freight',
+      insured_value_usd: null,
+      estimated_insurance_usd: null,
+      estimated_cif_abidjan_usd: null
+    };
+  }
+
+
+  // ----------------------------------------------
+  // CONTRÔLE DE L'ASSURANCE
+  // ----------------------------------------------
+
+  if (!insurance) {
+    return {
+      status: 'insurance_not_available',
+      insured_value_usd: null,
+      estimated_insurance_usd: null,
+      estimated_cif_abidjan_usd: null
+    };
+  }
+
+
+  const premiumRatePercent =
+    Number(
+      insurance.premium_rate_percent
+    );
+
+  if (
+    !Number.isFinite(premiumRatePercent) ||
+    premiumRatePercent <= 0
+  ) {
+    return {
+      status: 'insurance_rate_not_available',
+      insured_value_usd: null,
+      estimated_insurance_usd: null,
+      estimated_cif_abidjan_usd: null
+    };
+  }
+
+
+  // ----------------------------------------------
+  // COEFFICIENT DE COUVERTURE
+  // ----------------------------------------------
+
+  const coveragePercent =
+    Number(
+      insurance.coverage_percent
+    );
+
+  if (
+    !Number.isFinite(coveragePercent) ||
+    coveragePercent <= 0
+  ) {
+    return {
+      status: 'invalid_coverage_percent',
+      insured_value_usd: null,
+      estimated_insurance_usd: null,
+      estimated_cif_abidjan_usd: null
+    };
+  }
+
+
+  const premiumRate =
+    premiumRatePercent / 100;
+
+  const coverageFactor =
+    coveragePercent / 100;
+
+
+  // ----------------------------------------------
+  // CONTRÔLE MATHÉMATIQUE
+  // ----------------------------------------------
+
+  const denominator =
+    1 - (
+      premiumRate *
+      coverageFactor
+    );
+
+  if (
+    !Number.isFinite(denominator) ||
+    denominator <= 0
+  ) {
+    return {
+      status: 'invalid_insurance_formula',
+      insured_value_usd: null,
+      estimated_insurance_usd: null,
+      estimated_cif_abidjan_usd: null
+    };
+  }
+
+
+  // ----------------------------------------------
+  // CIF THÉORIQUE AVANT PRIME MINIMALE
+  // ----------------------------------------------
+
+  const baseFobFreight =
+    fob + freight;
+
+  let cifUsd =
+    baseFobFreight /
+    denominator;
+
+  let insuranceUsd =
+    cifUsd -
+    baseFobFreight;
+
+
+  // ----------------------------------------------
+  // PRIME MINIMALE ÉVENTUELLE
+  // ----------------------------------------------
+
+  const minimumPremiumUsd =
+    Number(
+      insurance.minimum_premium_usd
+    ) || 0;
+
+  let minimumApplied =
+    false;
+
+  if (
+    minimumPremiumUsd > insuranceUsd
+  ) {
+
+    insuranceUsd =
+      minimumPremiumUsd;
+
+    cifUsd =
+      baseFobFreight +
+      insuranceUsd;
+
+    minimumApplied =
+      true;
+  }
+
+
+  // ----------------------------------------------
+  // VALEUR ASSURÉE
+  // ----------------------------------------------
+
+  const insuredValueUsd =
+    cifUsd *
+    coverageFactor;
+
+
+  // ----------------------------------------------
+  // RÉSULTAT
+  // ----------------------------------------------
+
+  return {
+
+    status:
+      'estimated',
+
+    fob_value_usd:
+      Number(fob.toFixed(2)),
+
+    freight_usd:
+      Number(freight.toFixed(2)),
+
+    coverage_percent:
+      coveragePercent,
+
+    premium_rate_percent:
+      premiumRatePercent,
+
+    minimum_premium_usd:
+      minimumPremiumUsd,
+
+    minimum_applied:
+      minimumApplied,
+
+    insured_value_usd:
+      Number(
+        insuredValueUsd.toFixed(2)
+      ),
+
+    estimated_insurance_usd:
+      Number(
+        insuranceUsd.toFixed(2)
+      ),
+
+    estimated_cif_abidjan_usd:
+      Number(
+        cifUsd.toFixed(2)
+      )
+
+  };
+}
+  // ==================================================
 // ANALYSE DES OPPORTUNITÉS DE REGROUPEMENT DU FRET
 // ==================================================
 
