@@ -5649,41 +5649,125 @@ analysis.consolidation_candidates.push({
 
 },
 
-  // ----------------------------------------
-  // 3. FCL — EXPÉDITION REGROUPÉE
-  // ----------------------------------------
+ // ----------------------------------------
+// 3. FCL — EXPÉDITION REGROUPÉE
+// ----------------------------------------
 
-  fcl_consolidated: {
+fcl_consolidated: {
+
+  // --------------------------------------
+  // STATUT GLOBAL DU SCÉNARIO
+  // --------------------------------------
+
+  status:
+    'dimensions_required',
+
+  shipping_mode:
+    'fcl',
+
+  consolidation:
+    true,
+
+  shipment_count:
+    1,
+
+
+  // --------------------------------------
+  // DONNÉES DU LOT À CHARGER
+  // --------------------------------------
+
+  combined_weight_kg:
+    combinedWeightKg,
+
+  combined_volume_m3:
+    combinedVolumeM3,
+
+  goods_value_usd:
+    combinedGoodsValueUsd,
+
+
+  // --------------------------------------
+  // CONTENEUR CANDIDAT
+  // --------------------------------------
+
+  // Le 20' est étudié comme premier candidat.
+  // Il n'est PAS encore déclaré compatible.
+  container_type:
+    '20ft_dry_candidate',
+
+
+  // --------------------------------------
+  // PRÉ-ANALYSE DE COMPATIBILITÉ
+  // --------------------------------------
+
+  fcl_analysis: {
 
     status:
-      'fit_to_verify',
+      'dimensions_required',
 
-    shipping_mode:
-      'fcl',
+    // Poids et volume permettent seulement
+    // une pré-évaluation.
+    weight_status:
+      'pre_compatible',
 
-    consolidation:
+    volume_status:
+      'pre_compatible',
+
+    // Dimensions emballées L × l × H
+    // actuellement absentes des données P2I.
+    dimensional_fit_status:
+      'dimensions_required',
+
+    // Aucun plan d'empotage n'a encore
+    // été vérifié.
+    loading_plan_status:
+      'not_verified',
+
+    // Le scénario reste candidat à une
+    // comparaison économique LCL / FCL.
+    comparison_eligible:
       true,
 
-    shipment_count:
-      1,
+    // Mais sa compatibilité physique
+    // n'est pas encore confirmée.
+    physical_fit_confirmed:
+      false
 
-    container_type:
-      null,
+  },
 
-    fit_status:
-      'unknown',
 
-    estimated_freight_usd:
-      null,
+  // --------------------------------------
+  // COMPATIBILITÉ GLOBALE
+  // --------------------------------------
 
-    estimated_insurance_usd:
-      null,
+  fit_status:
+    'dimensions_required',
 
-    estimated_total_usd:
-      null
 
-  }
+  // --------------------------------------
+  // CALCULS TARIFAIRES
+  // Raccordés ultérieurement
+  // --------------------------------------
 
+  freight_calculation_status:
+    'not_calculated',
+
+  estimated_freight_usd:
+    null,
+
+  insurance_calculation_status:
+    'not_calculated',
+
+  estimated_insurance_usd:
+    null,
+
+  estimated_cif_abidjan_usd:
+    null,
+
+  estimated_total_usd:
+    null
+
+}
 },
         combined_goods_value_usd:
           combinedGoodsValueUsd,
