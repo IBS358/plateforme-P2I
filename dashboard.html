@@ -3879,8 +3879,13 @@ fcl_analysis: {
   fit_status: 'unknown'
 },
 
-  estimated_freight_usd:
-    null,
+  freight_calculation_status:
+  individualLclFreightEstimate
+    ?.status || 'not_calculated',
+
+estimated_freight_usd:
+  individualLclFreightEstimate
+    ?.estimated_freight_usd ?? null,
 
   estimated_insurance_usd:
     null,
