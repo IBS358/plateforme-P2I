@@ -3640,6 +3640,94 @@ if (
       : 'weight';
 
 }
+      // --------------------------------------------------
+// TARIF DE FRET DE RÉFÉRENCE — MACHINE INDIVIDUELLE
+// --------------------------------------------------
+
+// Pour l'instant aucun tarif réel n'est encore injecté.
+// Cette structure sera ensuite alimentée par les
+// références logistiques P2I / Supabase.
+
+const individualFreightRate = {
+
+  status:
+    'not_available',
+
+  rate_type:
+    null,
+
+  shipping_mode:
+    null,
+
+  origin_port:
+    null,
+
+  destination_port:
+    'Abidjan',
+
+  currency:
+    'USD',
+
+  rate_amount:
+    null,
+
+  rate_unit:
+    null,
+
+  rate_per_rt_usd:
+    null,
+
+  minimum_charge_usd:
+    null,
+
+  fixed_charge_per_shipment_usd:
+    null,
+
+  surcharges_usd:
+    null,
+
+  origin_charges_usd:
+    null,
+
+  destination_charges_usd:
+    null,
+
+  other_charges_usd:
+    null,
+
+  source_type:
+    null,
+
+  source_name:
+    null,
+
+  source_date:
+    null,
+
+  valid_until:
+    null,
+
+  verification_status:
+    'not_verified',
+
+  notes:
+    null
+
+};
+      // --------------------------------------------------
+// CALCUL AUTOMATIQUE DU FRET LCL INDIVIDUEL
+// --------------------------------------------------
+
+const individualLclFreightEstimate =
+  calculateLclFreightEstimate({
+
+    revenueTons:
+      lclRevenueTons,
+
+    rate:
+      individualFreightRate
+
+  });
 // --------------------------------------------------
 // ENREGISTREMENT DANS LA SYNTHÈSE
 // --------------------------------------------------
