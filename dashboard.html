@@ -5581,11 +5581,20 @@ analysis.consolidation_candidates.push({
   revenue_tons:
     combinedLclRevenueTons,
 
-  // Référence tarifaire utilisée
+  // ----------------------------------------
+  // VALEUR DES MARCHANDISES
+  // ----------------------------------------
+
+  goods_value_usd:
+    combinedGoodsValueUsd,
+
+  // ----------------------------------------
+  // RÉFÉRENCE ET CALCUL DU FRET
+  // ----------------------------------------
+
   freight_rate:
     consolidatedLclFreightRate,
 
-  // Résultat du calcul du fret
   freight_calculation_status:
     consolidatedLclFreightEstimate
       ?.status || 'not_calculated',
@@ -5594,12 +5603,49 @@ analysis.consolidation_candidates.push({
     consolidatedLclFreightEstimate
       ?.estimated_freight_usd ?? null,
 
-  // Assurance et total seront raccordés ensuite
-  estimated_insurance_usd:
-    null,
+  // ----------------------------------------
+  // RÉFÉRENCE ET CALCUL DE L'ASSURANCE
+  // ----------------------------------------
 
+  insurance_estimate: {
+
+    ...consolidatedInsuranceReference,
+
+    calculation_status:
+      consolidatedCifInsuranceEstimate
+        ?.status || 'not_calculated',
+
+    insured_value_usd:
+      consolidatedCifInsuranceEstimate
+        ?.insured_value_usd ?? null,
+
+    estimated_insurance_usd:
+      consolidatedCifInsuranceEstimate
+        ?.estimated_insurance_usd ?? null
+
+  },
+
+  insurance_calculation_status:
+    consolidatedCifInsuranceEstimate
+      ?.status || 'not_calculated',
+
+  estimated_insurance_usd:
+    consolidatedCifInsuranceEstimate
+      ?.estimated_insurance_usd ?? null,
+
+  // ----------------------------------------
+  // CIF PORT D'ABIDJAN
+  // ----------------------------------------
+
+  estimated_cif_abidjan_usd:
+    consolidatedCifInsuranceEstimate
+      ?.estimated_cif_abidjan_usd ?? null,
+
+  // Conservé pour compatibilité avec
+  // la structure actuelle des scénarios
   estimated_total_usd:
-    null
+    consolidatedCifInsuranceEstimate
+      ?.estimated_cif_abidjan_usd ?? null
 
 },
 
