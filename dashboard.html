@@ -5338,6 +5338,68 @@ const consolidatedLclFreightEstimate =
       consolidatedLclFreightRate
 
   });
+     // --------------------------------------------------
+// ASSURANCE DE RÉFÉRENCE — LOT LCL CONSOLIDÉ
+// --------------------------------------------------
+
+const consolidatedInsuranceReference = {
+
+  status:
+    'not_available',
+
+  coverage_basis:
+    'cif_contract_value',
+
+  coverage_percent:
+    110,
+
+  premium_rate_percent:
+    null,
+
+  minimum_premium_usd:
+    null,
+
+  coverage_level:
+    'institute_cargo_clauses_c',
+
+  source_type:
+    null,
+
+  source_name:
+    null,
+
+  source_date:
+    null,
+
+  valid_until:
+    null,
+
+  verification_status:
+    'not_verified'
+
+};
+
+
+// --------------------------------------------------
+// CALCUL ASSURANCE + CIF — LOT LCL CONSOLIDÉ
+// --------------------------------------------------
+
+const consolidatedCifInsuranceEstimate =
+  calculateCifInsuranceEstimate({
+
+    // Valeur totale des marchandises du lot
+    fobValueUsd:
+      combinedGoodsValueUsd,
+
+    // Fret LCL consolidé calculé
+    freightUsd:
+      consolidatedLclFreightEstimate
+        ?.estimated_freight_usd ?? null,
+
+    insurance:
+      consolidatedInsuranceReference
+
+  }); 
 
 
 // ------------------------------------------
