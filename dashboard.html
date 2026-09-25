@@ -5110,29 +5110,29 @@ function analyzeFreightConsolidation(
           : null;
 
 
-      // ------------------------------------------
-      // COMPATIBILITÉ DE LA FENÊTRE TEMPORELLE
-      // ------------------------------------------
+     // ------------------------------------------
+// COMPATIBILITÉ DE LA FENÊTRE TEMPORELLE
+// ------------------------------------------
 
-      const compatibleReadyDates =
-        readyDateGapDays != null &&
-        readyDateGapDays <=
-          maxReadyDateGapDays;
+const compatibleReadyDates =
+  readyDateGapDays != null &&
+  readyDateGapDays <=
+    maxReadyDateGapDays;
 
 
-      // ------------------------------------------
-      // POIDS ET VOLUME COMBINÉS
-      // ------------------------------------------
+// ------------------------------------------
+// POIDS ET VOLUME COMBINÉS
+// ------------------------------------------
 
-      const combinedWeightKg =
-        Number(
-          shippingA.total_shipping_weight_kg
-        ) +
-        Number(
-          shippingB.total_shipping_weight_kg
-        );
+const combinedWeightKg =
+  Number(
+    shippingA.total_shipping_weight_kg
+  ) +
+  Number(
+    shippingB.total_shipping_weight_kg
+  );
 
-      const combinedVolumeM3 =
+const combinedVolumeM3 =
   Number(
     (
       Number(
@@ -5143,7 +5143,9 @@ function analyzeFreightConsolidation(
       )
     ).toFixed(3)
   );
-      // ------------------------------------------
+
+
+// ------------------------------------------
 // BASE TAXABLE LCL DU REGROUPEMENT — W/M
 // ------------------------------------------
 
@@ -5160,7 +5162,9 @@ const combinedLclBasis =
   combinedVolumeM3 >= combinedWeightTons
     ? 'measurement'
     : 'weight';
-      // ------------------------------------------
+
+
+// ------------------------------------------
 // BASES LCL INDIVIDUELLES DES DEUX MACHINES
 // ------------------------------------------
 
@@ -5207,130 +5211,47 @@ const individualLclRevenueTons =
   );
 
 
-      // ------------------------------------------
-      // VALEUR TOTALE DES MARCHANDISES
-      // ------------------------------------------
-
-      const goodsValueA =
-        Number(
-          shippingA.goods_value_usd
-        );
-
-      const goodsValueB =
-        Number(
-          shippingB.goods_value_usd
-        );
-
-      const combinedGoodsValueUsd =
-        (
-          Number.isFinite(goodsValueA) &&
-          Number.isFinite(goodsValueB)
-        )
-          ? goodsValueA + goodsValueB
-          : null;
-
-
-      // ------------------------------------------
-      // CANDIDAT AU REGROUPEMENT
-      // ------------------------------------------
-
-      const isCandidate =
-        sameDeparturePort &&
-        compatibleReadyDates;
-
-
-      // On conserve uniquement les véritables
-      // candidats à étudier.
-      if (!isCandidate) {
-        continue;
-      }
-
-
-      analysis.consolidation_candidates.push({
-
-        status:
-          'consolidation_candidate',
-
-        machine_a: {
-
-          machine_key:
-            machineA.machine_key,
-
-          machine:
-            machineA.machine,
-
-          ready_date:
-            shippingA.ready_date,
-
-          weight_kg:
-            shippingA.total_shipping_weight_kg,
-
-          volume_m3:
-            shippingA.total_shipping_volume_m3
-
-        },
-
-        machine_b: {
-
-          machine_key:
-            machineB.machine_key,
-
-          machine:
-            machineB.machine,
-
-          ready_date:
-            shippingB.ready_date,
-
-          weight_kg:
-            shippingB.total_shipping_weight_kg,
-
-          volume_m3:
-            shippingB.total_shipping_volume_m3
-
-        },
-
-        departure_country:
-          shippingA.departure_country ||
-          shippingB.departure_country ||
-          null,
-
-        departure_port:
-          shippingA.departure_port,
-
-        same_departure_port:
-          sameDeparturePort,
-
-        ready_date_gap_days:
-          readyDateGapDays,
-
-        max_ready_date_gap_days:
-          maxReadyDateGapDays,
-
-        combined_weight_kg:
-          combinedWeightKg,
-
-        combined_volume_m3:
-          combinedVolumeM3,
 // ------------------------------------------
-// BASE LCL DU LOT REGROUPÉ
+// VALEUR TOTALE DES MARCHANDISES
 // ------------------------------------------
 
-lcl_chargeable: {
+const goodsValueA =
+  Number(
+    shippingA.goods_value_usd
+  );
 
-  weight_tons:
-    combinedWeightTons,
+const goodsValueB =
+  Number(
+    shippingB.goods_value_usd
+  );
 
-  volume_m3:
-    combinedVolumeM3,
+const combinedGoodsValueUsd =
+  (
+    Number.isFinite(goodsValueA) &&
+    Number.isFinite(goodsValueB)
+  )
+    ? goodsValueA + goodsValueB
+    : null;
 
-  revenue_tons:
-    combinedLclRevenueTons,
 
-  basis:
-    combinedLclBasis
+// ------------------------------------------
+// CANDIDAT AU REGROUPEMENT
+// ------------------------------------------
 
-},
-        // --------------------------------------------------
+const isCandidate =
+  sameDeparturePort &&
+  compatibleReadyDates;
+
+
+// On conserve uniquement les véritables
+// candidats à étudier.
+
+if (!isCandidate) {
+  continue;
+}
+
+
+// --------------------------------------------------
 // TARIF LCL DE RÉFÉRENCE — LOT CONSOLIDÉ
 // --------------------------------------------------
 
@@ -5345,7 +5266,7 @@ const consolidatedLclFreightRate = {
   shipping_mode:
     'lcl',
 
-  // Nous raccorderons le vrai port ensuite
+  // Le port réel sera raccordé ensuite.
   origin_port:
     null,
 
@@ -5401,7 +5322,9 @@ const consolidatedLclFreightRate = {
     null
 
 };
-      // --------------------------------------------------
+
+
+// --------------------------------------------------
 // CALCUL DU FRET LCL CONSOLIDÉ
 // --------------------------------------------------
 
@@ -5415,68 +5338,163 @@ const consolidatedLclFreightEstimate =
       consolidatedLclFreightRate
 
   });
-        // ------------------------------------------
-// SCÉNARIOS LOGISTIQUES À COMPARER
+
+
+// ------------------------------------------
+// ENREGISTREMENT DU CANDIDAT
 // ------------------------------------------
 
-freight_scenarios: {
+analysis.consolidation_candidates.push({
 
-  // ----------------------------------------
-  // 1. LCL — EXPÉDITIONS INDIVIDUELLES
-  // ----------------------------------------
+  status:
+    'consolidation_candidate',
 
-  lcl_individual: {
+  machine_a: {
 
-    status:
-      'pending_rate',
-
-    shipping_mode:
-      'lcl',
-
-    consolidation:
-      false,
-
-    shipment_count:
-      2,
-
-    total_revenue_tons:
-  individualLclRevenueTons,
-    shipments: [
-
-  {
     machine_key:
       machineA.machine_key,
 
     machine:
       machineA.machine,
 
-    revenue_tons:
-      machineALclRevenueTons
+    ready_date:
+      shippingA.ready_date,
+
+    weight_kg:
+      shippingA.total_shipping_weight_kg,
+
+    volume_m3:
+      shippingA.total_shipping_volume_m3
+
   },
 
-  {
+  machine_b: {
+
     machine_key:
       machineB.machine_key,
 
     machine:
       machineB.machine,
 
-    revenue_tons:
-      machineBLclRevenueTons
-  }
+    ready_date:
+      shippingB.ready_date,
 
-],
+    weight_kg:
+      shippingB.total_shipping_weight_kg,
 
-    estimated_freight_usd:
-      null,
-
-    estimated_insurance_usd:
-      null,
-
-    estimated_total_usd:
-      null
+    volume_m3:
+      shippingB.total_shipping_volume_m3
 
   },
+
+  departure_country:
+    shippingA.departure_country ||
+    shippingB.departure_country ||
+    null,
+
+  departure_port:
+    shippingA.departure_port,
+
+  same_departure_port:
+    sameDeparturePort,
+
+  ready_date_gap_days:
+    readyDateGapDays,
+
+  max_ready_date_gap_days:
+    maxReadyDateGapDays,
+
+  combined_weight_kg:
+    combinedWeightKg,
+
+  combined_volume_m3:
+    combinedVolumeM3,
+
+
+  // ------------------------------------------
+  // BASE LCL DU LOT REGROUPÉ
+  // ------------------------------------------
+
+  lcl_chargeable: {
+
+    weight_tons:
+      combinedWeightTons,
+
+    volume_m3:
+      combinedVolumeM3,
+
+    revenue_tons:
+      combinedLclRevenueTons,
+
+    basis:
+      combinedLclBasis
+
+  },
+
+
+  // ------------------------------------------
+  // SCÉNARIOS LOGISTIQUES À COMPARER
+  // ------------------------------------------
+
+  freight_scenarios: {
+
+    // ----------------------------------------
+    // 1. LCL — EXPÉDITIONS INDIVIDUELLES
+    // ----------------------------------------
+
+    lcl_individual: {
+
+      status:
+        'pending_rate',
+
+      shipping_mode:
+        'lcl',
+
+      consolidation:
+        false,
+
+      shipment_count:
+        2,
+
+      total_revenue_tons:
+        individualLclRevenueTons,
+
+      shipments: [
+
+        {
+          machine_key:
+            machineA.machine_key,
+
+          machine:
+            machineA.machine,
+
+          revenue_tons:
+            machineALclRevenueTons
+        },
+
+        {
+          machine_key:
+            machineB.machine_key,
+
+          machine:
+            machineB.machine,
+
+          revenue_tons:
+            machineBLclRevenueTons
+        }
+
+      ],
+
+      estimated_freight_usd:
+        null,
+
+      estimated_insurance_usd:
+        null,
+
+      estimated_total_usd:
+        null
+
+    },
 
 
   // ----------------------------------------
