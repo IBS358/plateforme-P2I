@@ -5705,6 +5705,206 @@ const consolidatedFclAnalysis =
       []
 
   });
+      // --------------------------------------------------
+// TARIFS FCL DE RÉFÉRENCE — LOT CONSOLIDÉ
+// --------------------------------------------------
+//
+// Une référence distincte est conservée pour
+// chaque type de conteneur.
+//
+// Aucun tarif réel n'est injecté pour l'instant.
+// Les cotations de référence P2I seront
+// raccordées ultérieurement.
+// --------------------------------------------------
+
+const consolidatedFclFreightRates = {
+
+  '20ft_dry': {
+
+    status:
+      'not_available',
+
+    rate_type:
+      'per_container',
+
+    shipping_mode:
+      'fcl',
+
+    container_type:
+      '20ft_dry',
+
+    origin_port:
+      shippingA.departure_port || null,
+
+    destination_port:
+      'Abidjan',
+
+    currency:
+      'USD',
+
+    rate_amount:
+      null,
+
+    rate_unit:
+      'container',
+
+    surcharges_usd:
+      null,
+
+    origin_charges_usd:
+      null,
+
+    destination_charges_usd:
+      null,
+
+    other_charges_usd:
+      null,
+
+    source_type:
+      null,
+
+    source_name:
+      null,
+
+    source_date:
+      null,
+
+    valid_until:
+      null,
+
+    verification_status:
+      'not_verified',
+
+    notes:
+      null
+
+  },
+
+
+  '40ft_dry': {
+
+    status:
+      'not_available',
+
+    rate_type:
+      'per_container',
+
+    shipping_mode:
+      'fcl',
+
+    container_type:
+      '40ft_dry',
+
+    origin_port:
+      shippingA.departure_port || null,
+
+    destination_port:
+      'Abidjan',
+
+    currency:
+      'USD',
+
+    rate_amount:
+      null,
+
+    rate_unit:
+      'container',
+
+    surcharges_usd:
+      null,
+
+    origin_charges_usd:
+      null,
+
+    destination_charges_usd:
+      null,
+
+    other_charges_usd:
+      null,
+
+    source_type:
+      null,
+
+    source_name:
+      null,
+
+    source_date:
+      null,
+
+    valid_until:
+      null,
+
+    verification_status:
+      'not_verified',
+
+    notes:
+      null
+
+  },
+
+
+  '40ft_high_cube': {
+
+    status:
+      'not_available',
+
+    rate_type:
+      'per_container',
+
+    shipping_mode:
+      'fcl',
+
+    container_type:
+      '40ft_high_cube',
+
+    origin_port:
+      shippingA.departure_port || null,
+
+    destination_port:
+      'Abidjan',
+
+    currency:
+      'USD',
+
+    rate_amount:
+      null,
+
+    rate_unit:
+      'container',
+
+    surcharges_usd:
+      null,
+
+    origin_charges_usd:
+      null,
+
+    destination_charges_usd:
+      null,
+
+    other_charges_usd:
+      null,
+
+    source_type:
+      null,
+
+    source_name:
+      null,
+
+    source_date:
+      null,
+
+    valid_until:
+      null,
+
+    verification_status:
+      'not_verified',
+
+    notes:
+      null
+
+  }
+
+};
 
 // ------------------------------------------
 // ENREGISTREMENT DU CANDIDAT
