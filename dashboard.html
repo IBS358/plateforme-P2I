@@ -5994,59 +5994,20 @@ fcl_consolidated: {
   // CONTENEUR CANDIDAT
   // --------------------------------------
 
-  // Le 20' est étudié comme premier candidat.
-  // Il n'est PAS encore déclaré compatible.
-  container_type:
-    '20ft_dry_candidate',
-
-
   // --------------------------------------
-  // PRÉ-ANALYSE DE COMPATIBILITÉ
-  // --------------------------------------
+// ANALYSE FCL GÉNÉRIQUE
+// --------------------------------------
 
-  fcl_analysis: {
+container_type:
+  consolidatedFclAnalysis
+    ?.recommended_container ?? null,
 
-    status:
-      'dimensions_required',
+fcl_analysis:
+  consolidatedFclAnalysis,
 
-    // Poids et volume permettent seulement
-    // une pré-évaluation.
-    weight_status:
-      'pre_compatible',
-
-    volume_status:
-      'pre_compatible',
-
-    // Dimensions emballées L × l × H
-    // actuellement absentes des données P2I.
-    dimensional_fit_status:
-      'dimensions_required',
-
-    // Aucun plan d'empotage n'a encore
-    // été vérifié.
-    loading_plan_status:
-      'not_verified',
-
-    // Le scénario reste candidat à une
-    // comparaison économique LCL / FCL.
-    comparison_eligible:
-      true,
-
-    // Mais sa compatibilité physique
-    // n'est pas encore confirmée.
-    physical_fit_confirmed:
-      false
-
-  },
-
-
-  // --------------------------------------
-  // COMPATIBILITÉ GLOBALE
-  // --------------------------------------
-
-  fit_status:
-    'dimensions_required',
-
+fit_status:
+  consolidatedFclAnalysis
+    ?.status || 'not_analyzed',
 
   // --------------------------------------
   // CALCULS TARIFAIRES
