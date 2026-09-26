@@ -4978,6 +4978,115 @@ function analyzeFclContainerFit({
 
 }
   // ==================================================
+// CALCUL D'UNE ESTIMATION DE FRET FCL
+// ==================================================
+
+function calculateFclFreightEstimate({
+
+  rate
+
+} = {}) {
+
+  // ----------------------------------------------
+  // CONTRÔLE DE LA RÉFÉRENCE TARIFAIRE
+  // ----------------------------------------------
+
+  if (
+    !rate ||
+    rate.status !== 'available'
+  ) {
+    return {
+      status:
+        'rate_not_available',
+
+      estimated_freight_usd:
+        null
+    };
+  }
+
+
+  // ----------------------------------------------
+  // CONTRÔLE DU TARIF PAR CONTENEUR
+  // ----------------------------------------------
+
+  const rateAmount =
+    Number(rate.rate_amount);
+
+  if (
+    !Number.isFinite(rateAmount) ||
+    rateAmount <= 0
+  ) {
+    return {
+      status:
+        'invalid_rate',
+
+      estimated_freight_usd:
+        null
+    };
+  }
+
+
+  // ----------------------------------------------
+  // FRAIS COMPLÉMENTAIRES
+  // ----------------------------------------------
+
+  const surchargesUsd =
+    Number(rate.surcharges_usd) || 0;
+
+  const originChargesUsd =
+    Number(rate.origin_charges_usd) || 0;
+
+  const destinationChargesUsd =
+    Number(rate.destination_charges_usd) || 0;
+
+  const otherChargesUsd =
+    Number(rate.other_charges_usd) || 0;
+
+
+  // ----------------------------------------------
+  // TOTAL ESTIMATIF DU FRET FCL
+  // ----------------------------------------------
+
+  const estimatedFreightUsd =
+    rateAmount +
+    surchargesUsd +
+    originChargesUsd +
+    destinationChargesUsd +
+    otherChargesUsd;
+
+
+  return {
+
+    status:
+      'estimated',
+
+    container_type:
+      rate.container_type || null,
+
+    rate_amount_usd:
+      rateAmount,
+
+    surcharges_usd:
+      surchargesUsd,
+
+    origin_charges_usd:
+      originChargesUsd,
+
+    destination_charges_usd:
+      destinationChargesUsd,
+
+    other_charges_usd:
+      otherChargesUsd,
+
+    estimated_freight_usd:
+      Number(
+        estimatedFreightUsd.toFixed(2)
+      )
+
+  };
+
+}
+  // ==================================================
 // CALCUL ASSURANCE + CIF PORT D'ABIDJAN
 // ==================================================
 
