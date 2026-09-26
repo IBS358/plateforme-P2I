@@ -6014,7 +6014,31 @@ const consolidatedFclFreightRates = {
   }
 
 };
+// --------------------------------------------------
+// CALCULS DE FRET FCL PAR TYPE DE CONTENEUR
+// --------------------------------------------------
 
+const consolidatedFclFreightEstimates = {
+
+  '20ft_dry':
+    calculateFclFreightEstimate({
+      rate:
+        consolidatedFclFreightRates['20ft_dry']
+    }),
+
+  '40ft_dry':
+    calculateFclFreightEstimate({
+      rate:
+        consolidatedFclFreightRates['40ft_dry']
+    }),
+
+  '40ft_high_cube':
+    calculateFclFreightEstimate({
+      rate:
+        consolidatedFclFreightRates['40ft_high_cube']
+    })
+
+};
 // ------------------------------------------
 // ENREGISTREMENT DU CANDIDAT
 // ------------------------------------------
@@ -6314,15 +6338,26 @@ fit_status:
     ?.status || 'not_analyzed',
 
   // --------------------------------------
-  // CALCULS TARIFAIRES
-  // Raccordés ultérieurement
-  // --------------------------------------
+// RÉFÉRENCES ET CALCULS TARIFAIRES FCL
+// --------------------------------------
 
-  freight_calculation_status:
-    'not_calculated',
+// Une cotation distincte est conservée
+// pour chaque type de conteneur.
+freight_rates:
+  consolidatedFclFreightRates,
 
-  estimated_freight_usd:
-    null,
+// Résultat du moteur de fret pour chacun
+// des conteneurs candidats.
+freight_estimates:
+  consolidatedFclFreightEstimates,
+
+// Aucun fret unique n'est retenu tant
+// qu'aucun conteneur n'a été sélectionné.
+freight_calculation_status:
+  'container_not_selected',
+
+estimated_freight_usd:
+  null,
 
   insurance_calculation_status:
     'not_calculated',
