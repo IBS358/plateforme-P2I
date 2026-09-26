@@ -6039,6 +6039,100 @@ const consolidatedFclFreightEstimates = {
     })
 
 };
+      // --------------------------------------------------
+// ASSURANCE DE RÉFÉRENCE — SCÉNARIOS FCL
+// --------------------------------------------------
+
+const consolidatedFclInsuranceReference = {
+
+  status:
+    'not_available',
+
+  coverage_basis:
+    'cif_contract_value',
+
+  coverage_percent:
+    110,
+
+  premium_rate_percent:
+    null,
+
+  minimum_premium_usd:
+    null,
+
+  coverage_level:
+    'institute_cargo_clauses_c',
+
+  source_type:
+    null,
+
+  source_name:
+    null,
+
+  source_date:
+    null,
+
+  valid_until:
+    null,
+
+  verification_status:
+    'not_verified'
+
+};
+      // --------------------------------------------------
+// CALCULS ASSURANCE + CIF PAR SCÉNARIO FCL
+// --------------------------------------------------
+
+const consolidatedFclCifEstimates = {
+
+  '20ft_dry':
+    calculateCifInsuranceEstimate({
+
+      fobValueUsd:
+        combinedGoodsValueUsd,
+
+      freightUsd:
+        consolidatedFclFreightEstimates['20ft_dry']
+          ?.estimated_freight_usd ?? null,
+
+      insurance:
+        consolidatedFclInsuranceReference
+
+    }),
+
+
+  '40ft_dry':
+    calculateCifInsuranceEstimate({
+
+      fobValueUsd:
+        combinedGoodsValueUsd,
+
+      freightUsd:
+        consolidatedFclFreightEstimates['40ft_dry']
+          ?.estimated_freight_usd ?? null,
+
+      insurance:
+        consolidatedFclInsuranceReference
+
+    }),
+
+
+  '40ft_high_cube':
+    calculateCifInsuranceEstimate({
+
+      fobValueUsd:
+        combinedGoodsValueUsd,
+
+      freightUsd:
+        consolidatedFclFreightEstimates['40ft_high_cube']
+          ?.estimated_freight_usd ?? null,
+
+      insurance:
+        consolidatedFclInsuranceReference
+
+    })
+
+};
 // ------------------------------------------
 // ENREGISTREMENT DU CANDIDAT
 // ------------------------------------------
