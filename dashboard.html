@@ -4548,6 +4548,125 @@ estimate.freight_consolidation =
   return estimate;
 }
   // ==================================================
+// P2I — RECHERCHE D'UNE ROUTE DE FRET
+// ==================================================
+
+function getP2IFreightRoute({
+
+  originPort,
+  destinationPort = 'Abidjan'
+
+} = {}) {
+
+  // ----------------------------------------------
+  // NORMALISATION DES NOMS DE PORTS
+  // ----------------------------------------------
+
+  const normalizePort = value =>
+    String(value || '')
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+
+
+  const normalizedOrigin =
+    normalizePort(originPort);
+
+  const normalizedDestination =
+    normalizePort(destinationPort);
+
+
+  // ----------------------------------------------
+  // DONNÉES INSUFFISANTES
+  // ----------------------------------------------
+
+  if (
+    !normalizedOrigin ||
+    !normalizedDestination
+  ) {
+    return null;
+  }
+
+
+  // ----------------------------------------------
+  // RÉFÉRENTIEL P2I DISPONIBLE ?
+  // ----------------------------------------------
+
+  const routes =
+    window.P2I_FREIGHT_RATES?.routes;
+
+  if (
+    !routes ||
+    typeof routes !== 'object'
+  ) {
+    return null;
+  }
+
+
+  // ----------------------------------------------
+  // RECHERCHE DE LA ROUTE
+  // ----------------------------------------------
+
+  for (
+    const [routeKey, route]
+    of Object.entries(routes)
+  ) {
+
+    const routeOrigin =
+      normalizePort(
+        route?.origin_port
+      );
+
+    const routeDestination =
+      normalizePort(
+        route?.destination_port
+      );
+
+
+    if (
+      routeOrigin === normalizedOrigin &&
+      routeDestination === normalizedDestination
+    ) {
+
+      return {
+
+        route_key:
+          routeKey,
+
+        origin_port:
+          route.origin_port,
+
+        destination_port:
+          route.destination_port,
+
+        origin_country:
+          route.origin_country || null,
+
+        destination_country:
+          route.destination_country || null,
+
+        lcl:
+          route.lcl || null,
+
+        fcl:
+          route.fcl || null
+
+      };
+
+    }
+
+  }
+
+
+  // ----------------------------------------------
+  // ROUTE NON RÉFÉRENCÉE
+  // ----------------------------------------------
+
+  return null;
+
+}
+  // ==================================================
 // CALCUL D'UNE ESTIMATION DE FRET LCL
 // ==================================================
 
