@@ -5686,7 +5686,25 @@ const consolidatedCifInsuranceEstimate =
       consolidatedInsuranceReference
 
   }); 
+// --------------------------------------------------
+// ANALYSE FCL DU LOT CONSOLIDÉ
+// --------------------------------------------------
 
+const consolidatedFclAnalysis =
+  analyzeFclContainerFit({
+
+    totalWeightKg:
+      combinedWeightKg,
+
+    totalVolumeM3:
+      combinedVolumeM3,
+
+    // Les dimensions L × l × H des colis
+    // ne sont pas encore disponibles.
+    packages:
+      []
+
+  });
 
 // ------------------------------------------
 // ENREGISTREMENT DU CANDIDAT
