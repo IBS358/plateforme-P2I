@@ -4635,7 +4635,8 @@ function calculateLclFreightEstimate({
 
   const originChargesUsd =
     Number(rate.origin_charges_usd) || 0;
-
+const destinationChargesUsd =
+  Number(rate.destination_charges_usd) || 0;
   const otherChargesUsd =
     Number(rate.other_charges_usd) || 0;
 
