@@ -6492,14 +6492,148 @@ estimated_total_usd:
   null
 
 }
+
 },
-        combined_goods_value_usd:
-          combinedGoodsValueUsd,
 
-        decision:
-          'comparison_required'
+// ------------------------------------------
+// VALEUR TOTALE DES MARCHANDISES
+// ------------------------------------------
+combined_goods_value_usd:
+  combinedGoodsValueUsd,
 
-      });
+
+// ------------------------------------------
+// SYNTHÈSE COMPARATIVE DES SCÉNARIOS
+// ------------------------------------------
+
+freight_comparison: {
+
+  status:
+    'comparison_pending',
+
+  // ----------------------------------------
+  // LCL — EXPÉDITIONS INDIVIDUELLES
+  // ----------------------------------------
+
+  lcl_individual: {
+
+    status:
+      'pending_rate',
+
+    calculation_available:
+      false,
+
+    shipment_count:
+      2,
+
+    total_revenue_tons:
+      individualLclRevenueTons,
+
+    estimated_freight_usd:
+      null,
+
+    estimated_total_usd:
+      null
+
+  },
+
+
+  // ----------------------------------------
+  // LCL — EXPÉDITION CONSOLIDÉE
+  // ----------------------------------------
+
+  lcl_consolidated: {
+
+    status:
+      consolidatedLclFreightEstimate
+        ?.status || 'not_calculated',
+
+    calculation_available:
+      consolidatedCifInsuranceEstimate
+        ?.estimated_cif_abidjan_usd != null,
+
+    revenue_tons:
+      combinedLclRevenueTons,
+
+    estimated_freight_usd:
+      consolidatedLclFreightEstimate
+        ?.estimated_freight_usd ?? null,
+
+    estimated_insurance_usd:
+      consolidatedCifInsuranceEstimate
+        ?.estimated_insurance_usd ?? null,
+
+    estimated_cif_abidjan_usd:
+      consolidatedCifInsuranceEstimate
+        ?.estimated_cif_abidjan_usd ?? null
+
+  },
+
+
+  // ----------------------------------------
+  // FCL — EXPÉDITION CONSOLIDÉE
+  // ----------------------------------------
+
+  fcl_consolidated: {
+
+    status:
+      consolidatedFclAnalysis
+        ?.status || 'not_analyzed',
+
+    calculation_available:
+      false,
+
+    physical_fit_confirmed:
+      false,
+
+    dimensions_available:
+      consolidatedFclAnalysis
+        ?.dimensions_available ?? false,
+
+    comparison_candidates:
+      consolidatedFclAnalysis
+        ?.comparison_candidates || [],
+
+    selected_container:
+      consolidatedFclAnalysis
+        ?.recommended_container ?? null,
+
+    freight_estimates:
+      consolidatedFclFreightEstimates,
+
+    cif_estimates:
+      consolidatedFclCifEstimates
+
+  },
+
+
+  // ----------------------------------------
+  // RÉSULTAT DE LA COMPARAISON
+  // ----------------------------------------
+
+  economic_preference:
+    null,
+
+  logistics_validation_status:
+    'pending',
+
+  final_selection:
+    null,
+
+  reason:
+    'reference_rates_required'
+
+},
+
+
+// ------------------------------------------
+// DÉCISION LOGISTIQUE GLOBALE
+// ------------------------------------------
+
+decision:
+  'comparison_pending'
+
+});
 
     }
 
