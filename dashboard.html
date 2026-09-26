@@ -4692,6 +4692,292 @@ function calculateLclFreightEstimate({
   };
 }
   // ==================================================
+// ANALYSE DE COMPATIBILITÉ FCL
+// ==================================================
+
+function analyzeFclContainerFit({
+
+  totalWeightKg,
+  totalVolumeM3,
+  packages = []
+
+} = {}) {
+
+  // ----------------------------------------------
+  // CONTRÔLE DES DONNÉES DE BASE
+  // ----------------------------------------------
+
+  const weight =
+    Number(totalWeightKg);
+
+  const volume =
+    Number(totalVolumeM3);
+
+  if (
+    !Number.isFinite(weight) ||
+    weight <= 0 ||
+    !Number.isFinite(volume) ||
+    volume <= 0
+  ) {
+    return {
+      status: 'insufficient_data',
+      recommended_container: null,
+      candidates: {}
+    };
+  }
+
+
+  // ----------------------------------------------
+  // CONTENEURS DE RÉFÉRENCE
+  // ----------------------------------------------
+  //
+  // Ces valeurs servent à la pré-analyse P2I.
+  // Les caractéristiques exactes devront pouvoir
+  // être remplacées par celles du transporteur.
+  //
+  // max_usable_volume_m3 :
+  // seuil prudent de pré-évaluation, distinct
+  // du volume géométrique maximal.
+  // ----------------------------------------------
+
+  const containers = {
+
+    '20ft_dry': {
+
+      label:
+        "20' Dry",
+
+      max_payload_kg:
+        28000,
+
+      nominal_volume_m3:
+        33,
+
+      max_usable_volume_m3:
+        28
+
+    },
+
+    '40ft_dry': {
+
+      label:
+        "40' Dry",
+
+      max_payload_kg:
+        26500,
+
+      nominal_volume_m3:
+        67,
+
+      max_usable_volume_m3:
+        57
+
+    },
+
+    '40ft_high_cube': {
+
+      label:
+        "40' High Cube",
+
+      max_payload_kg:
+        26500,
+
+      nominal_volume_m3:
+        76,
+
+      max_usable_volume_m3:
+        65
+
+    }
+
+  };
+
+
+  // ----------------------------------------------
+  // DIMENSIONS DES COLIS DISPONIBLES ?
+  // ----------------------------------------------
+
+  const dimensionsAvailable =
+    Array.isArray(packages) &&
+    packages.length > 0 &&
+    packages.every(pkg =>
+
+      Number(pkg?.length_m) > 0 &&
+      Number(pkg?.width_m) > 0 &&
+      Number(pkg?.height_m) > 0
+
+    );
+
+
+  // ----------------------------------------------
+  // ANALYSE DES CONTENEURS
+  // ----------------------------------------------
+
+  const candidates = {};
+
+  for (
+    const [containerKey, container]
+    of Object.entries(containers)
+  ) {
+
+    const weightCompatible =
+      weight <= container.max_payload_kg;
+
+    const volumeCompatible =
+      volume <= container.max_usable_volume_m3;
+
+
+    let dimensionalFitStatus =
+      'dimensions_required';
+
+    let physicalFitConfirmed =
+      false;
+
+
+    // Pour le moment, même lorsque les dimensions
+    // existent, le moteur ne prétend pas encore
+    // résoudre automatiquement un plan d'empotage.
+    //
+    // Cette partie sera enrichie ultérieurement.
+
+    if (dimensionsAvailable) {
+
+      dimensionalFitStatus =
+        'loading_plan_required';
+
+    }
+
+
+    let status;
+
+    if (
+      !weightCompatible ||
+      !volumeCompatible
+    ) {
+
+      status =
+        'not_compatible';
+
+    } else if (!dimensionsAvailable) {
+
+      status =
+        'dimensions_required';
+
+    } else {
+
+      status =
+        'loading_plan_required';
+
+    }
+
+
+    candidates[containerKey] = {
+
+      label:
+        container.label,
+
+      status:
+        status,
+
+      weight_status:
+        weightCompatible
+          ? 'pre_compatible'
+          : 'not_compatible',
+
+      volume_status:
+        volumeCompatible
+          ? 'pre_compatible'
+          : 'not_compatible',
+
+      dimensional_fit_status:
+        dimensionalFitStatus,
+
+      loading_plan_status:
+        'not_verified',
+
+      physical_fit_confirmed:
+        physicalFitConfirmed,
+
+      comparison_eligible:
+        weightCompatible &&
+        volumeCompatible,
+
+      max_payload_kg:
+        container.max_payload_kg,
+
+      nominal_volume_m3:
+        container.nominal_volume_m3,
+
+      max_usable_volume_m3:
+        container.max_usable_volume_m3
+
+    };
+
+  }
+
+
+  // ----------------------------------------------
+  // CONTENEURS ÉLIGIBLES À UNE COMPARAISON
+  // ----------------------------------------------
+
+  const comparisonCandidates =
+    Object.entries(candidates)
+      .filter(
+        ([, candidate]) =>
+          candidate.comparison_eligible
+      )
+      .map(
+        ([containerKey]) =>
+          containerKey
+      );
+
+
+  // ----------------------------------------------
+  // STATUT GLOBAL
+  // ----------------------------------------------
+
+  let globalStatus =
+    'no_compatible_container';
+
+  if (comparisonCandidates.length > 0) {
+
+    globalStatus =
+      dimensionsAvailable
+        ? 'loading_plan_required'
+        : 'dimensions_required';
+
+  }
+
+
+  return {
+
+    status:
+      globalStatus,
+
+    total_weight_kg:
+      weight,
+
+    total_volume_m3:
+      volume,
+
+    dimensions_available:
+      dimensionsAvailable,
+
+    comparison_candidates:
+      comparisonCandidates,
+
+    // Aucun conteneur n'est encore déclaré
+    // comme définitivement retenu.
+    recommended_container:
+      null,
+
+    candidates:
+      candidates
+
+  };
+
+}
+  // ==================================================
 // CALCUL ASSURANCE + CIF PORT D'ABIDJAN
 // ==================================================
 
