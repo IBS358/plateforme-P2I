@@ -4645,12 +4645,13 @@ const destinationChargesUsd =
   // TOTAL ESTIMATIF DU FRET
   // ----------------------------------------------
 
-  const estimatedFreightUsd =
-    freightAfterMinimumUsd +
-    fixedChargeUsd +
-    surchargesUsd +
-    originChargesUsd +
-    otherChargesUsd;
+ const estimatedFreightUsd =
+  freightAfterMinimumUsd +
+  fixedChargeUsd +
+  surchargesUsd +
+  originChargesUsd +
+  destinationChargesUsd +
+  otherChargesUsd;
 
 
   return {
