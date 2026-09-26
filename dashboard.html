@@ -6453,17 +6453,35 @@ freight_calculation_status:
 estimated_freight_usd:
   null,
 
-  insurance_calculation_status:
-    'not_calculated',
+  // --------------------------------------
+// ASSURANCE DE RÉFÉRENCE FCL
+// --------------------------------------
 
-  estimated_insurance_usd:
-    null,
+insurance_reference:
+  consolidatedFclInsuranceReference,
 
-  estimated_cif_abidjan_usd:
-    null,
+// --------------------------------------
+// CALCULS ASSURANCE + CIF
+// PAR TYPE DE CONTENEUR
+// --------------------------------------
 
-  estimated_total_usd:
-    null
+cif_estimates:
+  consolidatedFclCifEstimates,
+
+// Aucun calcul unique d'assurance/CIF
+// n'est retenu tant qu'aucun conteneur
+// n'a été sélectionné.
+insurance_calculation_status:
+  'container_not_selected',
+
+estimated_insurance_usd:
+  null,
+
+estimated_cif_abidjan_usd:
+  null,
+
+estimated_total_usd:
+  null
 
 }
 },
