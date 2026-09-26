@@ -8,11 +8,19 @@
 // Ces références ne constituent pas des devis
 // officiels de transport.
 //
-// Les montants peuvent provenir ultérieurement de :
-// - cotations de transitaires,
-// - compagnies maritimes,
-// - partenaires logistiques P2I,
-// - références de marché vérifiables.
+// Deux niveaux de référence sont distingués :
+//
+// 1. market_reference
+//    Référence / fourchette de marché.
+//    Peut servir à produire un ordre de grandeur P2I.
+//
+// 2. reference_quote
+//    Cotation précise, datée et vérifiable.
+//    Utilisée prioritairement lorsqu'elle est valide.
+//
+// Les devis officiels propres à une opération réelle
+// ne sont PAS stockés dans ce fichier.
+// Ils seront gérés séparément, notamment via Supabase.
 //
 // ==================================================
 
@@ -20,7 +28,7 @@
 window.P2I_FREIGHT_RATES = {
 
   version:
-    '1.0',
+    '2.0',
 
   updated_at:
     null,
@@ -52,14 +60,14 @@ window.P2I_FREIGHT_RATES = {
         'Abidjan',
 
 
-      // ----------------------------------------------
+      // ==============================================
       // LCL
-      // ----------------------------------------------
+      // ==============================================
 
       lcl: {
 
-        status:
-          'not_available',
+        shipping_mode:
+          'lcl',
 
         currency:
           'USD',
@@ -70,63 +78,138 @@ window.P2I_FREIGHT_RATES = {
         rate_unit:
           'RT',
 
-        rate_per_rt_usd:
-          null,
 
-        minimum_charge_usd:
-          null,
+        // --------------------------------------------
+        // RÉFÉRENCE DE MARCHÉ
+        // --------------------------------------------
 
-        fixed_charge_per_shipment_usd:
-          null,
+        market_reference: {
 
-        surcharges_usd:
-          null,
+          status:
+            'not_available',
 
-        origin_charges_usd:
-          null,
+          min_rate_per_rt_usd:
+            null,
 
-        destination_charges_usd:
-          null,
+          max_rate_per_rt_usd:
+            null,
 
-        other_charges_usd:
-          null,
+          midpoint_rate_per_rt_usd:
+            null,
 
-        source_type:
-          null,
+          minimum_charge_usd:
+            null,
 
-        source_name:
-          null,
+          fixed_charge_per_shipment_usd:
+            null,
 
-        source_date:
-          null,
+          surcharges_usd:
+            null,
 
-        valid_until:
-          null,
+          origin_charges_usd:
+            null,
 
-        verification_status:
-          'not_verified',
+          destination_charges_usd:
+            null,
 
-        notes:
-          null
+          other_charges_usd:
+            null,
+
+          source_count:
+            null,
+
+          source_type:
+            'market_reference',
+
+          source_name:
+            null,
+
+          source_date:
+            null,
+
+          valid_until:
+            null,
+
+          verification_status:
+            'not_verified',
+
+          notes:
+            null
+
+        },
+
+
+        // --------------------------------------------
+        // COTATION DE RÉFÉRENCE
+        // --------------------------------------------
+
+        reference_quote: {
+
+          status:
+            'not_available',
+
+          rate_per_rt_usd:
+            null,
+
+          minimum_charge_usd:
+            null,
+
+          fixed_charge_per_shipment_usd:
+            null,
+
+          surcharges_usd:
+            null,
+
+          origin_charges_usd:
+            null,
+
+          destination_charges_usd:
+            null,
+
+          other_charges_usd:
+            null,
+
+          source_type:
+            'reference_quote',
+
+          source_name:
+            null,
+
+          source_date:
+            null,
+
+          valid_until:
+            null,
+
+          verification_status:
+            'not_verified',
+
+          notes:
+            null
+
+        }
 
       },
 
 
-      // ----------------------------------------------
+      // ==============================================
       // FCL
-      // ----------------------------------------------
+      // ==============================================
 
       fcl: {
 
 
-        // --------------------------
+        // --------------------------------------------
         // 20' DRY
-        // --------------------------
+        // --------------------------------------------
 
         '20ft_dry': {
 
-          status:
-            'not_available',
+          shipping_mode:
+            'fcl',
+
+          container_type:
+            '20ft_dry',
 
           currency:
             'USD',
@@ -137,50 +220,111 @@ window.P2I_FREIGHT_RATES = {
           rate_unit:
             'container',
 
-          rate_amount:
-            null,
 
-          surcharges_usd:
-            null,
+          market_reference: {
 
-          origin_charges_usd:
-            null,
+            status:
+              'not_available',
 
-          destination_charges_usd:
-            null,
+            min_rate_usd:
+              null,
 
-          other_charges_usd:
-            null,
+            max_rate_usd:
+              null,
 
-          source_type:
-            null,
+            midpoint_rate_usd:
+              null,
 
-          source_name:
-            null,
+            surcharges_usd:
+              null,
 
-          source_date:
-            null,
+            origin_charges_usd:
+              null,
 
-          valid_until:
-            null,
+            destination_charges_usd:
+              null,
 
-          verification_status:
-            'not_verified',
+            other_charges_usd:
+              null,
 
-          notes:
-            null
+            source_count:
+              null,
+
+            source_type:
+              'market_reference',
+
+            source_name:
+              null,
+
+            source_date:
+              null,
+
+            valid_until:
+              null,
+
+            verification_status:
+              'not_verified',
+
+            notes:
+              null
+
+          },
+
+
+          reference_quote: {
+
+            status:
+              'not_available',
+
+            rate_amount:
+              null,
+
+            surcharges_usd:
+              null,
+
+            origin_charges_usd:
+              null,
+
+            destination_charges_usd:
+              null,
+
+            other_charges_usd:
+              null,
+
+            source_type:
+              'reference_quote',
+
+            source_name:
+              null,
+
+            source_date:
+              null,
+
+            valid_until:
+              null,
+
+            verification_status:
+              'not_verified',
+
+            notes:
+              null
+
+          }
 
         },
 
 
-        // --------------------------
+        // --------------------------------------------
         // 40' DRY
-        // --------------------------
+        // --------------------------------------------
 
         '40ft_dry': {
 
-          status:
-            'not_available',
+          shipping_mode:
+            'fcl',
+
+          container_type:
+            '40ft_dry',
 
           currency:
             'USD',
@@ -191,50 +335,111 @@ window.P2I_FREIGHT_RATES = {
           rate_unit:
             'container',
 
-          rate_amount:
-            null,
 
-          surcharges_usd:
-            null,
+          market_reference: {
 
-          origin_charges_usd:
-            null,
+            status:
+              'not_available',
 
-          destination_charges_usd:
-            null,
+            min_rate_usd:
+              null,
 
-          other_charges_usd:
-            null,
+            max_rate_usd:
+              null,
 
-          source_type:
-            null,
+            midpoint_rate_usd:
+              null,
 
-          source_name:
-            null,
+            surcharges_usd:
+              null,
 
-          source_date:
-            null,
+            origin_charges_usd:
+              null,
 
-          valid_until:
-            null,
+            destination_charges_usd:
+              null,
 
-          verification_status:
-            'not_verified',
+            other_charges_usd:
+              null,
 
-          notes:
-            null
+            source_count:
+              null,
+
+            source_type:
+              'market_reference',
+
+            source_name:
+              null,
+
+            source_date:
+              null,
+
+            valid_until:
+              null,
+
+            verification_status:
+              'not_verified',
+
+            notes:
+              null
+
+          },
+
+
+          reference_quote: {
+
+            status:
+              'not_available',
+
+            rate_amount:
+              null,
+
+            surcharges_usd:
+              null,
+
+            origin_charges_usd:
+              null,
+
+            destination_charges_usd:
+              null,
+
+            other_charges_usd:
+              null,
+
+            source_type:
+              'reference_quote',
+
+            source_name:
+              null,
+
+            source_date:
+              null,
+
+            valid_until:
+              null,
+
+            verification_status:
+              'not_verified',
+
+            notes:
+              null
+
+          }
 
         },
 
 
-        // --------------------------
+        // --------------------------------------------
         // 40' HIGH CUBE
-        // --------------------------
+        // --------------------------------------------
 
         '40ft_high_cube': {
 
-          status:
-            'not_available',
+          shipping_mode:
+            'fcl',
+
+          container_type:
+            '40ft_high_cube',
 
           currency:
             'USD',
@@ -245,38 +450,96 @@ window.P2I_FREIGHT_RATES = {
           rate_unit:
             'container',
 
-          rate_amount:
-            null,
 
-          surcharges_usd:
-            null,
+          market_reference: {
 
-          origin_charges_usd:
-            null,
+            status:
+              'not_available',
 
-          destination_charges_usd:
-            null,
+            min_rate_usd:
+              null,
 
-          other_charges_usd:
-            null,
+            max_rate_usd:
+              null,
 
-          source_type:
-            null,
+            midpoint_rate_usd:
+              null,
 
-          source_name:
-            null,
+            surcharges_usd:
+              null,
 
-          source_date:
-            null,
+            origin_charges_usd:
+              null,
 
-          valid_until:
-            null,
+            destination_charges_usd:
+              null,
 
-          verification_status:
-            'not_verified',
+            other_charges_usd:
+              null,
 
-          notes:
-            null
+            source_count:
+              null,
+
+            source_type:
+              'market_reference',
+
+            source_name:
+              null,
+
+            source_date:
+              null,
+
+            valid_until:
+              null,
+
+            verification_status:
+              'not_verified',
+
+            notes:
+              null
+
+          },
+
+
+          reference_quote: {
+
+            status:
+              'not_available',
+
+            rate_amount:
+              null,
+
+            surcharges_usd:
+              null,
+
+            origin_charges_usd:
+              null,
+
+            destination_charges_usd:
+              null,
+
+            other_charges_usd:
+              null,
+
+            source_type:
+              'reference_quote',
+
+            source_name:
+              null,
+
+            source_date:
+              null,
+
+            valid_until:
+              null,
+
+            verification_status:
+              'not_verified',
+
+            notes:
+              null
+
+          }
 
         }
 
@@ -304,14 +567,14 @@ window.P2I_FREIGHT_RATES = {
         'Abidjan',
 
 
-      // ----------------------------------------------
+      // ==============================================
       // LCL
-      // ----------------------------------------------
+      // ==============================================
 
       lcl: {
 
-        status:
-          'not_available',
+        shipping_mode:
+          'lcl',
 
         currency:
           'USD',
@@ -322,63 +585,130 @@ window.P2I_FREIGHT_RATES = {
         rate_unit:
           'RT',
 
-        rate_per_rt_usd:
-          null,
 
-        minimum_charge_usd:
-          null,
+        market_reference: {
 
-        fixed_charge_per_shipment_usd:
-          null,
+          status:
+            'not_available',
 
-        surcharges_usd:
-          null,
+          min_rate_per_rt_usd:
+            null,
 
-        origin_charges_usd:
-          null,
+          max_rate_per_rt_usd:
+            null,
 
-        destination_charges_usd:
-          null,
+          midpoint_rate_per_rt_usd:
+            null,
 
-        other_charges_usd:
-          null,
+          minimum_charge_usd:
+            null,
 
-        source_type:
-          null,
+          fixed_charge_per_shipment_usd:
+            null,
 
-        source_name:
-          null,
+          surcharges_usd:
+            null,
 
-        source_date:
-          null,
+          origin_charges_usd:
+            null,
 
-        valid_until:
-          null,
+          destination_charges_usd:
+            null,
 
-        verification_status:
-          'not_verified',
+          other_charges_usd:
+            null,
 
-        notes:
-          null
+          source_count:
+            null,
+
+          source_type:
+            'market_reference',
+
+          source_name:
+            null,
+
+          source_date:
+            null,
+
+          valid_until:
+            null,
+
+          verification_status:
+            'not_verified',
+
+          notes:
+            null
+
+        },
+
+
+        reference_quote: {
+
+          status:
+            'not_available',
+
+          rate_per_rt_usd:
+            null,
+
+          minimum_charge_usd:
+            null,
+
+          fixed_charge_per_shipment_usd:
+            null,
+
+          surcharges_usd:
+            null,
+
+          origin_charges_usd:
+            null,
+
+          destination_charges_usd:
+            null,
+
+          other_charges_usd:
+            null,
+
+          source_type:
+            'reference_quote',
+
+          source_name:
+            null,
+
+          source_date:
+            null,
+
+          valid_until:
+            null,
+
+          verification_status:
+            'not_verified',
+
+          notes:
+            null
+
+        }
 
       },
 
 
-      // ----------------------------------------------
+      // ==============================================
       // FCL
-      // ----------------------------------------------
+      // ==============================================
 
       fcl: {
 
 
-        // --------------------------
+        // --------------------------------------------
         // 20' DRY
-        // --------------------------
+        // --------------------------------------------
 
         '20ft_dry': {
 
-          status:
-            'not_available',
+          shipping_mode:
+            'fcl',
+
+          container_type:
+            '20ft_dry',
 
           currency:
             'USD',
@@ -389,50 +719,111 @@ window.P2I_FREIGHT_RATES = {
           rate_unit:
             'container',
 
-          rate_amount:
-            null,
 
-          surcharges_usd:
-            null,
+          market_reference: {
 
-          origin_charges_usd:
-            null,
+            status:
+              'not_available',
 
-          destination_charges_usd:
-            null,
+            min_rate_usd:
+              null,
 
-          other_charges_usd:
-            null,
+            max_rate_usd:
+              null,
 
-          source_type:
-            null,
+            midpoint_rate_usd:
+              null,
 
-          source_name:
-            null,
+            surcharges_usd:
+              null,
 
-          source_date:
-            null,
+            origin_charges_usd:
+              null,
 
-          valid_until:
-            null,
+            destination_charges_usd:
+              null,
 
-          verification_status:
-            'not_verified',
+            other_charges_usd:
+              null,
 
-          notes:
-            null
+            source_count:
+              null,
+
+            source_type:
+              'market_reference',
+
+            source_name:
+              null,
+
+            source_date:
+              null,
+
+            valid_until:
+              null,
+
+            verification_status:
+              'not_verified',
+
+            notes:
+              null
+
+          },
+
+
+          reference_quote: {
+
+            status:
+              'not_available',
+
+            rate_amount:
+              null,
+
+            surcharges_usd:
+              null,
+
+            origin_charges_usd:
+              null,
+
+            destination_charges_usd:
+              null,
+
+            other_charges_usd:
+              null,
+
+            source_type:
+              'reference_quote',
+
+            source_name:
+              null,
+
+            source_date:
+              null,
+
+            valid_until:
+              null,
+
+            verification_status:
+              'not_verified',
+
+            notes:
+              null
+
+          }
 
         },
 
 
-        // --------------------------
+        // --------------------------------------------
         // 40' DRY
-        // --------------------------
+        // --------------------------------------------
 
         '40ft_dry': {
 
-          status:
-            'not_available',
+          shipping_mode:
+            'fcl',
+
+          container_type:
+            '40ft_dry',
 
           currency:
             'USD',
@@ -443,50 +834,111 @@ window.P2I_FREIGHT_RATES = {
           rate_unit:
             'container',
 
-          rate_amount:
-            null,
 
-          surcharges_usd:
-            null,
+          market_reference: {
 
-          origin_charges_usd:
-            null,
+            status:
+              'not_available',
 
-          destination_charges_usd:
-            null,
+            min_rate_usd:
+              null,
 
-          other_charges_usd:
-            null,
+            max_rate_usd:
+              null,
 
-          source_type:
-            null,
+            midpoint_rate_usd:
+              null,
 
-          source_name:
-            null,
+            surcharges_usd:
+              null,
 
-          source_date:
-            null,
+            origin_charges_usd:
+              null,
 
-          valid_until:
-            null,
+            destination_charges_usd:
+              null,
 
-          verification_status:
-            'not_verified',
+            other_charges_usd:
+              null,
 
-          notes:
-            null
+            source_count:
+              null,
+
+            source_type:
+              'market_reference',
+
+            source_name:
+              null,
+
+            source_date:
+              null,
+
+            valid_until:
+              null,
+
+            verification_status:
+              'not_verified',
+
+            notes:
+              null
+
+          },
+
+
+          reference_quote: {
+
+            status:
+              'not_available',
+
+            rate_amount:
+              null,
+
+            surcharges_usd:
+              null,
+
+            origin_charges_usd:
+              null,
+
+            destination_charges_usd:
+              null,
+
+            other_charges_usd:
+              null,
+
+            source_type:
+              'reference_quote',
+
+            source_name:
+              null,
+
+            source_date:
+              null,
+
+            valid_until:
+              null,
+
+            verification_status:
+              'not_verified',
+
+            notes:
+              null
+
+          }
 
         },
 
 
-        // --------------------------
+        // --------------------------------------------
         // 40' HIGH CUBE
-        // --------------------------
+        // --------------------------------------------
 
         '40ft_high_cube': {
 
-          status:
-            'not_available',
+          shipping_mode:
+            'fcl',
+
+          container_type:
+            '40ft_high_cube',
 
           currency:
             'USD',
@@ -497,38 +949,96 @@ window.P2I_FREIGHT_RATES = {
           rate_unit:
             'container',
 
-          rate_amount:
-            null,
 
-          surcharges_usd:
-            null,
+          market_reference: {
 
-          origin_charges_usd:
-            null,
+            status:
+              'not_available',
 
-          destination_charges_usd:
-            null,
+            min_rate_usd:
+              null,
 
-          other_charges_usd:
-            null,
+            max_rate_usd:
+              null,
 
-          source_type:
-            null,
+            midpoint_rate_usd:
+              null,
 
-          source_name:
-            null,
+            surcharges_usd:
+              null,
 
-          source_date:
-            null,
+            origin_charges_usd:
+              null,
 
-          valid_until:
-            null,
+            destination_charges_usd:
+              null,
 
-          verification_status:
-            'not_verified',
+            other_charges_usd:
+              null,
 
-          notes:
-            null
+            source_count:
+              null,
+
+            source_type:
+              'market_reference',
+
+            source_name:
+              null,
+
+            source_date:
+              null,
+
+            valid_until:
+              null,
+
+            verification_status:
+              'not_verified',
+
+            notes:
+              null
+
+          },
+
+
+          reference_quote: {
+
+            status:
+              'not_available',
+
+            rate_amount:
+              null,
+
+            surcharges_usd:
+              null,
+
+            origin_charges_usd:
+              null,
+
+            destination_charges_usd:
+              null,
+
+            other_charges_usd:
+              null,
+
+            source_type:
+              'reference_quote',
+
+            source_name:
+              null,
+
+            source_date:
+              null,
+
+            valid_until:
+              null,
+
+            verification_status:
+              'not_verified',
+
+            notes:
+              null
+
+          }
 
         }
 
