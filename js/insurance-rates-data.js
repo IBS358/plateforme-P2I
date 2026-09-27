@@ -57,45 +57,70 @@ window.P2I_INSURANCE_RATES = {
       coverage_level:
         'institute_cargo_clauses_a',
 
-      market_reference: {
+      // --------------------------------------------
+// RÉFÉRENCE DE MARCHÉ — ICC A
+// --------------------------------------------
+//
+// Type de marchandise :
+// Machines / équipements
+//
+// Référence indicative 2026 :
+// 0,15 % à 0,30 %
+//
+// Le moteur P2I calcule automatiquement
+// le point milieu :
+//
+// (0,15 + 0,30) / 2 = 0,225 %
+//
+// Base publiée : valeur assurée CIF + 10 %.
+//
+// Cette référence n'est PAS une cotation
+// d'assurance pour une expédition précise.
+//
+// Les éventuelles surprimes liées à la route,
+// guerre, grèves ou autres risques spécifiques
+// ne sont pas incluses ici.
+// --------------------------------------------
 
-        status:
-          'not_available',
+market_reference: {
 
-        premium_rate_percent:
-          null,
+  status:
+    'available',
 
-        min_premium_rate_percent:
-          null,
+  premium_rate_percent:
+    null,
 
-        max_premium_rate_percent:
-          null,
+  min_premium_rate_percent:
+    0.15,
 
-        minimum_premium_usd:
-          null,
+  max_premium_rate_percent:
+    0.30,
 
-        source_count:
-          null,
+  minimum_premium_usd:
+    null,
 
-        source_type:
-          'market_reference',
+  source_count:
+    1,
 
-        source_name:
-          null,
+  source_type:
+    'market_reference',
 
-        source_date:
-          null,
+  source_name:
+    'Unicore Overseas SIA',
 
-        valid_until:
-          null,
+  source_date:
+    '2026-09-24',
 
-        verification_status:
-          'not_verified',
+  valid_until:
+    null,
 
-        notes:
-          null
+  verification_status:
+    'verified',
 
-      },
+  notes:
+    'Référence indicative 2026 pour machines / équipements en couverture standard ICC A : 0,15–0,30 % de la valeur assurée. Point milieu P2I : 0,225 %. Prime minimale publiée en EUR non intégrée au calcul USD. Les surprimes éventuelles liées à la route ou aux extensions War & Strikes ne sont pas incluses.'
+
+},
 
       reference_quote: {
 
