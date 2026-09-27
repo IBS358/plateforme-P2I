@@ -8372,63 +8372,209 @@ analysis.consolidation_candidates.push({
   freight_scenarios: {
 
     // ----------------------------------------
-    // 1. LCL — EXPÉDITIONS INDIVIDUELLES
-    // ----------------------------------------
+// 1. LCL — EXPÉDITIONS INDIVIDUELLES
+// ----------------------------------------
 
-    lcl_individual: {
+lcl_individual: {
 
-      status:
-        'pending_rate',
+  status:
+    individualLclStatus,
 
-      shipping_mode:
-        'lcl',
+  calculation_available:
+    individualLclCalculationAvailable,
 
-      consolidation:
-        false,
+  shipping_mode:
+    'lcl',
 
-      shipment_count:
-        2,
+  consolidation:
+    false,
 
-      total_revenue_tons:
-        individualLclRevenueTons,
+  shipment_count:
+    2,
 
-      shipments: [
+  total_revenue_tons:
+    individualLclRevenueTons,
 
-        {
-          machine_key:
-            machineA.machine_key,
 
-          machine:
-            machineA.machine,
+  // ----------------------------------------
+  // EXPÉDITIONS INDIVIDUELLES
+  // ----------------------------------------
 
-          revenue_tons:
-            machineALclRevenueTons
-        },
+  shipments: [
 
-        {
-          machine_key:
-            machineB.machine_key,
+    // --------------------------------------
+    // MACHINE A
+    // --------------------------------------
 
-          machine:
-            machineB.machine,
+    {
 
-          revenue_tons:
-            machineBLclRevenueTons
-        }
+      machine_key:
+        machineA.machine_key,
 
-      ],
+      machine:
+        machineA.machine,
+
+      origin_port:
+        shippingA.departure_port || null,
+
+      destination_port:
+        'Abidjan',
+
+      goods_value_usd:
+        Number.isFinite(goodsValueA)
+          ? goodsValueA
+          : null,
+
+      weight_kg:
+        shippingA.total_shipping_weight_kg,
+
+      volume_m3:
+        machineAVolumeM3,
+
+      revenue_tons:
+        machineALclRevenueTons,
+
+      freight_rate:
+        machineALclFreightRate,
+
+      freight_calculation_status:
+        machineALclFreightEstimate
+          ?.status || 'not_calculated',
 
       estimated_freight_usd:
-        null,
+        machineALclFreightEstimate
+          ?.estimated_freight_usd ?? null,
+
+      insurance_estimate: {
+
+        ...machineAInsuranceReference,
+
+        calculation_status:
+          machineALclCifEstimate
+            ?.status || 'not_calculated',
+
+        insured_value_usd:
+          machineALclCifEstimate
+            ?.insured_value_usd ?? null,
+
+        estimated_insurance_usd:
+          machineALclCifEstimate
+            ?.estimated_insurance_usd ?? null
+
+      },
+
+      insurance_calculation_status:
+        machineALclCifEstimate
+          ?.status || 'not_calculated',
 
       estimated_insurance_usd:
-        null,
+        machineALclCifEstimate
+          ?.estimated_insurance_usd ?? null,
 
-      estimated_total_usd:
-        null
+      estimated_cif_abidjan_usd:
+        machineALclCifEstimate
+          ?.estimated_cif_abidjan_usd ?? null
 
     },
 
+
+    // --------------------------------------
+    // MACHINE B
+    // --------------------------------------
+
+    {
+
+      machine_key:
+        machineB.machine_key,
+
+      machine:
+        machineB.machine,
+
+      origin_port:
+        shippingB.departure_port || null,
+
+      destination_port:
+        'Abidjan',
+
+      goods_value_usd:
+        Number.isFinite(goodsValueB)
+          ? goodsValueB
+          : null,
+
+      weight_kg:
+        shippingB.total_shipping_weight_kg,
+
+      volume_m3:
+        machineBVolumeM3,
+
+      revenue_tons:
+        machineBLclRevenueTons,
+
+      freight_rate:
+        machineBLclFreightRate,
+
+      freight_calculation_status:
+        machineBLclFreightEstimate
+          ?.status || 'not_calculated',
+
+      estimated_freight_usd:
+        machineBLclFreightEstimate
+          ?.estimated_freight_usd ?? null,
+
+      insurance_estimate: {
+
+        ...machineBInsuranceReference,
+
+        calculation_status:
+          machineBLclCifEstimate
+            ?.status || 'not_calculated',
+
+        insured_value_usd:
+          machineBLclCifEstimate
+            ?.insured_value_usd ?? null,
+
+        estimated_insurance_usd:
+          machineBLclCifEstimate
+            ?.estimated_insurance_usd ?? null
+
+      },
+
+      insurance_calculation_status:
+        machineBLclCifEstimate
+          ?.status || 'not_calculated',
+
+      estimated_insurance_usd:
+        machineBLclCifEstimate
+          ?.estimated_insurance_usd ?? null,
+
+      estimated_cif_abidjan_usd:
+        machineBLclCifEstimate
+          ?.estimated_cif_abidjan_usd ?? null
+
+    }
+
+  ],
+
+
+  // ----------------------------------------
+  // TOTAUX DES DEUX EXPÉDITIONS
+  // ----------------------------------------
+
+  estimated_freight_usd:
+    individualLclFreightUsd,
+
+  estimated_insurance_usd:
+    individualLclInsuranceUsd,
+
+  estimated_cif_abidjan_usd:
+    individualLclCifUsd,
+
+  // Conservé pour compatibilité avec
+  // la structure actuelle des scénarios.
+  estimated_total_usd:
+    individualLclCifUsd
+
+},
 
   // ----------------------------------------
   // 2. LCL — EXPÉDITION REGROUPÉE
