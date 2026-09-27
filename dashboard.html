@@ -4668,6 +4668,408 @@ function getP2IFreightRoute({
 
 }
   // ==================================================
+// P2I — RÉSOLUTION D'UN TARIF LCL DE RÉFÉRENCE
+// ==================================================
+
+function resolveP2ILclFreightRate({
+
+  route,
+  referenceDate = new Date()
+
+} = {}) {
+
+  // ----------------------------------------------
+  // ROUTE / LCL DISPONIBLE ?
+  // ----------------------------------------------
+
+  const lcl =
+    route?.lcl;
+
+  if (!lcl) {
+
+    return {
+
+      status:
+        'not_available',
+
+      rate_type:
+        'per_revenue_ton',
+
+      shipping_mode:
+        'lcl',
+
+      origin_port:
+        route?.origin_port || null,
+
+      destination_port:
+        route?.destination_port || 'Abidjan',
+
+      currency:
+        'USD',
+
+      rate_per_rt_usd:
+        null,
+
+      minimum_charge_usd:
+        null,
+
+      fixed_charge_per_shipment_usd:
+        null,
+
+      surcharges_usd:
+        null,
+
+      origin_charges_usd:
+        null,
+
+      destination_charges_usd:
+        null,
+
+      other_charges_usd:
+        null,
+
+      source_type:
+        null,
+
+      source_name:
+        null,
+
+      source_date:
+        null,
+
+      valid_until:
+        null,
+
+      verification_status:
+        'not_verified',
+
+      selection_status:
+        'lcl_reference_not_available'
+
+    };
+
+  }
+
+
+  // ----------------------------------------------
+  // CONTRÔLE DE VALIDITÉ D'UNE DATE
+  // ----------------------------------------------
+
+  const isStillValid = validUntil => {
+
+    if (!validUntil) {
+      return true;
+    }
+
+    const expiry =
+      new Date(validUntil);
+
+    const current =
+      referenceDate instanceof Date
+        ? referenceDate
+        : new Date(referenceDate);
+
+    if (
+      Number.isNaN(expiry.getTime()) ||
+      Number.isNaN(current.getTime())
+    ) {
+      return false;
+    }
+
+    return expiry.getTime() >= current.getTime();
+
+  };
+
+
+  // ----------------------------------------------
+  // 1. COTATION DE RÉFÉRENCE
+  // ----------------------------------------------
+
+  const referenceQuote =
+    lcl.reference_quote;
+
+
+  const referenceRate =
+    Number(
+      referenceQuote?.rate_per_rt_usd
+    );
+
+
+  const referenceQuoteUsable =
+
+    referenceQuote?.status === 'available' &&
+
+    referenceQuote?.verification_status ===
+      'verified' &&
+
+    Number.isFinite(referenceRate) &&
+
+    referenceRate > 0 &&
+
+    isStillValid(
+      referenceQuote?.valid_until
+    );
+
+
+  if (referenceQuoteUsable) {
+
+    return {
+
+      status:
+        'available',
+
+      rate_type:
+        lcl.rate_type ||
+        'per_revenue_ton',
+
+      shipping_mode:
+        'lcl',
+
+      origin_port:
+        route.origin_port || null,
+
+      destination_port:
+        route.destination_port || 'Abidjan',
+
+      currency:
+        lcl.currency || 'USD',
+
+      rate_amount:
+        referenceRate,
+
+      rate_unit:
+        lcl.rate_unit || 'RT',
+
+      rate_per_rt_usd:
+        referenceRate,
+
+      minimum_charge_usd:
+        referenceQuote.minimum_charge_usd ?? null,
+
+      fixed_charge_per_shipment_usd:
+        referenceQuote.fixed_charge_per_shipment_usd ?? null,
+
+      surcharges_usd:
+        referenceQuote.surcharges_usd ?? null,
+
+      origin_charges_usd:
+        referenceQuote.origin_charges_usd ?? null,
+
+      destination_charges_usd:
+        referenceQuote.destination_charges_usd ?? null,
+
+      other_charges_usd:
+        referenceQuote.other_charges_usd ?? null,
+
+      source_type:
+        referenceQuote.source_type ||
+        'reference_quote',
+
+      source_name:
+        referenceQuote.source_name || null,
+
+      source_date:
+        referenceQuote.source_date || null,
+
+      valid_until:
+        referenceQuote.valid_until || null,
+
+      verification_status:
+        referenceQuote.verification_status,
+
+      selection_status:
+        'reference_quote_selected'
+
+    };
+
+  }
+
+
+  // ----------------------------------------------
+  // 2. RÉFÉRENCE DE MARCHÉ
+  // ----------------------------------------------
+
+  const marketReference =
+    lcl.market_reference;
+
+
+  const marketMidpoint =
+    Number(
+      marketReference
+        ?.midpoint_rate_per_rt_usd
+    );
+
+
+  const marketReferenceUsable =
+
+    marketReference?.status === 'available' &&
+
+    marketReference?.verification_status ===
+      'verified' &&
+
+    Number.isFinite(marketMidpoint) &&
+
+    marketMidpoint > 0 &&
+
+    isStillValid(
+      marketReference?.valid_until
+    );
+
+
+  if (marketReferenceUsable) {
+
+    return {
+
+      status:
+        'available',
+
+      rate_type:
+        lcl.rate_type ||
+        'per_revenue_ton',
+
+      shipping_mode:
+        'lcl',
+
+      origin_port:
+        route.origin_port || null,
+
+      destination_port:
+        route.destination_port || 'Abidjan',
+
+      currency:
+        lcl.currency || 'USD',
+
+      rate_amount:
+        marketMidpoint,
+
+      rate_unit:
+        lcl.rate_unit || 'RT',
+
+      rate_per_rt_usd:
+        marketMidpoint,
+
+      minimum_charge_usd:
+        marketReference.minimum_charge_usd ?? null,
+
+      fixed_charge_per_shipment_usd:
+        marketReference.fixed_charge_per_shipment_usd ?? null,
+
+      surcharges_usd:
+        marketReference.surcharges_usd ?? null,
+
+      origin_charges_usd:
+        marketReference.origin_charges_usd ?? null,
+
+      destination_charges_usd:
+        marketReference.destination_charges_usd ?? null,
+
+      other_charges_usd:
+        marketReference.other_charges_usd ?? null,
+
+      source_type:
+        marketReference.source_type ||
+        'market_reference',
+
+      source_name:
+        marketReference.source_name || null,
+
+      source_date:
+        marketReference.source_date || null,
+
+      valid_until:
+        marketReference.valid_until || null,
+
+      verification_status:
+        marketReference.verification_status,
+
+      market_min_rate_per_rt_usd:
+        marketReference.min_rate_per_rt_usd ?? null,
+
+      market_max_rate_per_rt_usd:
+        marketReference.max_rate_per_rt_usd ?? null,
+
+      selection_status:
+        'market_reference_selected'
+
+    };
+
+  }
+
+
+  // ----------------------------------------------
+  // AUCUNE RÉFÉRENCE EXPLOITABLE
+  // ----------------------------------------------
+
+  return {
+
+    status:
+      'not_available',
+
+    rate_type:
+      lcl.rate_type ||
+      'per_revenue_ton',
+
+    shipping_mode:
+      'lcl',
+
+    origin_port:
+      route.origin_port || null,
+
+    destination_port:
+      route.destination_port || 'Abidjan',
+
+    currency:
+      lcl.currency || 'USD',
+
+    rate_amount:
+      null,
+
+    rate_unit:
+      lcl.rate_unit || 'RT',
+
+    rate_per_rt_usd:
+      null,
+
+    minimum_charge_usd:
+      null,
+
+    fixed_charge_per_shipment_usd:
+      null,
+
+    surcharges_usd:
+      null,
+
+    origin_charges_usd:
+      null,
+
+    destination_charges_usd:
+      null,
+
+    other_charges_usd:
+      null,
+
+    source_type:
+      null,
+
+    source_name:
+      null,
+
+    source_date:
+      null,
+
+    valid_until:
+      null,
+
+    verification_status:
+      'not_verified',
+
+    selection_status:
+      'no_usable_reference'
+
+  };
+
+}
+  // ==================================================
 // CALCUL D'UNE ESTIMATION DE FRET LCL
 // ==================================================
 
