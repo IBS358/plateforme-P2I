@@ -64,132 +64,149 @@ window.P2I_FREIGHT_RATES = {
       // LCL
       // ==============================================
 
-      lcl: {
+     lcl: {
 
-        shipping_mode:
-          'lcl',
+  shipping_mode:
+    'lcl',
 
-        currency:
-          'USD',
+  currency:
+    'USD',
 
-        rate_type:
-          'per_revenue_ton',
+  rate_type:
+    'per_cbm',
 
-        rate_unit:
-          'RT',
-
-
-        // --------------------------------------------
-        // RÉFÉRENCE DE MARCHÉ
-        // --------------------------------------------
-
-        market_reference: {
-
-          status:
-            'not_available',
-
-          min_rate_per_rt_usd:
-            null,
-
-          max_rate_per_rt_usd:
-            null,
-
-          midpoint_rate_per_rt_usd:
-            null,
-
-          minimum_charge_usd:
-            null,
-
-          fixed_charge_per_shipment_usd:
-            null,
-
-          surcharges_usd:
-            null,
-
-          origin_charges_usd:
-            null,
-
-          destination_charges_usd:
-            null,
-
-          other_charges_usd:
-            null,
-
-          source_count:
-            null,
-
-          source_type:
-            'market_reference',
-
-          source_name:
-            null,
-
-          source_date:
-            null,
-
-          valid_until:
-            null,
-
-          verification_status:
-            'not_verified',
-
-          notes:
-            null
-
-        },
+  rate_unit:
+    'CBM',
 
 
-        // --------------------------------------------
-        // COTATION DE RÉFÉRENCE
-        // --------------------------------------------
+  // --------------------------------------------
+  // RÉFÉRENCE DE MARCHÉ
+  // --------------------------------------------
+  //
+  // Référence indicative 2026 publiée pour :
+  // Shanghai → Abidjan
+  //
+  // Fourchette publiée :
+  // 250 à 320 USD / CBM
+  //
+  // Point milieu utilisé par l'Estimation P2I :
+  // (250 + 320) / 2 = 285 USD / CBM
+  //
+  // Cette référence n'est PAS un devis de transport.
+  // --------------------------------------------
 
-        reference_quote: {
+  market_reference: {
 
-          status:
-            'not_available',
+    status:
+      'available',
 
-          rate_per_rt_usd:
-            null,
+    min_rate_per_cbm_usd:
+      250,
 
-          minimum_charge_usd:
-            null,
+    max_rate_per_cbm_usd:
+      320,
 
-          fixed_charge_per_shipment_usd:
-            null,
+    midpoint_rate_per_cbm_usd:
+      285,
 
-          surcharges_usd:
-            null,
+    minimum_charge_usd:
+      null,
 
-          origin_charges_usd:
-            null,
+    fixed_charge_per_shipment_usd:
+      null,
 
-          destination_charges_usd:
-            null,
+    surcharges_usd:
+      null,
 
-          other_charges_usd:
-            null,
+    origin_charges_usd:
+      null,
 
-          source_type:
-            'reference_quote',
+    destination_charges_usd:
+      null,
 
-          source_name:
-            null,
+    other_charges_usd:
+      null,
 
-          source_date:
-            null,
+    source_count:
+      1,
 
-          valid_until:
-            null,
+    source_type:
+      'market_reference',
 
-          verification_status:
-            'not_verified',
+    source_name:
+      'DDPLINK',
 
-          notes:
-            null
+    source_date:
+      '2026',
 
-        }
+    valid_until:
+      null,
 
-      },
+    verification_status:
+      'verified',
+
+    notes:
+      'Référence indicative 2026 Shanghai → Abidjan : 250–320 USD/CBM. Point milieu P2I : 285 USD/CBM. À remplacer par une cotation récente lorsque disponible.'
+
+  },
+
+
+  // --------------------------------------------
+  // COTATION DE RÉFÉRENCE
+  // --------------------------------------------
+  //
+  // Aucune cotation P2I active pour l'instant.
+  // Une future cotation vérifiée et encore valide
+  // sera prioritaire sur la référence de marché.
+  // --------------------------------------------
+
+  reference_quote: {
+
+    status:
+      'not_available',
+
+    rate_per_cbm_usd:
+      null,
+
+    minimum_charge_usd:
+      null,
+
+    fixed_charge_per_shipment_usd:
+      null,
+
+    surcharges_usd:
+      null,
+
+    origin_charges_usd:
+      null,
+
+    destination_charges_usd:
+      null,
+
+    other_charges_usd:
+      null,
+
+    source_type:
+      'reference_quote',
+
+    source_name:
+      null,
+
+    source_date:
+      null,
+
+    valid_until:
+      null,
+
+    verification_status:
+      'not_verified',
+
+    notes:
+      null
+
+  }
+
+},
 
 
       // ==============================================
