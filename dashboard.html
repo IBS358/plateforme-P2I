@@ -6564,6 +6564,565 @@ function calculateFclFreightEstimate({
 
 }
   // ==================================================
+// P2I — RÉSOLUTION D'UN TARIF D'ASSURANCE MARITIME
+// ==================================================
+//
+// Cette fonction sélectionne la référence d'assurance
+// exploitable pour l'Estimation P2I.
+//
+// Priorité :
+//
+// 1. reference_quote valide et vérifiée
+// 2. market_reference valide et vérifiée
+// 3. not_available
+//
+// Le taux de prime n'est jamais inventé.
+//
+// Le niveau de couverture demandé doit correspondre
+// à une entrée du référentiel :
+//
+// - institute_cargo_clauses_a
+// - institute_cargo_clauses_b
+// - institute_cargo_clauses_c
+//
+// ==================================================
+
+function resolveP2IInsuranceRate({
+
+  coverageLevel =
+    'institute_cargo_clauses_a',
+
+  referenceDate =
+    new Date()
+
+} = {}) {
+
+
+  // ----------------------------------------------
+  // RÉFÉRENTIEL DISPONIBLE ?
+  // ----------------------------------------------
+
+  const marineCargo =
+    window.P2I_INSURANCE_RATES
+      ?.marine_cargo;
+
+
+  if (
+    !marineCargo ||
+    typeof marineCargo !== 'object'
+  ) {
+
+    return {
+
+      status:
+        'not_available',
+
+      coverage_basis:
+        'cif_contract_value',
+
+      coverage_percent:
+        null,
+
+      coverage_level:
+        coverageLevel || null,
+
+      premium_rate_percent:
+        null,
+
+      minimum_premium_usd:
+        null,
+
+      source_type:
+        null,
+
+      source_name:
+        null,
+
+      source_date:
+        null,
+
+      valid_until:
+        null,
+
+      verification_status:
+        'not_verified',
+
+      selection_status:
+        'insurance_reference_not_available'
+
+    };
+
+  }
+
+
+  // ----------------------------------------------
+  // NIVEAU DE COUVERTURE DISPONIBLE ?
+  // ----------------------------------------------
+
+  const coverage =
+    marineCargo?.[coverageLevel];
+
+
+  if (
+    !coverage ||
+    typeof coverage !== 'object'
+  ) {
+
+    return {
+
+      status:
+        'not_available',
+
+      coverage_basis:
+        marineCargo.coverage_basis ||
+        'cif_contract_value',
+
+      coverage_percent:
+        marineCargo.coverage_percent ??
+        null,
+
+      coverage_level:
+        coverageLevel || null,
+
+      premium_rate_percent:
+        null,
+
+      minimum_premium_usd:
+        null,
+
+      source_type:
+        null,
+
+      source_name:
+        null,
+
+      source_date:
+        null,
+
+      valid_until:
+        null,
+
+      verification_status:
+        'not_verified',
+
+      selection_status:
+        'coverage_level_not_available'
+
+    };
+
+  }
+
+
+  // ----------------------------------------------
+  // CONTRÔLE DE VALIDITÉ D'UNE DATE
+  // ----------------------------------------------
+
+  const isStillValid =
+    validUntil => {
+
+      if (!validUntil) {
+        return true;
+      }
+
+
+      const expiry =
+        new Date(validUntil);
+
+
+      const current =
+        referenceDate instanceof Date
+          ? referenceDate
+          : new Date(referenceDate);
+
+
+      if (
+        Number.isNaN(
+          expiry.getTime()
+        ) ||
+        Number.isNaN(
+          current.getTime()
+        )
+      ) {
+        return false;
+      }
+
+
+      return (
+        expiry.getTime() >=
+        current.getTime()
+      );
+
+    };
+
+
+  // ----------------------------------------------
+  // INFORMATIONS COMMUNES
+  // ----------------------------------------------
+
+  const coverageBasis =
+    marineCargo.coverage_basis ||
+    'cif_contract_value';
+
+
+  const coveragePercent =
+    Number(
+      marineCargo.coverage_percent
+    );
+
+
+  const normalizedCoveragePercent =
+
+    Number.isFinite(
+      coveragePercent
+    ) &&
+    coveragePercent > 0
+
+      ? coveragePercent
+
+      : null;
+
+
+  const resolvedCoverageLevel =
+    coverage.coverage_level ||
+    coverageLevel;
+
+
+  // ==============================================
+  // 1. COTATION DE RÉFÉRENCE
+  // ==============================================
+
+  const referenceQuote =
+    coverage.reference_quote;
+
+
+  const referencePremiumRate =
+    Number(
+      referenceQuote
+        ?.premium_rate_percent
+    );
+
+
+  const referenceQuoteUsable =
+
+    referenceQuote?.status ===
+      'available' &&
+
+    referenceQuote
+      ?.verification_status ===
+      'verified' &&
+
+    Number.isFinite(
+      referencePremiumRate
+    ) &&
+
+    referencePremiumRate > 0 &&
+
+    isStillValid(
+      referenceQuote?.valid_until
+    );
+
+
+  if (referenceQuoteUsable) {
+
+    return {
+
+      status:
+        'available',
+
+      coverage_basis:
+        coverageBasis,
+
+      coverage_percent:
+        normalizedCoveragePercent,
+
+      coverage_level:
+        resolvedCoverageLevel,
+
+      premium_rate_percent:
+        referencePremiumRate,
+
+      minimum_premium_usd:
+        referenceQuote
+          .minimum_premium_usd ??
+        null,
+
+      source_type:
+        referenceQuote.source_type ||
+        'reference_quote',
+
+      source_name:
+        referenceQuote.source_name ||
+        null,
+
+      source_date:
+        referenceQuote.source_date ||
+        null,
+
+      valid_until:
+        referenceQuote.valid_until ||
+        null,
+
+      verification_status:
+        referenceQuote
+          .verification_status,
+
+      selection_status:
+        'reference_quote_selected'
+
+    };
+
+  }
+
+
+  // ==============================================
+  // 2. RÉFÉRENCE DE MARCHÉ
+  // ==============================================
+
+  const marketReference =
+    coverage.market_reference;
+
+
+  const explicitMarketRate =
+    Number(
+      marketReference
+        ?.premium_rate_percent
+    );
+
+
+  const marketMinRate =
+    Number(
+      marketReference
+        ?.min_premium_rate_percent
+    );
+
+
+  const marketMaxRate =
+    Number(
+      marketReference
+        ?.max_premium_rate_percent
+    );
+
+
+  // ----------------------------------------------
+  // TAUX DE MARCHÉ UTILISÉ
+  // ----------------------------------------------
+  //
+  // Si un taux central explicite existe,
+  // il est utilisé.
+  //
+  // Sinon, si une fourchette min/max existe,
+  // le point milieu est calculé.
+  // ----------------------------------------------
+
+  let selectedMarketRate =
+    null;
+
+
+  let marketRateMethod =
+    null;
+
+
+  if (
+    Number.isFinite(
+      explicitMarketRate
+    ) &&
+    explicitMarketRate > 0
+  ) {
+
+    selectedMarketRate =
+      explicitMarketRate;
+
+    marketRateMethod =
+      'explicit_rate';
+
+  }
+
+  else if (
+
+    Number.isFinite(
+      marketMinRate
+    ) &&
+
+    marketMinRate > 0 &&
+
+    Number.isFinite(
+      marketMaxRate
+    ) &&
+
+    marketMaxRate > 0 &&
+
+    marketMaxRate >=
+      marketMinRate
+
+  ) {
+
+    selectedMarketRate =
+      (
+        marketMinRate +
+        marketMaxRate
+      ) / 2;
+
+    marketRateMethod =
+      'range_midpoint';
+
+  }
+
+
+  const marketReferenceUsable =
+
+    marketReference?.status ===
+      'available' &&
+
+    marketReference
+      ?.verification_status ===
+      'verified' &&
+
+    Number.isFinite(
+      selectedMarketRate
+    ) &&
+
+    selectedMarketRate > 0 &&
+
+    isStillValid(
+      marketReference?.valid_until
+    );
+
+
+  if (marketReferenceUsable) {
+
+    return {
+
+      status:
+        'available',
+
+      coverage_basis:
+        coverageBasis,
+
+      coverage_percent:
+        normalizedCoveragePercent,
+
+      coverage_level:
+        resolvedCoverageLevel,
+
+      premium_rate_percent:
+        Number(
+          selectedMarketRate
+            .toFixed(6)
+        ),
+
+      minimum_premium_usd:
+        marketReference
+          .minimum_premium_usd ??
+        null,
+
+      market_min_premium_rate_percent:
+
+        Number.isFinite(
+          marketMinRate
+        ) &&
+        marketMinRate > 0
+
+          ? marketMinRate
+
+          : null,
+
+      market_max_premium_rate_percent:
+
+        Number.isFinite(
+          marketMaxRate
+        ) &&
+        marketMaxRate > 0
+
+          ? marketMaxRate
+
+          : null,
+
+      market_rate_method:
+        marketRateMethod,
+
+      source_type:
+        marketReference.source_type ||
+        'market_reference',
+
+      source_name:
+        marketReference.source_name ||
+        null,
+
+      source_date:
+        marketReference.source_date ||
+        null,
+
+      valid_until:
+        marketReference.valid_until ||
+        null,
+
+      verification_status:
+        marketReference
+          .verification_status,
+
+      selection_status:
+        'market_reference_selected'
+
+    };
+
+  }
+
+
+  // ==============================================
+  // 3. AUCUNE RÉFÉRENCE EXPLOITABLE
+  // ==============================================
+
+  return {
+
+    status:
+      'not_available',
+
+    coverage_basis:
+      coverageBasis,
+
+    coverage_percent:
+      normalizedCoveragePercent,
+
+    coverage_level:
+      resolvedCoverageLevel,
+
+    premium_rate_percent:
+      null,
+
+    minimum_premium_usd:
+      null,
+
+    market_min_premium_rate_percent:
+      null,
+
+    market_max_premium_rate_percent:
+      null,
+
+    market_rate_method:
+      null,
+
+    source_type:
+      null,
+
+    source_name:
+      null,
+
+    source_date:
+      null,
+
+    valid_until:
+      null,
+
+    verification_status:
+      'not_verified',
+
+    selection_status:
+      'no_usable_reference'
+
+  };
+
+}
+  // ==================================================
 // CALCUL ASSURANCE + CIF PORT D'ABIDJAN
 // ==================================================
 
