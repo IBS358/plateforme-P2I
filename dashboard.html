@@ -7746,6 +7746,283 @@ const consolidatedLclFreightEstimate =
       consolidatedLclFreightRate
 
   });
+      // ==================================================
+// LCL — EXPÉDITIONS INDIVIDUELLES
+// ==================================================
+//
+// Chaque machine est calculée comme une expédition
+// indépendante.
+//
+// Cela permet de comparer :
+//
+// 1. deux expéditions LCL séparées
+// 2. une seule expédition LCL consolidée
+//
+// Les frais minimums, fixes et complémentaires
+// éventuels sont ainsi appliqués séparément à
+// chaque expédition individuelle.
+// ==================================================
+
+
+// --------------------------------------------------
+// ROUTE INDIVIDUELLE — MACHINE A
+// --------------------------------------------------
+
+const machineALclFreightRoute =
+  getP2IFreightRoute({
+
+    originPort:
+      shippingA.departure_port,
+
+    destinationPort:
+      'Abidjan'
+
+  });
+
+
+// --------------------------------------------------
+// ROUTE INDIVIDUELLE — MACHINE B
+// --------------------------------------------------
+
+const machineBLclFreightRoute =
+  getP2IFreightRoute({
+
+    originPort:
+      shippingB.departure_port,
+
+    destinationPort:
+      'Abidjan'
+
+  });
+
+
+// --------------------------------------------------
+// TARIF LCL — MACHINE A
+// --------------------------------------------------
+
+const machineALclFreightRate =
+  resolveP2ILclFreightRate({
+
+    route:
+      machineALclFreightRoute
+
+  });
+
+
+// --------------------------------------------------
+// TARIF LCL — MACHINE B
+// --------------------------------------------------
+
+const machineBLclFreightRate =
+  resolveP2ILclFreightRate({
+
+    route:
+      machineBLclFreightRoute
+
+  });
+
+
+// --------------------------------------------------
+// CALCUL DU FRET — MACHINE A
+// --------------------------------------------------
+
+const machineALclFreightEstimate =
+  calculateLclFreightEstimate({
+
+    revenueTons:
+      machineALclRevenueTons,
+
+    volumeM3:
+      machineAVolumeM3,
+
+    rate:
+      machineALclFreightRate
+
+  });
+
+
+// --------------------------------------------------
+// CALCUL DU FRET — MACHINE B
+// --------------------------------------------------
+
+const machineBLclFreightEstimate =
+  calculateLclFreightEstimate({
+
+    revenueTons:
+      machineBLclRevenueTons,
+
+    volumeM3:
+      machineBVolumeM3,
+
+    rate:
+      machineBLclFreightRate
+
+  });
+
+
+// ==================================================
+// ASSURANCE — EXPÉDITIONS INDIVIDUELLES
+// ==================================================
+//
+// Le même mécanisme de résolution est utilisé que
+// pour le lot consolidé.
+//
+// Une cotation valide est prioritaire sur une
+// référence de marché.
+// ==================================================
+
+const machineAInsuranceReference =
+  resolveP2IInsuranceRate({
+
+    coverageLevel:
+      'institute_cargo_clauses_a'
+
+  });
+
+
+const machineBInsuranceReference =
+  resolveP2IInsuranceRate({
+
+    coverageLevel:
+      'institute_cargo_clauses_a'
+
+  });
+
+
+// --------------------------------------------------
+// ASSURANCE + CIF — MACHINE A
+// --------------------------------------------------
+
+const machineALclCifEstimate =
+  calculateCifInsuranceEstimate({
+
+    fobValueUsd:
+      Number.isFinite(goodsValueA)
+        ? goodsValueA
+        : null,
+
+    freightUsd:
+      machineALclFreightEstimate
+        ?.estimated_freight_usd ?? null,
+
+    insurance:
+      machineAInsuranceReference
+
+  });
+
+
+// --------------------------------------------------
+// ASSURANCE + CIF — MACHINE B
+// --------------------------------------------------
+
+const machineBLclCifEstimate =
+  calculateCifInsuranceEstimate({
+
+    fobValueUsd:
+      Number.isFinite(goodsValueB)
+        ? goodsValueB
+        : null,
+
+    freightUsd:
+      machineBLclFreightEstimate
+        ?.estimated_freight_usd ?? null,
+
+    insurance:
+      machineBInsuranceReference
+
+  });
+
+
+// ==================================================
+// TOTAUX — LCL INDIVIDUEL
+// ==================================================
+
+const individualLclFreightUsd =
+
+  machineALclFreightEstimate?.status ===
+    'estimated' &&
+
+  machineBLclFreightEstimate?.status ===
+    'estimated'
+
+    ? Number(
+        (
+          machineALclFreightEstimate
+            .estimated_freight_usd +
+
+          machineBLclFreightEstimate
+            .estimated_freight_usd
+        ).toFixed(2)
+      )
+
+    : null;
+
+
+const individualLclInsuranceUsd =
+
+  machineALclCifEstimate?.status ===
+    'estimated' &&
+
+  machineBLclCifEstimate?.status ===
+    'estimated'
+
+    ? Number(
+        (
+          machineALclCifEstimate
+            .estimated_insurance_usd +
+
+          machineBLclCifEstimate
+            .estimated_insurance_usd
+        ).toFixed(2)
+      )
+
+    : null;
+
+
+const individualLclCifUsd =
+
+  machineALclCifEstimate?.status ===
+    'estimated' &&
+
+  machineBLclCifEstimate?.status ===
+    'estimated'
+
+    ? Number(
+        (
+          machineALclCifEstimate
+            .estimated_cif_abidjan_usd +
+
+          machineBLclCifEstimate
+            .estimated_cif_abidjan_usd
+        ).toFixed(2)
+      )
+
+    : null;
+
+
+// --------------------------------------------------
+// STATUT GLOBAL DU SCÉNARIO LCL INDIVIDUEL
+// --------------------------------------------------
+
+const individualLclCalculationAvailable =
+
+  Number.isFinite(
+    individualLclFreightUsd
+  ) &&
+
+  Number.isFinite(
+    individualLclInsuranceUsd
+  ) &&
+
+  Number.isFinite(
+    individualLclCifUsd
+  );
+
+
+const individualLclStatus =
+  individualLclCalculationAvailable
+    ? 'estimated'
+    : 'pending_rate';
 
 
 // --------------------------------------------------
