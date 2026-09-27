@@ -4667,8 +4667,22 @@ function getP2IFreightRoute({
   return null;
 
 }
-  // ==================================================
+
+// ==================================================
 // P2I — RÉSOLUTION D'UN TARIF LCL DE RÉFÉRENCE
+// ==================================================
+//
+// Types tarifaires pris en charge :
+//
+// - per_revenue_ton → USD / RT
+// - per_cbm         → USD / CBM
+//
+// Priorité :
+//
+// 1. reference_quote valide et vérifiée
+// 2. market_reference valide et vérifiée
+// 3. not_available
+//
 // ==================================================
 
 function resolveP2ILclFreightRate({
@@ -4685,6 +4699,7 @@ function resolveP2ILclFreightRate({
   const lcl =
     route?.lcl;
 
+
   if (!lcl) {
 
     return {
@@ -4693,7 +4708,7 @@ function resolveP2ILclFreightRate({
         'not_available',
 
       rate_type:
-        'per_revenue_ton',
+        null,
 
       shipping_mode:
         'lcl',
@@ -4707,7 +4722,16 @@ function resolveP2ILclFreightRate({
       currency:
         'USD',
 
+      rate_amount:
+        null,
+
+      rate_unit:
+        null,
+
       rate_per_rt_usd:
+        null,
+
+      rate_per_cbm_usd:
         null,
 
       minimum_charge_usd:
@@ -4752,75 +4776,36 @@ function resolveP2ILclFreightRate({
 
 
   // ----------------------------------------------
-  // CONTRÔLE DE VALIDITÉ D'UNE DATE
+  // TYPE DE TARIF LCL
   // ----------------------------------------------
 
-  const isStillValid = validUntil => {
+  const rateType =
+    lcl.rate_type ||
+    'per_revenue_ton';
 
-    if (!validUntil) {
-      return true;
-    }
 
-    const expiry =
-      new Date(validUntil);
-
-    const current =
-      referenceDate instanceof Date
-        ? referenceDate
-        : new Date(referenceDate);
-
-    if (
-      Number.isNaN(expiry.getTime()) ||
-      Number.isNaN(current.getTime())
-    ) {
-      return false;
-    }
-
-    return expiry.getTime() >= current.getTime();
-
-  };
+  const rateUnit =
+    rateType === 'per_cbm'
+      ? 'CBM'
+      : 'RT';
 
 
   // ----------------------------------------------
-  // 1. COTATION DE RÉFÉRENCE
+  // TYPE PRIS EN CHARGE ?
   // ----------------------------------------------
 
-  const referenceQuote =
-    lcl.reference_quote;
-
-
-  const referenceRate =
-    Number(
-      referenceQuote?.rate_per_rt_usd
-    );
-
-
-  const referenceQuoteUsable =
-
-    referenceQuote?.status === 'available' &&
-
-    referenceQuote?.verification_status ===
-      'verified' &&
-
-    Number.isFinite(referenceRate) &&
-
-    referenceRate > 0 &&
-
-    isStillValid(
-      referenceQuote?.valid_until
-    );
-
-
-  if (referenceQuoteUsable) {
+  if (
+    rateType !== 'per_revenue_ton' &&
+    rateType !== 'per_cbm'
+  ) {
 
     return {
 
       status:
-        'available',
+        'not_available',
 
       rate_type:
-        lcl.rate_type ||
-        'per_revenue_ton',
+        rateType,
 
       shipping_mode:
         'lcl',
@@ -4835,31 +4820,234 @@ function resolveP2ILclFreightRate({
         lcl.currency || 'USD',
 
       rate_amount:
-        referenceRate,
+        null,
 
       rate_unit:
-        lcl.rate_unit || 'RT',
+        lcl.rate_unit || null,
 
       rate_per_rt_usd:
-        referenceRate,
+        null,
+
+      rate_per_cbm_usd:
+        null,
 
       minimum_charge_usd:
-        referenceQuote.minimum_charge_usd ?? null,
+        null,
 
       fixed_charge_per_shipment_usd:
-        referenceQuote.fixed_charge_per_shipment_usd ?? null,
+        null,
 
       surcharges_usd:
-        referenceQuote.surcharges_usd ?? null,
+        null,
 
       origin_charges_usd:
-        referenceQuote.origin_charges_usd ?? null,
+        null,
 
       destination_charges_usd:
-        referenceQuote.destination_charges_usd ?? null,
+        null,
 
       other_charges_usd:
-        referenceQuote.other_charges_usd ?? null,
+        null,
+
+      source_type:
+        null,
+
+      source_name:
+        null,
+
+      source_date:
+        null,
+
+      valid_until:
+        null,
+
+      verification_status:
+        'not_verified',
+
+      selection_status:
+        'unsupported_rate_type'
+
+    };
+
+  }
+
+
+  // ----------------------------------------------
+  // CONTRÔLE DE VALIDITÉ D'UNE DATE
+  // ----------------------------------------------
+
+  const isStillValid = validUntil => {
+
+    if (!validUntil) {
+      return true;
+    }
+
+
+    const expiry =
+      new Date(validUntil);
+
+
+    const current =
+      referenceDate instanceof Date
+        ? referenceDate
+        : new Date(referenceDate);
+
+
+    if (
+      Number.isNaN(expiry.getTime()) ||
+      Number.isNaN(current.getTime())
+    ) {
+      return false;
+    }
+
+
+    return (
+      expiry.getTime() >=
+      current.getTime()
+    );
+
+  };
+
+
+  // ----------------------------------------------
+  // EXTRACTION D'UN MONTANT SELON L'UNITÉ
+  // ----------------------------------------------
+
+  const getReferenceAmount =
+    reference => {
+
+      if (rateType === 'per_cbm') {
+
+        return Number(
+          reference?.rate_per_cbm_usd
+        );
+
+      }
+
+
+      return Number(
+        reference?.rate_per_rt_usd
+      );
+
+    };
+
+
+  const getMarketMidpoint =
+    reference => {
+
+      if (rateType === 'per_cbm') {
+
+        return Number(
+          reference
+            ?.midpoint_rate_per_cbm_usd
+        );
+
+      }
+
+
+      return Number(
+        reference
+          ?.midpoint_rate_per_rt_usd
+      );
+
+    };
+
+
+  // ==================================================
+  // 1. COTATION DE RÉFÉRENCE
+  // ==================================================
+
+  const referenceQuote =
+    lcl.reference_quote;
+
+
+  const referenceAmount =
+    getReferenceAmount(
+      referenceQuote
+    );
+
+
+  const referenceQuoteUsable =
+
+    referenceQuote?.status ===
+      'available' &&
+
+    referenceQuote?.verification_status ===
+      'verified' &&
+
+    Number.isFinite(
+      referenceAmount
+    ) &&
+
+    referenceAmount > 0 &&
+
+    isStillValid(
+      referenceQuote?.valid_until
+    );
+
+
+  if (referenceQuoteUsable) {
+
+    return {
+
+      status:
+        'available',
+
+      rate_type:
+        rateType,
+
+      shipping_mode:
+        'lcl',
+
+      origin_port:
+        route.origin_port || null,
+
+      destination_port:
+        route.destination_port || 'Abidjan',
+
+      currency:
+        lcl.currency || 'USD',
+
+      rate_amount:
+        referenceAmount,
+
+      rate_unit:
+        lcl.rate_unit ||
+        rateUnit,
+
+      rate_per_rt_usd:
+        rateType === 'per_revenue_ton'
+          ? referenceAmount
+          : null,
+
+      rate_per_cbm_usd:
+        rateType === 'per_cbm'
+          ? referenceAmount
+          : null,
+
+      minimum_charge_usd:
+        referenceQuote
+          .minimum_charge_usd ?? null,
+
+      fixed_charge_per_shipment_usd:
+        referenceQuote
+          .fixed_charge_per_shipment_usd ?? null,
+
+      surcharges_usd:
+        referenceQuote
+          .surcharges_usd ?? null,
+
+      origin_charges_usd:
+        referenceQuote
+          .origin_charges_usd ?? null,
+
+      destination_charges_usd:
+        referenceQuote
+          .destination_charges_usd ?? null,
+
+      other_charges_usd:
+        referenceQuote
+          .other_charges_usd ?? null,
 
       source_type:
         referenceQuote.source_type ||
@@ -4875,7 +5063,8 @@ function resolveP2ILclFreightRate({
         referenceQuote.valid_until || null,
 
       verification_status:
-        referenceQuote.verification_status,
+        referenceQuote
+          .verification_status,
 
       selection_status:
         'reference_quote_selected'
@@ -4885,29 +5074,31 @@ function resolveP2ILclFreightRate({
   }
 
 
-  // ----------------------------------------------
+  // ==================================================
   // 2. RÉFÉRENCE DE MARCHÉ
-  // ----------------------------------------------
+  // ==================================================
 
   const marketReference =
     lcl.market_reference;
 
 
   const marketMidpoint =
-    Number(
+    getMarketMidpoint(
       marketReference
-        ?.midpoint_rate_per_rt_usd
     );
 
 
   const marketReferenceUsable =
 
-    marketReference?.status === 'available' &&
+    marketReference?.status ===
+      'available' &&
 
     marketReference?.verification_status ===
       'verified' &&
 
-    Number.isFinite(marketMidpoint) &&
+    Number.isFinite(
+      marketMidpoint
+    ) &&
 
     marketMidpoint > 0 &&
 
@@ -4924,8 +5115,7 @@ function resolveP2ILclFreightRate({
         'available',
 
       rate_type:
-        lcl.rate_type ||
-        'per_revenue_ton',
+        rateType,
 
       shipping_mode:
         'lcl',
@@ -4943,28 +5133,42 @@ function resolveP2ILclFreightRate({
         marketMidpoint,
 
       rate_unit:
-        lcl.rate_unit || 'RT',
+        lcl.rate_unit ||
+        rateUnit,
 
       rate_per_rt_usd:
-        marketMidpoint,
+        rateType === 'per_revenue_ton'
+          ? marketMidpoint
+          : null,
+
+      rate_per_cbm_usd:
+        rateType === 'per_cbm'
+          ? marketMidpoint
+          : null,
 
       minimum_charge_usd:
-        marketReference.minimum_charge_usd ?? null,
+        marketReference
+          .minimum_charge_usd ?? null,
 
       fixed_charge_per_shipment_usd:
-        marketReference.fixed_charge_per_shipment_usd ?? null,
+        marketReference
+          .fixed_charge_per_shipment_usd ?? null,
 
       surcharges_usd:
-        marketReference.surcharges_usd ?? null,
+        marketReference
+          .surcharges_usd ?? null,
 
       origin_charges_usd:
-        marketReference.origin_charges_usd ?? null,
+        marketReference
+          .origin_charges_usd ?? null,
 
       destination_charges_usd:
-        marketReference.destination_charges_usd ?? null,
+        marketReference
+          .destination_charges_usd ?? null,
 
       other_charges_usd:
-        marketReference.other_charges_usd ?? null,
+        marketReference
+          .other_charges_usd ?? null,
 
       source_type:
         marketReference.source_type ||
@@ -4980,13 +5184,40 @@ function resolveP2ILclFreightRate({
         marketReference.valid_until || null,
 
       verification_status:
-        marketReference.verification_status,
+        marketReference
+          .verification_status,
+
+      // ------------------------------------------
+      // FOURCHETTE DE MARCHÉ — RT
+      // ------------------------------------------
 
       market_min_rate_per_rt_usd:
-        marketReference.min_rate_per_rt_usd ?? null,
+        rateType === 'per_revenue_ton'
+          ? marketReference
+              .min_rate_per_rt_usd ?? null
+          : null,
 
       market_max_rate_per_rt_usd:
-        marketReference.max_rate_per_rt_usd ?? null,
+        rateType === 'per_revenue_ton'
+          ? marketReference
+              .max_rate_per_rt_usd ?? null
+          : null,
+
+      // ------------------------------------------
+      // FOURCHETTE DE MARCHÉ — CBM
+      // ------------------------------------------
+
+      market_min_rate_per_cbm_usd:
+        rateType === 'per_cbm'
+          ? marketReference
+              .min_rate_per_cbm_usd ?? null
+          : null,
+
+      market_max_rate_per_cbm_usd:
+        rateType === 'per_cbm'
+          ? marketReference
+              .max_rate_per_cbm_usd ?? null
+          : null,
 
       selection_status:
         'market_reference_selected'
@@ -4996,9 +5227,9 @@ function resolveP2ILclFreightRate({
   }
 
 
-  // ----------------------------------------------
+  // ==================================================
   // AUCUNE RÉFÉRENCE EXPLOITABLE
-  // ----------------------------------------------
+  // ==================================================
 
   return {
 
@@ -5006,8 +5237,7 @@ function resolveP2ILclFreightRate({
       'not_available',
 
     rate_type:
-      lcl.rate_type ||
-      'per_revenue_ton',
+      rateType,
 
     shipping_mode:
       'lcl',
@@ -5025,9 +5255,13 @@ function resolveP2ILclFreightRate({
       null,
 
     rate_unit:
-      lcl.rate_unit || 'RT',
+      lcl.rate_unit ||
+      rateUnit,
 
     rate_per_rt_usd:
+      null,
+
+    rate_per_cbm_usd:
       null,
 
     minimum_charge_usd:
