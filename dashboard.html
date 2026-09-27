@@ -5947,51 +5947,235 @@ function resolveP2IFclFreightRate({
 // CALCUL D'UNE ESTIMATION DE FRET LCL
 // ==================================================
 
+// ==================================================
+// P2I — CALCUL D'UNE ESTIMATION DE FRET LCL
+// ==================================================
+//
+// Deux bases tarifaires sont prises en charge :
+//
+// 1. per_revenue_ton
+//    → quantité facturable = Revenue Ton (RT)
+//
+// 2. per_cbm
+//    → quantité facturable = volume en m³ (CBM)
+//
+// Le moteur conserve la compatibilité avec les
+// références LCL historiques exprimées en RT.
+// ==================================================
+
 function calculateLclFreightEstimate({
+
   revenueTons,
+  volumeM3,
   rate
+
 }) {
 
   // ----------------------------------------------
-  // CONTRÔLES DE BASE
+  // IDENTIFICATION DU TYPE DE TARIF
+  // ----------------------------------------------
+
+  const rateType =
+    rate?.rate_type ||
+    'per_revenue_ton';
+
+
+  // ----------------------------------------------
+  // QUANTITÉS DISPONIBLES
   // ----------------------------------------------
 
   const rt =
     Number(revenueTons);
 
-  if (
-    !Number.isFinite(rt) ||
-    rt <= 0
-  ) {
-    return {
-      status: 'missing_chargeable_quantity',
-      estimated_freight_usd: null
-    };
+  const cbm =
+    Number(volumeM3);
+
+
+  // ----------------------------------------------
+  // DÉTERMINATION DE LA BASE FACTURABLE
+  // ----------------------------------------------
+
+  let chargeableQuantity = null;
+  let rateAmount = null;
+  let rateUnit = null;
+
+
+  // ==============================================
+  // CAS 1 — TARIF PAR REVENUE TON
+  // ==============================================
+
+  if (rateType === 'per_revenue_ton') {
+
+    if (
+      !Number.isFinite(rt) ||
+      rt <= 0
+    ) {
+
+      return {
+
+        status:
+          'missing_chargeable_quantity',
+
+        rate_type:
+          rateType,
+
+        estimated_freight_usd:
+          null
+
+      };
+
+    }
+
+
+    const ratePerRt =
+      Number(
+        rate?.rate_per_rt_usd
+      );
+
+
+    if (
+      !Number.isFinite(ratePerRt) ||
+      ratePerRt <= 0
+    ) {
+
+      return {
+
+        status:
+          'invalid_rate',
+
+        rate_type:
+          rateType,
+
+        estimated_freight_usd:
+          null
+
+      };
+
+    }
+
+
+    chargeableQuantity =
+      rt;
+
+    rateAmount =
+      ratePerRt;
+
+    rateUnit =
+      'RT';
+
   }
 
+
+  // ==============================================
+  // CAS 2 — TARIF PAR CBM
+  // ==============================================
+
+  else if (rateType === 'per_cbm') {
+
+    if (
+      !Number.isFinite(cbm) ||
+      cbm <= 0
+    ) {
+
+      return {
+
+        status:
+          'missing_chargeable_quantity',
+
+        rate_type:
+          rateType,
+
+        estimated_freight_usd:
+          null
+
+      };
+
+    }
+
+
+    const ratePerCbm =
+      Number(
+        rate?.rate_per_cbm_usd
+      );
+
+
+    if (
+      !Number.isFinite(ratePerCbm) ||
+      ratePerCbm <= 0
+    ) {
+
+      return {
+
+        status:
+          'invalid_rate',
+
+        rate_type:
+          rateType,
+
+        estimated_freight_usd:
+          null
+
+      };
+
+    }
+
+
+    chargeableQuantity =
+      cbm;
+
+    rateAmount =
+      ratePerCbm;
+
+    rateUnit =
+      'CBM';
+
+  }
+
+
+  // ==============================================
+  // TYPE DE TARIF NON PRIS EN CHARGE
+  // ==============================================
+
+  else {
+
+    return {
+
+      status:
+        'unsupported_rate_type',
+
+      rate_type:
+        rateType,
+
+      estimated_freight_usd:
+        null
+
+    };
+
+  }
+
+
+  // ----------------------------------------------
+  // TARIF DISPONIBLE ?
+  // ----------------------------------------------
 
   if (
     !rate ||
     rate.status !== 'available'
   ) {
+
     return {
-      status: 'rate_not_available',
-      estimated_freight_usd: null
+
+      status:
+        'rate_not_available',
+
+      rate_type:
+        rateType,
+
+      estimated_freight_usd:
+        null
+
     };
-  }
 
-
-  const ratePerRt =
-    Number(rate.rate_per_rt_usd);
-
-  if (
-    !Number.isFinite(ratePerRt) ||
-    ratePerRt <= 0
-  ) {
-    return {
-      status: 'invalid_rate',
-      estimated_freight_usd: null
-    };
   }
 
 
@@ -6000,7 +6184,8 @@ function calculateLclFreightEstimate({
   // ----------------------------------------------
 
   const variableFreightUsd =
-    rt * ratePerRt;
+    chargeableQuantity *
+    rateAmount;
 
 
   // ----------------------------------------------
@@ -6008,7 +6193,10 @@ function calculateLclFreightEstimate({
   // ----------------------------------------------
 
   const minimumChargeUsd =
-    Number(rate.minimum_charge_usd) || 0;
+    Number(
+      rate.minimum_charge_usd
+    ) || 0;
+
 
   const freightAfterMinimumUsd =
     Math.max(
@@ -6026,73 +6214,124 @@ function calculateLclFreightEstimate({
       rate.fixed_charge_per_shipment_usd
     ) || 0;
 
+
   const surchargesUsd =
-    Number(rate.surcharges_usd) || 0;
-
-const originChargesUsd =
-  Number(rate.origin_charges_usd) || 0;
-
-const destinationChargesUsd =
-  Number(rate.destination_charges_usd) || 0;
-
-const otherChargesUsd =
-  Number(rate.other_charges_usd) || 0;
-
-
-// ----------------------------------------------
-// TOTAL ESTIMATIF DU FRET
-// ----------------------------------------------
-
-const estimatedFreightUsd =
-  freightAfterMinimumUsd +
-  fixedChargeUsd +
-  surchargesUsd +
-  originChargesUsd +
-  destinationChargesUsd +
-  otherChargesUsd;
-
-
-return {
-
-  status:
-    'estimated',
-
-  revenue_tons:
-    rt,
-
-  rate_per_rt_usd:
-    ratePerRt,
-
-  variable_freight_usd:
-    variableFreightUsd,
-
-  minimum_charge_usd:
-    minimumChargeUsd,
-
-  minimum_applied:
-    minimumChargeUsd > variableFreightUsd,
-
-  fixed_charge_usd:
-    fixedChargeUsd,
-
-  surcharges_usd:
-    surchargesUsd,
-
-  origin_charges_usd:
-    originChargesUsd,
-
-  destination_charges_usd:
-    destinationChargesUsd,
-
-  other_charges_usd:
-    otherChargesUsd,
-
-  estimated_freight_usd:
     Number(
-      estimatedFreightUsd.toFixed(2)
-    )
+      rate.surcharges_usd
+    ) || 0;
 
-};
+
+  const originChargesUsd =
+    Number(
+      rate.origin_charges_usd
+    ) || 0;
+
+
+  const destinationChargesUsd =
+    Number(
+      rate.destination_charges_usd
+    ) || 0;
+
+
+  const otherChargesUsd =
+    Number(
+      rate.other_charges_usd
+    ) || 0;
+
+
+  // ----------------------------------------------
+  // TOTAL ESTIMATIF DU FRET
+  // ----------------------------------------------
+
+  const estimatedFreightUsd =
+
+    freightAfterMinimumUsd +
+
+    fixedChargeUsd +
+
+    surchargesUsd +
+
+    originChargesUsd +
+
+    destinationChargesUsd +
+
+    otherChargesUsd;
+
+
+  // ----------------------------------------------
+  // RÉSULTAT
+  // ----------------------------------------------
+
+  return {
+
+    status:
+      'estimated',
+
+    rate_type:
+      rateType,
+
+    rate_unit:
+      rateUnit,
+
+    chargeable_quantity:
+      chargeableQuantity,
+
+    revenue_tons:
+      Number.isFinite(rt)
+        ? rt
+        : null,
+
+    volume_m3:
+      Number.isFinite(cbm)
+        ? cbm
+        : null,
+
+    rate_amount:
+      rateAmount,
+
+    rate_per_rt_usd:
+      rateType === 'per_revenue_ton'
+        ? rateAmount
+        : null,
+
+    rate_per_cbm_usd:
+      rateType === 'per_cbm'
+        ? rateAmount
+        : null,
+
+    variable_freight_usd:
+      Number(
+        variableFreightUsd.toFixed(2)
+      ),
+
+    minimum_charge_usd:
+      minimumChargeUsd,
+
+    minimum_applied:
+      minimumChargeUsd >
+      variableFreightUsd,
+
+    fixed_charge_usd:
+      fixedChargeUsd,
+
+    surcharges_usd:
+      surchargesUsd,
+
+    origin_charges_usd:
+      originChargesUsd,
+
+    destination_charges_usd:
+      destinationChargesUsd,
+
+    other_charges_usd:
+      otherChargesUsd,
+
+    estimated_freight_usd:
+      Number(
+        estimatedFreightUsd.toFixed(2)
+      )
+
+  };
 
 }
   // ==================================================
