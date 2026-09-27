@@ -7747,48 +7747,33 @@ const consolidatedLclFreightEstimate =
 
   });
 
+
 // --------------------------------------------------
 // ASSURANCE DE RÉFÉRENCE — LOT LCL CONSOLIDÉ
 // --------------------------------------------------
+//
+// La référence d'assurance n'est plus définie
+// manuellement dans le scénario.
+//
+// Elle est résolue automatiquement depuis le
+// référentiel P2I_INSURANCE_RATES.
+//
+// Priorité :
+//
+// 1. Cotation de référence valide et vérifiée
+// 2. Référence de marché valide et vérifiée
+// 3. Aucune référence exploitable
+//
+// Aucun taux d'assurance n'est inventé.
+// --------------------------------------------------
 
-const consolidatedInsuranceReference = {
+const consolidatedInsuranceReference =
+  resolveP2IInsuranceRate({
 
-  status:
-    'not_available',
+    coverageLevel:
+      'institute_cargo_clauses_a'
 
-  coverage_basis:
-    'cif_contract_value',
-
-  coverage_percent:
-    110,
-
-  premium_rate_percent:
-    null,
-
-  minimum_premium_usd:
-    null,
-
-  coverage_level:
-    'institute_cargo_clauses_c',
-
-  source_type:
-    null,
-
-  source_name:
-    null,
-
-  source_date:
-    null,
-
-  valid_until:
-    null,
-
-  verification_status:
-    'not_verified'
-
-};
-
-
+  });
 // --------------------------------------------------
 // CALCUL ASSURANCE + CIF — LOT LCL CONSOLIDÉ
 // --------------------------------------------------
