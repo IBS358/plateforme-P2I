@@ -5508,6 +5508,478 @@ function analyzeFclContainerFit({
 
 }
   // ==================================================
+// P2I — RÉSOLUTION D'UN TARIF FCL DE RÉFÉRENCE
+// ==================================================
+
+function resolveP2IFclFreightRate({
+
+  route,
+  containerType,
+  referenceDate = new Date()
+
+} = {}) {
+
+  // ----------------------------------------------
+  // TYPES DE CONTENEURS AUTORISÉS
+  // ----------------------------------------------
+
+  const allowedContainerTypes = [
+    '20ft_dry',
+    '40ft_dry',
+    '40ft_high_cube'
+  ];
+
+
+  // ----------------------------------------------
+  // TYPE DE CONTENEUR VALIDE ?
+  // ----------------------------------------------
+
+  if (
+    !containerType ||
+    !allowedContainerTypes.includes(containerType)
+  ) {
+
+    return {
+
+      status:
+        'not_available',
+
+      shipping_mode:
+        'fcl',
+
+      container_type:
+        containerType || null,
+
+      origin_port:
+        route?.origin_port || null,
+
+      destination_port:
+        route?.destination_port || 'Abidjan',
+
+      currency:
+        'USD',
+
+      rate_type:
+        'per_container',
+
+      rate_unit:
+        'container',
+
+      rate_amount:
+        null,
+
+      surcharges_usd:
+        null,
+
+      origin_charges_usd:
+        null,
+
+      destination_charges_usd:
+        null,
+
+      other_charges_usd:
+        null,
+
+      source_type:
+        null,
+
+      source_name:
+        null,
+
+      source_date:
+        null,
+
+      valid_until:
+        null,
+
+      verification_status:
+        'not_verified',
+
+      selection_status:
+        'invalid_container_type'
+
+    };
+
+  }
+
+
+  // ----------------------------------------------
+  // RÉFÉRENCE FCL DISPONIBLE ?
+  // ----------------------------------------------
+
+  const fclReference =
+    route?.fcl?.[containerType];
+
+
+  if (!fclReference) {
+
+    return {
+
+      status:
+        'not_available',
+
+      shipping_mode:
+        'fcl',
+
+      container_type:
+        containerType,
+
+      origin_port:
+        route?.origin_port || null,
+
+      destination_port:
+        route?.destination_port || 'Abidjan',
+
+      currency:
+        'USD',
+
+      rate_type:
+        'per_container',
+
+      rate_unit:
+        'container',
+
+      rate_amount:
+        null,
+
+      surcharges_usd:
+        null,
+
+      origin_charges_usd:
+        null,
+
+      destination_charges_usd:
+        null,
+
+      other_charges_usd:
+        null,
+
+      source_type:
+        null,
+
+      source_name:
+        null,
+
+      source_date:
+        null,
+
+      valid_until:
+        null,
+
+      verification_status:
+        'not_verified',
+
+      selection_status:
+        'fcl_reference_not_available'
+
+    };
+
+  }
+
+
+  // ----------------------------------------------
+  // CONTRÔLE DE VALIDITÉ D'UNE DATE
+  // ----------------------------------------------
+
+  const isStillValid = validUntil => {
+
+    if (!validUntil) {
+      return true;
+    }
+
+    const expiry =
+      new Date(validUntil);
+
+    const current =
+      referenceDate instanceof Date
+        ? referenceDate
+        : new Date(referenceDate);
+
+    if (
+      Number.isNaN(expiry.getTime()) ||
+      Number.isNaN(current.getTime())
+    ) {
+      return false;
+    }
+
+    return expiry.getTime() >= current.getTime();
+
+  };
+
+
+  // ==================================================
+  // 1. COTATION DE RÉFÉRENCE
+  // ==================================================
+
+  const referenceQuote =
+    fclReference.reference_quote;
+
+
+  const referenceAmount =
+    Number(
+      referenceQuote?.rate_amount
+    );
+
+
+  const referenceQuoteUsable =
+
+    referenceQuote?.status === 'available' &&
+
+    referenceQuote?.verification_status ===
+      'verified' &&
+
+    Number.isFinite(referenceAmount) &&
+
+    referenceAmount > 0 &&
+
+    isStillValid(
+      referenceQuote?.valid_until
+    );
+
+
+  if (referenceQuoteUsable) {
+
+    return {
+
+      status:
+        'available',
+
+      shipping_mode:
+        'fcl',
+
+      container_type:
+        containerType,
+
+      origin_port:
+        route.origin_port || null,
+
+      destination_port:
+        route.destination_port || 'Abidjan',
+
+      currency:
+        fclReference.currency || 'USD',
+
+      rate_type:
+        fclReference.rate_type ||
+        'per_container',
+
+      rate_unit:
+        fclReference.rate_unit ||
+        'container',
+
+      rate_amount:
+        referenceAmount,
+
+      surcharges_usd:
+        referenceQuote.surcharges_usd ?? null,
+
+      origin_charges_usd:
+        referenceQuote.origin_charges_usd ?? null,
+
+      destination_charges_usd:
+        referenceQuote.destination_charges_usd ?? null,
+
+      other_charges_usd:
+        referenceQuote.other_charges_usd ?? null,
+
+      source_type:
+        referenceQuote.source_type ||
+        'reference_quote',
+
+      source_name:
+        referenceQuote.source_name || null,
+
+      source_date:
+        referenceQuote.source_date || null,
+
+      valid_until:
+        referenceQuote.valid_until || null,
+
+      verification_status:
+        referenceQuote.verification_status,
+
+      selection_status:
+        'reference_quote_selected'
+
+    };
+
+  }
+
+
+  // ==================================================
+  // 2. RÉFÉRENCE DE MARCHÉ
+  // ==================================================
+
+  const marketReference =
+    fclReference.market_reference;
+
+
+  const marketMidpoint =
+    Number(
+      marketReference?.midpoint_rate_usd
+    );
+
+
+  const marketReferenceUsable =
+
+    marketReference?.status === 'available' &&
+
+    marketReference?.verification_status ===
+      'verified' &&
+
+    Number.isFinite(marketMidpoint) &&
+
+    marketMidpoint > 0 &&
+
+    isStillValid(
+      marketReference?.valid_until
+    );
+
+
+  if (marketReferenceUsable) {
+
+    return {
+
+      status:
+        'available',
+
+      shipping_mode:
+        'fcl',
+
+      container_type:
+        containerType,
+
+      origin_port:
+        route.origin_port || null,
+
+      destination_port:
+        route.destination_port || 'Abidjan',
+
+      currency:
+        fclReference.currency || 'USD',
+
+      rate_type:
+        fclReference.rate_type ||
+        'per_container',
+
+      rate_unit:
+        fclReference.rate_unit ||
+        'container',
+
+      rate_amount:
+        marketMidpoint,
+
+      surcharges_usd:
+        marketReference.surcharges_usd ?? null,
+
+      origin_charges_usd:
+        marketReference.origin_charges_usd ?? null,
+
+      destination_charges_usd:
+        marketReference.destination_charges_usd ?? null,
+
+      other_charges_usd:
+        marketReference.other_charges_usd ?? null,
+
+      source_type:
+        marketReference.source_type ||
+        'market_reference',
+
+      source_name:
+        marketReference.source_name || null,
+
+      source_date:
+        marketReference.source_date || null,
+
+      valid_until:
+        marketReference.valid_until || null,
+
+      verification_status:
+        marketReference.verification_status,
+
+      market_min_rate_usd:
+        marketReference.min_rate_usd ?? null,
+
+      market_max_rate_usd:
+        marketReference.max_rate_usd ?? null,
+
+      selection_status:
+        'market_reference_selected'
+
+    };
+
+  }
+
+
+  // ==================================================
+  // AUCUNE RÉFÉRENCE EXPLOITABLE
+  // ==================================================
+
+  return {
+
+    status:
+      'not_available',
+
+    shipping_mode:
+      'fcl',
+
+    container_type:
+      containerType,
+
+    origin_port:
+      route.origin_port || null,
+
+    destination_port:
+      route.destination_port || 'Abidjan',
+
+    currency:
+      fclReference.currency || 'USD',
+
+    rate_type:
+      fclReference.rate_type ||
+      'per_container',
+
+    rate_unit:
+      fclReference.rate_unit ||
+      'container',
+
+    rate_amount:
+      null,
+
+    surcharges_usd:
+      null,
+
+    origin_charges_usd:
+      null,
+
+    destination_charges_usd:
+      null,
+
+    other_charges_usd:
+      null,
+
+    source_type:
+      null,
+
+    source_name:
+      null,
+
+    source_date:
+      null,
+
+    valid_until:
+      null,
+
+    verification_status:
+      'not_verified',
+
+    selection_status:
+      'no_usable_reference'
+
+  };
+
+}
+  // ==================================================
 // CALCUL D'UNE ESTIMATION DE FRET FCL
 // ==================================================
 
