@@ -8789,6 +8789,7 @@ freight_comparison: {
   status:
     'comparison_pending',
 
+
   // ----------------------------------------
   // LCL — EXPÉDITIONS INDIVIDUELLES
   // ----------------------------------------
@@ -8796,10 +8797,10 @@ freight_comparison: {
   lcl_individual: {
 
     status:
-      'pending_rate',
+      individualLclStatus,
 
     calculation_available:
-      false,
+      individualLclCalculationAvailable,
 
     shipment_count:
       2,
@@ -8808,10 +8809,16 @@ freight_comparison: {
       individualLclRevenueTons,
 
     estimated_freight_usd:
-      null,
+      individualLclFreightUsd,
+
+    estimated_insurance_usd:
+      individualLclInsuranceUsd,
+
+    estimated_cif_abidjan_usd:
+      individualLclCifUsd,
 
     estimated_total_usd:
-      null
+      individualLclCifUsd
 
   },
 
@@ -8843,9 +8850,140 @@ freight_comparison: {
 
     estimated_cif_abidjan_usd:
       consolidatedCifInsuranceEstimate
+        ?.estimated_cif_abidjan_usd ?? null,
+
+    estimated_total_usd:
+      consolidatedCifInsuranceEstimate
         ?.estimated_cif_abidjan_usd ?? null
 
   },
+
+
+  // ----------------------------------------
+  // COMPARAISON LCL
+  // ----------------------------------------
+  //
+  // Cette comparaison est indépendante de la
+  // décision logistique globale.
+  //
+  // Elle permet de comparer :
+  //
+  // - deux expéditions LCL individuelles
+  // - une expédition LCL consolidée
+  //
+  // Le FCL reste à analyser séparément.
+  // ----------------------------------------
+
+  lcl_comparison: (() => {
+
+    const individualCif =
+      individualLclCifUsd;
+
+    const consolidatedCif =
+      consolidatedCifInsuranceEstimate
+        ?.estimated_cif_abidjan_usd ?? null;
+
+
+    const comparisonAvailable =
+
+      Number.isFinite(individualCif) &&
+      Number.isFinite(consolidatedCif);
+
+
+    if (!comparisonAvailable) {
+
+      return {
+
+        status:
+          'not_available',
+
+        individual_cif_usd:
+          individualCif,
+
+        consolidated_cif_usd:
+          consolidatedCif,
+
+        difference_usd:
+          null,
+
+        savings_percent:
+          null,
+
+        economic_result:
+          null
+
+      };
+
+    }
+
+
+    const differenceUsd =
+      Number(
+        (
+          individualCif -
+          consolidatedCif
+        ).toFixed(2)
+      );
+
+
+    const savingsPercent =
+
+      individualCif > 0
+
+        ? Number(
+            (
+              (
+                differenceUsd /
+                individualCif
+              ) * 100
+            ).toFixed(2)
+          )
+
+        : 0;
+
+
+    let economicResult =
+      'equivalent';
+
+
+    if (differenceUsd > 0) {
+
+      economicResult =
+        'consolidated_lower_cost';
+
+    }
+
+    else if (differenceUsd < 0) {
+
+      economicResult =
+        'individual_lower_cost';
+
+    }
+
+
+    return {
+
+      status:
+        'calculated',
+
+      individual_cif_usd:
+        individualCif,
+
+      consolidated_cif_usd:
+        consolidatedCif,
+
+      difference_usd:
+        differenceUsd,
+
+      savings_percent:
+        savingsPercent,
+
+      economic_result:
+        economicResult
+
+    };
+
+  })(),
 
 
   // ----------------------------------------
@@ -8886,7 +9024,12 @@ freight_comparison: {
 
 
   // ----------------------------------------
-  // RÉSULTAT DE LA COMPARAISON
+  // RÉSULTAT GLOBAL DE LA COMPARAISON
+  // ----------------------------------------
+  //
+  // Aucune préférence globale n'est encore
+  // déterminée tant que le scénario FCL
+  // n'est pas suffisamment documenté.
   // ----------------------------------------
 
   economic_preference:
@@ -8899,7 +9042,7 @@ freight_comparison: {
     null,
 
   reason:
-    'reference_rates_required'
+    'fcl_evaluation_required'
 
 },
 
