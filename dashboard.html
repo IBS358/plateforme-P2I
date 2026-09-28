@@ -9787,7 +9787,7 @@ console.log(
 ${p2iCifDisplay.available ? `
 
   <!-- ========================================
-       ESTIMATION LOGISTIQUE P2I — CIF ABIDJAN
+       SYNTHÈSE LOGISTIQUE P2I — LOT
        ======================================== -->
 
   <div style="
@@ -9798,7 +9798,9 @@ ${p2iCifDisplay.available ? `
     border:1px solid rgba(56,189,248,.20);
   ">
 
-    <!-- EN-TÊTE -->
+    <!-- ======================================
+         EN-TÊTE DU LOT
+         ====================================== -->
 
     <div style="
       display:flex;
@@ -9806,7 +9808,7 @@ ${p2iCifDisplay.available ? `
       align-items:flex-start;
       gap:12px;
       flex-wrap:wrap;
-      margin-bottom:12px;
+      margin-bottom:14px;
     ">
 
       <div>
@@ -9814,12 +9816,29 @@ ${p2iCifDisplay.available ? `
         <div style="
           color:#7dd3fc;
           font-size:11px;
-          font-weight:700;
+          font-weight:800;
           text-transform:uppercase;
           letter-spacing:.04em;
         ">
           <i class="fas fa-ship"></i>
-          Estimation logistique P2I
+          Lot logistique 1
+        </div>
+
+        <div style="
+          color:#e2e8f0;
+          font-size:13px;
+          font-weight:700;
+          margin-top:4px;
+        ">
+          ${escapeHtml(
+            p2iCifDisplay.origin_port ||
+            'Port de départ'
+          )}
+          →
+          ${escapeHtml(
+            p2iCifDisplay.destination_port ||
+            'Abidjan'
+          )}
         </div>
 
         <div style="
@@ -9827,26 +9846,25 @@ ${p2iCifDisplay.available ? `
           font-size:10px;
           margin-top:3px;
         ">
-          ${escapeHtml(p2iCifDisplay.origin_port || 'Port de départ')}
-          →
-          ${escapeHtml(p2iCifDisplay.destination_port || 'Abidjan')}
-          ·
           ${(p2iCifDisplay.shipping_mode || '').toUpperCase()}
+          ·
+          ${p2iCifDisplay.machine_count}
+          machine${p2iCifDisplay.machine_count > 1 ? 's' : ''}
+          ·
+          Expédition consolidée
         </div>
 
       </div>
 
 
-      <div style="
-        text-align:right;
-      ">
+      <div style="text-align:right;">
 
         <div style="
           color:#94a3b8;
           font-size:9px;
           text-transform:uppercase;
         ">
-          CIF Port d'Abidjan
+          CIF estimatif — Port d'Abidjan
         </div>
 
         <div style="
@@ -9860,8 +9878,8 @@ ${p2iCifDisplay.available ? `
           ).toLocaleString(
             'fr-FR',
             {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
+              minimumFractionDigits:2,
+              maximumFractionDigits:2
             }
           )} USD
         </div>
@@ -9871,114 +9889,486 @@ ${p2iCifDisplay.available ? `
     </div>
 
 
-    <!-- DÉCOMPOSITION DU CIF -->
+    <!-- ======================================
+         MACHINES COMPOSANT LE LOT
+         ====================================== -->
+
+    <div style="
+      margin-bottom:14px;
+    ">
+
+      <div style="
+        color:#94a3b8;
+        font-size:9px;
+        font-weight:700;
+        text-transform:uppercase;
+        margin-bottom:7px;
+      ">
+        Machines incluses dans ce lot
+      </div>
+
+
+      ${p2iCifDisplay.machines.map(
+        (machine, index) => `
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:12px;
+          padding:8px 10px;
+          margin-bottom:5px;
+          border-radius:7px;
+          background:rgba(255,255,255,.025);
+        ">
+
+          <div>
+
+            <div style="
+              color:#e2e8f0;
+              font-size:11px;
+              font-weight:700;
+            ">
+              ${index + 1}.
+              ${escapeHtml(
+                machine.machine ||
+                'Machine'
+              )}
+            </div>
+
+            ${
+              machine.ready_date
+                ? `
+                  <div style="
+                    color:#64748b;
+                    font-size:9px;
+                    margin-top:2px;
+                  ">
+                    Disponibilité déclarée :
+                    ${new Date(
+                      machine.ready_date
+                    ).toLocaleDateString('fr-FR')}
+                  </div>
+                `
+                : ''
+            }
+
+          </div>
+
+
+          <div style="
+            color:#94a3b8;
+            font-size:10px;
+            text-align:right;
+            white-space:nowrap;
+          ">
+
+            ${
+              machine.weight_kg != null
+                ? `${Number(
+                    machine.weight_kg
+                  ).toLocaleString('fr-FR')} kg`
+                : 'Poids à confirmer'
+            }
+
+            <br>
+
+            ${
+              machine.volume_m3 != null
+                ? `${Number(
+                    machine.volume_m3
+                  ).toLocaleString('fr-FR')} m³`
+                : 'Volume à confirmer'
+            }
+
+          </div>
+
+        </div>
+
+      `).join('')}
+
+    </div>
+
+
+    <!-- ======================================
+         DONNÉES PHYSIQUES DU LOT
+         ====================================== -->
 
     <div style="
       display:grid;
       grid-template-columns:
-        repeat(auto-fit,minmax(145px,1fr));
-      gap:8px;
+        repeat(auto-fit,minmax(135px,1fr));
+      gap:7px;
+      margin-bottom:14px;
     ">
 
-
-      <!-- VALEUR DES ÉQUIPEMENTS -->
-
       <div style="
-        padding:10px;
-        border-radius:8px;
+        padding:9px;
+        border-radius:7px;
         background:rgba(255,255,255,.025);
       ">
-
         <div style="
           color:#94a3b8;
           font-size:9px;
         ">
-          Valeur équipements
+          Poids total
         </div>
 
         <div style="
           color:#e2e8f0;
-          font-size:13px;
+          font-size:12px;
           font-weight:700;
           margin-top:3px;
         ">
+          ${Number(
+            p2iCifDisplay.total_weight_kg
+          ).toLocaleString('fr-FR')} kg
+        </div>
+      </div>
+
+
+      <div style="
+        padding:9px;
+        border-radius:7px;
+        background:rgba(255,255,255,.025);
+      ">
+        <div style="
+          color:#94a3b8;
+          font-size:9px;
+        ">
+          Volume total
+        </div>
+
+        <div style="
+          color:#e2e8f0;
+          font-size:12px;
+          font-weight:700;
+          margin-top:3px;
+        ">
+          ${Number(
+            p2iCifDisplay.total_volume_m3
+          ).toLocaleString('fr-FR')} m³
+        </div>
+      </div>
+
+
+      <div style="
+        padding:9px;
+        border-radius:7px;
+        background:rgba(255,255,255,.025);
+      ">
+        <div style="
+          color:#94a3b8;
+          font-size:9px;
+        ">
+          Base facturable LCL
+        </div>
+
+        <div style="
+          color:#e2e8f0;
+          font-size:12px;
+          font-weight:700;
+          margin-top:3px;
+        ">
+          ${Number(
+            p2iCifDisplay.revenue_tons
+          ).toLocaleString('fr-FR')} CBM
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ======================================
+         VALEUR DES MARCHANDISES
+         ====================================== -->
+
+    <div style="
+      padding:11px;
+      border-radius:8px;
+      background:rgba(15,23,42,.35);
+      margin-bottom:10px;
+    ">
+
+      <div style="
+        color:#94a3b8;
+        font-size:9px;
+        font-weight:700;
+        text-transform:uppercase;
+        margin-bottom:8px;
+      ">
+        Valeur des marchandises du lot
+      </div>
+
+
+      ${
+        p2iCifDisplay.machine_value_usd != null
+          ? `
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              gap:12px;
+              color:#cbd5e1;
+              font-size:10px;
+              margin-bottom:5px;
+            ">
+              <span>Valeur des machines</span>
+
+              <strong>
+                ${Number(
+                  p2iCifDisplay.machine_value_usd
+                ).toLocaleString(
+                  'fr-FR',
+                  {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                  }
+                )} USD
+              </strong>
+            </div>
+          `
+          : ''
+      }
+
+
+      ${
+        p2iCifDisplay.spare_parts_value_usd != null &&
+        Number(p2iCifDisplay.spare_parts_value_usd) > 0
+          ? `
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              gap:12px;
+              color:#cbd5e1;
+              font-size:10px;
+              margin-bottom:5px;
+            ">
+              <span>
+                Pièces critiques supplémentaires
+              </span>
+
+              <strong>
+                ${Number(
+                  p2iCifDisplay.spare_parts_value_usd
+                ).toLocaleString(
+                  'fr-FR',
+                  {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                  }
+                )} USD
+              </strong>
+            </div>
+          `
+          : ''
+      }
+
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:12px;
+        padding-top:7px;
+        margin-top:7px;
+        border-top:1px solid rgba(148,163,184,.14);
+        color:#f8fafc;
+        font-size:11px;
+      ">
+
+        <strong>
+          Valeur totale du lot
+        </strong>
+
+        <strong>
           ${Number(
             p2iCifDisplay.goods_value_usd
           ).toLocaleString(
             'fr-FR',
             {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
+              minimumFractionDigits:2,
+              maximumFractionDigits:2
             }
           )} USD
-        </div>
+        </strong>
 
       </div>
 
+    </div>
 
-      <!-- FRET MARITIME -->
+
+    <!-- ======================================
+         FRET + ASSURANCE + CIF
+         ====================================== -->
+
+    <div style="
+      padding:11px;
+      border-radius:8px;
+      background:rgba(15,23,42,.35);
+    ">
 
       <div style="
-        padding:10px;
-        border-radius:8px;
-        background:rgba(255,255,255,.025);
+        color:#94a3b8;
+        font-size:9px;
+        font-weight:700;
+        text-transform:uppercase;
+        margin-bottom:8px;
       ">
+        Fret maritime et assurance
+      </div>
 
-        <div style="
-          color:#94a3b8;
-          font-size:9px;
-        ">
-          Fret maritime estimé
-        </div>
 
-        <div style="
-          color:#e2e8f0;
-          font-size:13px;
-          font-weight:700;
-          margin-top:3px;
-        ">
+      ${
+        p2iCifDisplay.freight_rate?.rate_amount != null
+          ? `
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              gap:12px;
+              color:#cbd5e1;
+              font-size:10px;
+              margin-bottom:5px;
+            ">
+              <span>
+                Tarif de fret retenu
+              </span>
+
+              <strong>
+                ${Number(
+                  p2iCifDisplay.freight_rate.rate_amount
+                ).toLocaleString(
+                  'fr-FR',
+                  {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                  }
+                )}
+                USD /
+                ${escapeHtml(
+                  p2iCifDisplay.freight_rate.rate_unit ||
+                  'unité'
+                )}
+              </strong>
+            </div>
+          `
+          : ''
+      }
+
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:12px;
+        color:#cbd5e1;
+        font-size:10px;
+        margin-bottom:5px;
+      ">
+        <span>Fret maritime estimé du lot</span>
+
+        <strong>
           ${Number(
             p2iCifDisplay.freight_usd
           ).toLocaleString(
             'fr-FR',
             {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
+              minimumFractionDigits:2,
+              maximumFractionDigits:2
             }
           )} USD
-        </div>
-
+        </strong>
       </div>
 
 
-      <!-- ASSURANCE -->
-
       <div style="
-        padding:10px;
-        border-radius:8px;
-        background:rgba(255,255,255,.025);
+        display:flex;
+        justify-content:space-between;
+        gap:12px;
+        color:#cbd5e1;
+        font-size:10px;
+        margin-bottom:5px;
       ">
+        <span>Assurance transport estimée</span>
 
-        <div style="
-          color:#94a3b8;
-          font-size:9px;
-        ">
-          Assurance transport estimée
-        </div>
-
-        <div style="
-          color:#e2e8f0;
-          font-size:13px;
-          font-weight:700;
-          margin-top:3px;
-        ">
+        <strong>
           ${Number(
             p2iCifDisplay.insurance_usd
           ).toLocaleString(
             'fr-FR',
             {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
+              minimumFractionDigits:2,
+              maximumFractionDigits:2
+            }
+          )} USD
+        </strong>
+      </div>
+
+
+      ${
+        p2iCifDisplay.insurance_estimate
+          ?.premium_rate_percent != null
+          ? `
+            <div style="
+              color:#64748b;
+              font-size:9px;
+              margin-top:2px;
+              margin-bottom:7px;
+            ">
+              Taux d'assurance utilisé :
+              ${Number(
+                p2iCifDisplay
+                  .insurance_estimate
+                  .premium_rate_percent
+              ).toLocaleString('fr-FR')} %
+              — estimation à confirmer par cotation.
+            </div>
+          `
+          : ''
+      }
+
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:12px;
+        padding-top:9px;
+        margin-top:8px;
+        border-top:1px solid rgba(56,189,248,.25);
+      ">
+
+        <div>
+
+          <div style="
+            color:#7dd3fc;
+            font-size:10px;
+            font-weight:800;
+          ">
+            CIF ESTIMATIF — PORT D'ABIDJAN
+          </div>
+
+          <div style="
+            color:#64748b;
+            font-size:8px;
+            margin-top:2px;
+          ">
+            Valeur marchandises + fret + assurance
+          </div>
+
+        </div>
+
+
+        <div style="
+          color:#38bdf8;
+          font-size:17px;
+          font-weight:800;
+          text-align:right;
+        ">
+          ${Number(
+            p2iCifDisplay.cif_abidjan_usd
+          ).toLocaleString(
+            'fr-FR',
+            {
+              minimumFractionDigits:2,
+              maximumFractionDigits:2
             }
           )} USD
         </div>
@@ -9988,25 +10378,37 @@ ${p2iCifDisplay.available ? `
     </div>
 
 
-    <!-- FORMULE -->
+    <!-- ======================================
+         AVERTISSEMENT DE PÉRIMÈTRE
+         ====================================== -->
 
     <div style="
       margin-top:10px;
-      padding-top:9px;
-      border-top:1px solid rgba(148,163,184,.12);
+      padding:9px 10px;
+      border-radius:7px;
+      background:rgba(245,158,11,.055);
+      border:1px solid rgba(245,158,11,.14);
       color:#94a3b8;
       font-size:9px;
       line-height:1.5;
     ">
 
-      CIF estimatif =
-      valeur des équipements
-      + fret maritime
-      + assurance transport.
+      <strong style="color:#fbbf24;">
+        Périmètre de cette estimation :
+      </strong>
 
-      Cette estimation est fondée sur les références
-      actuellement disponibles et ne constitue pas
-      un devis définitif de transport ou d'assurance.
+      ce CIF concerne uniquement les
+      ${p2iCifDisplay.machine_count}
+      machine${p2iCifDisplay.machine_count > 1 ? 's' : ''}
+      du lot logistique présenté ci-dessus et les coûts
+      de marchandises qui lui sont actuellement rattachés.
+
+      Il ne représente pas encore le coût CIF de
+      l'ensemble du plan d'équipement.
+
+      Le fret et l'assurance sont des estimations fondées
+      sur les références actuellement disponibles et seront
+      à confirmer par les cotations officielles.
 
     </div>
 
