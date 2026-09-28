@@ -9191,9 +9191,22 @@ const p2iLclConsolidated =
 
 const p2iCifDisplay = {
 
+  // ------------------------------------------------
+  // DISPONIBILITÉ DU CALCUL CIF
+  // ------------------------------------------------
+
   available:
     p2iLclConsolidated?.status === 'estimated' &&
     p2iLclConsolidated?.estimated_cif_abidjan_usd != null,
+
+
+  // ------------------------------------------------
+  // ROUTE LOGISTIQUE
+  // ------------------------------------------------
+
+  origin_country:
+    p2iConsolidationCandidate
+      ?.departure_country || null,
 
   origin_port:
     p2iConsolidationCandidate
@@ -9202,33 +9215,162 @@ const p2iCifDisplay = {
   destination_port:
     'Abidjan',
 
-  goods_value_usd:
-    p2iLclConsolidated
-      ?.goods_value_usd ?? null,
 
-  freight_usd:
-    p2iLclConsolidated
-      ?.estimated_freight_usd ?? null,
-
-  insurance_usd:
-    p2iLclConsolidated
-      ?.estimated_insurance_usd ?? null,
-
-  cif_abidjan_usd:
-    p2iLclConsolidated
-      ?.estimated_cif_abidjan_usd ?? null,
+  // ------------------------------------------------
+  // MODE D'EXPÉDITION
+  // ------------------------------------------------
 
   shipping_mode:
     p2iLclConsolidated
       ?.shipping_mode || null,
 
+  consolidation:
+    p2iLclConsolidated
+      ?.consolidation ?? true,
+
+  shipment_count:
+    p2iLclConsolidated
+      ?.shipment_count ?? 1,
+
+
+  // ------------------------------------------------
+  // MACHINES COMPOSANT LE LOT
+  // ------------------------------------------------
+
+  machines: [
+
+    p2iConsolidationCandidate?.machine_a
+      ? {
+          machine_key:
+            p2iConsolidationCandidate
+              .machine_a
+              .machine_key || null,
+
+          machine:
+            p2iConsolidationCandidate
+              .machine_a
+              .machine || null,
+
+          weight_kg:
+            p2iConsolidationCandidate
+              .machine_a
+              .weight_kg ?? null,
+
+          volume_m3:
+            p2iConsolidationCandidate
+              .machine_a
+              .volume_m3 ?? null,
+
+          ready_date:
+            p2iConsolidationCandidate
+              .machine_a
+              .ready_date || null
+        }
+      : null,
+
+
+    p2iConsolidationCandidate?.machine_b
+      ? {
+          machine_key:
+            p2iConsolidationCandidate
+              .machine_b
+              .machine_key || null,
+
+          machine:
+            p2iConsolidationCandidate
+              .machine_b
+              .machine || null,
+
+          weight_kg:
+            p2iConsolidationCandidate
+              .machine_b
+              .weight_kg ?? null,
+
+          volume_m3:
+            p2iConsolidationCandidate
+              .machine_b
+              .volume_m3 ?? null,
+
+          ready_date:
+            p2iConsolidationCandidate
+              .machine_b
+              .ready_date || null
+        }
+      : null
+
+  ].filter(Boolean),
+
+
+  // ------------------------------------------------
+  // NOMBRE DE MACHINES
+  // ------------------------------------------------
+
+  machine_count:
+    [
+      p2iConsolidationCandidate?.machine_a,
+      p2iConsolidationCandidate?.machine_b
+    ].filter(Boolean).length,
+
+
+  // ------------------------------------------------
+  // DONNÉES PHYSIQUES DU LOT
+  // ------------------------------------------------
+
+  total_weight_kg:
+    p2iConsolidationCandidate
+      ?.combined_weight_kg ?? null,
+
+  total_volume_m3:
+    p2iConsolidationCandidate
+      ?.combined_volume_m3 ?? null,
+
+  revenue_tons:
+    p2iLclConsolidated
+      ?.revenue_tons ?? null,
+
+
+  // ------------------------------------------------
+  // VALEUR DES MARCHANDISES DU LOT
+  // ------------------------------------------------
+
+  goods_value_usd:
+    p2iLclConsolidated
+      ?.goods_value_usd ?? null,
+
+
+  // ------------------------------------------------
+  // FRET
+  // ------------------------------------------------
+
+  freight_usd:
+    p2iLclConsolidated
+      ?.estimated_freight_usd ?? null,
+
   freight_rate:
     p2iLclConsolidated
       ?.freight_rate || null,
 
+
+  // ------------------------------------------------
+  // ASSURANCE
+  // ------------------------------------------------
+
+  insurance_usd:
+    p2iLclConsolidated
+      ?.estimated_insurance_usd ?? null,
+
   insurance_estimate:
     p2iLclConsolidated
-      ?.insurance_estimate || null
+      ?.insurance_estimate || null,
+
+
+  // ------------------------------------------------
+  // CIF PORT D'ABIDJAN
+  // ------------------------------------------------
+
+  cif_abidjan_usd:
+    p2iLclConsolidated
+      ?.estimated_cif_abidjan_usd ?? null
 
 };
 
@@ -9238,59 +9380,6 @@ console.log(
   up.nom,
   p2iCifDisplay
 );
-if (up.id === 'biscuiterie') {
-
-  console.log(
-    '🔬 EQUIPMENT PLAN BISCUITERIE COMPLET :',
-    equipmentPlan
-  );
-
-  console.table(
-    equipmentPlan.map((item, index) => ({
-      n: index + 1,
-
-      machine_key:
-        item.machine_key ||
-        item.reference?.machine_key ||
-        item.machine?.machine_key ||
-        item.requiredMachine?.machine_key ||
-        item.data?.machine_key ||
-        '',
-
-      machine_name:
-        item.machine_name ||
-        item.name ||
-        item.reference?.machine_name ||
-        item.reference?.name ||
-        item.machine?.machine_name ||
-        item.machine?.name ||
-        item.requiredMachine?.machine_name ||
-        item.requiredMachine?.name ||
-        item.data?.machine ||
-        item.data?.machine_name ||
-        '',
-
-      source:
-        item.source ||
-        item.type ||
-        item.record_type ||
-        '',
-
-      has_data:
-        !!item.data,
-
-      has_saved:
-        !!item.saved,
-
-      has_selected:
-        !!item.selected,
-
-      has_reference:
-        !!item.reference
-    }))
-  );
-
-}
 if (up.id === 'biscuiterie') {
 
   console.log(
