@@ -9695,7 +9695,235 @@ console.log(
     </div>
 
   </div>
+${p2iCifDisplay.available ? `
 
+  <!-- ========================================
+       ESTIMATION LOGISTIQUE P2I — CIF ABIDJAN
+       ======================================== -->
+
+  <div style="
+    margin-top:14px;
+    padding:14px;
+    border-radius:10px;
+    background:rgba(14,165,233,.055);
+    border:1px solid rgba(56,189,248,.20);
+  ">
+
+    <!-- EN-TÊTE -->
+
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    ">
+
+      <div>
+
+        <div style="
+          color:#7dd3fc;
+          font-size:11px;
+          font-weight:700;
+          text-transform:uppercase;
+          letter-spacing:.04em;
+        ">
+          <i class="fas fa-ship"></i>
+          Estimation logistique P2I
+        </div>
+
+        <div style="
+          color:#94a3b8;
+          font-size:10px;
+          margin-top:3px;
+        ">
+          ${escapeHtml(p2iCifDisplay.origin_port || 'Port de départ')}
+          →
+          ${escapeHtml(p2iCifDisplay.destination_port || 'Abidjan')}
+          ·
+          ${(p2iCifDisplay.shipping_mode || '').toUpperCase()}
+        </div>
+
+      </div>
+
+
+      <div style="
+        text-align:right;
+      ">
+
+        <div style="
+          color:#94a3b8;
+          font-size:9px;
+          text-transform:uppercase;
+        ">
+          CIF Port d'Abidjan
+        </div>
+
+        <div style="
+          color:#38bdf8;
+          font-size:20px;
+          font-weight:800;
+          margin-top:2px;
+        ">
+          ${Number(
+            p2iCifDisplay.cif_abidjan_usd
+          ).toLocaleString(
+            'fr-FR',
+            {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }
+          )} USD
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- DÉCOMPOSITION DU CIF -->
+
+    <div style="
+      display:grid;
+      grid-template-columns:
+        repeat(auto-fit,minmax(145px,1fr));
+      gap:8px;
+    ">
+
+
+      <!-- VALEUR DES ÉQUIPEMENTS -->
+
+      <div style="
+        padding:10px;
+        border-radius:8px;
+        background:rgba(255,255,255,.025);
+      ">
+
+        <div style="
+          color:#94a3b8;
+          font-size:9px;
+        ">
+          Valeur équipements
+        </div>
+
+        <div style="
+          color:#e2e8f0;
+          font-size:13px;
+          font-weight:700;
+          margin-top:3px;
+        ">
+          ${Number(
+            p2iCifDisplay.goods_value_usd
+          ).toLocaleString(
+            'fr-FR',
+            {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }
+          )} USD
+        </div>
+
+      </div>
+
+
+      <!-- FRET MARITIME -->
+
+      <div style="
+        padding:10px;
+        border-radius:8px;
+        background:rgba(255,255,255,.025);
+      ">
+
+        <div style="
+          color:#94a3b8;
+          font-size:9px;
+        ">
+          Fret maritime estimé
+        </div>
+
+        <div style="
+          color:#e2e8f0;
+          font-size:13px;
+          font-weight:700;
+          margin-top:3px;
+        ">
+          ${Number(
+            p2iCifDisplay.freight_usd
+          ).toLocaleString(
+            'fr-FR',
+            {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }
+          )} USD
+        </div>
+
+      </div>
+
+
+      <!-- ASSURANCE -->
+
+      <div style="
+        padding:10px;
+        border-radius:8px;
+        background:rgba(255,255,255,.025);
+      ">
+
+        <div style="
+          color:#94a3b8;
+          font-size:9px;
+        ">
+          Assurance transport estimée
+        </div>
+
+        <div style="
+          color:#e2e8f0;
+          font-size:13px;
+          font-weight:700;
+          margin-top:3px;
+        ">
+          ${Number(
+            p2iCifDisplay.insurance_usd
+          ).toLocaleString(
+            'fr-FR',
+            {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }
+          )} USD
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- FORMULE -->
+
+    <div style="
+      margin-top:10px;
+      padding-top:9px;
+      border-top:1px solid rgba(148,163,184,.12);
+      color:#94a3b8;
+      font-size:9px;
+      line-height:1.5;
+    ">
+
+      CIF estimatif =
+      valeur des équipements
+      + fret maritime
+      + assurance transport.
+
+      Cette estimation est fondée sur les références
+      actuellement disponibles et ne constitue pas
+      un devis définitif de transport ou d'assurance.
+
+    </div>
+
+  </div>
+
+` : ''}
 
   <!-- ========================================
        INDICATEURS FINANCIERS
