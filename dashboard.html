@@ -9328,14 +9328,27 @@ const p2iCifDisplay = {
     p2iLclConsolidated
       ?.revenue_tons ?? null,
 
-
   // ------------------------------------------------
-  // VALEUR DES MARCHANDISES DU LOT
-  // ------------------------------------------------
+// VALEUR DES MARCHANDISES DU LOT
+// ------------------------------------------------
 
-  goods_value_usd:
-    p2iLclConsolidated
-      ?.goods_value_usd ?? null,
+// Valeur des machines renseignées par l'utilisateur
+// actuellement rattachées au lot test.
+machine_value_usd:
+  equipmentEstimate
+    ?.user_declared_cost_usd ?? null,
+
+// Premier stock de pièces critiques ajouté
+// aux marchandises expédiées.
+spare_parts_value_usd:
+  equipmentEstimate
+    ?.spare_parts_additional_cost_usd ?? null,
+
+// Valeur totale des marchandises utilisée
+// par le calcul logistique.
+goods_value_usd:
+  p2iLclConsolidated
+    ?.goods_value_usd ?? null,
 
 
   // ------------------------------------------------
