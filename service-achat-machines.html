@@ -1875,6 +1875,69 @@ machinesToDisplay = [
   ...selectedOptionalModules
 ];
   // ==============================================
+// IDENTITÉ DU PLAN D'ÉQUIPEMENT
+// ==============================================
+
+// Configuration actuellement sélectionnée
+const currentConfiguration =
+  selectedConfiguration && up.configurations
+    ? up.configurations[selectedConfiguration]
+    : null;
+
+const currentConfigurationName =
+  currentConfiguration?.name ||
+  currentConfiguration?.label ||
+  selectedConfiguration ||
+  '';
+
+
+// Capacité de référence P2I de l'UP
+const capacityReference =
+  up.capacity_reference || null;
+
+const capacityValue =
+  capacityReference?.value ?? null;
+
+const capacityUnit =
+  capacityReference?.unit || '';
+
+const capacityLabel =
+  capacityReference?.label || '';
+
+
+// Identifiant technique du plan
+const normalizePlanPart = value =>
+  String(value ?? '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '_')
+    .replace(/\//g, '_')
+    .replace(/[^a-z0-9_-]/g, '');
+
+const equipmentPlanId = [
+  upId,
+  selectedConfiguration || 'default',
+  capacityValue ?? 'capacity_unknown',
+  capacityUnit || ''
+]
+  .map(normalizePlanPart)
+  .filter(Boolean)
+  .join('__');
+
+
+console.log(
+  '🆔 Identité du plan d’équipement :',
+  {
+    equipment_plan_id: equipmentPlanId,
+    up_id: upId,
+    configuration_id: selectedConfiguration,
+    configuration_name: currentConfigurationName,
+    capacity_value: capacityValue,
+    capacity_unit: capacityUnit,
+    capacity_label: capacityLabel
+  }
+);
+  // ==============================================
 // MÉMORISATION DU PLAN D'ÉQUIPEMENT ACTIF
 // ==============================================
 
