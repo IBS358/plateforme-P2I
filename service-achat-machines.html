@@ -1365,6 +1365,12 @@ const configurationLabel =
   document.getElementById('productionConfigurationLabel');
 
 let machinesToDisplay = up.machines || [];
+  // ==============================================
+// CONTEXTE DE CONFIGURATION ACTIF
+// ==============================================
+
+let activeConfigurationId = '';
+let activeConfigurationName = '';
 
 // ==============================================
 // UP AVEC CONFIGURATION DE PRODUCTION
