@@ -1942,14 +1942,54 @@ console.log(
 // ==============================================
 
 const equipmentPlan = {
-  up_id: upId || '',
-  up_nom: upNom || '',
+  // ============================================
+  // IDENTITÉ DU PLAN
+  // ============================================
+
+  equipment_plan_id:
+    equipmentPlanId,
+
+  up_id:
+    upId || '',
+
+  up_nom:
+    upNom || '',
 
   configuration_id:
     selectedConfiguration || null,
 
+  configuration_name:
+    currentConfigurationName || '',
+
+
+  // ============================================
+  // CAPACITÉ DE RÉFÉRENCE DU PLAN
+  // ============================================
+
+  capacity_value:
+    capacityValue,
+
+  capacity_unit:
+    capacityUnit,
+
+  capacity_label:
+    capacityLabel,
+
+  capacity_status:
+    capacityReference?.status || null,
+
+
+  // ============================================
+  // MÉTADONNÉES
+  // ============================================
+
   updated_at:
     new Date().toISOString(),
+
+
+  // ============================================
+  // MACHINES DU PLAN
+  // ============================================
 
   machines: machinesToDisplay.map(machine => ({
     machine_key:
