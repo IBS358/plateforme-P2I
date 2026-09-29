@@ -3801,6 +3801,10 @@ function updateV2EquipmentPlanButtons(
 // RESTAURATION DU MODÈLE V2 RETENU AU CHARGEMENT DE LA PAGE
 // ==========================================================
 
+// ==========================================================
+// RESTAURATION DU MODÈLE V2 RETENU AU CHARGEMENT DE LA PAGE
+// ==========================================================
+
 async function restoreV2EquipmentPlanSelection(machineKey) {
 
   if (!machineKey) {
@@ -3842,7 +3846,7 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
 
     // ======================================================
-    // 2. UP COURANTE
+    // 2. UP + CONFIGURATION COURANTES
     // ======================================================
 
     const params =
@@ -3850,6 +3854,12 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
     const upId =
       params.upId || '';
+
+    const configurationId =
+      params.configurationId || '';
+
+    const configurationName =
+      params.configurationName || '';
 
 
     if (!upId) {
@@ -3865,6 +3875,24 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
       return;
     }
+
+
+    console.log(
+      '🧩 Restauration pour la configuration :',
+      {
+        up_id:
+          upId,
+
+        configuration_id:
+          configurationId || null,
+
+        configuration_name:
+          configurationName || null,
+
+        machine_key:
+          machineKey
+      }
+    );
 
 
     // ======================================================
@@ -3896,6 +3924,13 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
     // ======================================================
     // 4. RECHERCHE DU MODÈLE ACTIF
+    //
+    // IDENTITÉ LOGIQUE :
+    //
+    // UP + CONFIGURATION + MACHINE_KEY
+    //
+    // Pour les UP sans configuration :
+    //
     // UP + MACHINE_KEY
     // ======================================================
 
@@ -3905,18 +3940,58 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
         const d =
           row.data || {};
 
+
+        const sameUp =
+          d.up_id === upId;
+
+
+        const sameMachine =
+          d.machine_key === machineKey;
+
+
+        // --------------------------------------------------
+        // CONFIGURATION
+        //
+        // Si la page possède une configuration,
+        // l'enregistrement doit appartenir exactement
+        // à cette configuration.
+        //
+        // Si la page n'a pas de configuration,
+        // on ne retient que les anciens/enregistrements
+        // classiques sans configuration.
+        // --------------------------------------------------
+
+        const sameConfiguration =
+          configurationId
+            ? d.configuration_id === configurationId
+            : !d.configuration_id;
+
+
+        const isEquipmentPlanItem =
+          d.record_type === 'equipment_plan_item';
+
+
         return (
-          d.up_id === upId &&
-          d.machine_key === machineKey &&
-          d.record_type === 'equipment_plan_item'
+          sameUp &&
+          sameConfiguration &&
+          sameMachine &&
+          isEquipmentPlanItem
         );
       });
 
 
     console.log(
       `🔎 ${matchingRows.length} choix trouvé(s) pour`,
-      upId,
-      machineKey
+      {
+        up_id:
+          upId,
+
+        configuration_id:
+          configurationId || null,
+
+        machine_key:
+          machineKey
+      }
     );
 
 
@@ -3932,7 +4007,7 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
       );
 
       console.log(
-        'ℹ️ Aucun modèle actuellement retenu.'
+        'ℹ️ Aucun modèle actuellement retenu pour cette configuration.'
       );
 
       return;
@@ -3957,7 +4032,9 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
     console.log(
       '✅ Modèle actuellement retenu :',
-      selectedModelId
+      selectedModelId,
+      '| configuration :',
+      configurationId || 'aucune'
     );
 
 
@@ -3979,7 +4056,7 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
     );
   }
 }
-    async function removeV2ModelFromEquipmentPlan(
+   async function removeV2ModelFromEquipmentPlan(
   machineKey,
   modelId
 ) {
@@ -3992,11 +4069,16 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
   try {
 
+    // ======================================================
+    // 1. UTILISATEUR SUPABASE
+    // ======================================================
+
     const {
       data: { user },
       error: userError
     } =
       await supabaseClient.auth.getUser();
+
 
     if (userError || !user) {
 
@@ -4013,15 +4095,56 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
     }
 
 
+    // ======================================================
+    // 2. UP + CONFIGURATION COURANTES
+    // ======================================================
+
     const params =
       getUrlParams();
 
     const upId =
       params.upId || '';
 
+    const configurationId =
+      params.configurationId || '';
+
+    const configurationName =
+      params.configurationName || '';
+
+
+    if (!upId) {
+
+      console.warn(
+        '⚠️ Impossible de retirer le modèle : up_id absent.'
+      );
+
+      return;
+    }
+
+
+    console.log(
+      '🧩 Retrait pour la configuration :',
+      {
+        up_id:
+          upId,
+
+        configuration_id:
+          configurationId || null,
+
+        configuration_name:
+          configurationName || null,
+
+        machine_key:
+          machineKey,
+
+        model_id:
+          modelId
+      }
+    );
+
 
     // ======================================================
-    // RECHERCHE DE LA LIGNE ACTIVE
+    // 3. LECTURE DU PLAN D'ÉQUIPEMENT
     // ======================================================
 
     const {
@@ -4052,24 +4175,65 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
     }
 
 
+    // ======================================================
+    // 4. RECHERCHE DE LA LIGNE ACTIVE
+    //
+    // IDENTITÉ :
+    //
+    // UP + CONFIGURATION + MACHINE + MODÈLE
+    //
+    // Pour une UP sans configuration :
+    //
+    // UP + MACHINE + MODÈLE
+    // ======================================================
+
     const row =
       (rows || []).find(item => {
 
         const d =
           item.data || {};
 
+
+        const sameUp =
+          d.up_id === upId;
+
+
+        const sameMachine =
+          d.machine_key === machineKey;
+
+
+        const sameModel =
+          d.model_id === modelId;
+
+
+        const sameConfiguration =
+          configurationId
+            ? d.configuration_id === configurationId
+            : !d.configuration_id;
+
+
+        const isEquipmentPlanItem =
+          d.record_type === 'equipment_plan_item';
+
+
         return (
-          d.up_id === upId &&
-          d.machine_key === machineKey &&
-          d.model_id === modelId
+          sameUp &&
+          sameConfiguration &&
+          sameMachine &&
+          sameModel &&
+          isEquipmentPlanItem
         );
       });
 
 
+    // ======================================================
+    // 5. AUCUNE LIGNE CORRESPONDANTE
+    // ======================================================
+
     if (!row) {
 
       console.warn(
-        '⚠️ Aucun modèle correspondant trouvé.'
+        '⚠️ Aucun modèle correspondant trouvé pour cette configuration.'
       );
 
       updateV2EquipmentPlanButtons(
@@ -4082,7 +4246,7 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
 
     // ======================================================
-    // SUPPRESSION
+    // 6. SUPPRESSION
     // ======================================================
 
     const {
@@ -4117,12 +4281,25 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
 
     console.log(
-      '✅ Modèle retiré du plan.'
+      '✅ Modèle retiré du plan :',
+      {
+        up_id:
+          upId,
+
+        configuration_id:
+          configurationId || null,
+
+        machine_key:
+          machineKey,
+
+        model_id:
+          modelId
+      }
     );
 
 
     // ======================================================
-    // RETOUR À L'ÉTAT INITIAL
+    // 7. RETOUR À L'ÉTAT INITIAL
     // ======================================================
 
     updateV2EquipmentPlanButtons(
