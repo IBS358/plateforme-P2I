@@ -1399,6 +1399,15 @@ let selectedConfiguration =
 
   const selectedConfig =
     up.configurations[selectedConfiguration];
+  // ----------------------------------------------
+// CONTEXTE DE CONFIGURATION ACTIF
+// ----------------------------------------------
+
+activeConfigurationId =
+  selectedConfiguration || '';
+
+activeConfigurationName =
+  selectedConfig?.name || '';
 
   // ----------------------------------------------
   // Afficher le sélecteur
