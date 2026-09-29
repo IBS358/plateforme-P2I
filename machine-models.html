@@ -4290,14 +4290,49 @@ async function addV2ModelToEquipmentPlan(
       machineV2.up_nom ||
       '';
 
+
+    // ======================================================
+    // CONFIGURATION / PLAN DE PRODUCTION
+    //
+    // Exemples Biscuiterie :
+    // biscuits_mous
+    // biscuits_durs
+    // crackers
+    //
+    // Pour les UP classiques :
+    // configurationId reste vide.
+    // ======================================================
+
+    const configurationId =
+      params.configurationId ||
+      '';
+
+    const configurationName =
+      params.configurationName ||
+      '';
+
+
+    console.log(
+      '🧩 Configuration du plan :',
+      {
+        configurationId:
+          configurationId || null,
+
+        configurationName:
+          configurationName || null
+      }
+    );
+
+
     const price =
-  model.price_reference || {};
+      model.price_reference || {};
 
-const acquisition =
-  model.acquisition || {};
+    const acquisition =
+      model.acquisition || {};
 
-const budgetReference =
-  model.p2i_budget_reference || {};
+    const budgetReference =
+      model.p2i_budget_reference || {};
+
 
     // ======================================================
     // 5. LIBELLÉ DU PRIX
@@ -4375,6 +4410,19 @@ const budgetReference =
 
       up_nom:
         upNom,
+
+
+      // ----------------------------------------------------
+      // CONFIGURATION DE PRODUCTION
+      //
+      // null pour les UP ne possédant pas de configuration.
+      // ----------------------------------------------------
+
+      configuration_id:
+        configurationId || null,
+
+      configuration_name:
+        configurationName || null,
 
 
       // ----------------------------------------------------
@@ -4501,94 +4549,102 @@ const budgetReference =
           ?.value ??
         null,
 
-// ----------------------------------------------------
-// STRATÉGIE D'ACQUISITION UTILISATEUR
-// ----------------------------------------------------
 
-acquisition_mode:
-  'p2i_catalog',
-acquisition_source:
-  'p2i',
-acquisition_status:
-  'model_selected',
-
-user_price_estimate:
-  null,
-
-user_price_currency:
-  null,
-
-user_origin_country:
-  null,
-
-user_supplier:
-  null,
-      
-     // MODE DE FOURNITURE DU MODÈLE / FOURNISSEUR
-
-supply_mode:
-  acquisition.supply_mode ||
-  'standalone',
-
-standalone_purchase_status:
-  acquisition.standalone_purchase_status ||
-  'to_confirm',
-
-package_id:
-  acquisition.package_id ||
-  null,
-
-package_name:
-  acquisition.package_name ||
-  acquisition.likely_package ||
-  null,
-
-likely_package:
-  acquisition.likely_package ||
-  null,
-
-can_be_integrated_in_line_package:
-  acquisition
-    .can_be_integrated_in_line_package ??
-  false,
-
-capex_double_counting_risk:
-  acquisition
-    .capex_double_counting_risk ??
-  false,
-      
       // ----------------------------------------------------
-// RÉFÉRENCE BUDGÉTAIRE P2I
-// ----------------------------------------------------
+      // STRATÉGIE D'ACQUISITION UTILISATEUR
+      // ----------------------------------------------------
 
-p2i_budget_status:
-  budgetReference.status ||
-  (
-    budgetReference.amount_min != null ||
-    budgetReference.amount_max != null
-      ? 'available'
-      : 'not_available'
-  ),
+      acquisition_mode:
+        'p2i_catalog',
 
-p2i_budget_min:
-  budgetReference.amount_min ??
-  null,
+      acquisition_source:
+        'p2i',
 
-p2i_budget_max:
-  budgetReference.amount_max ??
-  null,
+      acquisition_status:
+        'model_selected',
 
-p2i_budget_currency:
-  budgetReference.currency ||
-  'USD',
+      user_price_estimate:
+        null,
 
-p2i_budget_methodology:
-  budgetReference.methodology ||
-  null,
+      user_price_currency:
+        null,
 
-p2i_budget_confidence_score:
-  budgetReference.confidence_score ??
-  null,
+      user_origin_country:
+        null,
+
+      user_supplier:
+        null,
+
+
+      // ----------------------------------------------------
+      // MODE DE FOURNITURE DU MODÈLE / FOURNISSEUR
+      // ----------------------------------------------------
+
+      supply_mode:
+        acquisition.supply_mode ||
+        'standalone',
+
+      standalone_purchase_status:
+        acquisition.standalone_purchase_status ||
+        'to_confirm',
+
+      package_id:
+        acquisition.package_id ||
+        null,
+
+      package_name:
+        acquisition.package_name ||
+        acquisition.likely_package ||
+        null,
+
+      likely_package:
+        acquisition.likely_package ||
+        null,
+
+      can_be_integrated_in_line_package:
+        acquisition
+          .can_be_integrated_in_line_package ??
+        false,
+
+      capex_double_counting_risk:
+        acquisition
+          .capex_double_counting_risk ??
+        false,
+
+
+      // ----------------------------------------------------
+      // RÉFÉRENCE BUDGÉTAIRE P2I
+      // ----------------------------------------------------
+
+      p2i_budget_status:
+        budgetReference.status ||
+        (
+          budgetReference.amount_min != null ||
+          budgetReference.amount_max != null
+            ? 'available'
+            : 'not_available'
+        ),
+
+      p2i_budget_min:
+        budgetReference.amount_min ??
+        null,
+
+      p2i_budget_max:
+        budgetReference.amount_max ??
+        null,
+
+      p2i_budget_currency:
+        budgetReference.currency ||
+        'USD',
+
+      p2i_budget_methodology:
+        budgetReference.methodology ||
+        null,
+
+      p2i_budget_confidence_score:
+        budgetReference.confidence_score ??
+        null,
+
 
       // ----------------------------------------------------
       // PLAN D'ÉQUIPEMENT
@@ -4636,7 +4692,14 @@ p2i_budget_confidence_score:
 
     // ======================================================
     // 7. RECHERCHE D'UN CHOIX EXISTANT
-    // POUR CETTE UP + CETTE MACHINE_KEY
+    //
+    // IDENTITÉ LOGIQUE :
+    //
+    // UP + CONFIGURATION + MACHINE
+    //
+    // Si l'UP ne possède pas de configuration :
+    //
+    // UP + MACHINE
     // ======================================================
 
     const {
@@ -4674,9 +4737,33 @@ p2i_budget_confidence_score:
           const d =
             row.data || {};
 
+          const sameUp =
+            d.up_id === upId;
+
+          const sameMachine =
+            d.machine_key === machineKey;
+
+
+          // --------------------------------------------------
+          // CONFIGURATION
+          //
+          // Si la page possède une configuration,
+          // elle fait partie de l'identité du plan.
+          //
+          // Sinon, on conserve le fonctionnement historique
+          // des autres UP.
+          // --------------------------------------------------
+
+          const sameConfiguration =
+            configurationId
+              ? d.configuration_id === configurationId
+              : !d.configuration_id;
+
+
           return (
-            d.up_id === upId &&
-            d.machine_key === machineKey
+            sameUp &&
+            sameConfiguration &&
+            sameMachine
           );
         }
       );
@@ -4684,8 +4771,16 @@ p2i_budget_confidence_score:
 
     console.log(
       `🔎 ${sameMachineRows.length} ligne(s) existante(s) pour`,
-      upId,
-      machineKey
+      {
+        up_id:
+          upId,
+
+        configuration_id:
+          configurationId || null,
+
+        machine_key:
+          machineKey
+      }
     );
 
 
@@ -4738,9 +4833,10 @@ p2i_budget_confidence_score:
 
 
       updateV2EquipmentPlanButtons(
-  machineKey,
-  modelId
-);
+        machineKey,
+        modelId
+      );
+
 
       showToast(
         `✅ "${model.name}" ajouté à votre plan d'équipement`
@@ -4766,12 +4862,6 @@ p2i_budget_confidence_score:
 
     // ======================================================
     // 10. CHOIX DE LA LIGNE À CONSERVER
-    //
-    // Si le modèle demandé existe déjà,
-    // on conserve cette ligne.
-    //
-    // Sinon on conserve la première ligne,
-    // qui sera mise à jour.
     // ======================================================
 
     const rowToKeep =
@@ -4790,8 +4880,12 @@ p2i_budget_confidence_score:
     // ======================================================
     // 11. NETTOYAGE DES ÉVENTUELS DOUBLONS
     //
-    // Cela permet notamment de corriger les deux lignes
-    // Skywin / ASAN créées pendant nos tests.
+    // IMPORTANT :
+    // uniquement les doublons appartenant à la MÊME
+    // UP + CONFIGURATION + MACHINE.
+    //
+    // Les modèles des autres configurations ne sont donc
+    // jamais supprimés.
     // ======================================================
 
     if (
@@ -4860,10 +4954,10 @@ p2i_budget_confidence_score:
       );
 
 
-     updateV2EquipmentPlanButtons(
-  machineKey,
-  modelId
-);
+      updateV2EquipmentPlanButtons(
+        machineKey,
+        modelId
+      );
 
 
       showToast(
@@ -4936,10 +5030,11 @@ p2i_budget_confidence_score:
     );
 
 
-   updateV2EquipmentPlanButtons(
-  machineKey,
-  modelId
-);
+    updateV2EquipmentPlanButtons(
+      machineKey,
+      modelId
+    );
+
 
     showToast(
       `✅ "${model.name}" remplace "${previousModel}" dans votre plan d'équipement`
