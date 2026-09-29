@@ -3350,6 +3350,26 @@ async function saveToDashboardWithOrigin(
   btn
 ) {
   const email = getActiveEmail();
+  // ==============================================
+// CONFIGURATION DU PLAN D'ÉQUIPEMENT
+// ==============================================
+
+const urlContext =
+  getUrlParams();
+
+const configurationId =
+  urlContext.configurationId || '';
+
+const configurationName =
+  urlContext.configurationName || '';
+
+console.log(
+  '🧩 Configuration du plan :',
+  {
+    configurationId,
+    configurationName
+  }
+);
 
   if (!email) {
     alert('Veuillez vous connecter.');
