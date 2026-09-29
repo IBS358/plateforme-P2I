@@ -2023,6 +2023,13 @@ machinesGrid.innerHTML = machinesToDisplay.map(machine => {
 const params = new URLSearchParams({
   up_id: upId || '',
   up_nom: upNom || '',
+
+  configuration_id:
+    activeConfigurationId || '',
+
+  configuration_name:
+    activeConfigurationName || '',
+
   machine_key: machine.machine_key || '',
   machine_name: machine.name || '',
   machine_role: machine.role || '',
