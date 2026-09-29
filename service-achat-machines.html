@@ -2005,19 +2005,9 @@ machinesGrid.innerHTML = machinesToDisplay.map(machine => {
   // ------------------------------------------------
   // Construction sécurisée de l'URL vers les modèles
   // ------------------------------------------------
- const params = new URLSearchParams({
+const params = new URLSearchParams({
   up_id: upId || '',
   up_nom: upNom || '',
-
-  // Configuration de production sélectionnée
-  configuration_id:
-    selectedConfiguration || '',
-
-  configuration_name:
-    selectedConfiguration &&
-    currentProductionConfig?.options?.[selectedConfiguration]
-      ?.label || '',
-
   machine_key: machine.machine_key || '',
   machine_name: machine.name || '',
   machine_role: machine.role || '',
