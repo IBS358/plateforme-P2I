@@ -1262,7 +1262,98 @@
   // Effacer l'affichage des machines
   machinesGrid.innerHTML = '<div class="empty-state"><i class="fas fa-microchip" style="font-size: 3rem; margin-bottom: 15px; display: block;"></i><p>Sélectionnez une unité de production.</p></div>';
 }
+// ======================================================
+// P2I - CONSTRUCTION DE L'IDENTITÉ D'UN PLAN D'ÉQUIPEMENT
+// ======================================================
+//
+// Cette fonction ne modifie aucune donnée.
+// Elle construit uniquement l'identité technique d'un plan
+// à partir de :
+// - l'UP
+// - la configuration / version de production
+// - la capacité de référence
+//
+// Elle sera utilisée plus tard par :
+// 1. service-achat-machines.html
+// 2. les liens vers machine-models.html
+// ======================================================
 
+function buildEquipmentPlanIdentity(
+  upId,
+  configurationId,
+  configurationName,
+  capacityReference
+) {
+
+  const capacityValue =
+    capacityReference?.value ?? null;
+
+  const capacityUnit =
+    capacityReference?.unit || '';
+
+  const capacityLabel =
+    capacityReference?.label || '';
+
+  const capacityStatus =
+    capacityReference?.status || '';
+
+
+  // ------------------------------------------------------
+  // Normalisation des différentes parties de l'identifiant
+  // ------------------------------------------------------
+
+  const normalizePlanPart = value =>
+    String(value ?? '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '_')
+      .replace(/\//g, '_')
+      .replace(/[^a-z0-9_-]/g, '');
+
+
+  // ------------------------------------------------------
+  // Identifiant unique du plan
+  // ------------------------------------------------------
+
+  const equipmentPlanId = [
+    upId || '',
+    configurationId || 'default',
+    capacityValue ?? 'capacity_unknown',
+    capacityUnit || ''
+  ]
+    .map(normalizePlanPart)
+    .filter(Boolean)
+    .join('__');
+
+
+  // ------------------------------------------------------
+  // Objet retourné
+  // ------------------------------------------------------
+
+  return {
+
+    equipment_plan_id:
+      equipmentPlanId,
+
+    configuration_id:
+      configurationId || '',
+
+    configuration_name:
+      configurationName || '',
+
+    capacity_value:
+      capacityValue,
+
+    capacity_unit:
+      capacityUnit,
+
+    capacity_label:
+      capacityLabel,
+
+    capacity_status:
+      capacityStatus
+  };
+}
 // Ajouter cette fonction aussi (elle est appelée par onchange="loadMachines()")
 function loadMachines() {
   const upId = document.getElementById('upSelect').value;
