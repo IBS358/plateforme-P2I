@@ -4562,7 +4562,30 @@ async function addV2ModelToEquipmentPlan(
     const configurationName =
       params.configurationName ||
       '';
+// ======================================================
+// IDENTITÉ DU PLAN D'ÉQUIPEMENT
+// ======================================================
 
+const equipmentPlanId =
+  params.equipmentPlanId ||
+  '';
+
+const capacityValue =
+  params.capacityValue !== ''
+    ? Number(params.capacityValue)
+    : null;
+
+const capacityUnit =
+  params.capacityUnit ||
+  '';
+
+const capacityLabel =
+  params.capacityLabel ||
+  '';
+
+const capacityStatus =
+  params.capacityStatus ||
+  '';
 
     console.log(
       '🧩 Configuration du plan :',
@@ -4899,14 +4922,29 @@ async function addV2ModelToEquipmentPlan(
 
 
       // ----------------------------------------------------
-      // PLAN D'ÉQUIPEMENT
-      // ----------------------------------------------------
+// PLAN D'ÉQUIPEMENT
+// ----------------------------------------------------
 
-      equipment_plan_status:
-        'selected',
+equipment_plan_id:
+  equipmentPlanId || null,
 
-      is_selected_model:
-        true,
+capacity_value:
+  capacityValue,
+
+capacity_unit:
+  capacityUnit || null,
+
+capacity_label:
+  capacityLabel || null,
+
+capacity_status:
+  capacityStatus || null,
+
+equipment_plan_status:
+  'selected',
+
+is_selected_model:
+  true,
 
 
       // ----------------------------------------------------
