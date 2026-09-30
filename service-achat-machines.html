@@ -2143,21 +2143,8 @@ machinesGrid.innerHTML = machinesToDisplay.map(machine => {
   // Construction sécurisée de l'URL vers les modèles
   // ------------------------------------------------
 const params = new URLSearchParams({
-
-  // ============================================
-  // UP
-  // ============================================
-
-  up_id:
-    upId || '',
-
-  up_nom:
-    upNom || '',
-
-
-  // ============================================
-  // CONFIGURATION / VERSION DE PRODUCTION
-  // ============================================
+  up_id: upId || '',
+  up_nom: upNom || '',
 
   configuration_id:
     activeConfigurationId || '',
@@ -2165,35 +2152,7 @@ const params = new URLSearchParams({
   configuration_name:
     activeConfigurationName || '',
 
-
-  // ============================================
-  // PLAN D'ÉQUIPEMENT
-  // ============================================
-
-  equipment_plan_id:
-    equipmentPlanId || '',
-
-  capacity_value:
-    capacityValue != null
-      ? String(capacityValue)
-      : '',
-
-  capacity_unit:
-    capacityUnit || '',
-
-  capacity_label:
-    capacityLabel || '',
-
-  capacity_status:
-    capacityReference?.status || '',
-
-
-  // ============================================
-  // MACHINE
-  // ============================================
-
-  machine_key:
-    machine.machine_key || '',
+  machine_key: machine.machine_key || '',
 
   machine_name:
     machine.name ||
@@ -2209,7 +2168,6 @@ const params = new URLSearchParams({
 
   machine_utilities:
     machine.utilities || ''
-
 });
 
   const modelsUrl =
