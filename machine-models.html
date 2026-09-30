@@ -484,25 +484,100 @@
     function getActiveEmail() { return localStorage.getItem('p2i_user_email') || localStorage.getItem('p2i_active_user') || ''; }
     
     function getUrlParams() {
-      const p = new URLSearchParams(window.location.search);
-      return { 
-        upId: p.get('up_id') || '', 
-        upNom: decodeURIComponent(p.get('up_nom') || ''),
+  const p = new URLSearchParams(window.location.search);
 
-        configurationId: p.get('configuration_id') || '',
-        configurationName: decodeURIComponent(
-          p.get('configuration_name') || ''
-        ),
+  return { 
+    // ==========================================
+    // UP
+    // ==========================================
 
-        filiere: decodeURIComponent(p.get('filiere') || ''), 
-        machineId: p.get('machine_id') || '', 
-        machineName: decodeURIComponent(p.get('machine_name') || ''), 
-        machineRole: decodeURIComponent(p.get('machine_role') || ''), 
-        machineCapacity: decodeURIComponent(p.get('machine_capacity') || ''), 
-        machineUtilities: decodeURIComponent(p.get('machine_utilities') || ''),
-        machine_key: p.get('machine_key') || ''
-      };
-    }
+    upId:
+      p.get('up_id') || '',
+
+    upNom:
+      decodeURIComponent(
+        p.get('up_nom') || ''
+      ),
+
+
+    // ==========================================
+    // CONFIGURATION / VERSION DE PRODUCTION
+    // ==========================================
+
+    configurationId:
+      p.get('configuration_id') || '',
+
+    configurationName:
+      decodeURIComponent(
+        p.get('configuration_name') || ''
+      ),
+
+
+    // ==========================================
+    // PLAN D'ÉQUIPEMENT
+    // ==========================================
+
+    equipmentPlanId:
+      p.get('equipment_plan_id') || '',
+
+    capacityValue:
+      p.get('capacity_value') || '',
+
+    capacityUnit:
+      decodeURIComponent(
+        p.get('capacity_unit') || ''
+      ),
+
+    capacityLabel:
+      decodeURIComponent(
+        p.get('capacity_label') || ''
+      ),
+
+    capacityStatus:
+      p.get('capacity_status') || '',
+
+
+    // ==========================================
+    // FILIÈRE
+    // ==========================================
+
+    filiere:
+      decodeURIComponent(
+        p.get('filiere') || ''
+      ),
+
+
+    // ==========================================
+    // MACHINE
+    // ==========================================
+
+    machineId:
+      p.get('machine_id') || '',
+
+    machineName:
+      decodeURIComponent(
+        p.get('machine_name') || ''
+      ),
+
+    machineRole:
+      decodeURIComponent(
+        p.get('machine_role') || ''
+      ),
+
+    machineCapacity:
+      decodeURIComponent(
+        p.get('machine_capacity') || ''
+      ),
+
+    machineUtilities:
+      decodeURIComponent(
+        p.get('machine_utilities') || ''
+      ),
+
+    machine_key:
+      p.get('machine_key') || ''
+  };
+}
 
     // ==============================================
     // getMachineRefKey (version complète)
