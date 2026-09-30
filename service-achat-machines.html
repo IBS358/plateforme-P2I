@@ -1982,45 +1982,50 @@ const currentConfigurationName =
   '';
 
 
-// Construction centralisée de l'identité du plan
-const planIdentity =
-  buildEquipmentPlanIdentity(
-    upId,
-    selectedConfiguration || '',
-    currentConfigurationName,
-    up.capacity_reference || null
-  );
-
-
-// Variables utilisées par la suite du code
-const equipmentPlanId =
-  planIdentity.equipment_plan_id;
+// Capacité de référence P2I de l'UP
+const capacityReference =
+  up.capacity_reference || null;
 
 const capacityValue =
-  planIdentity.capacity_value;
+  capacityReference?.value ?? null;
 
 const capacityUnit =
-  planIdentity.capacity_unit;
+  capacityReference?.unit || '';
 
 const capacityLabel =
-  planIdentity.capacity_label;
-
-const capacityStatus =
-  planIdentity.capacity_status;
+  capacityReference?.label || '';
 
 
-// Contrôle console
+// Identifiant technique du plan
+const normalizePlanPart = value =>
+  String(value ?? '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '_')
+    .replace(/\//g, '_')
+    .replace(/[^a-z0-9_-]/g, '');
+
+const equipmentPlanId = [
+  upId,
+  selectedConfiguration || 'default',
+  capacityValue ?? 'capacity_unknown',
+  capacityUnit || ''
+]
+  .map(normalizePlanPart)
+  .filter(Boolean)
+  .join('__');
+
+
 console.log(
   '🆔 Identité du plan d’équipement :',
   {
     equipment_plan_id: equipmentPlanId,
     up_id: upId,
-    configuration_id: planIdentity.configuration_id,
-    configuration_name: planIdentity.configuration_name,
+    configuration_id: selectedConfiguration,
+    configuration_name: currentConfigurationName,
     capacity_value: capacityValue,
     capacity_unit: capacityUnit,
-    capacity_label: capacityLabel,
-    capacity_status: capacityStatus
+    capacity_label: capacityLabel
   }
 );
   // ==============================================
