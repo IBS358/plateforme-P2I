@@ -2230,40 +2230,82 @@ if (!machinesToDisplay.length) {
 
 machinesGrid.innerHTML = machinesToDisplay.map(machine => {
 
+  // ==============================================
+  // IDENTITÉ DU PLAN POUR LE LIEN VERS LES MODÈLES
+  // ==============================================
+
+  const linkPlanIdentity =
+    buildEquipmentPlanIdentity(
+      upId,
+      activeConfigurationId || '',
+      activeConfigurationName || '',
+      up.capacity_reference || null
+    );
+
+
   // ------------------------------------------------
   // Construction sécurisée de l'URL vers les modèles
   // ------------------------------------------------
-const params = new URLSearchParams({
-  up_id: upId || '',
-  up_nom: upNom || '',
 
-  configuration_id:
-    activeConfigurationId || '',
+  const params = new URLSearchParams({
+    up_id: upId || '',
+    up_nom: upNom || '',
 
-  configuration_name:
-    activeConfigurationName || '',
+    configuration_id:
+      activeConfigurationId || '',
 
-  machine_key: machine.machine_key || '',
+    configuration_name:
+      activeConfigurationName || '',
 
-  machine_name:
-    machine.name ||
-    machine.machine_name ||
-    machine.nom ||
-    '',
 
-  machine_role:
-    machine.role || '',
+    // ============================================
+    // PLAN D'ÉQUIPEMENT
+    // ============================================
 
-  machine_capacity:
-    machine.capacity || '',
+    equipment_plan_id:
+      linkPlanIdentity.equipment_plan_id || '',
 
-  machine_utilities:
-    machine.utilities || ''
-});
+    capacity_value:
+      linkPlanIdentity.capacity_value != null
+        ? String(linkPlanIdentity.capacity_value)
+        : '',
+
+    capacity_unit:
+      linkPlanIdentity.capacity_unit || '',
+
+    capacity_label:
+      linkPlanIdentity.capacity_label || '',
+
+    capacity_status:
+      linkPlanIdentity.capacity_status || '',
+
+
+    // ============================================
+    // MACHINE
+    // ============================================
+
+    machine_key:
+      machine.machine_key || '',
+
+    machine_name:
+      machine.name ||
+      machine.machine_name ||
+      machine.nom ||
+      '',
+
+    machine_role:
+      machine.role || '',
+
+    machine_capacity:
+      machine.capacity || '',
+
+    machine_utilities:
+      machine.utilities || ''
+  });
+
 
   const modelsUrl =
     `machine-models.html?${params.toString()}`;
-
   return `
     <div class="machine-card">
 
