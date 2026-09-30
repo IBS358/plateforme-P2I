@@ -2023,9 +2023,28 @@ const equipmentPlan = {
   }))
 };
 
+// ==============================================
+// MÉMORISATION INDÉPENDANTE DU PLAN D'ÉQUIPEMENT
+// ==============================================
+
+const equipmentPlanStorageKey =
+  `p2i_equipment_plan_${equipmentPlanId}`;
+
 localStorage.setItem(
-  `p2i_equipment_plan_${upId}`,
+  equipmentPlanStorageKey,
   JSON.stringify(equipmentPlan)
+);
+
+// On mémorise également quel est le plan actuellement actif
+// pour cette UP.
+localStorage.setItem(
+  `p2i_active_equipment_plan_${upId}`,
+  equipmentPlanId
+);
+
+console.log(
+  '🔑 Plan enregistré sous la clé :',
+  equipmentPlanStorageKey
 );
 
 console.log(
