@@ -5020,59 +5020,87 @@ is_selected_model:
     }
 
 
-    const sameMachineRows =
-      (existingRows || []).filter(
-        row => {
+  const sameMachineRows =
+  (existingRows || []).filter(
+    row => {
 
-          const d =
-            row.data || {};
-
-          const sameUp =
-            d.up_id === upId;
-
-          const sameMachine =
-            d.machine_key === machineKey;
+      const d =
+        row.data || {};
 
 
-          // --------------------------------------------------
-          // CONFIGURATION
-          //
-          // Si la page possède une configuration,
-          // elle fait partie de l'identité du plan.
-          //
-          // Sinon, on conserve le fonctionnement historique
-          // des autres UP.
-          // --------------------------------------------------
+      // ==================================================
+      // MACHINE
+      // ==================================================
 
-          const sameConfiguration =
-            configurationId
-              ? d.configuration_id === configurationId
-              : !d.configuration_id;
+      const sameMachine =
+        d.machine_key === machineKey;
 
 
-          return (
-            sameUp &&
-            sameConfiguration &&
-            sameMachine
-          );
-        }
-      );
-
-
-    console.log(
-      `🔎 ${sameMachineRows.length} ligne(s) existante(s) pour`,
-      {
-        up_id:
-          upId,
-
-        configuration_id:
-          configurationId || null,
-
-        machine_key:
-          machineKey
+      if (!sameMachine) {
+        return false;
       }
-    );
 
+
+      // ==================================================
+      // NOUVELLE IDENTITÉ DU PLAN
+      //
+      // Si la ligne possède déjà un equipment_plan_id,
+      // celui-ci devient l'identité prioritaire.
+      // ==================================================
+
+      if (d.equipment_plan_id) {
+
+        return (
+          equipmentPlanId &&
+          d.equipment_plan_id === equipmentPlanId
+        );
+      }
+
+
+      // ==================================================
+      // COMPATIBILITÉ AVEC LES ANCIENNES DONNÉES
+      //
+      // Les anciennes lignes ne possèdent pas encore
+      // equipment_plan_id.
+      //
+      // On conserve donc temporairement :
+      // UP + configuration + machine
+      // ==================================================
+
+      const sameUp =
+        d.up_id === upId;
+
+
+      const sameConfiguration =
+        configurationId
+          ? d.configuration_id === configurationId
+          : !d.configuration_id;
+
+
+      return (
+        sameUp &&
+        sameConfiguration
+      );
+    }
+  );
+
+
+console.log(
+  `🔎 ${sameMachineRows.length} ligne(s) existante(s) pour`,
+  {
+    equipment_plan_id:
+      equipmentPlanId || null,
+
+    up_id:
+      upId,
+
+    configuration_id:
+      configurationId || null,
+
+    machine_key:
+      machineKey
+  }
+);
 
     // ======================================================
     // 8. CAS 1 :
