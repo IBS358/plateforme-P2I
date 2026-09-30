@@ -4131,7 +4131,11 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
     );
   }
 }
-   async function removeV2ModelFromEquipmentPlan(
+   // ==========================================================
+// RETRAIT D'UN MODÈLE DU PLAN D'ÉQUIPEMENT V2
+// ==========================================================
+
+async function removeV2ModelFromEquipmentPlan(
   machineKey,
   modelId
 ) {
@@ -4171,7 +4175,7 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
 
     // ======================================================
-    // 2. UP + CONFIGURATION COURANTES
+    // 2. CONTEXTE DU PLAN COURANT
     // ======================================================
 
     const params =
@@ -4186,6 +4190,9 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
     const configurationName =
       params.configurationName || '';
 
+    const equipmentPlanId =
+      params.equipmentPlanId || '';
+
 
     if (!upId) {
 
@@ -4198,8 +4205,11 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
 
     console.log(
-      '🧩 Retrait pour la configuration :',
+      '🧩 Retrait pour le plan d’équipement :',
       {
+        equipment_plan_id:
+          equipmentPlanId || null,
+
         up_id:
           upId,
 
@@ -4253,13 +4263,13 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
     // ======================================================
     // 4. RECHERCHE DE LA LIGNE ACTIVE
     //
-    // IDENTITÉ :
+    // NOUVELLE IDENTITÉ PRIORITAIRE :
+    //
+    // EQUIPMENT_PLAN_ID + MACHINE + MODÈLE
+    //
+    // COMPATIBILITÉ ANCIENNES DONNÉES :
     //
     // UP + CONFIGURATION + MACHINE + MODÈLE
-    //
-    // Pour une UP sans configuration :
-    //
-    // UP + MACHINE + MODÈLE
     // ======================================================
 
     const row =
@@ -4269,16 +4279,66 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
           item.data || {};
 
 
-        const sameUp =
-          d.up_id === upId;
+        // --------------------------------------------------
+        // La ligne doit appartenir au plan d'équipement
+        // --------------------------------------------------
 
+        const isEquipmentPlanItem =
+          d.record_type === 'equipment_plan_item';
+
+
+        if (!isEquipmentPlanItem) {
+          return false;
+        }
+
+
+        // --------------------------------------------------
+        // MACHINE + MODÈLE
+        // --------------------------------------------------
 
         const sameMachine =
           d.machine_key === machineKey;
 
-
         const sameModel =
           d.model_id === modelId;
+
+
+        if (
+          !sameMachine ||
+          !sameModel
+        ) {
+          return false;
+        }
+
+
+        // --------------------------------------------------
+        // NOUVELLE IDENTITÉ DU PLAN
+        //
+        // Lorsqu'une ligne possède equipment_plan_id,
+        // celui-ci est prioritaire.
+        // --------------------------------------------------
+
+        if (d.equipment_plan_id) {
+
+          return (
+            equipmentPlanId &&
+            d.equipment_plan_id === equipmentPlanId
+          );
+        }
+
+
+        // --------------------------------------------------
+        // COMPATIBILITÉ AVEC LES ANCIENNES DONNÉES
+        //
+        // Les anciennes lignes peuvent ne pas posséder
+        // equipment_plan_id.
+        //
+        // On utilise alors :
+        // UP + CONFIGURATION
+        // --------------------------------------------------
+
+        const sameUp =
+          d.up_id === upId;
 
 
         const sameConfiguration =
@@ -4287,16 +4347,9 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
             : !d.configuration_id;
 
 
-        const isEquipmentPlanItem =
-          d.record_type === 'equipment_plan_item';
-
-
         return (
           sameUp &&
-          sameConfiguration &&
-          sameMachine &&
-          sameModel &&
-          isEquipmentPlanItem
+          sameConfiguration
         );
       });
 
@@ -4308,7 +4361,7 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
     if (!row) {
 
       console.warn(
-        '⚠️ Aucun modèle correspondant trouvé pour cette configuration.'
+        '⚠️ Aucun modèle correspondant trouvé pour ce plan d’équipement.'
       );
 
       updateV2EquipmentPlanButtons(
@@ -4358,6 +4411,9 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
     console.log(
       '✅ Modèle retiré du plan :',
       {
+        equipment_plan_id:
+          equipmentPlanId || null,
+
         up_id:
           upId,
 
