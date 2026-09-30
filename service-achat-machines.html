@@ -1415,69 +1415,7 @@ activeConfigurationId =
 
 activeConfigurationName =
   selectedConfig?.name || '';
-  // ----------------------------------------------
-// IDENTITÉ DU PLAN D'ÉQUIPEMENT ACTIF
-// ----------------------------------------------
-
-const capacityReference =
-  up.capacity_reference || null;
-
-activeCapacityValue =
-  capacityReference?.value ?? null;
-
-activeCapacityUnit =
-  capacityReference?.unit || '';
-
-activeCapacityLabel =
-  capacityReference?.label || '';
-
-activeCapacityStatus =
-  capacityReference?.status || '';
-
-const normalizePlanPart = value =>
-  String(value ?? '')
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, '_')
-    .replace(/\//g, '_')
-    .replace(/[^a-z0-9_-]/g, '');
-
-activeEquipmentPlanId = [
-  upId,
-  activeConfigurationId || 'default',
-  activeCapacityValue ?? 'capacity_unknown',
-  activeCapacityUnit || ''
-]
-  .map(normalizePlanPart)
-  .filter(Boolean)
-  .join('__');
-
-console.log(
-  '🧭 Contexte du plan actif :',
-  {
-    equipment_plan_id:
-      activeEquipmentPlanId,
-
-    configuration_id:
-      activeConfigurationId,
-
-    configuration_name:
-      activeConfigurationName,
-
-    capacity_value:
-      activeCapacityValue,
-
-    capacity_unit:
-      activeCapacityUnit,
-
-    capacity_label:
-      activeCapacityLabel,
-
-    capacity_status:
-      activeCapacityStatus
-  }
-);
-
+ 
   // ----------------------------------------------
   // Afficher le sélecteur
   // ----------------------------------------------
