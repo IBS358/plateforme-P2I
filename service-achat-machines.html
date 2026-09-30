@@ -2143,8 +2143,21 @@ machinesGrid.innerHTML = machinesToDisplay.map(machine => {
   // Construction sécurisée de l'URL vers les modèles
   // ------------------------------------------------
 const params = new URLSearchParams({
-  up_id: upId || '',
-  up_nom: upNom || '',
+
+  // ============================================
+  // UP
+  // ============================================
+
+  up_id:
+    upId || '',
+
+  up_nom:
+    upNom || '',
+
+
+  // ============================================
+  // CONFIGURATION / VERSION DE PRODUCTION
+  // ============================================
 
   configuration_id:
     activeConfigurationId || '',
@@ -2152,11 +2165,51 @@ const params = new URLSearchParams({
   configuration_name:
     activeConfigurationName || '',
 
-  machine_key: machine.machine_key || '',
-  machine_name: machine.name || '',
-  machine_role: machine.role || '',
-  machine_capacity: machine.capacity || '',
-  machine_utilities: machine.utilities || ''
+
+  // ============================================
+  // PLAN D'ÉQUIPEMENT
+  // ============================================
+
+  equipment_plan_id:
+    equipmentPlanId || '',
+
+  capacity_value:
+    capacityValue != null
+      ? String(capacityValue)
+      : '',
+
+  capacity_unit:
+    capacityUnit || '',
+
+  capacity_label:
+    capacityLabel || '',
+
+  capacity_status:
+    capacityReference?.status || '',
+
+
+  // ============================================
+  // MACHINE
+  // ============================================
+
+  machine_key:
+    machine.machine_key || '',
+
+  machine_name:
+    machine.name ||
+    machine.machine_name ||
+    machine.nom ||
+    '',
+
+  machine_role:
+    machine.role || '',
+
+  machine_capacity:
+    machine.capacity || '',
+
+  machine_utilities:
+    machine.utilities || ''
+
 });
 
   const modelsUrl =
