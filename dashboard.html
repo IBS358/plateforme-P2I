@@ -2457,6 +2457,463 @@ console.log('🔎 TEST PRODUCTION_DATA :', typeof PRODUCTION_DATA);
   '🔎 TEST UP DANS MACHINES_DATA :',
   MACHINES_DATA['conserverie_legumes']
 );
+  // ==========================================================
+// RÉCUPÉRER TOUS LES PLANS D'ÉQUIPEMENT D'UNE UP
+//
+// Sources :
+// 1. localStorage : plans créés dans service-achat-machines
+// 2. saved_machines : plans possédant déjà des choix Supabase
+//
+// Cette fonction ne modifie aucune donnée.
+// ==========================================================
+
+function getEquipmentPlansForUp(up) {
+
+  if (!up || !up.id) {
+    return [];
+  }
+
+  const upId =
+    up.id;
+
+  const plansById =
+    {};
+
+
+  // ========================================================
+  // 1. PLANS PRÉSENTS DANS LOCALSTORAGE
+  // ========================================================
+
+  try {
+
+    const prefix =
+      `p2i_equipment_plan_${upId}__`;
+
+
+    for (
+      let i = 0;
+      i < localStorage.length;
+      i++
+    ) {
+
+      const key =
+        localStorage.key(i);
+
+
+      if (
+        !key ||
+        !key.startsWith(prefix)
+      ) {
+        continue;
+      }
+
+
+      const raw =
+        localStorage.getItem(key);
+
+
+      if (!raw) {
+        continue;
+      }
+
+
+      try {
+
+        const plan =
+          JSON.parse(raw);
+
+
+        if (
+          !plan ||
+          plan.up_id !== upId ||
+          !plan.equipment_plan_id
+        ) {
+          continue;
+        }
+
+
+        plansById[
+          plan.equipment_plan_id
+        ] = {
+
+          equipment_plan_id:
+            plan.equipment_plan_id,
+
+          up_id:
+            plan.up_id,
+
+          up_nom:
+            plan.up_nom ||
+            up.nom ||
+            '',
+
+          configuration_id:
+            plan.configuration_id ||
+            '',
+
+          configuration_name:
+            plan.configuration_name ||
+            '',
+
+          capacity_value:
+            plan.capacity_value ??
+            null,
+
+          capacity_unit:
+            plan.capacity_unit ||
+            '',
+
+          capacity_label:
+            plan.capacity_label ||
+            '',
+
+          capacity_status:
+            plan.capacity_status ||
+            '',
+
+          machines:
+            Array.isArray(plan.machines)
+              ? plan.machines
+              : [],
+
+          updated_at:
+            plan.updated_at ||
+            null,
+
+          source:
+            'localStorage',
+
+          saved_items:
+            []
+        };
+
+
+      } catch (parseError) {
+
+        console.warn(
+          '⚠️ Plan localStorage illisible :',
+          key,
+          parseError
+        );
+      }
+    }
+
+
+  } catch (error) {
+
+    console.warn(
+      '⚠️ Impossible de parcourir les plans localStorage :',
+      upId,
+      error
+    );
+  }
+
+
+  // ========================================================
+  // 2. PLANS PRÉSENTS DANS SAVED_MACHINES
+  // ========================================================
+
+  const savedMachines =
+    Array.isArray(up.machines)
+      ? up.machines
+      : [];
+
+
+  savedMachines.forEach(saved => {
+
+    const data =
+      saved.data || {};
+
+
+    if (
+      data.record_type !==
+        'equipment_plan_item'
+    ) {
+      return;
+    }
+
+
+    if (
+      data.up_id !== upId
+    ) {
+      return;
+    }
+
+
+    const equipmentPlanId =
+      data.equipment_plan_id ||
+      '';
+
+
+    // Les anciennes données sans equipment_plan_id
+    // restent gérées par le système historique.
+    if (!equipmentPlanId) {
+      return;
+    }
+
+
+    // ------------------------------------------------------
+    // Si le plan n'existe pas encore dans localStorage,
+    // on peut néanmoins le reconstruire depuis Supabase.
+    // ------------------------------------------------------
+
+    if (
+      !plansById[equipmentPlanId]
+    ) {
+
+      plansById[
+        equipmentPlanId
+      ] = {
+
+        equipment_plan_id:
+          equipmentPlanId,
+
+        up_id:
+          data.up_id ||
+          upId,
+
+        up_nom:
+          data.up_nom ||
+          up.nom ||
+          '',
+
+        configuration_id:
+          data.configuration_id ||
+          '',
+
+        configuration_name:
+          data.configuration_name ||
+          '',
+
+        capacity_value:
+          data.capacity_value ??
+          null,
+
+        capacity_unit:
+          data.capacity_unit ||
+          '',
+
+        capacity_label:
+          data.capacity_label ||
+          '',
+
+        capacity_status:
+          data.capacity_status ||
+          '',
+
+        machines:
+          [],
+
+        updated_at:
+          data.saved_at ||
+          saved.created_at ||
+          null,
+
+        source:
+          'supabase',
+
+        saved_items:
+          []
+      };
+    }
+
+
+    // ------------------------------------------------------
+    // Rattacher le modèle sélectionné au bon plan
+    // ------------------------------------------------------
+
+    plansById[
+      equipmentPlanId
+    ].saved_items.push(
+      saved
+    );
+
+
+    // ------------------------------------------------------
+    // Compléter les informations manquantes
+    // ------------------------------------------------------
+
+    const plan =
+      plansById[
+        equipmentPlanId
+      ];
+
+
+    if (
+      !plan.configuration_id &&
+      data.configuration_id
+    ) {
+
+      plan.configuration_id =
+        data.configuration_id;
+    }
+
+
+    if (
+      !plan.configuration_name &&
+      data.configuration_name
+    ) {
+
+      plan.configuration_name =
+        data.configuration_name;
+    }
+
+
+    if (
+      plan.capacity_value == null &&
+      data.capacity_value != null
+    ) {
+
+      plan.capacity_value =
+        data.capacity_value;
+    }
+
+
+    if (
+      !plan.capacity_unit &&
+      data.capacity_unit
+    ) {
+
+      plan.capacity_unit =
+        data.capacity_unit;
+    }
+
+
+    if (
+      !plan.capacity_label &&
+      data.capacity_label
+    ) {
+
+      plan.capacity_label =
+        data.capacity_label;
+    }
+
+
+    if (
+      !plan.capacity_status &&
+      data.capacity_status
+    ) {
+
+      plan.capacity_status =
+        data.capacity_status;
+    }
+  });
+
+
+  // ========================================================
+  // 3. CONVERSION EN TABLEAU
+  // ========================================================
+
+  const plans =
+    Object.values(
+      plansById
+    );
+
+
+  // ========================================================
+  // 4. TRI
+  //
+  // Configuration puis capacité.
+  // Cela évite que l'ordre dépende de localStorage.
+  // ========================================================
+
+  plans.sort(
+    (a, b) => {
+
+      const configA =
+        (
+          a.configuration_name ||
+          a.configuration_id ||
+          ''
+        ).toLowerCase();
+
+      const configB =
+        (
+          b.configuration_name ||
+          b.configuration_id ||
+          ''
+        ).toLowerCase();
+
+
+      const configComparison =
+        configA.localeCompare(
+          configB,
+          'fr'
+        );
+
+
+      if (
+        configComparison !== 0
+      ) {
+
+        return configComparison;
+      }
+
+
+      const capacityA =
+        Number(
+          a.capacity_value
+        ) || 0;
+
+      const capacityB =
+        Number(
+          b.capacity_value
+        ) || 0;
+
+
+      return (
+        capacityA -
+        capacityB
+      );
+    }
+  );
+
+
+  // ========================================================
+  // 5. CONTRÔLE CONSOLE
+  // ========================================================
+
+  console.log(
+    `🗂️ ${plans.length} plan(s) d'équipement détecté(s) pour ${upId} :`,
+    plans
+  );
+
+
+  if (
+    upId === 'biscuiterie'
+  ) {
+
+    console.table(
+      plans.map(plan => ({
+
+        equipment_plan_id:
+          plan.equipment_plan_id,
+
+        configuration:
+          plan.configuration_name,
+
+        capacity:
+          plan.capacity_label,
+
+        machines:
+          plan.machines.length,
+
+        selected_models:
+          plan.saved_items.length,
+
+        source:
+          plan.source
+      }))
+    );
+  }
+
+
+  // ========================================================
+  // 6. RETOUR
+  // ========================================================
+
+  return plans;
+}
   // ======================================================
 // CONSTRUCTION DU PLAN D'ÉQUIPEMENT D'UNE UP
 // ======================================================
