@@ -2918,6 +2918,42 @@ function getEquipmentPlansForUp(up) {
 // Exposition temporaire pour les tests console
 window.getEquipmentPlansForUp =
   getEquipmentPlansForUp;
+  // ==========================================================
+// SÉLECTION D'UN PLAN D'ÉQUIPEMENT DANS LE DASHBOARD
+// ==========================================================
+
+function selectDashboardEquipmentPlan(
+  upId,
+  equipmentPlanId
+) {
+
+  if (
+    !upId ||
+    !equipmentPlanId
+  ) {
+    return;
+  }
+
+  // Un plan actif est mémorisé séparément pour chaque UP
+  const storageKey =
+    `p2i_dashboard_equipment_plan_${upId}`;
+
+  localStorage.setItem(
+    storageKey,
+    equipmentPlanId
+  );
+
+  console.log(
+    '🎯 Plan Dashboard sélectionné :',
+    {
+      up_id: upId,
+      equipment_plan_id: equipmentPlanId
+    }
+  );
+
+  // Reconstruction de Mes machines
+  loadSavedMachines();
+}
   // ======================================================
 // CONSTRUCTION DU PLAN D'ÉQUIPEMENT D'UNE UP
 // ======================================================
@@ -10074,6 +10110,72 @@ const allEquipmentPlans =
 
 const hasMultipleEquipmentPlans =
   allEquipmentPlans.length > 1;
+    // ==================================================
+// PLAN SÉLECTIONNÉ DANS LE DASHBOARD
+// ==================================================
+
+const dashboardPlanStorageKey =
+  `p2i_dashboard_equipment_plan_${up.id}`;
+
+let selectedDashboardPlanId =
+  localStorage.getItem(
+    dashboardPlanStorageKey
+  );
+
+
+// Si aucun plan n'a encore été choisi,
+// on prend le plan actuellement actif de l'UP.
+if (
+  !selectedDashboardPlanId ||
+  !allEquipmentPlans.some(
+    plan =>
+      plan.equipment_plan_id ===
+      selectedDashboardPlanId
+  )
+) {
+
+  selectedDashboardPlanId =
+    allEquipmentPlans.find(
+      plan =>
+        plan.configuration_id ===
+        localStorage.getItem(
+          `p2i_configuration_${up.id}`
+        )
+    )?.equipment_plan_id
+    ||
+    allEquipmentPlans[0]
+      ?.equipment_plan_id
+    ||
+    '';
+}
+
+
+const selectedDashboardPlan =
+  allEquipmentPlans.find(
+    plan =>
+      plan.equipment_plan_id ===
+      selectedDashboardPlanId
+  ) || null;
+
+
+console.log(
+  '🎯 PLAN DASHBOARD ACTIF :',
+  {
+    up_id:
+      up.id,
+
+    equipment_plan_id:
+      selectedDashboardPlanId,
+
+    configuration_id:
+      selectedDashboardPlan
+        ?.configuration_id || null,
+
+    configuration_name:
+      selectedDashboardPlan
+        ?.configuration_name || null
+  }
+);
     // ==================================================
     // PLAN TECHNIQUE COMPLET DE L'UP
     // ==================================================
