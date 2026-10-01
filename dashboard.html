@@ -2951,16 +2951,20 @@ function selectDashboardEquipmentPlan(
     }
   );
 
-  // Reconstruction de Mes machines
+    // Reconstruction de Mes machines
   loadSavedMachines();
 }
-  // ==========================================================
+
+
+// ==========================================================
 // EXPOSITION POUR LES CLICS HTML DU DASHBOARD
 // ==========================================================
 
 window.selectDashboardEquipmentPlan =
   selectDashboardEquipmentPlan;
-  // ======================================================
+
+
+// ======================================================
 // CONSTRUCTION DU PLAN D'ÉQUIPEMENT D'UNE UP
 // ======================================================
 
@@ -3007,22 +3011,111 @@ function buildEquipmentPlanForUp(up) {
   let activeCapacityStatus = '';
 
 
+  // ====================================================
+  // 3A. PLAN EXPLICITEMENT SÉLECTIONNÉ
+  //     DANS LE DASHBOARD
+  // ====================================================
+
+  let dashboardSelectedPlanId = '';
+
+  try {
+
+    dashboardSelectedPlanId =
+      localStorage.getItem(
+        `p2i_dashboard_equipment_plan_${up.id}`
+      ) || '';
+
+  } catch (error) {
+
+    console.warn(
+      '⚠️ Impossible de lire le plan Dashboard :',
+      up.id,
+      error
+    );
+  }
+
+
   // ----------------------------------------------------
-  // Si des choix V2 existent déjà dans Supabase,
-  // leur equipment_plan_id est prioritaire.
-  //
-  // À ce stade du Dashboard, une UP correspond encore
-  // à une carte. On prend donc le plan V2 représenté
-  // dans cette UP.
-  //
-  // La gestion de plusieurs plans simultanés pour une
-  // même UP sera faite ensuite au niveau du regroupement.
+  // Le choix explicite de l'utilisateur dans
+  // "Mes machines" devient prioritaire.
   // ----------------------------------------------------
 
-  if (equipmentPlanItems.length > 0) {
+  if (dashboardSelectedPlanId) {
+
+    activeEquipmentPlanId =
+      dashboardSelectedPlanId;
+
+
+    // Chercher un modèle déjà enregistré appartenant
+    // précisément au plan sélectionné.
+    const selectedSavedItem =
+      equipmentPlanItems.find(saved =>
+        saved.data?.equipment_plan_id ===
+        dashboardSelectedPlanId
+      );
+
+
+    const selectedData =
+      selectedSavedItem?.data || {};
+
+
+    activeConfigurationId =
+      selectedData.configuration_id || '';
+
+    activeConfigurationName =
+      selectedData.configuration_name || '';
+
+    activeCapacityValue =
+      selectedData.capacity_value ?? null;
+
+    activeCapacityUnit =
+      selectedData.capacity_unit || '';
+
+    activeCapacityLabel =
+      selectedData.capacity_label || '';
+
+    activeCapacityStatus =
+      selectedData.capacity_status || '';
+
+
+    console.log(
+      '🎯 BUILD PLAN — choix Dashboard prioritaire :',
+      {
+        up_id:
+          up.id,
+
+        equipment_plan_id:
+          activeEquipmentPlanId,
+
+        configuration_id:
+          activeConfigurationId || null,
+
+        configuration_name:
+          activeConfigurationName || null
+      }
+    );
+  }
+
+
+  // ====================================================
+  // 3B. PLAN IDENTIFIÉ DANS SAVED_MACHINES
+  // ====================================================
+  //
+  // Ce bloc n'est utilisé QUE si aucun plan n'a été
+  // explicitement sélectionné dans le Dashboard.
+  //
+  // Cela évite que le premier equipment_plan_item
+  // trouvé dans Supabase écrase le choix de l'utilisateur.
+  // ====================================================
+
+  if (
+    !activeEquipmentPlanId &&
+    equipmentPlanItems.length > 0
+  ) {
 
     const firstPlanData =
       equipmentPlanItems[0].data || {};
+
 
     activeEquipmentPlanId =
       firstPlanData.equipment_plan_id || '';
@@ -3058,6 +3151,10 @@ function buildEquipmentPlanForUp(up) {
   // ----------------------------------------------------
   // PRIORITÉ A :
   // clé complète equipment_plan_id
+  //
+  // Si le Dashboard vient de sélectionner un plan,
+  // activeEquipmentPlanId contient précisément
+  // l'identifiant de ce plan.
   // ----------------------------------------------------
 
   if (activeEquipmentPlanId) {
@@ -3076,6 +3173,7 @@ function buildEquipmentPlanForUp(up) {
         const parsedPlan =
           JSON.parse(storedPlan);
 
+
         if (
           parsedPlan &&
           parsedPlan.equipment_plan_id ===
@@ -3084,6 +3182,59 @@ function buildEquipmentPlanForUp(up) {
 
           activeEquipmentPlan =
             parsedPlan;
+
+
+          // ----------------------------------------------
+          // Le plan localStorage devient également
+          // la référence pour son identité complète.
+          // ----------------------------------------------
+
+          activeConfigurationId =
+            activeEquipmentPlan.configuration_id ||
+            activeConfigurationId;
+
+          activeConfigurationName =
+            activeEquipmentPlan.configuration_name ||
+            activeConfigurationName;
+
+          activeCapacityValue =
+            activeEquipmentPlan.capacity_value ??
+            activeCapacityValue;
+
+          activeCapacityUnit =
+            activeEquipmentPlan.capacity_unit ||
+            activeCapacityUnit;
+
+          activeCapacityLabel =
+            activeEquipmentPlan.capacity_label ||
+            activeCapacityLabel;
+
+          activeCapacityStatus =
+            activeEquipmentPlan.capacity_status ||
+            activeCapacityStatus;
+
+
+          console.log(
+            '📦 PLAN DASHBOARD CHARGÉ DEPUIS LOCALSTORAGE :',
+            {
+              up_id:
+                up.id,
+
+              equipment_plan_id:
+                activeEquipmentPlan.equipment_plan_id,
+
+              configuration_id:
+                activeEquipmentPlan.configuration_id || null,
+
+              configuration_name:
+                activeEquipmentPlan.configuration_name || null,
+
+              machines:
+                Array.isArray(activeEquipmentPlan.machines)
+                  ? activeEquipmentPlan.machines.length
+                  : 0
+            }
+          );
         }
       }
 
@@ -3103,8 +3254,11 @@ function buildEquipmentPlanForUp(up) {
   // retrouver dans localStorage un plan complet
   // appartenant à cette UP.
   //
-  // Utile lorsqu'aucun modèle n'a encore été choisi
-  // dans Supabase.
+  // Ce secours n'est utilisé que lorsqu'aucun plan
+  // précis n'a pu être chargé par equipment_plan_id.
+  //
+  // Utile notamment pour les UP historiques ou lorsqu'
+  // aucun modèle n'a encore été choisi dans Supabase.
   // ----------------------------------------------------
 
   if (!activeEquipmentPlan) {
@@ -3126,6 +3280,7 @@ function buildEquipmentPlanForUp(up) {
         const key =
           localStorage.key(i);
 
+
         if (
           !key ||
           !key.startsWith(prefix)
@@ -3137,6 +3292,7 @@ function buildEquipmentPlanForUp(up) {
         const raw =
           localStorage.getItem(key);
 
+
         if (!raw) {
           continue;
         }
@@ -3146,6 +3302,7 @@ function buildEquipmentPlanForUp(up) {
 
           const parsed =
             JSON.parse(raw);
+
 
           if (
             parsed &&
@@ -3169,8 +3326,15 @@ function buildEquipmentPlanForUp(up) {
       }
 
 
+      // ------------------------------------------------
       // Le plan le plus récemment mis à jour
       // devient le plan actif provisoire.
+      //
+      // Ce comportement reste uniquement un secours :
+      // lorsqu'un plan Dashboard précis existe et a pu
+      // être chargé, nous ne passons pas ici.
+      // ------------------------------------------------
+
       candidatePlans.sort(
         (a, b) =>
           new Date(
@@ -3186,6 +3350,7 @@ function buildEquipmentPlanForUp(up) {
 
         activeEquipmentPlan =
           candidatePlans[0];
+
 
         activeEquipmentPlanId =
           activeEquipmentPlan.equipment_plan_id ||
@@ -3225,7 +3390,6 @@ function buildEquipmentPlanForUp(up) {
       );
     }
   }
-
 
   // ----------------------------------------------------
   // PRIORITÉ C :
