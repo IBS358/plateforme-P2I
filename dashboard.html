@@ -2474,40 +2474,325 @@ function buildEquipmentPlanForUp(up) {
 
 
   // ====================================================
-  // 2. PLAN D'ÉQUIPEMENT ACTIF
+  // 2. IDENTIFIER LES PLANS D'ÉQUIPEMENT PRÉSENTS
+  //    DANS SAVED_MACHINES
+  // ====================================================
+
+  const equipmentPlanItems =
+    savedMachines.filter(saved => {
+
+      const data =
+        saved.data || {};
+
+      return (
+        data.record_type === 'equipment_plan_item' &&
+        data.equipment_plan_id
+      );
+    });
+
+
+  // ====================================================
+  // 3. DÉTERMINER L'IDENTITÉ DU PLAN À UTILISER
+  // ====================================================
+
+  let activeEquipmentPlanId = '';
+  let activeConfigurationId = '';
+  let activeConfigurationName = '';
+  let activeCapacityValue = null;
+  let activeCapacityUnit = '';
+  let activeCapacityLabel = '';
+  let activeCapacityStatus = '';
+
+
+  // ----------------------------------------------------
+  // Si des choix V2 existent déjà dans Supabase,
+  // leur equipment_plan_id est prioritaire.
+  //
+  // À ce stade du Dashboard, une UP correspond encore
+  // à une carte. On prend donc le plan V2 représenté
+  // dans cette UP.
+  //
+  // La gestion de plusieurs plans simultanés pour une
+  // même UP sera faite ensuite au niveau du regroupement.
+  // ----------------------------------------------------
+
+  if (equipmentPlanItems.length > 0) {
+
+    const firstPlanData =
+      equipmentPlanItems[0].data || {};
+
+    activeEquipmentPlanId =
+      firstPlanData.equipment_plan_id || '';
+
+    activeConfigurationId =
+      firstPlanData.configuration_id || '';
+
+    activeConfigurationName =
+      firstPlanData.configuration_name || '';
+
+    activeCapacityValue =
+      firstPlanData.capacity_value ?? null;
+
+    activeCapacityUnit =
+      firstPlanData.capacity_unit || '';
+
+    activeCapacityLabel =
+      firstPlanData.capacity_label || '';
+
+    activeCapacityStatus =
+      firstPlanData.capacity_status || '';
+  }
+
+
+  // ====================================================
+  // 4. PLAN D'ÉQUIPEMENT ACTIF
   //    créé dans service-achat-machines.html
   // ====================================================
 
   let activeEquipmentPlan = null;
 
-  try {
 
-    const storageKey =
-      `p2i_equipment_plan_${up.id}`;
+  // ----------------------------------------------------
+  // PRIORITÉ A :
+  // clé complète equipment_plan_id
+  // ----------------------------------------------------
 
-    const storedPlan =
-  localStorage.getItem(storageKey);
+  if (activeEquipmentPlanId) {
 
-    if (storedPlan) {
+    try {
 
-      activeEquipmentPlan =
-        JSON.parse(storedPlan);
+      const storageKey =
+        `p2i_equipment_plan_${activeEquipmentPlanId}`;
 
+      const storedPlan =
+        localStorage.getItem(storageKey);
+
+
+      if (storedPlan) {
+
+        const parsedPlan =
+          JSON.parse(storedPlan);
+
+        if (
+          parsedPlan &&
+          parsedPlan.equipment_plan_id ===
+            activeEquipmentPlanId
+        ) {
+
+          activeEquipmentPlan =
+            parsedPlan;
+        }
+      }
+
+    } catch (error) {
+
+      console.warn(
+        '⚠️ Impossible de lire le plan identifié :',
+        activeEquipmentPlanId,
+        error
+      );
     }
+  }
 
-  } catch (error) {
 
-    console.warn(
-      '⚠️ Impossible de lire le plan actif :',
-      up.id,
-      error
-    );
+  // ----------------------------------------------------
+  // PRIORITÉ B :
+  // retrouver dans localStorage un plan complet
+  // appartenant à cette UP.
+  //
+  // Utile lorsqu'aucun modèle n'a encore été choisi
+  // dans Supabase.
+  // ----------------------------------------------------
 
+  if (!activeEquipmentPlan) {
+
+    try {
+
+      const prefix =
+        `p2i_equipment_plan_${up.id}__`;
+
+      const candidatePlans = [];
+
+
+      for (
+        let i = 0;
+        i < localStorage.length;
+        i++
+      ) {
+
+        const key =
+          localStorage.key(i);
+
+        if (
+          !key ||
+          !key.startsWith(prefix)
+        ) {
+          continue;
+        }
+
+
+        const raw =
+          localStorage.getItem(key);
+
+        if (!raw) {
+          continue;
+        }
+
+
+        try {
+
+          const parsed =
+            JSON.parse(raw);
+
+          if (
+            parsed &&
+            parsed.up_id === up.id &&
+            parsed.equipment_plan_id
+          ) {
+
+            candidatePlans.push(
+              parsed
+            );
+          }
+
+        } catch (parseError) {
+
+          console.warn(
+            '⚠️ Plan localStorage illisible :',
+            key,
+            parseError
+          );
+        }
+      }
+
+
+      // Le plan le plus récemment mis à jour
+      // devient le plan actif provisoire.
+      candidatePlans.sort(
+        (a, b) =>
+          new Date(
+            b.updated_at || 0
+          ).getTime() -
+          new Date(
+            a.updated_at || 0
+          ).getTime()
+      );
+
+
+      if (candidatePlans.length > 0) {
+
+        activeEquipmentPlan =
+          candidatePlans[0];
+
+        activeEquipmentPlanId =
+          activeEquipmentPlan.equipment_plan_id ||
+          activeEquipmentPlanId;
+
+        activeConfigurationId =
+          activeEquipmentPlan.configuration_id ||
+          activeConfigurationId;
+
+        activeConfigurationName =
+          activeEquipmentPlan.configuration_name ||
+          activeConfigurationName;
+
+        activeCapacityValue =
+          activeEquipmentPlan.capacity_value ??
+          activeCapacityValue;
+
+        activeCapacityUnit =
+          activeEquipmentPlan.capacity_unit ||
+          activeCapacityUnit;
+
+        activeCapacityLabel =
+          activeEquipmentPlan.capacity_label ||
+          activeCapacityLabel;
+
+        activeCapacityStatus =
+          activeEquipmentPlan.capacity_status ||
+          activeCapacityStatus;
+      }
+
+    } catch (error) {
+
+      console.warn(
+        '⚠️ Impossible de rechercher les plans de l’UP :',
+        up.id,
+        error
+      );
+    }
+  }
+
+
+  // ----------------------------------------------------
+  // PRIORITÉ C :
+  // compatibilité avec l'ancienne clé historique
+  // p2i_equipment_plan_${up.id}
+  // ----------------------------------------------------
+
+  if (!activeEquipmentPlan) {
+
+    try {
+
+      const legacyStorageKey =
+        `p2i_equipment_plan_${up.id}`;
+
+      const legacyStoredPlan =
+        localStorage.getItem(
+          legacyStorageKey
+        );
+
+
+      if (legacyStoredPlan) {
+
+        activeEquipmentPlan =
+          JSON.parse(
+            legacyStoredPlan
+          );
+
+
+        activeEquipmentPlanId =
+          activeEquipmentPlan?.equipment_plan_id ||
+          activeEquipmentPlanId;
+
+        activeConfigurationId =
+          activeEquipmentPlan?.configuration_id ||
+          activeConfigurationId;
+
+        activeConfigurationName =
+          activeEquipmentPlan?.configuration_name ||
+          activeConfigurationName;
+
+        activeCapacityValue =
+          activeEquipmentPlan?.capacity_value ??
+          activeCapacityValue;
+
+        activeCapacityUnit =
+          activeEquipmentPlan?.capacity_unit ||
+          activeCapacityUnit;
+
+        activeCapacityLabel =
+          activeEquipmentPlan?.capacity_label ||
+          activeCapacityLabel;
+
+        activeCapacityStatus =
+          activeEquipmentPlan?.capacity_status ||
+          activeCapacityStatus;
+      }
+
+    } catch (error) {
+
+      console.warn(
+        '⚠️ Impossible de lire l’ancien plan actif :',
+        up.id,
+        error
+      );
+    }
   }
 
 
   // ====================================================
-  // 3. RÉFÉRENTIEL HISTORIQUE
+  // 5. RÉFÉRENTIEL HISTORIQUE
   // ====================================================
 
   const upReference =
@@ -2521,7 +2806,7 @@ function buildEquipmentPlanForUp(up) {
 
 
   // ====================================================
-  // 4. DÉTERMINER LE PLAN TECHNIQUE À UTILISER
+  // 6. DÉTERMINER LE PLAN TECHNIQUE À UTILISER
   // ====================================================
 
   let requiredMachines = [];
@@ -2529,167 +2814,176 @@ function buildEquipmentPlanForUp(up) {
 
 
   // ----------------------------------------------------
-  // PRIORITÉ 1
-  // Plan dynamique réellement construit par
-  // service-achat-machines.html
+  // PRIORITÉ 1 :
+  // plan dynamique complet
   // ----------------------------------------------------
 
   if (
     activeEquipmentPlan &&
-    Array.isArray(activeEquipmentPlan.machines) &&
+    Array.isArray(
+      activeEquipmentPlan.machines
+    ) &&
     activeEquipmentPlan.machines.length > 0
   ) {
 
     requiredMachines =
-      activeEquipmentPlan.machines.map(machine => ({
+      activeEquipmentPlan.machines.map(
+        machine => ({
 
-        machine_key:
-          machine.machine_key ||
-          machine.key ||
-          machine.id ||
-          '',
+          machine_key:
+            machine.machine_key ||
+            machine.key ||
+            machine.id ||
+            '',
 
-        machine_name:
-          machine.machine_name ||
-          machine.name ||
-          machine.nom ||
-          'Machine',
+          machine_name:
+            machine.machine_name ||
+            machine.name ||
+            machine.nom ||
+            'Machine',
 
-        role:
-          machine.role ||
-          machine.machine_role ||
-          '',
+          role:
+            machine.role ||
+            machine.machine_role ||
+            '',
 
-        capacity:
-          machine.capacity ||
-          machine.machine_capacity ||
-          '',
+          capacity:
+            machine.capacity ||
+            machine.machine_capacity ||
+            '',
 
-        utilities:
-          machine.utilities ||
-          machine.machine_utilities ||
-          '',
+          utilities:
+            machine.utilities ||
+            machine.machine_utilities ||
+            '',
 
-        price:
-          machine.price ??
-          null,
+          price:
+            machine.price ??
+            null,
 
-        source:
-          machine.source ||
-          machine.type ||
-          'configured_plan'
+          source:
+            machine.source ||
+            machine.type ||
+            'configured_plan'
+        })
+      );
 
-      }));
 
     equipmentPlanSource =
-      'active_configuration';
-
+      'active_equipment_plan';
   }
 
 
   // ----------------------------------------------------
-  // PRIORITÉ 2
-  // Ancien référentiel MACHINES_DATA
+  // PRIORITÉ 2 :
+  // ancien référentiel MACHINES_DATA
   // ----------------------------------------------------
 
   else if (
     upReference &&
-    Array.isArray(upReference.machines)
+    Array.isArray(
+      upReference.machines
+    )
   ) {
 
     requiredMachines =
-      upReference.machines.map(machine => ({
+      upReference.machines.map(
+        machine => ({
 
-        machine_key:
-          machine.machine_key ||
-          machine.key ||
-          machine.id ||
-          '',
+          machine_key:
+            machine.machine_key ||
+            machine.key ||
+            machine.id ||
+            '',
 
-        machine_name:
-          machine.machine_name ||
-          machine.name ||
-          machine.nom ||
-          'Machine',
+          machine_name:
+            machine.machine_name ||
+            machine.name ||
+            machine.nom ||
+            'Machine',
 
-        role:
-          machine.role ||
-          machine.machine_role ||
-          '',
+          role:
+            machine.role ||
+            machine.machine_role ||
+            '',
 
-        capacity:
-          machine.capacity ||
-          machine.machine_capacity ||
-          '',
+          capacity:
+            machine.capacity ||
+            machine.machine_capacity ||
+            '',
 
-        utilities:
-          machine.utilities ||
-          machine.machine_utilities ||
-          '',
+          utilities:
+            machine.utilities ||
+            machine.machine_utilities ||
+            '',
 
-        price:
-          machine.price ??
-          null,
+          price:
+            machine.price ??
+            null,
 
-        source:
-          'machines_data'
+          source:
+            'machines_data'
+        })
+      );
 
-      }));
 
     equipmentPlanSource =
       'machines_data';
-
   }
 
-  else if (Array.isArray(upReference)) {
+
+  else if (
+    Array.isArray(upReference)
+  ) {
 
     requiredMachines =
-      upReference.map(machine => ({
+      upReference.map(
+        machine => ({
 
-        machine_key:
-          machine.machine_key ||
-          machine.key ||
-          machine.id ||
-          '',
+          machine_key:
+            machine.machine_key ||
+            machine.key ||
+            machine.id ||
+            '',
 
-        machine_name:
-          machine.machine_name ||
-          machine.name ||
-          machine.nom ||
-          'Machine',
+          machine_name:
+            machine.machine_name ||
+            machine.name ||
+            machine.nom ||
+            'Machine',
 
-        role:
-          machine.role ||
-          machine.machine_role ||
-          '',
+          role:
+            machine.role ||
+            machine.machine_role ||
+            '',
 
-        capacity:
-          machine.capacity ||
-          machine.machine_capacity ||
-          '',
+          capacity:
+            machine.capacity ||
+            machine.machine_capacity ||
+            '',
 
-        utilities:
-          machine.utilities ||
-          machine.machine_utilities ||
-          '',
+          utilities:
+            machine.utilities ||
+            machine.machine_utilities ||
+            '',
 
-        price:
-          machine.price ??
-          null,
+          price:
+            machine.price ??
+            null,
 
-        source:
-          'machines_data'
+          source:
+            'machines_data'
+        })
+      );
 
-      }));
 
     equipmentPlanSource =
       'machines_data';
-
   }
 
 
   // ====================================================
-  // 5. CONTRÔLE IMPORTANT
+  // 7. CONTRÔLE DU PLAN ACTIF
   // ====================================================
 
   console.log(
@@ -2699,10 +2993,40 @@ function buildEquipmentPlanForUp(up) {
   );
 
   console.log(
+    '🆔 EQUIPMENT PLAN ACTIF :',
+    {
+      up_id:
+        up.id,
+
+      equipment_plan_id:
+        activeEquipmentPlanId || null,
+
+      configuration_id:
+        activeConfigurationId || null,
+
+      configuration_name:
+        activeConfigurationName || null,
+
+      capacity_value:
+        activeCapacityValue,
+
+      capacity_unit:
+        activeCapacityUnit || null,
+
+      capacity_label:
+        activeCapacityLabel || null,
+
+      capacity_status:
+        activeCapacityStatus || null
+    }
+  );
+
+  console.log(
     '⚙️ MACHINES REQUISES :',
     up.id,
     requiredMachines.length
   );
+
 
   if (up.id === 'biscuiterie') {
 
@@ -2720,12 +3044,11 @@ function buildEquipmentPlanForUp(up) {
       '🍪 MACHINES APRÈS NORMALISATION :',
       requiredMachines.length
     );
-
   }
 
 
   // ====================================================
-  // 6. AUCUN PLAN TECHNIQUE DISPONIBLE
+  // 8. AUCUN PLAN TECHNIQUE DISPONIBLE
   // ====================================================
 
   if (!requiredMachines.length) {
@@ -2735,10 +3058,12 @@ function buildEquipmentPlanForUp(up) {
       up.id
     );
 
+
     return savedMachines.map(saved => {
 
       const data =
         saved.data || {};
+
 
       return {
 
@@ -2784,23 +3109,98 @@ function buildEquipmentPlanForUp(up) {
         coverage_status:
           'selected',
 
-        // IMPORTANT :
-        // structure normalisée pour l'affichage
         savedMachine:
           saved,
 
         data:
-          data
+          data,
 
+        equipment_plan_id:
+          data.equipment_plan_id ||
+          activeEquipmentPlanId ||
+          '',
+
+        configuration_id:
+          data.configuration_id ||
+          activeConfigurationId ||
+          '',
+
+        configuration_name:
+          data.configuration_name ||
+          activeConfigurationName ||
+          '',
+
+        capacity_value:
+          data.capacity_value ??
+          activeCapacityValue,
+
+        capacity_unit:
+          data.capacity_unit ||
+          activeCapacityUnit ||
+          '',
+
+        capacity_label:
+          data.capacity_label ||
+          activeCapacityLabel ||
+          ''
       };
-
     });
-
   }
 
 
   // ====================================================
-  // 7. FUSION PLAN TECHNIQUE + CHOIX UTILISATEUR
+  // 9. MACHINES ENREGISTRÉES DU PLAN ACTIF
+  // ====================================================
+
+  const savedMachinesForActivePlan =
+    savedMachines.filter(saved => {
+
+      const data =
+        saved.data || {};
+
+
+      // --------------------------------------------------
+      // Nouvelles données V2
+      // --------------------------------------------------
+
+      if (data.equipment_plan_id) {
+
+        return (
+          activeEquipmentPlanId &&
+          data.equipment_plan_id ===
+            activeEquipmentPlanId
+        );
+      }
+
+
+      // --------------------------------------------------
+      // Compatibilité historique
+      //
+      // Une ancienne donnée sans equipment_plan_id
+      // peut encore être utilisée si elle appartient
+      // à la même UP et à la même configuration.
+      // --------------------------------------------------
+
+      const sameUp =
+        data.up_id === up.id;
+
+
+      const sameConfiguration =
+        activeConfigurationId
+          ? data.configuration_id ===
+              activeConfigurationId
+          : !data.configuration_id;
+
+
+      return (
+        sameUp &&
+        sameConfiguration
+      );
+    });
+
+
+  // ====================================================
+  // 10. FUSION PLAN TECHNIQUE + CHOIX UTILISATEUR
   // ====================================================
 
   const finalPlan =
@@ -2817,68 +3217,69 @@ function buildEquipmentPlanForUp(up) {
 
 
       // ------------------------------------------------
-      // Recherche d'un modèle déjà enregistré
+      // Recherche d'un modèle enregistré
+      // UNIQUEMENT dans le plan actif
       // ------------------------------------------------
 
       const selected =
-        savedMachines.find(saved => {
+        savedMachinesForActivePlan.find(
+          saved => {
 
-          const data =
-            saved.data || {};
-
-
-          const savedKey =
-            data.machine_key ||
-            data.machine_ref ||
-            '';
+            const data =
+              saved.data || {};
 
 
-          // ============================================
-          // MÉTHODE 1
-          // machine_key identique
-          // ============================================
+            const savedKey =
+              data.machine_key ||
+              data.machine_ref ||
+              '';
 
-          if (
-            requiredKey &&
-            savedKey &&
-            requiredKey === savedKey
-          ) {
 
-            return true;
+            // ============================================
+            // MÉTHODE 1
+            // machine_key identique
+            // ============================================
 
+            if (
+              requiredKey &&
+              savedKey &&
+              requiredKey === savedKey
+            ) {
+
+              return true;
+            }
+
+
+            // ============================================
+            // MÉTHODE 2
+            // Compatibilité anciennes données par nom
+            // ============================================
+
+            const savedName =
+              data.machine ||
+              data.machine_name ||
+              '';
+
+
+            if (
+              requiredName &&
+              savedName &&
+              requiredName
+                .trim()
+                .toLowerCase() ===
+              savedName
+                .trim()
+                .toLowerCase()
+            ) {
+
+              return true;
+            }
+
+
+            return false;
           }
-
-
-          // ============================================
-          // MÉTHODE 2
-          // Compatibilité anciennes données par nom
-          // ============================================
-
-          const savedName =
-            data.machine ||
-            data.machine_name ||
-            '';
-
-
-          if (
-            requiredName &&
-            savedName &&
-            requiredName
-              .trim()
-              .toLowerCase() ===
-            savedName
-              .trim()
-              .toLowerCase()
-          ) {
-
-            return true;
-
-          }
-
-
-          return false;
-
-        }) || null;
+        ) ||
+        null;
 
 
       const selectedData =
@@ -2923,6 +3324,46 @@ function buildEquipmentPlanForUp(up) {
 
 
         // ==============================================
+        // IDENTITÉ DU PLAN
+        // ==============================================
+
+        equipment_plan_id:
+          activeEquipmentPlanId ||
+          selectedData.equipment_plan_id ||
+          '',
+
+        configuration_id:
+          activeConfigurationId ||
+          selectedData.configuration_id ||
+          '',
+
+        configuration_name:
+          activeConfigurationName ||
+          selectedData.configuration_name ||
+          '',
+
+        capacity_value:
+          activeCapacityValue ??
+          selectedData.capacity_value ??
+          null,
+
+        capacity_unit:
+          activeCapacityUnit ||
+          selectedData.capacity_unit ||
+          '',
+
+        capacity_label:
+          activeCapacityLabel ||
+          selectedData.capacity_label ||
+          '',
+
+        capacity_status:
+          activeCapacityStatus ||
+          selectedData.capacity_status ||
+          '',
+
+
+        // ==============================================
         // ÉTAT DE COUVERTURE
         // ==============================================
 
@@ -2941,14 +3382,12 @@ function buildEquipmentPlanForUp(up) {
 
         data:
           selectedData
-
       };
-
     });
 
 
   // ====================================================
-  // 8. CONTRÔLE FINAL
+  // 11. CONTRÔLE FINAL
   // ====================================================
 
   console.log(
@@ -2958,11 +3397,26 @@ function buildEquipmentPlanForUp(up) {
       source:
         equipmentPlanSource,
 
+      equipment_plan_id:
+        activeEquipmentPlanId || null,
+
+      configuration_id:
+        activeConfigurationId || null,
+
+      configuration_name:
+        activeConfigurationName || null,
+
+      capacity_label:
+        activeCapacityLabel || null,
+
       required:
         requiredMachines.length,
 
-      saved:
+      saved_total:
         savedMachines.length,
+
+      saved_for_plan:
+        savedMachinesForActivePlan.length,
 
       final:
         finalPlan.length,
@@ -2985,6 +3439,15 @@ function buildEquipmentPlanForUp(up) {
         n:
           index + 1,
 
+        equipment_plan_id:
+          item.equipment_plan_id,
+
+        configuration:
+          item.configuration_name,
+
+        capacity:
+          item.capacity_label,
+
         machine_key:
           item.machine_key,
 
@@ -3000,19 +3463,16 @@ function buildEquipmentPlanForUp(up) {
         model:
           item.data?.model ||
           ''
-
       }))
     );
-
   }
 
 
   // ====================================================
-  // 9. RETOUR
+  // 12. RETOUR
   // ====================================================
 
   return finalPlan;
-
 }
   // ======================================================
 // SYNTHÈSE FINANCIÈRE DU PLAN D'ÉQUIPEMENT
