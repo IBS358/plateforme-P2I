@@ -3872,9 +3872,6 @@ function updateV2EquipmentPlanButtons(
 
   });
 }
-    // ==========================================================
-// RESTAURATION DU MODÈLE V2 RETENU AU CHARGEMENT DE LA PAGE
-// ==========================================================
 
 // ==========================================================
 // RESTAURATION DU MODÈLE V2 RETENU AU CHARGEMENT DE LA PAGE
@@ -3921,7 +3918,7 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
 
     // ======================================================
-    // 2. UP + CONFIGURATION COURANTES
+    // 2. CONTEXTE DU PLAN COURANT
     // ======================================================
 
     const params =
@@ -3935,6 +3932,9 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
     const configurationName =
       params.configurationName || '';
+
+    const equipmentPlanId =
+      params.equipmentPlanId || '';
 
 
     if (!upId) {
@@ -3953,8 +3953,11 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
 
 
     console.log(
-      '🧩 Restauration pour la configuration :',
+      '🧩 Restauration pour le plan d’équipement :',
       {
+        equipment_plan_id:
+          equipmentPlanId || null,
+
         up_id:
           upId,
 
@@ -4000,13 +4003,13 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
     // ======================================================
     // 4. RECHERCHE DU MODÈLE ACTIF
     //
-    // IDENTITÉ LOGIQUE :
+    // NOUVELLE IDENTITÉ PRIORITAIRE :
+    //
+    // EQUIPMENT_PLAN_ID + MACHINE_KEY
+    //
+    // COMPATIBILITÉ ANCIENNES DONNÉES :
     //
     // UP + CONFIGURATION + MACHINE_KEY
-    //
-    // Pour les UP sans configuration :
-    //
-    // UP + MACHINE_KEY
     // ======================================================
 
     const matchingRows =
@@ -4016,25 +4019,61 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
           row.data || {};
 
 
-        const sameUp =
-          d.up_id === upId;
+        // --------------------------------------------------
+        // La ligne doit appartenir au plan d'équipement
+        // --------------------------------------------------
 
+        const isEquipmentPlanItem =
+          d.record_type === 'equipment_plan_item';
+
+
+        if (!isEquipmentPlanItem) {
+          return false;
+        }
+
+
+        // --------------------------------------------------
+        // MACHINE
+        // --------------------------------------------------
 
         const sameMachine =
           d.machine_key === machineKey;
 
 
+        if (!sameMachine) {
+          return false;
+        }
+
+
         // --------------------------------------------------
-        // CONFIGURATION
+        // NOUVELLE IDENTITÉ DU PLAN
         //
-        // Si la page possède une configuration,
-        // l'enregistrement doit appartenir exactement
-        // à cette configuration.
-        //
-        // Si la page n'a pas de configuration,
-        // on ne retient que les anciens/enregistrements
-        // classiques sans configuration.
+        // Si la ligne possède equipment_plan_id,
+        // celui-ci devient l'identité prioritaire.
         // --------------------------------------------------
+
+        if (d.equipment_plan_id) {
+
+          return (
+            equipmentPlanId &&
+            d.equipment_plan_id === equipmentPlanId
+          );
+        }
+
+
+        // --------------------------------------------------
+        // COMPATIBILITÉ AVEC LES ANCIENNES DONNÉES
+        //
+        // Les anciennes lignes peuvent ne pas posséder
+        // equipment_plan_id.
+        //
+        // On utilise alors :
+        // UP + CONFIGURATION + MACHINE
+        // --------------------------------------------------
+
+        const sameUp =
+          d.up_id === upId;
+
 
         const sameConfiguration =
           configurationId
@@ -4042,15 +4081,9 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
             : !d.configuration_id;
 
 
-        const isEquipmentPlanItem =
-          d.record_type === 'equipment_plan_item';
-
-
         return (
           sameUp &&
-          sameConfiguration &&
-          sameMachine &&
-          isEquipmentPlanItem
+          sameConfiguration
         );
       });
 
@@ -4058,6 +4091,9 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
     console.log(
       `🔎 ${matchingRows.length} choix trouvé(s) pour`,
       {
+        equipment_plan_id:
+          equipmentPlanId || null,
+
         up_id:
           upId,
 
@@ -4082,7 +4118,7 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
       );
 
       console.log(
-        'ℹ️ Aucun modèle actuellement retenu pour cette configuration.'
+        'ℹ️ Aucun modèle actuellement retenu pour ce plan d’équipement.'
       );
 
       return;
@@ -4108,8 +4144,8 @@ async function restoreV2EquipmentPlanSelection(machineKey) {
     console.log(
       '✅ Modèle actuellement retenu :',
       selectedModelId,
-      '| configuration :',
-      configurationId || 'aucune'
+      '| plan :',
+      equipmentPlanId || 'ancien plan sans identifiant'
     );
 
 
