@@ -10760,17 +10760,36 @@ ${currentConfigurationName || currentCapacityLabel ? `
 
                   return `
 
-                    <div
-                      data-equipment-plan-id="${escapeHtml(
-                        plan.equipment_plan_id || ''
-                      )}"
-                      style="
-                        padding:13px;
-                        border-radius:10px;
-                        background:#111827;
-                        border:1px solid #334155;
-                      "
-                    >
+                   <div
+  data-equipment-plan-id="${escapeHtml(
+    plan.equipment_plan_id || ''
+  )}"
+
+  onclick="selectDashboardEquipmentPlan(
+    '${escapeHtml(up.id || '')}',
+    '${escapeHtml(plan.equipment_plan_id || '')}'
+  )"
+
+  style="
+    padding:13px;
+    border-radius:10px;
+
+    background:${
+      plan.equipment_plan_id === selectedDashboardPlanId
+        ? 'rgba(76,201,240,.10)'
+        : '#111827'
+    };
+
+    border:${
+      plan.equipment_plan_id === selectedDashboardPlanId
+        ? '2px solid #4cc9f0'
+        : '1px solid #334155'
+    };
+
+    cursor:pointer;
+    transition:all .2s ease;
+  "
+>
 
                       <!-- CONFIGURATION -->
 
@@ -10784,6 +10803,18 @@ ${currentConfigurationName || currentCapacityLabel ? `
                           plan.configuration_name ||
                           'Plan d’équipement'
                         )}
+                        ${plan.equipment_plan_id === selectedDashboardPlanId ? `
+
+  <div style="
+    margin-top:6px;
+    color:#4cc9f0;
+    font-size:10px;
+    font-weight:700;
+  ">
+    ✓ Plan sélectionné
+  </div>
+
+` : ''}
                       </div>
 
 
