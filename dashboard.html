@@ -4207,6 +4207,17 @@ p2i_verified_cost_usd:
 // mais pas encore vérifiés par la P2I
 p2i_unverified_cost_usd:
   0,
+    // Fourchettes de prix catalogue documentées.
+// Elles restent séparées des prix fixes afin de ne pas
+// fabriquer artificiellement un montant unique.
+p2i_documented_range_min_usd:
+  0,
+
+p2i_documented_range_max_usd:
+  0,
+
+p2i_documented_range_count:
+  0,
 
 user_declared_cost_usd:
   0,
@@ -5650,10 +5661,31 @@ if (validP2IPrice) {
 
   }
 
-} else if (!hasDocumentedP2IPriceRange) {
+}
 
-  // Aucun prix unique ET aucune fourchette
-  // documentée : une cotation reste nécessaire.
+// --------------------------------------------------
+// FOURCHETTE CATALOGUE DOCUMENTÉE
+// --------------------------------------------------
+
+else if (hasDocumentedP2IPriceRange) {
+
+  estimate.p2i_documented_range_min_usd +=
+    parsedP2IPriceMin;
+
+  estimate.p2i_documented_range_max_usd +=
+    parsedP2IPriceMax;
+
+  estimate.p2i_documented_range_count +=
+    1;
+
+}
+
+// --------------------------------------------------
+// AUCUN PRIX CATALOGUE EXPLOITABLE
+// --------------------------------------------------
+
+else {
+
   estimate.has_unpriced_p2i_models =
     true;
 }
