@@ -12514,24 +12514,76 @@ const isP2ICatalog =
         );
 
 
-      // ------------------------------------------------
-      // URL vers les modèles
-      // ------------------------------------------------
+     // ------------------------------------------------
+// URL vers les modèles
+//
+// Transmission du contexte complet du
+// plan d'équipement actuellement affiché.
+// ------------------------------------------------
 
-      const modelParams =
-        new URLSearchParams({
-          up_id: up.id || '',
-          up_nom: up.nom || '',
-          machine_key: machineKey || '',
-          machine_name: machineName || '',
-          machine_role: role || '',
-          machine_capacity: capacity || '',
-          machine_utilities: utilities || ''
-        });
+const modelParams =
+  new URLSearchParams({
 
-      const modelsUrl =
-        `machine-models.html?${modelParams.toString()}`;
+    // ============================================
+    // UP
+    // ============================================
 
+    up_id:
+      up.id || '',
+
+    up_nom:
+      up.nom || '',
+
+
+    // ============================================
+    // PLAN D'ÉQUIPEMENT ACTIF
+    // ============================================
+
+    configuration_id:
+      equipmentPlan?.configuration_id || '',
+
+    configuration_name:
+      equipmentPlan?.configuration_name || '',
+
+    equipment_plan_id:
+      equipmentPlan?.equipment_plan_id || '',
+
+    capacity_value:
+      equipmentPlan?.capacity_value ?? '',
+
+    capacity_unit:
+      equipmentPlan?.capacity_unit || '',
+
+    capacity_label:
+      equipmentPlan?.capacity_label || '',
+
+    capacity_status:
+      equipmentPlan?.capacity_status || '',
+
+
+    // ============================================
+    // MACHINE
+    // ============================================
+
+    machine_key:
+      machineKey || '',
+
+    machine_name:
+      machineName || '',
+
+    machine_role:
+      role || '',
+
+    machine_capacity:
+      capacity || '',
+
+    machine_utilities:
+      utilities || ''
+  });
+
+
+const modelsUrl =
+  `machine-models.html?${modelParams.toString()}`;
 
       // ------------------------------------------------
       // CARTE / LIGNE MACHINE
