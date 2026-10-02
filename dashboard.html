@@ -13236,26 +13236,60 @@ ${
                   }
 
                   ${
-                    price
-                      ? `
-                        <span style="
-                          color:#22c55e;
-                          font-size:10px;
-                          font-weight:700;
-                        ">
-                          • ${escapeHtml(String(price))}
-                        </span>
-                      `
-                      : `
-                        <span style="
-                          color:#f59e0b;
-                          font-size:10px;
-                          font-weight:700;
-                        ">
-                          • Cotation à obtenir
-                        </span>
-                      `
-                  }
+  price
+    ? `
+      <span style="
+        color:#22c55e;
+        font-size:10px;
+        font-weight:700;
+      ">
+        • ${escapeHtml(String(price))}
+      </span>
+    `
+
+    : (
+        data?.price_type === 'range' ||
+        (
+          data?.price_status === 'documented' &&
+          Number(data?.price_min) > 0 &&
+          Number(data?.price_max) > 0
+        )
+      )
+
+      ? `
+        <span style="
+          color:#7dd3fc;
+          font-size:10px;
+          font-weight:700;
+        ">
+          • ${Number(
+            data?.price_min ?? data?.price_min_usd ?? 0
+          ).toLocaleString('fr-FR')}
+          –
+          ${Number(
+            data?.price_max ?? data?.price_max_usd ?? 0
+          ).toLocaleString('fr-FR')} USD
+        </span>
+
+        <span style="
+          color:#94a3b8;
+          font-size:9px;
+          margin-left:4px;
+        ">
+          Fourchette catalogue documentée
+        </span>
+      `
+
+      : `
+        <span style="
+          color:#f59e0b;
+          font-size:10px;
+          font-weight:700;
+        ">
+          • Cotation à obtenir
+        </span>
+      `
+}
 
                 </div>
 
