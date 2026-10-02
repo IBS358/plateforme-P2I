@@ -12134,90 +12134,210 @@ ${p2iCifDisplay.available ? `
   ">
 
 
-    <!-- PRIX CATALOGUE P2I -->
+   <!-- PRIX CATALOGUE P2I -->
 
-    <div style="
-      padding:9px 10px;
-      border-radius:8px;
-      background:rgba(255,255,255,.025);
-    ">
+<div style="
+  padding:9px 10px;
+  border-radius:8px;
+  background:rgba(255,255,255,.025);
+">
 
-      <div style="
-        color:#94a3b8;
-        font-size:9px;
-      ">
-        Prix catalogue P2I
-      </div>
-
-      <div style="
-        color:#e2e8f0;
-        font-size:12px;
-        font-weight:650;
-        margin-top:2px;
-      ">
-        ${Number(
-          equipmentEstimate.p2i_known_cost_usd || 0
-        ).toLocaleString('fr-FR')} USD
-      </div>
+  <div style="
+    color:#94a3b8;
+    font-size:9px;
+  ">
+    Prix catalogue P2I
+  </div>
 
 
-      <!-- DÉTAIL DU NIVEAU DE VÉRIFICATION -->
+  <!-- MONTANT / FOURCHETTE PRINCIPALE -->
 
-      <div style="
-        margin-top:6px;
-        padding-top:6px;
-        border-top:1px solid rgba(148,163,184,.12);
-        display:grid;
-        gap:3px;
-      ">
+  <div style="
+    color:#e2e8f0;
+    font-size:12px;
+    font-weight:650;
+    margin-top:2px;
+  ">
 
+    ${
+      Number(
+        equipmentEstimate.p2i_documented_range_count || 0
+      ) > 0
+
+        ? `${Number(
+            equipmentEstimate.p2i_documented_range_min_usd || 0
+          ).toLocaleString('fr-FR')}
+          –
+          ${Number(
+            equipmentEstimate.p2i_documented_range_max_usd || 0
+          ).toLocaleString('fr-FR')} USD`
+
+        : `${Number(
+            equipmentEstimate.p2i_known_cost_usd || 0
+          ).toLocaleString('fr-FR')} USD`
+    }
+
+  </div>
+
+
+  <!-- NATURE DU MONTANT AFFICHÉ -->
+
+  ${
+    Number(
+      equipmentEstimate.p2i_documented_range_count || 0
+    ) > 0
+      ? `
         <div style="
-          display:flex;
-          justify-content:space-between;
-          gap:8px;
-          color:#86efac;
+          color:#7dd3fc;
           font-size:9px;
+          margin-top:3px;
         ">
-
-          <span>
-            <i class="fas fa-check-circle"></i>
-            Vérifiés P2I
-          </span>
-
-          <strong>
-            ${Number(
-              equipmentEstimate.p2i_verified_cost_usd || 0
-            ).toLocaleString('fr-FR')} USD
-          </strong>
-
+          <i class="fas fa-chart-line"></i>
+          Fourchette catalogue documentée
         </div>
+      `
+      : ''
+  }
 
 
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          gap:8px;
-          color:#fbbf24;
-          font-size:9px;
-        ">
+  <!-- DÉTAIL DU NIVEAU DE VÉRIFICATION -->
 
-          <span>
-            <i class="fas fa-clock"></i>
-            À vérifier
-          </span>
+  <div style="
+    margin-top:6px;
+    padding-top:6px;
+    border-top:1px solid rgba(148,163,184,.12);
+    display:grid;
+    gap:4px;
+  ">
 
-          <strong>
-            ${Number(
-              equipmentEstimate.p2i_unverified_cost_usd || 0
-            ).toLocaleString('fr-FR')} USD
-          </strong>
 
-        </div>
+    <!-- FOURCHETTES DOCUMENTÉES -->
 
-      </div>
+    ${
+      Number(
+        equipmentEstimate.p2i_documented_range_count || 0
+      ) > 0
+        ? `
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            gap:8px;
+            color:#7dd3fc;
+            font-size:9px;
+          ">
 
-    </div>
+            <span>
+              <i class="fas fa-file-circle-check"></i>
+              Prix documentés
+            </span>
 
+            <strong>
+              ${Number(
+                equipmentEstimate.p2i_documented_range_count || 0
+              )}
+              modèle${
+                Number(
+                  equipmentEstimate.p2i_documented_range_count || 0
+                ) > 1
+                  ? 's'
+                  : ''
+              }
+            </strong>
+
+          </div>
+        `
+        : ''
+    }
+
+
+    <!-- PRIX FIXES VÉRIFIÉS -->
+
+    ${
+      Number(
+        equipmentEstimate.p2i_verified_cost_usd || 0
+      ) > 0
+        ? `
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            gap:8px;
+            color:#86efac;
+            font-size:9px;
+          ">
+
+            <span>
+              <i class="fas fa-check-circle"></i>
+              Prix fixes vérifiés P2I
+            </span>
+
+            <strong>
+              ${Number(
+                equipmentEstimate.p2i_verified_cost_usd || 0
+              ).toLocaleString('fr-FR')} USD
+            </strong>
+
+          </div>
+        `
+        : ''
+    }
+
+
+    <!-- PRIX FIXES À VÉRIFIER -->
+
+    ${
+      Number(
+        equipmentEstimate.p2i_unverified_cost_usd || 0
+      ) > 0
+        ? `
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            gap:8px;
+            color:#fbbf24;
+            font-size:9px;
+          ">
+
+            <span>
+              <i class="fas fa-clock"></i>
+              Prix fixes à vérifier
+            </span>
+
+            <strong>
+              ${Number(
+                equipmentEstimate.p2i_unverified_cost_usd || 0
+              ).toLocaleString('fr-FR')} USD
+            </strong>
+
+          </div>
+        `
+        : ''
+    }
+
+
+    <!-- PRÉCISION FOURCHETTE -->
+
+    ${
+      Number(
+        equipmentEstimate.p2i_documented_range_count || 0
+      ) > 0
+        ? `
+          <div style="
+            margin-top:3px;
+            color:#94a3b8;
+            font-size:8px;
+            line-height:1.35;
+          ">
+            Fourchette issue des prix catalogue documentés
+            des modèles actuellement retenus.
+            Elle ne constitue pas encore un devis fournisseur.
+          </div>
+        `
+        : ''
+    }
+
+  </div>
+
+</div>
 
     <!-- PRIX UTILISATEUR -->
 
