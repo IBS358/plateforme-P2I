@@ -5651,11 +5651,12 @@ if (validP2IPrice) {
 
   }
 
-} else {
+} else if (!hasDocumentedP2IPriceRange) {
 
+  // Aucun prix unique ET aucune fourchette
+  // documentée : une cotation reste nécessaire.
   estimate.has_unpriced_p2i_models =
     true;
-
 }
 
 
@@ -5721,18 +5722,26 @@ catalog_price_verified:
   catalogPriceVerified,
 
 price_source:
-  !validP2IPrice
-    ? 'quotation_required'
-    : catalogPriceVerified
-      ? 'p2i_verified_reference'
-      : 'catalog_price_unverified',
+  validP2IPrice
+    ? (
+        catalogPriceVerified
+          ? 'p2i_verified_reference'
+          : 'catalog_price_unverified'
+      )
+    : hasDocumentedP2IPriceRange
+      ? 'p2i_documented_catalog_range'
+      : 'quotation_required',
 
 verification_status:
-  !validP2IPrice
-    ? 'pending_quotation'
-    : catalogPriceVerified
-      ? 'verified'
-      : 'not_verified',
+  validP2IPrice
+    ? (
+        catalogPriceVerified
+          ? 'verified'
+          : 'not_verified'
+      )
+    : hasDocumentedP2IPriceRange
+      ? 'documented'
+      : 'pending_quotation',
 
 
   // ----------------------------------------------
