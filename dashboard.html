@@ -12518,11 +12518,26 @@ const isP2ICatalog =
         );
 
 
-     // ------------------------------------------------
+    // ------------------------------------------------
 // URL vers les modèles
 //
 // Transmission du contexte complet du
-// plan d'équipement actuellement affiché.
+// plan d'équipement actuellement sélectionné.
+// ------------------------------------------------
+
+// Le résultat de buildEquipmentPlanForUp(up)
+// est un tableau de machines.
+//
+// Chaque machine porte les métadonnées du plan.
+// On utilise donc le premier élément comme
+// référence pour l'identité du plan actif.
+const currentPlanMeta =
+  equipmentPlan?.[0] || {};
+
+
+// ------------------------------------------------
+// Construction des paramètres transmis à
+// machine-models.html
 // ------------------------------------------------
 
 const modelParams =
@@ -12544,25 +12559,25 @@ const modelParams =
     // ============================================
 
     configuration_id:
-      equipmentPlan?.configuration_id || '',
+      currentPlanMeta.configuration_id || '',
 
     configuration_name:
-      equipmentPlan?.configuration_name || '',
+      currentPlanMeta.configuration_name || '',
 
     equipment_plan_id:
-      equipmentPlan?.equipment_plan_id || '',
+      currentPlanMeta.equipment_plan_id || '',
 
     capacity_value:
-      equipmentPlan?.capacity_value ?? '',
+      currentPlanMeta.capacity_value ?? '',
 
     capacity_unit:
-      equipmentPlan?.capacity_unit || '',
+      currentPlanMeta.capacity_unit || '',
 
     capacity_label:
-      equipmentPlan?.capacity_label || '',
+      currentPlanMeta.capacity_label || '',
 
     capacity_status:
-      equipmentPlan?.capacity_status || '',
+      currentPlanMeta.capacity_status || '',
 
 
     // ============================================
@@ -12585,6 +12600,10 @@ const modelParams =
       utilities || ''
   });
 
+
+// ------------------------------------------------
+// URL finale
+// ------------------------------------------------
 
 const modelsUrl =
   `machine-models.html?${modelParams.toString()}`;
