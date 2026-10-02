@@ -5323,7 +5323,8 @@ return;
 
 
 // ==================================================
-// 3. MODÈLE CATALOGUE P2I
+// PRIX CATALOGUE P2I
+// Prix unique + fourchette documentée
 // ==================================================
 
 const rawP2IPrice =
@@ -5333,6 +5334,10 @@ const rawP2IPrice =
   data.price ??
   null;
 
+
+// --------------------------------------------------
+// PRIX UNIQUE
+// --------------------------------------------------
 
 const parsedP2IPrice =
   typeof rawP2IPrice === 'number'
@@ -5350,11 +5355,81 @@ const validP2IPrice =
 
 
 // --------------------------------------------------
+// FOURCHETTE DE PRIX CATALOGUE
+// --------------------------------------------------
+
+const parsedP2IPriceMin =
+  Number(data.price_min);
+
+const parsedP2IPriceMax =
+  Number(data.price_max);
+
+
+const validP2IPriceMin =
+  Number.isFinite(parsedP2IPriceMin) &&
+  parsedP2IPriceMin > 0;
+
+
+const validP2IPriceMax =
+  Number.isFinite(parsedP2IPriceMax) &&
+  parsedP2IPriceMax > 0;
+
+
+const hasP2IPriceRange =
+  validP2IPriceMin &&
+  validP2IPriceMax;
+
+
+// --------------------------------------------------
+// STATUT DU PRIX
+// --------------------------------------------------
+
+const p2iPriceStatus =
+  data.price_status || null;
+
+
+const p2iPriceCurrency =
+  String(
+    data.price_currency || 'USD'
+  ).toUpperCase();
+
+
+const p2iPriceDisplay =
+  data.price_display || null;
+
+
+// Une fourchette est considérée comme documentée
+// uniquement si :
+// - min et max sont valides
+// - la devise est USD
+// - le statut indique un prix documenté
+const hasDocumentedP2IPriceRange =
+  hasP2IPriceRange &&
+  p2iPriceCurrency === 'USD' &&
+  p2iPriceStatus === 'documented';
+
+
+// --------------------------------------------------
+// PRIX CATALOGUE DISPONIBLE ?
+// --------------------------------------------------
+
+// IMPORTANT :
+// validP2IPrice = prix unique exploitable directement
+// hasDocumentedP2IPriceRange = fourchette exploitable
+// comme estimation, mais PAS comme montant unique.
+
+const hasUsableP2ICatalogPrice =
+  validP2IPrice ||
+  hasDocumentedP2IPriceRange;
+
+
+// --------------------------------------------------
 // VÉRIFICATION DU PRIX CATALOGUE P2I
 // --------------------------------------------------
 
 const catalogPriceVerified =
-  data.catalog_price_verified === true;
+  data.catalog_price_verified === true ||
+  hasDocumentedP2IPriceRange;
 
 
 // --------------------------------------------------
@@ -5372,9 +5447,10 @@ const catalogPriceBasis =
 // --------------------------------------------------
 
 let p2iLogisticsStatus =
-  validP2IPrice
+  hasUsableP2ICatalogPrice
     ? 'price_basis_to_confirm'
     : 'quotation_required';
+
 
 let p2iPreCarriageRequired =
   null;
@@ -5385,15 +5461,19 @@ let p2iFreightRequired =
 let p2iInsuranceRequired =
   null;
 
+
 let p2iCifStatus =
-  validP2IPrice
+  hasUsableP2ICatalogPrice
     ? 'not_calculable'
     : 'quotation_required';
 
 
+// ==================================================
 // EXW — départ usine
+// ==================================================
+
 if (
-  validP2IPrice &&
+  hasUsableP2ICatalogPrice &&
   catalogPriceBasis === 'exw'
 ) {
 
@@ -5414,9 +5494,12 @@ if (
 }
 
 
+// ==================================================
 // FOB — port d'embarquement
+// ==================================================
+
 else if (
-  validP2IPrice &&
+  hasUsableP2ICatalogPrice &&
   catalogPriceBasis === 'fob'
 ) {
 
@@ -5437,9 +5520,12 @@ else if (
 }
 
 
+// ==================================================
 // CIF — PORT D'ABIDJAN
+// ==================================================
+
 else if (
-  validP2IPrice &&
+  hasUsableP2ICatalogPrice &&
   catalogPriceBasis === 'cif_abidjan'
 ) {
 
@@ -5458,7 +5544,6 @@ else if (
   p2iCifStatus =
     'already_available';
 }
-
 
 // RENDU SUR SITE EN CÔTE D'IVOIRE
 else if (
@@ -5599,9 +5684,35 @@ estimate.p2i_catalog.push({
     'p2i_catalog',
 
   amount_usd:
-    validP2IPrice
-      ? parsedP2IPrice
-      : null,
+  validP2IPrice
+    ? parsedP2IPrice
+    : null,
+
+price_type:
+  validP2IPrice
+    ? 'fixed'
+    : hasDocumentedP2IPriceRange
+      ? 'range'
+      : 'quotation_required',
+
+price_min_usd:
+  hasDocumentedP2IPriceRange
+    ? parsedP2IPriceMin
+    : null,
+
+price_max_usd:
+  hasDocumentedP2IPriceRange
+    ? parsedP2IPriceMax
+    : null,
+
+price_display:
+  p2iPriceDisplay,
+
+price_status:
+  p2iPriceStatus,
+
+price_currency:
+  p2iPriceCurrency,
 
   catalog_price_basis:
   catalogPriceBasis,
