@@ -5570,13 +5570,12 @@ else if (
 
 // PRIX CONNU MAIS BASE NON RENSEIGNÉE
 else if (
-  validP2IPrice &&
+  hasUsableP2ICatalogPrice &&
   (
     catalogPriceBasis === 'unknown' ||
     !catalogPriceBasis
   )
 ) {
-
   p2iLogisticsStatus =
     'price_basis_to_confirm';
 
