@@ -14134,11 +14134,22 @@ async function deleteDevisSupabase(id) {
 async function openSelfPurchaseEditor(
   upId,
   upNom,
+
+  configurationId,
+  configurationName,
+  equipmentPlanId,
+
+  capacityValue,
+  capacityUnit,
+  capacityLabel,
+  capacityStatus,
+
   machineKey,
   machineName,
   role,
   capacity,
   utilities,
+
   savedMachineId = null
 ) {
   // --------------------------------------------------
@@ -15048,16 +15059,27 @@ async function openSelfPurchaseEditor(
   .getElementById('saveSelfPurchaseButton')
   .addEventListener('click', () => {
 
-    saveSelfPurchaseChoice(
-      upId,
-      upNom,
-      machineKey,
-      machineName,
-      role,
-      capacity,
-      utilities,
-      savedMachineId
-    );
+   saveSelfPurchaseChoice(
+  upId,
+  upNom,
+
+  configurationId,
+  configurationName,
+  equipmentPlanId,
+
+  capacityValue,
+  capacityUnit,
+  capacityLabel,
+  capacityStatus,
+
+  machineKey,
+  machineName,
+  role,
+  capacity,
+  utilities,
+
+  savedMachineId
+);
 
   });
 }
@@ -15077,11 +15099,22 @@ function closeSelfPurchaseEditor() {
 async function saveSelfPurchaseChoice(
   upId,
   upNom,
+
+  configurationId,
+  configurationName,
+  equipmentPlanId,
+
+  capacityValue,
+  capacityUnit,
+  capacityLabel,
+  capacityStatus,
+
   machineKey,
   machineName,
   role,
   capacity,
   utilities,
+
   savedMachineId = null
 ) {
   try {
@@ -15298,6 +15331,17 @@ if (!priceBasis) {
   return;
 }
     // --------------------------------------------------
+// 3 TER. NORMALISATION DE LA CAPACITÉ DU PLAN
+// --------------------------------------------------
+
+const parsedCapacityValue =
+  capacityValue !== '' &&
+  capacityValue !== null &&
+  capacityValue !== undefined &&
+  Number.isFinite(Number(capacityValue))
+    ? Number(capacityValue)
+    : null;
+    // --------------------------------------------------
     // 4. DONNÉES À ENREGISTRER
     // --------------------------------------------------
 
@@ -15309,14 +15353,53 @@ if (!priceBasis) {
       record_type:
         'equipment_plan_item',
 
-      up_id:
-        upId || '',
+     up_id:
+  upId || '',
 
-      up_nom:
-        upNom || '',
+up_nom:
+  upNom || '',
 
-      machine_key:
-        machineKey || '',
+
+// ----------------------------------------------
+// CONFIGURATION / PLAN D'ÉQUIPEMENT
+// ----------------------------------------------
+
+configuration_id:
+  configurationId || '',
+
+configuration_name:
+  configurationName || '',
+
+equipment_plan_id:
+  equipmentPlanId || '',
+
+equipment_plan_status:
+  'selected',
+
+
+// ----------------------------------------------
+// CAPACITÉ DE RÉFÉRENCE DU PLAN
+// ----------------------------------------------
+
+capacity_value:
+  parsedCapacityValue,
+
+capacity_unit:
+  capacityUnit || '',
+
+capacity_label:
+  capacityLabel || '',
+
+capacity_status:
+  capacityStatus || '',
+
+
+// ----------------------------------------------
+// MACHINE TECHNIQUE
+// ----------------------------------------------
+
+machine_key:
+  machineKey || '',
 
       machine:
         machineName || 'Machine',
@@ -15495,51 +15578,109 @@ user_spare_parts: {
     );
 
 
-    // --------------------------------------------------
-    // 5. ENREGISTREMENT SUPABASE
-    // --------------------------------------------------
-
-    let savedResult;
-let error;
-
-
-// --------------------------------------------------
-// MODIFICATION D'UN CHOIX EXISTANT
+   // --------------------------------------------------
+// 5. RECHERCHE DU CHOIX EXISTANT DANS CE PLAN
 // --------------------------------------------------
 
-if (savedMachineId) {
+let targetSavedMachineId =
+  savedMachineId || null;
 
-  const result = await supabaseClient
+
+// Si aucun ID n'a été transmis,
+// on recherche la machine par son identité V2 :
+// equipment_plan_id + machine_key
+
+if (!targetSavedMachineId) {
+
+  const {
+    data: existingRows,
+    error: searchError
+  } = await supabaseClient
     .from('saved_machines')
-    .update({
-      data: machineData
-    })
-    .eq('id', savedMachineId)
-    .eq('user_id', user.id)
-    .select();
+    .select('id,data')
+    .eq('user_id', user.id);
 
-  savedResult =
-    result.data;
 
-  error =
-    result.error;
+  if (searchError) {
 
+    console.error(
+      '❌ Erreur recherche choix existant :',
+      searchError
+    );
+
+    alert(
+      "Erreur lors de la vérification du plan d'équipement."
+    );
+
+    return;
+  }
+
+
+  const existingChoice =
+    (existingRows || []).find(row => {
+
+      const data =
+        row.data || {};
+
+      return (
+        data.record_type ===
+          'equipment_plan_item' &&
+
+        data.equipment_plan_id ===
+          equipmentPlanId &&
+
+        data.machine_key ===
+          machineKey
+      );
+
+    });
+
+
+  if (existingChoice) {
+
+    targetSavedMachineId =
+      existingChoice.id;
+
+    console.log(
+      '🔄 Choix existant trouvé pour remplacement :',
+      {
+        id: existingChoice.id,
+        equipment_plan_id:
+          equipmentPlanId,
+        machine_key:
+          machineKey
+      }
+    );
+  }
 }
 
 
 // --------------------------------------------------
-// NOUVEAU CHOIX
+// 6. ENREGISTREMENT SUPABASE
 // --------------------------------------------------
 
-else {
+let savedResult;
+let error;
 
-  const result = await supabaseClient
-    .from('saved_machines')
-    .insert({
-      user_id: user.id,
-      data: machineData
-    })
-    .select();
+
+if (targetSavedMachineId) {
+
+  const result =
+    await supabaseClient
+      .from('saved_machines')
+      .update({
+        data: machineData
+      })
+      .eq(
+        'id',
+        targetSavedMachineId
+      )
+      .eq(
+        'user_id',
+        user.id
+      )
+      .select();
+
 
   savedResult =
     result.data;
@@ -15547,6 +15688,26 @@ else {
   error =
     result.error;
 
+} else {
+
+  const result =
+    await supabaseClient
+      .from('saved_machines')
+      .insert({
+        user_id:
+          user.id,
+
+        data:
+          machineData
+      })
+      .select();
+
+
+  savedResult =
+    result.data;
+
+  error =
+    result.error;
 }
 
 
