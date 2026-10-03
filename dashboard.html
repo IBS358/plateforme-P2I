@@ -12195,24 +12195,38 @@ ${p2iCifDisplay.available ? `
     margin-top:2px;
   ">
 
-    ${
-      Number(
-        equipmentEstimate.p2i_documented_range_count || 0
+   ${
+  Number(
+    equipmentEstimate.p2i_documented_range_count || 0
+  ) > 0
+
+    ? `${Number(
+        equipmentEstimate.p2i_documented_range_min_usd || 0
+      ).toLocaleString('fr-FR')}
+      –
+      ${Number(
+        equipmentEstimate.p2i_documented_range_max_usd || 0
+      ).toLocaleString('fr-FR')} USD`
+
+    : Number(
+        equipmentEstimate.p2i_known_cost_usd || 0
       ) > 0
 
-        ? `${Number(
-            equipmentEstimate.p2i_documented_range_min_usd || 0
-          ).toLocaleString('fr-FR')}
-          –
-          ${Number(
-            equipmentEstimate.p2i_documented_range_max_usd || 0
-          ).toLocaleString('fr-FR')} USD`
+      ? `${Number(
+          equipmentEstimate.p2i_known_cost_usd || 0
+        ).toLocaleString('fr-FR')} USD`
 
-        : `${Number(
-            equipmentEstimate.p2i_known_cost_usd || 0
-          ).toLocaleString('fr-FR')} USD`
-    }
+      : (
+          Array.isArray(
+            equipmentEstimate.p2i_catalog
+          ) &&
+          equipmentEstimate.p2i_catalog.length > 0
+        )
 
+        ? `Cotation requise`
+
+        : `0 USD`
+}
   </div>
 
 
