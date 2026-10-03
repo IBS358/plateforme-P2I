@@ -11464,29 +11464,53 @@ ${currentConfigurationName || currentCapacityLabel ? `
     </div>
 
 
-    <div style="
-      text-align:right;
-    ">
+   <div style="
+  text-align:right;
+">
 
-      <div style="
-        color:#f8fafc;
-        font-size:18px;
-        font-weight:750;
-      ">
-        ${Number(
-          equipmentEstimate.known_machine_cost_usd || 0
-        ).toLocaleString('fr-FR')} USD
-      </div>
+  <div style="
+    color:#f8fafc;
+    font-size:18px;
+    font-weight:750;
+  ">
 
-      <div style="
-        color:#94a3b8;
-        font-size:10px;
-        margin-top:2px;
-      ">
-        Sous-total actuellement chiffré
-      </div>
+    ${
+      Number(
+        equipmentEstimate.p2i_documented_range_count || 0
+      ) > 0
 
-    </div>
+        ? `${Number(
+            (equipmentEstimate.known_machine_cost_usd || 0) +
+            (equipmentEstimate.p2i_documented_range_min_usd || 0)
+          ).toLocaleString('fr-FR')}
+          –
+          ${Number(
+            (equipmentEstimate.known_machine_cost_usd || 0) +
+            (equipmentEstimate.p2i_documented_range_max_usd || 0)
+          ).toLocaleString('fr-FR')} USD`
+
+        : `${Number(
+            equipmentEstimate.known_machine_cost_usd || 0
+          ).toLocaleString('fr-FR')} USD`
+    }
+
+  </div>
+
+  <div style="
+    color:#94a3b8;
+    font-size:10px;
+    margin-top:2px;
+  ">
+    ${
+      Number(
+        equipmentEstimate.p2i_documented_range_count || 0
+      ) > 0
+        ? 'Estimation actuelle des équipements renseignés'
+        : 'Sous-total actuellement chiffré'
+    }
+  </div>
+
+</div>
 
   </div>
 ${p2iCifDisplay.available ? `
