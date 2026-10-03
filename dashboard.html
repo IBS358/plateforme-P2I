@@ -11475,24 +11475,36 @@ ${currentConfigurationName || currentCapacityLabel ? `
   ">
 
     ${
-      Number(
-        equipmentEstimate.p2i_documented_range_count || 0
+  Number(
+    equipmentEstimate.p2i_documented_range_count || 0
+  ) > 0
+
+    ? `${Number(
+        (equipmentEstimate.known_machine_cost_usd || 0) +
+        (equipmentEstimate.p2i_documented_range_min_usd || 0)
+      ).toLocaleString('fr-FR')}
+      –
+      ${Number(
+        (equipmentEstimate.known_machine_cost_usd || 0) +
+        (equipmentEstimate.p2i_documented_range_max_usd || 0)
+      ).toLocaleString('fr-FR')} USD`
+
+    : Number(
+        equipmentEstimate.known_machine_cost_usd || 0
       ) > 0
 
-        ? `${Number(
-            (equipmentEstimate.known_machine_cost_usd || 0) +
-            (equipmentEstimate.p2i_documented_range_min_usd || 0)
-          ).toLocaleString('fr-FR')}
-          –
-          ${Number(
-            (equipmentEstimate.known_machine_cost_usd || 0) +
-            (equipmentEstimate.p2i_documented_range_max_usd || 0)
-          ).toLocaleString('fr-FR')} USD`
+      ? `${Number(
+          equipmentEstimate.known_machine_cost_usd || 0
+        ).toLocaleString('fr-FR')} USD`
 
-        : `${Number(
-            equipmentEstimate.known_machine_cost_usd || 0
-          ).toLocaleString('fr-FR')} USD`
-    }
+      : Number(
+          equipmentEstimate.configured || 0
+        ) > 0
+
+        ? `À chiffrer`
+
+        : `0 USD`
+}
 
   </div>
 
