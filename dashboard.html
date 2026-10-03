@@ -11514,12 +11514,31 @@ ${currentConfigurationName || currentCapacityLabel ? `
     margin-top:2px;
   ">
     ${
-      Number(
-        equipmentEstimate.p2i_documented_range_count || 0
+  Number(
+    equipmentEstimate.p2i_documented_range_count || 0
+  ) > 0 ||
+  Number(
+    equipmentEstimate.known_machine_cost_usd || 0
+  ) > 0
+
+    ? 'Estimation actuelle des équipements renseignés'
+
+    : Number(
+        equipmentEstimate.configured || 0
       ) > 0
-        ? 'Estimation actuelle des équipements renseignés'
-        : 'Sous-total actuellement chiffré'
-    }
+
+      ? `${Number(
+          equipmentEstimate.configured || 0
+        )} modèle${
+          Number(
+            equipmentEstimate.configured || 0
+          ) > 1
+            ? 's retenus en attente de cotation'
+            : ' retenu en attente de cotation'
+        }`
+
+      : 'Aucun équipement encore renseigné'
+}
   </div>
 
 </div>
