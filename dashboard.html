@@ -11474,7 +11474,7 @@ ${currentConfigurationName || currentCapacityLabel ? `
     font-weight:750;
   ">
 
-    ${
+   ${
   Number(
     equipmentEstimate.p2i_documented_range_count || 0
   ) > 0
@@ -11498,52 +11498,66 @@ ${currentConfigurationName || currentCapacityLabel ? `
         ).toLocaleString('fr-FR')} USD`
 
       : Number(
-          equipmentEstimate.configured || 0
+          equipmentEstimate.p2i_catalog?.length || 0
         ) > 0
 
         ? `À chiffrer`
 
         : `0 USD`
 }
-
   </div>
 
   <div style="
-    color:#94a3b8;
-    font-size:10px;
-    margin-top:2px;
-  ">
-    ${
-  Number(
-    equipmentEstimate.p2i_documented_range_count || 0
-  ) > 0 ||
-  Number(
-    equipmentEstimate.known_machine_cost_usd || 0
-  ) > 0
+  color:#94a3b8;
+  font-size:10px;
+  margin-top:2px;
+">
+  ${
+    Number(
+      equipmentEstimate.p2i_documented_range_count || 0
+    ) > 0 ||
+    Number(
+      equipmentEstimate.known_machine_cost_usd || 0
+    ) > 0
 
-    ? 'Estimation actuelle des équipements renseignés'
+      ? 'Estimation actuelle des équipements renseignés'
 
-    : Number(
-        equipmentEstimate.configured || 0
-      ) > 0
+      : Number(
+          equipmentEstimate.p2i_catalog?.length || 0
+        ) > 0
 
-      ? `${Number(
-          equipmentEstimate.configured || 0
-        )} modèle${
-          Number(
-            equipmentEstimate.configured || 0
-          ) > 1
-            ? 's retenus en attente de cotation'
-            : ' retenu en attente de cotation'
-        }`
+        ? `${Number(
+            equipmentEstimate.p2i_catalog?.length || 0
+          )} modèle${
+            Number(
+              equipmentEstimate.p2i_catalog?.length || 0
+            ) > 1
+              ? 's P2I retenus en attente de cotation'
+              : ' P2I retenu en attente de cotation'
+          }`
 
-      : 'Aucun équipement encore renseigné'
-}
-  </div>
+        : Number(
+            equipmentEstimate.already_owned?.length || 0
+          ) > 0
+
+          ? `${Number(
+              equipmentEstimate.already_owned?.length || 0
+            )} machine${
+              Number(
+                equipmentEstimate.already_owned?.length || 0
+              ) > 1
+                ? 's déjà possédées'
+                : ' déjà possédée'
+            } — hors coût d'acquisition P2I`
+
+          : 'Aucun équipement encore renseigné'
+  }
+</div>
 
 </div>
 
-  </div>
+</div>
+
 ${p2iCifDisplay.available ? `
 
   <!-- ========================================
