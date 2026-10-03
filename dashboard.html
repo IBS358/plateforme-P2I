@@ -13525,24 +13525,24 @@ ${
           justify-content:flex-end;
         ">
 
-           <button
+          <button
   type="button"
   onclick="selectEquipmentAcquisitionMode(
     '${escapeJsString(up.id || '')}',
     '${escapeJsString(up.nom || '')}',
 
-    '${escapeJsString(item?.configuration_id || '')}',
-    '${escapeJsString(item?.configuration_name || '')}',
-    '${escapeJsString(item?.equipment_plan_id || '')}',
+    '${escapeJsString(currentPlanMeta.configuration_id || '')}',
+    '${escapeJsString(currentPlanMeta.configuration_name || '')}',
+    '${escapeJsString(currentPlanMeta.equipment_plan_id || '')}',
 
     '${escapeJsString(
-      item?.capacity_value != null
-        ? String(item.capacity_value)
+      currentPlanMeta.capacity_value != null
+        ? String(currentPlanMeta.capacity_value)
         : ''
     )}',
-    '${escapeJsString(item?.capacity_unit || '')}',
-    '${escapeJsString(item?.capacity_label || '')}',
-    '${escapeJsString(item?.capacity_status || '')}',
+    '${escapeJsString(currentPlanMeta.capacity_unit || '')}',
+    '${escapeJsString(currentPlanMeta.capacity_label || '')}',
+    '${escapeJsString(currentPlanMeta.capacity_status || '')}',
 
     '${escapeJsString(machineKey || '')}',
     '${escapeJsString(machineName || '')}',
@@ -13573,18 +13573,18 @@ ${
     '${escapeJsString(up.id || '')}',
     '${escapeJsString(up.nom || '')}',
 
-    '${escapeJsString(item?.configuration_id || '')}',
-    '${escapeJsString(item?.configuration_name || '')}',
-    '${escapeJsString(item?.equipment_plan_id || '')}',
+    '${escapeJsString(currentPlanMeta.configuration_id || '')}',
+    '${escapeJsString(currentPlanMeta.configuration_name || '')}',
+    '${escapeJsString(currentPlanMeta.equipment_plan_id || '')}',
 
     '${escapeJsString(
-      item?.capacity_value != null
-        ? String(item.capacity_value)
+      currentPlanMeta.capacity_value != null
+        ? String(currentPlanMeta.capacity_value)
         : ''
     )}',
-    '${escapeJsString(item?.capacity_unit || '')}',
-    '${escapeJsString(item?.capacity_label || '')}',
-    '${escapeJsString(item?.capacity_status || '')}',
+    '${escapeJsString(currentPlanMeta.capacity_unit || '')}',
+    '${escapeJsString(currentPlanMeta.capacity_label || '')}',
+    '${escapeJsString(currentPlanMeta.capacity_status || '')}',
 
     '${escapeJsString(machineKey || '')}',
     '${escapeJsString(machineName || '')}',
@@ -13623,7 +13623,6 @@ ${
     html += `
 
           </div>
-
         </div>
 
       </div>
