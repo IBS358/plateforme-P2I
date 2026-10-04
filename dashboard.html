@@ -2812,6 +2812,342 @@ function calculateP2IExwToFobOriginCosts({
         'comparison_required'
   };
 }
+    // ======================================================
+// P2I — ESTIMATION DU PRÉ-ACHEMINEMENT
+// USINE / FOURNISSEUR → PORT D'EMBARQUEMENT
+// ======================================================
+//
+// OBJECTIF :
+//
+// Estimer le transport terrestre entre :
+//
+//   usine / fournisseur
+//          ↓
+//   port d'embarquement
+//
+// avant le calcul du FOB.
+//
+// IMPORTANT :
+// Cette première version ne cherche PAS encore
+// automatiquement l'adresse du fournisseur.
+//
+// Elle gère trois situations :
+//
+// 1. localisation connue
+// 2. estimation régionale disponible
+// 3. localisation à confirmer
+//
+// Aucun coût n'est inventé si aucune référence
+// exploitable n'est disponible.
+// ======================================================
+
+function calculateP2IPreCarriageEstimate({
+
+  supplierName = null,
+
+  supplierCountry = null,
+
+  supplierLocation = null,
+
+  departurePort = null,
+
+  regionalReference = null
+
+} = {}) {
+
+
+  // --------------------------------------------------
+  // NORMALISATION DES DONNÉES
+  // --------------------------------------------------
+
+  const normalizedSupplierName =
+    String(supplierName || '').trim();
+
+  const normalizedCountry =
+    String(supplierCountry || '').trim();
+
+  const normalizedLocation =
+    String(supplierLocation || '').trim();
+
+  const normalizedPort =
+    String(departurePort || '').trim();
+
+
+  // --------------------------------------------------
+  // 1. PORT DE DÉPART MANQUANT
+  // --------------------------------------------------
+
+  if (!normalizedPort) {
+
+    return {
+
+      status:
+        'departure_port_required',
+
+      estimation_method:
+        null,
+
+      supplier_name:
+        normalizedSupplierName || null,
+
+      supplier_country:
+        normalizedCountry || null,
+
+      supplier_location:
+        normalizedLocation || null,
+
+      departure_port:
+        null,
+
+      distance_km:
+        null,
+
+      min_usd:
+        null,
+
+      max_usd:
+        null,
+
+      confidence:
+        null,
+
+      source:
+        null
+
+    };
+  }
+
+
+  // --------------------------------------------------
+  // 2. LOCALISATION EXACTE DU FOURNISSEUR CONNUE
+  // --------------------------------------------------
+  //
+  // À ce stade nous savons que la localisation existe,
+  // mais nous n'avons pas encore ajouté le moteur
+  // distance + tarif routier.
+  //
+  // Le calcul reste donc volontairement en attente.
+  // --------------------------------------------------
+
+  if (normalizedLocation) {
+
+    return {
+
+      status:
+        'supplier_location_known',
+
+      estimation_method:
+        'exact_location_pending_distance_engine',
+
+      supplier_name:
+        normalizedSupplierName || null,
+
+      supplier_country:
+        normalizedCountry || null,
+
+      supplier_location:
+        normalizedLocation,
+
+      departure_port:
+        normalizedPort,
+
+      distance_km:
+        null,
+
+      min_usd:
+        null,
+
+      max_usd:
+        null,
+
+      confidence:
+        'location_known_cost_pending',
+
+      source:
+        null
+
+    };
+  }
+
+
+  // --------------------------------------------------
+  // 3. RÉFÉRENCE RÉGIONALE DISPONIBLE
+  // --------------------------------------------------
+  //
+  // Cette possibilité nous permettra plus tard
+  // d'utiliser une fourchette correspondant à un
+  // bassin industriel.
+  //
+  // Exemple futur :
+  //
+  // région Shanghai / Jiangsu / Zhejiang
+  //          ↓
+  // fourchette transport vers Shanghai
+  //
+  // Pour le moment aucune référence régionale
+  // n'est injectée automatiquement.
+  // --------------------------------------------------
+
+  if (
+    regionalReference &&
+    Number.isFinite(
+      Number(regionalReference.min_usd)
+    ) &&
+    Number.isFinite(
+      Number(regionalReference.max_usd)
+    )
+  ) {
+
+    const minUsd =
+      Number(regionalReference.min_usd);
+
+    const maxUsd =
+      Number(regionalReference.max_usd);
+
+
+    if (
+      minUsd >= 0 &&
+      maxUsd >= minUsd
+    ) {
+
+      return {
+
+        status:
+          'regional_estimate',
+
+        estimation_method:
+          'industrial_region_reference',
+
+        supplier_name:
+          normalizedSupplierName || null,
+
+        supplier_country:
+          normalizedCountry || null,
+
+        supplier_location:
+          null,
+
+        departure_port:
+          normalizedPort,
+
+        distance_km:
+          regionalReference.distance_km ??
+          null,
+
+        min_usd:
+          minUsd,
+
+        max_usd:
+          maxUsd,
+
+        confidence:
+          regionalReference.confidence ||
+          'medium',
+
+        source:
+          regionalReference.source ||
+          null
+
+      };
+    }
+  }
+
+
+  // --------------------------------------------------
+  // 4. FOURNISSEUR CONNU MAIS LOCALISATION INCONNUE
+  // --------------------------------------------------
+  //
+  // C'est précisément le cas actuel de :
+  //
+  // Fournisseur test
+  //
+  // P2I connaît le fournisseur mais doit encore
+  // déterminer son lieu de production / enlèvement.
+  // --------------------------------------------------
+
+  if (normalizedSupplierName) {
+
+    return {
+
+      status:
+        'supplier_location_to_research',
+
+      estimation_method:
+        'supplier_research_required',
+
+      supplier_name:
+        normalizedSupplierName,
+
+      supplier_country:
+        normalizedCountry || null,
+
+      supplier_location:
+        null,
+
+      departure_port:
+        normalizedPort,
+
+      distance_km:
+        null,
+
+      min_usd:
+        null,
+
+      max_usd:
+        null,
+
+      confidence:
+        null,
+
+      source:
+        null
+
+    };
+  }
+
+
+  // --------------------------------------------------
+  // 5. AUCUNE LOCALISATION NI FOURNISSEUR
+  // --------------------------------------------------
+
+  return {
+
+    status:
+      'supplier_location_required',
+
+    estimation_method:
+      'insufficient_information',
+
+    supplier_name:
+      null,
+
+    supplier_country:
+      normalizedCountry || null,
+
+    supplier_location:
+      null,
+
+    departure_port:
+      normalizedPort,
+
+    distance_km:
+      null,
+
+    min_usd:
+      null,
+
+    max_usd:
+      null,
+
+    confidence:
+      null,
+
+    source:
+      null
+
+  };
+
+}
     // ==============================================
     // NOUVELLES FONCTIONS SUPABASE
     // ==============================================
