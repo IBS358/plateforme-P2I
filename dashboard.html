@@ -5045,14 +5045,26 @@ estimate.self_purchase.push({
 // ----------------------------------------------
 
 shipping_package: {
-// ----------------------------------------------
-// VALEUR DES MARCHANDISES EXPÉDIÉES
-// ----------------------------------------------
 
-goods_value_usd:
-  usableUsdPrice
-    ? Number(price) + additionalSparePartsCostUsd
-    : null,
+  // ----------------------------------------------
+  // VALEUR FOB DES MARCHANDISES EXPÉDIÉES
+  // ----------------------------------------------
+  //
+  // Cette valeur ne doit être disponible que si
+  // le prix utilisateur est déjà exprimé en FOB.
+  //
+  // Un prix EXW devra d'abord être normalisé
+  // EXW → FOB avant d'être utilisé pour le calcul
+  // du fret, de l'assurance et du CIF.
+  // ----------------------------------------------
+
+  goods_value_usd:
+    (
+      usableUsdPrice &&
+      priceBasis === 'fob'
+    )
+      ? Number(price) + additionalSparePartsCostUsd
+      : null,
   // ----------------------------------------------
 // ESTIMATION DU FRET INDIVIDUEL
 // ----------------------------------------------
