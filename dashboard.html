@@ -13558,52 +13558,52 @@ ${
           }
 
 
-          ${
-            isSelfPurchase
-              ? `
-                <button
-  type="button"
-  onclick="openSelfPurchaseEditor(
-    '${escapeJsString(up.id || '')}',
-    '${escapeJsString(up.nom || '')}',
+         ${
+  isSelfPurchase
+    ? `
+      <button
+        type="button"
+        onclick="openSelfPurchaseEditor(
+          '${escapeJsString(up.id || '')}',
+          '${escapeJsString(up.nom || '')}',
 
-    '${escapeJsString(item?.configuration_id || '')}',
-    '${escapeJsString(item?.configuration_name || '')}',
-    '${escapeJsString(item?.equipment_plan_id || '')}',
+          '${escapeJsString(savedData?.configuration_id || '')}',
+          '${escapeJsString(savedData?.configuration_name || '')}',
+          '${escapeJsString(savedData?.equipment_plan_id || '')}',
 
-    '${escapeJsString(
-      item?.capacity_value != null
-        ? String(item.capacity_value)
-        : ''
-    )}',
-    '${escapeJsString(item?.capacity_unit || '')}',
-    '${escapeJsString(item?.capacity_label || '')}',
-    '${escapeJsString(item?.capacity_status || '')}',
-
-    '${escapeJsString(machineKey || '')}',
-    '${escapeJsString(machineName || '')}',
-    '${escapeJsString(role || '')}',
-    '${escapeJsString(capacity || '')}',
-    '${escapeJsString(utilities || '')}',
-
-    '${escapeJsString(savedMachine?.id || '')}'
-  )"
-  style="
-    border:1px solid rgba(59,130,246,.35);
-    background:rgba(59,130,246,.08);
-    color:#60a5fa;
-    border-radius:7px;
-    padding:6px 8px;
-    font-size:10px;
-    cursor:pointer;
-  "
->
-  <i class="fas fa-pen"></i>
-  Modifier
-</button>
-              `
+          '${escapeJsString(
+            savedData?.capacity_value != null
+              ? String(savedData.capacity_value)
               : ''
-          }
+          )}',
+          '${escapeJsString(savedData?.capacity_unit || '')}',
+          '${escapeJsString(savedData?.capacity_label || '')}',
+          '${escapeJsString(savedData?.capacity_status || '')}',
+
+          '${escapeJsString(machineKey || '')}',
+          '${escapeJsString(machineName || '')}',
+          '${escapeJsString(role || '')}',
+          '${escapeJsString(capacity || '')}',
+          '${escapeJsString(utilities || '')}',
+
+          '${escapeJsString(savedMachine?.id || '')}'
+        )"
+        style="
+          border:1px solid rgba(59,130,246,.35);
+          background:rgba(59,130,246,.08);
+          color:#60a5fa;
+          border-radius:7px;
+          padding:6px 8px;
+          font-size:10px;
+          cursor:pointer;
+        "
+      >
+        <i class="fas fa-pen"></i>
+        Modifier
+      </button>
+    `
+    : ''
+}
 
 
           <button
