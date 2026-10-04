@@ -5040,14 +5040,35 @@ const individualInsuranceReference = {
 
 
 // --------------------------------------------------
+// RÉFÉRENCE P2I EXW → FOB DISPONIBLE
+// --------------------------------------------------
+//
+// Recherche d'une référence P2I à partir :
+// - du pays d'origine déclaré,
+// - du port de départ déclaré.
+//
+// Exemple actuel :
+// Chine + Shanghai → référence trouvée.
+//
+// Si aucune référence n'existe encore pour le couple
+// pays / port, la valeur retournée sera null.
+// --------------------------------------------------
+
+const individualExwToFobReference =
+  getP2IExwFobReference(
+    data.user_origin_country,
+    data.user_logistics?.departure_port
+  );
+
+
+// --------------------------------------------------
 // NORMALISATION EXW → FOB — MACHINE INDIVIDUELLE
 // --------------------------------------------------
 //
 // Un prix EXW ne peut pas être utilisé directement
 // comme valeur FOB.
 //
-// La normalisation EXW → FOB devra intégrer
-// notamment :
+// La normalisation EXW → FOB devra intégrer :
 //
 // - le pré-acheminement fournisseur/usine → port,
 // - les formalités export,
@@ -5055,12 +5076,22 @@ const individualInsuranceReference = {
 // - les frais documentaires,
 // - les autres frais origine éventuels.
 //
-// À ce stade, aucun montant n'est inventé.
-// Les coûts resteront à null tant qu'une référence
+// IMPORTANT :
+// Aucun montant n'est inventé.
+//
+// Les montants restent à null tant qu'une référence
 // P2I exploitable n'est pas disponible.
+//
+// Le pré-acheminement reste également à null tant que
+// le lieu réel de l'usine / fournisseur n'est pas
+// suffisamment déterminé.
 // --------------------------------------------------
 
 const individualExwToFobEstimate = {
+
+  // ----------------------------------------------
+  // STATUT INITIAL
+  // ----------------------------------------------
 
   status:
     exwToFobRequired
@@ -5086,6 +5117,7 @@ const individualExwToFobEstimate = {
   departure_port:
     data.user_logistics?.departure_port || null,
 
+
   // ----------------------------------------------
   // PRIX EXW DE DÉPART
   // ----------------------------------------------
@@ -5100,11 +5132,28 @@ const individualExwToFobEstimate = {
 
 
   // ----------------------------------------------
-  // PRÉ-ACHEMINEMENT USINE / FOURNISSEUR → PORT
+  // PRÉ-ACHEMINEMENT
+  // FOURNISSEUR / USINE → PORT
+  // ----------------------------------------------
+  //
+  // Pour le moment, nous ne reprenons pas
+  // automatiquement un montant de référence.
+  //
+  // Il faudra connaître ou estimer la localisation
+  // réelle du fournisseur / de l'usine.
   // ----------------------------------------------
 
   pre_carriage_usd:
     null,
+
+  pre_carriage_status:
+    individualExwToFobReference
+      ?.pre_carriage_status ||
+      (
+        data.user_supplier
+          ? 'supplier_location_required'
+          : 'supplier_required'
+      ),
 
 
   // ----------------------------------------------
@@ -5112,7 +5161,8 @@ const individualExwToFobEstimate = {
   // ----------------------------------------------
 
   export_clearance_usd:
-    null,
+    individualExwToFobReference
+      ?.export_clearance_usd ?? null,
 
 
   // ----------------------------------------------
@@ -5120,7 +5170,8 @@ const individualExwToFobEstimate = {
   // ----------------------------------------------
 
   origin_handling_usd:
-    null,
+    individualExwToFobReference
+      ?.origin_handling_usd ?? null,
 
 
   // ----------------------------------------------
@@ -5128,7 +5179,8 @@ const individualExwToFobEstimate = {
   // ----------------------------------------------
 
   documentation_usd:
-    null,
+    individualExwToFobReference
+      ?.documentation_usd ?? null,
 
 
   // ----------------------------------------------
@@ -5136,11 +5188,17 @@ const individualExwToFobEstimate = {
   // ----------------------------------------------
 
   other_origin_costs_usd:
-    null,
+    individualExwToFobReference
+      ?.other_origin_costs_usd ?? null,
 
 
   // ----------------------------------------------
   // TOTAL EXW → FOB
+  // ----------------------------------------------
+  //
+  // Reste volontairement null tant que tous les
+  // éléments nécessaires au calcul ne sont pas
+  // disponibles.
   // ----------------------------------------------
 
   estimated_exw_to_fob_cost_usd:
@@ -5150,9 +5208,30 @@ const individualExwToFobEstimate = {
   // ----------------------------------------------
   // FOB ESTIMÉ
   // ----------------------------------------------
+  //
+  // Reste volontairement null tant que le coût
+  // EXW → FOB n'a pas été calculé.
+  // ----------------------------------------------
 
   estimated_fob_usd:
     null,
+
+
+  // ----------------------------------------------
+  // RÉFÉRENCE P2I UTILISÉE
+  // ----------------------------------------------
+
+  reference_country:
+    individualExwToFobReference
+      ?.country || null,
+
+  reference_port:
+    individualExwToFobReference
+      ?.port || null,
+
+  reference_currency:
+    individualExwToFobReference
+      ?.currency || null,
 
 
   // ----------------------------------------------
@@ -5160,19 +5239,28 @@ const individualExwToFobEstimate = {
   // ----------------------------------------------
 
   source_type:
-    null,
+    individualExwToFobReference
+      ?.source_type ?? null,
 
   source_name:
-    null,
+    individualExwToFobReference
+      ?.source_name ?? null,
 
   source_date:
-    null,
+    individualExwToFobReference
+      ?.source_date ?? null,
 
   verification_status:
-    'not_verified'
+    individualExwToFobReference
+      ?.verification_status ||
+      'reference_not_available',
+
+  reference_status:
+    individualExwToFobReference
+      ?.status ||
+      'reference_not_available'
 
 };
-
 
 // --------------------------------------------------
 // VALEUR FOB DES MARCHANDISES EXPÉDIÉES
