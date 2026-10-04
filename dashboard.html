@@ -5513,7 +5513,20 @@ const individualExwToFobReference =
     data.user_origin_country,
     data.user_logistics?.departure_port
   );
+// --------------------------------------------------
+// CALCUL DES FRAIS D'ORIGINE DOCUMENTÉS EXW → FOB
+// --------------------------------------------------
 
+const individualExwToFobOriginCosts =
+  calculateP2IExwToFobOriginCosts({
+
+    reference:
+      individualExwToFobReference,
+
+    shippingVolumeM3:
+      totalShippingVolumeM3
+
+  });
 
 // --------------------------------------------------
 // NORMALISATION EXW → FOB — MACHINE INDIVIDUELLE
@@ -5647,29 +5660,51 @@ const individualExwToFobEstimate = {
 
 
   // ----------------------------------------------
-  // TOTAL EXW → FOB
-  // ----------------------------------------------
-  //
-  // Reste volontairement null tant que tous les
-  // éléments nécessaires au calcul ne sont pas
-  // disponibles.
-  // ----------------------------------------------
+// FRAIS D'ORIGINE DOCUMENTÉS
+// HORS PRÉ-ACHEMINEMENT USINE → PORT
+// ----------------------------------------------
 
-  estimated_exw_to_fob_cost_usd:
-    null,
+documented_origin_costs:
+  individualExwToFobOriginCosts,
+
+documented_origin_cost_min_usd:
+  individualExwToFobOriginCosts
+    ?.min_usd ?? null,
+
+documented_origin_cost_max_usd:
+  individualExwToFobOriginCosts
+    ?.max_usd ?? null,
 
 
-  // ----------------------------------------------
-  // FOB ESTIMÉ
-  // ----------------------------------------------
-  //
-  // Reste volontairement null tant que le coût
-  // EXW → FOB n'a pas été calculé.
-  // ----------------------------------------------
+// ----------------------------------------------
+// TOTAL EXW → FOB
+// ----------------------------------------------
+//
+// IMPORTANT :
+// Les frais d'origine documentés sont maintenant
+// disponibles sous forme de fourchette.
+//
+// Cependant, le pré-acheminement usine/fournisseur
+// → port n'est pas encore calculé.
+//
+// Le coût EXW → FOB complet reste donc volontairement
+// à null.
+// ----------------------------------------------
 
-  estimated_fob_usd:
-    null,
+estimated_exw_to_fob_cost_usd:
+  null,
 
+
+// ----------------------------------------------
+// FOB ESTIMÉ
+// ----------------------------------------------
+//
+// Tant que le pré-acheminement manque,
+// P2I ne doit pas présenter de FOB complet.
+// ----------------------------------------------
+
+estimated_fob_usd:
+  null,
 
   // ----------------------------------------------
   // RÉFÉRENCE P2I UTILISÉE
