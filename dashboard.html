@@ -2228,7 +2228,136 @@ async function initDashboard() {
       alertDiv.style.display = 'block';
       setTimeout(() => { alertDiv.style.display = 'none'; }, 4000);
     }
+// ======================================================
+// P2I — RÉFÉRENTIEL EXW → FOB
+// ======================================================
+//
+// Ce référentiel prépare les coûts nécessaires pour
+// transformer un prix EXW en valeur FOB.
+//
+// IMPORTANT :
+// Les montants restent à null tant qu'aucune référence
+// tarifaire P2I suffisamment fiable n'a été intégrée.
+//
+// Le pré-acheminement usine → port sera traité
+// séparément lorsque la localisation réelle de l'usine
+// ou du fournisseur sera disponible.
+// ======================================================
 
+const P2I_EXW_FOB_REFERENCES = {
+
+  china: {
+
+    shanghai: {
+
+      country:
+        'Chine',
+
+      port:
+        'Shanghai',
+
+      currency:
+        'USD',
+
+      // ----------------------------------------------
+      // FRAIS D'ORIGINE
+      // ----------------------------------------------
+
+      export_clearance_usd:
+        null,
+
+      origin_handling_usd:
+        null,
+
+      documentation_usd:
+        null,
+
+      other_origin_costs_usd:
+        null,
+
+      // ----------------------------------------------
+      // PRÉ-ACHEMINEMENT
+      // ----------------------------------------------
+
+      pre_carriage_usd:
+        null,
+
+      pre_carriage_status:
+        'supplier_location_required',
+
+      // ----------------------------------------------
+      // SOURCE / VALIDATION
+      // ----------------------------------------------
+
+      source_type:
+        null,
+
+      source_name:
+        null,
+
+      source_date:
+        null,
+
+      verification_status:
+        'reference_to_document',
+
+      status:
+        'incomplete_reference'
+    }
+
+  }
+
+};
+    function getP2IExwFobReference(
+  country,
+  departurePort
+) {
+
+  const normalizedCountry =
+    String(country || '')
+      .trim()
+      .toLowerCase();
+
+  const normalizedPort =
+    String(departurePort || '')
+      .trim()
+      .toLowerCase();
+
+
+  let countryKey =
+    null;
+
+
+  if (
+    normalizedCountry === 'chine' ||
+    normalizedCountry === 'china' ||
+    normalizedCountry === 'cn'
+  ) {
+
+    countryKey =
+      'china';
+
+  }
+
+
+  if (!countryKey) {
+    return null;
+  }
+
+
+  const countryReferences =
+    P2I_EXW_FOB_REFERENCES[countryKey];
+
+  if (!countryReferences) {
+    return null;
+  }
+
+
+  return (
+    countryReferences[normalizedPort] ||
+    null
+  );
+}
     // ==============================================
     // NOUVELLES FONCTIONS SUPABASE
     // ==============================================
