@@ -5307,17 +5307,24 @@ total_shipping_volume_m3:
   // ----------------------------------------------
 
   status:
+  (
+    data.user_logistics?.machine_weight_kg != null &&
+    data.user_logistics?.machine_volume_m3 != null &&
     (
-      data.user_logistics?.machine_weight_kg != null &&
-      data.user_logistics?.machine_volume_m3 != null &&
-      (
-        data.user_logistics?.departure_country ||
-        data.user_origin_country
-      ) &&
-      data.user_logistics?.departure_port
-    )
-      ? 'ready_for_freight_estimate'
-      : 'to_complete'
+      data.user_logistics?.departure_country ||
+      data.user_origin_country
+    ) &&
+    data.user_logistics?.departure_port
+  )
+    ? (
+        usableUsdPrice &&
+        priceBasis === 'fob'
+          ? 'ready_for_freight_estimate'
+          : priceBasis === 'exw'
+            ? 'awaiting_fob_normalization'
+            : 'price_basis_to_confirm'
+      )
+    : 'to_complete'
 
 },
 
