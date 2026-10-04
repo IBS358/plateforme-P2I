@@ -15709,78 +15709,113 @@ user_spare_parts: {
 // 5. RECHERCHE DU CHOIX EXISTANT DANS CE PLAN
 // --------------------------------------------------
 
-let targetSavedMachineId =
-  savedMachineId || null;
+// Pour les données V2, l'identité fonctionnelle
+// d'une machine est :
+// equipment_plan_id + machine_key.
+//
+// On ne fait donc plus confiance en priorité
+// à un ancien savedMachineId.
+
+let targetSavedMachineId = null;
 
 
-// Si aucun ID n'a été transmis,
-// on recherche la machine par son identité V2 :
-// equipment_plan_id + machine_key
-
-if (!targetSavedMachineId) {
-
-  const {
-    data: existingRows,
-    error: searchError
-  } = await supabaseClient
-    .from('saved_machines')
-    .select('id,data')
-    .eq('user_id', user.id);
+const {
+  data: existingRows,
+  error: searchError
+} = await supabaseClient
+  .from('saved_machines')
+  .select('id,data')
+  .eq('user_id', user.id);
 
 
-  if (searchError) {
+if (searchError) {
 
-    console.error(
-      '❌ Erreur recherche choix existant :',
-      searchError
-    );
+  console.error(
+    '❌ Erreur recherche choix existant :',
+    searchError
+  );
 
-    alert(
-      "Erreur lors de la vérification du plan d'équipement."
-    );
+  alert(
+    "Erreur lors de la vérification du plan d'équipement."
+  );
 
-    return;
-  }
-
-
-  const existingChoice =
-    (existingRows || []).find(row => {
-
-      const data =
-        row.data || {};
-
-      return (
-        data.record_type ===
-          'equipment_plan_item' &&
-
-        data.equipment_plan_id ===
-          equipmentPlanId &&
-
-        data.machine_key ===
-          machineKey
-      );
-
-    });
-
-
-  if (existingChoice) {
-
-    targetSavedMachineId =
-      existingChoice.id;
-
-    console.log(
-      '🔄 Choix existant trouvé pour remplacement :',
-      {
-        id: existingChoice.id,
-        equipment_plan_id:
-          equipmentPlanId,
-        machine_key:
-          machineKey
-      }
-    );
-  }
+  return;
 }
 
+
+// --------------------------------------------------
+// RECHERCHE V2 PRIORITAIRE
+// equipment_plan_id + machine_key
+// --------------------------------------------------
+
+const existingV2Choice =
+  (existingRows || []).find(row => {
+
+    const data =
+      row.data || {};
+
+    return (
+      data.record_type ===
+        'equipment_plan_item' &&
+
+      data.equipment_plan_id ===
+        equipmentPlanId &&
+
+      data.machine_key ===
+        machineKey
+    );
+
+  });
+
+
+if (existingV2Choice) {
+
+  targetSavedMachineId =
+    existingV2Choice.id;
+
+  console.log(
+    '🎯 Choix V2 trouvé pour remplacement :',
+    {
+      id:
+        existingV2Choice.id,
+
+      equipment_plan_id:
+        equipmentPlanId,
+
+      machine_key:
+        machineKey
+    }
+  );
+
+}
+
+
+// --------------------------------------------------
+// FALLBACK ANCIEN ID
+// uniquement si aucune ligne V2 n'existe
+// --------------------------------------------------
+
+else if (savedMachineId) {
+
+  const legacyChoice =
+    (existingRows || []).find(
+      row =>
+        row.id === savedMachineId
+    );
+
+
+  if (legacyChoice) {
+
+    targetSavedMachineId =
+      legacyChoice.id;
+
+    console.log(
+      '⚠️ Ancien savedMachineId utilisé en fallback :',
+      legacyChoice.id
+    );
+
+  }
+}
 
 // --------------------------------------------------
 // 6. ENREGISTREMENT SUPABASE
