@@ -5002,44 +5002,101 @@ estimate.self_purchase.push({
   // NORMALISATION FOB
   // ----------------------------------------------
 
-  fob_normalization: {
+ // ----------------------------------------------
+// NORMALISATION FOB
+// ----------------------------------------------
 
-    source_price_basis:
-      priceBasis,
+fob_normalization: {
 
-    source_amount:
-      validPrice
-        ? price
-        : null,
+  // Prix déclaré par l'utilisateur
+  source_price_basis:
+    priceBasis,
 
-    source_currency:
-      currency,
+  source_amount:
+    validPrice
+      ? price
+      : null,
 
-    exw_to_fob_required:
-      exwToFobRequired,
+  source_currency:
+    currency,
 
-    // Sera calculé ultérieurement
-    // lorsque nous construirons le moteur EXW → FOB.
-    exw_to_fob_cost_usd:
-      null,
 
-    // Si le prix déclaré est déjà FOB en USD,
-    // il constitue directement notre base FOB.
-    estimated_fob_usd:
-      (
-        usableUsdPrice &&
-        priceBasis === 'fob'
-      )
-        ? price
-        : null,
+  // --------------------------------------------
+  // FOURNISSEUR / LOCALISATION
+  // --------------------------------------------
 
-    status:
-      fobNormalizationStatus,
+  supplier_name:
+    data.user_supplier || null,
 
-    source:
-      fobSource
+  supplier_country:
+    data.user_origin_country || null,
 
-  },
+  supplier_location:
+    null,
+
+  supplier_location_status:
+    data.user_supplier
+      ? 'p2i_research_required'
+      : 'supplier_not_provided',
+
+
+  // --------------------------------------------
+  // PORT DE DÉPART
+  // --------------------------------------------
+
+  departure_port:
+    data.user_logistics?.departure_port || null,
+
+  departure_port_status:
+    data.user_logistics?.departure_port
+      ? 'user_declared'
+      : 'to_determine',
+
+
+  // --------------------------------------------
+  // PASSAGE EXW → FOB
+  // --------------------------------------------
+
+  exw_to_fob_required:
+    exwToFobRequired,
+
+  exw_to_fob_cost_usd:
+    null,
+
+  exw_to_fob_status:
+    exwToFobRequired
+      ? (
+          data.user_supplier
+            ? 'supplier_location_to_research'
+            : 'supplier_required'
+        )
+      : 'not_required',
+
+
+  // --------------------------------------------
+  // VALEUR FOB
+  // --------------------------------------------
+
+  estimated_fob_usd:
+    (
+      usableUsdPrice &&
+      priceBasis === 'fob'
+    )
+      ? price
+      : null,
+
+
+  // --------------------------------------------
+  // STATUT GLOBAL
+  // --------------------------------------------
+
+  status:
+    fobNormalizationStatus,
+
+  source:
+    fobSource
+
+},
 // ----------------------------------------------
 // COLIS LOGISTIQUE DE LA MACHINE
 // ----------------------------------------------
