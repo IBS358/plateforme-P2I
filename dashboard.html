@@ -4911,37 +4911,154 @@ const individualInsuranceReference = {
 
 
 // --------------------------------------------------
-// VALEUR FOB DES MARCHANDISES EXPÉDIÉES
+// NORMALISATION EXW → FOB — MACHINE INDIVIDUELLE
 // --------------------------------------------------
 //
-// IMPORTANT :
-// Un prix EXW ne doit jamais être utilisé directement
+// Un prix EXW ne peut pas être utilisé directement
 // comme valeur FOB.
 //
-// La valeur FOB n'est disponible immédiatement que
-// lorsque le prix déclaré par l'utilisateur est déjà
-// exprimé sur une base FOB.
+// La normalisation EXW → FOB devra intégrer
+// notamment :
 //
-// Pour un prix EXW, le passage EXW → FOB devra être
-// calculé séparément avant le calcul du fret,
-// de l'assurance et du CIF.
+// - le pré-acheminement fournisseur/usine → port,
+// - les formalités export,
+// - les frais de manutention à l'origine,
+// - les frais documentaires,
+// - les autres frais origine éventuels.
+//
+// À ce stade, aucun montant n'est inventé.
+// Les coûts resteront à null tant qu'une référence
+// P2I exploitable n'est pas disponible.
 // --------------------------------------------------
+
+const individualExwToFobEstimate = {
+
+  status:
+    exwToFobRequired
+      ? 'reference_costs_required'
+      : 'not_required',
+
+
+  // ----------------------------------------------
+  // FOURNISSEUR / ORIGINE
+  // ----------------------------------------------
+
+  supplier_name:
+    data.user_supplier || null,
+
+  origin_country:
+    data.user_origin_country || null,
+
+
+  // ----------------------------------------------
+  // PORT DE DÉPART
+  // ----------------------------------------------
+
+  departure_port:
+    data.user_logistics?.departure_port || null,
+
+
+  // ----------------------------------------------
+  // PRIX EXW DE DÉPART
+  // ----------------------------------------------
+
+  source_exw_value_usd:
+    (
+      usableUsdPrice &&
+      priceBasis === 'exw'
+    )
+      ? Number(price)
+      : null,
+
+
+  // ----------------------------------------------
+  // PRÉ-ACHEMINEMENT USINE / FOURNISSEUR → PORT
+  // ----------------------------------------------
+
+  pre_carriage_usd:
+    null,
+
+
+  // ----------------------------------------------
+  // FORMALITÉS EXPORT
+  // ----------------------------------------------
+
+  export_clearance_usd:
+    null,
+
+
+  // ----------------------------------------------
+  // MANUTENTION / FRAIS ORIGINE
+  // ----------------------------------------------
+
+  origin_handling_usd:
+    null,
+
+
+  // ----------------------------------------------
+  // DOCUMENTATION
+  // ----------------------------------------------
+
+  documentation_usd:
+    null,
+
+
+  // ----------------------------------------------
+  // AUTRES FRAIS ORIGINE
+  // ----------------------------------------------
+
+  other_origin_costs_usd:
+    null,
+
+
+  // ----------------------------------------------
+  // TOTAL EXW → FOB
+  // ----------------------------------------------
+
+  estimated_exw_to_fob_cost_usd:
+    null,
+
+
+  // ----------------------------------------------
+  // FOB ESTIMÉ
+  // ----------------------------------------------
+
+  estimated_fob_usd:
+    null,
+
+
+  // ----------------------------------------------
+  // SOURCE / VÉRIFICATION
+  // ----------------------------------------------
+
+  source_type:
+    null,
+
+  source_name:
+    null,
+
+  source_date:
+    null,
+
+  verification_status:
+    'not_verified'
+
+};
+
 
 // --------------------------------------------------
 // VALEUR FOB DES MARCHANDISES EXPÉDIÉES
 // --------------------------------------------------
 //
-// IMPORTANT :
-// Un prix EXW ne doit jamais être utilisé directement
-// comme valeur FOB.
+// CAS 1 :
+// le prix utilisateur est déjà FOB → utilisable.
 //
-// La valeur FOB n'est disponible immédiatement que
-// lorsque le prix déclaré par l'utilisateur est déjà
-// exprimé sur une base FOB.
+// CAS 2 :
+// le prix utilisateur est EXW → la valeur FOB ne
+// devient disponible qu'après normalisation EXW → FOB.
 //
-// Pour un prix EXW, le passage EXW → FOB devra être
-// calculé séparément avant le calcul du fret,
-// de l'assurance et du CIF.
+// Les pièces critiques commandées en supplément sont
+// ajoutées à la valeur des marchandises expédiées.
 // --------------------------------------------------
 
 const individualGoodsValueUsd =
@@ -4949,9 +5066,30 @@ const individualGoodsValueUsd =
     usableUsdPrice &&
     priceBasis === 'fob'
   )
-    ? Number(price) + additionalSparePartsCostUsd
-    : null;
 
+    ? Number(price) +
+      additionalSparePartsCostUsd
+
+    : (
+        usableUsdPrice &&
+        priceBasis === 'exw' &&
+        individualExwToFobEstimate
+          .estimated_fob_usd != null &&
+        Number.isFinite(
+          Number(
+            individualExwToFobEstimate
+              .estimated_fob_usd
+          )
+        )
+      )
+
+      ? Number(
+          individualExwToFobEstimate
+            .estimated_fob_usd
+        ) +
+        additionalSparePartsCostUsd
+
+      : null;
 
 // --------------------------------------------------
 // CALCUL ASSURANCE + CIF
@@ -5008,7 +5146,10 @@ estimate.self_purchase.push({
 
 fob_normalization: {
 
-  // Prix déclaré par l'utilisateur
+  // --------------------------------------------
+  // PRIX DÉCLARÉ PAR L'UTILISATEUR
+  // --------------------------------------------
+
   source_price_basis:
     priceBasis,
 
@@ -5061,16 +5202,30 @@ fob_normalization: {
     exwToFobRequired,
 
   exw_to_fob_cost_usd:
-    null,
+    individualExwToFobEstimate
+      .estimated_exw_to_fob_cost_usd,
 
   exw_to_fob_status:
     exwToFobRequired
       ? (
-          data.user_supplier
-            ? 'supplier_location_to_research'
-            : 'supplier_required'
+          individualExwToFobEstimate
+            .estimated_fob_usd != null
+            ? 'estimated'
+            : (
+                data.user_supplier
+                  ? 'supplier_location_to_research'
+                  : 'supplier_required'
+              )
         )
       : 'not_required',
+
+
+  // --------------------------------------------
+  // DÉTAIL DU CALCUL EXW → FOB
+  // --------------------------------------------
+
+  exw_to_fob_estimate:
+    individualExwToFobEstimate,
 
 
   // --------------------------------------------
@@ -5082,8 +5237,15 @@ fob_normalization: {
       usableUsdPrice &&
       priceBasis === 'fob'
     )
-      ? price
-      : null,
+
+      ? Number(price)
+
+      : (
+          priceBasis === 'exw'
+            ? individualExwToFobEstimate
+                .estimated_fob_usd
+            : null
+        ),
 
 
   // --------------------------------------------
