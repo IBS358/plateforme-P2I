@@ -4913,9 +4913,25 @@ const individualInsuranceReference = {
 // --------------------------------------------------
 // VALEUR FOB DES MARCHANDISES EXPÉDIÉES
 // --------------------------------------------------
+//
+// IMPORTANT :
+// Un prix EXW ne doit jamais être utilisé directement
+// comme valeur FOB.
+//
+// La valeur FOB n'est disponible immédiatement que
+// lorsque le prix déclaré par l'utilisateur est déjà
+// exprimé sur une base FOB.
+//
+// Pour un prix EXW, le passage EXW → FOB devra être
+// calculé séparément avant le calcul du fret,
+// de l'assurance et du CIF.
+// --------------------------------------------------
 
 const individualGoodsValueUsd =
-  usableUsdPrice
+  (
+    usableUsdPrice &&
+    priceBasis === 'fob'
+  )
     ? Number(price) + additionalSparePartsCostUsd
     : null;
 
