@@ -14525,32 +14525,46 @@ async function openSelfPurchaseEditor(
         quels frais logistiques doivent encore être ajoutés
         à votre prix.
       </div>
-      <label style="
+     <label style="
   display:block;
   color:#cbd5e1;
   font-size:12px;
   margin-bottom:6px;
 ">
-  Fournisseur ou source d'approvisionnement
+  Fournisseur / vendeur envisagé
 </label>
-      <input
-        id="selfPurchaseSupplier"
-        type="text"
-        value="${escapeHtml(
-  existingData.user_supplier || ''
-)}"
-        placeholder="Facultatif"
-        style="
-          width:100%;
-          box-sizing:border-box;
-          padding:10px;
-          margin-bottom:15px;
-          border-radius:8px;
-          border:1px solid #334155;
-          background:#020617;
-          color:#f8fafc;
-        "
-      >
+
+<input
+  id="selfPurchaseSupplier"
+  type="text"
+  value="${escapeHtml(
+    existingData.user_supplier || ''
+  )}"
+  placeholder="Ex. nom du fabricant ou du vendeur"
+  style="
+    width:100%;
+    box-sizing:border-box;
+    padding:10px;
+    margin-bottom:6px;
+    border-radius:8px;
+    border:1px solid #334155;
+    background:#020617;
+    color:#f8fafc;
+  "
+>
+
+<div style="
+  color:#64748b;
+  font-size:9px;
+  line-height:1.4;
+  margin-bottom:15px;
+">
+  Si vous connaissez votre fournisseur, indiquez son nom.
+  La P2I pourra utiliser cette information pour identifier
+  sa localisation et préparer l'estimation logistique.
+  Les informations identifiées resteront à confirmer avant
+  toute opération.
+</div>
 
       <label style="
         display:block;
