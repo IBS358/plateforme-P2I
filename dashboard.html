@@ -2230,18 +2230,16 @@ async function initDashboard() {
     }
 // ======================================================
 // P2I — RÉFÉRENTIEL EXW → FOB
+// VERSION 2 — RÉFÉRENCES DOCUMENTÉES
 // ======================================================
 //
-// Ce référentiel prépare les coûts nécessaires pour
-// transformer un prix EXW en valeur FOB.
+// Les valeurs ci-dessous sont des références de travail
+// destinées à l'Estimation P2I.
 //
-// IMPORTANT :
-// Les montants restent à null tant qu'aucune référence
-// tarifaire P2I suffisamment fiable n'a été intégrée.
+// Elles ne constituent PAS un devis de transitaire.
 //
-// Le pré-acheminement usine → port sera traité
-// séparément lorsque la localisation réelle de l'usine
-// ou du fournisseur sera disponible.
+// Les frais variables ou dépendant de la localisation
+// exacte de l'usine restent à confirmer.
 // ======================================================
 
 const P2I_EXW_FOB_REFERENCES = {
@@ -2256,59 +2254,217 @@ const P2I_EXW_FOB_REFERENCES = {
       port:
         'Shanghai',
 
-      currency:
-        'USD',
+      local_currency:
+        'CNY',
 
-      // ----------------------------------------------
-      // FRAIS D'ORIGINE
-      // ----------------------------------------------
 
-      export_clearance_usd:
-        null,
+      // ==============================================
+      // TAUX DE CHANGE DE RÉFÉRENCE
+      // ==============================================
+      //
+      // Taux indicatif daté.
+      // Il devra ultérieurement être actualisé
+      // automatiquement ou manuellement.
+      //
+      // 1 CNY ≈ 0.1491301 USD
+      // au 03/10/2026.
+      // ==============================================
 
-      origin_handling_usd:
-        null,
+      fx_reference: {
 
-      documentation_usd:
-        null,
+        from:
+          'CNY',
 
-      other_origin_costs_usd:
-        null,
+        to:
+          'USD',
 
-      // ----------------------------------------------
-      // PRÉ-ACHEMINEMENT
-      // ----------------------------------------------
+        rate:
+          0.1491301024,
 
-      pre_carriage_usd:
-        null,
+        rate_date:
+          '2026-10-03',
 
-      pre_carriage_status:
-        'supplier_location_required',
+        source_type:
+          'market_reference',
 
-      // ----------------------------------------------
+        source_name:
+          'XE',
+
+        status:
+          'dated_reference'
+      },
+
+
+      // ==============================================
+      // DÉCLARATION DOUANIÈRE EXPORT
+      // ==============================================
+
+      export_clearance: {
+
+        min_cny:
+          300,
+
+        max_cny:
+          500,
+
+        unit:
+          'per_shipment',
+
+        status:
+          'documented_range'
+      },
+
+
+      // ==============================================
+      // THC / MANUTENTION PORTUAIRE LCL
+      // ==============================================
+
+      origin_handling_lcl: {
+
+        rate_cny:
+          68,
+
+        unit:
+          'per_m3',
+
+        status:
+          'documented_reference'
+      },
+
+
+      // ==============================================
+      // DOCUMENTATION
+      // ==============================================
+
+      documentation: {
+
+        amount_cny:
+          300,
+
+        unit:
+          'per_shipment',
+
+        status:
+          'documented_reference'
+      },
+
+
+      // ==============================================
+      // SCELLÉ
+      // ==============================================
+
+      seal_fee: {
+
+        amount_cny:
+          50,
+
+        unit:
+          'per_shipment',
+
+        status:
+          'documented_reference'
+      },
+
+
+      // ==============================================
+      // PRÉ-ENREGISTREMENT MANIFESTE
+      // ==============================================
+
+      manifest_fee: {
+
+        amount_cny:
+          40,
+
+        unit:
+          'per_shipment',
+
+        status:
+          'documented_reference'
+      },
+
+
+      // ==============================================
+      // STOCKAGE ÉVENTUEL
+      // ==============================================
+      //
+      // Non ajouté automatiquement.
+      // Il s'agit d'un coût conditionnel.
+      // ==============================================
+
+      storage: {
+
+        free_days:
+          3,
+
+        rate_cny_per_m3_day:
+          8,
+
+        automatic_inclusion:
+          false,
+
+        status:
+          'conditional_cost'
+      },
+
+
+      // ==============================================
+      // PRÉ-ACHEMINEMENT USINE → PORT
+      // ==============================================
+      //
+      // Impossible à calculer sérieusement tant que
+      // la localisation réelle du fournisseur/usine
+      // n'est pas connue.
+      // ==============================================
+
+      pre_carriage: {
+
+        amount_cny:
+          null,
+
+        status:
+          'supplier_location_required'
+      },
+
+
+      // ==============================================
+      // MODE DE TRANSPORT CONCERNÉ
+      // ==============================================
+
+      applicable_shipping_mode:
+        'lcl_reference',
+
+      shipping_mode_status:
+        'comparison_required',
+
+
+      // ==============================================
       // SOURCE / VALIDATION
-      // ----------------------------------------------
+      // ==============================================
 
       source_type:
-        null,
+        'market_reference',
 
       source_name:
-        null,
+        'Shanghai LCL export market reference 2026',
 
       source_date:
-        null,
+        '2026-09-11',
 
       verification_status:
-        'reference_to_document',
+        'documented_reference',
 
       status:
-        'incomplete_reference'
+        'partial_documented_reference'
     }
 
   }
 
 };
-    function getP2IExwFobReference(
+   // ======================================================
+// P2I — LECTURE D'UNE RÉFÉRENCE EXW → FOB
+// ======================================================
+
+function getP2IExwFobReference(
   country,
   departurePort
 ) {
@@ -2328,6 +2484,10 @@ const P2I_EXW_FOB_REFERENCES = {
     null;
 
 
+  // ----------------------------------------------
+  // CHINE
+  // ----------------------------------------------
+
   if (
     normalizedCountry === 'chine' ||
     normalizedCountry === 'china' ||
@@ -2346,7 +2506,10 @@ const P2I_EXW_FOB_REFERENCES = {
 
 
   const countryReferences =
-    P2I_EXW_FOB_REFERENCES[countryKey];
+    P2I_EXW_FOB_REFERENCES[
+      countryKey
+    ];
+
 
   if (!countryReferences) {
     return null;
@@ -2354,9 +2517,300 @@ const P2I_EXW_FOB_REFERENCES = {
 
 
   return (
-    countryReferences[normalizedPort] ||
-    null
+    countryReferences[
+      normalizedPort
+    ] || null
   );
+}
+    // ======================================================
+// P2I — CALCUL DES FRAIS D'ORIGINE EXW → FOB
+// ======================================================
+//
+// ATTENTION :
+// Ce calcul ne comprend PAS le pré-acheminement
+// usine/fournisseur → port.
+//
+// Tant que ce coût manque, le FOB complet reste
+// considéré comme incomplet.
+//
+// Les références LCL ne doivent être utilisées que
+// comme estimation provisoire lorsque le mode LCL
+// reste techniquement pertinent.
+// ======================================================
+
+function calculateP2IExwToFobOriginCosts({
+
+  reference,
+  shippingVolumeM3
+
+}) {
+
+  if (!reference) {
+
+    return {
+
+      status:
+        'reference_not_available',
+
+      min_usd:
+        null,
+
+      max_usd:
+        null
+    };
+  }
+
+
+  const fxRate =
+    Number(
+      reference.fx_reference?.rate
+    );
+
+
+  if (
+    !Number.isFinite(fxRate) ||
+    fxRate <= 0
+  ) {
+
+    return {
+
+      status:
+        'fx_rate_not_available',
+
+      min_usd:
+        null,
+
+      max_usd:
+        null
+    };
+  }
+
+
+  const volume =
+    Number(shippingVolumeM3);
+
+
+  // ----------------------------------------------
+  // DÉCLARATION DOUANIÈRE
+  // ----------------------------------------------
+
+  const customsMinCny =
+    Number(
+      reference.export_clearance
+        ?.min_cny || 0
+    );
+
+  const customsMaxCny =
+    Number(
+      reference.export_clearance
+        ?.max_cny || 0
+    );
+
+
+  // ----------------------------------------------
+  // DOCUMENTATION
+  // ----------------------------------------------
+
+  const documentationCny =
+    Number(
+      reference.documentation
+        ?.amount_cny || 0
+    );
+
+
+  // ----------------------------------------------
+  // SCELLÉ
+  // ----------------------------------------------
+
+  const sealCny =
+    Number(
+      reference.seal_fee
+        ?.amount_cny || 0
+    );
+
+
+  // ----------------------------------------------
+  // MANIFESTE
+  // ----------------------------------------------
+
+  const manifestCny =
+    Number(
+      reference.manifest_fee
+        ?.amount_cny || 0
+    );
+
+
+  // ----------------------------------------------
+  // THC LCL
+  // ----------------------------------------------
+
+  let handlingCny =
+    null;
+
+
+  if (
+    Number.isFinite(volume) &&
+    volume > 0
+  ) {
+
+    const handlingRate =
+      Number(
+        reference
+          .origin_handling_lcl
+          ?.rate_cny || 0
+      );
+
+
+    handlingCny =
+      volume *
+      handlingRate;
+  }
+
+
+  // Sans volume, on ne peut pas produire
+  // correctement la référence LCL.
+
+  if (handlingCny == null) {
+
+    return {
+
+      status:
+        'shipping_volume_required',
+
+      min_usd:
+        null,
+
+      max_usd:
+        null
+    };
+  }
+
+
+  // ----------------------------------------------
+  // TOTAL FRAIS ORIGINE EN CNY
+  // ----------------------------------------------
+
+  const minCny =
+    customsMinCny +
+    documentationCny +
+    sealCny +
+    manifestCny +
+    handlingCny;
+
+
+  const maxCny =
+    customsMaxCny +
+    documentationCny +
+    sealCny +
+    manifestCny +
+    handlingCny;
+
+
+  // ----------------------------------------------
+  // CONVERSION USD
+  // ----------------------------------------------
+
+  const minUsd =
+    minCny *
+    fxRate;
+
+
+  const maxUsd =
+    maxCny *
+    fxRate;
+
+
+  return {
+
+    status:
+      'partial_origin_costs_estimated',
+
+    currency:
+      'USD',
+
+    source_currency:
+      'CNY',
+
+    fx_rate:
+      fxRate,
+
+    fx_rate_date:
+      reference.fx_reference
+        ?.rate_date || null,
+
+
+    // ------------------------------------------
+    // DÉTAIL CNY
+    // ------------------------------------------
+
+    export_clearance_min_cny:
+      customsMinCny,
+
+    export_clearance_max_cny:
+      customsMaxCny,
+
+    origin_handling_cny:
+      handlingCny,
+
+    documentation_cny:
+      documentationCny,
+
+    seal_fee_cny:
+      sealCny,
+
+    manifest_fee_cny:
+      manifestCny,
+
+
+    // ------------------------------------------
+    // TOTAL CNY
+    // ------------------------------------------
+
+    min_cny:
+      minCny,
+
+    max_cny:
+      maxCny,
+
+
+    // ------------------------------------------
+    // TOTAL USD
+    // ------------------------------------------
+
+    min_usd:
+      minUsd,
+
+    max_usd:
+      maxUsd,
+
+
+    // ------------------------------------------
+    // PRÉ-ACHEMINEMENT
+    // ------------------------------------------
+
+    pre_carriage_included:
+      false,
+
+    pre_carriage_status:
+      reference.pre_carriage
+        ?.status ||
+        'supplier_location_required',
+
+
+    // ------------------------------------------
+    // MODE
+    // ------------------------------------------
+
+    shipping_mode_reference:
+      reference
+        .applicable_shipping_mode ||
+        null,
+
+    shipping_mode_status:
+      reference
+        .shipping_mode_status ||
+        'comparison_required'
+  };
 }
     // ==============================================
     // NOUVELLES FONCTIONS SUPABASE
