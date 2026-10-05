@@ -5854,6 +5854,7 @@ const individualExwToFobReference =
 // --------------------------------------------------
 
 const individualExwToFobOriginCosts =
+  const individualExwToFobOriginCosts =
   calculateP2IExwToFobOriginCosts({
 
     reference:
@@ -5863,6 +5864,35 @@ const individualExwToFobOriginCosts =
       totalShippingVolumeM3
 
   });
+
+
+// --------------------------------------------------
+// ESTIMATION DU PRÉ-ACHEMINEMENT
+// USINE / FOURNISSEUR → PORT
+// --------------------------------------------------
+
+const individualPreCarriageEstimate =
+  calculateP2IPreCarriageEstimate({
+
+    supplierName:
+      data.user_supplier || null,
+
+    supplierCountry:
+      data.user_origin_country || null,
+
+    supplierLocation:
+      data.user_supplier_location || null,
+
+    departurePort:
+      data.user_logistics?.departure_port || null,
+
+    // Aucune référence régionale automatique
+    // n'est encore appliquée à ce stade.
+    regionalReference:
+      null
+
+  });
+
 
 // --------------------------------------------------
 // NORMALISATION EXW → FOB — MACHINE INDIVIDUELLE
@@ -5891,7 +5921,6 @@ const individualExwToFobOriginCosts =
 // --------------------------------------------------
 
 const individualExwToFobEstimate = {
-
   // ----------------------------------------------
   // STATUT INITIAL
   // ----------------------------------------------
@@ -5946,18 +5975,53 @@ const individualExwToFobEstimate = {
   // réelle du fournisseur / de l'usine.
   // ----------------------------------------------
 
-  pre_carriage_usd:
-    null,
+  // ----------------------------------------------
+// PRÉ-ACHEMINEMENT USINE / FOURNISSEUR → PORT
+// ----------------------------------------------
+//
+// Le résultat provient maintenant du moteur
+// calculateP2IPreCarriageEstimate().
+//
+// Il peut contenir :
+// - un montant unique,
+// - une fourchette,
+// - ou aucun montant tant que la localisation
+//   du fournisseur reste à déterminer.
+// ----------------------------------------------
 
-  pre_carriage_status:
-    individualExwToFobReference
-      ?.pre_carriage_status ||
-      (
-        data.user_supplier
-          ? 'supplier_location_required'
-          : 'supplier_required'
-      ),
+pre_carriage:
+  individualPreCarriageEstimate,
 
+pre_carriage_usd:
+  (
+    individualPreCarriageEstimate?.min_usd != null &&
+    individualPreCarriageEstimate?.max_usd != null &&
+    individualPreCarriageEstimate.min_usd ===
+      individualPreCarriageEstimate.max_usd
+  )
+    ? individualPreCarriageEstimate.min_usd
+    : null,
+
+pre_carriage_min_usd:
+  individualPreCarriageEstimate
+    ?.min_usd ?? null,
+
+pre_carriage_max_usd:
+  individualPreCarriageEstimate
+    ?.max_usd ?? null,
+
+pre_carriage_status:
+  individualPreCarriageEstimate
+    ?.status ||
+    'supplier_location_required',
+
+pre_carriage_method:
+  individualPreCarriageEstimate
+    ?.estimation_method || null,
+
+pre_carriage_confidence:
+  individualPreCarriageEstimate
+    ?.confidence || null,
 
   // ----------------------------------------------
   // FORMALITÉS EXPORT
