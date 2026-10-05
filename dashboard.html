@@ -3144,27 +3144,99 @@ function calculateP2IPreCarriageEstimate({
   // Pour le moment aucune référence régionale
   // n'est injectée automatiquement.
   // --------------------------------------------------
+// --------------------------------------------------
+// CONVERSION DE LA RÉFÉRENCE RÉGIONALE
+// VERS USD
+// --------------------------------------------------
+//
+// La référence régionale conserve ses montants
+// dans la devise source.
+//
+// Pour la Chine, les montants sont enregistrés
+// en CNY puis convertis avec le même taux FX P2I
+// que celui utilisé pour les frais d'origine.
+//
+// Aucun taux de change n'est inventé ici.
+// --------------------------------------------------
 
- if (
+let regionalMinUsd =
+  regionalReference?.min_usd ?? null;
+
+let regionalMaxUsd =
+  regionalReference?.max_usd ?? null;
+
+let regionalFxRate =
+  null;
+
+let regionalFxRateDate =
+  null;
+
+
+// --------------------------------------------------
+// RÉFÉRENCE EN CNY
+// --------------------------------------------------
+
+if (
+  regionalReference &&
+  regionalReference.source_currency === 'CNY' &&
+  regionalReference.min_cny != null &&
+  regionalReference.max_cny != null
+) {
+
+  // On récupère la même référence EXW → FOB
+  // que celle utilisée pour les frais origine.
+  const fxReference =
+    getP2IExwFobReference(
+      regionalReference.country,
+      regionalReference.departure_port
+    );
+
+  const fxRate =
+    Number(
+      fxReference?.fx_reference?.rate
+    );
+
+  if (
+    Number.isFinite(fxRate) &&
+    fxRate > 0
+  ) {
+
+    regionalFxRate =
+      fxRate;
+
+    regionalFxRateDate =
+      fxReference?.fx_reference?.date ||
+      null;
+
+    regionalMinUsd =
+      Number(regionalReference.min_cny) *
+      fxRate;
+
+    regionalMaxUsd =
+      Number(regionalReference.max_cny) *
+      fxRate;
+  }
+}
+if (
   regionalReference &&
 
-  regionalReference.min_usd != null &&
-  regionalReference.max_usd != null &&
+  regionalMinUsd != null &&
+  regionalMaxUsd != null &&
 
   Number.isFinite(
-    Number(regionalReference.min_usd)
+    Number(regionalMinUsd)
   ) &&
 
   Number.isFinite(
-    Number(regionalReference.max_usd)
+    Number(regionalMaxUsd)
   )
 ) {
 
-    const minUsd =
-      Number(regionalReference.min_usd);
+  const minUsd =
+    Number(regionalMinUsd);
 
-    const maxUsd =
-      Number(regionalReference.max_usd);
+  const maxUsd =
+    Number(regionalMaxUsd);
 
 
     if (
@@ -3201,6 +3273,24 @@ function calculateP2IPreCarriageEstimate({
 
         max_usd:
           maxUsd,
+        source_currency:
+  regionalReference?.source_currency || 'USD',
+
+source_min_amount:
+  regionalReference?.source_currency === 'CNY'
+    ? regionalReference?.min_cny ?? null
+    : regionalReference?.min_usd ?? null,
+
+source_max_amount:
+  regionalReference?.source_currency === 'CNY'
+    ? regionalReference?.max_cny ?? null
+    : regionalReference?.max_usd ?? null,
+
+fx_rate:
+  regionalFxRate,
+
+fx_rate_date:
+  regionalFxRateDate,
 
         confidence:
           regionalReference.confidence ||
