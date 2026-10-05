@@ -3125,15 +3125,20 @@ function calculateP2IPreCarriageEstimate({
   // n'est injectée automatiquement.
   // --------------------------------------------------
 
-  if (
-    regionalReference &&
-    Number.isFinite(
-      Number(regionalReference.min_usd)
-    ) &&
-    Number.isFinite(
-      Number(regionalReference.max_usd)
-    )
-  ) {
+ if (
+  regionalReference &&
+
+  regionalReference.min_usd != null &&
+  regionalReference.max_usd != null &&
+
+  Number.isFinite(
+    Number(regionalReference.min_usd)
+  ) &&
+
+  Number.isFinite(
+    Number(regionalReference.max_usd)
+  )
+) {
 
     const minUsd =
       Number(regionalReference.min_usd);
@@ -6003,6 +6008,18 @@ const individualExwToFobOriginCosts =
 
 
 // --------------------------------------------------
+// RECHERCHE D'UNE RÉFÉRENCE RÉGIONALE
+// DE PRÉ-ACHEMINEMENT
+// --------------------------------------------------
+
+const individualPreCarriageRegionalReference =
+  getP2IPreCarriageReference(
+    data.user_origin_country,
+    data.user_logistics?.departure_port
+  );
+
+
+// --------------------------------------------------
 // ESTIMATION DU PRÉ-ACHEMINEMENT
 // USINE / FOURNISSEUR → PORT
 // --------------------------------------------------
@@ -6022,13 +6039,10 @@ const individualPreCarriageEstimate =
     departurePort:
       data.user_logistics?.departure_port || null,
 
-    // Aucune référence régionale automatique
-    // n'est encore appliquée à ce stade.
     regionalReference:
-      null
+      individualPreCarriageRegionalReference
 
   });
-
 
 // --------------------------------------------------
 // NORMALISATION EXW → FOB — MACHINE INDIVIDUELLE
