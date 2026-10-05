@@ -3205,8 +3205,8 @@ if (
       fxRate;
 
     regionalFxRateDate =
-      fxReference?.fx_reference?.date ||
-      null;
+  fxReference?.fx_reference?.rate_date ||
+  null;
 
     regionalMinUsd =
       Number(regionalReference.min_cny) *
