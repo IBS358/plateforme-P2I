@@ -2864,64 +2864,84 @@ const P2I_PRE_CARRIAGE_REFERENCES = {
 
   china: {
 
-    shanghai: {
+   shanghai: {
 
-      country:
-        'Chine',
+  country:
+    'Chine',
 
-      departure_port:
-        'Shanghai',
+  departure_port:
+    'Shanghai',
 
-      region:
-        'Shanghai / Jiangsu / Zhejiang',
+  region:
+    'Shanghai / Jiangsu / Zhejiang',
 
-      status:
-        'reference_structure_ready',
+  status:
+    'regional_fallback_reference',
 
-      estimation_method:
-        'industrial_region_reference',
+  estimation_method:
+    'industrial_region_reference',
 
-      // --------------------------------------------
-      // FOURCHETTE DE PRÉ-ACHEMINEMENT
-      // --------------------------------------------
-      //
-      // Volontairement laissée à null tant que
-      // la référence tarifaire n'est pas documentée.
-      // --------------------------------------------
+  // --------------------------------------------
+  // FOURCHETTE RÉGIONALE DE PRÉ-ACHEMINEMENT
+  // --------------------------------------------
+  //
+  // Référence de secours uniquement lorsque
+  // la localisation exacte du fournisseur/usine
+  // n'est pas encore connue.
+  //
+  // Cette fourchette ne constitue pas un devis.
+  // Elle devra être remplacée par une estimation
+  // plus précise dès que le lieu d'enlèvement
+  // est déterminé.
+  // --------------------------------------------
 
-      min_usd:
-        null,
+  source_currency:
+    'CNY',
 
-      max_usd:
-        null,
+  min_cny:
+    1500,
 
-      // Distance indicative éventuelle
-      distance_km:
-        null,
+  max_cny:
+    5000,
 
-      confidence:
-        null,
+  // Les montants USD seront calculés
+  // dynamiquement par P2I.
+  min_usd:
+    null,
 
-      // --------------------------------------------
-      // TRAÇABILITÉ
-      // --------------------------------------------
+  max_usd:
+    null,
 
-      source_type:
-        null,
+  // --------------------------------------------
+  // PÉRIMÈTRE
+  // --------------------------------------------
 
-      source_name:
-        null,
+  distance_km:
+    null,
 
-      source_date:
-        null,
+  confidence:
+    'low_to_medium',
 
-      verification_status:
-        'reference_to_document',
+  // --------------------------------------------
+  // TRAÇABILITÉ
+  // --------------------------------------------
 
-      notes:
-        'Référence régionale P2I à documenter pour le pré-acheminement vers le port de Shanghai.'
+  source_type:
+    'market_reference',
 
-    }
+  source_name:
+    'P2I regional market reference — Shanghai / Jiangsu / Zhejiang',
+
+  source_date:
+    '2026-10-05',
+
+  verification_status:
+    'provisional_reference',
+
+  notes:
+    'Fourchette régionale de secours. À remplacer par une estimation fondée sur la localisation réelle du fournisseur ou de l’usine dès que celle-ci est disponible.'
+
+}
 
   }
 
