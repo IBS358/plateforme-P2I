@@ -2840,7 +2840,144 @@ function calculateP2IExwToFobOriginCosts({
 // Aucun coût n'est inventé si aucune référence
 // exploitable n'est disponible.
 // ======================================================
+// ======================================================
+// P2I — RÉFÉRENTIEL DE PRÉ-ACHEMINEMENT
+// USINE / FOURNISSEUR → PORT D'EMBARQUEMENT
+// ======================================================
+//
+// IMPORTANT :
+//
+// Ce référentiel ne remplace pas une localisation
+// précise du fournisseur.
+//
+// Ordre de priorité futur :
+//
+// 1. localisation précise fournisseur / usine
+// 2. référence régionale / bassin industriel
+// 3. information à confirmer
+//
+// Les montants ne seront ajoutés qu'après
+// documentation d'une source exploitable.
+// ======================================================
 
+const P2I_PRE_CARRIAGE_REFERENCES = {
+
+  china: {
+
+    shanghai: {
+
+      country:
+        'Chine',
+
+      departure_port:
+        'Shanghai',
+
+      region:
+        'Shanghai / Jiangsu / Zhejiang',
+
+      status:
+        'reference_structure_ready',
+
+      estimation_method:
+        'industrial_region_reference',
+
+      // --------------------------------------------
+      // FOURCHETTE DE PRÉ-ACHEMINEMENT
+      // --------------------------------------------
+      //
+      // Volontairement laissée à null tant que
+      // la référence tarifaire n'est pas documentée.
+      // --------------------------------------------
+
+      min_usd:
+        null,
+
+      max_usd:
+        null,
+
+      // Distance indicative éventuelle
+      distance_km:
+        null,
+
+      confidence:
+        null,
+
+      // --------------------------------------------
+      // TRAÇABILITÉ
+      // --------------------------------------------
+
+      source_type:
+        null,
+
+      source_name:
+        null,
+
+      source_date:
+        null,
+
+      verification_status:
+        'reference_to_document',
+
+      notes:
+        'Référence régionale P2I à documenter pour le pré-acheminement vers le port de Shanghai.'
+
+    }
+
+  }
+
+};
+    // ======================================================
+// P2I — RECHERCHE D'UNE RÉFÉRENCE RÉGIONALE
+// DE PRÉ-ACHEMINEMENT
+// ======================================================
+
+function getP2IPreCarriageReference(
+  country,
+  departurePort
+) {
+
+  const normalize = value =>
+    String(value || '')
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+
+
+  const normalizedCountry =
+    normalize(country);
+
+  const normalizedPort =
+    normalize(departurePort);
+
+
+  // --------------------------------------------------
+  // CHINE
+  // --------------------------------------------------
+
+  if (
+    (
+      normalizedCountry === 'chine' ||
+      normalizedCountry === 'china' ||
+      normalizedCountry === 'cn'
+    ) &&
+    normalizedPort === 'shanghai'
+  ) {
+
+    return (
+      P2I_PRE_CARRIAGE_REFERENCES
+        .china
+        .shanghai
+    );
+  }
+
+
+  // --------------------------------------------------
+  // AUCUNE RÉFÉRENCE DISPONIBLE
+  // --------------------------------------------------
+
+  return null;
+}
 function calculateP2IPreCarriageEstimate({
 
   supplierName = null,
