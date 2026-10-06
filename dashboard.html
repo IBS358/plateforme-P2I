@@ -6533,12 +6533,50 @@ const individualGoodsValueMaxUsd =
 const individualCifInsuranceEstimate =
   calculateCifInsuranceEstimate({
 
+    // ----------------------------------------------
+    // VALEUR FOB CENTRALE
+    // ----------------------------------------------
+
     fobValueUsd:
       individualGoodsValueUsd,
+
+
+    // ----------------------------------------------
+    // FOURCHETTE FOB
+    // ----------------------------------------------
+
+    fobValueMinUsd:
+      individualGoodsValueMinUsd,
+
+    fobValueMaxUsd:
+      individualGoodsValueMaxUsd,
+
+
+    // ----------------------------------------------
+    // FRET CENTRAL
+    // ----------------------------------------------
 
     freightUsd:
       individualLclFreightEstimate
         ?.estimated_freight_usd ?? null,
+
+
+    // ----------------------------------------------
+    // FOURCHETTE DE FRET
+    // ----------------------------------------------
+
+    freightMinUsd:
+      individualLclFreightEstimate
+        ?.estimated_freight_min_usd ?? null,
+
+    freightMaxUsd:
+      individualLclFreightEstimate
+        ?.estimated_freight_max_usd ?? null,
+
+
+    // ----------------------------------------------
+    // ASSURANCE
+    // ----------------------------------------------
 
     insurance:
       individualInsuranceReference
