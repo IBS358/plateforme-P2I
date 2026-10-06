@@ -6340,32 +6340,95 @@ documented_origin_cost_max_usd:
 // TOTAL EXW → FOB
 // ----------------------------------------------
 //
-// IMPORTANT :
-// Les frais d'origine documentés sont maintenant
-// disponibles sous forme de fourchette.
+// Le coût EXW → FOB est calculé sous forme
+// de fourchette lorsque P2I dispose :
 //
-// Cependant, le pré-acheminement usine/fournisseur
-// → port n'est pas encore calculé.
+// - du prix EXW,
+// - d'une estimation du pré-acheminement,
+// - des frais d'origine documentés.
 //
-// Le coût EXW → FOB complet reste donc volontairement
-// à null.
+// Aucun montant moyen artificiel n'est créé.
 // ----------------------------------------------
 
 estimated_exw_to_fob_cost_usd:
   null,
+
+estimated_exw_to_fob_cost_min_usd:
+  (
+    individualPreCarriageEstimate?.min_usd != null &&
+    individualExwToFobOriginCosts?.min_usd != null
+  )
+    ? Number(individualPreCarriageEstimate.min_usd) +
+      Number(individualExwToFobOriginCosts.min_usd)
+    : null,
+
+estimated_exw_to_fob_cost_max_usd:
+  (
+    individualPreCarriageEstimate?.max_usd != null &&
+    individualExwToFobOriginCosts?.max_usd != null
+  )
+    ? Number(individualPreCarriageEstimate.max_usd) +
+      Number(individualExwToFobOriginCosts.max_usd)
+    : null,
 
 
 // ----------------------------------------------
 // FOB ESTIMÉ
 // ----------------------------------------------
 //
-// Tant que le pré-acheminement manque,
-// P2I ne doit pas présenter de FOB complet.
+// Prix FOB estimé =
+// prix EXW
+// + pré-acheminement
+// + frais d'origine.
+//
+// Lorsque le pré-acheminement repose sur une
+// référence régionale, P2I conserve une
+// fourchette et ne fabrique pas un prix unique.
 // ----------------------------------------------
 
 estimated_fob_usd:
   null,
 
+estimated_fob_min_usd:
+  (
+    usableUsdPrice &&
+    priceBasis === 'exw' &&
+    individualPreCarriageEstimate?.min_usd != null &&
+    individualExwToFobOriginCosts?.min_usd != null
+  )
+    ? Number(price) +
+      Number(individualPreCarriageEstimate.min_usd) +
+      Number(individualExwToFobOriginCosts.min_usd)
+    : null,
+
+estimated_fob_max_usd:
+  (
+    usableUsdPrice &&
+    priceBasis === 'exw' &&
+    individualPreCarriageEstimate?.max_usd != null &&
+    individualExwToFobOriginCosts?.max_usd != null
+  )
+    ? Number(price) +
+      Number(individualPreCarriageEstimate.max_usd) +
+      Number(individualExwToFobOriginCosts.max_usd)
+    : null,
+
+estimated_fob_status:
+  (
+    usableUsdPrice &&
+    priceBasis === 'exw' &&
+    individualPreCarriageEstimate?.min_usd != null &&
+    individualPreCarriageEstimate?.max_usd != null &&
+    individualExwToFobOriginCosts?.min_usd != null &&
+    individualExwToFobOriginCosts?.max_usd != null
+  )
+    ? (
+        individualPreCarriageEstimate?.status ===
+        'regional_estimate'
+          ? 'regional_range_estimate'
+          : 'range_estimate'
+      )
+    : 'not_calculable',
   // ----------------------------------------------
   // RÉFÉRENCE P2I UTILISÉE
   // ----------------------------------------------
