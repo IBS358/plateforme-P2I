@@ -6185,10 +6185,24 @@ const individualExwToFobEstimate = {
   // STATUT INITIAL
   // ----------------------------------------------
 
-  status:
-    exwToFobRequired
-      ? 'reference_costs_required'
-      : 'not_required',
+   status:
+    !exwToFobRequired
+      ? 'not_required'
+      : (
+          usableUsdPrice &&
+          priceBasis === 'exw' &&
+          individualPreCarriageEstimate?.min_usd != null &&
+          individualPreCarriageEstimate?.max_usd != null &&
+          individualExwToFobOriginCosts?.min_usd != null &&
+          individualExwToFobOriginCosts?.max_usd != null
+        )
+          ? (
+              individualPreCarriageEstimate?.status ===
+              'regional_estimate'
+                ? 'regional_range_estimated'
+                : 'range_estimated'
+            )
+          : 'reference_costs_required',
 
 
   // ----------------------------------------------
