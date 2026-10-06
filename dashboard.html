@@ -5999,43 +5999,11 @@ const individualLclFreightEstimate =
 // ASSURANCE DE RÉFÉRENCE — MACHINE INDIVIDUELLE
 // --------------------------------------------------
 
-const individualInsuranceReference = {
-
-  status:
-    'not_available',
-
-  coverage_basis:
-    'cif_contract_value',
-
-  coverage_percent:
-    110,
-
-  premium_rate_percent:
-    null,
-
-  minimum_premium_usd:
-    null,
-
-  coverage_level:
-    'institute_cargo_clauses_c',
-
-  source_type:
-    null,
-
-  source_name:
-    null,
-
-  source_date:
-    null,
-
-  valid_until:
-    null,
-
-  verification_status:
-    'not_verified'
-
-};
-
+const individualInsuranceReference =
+  resolveP2IInsuranceRate({
+    coverageLevel:
+      'institute_cargo_clauses_a'
+  });
 
 // --------------------------------------------------
 // RÉFÉRENCE P2I EXW → FOB DISPONIBLE
