@@ -10500,18 +10500,35 @@ if (hasPremiumRateRange) {
       Number(
         insuredValueUsd.toFixed(2)
       ),
-
     estimated_insurance_usd:
       Number(
         insuranceUsd.toFixed(2)
       ),
 
+    estimated_insurance_min_usd:
+      estimatedInsuranceMinUsd,
+
+    estimated_insurance_max_usd:
+      estimatedInsuranceMaxUsd,
+
     estimated_cif_abidjan_usd:
       Number(
         cifUsd.toFixed(2)
-      )
+      ),
+
+    estimated_cif_abidjan_min_usd:
+      estimatedCifMinUsd,
+
+    estimated_cif_abidjan_max_usd:
+      estimatedCifMaxUsd,
+
+    insurance_range_status:
+      hasPremiumRateRange
+        ? 'market_range_available'
+        : 'range_not_available'
 
   };
+   
 }
   // ==================================================
 // ANALYSE DES OPPORTUNITÉS DE REGROUPEMENT DU FRET
