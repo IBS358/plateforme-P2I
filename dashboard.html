@@ -10296,33 +10296,77 @@ if (
 ) {
   return {
     status: 'missing_fob_value',
-    insured_value_usd: null,
-    estimated_insurance_usd: null,
-    estimated_insurance_min_usd: null,
-    estimated_insurance_max_usd: null,
-    estimated_cif_abidjan_usd: null,
-    estimated_cif_abidjan_min_usd: null,
-    estimated_cif_abidjan_max_usd: null
+
+    insured_value_usd:
+      null,
+
+    estimated_insurance_usd:
+      null,
+
+    estimated_insurance_min_usd:
+      null,
+
+    estimated_insurance_max_usd:
+      null,
+
+    estimated_cif_abidjan_usd:
+      null,
+
+    estimated_cif_abidjan_min_usd:
+      null,
+
+    estimated_cif_abidjan_max_usd:
+      null
   };
 }
 
 
-const fob =
-  hasCentralFob
-    ? Number(fobValueUsd)
-    : null;
-
+// ----------------------------------------------
+// BORNES FOB
+// ----------------------------------------------
 
 const fobMin =
   hasFobRange
-    ? Number(fobValueMinUsd)
-    : fob;
+    ? Number(
+        fobValueMinUsd
+      )
+    : Number(
+        fobValueUsd
+      );
 
 
 const fobMax =
   hasFobRange
-    ? Number(fobValueMaxUsd)
-    : fob;
+    ? Number(
+        fobValueMaxUsd
+      )
+    : Number(
+        fobValueUsd
+      );
+
+
+// ----------------------------------------------
+// FOB CENTRAL DE CALCUL
+// ----------------------------------------------
+//
+// Si un FOB unique existe, on le conserve.
+//
+// Si seule une fourchette existe, le moteur utilise
+// son point milieu uniquement pour maintenir le
+// calcul central historique.
+//
+// Les bornes min / max restent conservées séparément.
+// ----------------------------------------------
+
+const fob =
+  hasCentralFob
+    ? Number(
+        fobValueUsd
+      )
+    : (
+        fobMin +
+        fobMax
+      ) / 2;
  // ----------------------------------------------
 // CONTRÔLE FRET
 // ----------------------------------------------
