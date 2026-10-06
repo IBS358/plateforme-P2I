@@ -9123,58 +9123,90 @@ function calculateLclFreightEstimate({
     // ----------------------------------------------
 
     estimated_freight_min_usd:
-      (
-        rate?.market_min_rate_usd != null &&
-        Number.isFinite(
-          Number(rate.market_min_rate_usd)
-        )
+  (
+    (
+      rateType === 'per_cbm'
+        ? rate?.market_min_rate_per_cbm_usd
+        : rate?.market_min_rate_per_rt_usd
+    ) != null &&
+    Number.isFinite(
+      Number(
+        rateType === 'per_cbm'
+          ? rate?.market_min_rate_per_cbm_usd
+          : rate?.market_min_rate_per_rt_usd
       )
-        ? Number(
-            (
-              Math.max(
-                chargeableQuantity *
-                  Number(rate.market_min_rate_usd),
-                minimumChargeUsd
-              ) +
-              fixedChargeUsd +
-              surchargesUsd +
-              originChargesUsd +
-              destinationChargesUsd +
-              otherChargesUsd
-            ).toFixed(2)
-          )
-        : null,
+    )
+  )
+    ? Number(
+        (
+          Math.max(
+            chargeableQuantity *
+              Number(
+                rateType === 'per_cbm'
+                  ? rate.market_min_rate_per_cbm_usd
+                  : rate.market_min_rate_per_rt_usd
+              ),
+            minimumChargeUsd
+          ) +
+          fixedChargeUsd +
+          surchargesUsd +
+          originChargesUsd +
+          destinationChargesUsd +
+          otherChargesUsd
+        ).toFixed(2)
+      )
+    : null,
 
-    estimated_freight_max_usd:
-      (
-        rate?.market_max_rate_usd != null &&
-        Number.isFinite(
-          Number(rate.market_max_rate_usd)
-        )
+estimated_freight_max_usd:
+  (
+    (
+      rateType === 'per_cbm'
+        ? rate?.market_max_rate_per_cbm_usd
+        : rate?.market_max_rate_per_rt_usd
+    ) != null &&
+    Number.isFinite(
+      Number(
+        rateType === 'per_cbm'
+          ? rate?.market_max_rate_per_cbm_usd
+          : rate?.market_max_rate_per_rt_usd
       )
-        ? Number(
-            (
-              Math.max(
-                chargeableQuantity *
-                  Number(rate.market_max_rate_usd),
-                minimumChargeUsd
-              ) +
-              fixedChargeUsd +
-              surchargesUsd +
-              originChargesUsd +
-              destinationChargesUsd +
-              otherChargesUsd
-            ).toFixed(2)
-          )
-        : null,
+    )
+  )
+    ? Number(
+        (
+          Math.max(
+            chargeableQuantity *
+              Number(
+                rateType === 'per_cbm'
+                  ? rate.market_max_rate_per_cbm_usd
+                  : rate.market_max_rate_per_rt_usd
+              ),
+            minimumChargeUsd
+          ) +
+          fixedChargeUsd +
+          surchargesUsd +
+          originChargesUsd +
+          destinationChargesUsd +
+          otherChargesUsd
+        ).toFixed(2)
+      )
+    : null,
 
-    freight_range_status:
-      (
-        rate?.market_min_rate_usd != null &&
-        rate?.market_max_rate_usd != null
-      )
-        ? 'market_range_available'
-        : 'range_not_available'
+freight_range_status:
+  (
+    (
+      rateType === 'per_cbm'
+        ? rate?.market_min_rate_per_cbm_usd
+        : rate?.market_min_rate_per_rt_usd
+    ) != null &&
+    (
+      rateType === 'per_cbm'
+        ? rate?.market_max_rate_per_cbm_usd
+        : rate?.market_max_rate_per_rt_usd
+    ) != null
+  )
+    ? 'market_range_available'
+    : 'range_not_available'
 
   };
 
