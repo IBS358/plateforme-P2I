@@ -6467,16 +6467,21 @@ estimated_fob_status:
       ?.verification_status ||
       'reference_not_available',
 
-  reference_status:
+   reference_status:
     individualExwToFobReference
       ?.status ||
       'reference_not_available'
 
 };
 
+console.log(
+  '🧪 TEST FOB P2I :',
+  individualExwToFobEstimate
+);
+
 // --------------------------------------------------
 // VALEUR FOB DES MARCHANDISES EXPÉDIÉES
-// --------------------------------------------------
+// -------------------------------------------------- 
 //
 // CAS 1 :
 // le prix utilisateur est déjà FOB → utilisable.
