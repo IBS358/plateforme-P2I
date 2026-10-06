@@ -10371,34 +10371,112 @@ const fob =
 // CONTRÔLE FRET
 // ----------------------------------------------
 
+const hasCentralFreight =
+  freightUsd !== null &&
+  freightUsd !== undefined &&
+  freightUsd !== '' &&
+  Number.isFinite(
+    Number(freightUsd)
+  ) &&
+  Number(freightUsd) >= 0;
+
+
+const hasFreightRange =
+  freightMinUsd !== null &&
+  freightMinUsd !== undefined &&
+  freightMinUsd !== '' &&
+  Number.isFinite(
+    Number(freightMinUsd)
+  ) &&
+  Number(freightMinUsd) >= 0 &&
+
+  freightMaxUsd !== null &&
+  freightMaxUsd !== undefined &&
+  freightMaxUsd !== '' &&
+  Number.isFinite(
+    Number(freightMaxUsd)
+  ) &&
+  Number(freightMaxUsd) >=
+    Number(freightMinUsd);
+
+
 if (
-  freightUsd === null ||
-  freightUsd === undefined ||
-  freightUsd === ''
+  !hasCentralFreight &&
+  !hasFreightRange
 ) {
   return {
     status: 'missing_freight',
-    insured_value_usd: null,
-    estimated_insurance_usd: null,
-    estimated_cif_abidjan_usd: null
+
+    insured_value_usd:
+      null,
+
+    estimated_insurance_usd:
+      null,
+
+    estimated_insurance_min_usd:
+      null,
+
+    estimated_insurance_max_usd:
+      null,
+
+    estimated_cif_abidjan_usd:
+      null,
+
+    estimated_cif_abidjan_min_usd:
+      null,
+
+    estimated_cif_abidjan_max_usd:
+      null
   };
 }
+
+
+// ----------------------------------------------
+// BORNES DE FRET
+// ----------------------------------------------
+
+const freightMin =
+  hasFreightRange
+    ? Number(
+        freightMinUsd
+      )
+    : Number(
+        freightUsd
+      );
+
+
+const freightMax =
+  hasFreightRange
+    ? Number(
+        freightMaxUsd
+      )
+    : Number(
+        freightUsd
+      );
+
+
+// ----------------------------------------------
+// FRET CENTRAL DE CALCUL
+// ----------------------------------------------
+//
+// Si un fret central existe, on le conserve.
+//
+// Si seule une fourchette existe, le moteur utilise
+// son point milieu pour préserver la compatibilité
+// du calcul central existant.
+//
+// Les bornes min / max restent conservées séparément.
+// ----------------------------------------------
 
 const freight =
-  Number(freightUsd);
-
-if (
-  !Number.isFinite(freight) ||
-  freight < 0
-) {
-  return {
-    status: 'invalid_freight',
-    insured_value_usd: null,
-    estimated_insurance_usd: null,
-    estimated_cif_abidjan_usd: null
-  };
-}
-
+  hasCentralFreight
+    ? Number(
+        freightUsd
+      )
+    : (
+        freightMin +
+        freightMax
+      ) / 2;
   // ----------------------------------------------
   // CONTRÔLE DE L'ASSURANCE
   // ----------------------------------------------
