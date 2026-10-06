@@ -6413,18 +6413,23 @@ estimated_fob_status:
 };
 
 // --------------------------------------------------
-// VALEUR FOB DES MARCHANDISES EXPÉDIÉES
-// -------------------------------------------------- 
+// VALEUR DES MARCHANDISES FOB
+// --------------------------------------------------
 //
-// CAS 1 :
-// le prix utilisateur est déjà FOB → utilisable.
+// Prix FOB déclaré : valeur unique disponible.
 //
-// CAS 2 :
-// le prix utilisateur est EXW → la valeur FOB ne
-// devient disponible qu'après normalisation EXW → FOB.
+// Prix EXW :
+// - la valeur unique n'est disponible que si un FOB
+//   unique a réellement été calculé ;
+// - la fourchette min / max est utilisée séparément.
 //
 // Les pièces critiques commandées en supplément sont
 // ajoutées à la valeur des marchandises expédiées.
+// --------------------------------------------------
+
+
+// --------------------------------------------------
+// VALEUR FOB UNIQUE
 // --------------------------------------------------
 
 const individualGoodsValueUsd =
@@ -6432,7 +6437,6 @@ const individualGoodsValueUsd =
     usableUsdPrice &&
     priceBasis === 'fob'
   )
-
     ? Number(price) +
       additionalSparePartsCostUsd
 
@@ -6440,7 +6444,7 @@ const individualGoodsValueUsd =
         usableUsdPrice &&
         priceBasis === 'exw' &&
         individualExwToFobEstimate
-          .estimated_fob_usd != null &&
+          ?.estimated_fob_usd != null &&
         Number.isFinite(
           Number(
             individualExwToFobEstimate
@@ -6448,19 +6452,84 @@ const individualGoodsValueUsd =
           )
         )
       )
+        ? Number(
+            individualExwToFobEstimate
+              .estimated_fob_usd
+          ) +
+          additionalSparePartsCostUsd
 
-      ? Number(
-          individualExwToFobEstimate
-            .estimated_fob_usd
-        ) +
-        additionalSparePartsCostUsd
+        : null;
 
-      : null;
+
+// --------------------------------------------------
+// VALEUR FOB MINIMALE
+// --------------------------------------------------
+
+const individualGoodsValueMinUsd =
+  (
+    usableUsdPrice &&
+    priceBasis === 'fob'
+  )
+    ? Number(price) +
+      additionalSparePartsCostUsd
+
+    : (
+        usableUsdPrice &&
+        priceBasis === 'exw' &&
+        individualExwToFobEstimate
+          ?.estimated_fob_min_usd != null &&
+        Number.isFinite(
+          Number(
+            individualExwToFobEstimate
+              .estimated_fob_min_usd
+          )
+        )
+      )
+        ? Number(
+            individualExwToFobEstimate
+              .estimated_fob_min_usd
+          ) +
+          additionalSparePartsCostUsd
+
+        : null;
+
+
+// --------------------------------------------------
+// VALEUR FOB MAXIMALE
+// --------------------------------------------------
+
+const individualGoodsValueMaxUsd =
+  (
+    usableUsdPrice &&
+    priceBasis === 'fob'
+  )
+    ? Number(price) +
+      additionalSparePartsCostUsd
+
+    : (
+        usableUsdPrice &&
+        priceBasis === 'exw' &&
+        individualExwToFobEstimate
+          ?.estimated_fob_max_usd != null &&
+        Number.isFinite(
+          Number(
+            individualExwToFobEstimate
+              .estimated_fob_max_usd
+          )
+        )
+      )
+        ? Number(
+            individualExwToFobEstimate
+              .estimated_fob_max_usd
+          ) +
+          additionalSparePartsCostUsd
+
+        : null;
+
 
 // --------------------------------------------------
 // CALCUL ASSURANCE + CIF
 // --------------------------------------------------
-
 const individualCifInsuranceEstimate =
   calculateCifInsuranceEstimate({
 
