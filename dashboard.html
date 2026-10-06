@@ -10656,17 +10656,50 @@ let estimatedCifMaxUsd =
 
 if (hasPremiumRateRange) {
 
+  // ----------------------------------------------
+  // CALCUL D'UNE BORNE CIF
+  // ----------------------------------------------
+
   const calculateRangePoint =
-    ratePercent => {
+    (
+      rangeFobUsd,
+      rangeFreightUsd,
+      ratePercent
+    ) => {
+
+      const rangeFob =
+        Number(rangeFobUsd);
+
+      const rangeFreight =
+        Number(rangeFreightUsd);
 
       const rate =
-        ratePercent / 100;
+        Number(ratePercent) / 100;
+
+
+      if (
+        !Number.isFinite(rangeFob) ||
+        rangeFob < 0 ||
+        !Number.isFinite(rangeFreight) ||
+        rangeFreight < 0 ||
+        !Number.isFinite(rate) ||
+        rate <= 0
+      ) {
+        return null;
+      }
+
+
+      const rangeBaseFobFreight =
+        rangeFob +
+        rangeFreight;
+
 
       const rangeDenominator =
         1 - (
           rate *
           coverageFactor
         );
+
 
       if (
         !Number.isFinite(
@@ -10679,13 +10712,18 @@ if (hasPremiumRateRange) {
 
 
       let rangeCifUsd =
-        baseFobFreight /
+        rangeBaseFobFreight /
         rangeDenominator;
+
 
       let rangeInsuranceUsd =
         rangeCifUsd -
-        baseFobFreight;
+        rangeBaseFobFreight;
 
+
+      // ----------------------------------------------
+      // PRIME MINIMALE ÉVENTUELLE
+      // ----------------------------------------------
 
       if (
         minimumPremiumUsd >
@@ -10696,12 +10734,28 @@ if (hasPremiumRateRange) {
           minimumPremiumUsd;
 
         rangeCifUsd =
-          baseFobFreight +
+          rangeBaseFobFreight +
           rangeInsuranceUsd;
       }
 
 
       return {
+
+        fob_usd:
+          Number(
+            rangeFob.toFixed(2)
+          ),
+
+        freight_usd:
+          Number(
+            rangeFreight.toFixed(2)
+          ),
+
+        premium_rate_percent:
+          Number(
+            ratePercent
+          ),
+
         insurance_usd:
           Number(
             rangeInsuranceUsd.toFixed(2)
@@ -10711,18 +10765,42 @@ if (hasPremiumRateRange) {
           Number(
             rangeCifUsd.toFixed(2)
           )
+
       };
     };
 
 
+  // ----------------------------------------------
+  // BORNE BASSE
+  // FOB min + fret min + taux assurance min
+  // ----------------------------------------------
+
   const minPoint =
     calculateRangePoint(
+
+      fobMin,
+
+      freightMin,
+
       marketMinPremiumRatePercent
+
     );
+
+
+  // ----------------------------------------------
+  // BORNE HAUTE
+  // FOB max + fret max + taux assurance max
+  // ----------------------------------------------
 
   const maxPoint =
     calculateRangePoint(
+
+      fobMax,
+
+      freightMax,
+
       marketMaxPremiumRatePercent
+
     );
 
 
@@ -10732,11 +10810,13 @@ if (hasPremiumRateRange) {
   estimatedInsuranceMaxUsd =
     maxPoint?.insurance_usd ?? null;
 
+
   estimatedCifMinUsd =
     minPoint?.cif_usd ?? null;
 
   estimatedCifMaxUsd =
     maxPoint?.cif_usd ?? null;
+
 }
   // ----------------------------------------------
   // RÉSULTAT
