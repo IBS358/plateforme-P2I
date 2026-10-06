@@ -10247,7 +10247,13 @@ function resolveP2IInsuranceRate({
 
 function calculateCifInsuranceEstimate({
   fobValueUsd,
+  fobValueMinUsd = null,
+  fobValueMaxUsd = null,
+
   freightUsd,
+  freightMinUsd = null,
+  freightMaxUsd = null,
+
   insurance
 }) {
   
