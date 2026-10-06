@@ -10261,34 +10261,68 @@ function calculateCifInsuranceEstimate({
 // CONTRÔLE FOB
 // ----------------------------------------------
 
+const hasCentralFob =
+  fobValueUsd !== null &&
+  fobValueUsd !== undefined &&
+  fobValueUsd !== '' &&
+  Number.isFinite(
+    Number(fobValueUsd)
+  ) &&
+  Number(fobValueUsd) >= 0;
+
+
+const hasFobRange =
+  fobValueMinUsd !== null &&
+  fobValueMinUsd !== undefined &&
+  fobValueMinUsd !== '' &&
+  Number.isFinite(
+    Number(fobValueMinUsd)
+  ) &&
+  Number(fobValueMinUsd) >= 0 &&
+
+  fobValueMaxUsd !== null &&
+  fobValueMaxUsd !== undefined &&
+  fobValueMaxUsd !== '' &&
+  Number.isFinite(
+    Number(fobValueMaxUsd)
+  ) &&
+  Number(fobValueMaxUsd) >=
+    Number(fobValueMinUsd);
+
+
 if (
-  fobValueUsd === null ||
-  fobValueUsd === undefined ||
-  fobValueUsd === ''
+  !hasCentralFob &&
+  !hasFobRange
 ) {
   return {
     status: 'missing_fob_value',
     insured_value_usd: null,
     estimated_insurance_usd: null,
-    estimated_cif_abidjan_usd: null
+    estimated_insurance_min_usd: null,
+    estimated_insurance_max_usd: null,
+    estimated_cif_abidjan_usd: null,
+    estimated_cif_abidjan_min_usd: null,
+    estimated_cif_abidjan_max_usd: null
   };
 }
+
 
 const fob =
-  Number(fobValueUsd);
+  hasCentralFob
+    ? Number(fobValueUsd)
+    : null;
 
-if (
-  !Number.isFinite(fob) ||
-  fob < 0
-) {
-  return {
-    status: 'invalid_fob_value',
-    insured_value_usd: null,
-    estimated_insurance_usd: null,
-    estimated_cif_abidjan_usd: null
-  };
-}
 
+const fobMin =
+  hasFobRange
+    ? Number(fobValueMinUsd)
+    : fob;
+
+
+const fobMax =
+  hasFobRange
+    ? Number(fobValueMaxUsd)
+    : fob;
  // ----------------------------------------------
 // CONTRÔLE FRET
 // ----------------------------------------------
