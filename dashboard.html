@@ -9151,10 +9151,74 @@ function calculateLclFreightEstimate({
     other_charges_usd:
       otherChargesUsd,
 
-    estimated_freight_usd:
+       estimated_freight_usd:
       Number(
         estimatedFreightUsd.toFixed(2)
+      ),
+
+    // ----------------------------------------------
+    // FOURCHETTE DE FRET P2I
+    // ----------------------------------------------
+    //
+    // Lorsque le tarif sélectionné provient d'une
+    // référence marché avec borne basse et haute,
+    // P2I conserve cette fourchette au lieu de
+    // fabriquer un montant unique définitif.
+    // ----------------------------------------------
+
+    estimated_freight_min_usd:
+      (
+        rate?.market_min_rate_usd != null &&
+        Number.isFinite(
+          Number(rate.market_min_rate_usd)
+        )
       )
+        ? Number(
+            (
+              Math.max(
+                chargeableQuantity *
+                  Number(rate.market_min_rate_usd),
+                minimumChargeUsd
+              ) +
+              fixedChargeUsd +
+              surchargesUsd +
+              originChargesUsd +
+              destinationChargesUsd +
+              otherChargesUsd
+            ).toFixed(2)
+          )
+        : null,
+
+    estimated_freight_max_usd:
+      (
+        rate?.market_max_rate_usd != null &&
+        Number.isFinite(
+          Number(rate.market_max_rate_usd)
+        )
+      )
+        ? Number(
+            (
+              Math.max(
+                chargeableQuantity *
+                  Number(rate.market_max_rate_usd),
+                minimumChargeUsd
+              ) +
+              fixedChargeUsd +
+              surchargesUsd +
+              originChargesUsd +
+              destinationChargesUsd +
+              otherChargesUsd
+            ).toFixed(2)
+          )
+        : null,
+
+    freight_range_status:
+      (
+        rate?.market_min_rate_usd != null &&
+        rate?.market_max_rate_usd != null
+      )
+        ? 'market_range_available'
+        : 'range_not_available'
 
   };
 
