@@ -10267,7 +10267,31 @@ if (
 
   const coverageFactor =
     coveragePercent / 100;
+// ----------------------------------------------
+// FOURCHETTE DE TAUX D'ASSURANCE
+// ----------------------------------------------
 
+const marketMinPremiumRatePercent =
+  Number(
+    insurance.market_min_premium_rate_percent
+  );
+
+const marketMaxPremiumRatePercent =
+  Number(
+    insurance.market_max_premium_rate_percent
+  );
+
+const hasPremiumRateRange =
+  Number.isFinite(
+    marketMinPremiumRatePercent
+  ) &&
+  marketMinPremiumRatePercent > 0 &&
+  Number.isFinite(
+    marketMaxPremiumRatePercent
+  ) &&
+  marketMaxPremiumRatePercent > 0 &&
+  marketMaxPremiumRatePercent >=
+    marketMinPremiumRatePercent;
 
   // ----------------------------------------------
   // CONTRÔLE MATHÉMATIQUE
