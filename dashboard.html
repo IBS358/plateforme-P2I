@@ -10368,7 +10368,107 @@ const hasPremiumRateRange =
     cifUsd *
     coverageFactor;
 
+// ----------------------------------------------
+// FOURCHETTE ASSURANCE + CIF
+// ----------------------------------------------
 
+let estimatedInsuranceMinUsd =
+  null;
+
+let estimatedInsuranceMaxUsd =
+  null;
+
+let estimatedCifMinUsd =
+  null;
+
+let estimatedCifMaxUsd =
+  null;
+
+
+if (hasPremiumRateRange) {
+
+  const calculateRangePoint =
+    ratePercent => {
+
+      const rate =
+        ratePercent / 100;
+
+      const rangeDenominator =
+        1 - (
+          rate *
+          coverageFactor
+        );
+
+      if (
+        !Number.isFinite(
+          rangeDenominator
+        ) ||
+        rangeDenominator <= 0
+      ) {
+        return null;
+      }
+
+
+      let rangeCifUsd =
+        baseFobFreight /
+        rangeDenominator;
+
+      let rangeInsuranceUsd =
+        rangeCifUsd -
+        baseFobFreight;
+
+
+      if (
+        minimumPremiumUsd >
+        rangeInsuranceUsd
+      ) {
+
+        rangeInsuranceUsd =
+          minimumPremiumUsd;
+
+        rangeCifUsd =
+          baseFobFreight +
+          rangeInsuranceUsd;
+      }
+
+
+      return {
+        insurance_usd:
+          Number(
+            rangeInsuranceUsd.toFixed(2)
+          ),
+
+        cif_usd:
+          Number(
+            rangeCifUsd.toFixed(2)
+          )
+      };
+    };
+
+
+  const minPoint =
+    calculateRangePoint(
+      marketMinPremiumRatePercent
+    );
+
+  const maxPoint =
+    calculateRangePoint(
+      marketMaxPremiumRatePercent
+    );
+
+
+  estimatedInsuranceMinUsd =
+    minPoint?.insurance_usd ?? null;
+
+  estimatedInsuranceMaxUsd =
+    maxPoint?.insurance_usd ?? null;
+
+  estimatedCifMinUsd =
+    minPoint?.cif_usd ?? null;
+
+  estimatedCifMaxUsd =
+    maxPoint?.cif_usd ?? null;
+}
   // ----------------------------------------------
   // RÉSULTAT
   // ----------------------------------------------
