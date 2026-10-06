@@ -6838,20 +6838,42 @@ estimated_freight_usd:
   individualCifInsuranceEstimate
     ?.status || 'not_calculated',
 
+insurance_calculation_status:
+  individualCifInsuranceEstimate
+    ?.status || 'not_calculated',
+
+// ----------------------------------------------
+// ASSURANCE — VALEUR CENTRALE
+// ----------------------------------------------
+
 estimated_insurance_usd:
   individualCifInsuranceEstimate
     ?.estimated_insurance_usd ?? null,
- 
+
 // ----------------------------------------------
-// ASSURANCE TRANSPORT — RÉFÉRENCE + CALCUL
+// ASSURANCE — FOURCHETTE
+// ----------------------------------------------
+
+estimated_insurance_min_usd:
+  individualCifInsuranceEstimate
+    ?.estimated_insurance_min_usd ?? null,
+
+estimated_insurance_max_usd:
+  individualCifInsuranceEstimate
+    ?.estimated_insurance_max_usd ?? null,
+
+insurance_range_status:
+  individualCifInsuranceEstimate
+    ?.insurance_range_status ||
+    'range_not_available',
+
+// ----------------------------------------------
+// DÉTAIL ASSURANCE
 // ----------------------------------------------
 
 insurance_estimate: {
-
-  // Référence d'assurance utilisée
   ...individualInsuranceReference,
 
-  // Résultat du moteur assurance / CIF
   calculation_status:
     individualCifInsuranceEstimate
       ?.status || 'not_calculated',
@@ -6862,14 +6884,41 @@ insurance_estimate: {
 
   estimated_insurance_usd:
     individualCifInsuranceEstimate
-      ?.estimated_insurance_usd ?? null
+      ?.estimated_insurance_usd ?? null,
 
+  estimated_insurance_min_usd:
+    individualCifInsuranceEstimate
+      ?.estimated_insurance_min_usd ?? null,
+
+  estimated_insurance_max_usd:
+    individualCifInsuranceEstimate
+      ?.estimated_insurance_max_usd ?? null,
+
+  range_status:
+    individualCifInsuranceEstimate
+      ?.insurance_range_status ||
+      'range_not_available'
 },
 
-  estimated_cif_abidjan_usd:
+// ----------------------------------------------
+// CIF PORT D'ABIDJAN — VALEUR CENTRALE
+// ----------------------------------------------
+
+estimated_cif_abidjan_usd:
   individualCifInsuranceEstimate
     ?.estimated_cif_abidjan_usd ?? null,
 
+// ----------------------------------------------
+// CIF PORT D'ABIDJAN — FOURCHETTE
+// ----------------------------------------------
+
+estimated_cif_abidjan_min_usd:
+  individualCifInsuranceEstimate
+    ?.estimated_cif_abidjan_min_usd ?? null,
+
+estimated_cif_abidjan_max_usd:
+  individualCifInsuranceEstimate
+    ?.estimated_cif_abidjan_max_usd ?? null,
   rate_source:
     null,
 
