@@ -13138,22 +13138,23 @@ goods_value_usd:
       ?.insurance_estimate || null,
 
 
-  // ------------------------------------------------
+    // ------------------------------------------------
   // CIF PORT D'ABIDJAN
   // ------------------------------------------------
 
   cif_abidjan_usd:
     p2iLclConsolidated
-      ?.estimated_cif_abidjan_usd ?? null
+      ?.estimated_cif_abidjan_usd ?? null,
+
+  cif_abidjan_min_usd:
+    p2iLclConsolidated
+      ?.estimated_cif_abidjan_min_usd ?? null,
+
+  cif_abidjan_max_usd:
+    p2iLclConsolidated
+      ?.estimated_cif_abidjan_max_usd ?? null
 
 };
-cif_abidjan_min_usd:
-  p2iLclConsolidated
-    ?.estimated_cif_abidjan_min_usd ?? null,
-
-cif_abidjan_max_usd:
-  p2iLclConsolidated
-    ?.estimated_cif_abidjan_max_usd ?? null,
 
 console.log(
   '🚢 SYNTHÈSE CIF P2I :',
