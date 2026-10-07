@@ -12998,7 +12998,27 @@ const p2iLclConsolidated =
   p2iConsolidationCandidate
     ?.freight_scenarios
     ?.lcl_consolidated || null;
+// ==================================================
+// ESTIMATION LOGISTIQUE INDIVIDUELLE DE SECOURS
+// ==================================================
+//
+// Si aucun lot consolidé n'existe encore,
+// on récupère la première machine du plan disposant
+// déjà d'un calcul CIF individuel.
+// ==================================================
 
+const p2iIndividualShippingItem =
+  equipmentPlan.find(item =>
+    item?.shipping_package
+      ?.freight_estimate
+      ?.estimated_cif_abidjan_usd != null
+  ) || null;
+
+
+const p2iIndividualFreightEstimate =
+  p2iIndividualShippingItem
+    ?.shipping_package
+    ?.freight_estimate || null;
 
 const p2iCifDisplay = {
 
