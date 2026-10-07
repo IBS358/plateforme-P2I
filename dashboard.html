@@ -13026,9 +13026,15 @@ const p2iCifDisplay = {
   // DISPONIBILITÉ DU CALCUL CIF
   // ------------------------------------------------
 
-  available:
-    p2iLclConsolidated?.status === 'estimated' &&
-    p2iLclConsolidated?.estimated_cif_abidjan_usd != null,
+ available:
+  (
+    p2iLclConsolidated
+      ?.estimated_cif_abidjan_usd != null
+  ) ||
+  (
+    p2iIndividualFreightEstimate
+      ?.estimated_cif_abidjan_usd != null
+  ),
 
 
   // ------------------------------------------------
