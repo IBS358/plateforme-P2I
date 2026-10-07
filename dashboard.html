@@ -11605,14 +11605,39 @@ const consolidatedInsuranceReference =
 const consolidatedCifInsuranceEstimate =
   calculateCifInsuranceEstimate({
 
-    // Valeur totale des marchandises du lot
+    // ----------------------------------------------
+    // VALEUR DES MARCHANDISES DU LOT
+    // ----------------------------------------------
+
     fobValueUsd:
       combinedGoodsValueUsd,
 
-    // Fret LCL consolidé calculé
+
+    // ----------------------------------------------
+    // FRET CENTRAL
+    // ----------------------------------------------
+
     freightUsd:
       consolidatedLclFreightEstimate
         ?.estimated_freight_usd ?? null,
+
+
+    // ----------------------------------------------
+    // FOURCHETTE DE FRET
+    // ----------------------------------------------
+
+    freightMinUsd:
+      consolidatedLclFreightEstimate
+        ?.estimated_freight_min_usd ?? null,
+
+    freightMaxUsd:
+      consolidatedLclFreightEstimate
+        ?.estimated_freight_max_usd ?? null,
+
+
+    // ----------------------------------------------
+    // ASSURANCE
+    // ----------------------------------------------
 
     insurance:
       consolidatedInsuranceReference
