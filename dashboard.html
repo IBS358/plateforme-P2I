@@ -3832,18 +3832,42 @@ function getEquipmentPlansForUp(up) {
 // être interprété comme un plan d'équipement.
 // ------------------------------------------------------
 
-const looksLikeSupabaseUuid =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
-    .test(equipmentPlanId);
+// ------------------------------------------------------
+// PROTECTION CONTRE LES FAUX PLANS
+// ------------------------------------------------------
+//
+// Un vrai plan P2I de cette UP doit utiliser
+// l'identifiant normalisé :
+//   up_id__configuration__capacité__unité
+//
+// Exemple :
+//   biscuiterie__biscuits_durs__500__kg_h
+//
+// Cela empêche une ancienne donnée machine mal structurée
+// d'être interprétée comme un plan d'équipement.
+// ------------------------------------------------------
 
-if (looksLikeSupabaseUuid) {
+const validEquipmentPlanPrefix =
+  `${upId}__`;
+
+if (
+  !equipmentPlanId.startsWith(
+    validEquipmentPlanPrefix
+  )
+) {
 
   console.warn(
-    '⚠️ Faux equipment_plan_id ignoré :',
-    equipmentPlanId,
-    data.machine ||
-    saved.machine ||
-    ''
+    '⚠️ Faux plan Supabase ignoré :',
+    {
+      up_id: upId,
+      equipment_plan_id: equipmentPlanId,
+      configuration_name:
+        data.configuration_name || '',
+      capacity_label:
+        data.capacity_label || '',
+      machine:
+        data.machine || ''
+    }
   );
 
   return;
