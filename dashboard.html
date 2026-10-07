@@ -11216,7 +11216,50 @@ const combinedGoodsValueUsd =
   )
     ? goodsValueA + goodsValueB
     : null;
+// ------------------------------------------
+// FOURCHETTE DE VALEUR FOB DU LOT
+// ------------------------------------------
 
+const goodsValueMinA =
+  Number(
+    shippingA.goods_value_min_usd
+  );
+
+const goodsValueMinB =
+  Number(
+    shippingB.goods_value_min_usd
+  );
+
+
+const goodsValueMaxA =
+  Number(
+    shippingA.goods_value_max_usd
+  );
+
+const goodsValueMaxB =
+  Number(
+    shippingB.goods_value_max_usd
+  );
+
+
+const combinedGoodsValueMinUsd =
+  (
+    Number.isFinite(goodsValueMinA) &&
+    Number.isFinite(goodsValueMinB)
+  )
+    ? goodsValueMinA +
+      goodsValueMinB
+    : null;
+
+
+const combinedGoodsValueMaxUsd =
+  (
+    Number.isFinite(goodsValueMaxA) &&
+    Number.isFinite(goodsValueMaxB)
+  )
+    ? goodsValueMaxA +
+      goodsValueMaxB
+    : null;
 
 // ------------------------------------------
 // CANDIDAT AU REGROUPEMENT
