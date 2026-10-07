@@ -14063,15 +14063,25 @@ ${p2iCifDisplay.available ? `
           font-weight:800;
           margin-top:2px;
         ">
-          ${Number(
-            p2iCifDisplay.cif_abidjan_usd
-          ).toLocaleString(
-            'fr-FR',
-            {
-              minimumFractionDigits:2,
-              maximumFractionDigits:2
-            }
-          )} USD
+        ${Number(
+  p2iCifDisplay.cif_abidjan_min_usd
+).toLocaleString(
+  'fr-FR',
+  {
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  }
+)}
+–
+${Number(
+  p2iCifDisplay.cif_abidjan_max_usd
+).toLocaleString(
+  'fr-FR',
+  {
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  }
+)} USD 
         </div>
 
       </div>
