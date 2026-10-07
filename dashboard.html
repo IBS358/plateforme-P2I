@@ -3821,7 +3821,33 @@ function getEquipmentPlansForUp(up) {
     if (!equipmentPlanId) {
       return;
     }
+// ------------------------------------------------------
+// PROTECTION CONTRE LES FAUX PLANS
+// ------------------------------------------------------
+//
+// Un equipment_plan_id valide doit correspondre à
+// l'identité fonctionnelle d'un plan P2I.
+//
+// Un UUID Supabase de saved_machines ne doit jamais
+// être interprété comme un plan d'équipement.
+// ------------------------------------------------------
 
+const looksLikeSupabaseUuid =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+    .test(equipmentPlanId);
+
+if (looksLikeSupabaseUuid) {
+
+  console.warn(
+    '⚠️ Faux equipment_plan_id ignoré :',
+    equipmentPlanId,
+    data.machine ||
+    saved.machine ||
+    ''
+  );
+
+  return;
+}
 
     // ------------------------------------------------------
     // Si le plan n'existe pas encore dans localStorage,
