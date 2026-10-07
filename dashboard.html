@@ -12447,41 +12447,104 @@ freight_comparison: {
   },
 
 
+ // ----------------------------------------
+// LCL — EXPÉDITION CONSOLIDÉE
+// ----------------------------------------
+
+lcl_consolidated: {
+
+  status:
+    consolidatedLclFreightEstimate
+      ?.status || 'not_calculated',
+
+  calculation_available:
+    consolidatedCifInsuranceEstimate
+      ?.estimated_cif_abidjan_usd != null,
+
+  revenue_tons:
+    combinedLclRevenueTons,
+
+
   // ----------------------------------------
-  // LCL — EXPÉDITION CONSOLIDÉE
+  // FRET — VALEUR CENTRALE
   // ----------------------------------------
 
-  lcl_consolidated: {
+  estimated_freight_usd:
+    consolidatedLclFreightEstimate
+      ?.estimated_freight_usd ?? null,
 
-    status:
-      consolidatedLclFreightEstimate
-        ?.status || 'not_calculated',
 
-    calculation_available:
-      consolidatedCifInsuranceEstimate
-        ?.estimated_cif_abidjan_usd != null,
+  // ----------------------------------------
+  // FRET — FOURCHETTE
+  // ----------------------------------------
 
-    revenue_tons:
-      combinedLclRevenueTons,
+  estimated_freight_min_usd:
+    consolidatedLclFreightEstimate
+      ?.estimated_freight_min_usd ?? null,
 
-    estimated_freight_usd:
-      consolidatedLclFreightEstimate
-        ?.estimated_freight_usd ?? null,
+  estimated_freight_max_usd:
+    consolidatedLclFreightEstimate
+      ?.estimated_freight_max_usd ?? null,
 
-    estimated_insurance_usd:
-      consolidatedCifInsuranceEstimate
-        ?.estimated_insurance_usd ?? null,
 
-    estimated_cif_abidjan_usd:
-      consolidatedCifInsuranceEstimate
-        ?.estimated_cif_abidjan_usd ?? null,
+  // ----------------------------------------
+  // ASSURANCE — VALEUR CENTRALE
+  // ----------------------------------------
 
-    estimated_total_usd:
-      consolidatedCifInsuranceEstimate
-        ?.estimated_cif_abidjan_usd ?? null
+  estimated_insurance_usd:
+    consolidatedCifInsuranceEstimate
+      ?.estimated_insurance_usd ?? null,
 
-  },
 
+  // ----------------------------------------
+  // ASSURANCE — FOURCHETTE
+  // ----------------------------------------
+
+  estimated_insurance_min_usd:
+    consolidatedCifInsuranceEstimate
+      ?.estimated_insurance_min_usd ?? null,
+
+  estimated_insurance_max_usd:
+    consolidatedCifInsuranceEstimate
+      ?.estimated_insurance_max_usd ?? null,
+
+  insurance_range_status:
+    consolidatedCifInsuranceEstimate
+      ?.insurance_range_status ||
+      'range_not_available',
+
+
+  // ----------------------------------------
+  // CIF PORT D'ABIDJAN — VALEUR CENTRALE
+  // ----------------------------------------
+
+  estimated_cif_abidjan_usd:
+    consolidatedCifInsuranceEstimate
+      ?.estimated_cif_abidjan_usd ?? null,
+
+
+  // ----------------------------------------
+  // CIF PORT D'ABIDJAN — FOURCHETTE
+  // ----------------------------------------
+
+  estimated_cif_abidjan_min_usd:
+    consolidatedCifInsuranceEstimate
+      ?.estimated_cif_abidjan_min_usd ?? null,
+
+  estimated_cif_abidjan_max_usd:
+    consolidatedCifInsuranceEstimate
+      ?.estimated_cif_abidjan_max_usd ?? null,
+
+
+  // ----------------------------------------
+  // TOTAL — COMPATIBILITÉ STRUCTURE ACTUELLE
+  // ----------------------------------------
+
+  estimated_total_usd:
+    consolidatedCifInsuranceEstimate
+      ?.estimated_cif_abidjan_usd ?? null
+
+},
 
   // ----------------------------------------
   // COMPARAISON LCL
