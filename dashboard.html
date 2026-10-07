@@ -6751,13 +6751,18 @@ shipping_package: {
   // du fret, de l'assurance et du CIF.
   // ----------------------------------------------
 
-  goods_value_usd:
-    (
-      usableUsdPrice &&
-      priceBasis === 'fob'
-    )
-      ? Number(price) + additionalSparePartsCostUsd
-      : null,
+// ----------------------------------------------
+// VALEUR FOB DES MARCHANDISES EXPÉDIÉES
+// ----------------------------------------------
+
+goods_value_usd:
+  individualGoodsValueUsd,
+
+goods_value_min_usd:
+  individualGoodsValueMinUsd,
+
+goods_value_max_usd:
+  individualGoodsValueMaxUsd,
   // ----------------------------------------------
 // ESTIMATION DU FRET INDIVIDUEL
 // ----------------------------------------------
