@@ -6582,6 +6582,55 @@ const individualCifInsuranceEstimate =
       individualInsuranceReference
 
   });
+      console.log(
+  '🔎 CIF P2I RÉEL :',
+  {
+    machine:
+      machineName,
+
+    supplier:
+      data.user_supplier || null,
+
+    spare_parts_additional_cost_usd:
+      additionalSparePartsCostUsd,
+
+    goods_value_unique_usd:
+      individualGoodsValueUsd,
+
+    goods_value_min_usd:
+      individualGoodsValueMinUsd,
+
+    goods_value_max_usd:
+      individualGoodsValueMaxUsd,
+
+    freight_central_usd:
+      individualLclFreightEstimate
+        ?.estimated_freight_usd ?? null,
+
+    freight_min_usd:
+      individualLclFreightEstimate
+        ?.estimated_freight_min_usd ?? null,
+
+    freight_max_usd:
+      individualLclFreightEstimate
+        ?.estimated_freight_max_usd ?? null,
+
+    insurance_rate_percent:
+      individualInsuranceReference
+        ?.premium_rate_percent ?? null,
+
+    insurance_rate_min_percent:
+      individualInsuranceReference
+        ?.market_min_premium_rate_percent ?? null,
+
+    insurance_rate_max_percent:
+      individualInsuranceReference
+        ?.market_max_premium_rate_percent ?? null,
+
+    result:
+      individualCifInsuranceEstimate
+  }
+);
 // --------------------------------------------------
 // ENREGISTREMENT DANS LA SYNTHÈSE
 // --------------------------------------------------
