@@ -13019,6 +13019,23 @@ const p2iIndividualFreightEstimate =
   p2iIndividualShippingItem
     ?.shipping_package
     ?.freight_estimate || null;
+    console.log(
+  '🔎 TEST CIF INDIVIDUEL P2I :',
+  {
+    item: p2iIndividualShippingItem,
+    freight_estimate:
+      p2iIndividualFreightEstimate,
+    cif:
+      p2iIndividualFreightEstimate
+        ?.estimated_cif_abidjan_usd,
+    cif_min:
+      p2iIndividualFreightEstimate
+        ?.estimated_cif_abidjan_min_usd,
+    cif_max:
+      p2iIndividualFreightEstimate
+        ?.estimated_cif_abidjan_max_usd
+  }
+);
 
 const p2iCifDisplay = {
 
