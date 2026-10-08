@@ -13070,6 +13070,26 @@ console.log(
       )
   }
 );
+    console.log(
+  '🔎 DONNÉES ALIMENTATEUR P2I :',
+  equipmentPlan
+    .filter(item =>
+      (
+        item.machine_key ||
+        item.machine_name ||
+        ''
+      )
+      .toLowerCase()
+      .includes('alimentateur')
+    )
+    .map(item => ({
+      machine_key: item.machine_key,
+      machine_name: item.machine_name,
+      coverage_status: item.coverage_status,
+      data: item.data,
+      savedMachine: item.savedMachine
+    }))
+);
 const p2iCifDisplay = {
 
   // ------------------------------------------------
