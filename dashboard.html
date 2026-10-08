@@ -13090,6 +13090,26 @@ console.log(
       savedMachine: item.savedMachine
     }))
 );
+    console.log(
+  '🔎 ÉLIGIBILITÉ ALIMENTATEUR :',
+  equipmentEstimate.self_purchase.map(item => ({
+    machine: item.machine,
+    machine_key: item.machine_key,
+    shipping_status:
+      item.shipping_package?.status,
+    departure_port:
+      item.shipping_package?.departure_port,
+    ready_date:
+      item.shipping_package?.ready_date,
+    total_weight_kg:
+      item.shipping_package?.total_shipping_weight_kg,
+    total_volume_m3:
+      item.shipping_package?.total_shipping_volume_m3,
+    cif_usd:
+      item.shipping_package?.freight_estimate
+        ?.estimated_cif_abidjan_usd
+  }))
+);
 const p2iCifDisplay = {
 
   // ------------------------------------------------
