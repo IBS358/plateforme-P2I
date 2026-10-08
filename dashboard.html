@@ -13152,9 +13152,18 @@ const p2iCifDisplay = {
     p2iConsolidationCandidate
       ?.departure_country || null,
 
-  origin_port:
-    p2iConsolidationCandidate
-      ?.departure_port || null,
+  // ------------------------------------------------
+// PORT DE DÉPART
+// Consolidation ou expédition individuelle
+// ------------------------------------------------
+
+origin_port:
+  p2iConsolidationCandidate
+    ?.departure_port ||
+  p2iIndividualShippingItem
+    ?.shipping_package
+    ?.departure_port ||
+  null,
 
   destination_port:
     'Abidjan',
