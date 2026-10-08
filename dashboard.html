@@ -13046,7 +13046,12 @@ const p2iIndividualFreightEstimate =
     equipmentEstimate?.freight_consolidation || {}
   )
 );
-
+console.log(
+  '📦 COLIS ÉLIGIBLES P2I :',
+  equipmentEstimate
+    ?.freight_consolidation
+    ?.eligible_packages
+);
 const p2iCifDisplay = {
 
   // ------------------------------------------------
