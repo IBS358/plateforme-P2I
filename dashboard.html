@@ -13255,15 +13255,20 @@ origin_port:
 
 
   // ------------------------------------------------
-  // NOMBRE DE MACHINES
-  // ------------------------------------------------
+// NOMBRE DE MACHINES EXPÉDIÉES
+// Lot consolidé ou expédition individuelle
+// ------------------------------------------------
 
-  machine_count:
-    [
-      p2iConsolidationCandidate?.machine_a,
-      p2iConsolidationCandidate?.machine_b
-    ].filter(Boolean).length,
-
+machine_count:
+  p2iLclConsolidated
+    ?.estimated_cif_abidjan_usd != null
+      ? [
+          p2iConsolidationCandidate?.machine_a,
+          p2iConsolidationCandidate?.machine_b
+        ].filter(Boolean).length
+      : (
+          p2iIndividualShippingItem ? 1 : 0
+        ),
 
   // ------------------------------------------------
   // DONNÉES PHYSIQUES DU LOT
