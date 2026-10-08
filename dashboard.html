@@ -13288,11 +13288,38 @@ spare_parts_value_usd:
   equipmentEstimate
     ?.spare_parts_additional_cost_usd ?? null,
 
-// Valeur totale des marchandises utilisée
-// par le calcul logistique.
+// ------------------------------------------------
+// VALEUR FOB ESTIMATIVE DES MARCHANDISES
+// ------------------------------------------------
+
 goods_value_usd:
   p2iLclConsolidated
-    ?.goods_value_usd ?? null,
+    ?.goods_value_usd ??
+  (
+    p2iIndividualShippingItem
+      ?.shipping_package
+      ?.goods_value_min_usd != null &&
+    p2iIndividualShippingItem
+      ?.shipping_package
+      ?.goods_value_max_usd != null
+
+      ? (
+          Number(
+            p2iIndividualShippingItem
+              .shipping_package
+              .goods_value_min_usd
+          ) +
+          Number(
+            p2iIndividualShippingItem
+              .shipping_package
+              .goods_value_max_usd
+          )
+        ) / 2
+
+      : p2iIndividualShippingItem
+          ?.shipping_package
+          ?.goods_value_usd ?? null
+  ),
 
 
   // ------------------------------------------------
