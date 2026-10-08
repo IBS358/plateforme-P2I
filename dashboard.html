@@ -13186,73 +13186,65 @@ origin_port:
     p2iLclConsolidated
       ?.shipment_count ?? 1,
 
+ // ------------------------------------------------
+// MACHINES INCLUSES DANS L'EXPÉDITION
+// Consolidation ou expédition individuelle
+// ------------------------------------------------
 
-  // ------------------------------------------------
-  // MACHINES COMPOSANT LE LOT
-  // ------------------------------------------------
+machines:
+  p2iLclConsolidated
+    ?.estimated_cif_abidjan_usd != null
 
-  machines: [
-
-    p2iConsolidationCandidate?.machine_a
-      ? {
+    ? [
+        p2iConsolidationCandidate?.machine_a,
+        p2iConsolidationCandidate?.machine_b
+      ]
+        .filter(Boolean)
+        .map(item => ({
           machine_key:
-            p2iConsolidationCandidate
-              .machine_a
-              .machine_key || null,
+            item.machine_key || null,
 
           machine:
-            p2iConsolidationCandidate
-              .machine_a
-              .machine || null,
+            item.machine || null,
 
           weight_kg:
-            p2iConsolidationCandidate
-              .machine_a
-              .weight_kg ?? null,
+            item.weight_kg ?? null,
 
           volume_m3:
-            p2iConsolidationCandidate
-              .machine_a
-              .volume_m3 ?? null,
+            item.volume_m3 ?? null,
 
           ready_date:
-            p2iConsolidationCandidate
-              .machine_a
-              .ready_date || null
-        }
-      : null,
+            item.ready_date || null
+        }))
 
+    : (
+        p2iIndividualShippingItem
+          ? [{
+              machine_key:
+                p2iIndividualShippingItem
+                  .machine_key || null,
 
-    p2iConsolidationCandidate?.machine_b
-      ? {
-          machine_key:
-            p2iConsolidationCandidate
-              .machine_b
-              .machine_key || null,
+              machine:
+                p2iIndividualShippingItem
+                  .machine || null,
 
-          machine:
-            p2iConsolidationCandidate
-              .machine_b
-              .machine || null,
+              weight_kg:
+                p2iIndividualShippingItem
+                  .shipping_package
+                  ?.total_shipping_weight_kg ?? null,
 
-          weight_kg:
-            p2iConsolidationCandidate
-              .machine_b
-              .weight_kg ?? null,
+              volume_m3:
+                p2iIndividualShippingItem
+                  .shipping_package
+                  ?.total_shipping_volume_m3 ?? null,
 
-          volume_m3:
-            p2iConsolidationCandidate
-              .machine_b
-              .volume_m3 ?? null,
-
-          ready_date:
-            p2iConsolidationCandidate
-              .machine_b
-              .ready_date || null
-        }
-      : null
-
-  ].filter(Boolean),
+              ready_date:
+                p2iIndividualShippingItem
+                  .shipping_package
+                  ?.ready_date || null
+            }]
+          : []
+      ),
 
 
   // ------------------------------------------------
