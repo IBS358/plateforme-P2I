@@ -13052,6 +13052,24 @@ console.log(
     ?.freight_consolidation
     ?.eligible_packages
 );
+    console.log(
+  '🔎 DIAGNOSTIC COLIS P2I :',
+  {
+    consolidation_status:
+      equipmentEstimate?.freight_consolidation?.status,
+
+    eligible_packages:
+      equipmentEstimate?.freight_consolidation?.eligible_packages,
+
+    equipment_plan_count:
+      equipmentPlan?.length,
+
+    equipment_plan_keys:
+      equipmentPlan?.map(item =>
+        Object.keys(item || {})
+      )
+  }
+);
 const p2iCifDisplay = {
 
   // ------------------------------------------------
