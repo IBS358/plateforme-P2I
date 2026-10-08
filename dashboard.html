@@ -14250,16 +14250,26 @@ ${p2iCifDisplay.available ? `
 
       <div>
 
-        <div style="
-          color:#7dd3fc;
-          font-size:11px;
-          font-weight:800;
-          text-transform:uppercase;
-          letter-spacing:.04em;
-        ">
-          <i class="fas fa-ship"></i>
-          Lot logistique 1
-        </div>
+       <div style="
+  color:#7dd3fc;
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+">
+  <i class="fas fa-ship"></i>
+
+  ${p2iCifDisplay.consolidation
+    ? 'Lot logistique consolidé 1'
+    : 'Expédition individuelle 1'
+  }
+
+  ${!p2iCifDisplay.consolidation &&
+    p2iCifDisplay.machines.length === 1
+      ? ' — ' + p2iCifDisplay.machines[0].machine
+      : ''
+  }
+</div>
 
         <div style="
           color:#e2e8f0;
