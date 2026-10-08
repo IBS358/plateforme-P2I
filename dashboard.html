@@ -14642,6 +14642,79 @@ ${Number(
       }
 
 
+${!p2iCifDisplay.consolidation &&
+  p2iIndividualShippingItem?.shipping_package
+    ?.exw_to_fob_estimate?.source_exw_value_usd != null
+  ? (() => {
+      const exw =
+        p2iIndividualShippingItem.shipping_package.exw_to_fob_estimate;
+
+      const money = value =>
+        value == null
+          ? 'À confirmer'
+          : Number(value).toLocaleString('fr-FR', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }) + ' USD';
+
+      return `
+        <div style="
+          padding:10px;
+          margin:10px 0;
+          border:1px solid rgba(76,201,240,.25);
+          border-radius:8px;
+          background:rgba(76,201,240,.05);
+          font-size:11px;
+          line-height:1.8;
+          color:#cbd5e1;
+        ">
+          <strong style="color:#4cc9f0;">
+            Détail de l'estimation EXW → FOB
+          </strong>
+
+          <div>Prix EXW déclaré :
+            ${money(exw.source_exw_value_usd)}
+          </div>
+
+          <div>Pré-acheminement usine → port :
+            ${money(exw.pre_carriage_min_usd)}
+            –
+            ${money(exw.pre_carriage_max_usd)}
+          </div>
+
+          <div>Frais d'origine :
+            ${money(exw.documented_origin_cost_min_usd)}
+            –
+            ${money(exw.documented_origin_cost_max_usd)}
+          </div>
+
+          <div style="
+            margin-top:6px;
+            padding-top:6px;
+            border-top:1px solid rgba(148,163,184,.2);
+            color:#f8fafc;
+          ">
+            <strong>Valeur FOB estimative :
+              ${money(exw.estimated_fob_min_usd)}
+              –
+              ${money(exw.estimated_fob_max_usd)}
+            </strong>
+          </div>
+
+          <div style="
+            font-size:10px;
+            color:#94a3b8;
+            margin-top:6px;
+          ">
+            Estimation provisoire fondée sur les références
+            disponibles. Transport intérieur et frais
+            d'origine à confirmer.
+          </div>
+        </div>
+      `;
+    })()
+  : ''}
+
       <div style="
         display:flex;
         justify-content:space-between;
