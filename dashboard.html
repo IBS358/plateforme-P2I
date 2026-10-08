@@ -13178,9 +13178,10 @@ origin_port:
       ?.shipping_mode || null,
 
   consolidation:
-    p2iLclConsolidated
-      ?.consolidation ?? true,
-
+  p2iLclConsolidated
+    ?.estimated_cif_abidjan_usd != null
+      ? (p2iLclConsolidated.consolidation ?? true)
+      : false,
   shipment_count:
     p2iLclConsolidated
       ?.shipment_count ?? 1,
@@ -14261,12 +14262,17 @@ ${p2iCifDisplay.available ? `
           font-size:10px;
           margin-top:3px;
         ">
-          ${(p2iCifDisplay.shipping_mode || '').toUpperCase()}
-          ·
-          ${p2iCifDisplay.machine_count}
-          machine${p2iCifDisplay.machine_count > 1 ? 's' : ''}
-          ·
-          Expédition consolidée
+         ${(
+  p2iCifDisplay.shipping_mode ||
+  'LCL'
+).toUpperCase()}
+·
+${p2iCifDisplay.machine_count}
+machine${p2iCifDisplay.machine_count > 1 ? 's' : ''}
+·
+${p2iCifDisplay.consolidation
+  ? 'Expédition consolidée'
+  : 'Expédition individuelle'}
         </div>
 
       </div>
