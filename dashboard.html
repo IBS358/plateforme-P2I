@@ -17383,13 +17383,51 @@ async function openSelfPurchaseEditor(
           color:#f8fafc;
         "
       >
+      <!-- LOCALISATION DE L'USINE / ENLÈVEMENT -->
 
-      <label style="
-        display:block;
-        color:#cbd5e1;
-        font-size:12px;
-        margin-bottom:6px;
+      <label
+        for="selfPurchaseSupplierLocation"
+        style="
+          display:block;
+          color:#cbd5e1;
+          font-size:12px;
+          margin-bottom:6px;
+        "
+      >
+        Ville / localisation de l'usine ou du lieu d'enlèvement
+      </label>
+
+      <input
+        id="selfPurchaseSupplierLocation"
+        type="text"
+        value="${escapeHtml(
+          existingData.user_supplier_location || ''
+        )}"
+        placeholder="Ex. : Suzhou, Jiangsu, Chine"
+        style="
+          width:100%;
+          box-sizing:border-box;
+          padding:10px;
+          margin-bottom:6px;
+          border-radius:8px;
+          border:1px solid #334155;
+          background:#020617;
+          color:#f8fafc;
+        "
+      >
+
+      <div style="
+        color:#94a3b8;
+        font-size:11px;
+        line-height:1.5;
+        margin-bottom:15px;
       ">
+        Facultatif. Indiquez le lieu réel de départ de la machine
+        si vous le connaissez. Cette information permettra à la P2I
+        d'affiner l'estimation du transport jusqu'au port
+        d'embarquement.
+      </div>
+      
       <div style="
   margin:4px 0 14px;
   padding:10px;
