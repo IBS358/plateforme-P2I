@@ -13040,6 +13040,12 @@ const p2iIndividualFreightEstimate =
   '🔬 STRUCTURE ESTIMATION P2I :',
   Object.keys(equipmentEstimate || {})
 );
+    console.log(
+  '🔬 STRUCTURE CONSOLIDATION P2I :',
+  Object.keys(
+    equipmentEstimate?.freight_consolidation || {}
+  )
+);
 
 const p2iCifDisplay = {
 
