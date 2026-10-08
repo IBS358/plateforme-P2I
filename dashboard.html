@@ -6696,8 +6696,8 @@ fob_normalization: {
   supplier_country:
     data.user_origin_country || null,
 
-  supplier_location:
-    null,
+ supplier_location:
+  data.user_supplier_location || null,
 
   supplier_location_status:
     data.user_supplier
