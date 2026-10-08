@@ -2953,7 +2953,8 @@ const P2I_PRE_CARRIAGE_REFERENCES = {
 
 function getP2IPreCarriageReference(
   country,
-  departurePort
+  departurePort,
+  supplierLocation = null
 ) {
 
   const normalize = value =>
