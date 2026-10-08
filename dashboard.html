@@ -18338,11 +18338,14 @@ machine_key:
 user_price_basis:
   priceBasis,
       user_origin_country:
-        country || null,
+  country || null,
 
-      user_supplier:
-        supplier || null,
+// LOCALISATION DE L'USINE / LIEU D'ENLÈVEMENT
+user_supplier_location:
+  supplierLocation || null,
 
+user_supplier:
+  supplier || null,
       user_note:
         note || null,
 // ----------------------------------------------
