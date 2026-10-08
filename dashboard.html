@@ -13008,7 +13008,9 @@ const p2iLclConsolidated =
 // ==================================================
 
 const p2iIndividualShippingItem =
-  equipmentPlan.find(item =>
+  (
+    equipmentEstimate?.self_purchase || []
+  ).find(item =>
     item?.shipping_package
       ?.freight_estimate
       ?.estimated_cif_abidjan_usd != null
