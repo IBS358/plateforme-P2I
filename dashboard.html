@@ -13112,6 +13112,21 @@ console.log(
         ?.estimated_cif_abidjan_usd
   }))
 );
+    // ==================================================
+// SOURCE LOGISTIQUE ACTIVE POUR L'AFFICHAGE CIF
+// ==================================================
+//
+// Priorité au lot consolidé lorsqu'il existe.
+// Sinon, utilisation de l'estimation individuelle.
+//
+// Cette sélection ne modifie aucun calcul.
+// ==================================================
+
+const p2iActiveFreightEstimate =
+  p2iLclConsolidated
+    ?.estimated_cif_abidjan_usd != null
+      ? p2iLclConsolidated
+      : p2iIndividualFreightEstimate;
 const p2iCifDisplay = {
 
   // ------------------------------------------------
