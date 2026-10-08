@@ -6100,7 +6100,8 @@ const individualExwToFobOriginCosts =
 const individualPreCarriageRegionalReference =
   getP2IPreCarriageReference(
     data.user_origin_country,
-    data.user_logistics?.departure_port
+    data.user_logistics?.departure_port,
+    data.user_supplier_location || null
   );
 
 
