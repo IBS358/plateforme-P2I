@@ -6700,10 +6700,13 @@ fob_normalization: {
   data.user_supplier_location || null,
 
   supplier_location_status:
-    data.user_supplier
-      ? 'p2i_research_required'
-      : 'supplier_not_provided',
-
+  data.user_supplier_location
+    ? 'user_declared'
+    : (
+        data.user_supplier
+          ? 'p2i_research_required'
+          : 'supplier_not_provided'
+      ),
 
   // --------------------------------------------
   // PORT DE DÉPART
