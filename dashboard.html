@@ -14512,32 +14512,48 @@ ${Number(
       </div>
 
 
-      <div style="
-        padding:9px;
-        border-radius:7px;
-        background:rgba(255,255,255,.025);
-      ">
-        <div style="
-          color:#94a3b8;
-          font-size:9px;
-        ">
-          Base facturable LCL
-        </div>
+     <div style="
+  padding:9px;
+  border-radius:7px;
+  background:rgba(255,255,255,.025);
+">
+  <div style="
+    color:#94a3b8;
+    font-size:9px;
+  ">
+    Base de calcul du fret LCL
+  </div>
 
-        <div style="
-          color:#e2e8f0;
-          font-size:12px;
-          font-weight:700;
-          margin-top:3px;
-        ">
-          ${Number(
-            p2iCifDisplay.revenue_tons
-          ).toLocaleString('fr-FR')} CBM
-        </div>
-      </div>
+  <div style="
+    color:#e2e8f0;
+    font-size:12px;
+    font-weight:700;
+    margin-top:3px;
+  ">
+    ${p2iCifDisplay.total_volume_m3 != null
+      ? Number(
+          p2iCifDisplay.total_volume_m3
+        ).toLocaleString('fr-FR')
+      : 'À confirmer'} m³
+  </div>
 
-    </div>
+  <div style="
+    color:#94a3b8;
+    font-size:9px;
+    margin-top:5px;
+  ">
+    Base poids/mesure théorique :
+    ${p2iCifDisplay.total_weight_kg != null &&
+      p2iCifDisplay.total_volume_m3 != null
+        ? Math.max(
+            Number(p2iCifDisplay.total_weight_kg) / 1000,
+            Number(p2iCifDisplay.total_volume_m3)
+          ).toLocaleString('fr-FR') + ' RT'
+        : 'À confirmer'}
+  </div>
+</div>
 
+</div>
 
     <!-- ======================================
          VALEUR DES MARCHANDISES
