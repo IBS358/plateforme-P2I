@@ -13272,20 +13272,49 @@ machine_count:
         ),
 
   // ------------------------------------------------
-  // DONNÉES PHYSIQUES DU LOT
-  // ------------------------------------------------
+// DONNÉES PHYSIQUES DU LOT
+// Consolidation ou expédition individuelle
+// ------------------------------------------------
 
-  total_weight_kg:
-    p2iConsolidationCandidate
-      ?.combined_weight_kg ?? null,
+total_weight_kg:
+  p2iLclConsolidated
+    ?.estimated_cif_abidjan_usd != null
+      ? (
+          p2iConsolidationCandidate
+            ?.combined_weight_kg ?? null
+        )
+      : (
+          p2iIndividualShippingItem
+            ?.shipping_package
+            ?.total_shipping_weight_kg ?? null
+        ),
 
-  total_volume_m3:
-    p2iConsolidationCandidate
-      ?.combined_volume_m3 ?? null,
+total_volume_m3:
+  p2iLclConsolidated
+    ?.estimated_cif_abidjan_usd != null
+      ? (
+          p2iConsolidationCandidate
+            ?.combined_volume_m3 ?? null
+        )
+      : (
+          p2iIndividualShippingItem
+            ?.shipping_package
+            ?.total_shipping_volume_m3 ?? null
+        ),
 
-  revenue_tons:
-    p2iLclConsolidated
-      ?.revenue_tons ?? null,
+revenue_tons:
+  p2iLclConsolidated
+    ?.estimated_cif_abidjan_usd != null
+      ? (
+          p2iLclConsolidated
+            ?.revenue_tons ?? null
+        )
+      : (
+          p2iIndividualShippingItem
+            ?.shipping_package
+            ?.lcl_chargeable
+            ?.revenue_tons ?? null
+        ),
 
   // ------------------------------------------------
 // VALEUR DES MARCHANDISES DU LOT
