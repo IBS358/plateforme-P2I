@@ -13300,9 +13300,9 @@ goods_value_usd:
   // ------------------------------------------------
 
   freight_usd:
-    p2iLclConsolidated
-      ?.estimated_freight_usd ?? null,
-
+  p2iActiveFreightEstimate
+    ?.estimated_freight_usd ?? null,
+  
   freight_rate:
     p2iLclConsolidated
       ?.freight_rate || null,
