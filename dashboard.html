@@ -14857,40 +14857,86 @@ ${Number(
 
 
     <!-- ======================================
-         AVERTISSEMENT DE PÉRIMÈTRE
-         ====================================== -->
+     AVERTISSEMENT DE PÉRIMÈTRE CIF
+     Expédition individuelle ou consolidée
+     ====================================== -->
 
-    <div style="
-      margin-top:10px;
-      padding:9px 10px;
-      border-radius:7px;
-      background:rgba(245,158,11,.055);
-      border:1px solid rgba(245,158,11,.14);
-      color:#94a3b8;
-      font-size:9px;
-      line-height:1.5;
-    ">
+<div style="
+  margin-top:10px;
+  padding:9px 10px;
+  border-radius:7px;
+  background:rgba(245,158,11,.055);
+  border:1px solid rgba(245,158,11,.14);
+  color:#94a3b8;
+  font-size:9px;
+  line-height:1.6;
+">
 
-      <strong style="color:#fbbf24;">
-        Périmètre de cette estimation :
-      </strong>
+  <strong style="color:#fbbf24;">
+    Périmètre de cette estimation :
+  </strong>
 
-      ce CIF concerne uniquement les
-      ${p2iCifDisplay.machine_count}
-      machine${p2iCifDisplay.machine_count > 1 ? 's' : ''}
-      du lot logistique présenté ci-dessus et les coûts
-      de marchandises qui lui sont actuellement rattachés.
+  <div style="margin-top:5px;">
 
-      Il ne représente pas encore le coût CIF de
-      l'ensemble du plan d'équipement.
-
-      Le fret et l'assurance sont des estimations fondées
-      sur les références actuellement disponibles et seront
-      à confirmer par les cotations officielles.
-
-    </div>
+    ${p2iCifDisplay.consolidation
+      ? `
+        Ce CIF concerne uniquement les
+        ${p2iCifDisplay.machine_count}
+        machines regroupées dans cette expédition
+        consolidée, ainsi que les coûts des marchandises
+        qui leur sont actuellement rattachés.
+      `
+      : `
+        Ce CIF concerne uniquement
+        ${p2iCifDisplay.machine_count === 1
+          ? 'la machine'
+          : 'les machines'}
+        présentée${p2iCifDisplay.machine_count > 1 ? 's' : ''}
+        dans cette expédition individuelle
+        ${p2iCifDisplay.machines.length === 1
+          ? `(${p2iCifDisplay.machines[0].machine})`
+          : ''}.
+      `
+    }
 
   </div>
+
+  <div style="margin-top:6px;">
+
+    Lorsque le prix initial est exprimé en EXW,
+    la valeur FOB estimative des marchandises
+    intègre une évaluation provisoire des frais
+    nécessaires entre la sortie d'usine et
+    la mise à FOB au port d'embarquement.
+
+    Ces frais peuvent notamment comprendre
+    le transport intérieur, la manutention
+    et les formalités à l'exportation.
+
+  </div>
+
+  <div style="margin-top:6px;">
+
+    <strong style="color:#fbbf24;">
+      Attention :
+    </strong>
+
+    cette estimation ne représente pas
+    nécessairement le coût CIF de l'ensemble
+    du plan d'équipement.
+
+    Les montants FOB, fret maritime et assurance
+    sont indicatifs et restent à confirmer
+    par les fournisseurs et les prestataires
+    logistiques concernés.
+
+    Ils ne constituent pas un devis officiel.
+
+  </div>
+
+</div>
+
+</div>
 
 ` : ''}
 
