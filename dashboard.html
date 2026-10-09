@@ -14688,6 +14688,11 @@ ${!p2iCifDisplay.consolidation &&
   ? (() => {
       const exw =
   p2iIndividualShippingItem.fob_normalization.exw_to_fob_estimate;
+    // Localisation déclarée de l'usine
+const supplierLocation =
+  p2iIndividualShippingItem
+    .fob_normalization
+    .supplier_location || null;
 
       const money = value =>
         value == null
@@ -14711,7 +14716,25 @@ ${!p2iCifDisplay.consolidation &&
           <strong style="color:#4cc9f0;">
             Détail de l'estimation EXW → FOB
           </strong>
+${supplierLocation ? `
+  <div style="margin-top:6px;">
+    Lieu d'enlèvement déclaré :
+    <strong style="color:#f8fafc;">
+      ${escapeHtml(supplierLocation)}
+    </strong>
+  </div>
 
+  <div style="
+    font-size:10px;
+    color:#94a3b8;
+  ">
+    Localisation déclarée par l'utilisateur,
+    non vérifiée par la P2I.
+    Le pré-acheminement reste fondé sur une
+    référence régionale provisoire lorsque
+    celle-ci est applicable.
+  </div>
+` : ''}
           <div>Prix EXW déclaré :
             ${money(exw.source_exw_value_usd)}
           </div>
