@@ -13087,7 +13087,7 @@ const p2iIndividualShippingItem =
     equipmentEstimate?.self_purchase || []
   ).find(item =>
     item?.fob_normalization
-      ?.source_price_basis === 'EXW' &&
+      ?.source_price_basis === 'exw' &&
     item?.fob_normalization
       ?.source_amount != null
   ) ||
@@ -15115,7 +15115,7 @@ ${supplierLocation ? `
 ` : (
   !p2iLclConsolidated?.estimated_cif_abidjan_usd &&
   p2iIndividualShippingItem?.fob_normalization
-    ?.source_price_basis === 'EXW'
+    ?.source_price_basis === 'exw'
     ? `
       <div style="
         margin-top:14px;
