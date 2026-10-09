@@ -3237,7 +3237,55 @@ function calculateP2IPreCarriageEstimate({
 
     };
   }
+  // --------------------------------------------------
+  // 2 BIS. RÉFÉRENCE DOCUMENTAIRE NON VALIDÉE
+  // --------------------------------------------------
+  // Un corridor identifié mais non validé ne doit
+  // pas alimenter les calculs EXW → FOB → CIF.
+  // --------------------------------------------------
 
+  if (
+    regionalReference &&
+    regionalReference.eligible_for_cif_calculation === false
+  ) {
+
+    return {
+
+      status:
+        'corridor_reference_pending_validation',
+
+      estimation_method:
+        regionalReference.estimation_method || null,
+
+      supplier_name:
+        normalizedSupplierName || null,
+
+      supplier_country:
+        normalizedCountry || null,
+
+      supplier_location:
+        normalizedLocation || null,
+
+      departure_port:
+        normalizedPort,
+
+      distance_km:
+        null,
+
+      min_usd:
+        null,
+
+      max_usd:
+        null,
+
+      confidence:
+        'pending_validation',
+
+      source:
+        null
+
+    };
+  }
 
   // --------------------------------------------------
   // 3. RÉFÉRENCE RÉGIONALE DISPONIBLE
