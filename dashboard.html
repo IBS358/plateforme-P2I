@@ -3026,6 +3026,32 @@ function getP2IPreCarriageReference(
 const normalizedLocation =
   normalize(supplierLocation);
   // --------------------------------------------------
+// CORRIDOR DOCUMENTAIRE GUANGZHOU → SHANGHAI
+// --------------------------------------------------
+// Référence identifiée mais non validée.
+// Le moteur de calcul interdit son utilisation
+// dans le FOB / CIF tant que
+// eligible_for_cif_calculation === false.
+// --------------------------------------------------
+
+const locationTokensForCorridor =
+  normalizedLocation
+    .split(/[\s,;/()-]+/)
+    .filter(Boolean);
+
+if (
+  ['chine', 'china', 'cn'].includes(normalizedCountry) &&
+  normalizedPort.includes('shanghai') &&
+  locationTokensForCorridor.includes('guangzhou') &&
+  locationTokensForCorridor.includes('guangdong')
+) {
+  return (
+    P2I_PRE_CARRIAGE_REFERENCES
+      .china
+      .guangzhou_shanghai
+  );
+}
+  // --------------------------------------------------
 // VÉRIFICATION DE LA ZONE SHANGHAI / JIANGSU / ZHEJIANG
 // --------------------------------------------------
 // Liste limitée aux localisations explicitement
