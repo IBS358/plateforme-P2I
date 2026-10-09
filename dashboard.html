@@ -15101,7 +15101,82 @@ ${supplierLocation ? `
 
 </div>
 
-` : ''}
+` : (
+  !p2iLclConsolidated?.estimated_cif_abidjan_usd &&
+  p2iIndividualShippingItem?.fob_normalization
+    ?.source_price_basis === 'EXW'
+    ? `
+      <div style="
+        margin-top:14px;
+        padding:14px;
+        border-radius:10px;
+        background:rgba(245,158,11,.05);
+        border:1px solid rgba(245,158,11,.25);
+        color:#cbd5e1;
+        font-size:12px;
+        line-height:1.8;
+      ">
+        <strong style="color:#fbbf24;">
+          Estimation logistique en attente
+        </strong>
+
+        <div style="margin-top:8px;">
+          Prix EXW déclaré :
+          <strong>
+            ${Number(
+              p2iIndividualShippingItem.fob_normalization
+                .source_price_usd || 0
+            ).toLocaleString('fr-FR')} USD
+          </strong>
+        </div>
+
+        <div>
+          Lieu d'enlèvement déclaré :
+          <strong>
+            ${escapeHtml(
+              p2iIndividualShippingItem.fob_normalization
+                .supplier_location || 'Non renseigné'
+            )}
+          </strong>
+        </div>
+
+        <div>
+          Port de départ :
+          ${escapeHtml(
+            p2iCifDisplay.origin_port || 'À confirmer'
+          )}
+        </div>
+
+        <div style="margin-top:8px;">
+          Pré-acheminement usine → port :
+          <strong>À confirmer</strong>
+        </div>
+
+        <div>
+          Valeur FOB estimative :
+          <strong>En attente de confirmation</strong>
+        </div>
+
+        <div>
+          CIF Port d'Abidjan :
+          <strong>Non calculable à ce stade</strong>
+        </div>
+
+        <div style="
+          margin-top:8px;
+          font-size:10px;
+          color:#94a3b8;
+        ">
+          La P2I ne dispose pas actuellement
+          d'une référence de transport applicable
+          à cette localisation.
+          Aucun coût de pré-acheminement
+          n'a été inventé.
+        </div>
+      </div>
+    `
+    : ''
+)}
 
   <!-- ========================================
        INDICATEURS FINANCIERS
