@@ -2996,13 +2996,40 @@ const shanghaiRegionalLocations = [
   'ningbo'
 ];
 
+// Provinces explicitement incompatibles avec
+// la référence régionale Shanghai / Jiangsu / Zhejiang
+const excludedShanghaiRegionProvinces = [
+  'guangdong',
+  'shandong',
+  'fujian',
+  'hebei',
+  'henan',
+  'hubei',
+  'hunan',
+  'sichuan',
+  'anhui',
+  'liaoning',
+  'guangxi',
+  'yunnan'
+];
+
+const locationTokens =
+  normalizedLocation
+    .split(/[\s,;/()-]+/)
+    .filter(Boolean);
+
+const hasExcludedProvince =
+  excludedShanghaiRegionProvinces.some(
+    province => locationTokens.includes(province)
+  );
+
 const locationMatchesShanghaiRegion =
   !normalizedLocation ||
-  shanghaiRegionalLocations.some(
-    location =>
-      normalizedLocation
-        .split(/[\s,;/()-]+/)
-        .includes(location)
+  (
+    !hasExcludedProvince &&
+    shanghaiRegionalLocations.some(
+      location => locationTokens.includes(location)
+    )
   );
 
 
