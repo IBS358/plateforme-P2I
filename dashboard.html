@@ -15296,20 +15296,53 @@ ${supplierLocation ? `
           <strong>Non calculable à ce stade</strong>
         </div>
 
-        <div style="
-          margin-top:8px;
-          font-size:10px;
-          color:#94a3b8;
-        ">
-          La P2I ne dispose pas actuellement
-          d'une référence de transport applicable
-          à cette localisation.
+       <div style="
+  margin-top:8px;
+  font-size:10px;
+  color:#94a3b8;
+">
+  ${
+    p2iIndividualShippingItem
+      ?.fob_normalization
+      ?.pre_carriage_estimate
+      ?.status === 'corridor_reference_pending_validation'
+
+      ? `
+        <strong>
+          Référence logistique identifiée —
+          validation en attente.
+        </strong>
+
+        <div style="margin-top:5px;">
+          La P2I a identifié une référence
+          indicative de transport entre
+          Guangzhou (Guangdong) et Shanghai.
+
+          Cette référence doit encore être
+          vérifiée pour les caractéristiques
+          de votre machine et les conditions
+          réelles d'expédition.
+
           Aucun coût de pré-acheminement
-          n'a été inventé.
+          n'est intégré aux calculs FOB et CIF
+          tant que cette validation
+          n'est pas effectuée.
         </div>
-      </div>
-    `
-    : ''
+      `
+
+      : `
+        La P2I ne dispose pas actuellement
+        d'une référence de transport applicable
+        à cette localisation.
+
+        Aucun coût de pré-acheminement
+        n'a été inventé.
+      `
+  }
+</div>
+</div>
+`
+: ''
 )}
 
   <!-- ========================================
