@@ -2976,6 +2976,34 @@ function getP2IPreCarriageReference(
 
 const normalizedLocation =
   normalize(supplierLocation);
+  // --------------------------------------------------
+// VÉRIFICATION DE LA ZONE SHANGHAI / JIANGSU / ZHEJIANG
+// --------------------------------------------------
+// Liste limitée aux localisations explicitement
+// reconnues. Une localisation inconnue ne sera
+// pas considérée comme appartenant à cette zone.
+// --------------------------------------------------
+
+const shanghaiRegionalLocations = [
+  'shanghai',
+  'jiangsu',
+  'suzhou',
+  'wuxi',
+  'changzhou',
+  'nanjing',
+  'zhejiang',
+  'hangzhou',
+  'ningbo'
+];
+
+const locationMatchesShanghaiRegion =
+  !normalizedLocation ||
+  shanghaiRegionalLocations.some(
+    location =>
+      normalizedLocation
+        .split(/[\s,;/()-]+/)
+        .includes(location)
+  );
 
 
   // --------------------------------------------------
