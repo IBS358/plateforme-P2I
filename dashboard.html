@@ -15302,13 +15302,12 @@ ${supplierLocation ? `
   color:#94a3b8;
 ">
   ${
-    p2iIndividualShippingItem
-  ?.shipping_package
-  ?.freight_estimate
-  ?.exw_to_fob_estimate
-  ?.pre_carriage
-  ?.status === 'corridor_reference_pending_validation'
-      ? `
+  p2iIndividualShippingItem
+    ?.fob_normalization
+    ?.exw_to_fob_estimate
+    ?.pre_carriage
+    ?.status === 'corridor_reference_pending_validation'
+  ? `
         <strong>
           Référence logistique identifiée —
           validation en attente.
