@@ -3122,7 +3122,7 @@ function calculateP2IPreCarriageEstimate({
   // Le calcul reste donc volontairement en attente.
   // --------------------------------------------------
 
-  if (normalizedLocation) {
+  if (normalizedLocation && !regionalReference) {
 
     return {
 
