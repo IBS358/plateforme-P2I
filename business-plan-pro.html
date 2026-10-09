@@ -2074,7 +2074,7 @@ function updateEquipmentSourceDisplay() {
 // CHARGEMENT DES DONNÉES UP
 // ==============================================
 
-function loadUPData() {
+function loadUPDataLegacy() {
     try {
       const up = JSON.parse(localStorage.getItem('currentProduction') || '{}');
       console.log('Chargement UP:', up.nom);
