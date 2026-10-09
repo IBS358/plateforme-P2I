@@ -15303,10 +15303,11 @@ ${supplierLocation ? `
 ">
   ${
     p2iIndividualShippingItem
-      ?.fob_normalization
-     ?.pre_carriage
-      ?.status === 'corridor_reference_pending_validation'
-
+  ?.shipping_package
+  ?.freight_estimate
+  ?.exw_to_fob_estimate
+  ?.pre_carriage
+  ?.status === 'corridor_reference_pending_validation'
       ? `
         <strong>
           Référence logistique identifiée —
