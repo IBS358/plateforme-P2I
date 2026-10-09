@@ -13081,7 +13081,18 @@ const p2iIndividualShippingItem =
     item?.shipping_package
       ?.freight_estimate
       ?.estimated_cif_abidjan_usd != null
-  ) || null;
+  ) ||
+
+  (
+    equipmentEstimate?.self_purchase || []
+  ).find(item =>
+    item?.fob_normalization
+      ?.source_price_basis === 'EXW' &&
+    item?.fob_normalization
+      ?.source_amount != null
+  ) ||
+
+  null;
 
 
 const p2iIndividualFreightEstimate =
