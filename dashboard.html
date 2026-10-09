@@ -15136,7 +15136,7 @@ ${supplierLocation ? `
           <strong>
             ${Number(
               p2iIndividualShippingItem.fob_normalization
-                .source_price_usd || 0
+               .source_amount ?? 0
             ).toLocaleString('fr-FR')} USD
           </strong>
         </div>
