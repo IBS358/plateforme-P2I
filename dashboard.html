@@ -3010,14 +3010,15 @@ const locationMatchesShanghaiRegion =
   // CHINE
   // --------------------------------------------------
 
-  if (
-    (
-      normalizedCountry === 'chine' ||
-      normalizedCountry === 'china' ||
-      normalizedCountry === 'cn'
-    ) &&
-    normalizedPort === 'shanghai'
-  ) {
+ if (
+  (
+    normalizedCountry === 'chine' ||
+    normalizedCountry === 'china' ||
+    normalizedCountry === 'cn'
+  ) &&
+  normalizedPort === 'shanghai' &&
+  locationMatchesShanghaiRegion
+) {
 
     return (
       P2I_PRE_CARRIAGE_REFERENCES
