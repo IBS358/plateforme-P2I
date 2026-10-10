@@ -2169,6 +2169,13 @@ localStorage.removeItem("bp_open_from_dashboard");
   // ---- 5) Injection HTML
   const s3Text = $("s3_text");
   const s3List = $("s3_list");
+  // P2I — Affichage du sélecteur de configuration Biscuiterie
+const biscuiterieConfigBox = document.getElementById("p2iBiscuiterieConfig");
+
+if (biscuiterieConfigBox) {
+  biscuiterieConfigBox.style.display =
+    upKey === "biscuiterie" ? "block" : "none";
+}
 
   if (s3Text) {
     s3Text.innerHTML =
