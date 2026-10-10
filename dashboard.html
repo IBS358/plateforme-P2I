@@ -17049,7 +17049,14 @@ async function loadSimulations() {
         <td>${x.source === "PRO" ? '<span class="bp-type-pill bp-type-pro">BP Pro</span>' : '<span class="bp-type-pill bp-type-free">BP Découverte</span>'}</td>
         <td style="color:var(--text-dim)">${formatDateFR(x.date)}</td>
         <td style="white-space: nowrap;">
-          <a class="btn-view" href="#" data-idx="${i}" style="margin-right: 8px;">Ouvrir</a>
+          
+<a class="btn-view"
+   href="${x.source === 'FREE' && x.raw?.id
+     ? escapeHtml(getP2ISimulationOpenUrl(x))
+     : '#'}"
+   data-idx="${i}"
+   style="margin-right: 8px;">Ouvrir</a>
+
           <button class="btn-view" onclick="deleteSimulationSupabase('${x.raw.id}', '${escapeHtml(x.unit).replace(/'/g, "\\'")}', '${x.source}')" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.3); color:#f87171;">
             <i class="fas fa-trash"></i> Supprimer
           </button>
@@ -17058,18 +17065,26 @@ async function loadSimulations() {
     `).join("");
 
     
+
 tbody.querySelectorAll("a.btn-view").forEach((a, i) => {
   a.addEventListener("click", (e) => {
-    e.preventDefault();
-
     const item = allSims[i];
-    if (!item) return;
+    if (!item) {
+      e.preventDefault();
+      return;
+    }
 
-    
-    // P2I : ouverture du BP avec son identifiant de simulation
-    window.location.href = getP2ISimulationOpenUrl(item);
+    // BP Découverte : suivre le lien contenant simulation_id
+    if (item.source === "FREE" && item.raw?.id) {
+      return;
+    }
+
+    // BP Pro : conserver le comportement existant
+    e.preventDefault();
+    window.location.href = item.openUrl;
   });
 });
+
 
   } catch(e) {
     console.error('Erreur inattendue :', e);
