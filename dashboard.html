@@ -1535,12 +1535,15 @@ function getP2ISimulationOpenUrl(item) {
         e.preventDefault();
         const item = latest[i];
         if (!item) return;
-        if (item.type === 'FREE') {
-          // Ouvrir le BP gratuit
-          window.location.href = getOpenUrlFromDownload(item.raw.simulation_data || item.raw);
-        } else {
-          window.location.href = item.openUrl;
-        }
+       
+if (item.type === 'FREE') {
+  // P2I : ouvrir le BP Découverte avec son identifiant Supabase
+  window.location.href = getP2ISimulationOpenUrl(item);
+} else {
+  // BP Pro : comportement inchangé
+  window.location.href = item.openUrl;
+}
+
       });
     });
 
