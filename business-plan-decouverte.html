@@ -2170,12 +2170,27 @@ let machinesForThisUp = normalize(P2I_MACHINES_BY_UP[upKey]);
 if (upKey === "biscuiterie" && typeof MACHINES_DATA !== "undefined") {
   const biscuiterieData = MACHINES_DATA.biscuiterie;
   const configSelect = document.getElementById("p2iBiscuiterieSelect");
-  // P2I — Clé de mémorisation de la configuration
-const biscuiterieStorageKey = "p2i_bp_decouverte_biscuiterie_" + (upKey || "");
+  
+  // P2I — Mémorisation par simulation
+  const simulationId = new URLSearchParams(window.location.search)
+    .get("simulation_id");
 
-  const configId = configSelect
-    ? configSelect.value
-    : biscuiterieData.default_configuration;
+  const biscuiterieStorageKey = simulationId
+    ? "p2i_bp_decouverte_biscuiterie_sim_" + simulationId
+    : null;
+
+  const savedConfig = biscuiterieStorageKey
+    ? localStorage.getItem(biscuiterieStorageKey)
+    : null;
+
+  const configId =
+    savedConfig && biscuiterieData.configurations[savedConfig]
+      ? savedConfig
+      : biscuiterieData.default_configuration;
+
+  if (configSelect && biscuiterieData.configurations[configId]) {
+    configSelect.value = configId;
+  }
 
   const configuration = biscuiterieData.configurations[configId];
 
@@ -2235,27 +2250,39 @@ if (biscuiterieConfigBox) {
     // Premier affichage
     renderMachines(machinesForThisUp);
 
-    // Changement de configuration : Biscuiterie uniquement
-    if (upKey === "biscuiterie" && typeof MACHINES_DATA !== "undefined") {
-      const configSelect = document.getElementById("p2iBiscuiterieSelect");
-      const biscuiterieData = MACHINES_DATA.biscuiterie;
+   
+  // Changement de configuration : Biscuiterie uniquement
+  if (upKey === "biscuiterie" && typeof MACHINES_DATA !== "undefined") {
+    const configSelect = document.getElementById("p2iBiscuiterieSelect");
+    const biscuiterieData = MACHINES_DATA.biscuiterie;
 
-      if (configSelect && biscuiterieData) {
-        configSelect.addEventListener("change", function () {
-          const configuration = biscuiterieData.configurations[this.value];
+    if (configSelect && biscuiterieData) {
+      configSelect.addEventListener("change", function () {
+        const configuration = biscuiterieData.configurations[this.value];
 
-          if (!configuration) return;
+        if (!configuration) return;
 
-          const machines = normalize([
-            ...biscuiterieData.base_machines,
-            ...configuration.specific_machines
-          ]);
+        const machines = normalize([
+          ...biscuiterieData.base_machines,
+          ...configuration.specific_machines
+        ]);
 
-          renderMachines(machines);
-        });
-      }
+        renderMachines(machines);
+
+        // P2I : mémoriser le choix pour cette simulation
+        const simulationId = new URLSearchParams(window.location.search)
+          .get("simulation_id");
+
+        if (simulationId) {
+          localStorage.setItem(
+            "p2i_bp_decouverte_biscuiterie_sim_" + simulationId,
+            this.value
+          );
+        }
+      });
     }
   }
+}
 })();
 </script>
 <script>
