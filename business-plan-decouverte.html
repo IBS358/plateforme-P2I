@@ -2220,12 +2220,39 @@ if (biscuiterieConfigBox) {
       return;
     }
 
-    s3List.innerHTML = machinesForThisUp.map((m) => {
-      const role = m.role ? ` — <i>${m.role}</i>` : "";
-      const cap  = m.capacity ? ` • <b>Capacité :</b> ${m.capacity}` : "";
-      const util = m.utilities ? ` • <b>Utilités :</b> ${m.utilities}` : "";
-      return `<li><b>${m.name}</b>${role}${cap}${util}</li>`;
-    }).join("");
+       // P2I — Affichage des machines selon la configuration
+    function renderMachines(list) {
+      s3List.innerHTML = list.map((m) => {
+        const role = m.role ? ` — <i>${m.role}</i>` : "";
+        const cap  = m.capacity ? ` • <b>Capacité :</b> ${m.capacity}` : "";
+        const util = m.utilities ? ` • <b>Utilités :</b> ${m.utilities}` : "";
+        return `<li><b>${m.name}</b>${role}${cap}${util}</li>`;
+      }).join("");
+    }
+
+    // Premier affichage
+    renderMachines(machinesForThisUp);
+
+    // Changement de configuration : Biscuiterie uniquement
+    if (upKey === "biscuiterie" && typeof MACHINES_DATA !== "undefined") {
+      const configSelect = document.getElementById("p2iBiscuiterieSelect");
+      const biscuiterieData = MACHINES_DATA.biscuiterie;
+
+      if (configSelect && biscuiterieData) {
+        configSelect.addEventListener("change", function () {
+          const configuration = biscuiterieData.configurations[this.value];
+
+          if (!configuration) return;
+
+          const machines = normalize([
+            ...biscuiterieData.base_machines,
+            ...configuration.specific_machines
+          ]);
+
+          renderMachines(machines);
+        });
+      }
+    }
   }
 })();
 </script>
