@@ -2164,7 +2164,26 @@ localStorage.removeItem("bp_open_from_dashboard");
   }
 
   // ---- 4) Récupérer la liste machines de l’UP
-  const machinesForThisUp = normalize(P2I_MACHINES_BY_UP[upKey]);
+  // P2I — Machines selon la configuration industrielle sélectionnée
+let machinesForThisUp = normalize(P2I_MACHINES_BY_UP[upKey]);
+
+if (upKey === "biscuiterie" && typeof MACHINES_DATA !== "undefined") {
+  const biscuiterieData = MACHINES_DATA.biscuiterie;
+  const configSelect = document.getElementById("p2iBiscuiterieSelect");
+
+  const configId = configSelect
+    ? configSelect.value
+    : biscuiterieData.default_configuration;
+
+  const configuration = biscuiterieData.configurations[configId];
+
+  if (configuration) {
+    machinesForThisUp = normalize([
+      ...biscuiterieData.base_machines,
+      ...configuration.specific_machines
+    ]);
+  }
+}
 
   // ---- 5) Injection HTML
   const s3Text = $("s3_text");
