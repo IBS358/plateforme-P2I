@@ -1319,6 +1319,17 @@ function formatDateFR(iso) {
   return filtered;
 }
     function getOpenUrlFromDownload(d) { return d?.url || d?.pdf_url || d?.pdfUrl || d?.href || d?.path || d?.file || d?.pdf || "business-plan-decouverte.html"; }
+    
+function getP2ISimulationOpenUrl(item) {
+  const url = new URL(item.openUrl, window.location.href);
+
+  if ((item.source === "FREE" || item.type === "FREE") && item.raw?.id) {
+    url.searchParams.set("simulation_id", item.raw.id);
+  }
+
+  return url.href;
+}
+
     function buildProOpenUrl(p) {
       let url = "business-plan-pro.html?mode=preview";
       if (p.unit_id) url += `&unit_id=${encodeURIComponent(p.unit_id)}`;
@@ -1622,11 +1633,7 @@ function formatDateFR(iso) {
         e.preventDefault();
         const item = allItems[i];
         if (!item) return;
-        if (item.type === 'FREE') {
-          window.location.href = getOpenUrlFromDownload(item.raw.simulation_data || item.raw);
-        } else {
-          window.location.href = item.openUrl;
-        }
+       window.location.href = getP2ISimulationOpenUrl(item);
       });
     });
 
@@ -17058,19 +17065,11 @@ tbody.querySelectorAll("a.btn-view").forEach((a, i) => {
     const item = allSims[i];
     if (!item) return;
 
-    // P2I : transmettre l'identifiant du BP Découverte
-    if (item.source === "FREE" && item.raw?.id) {
-      const url = new URL(item.openUrl, window.location.href);
-      url.searchParams.set("simulation_id", item.raw.id);
-      window.location.href = url.href;
-      return;
-    }
-
-    // BP Pro : comportement inchangé
-    window.location.href = item.openUrl;
+    
+    // P2I : ouverture du BP avec son identifiant de simulation
+    window.location.href = getP2ISimulationOpenUrl(item);
   });
 });
-
 
   } catch(e) {
     console.error('Erreur inattendue :', e);
