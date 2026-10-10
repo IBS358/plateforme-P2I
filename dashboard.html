@@ -17050,14 +17050,27 @@ async function loadSimulations() {
       </tr>
     `).join("");
 
-    tbody.querySelectorAll("a.btn-view").forEach((a, i) => {
-      a.addEventListener("click", (e) => {
-        e.preventDefault();
-        const item = allSims[i];
-        if (!item) return;
-        window.location.href = item.openUrl;
-      });
-    });
+    
+tbody.querySelectorAll("a.btn-view").forEach((a, i) => {
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const item = allSims[i];
+    if (!item) return;
+
+    // P2I : transmettre l'identifiant du BP Découverte
+    if (item.source === "FREE" && item.raw?.id) {
+      const url = new URL(item.openUrl, window.location.href);
+      url.searchParams.set("simulation_id", item.raw.id);
+      window.location.href = url.href;
+      return;
+    }
+
+    // BP Pro : comportement inchangé
+    window.location.href = item.openUrl;
+  });
+});
+
 
   } catch(e) {
     console.error('Erreur inattendue :', e);
