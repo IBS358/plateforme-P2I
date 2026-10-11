@@ -3,26 +3,26 @@
  * P2I — Biscuiterie industrielle
  * Référentiel de modèles candidats — pilote indépendant
  *
- * Version : 0.3.0
- * Date : 2026-10-12
+ * VERSION 0.4.0
+ * DATE 2026-10-12
  *
- * OBJECTIFS
- * - Documenter les modèles candidats.
- * - Distinguer données annoncées et données vérifiées.
- * - Éviter le double comptage des équipements intégrés.
- * - Préparer un référencement réutilisable par la P2I.
+ * Cette version :
+ * - conserve les trois pistes de laminateurs ;
+ * - conserve les trois variantes Wenva ;
+ * - prépare le référencement du calibrage et de la découpe ;
+ * - trace les sources et les informations manquantes ;
+ * - évite le double comptage des équipements intégrés ;
+ * - ne valide aucun prix ni modèle automatiquement.
  *
- * SÉCURITÉ
- * - Aucun modèle n'est validé commercialement.
- * - Aucun prix n'est considéré comme confirmé.
- * - Aucun appel à Supabase.
- * - Aucune modification des catalogues existants.
+ * Aucune écriture dans Supabase.
+ * Aucune modification des catalogues de production.
  */
 
 (function (global) {
   'use strict';
 
-  const VERSION = '0.3.0';
+  const VERSION = '0.4.0';
+  const DATE_REFERENCE = '2026-10-12';
 
   const SOURCES = {
     wenva_laminateur:
@@ -32,21 +32,16 @@
       'https://wenva668.en.made-in-china.com/product/aFeQECKHhtWl/China-Wenva-Delicious-Soda-Cracker-Production-Line.html'
   };
 
-  const DATE_REFERENCE = '2026-10-12';
-
-  function copier(objet) {
-    return JSON.parse(JSON.stringify(objet));
+  function copier(valeur) {
+    return JSON.parse(JSON.stringify(valeur));
   }
 
   /*
-   * Statuts de référencement :
+   * Les données Wenva ci-dessous proviennent des
+   * informations précédemment enregistrées.
    *
-   * piste_a_documenter
-   * candidat_documente_non_valide
-   * modele_valide
-   *
-   * Le statut modele_valide n'est attribué
-   * à aucun modèle dans cette version.
+   * Elles restent déclaratives et doivent être
+   * confirmées avant toute validation commerciale.
    */
 
   function creerVarianteWenva(code, dimensions, poidsKg) {
@@ -61,7 +56,6 @@
       designation: 'Cut-sheet laminator',
 
       variante: code,
-
       origine_declaree: 'Chine',
 
       fonction:
@@ -70,24 +64,18 @@
       caracteristiques_annoncees: {
         couches_min: 12,
         couches_max: 16,
-
         epaisseur_pate_min_mm: 3,
         epaisseur_pate_max_mm: 8,
-
         puissance_nominale_kw: 5.05,
-
         dimensions_mm: dimensions,
-
         poids_kg: poidsKg
       },
 
       capacite_cible_p2i_kg_h: 500,
-
       debit_kg_h_verifie: null,
 
       prix_reference: {
         devise: 'USD',
-
         montant_min: 35000,
         montant_max: 45000,
 
@@ -95,20 +83,16 @@
           'fourchette_annonce_generale_multivariantes',
 
         prix_individuel_variante: null,
-
         incoterm: null,
 
         prix_public_documente: true,
-
         prix_variante_verifie: false,
 
         date_consultation: DATE_REFERENCE,
-
         source_url: SOURCES.wenva_laminateur
       },
 
       rouleaux_calibrage_inclus: null,
-
       convoyeurs_inclus: null,
 
       compatibilite_ligne_500kg_h: 'a_confirmer',
@@ -116,24 +100,20 @@
       statut: 'candidat_documente_non_valide',
 
       fournisseur_confirme: false,
-
       prix_verifie: false,
-
       admissible_catalogue_p2i: false,
 
       points_a_verifier: [
         'Référence commerciale exacte',
-        'Capacité réelle en kg/h',
-        'Largeur utile de travail',
+        'Débit réel en kg/h',
+        'Largeur utile',
         'Prix individuel de la variante',
-        'Devise et incoterm',
+        'Incoterm',
         'Rouleaux de calibrage inclus ou séparés',
         'Convoyeurs inclus ou séparés',
         'Compatibilité avec la découpeuse',
-        'Alimentation électrique',
         'Installation et mise en service',
-        'Garantie et pièces de rechange',
-        'Service après-vente'
+        'Garantie et SAV'
       ],
 
       sources: [
@@ -144,8 +124,7 @@
   }
 
   /*
-   * FAMILLE 1
-   * Laminateur pour crackers
+   * FAMILLE 1 — LAMINATEUR CRACKERS
    */
 
   const laminateur = {
@@ -154,14 +133,13 @@
     nom: 'Laminateur pour crackers',
 
     fonction:
-      'Former les couches de pâte nécessaires au procédé de fabrication des crackers',
+      'Former les couches de pâte nécessaires à la fabrication des crackers',
 
+    configuration: ['crackers'],
     configurations: ['crackers'],
 
     capacite_cible_kg_h: 500,
-
     importance: 'indispensable',
-
     achat_separe: 'a_confirmer',
 
     fonctions_a_verifier: [
@@ -170,6 +148,15 @@
       'Réglage de l’épaisseur',
       'Transfert de la pâte',
       'Synchronisation avec le calibrage'
+    ],
+
+    interfaces_a_verifier: [
+      'Largeur utile',
+      'Épaisseur entrée et sortie',
+      'Vitesse de fonctionnement',
+      'Rouleaux de calibrage',
+      'Découpeuse',
+      'Convoyeurs de liaison'
     ],
 
     modeles_candidats: [
@@ -196,17 +183,13 @@
         },
 
         source_url: SOURCES.wenva_laminateur,
-
         date_source_consultee: DATE_REFERENCE,
 
         debit_kg_h_verifie: null,
-
         rouleaux_calibrage_inclus: null,
 
         fournisseur_confirme: false,
-
         prix_verifie: false,
-
         admissible_catalogue_p2i: false,
 
         variantes_documentees: [
@@ -230,9 +213,8 @@
         ],
 
         notes:
-          'Prix public annoncé pour plusieurs variantes. ' +
-          'Le prix individuel, le débit réel et le ' +
-          'périmètre de fourniture restent à confirmer.'
+          'Prix annoncé pour plusieurs variantes. ' +
+          'Prix individuel et débit réel à confirmer.'
       },
 
       {
@@ -258,27 +240,22 @@
         },
 
         source_url: null,
-
         date_source_consultee: null,
 
         debit_kg_h_verifie: null,
-
         rouleaux_calibrage_inclus: null,
 
         compatibilite_crackers: 'non_demontree',
 
         fournisseur_confirme: false,
-
         prix_verifie: false,
-
         admissible_catalogue_p2i: false
       },
 
       {
         id: 'piste_dingson_laminateur',
 
-        fournisseur_declare:
-          'Zhongshan Dingson',
+        fournisseur_declare: 'Zhongshan Dingson',
 
         designation:
           'Laminateur pour biscuits et crackers',
@@ -297,7 +274,6 @@
         },
 
         source_url: null,
-
         date_source_consultee: null,
 
         debit_annonce_kg_h: {
@@ -306,21 +282,23 @@
         },
 
         debit_kg_h_verifie: null,
-
         rouleaux_calibrage_inclus: null,
 
         fournisseur_confirme: false,
-
         prix_verifie: false,
-
         admissible_catalogue_p2i: false
       }
     ]
   };
 
   /*
-   * FAMILLE 2
-   * Rouleaux de calibrage
+   * FAMILLE 2 — ROULEAUX DE CALIBRAGE
+   *
+   * Les rouleaux peuvent être fournis séparément
+   * ou intégrés à un autre équipement.
+   *
+   * Aucun modèle commercial suffisamment documenté
+   * n'est encore enregistré.
    */
 
   const calibrage = {
@@ -331,13 +309,17 @@
     fonction:
       'Obtenir une épaisseur régulière de la bande de pâte avant découpe',
 
+    configuration: [
+      'biscuits_durs',
+      'crackers'
+    ],
+
     configurations: [
       'biscuits_durs',
       'crackers'
     ],
 
     capacite_cible_kg_h: 500,
-
     importance: 'indispensable',
 
     achat_separe: 'a_confirmer',
@@ -349,35 +331,51 @@
 
     criteres_techniques: {
       largeur_utile_mm: null,
-
       epaisseur_min_mm: null,
-
       epaisseur_max_mm: null,
-
       nombre_paires_rouleaux: null,
-
       vitesse_reglable: null,
-
       synchronisation_ligne: null,
-
       debit_kg_h_verifie: null
     },
 
+    criteres_referencement: {
+      fabricant_identifie: false,
+      modele_identifie: false,
+      documentation_technique: false,
+      prix_public_verifiable: false,
+      debit_500kg_h_demontre: false,
+      perimetre_fourniture_confirme: false
+    },
+
+    points_a_verifier: [
+      'Référence exacte du fabricant',
+      'Nombre de paires de rouleaux',
+      'Largeur utile de travail',
+      'Épaisseur minimale et maximale',
+      'Réglage de la vitesse',
+      'Capacité réelle pour la recette retenue',
+      'Compatibilité avec le laminateur',
+      'Compatibilité avec la découpeuse',
+      'Présence de convoyeurs',
+      'Prix public et incoterm',
+      'Garantie et pièces de rechange'
+    ],
+
     questions_fournisseur: [
-      'Les rouleaux de calibrage sont-ils inclus dans le laminateur ?',
-      'Combien de paires de rouleaux sont nécessaires ?',
+      'Les rouleaux sont-ils inclus dans le laminateur ?',
+      'Combien de paires sont nécessaires ?',
       'Quelle est la largeur utile ?',
-      'Quelle est la plage de réglage de l’épaisseur ?',
+      'Quelle est la plage d’épaisseur ?',
       'Quelle est la capacité réelle en kg/h ?',
-      'Les convoyeurs de liaison sont-ils inclus ?',
-      'Quel est le prix si les rouleaux sont vendus séparément ?'
+      'Les convoyeurs sont-ils inclus ?',
+      'Quel est le prix si vendus séparément ?'
     ],
 
     note_documentaire:
-      'Une présentation de ligne Wenva distingue le ' +
-      'laminateur des rouleaux de calibrage B/C/D. ' +
-      'Cette distinction ne prouve pas que les rouleaux ' +
-      'soient exclus de toute offre de laminateur.',
+      'La présentation de la ligne Wenva distingue ' +
+      'le laminateur des rouleaux de calibrage B/C/D. ' +
+      'Le périmètre exact des offres reste à confirmer.',
 
     source_url: SOURCES.wenva_ligne,
 
@@ -387,8 +385,13 @@
   };
 
   /*
-   * FAMILLE 3
-   * Découpeuse pour crackers
+   * FAMILLE 3 — DÉCOUPEUSE CRACKERS
+   *
+   * La découpe doit être adaptée à la bande de pâte
+   * et à la cadence réelle de la ligne.
+   *
+   * Aucun modèle commercial suffisamment documenté
+   * n'est encore enregistré.
    */
 
   const decoupeuse = {
@@ -399,41 +402,63 @@
     fonction:
       'Découper la bande de pâte laminée et calibrée aux dimensions des crackers',
 
+    configuration: ['crackers'],
     configurations: ['crackers'],
 
     capacite_cible_kg_h: 500,
-
     importance: 'indispensable',
 
     achat_separe: 'a_confirmer',
 
+    inclusion_possible: [
+      'ligne_complete_crackers'
+    ],
+
     criteres_techniques: {
       type_decoupe: null,
-
       largeur_utile_mm: null,
-
       dimensions_produits_mm: null,
-
       cadence_annoncee: null,
-
       debit_kg_h_verifie: null,
-
       recuperation_rognures: null,
-
       convoyeur_sortie_inclus: null,
-
       synchronisation_ligne: null
     },
 
+    criteres_referencement: {
+      fabricant_identifie: false,
+      modele_identifie: false,
+      documentation_technique: false,
+      prix_public_verifiable: false,
+      debit_500kg_h_demontre: false,
+      perimetre_fourniture_confirme: false
+    },
+
+    points_a_verifier: [
+      'Référence exacte du fabricant',
+      'Principe de découpe',
+      'Largeur utile',
+      'Dimensions possibles des crackers',
+      'Cadence réelle',
+      'Compatibilité avec la pâte laminée',
+      'Système de piquage éventuel',
+      'Retour des rognures',
+      'Convoyeur de sortie',
+      'Synchronisation avec le four',
+      'Prix public et incoterm',
+      'Garantie et maintenance'
+    ],
+
     questions_fournisseur: [
       'Quel système de découpe est proposé ?',
-      'Quelle est la largeur utile de travail ?',
-      'Quelles dimensions de crackers sont réalisables ?',
-      'Quelle est la cadence réelle pour notre recette ?',
+      'Quelle est la largeur utile ?',
+      'Quelles dimensions de crackers sont possibles ?',
+      'Quelle cadence est réalisable ?',
+      'Le système de piquage est-il inclus ?',
       'Le retour des rognures est-il intégré ?',
-      'Les convoyeurs de sortie sont-ils inclus ?',
-      'La découpeuse est-elle synchronisable avec le laminateur ?',
-      'Quel est le prix catalogue et son incoterm ?'
+      'Les convoyeurs sont-ils inclus ?',
+      'La machine est-elle synchronisable avec la ligne ?',
+      'Quel est le prix catalogue ?'
     ],
 
     statut_referencement: 'modeles_a_rechercher',
@@ -442,26 +467,17 @@
   };
 
   /*
-   * RÉFÉRENTIEL DES TROIS FAMILLES
+   * RÉFÉRENTIEL
    */
 
   const familles = {
     laminateur_cracker_biscuiterie: laminateur,
-
     rouleaux_calibrage_biscuiterie: calibrage,
-
     decoupeuse_cracker_biscuiterie: decoupeuse
   };
 
   /*
-   * CONTRÔLE DES DOUBLES COMPTAGES
-   *
-   * Une fonction peut être nécessaire à la ligne
-   * sans correspondre à un achat supplémentaire.
-   *
-   * inclus = équipement déjà fourni
-   * separe = équipement à acquérir séparément
-   * a_confirmer = information manquante
+   * RÈGLES DE DOUBLE COMPTAGE
    */
 
   function analyserAchatSepare(statutInclusion) {
@@ -495,11 +511,10 @@
   }
 
   /*
-   * CONTRÔLE D'ADMISSIBILITÉ COMMERCIALE
+   * CONTRÔLE D'ADMISSIBILITÉ
    *
-   * Vérification conservatrice :
-   * un modèle ne devient jamais automatiquement
-   * validé du seul fait de posséder un prix annoncé.
+   * Les indicateurs sont conservateurs.
+   * Une validation documentaire humaine reste requise.
    */
 
   function verifierAdmissibilite(modele) {
@@ -525,12 +540,70 @@
     return {
       admissible: true,
       motif:
-        'Indicateurs de validation présents ; justificatifs à contrôler'
+        'Indicateurs présents : justificatifs à contrôler'
     };
   }
 
   /*
-   * BILAN DOCUMENTAIRE
+   * FICHE DE CONTRÔLE POUR UN NOUVEAU MODÈLE
+   *
+   * Permet de préparer les prochaines références
+   * sans leur attribuer de données fictives.
+   */
+
+  function creerFicheCandidate(machineRef) {
+    if (!familles[machineRef]) {
+      return null;
+    }
+
+    return {
+      machine_ref: machineRef,
+
+      id: null,
+      fabricant: null,
+      fournisseur: null,
+      marque: null,
+      modele: null,
+      pays_origine: null,
+
+      caracteristiques_techniques: {
+        capacite_annoncee_kg_h: null,
+        capacite_verifiee_kg_h: null,
+        largeur_utile_mm: null,
+        puissance_kw: null,
+        dimensions_mm: null,
+        poids_kg: null
+      },
+
+      equipements_inclus: {
+        rouleaux_calibrage: null,
+        convoyeurs: null,
+        retour_rognures: null,
+        autres: []
+      },
+
+      prix_reference: {
+        montant: null,
+        devise: null,
+        incoterm: null,
+        source_url: null,
+        date_source: null,
+        prix_public_documente: false
+      },
+
+      fournisseur_confirme: false,
+      prix_verifie: false,
+      debit_500kg_h_valide: false,
+
+      statut: 'piste_a_documenter',
+      admissible_catalogue_p2i: false,
+
+      observations: []
+    };
+  }
+
+  /*
+   * BILAN DU RÉFÉRENCEMENT
    */
 
   function obtenirBilan() {
@@ -540,20 +613,16 @@
       famille => famille.modeles_candidats || []
     );
 
-    const variantesWenva =
-      laminateur.modeles_candidats[0]
-        .variantes_documentees.length;
-
     return {
       version: VERSION,
-
       up_id: 'biscuiterie',
 
       familles: listeFamilles.length,
-
       pistes_fournisseurs: candidats.length,
 
-      variantes_wenva: variantesWenva,
+      variantes_wenva:
+        laminateur.modeles_candidats[0]
+          .variantes_documentees.length,
 
       modeles_commerciaux_valides:
         candidats.filter(
@@ -567,21 +636,17 @@
         .map(famille => famille.machine_ref),
 
       avertissement:
-        'Les modèles candidats ne sont pas encore ' +
-        'validés pour le catalogue commercial P2I.'
+        'Référentiel pilote. Aucun modèle commercial ' +
+        'n’est encore validé pour intégration P2I.'
     };
   }
 
   /*
-   * API PUBLIQUE
-   *
-   * Lecture seule :
-   * les objets retournés sont des copies.
+   * API PUBLIQUE — LECTURE SEULE
    */
 
   const api = Object.freeze({
     version: VERSION,
-
     up_id: 'biscuiterie',
 
     obtenirFamille: function (cle) {
@@ -598,7 +663,9 @@
 
     analyserAchatSepare: analyserAchatSepare,
 
-    verifierAdmissibilite: verifierAdmissibilite
+    verifierAdmissibilite: verifierAdmissibilite,
+
+    creerFicheCandidate: creerFicheCandidate
   });
 
   global.P2I_BISCUITERIE_MODELES_CANDIDATS_PILOTE = api;
