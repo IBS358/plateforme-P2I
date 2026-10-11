@@ -1,7 +1,7 @@
 
 /*
  * P2I — Référentiel complémentaire Biscuiterie
- * Version 1.0.0
+ * Version 1.1.0
  *
  * Module indépendant, en lecture seule.
  * Aucune modification des catalogues ou de Supabase.
@@ -155,6 +155,33 @@
       controle_double_comptage: true,
       prix_verifie: false,
       modele_valide: false
+    },
+
+    deposeuse_cookie_biscuiterie: {
+      nom: "Déposeuse / formeuse à cookies",
+      configurations: ["biscuits_mous"],
+      importance: "conditional",
+      choice_group: "formage_biscuits_mous",
+      fonction:
+        "Déposer ou former des portions de pâte à biscuits mous sur un support de cuisson, selon le procédé retenu.",
+      caracteristiques_a_verifier: [
+        "Type de pâte accepté : souple, semi-liquide ou autre",
+        "Principe de formage : dépôt, extrusion ou dosage",
+        "Poids et dimensions des portions",
+        "Cadence réelle en kg/h et en pièces/minute",
+        "Précision et régularité du dosage",
+        "Largeur utile de travail",
+        "Compatibilité avec les plaques ou le convoyeur de cuisson",
+        "Facilité de nettoyage et changements de recette",
+        "Puissance électrique et éventuel besoin en air comprimé"
+      ],
+      inclusion_possible:
+        "Peut intégrer un système de dosage, un convoyeur ou un dispositif de transfert vers la cuisson.",
+      controle_double_comptage: true,
+      prix_verifie: false,
+      modele_valide: false,
+      remarque:
+        "Alternative à la mouleuse rotative. Le choix dépend du type de pâte et du biscuit recherché. Ne pas additionner automatiquement les deux machines."
     }
 
   };
@@ -167,6 +194,7 @@
     if (!Object.prototype.hasOwnProperty.call(familles, machineKey)) {
       return null;
     }
+
     return copier(familles[machineKey]);
   }
 
@@ -188,10 +216,11 @@
 
   root.P2I_BISCUITERIE_FAMILLES_MANQUANTES =
     Object.freeze({
-      version: "1.0.0",
+      version: "1.1.0",
       obtenirFamille: obtenirFamille,
       obtenirParConfiguration: obtenirParConfiguration,
       obtenirToutes: obtenirToutes
     });
 
 })(window);
+
