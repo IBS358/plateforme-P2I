@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>P2I — Test de sélection des machines</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px auto;
+      padding: 0 16px;
+      max-width: 1050px;
+      color: #243244;
+      background: #f5f7fa;
+    }
+    h1 { color: #164b78; }
+    .info, .resultat, .erreur {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    .erreur { border-left: 4px solid #c0392b; }
+    .info { border-left: 4px solid #2874a6; }
+    label { font-weight: bold; }
+    select, button {
+      padding: 10px;
+      margin: 8px;
+      font-size: 15px;
+    }
+    button {
+      background: #1769aa;
+      color: white;
+      border: 0;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #d8dfe6;
+      padding: 9px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #e8eef5; }
+    .tableau { overflow-x: auto; }
+    .petit { font-size: 13px; color: #586474; }
+  </style>
+</head>
+<body>
+
+  <h1>P2I — Test de sélection des machines</h1>
+
+  <div class="info">
+    <strong>Mode pilote — Lecture seule</strong>
+    <p>
+      Ce test examine les équipements et les modèles candidats
+      de la Biscuiterie industrielle. Aucun modèle n'est
+      automatiquement validé et aucune donnée n'est enregistrée.
+    </p>
+  </div>
+
+  <label for="configuration">Configuration :</label>
+  <select id="configuration">
+    <option value="biscuits_mous">Biscuits mous</option>
+    <option value="biscuits_durs">Biscuits durs</option>
+    <option value="crackers">Crackers</option>
+  </select>
+
+  <button id="analyser">Analyser</button>
+
+  <div id="resultat" class="resultat">
+    Chargement des données...
+  </div>
+
+  <!-- Données principales à la racine du projet -->
+  <script src="../machines-data.js"></script>
+
+  <!-- Catalogue historique dans le dossier js -->
+  <script src="models-db.js"></script>
+
+  <!-- Module pilote de sélection -->
+  <script src="p2i-selection-machines-pilote.js"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const sortie = document.getElementById("resultat");
+      const select = document.getElementById("configuration");
+      const bouton = document.getElementById("analyser");
+
+      function echapper(valeur) {
+        return String(valeur == null ? "" : valeur)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function analyser() {
+        const module = window.P2I_SELECTION_MACHINES_PILOTE;
+
+        if (!module || typeof module.analyser !== "function") {
+          sortie.innerHTML =
+            '<div class="erreur">Le module pilote n’a pas été chargé.</div>';
+          return;
+        }
+
+        let resultat;
+
+        try {
+          resultat = module.analyser(select.value);
+        } catch (erreur) {
+          sortie.textContent = "Erreur pendant l’analyse : " + erreur.message;
+          return;
+        }
+
+        if (!resultat.ok) {
+          sortie.textContent = resultat.erreur;
+          return;
+        }
+
+        const s = resultat.statistiques;
+
+        let html = `
+          <h2>${echapper(select.options[select.selectedIndex].text)}</h2>
+
+          <p><strong>Capacité de référence :</strong>
+          ${echapper(resultat.capacite_reference.value)}
+          ${echapper(resultat.capacite_reference.unit)}
+          — objectif initial, non validé.</p>
+
+          <p><strong>Équipements répertoriés :</strong>
+          ${s.equipements_repertories}</p>
+
+          <p><strong>Correspondances directes :</strong>
+          ${s.correspondances_directes}</p>
+
+          <p><strong>Alias à vérifier :</strong>
+          ${s.alias_a_valider}</p>
+
+          <p><strong>Sans correspondance :</strong>
+          ${s.sans_correspondance}</p>
+
+          <p><strong>Modèles candidats :</strong>
+          ${s.modeles_candidats}</p>
+
+          <p><strong>Modèles validés :</strong>
+          ${s.modeles_valides}</p>
+
+          <h3>Équipements de la configuration</h3>
+
+          <div class="tableau">
+          <table>
+            <thead>
+              <tr>
+                <th>Machine</th>
+                <th>Importance</th>
+                <th>Correspondance</th>
+                <th>Modèles candidats</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        for (const machine of resultat.equipements) {
+          html += `
+            <tr>
+              <td>
+                ${echapper(machine.nom || machine.machine_key)}
+                ${machine.groupe_choix
+                  ? '<div class="petit">Alternative : ' +
+                    echapper(machine.groupe_choix) + '</div>'
+                  : ''}
+              </td>
+              <td>${echapper(machine.importance)}</td>
+              <td>${echapper(machine.correspondance)}</td>
+              <td>${machine.nombre_candidats}</td>
+            </tr>
+          `;
+        }
+
+        html += `
+            </tbody>
+          </table>
+          </div>
+        `;
+
+        const groupes = Object.entries(resultat.groupes_de_choix);
+
+        if (groupes.length) {
+          html += "<h3>Groupes de choix</h3>";
+
+          for (const [identifiant, groupe] of groupes) {
+            html += `
+              <p><strong>${echapper(identifiant)}</strong> :
+              minimum ${groupe.minimum_choix} choix parmi
+              ${groupe.machines_alternatives.length} alternatives.</p>
+            `;
+          }
+        }
+
+        html += `
+          <h3>Modules optionnels</h3>
+          <p>${resultat.modules_optionnels.length}
+          module(s) applicable(s) à cette configuration.</p>
+
+          <p class="petit">
+            Les correspondances et les prix ne constituent
+            pas une validation technique ou commerciale.
+          </p>
+        `;
+
+        sortie.innerHTML = html;
+      }
+
+      bouton.addEventListener("click", analyser);
+      analyser();
+    })();
+  </script>
+
+</body>
+</html>
