@@ -272,7 +272,8 @@
   </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="machines-data.js"></script>
-  <script src="js/up-data.js"></script>
+<script src="js/up-data.js"></script>
+<script src="js/p2i-bp-decouverte-references-biscuiterie-pilote.js"></script>
 </head>
 
 <body>
@@ -2393,6 +2394,7 @@ if (biscuiterieConfigBox) {
 
         renderMachines(machines);
 
+       
         // P2I : mémoriser le choix pour cette simulation
         const simulationId = new URLSearchParams(window.location.search)
           .get("simulation_id");
@@ -2410,6 +2412,232 @@ if (biscuiterieConfigBox) {
 }
 })();
 </script>
+
+<script>
+/* =====================================================
+   P2I - BP DECOUVERTE
+   Biscuiterie / Crackers / Reference KH-800
+   Integration ciblee - Version 1.0
+   ===================================================== */
+
+(function () {
+  "use strict";
+
+  const params = new URLSearchParams(location.search);
+
+  const unitId = params.get("unit_id");
+
+  if (unitId !== "biscuiterie") return;
+
+  const ref = window.P2I_BP_BISCUITERIE_REFERENCES;
+
+  if (!ref || ref.version !== "1.3.0") {
+    console.warn("P2I : referentiel Biscuiterie 1.3.0 absent.");
+    return;
+  }
+
+  const select = document.getElementById(
+    "p2iBiscuiterieSelect"
+  );
+
+  const section3 = document.getElementById("s3");
+  const section4 = document.getElementById("s4");
+
+  if (!select || !section3 || !section4) return;
+
+  const box = document.createElement("div");
+
+  box.id = "p2iReferenceCrackers";
+
+  box.style.cssText = [
+    "margin-top:16px",
+    "padding:16px",
+    "border:1px solid rgba(76,201,240,.35)",
+    "border-radius:14px",
+    "background:rgba(76,201,240,.05)"
+  ].join(";");
+
+  const financialBox = document.createElement("div");
+
+  financialBox.id = "p2iBudgetCrackers";
+
+  financialBox.style.cssText = [
+    "margin-top:16px",
+    "padding:16px",
+    "border:1px solid rgba(245,158,11,.35)",
+    "border-radius:14px",
+    "background:rgba(245,158,11,.05)"
+  ].join(";");
+
+  const esc = value => String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
+  const money = value =>
+    Number(value).toLocaleString("fr-FR") + " USD";
+
+  function render() {
+
+    const isCrackers = select.value === "crackers";
+
+    box.style.display = isCrackers ? "block" : "none";
+
+    financialBox.style.display =
+      isCrackers ? "block" : "none";
+
+    if (!isCrackers) return;
+
+    const choix = ref.getChoixReferenceCrackers();
+
+    const ligne = choix.ligne_reference_candidate;
+
+    const fournisseur = choix.fournisseur;
+
+    const budget = ref.calculerBudgetMachines("crackers");
+
+    box.innerHTML = `
+      <h3 style="color:#4cc9f0;margin-bottom:12px">
+        Configuration industrielle de reference P2I
+      </h3>
+
+      <p>
+        <b>Produit :</b> Crackers
+      </p>
+
+      <p>
+        <b>Objectif de production :</b>
+        environ 500 kg/h
+        (capacite cible non encore validee)
+      </p>
+
+      <p>
+        <b>Ligne candidate :</b>
+        ${esc(ligne.modele_nom)}
+      </p>
+
+      <p>
+        <b>Fabricant :</b>
+        ${esc(fournisseur.nom)}
+      </p>
+
+      <p>
+        <b>Origine :</b>
+        ${esc(fournisseur.pays)}
+      </p>
+
+      <p>
+        <b>Capacite annoncee :</b>
+        ${ligne.capacite.minimum_annonce_kg_h}
+        a
+        ${ligne.capacite.maximum_annonce_kg_h}
+        kg/h
+      </p>
+
+      <p>
+        <b>Prix public indicatif :</b>
+        ${money(ligne.prix_reference.montant)}
+      </p>
+
+      <p>
+        <b>Incoterm :</b>
+        a confirmer
+      </p>
+
+      <p>
+        <b>Evaluation fournisseur :</b>
+        ${esc(fournisseur.evaluation.recommandation)}
+      </p>
+
+      <p>
+        <b>SAV en Cote d'Ivoire :</b>
+        ${esc(fournisseur.evaluation.sav_local_cote_ivoire)}
+      </p>
+
+      <p style="margin-top:12px">
+        <b>Personnalisation :</b>
+        dans le BP Pro, l'investisseur pourra
+        etudier des equipements alternatifs,
+        sous reserve de compatibilite technique
+        et de revision du prix de la ligne integree.
+      </p>
+
+      <p style="margin-top:12px;color:#fbbf24">
+        <b>Reserve importante :</b>
+        le prix publie ne confirme pas que
+        la configuration complete pour crackers
+        a 500 kg/h est incluse.
+        Le fournisseur doit preciser le perimetre,
+        les equipements, les garanties et le SAV.
+      </p>
+    `;
+
+    financialBox.innerHTML = `
+      <h3 style="color:#fbbf24;margin-bottom:12px">
+        Reference de prix - Ligne crackers
+      </h3>
+
+      <p>
+        <b>KH-800 :</b>
+        ${money(ligne.prix_reference.montant)}
+        (prix public indicatif)
+      </p>
+
+      <p>
+        <b>Budget machines valide :</b>
+        ${budget.total_machines === null
+          ? "Non disponible"
+          : money(budget.total_machines)}
+      </p>
+
+      <p>
+        <b>Statut :</b>
+        verification technique et commerciale
+        necessaire.
+      </p>
+
+      <p style="margin-top:10px">
+        Ce prix n'est pas additionne automatiquement
+        aux investissements de la section 4.
+        Le financement historique du referentiel UP
+        reste affiche separement et ne doit pas etre
+        interprete comme un budget KH-800 valide.
+      </p>
+    `;
+
+  }
+
+  const s3List = document.getElementById("s3_list");
+
+  if (s3List) {
+    s3List.insertAdjacentElement("afterend", box);
+  } else {
+    section3.appendChild(box);
+  }
+
+  const s4List = document.getElementById("s4_list");
+
+  if (s4List) {
+    s4List.insertAdjacentElement("afterend", financialBox);
+  } else {
+    section4.appendChild(financialBox);
+  }
+
+  select.addEventListener("change", render);
+
+  window.p2iRenderReferenceCrackers = render;
+
+  render();
+
+  console.info(
+    "P2I : integration KH-800 BP Decouverte active"
+  );
+
+})();
+</script>
+
 <script>
 // P2I — Sections financières 4 à 7. Référentiel UP prioritaire, aucun coût inventé.
 (function(){
