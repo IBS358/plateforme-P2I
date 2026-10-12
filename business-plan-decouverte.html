@@ -2627,8 +2627,13 @@ if (biscuiterieConfigBox) {
 
   select.addEventListener("change", render);
 
-  window.p2iRenderReferenceCrackers = render;
+ window.p2iRenderReferenceCrackers = function () {
+  render();
 
+  if (typeof window.p2iRenderFinancesBiscuiterie === "function") {
+    window.p2iRenderFinancesBiscuiterie();
+  }
+};
   render();
 
   console.info(
@@ -2761,7 +2766,240 @@ if (biscuiterieConfigBox) {
       `<li><b>Réserve :</b> résultat théorique en régime d'activité, sans simulation de montée en charge ni validation des hypothèses de marché.</li>`;
   }
 })();
+</sc
+<script>
+/* =========================================================
+   P2I - BP DECOUVERTE
+   Correction financiere ciblee : Biscuiterie / Crackers
+   Version 1.0 - Sans modification Supabase
+   ========================================================= */
+
+(function () {
+  "use strict";
+
+  const params = new URLSearchParams(window.location.search);
+  const unitId = params.get("unit_id");
+
+  // Ne rien modifier pour les autres UP.
+  if (unitId !== "biscuiterie") return;
+
+  const select = document.getElementById("p2iBiscuiterieSelect");
+
+  if (!select) return;
+
+  const ids = [
+    "s4_text", "s4_list",
+    "s5_text", "s5_list",
+    "s6_text", "s6_list",
+    "s7_text", "s7_list"
+  ];
+
+  // Sauvegarder l'affichage financier historique.
+  // Il sera restaure pour biscuits durs et biscuits mous.
+  const original = {};
+
+  ids.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) original[id] = element.innerHTML;
+  });
+
+  const setHtml = (id, html) => {
+    const element = document.getElementById(id);
+    if (element) element.innerHTML = html;
+  };
+
+  const li = (label, value) =>
+    `<li><b>${label} :</b> ${value}</li>`;
+
+  const escapeHtml = value => String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
+  function restoreOriginal() {
+    ids.forEach(id => {
+      if (Object.prototype.hasOwnProperty.call(original, id)) {
+        setHtml(id, original[id]);
+      }
+    });
+  }
+
+  function renderCrackers() {
+
+    const reference =
+      window.P2I_BP_BISCUITERIE_REFERENCES;
+
+    const choix = reference &&
+      typeof reference.getChoixReferenceCrackers === "function"
+        ? reference.getChoixReferenceCrackers()
+        : null;
+
+    const ligne = choix?.ligne_reference_candidate;
+
+    const prix = ligne?.prix_reference?.montant;
+
+    const prixAffiche =
+      typeof prix === "number" && Number.isFinite(prix)
+        ? prix.toLocaleString("fr-FR") + " USD"
+        : "Non disponible";
+
+    const modele = escapeHtml(
+      ligne?.modele_nom || "Ligne candidate à confirmer"
+    );
+
+    // SECTION 4 - Investissement
+    setHtml("s4_text", `
+      <b>Investissements industriels - Biscuiterie / Crackers.</b>
+      Le projet est étudié pour une capacité cible
+      d'environ 500 kg/h. Son financement initial
+      complet reste à déterminer.
+    `);
+
+    setHtml("s4_list",
+      li("Ligne industrielle candidate", modele) +
+      li("Prix public indicatif", prixAffiche) +
+      li("Incoterm", "À confirmer") +
+      li("Périmètre de la ligne",
+         "À confirmer auprès du fabricant") +
+      li("Capacité réelle en crackers",
+         "500 kg/h visés, non validés") +
+      li("Fret et assurance",
+         "À chiffrer") +
+      li("Dédouanement et transport jusqu'au site",
+         "À chiffrer") +
+      li("Installation et mise en service",
+         "À chiffrer") +
+      li("Formation des opérateurs",
+         "À chiffrer") +
+      li("Pièces de rechange initiales",
+         "À chiffrer") +
+      li("Utilités et aménagements industriels",
+         "À chiffrer") +
+      li("Sécurité et conformité",
+         "À chiffrer") +
+      li("Fonds de roulement initial",
+         "À déterminer") +
+      li("Imprévus",
+         "À déterminer") +
+      li("Financement initial complet",
+         "Non calculable à ce stade") +
+      `<li><b>Important :</b> le prix indicatif
+      de la KH-800 ne représente pas le coût
+      total d'installation de l'unité en Côte d'Ivoire.
+      Il n'est pas additionné à l'ancien budget.</li>`
+    );
+
+    // SECTION 5 - Resultat
+    setHtml("s5_text", `
+      <b>Compte de résultat prévisionnel -
+      Biscuiterie / Crackers.</b>
+      Les hypothèses commerciales historiques
+      peuvent servir de point de départ,
+      mais elles ne sont pas encore validées
+      pour cette configuration industrielle.
+    `);
+
+    setHtml("s5_list",
+      li("Chiffre d'affaires",
+         "Hypothèses historiques à réexaminer") +
+      li("Volume commercialisable",
+         "À calculer après validation du débit,
+         des heures de fonctionnement et du rendement") +
+      li("Achats de matières premières",
+         "À recalculer selon les recettes crackers") +
+      li("Énergie, maintenance et emballages",
+         "À chiffrer") +
+      li("Personnel et autres charges",
+         "À dimensionner") +
+      li("Excédent brut d'exploitation",
+         "Non calculable de manière fiable") +
+      li("Amortissements",
+         "En attente du budget immobilisé complet") +
+      li("Résultat avant impôt",
+         "Non calculable à ce stade")
+    );
+
+    // SECTION 6 - Bilan
+    setHtml("s6_text", `
+      <b>Situation financière prévisionnelle -
+      Biscuiterie / Crackers.</b>
+      Le bilan de départ nécessite une évaluation
+      des actifs, du financement et du fonds de roulement.
+    `);
+
+    setHtml("s6_list",
+      li("Machines et équipements",
+         "Prix indicatif KH-800 : " + prixAffiche) +
+      li("Valeur totale des immobilisations",
+         "À déterminer") +
+      li("Fonds de roulement",
+         "À déterminer") +
+      li("Apport de l'investisseur",
+         "Non renseigné") +
+      li("Emprunts et dettes",
+         "Non renseignés") +
+      li("Bilan prévisionnel équilibré",
+         "Non calculable à ce stade")
+    );
+
+    // SECTION 7 - Rentabilite
+    setHtml("s7_text", `
+      <b>Rentabilité prévisionnelle -
+      Biscuiterie / Crackers.</b>
+      Le calcul de rentabilité doit être établi
+      à partir d'un investissement complet et
+      d'hypothèses d'exploitation cohérentes.
+    `);
+
+    setHtml("s7_list",
+      li("Investissement total",
+         "Non encore validé") +
+      li("Résultat net annuel",
+         "À recalculer") +
+      li("ROI",
+         "Non calculable à ce stade") +
+      li("Délai de récupération",
+         "Non calculable") +
+      li("Principaux risques",
+         `<ul>
+           <li>Capacité effective en crackers à confirmer</li>
+           <li>Périmètre technique de la KH-800 à vérifier</li>
+           <li>Coûts logistiques et d'installation inconnus</li>
+           <li>Consommations d'énergie à confirmer</li>
+           <li>Débouchés commerciaux et prix de vente à valider</li>
+           <li>Disponibilité des pièces et SAV local à vérifier</li>
+         </ul>`) +
+      `<li><b>Conclusion :</b> aucun pourcentage
+      de rentabilité n'est présenté tant que
+      les données nécessaires ne sont pas validées.</li>`
+    );
+  }
+
+  function render() {
+    if (select.value === "crackers") {
+      renderCrackers();
+    } else {
+      restoreOriginal();
+    }
+  }
+
+  select.addEventListener("change", render);
+
+  // Accessible au mecanisme de restauration Supabase.
+  window.p2iRenderFinancesBiscuiterie = render;
+
+  render();
+
+  console.info(
+    "P2I : correction financiere crackers active"
+  );
+
+})();
 </script>
+ript>
+  
 <script>
 // ==================================================
 // BP GRATUIT — SECTION 8 : Recommandations stratégiques — v1
