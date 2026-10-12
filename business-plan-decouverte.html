@@ -2764,9 +2764,11 @@ if (biscuiterieConfigBox) {
       li("Risques principaux",Array.isArray(prod.challenges)&&prod.challenges.length?
          `<ul>${prod.challenges.map(x=>`<li>${String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;")}</li>`).join("")}</ul>`:unavailable)+
       `<li><b>Réserve :</b> résultat théorique en régime d'activité, sans simulation de montée en charge ni validation des hypothèses de marché.</li>`;
+  
   }
 })();
-</sc
+</script>
+
 <script>
 /* =========================================================
    P2I - BP DECOUVERTE
@@ -2904,9 +2906,9 @@ if (biscuiterieConfigBox) {
     setHtml("s5_list",
       li("Chiffre d'affaires",
          "Hypothèses historiques à réexaminer") +
+      
       li("Volume commercialisable",
-         "À calculer après validation du débit,
-         des heures de fonctionnement et du rendement") +
+         "À calculer après validation du débit, des heures de fonctionnement et du rendement") +
       li("Achats de matières premières",
          "À recalculer selon les recettes crackers") +
       li("Énergie, maintenance et emballages",
@@ -2996,11 +2998,12 @@ if (biscuiterieConfigBox) {
     "P2I : correction financiere crackers active"
   );
 
+
 })();
 </script>
-ript>
-  
+
 <script>
+
 // ==================================================
 // BP GRATUIT — SECTION 8 : Recommandations stratégiques — v1
 // ✅ 3 priorités actionnables (30 / 60 / 90 jours)
