@@ -1,303 +1,301 @@
 
-/* ============================================================
-   P2I — RÉFÉRENCES MACHINES POUR BP DÉCOUVERTE
-   Unité pilote : Biscuiterie industrielle
-
-   Fichier :
-   js/p2i-bp-decouverte-references-biscuiterie-pilote.js
-
-   Version : 1.0.0
-
-   PRINCIPES :
-   - Une configuration de référence par version d'UP.
-   - Prix de référence vérifiable obligatoire pour le BP.
-   - Aucun prix inventé.
-   - Les modèles sans prix vérifié restent hors chiffrage.
-   - Aucun accès à Supabase.
-   - Aucune modification des autres fichiers P2I.
-   ============================================================ */
-
+/* P2I — Référentiel BP Découverte, Biscuiterie industrielle
+   Version 1.1.0 — préparation de la configuration crackers
+   Aucune donnée commerciale non vérifiée n'est comptabilisée.
+   Aucun accès à Supabase ni modification des autres fichiers.
+*/
 (function () {
-  "use strict";
+  'use strict';
 
-  // ----------------------------------------------------------
-  // 1. INFORMATIONS GÉNÉRALES
-  // ----------------------------------------------------------
+  const SOURCES = Object.freeze({
+    sinobake: 'https://www.sinobake.net/Customized-Cracker-Biscuit-Hard-Biscuit-Production-Line-pd557569458.html',
+    biscuitpro: 'https://www.biscuitpro.com/fr/les-lignes/ligne-de-production-de-cracker',
+    skywin: 'https://skywinbake.en.made-in-china.com/product/qwrfULYWYpMl/China-Soda-Cracker-Biscuit-Production-Line-Tunnel-Oven-Biscuit-Making-Machine.html'
+  });
+
+  function fonction(id, nom, notes, groupe) {
+    return {
+      machine_key: id,
+      machine_nom: nom,
+      groupe: groupe || 'production',
+      notes: notes || '',
+      modele_id: null,
+      modele_nom: null,
+      fournisseur: null,
+      capacite: {
+        valeur: null,
+        unite: 'kg/h',
+        statut: 'a_verifier'
+      },
+      prix_reference: {
+        montant: null,
+        devise: 'USD',
+        incoterm: null,
+        statut: 'non_verifie',
+        source_url: null,
+        date_verification: null
+      },
+      fonctions_incluses: [id],
+      statut: 'a_referencer'
+    };
+  }
 
   const REFERENTIEL = {
-    version: "1.0.0",
-    up_id: "biscuiterie",
-    up_nom: "Biscuiterie industrielle",
-    devise: "USD",
+    version: '1.1.0',
+    up_id: 'biscuiterie',
+    up_nom: 'Biscuiterie industrielle',
+    devise: 'USD',
+    sources_documentaires: SOURCES,
 
     configurations: {
 
-      // ------------------------------------------------------
-      // BISCUITS MOUS
-      // ------------------------------------------------------
-
       biscuits_mous: {
-        configuration_id: "biscuits_mous",
-        nom: "Biscuits mous",
-
+        configuration_id: 'biscuits_mous',
+        nom: 'Biscuits mous',
         capacite_cible: {
           valeur: 500,
-          unite: "kg/h",
-          statut: "indicative_non_validee"
+          unite: 'kg/h',
+          statut: 'indicative_non_validee'
         },
-
-        machines: []
+        machines: [],
+        statut: 'inventaire_a_etablir'
       },
-
-      // ------------------------------------------------------
-      // BISCUITS DURS
-      // ------------------------------------------------------
 
       biscuits_durs: {
-        configuration_id: "biscuits_durs",
-        nom: "Biscuits durs",
-
+        configuration_id: 'biscuits_durs',
+        nom: 'Biscuits durs',
         capacite_cible: {
           valeur: 500,
-          unite: "kg/h",
-          statut: "indicative_non_validee"
+          unite: 'kg/h',
+          statut: 'indicative_non_validee'
         },
-
-        machines: []
+        machines: [],
+        statut: 'inventaire_a_etablir'
       },
 
-      // ------------------------------------------------------
-      // CRACKERS
-      // ------------------------------------------------------
-
       crackers: {
-        configuration_id: "crackers",
-        nom: "Crackers",
-
+        configuration_id: 'crackers',
+        nom: 'Crackers',
         capacite_cible: {
           valeur: 500,
-          unite: "kg/h",
-          statut: "indicative_non_validee"
+          unite: 'kg/h',
+          statut: 'indicative_non_validee'
         },
+        statut: 'fonctions_identifiees_modeles_a_verifier',
 
-        machines: []
+        machines: [
+          fonction(
+            'melangeur_biscuiterie',
+            'Mélangeur / pétrin industriel',
+            'Vérifier le volume par lot et la cadence effective.'
+          ),
+
+          fonction(
+            'alimentation_pate_cracker',
+            'Alimentation et transfert de pâte',
+            'Peut être intégré à un ensemble de préparation.'
+          ),
+
+          fonction(
+            'prelaminoir_cracker',
+            'Pré-laminoir / mise en nappe',
+            'Vérifier si inclus dans le laminateur.'
+          ),
+
+          fonction(
+            'laminateur_cracker',
+            'Laminateur pour crackers',
+            'Fonction de laminage indispensable selon la recette retenue.'
+          ),
+
+          fonction(
+            'rouleaux_calibrage',
+            'Rouleaux de calibrage',
+            'Plusieurs stations possibles ; ne pas compter deux fois si intégrées.'
+          ),
+
+          fonction(
+            'decoupeuse_cracker',
+            'Découpeuse rotative crackers',
+            'Vérifier format, largeur et rendement.'
+          ),
+
+          fonction(
+            'retour_rognures',
+            'Retour des rognures',
+            'Peut être intégré à la découpeuse ou à la ligne.'
+          ),
+
+          fonction(
+            'convoyeur_entree_four',
+            'Convoyeur d’entrée du four',
+            'Vérifier si fourni avec le four tunnel.'
+          ),
+
+          fonction(
+            'four_tunnel_biscuiterie',
+            'Four tunnel',
+            'Dimensionnement selon temps de cuisson et cadence.'
+          ),
+
+          fonction(
+            'convoyeur_sortie_four',
+            'Convoyeur de sortie du four',
+            'Vérifier si fourni avec le four tunnel.'
+          ),
+
+          fonction(
+            'refroidisseur_biscuiterie',
+            'Convoyeur de refroidissement',
+            'Dimensionner selon temps de refroidissement.'
+          ),
+
+          fonction(
+            'conditionneuse_biscuiterie',
+            'Conditionneuse / emballeuse',
+            'Vérifier cadence en paquets/minute.',
+            'conditionnement'
+          )
+        ]
       }
     }
   };
 
   // ----------------------------------------------------------
-  // 2. FORMAT D'UNE MACHINE DE RÉFÉRENCE
+  // VALIDATION DES PRIX
   // ----------------------------------------------------------
 
-  /*
-    Chaque machine validée pourra être ajoutée sous cette forme :
-
-    {
-      machine_key: "identifiant_machine",
-
-      machine_nom: "Nom de la machine",
-
-      modele_id: "identifiant_modele",
-
-      modele_nom: "Nom commercial du modèle",
-
-      fournisseur: {
-        nom: "Nom du fabricant",
-        pays: "Pays d'origine",
-        site: "https://exemple.com"
-      },
-
-      capacite: {
-        valeur: 500,
-        unite: "kg/h",
-        statut: "confirmee"
-      },
-
-      prix_reference: {
-        montant: 10000,
-        devise: "USD",
-        incoterm: "FOB",
-        statut: "verifie",
-        source_url: "https://exemple.com/produit",
-        date_verification: "AAAA-MM-JJ"
-      },
-
-      photo: {
-        url: "https://exemple.com/photo.jpg",
-        source_url: "https://exemple.com/produit"
-      },
-
-      fonctions_incluses: [
-        "Fonction 1",
-        "Fonction 2"
-      ],
-
-      statut: "valide_bp"
-    }
-
-    IMPORTANT :
-    Cet exemple est uniquement documentaire.
-    Il ne représente aucune machine validée.
-  */
-
-  // ----------------------------------------------------------
-  // 3. OUTILS DE VALIDATION
-  // ----------------------------------------------------------
-
-  function estNombrePositif(valeur) {
+  function estNombrePositif(n) {
     return (
-      typeof valeur === "number" &&
-      Number.isFinite(valeur) &&
-      valeur > 0
+      typeof n === 'number' &&
+      Number.isFinite(n) &&
+      n > 0
     );
   }
 
   function estPrixVerifie(machine) {
-    if (!machine || !machine.prix_reference) {
-      return false;
-    }
+    const p = machine && machine.prix_reference;
 
-    const prix = machine.prix_reference;
-
-    return (
-      prix.statut === "verifie" &&
-      estNombrePositif(prix.montant) &&
-      typeof prix.devise === "string" &&
-      prix.devise.trim() !== "" &&
-      typeof prix.source_url === "string" &&
-      /^https?:\/\//i.test(prix.source_url) &&
-      typeof prix.date_verification === "string" &&
+    return !!(
+      p &&
+      p.statut === 'verifie' &&
+      estNombrePositif(p.montant) &&
+      p.devise === 'USD' &&
+      typeof p.source_url === 'string' &&
+      /^https?:\/\//i.test(p.source_url) &&
+      typeof p.date_verification === 'string' &&
       /^\d{4}-\d{2}-\d{2}$/.test(
-        prix.date_verification
+        p.date_verification
       )
     );
   }
 
   function estMachineValideBP(machine) {
-    return (
+    return !!(
       machine &&
-      machine.statut === "valide_bp" &&
-      typeof machine.machine_key === "string" &&
-      machine.machine_key.trim() !== "" &&
-      typeof machine.modele_id === "string" &&
-      machine.modele_id.trim() !== "" &&
+      machine.statut === 'valide_bp' &&
+      typeof machine.modele_id === 'string' &&
+      machine.modele_id.trim() &&
+      typeof machine.modele_nom === 'string' &&
+      machine.modele_nom.trim() &&
+      machine.fournisseur &&
+      machine.fournisseur.nom &&
       estPrixVerifie(machine)
     );
   }
 
   // ----------------------------------------------------------
-  // 4. RÉCUPÉRER UNE CONFIGURATION
+  // CONSULTATION DES CONFIGURATIONS
   // ----------------------------------------------------------
+
+  function copie(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
 
   function getConfiguration(configurationId) {
-    return (
-      REFERENTIEL.configurations[configurationId] || null
-    );
-  }
+    const c = REFERENTIEL.configurations[configurationId];
 
-  // ----------------------------------------------------------
-  // 5. RÉCUPÉRER LES MACHINES VALIDÉES
-  // ----------------------------------------------------------
+    return c ? copie(c) : null;
+  }
 
   function getMachinesValidees(configurationId) {
-    const configuration = getConfiguration(
-      configurationId
-    );
+    const c = REFERENTIEL.configurations[configurationId];
 
-    if (!configuration) {
-      return [];
-    }
-
-    return configuration.machines.filter(
-      estMachineValideBP
-    );
+    return c
+      ? copie(c.machines.filter(estMachineValideBP))
+      : [];
   }
 
   // ----------------------------------------------------------
-  // 6. CALCULER LE BUDGET MACHINES
+  // CALCUL DU BUDGET MACHINES
   // ----------------------------------------------------------
 
   function calculerBudgetMachines(configurationId) {
-    const configuration = getConfiguration(
-      configurationId
-    );
+    const c = REFERENTIEL.configurations[configurationId];
 
-    if (!configuration) {
+    if (!c) {
       return {
-        erreur: "Configuration introuvable"
+        erreur: 'Configuration introuvable'
       };
     }
 
-    const machines = getMachinesValidees(
-      configurationId
+    const machines = c.machines.filter(
+      estMachineValideBP
     );
 
-    const devises = [
-      ...new Set(
-        machines.map(
-          machine => machine.prix_reference.devise
-        )
-      )
-    ];
+    const totalPartiel = machines.reduce(
+      (s, m) => s + m.prix_reference.montant,
+      0
+    );
 
-    // Ne pas additionner des devises différentes.
-    const deviseUnique = devises.length <= 1;
-
-    const total = deviseUnique
-      ? machines.reduce(
-          (somme, machine) =>
-            somme + machine.prix_reference.montant,
-          0
-        )
-      : null;
-
-    const nombreTotal = configuration.machines.length;
+    const complet = (
+      c.machines.length > 0 &&
+      machines.length === c.machines.length
+    );
 
     return {
       configuration_id: configurationId,
-      configuration_nom: configuration.nom,
+      configuration_nom: c.nom,
+      devise: 'USD',
 
-      devise: deviseUnique
-        ? (devises[0] || REFERENTIEL.devise)
+      nombre_fonctions_referencees: c.machines.length,
+      nombre_modeles_valides: machines.length,
+
+      nombre_fonctions_a_traiter:
+        c.machines.length - machines.length,
+
+      sous_total_partiel_usd: totalPartiel,
+
+      total_machines: complet
+        ? totalPartiel
         : null,
 
-      nombre_machines_referencees: nombreTotal,
-      nombre_machines_validees: machines.length,
-
-      nombre_machines_a_verifier:
-        nombreTotal - machines.length,
-
-      total_machines: total,
-
       statut:
-        nombreTotal === 0
-          ? "referencement_a_completer"
-          : !deviseUnique
-            ? "devises_a_harmoniser"
-            : machines.length === nombreTotal
-              ? "prix_modeles_verifies"
-              : "referencement_incomplet",
+        c.machines.length === 0
+          ? 'inventaire_a_etablir'
+          : complet
+            ? 'prix_modeles_verifies'
+            : 'referencement_incomplet',
 
-      // Le total reste un sous-total de prix catalogue.
-      // Il ne constitue pas un investissement complet.
-      investissement_complet: false
+      investissement_complet: false,
+
+      avertissement:
+        'Aucun montant incomplet ne doit alimenter automatiquement le BP.'
     };
   }
 
   // ----------------------------------------------------------
-  // 7. SYNTHÈSE DES TROIS VERSIONS
+  // SYNTHÈSE DES TROIS VERSIONS
   // ----------------------------------------------------------
 
   function getSyntheseBiscuiterie() {
     return Object.keys(
       REFERENTIEL.configurations
-    ).map(configurationId =>
-      calculerBudgetMachines(configurationId)
-    );
+    ).map(calculerBudgetMachines);
   }
 
   // ----------------------------------------------------------
-  // 8. EXPOSITION EN LECTURE SEULE
+  // EXPOSITION DES FONCTIONS
   // ----------------------------------------------------------
 
   window.P2I_BP_BISCUITERIE_REFERENCES = Object.freeze({
@@ -306,15 +304,16 @@
     up_nom: REFERENTIEL.up_nom,
     devise: REFERENTIEL.devise,
 
-    getConfiguration,
-    getMachinesValidees,
-    calculerBudgetMachines,
-    getSyntheseBiscuiterie
+    getConfiguration: getConfiguration,
+    getMachinesValidees: getMachinesValidees,
+    calculerBudgetMachines: calculerBudgetMachines,
+    getSyntheseBiscuiterie: getSyntheseBiscuiterie
   });
 
   console.log(
-    "P2I — Référentiel BP Biscuiterie pilote chargé",
-    REFERENTIEL.version
+    'P2I — Référentiel Biscuiterie pilote chargé (v' +
+    REFERENTIEL.version +
+    ')'
   );
 
 })();
