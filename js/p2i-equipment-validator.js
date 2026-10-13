@@ -57,21 +57,61 @@
 
     const machinesValidees = new Map();
 
-    selection.forEach(machine => {
-      if (!machine || typeof machine.machine_key !== "string") {
-        return;
-      }
+   
+selection.forEach(machine => {
+  if (!machine || typeof machine !== "object") return;
 
-      // Un équipement ne couvre une fonction que si
-      // sa correspondance machine_key est explicite.
-      if (!machinesValidees.has(machine.machine_key)) {
-        machinesValidees.set(machine.machine_key, machine);
+  // MODE 1 : machine individuelle
+  if (
+    machine.type !== "ligne_integree" &&
+    typeof machine.machine_key === "string"
+  ) {
+    if (!machinesValidees.has(machine.machine_key)) {
+      machinesValidees.set(machine.machine_key, machine);
+    } else {
+      alertes.push(
+        "Sélection répétée : " + machine.machine_key
+      );
+    }
+  }
+
+  // MODE 2 : ligne intégrée
+  if (machine.type === "ligne_integree") {
+    const fonctions = Array.isArray(machine.fonctions_couvertes)
+      ? machine.fonctions_couvertes
+      : [];
+
+    fonctions.forEach(fonction => {
+      if (
+        !fonction ||
+        typeof fonction.machine_key !== "string"
+      ) return;
+
+      // Une fonction annoncée dans l'offre n'est pas
+      // automatiquement une fonction techniquement vérifiée.
+      if (!machinesValidees.has(fonction.machine_key)) {
+        machinesValidees.set(fonction.machine_key, {
+          machine_key: fonction.machine_key,
+          model: machine.model || null,
+          source_type: "ligne_integree",
+          couverture_documentee:
+            fonction.couverture_documentee === true,
+
+          // Aucune capacité n'est déduite
+          // automatiquement du débit annoncé de la ligne.
+          capacite_nominale_kg_h: null,
+          capacite_documentee: false,
+          capacite_applicable_crackers: false
+        });
       } else {
         alertes.push(
-          "Sélection répétée : " + machine.machine_key
+          "Fonction couverte plusieurs fois : " +
+          fonction.machine_key
         );
       }
     });
+  }
+});
 
     exigences.forEach(exigence => {
       const machine = machinesValidees.get(exigence.machine_key);
@@ -85,6 +125,20 @@
         modele: machine?.model || machine?.model_nom || null
       });
     });
+
+indispensables.forEach(exigence => {
+  const machine = machinesValidees.get(exigence.machine_key);
+
+  if (
+    machine?.source_type === "ligne_integree" &&
+    machine.couverture_documentee !== true
+  ) {
+    alertes.push(
+      "Couverture de la ligne intégrée à documenter : " +
+      exigence.name
+    );
+  }
+});
 
     const manquantes = indispensables.filter(
       m => !machinesValidees.has(m.machine_key)
