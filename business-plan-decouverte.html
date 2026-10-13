@@ -3210,5 +3210,118 @@ if (biscuiterieConfigBox) {
 })();
 </script>
 
+<script>
+/* P2I — Production indicative Biscuiterie / Crackers */
+(function () {
+  "use strict";
+
+  const params = new URLSearchParams(location.search);
+  const unit = params.get("unit_id") || params.get("id");
+
+  if (unit !== "biscuiterie") return;
+
+  const select = document.getElementById("p2iBiscuiterieSelect");
+  if (!select) return;
+
+  // Hypothèses initiales P2I, à ajuster.
+  const capaciteKgH = 500;
+  const heuresJour = 8;
+  const joursAn = 250;
+  const disponibilite = 0.80;
+  const rendement = 0.95;
+
+  const productionTheorique =
+    capaciteKgH * heuresJour * joursAn;
+
+  const productionEffective =
+    productionTheorique * disponibilite;
+
+  const productionCommercialisable =
+    productionEffective * rendement;
+
+  const nombre = n => n.toLocaleString("fr-FR");
+
+  function renderProduction() {
+    if (select.value !== "crackers") return;
+
+    const section5 = document.getElementById("s5_list");
+    const section7 = document.getElementById("s7_list");
+
+    if (section5) {
+      section5.innerHTML = `
+        <li><b>Capacité cible :</b>
+          ${nombre(capaciteKgH)} kg/h</li>
+        <li><b>Durée de fonctionnement :</b>
+          ${heuresJour} heures/jour</li>
+        <li><b>Jours de production :</b>
+          ${joursAn} jours/an</li>
+        <li><b>Production théorique annuelle :</b>
+          ${nombre(productionTheorique)} kg</li>
+        <li><b>Disponibilité industrielle :</b>
+          ${disponibilite * 100} %</li>
+        <li><b>Production effective :</b>
+          ${nombre(productionEffective)} kg/an</li>
+        <li><b>Rendement commercialisable :</b>
+          ${rendement * 100} %</li>
+        <li><b>Production commercialisable :</b>
+          <strong>${nombre(productionCommercialisable)}
+          kg/an</strong></li>
+        <li><b>Production commercialisable :</b>
+          ${nombre(productionCommercialisable / 1000)}
+          tonnes/an</li>
+        <li><b>Chiffre d'affaires :</b>
+          À calculer selon prix de vente et volumes vendus</li>
+        <li><b>Charges d'exploitation :</b>
+          À calculer</li>
+        <li><b>Résultat prévisionnel :</b>
+          À calculer</li>
+      `;
+    }
+
+    if (section7) {
+      const capex = window.P2I_CRACKERS_CAPEX_PILOTE;
+
+      section7.innerHTML = `
+        <li><b>CAPEX indicatif :</b>
+          ${capex
+            ? nombre(capex.capex_usd) + " USD"
+            : "À confirmer"}</li>
+        <li><b>Production commercialisable indicative :</b>
+          ${nombre(productionCommercialisable)} kg/an</li>
+        <li><b>Chiffre d'affaires :</b>
+          À calculer</li>
+        <li><b>Résultat annuel :</b>
+          À calculer</li>
+        <li><b>ROI :</b>
+          Non calculé à ce stade</li>
+        <li><b>Délai de récupération :</b>
+          Non calculé à ce stade</li>
+        <li><b>Réserves :</b>
+          capacité de 500 kg/h non confirmée pour
+          la variante Wenva retenue ; hypothèses
+          de fonctionnement provisoires.</li>
+      `;
+    }
+
+    window.P2I_CRACKERS_PRODUCTION = Object.freeze({
+      capacite_kg_h: capaciteKgH,
+      heures_jour: heuresJour,
+      jours_an: joursAn,
+      disponibilite: disponibilite,
+      rendement: rendement,
+      production_theorique_kg: productionTheorique,
+      production_effective_kg: productionEffective,
+      production_commercialisable_kg:
+        productionCommercialisable
+    });
+  }
+
+  select.addEventListener("change", () => {
+    setTimeout(renderProduction, 10);
+  });
+
+  setTimeout(renderProduction, 10);
+})();
+</script>
 </body>
 </html>
