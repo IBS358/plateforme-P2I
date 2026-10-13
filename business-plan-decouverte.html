@@ -3323,5 +3323,168 @@ if (biscuiterieConfigBox) {
   setTimeout(renderProduction, 10);
 })();
 </script>
+  
+<script>
+/* P2I — Coût de revient pilote Crackers */
+(function () {
+  "use strict";
+
+  const select = document.getElementById("p2iBiscuiterieSelect");
+  const liste = document.getElementById("s5_list");
+
+  if (!select || !liste) return;
+
+  const fmt = n => Number(n).toLocaleString("fr-FR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+
+  const hypotheses = [
+    ["Matières premières (USD/kg)", "matieres", 0.38],
+    ["Emballages (USD/kg)", "emballages", 0.14],
+    ["Énergie (USD/kg)", "energie", 0.08],
+    ["Personnel annuel (USD)", "personnel", 65000],
+    ["Maintenance annuelle (USD)", "maintenance", 15000],
+    ["Autres charges fixes annuelles (USD)", "autres", 30000]
+  ];
+
+  const panel = document.createElement("div");
+  panel.id = "p2iCoutCrackers";
+  panel.style.cssText =
+    "margin:20px 0;padding:18px;border:1px solid #888;" +
+    "border-radius:10px;";
+
+  liste.insertAdjacentElement("afterend", panel);
+
+  function render() {
+    panel.style.display =
+      select.value === "crackers" ? "block" : "none";
+
+    if (select.value !== "crackers") return;
+
+    const production =
+      window.P2I_CRACKERS_PRODUCTION
+        ?.production_commercialisable_kg || 760000;
+
+    panel.innerHTML = `
+      <h3>Coût de revient industriel P2I — Crackers</h3>
+      <p>Production commercialisable indicative :
+        <b>${fmt(production)} kg/an</b></p>
+      <p><small>
+        Hypothèses provisoires de démonstration,
+        modifiables. Prix fournisseurs à documenter.
+      </small></p>
+
+      <div id="p2iCoutInputs"></div>
+
+      <hr>
+      <div id="p2iCoutResultats"></div>
+    `;
+
+    const inputs = panel.querySelector("#p2iCoutInputs");
+
+    hypotheses.forEach(([label, id, valeur]) => {
+      const ligne = document.createElement("div");
+      ligne.style.marginBottom = "10px";
+
+      const titre = document.createElement("label");
+      titre.textContent = label + " : ";
+      titre.style.display = "inline-block";
+      titre.style.minWidth = "270px";
+
+      const input = document.createElement("input");
+      input.type = "number";
+      input.min = "0";
+      input.step = "any";
+      input.value = valeur;
+      input.dataset.cout = id;
+      input.style.cssText =
+        "width:120px;padding:5px;";
+
+      ligne.append(titre, input);
+      inputs.appendChild(ligne);
+    });
+
+    function calculer() {
+      const lire = id => {
+        const champ = panel.querySelector(
+          '[data-cout="' + id + '"]'
+        );
+        const valeur = Number(champ.value);
+        return Number.isFinite(valeur) && valeur >= 0
+          ? valeur : NaN;
+      };
+
+      const matieres = lire("matieres");
+      const emballages = lire("emballages");
+      const energie = lire("energie");
+      const personnel = lire("personnel");
+      const maintenance = lire("maintenance");
+      const autres = lire("autres");
+
+      const resultats =
+        panel.querySelector("#p2iCoutResultats");
+
+      const valeurs = [
+        matieres, emballages, energie,
+        personnel, maintenance, autres
+      ];
+
+      if (valeurs.some(v => !Number.isFinite(v))) {
+        resultats.textContent =
+          "Veuillez saisir des montants positifs.";
+        return;
+      }
+
+      const variableKg =
+        matieres + emballages + energie;
+
+      const fixesAn =
+        personnel + maintenance + autres;
+
+      const coutAnnuel =
+        production * variableKg + fixesAn;
+
+      const coutKg = coutAnnuel / production;
+
+      resultats.innerHTML = `
+        <p><b>Charges variables :</b>
+          ${fmt(variableKg)} USD/kg</p>
+        <p><b>Charges fixes annuelles :</b>
+          ${fmt(fixesAn)} USD</p>
+        <p><b>Coût industriel annuel :</b>
+          ${fmt(coutAnnuel)} USD</p>
+        <p><b>Coût industriel unitaire :</b>
+          <strong>${fmt(coutKg)} USD/kg</strong></p>
+        <p><small>
+          Hors amortissements, financement,
+          fiscalité et coûts commerciaux
+          non renseignés.
+          Ce résultat n'est pas encore
+          un coût de revient complet.
+        </small></p>
+      `;
+
+      window.P2I_CRACKERS_COUTS = {
+        production_kg: production,
+        cout_variable_kg: variableKg,
+        charges_fixes_usd: fixesAn,
+        cout_industriel_annuel_usd: coutAnnuel,
+        cout_industriel_kg_usd: coutKg,
+        statut: "simulation_provisoire"
+      };
+    }
+
+    inputs.addEventListener("input", calculer);
+    calculer();
+  }
+
+  select.addEventListener("change", () => {
+    setTimeout(render, 30);
+  });
+
+  setTimeout(render, 30);
+})();
+</script>
 </body>
 </html>
