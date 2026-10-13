@@ -3076,5 +3076,139 @@ if (biscuiterieConfigBox) {
   `;
 })();
 </script>
+  
+<script>
+/* P2I — Pilote CAPEX Crackers / Wenva */
+(function () {
+  "use strict";
+
+  const unit = new URLSearchParams(location.search).get("unit_id");
+  if (unit !== "biscuiterie") return;
+
+  const select = document.getElementById("p2iBiscuiterieSelect");
+  if (!select) return;
+
+  // Borne basse publique de la gamme Wenva.
+  // Correspondance exacte variante / capacité à confirmer.
+  const PRIX_CATALOGUE_BAS = 300000;
+
+  // Hypothèses de simulation P2I : pas des devis fournisseurs.
+  const HYPOTHESES = [
+    ["Fret international (provision)", 0.08],
+    ["Assurance transport (provision)", 0.01],
+    ["Transit, douane et taxes non récupérables (provision)", 0.12],
+    ["Transport local jusqu'au site (provision)", 0.02],
+    ["Installation et mise en service (provision)", 0.08],
+    ["Formation initiale (provision)", 0.02],
+    ["Pièces de rechange initiales (provision)", 0.03],
+    ["Utilités industrielles (provision)", 0.10],
+    ["Génie civil et aménagements (provision)", 0.10],
+    ["Sécurité et conformité (provision)", 0.02]
+  ];
+
+  const IMPREVUS = 0.10;
+  const BFR = 0.15;
+
+  const usd = n =>
+    Math.round(n).toLocaleString("fr-FR") + " USD";
+
+  const li = (label, value) =>
+    `<li><b>${label} :</b> ${value}</li>`;
+
+  const supplementary = HYPOTHESES.reduce(
+    (s, x) => s + PRIX_CATALOGUE_BAS * x[1], 0
+  );
+
+  const beforeContingency = PRIX_CATALOGUE_BAS + supplementary;
+  const contingency = beforeContingency * IMPREVUS;
+  const capex = beforeContingency + contingency;
+  const workingCapital = PRIX_CATALOGUE_BAS * BFR;
+  const funding = capex + workingCapital;
+
+  function render() {
+    if (select.value !== "crackers") return;
+
+    const lineBox = document.getElementById("p2iReferenceCrackers");
+    const budgetBox = document.getElementById("p2iBudgetCrackers");
+
+    if (lineBox) {
+      lineBox.innerHTML = `
+        <h3 style="color:#4cc9f0;margin-bottom:10px">
+          Ligne Crackers — référence budgétaire Wenva
+        </h3>
+        <p><b>Base documentaire :</b> ${usd(PRIX_CATALOGUE_BAS)}</p>
+        <p><b>Capacité cible P2I :</b> 500 kg/h, non confirmée pour cette variante.</p>
+        <p><b>Statut :</b> variante, composition, conditionnement
+          et incoterm à confirmer.</p>
+        <p><b>Attention :</b> aucun équipement inclus dans la ligne
+          n'est compté deux fois.</p>`;
+    }
+
+    if (budgetBox) {
+      budgetBox.innerHTML = `
+        <h3 style="color:#fbbf24;margin-bottom:10px">
+          Estimation initiale P2I — Crackers
+        </h3>
+        <p>Base catalogue ${usd(PRIX_CATALOGUE_BAS)}
+          + provisions de simulation.</p>
+        <p><b>CAPEX indicatif :</b> ${usd(capex)}</p>
+        <p><b>Besoin total avec fonds de roulement :</b>
+          ${usd(funding)}</p>`;
+    }
+
+    const s4Text = document.getElementById("s4_text");
+    const s4List = document.getElementById("s4_list");
+
+    if (s4Text) {
+      s4Text.innerHTML = `
+        <b>Scénario budgétaire initial — Biscuiterie / Crackers.</b>
+        Base publique basse de gamme Wenva : ${usd(PRIX_CATALOGUE_BAS)}.
+        Les pourcentages sont des hypothèses P2I à affiner.
+        La capacité de 500 kg/h reste à confirmer.`;
+    }
+
+    if (s4List) {
+      s4List.innerHTML =
+        li("Ligne de production — borne basse", usd(PRIX_CATALOGUE_BAS)) +
+        HYPOTHESES.map(([name, rate]) =>
+          li(name + ` (${rate * 100} %)`,
+            usd(PRIX_CATALOGUE_BAS * rate))
+        ).join("") +
+        li("Sous-total avant imprévus", usd(beforeContingency)) +
+        li("Imprévus (10 %)", usd(contingency)) +
+        li("CAPEX immobilisé indicatif", usd(capex)) +
+        li("Fonds de roulement de démarrage", usd(workingCapital)) +
+        li("Besoin de financement initial", usd(funding)) +
+        `<li><b>Réserves :</b> le périmètre de la ligne,
+          les frais réels et la capacité restent à confirmer.
+          Les provisions ne sont pas des devis.</li>`;
+    }
+
+    const s6List = document.getElementById("s6_list");
+
+    if (s6List) {
+      s6List.innerHTML =
+        li("Immobilisations estimatives", usd(capex)) +
+        li("Besoin en fonds de roulement", usd(workingCapital)) +
+        li("Financement à mobiliser", usd(funding)) +
+        li("Répartition apport / dette", "À définir") +
+        `<li>Présentation des besoins de départ,
+          et non bilan comptable équilibré.</li>`;
+    }
+
+    window.P2I_CRACKERS_CAPEX_PILOTE = Object.freeze({
+      base_usd: PRIX_CATALOGUE_BAS,
+      capex_usd: capex,
+      bfr_usd: workingCapital,
+      financement_usd: funding
+    });
+  }
+
+  select.addEventListener("change", () => setTimeout(render, 0));
+  setTimeout(render, 0);
+
+})();
+</script>
+
 </body>
 </html>
