@@ -3323,8 +3323,6 @@ if (biscuiterieConfigBox) {
   setTimeout(renderProduction, 10);
 })();
 </script>
-  
-
 <script>
 /* P2I — Coût de revient Crackers : recette détaillée */
 (function () {
@@ -3338,6 +3336,34 @@ if (biscuiterieConfigBox) {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
+
+const P2I_SOURCES_COUTS = {
+  recette: {
+    statut: "hypothese_p2i",
+    source: "Formulation pilote P2I à valider",
+    verification: "en_attente"
+  },
+  prix_matieres: {
+    statut: "hypothese_p2i",
+    source: "Prix de démonstration non vérifiés",
+    verification: "en_attente"
+  },
+  emballages: {
+    statut: "hypothese_p2i",
+    source: "Estimation provisoire P2I",
+    verification: "en_attente"
+  },
+  energie: {
+    statut: "hypothese_p2i",
+    source: "Estimation provisoire P2I",
+    verification: "en_attente"
+  },
+  personnel: {
+    statut: "hypothese_p2i",
+    source: "Estimation provisoire P2I",
+    verification: "en_attente"
+  }
+};
 
   // Hypothèses de démonstration, NON validées par un fournisseur.
   // Quantités achetées pour 1 kg de crackers finis.
@@ -3559,6 +3585,7 @@ if (biscuiterieConfigBox) {
 
       window.P2I_CRACKERS_COUTS = {
         production_kg: production,
+        sources: P2I_SOURCES_COUTS,
         recette: ingredients,
         masse_entree_kg_par_kg_fini: masseEntree,
         cout_matieres_kg_usd: coutMatieres,
