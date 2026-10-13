@@ -3324,14 +3324,14 @@ if (biscuiterieConfigBox) {
 })();
 </script>
   
+
 <script>
-/* P2I — Coût de revient pilote Crackers */
+/* P2I — Coût de revient Crackers : recette détaillée */
 (function () {
   "use strict";
 
   const select = document.getElementById("p2iBiscuiterieSelect");
   const liste = document.getElementById("s5_list");
-
   if (!select || !liste) return;
 
   const fmt = n => Number(n).toLocaleString("fr-FR", {
@@ -3339,22 +3339,45 @@ if (biscuiterieConfigBox) {
     maximumFractionDigits: 2
   });
 
-  const hypotheses = [
-    ["Matières premières (USD/kg)", "matieres", 0.38],
+  // Hypothèses de démonstration, NON validées par un fournisseur.
+  // Quantités achetées pour 1 kg de crackers finis.
+  const recette = [
+    ["Farine de blé", 0.88, 0.42],
+    ["Matières grasses", 0.11, 1.30],
+    ["Sucre", 0.04, 0.65],
+    ["Sel", 0.012, 0.20],
+    ["Agents levants", 0.008, 2.00],
+    ["Eau de fabrication", 0.10, 0.002]
+  ];
+
+  const autresCouts = [
     ["Emballages (USD/kg)", "emballages", 0.14],
     ["Énergie (USD/kg)", "energie", 0.08],
     ["Personnel annuel (USD)", "personnel", 65000],
     ["Maintenance annuelle (USD)", "maintenance", 15000],
-    ["Autres charges fixes annuelles (USD)", "autres", 30000]
+    ["Autres charges annuelles (USD)", "autres", 30000]
   ];
 
-  const panel = document.createElement("div");
-  panel.id = "p2iCoutCrackers";
-  panel.style.cssText =
-    "margin:20px 0;padding:18px;border:1px solid #888;" +
-    "border-radius:10px;";
+  let panel = document.getElementById("p2iCoutCrackers");
 
-  liste.insertAdjacentElement("afterend", panel);
+  if (!panel) {
+    panel = document.createElement("div");
+    panel.id = "p2iCoutCrackers";
+    liste.insertAdjacentElement("afterend", panel);
+  }
+
+  panel.style.cssText =
+    "margin:20px 0;padding:18px;" +
+    "border:1px solid rgba(76,201,240,.4);" +
+    "border-radius:12px;background:#121c36;color:white;";
+
+  function champ(valeur, type, index) {
+    return `<input type="number" min="0" step="any"
+      data-type="${type}" data-index="${index}"
+      value="${valeur}"
+      style="width:105px;padding:7px;border-radius:6px;
+      background:#1c2541;color:white;border:1px solid #64748b;">`;
+  }
 
   function render() {
     panel.style.display =
@@ -3367,124 +3390,197 @@ if (biscuiterieConfigBox) {
         ?.production_commercialisable_kg || 760000;
 
     panel.innerHTML = `
-      <h3>Coût de revient industriel P2I — Crackers</h3>
+      <h3 style="color:#4cc9f0;margin-bottom:12px">
+        Coût de revient industriel P2I — Crackers
+      </h3>
+
       <p>Production commercialisable indicative :
         <b>${fmt(production)} kg/an</b></p>
-      <p><small>
-        Hypothèses provisoires de démonstration,
-        modifiables. Prix fournisseurs à documenter.
-      </small></p>
 
-      <div id="p2iCoutInputs"></div>
+      <p style="margin:12px 0;color:#fbbf24">
+        Simulation technique provisoire : recette, quantités
+        et prix d'achat à documenter et à valider.
+      </p>
 
-      <hr>
+      <h4 style="margin:18px 0 10px">
+        1. Composition des matières premières
+      </h4>
+
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:8px">Ingrédient</th>
+              <th style="padding:8px">kg/kg fini</th>
+              <th style="padding:8px">USD/kg acheté</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${recette.map(([nom, quantite, prix], i) => `
+              <tr>
+                <td style="padding:8px">${nom}</td>
+                <td style="padding:8px">
+                  ${champ(quantite, "quantite", i)}
+                </td>
+                <td style="padding:8px">
+                  ${champ(prix, "prix", i)}
+                </td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+
+      <h4 style="margin:20px 0 10px">
+        2. Autres charges industrielles
+      </h4>
+
+      ${autresCouts.map(([nom, id, valeur]) => `
+        <div style="margin:9px 0;display:flex;
+          justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <label>${nom}</label>
+          <input type="number" min="0" step="any"
+            data-cout="${id}" value="${valeur}"
+            style="width:125px;padding:7px;border-radius:6px;
+            background:#1c2541;color:white;
+            border:1px solid #64748b;">
+        </div>
+      `).join("")}
+
+      <hr style="margin:18px 0">
+
       <div id="p2iCoutResultats"></div>
     `;
 
-    const inputs = panel.querySelector("#p2iCoutInputs");
-
-    hypotheses.forEach(([label, id, valeur]) => {
-      const ligne = document.createElement("div");
-      ligne.style.marginBottom = "10px";
-
-      const titre = document.createElement("label");
-      titre.textContent = label + " : ";
-      titre.style.display = "inline-block";
-      titre.style.minWidth = "270px";
-
-      const input = document.createElement("input");
-      input.type = "number";
-      input.min = "0";
-      input.step = "any";
-      input.value = valeur;
-      input.dataset.cout = id;
-      input.style.cssText =
-        "width:120px;padding:5px;";
-
-      ligne.append(titre, input);
-      inputs.appendChild(ligne);
-    });
-
     function calculer() {
-      const lire = id => {
-        const champ = panel.querySelector(
-          '[data-cout="' + id + '"]'
-        );
-        const valeur = Number(champ.value);
-        return Number.isFinite(valeur) && valeur >= 0
-          ? valeur : NaN;
+      const lire = el => {
+        if (!el || el.value.trim() === "") return NaN;
+        const v = Number(el.value);
+        return Number.isFinite(v) && v >= 0 ? v : NaN;
       };
 
-      const matieres = lire("matieres");
-      const emballages = lire("emballages");
-      const energie = lire("energie");
-      const personnel = lire("personnel");
-      const maintenance = lire("maintenance");
-      const autres = lire("autres");
+      const ingredients = recette.map((item, i) => {
+        const q = lire(panel.querySelector(
+          '[data-type="quantite"][data-index="' + i + '"]'
+        ));
+        const p = lire(panel.querySelector(
+          '[data-type="prix"][data-index="' + i + '"]'
+        ));
+        return { nom: item[0], quantite: q, prix: p };
+      });
 
-      const resultats =
-        panel.querySelector("#p2iCoutResultats");
+      const autre = id => lire(panel.querySelector(
+        '[data-cout="' + id + '"]'
+      ));
+
+      const emballages = autre("emballages");
+      const energie = autre("energie");
+      const personnel = autre("personnel");
+      const maintenance = autre("maintenance");
+      const autres = autre("autres");
 
       const valeurs = [
-        matieres, emballages, energie,
-        personnel, maintenance, autres
+        ...ingredients.flatMap(x => [x.quantite, x.prix]),
+        emballages, energie, personnel, maintenance, autres
       ];
 
+      const sortie = panel.querySelector("#p2iCoutResultats");
+
       if (valeurs.some(v => !Number.isFinite(v))) {
-        resultats.textContent =
-          "Veuillez saisir des montants positifs.";
+        sortie.textContent =
+          "Veuillez renseigner tous les champs avec des valeurs positives.";
         return;
       }
 
-      const variableKg =
-        matieres + emballages + energie;
+      const masseEntree = ingredients.reduce(
+        (s, x) => s + x.quantite, 0
+      );
 
-      const fixesAn =
-        personnel + maintenance + autres;
+      const coutMatieres = ingredients.reduce(
+        (s, x) => s + x.quantite * x.prix, 0
+      );
 
-      const coutAnnuel =
-        production * variableKg + fixesAn;
-
+      const variableKg = coutMatieres + emballages + energie;
+      const fixesAn = personnel + maintenance + autres;
+      const coutAnnuel = production * variableKg + fixesAn;
       const coutKg = coutAnnuel / production;
 
-      resultats.innerHTML = `
-        <p><b>Charges variables :</b>
+      // Simple contrôle massique : à valider avec
+      // l'humidité et les pertes réelles du procédé.
+      const ecartMasse = masseEntree - 1;
+
+      sortie.innerHTML = `
+        <h4 style="color:#4cc9f0;margin-bottom:10px">
+          3. Résultats de la simulation
+        </h4>
+
+        <p><b>Masse d'ingrédients par kg fini :</b>
+          ${fmt(masseEntree)} kg</p>
+
+        <p><b>Écart massique théorique :</b>
+          ${fmt(ecartMasse)} kg/kg fini</p>
+
+        <p><small>
+          Cet écart peut notamment comprendre l'eau évaporée.
+          Il ne constitue pas une validation du bilan matière.
+        </small></p>
+
+        <p><b>Coût des matières premières :</b>
+          ${fmt(coutMatieres)} USD/kg</p>
+
+        <p><b>Emballages :</b>
+          ${fmt(emballages)} USD/kg</p>
+
+        <p><b>Énergie :</b>
+          ${fmt(energie)} USD/kg</p>
+
+        <p><b>Charges variables industrielles :</b>
           ${fmt(variableKg)} USD/kg</p>
+
         <p><b>Charges fixes annuelles :</b>
           ${fmt(fixesAn)} USD</p>
-        <p><b>Coût industriel annuel :</b>
+
+        <p><b>Charges industrielles annuelles :</b>
           ${fmt(coutAnnuel)} USD</p>
-        <p><b>Coût industriel unitaire :</b>
-          <strong>${fmt(coutKg)} USD/kg</strong></p>
-        <p><small>
-          Hors amortissements, financement,
-          fiscalité et coûts commerciaux
-          non renseignés.
-          Ce résultat n'est pas encore
-          un coût de revient complet.
-        </small></p>
+
+        <p style="margin-top:14px;color:#4cc9f0">
+          <b>Coût industriel unitaire :</b>
+          <strong>${fmt(coutKg)} USD/kg</strong>
+        </p>
+
+        <p style="margin-top:12px">
+          <small>
+            Hors amortissements, frais financiers,
+            fiscalité et frais commerciaux non renseignés.
+            Ce n'est pas encore un coût de revient complet.
+          </small>
+        </p>
       `;
 
       window.P2I_CRACKERS_COUTS = {
         production_kg: production,
+        recette: ingredients,
+        masse_entree_kg_par_kg_fini: masseEntree,
+        cout_matieres_kg_usd: coutMatieres,
         cout_variable_kg: variableKg,
         charges_fixes_usd: fixesAn,
         cout_industriel_annuel_usd: coutAnnuel,
         cout_industriel_kg_usd: coutKg,
-        statut: "simulation_provisoire"
+        statut: "simulation_provisoire_non_documentee"
       };
     }
 
-    inputs.addEventListener("input", calculer);
+    panel.addEventListener("input", calculer);
     calculer();
   }
 
   select.addEventListener("change", () => {
-    setTimeout(render, 30);
+    setTimeout(render, 50);
   });
 
-  setTimeout(render, 30);
+  setTimeout(render, 50);
 })();
 </script>
+
 </body>
 </html>
