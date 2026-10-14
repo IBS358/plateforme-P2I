@@ -525,6 +525,12 @@
             <li>Charges principales : —</li>
             <li>Résultat estimé : —</li>
           </ul>
+          <div id="p2iCommercialResults"
+     style="display:none; margin-top:18px;
+            padding:16px;
+            border:1px solid rgba(76,201,240,0.35);
+            border-radius:14px;">
+</div>
 
           <div class="cta">
             <div class="row">
@@ -3698,5 +3704,101 @@ ${autresCouts.map(([nom, id, valeur]) => `
 })();
 </script>
 
+<script>
+/* P2I — Affichage commercial du BP Découverte */
+(function () {
+  "use strict";
+
+  const select = document.getElementById(
+    "p2iBiscuiterieSelect"
+  );
+
+  const sortie = document.getElementById(
+    "p2iCommercialResults"
+  );
+
+  if (!select || !sortie) return;
+
+  function formatNombre(valeur, decimales = 0) {
+    return Number(valeur).toLocaleString("fr-FR", {
+      minimumFractionDigits: decimales,
+      maximumFractionDigits: decimales
+    });
+  }
+
+  function afficher() {
+    if (select.value !== "crackers") {
+      sortie.style.display = "none";
+      sortie.innerHTML = "";
+      return;
+    }
+
+    try {
+      const resultat =
+        window.P2I_HYPOTHESES_COMMERCIALES
+          .calculerReference("biscuiterie", "crackers");
+
+      const ligne = resultat.lignes[0];
+
+      sortie.innerHTML = `
+        <h3 style="color:#4cc9f0;margin-bottom:12px">
+          Hypothèses commerciales P2I — Crackers
+        </h3>
+
+        <p><b>Production commercialisable :</b>
+          ${formatNombre(ligne.capacite_annuelle)} kg/an</p>
+
+        <p><b>Taux d'écoulement commercial :</b>
+          ${formatNombre(ligne.taux_commercialisation * 100)} %</p>
+
+        <p><b>Quantité vendue :</b>
+          ${formatNombre(ligne.quantite_facturee)} kg/an</p>
+
+        <p><b>Quantité non vendue :</b>
+          ${formatNombre(ligne.quantite_non_facturee)} kg/an</p>
+
+        <p><b>Prix de vente départ usine :</b>
+          ${formatNombre(ligne.prix_unitaire)}
+          FCFA/kg</p>
+
+        <p style="margin-top:12px">
+          <b>Chiffre d'affaires prévisionnel :</b>
+          <strong>
+            ${formatNombre(resultat.chiffre_affaires_xof)}
+            FCFA
+          </strong>
+        </p>
+
+        <p><b>Équivalent en USD :</b>
+          ${formatNombre(resultat.chiffre_affaires_usd, 2)}
+          USD</p>
+
+        <p style="margin-top:12px;font-size:0.85rem">
+          Simulation indicative P2I.
+          Prix de vente non encore validé par une étude
+          de marché. Taux de change de référence :
+          ${resultat.taux_change.date_taux}.
+          La quantité non vendue ne constitue pas
+          automatiquement un stock comptable valorisé.
+        </p>
+      `;
+
+      sortie.style.display = "block";
+
+    } catch (erreur) {
+      console.error(
+        "P2I — Affichage commercial :",
+        erreur
+      );
+
+      sortie.style.display = "none";
+    }
+  }
+
+  select.addEventListener("change", afficher);
+  afficher();
+
+})();
+</script>
 </body>
 </html>
