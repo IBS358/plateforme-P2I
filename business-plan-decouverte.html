@@ -532,7 +532,12 @@
             border:1px solid rgba(76,201,240,0.35);
             border-radius:14px;">
 </div>
-
+<div id="p2iCompteResultat"
+     style="display:none; margin-top:18px;
+            padding:16px;
+            border:1px solid rgba(76,201,240,0.35);
+            border-radius:14px;">
+</div>
           <div class="cta">
             <div class="row">
               <i class="fa-solid fa-leaf"></i>
@@ -3281,12 +3286,6 @@ if (biscuiterieConfigBox) {
         <li><b>Production commercialisable :</b>
           ${nombre(productionCommercialisable / 1000)}
           tonnes/an</li>
-        <li><b>Chiffre d'affaires :</b>
-          À calculer selon prix de vente et volumes vendus</li>
-        <li><b>Charges d'exploitation :</b>
-          À calculer</li>
-        <li><b>Résultat prévisionnel :</b>
-          À calculer</li>
       `;
     }
 
@@ -3798,6 +3797,148 @@ ${autresCouts.map(([nom, id, valeur]) => `
 
   select.addEventListener("change", afficher);
   afficher();
+
+})();
+</script>
+  
+<script>
+/* P2I — Synthèse économique BP Découverte : Crackers */
+(function () {
+  "use strict";
+
+  const select = document.getElementById("p2iBiscuiterieSelect");
+  const sortie = document.getElementById("p2iCompteResultat");
+
+  if (!select || !sortie) return;
+
+  const fmt = (n, d = 2) =>
+    Number(n).toLocaleString("fr-FR", {
+      minimumFractionDigits: d,
+      maximumFractionDigits: d
+    });
+
+  function afficher() {
+    if (select.value !== "crackers") {
+      sortie.style.display = "none";
+      sortie.innerHTML = "";
+      return;
+    }
+
+    try {
+      const couts = window.P2I_CRACKERS_COUTS;
+      const moteur = window.P2I_ECONOMIC_RESULT_ENGINE;
+      const hypotheses = window.P2I_HYPOTHESES_COMMERCIALES;
+
+      if (!couts || !moteur || !hypotheses) {
+        sortie.style.display = "none";
+        return;
+      }
+
+      const commercial = hypotheses.calculerReference(
+        "biscuiterie", "crackers"
+      );
+
+      const ligne = commercial.lignes[0];
+
+      // Vérifier que les volumes industriels et commerciaux
+      // correspondent à la même configuration.
+      if (
+        Math.abs(
+          couts.production_kg - ligne.capacite_annuelle
+        ) > 0.001
+      ) {
+        throw new Error(
+          "Production industrielle et commerciale incohérentes."
+        );
+      }
+
+      const resultat = moteur.calculer({
+        type_activite: "fabrication",
+        quantite_produite: couts.production_kg,
+        quantite_vendue: ligne.quantite_facturee,
+        quantite_perdue: 0,
+        cout_variable_unitaire: couts.cout_variable_kg,
+        charges_fixes_industrielles: couts.charges_fixes_usd,
+        chiffre_affaires_usd: commercial.chiffre_affaires_usd
+      });
+
+      sortie.innerHTML = `
+        <h3 style="color:#4cc9f0;margin-bottom:12px">
+          Compte de résultat prévisionnel —
+          Synthèse économique P2I
+        </h3>
+
+        <p><b>Chiffre d'affaires :</b>
+          ${fmt(resultat.chiffre_affaires_usd)} USD</p>
+
+        <p><b>Coût total de production :</b>
+          ${fmt(resultat.cout_production_total_usd)} USD</p>
+
+        <p><b>Coût industriel unitaire :</b>
+          ${fmt(resultat.cout_production_unitaire_usd, 4)}
+          USD/kg</p>
+
+        <p><b>Coût des produits vendus :</b>
+          ${fmt(resultat.cout_produits_vendus_usd)} USD</p>
+
+        <p><b>Quantité non vendue :</b>
+          ${fmt(resultat.quantite_non_vendue, 0)} kg</p>
+
+        <p><b>Stock final théorique :</b>
+          ${fmt(resultat.quantite_stockee, 0)} kg</p>
+
+        <p><b>Valorisation indicative du stock :</b>
+          ${fmt(resultat.valeur_stock_indicative_usd)} USD</p>
+
+        <p style="margin-top:14px;color:#4cc9f0">
+          <b>Marge industrielle indicative :</b>
+          <strong>
+            ${fmt(resultat.resultat_industriel_apres_pertes_usd)}
+            USD
+          </strong>
+        </p>
+
+        <p style="margin-top:12px">
+          <b>Frais commerciaux :</b> Non renseignés<br>
+          <b>Amortissements :</b> Non renseignés<br>
+          <b>Charges financières :</b> Non renseignées<br>
+          <b>Fiscalité :</b> Non renseignée<br>
+          <b>Résultat net :</b> Non calculable à ce stade
+        </p>
+
+        <p style="margin-top:14px;font-size:0.85rem">
+          <b>Attention :</b> simulation provisoire P2I.
+          La valorisation du stock suppose ici que
+          les 228 000 kg non vendus sont intégralement
+          stockables, sans pertes, et que les coûts
+          industriels sont répartis proportionnellement.
+          Ces hypothèses ne sont pas vérifiées.
+          La marge affichée n'est ni un résultat
+          d'exploitation définitif ni un bénéfice net.
+        </p>
+      `;
+
+      sortie.style.display = "block";
+
+      window.P2I_CRACKERS_RESULTAT =
+        Object.freeze({ ...resultat });
+
+    } catch (erreur) {
+      console.error(
+        "P2I — Synthèse du compte de résultat :", erreur
+      );
+      sortie.style.display = "none";
+    }
+  }
+
+  // Les calculs de coûts existants se mettent à jour
+  // après un changement de configuration.
+  select.addEventListener("change", () => {
+    sortie.style.display = "none";
+    setTimeout(afficher, 120);
+  });
+
+  setTimeout(afficher, 120);
 
 })();
 </script>
