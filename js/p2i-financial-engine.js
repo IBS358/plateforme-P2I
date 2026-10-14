@@ -477,13 +477,117 @@
     };
   }
 
-   root.P2I_FINANCIAL_ENGINE = Object.freeze({
-    calculer,
-    calculerPosteAutomatique,
-    POSTES,
-    TYPES: Object.freeze(TYPES),
-    STATUTS: Object.freeze(STATUTS)
-  });
+  // ============================================
+  // P2I — COMPTE DE RÉSULTAT AUTOMATIQUE v0.3
+  // ============================================
+
+  function calculerCompteResultatAutomatique(configuration) {
+    if (!configuration || typeof configuration !== "object") {
+      throw new Error("Configuration financière P2I manquante.");
+    }
+
+    const {
+      type_activite,
+      lignes,
+      regles = {},
+      donnees = {},
+      postes_manuels = {},
+      postes_deja_inclus = []
+    } = configuration;
+
+    const postes = { ...postes_manuels };
+    const calculs = {};
+    const controles = [];
+
+    const nomsAutorises = [
+      ...POSTES.exploitation,
+      ...POSTES.dotations,
+      ...POSTES.financier,
+      ...POSTES.fiscal
+    ];
+
+    for (const nom of Object.keys(regles)) {
+      if (!nomsAutorises.includes(nom)) {
+        throw new Error("Poste financier inconnu : " + nom);
+      }
+    }
+
+    for (const nom of Object.keys(postes)) {
+      if (!nomsAutorises.includes(nom)) {
+        throw new Error("Poste manuel inconnu : " + nom);
+      }
+    }
+
+    for (const nom of postes_deja_inclus) {
+      if (!nomsAutorises.includes(nom)) {
+        throw new Error("Poste déjà inclus inconnu : " + nom);
+      }
+
+      if (regles[nom] || postes[nom] != null) {
+        throw new Error(
+          "Double comptabilisation potentielle : " + nom
+        );
+      }
+
+      postes[nom] = {
+        montant_usd: 0,
+        statut: "documente",
+        source: "Déjà inclus dans les coûts des ventes"
+      };
+
+      controles.push({
+        poste: nom,
+        controle: "deja_inclus",
+        montant_supplementaire_usd: 0
+      });
+    }
+
+    for (const [nom, regle] of Object.entries(regles)) {
+      if (postes[nom] != null) {
+        throw new Error(
+          "Poste défini deux fois : " + nom
+        );
+      }
+
+      const resultat = calculerPosteAutomatique(
+        regle,
+        donnees[nom]
+      );
+
+      if (!STATUTS.includes(resultat.statut) ||
+          resultat.statut === "a_renseigner") {
+        throw new Error(
+          "Statut calculé invalide : " + nom
+        );
+      }
+
+      postes[nom] = resultat;
+      calculs[nom] = resultat;
+    }
+
+    const resultat = calculer({
+      type_activite,
+      lignes,
+      postes,
+      controle_non_double_compte: true
+    });
+
+    return {
+      ...resultat,
+      version_automatisation: "0.3.0",
+      calculs_automatiques: calculs,
+      controles_double_compte: controles
+    };
+  }
+
+  root.P2I_FINANCIAL_ENGINE = Object.freeze({
+  calculer,
+  calculerPosteAutomatique,
+  calculerCompteResultatAutomatique,
+  POSTES,
+  TYPES: Object.freeze(TYPES),
+  STATUTS: Object.freeze(STATUTS)
+});
 
 })(
   typeof window !== 'undefined'
