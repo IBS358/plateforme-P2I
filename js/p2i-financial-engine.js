@@ -549,10 +549,21 @@
         );
       }
 
-      const resultat = calculerPosteAutomatique(
-        regle,
-        donnees[nom]
-      );
+      const referentiel = root.P2I_FINANCIAL_REFERENCE;
+
+if (!referentiel ||
+    typeof referentiel.verifierRegle !== "function") {
+  throw new Error(
+    "Référentiel financier P2I indisponible."
+  );
+}
+
+referentiel.verifierRegle(nom, regle.methode);
+
+const resultat = calculerPosteAutomatique(
+  regle,
+  donnees[nom]
+);
 
       if (!STATUTS.includes(resultat.statut) ||
           resultat.statut === "a_renseigner") {
