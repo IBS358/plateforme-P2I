@@ -1,134 +1,243 @@
 
 /*
- * P2I — Affichage financier BP Découverte
- * Version initiale : pilote Crackers
+ * P2I — Compte de résultat consolidé
+ * BP Découverte — Pilote Biscuiterie / Crackers
+ *
+ * Conserve les moteurs économique et financier.
  * Aucun montant manquant n'est remplacé par zéro.
  */
 (function () {
   "use strict";
 
-  function afficherCompteFinancier() {
+  const ID_COMPTE = "p2iCompteResultat";
+  const ID_ANCIEN = "p2iFinancialDetails";
+  const ID_SELECT = "p2iBiscuiterieSelect";
+
+  function formatMontant(valeur, decimales = 2) {
+    return Number.isFinite(valeur)
+      ? valeur.toLocaleString("fr-FR", {
+          minimumFractionDigits: decimales,
+          maximumFractionDigits: decimales
+        }) + " USD"
+      : "À renseigner";
+  }
+
+  function formatQuantite(valeur) {
+    return Number.isFinite(valeur)
+      ? valeur.toLocaleString("fr-FR", {
+          maximumFractionDigits: 0
+        }) + " kg"
+      : "À renseigner";
+  }
+
+  function nettoyer() {
+    document.getElementById(ID_ANCIEN)?.remove();
+    delete window.P2I_COMPTE_FINANCIER;
+  }
+
+  function consolider() {
+    const select = document.getElementById(ID_SELECT);
+    const sortie = document.getElementById(ID_COMPTE);
+
+    if (!select || !sortie) return;
+
+    nettoyer();
+
+    if (select.value !== "crackers") return;
+
+    const economique = window.P2I_CRACKERS_RESULTAT;
     const donnees = window.P2I_DONNEES_FINANCIERES;
     const moteur = window.P2I_FINANCIAL_ENGINE;
-    const synthese = document.getElementById("p2iCompteResultat");
 
-    if (!synthese || !donnees || !moteur) return;
+    if (!economique || !donnees || !moteur) return;
 
-    // Ne pas utiliser les données des Crackers
-    // lorsqu'une autre configuration est sélectionnée.
-    const select = document.getElementById("p2iBiscuiterieSelect");
-    if (!select || select.value !== "crackers") return;
+    const ca = economique.chiffre_affaires_usd;
+    const cpv = economique.cout_produits_vendus_usd;
 
-    const ca = donnees.chiffre_affaires_usd;
-    const cpv = donnees.cout_produits_vendus_usd;
+    if (!Number.isFinite(ca) ||
+        !Number.isFinite(cpv)) return;
 
-    if (!Number.isFinite(ca) || !Number.isFinite(cpv)) return;
+    // Contrôle de cohérence avec le raccordement.
+    if (
+      Math.abs(ca - donnees.chiffre_affaires_usd) > 0.01 ||
+      Math.abs(cpv - donnees.cout_produits_vendus_usd) > 0.01
+    ) {
+      console.error(
+        "P2I : incohérence entre données économiques et financières."
+      );
+      return;
+    }
 
-    const source = "Synthèse économique P2I — Crackers";
+    try {
+      const source = "Synthèse économique P2I — Crackers";
 
-    const resultat = moteur.calculer({
-      type_activite: "fabrication",
-      lignes: [{
-        id: "crackers",
+      const financier = moteur.calculer({
         type_activite: "fabrication",
-        chiffre_affaires: {
-          montant_usd: ca,
-          statut: "estime_p2i",
-          source
-        },
-        cout_prestations_ou_produits_vendus: {
-          montant_usd: cpv,
-          statut: "estime_p2i",
-          source
-        }
-      }],
-      postes: {},
-      controle_non_double_compte: false
-    });
+        lignes: [{
+          id: "crackers",
+          type_activite: "fabrication",
+          chiffre_affaires: {
+            montant_usd: ca,
+            statut: "estime_p2i",
+            source
+          },
+          cout_prestations_ou_produits_vendus: {
+            montant_usd: cpv,
+            statut: "estime_p2i",
+            source
+          }
+        }],
+        postes: {},
+        controle_non_double_compte: false
+      });
 
-    const ancien = document.getElementById("p2iFinancialDetails");
-    if (ancien) ancien.remove();
+      const postesManquants =
+        Array.isArray(financier.postes_a_renseigner)
+          ? financier.postes_a_renseigner.length
+          : null;
 
-    const bloc = document.createElement("div");
-    bloc.id = "p2iFinancialDetails";
-    bloc.style.cssText =
-      "margin-top:16px;padding:16px;border:1px solid #4cc9f0;" +
-      "border-radius:14px;background:#121c36;color:white";
+      const ligne = (libelle, valeur, important = false) => `
+        <tr>
+          <td style="padding:9px;border-bottom:1px solid #334155">
+            ${important ? "<strong>" : ""}
+            ${libelle}
+            ${important ? "</strong>" : ""}
+          </td>
+          <td style="padding:9px;text-align:right;border-bottom:1px solid #334155">
+            ${important ? "<strong>" : ""}
+            ${valeur}
+            ${important ? "</strong>" : ""}
+          </td>
+        </tr>
+      `;
 
-    const format = n =>
-      n == null
-        ? "À renseigner"
-        : n.toLocaleString("fr-FR", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }) + " USD";
+      sortie.innerHTML = `
+        <div style="padding:16px;border:1px solid #4cc9f0;
+                    border-radius:14px;background:#121c36;color:white">
 
-    const ligne = (libelle, valeur) => {
-      const p = document.createElement("p");
-      p.style.margin = "8px 0";
-      p.textContent = libelle + " : " + format(valeur);
-      bloc.appendChild(p);
-    };
+          <h3 style="color:#4cc9f0;margin-bottom:8px">
+            Compte de résultat prévisionnel P2I
+          </h3>
 
-    const titre = document.createElement("h3");
-    titre.textContent = "Compte de résultat financier — Crackers";
-    titre.style.marginBottom = "12px";
-    bloc.appendChild(titre);
+          <p style="font-size:0.9rem">
+            Biscuiterie industrielle — Crackers<br>
+            Exercice annuel · USD · Simulation provisoire
+          </p>
 
-    ligne("Chiffre d'affaires", resultat.chiffre_affaires_total_usd);
-    ligne("Coût des produits vendus", resultat.cout_ventes_total_usd);
-    ligne(
-      "Marge industrielle indicative",
-      resultat.marge_industrielle_ou_sur_prestations_usd
-    );
-    ligne(
-      "Autres charges d'exploitation",
-      resultat.autres_charges_exploitation_usd
-    );
-    ligne("Dotations", resultat.dotations_usd);
-    ligne(
-      "Résultat d'exploitation",
-      resultat.resultat_exploitation_usd
-    );
-    ligne(
-      "Résultat financier",
-      resultat.resultat_financier_usd
-    );
-    ligne(
-      "Résultat avant impôt",
-      resultat.resultat_avant_impot_usd
-    );
-    ligne("Résultat net", resultat.resultat_net_usd);
+          <table style="width:100%;border-collapse:collapse;margin-top:14px">
+            <tbody>
+              ${ligne("Chiffre d'affaires",
+                formatMontant(financier.chiffre_affaires_total_usd))}
 
-    const info = document.createElement("p");
-    info.style.cssText =
-      "margin-top:14px;color:#fbbf24;line-height:1.5";
+              ${ligne("Coût des produits vendus",
+                formatMontant(financier.cout_ventes_total_usd))}
 
-    info.textContent =
-      resultat.postes_a_renseigner.length +
-      " postes ou contrôles restent à renseigner. " +
-      "Le résultat net ne peut pas encore être déterminé. " +
-      "Les montants manquants ne sont pas assimilés à zéro.";
+              ${ligne("Marge industrielle indicative",
+                formatMontant(financier.marge_industrielle_ou_sur_prestations_usd),
+                true)}
 
-    bloc.appendChild(info);
+              ${ligne("Autres charges d'exploitation",
+                formatMontant(financier.autres_charges_exploitation_usd))}
 
-    synthese.insertAdjacentElement("afterend", bloc);
+              ${ligne("Dotations et amortissements",
+                formatMontant(financier.dotations_usd))}
 
-    window.P2I_COMPTE_FINANCIER = resultat;
+              ${ligne("Résultat d'exploitation",
+                formatMontant(financier.resultat_exploitation_usd))}
+
+              ${ligne("Résultat financier",
+                formatMontant(financier.resultat_financier_usd))}
+
+              ${ligne("Résultat avant impôt",
+                formatMontant(financier.resultat_avant_impot_usd))}
+
+              ${ligne("Résultat net prévisionnel",
+                formatMontant(financier.resultat_net_usd),
+                true)}
+            </tbody>
+          </table>
+
+          <p style="margin-top:16px;color:#fbbf24">
+            ${postesManquants === null
+              ? "Des postes restent à vérifier."
+              : postesManquants + " postes ou contrôles restent à renseigner."}
+            La marge industrielle ne constitue pas un bénéfice net.
+            Les charges inconnues ne sont pas assimilées à zéro.
+          </p>
+
+          <h4 style="color:#4cc9f0;margin-top:20px">
+            Production et stocks — Informations complémentaires
+          </h4>
+
+          <p><b>Production annuelle :</b>
+            ${formatQuantite(economique.quantite_produite)}
+          </p>
+
+          <p><b>Quantité vendue :</b>
+            ${formatQuantite(economique.quantite_vendue)}
+          </p>
+
+          <p><b>Quantité non vendue :</b>
+            ${formatQuantite(economique.quantite_non_vendue)}
+          </p>
+
+          <p><b>Stock final théorique :</b>
+            ${formatQuantite(economique.quantite_stockee)}
+          </p>
+
+          <p><b>Valorisation indicative du stock :</b>
+            ${formatMontant(economique.valeur_stock_indicative_usd)}
+          </p>
+
+          <p><b>Coût total de production :</b>
+            ${formatMontant(economique.cout_production_total_usd)}
+          </p>
+
+          <p><b>Coût industriel unitaire :</b>
+            ${formatMontant(economique.cout_production_unitaire_usd, 4)}
+            /kg
+          </p>
+
+          <p style="margin-top:14px;font-size:0.85rem;color:#cbd5e1">
+            Simulation indicative P2I. La valorisation du stock
+            suppose que les quantités non vendues sont stockables,
+            sans pertes non comptabilisées, et que les coûts
+            industriels sont répartis selon les hypothèses
+            du moteur économique. Ces hypothèses doivent
+            être vérifiées avant toute utilisation financière.
+          </p>
+        </div>
+      `;
+
+      sortie.style.display = "block";
+      window.P2I_COMPTE_FINANCIER = financier;
+
+      console.log(
+        "P2I : compte de résultat consolidé affiché."
+      );
+
+    } catch (erreur) {
+      console.error(
+        "P2I : erreur de consolidation financière",
+        erreur
+      );
+    }
   }
 
   function initialiser() {
-    const select = document.getElementById("p2iBiscuiterieSelect");
+    const select = document.getElementById(ID_SELECT);
+    if (!select) return;
 
-    if (select) {
-      select.addEventListener("change", () => {
-        document.getElementById("p2iFinancialDetails")?.remove();
-        delete window.P2I_COMPTE_FINANCIER;
-        setTimeout(afficherCompteFinancier, 600);
-      });
-    }
+    select.addEventListener("change", () => {
+      nettoyer();
 
-    setTimeout(afficherCompteFinancier, 600);
+      // Coordination provisoire avec les modules existants.
+      if (select.value === "crackers") {
+        setTimeout(consolider, 700);
+      }
+    });
+
+    setTimeout(consolider, 700);
   }
 
   if (document.readyState === "loading") {
@@ -136,4 +245,5 @@
   } else {
     initialiser();
   }
+
 })();
