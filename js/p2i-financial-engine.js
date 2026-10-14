@@ -379,8 +379,107 @@
     };
   }
 
-  root.P2I_FINANCIAL_ENGINE = Object.freeze({
+  // ============================================
+  // P2I — CALCUL AUTOMATIQUE DES POSTES FINANCIERS
+  // ============================================
+
+  function calculerPosteAutomatique(regle, donnees) {
+    if (!regle || typeof regle !== "object") {
+      throw new Error("Règle financière P2I manquante.");
+    }
+
+    const methode = regle.methode;
+    const d = donnees || {};
+
+    function verifier(v, nom) {
+      if (
+        typeof v !== "number" ||
+        !Number.isFinite(v) ||
+        v < 0
+      ) {
+        throw new Error(
+          "Valeur manquante ou invalide : " + nom
+        );
+      }
+      return v;
+    }
+
+    let resultat;
+
+    switch (methode) {
+
+      case "pourcentage_ca":
+        resultat =
+          verifier(d.chiffre_affaires_usd, "CA") *
+          verifier(regle.taux, "taux");
+        break;
+
+      case "pourcentage_base":
+        resultat =
+          verifier(d.base_usd, "base") *
+          verifier(regle.taux, "taux");
+        break;
+
+      case "quantite_tarif":
+        resultat =
+          verifier(d.quantite, "quantite") *
+          verifier(d.tarif_unitaire_usd, "tarif");
+        break;
+
+      case "effectif_salaire":
+        resultat =
+          verifier(d.effectif, "effectif") *
+          verifier(d.cout_annuel_salarial_usd, "salaire");
+        break;
+
+      case "montant_periodique":
+        resultat =
+          verifier(d.montant_periode_usd, "montant") *
+          verifier(d.nombre_periodes, "periodes");
+        break;
+
+      case "amortissement_lineaire":
+        const valeur =
+          verifier(d.valeur_amortissable_usd, "valeur");
+
+        const duree =
+          verifier(d.duree_ans, "duree");
+
+        if (duree === 0) {
+          throw new Error("Durée d'amortissement nulle.");
+        }
+
+        resultat = valeur / duree;
+        break;
+
+      case "interets_simples":
+        resultat =
+          verifier(d.encours_moyen_usd, "encours") *
+          verifier(d.taux_annuel, "taux");
+        break;
+
+      case "montant_documente":
+        resultat =
+          verifier(d.montant_usd, "montant");
+        break;
+
+      default:
+        throw new Error(
+          "Méthode financière inconnue : " + methode
+        );
+    }
+
+    return {
+      montant_usd: resultat,
+      statut: regle.statut || "estime_p2i",
+      source: regle.source || "reference_p2i",
+      methode: methode
+    };
+  }
+
+   root.P2I_FINANCIAL_ENGINE = Object.freeze({
     calculer,
+    calculerPosteAutomatique,
     POSTES,
     TYPES: Object.freeze(TYPES),
     STATUTS: Object.freeze(STATUTS)
