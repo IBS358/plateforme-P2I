@@ -3441,12 +3441,19 @@ const recette = window.P2I_RECETTES_BISCUITERIE.crackers.ingredients;
             ${recette.map(([nom, quantite, prix], i) => `
               <tr>
                 <td style="padding:8px">${nom}</td>
-                <td style="padding:8px">
-                  ${champ(quantite, "quantite", i)}
-                </td>
-                <td style="padding:8px">
-                  ${champ(prix, "prix", i)}
-                </td>
+               
+<td style="padding:8px;text-align:center">
+  ${Number(quantite).toLocaleString("fr-FR", {
+    maximumFractionDigits: 4
+  })}
+</td>
+<td style="padding:8px;text-align:center">
+  ${Number(prix).toLocaleString("fr-FR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 4
+  })}
+</td>
+
               </tr>
             `).join("")}
           </tbody>
@@ -3457,18 +3464,19 @@ const recette = window.P2I_RECETTES_BISCUITERIE.crackers.ingredients;
         2. Autres charges industrielles
       </h4>
 
-      ${autresCouts.map(([nom, id, valeur]) => `
-        <div style="margin:9px 0;display:flex;
-          justify-content:space-between;gap:12px;flex-wrap:wrap">
-          <label>${nom}</label>
-          <input type="number" min="0" step="any"
-            data-cout="${id}" value="${valeur}"
-            style="width:125px;padding:7px;border-radius:6px;
-            background:#1c2541;color:white;
-            border:1px solid #64748b;">
-        </div>
-      `).join("")}
-
+      
+${autresCouts.map(([nom, id, valeur]) => `
+  <div style="margin:9px 0;display:flex;
+    justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span>${nom}</span>
+    <strong>
+      ${Number(valeur).toLocaleString("fr-FR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 4
+      })}
+    </strong>
+  </div>
+`).join("")}
       
 <hr style="margin:18px 0">
 
@@ -3506,45 +3514,68 @@ const recette = window.P2I_RECETTES_BISCUITERIE.crackers.ingredients;
 </div>
     `;
 
+    
     function calculer() {
-      const lire = el => {
-        if (!el || el.value.trim() === "") return NaN;
-        const v = Number(el.value);
-        return Number.isFinite(v) && v >= 0 ? v : NaN;
-      };
 
-      const ingredients = recette.map((item, i) => {
-        const q = lire(panel.querySelector(
-          '[data-type="quantite"][data-index="' + i + '"]'
-        ));
-        const p = lire(panel.querySelector(
-          '[data-type="prix"][data-index="' + i + '"]'
-        ));
-        return { nom: item[0], quantite: q, prix: p };
-      });
+      // ==============================================
+      // BP DÉCOUVERTE — HYPOTHÈSES DE RÉFÉRENCE P2I
+      // ==============================================
+      // Les données proviennent des référentiels P2I.
+      // Aucune saisie utilisateur n'est nécessaire.
 
-      const autre = id => lire(panel.querySelector(
-        '[data-cout="' + id + '"]'
-      ));
+      const ingredients = recette.map(
+        ([nom, quantite, prix]) => ({
+          nom,
+          quantite: Number(quantite),
+          prix: Number(prix)
+        })
+      );
 
-      const emballages = autre("emballages");
-      const energie = autre("energie");
-      const personnel = autre("personnel");
-      const maintenance = autre("maintenance");
-      const autres = autre("autres");
+      // ==============================================
+      // AUTRES COÛTS DE RÉFÉRENCE
+      // ==============================================
+
+      const coutsReference = Object.fromEntries(
+        autresCouts.map(([nom, id, valeur]) => [
+          id,
+          Number(valeur)
+        ])
+      );
+
+      const emballages = coutsReference.emballages;
+      const energie = coutsReference.energie;
+      const personnel = coutsReference.personnel;
+      const maintenance = coutsReference.maintenance;
+      const autres = coutsReference.autres;
 
       const valeurs = [
         ...ingredients.flatMap(x => [x.quantite, x.prix]),
-        emballages, energie, personnel, maintenance, autres
+        emballages,
+        energie,
+        personnel,
+        maintenance,
+        autres
       ];
 
       const sortie = panel.querySelector("#p2iCoutResultats");
 
-      if (valeurs.some(v => !Number.isFinite(v))) {
+      // ==============================================
+      // CONTRÔLE DES DONNÉES
+      // ==============================================
+
+      if (
+        !Number.isFinite(production) ||
+        production <= 0 ||
+        valeurs.some(v => !Number.isFinite(v) || v < 0)
+      ) {
         sortie.textContent =
-          "Veuillez renseigner tous les champs avec des valeurs positives.";
+          "Les hypothèses économiques P2I sont incomplètes ou invalides.";
         return;
       }
+
+      // ==============================================
+      // CALCUL DES MATIÈRES PREMIÈRES
+      // ==============================================
 
       const masseEntree = ingredients.reduce(
         (s, x) => s + x.quantite, 0
@@ -3554,14 +3585,29 @@ const recette = window.P2I_RECETTES_BISCUITERIE.crackers.ingredients;
         (s, x) => s + x.quantite * x.prix, 0
       );
 
+      // ==============================================
+      // CALCUL DES CHARGES INDUSTRIELLES
+      // ==============================================
+
       const variableKg = coutMatieres + emballages + energie;
+
       const fixesAn = personnel + maintenance + autres;
+
       const coutAnnuel = production * variableKg + fixesAn;
+
       const coutKg = coutAnnuel / production;
 
-      // Simple contrôle massique : à valider avec
-      // l'humidité et les pertes réelles du procédé.
+      // ==============================================
+      // CONTRÔLE MASSIQUE INDICATIF
+      // ==============================================
+      // À valider avec les pertes et l'humidité
+      // réelles du procédé industriel.
+
       const ecartMasse = masseEntree - 1;
+
+      // ==============================================
+      // AFFICHAGE DES RÉSULTATS
+      // ==============================================
 
       sortie.innerHTML = `
         <h4 style="color:#4cc9f0;margin-bottom:10px">
@@ -3611,6 +3657,10 @@ const recette = window.P2I_RECETTES_BISCUITERIE.crackers.ingredients;
         </p>
       `;
 
+      // ==============================================
+      // DONNÉES DISPONIBLES POUR LE FUTUR BP PRO
+      // ==============================================
+
       window.P2I_CRACKERS_COUTS = {
         production_kg: production,
         sources: P2I_SOURCES_COUTS,
@@ -3625,15 +3675,23 @@ const recette = window.P2I_RECETTES_BISCUITERIE.crackers.ingredients;
       };
     }
 
-    panel.addEventListener("input", calculer);
+    // ==============================================
+    // CALCUL AUTOMATIQUE — LECTURE SEULE
+    // ==============================================
+
     calculer();
   }
+
+  // ==============================================
+  // CHANGEMENT DE CONFIGURATION BISCUITERIE
+  // ==============================================
 
   select.addEventListener("change", () => {
     setTimeout(render, 50);
   });
 
   setTimeout(render, 50);
+
 })();
 </script>
 
