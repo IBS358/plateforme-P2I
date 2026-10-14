@@ -114,6 +114,7 @@
     };
   }
 
+  
   window.P2I_CURRENCY = Object.freeze({
     definirTauxEURUSD,
     obtenirTauxUSDXOF,
@@ -121,5 +122,19 @@
     formater,
     obtenirConfiguration
   });
+
+  // ==========================================
+  // TAUX DE RÉFÉRENCE DU PILOTE P2I
+  // ==========================================
+  // Taux historique documenté.
+  // Ne constitue pas un taux bancaire garanti.
+  // Une actualisation explicite sera nécessaire
+  // pour les nouvelles versions des simulations.
+
+  definirTauxEURUSD(
+    1.1118,
+    "2026-10-13",
+    "Service de taux de change — consultation du 14/10/2026"
+  );
 
 })();
