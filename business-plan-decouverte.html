@@ -3947,6 +3947,59 @@ ${autresCouts.map(([nom, id, valeur]) => `
   setTimeout(afficher, 120);
 
 })();
+
 </script>
+
+<script>
+/* P2I — Raccordement du moteur financier */
+(function () {
+  "use strict";
+
+  function preparerCompteFinancier() {
+    const resultat = window.P2I_CRACKERS_RESULTAT;
+    const moteur = window.P2I_FINANCIAL_ENGINE;
+    const referentiel = window.P2I_FINANCIAL_REFERENCE;
+
+    if (!resultat || !moteur || !referentiel) {
+      return;
+    }
+
+    const chiffreAffaires = resultat.chiffre_affaires_usd;
+    const coutVentes = resultat.cout_produits_vendus_usd;
+
+    if (
+      !Number.isFinite(chiffreAffaires) ||
+      !Number.isFinite(coutVentes)
+    ) {
+      console.error(
+        "P2I : données économiques incomplètes."
+      );
+      return;
+    }
+
+    window.P2I_DONNEES_FINANCIERES = Object.freeze({
+      type_activite: "fabrication",
+      chiffre_affaires_usd: chiffreAffaires,
+      cout_produits_vendus_usd: coutVentes,
+      source: "Synthèse économique P2I — Crackers",
+      statut: "donnees_partielles"
+    });
+  }
+
+  const select = document.getElementById(
+    "p2iBiscuiterieSelect"
+  );
+
+  if (select) {
+    select.addEventListener("change", () => {
+      delete window.P2I_DONNEES_FINANCIERES;
+      setTimeout(preparerCompteFinancier, 250);
+    });
+  }
+
+  setTimeout(preparerCompteFinancier, 250);
+})();
+</script>
+
 </body>
 </html>
