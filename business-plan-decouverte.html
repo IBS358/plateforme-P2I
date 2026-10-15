@@ -353,7 +353,7 @@
           <a href="#s2"><i class="fa-solid fa-chart-line"></i><span>Analyse du marché cible</span></a>
           <a href="#s3"><i class="fa-solid fa-gears"></i><span>Machines & équipements nécessaires</span></a>
           <a href="#s4"><i class="fa-solid fa-coins"></i><span>Investissements et financement initial</span></a>
-          <a href="#s5"><i class="fa-solid fa-receipt"></i><span>Compte de résultat prévisionnel sommaire</span></a>
+          <a href="#s5"><i class="fa-solid fa-receipt"></i><span>Prévisions économiques et financières</span></a>
           <a href="#s6"><i class="fa-solid fa-scale-balanced"></i><span>Bilan prévisionnel simplifié</span></a>
           <a href="#s7"><i class="fa-solid fa-arrow-trend-up"></i><span>Calcul du ROI approximatif</span></a>
           <a href="#s8"><i class="fa-solid fa-compass"></i><span>Recommandations stratégiques</span></a>
@@ -2849,6 +2849,8 @@ if (biscuiterieConfigBox) {
     .replace(/'/g, "&#39;");
 
   function restoreOriginal() {
+    const liste = document.getElementById("s5_list");
+    if (liste) liste.style.display = "";
     ids.forEach(id => {
       if (Object.prototype.hasOwnProperty.call(original, id)) {
         setHtml(id, original[id]);
@@ -3961,6 +3963,7 @@ window.dispatchEvent(
   // après un changement de configuration.
   select.addEventListener("change", () => {
     sortie.style.display = "none";
+    delete window.P2I_CRACKERS_RESULTAT;
     setTimeout(afficher, 120);
   });
 
@@ -3971,53 +3974,60 @@ window.dispatchEvent(
 </script>
 
 <script>
-/* P2I — Raccordement du moteur financier */
+/* P2I — Raccordement financier synchronisé (pilote Crackers)
+ * Les autres configurations conservent leur fonctionnement historique.
+ */
 (function () {
   "use strict";
+  const select = document.getElementById("p2iBiscuiterieSelect");
+  if (!select) return;
+
+  function vider() {
+    delete window.P2I_DONNEES_FINANCIERES;
+    delete window.P2I_COMPTE_FINANCIER;
+  }
 
   function preparerCompteFinancier() {
+    if (select.value !== "crackers") return;
     const resultat = window.P2I_CRACKERS_RESULTAT;
     const moteur = window.P2I_FINANCIAL_ENGINE;
     const referentiel = window.P2I_FINANCIAL_REFERENCE;
+    if (!resultat || !moteur || !referentiel) return;
 
-    if (!resultat || !moteur || !referentiel) {
+    const ca = resultat.chiffre_affaires_usd;
+    const cpv = resultat.cout_produits_vendus_usd;
+    if (![ca, cpv].every(Number.isFinite) || ca < 0 || cpv < 0) {
+      console.error("P2I : données économiques invalides.");
       return;
     }
-
-    const chiffreAffaires = resultat.chiffre_affaires_usd;
-    const coutVentes = resultat.cout_produits_vendus_usd;
-
-    if (
-      !Number.isFinite(chiffreAffaires) ||
-      !Number.isFinite(coutVentes)
-    ) {
-      console.error(
-        "P2I : données économiques incomplètes."
-      );
-      return;
-    }
-
     window.P2I_DONNEES_FINANCIERES = Object.freeze({
       type_activite: "fabrication",
-      chiffre_affaires_usd: chiffreAffaires,
-      cout_produits_vendus_usd: coutVentes,
+      chiffre_affaires_usd: ca,
+      cout_produits_vendus_usd: cpv,
       source: "Synthèse économique P2I — Crackers",
       statut: "donnees_partielles"
     });
+    window.dispatchEvent(new CustomEvent("p2i:financial-data-ready", {
+      detail: {up_id: "biscuiterie", configuration_id: "crackers"}
+    }));
   }
 
-  const select = document.getElementById(
-    "p2iBiscuiterieSelect"
-  );
+  window.addEventListener("p2i:economic-result-ready", event => {
+    if (event.detail?.up_id !== "biscuiterie" ||
+        event.detail?.configuration_id !== "crackers") return;
+    vider();
+    preparerCompteFinancier();
+  });
 
-  if (select) {
-    select.addEventListener("change", () => {
-      delete window.P2I_DONNEES_FINANCIERES;
-      setTimeout(preparerCompteFinancier, 250);
-    });
-  }
+  select.addEventListener("change", () => {
+    vider();
+    if (select.value !== "crackers") {
+      delete window.P2I_CRACKERS_RESULTAT;
+    }
+  });
 
-  setTimeout(preparerCompteFinancier, 250);
+  // Au chargement initial, la synthèse économique peut déjà être disponible.
+  preparerCompteFinancier();
 })();
 </script>
 
