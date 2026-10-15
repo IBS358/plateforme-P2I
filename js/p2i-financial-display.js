@@ -1,4 +1,3 @@
-
 /*
  * P2I — Compte de résultat consolidé
  * BP Découverte — Pilote Biscuiterie / Crackers
@@ -43,13 +42,19 @@
 
     nettoyer();
 
-    if (select.value !== "crackers") return;
+    if (select.value !== "crackers") {
+      sortie.style.display = "none";
+      return;
+    }
 
     const economique = window.P2I_CRACKERS_RESULTAT;
     const donnees = window.P2I_DONNEES_FINANCIERES;
     const moteur = window.P2I_FINANCIAL_ENGINE;
 
-    if (!economique || !donnees || !moteur) return;
+    if (!economique || !donnees || !moteur) {
+      sortie.style.display = "none";
+      return;
+    }
 
     const ca = economique.chiffre_affaires_usd;
     const cpv = economique.cout_produits_vendus_usd;
@@ -228,16 +233,23 @@
     const select = document.getElementById(ID_SELECT);
     if (!select) return;
 
-    select.addEventListener("change", () => {
-      nettoyer();
-
-      // Coordination provisoire avec les modules existants.
-      if (select.value === "crackers") {
-        setTimeout(consolider, 700);
-      }
+    // Le raccordement HTML émet cet événement uniquement après la
+    // disponibilité des données économiques de la configuration courante.
+    window.addEventListener("p2i:financial-data-ready", event => {
+      if (event.detail?.up_id !== "biscuiterie" ||
+          event.detail?.configuration_id !== "crackers") return;
+      consolider();
     });
 
-    setTimeout(consolider, 700);
+    select.addEventListener("change", () => {
+      nettoyer();
+      const sortie = document.getElementById(ID_COMPTE);
+      if (sortie) sortie.style.display = "none";
+      // Pas de délai arbitraire : attendre l'événement de données prêtes.
+    });
+
+    // Cas du chargement initial si les données sont déjà prêtes.
+    if (window.P2I_DONNEES_FINANCIERES) consolider();
   }
 
   if (document.readyState === "loading") {
