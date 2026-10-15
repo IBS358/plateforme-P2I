@@ -3929,8 +3929,19 @@ ${autresCouts.map(([nom, id, valeur]) => `
 
       sortie.style.display = "block";
 
-      window.P2I_CRACKERS_RESULTAT =
-        Object.freeze({ ...resultat });
+     
+window.P2I_CRACKERS_RESULTAT =
+  Object.freeze({ ...resultat });
+
+// Signaler que les résultats économiques sont disponibles.
+window.dispatchEvent(
+  new CustomEvent("p2i:economic-result-ready", {
+    detail: {
+      up_id: "biscuiterie",
+      configuration_id: "crackers"
+    }
+  })
+);
 
     } catch (erreur) {
       console.error(
