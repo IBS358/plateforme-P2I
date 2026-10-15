@@ -521,7 +521,7 @@
             <div class="hgroup">
               <div class="icon"><i class="fa-solid fa-receipt"></i></div>
               <div>
-                <h2>Compte de résultat prévisionnel sommaire</h2>
+               <h2>Prévisions économiques et financières</h2>
                 <p id="s5_text">
                   <b>À compléter dynamiquement</b> : CA estimé, coût matière, charges clés, marge brute, résultat (ordre de grandeur).
                 </p>
@@ -2921,36 +2921,42 @@ if (biscuiterieConfigBox) {
       Il n'est pas additionné à l'ancien budget.</li>`
     );
 
-    // SECTION 5 - Resultat
+    
+    // ==========================================
+    // SECTION 5 — Prévisions économiques P2I
+    // Configuration : Biscuiterie / Crackers
+    // ==========================================
+
     setHtml("s5_text", `
-      <b>Compte de résultat prévisionnel -
-      Biscuiterie / Crackers.</b>
-      Les hypothèses commerciales historiques
-      peuvent servir de point de départ,
-      mais elles ne sont pas encore validées
-      pour cette configuration industrielle.
+      <b>Prévisions économiques et financières —
+      Biscuiterie industrielle / Crackers.</b>
+
+      Cette section présente les hypothèses de
+      production, les coûts industriels, les
+      prévisions commerciales et le compte
+      de résultat consolidé P2I.
+
+      Les résultats sont établis à partir
+      d'hypothèses techniques et économiques
+      provisoires.
+
+      Les données non vérifiées restent
+      explicitement identifiées et le résultat
+      net n'est pas calculé lorsque des
+      charges essentielles sont manquantes.
     `);
 
-    setHtml("s5_list",
-      li("Chiffre d'affaires",
-         "Hypothèses historiques à réexaminer") +
-      
-      li("Volume commercialisable",
-         "À calculer après validation du débit, des heures de fonctionnement et du rendement") +
-      li("Achats de matières premières",
-         "À recalculer selon les recettes crackers") +
-      li("Énergie, maintenance et emballages",
-         "À chiffrer") +
-      li("Personnel et autres charges",
-         "À dimensionner") +
-      li("Excédent brut d'exploitation",
-         "Non calculable de manière fiable") +
-      li("Amortissements",
-         "En attente du budget immobilisé complet") +
-      li("Résultat avant impôt",
-         "Non calculable à ce stade")
-    );
+    // Supprimer le contenu historique uniquement
+    // pour la configuration Crackers.
+    setHtml("s5_list", "");
 
+    // Masquer la liste historique.
+    const listeHistoriqueCrackers =
+      document.getElementById("s5_list");
+
+    if (listeHistoriqueCrackers) {
+      listeHistoriqueCrackers.style.display = "none";
+    }
     // SECTION 6 - Bilan
     setHtml("s6_text", `
       <b>Situation financière prévisionnelle -
