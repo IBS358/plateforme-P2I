@@ -100,6 +100,9 @@ assert.ok(layout.includes('if(/(?:^|\\/)\\.\\.(?:\\/|$)/.test(url))return "";'),
 assert.ok(layout.includes('[a-z0-9_./-]+'),"Autoriser les images locales du dépôt");
 
 assert.ok(css.includes('.bp-variant-photo'),"Photographies des cartes de variantes mises en forme");
+assert.ok(layout.includes('unitPictures.variants?.[v.id]?.product'),"Les cartes Nettoyage utilisent leur propre photographie");
+assert.ok(layout.includes('unitPictures.variants?.[v[0]]?.product'),"Les cartes Biscuiterie utilisent leur propre photographie");
+
 
 
 assert.ok(layout.includes('id="p2i-bp17-go-pro"'),"Bouton Aller au Pro dans la rubrique 17");
