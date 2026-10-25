@@ -85,6 +85,11 @@ assert.ok(bridge.includes('window.addEventListener("p2i:bp17-rendered",update)')
 
 
 assert.ok(layout.includes('📈'),"Pictogramme du logo P2I de référence");
+assert.ok(layout.includes('v[0]==="crackers"'),"450 000 USD ne doit concerner que la ligne Crackers");
+assert.ok(layout.includes('Capacité et investissement à documenter pour cette variante'),"Ne pas attribuer une capacité fictive aux autres variantes");
+assert.ok(layout.includes('pictureUrl(image.hero)'),"Vérifier les URL de photographies avant affichage");
+assert.ok(css.includes('.bp-variant-photo'),"Photographies des cartes de variantes mises en forme");
+
 
 assert.ok(layout.includes('id="p2i-bp17-go-pro"'),"Bouton Aller au Pro dans la rubrique 17");
 assert.ok(layout.includes('destinationParams.set("unit_id",id)'),"Conserver l’identifiant de l’UP");
