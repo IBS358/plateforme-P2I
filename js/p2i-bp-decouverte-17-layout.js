@@ -141,7 +141,7 @@ if(id==="nettoyage"){
  const chosen=p.get("configuration_id")||"";
  const panel=document.createElement("section");panel.className="bp-section bp-variants";panel.setAttribute("aria-label","Variantes de nettoyage industriel");
  panel.innerHTML='<h2>Les trois activités de nettoyage industriel</h2><p>Chaque activité constitue un périmètre technique et économique distinct. Les montants d’une activité ne sont pas automatiquement transférables aux autres.</p><div class="bp-cards">'+variants.map(v=>'<article class="bp-card"><small>'+safe(v.title)+'</small><p>'+safe(v.detail)+'</p><p><b>Statut :</b> '+safe(v.status)+'</p><a href="?'+safe((()=>{const q=new URLSearchParams(location.search);q.set("configuration_id",v.id);return q.toString()})())+'">Consulter cette activité</a></article>').join("")+'</div>';
- main.insertBefore(panel,main.querySelector("#p2i-r1"));
+ main.insertBefore(panel,main.querySelector(".bp-hero"));
  if(chosen&&variants.some(v=>v.id===chosen)){
   const v=variants.find(v=>v.id===chosen);
   const info=document.createElement("div");info.className="bp-note";info.innerHTML='<b>Activité sélectionnée :</b> '+safe(v.title)+'. '+safe(v.status)+'. Aucun compte de résultat consolidé des trois activités n’est présumé.';
@@ -151,8 +151,10 @@ if(id==="nettoyage"){
 layout.append(aside,main);document.body.prepend(layout);document.body.prepend(header);
 $("p2i-bp17-print").addEventListener("click",()=>window.print());
 
+// Images liées à l’UP et à sa variante : pas de photo d’une autre activité.
 const imgRegistry=window.P2I_BP_IMAGES||{};
-const image=imgRegistry[id]||{};
+const imageSet=imgRegistry[id]||{};
+const image=(selectedVariant&&imageSet.variants&&imageSet.variants[selectedVariant])||imageSet;
 if(image.hero)main.querySelector(".bp-hero").style.setProperty("--bp-hero-image",'url("'+String(image.hero).replace(/["\\]/g,"")+'")');
 if(image.product)main.querySelector(".bp-medallion").style.setProperty("--bp-product-image",'url("'+String(image.product).replace(/["\\]/g,"")+'")');
 }
