@@ -14,6 +14,7 @@ const layout=read("js/p2i-bp-decouverte-17-layout.js");
 const bridge=read("js/p2i-bp-decouverte-17-engine-bridge.js");
 const css=read("css/p2i-bp-decouverte-17.css");
 const financial=read("js/p2i-financial-display.js");
+const fiche=read("fiche-production.html");
 for(const [file,source] of [["layout",layout],["bridge",bridge],["financial",financial]])
   assert.doesNotThrow(()=>new vm.Script(source,{filename:file}),file+" doit être syntaxiquement valide");
 const sectionList=layout.match(/const TITRES=(\[[^\n]+\]);/);
@@ -68,8 +69,11 @@ assert.ok(layout.includes('card("ROI financier","Non calculable sans flux de tr�
 assert.ok(layout.includes('id="p2i-bp17-download"'),"Bouton de téléchargement dans la rubrique 17");
 assert.ok(layout.includes('id="p2i-bp17-go-pro"'),"Bouton Aller au Pro dans la rubrique 17");
 assert.ok(layout.includes('destinationParams.set("unit_id",id)'),"Conserver l’identifiant de l’UP");
-assert.ok(layout.includes('proParams.set("tab","bp-pro")'),"Diriger vers l’onglet BP Pro existant");
+assert.ok(layout.includes('proParams.set("redirect","bp-pro")'),"Déclencher le véritable parcours BP Pro");
 assert.ok(layout.includes('fiche-production.html?'),"Utiliser la route BP Pro du parcours existant");
+assert.ok(fiche.includes("window.goToBpPro()"),"La fiche déclenche le BP Pro");
+assert.ok(fiche.includes("buildUrl('business-plan-pro.html', data)"),"La fiche rejoint le BP Pro");
+assert.ok(fiche.includes("'configuration_id', 'simulation_id'"),"Le contexte de simulation est transmis au BP Pro");
 assert.ok(layout.includes('window.print()'),"Téléchargement via impression PDF du navigateur");
 assert.ok(css.includes(".bp-actions"),"Actions de fin de parcours stylées");
 assert.ok(css.includes("bp-sidebar"),"La navigation doit être stylée");
