@@ -24,6 +24,8 @@ return {id,up:up||{}};
 function render(){
 if(document.getElementById("p2i-bp17-root"))return;
 const {id,up}=getUP();
+// Ne pas construire un faux BP pour une simulation dont l’UP n’est pas encore hydratée.
+if(!id||(!up.nom&&!up.id&&!up.description))return;
 const name=up.nom||new URLSearchParams(location.search).get("unit")||"Unité de production";
 const filiere=up.filiereNom||up.filiere||"À documenter";
 const params=new URLSearchParams(location.search);
@@ -41,9 +43,9 @@ const equipmentReference=isCrackers?450000:null;
 const invest=up.investment_breakdown||{};
 const machineRegistry=typeof MACHINES_DATA!=="undefined"?MACHINES_DATA:null;
 const machineSource=machineRegistry&&machineRegistry[id];
-const referenceMachines=Array.isArray(up.machines)&&up.machines.length?up.machines:
- (Array.isArray(machineSource)?machineSource:
- (machineSource&&Array.isArray(machineSource.machines)?machineSource.machines:[]));
+const referenceMachines=Array.isArray(machineSource)?machineSource:
+ (machineSource&&Array.isArray(machineSource.machines)?machineSource.machines:
+ (Array.isArray(up.machines)?up.machines:[]));
 const variantMachineData=id==="biscuiterie"&&machineSource&&machineSource.configurations&&selectedVariant
  ?machineSource.configurations[selectedVariant]:null;
 const variantMachines=variantMachineData?[
@@ -57,10 +59,10 @@ const equipmentSummary=variantMachineData?
  machineCount?machineCount+" équipements référencés dans MACHINES_DATA. Les prix et la compatibilité de la ligne restent à confirmer.":
  "Liste des équipements à compléter dans le référentiel P2I.";
 const sourceCapex=equipmentReference!==null?fmt(equipmentReference)+" (ligne intégrée Crackers 500 kg/h, équipements uniquement)":"À documenter pour la configuration choisie";
-const finance=capex===null?note("Financement 40 % apport / 60 % dette : calcul suspendu jusqu'à validation de l'investissement de référence."):table([["Investissement indicatif",sourceCapex],["Apport de référence (40 %)",fmt(capex*.4)],["Dette de référence (60 %)",fmt(capex*.6)],["Réserve de trésorerie initiale","À calculer séparément"]]);
+const finance=capex===null?note("Financement de référence : 40 % d’apport et 60 % de dette, calculés sur l’investissement total validé (et non sur le seul prix des machines). Réserve initiale de trésorerie distincte. Aucun montant ne peut être calculé tant que ce total manque."):table([["Investissement indicatif",sourceCapex],["Apport de référence (40 %)",fmt(capex*.4)],["Dette de référence (60 %)",fmt(capex*.6)],["Réserve de trésorerie initiale","À calculer séparément"]]);
 const sections=[
 '<div class="bp-cards">'+card("Unité industrielle",name)+card("Filière",filiere)+card("Configuration",config||"Référence P2I à préciser")+'</div>'+note("<b>Activité :</b> "+text(up.description)),
-'<div class="bp-cards">'+card("Investissement machines",sourceCapex)+card("Chiffre d’affaires estimé",up.chiffre_affaires_estime||"À documenter")+card("Emplois directs",up.emplois_directs||"À documenter")+'</div>'+note("Données préliminaires du référentiel. Ne constituent pas des prévisions financières validées."),
+'<div class="bp-cards">'+card("Investissement machines",sourceCapex)+card("Chiffre d’affaires prévisionnel","À calculer par le moteur économique")+card("Emplois directs",up.emplois_directs||"À documenter")+'</div>'+note("Données préliminaires du référentiel. Ne constituent pas des prévisions financières validées."),
 note("Les équipements sont présentés verticalement par fonction. Les capacités, interfaces, utilités et prix doivent être vérifiés pour chaque configuration. Pour les biscuits mous, les équipements alternatifs de formage ne sont pas tous à acheter : le choix technique reste à valider.")+note(safe(equipmentSummary))+'<div class="bp-equipment-vertical">'+(variantMachines.length?variantMachines.map(m=>'<article><b>'+safe(typeof m==='string'?m:(m.name||m.nom||m.machine||m.machine_name||'Équipement'))+'</b><p>Fonction : '+text(typeof m==='string'?null:(m.role||m.machine_role))+'</p><p>Capacité : '+text(typeof m==='string'?null:(m.capacity||m.machine_capacity))+'</p><p>Utilités : '+text(typeof m==='string'?null:(m.utilities||m.machine_utilities))+'</p></article>').join(""):'<article>Configuration industrielle de référence à documenter.</article>')+'</div>',
 '<h3>Marchés cibles</h3>'+list(up.target_markets)+'<h3>Positionnement concurrentiel</h3>'+list(up.competitive_advantages),
 '<h3>Canaux et actions commerciales</h3>'+list(up.marketing)+note("Prix de vente, volumes, circuits de distribution et budget marketing : à justifier par hypothèses documentées."),
@@ -70,7 +72,7 @@ note("Les équipements sont présentés verticalement par fonction. Les capacit�
 note("Le compte de résultat sur trois années sera calculé par le moteur financier commun lorsque les hypothèses de ventes, charges, amortissements, dette et fiscalité seront complètes. Aucun montant absent n’est remplacé par zéro.")+table([["Chiffre d'affaires annuel","À calculer sur hypothèses documentées"],["Charges d’exploitation","À documenter"],["Résultat net","Non calculable à ce stade"]]),
 note("BFR mensuel = stocks + créances clients − dettes d’exploitation. Les délais de règlement et stocks cibles doivent être propres à la configuration. Aucun stock n’est compté deux fois.")+table([["Stock matières premières","À documenter"],["Stock produits finis","À documenter"],["Créances clients","À documenter"],["Dettes fournisseurs","À documenter"]]),
 note("Le bilan simplifié ne peut être équilibré automatiquement sans financement complet, immobilisations, BFR, amortissements et trésorerie validés.")+table([["Actifs","À calculer"],["Dettes","À calculer"],["Capitaux propres","À calculer"]]),
-'<div class="bp-cards">'+card("Capacité",isCrackers?"500 kg/h (référence)":up.monthly_capacity||"À documenter")+card("Emplois directs",up.emplois_directs||"À documenter")+card("ROI indicatif",up.roi_estime||"À documenter")+'</div>'+note("Les indicateurs de rentabilité nécessitent des calculs financiers traçables, non une simple reprise de fourchettes."),
+'<div class="bp-cards">'+card("Capacité",isCrackers?"500 kg/h (référence)":up.monthly_capacity||"À documenter")+card("Emplois directs",up.emplois_directs||"À documenter")+card("ROI financier","Non calculable sans flux de trésorerie validés")+'</div>'+note("Les indicateurs de rentabilité nécessitent des calculs financiers traçables, non une simple reprise de fourchettes."),
 note("Trésorerie prévisionnelle : 12 mois exclusivement. Encaissements, décaissements, échéances de dette et variations de BFR seront produits après validation des hypothèses.")+table([["Mois 1 à 12","À calculer"],["Solde initial","À documenter"],["Solde final","À calculer"]]),
 table([["Source unité",id||"Non identifié"],["Référentiel","js/up-data.js"],["Statut des montants","Estimations indicatives / à documenter"],["Devise de calcul","USD"],["Conversion FCFA","À afficher selon taux daté"]])+note("Les données financières non documentées sont volontairement laissées en attente."),
 note("La P2I accompagne la conception, la configuration industrielle, la simulation, le financement et la mise en relation avec les fournisseurs. Une estimation indicative ne déclenche pas de négociation."),
