@@ -48,13 +48,14 @@ const referenceMachines=Array.isArray(machineSource)?machineSource:
  (Array.isArray(up.machines)?up.machines:[]));
 const variantMachineData=id==="biscuiterie"&&machineSource&&machineSource.configurations&&selectedVariant
  ?machineSource.configurations[selectedVariant]:null;
-const variantMachines=variantMachineData?[
+const isSpecialCleaning=id==="nettoyage"&&["decontamination_chimique","decontamination_biologique"].includes(config);
+const variantMachines=isSpecialCleaning?[]:variantMachineData?[
  ...(Array.isArray(machineSource.base_machines)?machineSource.base_machines:[]),
  ...(Array.isArray(variantMachineData.specific_machines)?variantMachineData.specific_machines:[])
 ]:referenceMachines;
 const machineNames=variantMachines.map(m=>typeof m==="string"?m:(m.name||m.nom||m.machine||m.machine_name||"Équipement à qualifier"));
 const machineCount=variantMachines.length;
-const equipmentSummary=variantMachineData?
+const equipmentSummary=isSpecialCleaning?"Le catalogue général de nettoyage n’est pas validé pour cette activité spécialisée. Équipements, habilitations, EPI, protocoles et gestion des déchets sont à qualifier avant toute estimation.":variantMachineData?
  "Référentiel Biscuiterie : "+machineCount+" entrées de fonctions ou d’équipements (communs et spécifiques). Les options alternatives ne doivent pas être additionnées dans le budget.":
  machineCount?machineCount+" équipements référencés dans MACHINES_DATA. Les prix et la compatibilité de la ligne restent à confirmer.":
  "Liste des équipements à compléter dans le référentiel P2I.";
