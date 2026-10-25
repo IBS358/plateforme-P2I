@@ -26,12 +26,16 @@ if(document.getElementById("p2i-bp17-root"))return;
 const {id,up}=getUP();
 const name=up.nom||new URLSearchParams(location.search).get("unit")||"Unité de production";
 const filiere=up.filiereNom||up.filiere||"À documenter";
-const config=new URLSearchParams(location.search).get("configuration_id")||"";
+const params=new URLSearchParams(location.search);
+const simId=params.get("simulation_id");
+const savedVariant=simId&&id==="biscuiterie"?localStorage.getItem("p2i_bp_decouverte_biscuiterie_sim_"+simId):null;
+const config=params.get("configuration_id")||savedVariant||"";
+const selectedVariant=id==="biscuiterie"&&["biscuits_durs","biscuits_mous","crackers"].includes(config)?config:null;
 const old=document.querySelector(".wrap");
 if(!old)return;
 const legacy=document.createElement("div");legacy.id="p2i-bp-legacy";legacy.hidden=true;legacy.style.display="none";old.parentNode.insertBefore(legacy,old);legacy.appendChild(old);
 document.body.classList.add("p2i-bp17");
-const isCrackers=id==="biscuiterie"&&config==="crackers";
+const isCrackers=id==="biscuiterie"&&selectedVariant==="crackers";
 const capex=null; // CAPEX générique non validé pour la configuration
 const equipmentReference=isCrackers?450000:null;
 const invest=up.investment_breakdown||{};
