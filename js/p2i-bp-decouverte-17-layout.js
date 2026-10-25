@@ -44,6 +44,13 @@ const simId=params.get("simulation_id");
 const savedVariant=simId&&id==="biscuiterie"?localStorage.getItem("p2i_bp_decouverte_biscuiterie_sim_"+simId):null;
 const config=params.get("configuration_id")||savedVariant||"";
 const selectedVariant=id==="biscuiterie"&&["biscuits_durs","biscuits_mous","crackers"].includes(config)?config:null;
+const unitPictures=(window.P2I_BP_IMAGES||{})[id]||{};
+const pictureUrl=value=>{
+ if(typeof value!=="string")return "";
+ const url=value.trim();
+ return /^(?:https:\/\/|(?:\.\.\/|\.\/|assets\/|images\/)[a-z0-9_./-]+$)/i.test(url)?url:"";
+};
+
 const old=document.querySelector(".wrap");
 if(!old)return;
 const legacy=document.createElement("div");legacy.id="p2i-bp-legacy";legacy.hidden=true;legacy.style.display="none";old.parentNode.insertBefore(legacy,old);legacy.appendChild(old);
@@ -125,7 +132,7 @@ if(id==="biscuiterie"){
  const selector=document.createElement("div");
  selector.className="bp-variant-selector";
  const variants=[["crackers","Crackers","Biscuits salés croquants"],["biscuits_mous","Biscuits mous","Biscuits tendres et moelleux"],["biscuits_durs","Biscuits durs","Biscuits secs à texture ferme"]];
- selector.innerHTML='<h2>Choisissez la version de votre biscuiterie</h2><p>Trois configurations distinctes. Chaque sélection actualise le périmètre du projet.</p><div class="bp-variant-grid">'+variants.map(v=>'<button type="button" class="bp-variant-choice'+(selectedVariant===v[0]?' is-active':'')+'" data-variant="'+v[0]+'"><strong>'+v[1]+'</strong><span>'+v[2]+'</span><small>Configuration à 500 kg/h · investissement total à confirmer</small></button>').join("")+'</div><select id="p2i-bp17-variant" aria-label="Variante de biscuiterie" class="bp-visually-hidden"><option value="">Choisir</option>'+variants.map(v=>'<option value="'+v[0]+'">'+v[1]+'</option>').join("")+'</select>';
+ selector.innerHTML='<h2>Choisissez la version de votre biscuiterie</h2><p>Trois configurations distinctes. Chaque sélection actualise le périmètre du projet.</p><div class="bp-variant-grid">'+variants.map(v=>'<button type="button" class="bp-variant-choice'+(selectedVariant===v[0]?' is-active':'')+'" data-variant="'+v[0]+'">'+(pictureUrl(unitPictures.variants?.[v[0]]?.product)?'<img class="bp-variant-photo" loading="lazy" alt="Produit fini : '+safe(v[1])+'" src="'+safe(pictureUrl(unitPictures.variants[v[0]].product))+'">':'')+'<strong>'+v[1]+'</strong><span>'+v[2]+'</span><small>Configuration à 500 kg/h · investissement total à confirmer</small></button>').join("")+'</div><select id="p2i-bp17-variant" aria-label="Variante de biscuiterie" class="bp-visually-hidden"><option value="">Choisir</option>'+variants.map(v=>'<option value="'+v[0]+'">'+v[1]+'</option>').join("")+'</select>';
  main.insertBefore(selector,main.querySelector(".bp-hero"));
  const select=selector.querySelector("select");
  select.value=selectedVariant||"";
@@ -162,8 +169,7 @@ layout.append(aside,main);document.body.prepend(layout);document.body.prepend(he
 $("p2i-bp17-print").addEventListener("click",()=>window.print());
 
 // Images liées à l’UP et à sa variante : pas de photo d’une autre activité.
-const imgRegistry=window.P2I_BP_IMAGES||{};
-const imageSet=imgRegistry[id]||{};
+const imageSet=unitPictures;
 const variantImage=selectedVariant&&imageSet.variants&&imageSet.variants[selectedVariant];
 const image=variantImage?{...imageSet,...variantImage}:imageSet;
 if(image.hero)main.querySelector(".bp-hero").style.setProperty("--bp-hero-image",'url("'+String(image.hero).replace(/["\\]/g,"")+'")');
