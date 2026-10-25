@@ -83,6 +83,23 @@ if(id==="biscuiterie"){
   location.assign(location.pathname+"?"+p.toString());
  });
 }
+if(id==="nettoyage"){
+ const variants=[
+  {id:"nettoyage_intensif",title:"Nettoyage industriel intensif",detail:"Entretien mécanisé des sols, décapage et dégraissage des surfaces compatibles, aspiration et gestion des déchets ordinaires.",status:"Scénario indicatif, équipements et prix à qualifier"},
+  {id:"decontamination_chimique",title:"Décontamination chimique",detail:"Interventions sur contamination chimique nécessitant un diagnostic, des procédures spécialisées et des habilitations adaptées.",status:"Investissements, habilitations et hypothèses financières non validés"},
+  {id:"decontamination_biologique",title:"Décontamination biologique",detail:"Interventions spécialisées avec protocoles de confinement, protection et gestion des déchets adaptés aux risques biologiques.",status:"Investissements, habilitations et hypothèses financières non validés"}
+ ];
+ const p=new URLSearchParams(location.search);
+ const chosen=p.get("configuration_id")||"";
+ const panel=document.createElement("section");panel.className="bp-section bp-variants";panel.setAttribute("aria-label","Variantes de nettoyage industriel");
+ panel.innerHTML='<h2>Les trois activités de nettoyage industriel</h2><p>Chaque activité constitue un périmètre technique et économique distinct. Les montants d’une activité ne sont pas automatiquement transférables aux autres.</p><div class="bp-cards">'+variants.map(v=>'<article class="bp-card"><small>'+safe(v.title)+'</small><p>'+safe(v.detail)+'</p><p><b>Statut :</b> '+safe(v.status)+'</p><a href="?'+safe((()=>{const q=new URLSearchParams(location.search);q.set("configuration_id",v.id);return q.toString()})())+'">Consulter cette activité</a></article>').join("")+'</div>';
+ main.insertBefore(panel,main.querySelector("#p2i-r1"));
+ if(chosen&&variants.some(v=>v.id===chosen)){
+  const v=variants.find(v=>v.id===chosen);
+  const info=document.createElement("div");info.className="bp-note";info.innerHTML='<b>Activité sélectionnée :</b> '+safe(v.title)+'. '+safe(v.status)+'. Aucun compte de résultat consolidé des trois activités n’est présumé.';
+  panel.insertBefore(info,panel.querySelector(".bp-cards"));
+ }
+}
 layout.append(aside,main);document.body.prepend(layout);document.body.prepend(header);
 $("p2i-bp17-print").addEventListener("click",()=>window.print());
 const imgRegistry=window.P2I_BP_IMAGES||{};
