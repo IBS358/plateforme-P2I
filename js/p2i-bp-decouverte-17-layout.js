@@ -43,8 +43,12 @@ const consultationDate=new Intl.DateTimeFormat("fr-FR",{day:"2-digit",month:"lon
 const params=new URLSearchParams(location.search);
 const simId=params.get("simulation_id");
 const savedVariant=simId&&id==="biscuiterie"?localStorage.getItem("p2i_bp_decouverte_biscuiterie_sim_"+simId):null;
-const config=params.get("configuration_id")||savedVariant||"";
-const selectedVariant=id==="biscuiterie"&&["biscuits_durs","biscuits_mous","crackers"].includes(config)?config:null;
+const requestedConfig=params.get("configuration_id")||savedVariant||"";
+const biscuitVariants={crackers:"Crackers",biscuits_mous:"Biscuits mous",biscuits_durs:"Biscuits durs"};
+const validBiscuitConfig=id!=="biscuiterie"||Object.prototype.hasOwnProperty.call(biscuitVariants,requestedConfig);
+const config=validBiscuitConfig?requestedConfig:"";
+const selectedVariant=id==="biscuiterie"&&Object.prototype.hasOwnProperty.call(biscuitVariants,config)?config:null;
+const configLabel=id==="biscuiterie"?(biscuitVariants[config]||"À choisir"):config||"À choisir";
 const unitPictures=(window.P2I_BP_IMAGES||{})[id]||{};
 const pictureUrl=value=>{
  if(typeof value!=="string")return "";
@@ -118,7 +122,7 @@ const header=document.createElement("header");header.className="bp-topbar";heade
 const layout=document.createElement("div");layout.className="bp-layout";layout.id="p2i-bp17-root";
 const aside=document.createElement("nav");aside.className="bp-sidebar";aside.setAttribute("aria-label","Parcours du business plan");aside.innerHTML='<h2>PARCOURS DU BP</h2>'+TITRES.map((t,i)=>'<a href="#p2i-r'+(i+1)+'">'+String(i+1).padStart(2,"0")+' · '+safe(t)+'</a>').join("");
 const main=document.createElement("main");main.className="bp-main";
-main.innerHTML='<div class="bp-intro"><b>P2I · PLATEFORME INDUSTRIELLE IVOIRIENNE</b><h1>Business Plan Découverte — '+safe(name)+'</h1><p>Une première vision structurée pour évaluer la faisabilité de votre projet.</p><div class="bp-intro-meta"><span>Unité : '+safe(name)+'</span><span>Filière : '+safe(filiere)+'</span><span>Configuration : '+safe(config||"À choisir")+'</span><span>Date de consultation : '+safe(consultationDate)+'</span></div></div><div class="bp-hero"><div class="bp-hero-copy"><b>BP DÉCOUVERTE · CÔTE D’IVOIRE</b><h1>'+safe(name)+'</h1><p>'+text(up.description||"Configuration industrielle de référence P2I")+'</p><p>GRATUIT — version « Découverte »</p></div><div class="bp-medallion" aria-label="Illustration de l’activité"></div></div>'+TITRES.map((t,i)=>'<section class="bp-section" id="p2i-r'+(i+1)+'"><h2>'+String(i+1).padStart(2,"0")+' · '+safe(t)+'</h2>'+sections[i]+'</section>').join("");
+main.innerHTML='<div class="bp-intro"><b>P2I · PLATEFORME INDUSTRIELLE IVOIRIENNE</b><h1>Business Plan Découverte — '+safe(name)+'</h1><p>Une première vision structurée pour évaluer la faisabilité de votre projet.</p><div class="bp-intro-meta"><span>Unité : '+safe(name)+'</span><span>Filière : '+safe(filiere)+'</span><span>Configuration : '+safe(configLabel)+'</span><span>Date de consultation : '+safe(consultationDate)+'</span></div></div><div class="bp-hero"><div class="bp-hero-copy"><b>BP DÉCOUVERTE · CÔTE D’IVOIRE</b><h1>'+safe(name)+'</h1><p>'+text(up.description||"Configuration industrielle de référence P2I")+'</p><p>GRATUIT — version « Découverte »</p></div><div class="bp-medallion" aria-label="Illustration de l’activité"></div></div>'+TITRES.map((t,i)=>'<section class="bp-section" id="p2i-r'+(i+1)+'"><h2>'+String(i+1).padStart(2,"0")+' · '+safe(t)+'</h2>'+sections[i]+'</section>').join("");
 // Le sommaire se place après la bannière, avant la première rubrique.
 const summary=document.createElement("section");
 summary.className="bp-summary";
