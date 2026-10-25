@@ -12,6 +12,7 @@ const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const html=read("business-plan-decouverte.html");
 const layout=read("js/p2i-bp-decouverte-17-layout.js");
 const bridge=read("js/p2i-bp-decouverte-17-engine-bridge.js");
+const images=read("js/p2i-bp-decouverte-images.js");
 const css=read("css/p2i-bp-decouverte-17.css");
 const financial=read("js/p2i-financial-display.js");
 const fiche=read("fiche-production.html");
@@ -114,6 +115,11 @@ assert.ok(pro.includes('Retour au BP Découverte'),"Le parcours retour est dispo
 assert.ok(layout.includes('window.print()'),"Téléchargement via impression PDF du navigateur");
 assert.ok(css.includes(".bp-actions"),"Actions de fin de parcours stylées");
 assert.ok(css.includes("bp-sidebar"),"La navigation doit être stylée");
+assert.doesNotThrow(()=>new vm.Script(images),"Registre des photographies : JavaScript valide");
+assert.ok(html.includes('src="js/p2i-bp-decouverte-images.js"'),"Registre chargé dans le BP");
+assert.ok(images.includes('biscuiterie:["crackers","biscuits_mous","biscuits_durs"]'),"Trois variantes Biscuiterie");
+assert.ok(images.includes('nettoyage:["nettoyage_intensif","decontamination_chimique","decontamination_biologique"]'),"Trois activités Nettoyage");
+
 assert.ok(css.includes('.bp-summary{display:block!important}'),"Le sommaire doit apparaître dans le PDF");
 assert.ok(css.includes('.bp-variant-selector{display:none!important}'),"Les contrôles de variante ne doivent pas apparaître dans le PDF");
 assert.ok(css.includes('.bp-section h2{page-break-after:avoid}'),"Éviter les titres isolés lors de l'impression");
