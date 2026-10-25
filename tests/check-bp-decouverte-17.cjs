@@ -65,5 +65,12 @@ assert.ok(layout.includes("if(!id||(!up.nom&&!up.id&&!up.description))return;"),
 assert.ok(layout.includes("Array.isArray(machineSource.machines)"),"Privilégier le catalogue machines de l’UP");
 assert.ok(layout.includes('card("Chiffre d’affaires prévisionnel","À calculer par le moteur économique")'),"Ne pas présenter les estimations UP comme prévisions validées");
 assert.ok(layout.includes('card("ROI financier","Non calculable sans flux de trésorerie validés")'),"Ne pas inventer le ROI");
+assert.ok(layout.includes('id="p2i-bp17-download"'),"Bouton de téléchargement dans la rubrique 17");
+assert.ok(layout.includes('id="p2i-bp17-go-pro"'),"Bouton Aller au Pro dans la rubrique 17");
+assert.ok(layout.includes('destinationParams.set("unit_id",id)'),"Conserver l’identifiant de l’UP");
+assert.ok(layout.includes('proParams.set("tab","bp-pro")'),"Diriger vers l’onglet BP Pro existant");
+assert.ok(layout.includes('fiche-production.html?'),"Utiliser la route BP Pro du parcours existant");
+assert.ok(layout.includes('window.print()'),"Téléchargement via impression PDF du navigateur");
+assert.ok(css.includes(".bp-actions"),"Actions de fin de parcours stylées");
 assert.ok(css.includes("bp-sidebar"),"La navigation doit être stylée");
 console.log("P2I BP Découverte : contrôles statiques réussis (17 rubriques, liens, garde-fous).");
