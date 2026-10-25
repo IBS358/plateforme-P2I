@@ -65,6 +65,19 @@ const layout=document.createElement("div");layout.className="bp-layout";layout.i
 const aside=document.createElement("nav");aside.className="bp-sidebar";aside.setAttribute("aria-label","Parcours du business plan");aside.innerHTML='<h2>PARCOURS DU BP</h2>'+TITRES.map((t,i)=>'<a href="#p2i-r'+(i+1)+'">'+String(i+1).padStart(2,"0")+' · '+safe(t)+'</a>').join("");
 const main=document.createElement("main");main.className="bp-main";
 main.innerHTML='<div class="bp-intro"><b>P2I · PLATEFORME INDUSTRIELLE IVOIRIENNE</b><h1>Business Plan Découverte — '+safe(name)+'</h1><p>Une première vision structurée pour évaluer la faisabilité de votre projet.</p></div><div class="bp-hero"><div class="bp-hero-copy"><b>BP DÉCOUVERTE · CÔTE D’IVOIRE</b><h1>'+safe(name)+'</h1><p>'+text(up.description||"Configuration industrielle de référence P2I")+'</p><p>GRATUIT — version « Découverte »</p></div><div class="bp-medallion" aria-label="Illustration de l’activité"></div></div><div class="bp-note"><b>Statut :</b> les données disponibles sont indicatives. Les données manquantes restent à documenter. Aucun devis fournisseur ni prêt bancaire n’est présumé.</div>'+TITRES.map((t,i)=>'<section class="bp-section" id="p2i-r'+(i+1)+'"><h2>'+String(i+1).padStart(2,"0")+' · '+safe(t)+'</h2>'+sections[i]+'</section>').join("");
+if(id==="biscuiterie"){
+ const selector=document.createElement("div");
+ selector.className="bp-note";
+ selector.innerHTML='<label for="p2i-bp17-variant"><b>Variante de biscuiterie</b></label><select id="p2i-bp17-variant" style="display:block;width:100%;max-width:460px;margin-top:10px;padding:12px;background:#102c50;color:white;border:1px solid #61b7e7;border-radius:8px"><option value="">Choisir la variante</option><option value="biscuits_durs">Biscuits durs / secs</option><option value="biscuits_mous">Biscuits mous / cookies</option><option value="crackers">Crackers</option></select><p>Le changement de variante recharge le BP en conservant l’identifiant de simulation.</p>';
+ main.insertBefore(selector,main.querySelector(".bp-hero"));
+ const select=selector.querySelector("select");
+ select.value=selectedVariant||"";
+ select.addEventListener("change",()=>{
+  const p=new URLSearchParams(location.search);
+  if(select.value)p.set("configuration_id",select.value);else p.delete("configuration_id");
+  location.assign(location.pathname+"?"+p.toString());
+ });
+}
 layout.append(aside,main);document.body.prepend(layout);document.body.prepend(header);
 $("p2i-bp17-print").addEventListener("click",()=>window.print());
 const imgRegistry=window.P2I_BP_IMAGES||{};
