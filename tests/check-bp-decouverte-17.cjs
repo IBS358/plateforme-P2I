@@ -84,7 +84,7 @@ assert.ok(layout.includes('new CustomEvent("p2i:bp17-rendered"'),"Notifier l’a
 assert.ok(bridge.includes('window.addEventListener("p2i:bp17-rendered",update)'),"Le pont financier attend les rubriques réellement affichées");
 
 
-assert.ok(layout.includes('📈'),"Pictogramme du logo P2I de référence");
+assert.ok(layout.includes('class="bp-logo"')&&layout.includes('<svg viewBox="0 0 40 40"'),"Logo P2I vectoriel sans emoji");
 assert.ok(layout.includes('v[0]==="crackers"'),"450 000 USD ne doit concerner que la ligne Crackers");
 assert.ok(layout.includes('Capacité et investissement à documenter pour cette variante'),"Ne pas attribuer une capacité fictive aux autres variantes");
 assert.ok(layout.includes('pictureUrl(image.hero)'),"Vérifier les URL de photographies avant affichage");
