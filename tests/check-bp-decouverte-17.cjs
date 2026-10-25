@@ -72,6 +72,9 @@ assert.ok(!layout.includes('id="p2i-bp17-download"'),"Pas de bouton PDF en doubl
 assert.ok(layout.includes('href="dashboard.html"'),"Retour au dashboard visible");
 assert.ok(layout.includes('bp-variant-choice'),"Cartes de variantes Biscuiterie");
 assert.ok(layout.includes('bp-summary-links'),"Sommaire des 17 rubriques avant les sections");
+assert.ok(layout.includes('Date de consultation :'),"En-tête : date de consultation");
+assert.ok(layout.includes('Intl.DateTimeFormat("fr-FR"'),"Date de consultation calculée au chargement");
+
 assert.ok(layout.includes('main.insertBefore(summary,main.querySelector("#p2i-r1"))'),"Sommaire inséré avant la première rubrique");
 assert.ok(layout.includes('main.insertBefore(selector,main.querySelector(".bp-hero"))'),"Variantes Biscuiterie avant la bannière");
 assert.ok(layout.includes('main.insertBefore(panel,main.querySelector(".bp-hero"))'),"Variantes Nettoyage avant la bannière");
