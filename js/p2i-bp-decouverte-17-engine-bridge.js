@@ -20,14 +20,23 @@ const sim=p.get("simulation_id");
 const saved=sim?localStorage.getItem("p2i_bp_decouverte_biscuiterie_sim_"+sim):null;
 const selected=p.get("configuration_id")||saved||"";
 const id=p.get("unit_id")||p.get("id")||localStorage.getItem("currentProductionKey")||"";
-if(id!=="biscuiterie"||selected!=="crackers")return;
+if(id!=="biscuiterie"||selected!=="crackers"){
+$("p2i-r8-engine")?.remove();$("p2i-r9-engine")?.remove();
+return;
+}
 const e=window.P2I_CRACKERS_RESULTAT;
 const f=window.P2I_COMPTE_FINANCIER;
 const d=window.P2I_DONNEES_FINANCIERES;
 // Ne jamais exposer un résultat financier d’une autre configuration.
-if(!e||!number(e.chiffre_affaires_usd)||!number(e.cout_produits_vendus_usd))return;
+if(!e||!number(e.chiffre_affaires_usd)||!number(e.cout_produits_vendus_usd)){
+$("p2i-r8-engine")?.remove();$("p2i-r9-engine")?.remove();
+return;
+}
 if(d&&number(d.chiffre_affaires_usd)&&number(d.cout_produits_vendus_usd)&&
- (Math.abs(d.chiffre_affaires_usd-e.chiffre_affaires_usd)>.01||Math.abs(d.cout_produits_vendus_usd-e.cout_produits_vendus_usd)>.01))return;
+ (Math.abs(d.chiffre_affaires_usd-e.chiffre_affaires_usd)>.01||Math.abs(d.cout_produits_vendus_usd-e.cout_produits_vendus_usd)>.01)){
+$("p2i-r8-engine")?.remove();$("p2i-r9-engine")?.remove();
+return;
+}
 {
 const div=$("p2i-r8-engine")||document.createElement("div");div.id="p2i-r8-engine";div.innerHTML='<h3>Production et ventes — données du moteur économique</h3>'+table([
 ["Quantité produite",qty(e.quantite_produite)],["Quantité vendue",qty(e.quantite_vendue)],
@@ -50,7 +59,7 @@ const div=$("p2i-r9-engine")||document.createElement("div");div.id="p2i-r9-engin
 ["Résultat net",money(f.resultat_net_usd)]])+
 '<p class="bp-note">Simulation indicative. Les postes inconnus restent à renseigner. La marge industrielle ne constitue pas un bénéfice net.</p>';
 if(!div.isConnected){const previous=r9.querySelector(".bp-table-wrap");if(previous)previous.remove();r9.appendChild(div);}
-}
+}else{$("p2i-r9-engine")?.remove();}
 }
 function init(){
 const legacy=$("p2iCompteResultat");
@@ -60,6 +69,8 @@ document.addEventListener("change",update);
 window.addEventListener("p2i:economic-result-ready",update);
 window.addEventListener("p2i:financial-result-ready",update);
 window.addEventListener("pageshow",update);
+// Une modification de configuration invalide immédiatement les résultats précédents.
+document.addEventListener("input",update);
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
