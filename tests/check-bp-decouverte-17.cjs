@@ -35,6 +35,12 @@ assert.ok(layout.includes('id==="nettoyage"'),"Les variantes nettoyage doivent r
 assert.ok(layout.includes("decontamination_chimique")&&layout.includes("decontamination_biologique"));
 assert.ok(bridge.includes("P2I_COMPTE_FINANCIER"),"Raccordement au moteur financier historique");
 assert.ok(bridge.includes("P2I_CRACKERS_RESULTAT"),"Raccordement au moteur économique Crackers");
+assert.ok(bridge.includes('selected!=="crackers"'),"Les autres variantes ne doivent pas recevoir les chiffres Crackers");
+assert.ok(bridge.includes('$("p2i-r9-engine")?.remove()'),"Le compte de résultat périmé doit être retiré");
+assert.ok(bridge.includes('Math.abs(f.chiffre_affaires_total_usd-e.chiffre_affaires_usd)'),"Contrôler le rapprochement du chiffre d’affaires");
+assert.ok(bridge.includes('Math.abs(f.cout_ventes_total_usd-e.cout_produits_vendus_usd)'),"Contrôler le rapprochement du coût des ventes");
+assert.ok(bridge.includes('document.addEventListener("input",update)'),"Réagir aux modifications des sélecteurs");
+
 assert.ok(bridge.includes("number(f.resultat_net_usd)")==false,"Ne pas exiger un résultat net artificiellement complet");
 assert.ok(layout.includes("if(!id||(!up.nom&&!up.id&&!up.description))return;"),"Ne pas afficher de faux BP avant hydratation de l’UP");
 assert.ok(layout.includes("Array.isArray(machineSource.machines)"),"Privilégier le catalogue machines de l’UP");
