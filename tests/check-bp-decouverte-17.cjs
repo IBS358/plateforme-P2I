@@ -77,6 +77,10 @@ assert.ok(layout.includes('main.insertBefore(selector,main.querySelector(".bp-he
 assert.ok(layout.includes('main.insertBefore(panel,main.querySelector(".bp-hero"))'),"Variantes Nettoyage avant la bannière");
 assert.ok(layout.includes('main.insertBefore(statusNote,main.querySelector("#p2i-r1"))'),"Avertissement après le sommaire");
 assert.ok(layout.includes('aria-label="Illustration de l’activité"'),"Médaillon du produit ou service");
+assert.ok(layout.includes('renderAttempts<20'),"Attente bornée des données UP");
+assert.ok(layout.includes('setTimeout(tryRender,250)'),"Relance après chargement asynchrone");
+assert.ok(layout.includes('window.addEventListener("pageshow",tryRender)'),"Reprise après navigation navigateur");
+
 assert.ok(layout.includes('📈'),"Pictogramme du logo P2I de référence");
 
 assert.ok(layout.includes('id="p2i-bp17-go-pro"'),"Bouton Aller au Pro dans la rubrique 17");
