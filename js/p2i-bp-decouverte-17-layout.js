@@ -168,6 +168,8 @@ const variantImage=selectedVariant&&imageSet.variants&&imageSet.variants[selecte
 const image=variantImage?{...imageSet,...variantImage}:imageSet;
 if(image.hero)main.querySelector(".bp-hero").style.setProperty("--bp-hero-image",'url("'+String(image.hero).replace(/["\\]/g,"")+'")');
 if(image.product)main.querySelector(".bp-medallion").style.setProperty("--bp-product-image",'url("'+String(image.product).replace(/["\\]/g,"")+'")');
+// Le pont financier doit être notifié même lorsque le moteur a terminé avant l’affichage.
+window.dispatchEvent(new CustomEvent("p2i:bp17-rendered",{detail:{unit_id:id,configuration_id:config}}));
 }
 // Les référentiels et la simulation peuvent arriver après DOMContentLoaded.
 // Tentatives bornées : ne jamais fabriquer une UP à partir d’une donnée absente.
