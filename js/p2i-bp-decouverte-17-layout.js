@@ -39,12 +39,18 @@ const isCrackers=id==="biscuiterie"&&selectedVariant==="crackers";
 const capex=null; // CAPEX générique non validé pour la configuration
 const equipmentReference=isCrackers?450000:null;
 const invest=up.investment_breakdown||{};
+const machineRegistry=typeof MACHINES_DATA!=="undefined"?MACHINES_DATA:null;
+const machineSource=machineRegistry&&machineRegistry[id];
+const referenceMachines=Array.isArray(up.machines)&&up.machines.length?up.machines:
+ (Array.isArray(machineSource)?machineSource:
+ (machineSource&&Array.isArray(machineSource.machines)?machineSource.machines:[]));
+const machineNames=referenceMachines.map(m=>typeof m==="string"?m:(m.name||m.nom||m.machine||m.machine_name||"Équipement à qualifier"));
 const sourceCapex=equipmentReference!==null?fmt(equipmentReference)+" (ligne intégrée Crackers 500 kg/h, équipements uniquement)":"À documenter pour la configuration choisie";
 const finance=capex===null?note("Financement 40 % apport / 60 % dette : calcul suspendu jusqu'à validation de l'investissement de référence."):table([["Investissement indicatif",sourceCapex],["Apport de référence (40 %)",fmt(capex*.4)],["Dette de référence (60 %)",fmt(capex*.6)],["Réserve de trésorerie initiale","À calculer séparément"]]);
 const sections=[
 '<div class="bp-cards">'+card("Unité industrielle",name)+card("Filière",filiere)+card("Configuration",config||"Référence P2I à préciser")+'</div>'+note("<b>Activité :</b> "+text(up.description)),
 '<div class="bp-cards">'+card("Investissement machines",sourceCapex)+card("Chiffre d’affaires estimé",up.chiffre_affaires_estime||"À documenter")+card("Emplois directs",up.emplois_directs||"À documenter")+'</div>'+note("Données préliminaires du référentiel. Ne constituent pas des prévisions financières validées."),
-note("Les équipements sont présentés verticalement par fonction. Les capacités, interfaces, utilités et prix doivent être vérifiés pour chaque configuration.")+'<div class="bp-equipment-vertical">'+((Array.isArray(up.machines)&&up.machines.length)?up.machines.map(m=>'<article><b>'+safe(m.name||m.nom||"Équipement")+'</b><p>Fonction : '+text(m.role)+'</p><p>Capacité : '+text(m.capacity)+'</p><p>Utilités : '+text(m.utilities)+'</p></article>').join(""):'<article>Configuration industrielle de référence à documenter.</article>')+'</div>',
+note("Les équipements sont présentés verticalement par fonction. Les capacités, interfaces, utilités et prix doivent être vérifiés pour chaque configuration.")+'<div class="bp-equipment-vertical">'+(referenceMachines.length?referenceMachines.map(m=>'<article><b>'+safe(typeof m==='string'?m:(m.name||m.nom||m.machine||m.machine_name||'Équipement'))+'</b><p>Fonction : '+text(typeof m==='string'?null:(m.role||m.machine_role))+'</p><p>Capacité : '+text(typeof m==='string'?null:(m.capacity||m.machine_capacity))+'</p><p>Utilités : '+text(typeof m==='string'?null:(m.utilities||m.machine_utilities))+'</p></article>').join(""):'<article>Configuration industrielle de référence à documenter.</article>')+'</div>',
 '<h3>Marchés cibles</h3>'+list(up.target_markets)+'<h3>Positionnement concurrentiel</h3>'+list(up.competitive_advantages),
 '<h3>Canaux et actions commerciales</h3>'+list(up.marketing)+note("Prix de vente, volumes, circuits de distribution et budget marketing : à justifier par hypothèses documentées."),
 '<h3>Opportunités</h3>'+list(up.avantages)+'<h3>Risques et contraintes</h3>'+list(up.challenges),
@@ -58,7 +64,7 @@ note("Trésorerie prévisionnelle : 12 mois exclusivement. Encaissements, décai
 table([["Source unité",id||"Non identifié"],["Référentiel","js/up-data.js"],["Statut des montants","Estimations indicatives / à documenter"],["Devise de calcul","USD"],["Conversion FCFA","À afficher selon taux daté"]])+note("Les données financières non documentées sont volontairement laissées en attente."),
 note("La P2I accompagne la conception, la configuration industrielle, la simulation, le financement et la mise en relation avec les fournisseurs. Une estimation indicative ne déclenche pas de négociation."),
 note("Le BP Initial permet de personnaliser le projet. Le BP Pro nécessite des contrôles techniques et financiers approfondis ainsi que des devis et justificatifs. Les services additionnels sont distincts du BP Pro."),
-'<h3>Éléments techniques disponibles</h3>'+table([["Unité",name],["Filière",filiere],["Configuration",config||"À préciser"],["Utilités","À confirmer"],["Sécurité / conformité","À documenter"]])+'<h3>Équipements et fonctions</h3>'+list(up.machines)
+'<h3>Éléments techniques disponibles</h3>'+table([["Unité",name],["Filière",filiere],["Configuration",config||"À préciser"],["Utilités","À confirmer"],["Sécurité / conformité","À documenter"]])+'<h3>Équipements et fonctions</h3>'+list(machineNames)
 ];
 const header=document.createElement("header");header.className="bp-topbar";header.innerHTML='<div class="bp-brand">▣ P2I<small>Plateforme Industrielle Ivoirienne · Business Plan Découverte</small></div><div class="bp-tag">BP Découverte · '+safe(name)+'</div><button class="bp-export" type="button" id="p2i-bp17-print">▣ Exporter le BP en PDF</button>';
 const layout=document.createElement("div");layout.className="bp-layout";layout.id="p2i-bp17-root";
