@@ -80,6 +80,9 @@ assert.ok(layout.includes('aria-label="Illustration de l’activité"'),"Médail
 assert.ok(layout.includes('renderAttempts<20'),"Attente bornée des données UP");
 assert.ok(layout.includes('setTimeout(tryRender,250)'),"Relance après chargement asynchrone");
 assert.ok(layout.includes('window.addEventListener("pageshow",tryRender)'),"Reprise après navigation navigateur");
+assert.ok(layout.includes('new CustomEvent("p2i:bp17-rendered"'),"Notifier l’affichage des 17 rubriques");
+assert.ok(bridge.includes('window.addEventListener("p2i:bp17-rendered",update)'),"Le pont financier attend les rubriques réellement affichées");
+
 
 assert.ok(layout.includes('📈'),"Pictogramme du logo P2I de référence");
 
