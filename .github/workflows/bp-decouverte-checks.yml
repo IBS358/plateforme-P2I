@@ -1,0 +1,33 @@
+name: BP Découverte — contrôles de non-régression
+
+on:
+  push:
+    branches:
+      - refonte-bp-decouverte-17-rubriques
+    paths:
+      - 'business-plan-decouverte.html'
+      - 'business-plan-pro.html'
+      - 'fiche-production.html'
+      - 'css/p2i-bp-decouverte-17.css'
+      - 'js/p2i-bp-decouverte-*.js'
+      - 'js/p2i-financial-display.js'
+      - 'tests/check-bp-decouverte-*.cjs'
+      - '.github/workflows/bp-decouverte-checks.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Contrôles statiques et syntaxiques
+        run: node tests/check-bp-decouverte-17.cjs
+      - name: Scénarios dynamiques du pont financier
+        run: node tests/check-bp-decouverte-bridge.cjs
