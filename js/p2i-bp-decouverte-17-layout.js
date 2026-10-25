@@ -169,5 +169,16 @@ const image=variantImage?{...imageSet,...variantImage}:imageSet;
 if(image.hero)main.querySelector(".bp-hero").style.setProperty("--bp-hero-image",'url("'+String(image.hero).replace(/["\\]/g,"")+'")');
 if(image.product)main.querySelector(".bp-medallion").style.setProperty("--bp-product-image",'url("'+String(image.product).replace(/["\\]/g,"")+'")');
 }
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(render,0));else setTimeout(render,0);
+// Les référentiels et la simulation peuvent arriver après DOMContentLoaded.
+// Tentatives bornées : ne jamais fabriquer une UP à partir d’une donnée absente.
+let renderAttempts=0;
+function tryRender(){
+ if(document.getElementById("p2i-bp17-root"))return;
+ render();
+ if(!document.getElementById("p2i-bp17-root")&&++renderAttempts<20)
+   setTimeout(tryRender,250);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",tryRender);
+else tryRender();
+window.addEventListener("pageshow",tryRender);
 })();
