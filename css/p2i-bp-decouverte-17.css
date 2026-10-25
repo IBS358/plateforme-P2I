@@ -52,3 +52,18 @@ body.p2i-bp17{margin:0;background:var(--p2i-bg);color:var(--p2i-text);font-famil
 /* Masquer les éléments de l'ancien document après activation du nouveau modèle. */
 body.p2i-bp17 > .topbar{display:none!important}
 body.p2i-bp17 > #p2i-bp-legacy{display:none!important}
+
+/* Actions de fin de parcours : téléchargement et transition BP Pro. */
+.p2i-bp17 .bp-actions{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0}
+.p2i-bp17 .bp-actions button,.p2i-bp17 .bp-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 22px;border-radius:9px;font-weight:800;text-decoration:none;cursor:pointer}
+.p2i-bp17 .bp-actions button{background:#e7f2ff;color:#102d4d;border:1px solid #b2d8ff}
+.p2i-bp17 .bp-actions a{background:#1974cf;color:#fff;border:1px solid #6db4f7}
+.p2i-bp17 .bp-table-wrap[hidden]{display:none!important}
+@media print{
+ .p2i-bp17 .bp-actions,.p2i-bp17 #p2i-bp17-variant{display:none!important}
+ .p2i-bp17 .bp-table-wrap{overflow:visible}
+ .p2i-bp17 table{font-size:9pt}
+ .p2i-bp17 th,.p2i-bp17 td{padding:6px 8px}
+ .p2i-bp17 thead{display:table-header-group}
+ .p2i-bp17 tr{break-inside:avoid}
+}
