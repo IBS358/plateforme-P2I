@@ -111,6 +111,12 @@ const layout=document.createElement("div");layout.className="bp-layout";layout.i
 const aside=document.createElement("nav");aside.className="bp-sidebar";aside.setAttribute("aria-label","Parcours du business plan");aside.innerHTML='<h2>PARCOURS DU BP</h2>'+TITRES.map((t,i)=>'<a href="#p2i-r'+(i+1)+'">'+String(i+1).padStart(2,"0")+' · '+safe(t)+'</a>').join("");
 const main=document.createElement("main");main.className="bp-main";
 main.innerHTML='<div class="bp-intro"><b>P2I · PLATEFORME INDUSTRIELLE IVOIRIENNE</b><h1>Business Plan Découverte — '+safe(name)+'</h1><p>Une première vision structurée pour évaluer la faisabilité de votre projet.</p><div class="bp-intro-meta"><span>Unité : '+safe(name)+'</span><span>Filière : '+safe(filiere)+'</span><span>Configuration : '+safe(config||"À choisir")+'</span></div></div><div class="bp-hero"><div class="bp-hero-copy"><b>BP DÉCOUVERTE · CÔTE D’IVOIRE</b><h1>'+safe(name)+'</h1><p>'+text(up.description||"Configuration industrielle de référence P2I")+'</p><p>GRATUIT — version « Découverte »</p></div><div class="bp-medallion" aria-label="Illustration de l’activité"></div></div><div class="bp-note"><b>Statut :</b> les données disponibles sont indicatives. Les données manquantes restent à documenter. Aucun devis fournisseur ni prêt bancaire n’est présumé.</div>'+TITRES.map((t,i)=>'<section class="bp-section" id="p2i-r'+(i+1)+'"><h2>'+String(i+1).padStart(2,"0")+' · '+safe(t)+'</h2>'+sections[i]+'</section>').join("");
+// Le sommaire se place après la bannière, avant la première rubrique.
+const summary=document.createElement("section");
+summary.className="bp-summary";
+summary.setAttribute("aria-label","Sommaire des 17 rubriques");
+summary.innerHTML='<h2>Votre BP Découverte en 17 rubriques</h2><p>Accédez directement aux analyses techniques, commerciales et financières.</p><div class="bp-summary-links">'+TITRES.map((t,i)=>'<a href="#p2i-r'+(i+1)+'">'+String(i+1).padStart(2,"0")+' · '+safe(t)+'</a>').join("")+'</div>';
+main.insertBefore(summary,main.querySelector("#p2i-r1"));
 if(id==="biscuiterie"){
  const selector=document.createElement("div");
  selector.className="bp-variant-selector";
