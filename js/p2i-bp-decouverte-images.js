@@ -4,23 +4,21 @@
  * Les champs vides ne sont pas affichés; aucun visuel fictif n'est généré.
  * Chemins autorisés : images/..., assets/..., ./..., ../... ou HTTPS.
  */
-window.P2I_BP_IMAGES=Object.assign({},window.P2I_BP_IMAGES||{},{
- biscuiterie:{
-  hero:"",
-  product:"",
-  variants:{
-   crackers:{hero:"",product:""},
-   biscuits_mous:{hero:"",product:""},
-   biscuits_durs:{hero:"",product:""}
-  }
- },
- nettoyage:{
-  hero:"",
-  product:"",
-  variants:{
-   nettoyage_intensif:{hero:"",product:""},
-   decontamination_chimique:{hero:"",product:""},
-   decontamination_biologique:{hero:"",product:""}
+(function(){
+ const registry=window.P2I_BP_IMAGES=window.P2I_BP_IMAGES||{};
+ const defaults={
+  biscuiterie:["crackers","biscuits_mous","biscuits_durs"],
+  nettoyage:["nettoyage_intensif","decontamination_chimique","decontamination_biologique"]
+ };
+ for(const [unit,variants] of Object.entries(defaults)){
+  const data=registry[unit]=registry[unit]||{};
+  data.hero=data.hero||"";
+  data.product=data.product||"";
+  data.variants=data.variants||{};
+  for(const variant of variants){
+   const item=data.variants[variant]=data.variants[variant]||{};
+   item.hero=item.hero||"";
+   item.product=item.product||"";
   }
  }
-});
+})();
