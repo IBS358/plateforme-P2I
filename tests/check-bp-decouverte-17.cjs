@@ -55,6 +55,10 @@ assert.ok(bridge.includes('Math.abs(f.chiffre_affaires_total_usd-e.chiffre_affai
 assert.ok(bridge.includes('Math.abs(f.cout_ventes_total_usd-e.cout_produits_vendus_usd)'),"Contrôler le rapprochement du coût des ventes");
 assert.ok(bridge.includes('document.addEventListener("input",update)'),"Réagir aux modifications des sélecteurs");
 assert.ok(bridge.includes('legacyChoice.value!=="crackers"'),"Refuser les résultats Crackers si le moteur historique utilise une autre variante");
+assert.ok(bridge.includes("function invalidate()"),"Réinitialisation explicite des résultats invalidés");
+assert.ok(bridge.includes("setPlaceholder(r8,true)")&&bridge.includes("setPlaceholder(r9,true)"),"Restaurer les tableaux d’attente lors de l’invalidation");
+assert.ok(bridge.includes("setPlaceholder(r8,false)")&&bridge.includes("setPlaceholder(r9,false)"),"Masquer les tableaux d’attente lorsque les résultats sont valides");
+
 
 assert.ok(bridge.includes("number(f.resultat_net_usd)")==false,"Ne pas exiger un résultat net artificiellement complet");
 assert.ok(layout.includes("if(!id||(!up.nom&&!up.id&&!up.description))return;"),"Ne pas afficher de faux BP avant hydratation de l’UP");
