@@ -56,6 +56,8 @@ const historical=document.getElementById("p2i-bp-legacy");
 if(historical){new MutationObserver(update).observe(historical,{childList:true,subtree:true});}
 update();
 document.addEventListener("change",update);
+window.addEventListener("p2i:economic-result-ready",update);
+window.addEventListener("p2i:financial-result-ready",update);
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
