@@ -107,4 +107,8 @@ assert.ok(pro.includes('Retour au BP Découverte'),"Le parcours retour est dispo
 assert.ok(layout.includes('window.print()'),"Téléchargement via impression PDF du navigateur");
 assert.ok(css.includes(".bp-actions"),"Actions de fin de parcours stylées");
 assert.ok(css.includes("bp-sidebar"),"La navigation doit être stylée");
+assert.ok(css.includes('.bp-summary{display:block!important}'),"Le sommaire doit apparaître dans le PDF");
+assert.ok(css.includes('.bp-variant-selector{display:none!important}'),"Les contrôles de variante ne doivent pas apparaître dans le PDF");
+assert.ok(css.includes('.bp-section h2{page-break-after:avoid}'),"Éviter les titres isolés lors de l'impression");
+
 console.log("P2I BP Découverte : contrôles statiques réussis (17 rubriques, liens, garde-fous).");
