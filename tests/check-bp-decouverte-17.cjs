@@ -72,6 +72,13 @@ assert.ok(!layout.includes('id="p2i-bp17-download"'),"Pas de bouton PDF en doubl
 assert.ok(layout.includes('href="dashboard.html"'),"Retour au dashboard visible");
 assert.ok(layout.includes('bp-variant-choice'),"Cartes de variantes Biscuiterie");
 assert.ok(layout.includes('bp-summary-links'),"Sommaire des 17 rubriques avant les sections");
+assert.ok(layout.includes('main.insertBefore(summary,main.querySelector("#p2i-r1"))'),"Sommaire inséré avant la première rubrique");
+assert.ok(layout.includes('main.insertBefore(selector,main.querySelector(".bp-hero"))'),"Variantes Biscuiterie avant la bannière");
+assert.ok(layout.includes('main.insertBefore(panel,main.querySelector(".bp-hero"))'),"Variantes Nettoyage avant la bannière");
+assert.ok(layout.includes('main.insertBefore(statusNote,main.querySelector("#p2i-r1"))'),"Avertissement après le sommaire");
+assert.ok(layout.includes('aria-label="Illustration de l’activité"'),"Médaillon du produit ou service");
+assert.ok(layout.includes('📈'),"Pictogramme du logo P2I de référence");
+
 assert.ok(layout.includes('id="p2i-bp17-go-pro"'),"Bouton Aller au Pro dans la rubrique 17");
 assert.ok(layout.includes('destinationParams.set("unit_id",id)'),"Conserver l’identifiant de l’UP");
 assert.ok(layout.includes('proParams.set("redirect","bp-pro")'),"Déclencher le véritable parcours BP Pro");
