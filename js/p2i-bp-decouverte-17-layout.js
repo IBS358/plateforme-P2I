@@ -170,7 +170,8 @@ $("p2i-bp17-print").addEventListener("click",()=>window.print());
 
 // Images liées à l’UP et à sa variante : pas de photo d’une autre activité.
 const imageSet=unitPictures;
-const variantImage=selectedVariant&&imageSet.variants&&imageSet.variants[selectedVariant];
+const imageVariant=id==="nettoyage"?config:selectedVariant;
+const variantImage=imageVariant&&imageSet.variants&&imageSet.variants[imageVariant];
 const image=variantImage?{...imageSet,...variantImage}:imageSet;
 if(pictureUrl(image.hero))main.querySelector(".bp-hero").style.setProperty("--bp-hero-image",'url("'+pictureUrl(image.hero)+'")');
 if(pictureUrl(image.product))main.querySelector(".bp-medallion").style.setProperty("--bp-product-image",'url("'+pictureUrl(image.product)+'")');
