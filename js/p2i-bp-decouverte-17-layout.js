@@ -105,7 +105,7 @@ if(selectedVariant)destinationParams.set("configuration_id",selectedVariant);
 const proParams=new URLSearchParams(destinationParams);
 proParams.set("redirect","bp-pro");
 const proUrl="fiche-production.html?"+proParams.toString();
-sections[16]+='<div class="bp-note"><h3>Continuer votre parcours P2I</h3><p>Conservez une copie du BP Découverte avant de passer à la préparation du dossier approfondi. Les données manquantes devront être complétées et vérifiées.</p><div class="bp-actions"><button type="button" id="p2i-bp17-download">Télécharger le BP Découverte (PDF)</button><a id="p2i-bp17-go-pro" href="'+safe(proUrl)+'">Aller au Pro</a></div><p>Le passage au BP Pro ne constitue ni une validation bancaire ni un devis fournisseur.</p></div>';
+sections[16]+='<div class="bp-note"><h3>Continuer votre parcours P2I</h3><p>Conservez une copie du BP Découverte avant de passer à la préparation du dossier approfondi. Les données manquantes devront être complétées et vérifiées.</p><div class="bp-actions"><a id="p2i-bp17-go-pro" href="'+safe(proUrl)+'">Aller au Pro</a></div><p>Le passage au BP Pro ne constitue ni une validation bancaire ni un devis fournisseur.</p></div>';
 const header=document.createElement("header");header.className="bp-topbar";header.innerHTML='<div class="bp-brand"><span class="bp-logo" aria-hidden="true">▣</span> P2I<small>Plateforme Industrielle Ivoirienne · Business Plan Découverte</small></div><div class="bp-tag">BP Découverte · '+safe(name)+'</div><div class="bp-top-actions"><a href="dashboard.html" class="bp-dashboard-link">← Retour au dashboard</a><button class="bp-export" type="button" id="p2i-bp17-print">▣ Exporter le BP en PDF</button></div>';
 const layout=document.createElement("div");layout.className="bp-layout";layout.id="p2i-bp17-root";
 const aside=document.createElement("nav");aside.className="bp-sidebar";aside.setAttribute("aria-label","Parcours du business plan");aside.innerHTML='<h2>PARCOURS DU BP</h2>'+TITRES.map((t,i)=>'<a href="#p2i-r'+(i+1)+'">'+String(i+1).padStart(2,"0")+' · '+safe(t)+'</a>').join("");
@@ -150,7 +150,7 @@ if(id==="nettoyage"){
 }
 layout.append(aside,main);document.body.prepend(layout);document.body.prepend(header);
 $("p2i-bp17-print").addEventListener("click",()=>window.print());
-$("p2i-bp17-download").addEventListener("click",()=>window.print());
+
 const imgRegistry=window.P2I_BP_IMAGES||{};
 const image=imgRegistry[id]||{};
 if(image.hero)main.querySelector(".bp-hero").style.setProperty("--bp-hero-image",'url("'+String(image.hero).replace(/["\\]/g,"")+'")');
