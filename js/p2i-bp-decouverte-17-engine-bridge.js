@@ -86,6 +86,7 @@ update();
 document.addEventListener("change",update);
 window.addEventListener("p2i:economic-result-ready",update);
 window.addEventListener("p2i:financial-result-ready",update);
+window.addEventListener("p2i:bp17-rendered",update);
 window.addEventListener("pageshow",update);
 // Une modification de configuration invalide immédiatement les résultats précédents.
 document.addEventListener("input",update);
