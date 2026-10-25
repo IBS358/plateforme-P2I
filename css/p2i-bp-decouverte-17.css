@@ -1,0 +1,50 @@
+/* P2I — Présentation commune BP Découverte — référence Biscuiterie V106.
+   Feuille isolée sur branche de refonte; ne modifie pas la production.
+   Le modèle HTML universel et les données seront raccordés après vérification. */
+:root{--p2i-bg:#09152a;--p2i-panel:#142440;--p2i-side:#071c39;--p2i-text:#f8fbff;--p2i-muted:#bdd0e6;--p2i-border:#2b4b72;--p2i-cyan:#08a1ce;--p2i-purple:#9634a5;--p2i-blue:#0660ce}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body.p2i-bp17{margin:0;background:var(--p2i-bg);color:var(--p2i-text);font-family:Inter,"Segoe UI",Arial,sans-serif}
+.p2i-bp17 button,.p2i-bp17 a{font:inherit}
+.p2i-bp17 .bp-topbar{height:100px;position:sticky;top:0;z-index:40;background:#071b37;border-bottom:1px solid #2b4b72;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:15px 35px}
+.p2i-bp17 .bp-brand{font-size:30px;font-weight:850;line-height:1.15}
+.p2i-bp17 .bp-brand small{display:block;font-size:12px;font-weight:600;margin-top:6px}
+.p2i-bp17 .bp-tag{padding:12px 18px;border-radius:30px;background:#07859b;font-size:14px;font-weight:800}
+.p2i-bp17 .bp-export{border:1px solid #58b5fb;border-radius:12px;padding:15px 22px;background:linear-gradient(105deg,#0784d0,#673ac5);color:white;font-weight:800;cursor:pointer}
+.p2i-bp17 .bp-layout{display:grid;grid-template-columns:395px minmax(0,1fr);min-height:calc(100vh - 100px)}
+.p2i-bp17 .bp-sidebar{position:sticky;top:100px;height:calc(100vh - 100px);overflow-y:auto;background:#071c39;border-right:1px solid #244567;padding:20px 26px}
+.p2i-bp17 .bp-sidebar h2{font-size:17px;margin:0 0 15px}
+.p2i-bp17 .bp-sidebar a{display:block;color:#d4e7ff;padding:12px 16px;text-decoration:none;border-radius:8px;font-size:16px;line-height:1.4}
+.p2i-bp17 .bp-sidebar a:hover,.p2i-bp17 .bp-sidebar a[aria-current="true"]{background:#075cce;color:white}
+.p2i-bp17 .bp-main{min-width:0;padding:24px 32px 60px}
+.p2i-bp17 .bp-intro{background:#142440;border:1px solid var(--p2i-border);border-radius:20px;padding:32px;margin-bottom:20px}
+.p2i-bp17 .bp-hero{position:relative;isolation:isolate;overflow:hidden;min-height:380px;padding:35px 40px;background:#092443;border:1px solid #355b83;display:flex;align-items:center;margin-bottom:24px}
+.p2i-bp17 .bp-hero::before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,rgba(3,19,40,.97),rgba(3,19,40,.83) 55%,rgba(3,19,40,.25)),var(--bp-hero-image,linear-gradient(110deg,#0b5379,#162c53));background-position:center;background-size:cover}
+.p2i-bp17 .bp-hero-copy{max-width:75%;text-shadow:0 2px 10px #07192b}
+.p2i-bp17 .bp-hero h1{font-size:clamp(27px,3vw,46px);line-height:1.25;margin:16px 0}
+.p2i-bp17 .bp-hero p{line-height:1.6}
+.p2i-bp17 .bp-medallion{position:absolute;right:4%;top:50%;transform:translateY(-50%);width:190px;aspect-ratio:1;border:7px solid white;border-radius:50%;background:var(--bp-product-image,#214365) center/cover no-repeat;box-shadow:0 8px 26px #0009}
+.p2i-bp17 .bp-section{scroll-margin-top:116px;border:1px solid var(--p2i-border);background:var(--p2i-panel);border-radius:20px;padding:32px;margin:24px 0}
+.p2i-bp17 .bp-section>h2{font-size:clamp(22px,2vw,30px);margin:0 0 24px;padding:20px 24px;border-radius:12px;background:linear-gradient(100deg,#0488b7,#2a61ad 55%,#983aa5);color:#fff}
+.p2i-bp17 .bp-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
+.p2i-bp17 .bp-card{padding:22px;border-radius:18px;background:linear-gradient(120deg,#135f88,#29457f);border:1px solid #3984b2;min-height:125px}
+.p2i-bp17 .bp-card:nth-child(3n){background:linear-gradient(120deg,#7d4ab4,#5545a0)}
+.p2i-bp17 .bp-card strong{display:block;font-size:clamp(20px,2vw,32px);margin-top:12px;overflow-wrap:anywhere}
+.p2i-bp17 .bp-card small{color:#d7e9ff;font-weight:750}
+.p2i-bp17 .bp-table-wrap{overflow-x:auto}
+.p2i-bp17 table{width:100%;border-collapse:collapse}
+.p2i-bp17 th,.p2i-bp17 td{padding:14px 16px;text-align:left;border-bottom:1px solid #476181}
+.p2i-bp17 th{background:#29415f;color:#fff;font-weight:800}
+.p2i-bp17 td{background:#f1f6fc;color:#0c2444}
+.p2i-bp17 tbody tr:nth-child(even) td{background:#dfe9f6;color:#0c2444}
+.p2i-bp17 .bp-note{border:1px solid #3974a1;border-radius:15px;padding:18px 20px;background:#1b3253;line-height:1.65}
+.p2i-bp17 .bp-variant-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:16px}
+.p2i-bp17 .bp-variant{border:1px solid #2d7ed0;border-radius:17px;overflow:hidden;background:#14385e}
+.p2i-bp17 .bp-variant img{display:block;width:100%;height:175px;object-fit:cover}
+.p2i-bp17 .bp-variant-content{padding:18px}
+.p2i-bp17 .bp-variant button{width:100%;padding:12px;background:#0565d5;border:0;color:white;font-weight:800;border-radius:7px;cursor:pointer}
+.p2i-bp17 .bp-equipment-vertical{display:block}
+.p2i-bp17 .bp-equipment-vertical>article{margin:14px 0;padding:18px;border:1px solid #3b688e;border-radius:12px;background:#1b3557}
+@media(max-width:1000px){.p2i-bp17 .bp-layout{grid-template-columns:270px minmax(0,1fr)}.p2i-bp17 .bp-sidebar{padding:15px}.p2i-bp17 .bp-medallion{width:135px}.p2i-bp17 .bp-hero-copy{max-width:78%}}
+@media(max-width:720px){.p2i-bp17 .bp-topbar{height:auto;position:relative;flex-wrap:wrap;padding:15px}.p2i-bp17 .bp-layout{display:block}.p2i-bp17 .bp-sidebar{position:relative;top:auto;height:auto;max-height:210px}.p2i-bp17 .bp-main{padding:12px}.p2i-bp17 .bp-section{padding:15px}.p2i-bp17 .bp-hero{padding:24px;min-height:340px}.p2i-bp17 .bp-hero-copy{max-width:100%;padding-right:65px}.p2i-bp17 .bp-medallion{width:95px;right:10px;bottom:10px;top:auto;transform:none}}
+@media print{.p2i-bp17{background:white;color:#112844}.p2i-bp17 .bp-topbar,.p2i-bp17 .bp-sidebar,.p2i-bp17 .bp-export{display:none!important}.p2i-bp17 .bp-layout{display:block}.p2i-bp17 .bp-main{padding:0}.p2i-bp17 .bp-section{break-inside:avoid;background:#fff;color:#112844}.p2i-bp17 .bp-hero,.p2i-bp17 .bp-card,.p2i-bp17 .bp-section>h2{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
