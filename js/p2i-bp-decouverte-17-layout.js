@@ -160,7 +160,8 @@ $("p2i-bp17-print").addEventListener("click",()=>window.print());
 // Images liées à l’UP et à sa variante : pas de photo d’une autre activité.
 const imgRegistry=window.P2I_BP_IMAGES||{};
 const imageSet=imgRegistry[id]||{};
-const image=(selectedVariant&&imageSet.variants&&imageSet.variants[selectedVariant])||imageSet;
+const variantImage=selectedVariant&&imageSet.variants&&imageSet.variants[selectedVariant];
+const image=variantImage?{...imageSet,...variantImage}:imageSet;
 if(image.hero)main.querySelector(".bp-hero").style.setProperty("--bp-hero-image",'url("'+String(image.hero).replace(/["\\]/g,"")+'")');
 if(image.product)main.querySelector(".bp-medallion").style.setProperty("--bp-product-image",'url("'+String(image.product).replace(/["\\]/g,"")+'")');
 }
