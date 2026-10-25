@@ -15,6 +15,7 @@ const bridge=read("js/p2i-bp-decouverte-17-engine-bridge.js");
 const css=read("css/p2i-bp-decouverte-17.css");
 const financial=read("js/p2i-financial-display.js");
 const fiche=read("fiche-production.html");
+const pro=read("business-plan-pro.html");
 for(const [file,source] of [["layout",layout],["bridge",bridge],["financial",financial]])
   assert.doesNotThrow(()=>new vm.Script(source,{filename:file}),file+" doit être syntaxiquement valide");
 const sectionList=layout.match(/const TITRES=(\[[^\n]+\]);/);
@@ -74,6 +75,12 @@ assert.ok(layout.includes('fiche-production.html?'),"Utiliser la route BP Pro du
 assert.ok(fiche.includes("window.goToBpPro()"),"La fiche déclenche le BP Pro");
 assert.ok(fiche.includes("buildUrl('business-plan-pro.html', data)"),"La fiche rejoint le BP Pro");
 assert.ok(fiche.includes("'configuration_id', 'simulation_id'"),"Le contexte de simulation est transmis au BP Pro");
+assert.ok(pro.includes('id = "p2i-bp-pro-context"'),"Le BP Pro indique le contexte repris");
+assert.ok(pro.includes('params.get("configuration_id")'),"Le BP Pro lit la variante transmise");
+assert.ok(pro.includes('params.get("simulation_id")'),"Le BP Pro lit la simulation d’origine");
+assert.ok(pro.includes('ne sont pas automatiquement validés ni transférés'),"Le BP Pro ne prétend pas reprendre les calculs");
+assert.ok(pro.includes('Retour au BP Découverte'),"Le parcours retour est disponible");
+
 assert.ok(layout.includes('window.print()'),"Téléchargement via impression PDF du navigateur");
 assert.ok(css.includes(".bp-actions"),"Actions de fin de parcours stylées");
 assert.ok(css.includes("bp-sidebar"),"La navigation doit être stylée");
