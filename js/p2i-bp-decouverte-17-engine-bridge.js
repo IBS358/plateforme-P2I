@@ -19,7 +19,7 @@ const p=new URLSearchParams(location.search);
 const sim=p.get("simulation_id");
 const saved=sim?localStorage.getItem("p2i_bp_decouverte_biscuiterie_sim_"+sim):null;
 const selected=p.get("configuration_id")||saved||"";
-const id=p.get("unit_id")||localStorage.getItem("currentProductionKey")||"";
+const id=p.get("unit_id")||p.get("id")||localStorage.getItem("currentProductionKey")||"";
 if(id!=="biscuiterie"||selected!=="crackers")return;
 const e=window.P2I_CRACKERS_RESULTAT;
 const f=window.P2I_COMPTE_FINANCIER;
@@ -51,7 +51,9 @@ r9.appendChild(div);
 }
 function init(){
 const legacy=$("p2iCompteResultat");
-if(legacy){new MutationObserver(update).observe(legacy,{childList:true,subtree:true,attributes:true,attributeFilter:["style"]});}
+if(legacy){new MutationObserver(update).observe(legacy,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:["style"]});}
+const historical=document.getElementById("p2i-bp-legacy");
+if(historical){new MutationObserver(update).observe(historical,{childList:true,subtree:true});}
 update();
 document.addEventListener("change",update);
 }
