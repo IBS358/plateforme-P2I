@@ -39,8 +39,8 @@ const f=window.P2I_COMPTE_FINANCIER;
 const d=window.P2I_DONNEES_FINANCIERES;
 const legacyChoice=$("p2iBiscuiterieSelect");
 // La configuration affichée dans l’URL et celle réellement calculée doivent coïncider.
-if(legacyChoice&&legacyChoice.value&&legacyChoice.value!=="crackers"){
- $("p2i-r8-engine")?.remove();$("p2i-r9-engine")?.remove();
+if(legacyChoice&&legacyChoice.value!=="crackers"){
+ invalidate();
  return;
 }
 // Ne jamais exposer un résultat financier d’une autre configuration.
