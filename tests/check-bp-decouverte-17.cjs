@@ -32,6 +32,13 @@ assert.ok(layout.includes("capex=null"),"Ne pas convertir le coût de la ligne e
 assert.ok(layout.includes("40 %")&&layout.includes("60 %"));
 assert.ok(layout.includes("12 mois exclusivement"),"Trésorerie : 12 mois seulement");
 assert.ok(layout.includes("Bilan simplifié prévisionnel sur trois exercices"),"Bilan sur 3 exercices");
+assert.ok(layout.includes("function annualMatrix(title,rows)"),"Matrice annuelle commune");
+assert.ok(layout.includes("<th>Année 1</th><th>Année 2</th><th>Année 3</th>"),"Les trois exercices sont explicites");
+assert.ok(layout.includes('annualMatrix("Compte de résultat prévisionnel — trois exercices"'),"Compte de résultat sur 3 ans");
+assert.ok(layout.includes('annualMatrix("Bilan simplifié — trois exercices"'),"Bilan sur 3 ans");
+assert.ok(layout.includes('annualMatrix("Indicateurs économiques — trois exercices"'),"Indicateurs sur 3 ans");
+assert.ok(layout.includes("Écart de contrôle actif − passif"),"Contrôle d’équilibre du bilan");
+
 assert.ok(layout.includes("compte de résultat sur trois années"),"Compte de résultat sur 3 exercices");
 assert.ok(layout.includes("Array.from({length:months}"),"Les tableaux mensuels doivent respecter leur horizon spécifique");
 assert.ok(layout.includes("30 jours")&&layout.includes("15 jours")&&layout.includes("40 % comptant")&&layout.includes("60 % à 30 jours"),"Les hypothèses BFR Crackers doivent rester explicites");
