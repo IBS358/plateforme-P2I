@@ -96,6 +96,9 @@ assert.ok(layout.includes('class="bp-logo"')&&layout.includes('<svg viewBox="0 0
 assert.ok(layout.includes('v[0]==="crackers"'),"450 000 USD ne doit concerner que la ligne Crackers");
 assert.ok(layout.includes('Capacité et investissement à documenter pour cette variante'),"Ne pas attribuer une capacité fictive aux autres variantes");
 assert.ok(layout.includes('pictureUrl(image.hero)'),"Vérifier les URL de photographies avant affichage");
+assert.ok(layout.includes('if(/(?:^|\\/)\\.\\.(?:\\/|$)/.test(url))return "";'),"Refuser la traversée des dossiers dans les URL de photographies");
+assert.ok(layout.includes('[a-z0-9_./-]+'),"Autoriser les images locales du dépôt");
+
 assert.ok(css.includes('.bp-variant-photo'),"Photographies des cartes de variantes mises en forme");
 
 
