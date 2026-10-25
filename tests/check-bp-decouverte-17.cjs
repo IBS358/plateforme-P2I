@@ -31,10 +31,12 @@ assert.ok(layout.includes("450000"),"La référence équipement Crackers doit re
 assert.ok(layout.includes("capex=null"),"Ne pas convertir le coût de la ligne en investissement total");
 assert.ok(layout.includes("40 %")&&layout.includes("60 %"));
 assert.ok(layout.includes("12 mois exclusivement"),"Trésorerie : 12 mois seulement");
-assert.ok(layout.includes("Array.from({length:12}"),"Les tableaux mensuels comportent exactement 12 lignes");
+assert.ok(layout.includes("Bilan simplifié prévisionnel sur trois exercices"),"Bilan sur 3 exercices");
+assert.ok(layout.includes("compte de résultat sur trois années"),"Compte de résultat sur 3 exercices");
+assert.ok(layout.includes("Array.from({length:months}"),"Les tableaux mensuels doivent respecter leur horizon spécifique");
 assert.ok(layout.includes("30 jours")&&layout.includes("15 jours")&&layout.includes("40 % comptant")&&layout.includes("60 % à 30 jours"),"Les hypothèses BFR Crackers doivent rester explicites");
-assert.ok(layout.includes('monthlyMatrix("BFR prévisionnel'),"BFR structuré mensuellement");
-assert.ok(layout.includes('monthlyMatrix("Plan de trésorerie'),"Trésorerie structurée mensuellement");
+assert.ok(layout.includes('monthlyMatrix("BFR prévisionnel — 36 périodes mensuelles (3 ans)"')&&layout.includes('"BFR net"],36)'),"BFR mensuel sur 36 mois");
+assert.ok(layout.includes('monthlyMatrix("Plan de trésorerie — année 1 uniquement"')&&layout.includes('"Solde final"],12)'),"Trésorerie seule limitée à 12 mois");
 
 assert.ok(layout.includes('id==="nettoyage"'),"Les variantes nettoyage doivent rester accessibles");
 assert.ok(layout.includes("decontamination_chimique")&&layout.includes("decontamination_biologique"));
