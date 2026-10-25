@@ -2693,6 +2693,13 @@
         url.searchParams.set('filiere', unitData.filiereNom);
     }
 
+    // Transmettre la configuration choisie dans le BP Découverte au BP Pro.
+    const current = new URLSearchParams(window.location.search);
+    for (const key of ['configuration_id', 'simulation_id', 'capacity_value', 'capacity_unit', 'equipment_plan_id']) {
+        const value = current.get(key);
+        if (value) url.searchParams.set(key, value);
+    }
+
     return url.toString();
 }
 
@@ -2849,6 +2856,11 @@ window.goToBpPro = async function() {
                 data = JSON.parse(stored);
             } catch (e) {}
         }
+    }
+    const { data: { user } } = await _p2iSupabase.auth.getUser();
+    if (!user) {
+        await saveSimulation('pro', data); // Enregistre le retour après authentification.
+        return; // Ne pas contourner la redirection vers la connexion.
     }
     await saveSimulation('pro', data);
     window.location.href = buildUrl('business-plan-pro.html', data);
