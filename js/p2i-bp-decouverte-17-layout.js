@@ -72,6 +72,11 @@ if(id==="biscuiterie"){
  main.insertBefore(selector,main.querySelector(".bp-hero"));
  const select=selector.querySelector("select");
  select.value=selectedVariant||"";
+ const legacySelect=$("p2iBiscuiterieSelect");
+ if(legacySelect&&selectedVariant&&legacySelect.value!==selectedVariant){
+   legacySelect.value=selectedVariant;
+   legacySelect.dispatchEvent(new Event("change",{bubbles:true}));
+ }
  select.addEventListener("change",()=>{
   const p=new URLSearchParams(location.search);
   if(select.value)p.set("configuration_id",select.value);else p.delete("configuration_id");
