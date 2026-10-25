@@ -53,7 +53,10 @@ const unitPictures=(window.P2I_BP_IMAGES||{})[id]||{};
 const pictureUrl=value=>{
  if(typeof value!=="string")return "";
  const url=value.trim();
- return /^(?:https:\/\/|(?:\.\.\/|\.\/|assets\/|images\/)[a-z0-9_./-]+$)/i.test(url)?url:"";
+ // Autoriser les chemins relatifs du dépôt, sans protocoles actifs ni traversée de répertoires.
+ if(!/^(?:https:\/\/[a-z0-9.-]+(?:\/[a-z0-9_./%+-]*)?|[a-z0-9_./-]+)$/i.test(url))return "";
+ if(/(?:^|\/)\.\.(?:\/|$)/.test(url))return "";
+ return url;
 };
 
 const old=document.querySelector(".wrap");
