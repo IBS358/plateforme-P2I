@@ -67,7 +67,11 @@ assert.ok(layout.includes("if(!id||(!up.nom&&!up.id&&!up.description))return;"),
 assert.ok(layout.includes("Array.isArray(machineSource.machines)"),"Privilégier le catalogue machines de l’UP");
 assert.ok(layout.includes('card("Chiffre d’affaires prévisionnel","À calculer par le moteur économique")'),"Ne pas présenter les estimations UP comme prévisions validées");
 assert.ok(layout.includes('card("ROI financier","Non calculable sans flux de trésorerie validés")'),"Ne pas inventer le ROI");
-assert.ok(layout.includes('id="p2i-bp17-download"'),"Bouton de téléchargement dans la rubrique 17");
+assert.ok(layout.includes('id="p2i-bp17-print"'),"Un seul bouton PDF dans l’en-tête");
+assert.ok(!layout.includes('id="p2i-bp17-download"'),"Pas de bouton PDF en doublon dans la rubrique 17");
+assert.ok(layout.includes('href="dashboard.html"'),"Retour au dashboard visible");
+assert.ok(layout.includes('bp-variant-choice'),"Cartes de variantes Biscuiterie");
+assert.ok(layout.includes('bp-summary-links'),"Sommaire des 17 rubriques avant les sections");
 assert.ok(layout.includes('id="p2i-bp17-go-pro"'),"Bouton Aller au Pro dans la rubrique 17");
 assert.ok(layout.includes('destinationParams.set("unit_id",id)'),"Conserver l’identifiant de l’UP");
 assert.ok(layout.includes('proParams.set("redirect","bp-pro")'),"Déclencher le véritable parcours BP Pro");
