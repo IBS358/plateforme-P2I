@@ -8690,6 +8690,51 @@ function p2iBuildPersonalUseWordHtml() {
     La version BP Pro bancable P2I reste distincte par son niveau de structuration, son argumentaire et son niveau de finition.
   </p>
 
+<script>
+/* P2I — reprise du contexte depuis le BP Découverte.
+   Ne préremplit aucun montant et ne suppose pas de devis validé. */
+(function () {
+  "use strict";
+  function initBPProContext() {
+    const params = new URLSearchParams(window.location.search);
+    const up = params.get("unit_id") || params.get("up_id") || "";
+    if (!up) return;
+    const config = params.get("configuration_id") || "";
+    const simulation = params.get("simulation_id") || "";
+    const plan = params.get("equipment_plan_id") || "";
+    if (!config && !simulation && !plan) return;
+    if (document.getElementById("p2i-bp-pro-context")) return;
+    const banner = document.createElement("aside");
+    banner.id = "p2i-bp-pro-context";
+    banner.setAttribute("aria-label", "Contexte transmis depuis le BP Découverte");
+    banner.style.cssText = "position:relative;z-index:5;max-width:1180px;margin:20px auto;padding:18px 22px;background:#112e50;color:#fff;border:1px solid #4c95cb;border-radius:12px;font:15px/1.6 Arial,sans-serif";
+    const heading = document.createElement("strong");
+    heading.textContent = "P2I — reprise de votre projet dans le BP Pro";
+    banner.appendChild(heading);
+    const details = document.createElement("p");
+    details.style.margin = "8px 0";
+    const items = [["Unité",up],["Configuration",config],["Simulation d’origine",simulation],["Plan d’équipement",plan]].filter(x=>x[1]);
+    details.textContent = items.map(x=>x[0]+" : "+x[1]).join(" · ");
+    banner.appendChild(details);
+    const warning = document.createElement("p");
+    warning.style.margin = "8px 0";
+    warning.textContent = "Les paramètres de parcours sont conservés. Les hypothèses économiques, les devis et les résultats du BP Découverte ne sont pas automatiquement validés ni transférés au BP Pro.";
+    banner.appendChild(warning);
+    const back = document.createElement("a");
+    const q = new URLSearchParams();
+    q.set("unit_id",up);
+    if (config) q.set("configuration_id",config);
+    if (simulation) q.set("simulation_id",simulation);
+    back.href = "business-plan-decouverte.html?"+q.toString();
+    back.textContent = "Retour au BP Découverte";
+    back.style.cssText = "color:#b9e5ff;font-weight:bold;text-decoration:underline";
+    banner.appendChild(back);
+    document.body.insertBefore(banner,document.body.firstChild);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded",initBPProContext);
+  else initBPProContext();
+})();
+</script>
 </body>
 </html>
   `;
