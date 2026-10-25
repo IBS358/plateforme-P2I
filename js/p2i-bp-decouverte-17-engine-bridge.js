@@ -24,6 +24,7 @@ if(id!=="biscuiterie"||selected!=="crackers")return;
 const e=window.P2I_CRACKERS_RESULTAT;
 const f=window.P2I_COMPTE_FINANCIER;
 const d=window.P2I_DONNEES_FINANCIERES;
+// Ne jamais exposer un résultat financier d’une autre configuration.
 if(!e||!number(e.chiffre_affaires_usd)||!number(e.cout_produits_vendus_usd))return;
 if(d&&number(d.chiffre_affaires_usd)&&number(d.cout_produits_vendus_usd)&&
  (Math.abs(d.chiffre_affaires_usd-e.chiffre_affaires_usd)>.01||Math.abs(d.cout_produits_vendus_usd-e.cout_produits_vendus_usd)>.01))return;
@@ -34,9 +35,13 @@ const div=document.createElement("div");div.id="p2i-r8-engine";div.innerHTML='<h
 ["Valorisation indicative du stock",money(e.valeur_stock_indicative_usd)],
 ["Chiffre d’affaires",money(e.chiffre_affaires_usd)],
 ["Coût total de production",money(e.cout_production_total_usd)]]);
+const previous=r8.querySelector(".bp-table-wrap");if(previous)previous.remove();
 r8.appendChild(div);
 }
-if(f&&number(f.chiffre_affaires_total_usd)&&number(f.cout_ventes_total_usd)&&!$("p2i-r9-engine")){
+if(f&&number(f.chiffre_affaires_total_usd)&&number(f.cout_ventes_total_usd)&&
+ Math.abs(f.chiffre_affaires_total_usd-e.chiffre_affaires_usd)<=.01&&
+ Math.abs(f.cout_ventes_total_usd-e.cout_produits_vendus_usd)<=.01&&
+ !$("p2i-r9-engine")){
 const div=document.createElement("div");div.id="p2i-r9-engine";div.innerHTML='<h3>Compte de résultat consolidé — moteur P2I</h3>'+table([
 ["Chiffre d’affaires",money(f.chiffre_affaires_total_usd)],
 ["Coût des produits vendus",money(f.cout_ventes_total_usd)],
@@ -46,6 +51,7 @@ const div=document.createElement("div");div.id="p2i-r9-engine";div.innerHTML='<h
 ["Résultat financier",money(f.resultat_financier_usd)],["Résultat avant impôt",money(f.resultat_avant_impot_usd)],
 ["Résultat net",money(f.resultat_net_usd)]])+
 '<p class="bp-note">Simulation indicative. Les postes inconnus restent à renseigner. La marge industrielle ne constitue pas un bénéfice net.</p>';
+const previous=r9.querySelector(".bp-table-wrap");if(previous)previous.remove();
 r9.appendChild(div);
 }
 }
