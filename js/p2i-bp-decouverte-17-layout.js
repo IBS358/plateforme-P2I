@@ -179,13 +179,23 @@ layout.append(aside,main);document.body.prepend(layout);document.body.prepend(he
 $("p2i-bp17-print").addEventListener("click",()=>{
  // L’export utilise le dialogue natif du navigateur : l’utilisateur choisit « Enregistrer au format PDF ».
  // Attendre le chargement des polices et des photographies pour éviter un PDF incomplet.
- const printable=Array.from(main.querySelectorAll("img")).filter(img=>!img.complete);
- const readyImages=printable.map(img=>new Promise(resolve=>{
-   img.addEventListener("load",resolve,{once:true});
-   img.addEventListener("error",resolve,{once:true});
- }));
+ const button=$("p2i-bp17-print");
+ if(button.disabled)return;
+ button.disabled=true;
+ const readyImages=Array.from(main.querySelectorAll("img")).map(img=>{
+   if(img.complete)return Promise.resolve();
+   if(typeof img.decode==="function")return img.decode().catch(()=>{});
+   return new Promise(resolve=>{
+     if(img.complete){resolve();return;}
+     img.addEventListener("load",resolve,{once:true});
+     img.addEventListener("error",resolve,{once:true});
+     if(img.complete)resolve();
+   });
+ });
  const readyFonts=document.fonts&&document.fonts.ready?document.fonts.ready.catch(()=>{}):Promise.resolve();
- Promise.all([readyFonts,...readyImages]).then(()=>window.print());
+ const waitResources=Promise.all([readyFonts,...readyImages]);
+ const maxWait=new Promise(resolve=>setTimeout(resolve,4000));
+ Promise.race([waitResources,maxWait]).then(()=>window.print()).finally(()=>{button.disabled=false;});
 });
 
 // Images liées à l’UP et à sa variante : pas de photo d’une autre activité.
