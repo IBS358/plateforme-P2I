@@ -16,7 +16,7 @@ function setPlaceholder(section,visible){
  if(placeholder)placeholder.hidden=!visible;
 }
 function invalidate(){
- ["p2i-r2-engine","p2i-r8-engine","p2i-r9-engine","p2i-r12-engine"].forEach(id=>$(id)?.remove());
+ ["p2i-r2-engine","p2i-r8-engine","p2i-r9-engine","p2i-r9-annual-engine","p2i-r12-engine"].forEach(id=>$(id)?.remove());
  const r8=$("p2i-r8"),r9=$("p2i-r9");
  if(r8)setPlaceholder(r8,true);
  if(r9)setPlaceholder(r9,true);
@@ -36,6 +36,9 @@ function financialConsistent(f,e){
  ];
  return checks.every(([key,expected])=>!number(f[key])||expected===null||Math.abs(f[key]-expected)<=.02);
 }
+const annualTable=rows=>'<div class="bp-table-wrap"><table><thead><tr><th>Poste</th><th>Année 1 — simulation</th><th>Année 2</th><th>Année 3</th></tr></thead><tbody>'+
+ rows.map(([label,value])=>'<tr><th scope="row">'+esc(label)+'</th><td>'+esc(value)+'</td><td>À calculer</td><td>À calculer</td></tr>').join("")+
+ '</tbody></table></div>';
 const table=rows=>'<div class="bp-table-wrap"><table><thead><tr><th>Indicateur</th><th>Valeur issue du moteur</th></tr></thead><tbody>'+rows.map(([a,b])=>'<tr><td>'+esc(a)+'</td><td>'+esc(b)+'</td></tr>').join("")+'</tbody></table></div>';
 function update(){
 const r8=$("p2i-r8"),r9=$("p2i-r9");
@@ -125,6 +128,23 @@ const div=$("p2i-r8-engine")||document.createElement("div");div.id="p2i-r8-engin
 if(!div.isConnected)r8.appendChild(div);
 setPlaceholder(r8,false);
 }
+// Année 1 : reprendre les chiffres contrôlés du moteur sans extrapoler les années 2 et 3.
+const annual=$("p2i-r9-annual-engine")||document.createElement("div");
+annual.id="p2i-r9-annual-engine";
+if(financialConsistent(f,e)){
+ annual.innerHTML='<h3>Compte de résultat prévisionnel — années 1 à 3</h3>'+annualTable([
+ ["Chiffre d’affaires",money(f.chiffre_affaires_total_usd)],
+ ["Coût des produits vendus",money(f.cout_ventes_total_usd)],
+ ["Marge brute",money(f.marge_industrielle_ou_sur_prestations_usd)],
+ ["Charges d’exploitation",money(f.autres_charges_exploitation_usd)],
+ ["Dotations aux amortissements",money(f.dotations_usd)],
+ ["Résultat d’exploitation",money(f.resultat_exploitation_usd)],
+ ["Résultat financier",money(f.resultat_financier_usd)],
+ ["Résultat avant impôt",money(f.resultat_avant_impot_usd)],
+ ["Résultat net",money(f.resultat_net_usd)]
+ ])+'<p class="bp-note">Année 1 : chiffres du moteur financier contrôlé. Années 2 et 3 : aucune extrapolation sans hypothèses validées. Les postes manquants restent à renseigner.</p>';
+ if(!annual.isConnected)r9.appendChild(annual);
+}else{annual.remove();}
 if(financialConsistent(f,e)){
 const div=$("p2i-r9-engine")||document.createElement("div");div.id="p2i-r9-engine";div.innerHTML='<h3>Compte de résultat consolidé — moteur P2I</h3>'+table([
 ["Chiffre d’affaires",money(f.chiffre_affaires_total_usd)],
