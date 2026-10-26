@@ -22,7 +22,7 @@ function current(){
  return {id,config:p.get("configuration_id")||saved||""};
 }
 function remove(){
- for(const id of ["p2i-validated-finance-r7","p2i-validated-finance-r10","p2i-validated-finance-r11","p2i-validated-finance-r13"])$(id)?.remove();
+ for(const id of ["p2i-validated-finance-r7","p2i-validated-finance-r9","p2i-validated-finance-r10","p2i-validated-finance-r11","p2i-validated-finance-r13"])$(id)?.remove();
 }
 function add(section,id,html){
  const parent=$(section);if(!parent)return;
@@ -46,6 +46,12 @@ function update(){
    ["Dette 60 %",money(f.dette_60_usd)],
    ["Réserve de trésorerie distincte",f.reserve_tresorerie_distincte_usd===null?"Non renseignée":money(f.reserve_tresorerie_distincte_usd)]
   ]));
+ add("p2i-r9","p2i-validated-finance-r9",
+  '<h3>Compte de résultat — trois exercices validés</h3>'+
+  renderTable(["Année","CA","Coût des ventes","Charges d’exploitation","Amortissements","Intérêts","Impôts","Résultat net"],
+   d.compte_resultat.map((x,i)=>[String(i+1),money(x.chiffre_affaires),money(x.cout_produits_vendus),
+   money(x.charges_exploitation),money(x.amortissements),money(x.charges_financieres),
+   money(x.impots),money(x.resultat_net)])));
  add("p2i-r10","p2i-validated-finance-r10",'<h3>BFR mensuel — 36 mois contrôlés</h3>'+
   renderTable(["Mois","Stocks","Créances clients","Dettes d’exploitation","BFR"],
    d.bfr_mensuel.map((x,i)=>[String(i+1),money(x.stocks),money(x.creances_clients),money(x.dettes_exploitation),money(x.bfr)])));
