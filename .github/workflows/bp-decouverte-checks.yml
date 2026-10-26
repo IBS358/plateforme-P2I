@@ -15,6 +15,9 @@ on:
       - 'tests/check-p2i-reference-coverage.cjs'
       - 'tests/check-p2i-bp-preparation.cjs'
       - 'tests/check-p2i-bp-lots.cjs'
+      - 'tests/check-p2i-bp-lot-01.cjs'
+      - 'scripts/build-bp-decouverte-lot-01.cjs'
+      - 'data/p2i-bp-decouverte-lot-01-sources.json'
       - 'scripts/build-bp-decouverte-lots.cjs'
       - 'data/p2i-bp-decouverte-lots.json'
       - 'js/p2i-bp-decouverte-preparation.js'
@@ -48,3 +51,8 @@ jobs:
           node tests/check-p2i-bp-lots.cjs
           node scripts/build-bp-decouverte-lots.cjs
           git diff --exit-code -- data/p2i-bp-decouverte-lots.json
+      - name: Vérifier les huit fiches sources agroalimentaires
+        run: |
+          node tests/check-p2i-bp-lot-01.cjs
+          node scripts/build-bp-decouverte-lot-01.cjs
+          git diff --exit-code -- data/p2i-bp-decouverte-lot-01-sources.json
