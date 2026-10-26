@@ -18,6 +18,8 @@ on:
       - 'tests/check-p2i-bp-lot-01.cjs'
       - 'tests/check-p2i-bp-tous-lots.cjs'
       - 'tests/check-p2i-bp-financial-validation.cjs'
+      - 'tests/check-p2i-bp-validated-projections.cjs'
+      - 'js/p2i-bp-decouverte-17-validated-projections.js'
       - 'js/p2i-bp-decouverte-financial-validation.js'
       - 'scripts/build-bp-decouverte-tous-lots.cjs'
       - 'data/p2i-bp-decouverte-lot-*-sources.json'
@@ -68,3 +70,5 @@ jobs:
           git diff --exit-code -- data/p2i-bp-decouverte-lot-*-sources.json
       - name: Contrôler le contrat financier commun
         run: node tests/check-p2i-bp-financial-validation.cjs
+      - name: Raccordement des prévisions validées aux rubriques
+        run: node tests/check-p2i-bp-validated-projections.cjs
