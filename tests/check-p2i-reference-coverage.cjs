@@ -16,7 +16,7 @@ assert.deepEqual(duplicates,[],"Définitions UP dupliquées, écrasement silenci
 const units=vm.runInContext("P2I_UP_DATA",context);
 const machines=vm.runInContext("MACHINES_DATA",context);
 const ids=Object.keys(units);
-assert.ok(ids.length>=95,"Le référentiel doit conserver les unités de production existantes");
+assert.ok(ids.length===96,"Le référentiel doit conserver les unités de production existantes");
 const missing=ids.filter(id=>!Object.prototype.hasOwnProperty.call(machines,id));
 assert.deepEqual(missing,[],"Toutes les UP doivent avoir une entrée catalogue machines");
 for(const id of ids){
@@ -38,7 +38,8 @@ for(const id of detailed){
 // et non corrigés arbitrairement. La référence intégrée Crackers reste 450 000 USD.
 assert.equal(units.biscuiterie.investment_breakdown.machines,65000);
 assert.equal(units.biscuiterie.capex_min,120000);
-const aliases={epices:"transformation_epices",peintures_btp:"peintures",profiles:"profilés",
+assert.notEqual(machines.peintures,machines.peintures_btp,"Deux catalogues distincts pour les deux UP peintures");
+const aliases={epices:"transformation_epices",profiles:"profilés",
  plastique:"plastique_recyclage",papier:"papier_recyclage",metaux:"metaux_recyclage",
  verre:"verre_recyclage",pneus:"pneus_recyclage",huiles:"huiles_recyclage",
  deee:"deee_recyclage",energie:"energie_services",eau:"eau_traitement"};
@@ -46,4 +47,4 @@ for(const [id,legacy] of Object.entries(aliases)){
  assert.ok(Array.isArray(machines[id]?.machines)&&Array.isArray(machines[legacy]?.machines),"Entrée catalogue inaccessible : "+id);
  if(id!=="peintures_btp")assert.equal(machines[id],machines[legacy],"L'alias doit pointer vers la même configuration : "+id);
 }
-console.log("Référentiels P2I : "+ids.length+" UP, catalogue accessible pour chacune, 12 alias validés.");
+console.log("Référentiels P2I : "+ids.length+" UP, catalogue accessible pour chacune, 11 alias validés.");

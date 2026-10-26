@@ -1,8 +1,8 @@
-/** Tests de complétude des 95 dossiers documentaires à 17 rubriques. */
+/** Tests de complétude des 96 dossiers documentaires à 17 rubriques. */
 "use strict";
 const fs=require("node:fs"),path=require("node:path"),vm=require("node:vm"),assert=require("node:assert/strict");
 const root=path.resolve(__dirname,"..");
-const data=JSON.parse(fs.readFileSync(path.join(root,"data/p2i-bp-decouverte-95-dossiers-17-rubriques.json"),"utf8"));
+const data=JSON.parse(fs.readFileSync(path.join(root,"data/p2i-bp-decouverte-96-dossiers-17-rubriques.json"),"utf8"));
 const ctx=vm.createContext({});
 vm.runInContext(fs.readFileSync(path.join(root,"js/p2i-bp-decouverte-dossier-builder.js"),"utf8"),ctx);
 const builder=ctx.P2I_BP_DOSSIER_BUILDER;
@@ -32,4 +32,4 @@ for(let i=0;i<source.length;i++){
   assert.equal(d.sections[7].contenu.capacite_reference.valeur,500);
  }else assert.equal(d.sections[6].contenu.investissement_reference_equipements_usd,null);
 }
-console.log("95 dossiers, 1 615 rubriques, aucun CAPEX complet fictif.");
+console.log("96 dossiers, 1 632 rubriques, aucun CAPEX complet fictif.");

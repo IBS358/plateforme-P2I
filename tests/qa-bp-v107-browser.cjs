@@ -9,7 +9,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   await page.goto(base+'?unit_id=biscuiterie&configuration_id=biscuits_mous&simulation_id=test-context');
   assert.equal(await page.locator('.section').count(),17);assert.equal(await page.locator('.sidebar a').count(),17);
   assert.equal(await page.locator('.equipment').count(),5);assert.equal(await page.locator('.variant').count(),3);
-  assert.equal(await page.locator('#up-choice option').count(),95);
+  assert.equal(await page.locator('#up-choice option').count(),96);
   assert.ok((await page.locator('#p2i-r16 h2').textContent()).includes('Préparer mon dossier de passage'));
   assert.ok((await page.locator('#p2i-r17 h2').textContent()).includes('Dossier technique Biscuiterie'));
   const style=await page.locator('.photo-inner').first().evaluate(e=>getComputedStyle(e).backgroundImage);

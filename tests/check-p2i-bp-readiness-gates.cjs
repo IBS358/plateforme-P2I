@@ -2,7 +2,7 @@
 "use strict";
 const fs=require("node:fs"),path=require("node:path"),assert=require("node:assert/strict");
 const root=path.resolve(__dirname,"..");
-const data=JSON.parse(fs.readFileSync(path.join(root,"data/p2i-bp-decouverte-95-dossiers-17-rubriques.json"),"utf8"));
+const data=JSON.parse(fs.readFileSync(path.join(root,"data/p2i-bp-decouverte-96-dossiers-17-rubriques.json"),"utf8"));
 const ids=new Set();
 const report={total:0,reference_industrielle:0,prix_ligne_documente:0,capex_complet:0,previsions_financieres:0,blocages:[]};
 for(const d of data.dossiers){
@@ -32,7 +32,7 @@ for(const d of data.dossiers){
  if(manquants.length)report.blocages.push({up_id:d.up_id,manquants});
 }
 assert.equal(report.total,data.nombre_up);
-assert.equal(report.total,95,"Périmètre des 95 dossiers attendu");
+assert.equal(report.total,96,"Périmètre des 96 dossiers attendu");
 assert.equal(report.previsions_financieres,0,
  "Si des prévisions sont disponibles, faire évoluer le test et contrôler les justificatifs");
 console.log("Audit publication P2I : "+JSON.stringify({

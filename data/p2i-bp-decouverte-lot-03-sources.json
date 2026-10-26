@@ -7,8 +7,8 @@
   "unites": [
     {
       "up_id": "peintures_btp",
-      "up_nom": "Peintures BTP",
-      "description": "Fabrication de peintures pour bâtiment.",
+      "up_nom": "Peintures bâtiment",
+      "description": "Peintures décoratives pour murs, façades et plafonds des bâtiments.",
       "filiere": "BTP & Matériaux Construction",
       "processus": [
         "Dispersion des pigments",

@@ -544,7 +544,7 @@ const MACHINES_DATA = {
     ]
   },
   peintures: {
-    up_nom: "Peintures industrielles & BTP",
+    up_nom: "Peintures industrielles",
     machines: [
       { name: "Disperseur", role: "Dispersion des pigments", capacity: "2,000 L/batch", utilities: "Électricité", price: 25000 },
       { name: "Broyeur à billes", role: "Broyage fin", capacity: "500 L/h", utilities: "Électricité", price: 30000 },
@@ -1092,7 +1092,7 @@ agglos: {
 },
 
 peintures_btp: {
-  up_nom: "Peintures BTP",
+  up_nom: "Peintures bâtiment",
   machines: [
     { name: "Disperseur", role: "Dispersion pigments", capacity: "2000 L/batch", utilities: "Électricité 30kW", price: 30000 },
     { name: "Broyeur à billes", role: "Broyage fin", capacity: "500 L/heure", utilities: "Électricité 22kW", price: 35000 },
@@ -1681,7 +1681,6 @@ if (typeof module !== 'undefined' && module.exports) {
 (function alignerMachinesAvecUP(){
  const correspondances={
   "epices": "transformation_epices",
-  "peintures_btp": "peintures",
   "profiles": "profilés",
   "plastique": "plastique_recyclage",
   "papier": "papier_recyclage",

@@ -1035,12 +1035,29 @@ aliments_betail: {
     ]
   },
 
+  peintures: {
+    id: "peintures", nom: "Peintures industrielles",
+    filiereNom: "Chimie, Cosmétiques & Détergents", type: "production",
+    description: "Revêtements de protection pour équipements, structures métalliques et installations industrielles.",
+    capex_min: 140000,
+    source_capex: "filieres.html / peintures / minCapex=140 milliers USD : indication historique non vérifiée",
+    processus: ["Réception et contrôle des matières", "Dosage", "Dispersion des pigments", "Broyage selon formulation", "Mélange final", "Filtration", "Contrôle du lot", "Conditionnement"],
+    raw_materials: ["Liants et résines à qualifier", "Pigments et charges", "Eau ou solvants selon formulation", "Additifs", "Emballages compatibles"],
+    target_markets: ["Maintenance et protection des installations industrielles", "Fabricants de structures métalliques", "Applicateurs industriels"],
+    avantages: ["Offre de protection adaptée aux supports et contraintes du client", "Possibilité de suivi des lots et du service technique"],
+    challenges: ["Performance anticorrosion à éprouver", "Compatibilité support, préparation et application", "Formulations et matières à qualifier", "Maîtrise des poussières et, selon formulation, des risques liés aux solvants"],
+    sanitaires: ["Évaluation des risques des matières et fiches de sécurité", "Ventilation et captage à dimensionner", "EPI selon évaluation des risques", "Gestion des résidus et emballages contaminés"],
+    energie: ["Mesurer la puissance et la consommation des disperseurs et broyeurs", "Contrôler les temps de mélange et les pertes de produit"],
+    amenagement: ["Séparer réception, formulation, stockage et conditionnement", "Prévoir rétention et ventilation selon les produits"],
+    marketing: ["Qualifier le cahier des charges du support et de l'environnement", "Proposer échantillons et essais avant référencement", "Documenter performance, rendement et conditions d'application"]
+  },
+
   peintures_btp: {
   id: "peintures_btp",
-  nom: "Peintures BTP",
+  nom: "Peintures bâtiment",
   filiereNom: "BTP & Matériaux Construction",
   type: "production",
-  description: "Fabrication de peintures pour bâtiment.",
+  description: "Peintures décoratives pour murs, façades et plafonds des bâtiments.",
   capex_min: 95000,
   chiffre_affaires_estime: "350000-700000",
   marge_brute: "30-45",

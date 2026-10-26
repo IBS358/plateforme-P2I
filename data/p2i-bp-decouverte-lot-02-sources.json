@@ -3,7 +3,7 @@
   "lot": "LOT-02",
   "filiere": "Chimie, Cosmétiques & Détergents",
   "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
-  "nombre_up": 7,
+  "nombre_up": 8,
   "unites": [
     {
       "up_id": "detergents",
@@ -207,6 +207,91 @@
       ],
       "estimation_generique_non_validee": {
         "investissement_minimum_usd": 85000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "peintures",
+      "up_nom": "Peintures industrielles",
+      "description": "Revêtements de protection pour équipements, structures métalliques et installations industrielles.",
+      "filiere": "Chimie, Cosmétiques & Détergents",
+      "processus": [
+        "Réception et contrôle des matières",
+        "Dosage",
+        "Dispersion des pigments",
+        "Broyage selon formulation",
+        "Mélange final",
+        "Filtration",
+        "Contrôle du lot",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Liants et résines à qualifier",
+        "Pigments et charges",
+        "Eau ou solvants selon formulation",
+        "Additifs",
+        "Emballages compatibles"
+      ],
+      "marches_cibles": [
+        "Maintenance et protection des installations industrielles",
+        "Fabricants de structures métalliques",
+        "Applicateurs industriels"
+      ],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Disperseur",
+          "role": "Dispersion des pigments",
+          "capacite": "2,000 L/batch",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Broyeur à billes",
+          "role": "Broyage fin",
+          "capacite": "500 L/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Cuve de formulation",
+          "role": "Mélange final",
+          "capacite": "5,000 L",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Filtre",
+          "role": "Filtration",
+          "capacite": "2,000 L/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Remplisseuse",
+          "role": "Conditionnement",
+          "capacite": "1,000 seaux/h",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Étiqueteuse",
+          "role": "Étiquetage",
+          "capacite": "1,000 seaux/h",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 140000,
         "ventilation": null,
         "chiffre_affaires_annuel_indicatif_usd": null,
         "marge_brute_indicative_pourcent": null,

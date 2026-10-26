@@ -25,7 +25,7 @@ class LocalResources extends ResourceLoader{
    assert.deepEqual(errors,[],id+'/'+variant);
    assert.equal(d.querySelectorAll('.bp-section[id^="p2i-r"]').length,17);
    assert.equal(d.querySelectorAll('.bp-sidebar a').length,17);
-   assert.equal(d.querySelectorAll('#p2i-up-consultation option').length,95);
+   assert.equal(d.querySelectorAll('#p2i-up-consultation option').length,96);
    assert.equal(d.querySelectorAll('#p2i-consultation').length,1);
    assert.equal(d.querySelector('#p2i-up-consultation').value,id);
    assert.ok(d.querySelector('#p2i-consultation').textContent.includes('0 BP validés'));
@@ -47,5 +47,5 @@ class LocalResources extends ResourceLoader{
    await new Promise(r=>setTimeout(r,30));assert.equal(printed,1);
   }finally{dom.window.close();}
  }
- console.log('DOM : 9 parcours, 17 rubriques, 95 choix UP, variantes, isolation du stockage, horizons et action impression vérifiés.');
+ console.log('DOM : 9 parcours, 17 rubriques, 96 choix UP, variantes, isolation du stockage, horizons et action impression vérifiés.');
 })().catch(e=>{console.error(e);process.exitCode=1;});

@@ -13,5 +13,5 @@ for(let n=1;n<=12;n++){
 }
 const output={version:"1.0.0",nature:"Brouillons documentaires P2I — données financières non validées",
  nombre_up:dossiers.length,rubriques_par_up:17,dossiers};
-fs.writeFileSync(path.join(root,"data/p2i-bp-decouverte-95-dossiers-17-rubriques.json"),JSON.stringify(output,null,2)+"\n");
+fs.writeFileSync(path.join(root,"data/p2i-bp-decouverte-96-dossiers-17-rubriques.json"),JSON.stringify(output,null,2)+"\n");
 console.log(dossiers.length+" dossiers BP documentaires générés, "+dossiers.length*17+" rubriques.");

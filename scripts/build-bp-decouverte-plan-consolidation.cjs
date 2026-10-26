@@ -1,11 +1,11 @@
-/** P2I — plan de consolidation industrialo-financière des 95 dossiers.
+/** P2I — plan de consolidation industrialo-financière des 96 dossiers.
  * Génère une matrice CSV auditable, sans inventer de prix ni de prévisions.
  * Exécution : node scripts/build-bp-decouverte-plan-consolidation.cjs
  */
 "use strict";
 const fs=require("node:fs"),path=require("node:path"),assert=require("node:assert/strict");
 const root=path.resolve(__dirname,"..");
-const data=JSON.parse(fs.readFileSync(path.join(root,"data/p2i-bp-decouverte-95-dossiers-17-rubriques.json"),"utf8"));
+const data=JSON.parse(fs.readFileSync(path.join(root,"data/p2i-bp-decouverte-96-dossiers-17-rubriques.json"),"utf8"));
 const sourceFiles=fs.readdirSync(path.join(root,"data")).filter(n=>/^p2i-bp-decouverte-lot-\d\d-sources\.json$/.test(n)).sort();
 const sources=new Map();
 for(const file of sourceFiles){
@@ -43,8 +43,8 @@ for(const d of data.dossiers){
   ventes,charges,bfr,tresorerie,bilans,d.statut,action]);
  counts.total++;if(ref)counts.configuration++;if(price)counts.prix++;if(capex)counts.capex++;if(validFinancial)counts.financier++;
 }
-assert.equal(counts.total,95);
-assert.equal(sources.size,95);
+assert.equal(counts.total,96);
+assert.equal(sources.size,96);
 const csv=x=>'"'+String(x??"").replace(/"/g,'""')+'"';
 const output=[fields.map(csv).join(";"),...rows.map(r=>r.map(csv).join(";"))].join("\n")+"\n";
 const target=path.join(root,"data/p2i-bp-decouverte-plan-consolidation.csv");

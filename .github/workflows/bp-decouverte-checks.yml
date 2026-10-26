@@ -24,6 +24,9 @@ on:
       - 'tests/check-p2i-bp-publication.cjs'
       - 'scripts/*bp-decouverte*.cjs'
       - 'data/p2i-bp-decouverte-publication.json'
+      - 'data/p2i-bp-decouverte-donnees.json'
+      - 'data/p2i-bp-decouverte-96-dossiers-17-rubriques.json'
+      - 'tests/check-p2i-bp-donnees.cjs'
       - 'business-plan-decouverte.html'
       - 'business-plan-pro.html'
       - 'fiche-production.html'
@@ -54,7 +57,7 @@ on:
       - 'scripts/build-bp-decouverte-plan-consolidation.cjs'
       - 'tests/check-p2i-bp-95-dossiers.cjs'
       - 'tests/check-p2i-bp-readiness-gates.cjs'
-      - 'data/p2i-bp-decouverte-95-dossiers-17-rubriques.json'
+      - 'data/p2i-bp-decouverte-96-dossiers-17-rubriques.json'
       - 'tests/check-p2i-bp-script-loading.cjs'
       - 'tests/check-p2i-bp-bfr-scenario-assembleur.cjs'
       - 'js/p2i-bp-decouverte-bfr-engine.js'
@@ -133,7 +136,7 @@ jobs:
         run: |
           node tests/check-p2i-bp-95-dossiers.cjs
           node scripts/build-bp-decouverte-95-dossiers.cjs
-          git diff --exit-code -- data/p2i-bp-decouverte-95-dossiers-17-rubriques.json
+          git diff --exit-code -- data/p2i-bp-decouverte-96-dossiers-17-rubriques.json
 
       - name: Générer la matrice de consolidation des 95 UP
         run: node scripts/build-bp-decouverte-plan-consolidation.cjs
@@ -180,3 +183,9 @@ jobs:
 
       - name: Recette du parcours Découverte vers Pro
         run: npm run test:parcours
+
+      - name: Vérifier le référentiel économique et rédactionnel des 96 UP
+        run: |
+          node tests/check-p2i-bp-donnees.cjs
+          node scripts/build-bp-decouverte-donnees.cjs
+          git diff --exit-code -- data/p2i-bp-decouverte-donnees.json js/p2i-bp-decouverte-donnees.js

@@ -25,6 +25,7 @@ function chart(title,series){
 const params=new URLSearchParams(location.search),registry=typeof P2I_UP_DATA!=='undefined'?P2I_UP_DATA:{};
 const hasUnit=key=>typeof key==='string'&&Object.prototype.hasOwnProperty.call(registry,key);
 let id=params.get('unit_id')||params.get('up_id')||params.get('id')||'biscuiterie';
+if(window.P2I_BP_DONNEES?.alias_identifiants[id])id=window.P2I_BP_DONNEES.alias_identifiants[id];
 let config=params.get('configuration_id')||(id==='biscuiterie'?'crackers':null),override=null,current=null,currentPartial=null;
 let contextState={mode:'reference'},actionMessage='';
 const contextAPI=window.P2I_BP_V108_CONTEXTE.create({registry,configuration:window.P2I_BP_SUPABASE_CONFIG});
@@ -36,7 +37,7 @@ function render(){
  const up=registry[id];if(!hasUnit(id)){failure('UP inconnue dans le référentiel.');return;}
  const cleaning=id==='nettoyage'?window.P2I_BP_V108_REFERENCES.nettoyage:null,selectedCleaning=cleaning&&Object.prototype.hasOwnProperty.call(cleaning,config)?cleaning[config]:null;
  const pilot=id==='biscuiterie',variants=window.P2I_BP_V108_REFERENCES.variants;
- let s=pilot?window.P2I_BP_V108_REFERENCES.obtenir(config):null,r=null,problem=null;
+ let s=pilot?window.P2I_BP_DONNEES_ENGINE.reference(id,config):null,r=null,problem=null;
  if(override){s={...(s||{}),...override};delete s.manquants;delete s.complet;}
  if(override&&up.type==='service'){problem='Les paramètres de fabrication en kg/h ne sont pas applicables à cette activité de services.';s=null;}
  if(s&&!s.manquants){try{r=window.P2I_BP_SIMULATION_COMMUNE.calculer(s);}catch(e){problem=e.message;}}
@@ -129,6 +130,30 @@ function render(){
   sections[5]=note('Diagnostic préalable, compétences, protections collectives, EPI, gestion des effluents et des déchets et critères de restitution à documenter pour cette activité.');
   sections[16]=sections[2];
  }
+ const dossier=window.P2I_BP_DONNEES?.unites[id];
+ if(dossier&&!pilot&&!r){
+  const t=dossier.redaction,e=window.P2I_BP_DONNEES_ENGINE.calculer(dossier);
+  const paragraph=x=>'<p>'+esc(x)+'</p>';
+  const needs=table(['Besoin fonctionnel','Rôle','Capacité catalogue historique','Utilités à qualifier'],dossier.machines.map(m=>[m.nom,m.role,m.capacite_texte,m.utilites_texte]));
+  sections[0]=paragraph(t.projet)+paragraph(t.positionnement)+cards([['Activité',dossier.type_activite],['Filière',dossier.filiere_nom],['Configuration fournisseur','À qualifier']]);
+  sections[1]=paragraph(t.economie)+cards([['Budget minimum historique',usd(e.budget_minimum_historique_usd)],['CA annuel historique',usd(e.ca_historique_usd)],['Fourchette CA historique',e.fourchette_ca_historique?e.fourchette_ca_historique+' USD/an':'À documenter'],['Résultat net','Non calculable à ce stade']])+note('Les montants historiques ne sont pas des prévisions validées. Aucune rentabilité nette n’est déduite de la marge historique.');
+  if(!cleaning)sections[2]=paragraph(t.procede)+needs+paragraph(t.approvisionnement);
+  sections[3]=paragraph(t.marche)+paragraph(t.positionnement);
+  sections[4]=paragraph(t.commercial)+paragraph(t.approvisionnement);
+  sections[5]=info('Opportunités à vérifier',t.opportunites)+info('Risques propres à cette activité',t.risques)+info('Qualité et sécurité',t.qualite);
+  const f=e.financement_historique_indicatif;
+  sections[6]=paragraph(t.financement)+table(['Repère historique — pas un CAPEX consolidé','Montant'],[['Budget minimum interne',usd(e.budget_minimum_historique_usd)],['Apport 30 % sur ce seul repère',usd(f?.apport)],['Dette 70 % sur ce seul repère',usd(f?.dette)],['CAPEX consolidé','À documenter'],['BFR / réserve initiale','À documenter séparément']]);
+  sections[7]=paragraph(t.production)+paragraph(t.approvisionnement)+paragraph(t.procede);
+  sections[8]=note('Compte de résultat non calculable : volumes, prix de vente, coûts directs, charges et fiscalité doivent être documentés pour cette UP. Le moteur commun conserve les postes absents, sans les remplacer par zéro.')+paragraph(t.economie);
+  sections[9]=paragraph(t.bfr)+note('36 mois requis. Aucun échéancier chiffré n’est créé sans les données propres à ce dossier.');
+  sections[10]=note('Trois bilans annuels seront calculés après consolidation des investissements, de la dette, des stocks, créances, dettes et résultats.');
+  sections[11]=table(['Indicateur historique','Valeur / qualification'],[['Marge brute interne',dossier.economie.marge_brute_historique.texte?dossier.economie.marge_brute_historique.texte+' % — non vérifiée':'À documenter'],['Résultat net / ROI / DSCR','Non calculables sans états cohérents']]);
+  sections[12]=paragraph(t.tresorerie);
+  const tariff=window.P2I_BP_DONNEES_ENGINE.tarif;
+  sections[13]=table(['Source interne','Usage'],dossier.sources.map(x=>[x.fichier+' / '+x.champ,x.qualification]))+paragraph(t.economie)+table(['Tarif CIE publié — MT général','FCFA HT'],[['Prime fixe annuelle / kW souscrit',tariff.prime_kw_an_ht],['kWh heures pleines',tariff.kwh_pleines_ht],['kWh heures de pointe',tariff.kwh_pointe_ht],['kWh heures creuses',tariff.kwh_creuses_ht]])+paragraph('Barème consulté le '+tariff.consulte_le+'. Contrat MT général à confirmer; puissance et consommations propres au projet manquantes. Aucun coût d’électricité annuel n’en est déduit automatiquement. Taxes, redevances, comptage et raccordement restent à intégrer.')+'<a href="'+esc(tariff.source)+'" target="_blank" rel="noopener noreferrer">Source CIE — tarifs entreprise</a>';
+  sections[14]=paragraph(t.suite)+paragraph('Implantation : '+t.implantation)+paragraph('Utilités : '+t.utilites);
+  if(!cleaning)sections[16]=paragraph(t.procede)+needs+paragraph(t.qualite)+paragraph(t.utilites)+paragraph(t.implantation)+note('Fonctions et caractéristiques historiques à qualifier : aucun fabricant, modèle, prix fournisseur ni compatibilité technique n’est présumé validé.');
+ }
  const fx=window.P2I_BP_V108_REFERENCES.change;
  sections[13]+='<h3>Conversion indicative USD / FCFA</h3>'+table(['Taux de référence daté','Valeur'],[['Date du taux',fx.date],['1 EUR en USD',fx.eur_usd],['1 EUR en FCFA',fx.eur_xof],['1 USD en FCFA',window.P2I_CURRENCY.obtenirTauxUSDXOF().toLocaleString('fr-FR',{maximumFractionDigits:4})],['Qualification','Conversion indicative, pas un cours bancaire garanti']])+'<p><a href="'+esc(fx.url)+'" target="_blank" rel="noopener noreferrer">Source BCE</a> · <a href="'+esc(fx.parite_url)+'" target="_blank" rel="noopener noreferrer">Source BCEAO</a></p>';
  sections[13]+='<div class="context-actions no-print"><h3>Paramètres de votre dossier</h3><p>Les données enregistrées sont recalculées par les moteurs communs. Aucun résultat importé n’est accepté comme montant validé.</p><label class="action" for="import-json">Importer des paramètres JSON</label><input type="file" id="import-json" accept="application/json,.json" class="sr-only">'+(contextAPI.snapshot()&&r?'<button id="save-scenario" type="button" class="action">Enregistrer les paramètres dans ma simulation</button>':contextAPI.snapshot()?.selection_seule&&config?'<button id="save-selection" type="button" class="action">Enregistrer le choix de variante</button>':'')+'<p id="action-message" role="status">'+esc(actionMessage)+'</p></div>';
@@ -152,7 +177,7 @@ function bind(){
  document.getElementById('go-pro')?.addEventListener('click',e=>{
   e.preventDefault();
   try{
-   const token=crypto.randomUUID(),payload={schema:'p2i.passage.v1',date:Date.now(),up_id:id,configuration_id:config,simulation_id:contextAPI.snapshot()?.id||null,owner_id:window.P2I_BP_PASSAGE_OWNER||null,up:registry[id],reference:window.P2I_BP_V108_REFERENCES.obtenir(config),entrees:current?.entrees||null,partiel:currentPartial,devise_affichage:displayCurrency,qualification:'hypotheses_non_verifiees'};
+   const token=crypto.randomUUID(),payload={schema:'p2i.passage.v1',date:Date.now(),up_id:id,configuration_id:config,simulation_id:contextAPI.snapshot()?.id||null,owner_id:window.P2I_BP_PASSAGE_OWNER||null,up:registry[id],reference:window.P2I_BP_V108_REFERENCES.obtenir(config),dossier:window.P2I_BP_DONNEES?.unites[id]||null,entrees:current?.entrees||null,partiel:currentPartial,devise_affichage:displayCurrency,qualification:'hypotheses_non_verifiees'};
    sessionStorage.setItem('p2i.passage:'+token,JSON.stringify(payload));
    const url=new URL(e.currentTarget.href);url.searchParams.set('passage_id',token);url.searchParams.set('mode','preview');url.searchParams.delete('redirect');url.searchParams.delete('tab');
    location.href=url.href;
@@ -194,7 +219,7 @@ function bind(){
  document.querySelectorAll('[data-variant]').forEach(button=>button.addEventListener('click',()=>chooseVariant(button.dataset.variant)));
  document.querySelectorAll('.print').forEach(button=>button.addEventListener('click',async()=>{await(document.fonts?.ready||Promise.resolve());window.print();}));
  document.querySelectorAll('.export-json').forEach(button=>button.addEventListener('click',()=>{
-  const data={schema:'p2i.bp-decouverte.v108',up_id:id,configuration_id:config,statut:'simulation_indicative_non_documentee',exporte_le:new Date().toISOString(),simulation:current,calcul_industriel_partiel:currentPartial,simulation_id:contextAPI.snapshot()?.id||null,taux_de_change:window.P2I_CURRENCY.obtenirConfiguration(),aucune_demande_fournisseur:true};
+  const data={schema:'p2i.bp-decouverte.v108',dossier:window.P2I_BP_DONNEES?.unites[id]||null,up_id:id,configuration_id:config,statut:'simulation_indicative_non_documentee',exporte_le:new Date().toISOString(),simulation:current,calcul_industriel_partiel:currentPartial,simulation_id:contextAPI.snapshot()?.id||null,taux_de_change:window.P2I_CURRENCY.obtenirConfiguration(),aucune_demande_fournisseur:true};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='P2I-BP-Decouverte-'+id+'-'+(config||'reference')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
  }));
  const form=document.getElementById('scenario-form');if(form)form.addEventListener('submit',e=>{e.preventDefault();const old=current.entrees,price=Number(form.elements.prix.value),production=Number(form.elements.production.value);contextState={...contextState,modifie:true};actionMessage='Paramètres modifiés localement; enregistrement explicite nécessaire pour les conserver dans Supabase.';override={...(override||{}),investissement:Number(form.elements.investissement.value),prix:old.prix.map(x=>x*price/old.prix[0]),production:old.production.map(x=>x*production/old.production[0]),ventes:old.ventes.map(x=>x*production/old.production[0])};render();document.getElementById('p2i-r2').scrollIntoView();});

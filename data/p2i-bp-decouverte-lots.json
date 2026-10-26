@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0.0",
   "objet": "Registre de préparation — ne constitue pas des BP validés",
-  "nb_up": 95,
+  "nb_up": 96,
   "nb_lots": 12,
-  "ecart_objectif_96": 1,
+  "ecart_objectif_96": 0,
   "priorite_pilote": {
     "up_id": "biscuiterie",
     "configuration_id": "crackers",
@@ -159,7 +159,7 @@
     {
       "lot": "LOT-02",
       "filiere": "Chimie, Cosmétiques & Détergents",
-      "nb_up": 7,
+      "nb_up": 8,
       "unites": [
         {
           "up_id": "detergents",
@@ -200,6 +200,23 @@
           "up_nom": "Cosmétiques naturels",
           "fonctions_machines": 6,
           "investissement_minimum_indicatif_usd": 85000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "peintures",
+          "up_nom": "Peintures industrielles",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 140000,
           "ventilation_generique_disponible": false,
           "capacite_mensuelle_generique_disponible": false,
           "configuration_reference_validee": false,
@@ -289,7 +306,7 @@
       "unites": [
         {
           "up_id": "peintures_btp",
-          "up_nom": "Peintures BTP",
+          "up_nom": "Peintures bâtiment",
           "fonctions_machines": 7,
           "investissement_minimum_indicatif_usd": 95000,
           "ventilation_generique_disponible": true,

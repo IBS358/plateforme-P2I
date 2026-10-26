@@ -1,8 +1,8 @@
 {
   "objectif_up": 96,
-  "up_presentes": 95,
-  "ecart_up": 1,
-  "configurations": 99,
+  "up_presentes": 96,
+  "ecart_up": 0,
+  "configurations": 100,
   "valides": 0,
   "dossiers": [
     {
@@ -635,6 +635,58 @@
     },
     {
       "up_id": "cosmetiques",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "peintures",
       "configuration_id": null,
       "statut": "a_completer",
       "blocages": [
