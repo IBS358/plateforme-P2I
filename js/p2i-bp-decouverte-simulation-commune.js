@@ -5,6 +5,12 @@
 (function(root){'use strict';
 const positive=x=>typeof x==='number'&&Number.isFinite(x)&&x>=0;
 const close=(a,b)=>Math.abs(a-b)<.02;
+const REPERES=Object.freeze({marge_nette_min:.10,roi_annuel_min:.15});
+function evaluerPerformance(annuel,investissement){
+ const serie=annuel.map(a=>({annee:a.annee,marge_nette:a.chiffre_affaires>0?a.resultat_net/a.chiffre_affaires:null,roi_annuel:investissement>0?a.resultat_net/investissement:null}));
+ const premier=serie[0];return {reperes:REPERES,annuel:serie,marge_atteinte:premier.marge_nette===null?null:premier.marge_nette>=REPERES.marge_nette_min,roi_atteint:premier.roi_annuel===null?null:premier.roi_annuel>=REPERES.roi_annuel_min,qualification:'repères indicatifs P2I, sans garantie ni seuil bancaire, sans modification des résultats'};
+}
+
 function calculer(input){
  const s=JSON.parse(JSON.stringify(input));
  for(const k of ['investissement','matieres_kg','personnel','charges_fixes','part_apport','part_dette','taux_interet','duree_dette_mois','duree_amortissement_ans','taux_tva','taux_is','coussin_tresorerie','croissance_personnel','croissance_charges'])if(!positive(s[k]))throw Error('Hypothèse manquante ou invalide : '+k);
@@ -66,7 +72,7 @@ function calculer(input){
   bilans.push({annee:y+1,immobilisations:fixed,stocks_matieres:b.stocks_matieres,stocks_finis:b.stocks_produits_finis,creances:b.creances_clients,tva_clients:last.creances*s.taux_tva,credit_tva:last.credit_tva,banque:last.banque,fonds_propres:equity,dette:last.dette_fin,tva_due:last.tva_due,is_du:last.is_cumule,actif_total:assets,passif_total:liabilities,ecart:assets-liabilities});
   if(!close(assets,liabilities))throw Error('Bilan déséquilibré A'+(y+1)+' : '+(assets-liabilities));
  }
- return {version:'107',statut:'simulation_indicative_non_documentee',entrees:s,mois:months,annuel:annual,bfr:bfr.bfr_mensuel,tresorerie:cash[0].tresorerie_mensuelle,bilans,reserve_initiale:reserve,financement:{apport:s.investissement*.3,dette:debt},moteurs:['P2I_ECONOMIC_RESULT_ENGINE','P2I_FINANCIAL_ENGINE','P2I_BP_BFR_MENSUEL','P2I_BP_MOTEUR_TRESORERIE'],controles:{bilans_equilibres:true,bfr_mois:36,tresorerie_mois:12,financement:'30/70'}};
+ return {version:'107',statut:'simulation_indicative_non_documentee',entrees:s,mois:months,annuel:annual,performance:evaluerPerformance(annual,s.investissement),bfr:bfr.bfr_mensuel,tresorerie:cash[0].tresorerie_mensuelle,bilans,reserve_initiale:reserve,financement:{apport:s.investissement*.3,dette:debt},moteurs:['P2I_ECONOMIC_RESULT_ENGINE','P2I_FINANCIAL_ENGINE','P2I_BP_BFR_MENSUEL','P2I_BP_MOTEUR_TRESORERIE'],controles:{bilans_equilibres:true,bfr_mois:36,tresorerie_mois:12,financement:'30/70'}};
 }
-root.P2I_BP_SIMULATION_COMMUNE=Object.freeze({calculer});
+root.P2I_BP_SIMULATION_COMMUNE=Object.freeze({calculer,evaluerPerformance,reperes:REPERES});
 })(typeof window!=='undefined'?window:globalThis);

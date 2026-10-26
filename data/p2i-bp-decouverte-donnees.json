@@ -1405,9 +1405,9 @@
               441000
             ],
             "prix": [
-              1.4,
-              1.428,
-              1.45656
+              1.56,
+              1.5912,
+              1.623024
             ],
             "matieres_kg": 0.5833333333333334,
             "cout_production_kg": [
@@ -1663,7 +1663,7 @@
             "personnel": "Hypothèses de salaires bruts : 6 opérateurs à 350 USD/mois et 1 responsable à 700; majoration de simulation 15 %, non taux légal déclaré. Les opérateurs sont inclus dans le coût industriel; le responsable est hors CPV.",
             "charges": "Hypothèses annuelles : site 7 200, commercial 4 800, maintenance 3 600, assurance 2 400, administration 3 600, autres 2 400 USD. La maintenance est affectée au coût industriel; les autres postes restent hors CPV.",
             "production": "500 kg fruits/h × 8 h × 250 jours × utilisation × rendement 0,60. Les ventes ne dépassent pas la production et les stocks reportés. À 0,5 kg par bouteille, le débit maximal de 300 kg/h correspond à environ 600 bouteilles/h et 300 L/h, sous l’hypothèse simplificatrice de densité 1 kg/L.",
-            "prix_vente": "Hypothèse P2I 1,40 USD/kg de jus en A1, +2 %/an, sans promesse de débouchés.",
+            "prix_vente": "Hypothèse P2I : 1,56 USD/kg en année 1, soit environ 0,78 USD par bouteille de 500 ml, puis +2 %/an. Prix de vente de l’UP, hors taxes dans la simulation ; repères de vente au détail en Côte d’Ivoire consultés le 26/10/2026, sans preuve de prix usine ni de composition strictement identique.",
             "complements": "Configuration indicative composée de machines tarifées séparément : laveuse, deux éplucheuses, broyeur, extracteur, cuves, pasteurisateur, rinceuse, remplisseuse de bouteilles, boucheuse et étiqueteuse. Pas de poste de remplissage en poches. Prix publics et fourchettes, quantités et frais complémentaires estimés ; interfaces, matériels auxiliaires, installation et conditions de transport restent à confirmer.",
             "preparation_ananas": "Hypothèse de 1,5 kg par fruit issue d’un repère de culture en Côte d’Ivoire (CIRAD), à mesurer à réception. Deux éplucheuses de 300 fruits/h donnent 600 fruits/h théoriques, soit 900 kg/h avant arrêts à cette masse moyenne. Cadences réelles, rendement matière et adaptation des machines à l’ananas restent à confirmer. Rendement global du jus de 60 % non mesuré.",
             "utilites": "Le pasteurisateur proposé utilise 30 kW triphasés ; la boucheuse nécessite de l’air comprimé. Puissance cumulée, compresseur, eau, charges et raccordements restent à dimensionner. Le poste courant de process de 0,08 USD/kg est une hypothèse globale, non un calcul fondé sur des mesures de consommation.",
