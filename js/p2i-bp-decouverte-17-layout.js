@@ -115,6 +115,35 @@ note("La P2I accompagne la conception, la configuration industrielle, la simulat
 note("Le BP Initial permet de personnaliser le projet. Le BP Pro nécessite des contrôles techniques et financiers approfondis ainsi que des devis et justificatifs. Les services additionnels sont distincts du BP Pro."),
 '<h3>Éléments techniques disponibles</h3>'+table([["Unité",name],["Filière",filiere],["Configuration",config||"À préciser"],["Utilités","À confirmer"],["Sécurité / conformité","À documenter"]])+'<h3>Équipements et fonctions</h3>'+list(machineNames)
 ];
+// Détail du budget d'investissement : ne jamais assimiler le prix de la ligne au CAPEX total.
+const investmentItems=[
+ ["Équipements de production",isCrackers?"450 000 USD — ligne intégrée de référence":"À documenter selon la configuration"],
+ ["Fret maritime et assurance","À documenter — calcul CIF Port d’Abidjan"],
+ ["Transit, douane et frais portuaires","À documenter"],
+ ["Transport du port au site","À documenter"],
+ ["Génie civil et aménagement du site","À documenter"],
+ ["Électricité, eau et autres utilités","À documenter"],
+ ["Installation, mise en service et formation","À documenter"],
+ ["Pièces de rechange initiales","À documenter"],
+ ["Sécurité, conformité et environnement","À documenter"],
+ ["Investissement total hors réserve de trésorerie","Non calculable tant que les coûts complémentaires manquent"],
+ ["Apport (40 % de l’investissement total)","Non calculable à ce stade"],
+ ["Dette (60 % de l’investissement total)","Non calculable à ce stade"],
+ ["Réserve de trésorerie initiale","À calculer séparément"]
+];
+sections[6]+='<h3>Décomposition de l’investissement et financement</h3>'+table(investmentItems)+
+ note("Le prix de référence de la ligne intégrée Crackers est une donnée d’équipement, pas un CAPEX complet. Le financement 40 % / 60 % s’applique au total d’investissement documenté ; la réserve de trésorerie initiale est distincte.");
+sections[13]+='<h3>Traçabilité de l’hypothèse industrielle</h3>'+table([
+ ["Périmètre",safe(name)],
+ ["Variante",safe(configLabel)],
+ ["Équipements",isCrackers?"450 000 USD — référence P2I, ligne intégrée 500 kg/h":"Prix de référence à documenter"],
+ ["Nature du prix",isCrackers?"Prix de la ligne, hors coûts complémentaires":"À préciser"],
+ ["Fret, assurance, taxes, installation et utilités","Non intégrés sans données vérifiées"],
+ ["Financement de référence","40 % apport / 60 % dette, sur CAPEX complet uniquement"],
+ ["Horizon BFR","36 périodes mensuelles"],
+ ["Horizon trésorerie","12 mois"],
+ ["Horizon autres états prévisionnels","3 exercices"]
+ ]);
 // Les deux actions du parcours conservent l'UP, la configuration et la simulation.
 const destinationParams=new URLSearchParams(location.search);
 destinationParams.set("unit_id",id);
