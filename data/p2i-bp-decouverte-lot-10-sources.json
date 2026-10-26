@@ -1,0 +1,639 @@
+{
+  "version": "1.0.0",
+  "lot": "LOT-10",
+  "filiere": "Recyclage & Environnement",
+  "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
+  "nombre_up": 8,
+  "unites": [
+    {
+      "up_id": "plastique",
+      "up_nom": "Recyclage plastique",
+      "description": "Recyclage et transformation de déchets plastiques.",
+      "filiere": "Recyclage & Environnement",
+      "processus": [
+        "Collecte",
+        "Tri",
+        "Broyage",
+        "Lavage",
+        "Extrusion",
+        "Granulation"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Broyeur plastique",
+          "role": "Broyage déchets plastiques",
+          "capacite": "500 kg/heure",
+          "utilites": "Électricité 45kW"
+        },
+        {
+          "nom": "Laveuse à friction",
+          "role": "Lavage des paillettes",
+          "capacite": "500 kg/heure",
+          "utilites": "Eau + électricité 30kW"
+        },
+        {
+          "nom": "Séparateur densimétrique",
+          "role": "Séparation PP/PE/PET",
+          "capacite": "500 kg/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Sécheur centrifuge",
+          "role": "Séchage",
+          "capacite": "500 kg/heure",
+          "utilites": "Électricité 20kW"
+        },
+        {
+          "nom": "Extrudeuse granulation",
+          "role": "Granulation",
+          "capacite": "300 kg/heure",
+          "utilites": "Électricité 75kW"
+        },
+        {
+          "nom": "Silo stockage",
+          "role": "Stockage granulés",
+          "capacite": "50 tonnes",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ensacheuse big bag",
+          "role": "Conditionnement",
+          "capacite": "20 big bags/heure",
+          "utilites": "Électricité + air"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 110000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "papier",
+      "up_nom": "Recyclage papier/carton",
+      "description": "Recyclage de papier et carton.",
+      "filiere": "Recyclage & Environnement",
+      "processus": [
+        "Collecte",
+        "Tri",
+        "Broyage",
+        "Pulpage",
+        "Pressage",
+        "Séchage"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Pulpeur",
+          "role": "Mise en pâte",
+          "capacite": "2 tonnes/heure",
+          "utilites": "Électricité 75kW"
+        },
+        {
+          "nom": "Tamis sous pression",
+          "role": "Épuration",
+          "capacite": "2 tonnes/heure",
+          "utilites": "Électricité 30kW"
+        },
+        {
+          "nom": "Défibreur",
+          "role": "Défibrage",
+          "capacite": "2 tonnes/heure",
+          "utilites": "Électricité 45kW"
+        },
+        {
+          "nom": "Machine à papier",
+          "role": "Formation feuille",
+          "capacite": "1.5 tonnes/heure",
+          "utilites": "Électricité + eau"
+        },
+        {
+          "nom": "Presses",
+          "role": "Pressage",
+          "capacite": "1.5 tonnes/heure",
+          "utilites": "Hydraulique"
+        },
+        {
+          "nom": "Sécheurs",
+          "role": "Séchage",
+          "capacite": "1.5 tonnes/heure",
+          "utilites": "Gaz + électricité"
+        },
+        {
+          "nom": "Enrouleuse",
+          "role": "Bobinage",
+          "capacite": "1.5 tonnes/heure",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 120000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "metaux",
+      "up_nom": "Recyclage métaux",
+      "description": "Recyclage de métaux ferreux et non-ferreux.",
+      "filiere": "Recyclage & Environnement",
+      "processus": [
+        "Collecte",
+        "Tri",
+        "Découpe",
+        "Broyage",
+        "Compactage",
+        "Expédition"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Broyeur à métaux",
+          "role": "Broyage ferrailles",
+          "capacite": "3 tonnes/heure",
+          "utilites": "Électricité 110kW"
+        },
+        {
+          "nom": "Séparateur magnétique",
+          "role": "Séparation ferreux",
+          "capacite": "3 tonnes/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Courant de Foucault",
+          "role": "Séparation non ferreux",
+          "capacite": "3 tonnes/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Compacteur",
+          "role": "Mise en balles",
+          "capacite": "2 tonnes/heure",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Cisaille hydraulique",
+          "role": "Découpe",
+          "capacite": "3 tonnes/heure",
+          "utilites": "Électricité 30kW"
+        },
+        {
+          "nom": "Four de fusion",
+          "role": "Fusion",
+          "capacite": "1 tonne/heure",
+          "utilites": "Électricité 300kW"
+        },
+        {
+          "nom": "Pont bascule",
+          "role": "Pesage",
+          "capacite": "20 tonnes",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 130000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "compost",
+      "up_nom": "Compost et engrais organiques",
+      "description": "Transformation de déchets organiques en compost.",
+      "filiere": "Recyclage & Environnement",
+      "processus": [
+        "Collecte",
+        "Broyage",
+        "Compostage",
+        "Retournement",
+        "Tamisage",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Broyeur déchets verts",
+          "role": "Broyage",
+          "capacite": "5 tonnes/heure",
+          "utilites": "Électricité 75kW"
+        },
+        {
+          "nom": "Retourneur d'andain",
+          "role": "Mélange aération",
+          "capacite": "1000 m/heure",
+          "utilites": "Diesel"
+        },
+        {
+          "nom": "Tamis rotatif",
+          "role": "Tamisage",
+          "capacite": "5 tonnes/heure",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Mélangeur",
+          "role": "Formulation",
+          "capacite": "5 tonnes/batch",
+          "utilites": "Électricité 11kW"
+        },
+        {
+          "nom": "Ensacheuse",
+          "role": "Conditionnement",
+          "capacite": "500 sacs/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Aire de maturation",
+          "role": "Maturation",
+          "capacite": "500 tonnes",
+          "utilites": "—"
+        },
+        {
+          "nom": "Laboratoire",
+          "role": "Qualité",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 55000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "verre",
+      "up_nom": "Recyclage verre",
+      "description": "Recyclage de verre usagé.",
+      "filiere": "Recyclage & Environnement",
+      "processus": [
+        "Collecte",
+        "Tri",
+        "Broyage",
+        "Tamisage",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Concasseur verre",
+          "role": "Concassage",
+          "capacite": "3 tonnes/heure",
+          "utilites": "Électricité 30kW"
+        },
+        {
+          "nom": "Trommel",
+          "role": "Tamisage",
+          "capacite": "3 tonnes/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Crible vibrant",
+          "role": "Calibrage",
+          "capacite": "3 tonnes/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Séparateur optique",
+          "role": "Tri calcin",
+          "capacite": "2 tonnes/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Nettoyeur",
+          "role": "Nettoyage",
+          "capacite": "2 tonnes/heure",
+          "utilites": "Eau + électricité"
+        },
+        {
+          "nom": "Four de fusion",
+          "role": "Fusion",
+          "capacite": "1 tonne/heure",
+          "utilites": "Gaz 200kW"
+        },
+        {
+          "nom": "Silo",
+          "role": "Stockage",
+          "capacite": "200 tonnes",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 150000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "pneus",
+      "up_nom": "Recyclage pneus",
+      "description": "Recyclage et valorisation de pneus usagés.",
+      "filiere": "Recyclage & Environnement",
+      "processus": [
+        "Collecte",
+        "Déchiquetage",
+        "Broyage",
+        "Séparation",
+        "Granulation",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Découpeuse pneus",
+          "role": "Découpe",
+          "capacite": "500 pneus/heure",
+          "utilites": "Électricité 30kW"
+        },
+        {
+          "nom": "Broyeur lames",
+          "role": "Broyage",
+          "capacite": "500 kg/heure",
+          "utilites": "Électricité 90kW"
+        },
+        {
+          "nom": "Cryobroyeur",
+          "role": "Broyage azote",
+          "capacite": "500 kg/heure",
+          "utilites": "Azote + électricité"
+        },
+        {
+          "nom": "Séparateur fer",
+          "role": "Extraction acier",
+          "capacite": "500 kg/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Granulateur",
+          "role": "Granulation",
+          "capacite": "500 kg/heure",
+          "utilites": "Électricité 55kW"
+        },
+        {
+          "nom": "Presse à briquettes",
+          "role": "Briquettes",
+          "capacite": "300 kg/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Pyrolyse (option)",
+          "role": "Valorisation énergie",
+          "capacite": "1 tonne/heure",
+          "utilites": "Électricité + gaz"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 150000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "huiles",
+      "up_nom": "Recyclage huiles usagées",
+      "description": "Recyclage et régénération d'huiles usagées.",
+      "filiere": "Recyclage & Environnement",
+      "processus": [
+        "Collecte",
+        "Filtration",
+        "Traitement",
+        "Décantation",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Décanteur centrifuge",
+          "role": "Séparation eau/sédiments",
+          "capacite": "1000 L/heure",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Filtre presse",
+          "role": "Filtration fine",
+          "capacite": "1000 L/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Flash",
+          "role": "Déshydratation",
+          "capacite": "1000 L/heure",
+          "utilites": "Gaz + électricité"
+        },
+        {
+          "nom": "Distillation",
+          "role": "Distillation",
+          "capacite": "500 L/heure",
+          "utilites": "Électricité 45kW"
+        },
+        {
+          "nom": "Hydrotraitement",
+          "role": "Hydrogénation",
+          "capacite": "500 L/heure",
+          "utilites": "Électricité + hydrogène"
+        },
+        {
+          "nom": "Stabilisation",
+          "role": "Stabilisation",
+          "capacite": "500 L/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Stockage",
+          "role": "Stockage",
+          "capacite": "100 m³",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 85000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "deee",
+      "up_nom": "Recyclage DEEE",
+      "description": "Recyclage de déchets électriques et électroniques.",
+      "filiere": "Recyclage & Environnement",
+      "processus": [
+        "Collecte",
+        "Démontage",
+        "Tri",
+        "Broyage",
+        "Séparation",
+        "Valorisation"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Broyeur lent",
+          "role": "Prébroyage",
+          "capacite": "1 tonne/heure",
+          "utilites": "Électricité 55kW"
+        },
+        {
+          "nom": "Ligne démantèlement",
+          "role": "Démantèlement",
+          "capacite": "500 kg/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Séparateur électrostatique",
+          "role": "Séparation métaux",
+          "capacite": "500 kg/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Broyeur fin",
+          "role": "Broyage raffiné",
+          "capacite": "500 kg/heure",
+          "utilites": "Électricité 75kW"
+        },
+        {
+          "nom": "Table à eau",
+          "role": "Séparation densité",
+          "capacite": "500 kg/heure",
+          "utilites": "Eau"
+        },
+        {
+          "nom": "Broyeur PCB",
+          "role": "Broyage cartes",
+          "capacite": "200 kg/heure",
+          "utilites": "Électricité 45kW"
+        },
+        {
+          "nom": "Dépoussiéreur",
+          "role": "Filtration",
+          "capacite": "5000 m³/h",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 160000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    }
+  ]
+}
