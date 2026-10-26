@@ -29,6 +29,7 @@ on:
       - 'tests/check-p2i-bp-validated-projections.cjs'
       - 'js/p2i-bp-decouverte-dossier-builder.js'
       - 'scripts/build-bp-decouverte-95-dossiers.cjs'
+      - 'scripts/build-bp-decouverte-plan-consolidation.cjs'
       - 'tests/check-p2i-bp-95-dossiers.cjs'
       - 'tests/check-p2i-bp-readiness-gates.cjs'
       - 'data/p2i-bp-decouverte-95-dossiers-17-rubriques.json'
@@ -111,3 +112,12 @@ jobs:
           node tests/check-p2i-bp-95-dossiers.cjs
           node scripts/build-bp-decouverte-95-dossiers.cjs
           git diff --exit-code -- data/p2i-bp-decouverte-95-dossiers-17-rubriques.json
+
+      - name: Générer la matrice de consolidation des 95 UP
+        run: node scripts/build-bp-decouverte-plan-consolidation.cjs
+      - name: Conserver la matrice de consolidation CSV
+        uses: actions/upload-artifact@v4
+        with:
+          name: p2i-bp-decouverte-plan-consolidation
+          path: data/p2i-bp-decouverte-plan-consolidation.csv
+          retention-days: 30
