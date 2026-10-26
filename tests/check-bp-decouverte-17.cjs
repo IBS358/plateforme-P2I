@@ -130,4 +130,16 @@ assert.ok(css.includes('.bp-summary{display:block!important}'),"Le sommaire doit
 assert.ok(css.includes('.bp-variant-selector{display:none!important}'),"Les contrôles de variante ne doivent pas apparaître dans le PDF");
 assert.ok(css.includes('.bp-section h2{page-break-after:avoid}'),"Éviter les titres isolés lors de l'impression");
 
+// Exécuter réellement la fonction de validation des chemins photographiques.
+const pictureStart=layout.indexOf("const pictureUrl=value=>{");
+const pictureEnd=layout.indexOf("\n};",pictureStart);
+assert.ok(pictureStart>=0&&pictureEnd>pictureStart,"Fonction de validation des photographies détectée");
+const pictureCode=layout.slice(pictureStart,pictureEnd+3).replace("const pictureUrl=","(")+")";
+const pictureUrl=vm.runInNewContext(pictureCode);
+assert.equal(pictureUrl("assets/photos/crackers.jpg"),"assets/photos/crackers.jpg");
+assert.equal(pictureUrl("p2i-nettoyage-hero.png"),"p2i-nettoyage-hero.png");
+assert.equal(pictureUrl("https://example.org/photos/crackers.webp"),"https://example.org/photos/crackers.webp");
+for(const url of ["javascript:alert(1)","data:image/svg+xml,test","../secret.png","assets/../secret.png","https://example.org/../../secret.png","https://example.org/pic.png?unsafe=1"])
+  assert.equal(pictureUrl(url),"","URL photographique interdite : "+url);
+
 console.log("P2I BP Découverte : contrôles statiques réussis (17 rubriques, liens, garde-fous).");
