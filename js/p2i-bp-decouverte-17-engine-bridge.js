@@ -54,14 +54,17 @@ const nonnegative=["chiffre_affaires_usd","cout_produits_vendus_usd","cout_produ
 if(nonnegative.some(key=>number(e[key])&&e[key]<0)||
  (number(e.quantite_produite)&&number(e.quantite_vendue)&&e.quantite_vendue>e.quantite_produite+.001)||
  (number(e.quantite_produite)&&number(e.quantite_vendue)&&number(e.quantite_non_vendue)&&
- Math.abs(e.quantite_produite-e.quantite_vendue-e.quantite_non_vendue)>.001)){
+ Math.abs(e.quantite_produite-e.quantite_vendue-e.quantite_non_vendue)>.001)||
+ (number(e.quantite_non_vendue)&&number(e.quantite_stockee)&&
+ Math.abs(e.quantite_non_vendue-e.quantite_stockee)>.001)){
  invalidate();
  return;
 }
-if(d&&number(d.chiffre_affaires_usd)&&number(d.cout_produits_vendus_usd)&&
- (Math.abs(d.chiffre_affaires_usd-e.chiffre_affaires_usd)>.01||Math.abs(d.cout_produits_vendus_usd-e.cout_produits_vendus_usd)>.01)){
-invalidate();
-return;
+// Ne jamais mélanger des données partielles de deux simulations différentes.
+if(d&&((number(d.chiffre_affaires_usd)&&Math.abs(d.chiffre_affaires_usd-e.chiffre_affaires_usd)>.01)||
+       (number(d.cout_produits_vendus_usd)&&Math.abs(d.cout_produits_vendus_usd-e.cout_produits_vendus_usd)>.01))){
+ invalidate();
+ return;
 }
 {
 const div=$("p2i-r8-engine")||document.createElement("div");div.id="p2i-r8-engine";div.innerHTML='<h3>Production et ventes — données du moteur économique</h3>'+table([
