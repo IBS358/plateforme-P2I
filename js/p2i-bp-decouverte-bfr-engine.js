@@ -26,8 +26,9 @@ function calculate(input){
  for(let i=0;i<36;i++){
   const m=months[i]||{};
   const keys=["ventes_usd","consommation_matieres_usd","cout_production_vendue_usd"];
-  for(const k of keys)if(!number(m[k]))problems.push("Mois "+(i+1)+" : "+k+" manquant ou invalide");
-  if(problems.length)continue;
+  const invalid=keys.filter(k=>!number(m[k]));
+  for(const k of invalid)problems.push("Mois "+(i+1)+" : "+k+" manquant ou invalide");
+  if(invalid.length)continue;
   const rawStock=m.consommation_matieres_usd;
   const finishedStock=m.cout_production_vendue_usd*.5;
   const receivable=m.ventes_usd*.6;
