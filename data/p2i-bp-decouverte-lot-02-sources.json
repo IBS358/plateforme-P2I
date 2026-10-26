@@ -1,0 +1,502 @@
+{
+  "version": "1.0.0",
+  "lot": "LOT-02",
+  "filiere": "Chimie, Cosmétiques & Détergents",
+  "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
+  "nombre_up": 7,
+  "unites": [
+    {
+      "up_id": "detergents",
+      "up_nom": "Détergents & produits ménagers",
+      "description": "Fabrication de détergents et produits d'hygiène.",
+      "filiere": "Chimie, Cosmétiques & Détergents",
+      "processus": [
+        "Dosage des ingrédients",
+        "Mélange",
+        "Homogénéisation",
+        "Contrôle qualité",
+        "Conditionnement",
+        "Étiquetage"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Cuve de mélange",
+          "role": "Formulation",
+          "capacite": "2,000 L",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Système de dosage",
+          "role": "Dosage précis",
+          "capacite": "Automatique",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Homogénéisateur",
+          "role": "Mélange et émulsification",
+          "capacite": "2,000 L/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Remplisseuse",
+          "role": "Conditionnement",
+          "capacite": "2,000 bouteilles/h",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Étiqueteuse",
+          "role": "Étiquetage",
+          "capacite": "2,000 bouteilles/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste contrôle qualité",
+          "role": "Tests de conformité",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 80000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "savonnerie",
+      "up_nom": "Savonnerie industrielle",
+      "description": "Production de savons solides et liquides.",
+      "filiere": "Chimie, Cosmétiques & Détergents",
+      "processus": [
+        "Dosage des ingrédients",
+        "Saponification",
+        "Moulage",
+        "Découpe",
+        "Séchage",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Cuve de saponification",
+          "role": "Réaction chimique",
+          "capacite": "1,000 L",
+          "utilites": "Électricité + eau"
+        },
+        {
+          "nom": "Moules",
+          "role": "Moulage des savons",
+          "capacite": "500 kg/batch",
+          "utilites": "—"
+        },
+        {
+          "nom": "Cutter",
+          "role": "Découpe des savons",
+          "capacite": "500 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Séchoir",
+          "role": "Séchage",
+          "capacite": "1,000 kg/batch",
+          "utilites": "Ventilation"
+        },
+        {
+          "nom": "Mélangeur",
+          "role": "Savon liquide",
+          "capacite": "1,000 L",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Remplisseuse",
+          "role": "Conditionnement",
+          "capacite": "1,000 bouteilles/h",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 70000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "cosmetiques",
+      "up_nom": "Cosmétiques naturels",
+      "description": "Cosmétiques à base de matières premières locales.",
+      "filiere": "Chimie, Cosmétiques & Détergents",
+      "processus": [
+        "Dosage des ingrédients",
+        "Mélange",
+        "Émulsion",
+        "Contrôle qualité",
+        "Conditionnement",
+        "Étiquetage"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Cuve de mélange",
+          "role": "Formulation",
+          "capacite": "500 L",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Bain-marie",
+          "role": "Chauffe contrôlée",
+          "capacite": "100 L",
+          "utilites": "Électricité + eau"
+        },
+        {
+          "nom": "Homogénéisateur",
+          "role": "Émulsions",
+          "capacite": "500 L/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Remplisseuse",
+          "role": "Conditionnement",
+          "capacite": "1,000 pots/h",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Étiqueteuse",
+          "role": "Étiquetage INCI",
+          "capacite": "1,000 pots/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste contrôle qualité",
+          "role": "Tests de stabilité",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 85000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "adhesifs",
+      "up_nom": "Adhésifs & colles",
+      "description": "Fabrication d'adhésifs et colles industriels.",
+      "filiere": "Chimie, Cosmétiques & Détergents",
+      "processus": [
+        "Dosage des ingrédients",
+        "Mélange",
+        "Réaction",
+        "Contrôle qualité",
+        "Conditionnement",
+        "Étiquetage"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Réacteur",
+          "role": "Formulation",
+          "capacite": "2,000 L",
+          "utilites": "Électricité + eau"
+        },
+        {
+          "nom": "Agitateur",
+          "role": "Mélange",
+          "capacite": "2,000 L/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Système de dosage",
+          "role": "Dosage précis",
+          "capacite": "Automatique",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Remplisseuse",
+          "role": "Conditionnement",
+          "capacite": "1,000 pots/h",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Étiqueteuse",
+          "role": "Étiquetage",
+          "capacite": "1,000 pots/h",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 120000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "engrais",
+      "up_nom": "Engrais & pesticides",
+      "description": "Fabrication d'engrais et pesticides pour l'agriculture.",
+      "filiere": "Chimie, Cosmétiques & Détergents",
+      "processus": [
+        "Réception des matières",
+        "Broyage",
+        "Dosage",
+        "Mélange",
+        "Granulation",
+        "Séchage",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Broyeur",
+          "role": "Broyage des matières",
+          "capacite": "2,000 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Mélangeur",
+          "role": "Mélange des ingrédients",
+          "capacite": "2,000 kg/batch",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Granulateur",
+          "role": "Granulation",
+          "capacite": "1,000 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Séchoir",
+          "role": "Séchage",
+          "capacite": "1,000 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Tamis",
+          "role": "Tamisage",
+          "capacite": "1,000 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ensacheuse",
+          "role": "Conditionnement",
+          "capacite": "500 sacs/h",
+          "utilites": "Électricité + air"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 180000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "javel",
+      "up_nom": "Eau de javel & désinfectants",
+      "description": "Fabrication d'eau de javel et désinfectants.",
+      "filiere": "Chimie, Cosmétiques & Détergents",
+      "processus": [
+        "Dosage des ingrédients",
+        "Mélange",
+        "Contrôle qualité",
+        "Conditionnement",
+        "Étiquetage"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Cuve de mélange",
+          "role": "Préparation",
+          "capacite": "5,000 L",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Système de dosage",
+          "role": "Dosage du chlore",
+          "capacite": "Automatique",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Remplisseuse",
+          "role": "Conditionnement",
+          "capacite": "2,000 bouteilles/h",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Étiqueteuse",
+          "role": "Étiquetage",
+          "capacite": "2,000 bouteilles/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste contrôle",
+          "role": "Contrôle qualité",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 60000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "produits_industriels",
+      "up_nom": "Produits chimiques industriels",
+      "description": "Fabrication de produits chimiques à usage industriel.",
+      "filiere": "Chimie, Cosmétiques & Détergents",
+      "processus": [
+        "Dosage des ingrédients",
+        "Mélange",
+        "Réaction",
+        "Contrôle qualité",
+        "Conditionnement",
+        "Étiquetage"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Cuve de mélange",
+          "role": "Formulation",
+          "capacite": "5,000 L",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Réacteur",
+          "role": "Réaction chimique",
+          "capacite": "2,000 L",
+          "utilites": "Électricité + eau"
+        },
+        {
+          "nom": "Système de dosage",
+          "role": "Dosage",
+          "capacite": "Automatique",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Remplisseuse",
+          "role": "Conditionnement",
+          "capacite": "1,000 bidons/h",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Étiqueteuse",
+          "role": "Étiquetage",
+          "capacite": "1,000 bidons/h",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 150000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    }
+  ]
+}
