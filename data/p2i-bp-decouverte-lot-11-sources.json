@@ -1,0 +1,627 @@
+{
+  "version": "1.0.0",
+  "lot": "LOT-11",
+  "filiere": "Services Industriels",
+  "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
+  "nombre_up": 8,
+  "unites": [
+    {
+      "up_id": "nettoyage",
+      "up_nom": "Services de nettoyage industriel",
+      "description": "Prestations de nettoyage professionnel pour entreprises, industries et collectivités.",
+      "filiere": "Services Industriels",
+      "processus": [
+        "Évaluation des besoins",
+        "Planification",
+        "Mobilisation",
+        "Exécution",
+        "Contrôle qualité",
+        "Facturation"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Monobrosse",
+          "role": "Nettoyage sols",
+          "capacite": "500 m²/heure",
+          "utilites": "Électricité 2kW"
+        },
+        {
+          "nom": "Autolaveuse",
+          "role": "Nettoyage/Lavage",
+          "capacite": "1000 m²/heure",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Nettoyeur HP",
+          "role": "Haute pression",
+          "capacite": "1000 L/heure",
+          "utilites": "Électricité 7kW"
+        },
+        {
+          "nom": "Aspirateur poussière",
+          "role": "Aspiration",
+          "capacite": "500 m²/heure",
+          "utilites": "Électricité 3kW"
+        },
+        {
+          "nom": "Générateur vapeur",
+          "role": "Nettoyage vapeur",
+          "capacite": "50 L/heure",
+          "utilites": "Électricité 9kW"
+        },
+        {
+          "nom": "Perche filtration",
+          "role": "Dépoussiérage",
+          "capacite": "200 m²/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Camion d'intervention",
+          "role": "Déplacement",
+          "capacite": "Standard",
+          "utilites": "Diesel"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 40000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "maintenance",
+      "up_nom": "Maintenance industrielle",
+      "description": "Services de maintenance préventive et curative.",
+      "filiere": "Services Industriels",
+      "processus": [
+        "Diagnostic",
+        "Intervention",
+        "Pièces de rechange",
+        "Suivi"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Tour",
+          "role": "Usinage réparation",
+          "capacite": "Standard",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Fraiseuse",
+          "role": "Usinage",
+          "capacite": "Standard",
+          "utilites": "Électricité 7kW"
+        },
+        {
+          "nom": "Poste à souder",
+          "role": "Soudure réparation",
+          "capacite": "Standard",
+          "utilites": "Électricité 8kW"
+        },
+        {
+          "nom": "Équilibreuse",
+          "role": "Équilibrage",
+          "capacite": "1000 kg",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Analyseur vibrations",
+          "role": "Diagnostic",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Camion atelier",
+          "role": "Intervention terrain",
+          "capacite": "Standard",
+          "utilites": "Diesel"
+        },
+        {
+          "nom": "Pont élévateur",
+          "role": "Levage",
+          "capacite": "5 tonnes",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 90000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "logistique",
+      "up_nom": "Logistique industrielle",
+      "description": "Services logistiques et gestion d'entrepôts.",
+      "filiere": "Services Industriels",
+      "processus": [
+        "Réception",
+        "Stockage",
+        "Préparation commandes",
+        "Expédition"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Transpalette",
+          "role": "Manutention",
+          "capacite": "2 tonnes",
+          "utilites": "Électrique"
+        },
+        {
+          "nom": "Chariot élévateur",
+          "role": "Levage/stockage",
+          "capacite": "3 tonnes",
+          "utilites": "Électrique/Diesel"
+        },
+        {
+          "nom": "Rayonnage",
+          "role": "Stockage",
+          "capacite": "50 tonnes",
+          "utilites": "—"
+        },
+        {
+          "nom": "Convoyeur",
+          "role": "Transport",
+          "capacite": "2 tonnes/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Quai de chargement",
+          "role": "Chargement",
+          "capacite": "Standard",
+          "utilites": "Hydraulique"
+        },
+        {
+          "nom": "Bascule camion",
+          "role": "Pesage",
+          "capacite": "40 tonnes",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Logiciel WMS",
+          "role": "Gestion stock",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 120000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "formation",
+      "up_nom": "Formation industrielle",
+      "description": "Formation technique et professionnelle.",
+      "filiere": "Services Industriels",
+      "processus": [
+        "Évaluation besoins",
+        "Développement programmes",
+        "Animation",
+        "Évaluation"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Salle de formation",
+          "role": "Cours théoriques",
+          "capacite": "20 personnes",
+          "utilites": "Climatisation"
+        },
+        {
+          "nom": "Labo électronique",
+          "role": "Pratique",
+          "capacite": "10 postes",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Atelier mécanique",
+          "role": "TP",
+          "capacite": "10 postes",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Simulateurs",
+          "role": "Simulation",
+          "capacite": "5 postes",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Outils pédagogiques",
+          "role": "Matériel",
+          "capacite": "Standard",
+          "utilites": "—"
+        },
+        {
+          "nom": "Accès LMS",
+          "role": "E-learning",
+          "capacite": "Illimité",
+          "utilites": "Internet"
+        },
+        {
+          "nom": "Certification",
+          "role": "Accréditation",
+          "capacite": "Standard",
+          "utilites": "—"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 70000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "qualite",
+      "up_nom": "Services qualité",
+      "description": "Services de contrôle qualité et certification.",
+      "filiere": "Services Industriels",
+      "processus": [
+        "Audit",
+        "Contrôle",
+        "Analyses",
+        "Certification"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Microscope métallographique",
+          "role": "Analyse micro",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Duromètre",
+          "role": "Dureté",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine traction",
+          "role": "Essai traction",
+          "capacite": "10 tonnes",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Spectromètre",
+          "role": "Analyse matière",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Pied à coulisser",
+          "role": "Mesure",
+          "capacite": "Standard",
+          "utilites": "—"
+        },
+        {
+          "nom": "Logiciel qualité",
+          "role": "Gestion",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Étalonnage",
+          "role": "Certification",
+          "capacite": "Standard",
+          "utilites": "—"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 60000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "etudes",
+      "up_nom": "Études et conseil",
+      "description": "Services d'études techniques et conseil industriel.",
+      "filiere": "Services Industriels",
+      "processus": [
+        "Analyse besoins",
+        "Recherche",
+        "Rédaction",
+        "Présentation"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Station CAO",
+          "role": "Conception",
+          "capacite": "10 postes",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Serveur",
+          "role": "Calcul",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Logiciels CAD/CAM",
+          "role": "Licences",
+          "capacite": "10 utilisateurs",
+          "utilites": "—"
+        },
+        {
+          "nom": "Imprimante 3D",
+          "role": "Prototypage",
+          "capacite": "200 x 200 mm",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Scanner 3D",
+          "role": "Rétro-ingénierie",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Simulation",
+          "role": "Calculs",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Imprimante A0",
+          "role": "Plans",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 55000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "securite",
+      "up_nom": "Sécurité industrielle",
+      "description": "Services de sécurité et surveillance.",
+      "filiere": "Services Industriels",
+      "processus": [
+        "Évaluation risques",
+        "Planification",
+        "Surveillance",
+        "Intervention"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "EPI",
+          "role": "Équipements",
+          "capacite": "50 personnes",
+          "utilites": "—"
+        },
+        {
+          "nom": "Détecteur gaz",
+          "role": "Surveillance",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Kit incendie",
+          "role": "Lutte incendie",
+          "capacite": "Standard",
+          "utilites": "—"
+        },
+        {
+          "nom": "Signalisation",
+          "role": "Sécurité",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Formation sécurité",
+          "role": "Formation",
+          "capacite": "20 personnes",
+          "utilites": "—"
+        },
+        {
+          "nom": "Audit HSE",
+          "role": "Diagnostic",
+          "capacite": "Standard",
+          "utilites": "—"
+        },
+        {
+          "nom": "Certification",
+          "role": "ISO 45001",
+          "capacite": "Standard",
+          "utilites": "—"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 50000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "energie",
+      "up_nom": "Services énergétiques",
+      "description": "Services d'efficacité énergétique et énergies renouvelables.",
+      "filiere": "Services Industriels",
+      "processus": [
+        "Audit énergétique",
+        "Conception",
+        "Installation",
+        "Maintenance"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Analyseur de réseau",
+          "role": "Audit électrique",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Caméra thermique",
+          "role": "Thermographie",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Balance énergétique",
+          "role": "Diagnostic",
+          "capacite": "Standard",
+          "utilites": "—"
+        },
+        {
+          "nom": "Logiciel de simulation",
+          "role": "Simulation énergie",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Matériel mesure",
+          "role": "Campagne",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Solutions CEE",
+          "role": "Certification",
+          "capacite": "Standard",
+          "utilites": "—"
+        },
+        {
+          "nom": "Accompagnement",
+          "role": "Conseil",
+          "capacite": "Standard",
+          "utilites": "—"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 100000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    }
+  ]
+}
