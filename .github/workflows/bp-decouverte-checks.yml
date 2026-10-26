@@ -27,6 +27,7 @@ on:
       - 'tests/check-p2i-bp-tresorerie-12-mois.cjs'
       - 'js/p2i-bp-decouverte-tresorerie-12-mois.js'
       - 'tests/check-p2i-bp-validated-projections.cjs'
+      - 'tests/check-p2i-bp-script-loading.cjs'
       - 'js/p2i-bp-decouverte-17-validated-projections.js'
       - 'js/p2i-bp-decouverte-financial-validation.js'
       - 'js/p2i-bp-decouverte-bfr-36-mois.js'
@@ -92,3 +93,5 @@ jobs:
         run: node tests/check-p2i-bp-bfr-36.cjs
       - name: Vérifier le moteur BFR sur 36 mois
         run: node tests/check-p2i-bp-bfr-engine.cjs
+      - name: Contrôler le chargement unique des scripts financiers
+        run: node tests/check-p2i-bp-script-loading.cjs
