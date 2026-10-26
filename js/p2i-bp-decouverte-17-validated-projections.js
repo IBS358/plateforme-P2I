@@ -20,8 +20,23 @@ function current(){
  const saved=sim&&id==="biscuiterie"?localStorage.getItem("p2i_bp_decouverte_biscuiterie_sim_"+sim):null;
  return {id,config:p.get("configuration_id")||saved||""};
 }
+const ids=["p2i-validated-finance-r7","p2i-validated-finance-r9","p2i-validated-finance-r10","p2i-validated-finance-r11","p2i-validated-finance-r13"];
+const sections=["p2i-r7","p2i-r9","p2i-r10","p2i-r11","p2i-r13"];
+function placeholders(section){
+ const parent=$(section);
+ if(!parent)return [];
+ // Seuls les tableaux de préparation directement contenus dans la rubrique
+ // sont masqués : ne jamais masquer les tableaux du moteur économique.
+ return Array.from(parent.children||[]).filter(child=>
+  child.classList&&child.classList.contains("bp-table-wrap")||
+  child.dataset&&child.dataset.p2iForecastPlaceholder==="true");
+}
+function togglePreparation(visible){
+ for(const section of sections)for(const node of placeholders(section))node.hidden=!visible;
+}
 function remove(){
- for(const id of ["p2i-validated-finance-r7","p2i-validated-finance-r9","p2i-validated-finance-r10","p2i-validated-finance-r11","p2i-validated-finance-r13"])$(id)?.remove();
+ for(const id of ids)$(id)?.remove();
+ togglePreparation(true);
 }
 function add(section,id,html){
  const parent=$(section);if(!parent)return;
@@ -53,6 +68,7 @@ function update(){
    !close(first.cout_produits_vendus,financial.cout_ventes_total_usd))return;
  }
 
+ togglePreparation(false);
  const f=result.financement_indicatif;
  add("p2i-r7","p2i-validated-finance-r7",'<h3>Financement de l’investissement consolidé</h3>'+
   renderTable(["Poste","Montant"],[
