@@ -165,4 +165,11 @@ assert.ok(layout.includes('configLabel=selectedCleaning?selectedCleaning.title:"
 assert.ok(layout.includes('(id==="nettoyage"&&!selectedCleaning)||isSpecialCleaning?[]'),"Aucun équipement générique en l'absence de sélection Nettoyage");
 assert.ok(layout.includes('id==="nettoyage"&&!selectedCleaning?"Sélectionnez une activité'),"Message clair si aucune activité Nettoyage n'est choisie");
 assert.ok(layout.includes('id==="nettoyage"?(selectedCleaning?config:null):selectedVariant'),"Pas de photo de variante Nettoyage inconnue");
+assert.ok(layout.includes('sections[6]+='),"La rubrique investissements contient un budget détaillé");
+assert.ok(layout.includes('sections[13]+='),"La rubrique hypothèses contient la traçabilité de la référence");
+assert.ok(layout.includes('["Fret maritime et assurance"'),"Le CIF est distingué du prix des équipements");
+assert.ok(layout.includes('["Pièces de rechange initiales"'),"Stock initial de pièces inclus dans les postes à documenter");
+assert.ok(layout.includes('["Réserve de trésorerie initiale"'),"Réserve de trésorerie distincte");
+assert.ok(layout.includes('["Horizon BFR","36 périodes mensuelles"]'),"BFR sur 36 mois");
+assert.ok(layout.includes('["Horizon trésorerie","12 mois"]'),"Trésorerie sur 12 mois");
 console.log("P2I BP Découverte : contrôles statiques réussis (17 rubriques, liens, garde-fous).");
