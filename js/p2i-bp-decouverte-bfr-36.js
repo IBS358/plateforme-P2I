@@ -32,7 +32,8 @@ function calculer(input){
    add(prefix+"dettes_fournisseurs_fin_usd","Paiement fournisseurs comptant : dette de clôture nulle");
   if(i===0&&ok(initial)&&!close(initial,0))
    add("creances_initiales_usd","Créances d'ouverture non nulles : échéancier antérieur requis");
-  if(!["ventes_facturees_usd","achats_fournisseurs_usd","stock_matieres_fin_usd","stock_produits_finis_fin_usd","autres_dettes_exploitation_fin_usd"].every(k=>ok(x[k])))continue;
+  if(!["ventes_facturees_usd","achats_fournisseurs_usd","stock_matieres_fin_usd","stock_produits_finis_fin_usd","autres_dettes_exploitation_fin_usd"].every(k=>ok(x[k]))||
+   (i>0&&!ok(months[i-1]?.ventes_facturees_usd)))continue;
   const ventes=x.ventes_facturees_usd;
   const stock=x.stock_matieres_fin_usd+x.stock_produits_finis_fin_usd;
   const creances=ventes*.6;
