@@ -172,4 +172,7 @@ assert.ok(layout.includes('["Pièces de rechange initiales"'),"Stock initial de 
 assert.ok(layout.includes('["Réserve de trésorerie initiale"'),"Réserve de trésorerie distincte");
 assert.ok(layout.includes('["Horizon BFR","36 périodes mensuelles"]'),"BFR sur 36 mois");
 assert.ok(layout.includes('["Horizon trésorerie","12 mois"]'),"Trésorerie sur 12 mois");
+assert.ok(html.includes('p2i-bp-decouverte-preparation.js'),"Module de préparation chargé");
+assert.ok(html.indexOf('p2i-bp-decouverte-preparation.js')<html.indexOf('p2i-bp-decouverte-17-layout.js'),"Module chargé avant le rendu");
+assert.ok(layout.includes('preparation.blocages.map'),"Blocages propres à chaque configuration visibles");
 console.log("P2I BP Découverte : contrôles statiques réussis (17 rubriques, liens, garde-fous).");
