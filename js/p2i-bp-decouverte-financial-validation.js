@@ -28,6 +28,12 @@ function validate(dataset){
  }else for(const k of requiredInvestment)if(!nonnegative(investment[k]))push("investissement."+k,"Montant vérifié requis");
  if(investment.reserve_tresorerie!==undefined&&!nonnegative(investment.reserve_tresorerie))
   push("investissement.reserve_tresorerie","Réserve distincte du CAPEX : montant invalide");
+ // La ligne intégrée Crackers est une référence d'équipements de 450 000 USD.
+ // Un dossier financier ne peut pas la remplacer par le budget générique
+ // historique de la Biscuiterie, ni confondre prix machine et CAPEX total.
+ if(d.up_id==="biscuiterie"&&d.configuration_id==="crackers"&&
+  (!nonnegative(investment.equipements)||investment.equipements<450000))
+  push("investissement.equipements","La ligne intégrée Crackers de référence coûte 450 000 USD : équipements sous-évalués");
  const annual=Array.isArray(d.compte_resultat)?d.compte_resultat:[];
  if(annual.length!==3)push("compte_resultat","Trois exercices annuels requis");
  for(let i=0;i<3;i++){
