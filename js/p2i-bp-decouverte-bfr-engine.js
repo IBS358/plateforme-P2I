@@ -30,8 +30,19 @@ function calculate(input){
   const invalid=keys.filter(k=>!number(m[k]));
   for(const k of invalid)problems.push("Mois "+(i+1)+" : "+k+" manquant ou invalide");
   if(invalid.length)continue;
-  const rawStock=m.consommation_matieres_usd;
-  const finishedStock=m.cout_production_vendue_usd*.5;
+  // Si des stocks physiques de fin de mois sont disponibles, leur valorisation
+  // remplace les stocks cibles 30/15 jours : jamais de cumul des deux méthodes.
+  const physical=["stock_matieres_quantite","cout_unitaire_matieres_usd",
+   "stock_finis_quantite","cout_unitaire_finis_usd"];
+  const hasPhysical=physical.some(k=>m[k]!==undefined&&m[k]!==null);
+  if(hasPhysical&&physical.some(k=>!number(m[k]))){
+   problems.push("Mois "+(i+1)+" : stock physique incomplet ou invalide");
+   continue;
+  }
+  const rawStock=hasPhysical?m.stock_matieres_quantite*m.cout_unitaire_matieres_usd:
+   m.consommation_matieres_usd;
+  const finishedStock=hasPhysical?m.stock_finis_quantite*m.cout_unitaire_finis_usd:
+   m.cout_production_vendue_usd*.5;
   const receivable=m.ventes_usd*.6;
   // Les fournisseurs sont payés comptant : aucune dette fournisseur.
   // Les stocks sont des encours distincts : ne pas ajouter la consommation
@@ -41,6 +52,7 @@ function calculate(input){
   rows.push(Object.freeze({mois:i+1,stocks_matieres:rawStock,
    stocks_produits_finis:finishedStock,stocks,creances_clients:receivable,
    dettes_exploitation:0,bfr,
+   methode_stock:hasPhysical?"stock_physique_valorise":"stock_cible_30_15_jours",
    encaissements_clients:m.ventes_usd*.4+previousReceivable}));
   previousReceivable=receivable;
  }
