@@ -85,4 +85,19 @@ assert.equal(nodes.has("p2i-validated-finance-diagnostic"),false,"Retirer le dia
 window.P2I_BP_PREVISIONS_VALIDABLES.up_id="conserverie_legumes";
 events["p2i:bp-previsions-ready"]();
 assert.equal(nodes.has("p2i-validated-finance-r10"),false);
+
+// Cas transversal : une UP hors Biscuiterie doit pouvoir afficher ses propres
+// projections documentées, sans réutiliser les résultats du pilote Crackers.
+location.search="?unit_id=conserverie_legumes&configuration_id=reference";
+window.P2I_BP_PREVISIONS_VALIDABLES.up_id="conserverie_legumes";
+window.P2I_BP_PREVISIONS_VALIDABLES.configuration_id="reference";
+events["p2i:bp-previsions-ready"]();
+for(const id of ["r7","r9","r10","r11","r13"])
+ assert.ok(nodes.has("p2i-validated-finance-"+id),"Projection UP non pilote : "+id);
+assert.ok(nodes.get("p2i-validated-finance-r7").innerHTML.includes("Apport 30 %"));
+assert.ok(nodes.get("p2i-validated-finance-r7").innerHTML.includes("Dette 70 %"));
+location.search="?unit_id=conserverie_legumes&configuration_id=autre";
+events["p2i:bp-previsions-ready"]();
+assert.equal(nodes.has("p2i-validated-finance-r9"),false,
+ "Ne jamais réutiliser les prévisions d'une autre configuration");
 console.log("Raccordement projections : 36 BFR, 12 trésorerie, invalidation et identité contrôlés.");
