@@ -6,6 +6,13 @@ const source=name=>fs.readFileSync(path.join(root,"js",name),"utf8");
 const nodes=new Map();
 const makeNode=id=>({id,innerHTML:"",children:[],appendChild(child){this.children.push(child);nodes.set(child.id,child);child.parentNode=this;},remove(){nodes.delete(this.id)}});
 for(const id of ["p2i-r7","p2i-r9","p2i-r10","p2i-r11","p2i-r13"])nodes.set(id,makeNode(id));
+// Tableaux d'attente présents dans le rendu initial : ils doivent être
+// masqués quand les prévisions validées arrivent, puis rétablis à l'invalidation.
+const pending={};
+for(const section of ["p2i-r7","p2i-r9","p2i-r10","p2i-r11","p2i-r13"]){
+ const node={hidden:false,classList:{contains:name=>name==="bp-table-wrap"}};
+ nodes.get(section).children.push(node);pending[section]=node;
+}
 const events={};
 const document={readyState:"complete",getElementById:id=>nodes.get(id)||null,createElement:()=>makeNode(""),addEventListener:(e,fn)=>{events[e]=fn}};
 const window={addEventListener:(e,fn)=>{events[e]=fn}};
@@ -31,12 +38,19 @@ window.P2I_CRACKERS_RESULTAT={chiffre_affaires_usd:1000000,cout_produits_vendus_
 window.P2I_COMPTE_FINANCIER={chiffre_affaires_total_usd:1000000,cout_ventes_total_usd:500000};
 events["p2i:bp-previsions-ready"]();
 for(const id of ["r7","r9","r10","r11","r13"])assert.ok(nodes.has("p2i-validated-finance-"+id),id);
+assert.equal(pending["p2i-r7"].hidden,false,"Conserver la décomposition du CAPEX");
+for(const section of ["p2i-r9","p2i-r10","p2i-r11","p2i-r13"])
+ assert.equal(pending[section].hidden,true,"Masquer les tableaux provisoires "+section);
+
 assert.equal((nodes.get("p2i-validated-finance-r9").innerHTML.match(/<tr>/g)||[]).length,4);
 assert.equal((nodes.get("p2i-validated-finance-r10").innerHTML.match(/<tr>/g)||[]).length,37);
 assert.equal((nodes.get("p2i-validated-finance-r13").innerHTML.match(/<tr>/g)||[]).length,13);
 delete window.P2I_CRACKERS_RESULTAT;
 events["p2i:bp-previsions-ready"]();
 assert.equal(nodes.has("p2i-validated-finance-r9"),false,"Aucun tableau sans résultat économique courant");
+for(const section of ["p2i-r9","p2i-r10","p2i-r11","p2i-r13"])
+ assert.equal(pending[section].hidden,false,"Restaurer les tableaux provisoires "+section);
+
 window.P2I_CRACKERS_RESULTAT={chiffre_affaires_usd:1000000,cout_produits_vendus_usd:500000};
 events["p2i:bp-previsions-ready"]();
 assert.ok(nodes.has("p2i-validated-finance-r9"));
