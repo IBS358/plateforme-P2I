@@ -47,3 +47,11 @@ Ces alias ne créent pas de nouveaux équipements ni de nouveaux prix : ils poin
 Deux définitions de la clé `peintures_btp` étaient présentes dans l'objet JavaScript. La seconde écrasait silencieusement la première, qui possédait notamment `investment_breakdown` et `monthly_capacity`. La définition moins documentée a été retirée. Le nombre d'UP distinctes reste 95 : le doublon ne correspond pas à une 96e activité.
 
 **Point de contrôle supplémentaire :** la fiche conservée contient `capex_min: 95000` et `investment_breakdown.total: 83000`. Ces deux montants ne doivent pas être assimilés à un CAPEX consolidé sans analyse de leur périmètre respectif.
+
+## Audit arithmétique des investissements — contrôle complémentaire
+
+- **17 fiches UP** disposent d'une ventilation `investment_breakdown`. La somme des postes renseignés correspond au champ `total` pour chacune des 17 fiches (écart arithmétique nul).
+- **Peintures BTP** : total ventilé de 83 000 USD et `capex_min` de 95 000 USD, soit **12 000 USD d'écart de périmètre non expliqué**. Ne pas affecter automatiquement cette différence à un poste fictif.
+- **Biscuiterie** : la fiche générique contient `capex_min: 120000` et `investment_breakdown.machines: 65000`. **Ces chiffres ne constituent pas le prix de la ligne intégrée Crackers**, fixé séparément à **450 000 USD pour 500 kg/h** dans le scénario pilote validé. Les postes de la fiche générique ne doivent pas alimenter directement le financement de cette configuration.
+- Le champ `working_capital` présent dans plusieurs ventilations doit être distingué du CAPEX industriel et du BFR mensuel calculé par le moteur ; éviter tout double compte.
+- Les tests `tests/check-p2i-reference-coverage.cjs` contrôlent désormais les clés UP dupliquées et l'arithmétique des ventilations. Le catalogue `peintures_btp` existe déjà sous sa clé canonique : sa configuration n'est pas remplacée par l'entrée historique `peintures`.
