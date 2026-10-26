@@ -1,0 +1,632 @@
+{
+  "version": "1.0.0",
+  "lot": "LOT-12",
+  "filiere": "Énergie & Eau",
+  "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
+  "nombre_up": 8,
+  "unites": [
+    {
+      "up_id": "poteaux",
+      "up_nom": "Poteaux électriques",
+      "description": "Fabrication de poteaux électriques en béton.",
+      "filiere": "Énergie & Eau",
+      "processus": [
+        "Préparation béton",
+        "Moulage",
+        "Compactage",
+        "Cure",
+        "Démoulage",
+        "Stockage"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Centrale béton",
+          "role": "Production béton",
+          "capacite": "20 m³/heure",
+          "utilites": "Électricité 30kW"
+        },
+        {
+          "nom": "Machine à poteaux",
+          "role": "Centrifugation",
+          "capacite": "50 poteaux/jour",
+          "utilites": "Électricité 45kW"
+        },
+        {
+          "nom": "Armature automatique",
+          "role": "Ferraillage",
+          "capacite": "50 poteaux/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Étuvage",
+          "role": "Cure",
+          "capacite": "50 poteaux/batch",
+          "utilites": "Vapeur"
+        },
+        {
+          "nom": "Démouleur",
+          "role": "Démoulage",
+          "capacite": "50 poteaux/jour",
+          "utilites": "Hydraulique"
+        },
+        {
+          "nom": "Stockage",
+          "role": "Stockage",
+          "capacite": "1000 poteaux",
+          "utilites": "—"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test flexion",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 150000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "compteurs_eau",
+      "up_nom": "Compteurs d'eau",
+      "description": "Fabrication de compteurs d'eau résidentiels et industriels.",
+      "filiere": "Énergie & Eau",
+      "processus": [
+        "Assemblage",
+        "Calibration",
+        "Test",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Ligne assemblage",
+          "role": "Assemblage",
+          "capacite": "500 compteurs/heure",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Poste brasage",
+          "role": "Brasage",
+          "capacite": "500 compteurs/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Étalonneur",
+          "role": "Calibration",
+          "capacite": "200 compteurs/heure",
+          "utilites": "Eau + électricité"
+        },
+        {
+          "nom": "Testeur fuites",
+          "role": "Test étanchéité",
+          "capacite": "500 compteurs/heure",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Poste marquage",
+          "role": "Marquage",
+          "capacite": "500 compteurs/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine emballage",
+          "role": "Conditionnement",
+          "capacite": "500 compteurs/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test final",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 120000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "kits_solaires",
+      "up_nom": "Kits solaires domestiques",
+      "description": "Assemblage de kits solaires pour domiciles.",
+      "filiere": "Énergie & Eau",
+      "processus": [
+        "Assemblage",
+        "Câblage",
+        "Test",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Ligne d'assemblage",
+          "role": "Assemblage kits",
+          "capacite": "200 kits/jour",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Testeur batterie",
+          "role": "Test batteries",
+          "capacite": "200 kits/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Simulateur solaire",
+          "role": "Test panneaux",
+          "capacite": "100 kits/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste câblage harnais",
+          "role": "Pré-câblage",
+          "capacite": "200 kits/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à emballer",
+          "role": "Conditionnement",
+          "capacite": "200 kits/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test final",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Stockage",
+          "role": "Stockage",
+          "capacite": "1000 kits",
+          "utilites": "—"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 100000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "lampadaires",
+      "up_nom": "Lampadaires solaires",
+      "description": "Fabrication de lampadaires solaires autonomes.",
+      "filiere": "Énergie & Eau",
+      "processus": [
+        "Assemblage",
+        "Montage solaire",
+        "Intégration batteries",
+        "Test",
+        "Contrôle"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Ligne d'assemblage",
+          "role": "Assemblage",
+          "capacite": "100 lampadaires/jour",
+          "utilites": "Électricité 7kW"
+        },
+        {
+          "nom": "Poste brasage LED",
+          "role": "Brasage LED",
+          "capacite": "100 lampadaires/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Testeur batterie",
+          "role": "Test batterie",
+          "capacite": "100 lampadaires/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Chambre étanche",
+          "role": "Test IP",
+          "capacite": "20 lampadaires/heure",
+          "utilites": "Eau + électricité"
+        },
+        {
+          "nom": "Machine à boucher",
+          "role": "Conditionnement",
+          "capacite": "100 lampadaires/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Contrôle flux",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Stockage",
+          "role": "Stockage",
+          "capacite": "500 lampadaires",
+          "utilites": "—"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 130000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "forage",
+      "up_nom": "Forage et équipements eau",
+      "description": "Services de forage et équipements hydrauliques.",
+      "filiere": "Énergie & Eau",
+      "processus": [
+        "Étude géologique",
+        "Forage",
+        "Installation",
+        "Test",
+        "Mise en service",
+        "Maintenance"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Foreuse hydraulique",
+          "role": "Forage",
+          "capacite": "50 m/jour",
+          "utilites": "Diesel 150kW"
+        },
+        {
+          "nom": "Pompe d'exhaure",
+          "role": "Épuisement",
+          "capacite": "50 m³/heure",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Tarière",
+          "role": "Extraction",
+          "capacite": "Standard",
+          "utilites": "Hydraulique"
+        },
+        {
+          "nom": "Compresseur",
+          "role": "Forage rotary",
+          "capacite": "20 m³/min",
+          "utilites": "Diesel"
+        },
+        {
+          "nom": "Pompe forage",
+          "role": "Exhaure",
+          "capacite": "30 m³/heure",
+          "utilites": "Électricité 11kW"
+        },
+        {
+          "nom": "Laboratoire eau",
+          "role": "Qualité eau",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Camion",
+          "role": "Transport",
+          "capacite": "Standard",
+          "utilites": "Diesel"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 160000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "eau",
+      "up_nom": "Traitement eau potable",
+      "description": "Unités de traitement d'eau potable.",
+      "filiere": "Énergie & Eau",
+      "processus": [
+        "Conception",
+        "Fabrication",
+        "Installation",
+        "Formation"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Filtre à sable",
+          "role": "Filtration",
+          "capacite": "10 m³/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Adoucisseur",
+          "role": "Décalcification",
+          "capacite": "10 m³/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Osmose inverse",
+          "role": "Déminéralisation",
+          "capacite": "5 m³/heure",
+          "utilites": "Électricité 7kW"
+        },
+        {
+          "nom": "UV",
+          "role": "Désinfection",
+          "capacite": "10 m³/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Surpresseur",
+          "role": "Réseau",
+          "capacite": "10 m³/heure",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Laboratoire",
+          "role": "Qualité",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Cuve stockage",
+          "role": "Stockage",
+          "capacite": "50 m³",
+          "utilites": "—"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 110000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "maintenance_energie",
+      "up_nom": "Maintenance énergétique",
+      "description": "Services de maintenance pour installations énergétiques.",
+      "filiere": "Énergie & Eau",
+      "processus": [
+        "Diagnostic",
+        "Intervention",
+        "Pièces",
+        "Suivi"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Poste soudure",
+          "role": "Soudure",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Multimètre",
+          "role": "Mesures",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Pince ampèremétrique",
+          "role": "Mesure intensité",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Analyseur qualité réseau",
+          "role": "Analyse",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Caméra thermique",
+          "role": "Thermographie",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Outillage",
+          "role": "Divers",
+          "capacite": "Standard",
+          "utilites": "—"
+        },
+        {
+          "nom": "Formation",
+          "role": "Formation",
+          "capacite": "10 personnes",
+          "utilites": "—"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 80000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "audit",
+      "up_nom": "Audits énergétiques",
+      "description": "Services d'audit et optimisation énergétique.",
+      "filiere": "Énergie & Eau",
+      "processus": [
+        "Analyse consommation",
+        "Mesures",
+        "Recommandations",
+        "Suivi"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Caméra thermique",
+          "role": "Déperditions",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Analyseur de réseau",
+          "role": "Qualité énergie",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Anémomètre",
+          "role": "Ventilation",
+          "capacite": "Standard",
+          "utilites": "—"
+        },
+        {
+          "nom": "Luxmètre",
+          "role": "Éclairage",
+          "capacite": "Standard",
+          "utilites": "—"
+        },
+        {
+          "nom": "Son de mesure",
+          "role": "Bruit",
+          "capacite": "Standard",
+          "utilites": "—"
+        },
+        {
+          "nom": "Logiciel simulation",
+          "role": "Modélisation",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Certification",
+          "role": "Label",
+          "capacite": "Standard",
+          "utilites": "—"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 60000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    }
+  ]
+}
