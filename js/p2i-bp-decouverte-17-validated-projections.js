@@ -8,7 +8,6 @@
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const money=v=>v.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" USD";
-const fmt=v=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2});
 function renderTable(headers,rows){
  return '<div class="bp-table-wrap"><table><thead><tr>'+
   headers.map(h=>'<th>'+esc(h)+'</th>').join("")+'</tr></thead><tbody>'+
@@ -38,6 +37,22 @@ function update(){
  if(d.up_id!==selected.id||d.configuration_id!==(selected.config||null))return;
  const result=v.validate(d);
  if(!result.valide)return;
+ // Le jeu annuel doit correspondre au résultat économique réellement calculé
+ // pour le pilote Crackers. Éviter deux comptes de résultat contradictoires.
+ if(selected.id==="biscuiterie"&&selected.config==="crackers"){
+  const economic=window.P2I_CRACKERS_RESULTAT;
+  const financial=window.P2I_COMPTE_FINANCIER;
+  const first=d.compte_resultat[0];
+  const close=(a,b)=>typeof a==="number"&&Number.isFinite(a)&&
+   typeof b==="number"&&Number.isFinite(b)&&
+   Math.abs(a-b)<=Math.max(.01,Math.abs(a)*1e-8);
+  if(!economic||!financial||
+   !close(first.chiffre_affaires,economic.chiffre_affaires_usd)||
+   !close(first.cout_produits_vendus,economic.cout_produits_vendus_usd)||
+   !close(first.chiffre_affaires,financial.chiffre_affaires_total_usd)||
+   !close(first.cout_produits_vendus,financial.cout_ventes_total_usd))return;
+ }
+
  const f=result.financement_indicatif;
  add("p2i-r7","p2i-validated-finance-r7",'<h3>Financement de l’investissement consolidé</h3>'+
   renderTable(["Poste","Montant"],[
