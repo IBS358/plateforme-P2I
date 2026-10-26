@@ -154,4 +154,11 @@ assert.equal(pictureUrl("https://example.org/photos/crackers.webp"),"https://exa
 for(const url of ["javascript:alert(1)","data:image/svg+xml,test","../secret.png","assets/../secret.png","https://example.org/../../secret.png","https://example.org/pic.png?unsafe=1"])
   assert.equal(pictureUrl(url),"","URL photographique interdite : "+url);
 
+
+// La transition BP Pro conserve la variante seulement si elle a été reconnue.
+assert.ok(layout.includes('if(id==="biscuiterie"){'),"Contrôle du contexte Biscuiterie");
+assert.ok(layout.includes('if(selectedVariant)destinationParams.set("configuration_id",selectedVariant)'),"Variante Biscuiterie validée");
+assert.ok(layout.includes('if(selectedCleaning)destinationParams.set("configuration_id",config)'),"Activité Nettoyage validée");
+assert.ok(layout.includes('else destinationParams.delete("configuration_id")'),"Retrait d'une configuration inconnue");
+
 console.log("P2I BP Découverte : contrôles statiques réussis (17 rubriques, liens, garde-fous).");
