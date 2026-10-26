@@ -26,11 +26,19 @@ window.P2I_BP_PREVISIONS_VALIDABLES={
  tresorerie_mensuelle:Array.from({length:12},(_,i)=>treasury(i)),
  bilans_annuels:Array.from({length:3},()=>({actif_total:900000,passif_total:900000}))
 };
+window.P2I_CRACKERS_RESULTAT={chiffre_affaires_usd:1000000,cout_produits_vendus_usd:500000};
+window.P2I_COMPTE_FINANCIER={chiffre_affaires_total_usd:1000000,cout_ventes_total_usd:500000};
 events["p2i:bp-previsions-ready"]();
 for(const id of ["r7","r9","r10","r11","r13"])assert.ok(nodes.has("p2i-validated-finance-"+id),id);
 assert.equal((nodes.get("p2i-validated-finance-r9").innerHTML.match(/<tr>/g)||[]).length,4);
 assert.equal((nodes.get("p2i-validated-finance-r10").innerHTML.match(/<tr>/g)||[]).length,37);
 assert.equal((nodes.get("p2i-validated-finance-r13").innerHTML.match(/<tr>/g)||[]).length,13);
+window.P2I_COMPTE_FINANCIER.cout_ventes_total_usd=490000;
+events["p2i:bp-previsions-ready"]();
+assert.equal(nodes.has("p2i-validated-finance-r9"),false,"Compte annuel contradictoire bloqué");
+window.P2I_COMPTE_FINANCIER.cout_ventes_total_usd=500000;
+events["p2i:bp-previsions-ready"]();
+assert.ok(nodes.has("p2i-validated-finance-r9"));
 window.P2I_BP_PREVISIONS_VALIDABLES.bfr_mensuel[2].bfr=0;
 events["p2i:bp-previsions-ready"]();
 assert.equal(nodes.has("p2i-validated-finance-r10"),false);
