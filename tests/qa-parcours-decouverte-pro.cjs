@@ -11,7 +11,7 @@ await p.goto(base+'/business-plan-decouverte.html?unit_id=nettoyage&configuratio
 // Départ réel depuis la fiche UP, création et restauration du même dossier.
 const authCtx=await browser.newContext();await authCtx.route('https://**',r=>r.abort());
 await authCtx.addInitScript(()=>{
- const state=window.P2I_FLOW_TEST={owner:'owner',row:null,writes:0};
+ const state=window.P2I_FLOW_TEST={owner:sessionStorage.getItem('flow-owner')||'owner',row:null,writes:0};
  const client={auth:{getSession:async()=>({data:{session:{user:{id:state.owner}}}}),getUser:async()=>({data:{user:state.owner?{id:state.owner}:null}})},from(name){let payload=null;const filters=[];return {insert(p){payload=p;return this;},select(){return this;},eq(k,v){filters.push([k,v]);return this;},async single(){state.writes++;state.row={id:27,...payload};sessionStorage.setItem('flow-row',JSON.stringify(state.row));return {data:{id:27}};},async maybeSingle(){const row=JSON.parse(sessionStorage.getItem('flow-row')||'null');return {data:row&&filters.every(([k,v])=>String(row[k])===String(v))?row:null};}};}};
  window.P2I_SUPABASE_CLIENT=client;window.supabase={createClient:()=>client};
 });
@@ -23,6 +23,6 @@ const reopened=await flow.evaluate(code=>{const build=Function('return ('+code+'
 await flow.goto(reopened);await flow.waitForFunction(()=>window.P2I_BP_PRO_PASSAGE);assert.equal(await flow.evaluate(()=>P2I_BP_PRO_PASSAGE.configuration_id),'biscuits_mous');
 // Un autre compte dans le même onglet ne peut pas reprendre le dossier privé.
 await flow.evaluate(()=>sessionStorage.setItem('flow-owner','other'));
-await authCtx.addInitScript(()=>{if(sessionStorage.getItem('flow-owner'))P2I_FLOW_TEST.owner=sessionStorage.getItem('flow-owner');});await flow.reload();await flow.waitForSelector('#p2i-passage-pro [role=alert]');assert.equal(await flow.evaluate(()=>window.P2I_BP_PRO_PASSAGE||null),null);
+await flow.reload();await flow.waitForSelector('#p2i-passage-pro [role=alert]');assert.equal(await flow.evaluate(()=>window.P2I_BP_PRO_PASSAGE||null),null);
 assert.deepEqual(errors,[]);console.log('Parcours réel Découverte -> Pro : trois variantes, activité de service, reprise intégrale, moteurs identiques, recalcul et rechargement contrôlés.');
 }finally{await browser?.close();await new Promise(r=>server.close(r));}})().catch(e=>{console.error(e);process.exitCode=1;});
