@@ -1,0 +1,653 @@
+{
+  "version": "1.0.0",
+  "lot": "LOT-03",
+  "filiere": "BTP & Matériaux Construction",
+  "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
+  "nombre_up": 8,
+  "unites": [
+    {
+      "up_id": "peintures_btp",
+      "up_nom": "Peintures BTP",
+      "description": "Fabrication de peintures pour bâtiment.",
+      "filiere": "BTP & Matériaux Construction",
+      "processus": [
+        "Dispersion des pigments",
+        "Formulation",
+        "Filtration",
+        "Contrôle qualité",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Résines",
+        "Pigments",
+        "Solvants",
+        "Additifs",
+        "Emballages (seaux, bidons)"
+      ],
+      "marches_cibles": [
+        "Quincailleries",
+        "Entreprises de BTP",
+        "Particuliers",
+        "Industries du bois et métal"
+      ],
+      "capacite_generique_texte": "20,000 L",
+      "machines_catalogue": [
+        {
+          "nom": "Disperseur",
+          "role": "Dispersion pigments",
+          "capacite": "2000 L/batch",
+          "utilites": "Électricité 30kW"
+        },
+        {
+          "nom": "Broyeur à billes",
+          "role": "Broyage fin",
+          "capacite": "500 L/heure",
+          "utilites": "Électricité 22kW"
+        },
+        {
+          "nom": "Cuve mélangeuse",
+          "role": "Formulation",
+          "capacite": "5000 L",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Filtre",
+          "role": "Filtration",
+          "capacite": "2000 L/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Remplisseuse",
+          "role": "Conditionnement",
+          "capacite": "1000 seaux/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Étiqueteuse",
+          "role": "Étiquetage",
+          "capacite": "1000 seaux/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Laboratoire",
+          "role": "Contrôle qualité",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 95000,
+        "ventilation": {
+          "machines": 35000,
+          "installation": 15000,
+          "working_capital": 25000,
+          "training": 8000,
+          "total": 83000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 450000,
+        "marge_brute_indicative_pourcent": 38,
+        "rentabilite_nette_indicative_pourcent": 22
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 83000,
+        "ecart_capex_min_ventilation_usd": 12000,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "cimenterie",
+      "up_nom": "Mini-cimenterie",
+      "description": "Production de ciment à échelle régionale.",
+      "filiere": "BTP & Matériaux Construction",
+      "processus": [
+        "Concassage",
+        "Broyage cru",
+        "Cuisson",
+        "Broyage ciment",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Broyeur à boulets",
+          "role": "Broyage clinker",
+          "capacite": "5 tonnes/heure",
+          "utilites": "Électricité 250kW"
+        },
+        {
+          "nom": "Four rotatif",
+          "role": "Cuisson",
+          "capacite": "5 tonnes/heure",
+          "utilites": "Fioul + électricité"
+        },
+        {
+          "nom": "Préchauffeur cyclone",
+          "role": "Préchauffage farine",
+          "capacite": "5 tonnes/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Silotage ciment",
+          "role": "Stockage",
+          "capacite": "500 tonnes",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ensacheuse rotative",
+          "role": "Conditionnement",
+          "capacite": "1000 sacs/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Laboratoire",
+          "role": "Contrôle qualité",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Dépoussiéreur",
+          "role": "Filtration",
+          "capacite": "5000 m³/h",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 600000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "briques",
+      "up_nom": "Briques et tuiles",
+      "description": "Fabrication de briques et tuiles en terre cuite.",
+      "filiere": "BTP & Matériaux Construction",
+      "processus": [
+        "Broyage",
+        "Malaxage",
+        "Moulage",
+        "Séchage",
+        "Cuisson",
+        "Stockage"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Broyeur",
+          "role": "Broyage terre",
+          "capacite": "3 tonnes/heure",
+          "utilites": "Électricité 30kW"
+        },
+        {
+          "nom": "Malaxeur",
+          "role": "Mélange terre/eau",
+          "capacite": "2 tonnes/batch",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Presse hydraulique BTC",
+          "role": "Compression briques",
+          "capacite": "1000 briques/heure",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Four tunnel",
+          "role": "Cuisson briques",
+          "capacite": "10000 briques/jour",
+          "utilites": "Gaz + électricité"
+        },
+        {
+          "nom": "Séchoir",
+          "role": "Séchage",
+          "capacite": "10000 briques/batch",
+          "utilites": "Gaz"
+        },
+        {
+          "nom": "Palettiseur",
+          "role": "Palettisation",
+          "capacite": "1000 briques/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test compression",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 55000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "prefab",
+      "up_nom": "Éléments préfabriqués",
+      "description": "Fabrication d'éléments préfabriqués en béton.",
+      "filiere": "BTP & Matériaux Construction",
+      "processus": [
+        "Préparation béton",
+        "Moulage",
+        "Compactage",
+        "Cure",
+        "Démoulage",
+        "Stockage"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Centrale à béton",
+          "role": "Production béton",
+          "capacite": "20 m³/heure",
+          "utilites": "Électricité 30kW"
+        },
+        {
+          "nom": "Machine à poutrelles",
+          "role": "Fabrication poutrelles",
+          "capacite": "500 m/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à hourdis",
+          "role": "Fabrication hourdis",
+          "capacite": "1000 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Table vibrante",
+          "role": "Compactage",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Étendoir",
+          "role": "Stockage cure",
+          "capacite": "500 m²",
+          "utilites": "—"
+        },
+        {
+          "nom": "Pont roulant",
+          "role": "Manutention",
+          "capacite": "5 tonnes",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test béton",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 110000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "tuiles",
+      "up_nom": "Tuiles et éléments toiture",
+      "description": "Fabrication de tuiles et éléments de toiture.",
+      "filiere": "BTP & Matériaux Construction",
+      "processus": [
+        "Malaxage",
+        "Moulage",
+        "Séchage",
+        "Cuisson",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Broyeur",
+          "role": "Broyage argile",
+          "capacite": "2 tonnes/heure",
+          "utilites": "Électricité 22kW"
+        },
+        {
+          "nom": "Malaxeur",
+          "role": "Mélange",
+          "capacite": "1.5 tonnes/heure",
+          "utilites": "Électricité 11kW"
+        },
+        {
+          "nom": "Extrudeuse",
+          "role": "Extrusion bande",
+          "capacite": "2 tonnes/heure",
+          "utilites": "Électricité 18kW"
+        },
+        {
+          "nom": "Presse à tuile",
+          "role": "Formage tuiles",
+          "capacite": "500 tuiles/heure",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Four",
+          "role": "Cuisson",
+          "capacite": "5000 tuiles/jour",
+          "utilites": "Gaz + électricité"
+        },
+        {
+          "nom": "Engobeuse",
+          "role": "Émaillage",
+          "capacite": "500 tuiles/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Inspection",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 85000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "agglos",
+      "up_nom": "Agglos et parpaings",
+      "description": "Fabrication d'agglos et parpaings en béton.",
+      "filiere": "BTP & Matériaux Construction",
+      "processus": [
+        "Malaxage",
+        "Moulage",
+        "Compactage",
+        "Cure",
+        "Stockage"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Centrale à béton",
+          "role": "Production béton",
+          "capacite": "15 m³/heure",
+          "utilites": "Électricité 25kW"
+        },
+        {
+          "nom": "Vibreuse à agglos",
+          "role": "Compactage",
+          "capacite": "500 agglos/heure",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Étendoir automatisé",
+          "role": "Cure",
+          "capacite": "5000 agglos/batch",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Palettiseur",
+          "role": "Palettisation",
+          "capacite": "500 agglos/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Fendeuse",
+          "role": "Fendage agglos",
+          "capacite": "200 agglos/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test résistance",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ensacheuse",
+          "role": "Conditionnement",
+          "capacite": "200 sacs/heure",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 75000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "centrale_beton",
+      "up_nom": "Centrale à béton",
+      "description": "Production et livraison de béton prêt à l'emploi.",
+      "filiere": "BTP & Matériaux Construction",
+      "processus": [
+        "Dosage",
+        "Malaxage",
+        "Contrôle",
+        "Livraison"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Trémie doseuse agrégats",
+          "role": "Dosage",
+          "capacite": "50 m³/heure",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Vis doseuse ciment",
+          "role": "Dosage ciment",
+          "capacite": "50 m³/heure",
+          "utilites": "Électricité 3kW"
+        },
+        {
+          "nom": "Malaxeur",
+          "role": "Mélange",
+          "capacite": "2 m³/batch",
+          "utilites": "Électricité 45kW"
+        },
+        {
+          "nom": "Système eau",
+          "role": "Dosage eau",
+          "capacite": "200 L/min",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Benne benne",
+          "role": "Évacuation",
+          "capacite": "2 m³",
+          "utilites": "Hydraulique"
+        },
+        {
+          "nom": "Silo ciment",
+          "role": "Stockage",
+          "capacite": "50 tonnes",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Système informatique",
+          "role": "Pilotage",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 150000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "menuiserie",
+      "up_nom": "Menuiserie aluminium/PVC",
+      "description": "Fabrication de menuiseries aluminium et PVC.",
+      "filiere": "BTP & Matériaux Construction",
+      "processus": [
+        "Découpe",
+        "Usinage",
+        "Assemblage",
+        "Montage vitrage",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Scie à double tête",
+          "role": "Découpe profilés",
+          "capacite": "200 coupes/heure",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Centre d'usinage",
+          "role": "Perçage, fraisage",
+          "capacite": "100 pièces/heure",
+          "utilites": "Électricité 7kW"
+        },
+        {
+          "nom": "Soudeuse PVC",
+          "role": "Soudure angles",
+          "capacite": "200 angles/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Ébavureuse",
+          "role": "Ébavurage",
+          "capacite": "200 châssis/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à poser joints",
+          "role": "Pose joints",
+          "capacite": "200 châssis/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste assemblage",
+          "role": "Montage final",
+          "capacite": "100 châssis/jour",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Inspection",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 150000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    }
+  ]
+}
