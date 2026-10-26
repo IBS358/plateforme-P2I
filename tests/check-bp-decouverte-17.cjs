@@ -124,6 +124,12 @@ assert.ok(layout.includes("document.title="),"Titre du document PDF personnalis�
 assert.ok(layout.includes("document.fonts.ready"),"Attendre les polices avant l'impression");
 assert.ok(layout.includes('img.addEventListener("load"'),"Attendre les photographies avant l'impression");
 assert.ok(layout.includes('img.addEventListener("error"'),"Ne pas bloquer si une photographie échoue");
+assert.ok(layout.includes("Promise.race([waitResources,maxWait])"),"L'impression ne peut pas attendre indéfiniment les ressources");
+assert.ok(layout.includes("setTimeout(resolve,4000)"),"L'attente des ressources PDF est limitée à quatre secondes");
+assert.ok(layout.includes("if(button.disabled)return"),"Éviter deux impressions simultanées");
+assert.ok(layout.includes("img.complete"),"Gérer les images chargées entre les vérifications");
+assert.ok(layout.includes('typeof img.decode==="function"'),"Privilégier le décodage natif des images");
+
 
 assert.ok(css.includes(".bp-actions"),"Actions de fin de parcours stylées");
 assert.ok(css.includes("bp-sidebar"),"La navigation doit être stylée");
