@@ -1,0 +1,11 @@
+'use strict';
+const fs=require('fs'),vm=require('vm'),path=require('path');const root=path.resolve(__dirname,'..'),c=vm.createContext({});c.window=c;
+for(const f of ['js/p2i-economic-result-engine.js','js/p2i-financial-engine.js','js/p2i-bp-decouverte-bfr-engine.js','js/p2i-bp-decouverte-tresorerie-12-mois.js','js/p2i-bp-decouverte-simulation-commune.js','js/p2i-bp-decouverte-donnees.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),c);
+const scenarios=[];
+for(const u of Object.values(c.P2I_BP_DONNEES.unites))for(const v of Object.values(u.variantes)){
+ if(!v.reference?.production)continue;
+ const r=c.P2I_BP_SIMULATION_COMMUNE.calculer(v.reference);
+ scenarios.push({up_id:u.up_id,configuration_id:v.reference.configuration_id,nom:v.nom,statut:'simulation_decouverte_indicative',qualification_prix:v.prix_equipement?.qualification||'budget_reference_historique',source_prix:v.prix_equipement?.url||v.prix_equipement?.source||v.reference.source,certification_prix_exigee:false,accord_fournisseur_exige:false,devis_exige:false,conditions_negociees_exigees:false,budget_equipements_usd:v.reference.machines,investissement_simulation_usd:v.reference.investissement,reserve_initiale_distincte_usd:r.reserve_initiale,annuel:r.annuel.map(a=>({annee:a.annee,production_kg:a.production,ventes_kg:a.ventes,stock_fin_kg:a.stock_quantite,chiffre_affaires_usd:a.chiffre_affaires,resultat_net_usd:a.resultat_net})),controles:r.controles,ecart_bilans:r.bilans.map(x=>x.ecart)});
+}
+const report={schema:'p2i.audit-simulations-decouverte.v1',nature:'Simulations indicatives, distinctes du contrôle documentaire du BP Pro',up_couvertes:96,simulations_affichables:scenarios.length,up_avec_simulation_complete:new Set(scenarios.map(s=>s.up_id)).size,up_restant_a_alimenter:96-new Set(scenarios.map(s=>s.up_id)).size,scenarios};
+fs.writeFileSync(path.join(root,'data/p2i-bp-decouverte-audit-simulations.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({simulations:report.simulations_affichables,up:report.up_avec_simulation_complete,reste:report.up_restant_a_alimenter}));

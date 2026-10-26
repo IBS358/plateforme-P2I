@@ -1,0 +1,218 @@
+{
+  "schema": "p2i.audit-simulations-decouverte.v1",
+  "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
+  "up_couvertes": 96,
+  "simulations_affichables": 4,
+  "up_avec_simulation_complete": 3,
+  "up_restant_a_alimenter": 93,
+  "scenarios": [
+    {
+      "up_id": "biscuiterie",
+      "configuration_id": "crackers",
+      "nom": "Crackers",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "budget_reference_utilisateur_pas_prix_catalogue_retrouve",
+      "source_prix": "Instruction utilisateur réitérée : Crackers, ligne intégrée 500 kg/h, budget équipements 450 000 USD.",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 450000,
+      "investissement_simulation_usd": 605000,
+      "reserve_initiale_distincte_usd": 115447.68139824923,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 549999.9999999999,
+          "ventes_kg": 531999.9999999999,
+          "stock_fin_kg": 18000,
+          "chiffre_affaires_usd": 1361676.7562507906,
+          "resultat_net_usd": 521274.0171880929
+        },
+        {
+          "annee": 2,
+          "production_kg": 650000,
+          "ventes_kg": 638000,
+          "stock_fin_kg": 29999.999999999993,
+          "chiffre_affaires_usd": 1665648.0561988058,
+          "resultat_net_usd": 676503.3252539462
+        },
+        {
+          "annee": 3,
+          "production_kg": 750000,
+          "ventes_kg": 745000.0000000001,
+          "stock_fin_kg": 34999.99999999989,
+          "chiffre_affaires_usd": 1983896.4857452547,
+          "resultat_net_usd": 837942.3272174341
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        2.3283064365386963e-10,
+        4.656612873077393e-10,
+        1.862645149230957e-9
+      ]
+    },
+    {
+      "up_id": "biscuiterie",
+      "configuration_id": "biscuits_mous",
+      "nom": "Biscuits mous",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "budget_reference_historique",
+      "source_prix": "Texte utilisateur du prototype V106 — hypothèses de simulation non vérifiées",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 160000,
+      "investissement_simulation_usd": 260000,
+      "reserve_initiale_distincte_usd": 82539.0645388889,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 428450.00000000006,
+          "ventes_kg": 411312,
+          "stock_fin_kg": 17137.99999999997,
+          "chiffre_affaires_usd": 946017.6000000001,
+          "resultat_net_usd": 258855.95000000007
+        },
+        {
+          "annee": 2,
+          "production_kg": 560880,
+          "ventes_kg": 555582.9999999999,
+          "stock_fin_kg": 22434.99999999989,
+          "chiffre_affaires_usd": 1322288,
+          "resultat_net_usd": 416009.6582836099
+        },
+        {
+          "annee": 3,
+          "production_kg": 654360,
+          "ventes_kg": 650621,
+          "stock_fin_kg": 26173.999999999993,
+          "chiffre_affaires_usd": 1600527.9999999993,
+          "resultat_net_usd": 532223.1928780286
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        1.1641532182693481e-10,
+        6.984919309616089e-10,
+        1.3969838619232178e-9
+      ]
+    },
+    {
+      "up_id": "jus_boissons",
+      "configuration_id": null,
+      "nom": "Production de jus et boissons",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_non_certifie",
+      "source_prix": "https://eshop.czechminibreweries.com/product/mfpu-500-mg/",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 94010.007,
+      "investissement_simulation_usd": 141110.00699999998,
+      "reserve_initiale_distincte_usd": 48037.50588955416,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 300000,
+          "ventes_kg": 294000,
+          "stock_fin_kg": 6000,
+          "chiffre_affaires_usd": 411600,
+          "resultat_net_usd": 60287.10270794998
+        },
+        {
+          "annee": 2,
+          "production_kg": 390000,
+          "ventes_kg": 382200,
+          "stock_fin_kg": 13800,
+          "chiffre_affaires_usd": 545781.6,
+          "resultat_net_usd": 97687.49353558669
+        },
+        {
+          "annee": 3,
+          "production_kg": 450000,
+          "ventes_kg": 441000,
+          "stock_fin_kg": 22800,
+          "chiffre_affaires_usd": 642342.96,
+          "resultat_net_usd": 123093.28475678354
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -5.820766091346741e-11,
+        -1.1641532182693481e-10,
+        -5.820766091346741e-11
+      ]
+    },
+    {
+      "up_id": "aliments_betail",
+      "configuration_id": null,
+      "nom": "Aliments pour bétail",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "fourchette_catalogue_publique_non_certifiee",
+      "source_prix": "https://tcpel.net/pellet-production-line/feed-pellet-production-line/",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 32000,
+      "investissement_simulation_usd": 62000,
+      "reserve_initiale_distincte_usd": 31553.91597222222,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 450000,
+          "ventes_kg": 441000,
+          "stock_fin_kg": 9000,
+          "chiffre_affaires_usd": 220500,
+          "resultat_net_usd": 15857.97500000001
+        },
+        {
+          "annee": 2,
+          "production_kg": 600000,
+          "ventes_kg": 594000,
+          "stock_fin_kg": 15000,
+          "chiffre_affaires_usd": 302940,
+          "resultat_net_usd": 32491.733749973122
+        },
+        {
+          "annee": 3,
+          "production_kg": 700000.0000000001,
+          "ventes_kg": 696500,
+          "stock_fin_kg": 18500.000000000065,
+          "chiffre_affaires_usd": 362319.30000000005,
+          "resultat_net_usd": 43394.93537349618
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        2.9103830456733704e-11,
+        5.820766091346741e-11,
+        -8.731149137020111e-11
+      ]
+    }
+  ]
+}

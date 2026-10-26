@@ -25,6 +25,9 @@ on:
       - 'scripts/*bp-decouverte*.cjs'
       - 'data/p2i-bp-decouverte-publication.json'
       - 'data/p2i-bp-decouverte-donnees.json'
+      - 'data/p2i-bp-decouverte-simulations.json'
+      - 'tests/check-p2i-bp-simulations.cjs'
+      - 'scripts/audit-simulations-decouverte.cjs'
       - 'data/p2i-bp-decouverte-96-dossiers-17-rubriques.json'
       - 'tests/check-p2i-bp-donnees.cjs'
       - 'business-plan-decouverte.html'
@@ -189,3 +192,9 @@ jobs:
           node tests/check-p2i-bp-donnees.cjs
           node scripts/build-bp-decouverte-donnees.cjs
           git diff --exit-code -- data/p2i-bp-decouverte-donnees.json js/p2i-bp-decouverte-donnees.js
+
+      - name: Vérifier les simulations indicatives sans conditions négociées
+        run: |
+          node tests/check-p2i-bp-simulations.cjs
+          node scripts/audit-simulations-decouverte.cjs
+          git diff --exit-code -- data/p2i-bp-decouverte-audit-simulations.json

@@ -39,7 +39,7 @@ function calculer(input){
   // Zéros explicites = postes non ventilés dans cette simulation agrégée;
   // personnel et charges fixes regroupés sans les compter dans les CPV.
   postes.personnel_administratif_commercial=post(sum('personnel'));postes.autres_exploitation=post(sum('charges_fixes'));postes.amortissements=post(amortissement);postes.interets_emprunts=post(sum('interets'));
-  const data={type_activite:'fabrication',controle_non_double_compte:true,lignes:[{id:s.configuration_id,type_activite:'fabrication',chiffre_affaires:post(sum('ca')),cout_prestations_ou_produits_vendus:post(sum('cpv')),variation_stock:post(0)}],postes};
+  const data={type_activite:'fabrication',controle_non_double_compte:true,lignes:[{id:s.configuration_id||s.up_id,type_activite:'fabrication',chiffre_affaires:post(sum('ca')),cout_prestations_ou_produits_vendus:post(sum('cpv')),variation_stock:post(0)}],postes};
   const before=root.P2I_FINANCIAL_ENGINE.calculer(data);postes.impot_resultat=post(Math.max(0,before.resultat_avant_impot_usd)*s.taux_is);
   const f=root.P2I_FINANCIAL_ENGINE.calculer(data);if(!f.complet)throw Error('Compte financier incomplet');
   const tax=f.postes.fiscal.impot_resultat.montant_usd;

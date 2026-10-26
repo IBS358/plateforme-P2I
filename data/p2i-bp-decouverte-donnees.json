@@ -511,19 +511,55 @@
         "crackers": {
           "configuration_id": "crackers",
           "nom": "Crackers",
-          "qualification": "configuration_a_documenter",
+          "qualification": "simulation_decouverte_calculable",
           "reference": {
-            "nom": "Crackers",
-            "sous_titre": "Biscuits salés croquants",
-            "description": "Biscuits salés à texture croquante, adaptés aux commerces et aux réseaux de distribution.",
-            "machines": 450000,
-            "investissement": 605000,
-            "photo": 0,
-            "statut_exploitation": "Recette, volumes, prix de vente et coûts industriels du référentiel Crackers du dépôt. Aucun paramètre d’exploitation Biscuits mous repris. Charges commerciales et administratives propres à cette variante encore manquantes.",
             "up_id": "biscuiterie",
             "configuration_id": "crackers",
+            "nom": "Crackers",
+            "sous_titre": "Biscuits salés croquants",
+            "description": "Programme de production piloté par les ventes pour limiter l’accumulation d’invendus. Ligne intégrée P2I conservée à 450 000 USD / 500 kg/h.",
             "capacite": 500,
             "unite": "kg/h",
+            "machines": 450000,
+            "investissement": 605000,
+            "production": [
+              550000,
+              650000,
+              750000
+            ],
+            "ventes": [
+              532000,
+              638000,
+              745000
+            ],
+            "prix": [
+              2.5595427749075017,
+              2.610733630405652,
+              2.662948303013765
+            ],
+            "matieres_kg": 0.5571999999999999,
+            "cout_production_kg": [
+              0.9771999999999998,
+              0.9748236923076922,
+              0.9801301466666665
+            ],
+            "personnel": 20700,
+            "charges_fixes": 34800,
+            "croissance_personnel": 0.03,
+            "croissance_charges": 0.03,
+            "part_apport": 0.3,
+            "part_dette": 0.7,
+            "taux_interet": 0.08,
+            "duree_dette_mois": 60,
+            "duree_amortissement_ans": 10,
+            "taux_tva": 0.18,
+            "taux_is": 0.25,
+            "coussin_tresorerie": 0.1,
+            "source": "data/p2i-bp-decouverte-simulations.json / biscuiterie__crackers : prix catalogue ou budget de référence + hypothèses P2I explicites",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+            "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "photo": 0,
             "technique": {
               "formage": "Laminage, calibrage et découpe",
               "etapes": [
@@ -535,19 +571,62 @@
               ],
               "source": "https://www.bakerperkins.com/biscuit-cookie-cracker/products/cracker-lines/",
               "faits": "Le procédé de mise en feuille et découpe est distinct du moulage des pâtes courtes; la compatibilité du procédé Crackers, les interfaces et la capacité effective de la ligne P2I restent à justifier."
-            },
-            "qualification": "hypotheses_p2i_non_verifiees",
-            "complet": false,
-            "manquants": [
-              "Charges commerciales et administratives hors coûts industriels",
-              "Prévisions de production et de ventes propres aux années 2 et 3",
-              "Ventilation des investissements complémentaires",
-              "Conservation, pertes et capacité de stockage des invendus"
-            ]
+            }
           },
           "economique_herite_up": false,
           "economique": null,
-          "source": "js/p2i-bp-decouverte-v108-references.js"
+          "source": "js/p2i-bp-decouverte-v108-references.js",
+          "prix_equipement": {
+            "id": "reference_crackers_p2i",
+            "fournisseur": null,
+            "modele": "Ligne intégrée de référence P2I",
+            "prix": 450000,
+            "devise": "USD",
+            "capacite": 500,
+            "unite_capacite": "kg/h",
+            "qualification": "budget_reference_utilisateur_pas_prix_catalogue_retrouve",
+            "source": "Instruction utilisateur réitérée : Crackers, ligne intégrée 500 kg/h, budget équipements 450 000 USD.",
+            "limites": "Conservé sans substitution. Le fabricant et le prix catalogue de cette ligne ne sont pas attestés par la documentation technique Baker Perkins."
+          },
+          "hypotheses_explicites": {
+            "matieres": "Recette Crackers du dépôt; quantités par kg de produit et prix unitaires historiques, hypothèses P2I, pas mercuriale validée.",
+            "process": "Emballage 0,14 et énergie 0,08 USD/kg; personnel industriel 65 000, maintenance 15 000, autres industriels 30 000 USD/an, issus du dossier Crackers historique. Ces coûts sont intégrés au coût industriel et ne sont pas déduits une seconde fois.",
+            "personnel": "Personnel administratif et commercial distinct : hypothèse de 3 personnes × 500 USD/mois × 12 × 1,15 = 20 700 USD/an.",
+            "charges": "Hypothèses hors coûts industriels : site/bureau 9 600, commercial 12 000, transport 6 000, assurance 3 600, administration 3 600 USD/an.",
+            "production": "550 000, 650 000, 750 000 kg produits; 532 000, 638 000, 745 000 vendus. Stocks cumulés 18 000, 30 000, 35 000 kg. Le précédent calcul partiel de 760 000 kg produits reste une archive, pas le programme de cette projection.",
+            "prix_vente": "Repère commercial historique 1 500 FCFA/kg en A1 converti au taux daté P2I; progression de prix de simulation de 2 %/an.",
+            "complements": "Ventilation P2I des 155 000 USD complémentaires au budget ligne; total investissement de simulation 605 000 USD conservé.",
+            "conventions": {
+              "apport": 0.3,
+              "dette": 0.7,
+              "taux_interet_annuel": 0.08,
+              "dette_mois": 60,
+              "amortissement_ans": 10,
+              "tva_simulation": 0.18,
+              "is_simulation": 0.25,
+              "croissance_charges": 0.03,
+              "croissance_personnel": 0.03,
+              "coussin_tresorerie": 0.1,
+              "clients_comptant": 0.4,
+              "clients_30_jours": 0.6,
+              "fournisseurs_comptant": true,
+              "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+            },
+            "complements_usd": {
+              "fret": 25000,
+              "assurance": 4500,
+              "douane_transit": 20000,
+              "transport_local": 5500,
+              "genie_civil": 40000,
+              "utilites": 20000,
+              "installation_formation": 20000,
+              "pieces_initiales": 10000,
+              "securite_environnement": 5000,
+              "etudes": 5000
+            },
+            "base_budget_equipements_usd": 450000,
+            "conversion": null
+          }
         },
         "biscuits_mous": {
           "configuration_id": "biscuits_mous",
@@ -936,7 +1015,7 @@
         "Fiscalité applicable et échéancier de financement",
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
-      "statut": "dossier_redactionnel_et_reperes_historiques_non_valide"
+      "statut": "simulation_decouverte_disponible"
     },
     "boulangerie_industrielle": {
       "variantes": {
@@ -1251,8 +1330,55 @@
         "reference": {
           "configuration_id": "reference",
           "nom": "Production de jus et boissons",
-          "qualification": "configuration_a_documenter",
-          "reference": null,
+          "qualification": "simulation_decouverte_calculable",
+          "reference": {
+            "up_id": "jus_boissons",
+            "configuration_id": null,
+            "nom": "Jus de fruits pressés pasteurisés en poches",
+            "sous_titre": "Unité intégrée de pressage et conditionnement",
+            "description": "Jus de fruits pressables; quantités exprimées en kg de jus, sans assimilation à des litres. La gamme ne couvre pas automatiquement les nectars ou toutes les espèces de fruits.",
+            "capacite": 500,
+            "unite": "kg/h",
+            "machines": 94010.007,
+            "investissement": 141110.00699999998,
+            "production": [
+              300000,
+              390000,
+              450000
+            ],
+            "ventes": [
+              294000,
+              382200,
+              441000
+            ],
+            "prix": [
+              1.4,
+              1.428,
+              1.45656
+            ],
+            "matieres_kg": 0.5833333333333334,
+            "cout_production_kg": [
+              0.9519333333333334,
+              0.9546779487179488,
+              0.9715014933333332
+            ],
+            "personnel": 9660,
+            "charges_fixes": 20400,
+            "croissance_personnel": 0.03,
+            "croissance_charges": 0.03,
+            "part_apport": 0.3,
+            "part_dette": 0.7,
+            "taux_interet": 0.08,
+            "duree_dette_mois": 60,
+            "duree_amortissement_ans": 10,
+            "taux_tva": 0.18,
+            "taux_is": 0.25,
+            "coussin_tresorerie": 0.1,
+            "source": "data/p2i-bp-decouverte-simulations.json / jus_boissons : prix catalogue ou budget de référence + hypothèses P2I explicites",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+            "qualification": "simulation_decouverte_prix_et_hypotheses"
+          },
           "economique_herite_up": true,
           "economique": {
             "budget_minimum_historique": {
@@ -1325,7 +1451,75 @@
             "qualification": "references_historiques_a_documenter",
             "aucune_repartition_fictive_des_charges": true
           },
-          "source": "up-data.js / jus_boissons"
+          "source": "up-data.js / jus_boissons",
+          "prix_equipement": {
+            "id": "catalogue_jus_mfpu",
+            "url": "https://eshop.czechminibreweries.com/product/mfpu-500-mg/",
+            "consulte_le": "2026-10-26",
+            "fournisseur": "Czech Brewery System s.r.o.",
+            "modele": "MFPU-500-MG",
+            "prix": 83990,
+            "devise": "EUR",
+            "base": "hors TVA; incoterm non indiqué",
+            "capacite": 500,
+            "unite_capacite": "kg de fruits/h",
+            "fonctions": [
+              "Lavage et broyage",
+              "Pressage à bande",
+              "Collecte et pompe",
+              "Pasteurisation",
+              "Remplissage en poches",
+              "Trois cuves de 200 L"
+            ],
+            "qualification": "prix_catalogue_public_non_certifie",
+            "limites": "Fruits compatibles avec le pressage; rendement et débit de sortie dépendent du fruit. Eau potable sous pression et alimentation électrique nécessaires. Puissance et chauffage non chiffrés par cette fiche."
+          },
+          "hypotheses_explicites": {
+            "fruits": "Hypothèse P2I : 0,35 USD/kg livré; rendement massique de 0,60 kg de jus par kg de fruit. Pas un prix marché observé.",
+            "process": "Hypothèses : emballage 0,18 USD/kg, énergie/eau/nettoyage 0,08 USD/kg.",
+            "personnel": "Hypothèses de salaires bruts : 6 opérateurs à 350 USD/mois et 1 responsable à 700; majoration de simulation 15 %, non taux légal déclaré. Les opérateurs sont inclus dans le coût industriel; le responsable est hors CPV.",
+            "charges": "Hypothèses annuelles : site 7 200, commercial 4 800, maintenance 3 600, assurance 2 400, administration 3 600, autres 2 400 USD. La maintenance est affectée au coût industriel; les autres postes restent hors CPV.",
+            "production": "500 kg fruits/h × 8 h × 250 jours × utilisation × rendement 0,60. Les ventes ne dépassent pas la production et les stocks reportés.",
+            "prix_vente": "Hypothèse P2I 1,40 USD/kg de jus en A1, +2 %/an, sans promesse de débouchés.",
+            "complements": "Enveloppes P2I de dimensionnement, pas devis de prestataires; hors achat de terrain.",
+            "conventions": {
+              "apport": 0.3,
+              "dette": 0.7,
+              "taux_interet_annuel": 0.08,
+              "dette_mois": 60,
+              "amortissement_ans": 10,
+              "tva_simulation": 0.18,
+              "is_simulation": 0.25,
+              "croissance_charges": 0.03,
+              "croissance_personnel": 0.03,
+              "coussin_tresorerie": 0.1,
+              "clients_comptant": 0.4,
+              "clients_30_jours": 0.6,
+              "fournisseurs_comptant": true,
+              "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+            },
+            "complements_usd": {
+              "fret": 10000,
+              "assurance": 1000,
+              "douane_transit": 5000,
+              "transport_local": 1500,
+              "genie_civil": 10000,
+              "utilites": 7000,
+              "installation_formation": 5000,
+              "pieces_initiales": 2800,
+              "securite_environnement": 1800,
+              "etudes": 3000
+            },
+            "base_budget_equipements_usd": 94010.007,
+            "conversion": {
+              "date": "2026-10-23",
+              "eur_usd": 1.1193,
+              "eur_xof": 655.957,
+              "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+              "parite_url": "https://www.bceao.int/fr/cours/cours-des-devises-contre-Franc-CFA-appliquer-aux-transferts",
+              "statut": "reference_datee_indicative_non_bancaire"
+            }
+          }
         }
       },
       "autres_variantes": "a_recenser",
@@ -1563,7 +1757,7 @@
         "Fiscalité applicable et échéancier de financement",
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
-      "statut": "dossier_redactionnel_et_reperes_historiques_non_valide"
+      "statut": "simulation_decouverte_disponible"
     },
     "mini_laiterie": {
       "variantes": {
@@ -2537,8 +2731,55 @@
         "reference": {
           "configuration_id": "reference",
           "nom": "Aliments pour bétail",
-          "qualification": "configuration_a_documenter",
-          "reference": null,
+          "qualification": "simulation_decouverte_calculable",
+          "reference": {
+            "up_id": "aliments_betail",
+            "configuration_id": null,
+            "nom": "Aliments granulés pour bétail — petite ligne",
+            "sous_titre": "Broyage, mélange, granulation et refroidissement",
+            "description": "Petite ligne d’aliments granulés avec pesée et ensachage manuel; formule illustrative de simulation, sans allégation d’équilibre nutritionnel certifié.",
+            "capacite": 500,
+            "unite": "kg/h",
+            "machines": 32000,
+            "investissement": 62000,
+            "production": [
+              450000,
+              600000,
+              700000
+            ],
+            "ventes": [
+              441000,
+              594000,
+              696500
+            ],
+            "prix": [
+              0.5,
+              0.51,
+              0.5202
+            ],
+            "matieres_kg": 0.3225,
+            "cout_production_kg": [
+              0.39030000000000004,
+              0.39150300000000005,
+              0.3986104414285715
+            ],
+            "personnel": 8280,
+            "charges_fixes": 9600,
+            "croissance_personnel": 0.03,
+            "croissance_charges": 0.03,
+            "part_apport": 0.3,
+            "part_dette": 0.7,
+            "taux_interet": 0.08,
+            "duree_dette_mois": 60,
+            "duree_amortissement_ans": 10,
+            "taux_tva": 0.18,
+            "taux_is": 0.25,
+            "coussin_tresorerie": 0.1,
+            "source": "data/p2i-bp-decouverte-simulations.json / aliments_betail : prix catalogue ou budget de référence + hypothèses P2I explicites",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+            "qualification": "simulation_decouverte_prix_et_hypotheses"
+          },
           "economique_herite_up": true,
           "economique": {
             "budget_minimum_historique": {
@@ -2611,7 +2852,69 @@
             "qualification": "references_historiques_a_documenter",
             "aucune_repartition_fictive_des_charges": true
           },
-          "source": "up-data.js / aliments_betail"
+          "source": "up-data.js / aliments_betail",
+          "prix_equipement": {
+            "id": "catalogue_feed_small",
+            "url": "https://tcpel.net/pellet-production-line/feed-pellet-production-line/",
+            "consulte_le": "2026-10-26",
+            "fournisseur": "TCPEL (enseigne présentée sur la page)",
+            "modele": "Small Line / TCF250–350",
+            "prix_min": 24500,
+            "prix_max": 32000,
+            "devise": "USD",
+            "base": "FOB Qingdao",
+            "capacite_min": 600,
+            "capacite_max": 1200,
+            "unite_capacite": "kg/h annoncés pour la gamme",
+            "fonctions": [
+              "Broyage à marteaux",
+              "Mélange à ruban",
+              "Granulation",
+              "Refroidissement SKLN1.5/2.5"
+            ],
+            "qualification": "fourchette_catalogue_publique_non_certifiee",
+            "limites": "Budget retenu à la borne haute, pas un devis pour un modèle précis. Cadence de calcul prudente 500 kg/h. Pesée, ensachage manuel, alimentation, humidité et cohérence des auxiliaires inclus comme hypothèses de dimensionnement à approfondir au Pro."
+          },
+          "hypotheses_explicites": {
+            "matieres": "Hypothèses : maïs 55 % à 0,28 USD/kg; son 25 % à 0,18; tourteau 17 % à 0,55; complément 3 % à 1,00. À formuler selon l’espèce et le cahier des charges.",
+            "process": "Hypothèses : emballage 0,012 USD/kg et énergie/consommables 0,015 USD/kg.",
+            "personnel": "Hypothèses : 4 opérateurs à 300 USD/mois et 1 responsable à 600; majoration de simulation de 15 %, non taux légal déclaré. Les opérateurs sont inclus dans le coût industriel; le responsable reste hors CPV.",
+            "charges": "Hypothèses annuelles : site 3 600, commercial 2 400, maintenance 1 800, assurance 1 200, administration 2 400 USD. Maintenance affectée au coût industriel, sans seconde déduction.",
+            "production": "Cadence de ligne calculée à 500 kg/h, en deçà de la gamme catalogue; 8 h × 250 jours × utilisation. Rendement net 1 kg/kg simplifié, sans pertes de procédé.",
+            "prix_vente": "Hypothèse P2I 0,50 USD/kg A1 puis +2 %/an; pas un prix marché constaté.",
+            "complements": "Enveloppes P2I explicites, pas prix catalogue ni devis; raccordements et ensachage manuel dimensionnés pour la petite ligne.",
+            "conventions": {
+              "apport": 0.3,
+              "dette": 0.7,
+              "taux_interet_annuel": 0.08,
+              "dette_mois": 60,
+              "amortissement_ans": 10,
+              "tva_simulation": 0.18,
+              "is_simulation": 0.25,
+              "croissance_charges": 0.03,
+              "croissance_personnel": 0.03,
+              "coussin_tresorerie": 0.1,
+              "clients_comptant": 0.4,
+              "clients_30_jours": 0.6,
+              "fournisseurs_comptant": true,
+              "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+            },
+            "complements_usd": {
+              "fret": 4000,
+              "assurance": 500,
+              "douane_transit": 2500,
+              "transport_local": 1000,
+              "genie_civil": 8000,
+              "utilites": 5000,
+              "installation_formation": 3000,
+              "pieces_initiales": 2000,
+              "securite_environnement": 1500,
+              "pesee_ensachage_manuel": 1500,
+              "etudes": 1000
+            },
+            "base_budget_equipements_usd": 32000,
+            "conversion": null
+          }
         }
       },
       "autres_variantes": "a_recenser",
@@ -2805,7 +3108,7 @@
         "Fiscalité applicable et échéancier de financement",
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
-      "statut": "dossier_redactionnel_et_reperes_historiques_non_valide"
+      "statut": "simulation_decouverte_disponible"
     },
     "detergents": {
       "variantes": {
@@ -27501,5 +27804,7 @@
       ],
       "statut": "dossier_redactionnel_et_reperes_historiques_non_valide"
     }
-  }
+  },
+  "regles_decouverte": "Prix catalogue public ou budget P2I identifié + hypothèses explicites; pas de certification, partenariat ou devis exigé au Découverte.",
+  "nombre_simulations_completes": 4
 }

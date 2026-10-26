@@ -55,7 +55,7 @@ async function init(){
   up=registry[payload.up_id];payload.dossier=root.P2I_BP_DONNEES?.unites[payload.up_id]||null;
   const choices=payload.up_id==='biscuiterie'?root.P2I_BP_V108_REFERENCES.variants:payload.up_id==='nettoyage'?root.P2I_BP_V108_REFERENCES.nettoyage:null;
   if(choices&&payload.configuration_id&&!own(choices,payload.configuration_id))throw Error('Configuration inconnue.');
-  payload.reference=payload.up_id==='biscuiterie'?root.P2I_BP_V108_REFERENCES.obtenir(payload.configuration_id):payload.up_id==='nettoyage'&&own(root.P2I_BP_V108_REFERENCES.nettoyage,payload.configuration_id)?root.P2I_BP_V108_REFERENCES.nettoyage[payload.configuration_id]:null;
+  payload.reference=root.P2I_BP_DONNEES?.unites[payload.up_id]?.variantes[payload.configuration_id||'reference']?.reference||null;
   inputs=payload.entrees?root.P2I_BP_V108_CONTEXTE.normalizeInput(payload.entrees,payload.up_id,payload.configuration_id):null;
   if(inputs&&up.type==='service')throw Error('Contrat de fabrication incompatible avec cette activité.');
   result=inputs?root.P2I_BP_SIMULATION_COMMUNE.calculer(inputs):null;
