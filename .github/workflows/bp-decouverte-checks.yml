@@ -13,6 +13,8 @@ on:
       - 'js/p2i-financial-display.js'
       - 'tests/check-bp-decouverte-*.cjs'
       - 'tests/check-p2i-reference-coverage.cjs'
+      - 'tests/check-p2i-bp-preparation.cjs'
+      - 'js/p2i-bp-decouverte-preparation.js'
       - 'up-data.js'
       - 'machines-data.js'
       - '.github/workflows/bp-decouverte-checks.yml'
@@ -36,3 +38,5 @@ jobs:
         run: node tests/check-bp-decouverte-bridge.cjs
       - name: Couverture des UP et correspondance catalogue
         run: node tests/check-p2i-reference-coverage.cjs
+      - name: Audit de préparation des BP Découverte
+        run: node tests/check-p2i-bp-preparation.cjs
