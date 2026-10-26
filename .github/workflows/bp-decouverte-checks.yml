@@ -17,6 +17,8 @@ on:
       - 'tests/check-p2i-bp-lots.cjs'
       - 'tests/check-p2i-bp-lot-01.cjs'
       - 'tests/check-p2i-bp-tous-lots.cjs'
+      - 'tests/check-p2i-bp-financial-validation.cjs'
+      - 'js/p2i-bp-decouverte-financial-validation.js'
       - 'scripts/build-bp-decouverte-tous-lots.cjs'
       - 'data/p2i-bp-decouverte-lot-*-sources.json'
       - 'scripts/build-bp-decouverte-lot-01.cjs'
@@ -64,3 +66,5 @@ jobs:
           node tests/check-p2i-bp-tous-lots.cjs
           node scripts/build-bp-decouverte-tous-lots.cjs
           git diff --exit-code -- data/p2i-bp-decouverte-lot-*-sources.json
+      - name: Contrôler le contrat financier commun
+        run: node tests/check-p2i-bp-financial-validation.cjs
