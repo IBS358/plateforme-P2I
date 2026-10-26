@@ -1,0 +1,859 @@
+{
+  "version": "1.0.0",
+  "lot": "LOT-01",
+  "filiere": "Agro-alimentaire & Boissons",
+  "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
+  "nombre_up": 8,
+  "unites": [
+    {
+      "up_id": "conserverie_legumes",
+      "up_nom": "Conserverie de légumes",
+      "description": "Transformation industrielle de légumes locaux en conserves (tomates, haricots verts, maïs doux, okra, gombo). Valorisation des produits agricoles ivoiriens pour le marché local et l'export.",
+      "filiere": "Agro-alimentaire & Boissons",
+      "processus": [
+        "Réception et tri des légumes",
+        "Lavage et calibrage",
+        "Blanchiement",
+        "Mise en conserve",
+        "Stérilisation",
+        "Étiquetage",
+        "Stockage"
+      ],
+      "matieres_premieres": [
+        "Tomates (production locale)",
+        "Haricots verts (producteurs locaux)",
+        "Maïs doux (régions du nord)",
+        "Okra, gombo (sud)",
+        "Sel, sucre, vinaigre",
+        "Boîtes de conserve, bocaux en verre, étiquettes"
+      ],
+      "marches_cibles": [
+        "Supermarchés (Carrefour, Casino)",
+        "Hôtels et restaurants",
+        "Cantines scolaires et universitaires",
+        "Export vers l'Europe",
+        "Marché institutionnel (hôpitaux, prisons)"
+      ],
+      "capacite_generique_texte": "20,000 boîtes",
+      "machines_catalogue": [
+        {
+          "nom": "Laveuse-découpeuse",
+          "role": "Nettoyage et coupe des légumes",
+          "capacite": "500-2000 kg/h",
+          "utilites": "Eau + électricité"
+        },
+        {
+          "nom": "Blanchisseur",
+          "role": "Traitement thermique (blanchiment)",
+          "capacite": "500-2000 kg/h",
+          "utilites": "Électricité + eau + vapeur"
+        },
+        {
+          "nom": "Remplisseuse-doseuse",
+          "role": "Mise en boîtes/bocaux",
+          "capacite": "1000-5000 unités/h",
+          "utilites": "Électricité + air comprimé"
+        },
+        {
+          "nom": "Scelleuse-operculieuse",
+          "role": "Fermeture hermétique",
+          "capacite": "1000-5000 unités/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Autoclave",
+          "role": "Stérilisation haute température",
+          "capacite": "500-2000 boîtes/batch",
+          "utilites": "Électricité + vapeur + eau"
+        },
+        {
+          "nom": "Étiqeteuse",
+          "role": "Pose des étiquettes",
+          "capacite": "1000-5000 unités/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Cartonneuse-emballeuse",
+          "role": "Conditionnement secondaire",
+          "capacite": "500-2000 cartons/h",
+          "utilites": "Électricité + air comprimé"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 90000,
+        "ventilation": {
+          "machines": 45000,
+          "installation": 15000,
+          "working_capital": 20000,
+          "training": 10000,
+          "total": 90000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 500000,
+        "marge_brute_indicative_pourcent": 40,
+        "rentabilite_nette_indicative_pourcent": 25
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 90000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "biscuiterie",
+      "up_nom": "Biscuiterie industrielle",
+      "description": "Production industrielle de biscuits à base de farines locales. Spécialisation possible dans les biscuits au cacao et au café, produits phares de la Côte d'Ivoire.",
+      "filiere": "Agro-alimentaire & Boissons",
+      "processus": [
+        "Mélange des ingrédients (farine, sucre, œufs, beurre)",
+        "Pétrissage et repos de la pâte",
+        "Laminage et formage des biscuits",
+        "Cuisson au four tunnel (200-220°C)",
+        "Refroidissement sur convoyeur",
+        "Conditionnement sous atmosphère protectrice",
+        "Étiquetage et cartonnage"
+      ],
+      "matieres_premieres": [
+        "Farine de blé (locale ou import)",
+        "Sucre",
+        "Œufs (producteurs locaux)",
+        "Beurre ou margarine",
+        "Cacao en poudre (produit local)",
+        "Café soluble (produit local)",
+        "Emballages (sachets, boîtes, cartons)"
+      ],
+      "marches_cibles": [
+        "Supermarchés et grandes surfaces",
+        "Épiceries et boutiques",
+        "Écoles (goûters)",
+        "Hôtels et restaurants",
+        "Export vers pays voisins"
+      ],
+      "capacite_generique_texte": "15,000 kg",
+      "machines_catalogue": [
+        {
+          "nom": "Mélangeur / pétrin industriel",
+          "role": "Préparation et homogénéisation de la pâte",
+          "capacite": "Dimensionné pour une ligne d'environ 500 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Alimentateur de pâte",
+          "role": "Alimentation régulière de la section de formage",
+          "capacite": "Adaptée à la capacité de la ligne",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Convoyeur d'alimentation du four",
+          "role": "Transfert régulier des biscuits formés vers le four",
+          "capacite": "Synchronisée avec la ligne",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Four tunnel à biscuits",
+          "role": "Cuisson continue des biscuits",
+          "capacite": "Dimensionné pour une ligne d'environ 500 kg/h",
+          "utilites": "Électricité ou combustible selon technologie"
+        },
+        {
+          "nom": "Convoyeur de sortie du four",
+          "role": "Réception et transfert des biscuits après cuisson",
+          "capacite": "Synchronisée avec le four",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Convoyeur de refroidissement",
+          "role": "Refroidissement des biscuits avant conditionnement",
+          "capacite": "Adaptée à la capacité de cuisson",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Système d'alignement / empilage",
+          "role": "Alignement et préparation des biscuits avant emballage",
+          "capacite": "Synchronisée avec l'emballage",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Emballeuse horizontale",
+          "role": "Conditionnement primaire des biscuits",
+          "capacite": "Adaptée au format et au débit retenus",
+          "utilites": "Électricité + air comprimé selon modèle"
+        },
+        {
+          "nom": "Étaleuse de pâte",
+          "role": "Formation initiale d'une feuille de pâte régulière",
+          "capacite": "Adaptée à une ligne d'environ 500 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Rouleaux de calibrage",
+          "role": "Réduction et contrôle progressif de l'épaisseur de la pâte",
+          "capacite": "Adaptée à une ligne d'environ 500 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Roto-découpoir",
+          "role": "Découpe et mise en forme des biscuits",
+          "capacite": "Adaptée à une ligne d'environ 500 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Convoyeur de retour des rognures",
+          "role": "Récupération et réintégration des chutes de pâte",
+          "capacite": "Synchronisée avec la ligne",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 120000,
+        "ventilation": {
+          "machines": 65000,
+          "installation": 20000,
+          "working_capital": 25000,
+          "training": 10000,
+          "total": 120000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 550000,
+        "marge_brute_indicative_pourcent": 35,
+        "rentabilite_nette_indicative_pourcent": 20
+      },
+      "reference_industrielle_validee": {
+        "configuration_id": "crackers",
+        "capacite_kg_h": 500,
+        "prix_ligne_usd": 450000,
+        "nature": "Équipements uniquement, CAPEX complet inconnu",
+        "statut": "Hypothèse de référence P2I retenue pour le pilote; justification fournisseur à documenter"
+      },
+      "controle": {
+        "montant_total_ventilation_usd": 120000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "boulangerie_industrielle",
+      "up_nom": "Boulangerie industrielle",
+      "description": "Production industrielle de pains, viennoiseries et pâtisseries pour le marché local et institutionnel.",
+      "filiere": "Agro-alimentaire & Boissons",
+      "processus": [
+        "Pesée et mélange des ingrédients",
+        "Pétrissage",
+        "Fermentation",
+        "Façonnage",
+        "Cuisson",
+        "Refroidissement",
+        "Tranchage",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Farine de blé (locale)",
+        "Levure",
+        "Sel",
+        "Sucre",
+        "Eau",
+        "Améliorants",
+        "Emballages (sachets, films)"
+      ],
+      "marches_cibles": [
+        "Supermarchés et grandes surfaces",
+        "Boulangeries locales",
+        "Cantines scolaires",
+        "Hôtels et restaurants",
+        "Hôpitaux et prisons"
+      ],
+      "capacite_generique_texte": "50,000 pains",
+      "machines_catalogue": [
+        {
+          "nom": "Pétrin spiral",
+          "role": "Pétrissage de la pâte",
+          "capacite": "200 kg/batch",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Diviseuse-bouleuse",
+          "role": "Division et boulage",
+          "capacite": "1,000 pains/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Façonneuse",
+          "role": "Façonnage des pains",
+          "capacite": "1,000 pains/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Chambre de fermentation",
+          "role": "Pousse contrôlée",
+          "capacite": "500 kg",
+          "utilites": "Électricité + vapeur"
+        },
+        {
+          "nom": "Four rotatif",
+          "role": "Cuisson",
+          "capacite": "500 pains/batch",
+          "utilites": "Électricité ou gaz"
+        },
+        {
+          "nom": "Trancheuse",
+          "role": "Tranchage du pain",
+          "capacite": "1,000 pains/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ensacheuse",
+          "role": "Conditionnement",
+          "capacite": "1,000 pains/h",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 150000,
+        "ventilation": {
+          "machines": 80000,
+          "installation": 25000,
+          "working_capital": 30000,
+          "training": 15000,
+          "total": 150000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 800000,
+        "marge_brute_indicative_pourcent": 30,
+        "rentabilite_nette_indicative_pourcent": 18
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 150000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "jus_boissons",
+      "up_nom": "Production de jus et boissons",
+      "description": "Transformation de fruits locaux en jus et boissons (ananas, mangue, orange, bissap, gingembre). Valorisation des fruits tropicaux ivoiriens.",
+      "filiere": "Agro-alimentaire & Boissons",
+      "processus": [
+        "Réception et tri des fruits",
+        "Lavage",
+        "Broyage",
+        "Pressage",
+        "Filtration",
+        "Pasteurisation",
+        "Embouteillage",
+        "Étiquetage",
+        "Stockage"
+      ],
+      "matieres_premieres": [
+        "Ananas (production locale)",
+        "Mangue (producteurs locaux)",
+        "Orange (régions du nord)",
+        "Bissap (fleurs d'hibiscus)",
+        "Gingembre",
+        "Sucre",
+        "Emballages (bouteilles PET, briques, étiquettes)"
+      ],
+      "marches_cibles": [
+        "Supermarchés",
+        "Hôtels et restaurants",
+        "Écoles",
+        "Cantines",
+        "Export vers l'Europe"
+      ],
+      "capacite_generique_texte": "50,000 L",
+      "machines_catalogue": [
+        {
+          "nom": "Laveuse-trieuse",
+          "role": "Nettoyage et tri des fruits",
+          "capacite": "1-5 tonnes/h",
+          "utilites": "Eau + électricité"
+        },
+        {
+          "nom": "Éplucheuse-dénoyauteuse",
+          "role": "Préparation des fruits",
+          "capacite": "500-2000 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Broyeur-raspeur",
+          "role": "Extraction pulpe/jus",
+          "capacite": "500-3000 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Filtreuse / Tamiseuse",
+          "role": "Séparation pulpe/liquide",
+          "capacite": "1000-5000 L/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Mélangeuse / Doseuse",
+          "role": "Ajout sucre, arômes",
+          "capacite": "500-3000 L/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Pasteurisateur",
+          "role": "Traitement thermique",
+          "capacite": "1000-5000 L/h",
+          "utilites": "Électricité + eau + vapeur"
+        },
+        {
+          "nom": "Remplisseuse-scelleuse",
+          "role": "Mise en bouteilles",
+          "capacite": "1000-5000 unités/h",
+          "utilites": "Électricité + air comprimé"
+        },
+        {
+          "nom": "Concentrateur (module export)",
+          "role": "Production jus concentré",
+          "capacite": "500-3000 L/h",
+          "utilites": "Électricité + vapeur"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 100000,
+        "ventilation": {
+          "machines": 50000,
+          "installation": 15000,
+          "working_capital": 25000,
+          "training": 10000,
+          "total": 100000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 600000,
+        "marge_brute_indicative_pourcent": 42,
+        "rentabilite_nette_indicative_pourcent": 28
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 100000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "mini_laiterie",
+      "up_nom": "Mini-laiterie",
+      "description": "Transformation du lait en produits laitiers frais (yaourts, fromages, beurre). Développement de l'élevage laitier local.",
+      "filiere": "Agro-alimentaire & Boissons",
+      "processus": [
+        "Réception du lait",
+        "Filtration",
+        "Standardisation",
+        "Pasteurisation",
+        "Homogénéisation",
+        "Fermentation",
+        "Conditionnement",
+        "Stockage réfrigéré"
+      ],
+      "matieres_premieres": [
+        "Lait frais (producteurs locaux)",
+        "Ferments lactiques",
+        "Sucre",
+        "Fruits (ananas, mangue, papaye)",
+        "Pots et opercules",
+        "Étiquettes"
+      ],
+      "marches_cibles": [
+        "Supermarchés",
+        "Crèches et écoles",
+        "Hôpitaux",
+        "Hôtels et restaurants",
+        "Particuliers"
+      ],
+      "capacite_generique_texte": "30,000 L",
+      "machines_catalogue": [
+        {
+          "nom": "Cuve de réception",
+          "role": "Réception et filtration du lait",
+          "capacite": "5000-20000 L",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Pasteurisateur",
+          "role": "Pasteurisation du lait",
+          "capacite": "500-2000 L/h",
+          "utilites": "Électricité + eau + vapeur"
+        },
+        {
+          "nom": "Écrémeuse",
+          "role": "Séparation de la crème",
+          "capacite": "500-2000 L/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Cuve de maturation",
+          "role": "Maturation du yaourt",
+          "capacite": "500-2000 L",
+          "utilites": "Électricité + froid"
+        },
+        {
+          "nom": "Remplisseuse",
+          "role": "Conditionnement en pots/bouteilles",
+          "capacite": "1000-5000 pots/h",
+          "utilites": "Électricité + air comprimé"
+        },
+        {
+          "nom": "Chambre froide",
+          "role": "Stockage réfrigéré",
+          "capacite": "20000-50000 L",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 110000,
+        "ventilation": {
+          "machines": 55000,
+          "installation": 15000,
+          "working_capital": 25000,
+          "training": 15000,
+          "total": 110000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 450000,
+        "marge_brute_indicative_pourcent": 35,
+        "rentabilite_nette_indicative_pourcent": 22
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 110000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "huiles_alimentaires",
+      "up_nom": "Huiles alimentaires",
+      "description": "Production d'huiles végétales à partir de graines locales (palme, arachide, tournesol, colza).",
+      "filiere": "Agro-alimentaire & Boissons",
+      "processus": [
+        "Réception des graines",
+        "Nettoyage",
+        "Décorticage",
+        "Broyage",
+        "Pressage",
+        "Filtration",
+        "Décantation",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Graines de palme (producteurs locaux)",
+        "Arachides",
+        "Tournesol",
+        "Colza",
+        "Emballages (bouteilles PET, bidons, étiquettes)"
+      ],
+      "marches_cibles": [
+        "Supermarchés",
+        "Restaurants",
+        "Industrie alimentaire",
+        "Export vers pays voisins"
+      ],
+      "capacite_generique_texte": "20,000 L",
+      "machines_catalogue": [
+        {
+          "nom": "Nettoyeur-décortiqueur",
+          "role": "Nettoyage des graines/noix",
+          "capacite": "500-3000 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Broyeur / Concasseur",
+          "role": "Concassage des graines",
+          "capacite": "500-3000 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Cuiseur (optionnel)",
+          "role": "Chauffage avant pressage",
+          "capacite": "500-2000 kg/h",
+          "utilites": "Électricité + vapeur"
+        },
+        {
+          "nom": "Presse à huile",
+          "role": "Extraction de l'huile",
+          "capacite": "500-2000 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Filtre-presse",
+          "role": "Filtration des impuretés",
+          "capacite": "1000-5000 L/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Clarificateur / Décanteuse",
+          "role": "Séparation eau / huile",
+          "capacite": "1000-5000 L/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Remplisseuse-scelleuse",
+          "role": "Mise en bidons/bouteilles",
+          "capacite": "500-2000 unités/h",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Neutraliseur (module raffinerie)",
+          "role": "Élimination acides gras",
+          "capacite": "1000-5000 L/h",
+          "utilites": "Électricité + vapeur"
+        },
+        {
+          "nom": "Décoloreur (module raffinerie)",
+          "role": "Élimination pigments",
+          "capacite": "1000-5000 L/h",
+          "utilites": "Électricité + vapeur"
+        },
+        {
+          "nom": "Désodoriseur (module raffinerie)",
+          "role": "Élimination odeurs",
+          "capacite": "1000-5000 L/h",
+          "utilites": "Électricité + vapeur"
+        },
+        {
+          "nom": "Fractionneur (module raffinerie)",
+          "role": "Séparation fractions",
+          "capacite": "1000-5000 L/h",
+          "utilites": "Électricité + froid"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 130000,
+        "ventilation": {
+          "machines": 65000,
+          "installation": 20000,
+          "working_capital": 30000,
+          "training": 15000,
+          "total": 130000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 700000,
+        "marge_brute_indicative_pourcent": 30,
+        "rentabilite_nette_indicative_pourcent": 20
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 130000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "epices",
+      "up_nom": "Transformation d'épices",
+      "description": "Transformation et conditionnement d'épices locales en poudre fine, mélanges et condiments.",
+      "filiere": "Agro-alimentaire & Boissons",
+      "processus": [
+        "Réception des épices",
+        "Tri",
+        "Séchage",
+        "Broyage",
+        "Tamisage",
+        "Mélange",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Poivre (producteurs locaux)",
+        "Gingembre",
+        "Piment",
+        "Curcuma",
+        "Cannelle (import)",
+        "Sachets et emballages"
+      ],
+      "marches_cibles": [
+        "Supermarchés",
+        "Épiceries fines",
+        "Restauration",
+        "Export Europe"
+      ],
+      "capacite_generique_texte": "5,000 kg",
+      "machines_catalogue": [
+        {
+          "nom": "Laveuse-décanteuse",
+          "role": "Nettoyage des épices brutes",
+          "capacite": "100-500 kg/h",
+          "utilites": "Eau + électricité"
+        },
+        {
+          "nom": "Séchoir",
+          "role": "Séchage des épices",
+          "capacite": "50-200 kg/batch",
+          "utilites": "Électricité ou gaz"
+        },
+        {
+          "nom": "Broyeur (moulin à épices)",
+          "role": "Broyage en poudre fine",
+          "capacite": "50-200 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Tamiseuse vibrante",
+          "role": "Classification granulométrique",
+          "capacite": "100-500 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Mélangeuse (spice blender)",
+          "role": "Mélanges personnalisés",
+          "capacite": "100-500 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Conditionneuse",
+          "role": "Mise en sachets / pots",
+          "capacite": "500-2000 sachets/h",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Étiqeteuse",
+          "role": "Pose étiquettes",
+          "capacite": "500-2000 unités/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Laboratoire qualité (module innovation)",
+          "role": "Analyse et R&D",
+          "capacite": "Analyse batch",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Micro-doseuse (module innovation)",
+          "role": "Petites séries innovation",
+          "capacite": "10-50 kg/h",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 70000,
+        "ventilation": {
+          "machines": 35000,
+          "installation": 10000,
+          "working_capital": 15000,
+          "training": 10000,
+          "total": 70000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 250000,
+        "marge_brute_indicative_pourcent": 48,
+        "rentabilite_nette_indicative_pourcent": 30
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 70000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "aliments_betail",
+      "up_nom": "Aliments pour bétail",
+      "description": "Production d'aliments composés pour l'élevage (volailles, bovins, porcins). Valorisation des sous-produits agricoles locaux.",
+      "filiere": "Agro-alimentaire & Boissons",
+      "processus": [
+        "Réception des matières premières",
+        "Broyage",
+        "Dosage",
+        "Mélange",
+        "Granulation",
+        "Refroidissement",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Maïs (producteurs locaux)",
+        "Tourteau de soja",
+        "Son de blé",
+        "Issues de céréales",
+        "Compléments minéraux",
+        "Sacs d'emballage"
+      ],
+      "marches_cibles": [
+        "Éleveurs de volailles",
+        "Éleveurs de bovins",
+        "Éleveurs de porcins",
+        "Coopératives agricoles"
+      ],
+      "capacite_generique_texte": "100,000 kg",
+      "machines_catalogue": [
+        {
+          "nom": "Broyeur",
+          "role": "Broyage des matières premières",
+          "capacite": "1,000 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Mélangeur",
+          "role": "Mélange des ingrédients",
+          "capacite": "1,000 kg/batch",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Granulateur",
+          "role": "Granulation",
+          "capacite": "500 kg/h",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ensacheuse",
+          "role": "Conditionnement",
+          "capacite": "500 sacs/h",
+          "utilites": "Électricité + air"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 95000,
+        "ventilation": {
+          "machines": 45000,
+          "installation": 15000,
+          "working_capital": 25000,
+          "training": 10000,
+          "total": 95000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 350000,
+        "marge_brute_indicative_pourcent": 25,
+        "rentabilite_nette_indicative_pourcent": 15
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 95000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    }
+  ]
+}
