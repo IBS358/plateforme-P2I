@@ -43,4 +43,24 @@ choice.value="";listeners.change();
 assert.equal(has("p2i-r8-engine"),false,"Sélecteur vide : retirer la production périmée");
 assert.equal(has("p2i-r9-engine"),false,"Sélecteur vide : retirer le résultat périmé");
 assert.equal(r8.placeholder.hidden,false);assert.equal(r9.placeholder.hidden,false);
-console.log("Pont financier P2I : 5 scénarios dynamiques réussis.");
+
+// Contrôles de cohérence physique : une survente ou un stock négatif invalide les résultats.
+window.P2I_CRACKERS_RESULTAT.quantite_vendue=600;
+listeners["p2i:economic-result-ready"]();
+assert.equal(has("p2i-r8-engine"),false,"Refuser une quantité vendue supérieure à la production");
+assert.equal(has("p2i-r9-engine"),false,"Ne pas publier le compte financier après une survente");
+window.P2I_CRACKERS_RESULTAT.quantite_vendue=400;
+window.P2I_CRACKERS_RESULTAT.quantite_non_vendue=-1;
+listeners["p2i:economic-result-ready"]();
+assert.equal(has("p2i-r8-engine"),false,"Refuser une quantité non vendue négative");
+window.P2I_CRACKERS_RESULTAT.quantite_non_vendue=100;
+listeners["p2i:economic-result-ready"]();
+assert.equal(has("p2i-r8-engine"),true,"Réafficher après correction des quantités");
+window.P2I_CRACKERS_RESULTAT.quantite_non_vendue=99;
+listeners["p2i:economic-result-ready"]();
+assert.equal(has("p2i-r8-engine"),false,"Refuser un bilan de quantités incohérent");
+window.P2I_CRACKERS_RESULTAT.quantite_non_vendue=100;
+listeners["p2i:economic-result-ready"]();
+assert.equal(has("p2i-r8-engine"),true,"Restaurer après retour à la cohérence");
+
+console.log("Pont financier P2I : scénarios de cohérence dynamique réussis.");
