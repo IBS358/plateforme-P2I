@@ -50,7 +50,7 @@ const biscuitVariants={crackers:"Crackers",biscuits_mous:"Biscuits mous",biscuit
 const validBiscuitConfig=id!=="biscuiterie"||Object.prototype.hasOwnProperty.call(biscuitVariants,requestedConfig);
 const config=validBiscuitConfig?requestedConfig:"";
 const selectedVariant=id==="biscuiterie"&&Object.prototype.hasOwnProperty.call(biscuitVariants,config)?config:null;
-const configLabel=id==="biscuiterie"?(biscuitVariants[config]||"À choisir"):config||"À choisir";
+let configLabel=id==="biscuiterie"?(biscuitVariants[config]||"À choisir"):config||"À choisir";
 const unitPictures=(window.P2I_BP_IMAGES||{})[id]||{};
 const pictureUrl=value=>{
  if(typeof value!=="string")return "";
@@ -82,6 +82,7 @@ const cleaningVariants={
  decontamination_biologique:{title:"Décontamination biologique",description:"Prestations spécialisées sur des risques biologiques : analyse préalable, protections, procédures et filières de traitement à confirmer."}
 };
 const selectedCleaning=id==="nettoyage"&&Object.prototype.hasOwnProperty.call(cleaningVariants,config)?cleaningVariants[config]:null;
+if(id==="nettoyage")configLabel=selectedCleaning?selectedCleaning.title:"À choisir";
 const isSpecialCleaning=!!selectedCleaning&&config!=="nettoyage_intensif";
 const variantMachines=isSpecialCleaning?[]:variantMachineData?[
  ...(Array.isArray(machineSource.base_machines)?machineSource.base_machines:[]),
