@@ -23,7 +23,8 @@ function validate(dataset){
  let capex=null;
  if(requiredInvestment.every(k=>nonnegative(investment[k]))){
   capex=requiredInvestment.reduce((n,k)=>n+investment[k],0);
-  if(finite(investment.total)&&!close(investment.total,capex))push("investissement.total","Différent de la somme des postes");
+  if(!nonnegative(investment.total))push("investissement.total","Total CAPEX explicite et non négatif requis");
+  else if(!close(investment.total,capex))push("investissement.total","Différent de la somme des postes");
  }else for(const k of requiredInvestment)if(!nonnegative(investment[k]))push("investissement."+k,"Montant vérifié requis");
  if(investment.reserve_tresorerie!==undefined&&!nonnegative(investment.reserve_tresorerie))
   push("investissement.reserve_tresorerie","Réserve distincte du CAPEX : montant invalide");
@@ -65,7 +66,8 @@ function validate(dataset){
   if(requiredBalance.every(k=>nonnegative(item[k]))&&!close(item.actif_total,item.passif_total))
    push("bilans_annuels."+(i+1),"Bilan déséquilibré");
  }
- const finance=capex===null?null:Object.freeze({investissement_total_usd:capex,
+ // Ne jamais publier un financement si le budget déclaré est absent ou incohérent.
+ const finance=capex===null||!nonnegative(investment.total)||!close(investment.total,capex)?null:Object.freeze({investissement_total_usd:capex,
   apport_40_usd:capex*.4,dette_60_usd:capex*.6,
   reserve_tresorerie_distincte_usd:nonnegative(investment.reserve_tresorerie)?investment.reserve_tresorerie:null});
  return Object.freeze({valide:issues.length===0,blocages:Object.freeze(issues),
