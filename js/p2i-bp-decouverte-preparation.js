@@ -3,7 +3,6 @@
  */
 (function(root){
 "use strict";
-const number=v=>typeof v==="number"&&Number.isFinite(v)&&v>=0;
 const hasText=v=>typeof v==="string"&&v.trim().length>0;
 function inspect(upId,configurationId,upRegistry,machineRegistry){
  const up=upRegistry&&upRegistry[upId];
@@ -12,12 +11,17 @@ function inspect(upId,configurationId,upRegistry,machineRegistry){
  const machines=machineEntry&&Array.isArray(machineEntry.machines)?machineEntry.machines:
   Array.isArray(machineEntry)?machineEntry:[];
  const pilot=upId==="biscuiterie"&&configurationId==="crackers";
+ const validConfiguration=upId!=="biscuiterie"||
+  !configurationId||["crackers","biscuits_mous","biscuits_durs"].includes(configurationId);
+ const needsChoice=upId==="biscuiterie"&&!configurationId;
  const points=[];
  const blocages=[];
  if(hasText(up.nom)&&hasText(up.filiereNom)&&hasText(up.description))points.push("identite_activite");
  else blocages.push("Identité, filière ou description à compléter");
  if(machines.length>0)points.push("catalogue_fonctions");
  else blocages.push("Catalogue de fonctions industrielles absent");
+ if(!validConfiguration)blocages.push("Variante Biscuiterie non reconnue");
+ if(needsChoice)blocages.push("Sélectionner une variante Biscuiterie");
  if(pilot){
   points.push("ligne_integree_reference_450000_usd","capacite_reference_500_kg_h");
  }else{
