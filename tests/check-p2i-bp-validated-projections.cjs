@@ -17,6 +17,7 @@ vm.runInContext(source("p2i-bp-decouverte-17-validated-projections.js"),ctx);
 assert.equal(nodes.has("p2i-validated-finance-r10"),false);
 const investment=Object.fromEntries(window.P2I_BP_CONTROLES_FINANCIERS.requiredInvestment.map(k=>[k,1000]));
 investment.equipements=450000;
+investment.total=459000;
 const annual=()=>({chiffre_affaires:1000000,cout_produits_vendus:500000,charges_exploitation:200000,amortissements:100000,charges_financieres:20000,impots:30000,resultat_net:150000});
 const treasury=i=>({encaissements:100000,decaissements:95000,solde_initial:10000+i*5000,solde_final:15000+i*5000});
 window.P2I_BP_PREVISIONS_VALIDABLES={
