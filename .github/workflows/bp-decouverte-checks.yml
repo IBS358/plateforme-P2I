@@ -30,6 +30,7 @@ on:
       - 'js/p2i-bp-decouverte-dossier-builder.js'
       - 'scripts/build-bp-decouverte-95-dossiers.cjs'
       - 'tests/check-p2i-bp-95-dossiers.cjs'
+      - 'tests/check-p2i-bp-readiness-gates.cjs'
       - 'data/p2i-bp-decouverte-95-dossiers-17-rubriques.json'
       - 'tests/check-p2i-bp-script-loading.cjs'
       - 'tests/check-p2i-bp-bfr-scenario-assembleur.cjs'
@@ -103,6 +104,8 @@ jobs:
         run: node tests/check-p2i-bp-script-loading.cjs
       - name: Vérifier le scénario BFR 40/60 raccordé à la trésorerie
         run: node tests/check-p2i-bp-bfr-scenario-assembleur.cjs
+      - name: Vérifier les portes de publication et les manques réels
+        run: node tests/check-p2i-bp-readiness-gates.cjs
       - name: Contrôler les 95 dossiers documentaires à 17 rubriques
         run: |
           node tests/check-p2i-bp-95-dossiers.cjs
