@@ -23,6 +23,8 @@ assert.equal(good.previsions.tresorerie_mensuelle.length,12);
 assert.equal(good.previsions.bfr_mensuel[0].bfr,65000);
 assert.equal(good.previsions.tresorerie_mensuelle[0].solde_final,7000);
 assert.equal(good.financement_indicatif.investissement_total_usd,459000);
+assert.equal(good.financement_indicatif.apport_30_usd,137700);
+assert.equal(good.financement_indicatif.dette_70_usd,321300);
 const published=assembler.publier(entree);
 assert.equal(published.valide,true);
 assert.equal(ctx.P2I_BP_PREVISIONS_VALIDABLES.bfr_mensuel.length,36);
