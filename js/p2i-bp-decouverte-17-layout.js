@@ -118,7 +118,14 @@ note("Le BP Initial permet de personnaliser le projet. Le BP Pro nécessite des 
 const destinationParams=new URLSearchParams(location.search);
 destinationParams.set("unit_id",id);
 destinationParams.delete("id");
-if(selectedVariant)destinationParams.set("configuration_id",selectedVariant);
+// Ne pas transmettre au BP Pro une variante inconnue ou non sélectionnée.
+if(id==="biscuiterie"){
+ if(selectedVariant)destinationParams.set("configuration_id",selectedVariant);
+ else destinationParams.delete("configuration_id");
+}else if(id==="nettoyage"){
+ if(selectedCleaning)destinationParams.set("configuration_id",config);
+ else destinationParams.delete("configuration_id");
+}
 const proParams=new URLSearchParams(destinationParams);
 proParams.set("redirect","bp-pro");
 const proUrl="fiche-production.html?"+proParams.toString();
