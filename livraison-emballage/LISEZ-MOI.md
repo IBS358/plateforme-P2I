@@ -11,3 +11,5 @@ L'investissement de simulation est de 155 519,50 USD; la réserve initiale est d
 Une structure emballage commune est ajoutée aux dossiers de production des 96 UP. Les activités de services sans produit emballé sont indiquées non applicables. Les coûts propres au produit restent à renseigner ; les coûts existants Crackers et Aliments pour bétail sont identifiés comme inclus, sans seconde déduction. Aucune somme n'est inventée pour les autres UP.
 
 Fichiers principaux : data/p2i-bp-decouverte-simulations.json, data/p2i-bp-decouverte-donnees.json, scripts/build-bp-decouverte-donnees.cjs, js/p2i-bp-decouverte-v108-layout.js, assets/bp-jus/bouteille-ivoire-fruits-ia.jpg et les pages générées. Les prompts des illustrations figurent dans assets/bp-jus/PROVENANCE.md.
+
+Les anciennes simulations personnelles restent conservées : si leur coût industriel ou leur budget machines diffère de la nouvelle configuration, le détail et l’image de la bouteille ne leur sont pas attribués automatiquement.
