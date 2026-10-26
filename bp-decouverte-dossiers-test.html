@@ -2,29 +2,39 @@
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>P2I — Consultation des 95 dossiers BP Découverte</title>
 <style>
-:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#17243d;background:#f3f6fb}
-*{box-sizing:border-box}body{margin:0}header{background:#10284c;color:white;padding:24px max(20px,calc((100vw - 1100px)/2))}
-header h1{margin:0 0 8px;font-size:1.55rem}header p{margin:0;color:#d8e6f7}
-main{max-width:1100px;margin:auto;padding:22px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0 22px}
-label{display:block;font-weight:700;margin-bottom:5px}select{width:100%;padding:12px;border:1px solid #aabbd0;border-radius:7px;background:white;color:#17243d}
-.notice{background:#fff5dd;border-left:5px solid #ad7200;padding:14px 18px;margin:14px 0;line-height:1.5}
-.status{color:#4b596d}.summary{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}.summary span{background:white;padding:12px 15px;border-radius:8px;border:1px solid #d6e1ed}
-nav{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0}nav a{color:#174579;background:#e2eaf5;padding:7px 10px;border-radius:6px;text-decoration:none}
-section{background:white;border:1px solid #dce4ef;border-radius:10px;padding:20px;margin:14px 0;overflow-wrap:anywhere}
-section h2{font-size:1.12rem;margin:0 0 15px;color:#123c72}h3{font-size:1rem;margin:14px 0 8px}
-table{border-collapse:collapse;width:100%}td,th{border:1px solid #dce4ef;padding:9px;vertical-align:top;text-align:left}th{background:#e9f0fa}
-ul{padding-left:22px}li{margin:6px 0}.missing{color:#8b4a00;font-style:italic}.key{font-weight:650}
-button{padding:10px 14px;border:0;border-radius:6px;background:#154c88;color:white;cursor:pointer}
-@media(max-width:650px){.controls{grid-template-columns:1fr}main{padding:12px}}
-@media print{header{background:white;color:black;padding:0}header p{color:#444}.controls,nav,button{display:none}section{break-inside:avoid}}
+:root{font-family:Inter,system-ui,"Segoe UI",sans-serif;color:#f8fbff;background:#09152a;scroll-behavior:smooth}
+*{box-sizing:border-box}body{margin:0;background:#09152a;color:#f8fbff}
+header{height:100px;position:sticky;top:0;z-index:20;background:#071b37;border-bottom:1px solid #2b4b72;padding:16px 30px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+header h1{margin:0 0 5px;font-size:1.6rem}header p{margin:0;color:#d8e6f7;font-size:.86rem}
+header .tag{border-radius:30px;background:#07859b;padding:12px 18px;font-weight:800;white-space:nowrap}
+.layout{display:grid;grid-template-columns:340px minmax(0,1fr);min-height:calc(100vh - 100px)}
+.sidebar{position:sticky;top:100px;height:calc(100vh - 100px);overflow-y:auto;background:#071c39;border-right:1px solid #244567;padding:24px}
+.sidebar h2{font-size:1.2rem;margin:0 0 20px}.sidebar nav{display:block}.sidebar nav a{display:block;color:#d4e7ff;text-decoration:none;padding:10px 12px;border-radius:8px;font-size:.94rem}.sidebar nav a:hover{background:#075cce}
+main{min-width:0;padding:25px 32px 60px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0 24px}
+label{display:block;font-weight:700;margin-bottom:7px}select{width:100%;padding:13px;border:1px solid #6385b2;border-radius:9px;background:#1b3253;color:white}
+.notice{background:#1b3253;border:1px solid #3974a1;border-radius:15px;padding:16px 20px;margin:15px 0;line-height:1.65}
+.status{color:#bdd0e6}.intro{background:#142440;border:1px solid #2b4b72;border-radius:20px;padding:30px;margin:16px 0 22px}
+.intro h2{font-size:clamp(1.5rem,3vw,2.5rem);margin:10px 0}.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:20px 0}
+.summary span{background:linear-gradient(120deg,#135f88,#29457f);padding:20px;border-radius:17px;border:1px solid #3984b2;line-height:1.6}
+.summary span:nth-child(3n){background:linear-gradient(120deg,#7d4ab4,#5545a0)}
+section{background:#142440;border:1px solid #2b4b72;border-radius:20px;padding:30px;margin:22px 0;overflow-wrap:anywhere;scroll-margin-top:115px}
+section h2{font-size:clamp(1.25rem,2vw,1.8rem);margin:0 0 24px;padding:20px 24px;border-radius:12px;background:linear-gradient(100deg,#0488b7,#2a61ad 55%,#983aa5)}
+table{border-collapse:collapse;width:100%;margin:10px 0}td,th{border:1px solid #476181;padding:12px 14px;vertical-align:top;text-align:left}
+th{background:#29415f;color:#fff;font-weight:800}td{background:#f1f6fc;color:#0c2444}tr:nth-child(even) td{background:#dfe9f6}
+td table{margin:0}td table td{background:#fff}td table th{background:#315271}
+ul{padding-left:22px}li{margin:6px 0}.missing{color:#9a5800;font-style:italic}.key{font-weight:650}
+button{padding:14px 22px;border:1px solid #58b5fb;border-radius:12px;background:linear-gradient(105deg,#0784d0,#673ac5);color:white;cursor:pointer;font-weight:800}
+@media(max-width:950px){.layout{grid-template-columns:240px minmax(0,1fr)}main{padding:18px}}
+@media(max-width:700px){header{height:auto;position:relative;flex-wrap:wrap}.layout{display:block}.sidebar{position:relative;top:auto;height:auto;max-height:220px}.controls{grid-template-columns:1fr}section{padding:15px}main{padding:12px}}
+@media print{header{position:static;background:white;color:black;height:auto}header p{color:#444}.sidebar,.controls,button{display:none}.layout{display:block}body,main{background:white;color:#111}section,.intro{background:white;color:#111;border-color:#bbb;break-inside:avoid}.notice{color:#111}section h2{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 </style></head>
 <body><header><h1>P2I — Dossiers BP Découverte à 17 rubriques</h1>
-<p>Consultation et vérification des 95 dossiers sources, répartis dans 12 filières industrielles.</p></header>
-<main><div class="notice"><strong>Version de préparation — non bancable.</strong> Les informations descriptives proviennent des référentiels P2I. Les prix catalogue, CAPEX complets, comptes de résultat, BFR et trésoreries non validés restent explicitement non renseignés. Cette page ne transforme pas les 95 dossiers en business plans financiers finalisés.</div>
+<p>Consultation et vérification des 95 dossiers sources, répartis dans 12 filières industrielles.</p><span class="tag">BP Découverte · 95 dossiers</span></header>
+<div class="layout"><aside class="sidebar"><h2>PARCOURS DU BP</h2><nav id="side-nav" aria-label="Parcours des 17 rubriques"></nav></aside><main><div class="notice"><strong>Version de préparation — non bancable.</strong> Les informations descriptives proviennent des référentiels P2I. Les prix catalogue, CAPEX complets, comptes de résultat, BFR et trésoreries non validés restent explicitement non renseignés. Cette page ne transforme pas les 95 dossiers en business plans financiers finalisés.</div>
 <div class="controls"><div><label for="filiere">Filière industrielle</label><select id="filiere"><option value="">Chargement…</option></select></div>
 <div><label for="up">Unité de production</label><select id="up"><option value="">Choisir une UP</option></select></div></div>
 <p id="message" class="status" role="status">Chargement des dossiers…</p>
-<div id="view" hidden><h2 id="name"></h2><div class="summary" id="summary"></div>
+<div id="view" hidden><div class="intro"><b>P2I · PLATEFORME INDUSTRIELLE IVOIRIENNE</b><h2 id="name"></h2><p>Business Plan Découverte — dossier documentaire en préparation</p></div><div class="summary" id="summary"></div>
 <button type="button" id="print">Imprimer / Enregistrer en PDF</button>
 <nav id="nav" aria-label="Sommaire des 17 rubriques"></nav><div id="sections"></div></div></main>
 <script>
@@ -51,6 +61,7 @@ function choose(){
  $("name").textContent=d.up_nom;
  $("summary").innerHTML='<span><b>Filière :</b> '+esc(d.filiere)+'</span><span><b>UP :</b> '+esc(d.up_id)+'</span><span><b>Statut :</b> '+esc(d.statut)+'</span>';
  $("nav").innerHTML=d.sections.map(s=>'<a href="#rubrique-'+s.numero+'">'+s.numero+'. '+esc(s.titre)+'</a>').join("");
+ $("side-nav").innerHTML=$("nav").innerHTML;
  $("sections").innerHTML=d.sections.map(s=>'<section id="rubrique-'+s.numero+'"><h2>'+String(s.numero).padStart(2,"0")+' · '+esc(s.titre)+'</h2>'+renderValue(s.contenu)+'</section>').join("");
  $("message").textContent="Dossier documentaire chargé — "+d.sections.length+" rubriques.";
  const url=new URL(location.href);url.searchParams.set("up_id",d.up_id);history.replaceState(null,"",url);
@@ -74,4 +85,4 @@ fetch("data/p2i-bp-decouverte-95-dossiers-17-rubriques.json",{cache:"no-store"})
  updateUP();
 }).catch(e=>{$("message").textContent="Impossible de charger les dossiers : "+e.message+". Ouvrir cette page depuis un serveur HTTP (pas en fichier local).";});
 })();
-</script></body></html>
+</script></div></body></html>
