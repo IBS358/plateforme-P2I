@@ -5,7 +5,7 @@ const root=path.resolve(__dirname,"..");
 const source=name=>fs.readFileSync(path.join(root,"js",name),"utf8");
 const nodes=new Map();
 const makeNode=id=>({id,innerHTML:"",children:[],appendChild(child){this.children.push(child);nodes.set(child.id,child);child.parentNode=this;},remove(){nodes.delete(this.id)}});
-for(const id of ["p2i-r7","p2i-r9","p2i-r10","p2i-r11","p2i-r13"])nodes.set(id,makeNode(id));
+for(const id of ["p2i-r7","p2i-r9","p2i-r10","p2i-r11","p2i-r13","p2i-r14"])nodes.set(id,makeNode(id));
 // Tableaux d'attente présents dans le rendu initial : ils doivent être
 // masqués quand les prévisions validées arrivent, puis rétablis à l'invalidation.
 const pending={};
@@ -62,8 +62,13 @@ events["p2i:bp-previsions-ready"]();
 assert.ok(nodes.has("p2i-validated-finance-r9"));
 window.P2I_BP_PREVISIONS_VALIDABLES.bfr_mensuel[2].bfr=0;
 events["p2i:bp-previsions-ready"]();
+assert.ok(nodes.has("p2i-validated-finance-diagnostic"),"Afficher les blocages financiers");
+assert.ok(nodes.get("p2i-validated-finance-diagnostic").innerHTML.includes("BFR sur 36 mois"));
+
 assert.equal(nodes.has("p2i-validated-finance-r10"),false);
 window.P2I_BP_PREVISIONS_VALIDABLES.bfr_mensuel[2].bfr=40000;
+events["p2i:bp-previsions-ready"]();
+assert.equal(nodes.has("p2i-validated-finance-diagnostic"),false,"Retirer le diagnostic quand les données sont cohérentes");
 window.P2I_BP_PREVISIONS_VALIDABLES.up_id="conserverie_legumes";
 events["p2i:bp-previsions-ready"]();
 assert.equal(nodes.has("p2i-validated-finance-r10"),false);
