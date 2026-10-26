@@ -36,5 +36,15 @@ function construire(entree){
  return Object.freeze({valide:true,erreurs:Object.freeze([]),
   previsions:Object.freeze(d),financement_indicatif:validation.financement_indicatif});
 }
-root.P2I_BP_ASSEMBLEUR_PREVISIONS=Object.freeze({construire});
+// Publication explicite : un moteur appelant doit fournir les entrées complètes.
+// Toute nouvelle tentative invalide d'abord les résultats précédents.
+function publier(entree){
+ root.P2I_BP_PREVISIONS_VALIDABLES=null;
+ const result=construire(entree);
+ if(result.valide)root.P2I_BP_PREVISIONS_VALIDABLES=result.previsions;
+ if(typeof root.dispatchEvent==="function"&&typeof root.Event==="function")
+  root.dispatchEvent(new root.Event("p2i:bp-previsions-ready"));
+ return result;
+}
+root.P2I_BP_ASSEMBLEUR_PREVISIONS=Object.freeze({construire,publier});
 })(typeof window!=="undefined"?window:globalThis);
