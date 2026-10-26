@@ -1392,8 +1392,8 @@
             "description": "Jus de fruits pressables conditionné en bouteilles PET refermables de 500 ml ; quantités de simulation en kg de jus. La marque Ivoire Fruits est illustrative.",
             "capacite": 500,
             "unite": "kg/h",
-            "machines": 108419.497,
-            "investissement": 156019.497,
+            "machines": 161844.767,
+            "investissement": 208944.767,
             "production": [
               300000,
               390000,
@@ -1565,6 +1565,40 @@
                 "qualification": "borne_haute_fourchette_catalogue_non_devis",
                 "limites": "Air comprimé 0,5–0,6 MPa et 0,3 m³/min ; électrique 220 V, 50–60 Hz ; bouchon 18–80 mm, bouteille diamètre maximum 100 mm. Compresseur, débit réel et couple de serrage adaptés au bouchon à confirmer.",
                 "prix_usd": 1800
+              },
+              {
+                "nom": "2 éplucheuses-décortiqueuses Penghui PH-MT4260",
+                "prix_retenu": 36560,
+                "prix_unitaire": 18280,
+                "quantite": 2,
+                "devise": "USD",
+                "source_url": "https://www.hnzhph.com/pineapple-peeling-machine.html",
+                "date_consultation": "2026-10-26",
+                "qualification": "prix_catalogue_public_quantite_hypothese",
+                "limites": "12 secondes par fruit annoncé ; 2 appareils soit 600 fruits/h théoriques. Dimensionnement indicatif pour une masse moyenne de 1,5 kg/fruit ; calibre, arrêts, alimentation des postes, rendement et prix livré restent à vérifier.",
+                "prix_usd": 36560
+              },
+              {
+                "nom": "Rinceuse bouteilles Tardito TP10",
+                "prix_retenu": 3900,
+                "devise": "EUR",
+                "source_url": "https://www.destiller.com/polautomatyczna-pluczka-myjka-do-butelek",
+                "date_consultation": "2026-10-26",
+                "qualification": "prix_catalogue_public_ht",
+                "limites": "700 bouteilles/h annoncées ; PET 375 ml à 5 l ; 220 V 50 Hz, filtre à eau 0,45 µm ; dimensions, débit réel, qualité de l’eau et intégration à vérifier.",
+                "prix_usd": 4365.2699999999995
+              },
+              {
+                "nom": "Laveuse à bulles fruits et légumes — Shaoxing Walley",
+                "prix_retenu": 12500,
+                "devise": "USD",
+                "source_url": "https://www.made-in-china.com/price/prodetail_Fruit-Vegetable-Processing-Machinery_CwXaEQpTJqht.html",
+                "date_consultation": "2026-10-26",
+                "capacite_min_kg_h": 500,
+                "capacite_max_kg_h": 1500,
+                "qualification": "prix_public_sous_reserve_de_configuration",
+                "limites": "Annonce 500–1 500 kg/h et 380 V, fiche portant aussi sur champignons ; configuration exacte, adaptation à l’ananas entier, cadence réelle, nettoyage et sécurité à confirmer.",
+                "prix_usd": 12500
               }
             ]
           },
@@ -1592,7 +1626,8 @@
             "charges": "Hypothèses annuelles : site 7 200, commercial 4 800, maintenance 3 600, assurance 2 400, administration 3 600, autres 2 400 USD. La maintenance est affectée au coût industriel; les autres postes restent hors CPV.",
             "production": "500 kg fruits/h × 8 h × 250 jours × utilisation × rendement 0,60. Les ventes ne dépassent pas la production et les stocks reportés. À 0,5 kg par bouteille, le débit maximal de 300 kg/h correspond à environ 600 bouteilles/h et 300 L/h, sous l’hypothèse simplificatrice de densité 1 kg/L.",
             "prix_vente": "Hypothèse P2I 1,40 USD/kg de jus en A1, +2 %/an, sans promesse de débouchés.",
-            "complements": "Enveloppes P2I de dimensionnement, pas devis de prestataires; hors achat de terrain. La ligne initiale inclut toujours la remplisseuse de poches ; la remplisseuse bouteilles est ajoutée en complément sans déduire sa valeur inconnue. Étiqueteuse MT-100 au prix public et boucheuse YL-P à la borne haute de la fourchette publique ; rinçage estimatif. Préparation de l’ananas et air comprimé à dimensionner.",
+            "complements": "Enveloppes P2I de dimensionnement, pas devis de prestataires; hors achat de terrain. La ligne MFPU inclut une remplisseuse de poches, inutilisée en scénario bouteille mais incluse dans son prix ; aucune déduction arbitraire. Deux éplucheuses PH-MT4260, une rinceuse TP10, une étiqueteuse MT-100 et une boucheuse YL-P sont ajoutées avec leurs prix publics ou borne haute ; utilités et interfaces restent à préciser. Laveuse amont distincte intégrée sur la base d’une annonce à 12 500 USD ; compatibilité avec l’ananas entier et prix de configuration restent à établir.",
+            "preparation_ananas": "Hypothèse de 1,5 kg par fruit, fondée sur un repère de culture en Côte d’Ivoire (CIRAD) mais à mesurer à réception. Deux éplucheuses de 300 fruits/h chacune donnent 600 fruits/h, soit 900 kg/h théoriques à cette masse moyenne avant arrêts ; le débit effectif de 500 kg/h reste à valider. Lavage avant parage budgété sur une laveuse amont distincte ; accès à la broyeuse intégrée à vérifier ; la MFPU doit être adaptée et son aptitude à l’ananas documentée. Rendement jus de 60 % non mesuré.",
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -1619,10 +1654,9 @@
               "installation_formation": 5000,
               "pieces_initiales": 2800,
               "securite_environnement": 1800,
-              "etudes": 3000,
-              "rincage_bouteilles_estimation": 500
+              "etudes": 3000
             },
-            "base_budget_equipements_usd": 108419.497,
+            "base_budget_equipements_usd": 161844.767,
             "conversion": {
               "date": "2026-10-23",
               "eur_usd": 1.1193,
