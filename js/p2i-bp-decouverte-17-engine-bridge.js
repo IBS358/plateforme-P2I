@@ -28,6 +28,9 @@ function financialConsistent(f,e){
     Math.abs(f.cout_ventes_total_usd-e.cout_produits_vendus_usd)>.01)return false;
  const checks=[
   ["marge_industrielle_ou_sur_prestations_usd",f.chiffre_affaires_total_usd-f.cout_ventes_total_usd],
+  ["resultat_exploitation_usd",
+   ["marge_industrielle_ou_sur_prestations_usd","autres_charges_exploitation_usd","dotations_usd"].every(key=>number(f[key]))?
+    f.marge_industrielle_ou_sur_prestations_usd-f.autres_charges_exploitation_usd-f.dotations_usd:null],
   ["resultat_avant_impot_usd",number(f.resultat_exploitation_usd)&&number(f.resultat_financier_usd)?
    f.resultat_exploitation_usd+f.resultat_financier_usd:null]
  ];
@@ -63,7 +66,11 @@ return;
 // Vérifications physiques et économiques minimales avant de publier les chiffres.
 const nonnegative=["chiffre_affaires_usd","cout_produits_vendus_usd","cout_production_total_usd",
  "quantite_produite","quantite_vendue","quantite_non_vendue","quantite_stockee","valeur_stock_indicative_usd"];
-if(nonnegative.some(key=>number(e[key])&&e[key]<0)||
+if(nonnegative.some(key=>e[key]!==undefined&&e[key]!==null&&!number(e[key]))||
+ nonnegative.some(key=>number(e[key])&&e[key]<0)||
+ (number(e.quantite_produite)&&number(e.quantite_vendue)&&number(e.quantite_non_vendue)&&
+  e.quantite_produite>0&&Math.abs(e.quantite_produite-e.quantite_vendue-e.quantite_non_vendue)>.001)||
+
  (number(e.quantite_produite)&&number(e.quantite_vendue)&&e.quantite_vendue>e.quantite_produite+.001)||
  (number(e.quantite_produite)&&number(e.quantite_vendue)&&number(e.quantite_non_vendue)&&
  Math.abs(e.quantite_produite-e.quantite_vendue-e.quantite_non_vendue)>.001)||
