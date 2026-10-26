@@ -3830,60 +3830,6 @@ linge: {
     ]
   },
 
-  peintures_btp: {
-    id: "peintures_btp",
-    nom: "Peintures BTP",
-    filiereNom: "BTP & Matériaux Construction",
-    type: "production",
-    description: "Fabrication de peintures pour bâtiment.",
-    capex_min: 95000,
-    chiffre_affaires_estime: "350000-700000",
-    marge_brute: "30-45",
-    machines: [
-      { name: "Disperseur", role: "Dispersion", capacity: "Batch", utilities: "Électricité" },
-      { name: "Cuve de formulation", role: "Formulation", capacity: "Standard", utilities: "Électricité" },
-      { name: "Filtre", role: "Filtration", capacity: "Standard", utilities: "Électricité" },
-      { name: "Remplisseuse", role: "Conditionnement", capacity: "Standard", utilities: "Électricité" }
-    ],
-    processus: [
-      "Dispersion",
-      "Formulation",
-      "Filtration",
-      "Contrôle",
-      "Conditionnement"
-    ],
-    avantages: ["Développement BTP", "Demande locale", "Import substitution", "Marges correctes"],
-    challenges: ["Import pigments", "Concurrence", "Qualité", "Marketing"],
-    sanitaires: [
-      "Utiliser des EPI",
-      "Nettoyer les postes",
-      "Former le personnel",
-      "Entretenir les équipements",
-      "Assurer la traçabilité"
-    ],
-    energie: [
-      "Optimiser la dispersion",
-      "Utiliser des moteurs à haut rendement",
-      "Éteindre les équipements hors production",
-      "Isoler les zones",
-      "Récupérer la chaleur"
-    ],
-    amenagement: [
-      "Organiser en flux continu",
-      "Prévoir zone de stockage",
-      "Aménager zone de formulation",
-      "Faciliter la circulation",
-      "Prévoir zone de contrôle"
-    ],
-    marketing: [
-      "Cibler quincailleries et BTP",
-      "Proposer des coloris variés",
-      "Garantir la qualité",
-      "Communiquer sur la résistance",
-      "Proposer des nuanciers"
-    ]
-  },
-
   centrale_beton: {
     id: "centrale_beton",
     nom: "Centrale à béton",
