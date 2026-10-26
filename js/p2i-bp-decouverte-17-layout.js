@@ -132,19 +132,19 @@ const investmentItems=[
  ["Pièces de rechange initiales","À documenter"],
  ["Sécurité, conformité et environnement","À documenter"],
  ["Investissement total hors réserve de trésorerie","Non calculable tant que les coûts complémentaires manquent"],
- ["Apport (40 % de l’investissement total)","Non calculable à ce stade"],
- ["Dette (60 % de l’investissement total)","Non calculable à ce stade"],
+ ["Apport (30 % de l’investissement total)","Non calculable à ce stade"],
+ ["Dette (70 % de l’investissement total)","Non calculable à ce stade"],
  ["Réserve de trésorerie initiale","À calculer séparément"]
 ];
 sections[6]+='<h3>Décomposition de l’investissement et financement</h3>'+table(investmentItems)+
- note("Le prix de référence de la ligne intégrée Crackers est une donnée d’équipement, pas un CAPEX complet. Le financement 40 % / 60 % s’applique au total d’investissement documenté ; la réserve de trésorerie initiale est distincte.");
+ note("Le prix de référence de la ligne intégrée Crackers est une donnée d’équipement, pas un CAPEX complet. Le financement 30 % / 70 % s’applique au total d’investissement documenté ; la réserve de trésorerie initiale est distincte.");
 sections[13]+='<h3>Traçabilité de l’hypothèse industrielle</h3>'+table([
  ["Périmètre",name],
  ["Variante",configLabel],
  ["Équipements",isCrackers?"450 000 USD — référence P2I, ligne intégrée 500 kg/h":"Prix de référence à documenter"],
  ["Nature du prix",isCrackers?"Prix de la ligne, hors coûts complémentaires":"À préciser"],
  ["Fret, assurance, taxes, installation et utilités","Non intégrés sans données vérifiées"],
- ["Financement de référence","40 % apport / 60 % dette, sur CAPEX complet uniquement"],
+ ["Financement de référence","30 % apport / 70 % dette, sur CAPEX complet uniquement"],
  ["Horizon BFR","36 périodes mensuelles"],
  ["Horizon trésorerie","12 mois"],
  ["Horizon autres états prévisionnels","3 exercices"]
@@ -157,7 +157,7 @@ if(preparation&&preparation.statut==="a_completer"){
  ["Points déjà établis",preparation.points_valides.length?
   preparation.points_valides.map(x=>x.replace(/_/g," ")).join(" ; "):"À documenter"],
  ["Investissement total","Non validé : aucun CAPEX complet calculé"],
- ["Financement 40 % / 60 %","Non calculable sans CAPEX complet"]
+ ["Financement 30 % / 70 %","Non calculable sans CAPEX complet"]
  ])+'<h3>Données à compléter avant validation financière</h3>'+
  '<ul>'+preparation.blocages.map(x=>'<li>'+safe(x)+'</li>').join("")+'</ul>';
 }
