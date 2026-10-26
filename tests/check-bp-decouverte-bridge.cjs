@@ -66,4 +66,24 @@ window.P2I_CRACKERS_RESULTAT.quantite_non_vendue=100;
 listeners["p2i:economic-result-ready"]();
 assert.equal(has("p2i-r8-engine"),true,"Restaurer après retour à la cohérence");
 
+
+// Un stock final incompatible avec les invendus doit masquer les résultats.
+window.P2I_CRACKERS_RESULTAT.quantite_stockee=99;
+listeners["p2i:economic-result-ready"]();
+assert.equal(has("p2i-r8-engine"),false,"Refuser un stock final incohérent");
+window.P2I_CRACKERS_RESULTAT.quantite_stockee=100;
+listeners["p2i:economic-result-ready"]();
+assert.equal(has("p2i-r8-engine"),true,"Restaurer les résultats après correction du stock");
+
+// Vérifier chaque concordance financière indépendamment, même si l'autre montant manque.
+window.P2I_DONNEES_FINANCIERES={chiffre_affaires_usd:101};
+listeners["p2i:financial-result-ready"]();
+assert.equal(has("p2i-r8-engine"),false,"Refuser un chiffre d'affaires divergent même si le CPV est absent");
+window.P2I_DONNEES_FINANCIERES={cout_produits_vendus_usd:41};
+listeners["p2i:financial-result-ready"]();
+assert.equal(has("p2i-r8-engine"),false,"Refuser un CPV divergent même si le CA est absent");
+window.P2I_DONNEES_FINANCIERES={chiffre_affaires_usd:100,cout_produits_vendus_usd:40};
+listeners["p2i:financial-result-ready"]();
+assert.equal(has("p2i-r8-engine"),true,"Restaurer les chiffres concordants");
+
 console.log("Pont financier P2I : scénarios de cohérence dynamique réussis.");
