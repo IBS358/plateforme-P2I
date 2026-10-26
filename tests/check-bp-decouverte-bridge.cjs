@@ -91,4 +91,20 @@ assert.equal(has("p2i-r8-engine"),true,"Restaurer les chiffres concordants");
 assert.equal(has("p2i-r2-engine"),true,"Restaurer la synthèse concordante");
 assert.equal(has("p2i-r12-engine"),true,"Restaurer les indicateurs concordants");
 
+
+// La marge et le résultat avant impôt doivent être compatibles avec leurs composantes.
+window.P2I_COMPTE_FINANCIER.marge_industrielle_ou_sur_prestations_usd=59;
+listeners["p2i:financial-result-ready"]();
+assert.equal(has("p2i-r9-engine"),false,"Refuser une marge industrielle incohérente");
+assert.ok(!nodes.get("p2i-r2-engine").innerHTML.includes("20,00 USD"),"Ne pas reprendre le résultat net d'un compte incohérent");
+window.P2I_COMPTE_FINANCIER.marge_industrielle_ou_sur_prestations_usd=60;
+window.P2I_COMPTE_FINANCIER.resultat_exploitation_usd=30;
+window.P2I_COMPTE_FINANCIER.resultat_financier_usd=-5;
+window.P2I_COMPTE_FINANCIER.resultat_avant_impot_usd=24;
+listeners["p2i:financial-result-ready"]();
+assert.equal(has("p2i-r9-engine"),false,"Refuser un résultat avant impôt incohérent");
+window.P2I_COMPTE_FINANCIER.resultat_avant_impot_usd=25;
+listeners["p2i:financial-result-ready"]();
+assert.equal(has("p2i-r9-engine"),true,"Restaurer le compte financier corrigé");
+
 console.log("Pont financier P2I : scénarios de cohérence dynamique réussis.");
