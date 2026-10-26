@@ -30,7 +30,7 @@ for(const d of data.dossiers){
  const bfr=control.bfr_36_mois_valide===true;
  const tresorerie=control.tresorerie_12_mois_validee===true;
  const bilans=validFinancial&&ventes&&bfr&&tresorerie;
- const charges=ventes; // La validation détaillée des charges est incluse dans le contrôle des projections.
+ const charges=ventes; // Indicateur global des projections, pas une certification autonome des charges.
  const ext=(u.controle?.sources_externes_verifiees||[]).length;
  const capacity=ref&&Number.isFinite(ref.capacite_kg_h)&&ref.capacite_kg_h>0;
  const action=!ref?"Sélectionner une configuration de référence cohérente, vérifier ses fonctions et interfaces":
