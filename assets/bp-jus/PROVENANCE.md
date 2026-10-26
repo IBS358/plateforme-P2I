@@ -3,3 +3,6 @@ Prompt : Create a photorealistic industrial equipment photo atlas, landscape 3 c
 
 Bouteille : image générée par le dispositif intégré, puis encodée en JPEG. Marque et logo fictifs, à vérifier avant usage commercial.
 Prompt : Photorealistic high-end commercial product photo for an Ivorian juice brand. One transparent recyclable-looking clear PET bottle with a secure screw cap, containing golden pineapple juice, branded 'IVOIRE FRUITS' in large clean readable lettering on a simple green and cream paper-style label, surrounded by fresh pineapple fruit and leaves, warm daylight, premium clean composition, no ecological claims, no certification symbols, no other words. The image is an illustrative concept, not a real product.
+
+Lavage d’ananas : image générée par le dispositif intégré, puis encodée en JPEG ; machine illustrative, sans fournisseur identifié.
+Prompt : Photorealistic industrial catalogue photograph for a business plan: stainless steel fruit washing and crushing equipment in a clean modern juice-processing workshop, with clearly recognizable whole pineapples with spiky leaves and cut pineapple beside the intake. This line produces pineapple juice. No mangoes, no other fruit, no text, no logos, no watermarks. Landscape framing, bright clean natural light. Illustrative fictional machinery, not an actual supplier.
