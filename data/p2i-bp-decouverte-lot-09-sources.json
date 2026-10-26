@@ -1,0 +1,637 @@
+{
+  "version": "1.0.0",
+  "lot": "LOT-09",
+  "filiere": "Assemblage & Montage",
+  "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
+  "nombre_up": 8,
+  "unites": [
+    {
+      "up_id": "smartphones",
+      "up_nom": "Assemblage smartphones",
+      "description": "Assemblage de smartphones et tablettes.",
+      "filiere": "Assemblage & Montage",
+      "processus": [
+        "Assemblage",
+        "Soudure",
+        "Programmation",
+        "Test",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Ligne SMT",
+          "role": "CMS cartes mères",
+          "capacite": "50000 comp/heure",
+          "utilites": "Électricité 20kW"
+        },
+        {
+          "nom": "Four refusion",
+          "role": "Brasage CMS",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Robot encollage",
+          "role": "Pose glue",
+          "capacite": "200 cartes/heure",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Presse écran",
+          "role": "Montage écran",
+          "capacite": "100 smartphones/heure",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Testeur fonctionnel",
+          "role": "Tests complets",
+          "capacite": "80 smartphones/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à étiqueter IMEI",
+          "role": "Marquage IMEI",
+          "capacite": "100 smartphones/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste contrôle optique",
+          "role": "Auto-inspection",
+          "capacite": "100 smartphones/heure",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 250000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "ordinateurs",
+      "up_nom": "Assemblage ordinateurs",
+      "description": "Assemblage d'ordinateurs et périphériques.",
+      "filiere": "Assemblage & Montage",
+      "processus": [
+        "Assemblage",
+        "Test",
+        "Imagerie",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Poste assemblage",
+          "role": "Montage manuel",
+          "capacite": "100 PC/jour",
+          "utilites": "Standard"
+        },
+        {
+          "nom": "Machine à visser",
+          "role": "Vissage automatique",
+          "capacite": "50 PC/heure",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Testeur alimentation",
+          "role": "Test PSU",
+          "capacite": "50 PC/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Testeur mémoire RAM",
+          "role": "Test RAM",
+          "capacite": "100 barrettes/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Brûleur BIOS",
+          "role": "Flash BIOS",
+          "capacite": "50 PC/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Configuration OS",
+          "role": "Installation OS",
+          "capacite": "50 PC/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste emballage",
+          "role": "Conditionnement",
+          "capacite": "50 PC/heure",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 150000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "electromenager",
+      "up_nom": "Assemblage électroménager",
+      "description": "Assemblage d'appareils électroménagers.",
+      "filiere": "Assemblage & Montage",
+      "processus": [
+        "Assemblage",
+        "Câblage",
+        "Test",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Presse pliage tôle",
+          "role": "Fabrication coque",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Poste soudure",
+          "role": "Soudure carcasse",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ligne peinture",
+          "role": "Peinture",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Chaîne assemblage",
+          "role": "Montage",
+          "capacite": "100 appareils/jour",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Machine à mousser",
+          "role": "Injection mousse",
+          "capacite": "100 appareils/jour",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Testeur fonctionnel",
+          "role": "Test performance",
+          "capacite": "60 appareils/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste emballage",
+          "role": "Conditionnement",
+          "capacite": "80 appareils/heure",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 220000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "climatiseurs",
+      "up_nom": "Assemblage climatiseurs",
+      "description": "Assemblage de climatiseurs et systèmes de refroidissement.",
+      "filiere": "Assemblage & Montage",
+      "processus": [
+        "Assemblage",
+        "Brasage",
+        "Mise sous vide",
+        "Charge fluide",
+        "Test",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Ligne cintrage tubes",
+          "role": "Fabrication échangeurs",
+          "capacite": "200 échangeurs/jour",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Poste brasage",
+          "role": "Brasage cuivre",
+          "capacite": "100 échangeurs/jour",
+          "utilites": "Gaz + électricité"
+        },
+        {
+          "nom": "Machine à assembler",
+          "role": "Montage",
+          "capacite": "100 climatiseurs/jour",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Poste recharge gaz",
+          "role": "Chargement fluide",
+          "capacite": "100 climatiseurs/jour",
+          "utilites": "Vide + balance"
+        },
+        {
+          "nom": "Testeur fuites",
+          "role": "Test étanchéité",
+          "capacite": "100 climatiseurs/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Banc de test",
+          "role": "Test performance",
+          "capacite": "50 climatiseurs/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste emballage",
+          "role": "Conditionnement",
+          "capacite": "80 climatiseurs/jour",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 220000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "motos",
+      "up_nom": "Assemblage motos",
+      "description": "Assemblage de motos et deux-roues.",
+      "filiere": "Assemblage & Montage",
+      "processus": [
+        "Assemblage châssis",
+        "Montage moteur",
+        "Câblage",
+        "Montage roues",
+        "Test",
+        "Contrôle"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Ligne soudure cadre",
+          "role": "Soudure châssis",
+          "capacite": "50 cadres/jour",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Cabine peinture",
+          "role": "Peinture",
+          "capacite": "50 cadres/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Chaîne assemblage",
+          "role": "Montage",
+          "capacite": "50 motos/jour",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Poste pause moteur",
+          "role": "Installation moteur",
+          "capacite": "50 motos/jour",
+          "utilites": "Pont roulant"
+        },
+        {
+          "nom": "Machine à monter roues",
+          "role": "Montage roues",
+          "capacite": "50 motos/jour",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Banc de roulage",
+          "role": "Test final",
+          "capacite": "30 motos/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste emballage",
+          "role": "Conditionnement",
+          "capacite": "50 motos/jour",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 280000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "velos",
+      "up_nom": "Assemblage vélos",
+      "description": "Assemblage de vélos et cycles.",
+      "filiere": "Assemblage & Montage",
+      "processus": [
+        "Assemblage cadre",
+        "Montage roues",
+        "Montage transmission",
+        "Réglage",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Poste soudure cadre",
+          "role": "Soudure",
+          "capacite": "100 cadres/jour",
+          "utilites": "Électricité 8kW"
+        },
+        {
+          "nom": "Cabine peinture",
+          "role": "Peinture",
+          "capacite": "100 cadres/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Chaîne assemblage",
+          "role": "Montage",
+          "capacite": "100 vélos/jour",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Machine à monter roues",
+          "role": "Montage roues",
+          "capacite": "100 vélos/jour",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Poste réglage",
+          "role": "Réglage transmission",
+          "capacite": "100 vélos/jour",
+          "utilites": "Standard"
+        },
+        {
+          "nom": "Banc de contrôle",
+          "role": "Test freinage",
+          "capacite": "80 vélos/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste emballage",
+          "role": "Conditionnement",
+          "capacite": "100 vélos/jour",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 100000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "meubles",
+      "up_nom": "Assemblage meubles",
+      "description": "Assemblage de meubles en kit et modulaires.",
+      "filiere": "Assemblage & Montage",
+      "processus": [
+        "Découpe",
+        "Perçage",
+        "Assemblage",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Scie à panneau",
+          "role": "Découpe panneaux",
+          "capacite": "200 m²/heure",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Défonceuse CNC",
+          "role": "Usinage",
+          "capacite": "100 pièces/heure",
+          "utilites": "Électricité 9kW"
+        },
+        {
+          "nom": "Chants",
+          "role": "Pose chant",
+          "capacite": "200 m/heure",
+          "utilites": "Électricité + colle"
+        },
+        {
+          "nom": "Pointeuse",
+          "role": "Perçage chevilles",
+          "capacite": "200 pièces/heure",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Chaîne assemblage",
+          "role": "Montage",
+          "capacite": "100 meubles/jour",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Presse à lamellé",
+          "role": "Collage lamellé",
+          "capacite": "100 pièces/jour",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Poste emballage",
+          "role": "Conditionnement",
+          "capacite": "100 meubles/jour",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 70000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "equipements",
+      "up_nom": "Équipements sportifs",
+      "description": "Assemblage d'équipements sportifs et de fitness.",
+      "filiere": "Assemblage & Montage",
+      "processus": [
+        "Assemblage",
+        "Montage",
+        "Test",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Chaîne polyvalente",
+          "role": "Assemblage divers",
+          "capacite": "500 pièces/jour",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Poste soudure",
+          "role": "Soudure",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste rivetage",
+          "role": "Rivetage",
+          "capacite": "500 rivets/heure",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Cabine peinture",
+          "role": "Peinture",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Testeur produit",
+          "role": "Test fonctionnel",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste contrôle",
+          "role": "Contrôle qualité",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ensacheuse",
+          "role": "Conditionnement",
+          "capacite": "300 sachets/heure",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 180000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    }
+  ]
+}
