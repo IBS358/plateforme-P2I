@@ -1,0 +1,638 @@
+{
+  "version": "1.0.0",
+  "lot": "LOT-06",
+  "filiere": "Plastique & Caoutchouc",
+  "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
+  "nombre_up": 8,
+  "unites": [
+    {
+      "up_id": "sacs",
+      "up_nom": "Sacs en plastique",
+      "description": "Production de sacs en plastique biodégradables.",
+      "filiere": "Plastique & Caoutchouc",
+      "processus": [
+        "Extrusion",
+        "Impression",
+        "Coupe-soudure",
+        "Contrôle qualité",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Extrudeuse soufflage",
+          "role": "Production de film",
+          "capacite": "100 kg/heure",
+          "utilites": "Électricité 30kW"
+        },
+        {
+          "nom": "Imprimeuse flexo",
+          "role": "Impression des sacs",
+          "capacite": "200 m/min",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Découpeuse sachets",
+          "role": "Découpe et soudure",
+          "capacite": "150 cycles/min",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Perforatrice",
+          "role": "Perforation des anses",
+          "capacite": "100 sacs/min",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Broyeur",
+          "role": "Recyclage des chutes",
+          "capacite": "50 kg/heure",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Machine à ourlet",
+          "role": "Ourlet des sacs",
+          "capacite": "100 sacs/min",
+          "utilites": "Électricité + chaleur"
+        },
+        {
+          "nom": "Poste contrôle qualité",
+          "role": "Inspection épaisseur",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 75000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "bouteilles_pet",
+      "up_nom": "Bouteilles PET",
+      "description": "Production de bouteilles en PET pour boissons.",
+      "filiere": "Plastique & Caoutchouc",
+      "processus": [
+        "Injection des préformes",
+        "Soufflage",
+        "Contrôle qualité",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Sécheur déshumidificateur",
+          "role": "Séchage des grains",
+          "capacite": "100 kg/heure",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Injection préforme",
+          "role": "Production préformes",
+          "capacite": "1000 préformes/heure",
+          "utilites": "Électricité 25kW"
+        },
+        {
+          "nom": "Souffleuse rotative",
+          "role": "Soufflage bouteilles",
+          "capacite": "2000 bouteilles/heure",
+          "utilites": "Air comprimé + électricité"
+        },
+        {
+          "nom": "Refroidisseur",
+          "role": "Refroidissement bouteilles",
+          "capacite": "Standard",
+          "utilites": "Électricité + eau"
+        },
+        {
+          "nom": "Palettiseur",
+          "role": "Palettisation",
+          "capacite": "2000 bouteilles/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Inspection fuites",
+          "capacite": "Standard",
+          "utilites": "Air comprimé"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 110000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "tuyaux_pvc",
+      "up_nom": "Tuyaux PVC",
+      "description": "Fabrication de tuyaux PVC pour construction.",
+      "filiere": "Plastique & Caoutchouc",
+      "processus": [
+        "Extrusion",
+        "Calibrage",
+        "Refroidissement",
+        "Coupe",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Extrudeuse PVC",
+          "role": "Extrusion des tuyaux",
+          "capacite": "200 kg/heure",
+          "utilites": "Électricité 45kW"
+        },
+        {
+          "nom": "Bain de calibrage",
+          "role": "Calibrage et refroidissement",
+          "capacite": "Standard",
+          "utilites": "Eau + électricité"
+        },
+        {
+          "nom": "Tireuse",
+          "role": "Tirage continu",
+          "capacite": "10 m/min",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Scie à tronçonner",
+          "role": "Coupe à longueur",
+          "capacite": "1 coupe/10 sec",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à emboîter",
+          "role": "Préparation emboîtements",
+          "capacite": "5 m/min",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste impression",
+          "role": "Marquage sérigraphie",
+          "capacite": "10 m/min",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Contrôle épaisseur",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 130000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "emballages",
+      "up_nom": "Emballages plastique",
+      "description": "Fabrication d'emballages plastique pour industries.",
+      "filiere": "Plastique & Caoutchouc",
+      "processus": [
+        "Extrusion",
+        "Impression",
+        "Découpe",
+        "Formage",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Extrudeuse film étirable",
+          "role": "Production film étirable",
+          "capacite": "150 kg/heure",
+          "utilites": "Électricité 35kW"
+        },
+        {
+          "nom": "Thermoformeuse",
+          "role": "Formage barquettes",
+          "capacite": "2000 barquettes/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Découpeuse",
+          "role": "Découpe emballages",
+          "capacite": "3000 pièces/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à sceller",
+          "role": "Soudure thermique",
+          "capacite": "1000 scellages/heure",
+          "utilites": "Électricité + chaleur"
+        },
+        {
+          "nom": "Imprimeuse",
+          "role": "Impression emballages",
+          "capacite": "200 m/min",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Enrouleuse",
+          "role": "Bobinage film",
+          "capacite": "50 rouleaux/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test d'étanchéité",
+          "capacite": "Standard",
+          "utilites": "Air comprimé"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 85000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "profiles",
+      "up_nom": "Profilés plastique",
+      "description": "Production de profilés plastique pour construction.",
+      "filiere": "Plastique & Caoutchouc",
+      "processus": [
+        "Extrusion",
+        "Calibrage",
+        "Refroidissement",
+        "Coupe",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Extrudeuse bi-vis",
+          "role": "Extrusion profilés",
+          "capacite": "250 kg/heure",
+          "utilites": "Électricité 55kW"
+        },
+        {
+          "nom": "Bain de refroidissement",
+          "role": "Refroidissement calibré",
+          "capacite": "Standard",
+          "utilites": "Eau + électricité"
+        },
+        {
+          "nom": "Tireuse à chenilles",
+          "role": "Tirage continu",
+          "capacite": "15 m/min",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Scie à onglet",
+          "role": "Coupe précise",
+          "capacite": "1 coupe/5 sec",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Calibreuse",
+          "role": "Calibrage final",
+          "capacite": "10 m/min",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste assemblage",
+          "role": "Assemblage profilés",
+          "capacite": "200 m/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Contrôle dimensions",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 120000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "jouets",
+      "up_nom": "Jouets en plastique",
+      "description": "Fabrication de jouets éducatifs en plastique.",
+      "filiere": "Plastique & Caoutchouc",
+      "processus": [
+        "Injection",
+        "Ébavurage",
+        "Assemblage",
+        "Décoration",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Presse à injecter",
+          "role": "Injection jouets",
+          "capacite": "200 pièces/heure",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Moule 2 cavités",
+          "role": "Moulage pièces",
+          "capacite": "Standard",
+          "utilites": "—"
+        },
+        {
+          "nom": "Robot de démoulage",
+          "role": "Extraction pièces",
+          "capacite": "200 cycles/heure",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Poste assemblage",
+          "role": "Assemblage manuel",
+          "capacite": "100 pièces/heure",
+          "utilites": "Standard"
+        },
+        {
+          "nom": "Imprimeuse tampon",
+          "role": "Impression motifs",
+          "capacite": "300 pièces/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Poste contrôle qualité",
+          "role": "Inspection visuelle",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ensacheuse",
+          "role": "Conditionnement",
+          "capacite": "500 sachets/heure",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 70000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "joints",
+      "up_nom": "Joints et pièces caoutchouc",
+      "description": "Fabrication de joints et pièces en caoutchouc.",
+      "filiere": "Plastique & Caoutchouc",
+      "processus": [
+        "Préparation matière",
+        "Moulage",
+        "Vulcanisation",
+        "Découpe",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Mélangeur interne",
+          "role": "Malaxage caoutchouc",
+          "capacite": "200 kg/batch",
+          "utilites": "Électricité 45kW"
+        },
+        {
+          "nom": "Calandreuse",
+          "role": "Mise en nappe",
+          "capacite": "300 kg/heure",
+          "utilites": "Électricité 30kW"
+        },
+        {
+          "nom": "Presse vulcanisation",
+          "role": "Vulcanisation joints",
+          "capacite": "1000 joints/heure",
+          "utilites": "Électricité + chaleur"
+        },
+        {
+          "nom": "Découpeuse à jet eau",
+          "role": "Découpe précise",
+          "capacite": "200 m/heure",
+          "utilites": "Eau + électricité"
+        },
+        {
+          "nom": "Affleureuse",
+          "role": "Finition bords",
+          "capacite": "500 pièces/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste contrôle",
+          "role": "Test d'étanchéité",
+          "capacite": "Standard",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Séchoir",
+          "role": "Séchage finition",
+          "capacite": "300 kg/batch",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 60000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "granules",
+      "up_nom": "Granulés plastique recyclé",
+      "description": "Recyclage plastique en granulés réutilisables.",
+      "filiere": "Plastique & Caoutchouc",
+      "processus": [
+        "Collecte",
+        "Tri",
+        "Broyage",
+        "Lavage",
+        "Extrusion",
+        "Granulation"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Broyeur lourd",
+          "role": "Broyage plastiques",
+          "capacite": "500 kg/heure",
+          "utilites": "Électricité 55kW"
+        },
+        {
+          "nom": "Laveuse à friction",
+          "role": "Lavage",
+          "capacite": "500 kg/heure",
+          "utilites": "Eau + électricité"
+        },
+        {
+          "nom": "Séparateur densimétrique",
+          "role": "Séparation matières",
+          "capacite": "500 kg/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Sécheur centrifuge",
+          "role": "Séchage",
+          "capacite": "500 kg/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Extrudeuse granulation",
+          "role": "Granulation",
+          "capacite": "300 kg/heure",
+          "utilites": "Électricité 75kW"
+        },
+        {
+          "nom": "Trempe",
+          "role": "Refroidissement",
+          "capacite": "300 kg/heure",
+          "utilites": "Eau"
+        },
+        {
+          "nom": "Silor de stockage",
+          "role": "Stockage granulés",
+          "capacite": "30 tonnes",
+          "utilites": "—"
+        },
+        {
+          "nom": "Ensacheuse big bag",
+          "role": "Conditionnement",
+          "capacite": "20 big bags/heure",
+          "utilites": "Électricité + air"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 150000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    }
+  ]
+}
