@@ -1675,3 +1675,28 @@ audit: {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = MACHINES_DATA;
 }
+
+// Correspondance des identifiants historiques du catalogue machines avec les UP.
+// Conserver les clés d'origine pour ne pas rompre les pages déjà déployées.
+(function alignerMachinesAvecUP(){
+ const correspondances={
+  "epices": "transformation_epices",
+  "peintures_btp": "peintures",
+  "profiles": "profilés",
+  "plastique": "plastique_recyclage",
+  "papier": "papier_recyclage",
+  "metaux": "metaux_recyclage",
+  "verre": "verre_recyclage",
+  "pneus": "pneus_recyclage",
+  "huiles": "huiles_recyclage",
+  "deee": "deee_recyclage",
+  "energie": "energie_services",
+  "eau": "eau_traitement"
+};
+ for(const [upId,catalogueId] of Object.entries(correspondances)){
+  if(!Object.prototype.hasOwnProperty.call(MACHINES_DATA,upId)&&
+     Object.prototype.hasOwnProperty.call(MACHINES_DATA,catalogueId)){
+   MACHINES_DATA[upId]=MACHINES_DATA[catalogueId];
+  }
+ }
+})();
