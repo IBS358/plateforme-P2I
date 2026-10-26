@@ -23,6 +23,8 @@ on:
       - 'tests/check-p2i-bp-validated-projections.cjs'
       - 'js/p2i-bp-decouverte-17-validated-projections.js'
       - 'js/p2i-bp-decouverte-financial-validation.js'
+      - 'js/p2i-bp-decouverte-bfr-36-mois.js'
+      - 'tests/check-p2i-bp-bfr-36-mois.cjs'
       - 'scripts/build-bp-decouverte-tous-lots.cjs'
       - 'data/p2i-bp-decouverte-lot-*-sources.json'
       - 'scripts/build-bp-decouverte-lot-01.cjs'
@@ -76,3 +78,5 @@ jobs:
         run: node tests/check-p2i-bp-validated-projections.cjs
       - name: Moteur de trésorerie mensuelle
         run: node tests/check-p2i-bp-tresorerie-12-mois.cjs
+      - name: Moteur BFR mensuel sur 36 mois
+        run: node tests/check-p2i-bp-bfr-36-mois.cjs
