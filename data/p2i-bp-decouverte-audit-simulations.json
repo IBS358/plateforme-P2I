@@ -121,9 +121,9 @@
       "accord_fournisseur_exige": false,
       "devis_exige": false,
       "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 106619.497,
-      "investissement_simulation_usd": 155719.497,
-      "reserve_initiale_distincte_usd": 54027.02399888338,
+      "budget_equipements_usd": 108419.497,
+      "investissement_simulation_usd": 156019.497,
+      "reserve_initiale_distincte_usd": 54102.96899888337,
       "annuel": [
         {
           "annee": 1,
@@ -131,7 +131,7 @@
           "ventes_kg": 294000,
           "stock_fin_kg": 6000,
           "chiffre_affaires_usd": 411600,
-          "resultat_net_usd": 10124.038914450026
+          "resultat_net_usd": 10090.093914450026
         },
         {
           "annee": 2,
@@ -139,7 +139,7 @@
           "ventes_kg": 382200,
           "stock_fin_kg": 13800,
           "chiffre_affaires_usd": 545781.6,
-          "resultat_net_usd": 31231.959457139194
+          "resultat_net_usd": 31200.534457139198
         },
         {
           "annee": 3,
@@ -147,7 +147,7 @@
           "ventes_kg": 441000,
           "stock_fin_kg": 22800,
           "chiffre_affaires_usd": 642342.96,
-          "resultat_net_usd": 44559.63106048958
+          "resultat_net_usd": 44530.72606048958
         }
       ],
       "controles": {
@@ -157,9 +157,9 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        0,
-        0,
-        5.820766091346741e-11
+        -2.9103830456733704e-11,
+        -5.820766091346741e-11,
+        0
       ]
     },
     {

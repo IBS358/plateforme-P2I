@@ -1392,8 +1392,8 @@
             "description": "Jus de fruits pressables conditionné en bouteilles PET refermables de 500 ml ; quantités de simulation en kg de jus. La marque Ivoire Fruits est illustrative.",
             "capacite": 500,
             "unite": "kg/h",
-            "machines": 106619.497,
-            "investissement": 155719.497,
+            "machines": 108419.497,
+            "investissement": 156019.497,
             "production": [
               300000,
               390000,
@@ -1551,6 +1551,20 @@
                 "qualification": "prix_catalogue_public",
                 "limites": "Étiquette et bouteille cylindrique diamètre 10–110 mm ; cadence annoncée dépend de l’opérateur ; format exact, codage, énergie et adaptation à confirmer ; livraison et taxes non précisées.",
                 "prix_usd": 2200
+              },
+              {
+                "nom": "Boucheuse semi-automatique Jvan Pack YL-P",
+                "prix_retenu": 1800,
+                "devise": "USD",
+                "prix_min": 1500,
+                "prix_max": 1800,
+                "source_url": "https://www.jvanpack.com/YL-P-Tabletop-Screw-Capping-Machine-Servo-Control-Stable-Torque-pd579617948.html",
+                "date_consultation": "2026-10-26",
+                "capacite_min_bouteilles_h": 1500,
+                "capacite_max_bouteilles_h": 1800,
+                "qualification": "borne_haute_fourchette_catalogue_non_devis",
+                "limites": "Air comprimé 0,5–0,6 MPa et 0,3 m³/min ; électrique 220 V, 50–60 Hz ; bouchon 18–80 mm, bouteille diamètre maximum 100 mm. Compresseur, débit réel et couple de serrage adaptés au bouchon à confirmer.",
+                "prix_usd": 1800
               }
             ]
           },
@@ -1578,7 +1592,7 @@
             "charges": "Hypothèses annuelles : site 7 200, commercial 4 800, maintenance 3 600, assurance 2 400, administration 3 600, autres 2 400 USD. La maintenance est affectée au coût industriel; les autres postes restent hors CPV.",
             "production": "500 kg fruits/h × 8 h × 250 jours × utilisation × rendement 0,60. Les ventes ne dépassent pas la production et les stocks reportés. À 0,5 kg par bouteille, le débit maximal de 300 kg/h correspond à environ 600 bouteilles/h et 300 L/h, sous l’hypothèse simplificatrice de densité 1 kg/L.",
             "prix_vente": "Hypothèse P2I 1,40 USD/kg de jus en A1, +2 %/an, sans promesse de débouchés.",
-            "complements": "Enveloppes P2I de dimensionnement, pas devis de prestataires; hors achat de terrain. La ligne initiale inclut toujours la remplisseuse de poches ; la remplisseuse bouteilles est ajoutée en complément sans déduire sa valeur inconnue. Une étiqueteuse MT-100 est retenue au prix public fabricant ; fermeture et rinçage restent estimatifs. Préparation de l’ananas à dimensionner.",
+            "complements": "Enveloppes P2I de dimensionnement, pas devis de prestataires; hors achat de terrain. La ligne initiale inclut toujours la remplisseuse de poches ; la remplisseuse bouteilles est ajoutée en complément sans déduire sa valeur inconnue. Étiqueteuse MT-100 au prix public et boucheuse YL-P à la borne haute de la fourchette publique ; rinçage estimatif. Préparation de l’ananas et air comprimé à dimensionner.",
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -1606,10 +1620,9 @@
               "pieces_initiales": 2800,
               "securite_environnement": 1800,
               "etudes": 3000,
-              "fermeture_bouchons_estimation": 1500,
               "rincage_bouteilles_estimation": 500
             },
-            "base_budget_equipements_usd": 106619.497,
+            "base_budget_equipements_usd": 108419.497,
             "conversion": {
               "date": "2026-10-23",
               "eur_usd": 1.1193,
