@@ -72,6 +72,12 @@ function update(){
  if(!v||typeof v.validate!=="function"||!d)return;
  const selected=current();
  if(d.up_id!==selected.id||d.configuration_id!==(selected.config||null))return;
+ // Une URL Crackers ne suffit pas : le sélecteur du moteur legacy
+ // doit désigner la même variante, faute de quoi les prévisions sont périmées.
+ if(selected.id==="biscuiterie"){
+  const choice=$("p2iBiscuiterieSelect");
+  if(choice&&choice.value!==selected.config)return;
+ }
  const result=v.validate(d);
  if(!result.valide){diagnostic(result.blocages);return;}
  // Le jeu annuel doit correspondre au résultat économique réellement calculé
@@ -87,7 +93,9 @@ function update(){
    !close(first.chiffre_affaires,economic.chiffre_affaires_usd)||
    !close(first.cout_produits_vendus,economic.cout_produits_vendus_usd)||
    !close(first.chiffre_affaires,financial.chiffre_affaires_total_usd)||
-   !close(first.cout_produits_vendus,financial.cout_ventes_total_usd))return;
+   !close(first.cout_produits_vendus,financial.cout_ventes_total_usd)||
+   (typeof financial.resultat_net_usd==="number"&&Number.isFinite(financial.resultat_net_usd)&&
+    !close(first.resultat_net,financial.resultat_net_usd)))return;
  }
 
  togglePreparation(false);
