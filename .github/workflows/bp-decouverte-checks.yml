@@ -18,6 +18,8 @@ on:
       - 'tests/check-p2i-bp-lot-01.cjs'
       - 'tests/check-p2i-bp-tous-lots.cjs'
       - 'tests/check-p2i-bp-financial-validation.cjs'
+      - 'tests/check-p2i-bp-tresorerie-12-mois.cjs'
+      - 'js/p2i-bp-decouverte-tresorerie-12-mois.js'
       - 'tests/check-p2i-bp-validated-projections.cjs'
       - 'js/p2i-bp-decouverte-17-validated-projections.js'
       - 'js/p2i-bp-decouverte-financial-validation.js'
@@ -72,3 +74,5 @@ jobs:
         run: node tests/check-p2i-bp-financial-validation.cjs
       - name: Raccordement des prévisions validées aux rubriques
         run: node tests/check-p2i-bp-validated-projections.cjs
+      - name: Moteur de trésorerie mensuelle
+        run: node tests/check-p2i-bp-tresorerie-12-mois.cjs
