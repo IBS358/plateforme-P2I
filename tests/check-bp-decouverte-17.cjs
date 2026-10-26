@@ -63,7 +63,7 @@ assert.ok(bridge.includes("setPlaceholder(r8,true)")&&bridge.includes("setPlaceh
 assert.ok(bridge.includes("setPlaceholder(r8,false)")&&bridge.includes("setPlaceholder(r9,false)"),"Masquer les tableaux d’attente lorsque les résultats sont valides");
 
 
-assert.ok(bridge.includes("number(f.resultat_net_usd)")==false,"Ne pas exiger un résultat net artificiellement complet");
+assert.ok(bridge.includes("financialConsistent(f,e)&&number(f.resultat_net_usd)")&&bridge.includes("Non calculable à ce stade"),"Résultat net facultatif, uniquement si le compte financier est cohérent");
 assert.ok(layout.includes("if(!id||(!up.nom&&!up.id&&!up.description))return;"),"Ne pas afficher de faux BP avant hydratation de l’UP");
 assert.ok(layout.includes("Array.isArray(machineSource.machines)"),"Privilégier le catalogue machines de l’UP");
 assert.ok(layout.includes('card("Chiffre d’affaires prévisionnel","À calculer par le moteur économique")'),"Ne pas présenter les estimations UP comme prévisions validées");
