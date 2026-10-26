@@ -6,3 +6,7 @@ Prompt : Photorealistic high-end commercial product photo for an Ivorian juice b
 
 Lavage d’ananas : image générée par le dispositif intégré, puis encodée en JPEG ; machine illustrative, sans fournisseur identifié.
 Prompt : Photorealistic industrial catalogue photograph for a business plan: stainless steel fruit washing and crushing equipment in a clean modern juice-processing workshop, with clearly recognizable whole pineapples with spiky leaves and cut pineapple beside the intake. This line produces pineapple juice. No mangoes, no other fruit, no text, no logos, no watermarks. Landscape framing, bright clean natural light. Illustrative fictional machinery, not an actual supplier.
+
+Postes de production ananas : deux planches de photographies illustratives générées par le dispositif intégré, puis encodées en JPEG. Elles représentent des fonctions et non les modèles exacts des fournisseurs.
+Prompt préparation : photorealistic industrial catalogue atlas, six separate panels in a 3×2 grid, no text: pineapple washing and sorting; pineapple peeling and coring; pineapple crusher; screw juice extraction; two stainless tanks and transfer pump; juice pasteurizer.
+Prompt conditionnement : photorealistic industrial catalogue atlas, six separate panels in a 3×2 grid, no text: bottle rinsing; bottle filling; screw capping; label application; bottle conveyor; stainless tanks.

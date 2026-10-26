@@ -9,3 +9,7 @@
 
 :root{--bouteille-jus:url('../assets/bp-jus/bouteille-ivoire-fruits-ia.jpg')}.photo-inner.jus-bouteille{background-image:var(--bouteille-jus);background-size:cover;background-position:center}
 :root{--lavage-ananas:url('../assets/bp-jus/lavage-ananas-ia.jpg')}.photo-inner.jus-ananas{background-image:var(--lavage-ananas);background-size:cover;background-position:35% center}
+
+:root{--jus-preparation:url('../assets/bp-jus/postes-preparation-ananas-ia.jpg');--jus-conditionnement:url('../assets/bp-jus/postes-conditionnement-ananas-ia.jpg')}
+.jus-poste{background-size:300% 200%}.jus-poste-0,.jus-poste-1,.jus-poste-2,.jus-poste-3,.jus-poste-4,.jus-poste-5{background-image:var(--jus-preparation)}.jus-poste-6,.jus-poste-7,.jus-poste-8,.jus-poste-9{background-image:var(--jus-conditionnement)}
+.jus-poste-0,.jus-poste-6{background-position:0% 0%}.jus-poste-1,.jus-poste-7{background-position:50% 0%}.jus-poste-2,.jus-poste-8{background-position:100% 0%}.jus-poste-3,.jus-poste-9{background-position:0% 100%}.jus-poste-4{background-position:50% 100%}.jus-poste-5{background-position:100% 100%}
