@@ -8,8 +8,8 @@ Date : 26 octobre 2026. Branche : `refonte-bp-decouverte-17-rubriques`.
 - `machines-data.js` : **96 entrées d'origine** et **107 clés accessibles après ajout de 12 alias**, certaines clés pointant vers la même liste de machines.
 - Couverture après alignement : **95/95 UP** ont une entrée `MACHINES_DATA[id]` avec un tableau `machines`.
 - **Écart à résoudre : 1 UP** par rapport à l'objectif produit de 96 UP. Ne pas ajouter d'unité fictive.
-- **79 UP** n'ont pas de champ `investment_breakdown` dans `up-data.js`.
-- **79 UP** n'ont pas de champ `monthly_capacity` dans `up-data.js`.
+- **78 UP** n'ont pas de champ `investment_breakdown` dans `up-data.js` après restauration de la fiche Peintures BTP plus détaillée.
+- **78 UP** n'ont pas de champ `monthly_capacity` dans `up-data.js` après restauration de la fiche Peintures BTP plus détaillée.
 - Les 95 UP disposent des champs `nom`, `filiereNom`, `description`, `capex_min`, `processus`, `avantages` et `challenges`. Ces champs ne suffisent pas à certifier un BP chiffré.
 
 ## Correspondances ajoutées
@@ -41,3 +41,9 @@ Ces alias ne créent pas de nouveaux équipements ni de nouveaux prix : ils poin
 6. Exécuter `node tests/check-p2i-reference-coverage.cjs` en plus des tests de régression BP.
 
 **Statut :** correspondances techniques réparées ; contenu industriel et financier complet des UP restant à documenter. La couverture d'un catalogue machines ne signifie pas que les machines sont compatibles ou que leurs prix sont vérifiés.
+
+## Complément d'audit — doublon Peintures BTP
+
+Deux définitions de la clé `peintures_btp` étaient présentes dans l'objet JavaScript. La seconde écrasait silencieusement la première, qui possédait notamment `investment_breakdown` et `monthly_capacity`. La définition moins documentée a été retirée. Le nombre d'UP distinctes reste 95 : le doublon ne correspond pas à une 96e activité.
+
+**Point de contrôle supplémentaire :** la fiche conservée contient `capex_min: 95000` et `investment_breakdown.total: 83000`. Ces deux montants ne doivent pas être assimilés à un CAPEX consolidé sans analyse de leur périmètre respectif.
