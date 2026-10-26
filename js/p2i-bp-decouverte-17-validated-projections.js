@@ -21,11 +21,12 @@ function current(){
  return {id,config:p.get("configuration_id")||saved||""};
 }
 const ids=["p2i-validated-finance-r7","p2i-validated-finance-r9","p2i-validated-finance-r10","p2i-validated-finance-r11","p2i-validated-finance-r13"];
-const sections=["p2i-r7","p2i-r9","p2i-r10","p2i-r11","p2i-r13"];
+const sections=["p2i-r9","p2i-r10","p2i-r11","p2i-r13"];
 function placeholders(section){
  const parent=$(section);
  if(!parent)return [];
- // Seuls les tableaux de préparation directement contenus dans la rubrique
+ // Conserver le détail d’investissement de la rubrique 7. Seuls les tableaux
+ // de préparation directement contenus dans les autres rubriques
  // sont masqués : ne jamais masquer les tableaux du moteur économique.
  return Array.from(parent.children||[]).filter(child=>
   child.classList&&child.classList.contains("bp-table-wrap")||
