@@ -16,6 +16,9 @@ on:
       - 'tests/check-p2i-bp-preparation.cjs'
       - 'tests/check-p2i-bp-lots.cjs'
       - 'tests/check-p2i-bp-lot-01.cjs'
+      - 'tests/check-p2i-bp-tous-lots.cjs'
+      - 'scripts/build-bp-decouverte-tous-lots.cjs'
+      - 'data/p2i-bp-decouverte-lot-*-sources.json'
       - 'scripts/build-bp-decouverte-lot-01.cjs'
       - 'data/p2i-bp-decouverte-lot-01-sources.json'
       - 'scripts/build-bp-decouverte-lots.cjs'
@@ -56,3 +59,8 @@ jobs:
           node tests/check-p2i-bp-lot-01.cjs
           node scripts/build-bp-decouverte-lot-01.cjs
           git diff --exit-code -- data/p2i-bp-decouverte-lot-01-sources.json
+      - name: Vérifier les dossiers sources des douze filières
+        run: |
+          node tests/check-p2i-bp-tous-lots.cjs
+          node scripts/build-bp-decouverte-tous-lots.cjs
+          git diff --exit-code -- data/p2i-bp-decouverte-lot-*-sources.json
