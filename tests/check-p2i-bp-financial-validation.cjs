@@ -11,6 +11,7 @@ assert.ok(empty.blocages.some(x=>x.champ==="bfr_mensuel"));
 assert.ok(empty.blocages.some(x=>x.champ==="tresorerie_mensuelle"));
 const investment=Object.fromEntries(ctx.P2I_BP_CONTROLES_FINANCIERS.requiredInvestment.map(k=>[k,1000]));
 investment.equipements=450000;
+investment.total=459000;
 investment.reserve_tresorerie=15000;
 const annual=()=>({chiffre_affaires:1000000,cout_produits_vendus:500000,charges_exploitation:200000,amortissements:100000,charges_financieres:20000,impots:30000,resultat_net:150000});
 const bfr=()=>({stocks:30000,creances_clients:20000,dettes_exploitation:10000,bfr:40000});
