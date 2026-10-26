@@ -36,7 +36,7 @@ function build(u){
   {opportunites:unknown("Opportunités locales et export à documenter"),risques:unknown("Risques industriels, commerciaux et réglementaires à qualifier")},
   {investissement_reference_equipements_usd:reference?reference.prix_ligne_usd:null,
    estimation_generique_non_validee:u.estimation_generique_non_validee||null,
-   capex_complet_usd:null,apport_40_usd:null,dette_60_usd:null,
+   capex_complet_usd:null,apport_30_usd:null,dette_70_usd:null,
    avertissement:"Prix des équipements distinct du CAPEX complet; anciens budgets génériques non validés"},
   {processus:list(u.processus),matieres_premieres:list(u.matieres_premieres),
    capacite_reference:reference?{valeur:reference.capacite_kg_h,unite:"kg/h"}:null,
