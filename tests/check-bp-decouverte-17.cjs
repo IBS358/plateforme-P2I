@@ -134,7 +134,7 @@ assert.ok(css.includes('.bp-section h2{page-break-after:avoid}'),"Éviter les ti
 const pictureStart=layout.indexOf("const pictureUrl=value=>{");
 const pictureEnd=layout.indexOf("\n};",pictureStart);
 assert.ok(pictureStart>=0&&pictureEnd>pictureStart,"Fonction de validation des photographies détectée");
-const pictureCode=layout.slice(pictureStart,pictureEnd+3).replace("const pictureUrl=","(")+")";
+const pictureCode=layout.slice(pictureStart,pictureEnd+3).replace("const pictureUrl=","(").replace(/;\\s*$/,"")+")";
 const pictureUrl=vm.runInNewContext(pictureCode);
 assert.equal(pictureUrl("assets/photos/crackers.jpg"),"assets/photos/crackers.jpg");
 assert.equal(pictureUrl("p2i-nettoyage-hero.png"),"p2i-nettoyage-hero.png");
