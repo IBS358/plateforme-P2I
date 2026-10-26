@@ -23,8 +23,14 @@ for(const d of data.dossiers){
  const {u,file}=entry,ref=u.reference_industrielle_validee;
  const machineCount=(u.machines_catalogue||[]).length;
  const price=!!(ref&&Number.isFinite(ref.prix_ligne_usd)&&ref.prix_ligne_usd>0);
- const capex=Number.isFinite(d.sections[6].contenu.capex_complet_usd)&&d.sections[6].contenu.capex_complet_usd>0;
+ const capex=Number.isFinite(d.sections[6].contenu.capex_complet_usd)&&d.sections[6].contenu.capex_complet_usd>0&&u.controle?.capex_complet_valide_usd===d.sections[6].contenu.capex_complet_usd;
  const validFinancial=[8,9,10,12].every(i=>d.sections[i].contenu?.etat!=="a_documenter");
+ const control=u.controle||{};
+ const ventes=control.projections_3_ans_validees===true;
+ const bfr=control.bfr_36_mois_valide===true;
+ const tresorerie=control.tresorerie_12_mois_validee===true;
+ const bilans=validFinancial&&ventes&&bfr&&tresorerie;
+ const charges=ventes; // La validation détaillée des charges est incluse dans le contrôle des projections.
  const ext=(u.controle?.sources_externes_verifiees||[]).length;
  const capacity=ref&&Number.isFinite(ref.capacite_kg_h)&&ref.capacite_kg_h>0;
  const action=!ref?"Sélectionner une configuration de référence cohérente, vérifier ses fonctions et interfaces":
@@ -34,7 +40,7 @@ for(const d of data.dossiers){
   !validFinancial?"Documenter volumes, prix de vente, charges, fiscalité, stocks et règlements puis calculer les états":
   "Contrôle final de cohérence et publication";
  rows.push([d.up_id,d.up_nom,d.filiere,file,machineCount,!!ref,!!capacity,price,ext,capex,
-  validFinancial,validFinancial,validFinancial,validFinancial,validFinancial,d.statut,action]);
+  ventes,charges,bfr,tresorerie,bilans,d.statut,action]);
  counts.total++;if(ref)counts.configuration++;if(price)counts.prix++;if(capex)counts.capex++;if(validFinancial)counts.financier++;
 }
 assert.equal(counts.total,95);
