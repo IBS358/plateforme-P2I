@@ -23,8 +23,8 @@ for(let i=0;i<source.length;i++){
  assert.deepEqual(d.sections.map(s=>s.numero),Array.from({length:17},(_,j)=>j+1));
  for(const n of [2,9,10,11,12,13])assert.equal(d.sections[n-1].contenu.etat,"a_documenter");
  assert.equal(d.sections[6].contenu.capex_complet_usd,null);
- assert.equal(d.sections[6].contenu.apport_40_usd,null);
- assert.equal(d.sections[6].contenu.dette_60_usd,null);
+ assert.equal(d.sections[6].contenu.apport_30_usd,null);
+ assert.equal(d.sections[6].contenu.dette_70_usd,null);
  assert.equal(d.sections[9].contenu.message.includes("36 mois"),true);
  assert.equal(d.sections[12].contenu.message.includes("12 mois"),true);
  if(d.up_id==="biscuiterie"){
