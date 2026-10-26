@@ -1,0 +1,1716 @@
+{
+  "schema_version": "1.0.0",
+  "objet": "Registre de préparation — ne constitue pas des BP validés",
+  "nb_up": 95,
+  "nb_lots": 12,
+  "ecart_objectif_96": 1,
+  "priorite_pilote": {
+    "up_id": "biscuiterie",
+    "configuration_id": "crackers",
+    "capacite_kg_h": 500,
+    "prix_ligne_usd": 450000,
+    "capex_complet_usd": null
+  },
+  "lots": [
+    {
+      "lot": "LOT-01",
+      "filiere": "Agro-alimentaire & Boissons",
+      "nb_up": 8,
+      "unites": [
+        {
+          "up_id": "conserverie_legumes",
+          "up_nom": "Conserverie de légumes",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 90000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "biscuiterie",
+          "up_nom": "Biscuiterie industrielle",
+          "fonctions_machines": 12,
+          "investissement_minimum_indicatif_usd": 120000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Sélectionner une variante Biscuiterie",
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "boulangerie_industrielle",
+          "up_nom": "Boulangerie industrielle",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 150000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "jus_boissons",
+          "up_nom": "Production de jus et boissons",
+          "fonctions_machines": 8,
+          "investissement_minimum_indicatif_usd": 100000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "mini_laiterie",
+          "up_nom": "Mini-laiterie",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 110000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "huiles_alimentaires",
+          "up_nom": "Huiles alimentaires",
+          "fonctions_machines": 11,
+          "investissement_minimum_indicatif_usd": 130000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "epices",
+          "up_nom": "Transformation d'épices",
+          "fonctions_machines": 9,
+          "investissement_minimum_indicatif_usd": 70000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "aliments_betail",
+          "up_nom": "Aliments pour bétail",
+          "fonctions_machines": 4,
+          "investissement_minimum_indicatif_usd": 95000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        }
+      ]
+    },
+    {
+      "lot": "LOT-02",
+      "filiere": "Chimie, Cosmétiques & Détergents",
+      "nb_up": 7,
+      "unites": [
+        {
+          "up_id": "detergents",
+          "up_nom": "Détergents & produits ménagers",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 80000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "savonnerie",
+          "up_nom": "Savonnerie industrielle",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 70000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "cosmetiques",
+          "up_nom": "Cosmétiques naturels",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 85000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "adhesifs",
+          "up_nom": "Adhésifs & colles",
+          "fonctions_machines": 5,
+          "investissement_minimum_indicatif_usd": 120000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "engrais",
+          "up_nom": "Engrais & pesticides",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 180000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "javel",
+          "up_nom": "Eau de javel & désinfectants",
+          "fonctions_machines": 5,
+          "investissement_minimum_indicatif_usd": 60000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "produits_industriels",
+          "up_nom": "Produits chimiques industriels",
+          "fonctions_machines": 5,
+          "investissement_minimum_indicatif_usd": 150000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        }
+      ]
+    },
+    {
+      "lot": "LOT-03",
+      "filiere": "BTP & Matériaux Construction",
+      "nb_up": 8,
+      "unites": [
+        {
+          "up_id": "peintures_btp",
+          "up_nom": "Peintures BTP",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 95000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "cimenterie",
+          "up_nom": "Mini-cimenterie",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 600000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "briques",
+          "up_nom": "Briques et tuiles",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 55000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "prefab",
+          "up_nom": "Éléments préfabriqués",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 110000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "tuiles",
+          "up_nom": "Tuiles et éléments toiture",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 85000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "agglos",
+          "up_nom": "Agglos et parpaings",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 75000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "centrale_beton",
+          "up_nom": "Centrale à béton",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 150000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "menuiserie",
+          "up_nom": "Menuiserie aluminium/PVC",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 150000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        }
+      ]
+    },
+    {
+      "lot": "LOT-04",
+      "filiere": "Textile, Habillement & Cuir",
+      "nb_up": 8,
+      "unites": [
+        {
+          "up_id": "confection",
+          "up_nom": "Confection de vêtements",
+          "fonctions_machines": 8,
+          "investissement_minimum_indicatif_usd": 60000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "tissage",
+          "up_nom": "Tissage industriel",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 100000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "maroquinerie",
+          "up_nom": "Maroquinerie & articles en cuir",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 75000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "teinture",
+          "up_nom": "Teinturerie industrielle",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 40000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "broderie",
+          "up_nom": "Broderie industrielle",
+          "fonctions_machines": 5,
+          "investissement_minimum_indicatif_usd": 55000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "chaussures",
+          "up_nom": "Fabrication de chaussures",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 120000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "uniformes",
+          "up_nom": "Confection d'uniformes",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 70000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "linge",
+          "up_nom": "Linge de maison",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 90000,
+          "ventilation_generique_disponible": true,
+          "capacite_mensuelle_generique_disponible": true,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        }
+      ]
+    },
+    {
+      "lot": "LOT-05",
+      "filiere": "Métallurgie & Mécanique",
+      "nb_up": 8,
+      "unites": [
+        {
+          "up_id": "serrurerie",
+          "up_nom": "Serrurerie industrielle",
+          "fonctions_machines": 8,
+          "investissement_minimum_indicatif_usd": 55000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "outillage",
+          "up_nom": "Outillage manuel",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 85000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "recyclage_metaux",
+          "up_nom": "Recyclage de métaux",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 110000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "chaudronnerie",
+          "up_nom": "Chaudronnerie industrielle",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 95000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "mecanosoudure",
+          "up_nom": "Mécanosoudure",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 65000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "structures",
+          "up_nom": "Structures métalliques",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 100000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "pieces",
+          "up_nom": "Pièces détachées automobiles",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 140000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "quincaillerie",
+          "up_nom": "Quincaillerie industrielle",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 75000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        }
+      ]
+    },
+    {
+      "lot": "LOT-06",
+      "filiere": "Plastique & Caoutchouc",
+      "nb_up": 8,
+      "unites": [
+        {
+          "up_id": "sacs",
+          "up_nom": "Sacs en plastique",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 75000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "bouteilles_pet",
+          "up_nom": "Bouteilles PET",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": 110000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "tuyaux_pvc",
+          "up_nom": "Tuyaux PVC",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 130000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "emballages",
+          "up_nom": "Emballages plastique",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 85000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "profiles",
+          "up_nom": "Profilés plastique",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 120000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "jouets",
+          "up_nom": "Jouets en plastique",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 70000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "joints",
+          "up_nom": "Joints et pièces caoutchouc",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 60000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "granules",
+          "up_nom": "Granulés plastique recyclé",
+          "fonctions_machines": 8,
+          "investissement_minimum_indicatif_usd": 150000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        }
+      ]
+    },
+    {
+      "lot": "LOT-07",
+      "filiere": "Électronique & Électricité",
+      "nb_up": 8,
+      "unites": [
+        {
+          "up_id": "cables",
+          "up_nom": "Câbles électriques",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 125000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "panneaux_solaires",
+          "up_nom": "Panneaux solaires",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 180000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "appareils",
+          "up_nom": "Appareils électroménagers",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 95000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "led",
+          "up_nom": "Éclairage LED",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 65000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "tableaux",
+          "up_nom": "Tableaux électriques",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 85000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "onduleurs",
+          "up_nom": "Onduleurs et convertisseurs",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 110000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "compteurs",
+          "up_nom": "Compteurs électriques",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 150000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "batteries",
+          "up_nom": "Batteries et accumulateurs",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 200000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        }
+      ]
+    },
+    {
+      "lot": "LOT-08",
+      "filiere": "Médical & Pharmaceutique",
+      "nb_up": 8,
+      "unites": [
+        {
+          "up_id": "masques",
+          "up_nom": "Masques et protections",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 35000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "pansements",
+          "up_nom": "Pansements et compresses",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 45000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "mobilier",
+          "up_nom": "Mobilier médical",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 70000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "fauteuils",
+          "up_nom": "Fauteuils roulants",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 85000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "instruments",
+          "up_nom": "Instruments médicaux",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 120000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "bequilles",
+          "up_nom": "Béquilles et cannes",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 55000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "antiseptiques",
+          "up_nom": "Antiseptiques et désinfectants",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 65000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "kits",
+          "up_nom": "Kits médicaux et premiers secours",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 50000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        }
+      ]
+    },
+    {
+      "lot": "LOT-09",
+      "filiere": "Assemblage & Montage",
+      "nb_up": 8,
+      "unites": [
+        {
+          "up_id": "smartphones",
+          "up_nom": "Assemblage smartphones",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 250000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "ordinateurs",
+          "up_nom": "Assemblage ordinateurs",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 150000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "electromenager",
+          "up_nom": "Assemblage électroménager",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 220000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "climatiseurs",
+          "up_nom": "Assemblage climatiseurs",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 220000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "motos",
+          "up_nom": "Assemblage motos",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 280000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "velos",
+          "up_nom": "Assemblage vélos",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 100000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "meubles",
+          "up_nom": "Assemblage meubles",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 70000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "equipements",
+          "up_nom": "Équipements sportifs",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 180000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        }
+      ]
+    },
+    {
+      "lot": "LOT-10",
+      "filiere": "Recyclage & Environnement",
+      "nb_up": 8,
+      "unites": [
+        {
+          "up_id": "plastique",
+          "up_nom": "Recyclage plastique",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 110000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "papier",
+          "up_nom": "Recyclage papier/carton",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 120000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "metaux",
+          "up_nom": "Recyclage métaux",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 130000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "compost",
+          "up_nom": "Compost et engrais organiques",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 55000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "verre",
+          "up_nom": "Recyclage verre",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 150000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "pneus",
+          "up_nom": "Recyclage pneus",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 150000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "huiles",
+          "up_nom": "Recyclage huiles usagées",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 85000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "deee",
+          "up_nom": "Recyclage DEEE",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 160000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        }
+      ]
+    },
+    {
+      "lot": "LOT-11",
+      "filiere": "Services Industriels",
+      "nb_up": 8,
+      "unites": [
+        {
+          "up_id": "nettoyage",
+          "up_nom": "Services de nettoyage industriel",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 40000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "maintenance",
+          "up_nom": "Maintenance industrielle",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 90000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "logistique",
+          "up_nom": "Logistique industrielle",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 120000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "formation",
+          "up_nom": "Formation industrielle",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 70000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "qualite",
+          "up_nom": "Services qualité",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 60000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "etudes",
+          "up_nom": "Études et conseil",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 55000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "securite",
+          "up_nom": "Sécurité industrielle",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 50000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "energie",
+          "up_nom": "Services énergétiques",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 100000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        }
+      ]
+    },
+    {
+      "lot": "LOT-12",
+      "filiere": "Énergie & Eau",
+      "nb_up": 8,
+      "unites": [
+        {
+          "up_id": "poteaux",
+          "up_nom": "Poteaux électriques",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 150000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "compteurs_eau",
+          "up_nom": "Compteurs d'eau",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 120000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "kits_solaires",
+          "up_nom": "Kits solaires domestiques",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 100000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "lampadaires",
+          "up_nom": "Lampadaires solaires",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 130000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "forage",
+          "up_nom": "Forage et équipements eau",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 160000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "eau",
+          "up_nom": "Traitement eau potable",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 110000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "maintenance_energie",
+          "up_nom": "Maintenance énergétique",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 80000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "audit",
+          "up_nom": "Audits énergétiques",
+          "fonctions_machines": 7,
+          "investissement_minimum_indicatif_usd": 60000,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        }
+      ]
+    }
+  ]
+}
