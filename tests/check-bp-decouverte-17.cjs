@@ -33,6 +33,8 @@ assert.ok(html.includes("p2iCompteResultat"),"La sortie historique du moteur doi
 assert.ok(layout.includes("450000"),"La référence équipement Crackers doit rester 450 000 USD");
 assert.ok(layout.includes("capex=null"),"Ne pas convertir le coût de la ligne en investissement total");
 assert.ok(layout.includes("Financement de référence : 30 % d’apport et 70 % de dette"),"Financement BP Découverte 30/70 requis");
+assert.ok(layout.includes("Apport (30 % de l’investissement total)")&&layout.includes("Dette (70 % de l’investissement total)"),"Décomposition investissement 30/70");
+assert.ok(!layout.includes("Financement 40 % / 60 %")&&!layout.includes("Apport (40 % de l’investissement total)"),"Aucun ancien financement 40/60 dans les rubriques");
 assert.ok(layout.includes("12 mois exclusivement"),"Trésorerie : 12 mois seulement");
 assert.ok(layout.includes("Bilan simplifié prévisionnel sur trois exercices"),"Bilan sur 3 exercices");
 assert.ok(layout.includes("function annualMatrix(title,rows)"),"Matrice annuelle commune");
