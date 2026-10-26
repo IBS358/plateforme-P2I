@@ -107,4 +107,26 @@ window.P2I_COMPTE_FINANCIER.resultat_avant_impot_usd=25;
 listeners["p2i:financial-result-ready"]();
 assert.equal(has("p2i-r9-engine"),true,"Restaurer le compte financier corrigé");
 
+
+// Le résultat d'exploitation doit tenir compte des charges et dotations documentées.
+window.P2I_COMPTE_FINANCIER.autres_charges_exploitation_usd=20;
+window.P2I_COMPTE_FINANCIER.dotations_usd=10;
+window.P2I_COMPTE_FINANCIER.resultat_exploitation_usd=31;
+window.P2I_COMPTE_FINANCIER.resultat_avant_impot_usd=26;
+listeners["p2i:financial-result-ready"]();
+assert.equal(has("p2i-r9-engine"),false,"Refuser un résultat d'exploitation non rapproché");
+window.P2I_COMPTE_FINANCIER.resultat_exploitation_usd=30;
+window.P2I_COMPTE_FINANCIER.resultat_avant_impot_usd=25;
+listeners["p2i:financial-result-ready"]();
+assert.equal(has("p2i-r9-engine"),true,"Restaurer le compte d'exploitation cohérent");
+
+// Une donnée chiffrée invalide ne doit jamais être traitée comme zéro.
+window.P2I_CRACKERS_RESULTAT.quantite_vendue="400";
+listeners["p2i:economic-result-ready"]();
+assert.equal(has("p2i-r8-engine"),false,"Refuser une quantité textuelle");
+assert.equal(has("p2i-r2-engine"),false,"Retirer la synthèse en cas de type invalide");
+window.P2I_CRACKERS_RESULTAT.quantite_vendue=400;
+listeners["p2i:economic-result-ready"]();
+assert.equal(has("p2i-r8-engine"),true,"Rétablir les données numériques");
+
 console.log("Pont financier P2I : scénarios de cohérence dynamique réussis.");
