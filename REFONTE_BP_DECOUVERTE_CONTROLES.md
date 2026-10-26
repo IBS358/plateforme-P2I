@@ -29,3 +29,24 @@
 - Financement de référence : **40 % apport / 60 % dette** sur investissement total validé, réserve initiale distincte.
 - Ne jamais substituer un montant manquant par zéro.
 - Ne pas fusionner cette branche avant une revue et des essais fonctionnels.
+
+
+## Lot consolidé — préparation du PDF et vérifications du 26 octobre 2026
+
+- Le bouton indique désormais **« Imprimer / Enregistrer en PDF »** : il ouvre le dialogue d'impression du navigateur et ne prétend plus télécharger directement un PDF.
+- Le titre de l'onglet est personnalisé avec le nom de l'unité industrielle.
+- Avant l'impression, le script attend les polices disponibles et les images encore en chargement ; une erreur de chargement d'image ne bloque pas l'impression.
+- Les contrôles statiques couvrent désormais ces garanties et les chemins photographiques autorisés/interdits.
+- Relecture directe des expressions de **89 assertions autonomes** de la suite statique : aucune assertion évaluée n'a échoué. Deux assertions nécessitant des variables locales du script de test n'ont pas été exécutées par cette relecture partielle.
+- **Limites :** cela ne constitue ni une exécution complète de Node/GitHub Actions ni une recette visuelle du PDF sur navigateur. Les valeurs financières manquantes et les images non référencées ne doivent pas être présentées comme finalisées.
+
+### Recette globale à effectuer avant mise en production
+
+1. Ouvrir Biscuiterie / Crackers et contrôler les 17 rubriques, le prix des seuls équipements (450 000 USD), le financement 40/60 appliqué uniquement au CAPEX complet validé.
+2. Tester Biscuits mous, Biscuits durs et les trois activités Nettoyage sans réutilisation de résultats ou photographies d'une autre configuration.
+3. Confirmer que le BFR couvre 36 mois, la trésorerie 12 mois et les autres états financiers trois exercices ; vérifier les contrôles du moteur sur les montants réellement renseignés.
+4. Ouvrir « Imprimer / Enregistrer en PDF », choisir l'enregistrement PDF, vérifier images, titres, pagination, contrastes et sommaire.
+5. Vérifier la transition vers le BP Pro avec une simulation authentifiée et la conservation des identifiants de contexte.
+6. Exécuter les deux scripts Node de régression sur un checkout de la branche et consulter les résultats GitHub Actions.
+
+**Règle de livraison :** aucune fusion vers `main` sans recette réussie et accord de l'utilisateur.
