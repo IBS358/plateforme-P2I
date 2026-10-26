@@ -6,6 +6,11 @@ const context=vm.createContext({});
 for(const file of ["up-data.js","machines-data.js"]){
  vm.runInContext(fs.readFileSync(path.join(root,file),"utf8"),context,{filename:file});
 }
+// Détecter les clés UP dupliquées avant l'évaluation JS : un objet JS écrase silencieusement la première fiche.
+const upSource=fs.readFileSync(path.join(root,"up-data.js"),"utf8");
+const declarations=[...upSource.matchAll(/^ {2}([a-z_][a-z_0-9]*):\\s*\\{\\s*\\n\\s*id:\\s*["']/gm)].map(m=>m[1]);
+const duplicates=declarations.filter((id,index)=>declarations.indexOf(id)!==index);
+assert.deepEqual(duplicates,[],"Définitions UP dupliquées, écrasement silencieux possible");
 const units=vm.runInContext("P2I_UP_DATA",context);
 const machines=vm.runInContext("MACHINES_DATA",context);
 const ids=Object.keys(units);
