@@ -1,0 +1,635 @@
+{
+  "version": "1.0.0",
+  "lot": "LOT-08",
+  "filiere": "Médical & Pharmaceutique",
+  "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
+  "nombre_up": 8,
+  "unites": [
+    {
+      "up_id": "masques",
+      "up_nom": "Masques et protections",
+      "description": "Fabrication de masques et équipements de protection.",
+      "filiere": "Médical & Pharmaceutique",
+      "processus": [
+        "Fabrication",
+        "Fixation élastiques",
+        "Insertion pince-nez",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Ligne complète masques",
+          "role": "Fabrication masques",
+          "capacite": "100 masques/min",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Soudeuse à ultrasons",
+          "role": "Soudage élastiques",
+          "capacite": "80 masques/min",
+          "utilites": "Électricité 2kW"
+        },
+        {
+          "nom": "Presse à découper",
+          "role": "Découpe forme",
+          "capacite": "100 masques/min",
+          "utilites": "Électricité 3kW"
+        },
+        {
+          "nom": "Machine à plier",
+          "role": "Pliage masques",
+          "capacite": "80 masques/min",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Étui de stérilisation",
+          "role": "Stérilisation UV",
+          "capacite": "10000 masques/batch",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ensacheuse automatique",
+          "role": "Conditionnement",
+          "capacite": "50 sachets/min",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Poste contrôle qualité",
+          "role": "Test filtration",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 35000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "pansements",
+      "up_nom": "Pansements et compresses",
+      "description": "Fabrication de pansements et matériels stériles.",
+      "filiere": "Médical & Pharmaceutique",
+      "processus": [
+        "Fabrication",
+        "Découpe",
+        "Stérilisation",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Tisseuse gaze",
+          "role": "Tissage gaze",
+          "capacite": "200 m/heure",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Découpeuse rotative",
+          "role": "Découpe bandes",
+          "capacite": "500 rouleaux/heure",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Machine à enrouler",
+          "role": "Enroulage bandes",
+          "capacite": "400 rouleaux/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Stérilisateur",
+          "role": "Stérilisation",
+          "capacite": "1000 rouleaux/batch",
+          "utilites": "Électricité + vapeur"
+        },
+        {
+          "nom": "Ensacheuse",
+          "role": "Conditionnement",
+          "capacite": "300 sachets/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste contrôle",
+          "role": "Test absorption",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Gencleuse",
+          "role": "Finition bords",
+          "capacite": "400 rouleaux/heure",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 45000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "mobilier",
+      "up_nom": "Mobilier médical",
+      "description": "Fabrication de mobilier pour établissements de santé.",
+      "filiere": "Médical & Pharmaceutique",
+      "processus": [
+        "Découpe",
+        "Soudage",
+        "Perçage",
+        "Peinture",
+        "Assemblage",
+        "Contrôle"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Poste à souder TIG",
+          "role": "Soudure tubes",
+          "capacite": "50 lits/jour",
+          "utilites": "Électricité 8kW"
+        },
+        {
+          "nom": "Cintreuse",
+          "role": "Cintrage tubes",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Coupeuse",
+          "role": "Découpe tubes",
+          "capacite": "200 coupes/jour",
+          "utilites": "Électricité 3kW"
+        },
+        {
+          "nom": "Plieuse",
+          "role": "Pliage tôles",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité 4kW"
+        },
+        {
+          "nom": "Riveteuse",
+          "role": "Assemblage",
+          "capacite": "200 rivets/heure",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Cabine peinture",
+          "role": "Peinture",
+          "capacite": "50 lits/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test charges",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 70000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "fauteuils",
+      "up_nom": "Fauteuils roulants",
+      "description": "Fabrication de fauteuils roulants et aides mobilité.",
+      "filiere": "Médical & Pharmaceutique",
+      "processus": [
+        "Découpe",
+        "Soudage",
+        "Perçage",
+        "Peinture",
+        "Assemblage",
+        "Contrôle"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Poste à souder",
+          "role": "Soudure châssis",
+          "capacite": "30 fauteuils/jour",
+          "utilites": "Électricité 6kW"
+        },
+        {
+          "nom": "Cintreuse",
+          "role": "Cintrage tubes",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à riveter",
+          "role": "Assemblage",
+          "capacite": "30 fauteuils/jour",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Presse monte-roue",
+          "role": "Montage roues",
+          "capacite": "30 fauteuils/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste sellerie",
+          "role": "Assise et dossier",
+          "capacite": "30 fauteuils/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste réglage",
+          "role": "Réglages finaux",
+          "capacite": "30 fauteuils/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test stabilité",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 85000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "instruments",
+      "up_nom": "Instruments médicaux",
+      "description": "Fabrication d'instruments médicaux stérilisables.",
+      "filiere": "Médical & Pharmaceutique",
+      "processus": [
+        "Usinage",
+        "Polissage",
+        "Stérilisation",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Tour CNC",
+          "role": "Usinage précision",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Fraiseuse CNC",
+          "role": "Usinage complexe",
+          "capacite": "80 pièces/jour",
+          "utilites": "Électricité 12kW"
+        },
+        {
+          "nom": "Polisseuse",
+          "role": "Finition miroir",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Laveur ultrason",
+          "role": "Nettoyage",
+          "capacite": "500 pièces/batch",
+          "utilites": "Électricité 3kW"
+        },
+        {
+          "nom": "Stérilisateur",
+          "role": "Stérilisation",
+          "capacite": "500 pièces/batch",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Marqueur laser",
+          "role": "Marquage",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test dimensionnel",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 120000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "bequilles",
+      "up_nom": "Béquilles et cannes",
+      "description": "Fabrication d'aides à la marche.",
+      "filiere": "Médical & Pharmaceutique",
+      "processus": [
+        "Découpe",
+        "Perçage",
+        "Montage",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Scie à tronçonner",
+          "role": "Découpe tubes",
+          "capacite": "500 coupes/jour",
+          "utilites": "Électricité 3kW"
+        },
+        {
+          "nom": "Cintreuse",
+          "role": "Cintrage",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité 4kW"
+        },
+        {
+          "nom": "Poste perçage",
+          "role": "Percage réglages",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à emboutir",
+          "role": "Emboutissage",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Cabine peinture",
+          "role": "Peinture",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste montage",
+          "role": "Montage poignées",
+          "capacite": "300 pièces/jour",
+          "utilites": "—"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test résistance",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 55000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "antiseptiques",
+      "up_nom": "Antiseptiques et désinfectants",
+      "description": "Fabrication de produits antiseptiques et désinfectants.",
+      "filiere": "Médical & Pharmaceutique",
+      "processus": [
+        "Formulation",
+        "Mélange",
+        "Contrôle",
+        "Conditionnement",
+        "Étiquetage"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Cuve mélangeuse",
+          "role": "Formulation",
+          "capacite": "2000 L/batch",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Mélangeur",
+          "role": "Homogénéisation",
+          "capacite": "2000 L/heure",
+          "utilites": "Électricité 7kW"
+        },
+        {
+          "nom": "Système dosage",
+          "role": "Dosage précis",
+          "capacite": "Automatique",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Remplisseuse",
+          "role": "Conditionnement",
+          "capacite": "2000 bouteilles/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Capsuleuse",
+          "role": "Fermeture",
+          "capacite": "2000 bouteilles/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Étiqueteuse",
+          "role": "Étiquetage",
+          "capacite": "2000 bouteilles/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Laboratoire",
+          "role": "Contrôle qualité",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 65000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "kits",
+      "up_nom": "Kits médicaux et premiers secours",
+      "description": "Assemblage de kits médicaux et de premiers secours.",
+      "filiere": "Médical & Pharmaceutique",
+      "processus": [
+        "Assemblage",
+        "Pesée",
+        "Conditionnement",
+        "Contrôle",
+        "Étiquetage"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Poste assemblage",
+          "role": "Assemblage manuel",
+          "capacite": "500 kits/jour",
+          "utilites": "Standard"
+        },
+        {
+          "nom": "Thermoscelleuse",
+          "role": "Scellage blisters",
+          "capacite": "300 kits/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à étiqueter",
+          "role": "Étiquetage",
+          "capacite": "500 kits/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste contrôle",
+          "role": "Inspection visuelle",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Stérilisateur",
+          "role": "Stérilisation",
+          "capacite": "1000 kits/batch",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ensacheuse",
+          "role": "Conditionnement",
+          "capacite": "300 sachets/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste traçabilité",
+          "role": "Enregistrement lots",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 50000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    }
+  ]
+}
