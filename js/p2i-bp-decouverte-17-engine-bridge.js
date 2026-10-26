@@ -16,7 +16,7 @@ function setPlaceholder(section,visible){
  if(placeholder)placeholder.hidden=!visible;
 }
 function invalidate(){
- $("p2i-r8-engine")?.remove();$("p2i-r9-engine")?.remove();
+ ["p2i-r2-engine","p2i-r8-engine","p2i-r9-engine","p2i-r12-engine"].forEach(id=>$(id)?.remove());
  const r8=$("p2i-r8"),r9=$("p2i-r9");
  if(r8)setPlaceholder(r8,true);
  if(r9)setPlaceholder(r9,true);
@@ -65,6 +65,38 @@ if(d&&((number(d.chiffre_affaires_usd)&&Math.abs(d.chiffre_affaires_usd-e.chiffr
        (number(d.cout_produits_vendus_usd)&&Math.abs(d.cout_produits_vendus_usd-e.cout_produits_vendus_usd)>.01))){
  invalidate();
  return;
+}
+// Synthèse et indicateurs : seules les grandeurs réellement calculées sont affichées.
+const margin=e.chiffre_affaires_usd-e.cout_produits_vendus_usd;
+const percent=e.chiffre_affaires_usd>0?100*margin/e.chiffre_affaires_usd:null;
+const summary=$("p2i-r2");
+if(summary){
+ const div=$("p2i-r2-engine")||document.createElement("div");
+ div.id="p2i-r2-engine";
+ div.innerHTML='<h3>Synthèse issue du moteur — Crackers</h3>'+table([
+  ["Chiffre d’affaires",money(e.chiffre_affaires_usd)],
+  ["Coût des produits vendus",money(e.cout_produits_vendus_usd)],
+  ["Marge brute avant autres charges",money(margin)],
+  ["Taux de marge brute",number(percent)?percent.toLocaleString("fr-FR",{maximumFractionDigits:2})+" %":"À renseigner"],
+  ["Résultat net",f&&number(f.resultat_net_usd)&&number(f.chiffre_affaires_total_usd)&&number(f.cout_ventes_total_usd)&&
+   Math.abs(f.chiffre_affaires_total_usd-e.chiffre_affaires_usd)<=.01&&
+   Math.abs(f.cout_ventes_total_usd-e.cout_produits_vendus_usd)<=.01?money(f.resultat_net_usd):"Non calculable à ce stade"]
+ ])+'<p class="bp-note">Marge brute avant charges complémentaires, amortissements, intérêts et impôts. Ne pas assimiler cette marge au résultat net.</p>';
+ if(!div.isConnected)summary.appendChild(div);
+}
+const indicators=$("p2i-r12");
+if(indicators){
+ const div=$("p2i-r12-engine")||document.createElement("div");
+ div.id="p2i-r12-engine";
+ div.innerHTML='<h3>Indicateurs calculables — référence Crackers</h3>'+table([
+  ["Quantité vendue",qty(e.quantite_vendue)],
+  ["Taux de marge brute",number(percent)?percent.toLocaleString("fr-FR",{maximumFractionDigits:2})+" %":"À renseigner"],
+  ["Coût des produits vendus / kg vendu",number(e.quantite_vendue)&&e.quantite_vendue>0?
+    money(e.cout_produits_vendus_usd/e.quantite_vendue).replace(" USD"," USD/kg"):"À renseigner"],
+  ["Rentabilité des capitaux propres","Non calculable sans CAPEX et financement validés"],
+  ["DSCR","Non calculable sans service de la dette validé"]
+ ])+'<p class="bp-note">Indicateurs partiels de la simulation ; aucune extrapolation automatique sur trois années.</p>';
+ if(!div.isConnected)indicators.appendChild(div);
 }
 {
 const div=$("p2i-r8-engine")||document.createElement("div");div.id="p2i-r8-engine";div.innerHTML='<h3>Production et ventes — données du moteur économique</h3>'+table([
