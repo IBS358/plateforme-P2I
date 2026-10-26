@@ -161,4 +161,5 @@ assert.ok(layout.includes('if(selectedVariant)destinationParams.set("configurati
 assert.ok(layout.includes('if(selectedCleaning)destinationParams.set("configuration_id",config)'),"Activité Nettoyage validée");
 assert.ok(layout.includes('else destinationParams.delete("configuration_id")'),"Retrait d'une configuration inconnue");
 
+assert.ok(layout.includes('configLabel=selectedCleaning?selectedCleaning.title:"À choisir"'),"Libellé lisible et validé pour Nettoyage industriel");
 console.log("P2I BP Découverte : contrôles statiques réussis (17 rubriques, liens, garde-fous).");
