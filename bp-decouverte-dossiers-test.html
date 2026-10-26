@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P2I — Consultation des 95 dossiers BP Découverte</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#17243d;background:#f3f6fb}
+*{box-sizing:border-box}body{margin:0}header{background:#10284c;color:white;padding:24px max(20px,calc((100vw - 1100px)/2))}
+header h1{margin:0 0 8px;font-size:1.55rem}header p{margin:0;color:#d8e6f7}
+main{max-width:1100px;margin:auto;padding:22px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0 22px}
+label{display:block;font-weight:700;margin-bottom:5px}select{width:100%;padding:12px;border:1px solid #aabbd0;border-radius:7px;background:white;color:#17243d}
+.notice{background:#fff5dd;border-left:5px solid #ad7200;padding:14px 18px;margin:14px 0;line-height:1.5}
+.status{color:#4b596d}.summary{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}.summary span{background:white;padding:12px 15px;border-radius:8px;border:1px solid #d6e1ed}
+nav{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0}nav a{color:#174579;background:#e2eaf5;padding:7px 10px;border-radius:6px;text-decoration:none}
+section{background:white;border:1px solid #dce4ef;border-radius:10px;padding:20px;margin:14px 0;overflow-wrap:anywhere}
+section h2{font-size:1.12rem;margin:0 0 15px;color:#123c72}h3{font-size:1rem;margin:14px 0 8px}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid #dce4ef;padding:9px;vertical-align:top;text-align:left}th{background:#e9f0fa}
+ul{padding-left:22px}li{margin:6px 0}.missing{color:#8b4a00;font-style:italic}.key{font-weight:650}
+button{padding:10px 14px;border:0;border-radius:6px;background:#154c88;color:white;cursor:pointer}
+@media(max-width:650px){.controls{grid-template-columns:1fr}main{padding:12px}}
+@media print{header{background:white;color:black;padding:0}header p{color:#444}.controls,nav,button{display:none}section{break-inside:avoid}}
+</style></head>
+<body><header><h1>P2I — Dossiers BP Découverte à 17 rubriques</h1>
+<p>Consultation et vérification des 95 dossiers sources, répartis dans 12 filières industrielles.</p></header>
+<main><div class="notice"><strong>Version de préparation — non bancable.</strong> Les informations descriptives proviennent des référentiels P2I. Les prix catalogue, CAPEX complets, comptes de résultat, BFR et trésoreries non validés restent explicitement non renseignés. Cette page ne transforme pas les 95 dossiers en business plans financiers finalisés.</div>
+<div class="controls"><div><label for="filiere">Filière industrielle</label><select id="filiere"><option value="">Chargement…</option></select></div>
+<div><label for="up">Unité de production</label><select id="up"><option value="">Choisir une UP</option></select></div></div>
+<p id="message" class="status" role="status">Chargement des dossiers…</p>
+<div id="view" hidden><h2 id="name"></h2><div class="summary" id="summary"></div>
+<button type="button" id="print">Imprimer / Enregistrer en PDF</button>
+<nav id="nav" aria-label="Sommaire des 17 rubriques"></nav><div id="sections"></div></div></main>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id),esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let dossiers=[];
+const human=k=>k.replace(/_/g," ").replace(/\b[a-z]/g,c=>c.toUpperCase());
+const missing=()=>'<span class="missing">À documenter / non validé</span>';
+function renderValue(v){
+ if(v===null||v===undefined||v==="")return missing();
+ if(Array.isArray(v))return v.length?'<ul>'+v.map(x=>'<li>'+renderValue(x)+'</li>').join("")+'</ul>':missing();
+ if(typeof v==="object"){
+  if(v.etat==="a_documenter")return '<p class="missing">'+esc(v.message||"Données non validées")+'</p>';
+  return '<table><tbody>'+Object.entries(v).map(([k,x])=>'<tr><th scope="row">'+esc(human(k))+'</th><td>'+renderValue(x)+'</td></tr>').join("")+'</tbody></table>';
+ }
+ if(typeof v==="boolean")return v?"Oui":"Non";
+ if(typeof v==="number")return esc(new Intl.NumberFormat("fr-FR",{maximumFractionDigits:2}).format(v));
+ return esc(v);
+}
+function choose(){
+ const d=dossiers.find(x=>x.up_id===$("up").value),view=$("view");
+ view.hidden=!d;if(!d)return;
+ $("name").textContent=d.up_nom;
+ $("summary").innerHTML='<span><b>Filière :</b> '+esc(d.filiere)+'</span><span><b>UP :</b> '+esc(d.up_id)+'</span><span><b>Statut :</b> '+esc(d.statut)+'</span>';
+ $("nav").innerHTML=d.sections.map(s=>'<a href="#rubrique-'+s.numero+'">'+s.numero+'. '+esc(s.titre)+'</a>').join("");
+ $("sections").innerHTML=d.sections.map(s=>'<section id="rubrique-'+s.numero+'"><h2>'+String(s.numero).padStart(2,"0")+' · '+esc(s.titre)+'</h2>'+renderValue(s.contenu)+'</section>').join("");
+ $("message").textContent="Dossier documentaire chargé — "+d.sections.length+" rubriques.";
+ const url=new URL(location.href);url.searchParams.set("up_id",d.up_id);history.replaceState(null,"",url);
+}
+function updateUP(){
+ const sector=$("filiere").value,items=dossiers.filter(d=>d.filiere===sector);
+ $("up").innerHTML=items.map(d=>'<option value="'+esc(d.up_id)+'">'+esc(d.up_nom)+'</option>').join("");
+ const requested=new URLSearchParams(location.search).get("up_id");
+ if(items.some(d=>d.up_id===requested))$("up").value=requested;
+ choose();
+}
+fetch("data/p2i-bp-decouverte-95-dossiers-17-rubriques.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).then(data=>{
+ if(!Array.isArray(data.dossiers)||data.dossiers.length!==95)throw Error("Référentiel de 95 dossiers incomplet");
+ dossiers=data.dossiers;
+ const sectors=[...new Set(dossiers.map(d=>d.filiere))].sort((a,b)=>a.localeCompare(b,"fr"));
+ $("filiere").innerHTML=sectors.map(s=>'<option value="'+esc(s)+'">'+esc(s)+'</option>').join("");
+ const requested=new URLSearchParams(location.search).get("up_id"),match=dossiers.find(d=>d.up_id===requested);
+ if(match)$("filiere").value=match.filiere;
+ $("filiere").addEventListener("change",updateUP);$("up").addEventListener("change",choose);
+ $("print").addEventListener("click",()=>window.print());
+ updateUP();
+}).catch(e=>{$("message").textContent="Impossible de charger les dossiers : "+e.message+". Ouvrir cette page depuis un serveur HTTP (pas en fichier local).";});
+})();
+</script></body></html>
