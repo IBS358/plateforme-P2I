@@ -1,0 +1,647 @@
+{
+  "version": "1.0.0",
+  "lot": "LOT-05",
+  "filiere": "Métallurgie & Mécanique",
+  "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
+  "nombre_up": 8,
+  "unites": [
+    {
+      "up_id": "serrurerie",
+      "up_nom": "Serrurerie industrielle",
+      "description": "Fabrication de serrures, clés et systèmes de sécurité.",
+      "filiere": "Métallurgie & Mécanique",
+      "processus": [
+        "Réception des matériaux",
+        "Découpe",
+        "Usinage",
+        "Assemblage",
+        "Finition",
+        "Contrôle qualité"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Poste à souder MIG/MAG",
+          "role": "Soudure des pièces métalliques",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité 8kW"
+        },
+        {
+          "nom": "Tronçonneuse à métaux",
+          "role": "Découpe des profilés",
+          "capacite": "300 mètres/jour",
+          "utilites": "Électricité 3kW"
+        },
+        {
+          "nom": "Perceuse à colonne",
+          "role": "Percage des pièces",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité 1.5kW"
+        },
+        {
+          "nom": "Plieuse hydraulique",
+          "role": "Pliage des tôles",
+          "capacite": "150 pièces/jour",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Meuleuse d'angle",
+          "role": "Ébavurage et finition",
+          "capacite": "Standard",
+          "utilites": "Électricité 2kW"
+        },
+        {
+          "nom": "Poste à riveter",
+          "role": "Assemblage par rivets",
+          "capacite": "400 pièces/jour",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Cabine de peinture",
+          "role": "Peinture des ouvrages",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité + ventilation"
+        },
+        {
+          "nom": "Contrôle qualité métal",
+          "role": "Inspection dimensionnelle",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 55000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "outillage",
+      "up_nom": "Outillage manuel",
+      "description": "Fabrication d'outils manuels pour BTP et industrie.",
+      "filiere": "Métallurgie & Mécanique",
+      "processus": [
+        "Réception des matériaux",
+        "Découpe",
+        "Usinage",
+        "Assemblage",
+        "Traitement thermique",
+        "Finition"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Forge à marteau-pilon",
+          "role": "Forgeage des outils",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Four de traitement thermique",
+          "role": "Trempe et revenu",
+          "capacite": "200 kg/batch",
+          "utilites": "Électricité ou gaz"
+        },
+        {
+          "nom": "Fraiseuse",
+          "role": "Usinage des pièces",
+          "capacite": "150 pièces/jour",
+          "utilites": "Électricité 7kW"
+        },
+        {
+          "nom": "Tour parallèle",
+          "role": "Usinage cylindrique",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Meuleuse plane",
+          "role": "Finition des surfaces",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité 3kW"
+        },
+        {
+          "nom": "Poste à affûter",
+          "role": "Affutage des lames",
+          "capacite": "150 pièces/jour",
+          "utilites": "Électricité 1kW"
+        },
+        {
+          "nom": "Marqueuse laser",
+          "role": "Marquage des outils",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 85000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "recyclage_metaux",
+      "up_nom": "Recyclage de métaux",
+      "description": "Recyclage et transformation de métaux ferreux et non-ferreux.",
+      "filiere": "Métallurgie & Mécanique",
+      "processus": [
+        "Collecte",
+        "Tri",
+        "Découpe",
+        "Broyage",
+        "Compactage",
+        "Expédition"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Broyeur à métaux",
+          "role": "Broyage des ferrailles",
+          "capacite": "2 tonnes/heure",
+          "utilites": "Électricité 45kW"
+        },
+        {
+          "nom": "Séparateur magnétique",
+          "role": "Séparation ferreux/non ferreux",
+          "capacite": "2 tonnes/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Compacteur à métaux",
+          "role": "Mise en balles",
+          "capacite": "1 tonne/heure",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Cisaille hydraulique",
+          "role": "Découpe des gros métaux",
+          "capacite": "3 tonnes/heure",
+          "utilites": "Électricité 30kW"
+        },
+        {
+          "nom": "Four de fusion",
+          "role": "Fusion des métaux",
+          "capacite": "500 kg/batch",
+          "utilites": "Électricité ou fioul"
+        },
+        {
+          "nom": "Pont roulant",
+          "role": "Manutention des charges",
+          "capacite": "5 tonnes",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Bascule pont",
+          "role": "Pesage des lots",
+          "capacite": "10 tonnes",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 110000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "chaudronnerie",
+      "up_nom": "Chaudronnerie industrielle",
+      "description": "Fabrication de cuves, réservoirs et équipements pression.",
+      "filiere": "Métallurgie & Mécanique",
+      "processus": [
+        "Réception des tôles",
+        "Découpe",
+        "Formage",
+        "Soudage",
+        "Contrôle",
+        "Finition"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Rouleuse",
+          "role": "Cintrage des tôles",
+          "capacite": "300 cm largeur",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Cisaille guillotine",
+          "role": "Découpe des tôles",
+          "capacite": "400 cm largeur",
+          "utilites": "Électricité 7kW"
+        },
+        {
+          "nom": "Poste à souder TIG/ARC",
+          "role": "Soudure de précision",
+          "capacite": "100 m/jour",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Poste à souder automatique",
+          "role": "Soudure robotisée",
+          "capacite": "200 m/jour",
+          "utilites": "Électricité 12kW"
+        },
+        {
+          "nom": "Perceuse radiale",
+          "role": "Perçage des cuves",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Meuleuse à soufre",
+          "role": "Rectification des soudures",
+          "capacite": "Standard",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Contrôle non destructif",
+          "role": "Contrôle qualité soudures",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 95000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "mecanosoudure",
+      "up_nom": "Mécanosoudure",
+      "description": "Travaux de soudure et fabrication métallique.",
+      "filiere": "Métallurgie & Mécanique",
+      "processus": [
+        "Étude du besoin",
+        "Découpe",
+        "Soudage",
+        "Finition",
+        "Contrôle qualité",
+        "Livraison"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Poste à souder",
+          "role": "Soudure générale",
+          "capacite": "150 m/jour",
+          "utilites": "Électricité 8kW"
+        },
+        {
+          "nom": "Laminoir",
+          "role": "Cintrage des barres",
+          "capacite": "100 m/jour",
+          "utilites": "Électricité 4kW"
+        },
+        {
+          "nom": "Plieuse",
+          "role": "Pliage des profilés",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Fraiseuse",
+          "role": "Usinage des pièces",
+          "capacite": "80 pièces/jour",
+          "utilites": "Électricité 7kW"
+        },
+        {
+          "nom": "Tour",
+          "role": "Tournage des pièces",
+          "capacite": "80 pièces/jour",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Poste à découper plasma",
+          "role": "Découpe rapide",
+          "capacite": "200 m/heure",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Marqueuse",
+          "role": "Marquage des pièces",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 65000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "structures",
+      "up_nom": "Structures métalliques",
+      "description": "Fabrication de structures métalliques pour BTP.",
+      "filiere": "Métallurgie & Mécanique",
+      "processus": [
+        "Étude des plans",
+        "Découpe",
+        "Perçage",
+        "Soudage",
+        "Montage",
+        "Contrôle",
+        "Livraison"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Scie à ruban",
+          "role": "Découpe des poutrelles",
+          "capacite": "200 coupes/jour",
+          "utilites": "Électricité 4kW"
+        },
+        {
+          "nom": "Poste à souder MAG",
+          "role": "Soudure des structures",
+          "capacite": "200 m/jour",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Pont roulant 10T",
+          "role": "Manutention lourde",
+          "capacite": "10 tonnes",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Niveleuse",
+          "role": "Aplanissement des tôles",
+          "capacite": "100 m²/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poinçonneuse",
+          "role": "Perçage et poinçonnage",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Cabine de grenaillage",
+          "role": "Traitement surface",
+          "capacite": "500 m²/jour",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Poste peinture",
+          "role": "Peinture des structures",
+          "capacite": "300 m²/jour",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 100000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "pieces",
+      "up_nom": "Pièces détachées automobiles",
+      "description": "Fabrication de pièces automobiles.",
+      "filiere": "Métallurgie & Mécanique",
+      "processus": [
+        "Réception des matières",
+        "Usinage",
+        "Contrôle",
+        "Traitement",
+        "Finition",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Tour CNC",
+          "role": "Usinage de précision",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Fraiseuse CNC",
+          "role": "Usinage complexe",
+          "capacite": "80 pièces/jour",
+          "utilites": "Électricité 12kW"
+        },
+        {
+          "nom": "Rectifieuse plane",
+          "role": "Finition des surfaces",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Perceuse CNC",
+          "role": "Perçage de précision",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité 4kW"
+        },
+        {
+          "nom": "Électro-érosion",
+          "role": "Usinage de formes complexes",
+          "capacite": "50 pièces/jour",
+          "utilites": "Électricité + diélectrique"
+        },
+        {
+          "nom": "Contrôle 3D",
+          "role": "Mesure dimensionnelle",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Laveuse industrielle",
+          "role": "Nettoyage des pièces",
+          "capacite": "500 pièces/jour",
+          "utilites": "Eau + électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 140000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "quincaillerie",
+      "up_nom": "Quincaillerie industrielle",
+      "description": "Fabrication d'articles de quincaillerie.",
+      "filiere": "Métallurgie & Mécanique",
+      "processus": [
+        "Réception des matières",
+        "Usinage",
+        "Traitement",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Dérouleuse",
+          "role": "Déroulage des fils",
+          "capacite": "500 m/heure",
+          "utilites": "Électricité 2kW"
+        },
+        {
+          "nom": "Ligne de tréfilage",
+          "role": "Réduction des sections",
+          "capacite": "300 kg/heure",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Machine à visser",
+          "role": "Production de vis",
+          "capacite": "1000 pièces/heure",
+          "utilites": "Électricité 3kW"
+        },
+        {
+          "nom": "Presse à froid",
+          "role": "Emboutissage à froid",
+          "capacite": "800 pièces/heure",
+          "utilites": "Électricité 7kW"
+        },
+        {
+          "nom": "Four de traitement",
+          "role": "Traitement thermique",
+          "capacite": "200 kg/batch",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Galvanoplastie",
+          "role": "Traitement de surface",
+          "capacite": "500 kg/jour",
+          "utilites": "Électricité + eau"
+        },
+        {
+          "nom": "Machine à emballer",
+          "role": "Conditionnement",
+          "capacite": "1000 boîtes/jour",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 75000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    }
+  ]
+}
