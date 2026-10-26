@@ -84,13 +84,13 @@ const cleaningVariants={
 const selectedCleaning=id==="nettoyage"&&Object.prototype.hasOwnProperty.call(cleaningVariants,config)?cleaningVariants[config]:null;
 if(id==="nettoyage")configLabel=selectedCleaning?selectedCleaning.title:"À choisir";
 const isSpecialCleaning=!!selectedCleaning&&config!=="nettoyage_intensif";
-const variantMachines=isSpecialCleaning?[]:variantMachineData?[
+const variantMachines=(id==="nettoyage"&&!selectedCleaning)||isSpecialCleaning?[]:variantMachineData?[
  ...(Array.isArray(machineSource.base_machines)?machineSource.base_machines:[]),
  ...(Array.isArray(variantMachineData.specific_machines)?variantMachineData.specific_machines:[])
 ]:referenceMachines;
 const machineNames=variantMachines.map(m=>typeof m==="string"?m:(m.name||m.nom||m.machine||m.machine_name||"Équipement à qualifier"));
 const machineCount=variantMachines.length;
-const equipmentSummary=isSpecialCleaning?"Le catalogue général de nettoyage n’est pas validé pour cette activité spécialisée. Équipements, habilitations, EPI, protocoles et gestion des déchets sont à qualifier avant toute estimation.":variantMachineData?
+const equipmentSummary=id==="nettoyage"&&!selectedCleaning?"Sélectionnez une activité de nettoyage avant de consulter une configuration d’équipements.":isSpecialCleaning?"Le catalogue général de nettoyage n’est pas validé pour cette activité spécialisée. Équipements, habilitations, EPI, protocoles et gestion des déchets sont à qualifier avant toute estimation.":variantMachineData?
  "Référentiel Biscuiterie : "+machineCount+" entrées de fonctions ou d’équipements (communs et spécifiques). Les options alternatives ne doivent pas être additionnées dans le budget.":
  machineCount?machineCount+" équipements référencés dans MACHINES_DATA. Les prix et la compatibilité de la ligne restent à confirmer.":
  "Liste des équipements à compléter dans le référentiel P2I.";
@@ -208,7 +208,7 @@ $("p2i-bp17-print").addEventListener("click",()=>{
 
 // Images liées à l’UP et à sa variante : pas de photo d’une autre activité.
 const imageSet=unitPictures;
-const imageVariant=id==="nettoyage"?config:selectedVariant;
+const imageVariant=id==="nettoyage"?(selectedCleaning?config:null):selectedVariant;
 const variantImage=imageVariant&&imageSet.variants&&imageSet.variants[imageVariant];
 const image=variantImage?{...imageSet,...variantImage}:imageSet;
 if(pictureUrl(image.hero))main.querySelector(".bp-hero").style.setProperty("--bp-hero-image",'url("'+pictureUrl(image.hero)+'")');
