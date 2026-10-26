@@ -21,6 +21,18 @@ function invalidate(){
  if(r8)setPlaceholder(r8,true);
  if(r9)setPlaceholder(r9,true);
 }
+// Contrôles du compte financier : chaque rapprochement n'est appliqué que si ses composantes sont renseignées.
+function financialConsistent(f,e){
+ if(!f||!number(f.chiffre_affaires_total_usd)||!number(f.cout_ventes_total_usd))return false;
+ if(Math.abs(f.chiffre_affaires_total_usd-e.chiffre_affaires_usd)>.01||
+    Math.abs(f.cout_ventes_total_usd-e.cout_produits_vendus_usd)>.01)return false;
+ const checks=[
+  ["marge_industrielle_ou_sur_prestations_usd",f.chiffre_affaires_total_usd-f.cout_ventes_total_usd],
+  ["resultat_avant_impot_usd",number(f.resultat_exploitation_usd)&&number(f.resultat_financier_usd)?
+   f.resultat_exploitation_usd+f.resultat_financier_usd:null]
+ ];
+ return checks.every(([key,expected])=>!number(f[key])||expected===null||Math.abs(f[key]-expected)<=.02);
+}
 const table=rows=>'<div class="bp-table-wrap"><table><thead><tr><th>Indicateur</th><th>Valeur issue du moteur</th></tr></thead><tbody>'+rows.map(([a,b])=>'<tr><td>'+esc(a)+'</td><td>'+esc(b)+'</td></tr>').join("")+'</tbody></table></div>';
 function update(){
 const r8=$("p2i-r8"),r9=$("p2i-r9");
@@ -78,9 +90,7 @@ if(summary){
   ["Coût des produits vendus",money(e.cout_produits_vendus_usd)],
   ["Marge brute avant autres charges",money(margin)],
   ["Taux de marge brute",number(percent)?percent.toLocaleString("fr-FR",{maximumFractionDigits:2})+" %":"À renseigner"],
-  ["Résultat net",f&&number(f.resultat_net_usd)&&number(f.chiffre_affaires_total_usd)&&number(f.cout_ventes_total_usd)&&
-   Math.abs(f.chiffre_affaires_total_usd-e.chiffre_affaires_usd)<=.01&&
-   Math.abs(f.cout_ventes_total_usd-e.cout_produits_vendus_usd)<=.01?money(f.resultat_net_usd):"Non calculable à ce stade"]
+  ["Résultat net",financialConsistent(f,e)&&number(f.resultat_net_usd)?money(f.resultat_net_usd):"Non calculable à ce stade"]
  ])+'<p class="bp-note">Marge brute avant charges complémentaires, amortissements, intérêts et impôts. Ne pas assimiler cette marge au résultat net.</p>';
  if(!div.isConnected)summary.appendChild(div);
 }
@@ -108,9 +118,7 @@ const div=$("p2i-r8-engine")||document.createElement("div");div.id="p2i-r8-engin
 if(!div.isConnected)r8.appendChild(div);
 setPlaceholder(r8,false);
 }
-if(f&&number(f.chiffre_affaires_total_usd)&&number(f.cout_ventes_total_usd)&&
- Math.abs(f.chiffre_affaires_total_usd-e.chiffre_affaires_usd)<=.01&&
- Math.abs(f.cout_ventes_total_usd-e.cout_produits_vendus_usd)<=.01){
+if(financialConsistent(f,e)){
 const div=$("p2i-r9-engine")||document.createElement("div");div.id="p2i-r9-engine";div.innerHTML='<h3>Compte de résultat consolidé — moteur P2I</h3>'+table([
 ["Chiffre d’affaires",money(f.chiffre_affaires_total_usd)],
 ["Coût des produits vendus",money(f.cout_ventes_total_usd)],
