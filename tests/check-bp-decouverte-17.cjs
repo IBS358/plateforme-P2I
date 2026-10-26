@@ -119,6 +119,12 @@ assert.ok(pro.includes('ne sont pas automatiquement validés ni transférés'),"
 assert.ok(pro.includes('Retour au BP Découverte'),"Le parcours retour est disponible");
 
 assert.ok(layout.includes('window.print()'),"Téléchargement via impression PDF du navigateur");
+assert.ok(layout.includes("Imprimer / Enregistrer en PDF"),"Le bouton décrit correctement l'impression native");
+assert.ok(layout.includes("document.title="),"Titre du document PDF personnalisé");
+assert.ok(layout.includes("document.fonts.ready"),"Attendre les polices avant l'impression");
+assert.ok(layout.includes('img.addEventListener("load"'),"Attendre les photographies avant l'impression");
+assert.ok(layout.includes('img.addEventListener("error"'),"Ne pas bloquer si une photographie échoue");
+
 assert.ok(css.includes(".bp-actions"),"Actions de fin de parcours stylées");
 assert.ok(css.includes("bp-sidebar"),"La navigation doit être stylée");
 assert.doesNotThrow(()=>new vm.Script(images),"Registre des photographies : JavaScript valide");
