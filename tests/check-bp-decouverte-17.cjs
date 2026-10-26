@@ -162,4 +162,7 @@ assert.ok(layout.includes('if(selectedCleaning)destinationParams.set("configurat
 assert.ok(layout.includes('else destinationParams.delete("configuration_id")'),"Retrait d'une configuration inconnue");
 
 assert.ok(layout.includes('configLabel=selectedCleaning?selectedCleaning.title:"À choisir"'),"Libellé lisible et validé pour Nettoyage industriel");
+assert.ok(layout.includes('(id==="nettoyage"&&!selectedCleaning)||isSpecialCleaning?[]'),"Aucun équipement générique en l'absence de sélection Nettoyage");
+assert.ok(layout.includes('id==="nettoyage"&&!selectedCleaning?"Sélectionnez une activité'),"Message clair si aucune activité Nettoyage n'est choisie");
+assert.ok(layout.includes('id==="nettoyage"?(selectedCleaning?config:null):selectedVariant'),"Pas de photo de variante Nettoyage inconnue");
 console.log("P2I BP Découverte : contrôles statiques réussis (17 rubriques, liens, garde-fous).");
