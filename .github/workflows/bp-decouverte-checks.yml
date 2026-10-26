@@ -18,6 +18,8 @@ on:
       - 'tests/check-p2i-bp-lot-01.cjs'
       - 'tests/check-p2i-bp-tous-lots.cjs'
       - 'tests/check-p2i-bp-financial-validation.cjs'
+      - 'tests/check-p2i-bp-assembleur-previsions.cjs'
+      - 'js/p2i-bp-decouverte-assembleur-previsions.js'
       - 'tests/check-p2i-bp-tresorerie-12-mois.cjs'
       - 'js/p2i-bp-decouverte-tresorerie-12-mois.js'
       - 'tests/check-p2i-bp-validated-projections.cjs'
@@ -80,3 +82,5 @@ jobs:
         run: node tests/check-p2i-bp-tresorerie-12-mois.cjs
       - name: Moteur BFR mensuel sur 36 mois
         run: node tests/check-p2i-bp-bfr-36-mois.cjs
+      - name: Assemblage et publication des prévisions BP Découverte
+        run: node tests/check-p2i-bp-assembleur-previsions.cjs
