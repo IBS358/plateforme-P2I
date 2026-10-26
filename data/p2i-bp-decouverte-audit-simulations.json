@@ -116,14 +116,14 @@
       "nom": "Production de jus et boissons",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
-      "source_prix": "https://eshop.czechminibreweries.com/product/mfpu-500-mg/",
+      "source_prix": "https://www.made-in-china.com/price/prodetail_Beverage-Processing-Machinery_iqAxpBWVCvRO.html",
       "certification_prix_exigee": false,
       "accord_fournisseur_exige": false,
       "devis_exige": false,
       "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 161844.767,
-      "investissement_simulation_usd": 208944.767,
-      "reserve_initiale_distincte_usd": 67501.00109938337,
+      "budget_equipements_usd": 97009.64750699999,
+      "investissement_simulation_usd": 144109.647507,
+      "reserve_initiale_distincte_usd": 52529.53603177497,
       "annuel": [
         {
           "annee": 1,
@@ -131,7 +131,7 @@
           "ventes_kg": 294000,
           "stock_fin_kg": 6000,
           "chiffre_affaires_usd": 411600,
-          "resultat_net_usd": 4101.599613950025
+          "resultat_net_usd": 11437.69338458298
         },
         {
           "annee": 2,
@@ -139,7 +139,7 @@
           "ventes_kg": 382200,
           "stock_fin_kg": 13800,
           "chiffre_affaires_usd": 545781.6,
-          "resultat_net_usd": 25656.612424639192
+          "resultat_net_usd": 32448.091191530955
         },
         {
           "annee": 3,
@@ -147,7 +147,7 @@
           "ventes_kg": 441000,
           "stock_fin_kg": 22800,
           "chiffre_affaires_usd": 642342.96,
-          "resultat_net_usd": 39431.37629598957
+          "resultat_net_usd": 45678.240059140124
         }
       ],
       "controles": {
@@ -157,9 +157,9 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        -1.1641532182693481e-10,
-        -1.1641532182693481e-10,
-        -5.820766091346741e-11
+        0,
+        5.820766091346741e-11,
+        5.820766091346741e-11
       ]
     },
     {

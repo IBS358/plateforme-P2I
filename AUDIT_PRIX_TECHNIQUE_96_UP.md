@@ -9,7 +9,7 @@ Inventaire automatique du référentiel P2I au 26 octobre 2026. Ce contrôle ide
 
 ## Analyse ciblée des références disponibles
 
-- Jus : MFPU-500-MG, 83 990 EUR HT pour une ligne comprenant lavage-broyage, presse, pompe, pasteurisation, remplissage en poches et cuves. Le remplissage en poches est inclus dans le prix mais la simulation ajoute une remplisseuse de bouteilles : deux voies alternatives de conditionnement, dont la première reste payée ; ce n’est pas un procédé en série sans doublon économique. Une ligne bouteille directement tarifée ou un prix de substitution doit être recherché. Source : https://eshop.czechminibreweries.com/product/mfpu-500-mg/
+- Jus : configuration P2I composée de machines distinctes avec extracteur à vis GGJE-5 annoncé pour l’ananas. Une seule remplisseuse de bouteilles est chiffrée. Prix publics et capacités indicatives ; compatibilité des interfaces et rendement restent à établir. Source : https://www.made-in-china.com/price/prodetail_Beverage-Processing-Machinery_iqAxpBWVCvRO.html
 - Jus : la borne haute de 9 300 EUR HT est une fourchette publiée Stalmont, pas un prix ferme pour un modèle configuré. Épluchage/parage de l’ananas, aptitude du broyeur et du pressage, qualité du jus, traitement thermique, température de remplissage, contenant et raccordement demeurent à documenter. Source : https://stalmont.net.pl/en/bottle-filler/
 - Aliments bétail : TCPEL publie 24 500–32 000 USD FOB pour une famille de petites lignes ; les composants précis, l’ensachage, l’énergie et les interfaces restent à qualifier ensemble. Une fourchette n’est pas le prix confirmé d’une configuration unique. Source : https://tcpel.net/pellet-production-line/feed-pellet-production-line/
 - Crackers : budget P2I utilisateur de 450 000 USD pour 500 kg/h conservé ; aucun fabricant ni prix catalogue de cette ligne n’est actuellement attesté.
@@ -21,7 +21,7 @@ Inventaire automatique du référentiel P2I au 26 octobre 2026. Ce contrôle ide
 | Agro-alimentaire & Boissons | Conserverie de légumes (`conserverie_legumes`) | 7 | 0 | aucun nom identique détecté | à documenter |
 | Agro-alimentaire & Boissons | Biscuiterie industrielle (`biscuiterie`) | 12 | 0 | aucun nom identique détecté | Crackers: budget_reference_utilisateur_pas_prix_catalogue_retrouve |
 | Agro-alimentaire & Boissons | Boulangerie industrielle (`boulangerie_industrielle`) | 7 | 0 | aucun nom identique détecté | à documenter |
-| Agro-alimentaire & Boissons | Production de jus et boissons (`jus_boissons`) | 8 | 0 | aucun nom identique détecté | Production de jus et boissons: prix_catalogue_public_non_certifie (https://eshop.czechminibreweries.com/product/mfpu-500-mg/) |
+| Agro-alimentaire & Boissons | Production de jus et boissons (`jus_boissons`) | 8 | 0 | aucun nom identique détecté | Production de jus et boissons: prix_catalogue_public_non_certifie (https://www.made-in-china.com/price/prodetail_Beverage-Processing-Machinery_iqAxpBWVCvRO.html) |
 | Agro-alimentaire & Boissons | Mini-laiterie (`mini_laiterie`) | 6 | 0 | aucun nom identique détecté | à documenter |
 | Agro-alimentaire & Boissons | Huiles alimentaires (`huiles_alimentaires`) | 11 | 0 | aucun nom identique détecté | à documenter |
 | Agro-alimentaire & Boissons | Transformation d'épices (`epices`) | 9 | 0 | aucun nom identique détecté | à documenter |
