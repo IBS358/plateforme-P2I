@@ -28,7 +28,10 @@ function construire(entree){
  const rBfr=scenario!==undefined?
   root.P2I_BP_BFR_MENSUEL.calculate(scenario):bfr.calculer(entree.entrees_bfr);
  const rTre=tre.calculer(entree.entrees_tresorerie);
- if(!rBfr.valide)erreurs.push(...(rBfr.erreurs||rBfr.blocages).map(x=>"BFR : "+x));
+ if(!rBfr.valide){
+  const blocages=Array.isArray(rBfr.erreurs)?rBfr.erreurs:Array.isArray(rBfr.blocages)?rBfr.blocages:["Entrées BFR invalides sans diagnostic du moteur"];
+  erreurs.push(...blocages.map(x=>"BFR : "+(typeof x==="string"?x:JSON.stringify(x))));
+ }
  // Les encaissements clients issus du scénario de règlement clients 40/60 doivent être identiques
  // aux ventes clients inscrites en trésorerie pour les douze premiers mois.
  if(scenario!==undefined&&rBfr.valide&&rTre.valide){
@@ -39,7 +42,10 @@ function construire(entree){
     erreurs.push("Mois "+(i+1)+" : encaissements clients incompatibles avec le BFR clients 40/60");
   }
  }
- if(!rTre.valide)erreurs.push(...rTre.erreurs.map(x=>"Trésorerie : "+x));
+ if(!rTre.valide){
+  const blocages=Array.isArray(rTre.erreurs)?rTre.erreurs:["Entrées de trésorerie invalides sans diagnostic du moteur"];
+  erreurs.push(...blocages.map(x=>"Trésorerie : "+(typeof x==="string"?x:JSON.stringify(x))));
+ }
  if(erreurs.length)return Object.freeze({valide:false,erreurs:Object.freeze(erreurs),previsions:null});
  const d={
   up_id:id,configuration_id:config,
