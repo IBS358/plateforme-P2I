@@ -1,0 +1,639 @@
+{
+  "version": "1.0.0",
+  "lot": "LOT-07",
+  "filiere": "Électronique & Électricité",
+  "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
+  "nombre_up": 8,
+  "unites": [
+    {
+      "up_id": "cables",
+      "up_nom": "Câbles électriques",
+      "description": "Fabrication de câbles électriques et conducteurs.",
+      "filiere": "Électronique & Électricité",
+      "processus": [
+        "Tréfilage",
+        "Toronnage",
+        "Isolation",
+        "Refroidissement",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Tréfileuse",
+          "role": "Tréfilage du cuivre",
+          "capacite": "200 kg/heure",
+          "utilites": "Électricité 45kW"
+        },
+        {
+          "nom": "Recuiseuse",
+          "role": "Recuisson cuivre",
+          "capacite": "200 kg/heure",
+          "utilites": "Électricité + eau"
+        },
+        {
+          "nom": "Extrudeuse isolation",
+          "role": "Gaine isolation",
+          "capacite": "150 kg/heure",
+          "utilites": "Électricité 55kW"
+        },
+        {
+          "nom": "Cabieuse",
+          "role": "Câblage conducteurs",
+          "capacite": "100 m/min",
+          "utilites": "Électricité 30kW"
+        },
+        {
+          "nom": "Machine à gainer",
+          "role": "Gaine extérieure",
+          "capacite": "100 m/min",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Enrouleuse",
+          "role": "Bobinage câbles",
+          "capacite": "50 bobines/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle haute tension",
+          "role": "Test isolation",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 125000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "panneaux_solaires",
+      "up_nom": "Panneaux solaires",
+      "description": "Assemblage de panneaux solaires photovoltaïques.",
+      "filiere": "Électronique & Électricité",
+      "processus": [
+        "Assemblage des cellules",
+        "Soudure",
+        "Lamination",
+        "Montage cadre",
+        "Test",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Lamineur",
+          "role": "Lamination cellules",
+          "capacite": "200 panneaux/jour",
+          "utilites": "Électricité + vide"
+        },
+        {
+          "nom": "Stringer",
+          "role": "Soudage cellules",
+          "capacite": "1000 cellules/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à cadre",
+          "role": "Montage cadres alu",
+          "capacite": "200 panneaux/jour",
+          "utilites": "Électricité + air"
+        },
+        {
+          "nom": "Testeur flash",
+          "role": "Test puissance",
+          "capacite": "1 panneau/min",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Découpeuse verre",
+          "role": "Découpe verre trempé",
+          "capacite": "300 panneaux/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste contrôle qualité",
+          "role": "Inspection cellules",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Palettiseur",
+          "role": "Palettisation",
+          "capacite": "200 panneaux/jour",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 180000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "appareils",
+      "up_nom": "Appareils électroménagers",
+      "description": "Assemblage d'appareils électroménagers.",
+      "filiere": "Électronique & Électricité",
+      "processus": [
+        "Assemblage",
+        "Câblage",
+        "Test",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Ligne SMT",
+          "role": "Placement composants",
+          "capacite": "20000 composants/heure",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Four à refusion",
+          "role": "Soudure CMS",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste brasage",
+          "role": "Brasage manuel",
+          "capacite": "100 cartes/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Testeur fonctionnel",
+          "role": "Test électronique",
+          "capacite": "50 appareils/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Boîtier d'assemblage",
+          "role": "Montage boîtier",
+          "capacite": "100 appareils/heure",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Machine à étiqueter",
+          "role": "Étiquetage SN",
+          "capacite": "200 appareils/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste contrôle qualité",
+          "role": "Inspection visuelle",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 95000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "led",
+      "up_nom": "Éclairage LED",
+      "description": "Fabrication de luminaires et ampoules LED.",
+      "filiere": "Électronique & Électricité",
+      "processus": [
+        "Assemblage",
+        "Soudure",
+        "Test",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Pick & place LED",
+          "role": "Placement LED",
+          "capacite": "10000 LED/heure",
+          "utilites": "Électricité 10kW"
+        },
+        {
+          "nom": "Four à refusion",
+          "role": "Soudure LED",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Assembleuse driver",
+          "role": "Assemblage driver",
+          "capacite": "200 drivers/heure",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Testeur photométrique",
+          "role": "Test flux lumineux",
+          "capacite": "200 lampes/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à encapsuler",
+          "role": "Encapsulation LED",
+          "capacite": "500 ampoules/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste contrôle qualité",
+          "role": "Test durée vie",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ensacheuse",
+          "role": "Conditionnement",
+          "capacite": "500 boîtes/heure",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 65000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "tableaux",
+      "up_nom": "Tableaux électriques",
+      "description": "Fabrication de tableaux électriques et armoires.",
+      "filiere": "Électronique & Électricité",
+      "processus": [
+        "Découpe des tôles",
+        "Peinture",
+        "Assemblage",
+        "Câblage",
+        "Test",
+        "Contrôle"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Découpeuse tôle",
+          "role": "Découpe armoires",
+          "capacite": "20 m²/heure",
+          "utilites": "Électricité 7kW"
+        },
+        {
+          "nom": "Plieuse CNC",
+          "role": "Pliage armoires",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Poste câblage",
+          "role": "Câblage manuel",
+          "capacite": "20 tableaux/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poinçonneuse",
+          "role": "Perçage, découpe",
+          "capacite": "50 tableaux/jour",
+          "utilites": "Électricité 4kW"
+        },
+        {
+          "nom": "Testeur diélectrique",
+          "role": "Test iso",
+          "capacite": "20 tableaux/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste marquage",
+          "role": "Marquage étiquettes",
+          "capacite": "1000 étiquettes/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test fonctionnel",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 85000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "onduleurs",
+      "up_nom": "Onduleurs et convertisseurs",
+      "description": "Fabrication d'onduleurs et convertisseurs de puissance.",
+      "filiere": "Électronique & Électricité",
+      "processus": [
+        "Assemblage",
+        "Soudure",
+        "Programmation",
+        "Test",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Ligne SMT",
+          "role": "CMS",
+          "capacite": "20000 comp/heure",
+          "utilites": "Électricité 15kW"
+        },
+        {
+          "nom": "Four refusion",
+          "role": "Brasage CMS",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste brasage THT",
+          "role": "Composants trous",
+          "capacite": "100 cartes/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Assemblage",
+          "role": "Montage boîtier",
+          "capacite": "100 onduleurs/jour",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Simulateur solaire",
+          "role": "Test charge",
+          "capacite": "50 onduleurs/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Poste conformal",
+          "role": "Application vernis",
+          "capacite": "100 cartes/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test final",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 110000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "compteurs",
+      "up_nom": "Compteurs électriques",
+      "description": "Fabrication de compteurs électriques intelligents.",
+      "filiere": "Électronique & Électricité",
+      "processus": [
+        "Assemblage",
+        "Soudure",
+        "Calibration",
+        "Test",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Ligne SMT",
+          "role": "Placement CMS",
+          "capacite": "15000 comp/heure",
+          "utilites": "Électricité 12kW"
+        },
+        {
+          "nom": "Four refusion",
+          "role": "Brasage",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Étalonneur",
+          "role": "Calibration",
+          "capacite": "200 compteurs/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à souder",
+          "role": "Soudure batterie",
+          "capacite": "200 compteurs/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Testeur RFID",
+          "role": "Test communication",
+          "capacite": "200 compteurs/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Boîtier d'assemblage",
+          "role": "Montage boîtier",
+          "capacite": "200 compteurs/heure",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test métrologique",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 150000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "batteries",
+      "up_nom": "Batteries et accumulateurs",
+      "description": "Fabrication de batteries et accumulateurs.",
+      "filiere": "Électronique & Électricité",
+      "processus": [
+        "Assemblage cellules",
+        "Remplissage",
+        "Formation",
+        "Test",
+        "Contrôle",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [],
+      "marches_cibles": [],
+      "capacite_generique_texte": null,
+      "machines_catalogue": [
+        {
+          "nom": "Presse à électrode",
+          "role": "Fabrication électrodes",
+          "capacite": "500 électrodes/heure",
+          "utilites": "Électricité 20kW"
+        },
+        {
+          "nom": "Enrouleuse",
+          "role": "Bobinage",
+          "capacite": "200 cellules/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à souder",
+          "role": "Soudure collecteurs",
+          "capacite": "200 cellules/heure",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Remplisseuse électrolyte",
+          "role": "Dosage électrolyte",
+          "capacite": "200 cellules/heure",
+          "utilites": "Air comprimé"
+        },
+        {
+          "nom": "Formation batterie",
+          "role": "Cyclage",
+          "capacite": "100 batteries/batch",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Testeur capacité",
+          "role": "Test décharge",
+          "capacite": "50 batteries/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Test final",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 200000,
+        "ventilation": null,
+        "chiffre_affaires_annuel_indicatif_usd": null,
+        "marge_brute_indicative_pourcent": null,
+        "rentabilite_nette_indicative_pourcent": null
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": null,
+        "ecart_capex_min_ventilation_usd": null,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    }
+  ]
+}
