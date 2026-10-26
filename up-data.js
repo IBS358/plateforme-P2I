@@ -1120,7 +1120,7 @@ aliments_betail: {
     "Assistance technique",
     "Prix compétitifs"
   ]
-}
+},
 
   adhesifs: {
     id: "adhesifs",
