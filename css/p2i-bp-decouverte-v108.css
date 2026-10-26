@@ -4,3 +4,5 @@
 @media print{.currency-choice,.context-actions{display:none!important}.context-banner{background:#eff5fb;color:#163954}}
 .cleaning-choice{font:inherit;color:#e7f4ff;text-align:left;cursor:pointer}.cleaning-choice[aria-pressed=true]{outline:3px solid #f6d66a;outline-offset:3px}.cleaning-choice b{color:#8ce1ff}
 :root{--forming-atlas:url('../assets/bp-v108/formage-biscuiterie-ia.jpg')}.atlas-9,.atlas-10{background-image:var(--forming-atlas);background-size:200% 100%}.atlas-9{background-position:0 0}.atlas-10{background-position:100% 0}
+
+:root{--jus-atlas:url('../assets/bp-jus/illustrations-jus-ia.jpg')} .jus-photo{background-image:var(--jus-atlas);background-size:300% 200%}.jus-0{background-position:0% 0%}.jus-1{background-position:50% 0%}.jus-2{background-position:100% 0%}.jus-3{background-position:0% 100%}.jus-4{background-position:50% 100%}.jus-5{background-position:100% 100%}
