@@ -44,6 +44,9 @@ assert.equal(has("p2i-r8-engine"),false,"Sélecteur vide : retirer la production
 assert.equal(has("p2i-r9-engine"),false,"Sélecteur vide : retirer le résultat périmé");
 assert.equal(r8.placeholder.hidden,false);assert.equal(r9.placeholder.hidden,false);
 
+choice.value="crackers";
+listeners.change();
+assert.equal(has("p2i-r8-engine"),true,"Revenir aux Crackers pour les tests de cohérence");
 // Contrôles de cohérence physique : une survente ou un stock négatif invalide les résultats.
 window.P2I_CRACKERS_RESULTAT.quantite_vendue=600;
 listeners["p2i:economic-result-ready"]();
