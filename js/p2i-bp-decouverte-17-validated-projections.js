@@ -103,8 +103,8 @@ function update(){
  add("p2i-r7","p2i-validated-finance-r7",'<h3>Financement de l’investissement consolidé</h3>'+
   renderTable(["Poste","Montant"],[
    ["CAPEX complet",money(f.investissement_total_usd)],
-   ["Apport 40 %",money(f.apport_40_usd)],
-   ["Dette 60 %",money(f.dette_60_usd)],
+   ["Apport 30 %",money(f.apport_30_usd)],
+   ["Dette 70 %",money(f.dette_70_usd)],
    ["Réserve de trésorerie distincte",f.reserve_tresorerie_distincte_usd===null?"Non renseignée":money(f.reserve_tresorerie_distincte_usd)]
   ]));
  add("p2i-r9","p2i-validated-finance-r9",
