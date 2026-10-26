@@ -74,7 +74,7 @@ function validate(dataset){
  }
  // Ne jamais publier un financement si le budget déclaré est absent ou incohérent.
  const finance=capex===null||!nonnegative(investment.total)||!close(investment.total,capex)?null:Object.freeze({investissement_total_usd:capex,
-  apport_40_usd:capex*.4,dette_60_usd:capex*.6,
+  apport_30_usd:capex*.3,dette_70_usd:capex*.7,
   reserve_tresorerie_distincte_usd:nonnegative(investment.reserve_tresorerie)?investment.reserve_tresorerie:null});
  return Object.freeze({valide:issues.length===0,blocages:Object.freeze(issues),
   financement_indicatif:finance});
