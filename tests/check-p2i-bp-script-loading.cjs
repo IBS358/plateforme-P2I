@@ -2,7 +2,7 @@
 "use strict";
 const fs=require("node:fs"),path=require("node:path"),assert=require("node:assert/strict");
 const root=path.resolve(__dirname,"..");
-const html=fs.readFileSync(path.join(root,"business-plan-decouverte.html"),"utf8");
+const html=fs.readFileSync(path.join(root,"business-plan-decouverte-avant-integration-v108.html"),"utf8");
 const scripts=[...html.matchAll(/<script\s+src="(js\/p2i-bp-decouverte-[^"]+)"\s+defer><\/script>/g)].map(x=>x[1]);
 const required=[
  "js/p2i-bp-decouverte-bfr-36-mois.js",
@@ -18,4 +18,6 @@ for(const script of required){
 const order=required.map(x=>scripts.indexOf(x));
 assert.ok(order[0]<order[3]&&order[1]<order[3]&&order[2]<order[3],"Les moteurs et le validateur précèdent l'assembleur");
 assert.ok(order[3]<order[4],"L'assembleur précède l'affichage des prévisions");
+assert.ok(html.includes('src="up-data.js"'),"Le BP doit charger le référentiel canonique audité");
+assert.ok(!html.includes('src="js/up-data.js"'),"Ne pas charger la copie historique contenant le doublon Peintures BTP");
 console.log("Scripts financiers BP Découverte : chargement unique et ordre cohérent.");

@@ -27,7 +27,7 @@ function annualMatrix(title,rows){
 }
 function getUP(){
 const p=new URLSearchParams(location.search);
-let id=p.get("unit_id")||p.get("id")||localStorage.getItem("currentProductionKey")||"";
+let id=p.get("unit_id")||p.get("up_id")||p.get("id")||localStorage.getItem("currentProductionKey")||"";
 let up=(typeof P2I_UP_DATA!=="undefined"&&P2I_UP_DATA[id])||null;
 if(!up){try{const x=JSON.parse(localStorage.getItem("currentProduction")||"null");if(x&&(!id||x.id===id))up=x}catch(_){}}
 return {id,up:up||{}};
@@ -109,7 +109,7 @@ note("Les équipements sont présentés verticalement par fonction. Les capacit�
 '<h3>Canaux et actions commerciales</h3>'+(isSpecialCleaning?"<p>Canaux commerciaux spécialisés à valider.</p>":list(up.marketing))+note("Prix de vente, volumes, circuits de distribution et budget marketing : à justifier par hypothèses documentées."),
 '<h3>Opportunités</h3>'+(isSpecialCleaning?"<p>Opportunités propres à cette activité à étudier.</p>":list(up.avantages))+'<h3>Risques et contraintes</h3>'+(isSpecialCleaning?"<p>Risques chimiques ou biologiques, conformité, sécurité du personnel et traitement des déchets à qualifier.</p>":list(up.challenges)),
 '<div class="bp-cards">'+card("Machines",equipmentReference!==null?fmt(equipmentReference):"À documenter")+card("Investissement total","À consolider : équipements et coûts complémentaires")+card("Apport 30 %",capex!==null?fmt(capex*.3):"À documenter")+card("Dette 70 %",capex!==null?fmt(capex*.7):"À documenter")+'</div>'+finance+note("Attention : un CAPEX minimal indicatif ne remplace pas le budget détaillé d’une ligne intégrée ou d’un devis fournisseur. La réserve de trésorerie reste distincte."),
-'<h3>Capacité et processus</h3>'+table([["Capacité de référence",up.monthly_capacity||"À documenter"],["Volume commercialisé","À calculer"],["Prix unitaire","À documenter"]])+'<h3>Étapes de production ou de prestation</h3>'+(isSpecialCleaning?"<p>Processus spécialisé à documenter après diagnostic des risques, vérification des habilitations et validation des protocoles.</p>":list(up.processus)),
+'<h3>Capacité et processus</h3>'+table([["Capacité de référence",isCrackers?"500 kg/h — hypothèse P2I":id==="biscuiterie"||id==="nettoyage"?"À documenter pour cette variante":up.monthly_capacity?up.monthly_capacity+" — donnée générique non validée":"À documenter"],["Volume commercialisé","À calculer"],["Prix unitaire","À documenter"]])+'<h3>Étapes de production ou de prestation</h3>'+(isSpecialCleaning?"<p>Processus spécialisé à documenter après diagnostic des risques, vérification des habilitations et validation des protocoles.</p>":list(up.processus)),
 note("Le compte de résultat sur trois années (A1, A2, A3) sera calculé par le moteur financier commun lorsque les hypothèses de ventes, charges, amortissements, dette et fiscalité seront complètes. Aucun montant absent n’est remplacé par zéro.")+annualMatrix("Compte de résultat prévisionnel — trois exercices",["Chiffre d’affaires","Coût des produits vendus","Marge brute","Charges commerciales","Charges d’exploitation","Dotations aux amortissements","Résultat d’exploitation","Charges financières","Résultat avant impôt","Impôts","Résultat net"]),
 note("BFR mensuel = stocks + créances clients − dettes d’exploitation. Les délais de règlement et stocks cibles doivent être propres à la configuration. Aucun stock n’est compté deux fois.")+(isCrackers?note("Hypothèses de référence Crackers à appliquer au moteur : matières premières 30 jours ; produits finis 15 jours de stock cible total, rotation et sécurité comprises ; fournisseurs réglés comptant ; clients 40 % comptant et 60 % à 30 jours. Le BFR est calculé mois par mois, sans double comptabilisation du stock."):note("Les délais clients, fournisseurs et stocks cibles doivent être documentés pour cette activité."))+monthlyMatrix("BFR prévisionnel — 36 périodes mensuelles (3 ans)",["Stock MP","Stock PF","Créances clients","Dettes exploitation","BFR net"],36),
 note("Bilan simplifié prévisionnel sur trois exercices (A1, A2, A3). Il ne peut être équilibré automatiquement sans financement complet, immobilisations, BFR, amortissements et trésorerie validés. Chaque année doit vérifier Actif = Passif.")+annualMatrix("Bilan simplifié — trois exercices",["Immobilisations nettes","Stocks","Créances clients","Trésorerie active","Total actif","Capital et réserves","Résultat de l’exercice","Dettes financières","Dettes d’exploitation","Total passif","Écart de contrôle actif − passif"]),
@@ -120,6 +120,22 @@ note("La P2I accompagne la conception, la configuration industrielle, la simulat
 note("Le BP Initial permet de personnaliser le projet. Le BP Pro nécessite des contrôles techniques et financiers approfondis ainsi que des devis et justificatifs. Les services additionnels sont distincts du BP Pro."),
 '<h3>Éléments techniques disponibles</h3>'+table([["Unité",name],["Filière",filiere],["Configuration",config||"À préciser"],["Utilités","À confirmer"],["Sécurité / conformité","À documenter"]])+'<h3>Équipements et fonctions</h3>'+list(machineNames)
 ];
+// Les exigences spécialisées restent visibles, sans inventer de modèles ni protocoles validés.
+if(isSpecialCleaning){
+ const requirements=config==="decontamination_chimique"?[
+ ["Caractérisation du risque","Diagnostic des substances et surfaces; moyens de mesure à déterminer"],
+ ["Traitement et récupération","Équipements compatibles avec les substances, récupération des effluents à dimensionner"],
+ ["Protection et confinement","EPI, protection respiratoire et confinement à prescrire par une personne compétente"],
+ ["Déchets et contrôle final","Conditionnement compatible, filière de traitement et critères de restitution à définir"]
+ ]:[
+ ["Évaluation biologique","Diagnostic du site et caractérisation des agents; moyens de contrôle à déterminer"],
+ ["Traitement spécialisé","Matériels et procédés de décontamination à choisir selon les agents et surfaces"],
+ ["Protection et confinement","EPI, confinement et prévention des expositions à prescrire par une personne compétente"],
+ ["Déchets et contrôle final","Collecte dédiée, traitement et critères de restitution à définir"]
+ ];
+ const technical='<h3>Exigences d’équipement et de sécurité à qualifier</h3>'+note("Périmètre fonctionnel à documenter : ces besoins ne constituent ni une sélection de machines validée ni un protocole d’intervention.")+table(requirements);
+ sections[2]+=technical;sections[16]+=technical;
+}
 // Détail du budget d'investissement : ne jamais assimiler le prix de la ligne au CAPEX total.
 const investmentItems=[
  ["Équipements de production",isCrackers?"450 000 USD — ligne intégrée de référence":"À documenter selon la configuration"],
@@ -149,6 +165,8 @@ sections[13]+='<h3>Traçabilité de l’hypothèse industrielle</h3>'+table([
  ["Horizon trésorerie","12 mois"],
  ["Horizon autres états prévisionnels","3 exercices"]
  ]);
+const documentary=(window.P2I_BP_SOURCES_DOCUMENTAIRES||[]).filter(x=>x.up_id===id);
+if(documentary.length)sections[13]+='<h3>Sources techniques consultées — hors configuration retenue</h3>'+documentary.map(x=>table([["Fabricant / modèle",x.fabricant+" / "+x.modele],["Date de consultation",x.date_verification],["Informations fabricant",x.faits],["Limites",x.limites]])+'<p><a target="_blank" rel="noopener noreferrer" href="'+safe(pictureUrl(x.url))+'">Consulter la fiche fabricant</a></p>').join("");
 // Diagnostic commun : visibilité des informations documentées et des blocages.
 if(preparation&&preparation.statut==="a_completer"){
  sections[13]+='<h3>État de préparation de cette configuration</h3>'+
@@ -192,6 +210,10 @@ const statusNote=document.createElement("div");
 statusNote.className="bp-note";
 statusNote.innerHTML="<b>Statut des données :</b> hypothèses indicatives, à documenter et à vérifier. Aucun devis fournisseur ni financement bancaire n’est présumé.";
 main.insertBefore(statusNote,main.querySelector("#p2i-r1"));
+const catalogueLink=document.createElement("a");
+catalogueLink.href="bp-decouverte-consultation.html?unit_id="+encodeURIComponent(id)+(config?"&configuration_id="+encodeURIComponent(config):"");
+catalogueLink.textContent="Consulter les autres UP et l’état des dossiers";
+statusNote.appendChild(document.createElement("br"));statusNote.appendChild(catalogueLink);
 if(id==="biscuiterie"){
  const selector=document.createElement("div");
  selector.className="bp-variant-selector";

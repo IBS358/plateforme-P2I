@@ -1,0 +1,2 @@
+/* Configuration publique déjà utilisée par P2I. Clé anon, aucun secret service_role. */
+window.P2I_BP_SUPABASE_CONFIG=Object.freeze({"url":"https://cfbbpmxdtiuicaitssjp.supabase.co","anon_key":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYmJwbXhkdGl1aWNhaXRzc2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzQ5MjUsImV4cCI6MjA4NDQxMDkyNX0._wukYnxJ27JJgW_YTU_m88YKNBVzAQFpMjBP7t8zT18"});

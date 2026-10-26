@@ -1,0 +1,5161 @@
+{
+  "objectif_up": 96,
+  "up_presentes": 95,
+  "ecart_up": 1,
+  "configurations": 99,
+  "valides": 0,
+  "dossiers": [
+    {
+      "up_id": "conserverie_legumes",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "biscuiterie",
+      "configuration_id": "crackers",
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": {
+        "equipements_usd": 450000,
+        "capacite_kg_h": 500,
+        "statut": "hypothese_p2i_justificatif_fournisseur_manquant"
+      }
+    },
+    {
+      "up_id": "biscuiterie",
+      "configuration_id": "biscuits_mous",
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "biscuiterie",
+      "configuration_id": "biscuits_durs",
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "boulangerie_industrielle",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "jus_boissons",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "mini_laiterie",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "huiles_alimentaires",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "epices",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "aliments_betail",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "detergents",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "savonnerie",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "cosmetiques",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "peintures_btp",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "adhesifs",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "engrais",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "javel",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "produits_industriels",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "confection",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "tissage",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "maroquinerie",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "teinture",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "broderie",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "chaussures",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "uniformes",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "linge",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "serrurerie",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "outillage",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "recyclage_metaux",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "chaudronnerie",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "mecanosoudure",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "structures",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "pieces",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "quincaillerie",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "sacs",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "bouteilles_pet",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "tuyaux_pvc",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "emballages",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "profiles",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "jouets",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "joints",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "granules",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "cables",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "panneaux_solaires",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "appareils",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "led",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "tableaux",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "onduleurs",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "compteurs",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "batteries",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "cimenterie",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "briques",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "prefab",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "tuiles",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "agglos",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "centrale_beton",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "menuiserie",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "masques",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "pansements",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "mobilier",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "fauteuils",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "instruments",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "bequilles",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "antiseptiques",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "kits",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "smartphones",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "ordinateurs",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "electromenager",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "climatiseurs",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "motos",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "velos",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "meubles",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "equipements",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "plastique",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "papier",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "metaux",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "compost",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "verre",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "pneus",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "huiles",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "deee",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "nettoyage",
+      "configuration_id": "nettoyage_intensif",
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "nettoyage",
+      "configuration_id": "decontamination_chimique",
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "nettoyage",
+      "configuration_id": "decontamination_biologique",
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "maintenance",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "logistique",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "formation",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "qualite",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "etudes",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "securite",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "energie",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "poteaux",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "compteurs_eau",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "kits_solaires",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "lampadaires",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "forage",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "eau",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "maintenance_energie",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    },
+    {
+      "up_id": "audit",
+      "configuration_id": null,
+      "statut": "a_completer",
+      "blocages": [
+        {
+          "code": "contexte",
+          "message": "Dossier documentaire absent ou rattaché à un autre contexte"
+        },
+        {
+          "code": "reference",
+          "message": "Fabricant, modèle et origine de la configuration à documenter"
+        },
+        {
+          "code": "capacite",
+          "message": "Capacité effective et unité de la ligne à justifier"
+        },
+        {
+          "code": "prix",
+          "message": "Prix fournisseur EXW/FOB, devise, date et preuve vérifiée manquants"
+        },
+        {
+          "code": "fonctions",
+          "message": "Contrôles techniques à justifier : fonctions"
+        },
+        {
+          "code": "utilites",
+          "message": "Contrôles techniques à justifier : utilites"
+        },
+        {
+          "code": "interfaces",
+          "message": "Contrôles techniques à justifier : interfaces"
+        },
+        {
+          "code": "securite",
+          "message": "Contrôles techniques à justifier : securite"
+        },
+        {
+          "code": "capex",
+          "message": "Postes du CAPEX complet et coûts complémentaires à sourcer"
+        },
+        {
+          "code": "hypotheses",
+          "message": "Hypothèses économiques à documenter"
+        },
+        {
+          "code": "previsions",
+          "message": "États cohérents requis : trois exercices, BFR 36 mois, trésorerie 12 mois"
+        }
+      ],
+      "reference_p2i": null
+    }
+  ]
+}

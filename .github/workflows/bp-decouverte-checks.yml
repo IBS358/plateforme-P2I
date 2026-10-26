@@ -5,9 +5,31 @@ on:
     branches:
       - refonte-bp-decouverte-17-rubriques
     paths:
+      - 'bp-decouverte-consultation*.html'
+      - 'bp-decouverte-v108-source.html'
+      - 'business-plan-decouverte-v108.html'
+      - 'css/p2i-bp-decouverte-v108.css'
+      - 'assets/bp-v108/**'
+      - 'js/vendor/**'
+      - 'tests/check-p2i-bp-v108.cjs'
+      - 'tests/qa-bp-v108-browser.cjs'
+      - 'bp-decouverte-v107-source.html'
+      - 'business-plan-decouverte-v107.html'
+      - 'css/p2i-bp-decouverte-v107.css'
+      - 'assets/bp-v107/**'
+      - 'tests/check-p2i-bp-v107.cjs'
+      - 'tests/qa-bp-v107-browser.cjs'
+      - 'package*.json'
+      - 'tests/qa-bp-decouverte-dom.cjs'
+      - 'tests/check-p2i-bp-publication.cjs'
+      - 'scripts/*bp-decouverte*.cjs'
+      - 'data/p2i-bp-decouverte-publication.json'
       - 'business-plan-decouverte.html'
       - 'business-plan-pro.html'
       - 'fiche-production.html'
+      - 'dashboard.html'
+      - 'js/p2i-bp-passage-pro.js'
+      - 'tests/qa-parcours-decouverte-pro.cjs'
       - 'css/p2i-bp-decouverte-17.css'
       - 'js/p2i-bp-decouverte-*.js'
       - 'js/p2i-financial-display.js'
@@ -121,3 +143,40 @@ jobs:
           name: p2i-bp-decouverte-plan-consolidation
           path: data/p2i-bp-decouverte-plan-consolidation.csv
           retention-days: 30
+
+      - name: Contrôler les preuves et les 99 configurations
+        run: |
+          node tests/check-p2i-bp-publication.cjs
+          node scripts/audit-bp-decouverte-publication.cjs
+          git diff --exit-code -- data/p2i-bp-decouverte-publication.json
+      - name: Vérifier le paquet autonome reproductible
+        run: |
+          node scripts/build-bp-decouverte-consultation.cjs
+          git diff --exit-code -- bp-decouverte-consultation-autonome.html
+      - name: Installer les outils de recette DOM
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Vérifier les parcours de consultation et le paquet autonome
+        run: |
+          npm run test:dom
+          P2I_QA_ENTRY=bp-decouverte-consultation-autonome.html npm run test:dom
+
+      - name: Vérifier les calculs et la construction V107
+        run: |
+          node tests/check-p2i-bp-v107.cjs
+          node scripts/build-bp-decouverte-v107.cjs
+          git diff --exit-code -- business-plan-decouverte-v107.html
+      - name: Installer Chromium pour la recette réelle V107
+        run: npx playwright install --with-deps chromium
+      - name: Recette navigateur V107
+        run: npm run test:browser-v107
+
+      - name: Vérifier la restauration et la construction V108
+        run: |
+          node tests/check-p2i-bp-v108.cjs
+          node scripts/build-bp-decouverte-v108.cjs
+          git diff --exit-code -- business-plan-decouverte.html business-plan-decouverte-v108.html js/vendor/p2i-supabase-v108.min.js
+      - name: Recette navigateur V108
+        run: npm run test:browser-v108
+
+      - name: Recette du parcours Découverte vers Pro
+        run: npm run test:parcours

@@ -362,7 +362,7 @@
       .tracking-actions .right{justify-content:flex-start;}
     }
   </style>
-  <script src="js/up-data.js"></script>
+  <script src="up-data.js"></script>
 </head>
 
 <body>
@@ -6248,12 +6248,12 @@ function updateGuaranteeSummary() {
 
   function draftKey(){
     const upKey = getUpKeyFromUrlOrStorage() || "unknown_up";
-    return scopeKey("bpProDraft", upKey);
+    return scopeKey("bpProDraft", upKey + (getParam("passage_id") ? ":"+(getParam("configuration_id")||"reference") : ""));
   }
 
   function savedAtKey(){
     const upKey = getUpKeyFromUrlOrStorage() || "unknown_up";
-    return scopeKey("bpProSavedAt", upKey);
+    return scopeKey("bpProSavedAt", upKey + (getParam("passage_id") ? ":"+(getParam("configuration_id")||"reference") : ""));
   }
 
   function collectForm(){
@@ -6292,6 +6292,7 @@ function updateGuaranteeSummary() {
 
   // Migration : évite contamination A/B via anciennes clés globales
   function migrateLegacyDraftOnce(){
+    if (getParam("passage_id")) return;
     const upKey = getUpKeyFromUrlOrStorage() || "unknown_up";
 
     // 1) Ancienne clé globale draft
@@ -6934,6 +6935,7 @@ sessionStorage.setItem('p2i_force_tutoriel_refresh', 'true');
       el.addEventListener("change", ()=>{ scheduleAutosave(); refreshProgress(); });
     });
 
+    window.dispatchEvent(new Event('p2i:pro-ready'));
     // 6) Petit debug soft (optionnel)
     // console.log("[P2I] USER_SCOPE_ID =", USER_SCOPE_ID);
   });
@@ -8690,51 +8692,7 @@ function p2iBuildPersonalUseWordHtml() {
     La version BP Pro bancable P2I reste distincte par son niveau de structuration, son argumentaire et son niveau de finition.
   </p>
 
-<script>
-/* P2I — reprise du contexte depuis le BP Découverte.
-   Ne préremplit aucun montant et ne suppose pas de devis validé. */
-(function () {
-  "use strict";
-  function initBPProContext() {
-    const params = new URLSearchParams(window.location.search);
-    const up = params.get("unit_id") || params.get("up_id") || "";
-    if (!up) return;
-    const config = params.get("configuration_id") || "";
-    const simulation = params.get("simulation_id") || "";
-    const plan = params.get("equipment_plan_id") || "";
-    if (!config && !simulation && !plan) return;
-    if (document.getElementById("p2i-bp-pro-context")) return;
-    const banner = document.createElement("aside");
-    banner.id = "p2i-bp-pro-context";
-    banner.setAttribute("aria-label", "Contexte transmis depuis le BP Découverte");
-    banner.style.cssText = "position:relative;z-index:5;max-width:1180px;margin:20px auto;padding:18px 22px;background:#112e50;color:#fff;border:1px solid #4c95cb;border-radius:12px;font:15px/1.6 Arial,sans-serif";
-    const heading = document.createElement("strong");
-    heading.textContent = "P2I — reprise de votre projet dans le BP Pro";
-    banner.appendChild(heading);
-    const details = document.createElement("p");
-    details.style.margin = "8px 0";
-    const items = [["Unité",up],["Configuration",config],["Simulation d’origine",simulation],["Plan d’équipement",plan]].filter(x=>x[1]);
-    details.textContent = items.map(x=>x[0]+" : "+x[1]).join(" · ");
-    banner.appendChild(details);
-    const warning = document.createElement("p");
-    warning.style.margin = "8px 0";
-    warning.textContent = "Les paramètres de parcours sont conservés. Les hypothèses économiques, les devis et les résultats du BP Découverte ne sont pas automatiquement validés ni transférés au BP Pro.";
-    banner.appendChild(warning);
-    const back = document.createElement("a");
-    const q = new URLSearchParams();
-    q.set("unit_id",up);
-    if (config) q.set("configuration_id",config);
-    if (simulation) q.set("simulation_id",simulation);
-    back.href = "business-plan-decouverte.html?"+q.toString();
-    back.textContent = "Retour au BP Découverte";
-    back.style.cssText = "color:#b9e5ff;font-weight:bold;text-decoration:underline";
-    banner.appendChild(back);
-    document.body.insertBefore(banner,document.body.firstChild);
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded",initBPProContext);
-  else initBPProContext();
-})();
-</script>
+
 </body>
 </html>
   `;
@@ -9735,9 +9693,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const sameCurrentProject =
       String(currentSaved.unit_id || "").trim() === unitId &&
       String(currentSaved.unit || "").trim() === unit &&
-      String(currentSaved.filiere || "").trim() === filiere;
+      String(currentSaved.filiere || "").trim() === filiere &&
+      (currentSaved.configuration_id || "") === p2iGetUrlParam("configuration_id");
 
-    const naturalProjectKey = [unitId, unit, filiere].filter(Boolean).join("__");
+    const naturalProjectKey = [unitId, unit, filiere, p2iGetUrlParam("configuration_id")].filter(Boolean).join("__");
     const generatedFallbackId = `bp_pro__${Date.now()}__${Math.random().toString(36).slice(2, 8)}`;
 
     const bpId = String(
@@ -9778,6 +9737,8 @@ document.addEventListener("DOMContentLoaded", function () {
       updated_at: nowIso,
       saved_at: nowIso,
 
+      configuration_id: p2iGetUrlParam("configuration_id"),
+      decouverte: window.P2I_BP_PRO_PASSAGE || null,
       source_page: "business-plan-pro.html",
       mode: (p2iGetUrlParam("mode") || "preview").toLowerCase(),
 
@@ -9904,6 +9865,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentPlan = p2iSafeParse(currentRaw, null);
 
     function sameProject(plan) {
+      if (p2iGetUrlParam("passage_id") && (plan?.configuration_id || "") !== p2iGetUrlParam("configuration_id")) return false;
       if (!plan || typeof plan !== "object") return false;
 
       const planUnitId = String(plan.unit_id || "").trim();
@@ -9993,6 +9955,8 @@ p2iUpdateSavedBadge(
   planToRestore.saved_at ||
   ""
 );
+
+  } // fin de la restauration du BP Pro
 
   async function p2iSaveBpProManually() {
     const btn = document.getElementById("btnSaveTop");
@@ -10115,5 +10079,22 @@ if (document.readyState === 'loading') {
   initBackToTutorielButton();
 }
 </script>
+
+
+<script src="js/p2i-economic-result-engine.js"></script>
+<script src="js/p2i-financial-engine.js"></script>
+<script src="js/p2i-bp-decouverte-bfr-engine.js"></script>
+<script src="js/p2i-bp-decouverte-tresorerie-12-mois.js"></script>
+<script src="js/p2i-currency-config.js"></script>
+<script src="js/p2i-commercial-engine.js"></script>
+<script src="js/p2i-hypotheses-commerciales.js"></script>
+<script src="js/p2i-recettes-biscuiterie.js"></script>
+<script src="js/p2i-bp-decouverte-v107-scenarios.js"></script>
+<script src="js/p2i-bp-decouverte-simulation-commune.js"></script>
+<script src="js/p2i-bp-decouverte-v108-references.js"></script>
+<script src="js/vendor/p2i-supabase-v108.min.js"></script>
+<script src="js/p2i-bp-decouverte-v108-supabase-config.js"></script>
+<script src="js/p2i-bp-decouverte-v108-contexte.js"></script>
+<script src="js/p2i-bp-passage-pro.js"></script>
 </body>
 </html>

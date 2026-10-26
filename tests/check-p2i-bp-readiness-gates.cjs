@@ -37,7 +37,7 @@ assert.equal(report.previsions_financieres,0,
  "Si des prévisions sont disponibles, faire évoluer le test et contrôler les justificatifs");
 console.log("Audit publication P2I : "+JSON.stringify({
  total:report.total,reference_industrielle:report.reference_industrielle,
- prix_ligne_documente:report.prix_ligne_documente,capex_complet:report.capex_complet,
+ prix_ligne_renseigne_sans_justificatif:report.prix_ligne_documente,capex_complet:report.capex_complet,
  previsions_financieres:report.previsions_financieres,
  dossiers_a_completer:report.blocages.length
 }));

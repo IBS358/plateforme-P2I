@@ -119,3 +119,8 @@ body.p2i-bp17 > #p2i-bp-legacy{display:none!important}
  .p2i-bp17 .bp-section h2{page-break-after:avoid}
  .p2i-bp17 .bp-table-wrap{max-width:100%!important}
 }
+
+/* Consultation multi-UP : même modèle visuel que les 17 rubriques. */
+.bp-consultation select{display:block;width:100%;max-width:100%;margin:12px 0;padding:12px;background:#102b4c;color:#fff;border:1px solid #80add4;border-radius:8px;font:inherit}
+.bp-consultation a{color:#94d9ff;text-decoration:underline}.bp-consultation details{margin:12px 0}.bp-consultation summary{cursor:pointer;font-weight:700}
+@media print{.bp-consultation{display:none!important}}

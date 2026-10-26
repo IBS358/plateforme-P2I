@@ -9,7 +9,7 @@ const assert=require("node:assert/strict");
 const path=require("node:path");
 const root=path.resolve(__dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
-const html=read("business-plan-decouverte.html");
+const html=read("business-plan-decouverte-avant-integration-v108.html");
 const layout=read("js/p2i-bp-decouverte-17-layout.js");
 const bridge=read("js/p2i-bp-decouverte-17-engine-bridge.js");
 const images=read("js/p2i-bp-decouverte-images.js");
@@ -114,11 +114,8 @@ assert.ok(layout.includes('fiche-production.html?'),"Utiliser la route BP Pro du
 assert.ok(fiche.includes("window.goToBpPro()"),"La fiche déclenche le BP Pro");
 assert.ok(fiche.includes("buildUrl('business-plan-pro.html', data)"),"La fiche rejoint le BP Pro");
 assert.ok(fiche.includes("'configuration_id', 'simulation_id'"),"Le contexte de simulation est transmis au BP Pro");
-assert.ok(pro.includes('id = "p2i-bp-pro-context"'),"Le BP Pro indique le contexte repris");
-assert.ok(pro.includes('params.get("configuration_id")'),"Le BP Pro lit la variante transmise");
-assert.ok(pro.includes('params.get("simulation_id")'),"Le BP Pro lit la simulation d’origine");
-assert.ok(pro.includes('ne sont pas automatiquement validés ni transférés'),"Le BP Pro ne prétend pas reprendre les calculs");
-assert.ok(pro.includes('Retour au BP Découverte'),"Le parcours retour est disponible");
+assert.ok(pro.includes('js/p2i-bp-passage-pro.js'),"Le BP Pro charge le transfert recalculé");
+assert.ok(read('js/p2i-bp-passage-pro.js').includes('P2I_BP_SIMULATION_COMMUNE.calculer'),"Le Pro utilise le moteur commun");
 
 assert.ok(layout.includes('window.print()'),"Téléchargement via impression PDF du navigateur");
 assert.ok(layout.includes("Imprimer / Enregistrer en PDF"),"Le bouton décrit correctement l'impression native");

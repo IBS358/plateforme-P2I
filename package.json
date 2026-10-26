@@ -1,0 +1,23 @@
+{
+  "name": "p2i-bp-decouverte",
+  "private": true,
+  "scripts": {
+    "test": "node scripts/test-bp-decouverte.cjs",
+    "test:dom": "node tests/qa-bp-decouverte-dom.cjs",
+    "audit:bp": "node scripts/audit-bp-decouverte-publication.cjs",
+    "build:bp-v107": "node scripts/build-bp-decouverte-v107.cjs",
+    "test:browser-v107": "node tests/qa-bp-v107-browser.cjs",
+    "build:bp-v108": "node scripts/build-bp-decouverte-v108.cjs",
+    "test:browser-v108": "node tests/qa-bp-v108-browser.cjs",
+    "test:parcours": "node tests/qa-parcours-decouverte-pro.cjs"
+  },
+  "devDependencies": {
+    "@supabase/supabase-js": "2.118.0",
+    "esbuild": "0.28.2",
+    "jsdom": "26.1.0",
+    "playwright": "1.62.1"
+  },
+  "engines": {
+    "node": ">=22.19"
+  }
+}

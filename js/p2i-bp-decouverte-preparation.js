@@ -23,7 +23,8 @@ function inspect(upId,configurationId,upRegistry,machineRegistry){
  if(!validConfiguration)blocages.push("Variante Biscuiterie non reconnue");
  if(needsChoice)blocages.push("Sélectionner une variante Biscuiterie");
  if(pilot){
-  points.push("ligne_integree_reference_450000_usd","capacite_reference_500_kg_h");
+  points.push("hypothese_p2i_ligne_450000_usd","hypothese_p2i_capacite_500_kg_h");
+  blocages.push("Justificatif fournisseur du prix et de la capacité de la ligne Crackers manquant");
  }else{
   blocages.push("Prix de configuration industrielle de référence non validé");
   blocages.push("Capacité de configuration industrielle de référence non validée");

@@ -2750,101 +2750,28 @@
 }
 
         window.goToBpFree = async function() {
-    console.log('🔍 goToBpFree - Début');
-
-    // Récupérer la session utilisateur
-    const { data: { session }, error: sessionError } =
-        await _p2iSupabase.auth.getSession();
-
+    const selected = getUnitData();
+    if (!selected) { alert('Unité introuvable dans le référentiel.'); return; }
+    const current = new URLSearchParams(location.search);
+    const unitId = Object.keys(productionsData).find(key => productionsData[key] === selected);
+    const url = new URL('business-plan-decouverte.html', location.href);
+    url.searchParams.set('unit_id', unitId);
+    url.searchParams.set('unit', selected.nom);
+    url.searchParams.set('filiere', selected.filiereNom || '');
+    const config = current.get('configuration_id');
+    if (config) url.searchParams.set('configuration_id', config);
+    const { data: { session }, error: sessionError } = await _p2iSupabase.auth.getSession();
     if (sessionError || !session) {
-        console.error('❌ Pas de session:', sessionError);
-
-        localStorage.setItem('p2i_pending_action', JSON.stringify({
-            action: 'bp_gratuit',
-            unit_id: localStorage.getItem('currentUnitId') || '',
-            unit_name: localStorage.getItem('currentUnitName') || '',
-            filiere: localStorage.getItem('currentFiliereName') || '',
-            return_url: window.location.href,
-            ts: new Date().toISOString()
-        }));
-
-        window.location.href = 'login.html?mode=login';
+        localStorage.setItem('p2i_pending_action', JSON.stringify({action:'bp_gratuit', unit_id:unitId, unit_name:selected.nom, filiere:selected.filiereNom || '', return_url:location.href, ts:new Date().toISOString()}));
+        location.href = 'login.html?mode=login';
         return;
     }
-
-    // Récupérer les informations de l'UP
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const unitName =
-        localStorage.getItem('currentUnitName') ||
-        urlParams.get('unit') ||
-        urlParams.get('nom') ||
-        'Unité sans nom';
-
-    const unitId =
-        localStorage.getItem('currentUnitId') ||
-        urlParams.get('unit_id') ||
-        '';
-
-    const filiere =
-        localStorage.getItem('currentFiliereName') ||
-        urlParams.get('filiere') ||
-        '';
-
-    console.log('🏭 UP :', unitName);
-    console.log('🆔 ID :', unitId);
-    console.log('📂 Filière :', filiere);
-
-    // Préparer le BP Découverte
-    const payload = {
-        user_id: session.user.id,
-        simulation_data: {
-            unit: unitName,
-            unit_name: unitName,
-            up_name: unitName,
-            unit_id: unitId,
-            filiere: filiere,
-            date: new Date().toISOString()
-        }
-    };
-
-    console.log(
-        '📤 Payload BP Découverte :',
-        JSON.stringify(payload, null, 2)
-    );
-
     try {
-        const { error } = await _p2iSupabase
-            .from('user_simulations')
-            .insert(payload);
-
-        if (error) {
-            console.error('❌ Erreur insertion :', error);
-            console.error('   Message:', error.message);
-            console.error('   Détails:', error.details);
-            console.error('   Hint:', error.hint);
-        } else {
-            console.log('✅ BP Découverte enregistré !');
-        }
-    } catch (e) {
-        console.error('❌ Exception Supabase :', e);
-    }
-
-    // Ouvrir le Business Plan Découverte
-    const url = new URL(
-    'business-plan-decouverte.html',
-    window.location.href
-);
-
-    url.searchParams.set('unit_id', unitId);
-    url.searchParams.set('unit', unitName);
-    url.searchParams.set('nom', unitName);
-    url.searchParams.set('filiere', filiere);
-    url.searchParams.set('src', 'free');
-
-    console.log('📄 Redirection vers :', url.toString());
-
-    window.location.href = url.toString();
+        const {data: row, error} = await _p2iSupabase.from('user_simulations').insert({user_id:session.user.id, simulation_data:{unit:selected.nom, unit_name:selected.nom, up_name:selected.nom, unit_id:unitId, filiere:selected.filiereNom || '', ...(config?{configuration_id:config}:{}), date:new Date().toISOString()}}).select('id').single();
+        if (error || !row?.id) throw new Error('Enregistrement du dossier impossible. Réessayez depuis cette fiche.');
+        url.searchParams.set('simulation_id', row.id);
+        location.href = url.href;
+    } catch(error) { alert(error.message); }
 };
 
 window.goToBpPro = async function() {

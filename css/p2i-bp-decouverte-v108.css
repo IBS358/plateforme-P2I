@@ -1,0 +1,6 @@
+/* Compléments V108 : mêmes composants V106/V107, restauration et affichage. */
+.currency-choice{max-width:150px}.top-actions{flex-wrap:wrap}.restore-error{max-width:960px;margin:8vh auto;padding:35px;background:#16243f;border:1px solid #52779b;border-radius:24px}.restore-error .action{margin:12px 8px 0 0}.context-actions{margin:25px 0;padding:24px;border:1px solid #3c6e99;border-radius:18px;background:#0d2844}.context-actions .action{margin:6px 12px 6px 0}.context-actions input:focus-visible+label{outline:3px solid #fbd86c}.context-banner{margin-top:16px}button:disabled{opacity:.6;cursor:wait}
+@media(max-width:760px){.top-actions{gap:10px;justify-content:flex-start}.top-actions .print{margin-left:auto}.currency-choice{max-width:155px}.up-choice{max-width:100%}.restore-error{margin:20px 12px;padding:22px}}
+@media print{.currency-choice,.context-actions{display:none!important}.context-banner{background:#eff5fb;color:#163954}}
+.cleaning-choice{font:inherit;color:#e7f4ff;text-align:left;cursor:pointer}.cleaning-choice[aria-pressed=true]{outline:3px solid #f6d66a;outline-offset:3px}.cleaning-choice b{color:#8ce1ff}
+:root{--forming-atlas:url('../assets/bp-v108/formage-biscuiterie-ia.jpg')}.atlas-9,.atlas-10{background-image:var(--forming-atlas);background-size:200% 100%}.atlas-9{background-position:0 0}.atlas-10{background-position:100% 0}
