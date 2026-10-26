@@ -67,6 +67,11 @@ const legacy=document.createElement("div");legacy.id="p2i-bp-legacy";legacy.hidd
 document.body.classList.add("p2i-bp17");
 const isCrackers=id==="biscuiterie"&&selectedVariant==="crackers";
 const capex=null; // CAPEX générique non validé pour la configuration
+const preparation=window.P2I_BP_DECOUVERTE_PREPARATION&&
+ typeof window.P2I_BP_DECOUVERTE_PREPARATION.inspect==="function"?
+ window.P2I_BP_DECOUVERTE_PREPARATION.inspect(id,selectedVariant||config,
+  typeof P2I_UP_DATA!=="undefined"?P2I_UP_DATA:{},
+  typeof MACHINES_DATA!=="undefined"?MACHINES_DATA:{}):null;
 const equipmentReference=isCrackers?450000:null;
 const invest=up.investment_breakdown||{};
 const machineRegistry=typeof MACHINES_DATA!=="undefined"?MACHINES_DATA:null;
@@ -144,6 +149,18 @@ sections[13]+='<h3>Traçabilité de l’hypothèse industrielle</h3>'+table([
  ["Horizon trésorerie","12 mois"],
  ["Horizon autres états prévisionnels","3 exercices"]
  ]);
+// Diagnostic commun : visibilité des informations documentées et des blocages.
+if(preparation&&preparation.statut==="a_completer"){
+ sections[13]+='<h3>État de préparation de cette configuration</h3>'+
+ table([
+ ["État du dossier","En cours de consolidation"],
+ ["Points déjà établis",preparation.points_valides.length?
+  preparation.points_valides.map(x=>x.replace(/_/g," ")).join(" ; "):"À documenter"],
+ ["Investissement total","Non validé : aucun CAPEX complet calculé"],
+ ["Financement 40 % / 60 %","Non calculable sans CAPEX complet"]
+ ])+'<h3>Données à compléter avant validation financière</h3>'+
+ '<ul>'+preparation.blocages.map(x=>'<li>'+safe(x)+'</li>').join("")+'</ul>';
+}
 // Les deux actions du parcours conservent l'UP, la configuration et la simulation.
 const destinationParams=new URLSearchParams(location.search);
 destinationParams.set("unit_id",id);
