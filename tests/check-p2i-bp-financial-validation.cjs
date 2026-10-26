@@ -23,8 +23,8 @@ const data={investissement:investment,compte_resultat:Array.from({length:3},annu
 const good=check(data);
 assert.equal(good.valide,true,JSON.stringify(good.blocages));
 assert.equal(good.financement_indicatif.investissement_total_usd,459000);
-assert.equal(good.financement_indicatif.apport_40_usd,183600);
-assert.equal(good.financement_indicatif.dette_60_usd,275400);
+assert.equal(good.financement_indicatif.apport_30_usd,137700);
+assert.equal(good.financement_indicatif.dette_70_usd,321300);
 assert.equal(good.financement_indicatif.reserve_tresorerie_distincte_usd,15000);
 const clone=()=>JSON.parse(JSON.stringify(data));
 let bad=clone();bad.bfr_mensuel[4].bfr=0;
@@ -52,4 +52,4 @@ assert.ok(check(bad).blocages.some(x=>x.champ==="investissement.equipements"),"N
 bad.investissement.equipements=450000;
 bad.investissement.total=459000;
 assert.equal(check(bad).valide,true,"Référence Crackers correctement financée");
-console.log("Validation financière : horizons, 40/60, BFR, bilans et trésorerie vérifiés.");
+console.log("Validation financière : horizons, 30/70, BFR, bilans et trésorerie vérifiés.");
