@@ -21,6 +21,7 @@ function current(){
  return {id,config:p.get("configuration_id")||saved||""};
 }
 const ids=["p2i-validated-finance-r7","p2i-validated-finance-r9","p2i-validated-finance-r10","p2i-validated-finance-r11","p2i-validated-finance-r13"];
+const diagnosticId="p2i-validated-finance-diagnostic";
 const sections=["p2i-r9","p2i-r10","p2i-r11","p2i-r13"];
 function placeholders(section){
  const parent=$(section);
@@ -44,15 +45,35 @@ function add(section,id,html){
  let node=$(id);if(!node){node=document.createElement("div");node.id=id;parent.appendChild(node);}
  node.innerHTML=html;
 }
+function diagnostic(issues){
+ const parent=$("p2i-r14");if(!parent)return;
+ let node=$(diagnosticId);
+ if(!node){node=document.createElement("div");node.id=diagnosticId;parent.appendChild(node);}
+ const counts={investissement:0,compte_resultat:0,bfr_mensuel:0,tresorerie_mensuelle:0,bilans_annuels:0};
+ for(const issue of issues){
+  const group=String(issue.champ||"").split(".")[0];
+  if(Object.prototype.hasOwnProperty.call(counts,group))counts[group]++;
+ }
+ node.innerHTML='<h3>Contrôle des prévisions financières</h3>'+
+  '<p class="bp-note">Données financières non publiables à ce stade. Aucun montant manquant n’est remplacé par zéro.</p>'+
+  renderTable(["État à consolider","Points bloquants"],[
+   ["Investissement complet",String(counts.investissement)],
+   ["Compte de résultat sur 3 ans",String(counts.compte_resultat)],
+   ["BFR sur 36 mois",String(counts.bfr_mensuel)],
+   ["Trésorerie sur 12 mois",String(counts.tresorerie_mensuelle)],
+   ["Bilans sur 3 ans",String(counts.bilans_annuels)]
+  ]);
+}
 function update(){
  remove();
+ $(diagnosticId)?.remove();
  const v=window.P2I_BP_CONTROLES_FINANCIERS;
  const d=window.P2I_BP_PREVISIONS_VALIDABLES;
  if(!v||typeof v.validate!=="function"||!d)return;
  const selected=current();
  if(d.up_id!==selected.id||d.configuration_id!==(selected.config||null))return;
  const result=v.validate(d);
- if(!result.valide)return;
+ if(!result.valide){diagnostic(result.blocages);return;}
  // Le jeu annuel doit correspondre au résultat économique réellement calculé
  // pour le pilote Crackers. Éviter deux comptes de résultat contradictoires.
  if(selected.id==="biscuiterie"&&selected.config==="crackers"){
