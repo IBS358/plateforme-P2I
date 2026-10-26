@@ -10,7 +10,8 @@ const mois=Array.from({length:36},(_,i)=>({
  ventes_usd:10000+i*100,consommation_matieres_usd:2000,
  cout_production_vendue_usd:4000
 }));
-const input={hypotheses,mois};
+const input={hypotheses,mois,creances_ouverture_usd:0};
+assert.equal(calculate({hypotheses,mois}).valide,false,"Créances initiales non présumées nulles");
 const result=calculate(input);
 assert.equal(result.valide,true,JSON.stringify(result.blocages));
 assert.equal(result.bfr_mensuel.length,36);
