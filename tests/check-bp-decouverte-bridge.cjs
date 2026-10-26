@@ -14,7 +14,7 @@ function element(id){
  };
  nodes.set(id,e);return e;
 }
-const r8=element("p2i-r8"),r9=element("p2i-r9"),choice=element("p2iBiscuiterieSelect");
+const r2=element("p2i-r2"),r8=element("p2i-r8"),r9=element("p2i-r9"),r12=element("p2i-r12"),choice=element("p2iBiscuiterieSelect");
 r8.placeholder={hidden:false};r9.placeholder={hidden:false};choice.value="crackers";
 const document={readyState:"complete",getElementById:id=>nodes.get(id)||null,
  createElement:()=>({id:"",isConnected:false,innerHTML:"",remove(){nodes.delete(this.id);this.isConnected=false;if(this.parent)this.parent.children=this.parent.children.filter(x=>x!==this);}}),
@@ -27,6 +27,7 @@ const context={document,window,location,URLSearchParams,localStorage:{getItem:()
 vm.runInNewContext(source,context,{filename:"p2i-bp-decouverte-17-engine-bridge.js"});
 const has=id=>nodes.has(id);
 assert.ok(has("p2i-r8-engine")&&has("p2i-r9-engine"),"Les tableaux validés sont affichés");
+assert.ok(has("p2i-r2-engine")&&has("p2i-r12-engine"),"Synthèse et indicateurs calculés sont affichés");
 assert.equal(r8.placeholder.hidden,true);assert.equal(r9.placeholder.hidden,true);
 window.P2I_COMPTE_FINANCIER.cout_ventes_total_usd=41;listeners["p2i:financial-result-ready"]();
 assert.equal(has("p2i-r9-engine"),false,"Incohérence : compte de résultat retiré");
@@ -51,6 +52,8 @@ assert.equal(has("p2i-r8-engine"),true,"Revenir aux Crackers pour les tests de c
 window.P2I_CRACKERS_RESULTAT.quantite_vendue=600;
 listeners["p2i:economic-result-ready"]();
 assert.equal(has("p2i-r8-engine"),false,"Refuser une quantité vendue supérieure à la production");
+assert.equal(has("p2i-r2-engine"),false,"Masquer aussi la synthèse en cas de survente");
+assert.equal(has("p2i-r12-engine"),false,"Masquer aussi les indicateurs en cas de survente");
 assert.equal(has("p2i-r9-engine"),false,"Ne pas publier le compte financier après une survente");
 window.P2I_CRACKERS_RESULTAT.quantite_vendue=400;
 window.P2I_CRACKERS_RESULTAT.quantite_non_vendue=-1;
@@ -85,5 +88,7 @@ assert.equal(has("p2i-r8-engine"),false,"Refuser un CPV divergent même si le CA
 window.P2I_DONNEES_FINANCIERES={chiffre_affaires_usd:100,cout_produits_vendus_usd:40};
 listeners["p2i:financial-result-ready"]();
 assert.equal(has("p2i-r8-engine"),true,"Restaurer les chiffres concordants");
+assert.equal(has("p2i-r2-engine"),true,"Restaurer la synthèse concordante");
+assert.equal(has("p2i-r12-engine"),true,"Restaurer les indicateurs concordants");
 
 console.log("Pont financier P2I : scénarios de cohérence dynamique réussis.");
