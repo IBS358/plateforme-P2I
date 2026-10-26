@@ -14,6 +14,9 @@ on:
       - 'tests/check-bp-decouverte-*.cjs'
       - 'tests/check-p2i-reference-coverage.cjs'
       - 'tests/check-p2i-bp-preparation.cjs'
+      - 'tests/check-p2i-bp-lots.cjs'
+      - 'scripts/build-bp-decouverte-lots.cjs'
+      - 'data/p2i-bp-decouverte-lots.json'
       - 'js/p2i-bp-decouverte-preparation.js'
       - 'up-data.js'
       - 'machines-data.js'
@@ -40,3 +43,8 @@ jobs:
         run: node tests/check-p2i-reference-coverage.cjs
       - name: Audit de préparation des BP Découverte
         run: node tests/check-p2i-bp-preparation.cjs
+      - name: Vérifier le registre des lots BP Découverte
+        run: |
+          node tests/check-p2i-bp-lots.cjs
+          node scripts/build-bp-decouverte-lots.cjs
+          git diff --exit-code -- data/p2i-bp-decouverte-lots.json
