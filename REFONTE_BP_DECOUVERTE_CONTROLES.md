@@ -50,3 +50,12 @@
 6. Exécuter les deux scripts Node de régression sur un checkout de la branche et consulter les résultats GitHub Actions.
 
 **Règle de livraison :** aucune fusion vers `main` sans recette réussie et accord de l'utilisateur.
+
+
+## Vérification intégrée des suites de régression — 26 octobre 2026
+
+Les deux scripts de test ont été récupérés avec leurs dépendances depuis la branche et **exécutés dans un environnement JavaScript simulé** :
+- `tests/check-bp-decouverte-17.cjs` : réussite des assertions statiques, de la compilation des scripts et de la validation des chemins photographiques ;
+- `tests/check-bp-decouverte-bridge.cjs` : réussite des scénarios dynamiques de publication, invalidation, changement de variante et contrôle des quantités.
+
+Cette exécution utilisait un adaptateur minimal des modules Node (`fs`, `vm`, `assert`, `path`) ; elle **n'est pas** un résultat GitHub Actions, un lancement natif de Node ni un test de navigateur. Ces étapes restent requises avant publication.
