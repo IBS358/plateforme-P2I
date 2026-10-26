@@ -12,6 +12,9 @@ on:
       - 'js/p2i-bp-decouverte-*.js'
       - 'js/p2i-financial-display.js'
       - 'tests/check-bp-decouverte-*.cjs'
+      - 'tests/check-p2i-reference-coverage.cjs'
+      - 'up-data.js'
+      - 'machines-data.js'
       - '.github/workflows/bp-decouverte-checks.yml'
   workflow_dispatch:
 
@@ -31,3 +34,5 @@ jobs:
         run: node tests/check-bp-decouverte-17.cjs
       - name: Scénarios dynamiques du pont financier
         run: node tests/check-bp-decouverte-bridge.cjs
+      - name: Couverture des UP et correspondance catalogue
+        run: node tests/check-p2i-reference-coverage.cjs
