@@ -8766,6 +8766,7 @@ const close=(a,b)=>Math.abs(a-b)<.02;
 function calculer(input){
  const s=JSON.parse(JSON.stringify(input));
  for(const k of ['investissement','matieres_kg','personnel','charges_fixes','part_apport','part_dette','taux_interet','duree_dette_mois','duree_amortissement_ans','taux_tva','taux_is','coussin_tresorerie','croissance_personnel','croissance_charges'])if(!positive(s[k]))throw Error('Hypothèse manquante ou invalide : '+k);
+ if(s.machines!=null&&(!positive(s.machines)||s.machines>s.investissement))throw Error('Le budget machines dépasse le budget global de simulation');
  if(!close(s.part_apport+s.part_dette,1)||s.part_apport!==.3||s.part_dette!==.7)throw Error('Financement attendu 30/70');
  if(s.duree_dette_mois<36||s.duree_amortissement_ans<3||s.taux_is>1||s.taux_tva>1)throw Error('Durées ou taux incompatibles');
  for(const k of ['production','ventes','prix','cout_production_kg'])if(!Array.isArray(s[k])||s[k].length!==3||!s[k].every(positive))throw Error('Trois années requises : '+k);
