@@ -28,12 +28,17 @@ vm.runInNewContext(source,context,{filename:"p2i-bp-decouverte-17-engine-bridge.
 const has=id=>nodes.has(id);
 assert.ok(has("p2i-r8-engine")&&has("p2i-r9-engine"),"Les tableaux validés sont affichés");
 assert.ok(has("p2i-r2-engine")&&has("p2i-r12-engine"),"Synthèse et indicateurs calculés sont affichés");
+assert.ok(has("p2i-r9-annual-engine"),"Compte annuel A1-A3 présent");
+assert.ok(nodes.get("p2i-r9-annual-engine").innerHTML.includes("Année 2</th><th>Année 3"),"Années 2 et 3 explicitement prévues");
+assert.ok(nodes.get("p2i-r9-annual-engine").innerHTML.includes("À calculer"),"Aucune projection A2/A3 inventée");
 assert.equal(r8.placeholder.hidden,true);assert.equal(r9.placeholder.hidden,true);
 window.P2I_COMPTE_FINANCIER.cout_ventes_total_usd=41;listeners["p2i:financial-result-ready"]();
 assert.equal(has("p2i-r9-engine"),false,"Incohérence : compte de résultat retiré");
+assert.equal(has("p2i-r9-annual-engine"),false,"Incohérence : projection annuelle retirée");
 assert.equal(r9.placeholder.hidden,false,"Incohérence : tableau provisoire restauré");
 window.P2I_COMPTE_FINANCIER.cout_ventes_total_usd=40;listeners["p2i:financial-result-ready"]();
 assert.equal(has("p2i-r9-engine"),true,"Recalcul : résultat rétabli");
+assert.equal(has("p2i-r9-annual-engine"),true,"Recalcul : projection annuelle rétablie");
 assert.equal(r9.placeholder.hidden,true);
 choice.value="biscuits_mous";listeners.change();
 assert.equal(has("p2i-r8-engine"),false);assert.equal(has("p2i-r9-engine"),false);
