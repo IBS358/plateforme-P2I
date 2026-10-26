@@ -11,3 +11,5 @@
 - Conserver le design V106/V108 et les 17 rubriques, dont les blocs 16 et 17. Préserver les simulations enregistrées et la transmission au Pro.
 - 96 UP = 12 filières de 8. `peintures` (Peintures industrielles, Chimie) est distincte de `peintures_btp` (Peintures bâtiment, BTP).
 - Livrer par ensembles cohérents, avec tests adaptés; ne pas solliciter de confirmations sur ces décisions déjà prises.
+
+- Chaque BP de production doit préciser un emballage adapté au produit, à son usage, à la présentation commerciale, à son coût et aux possibilités locales de réemploi ou de recyclage. Chiffrer contenant, fermeture, étiquette et regroupement sans double compte; les impacts et filières non prouvés restent à qualifier. Les prestations sans produit emballé sont marquées non applicables.

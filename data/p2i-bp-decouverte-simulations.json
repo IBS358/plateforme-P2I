@@ -63,9 +63,9 @@
   "profils": {
     "jus_boissons": {
       "configuration_id": null,
-      "nom": "Jus de fruits pressés pasteurisés en poches",
+      "nom": "Jus de fruits pressés pasteurisés en bouteilles",
       "sous_titre": "Unité intégrée de pressage et conditionnement",
-      "description": "Jus de fruits pressables; quantités exprimées en kg de jus, sans assimilation à des litres. La gamme ne couvre pas automatiquement les nectars ou toutes les espèces de fruits.",
+      "description": "Jus de fruits pressables conditionné en bouteilles PET refermables de 500 ml ; quantités de simulation en kg de jus. La marque Ivoire Fruits est illustrative.",
       "source_equipement": "catalogue_jus_mfpu",
       "prix_retenu": 83990,
       "devise_prix": "EUR",
@@ -89,7 +89,6 @@
         1.45656
       ],
       "matieres_usd_kg_produit": 0.5833333333333334,
-      "cout_process_usd_kg": 0.26,
       "fixes_industriels_an": 32579.999999999996,
       "personnel_hors_cout_industriel": 9660.0,
       "charges_fixes_hors_industriel": 20400,
@@ -103,17 +102,49 @@
         "installation_formation": 5000,
         "pieces_initiales": 2800,
         "securite_environnement": 1800,
-        "etudes": 3000
+        "etudes": 3000,
+        "fermeture_bouchons_estimation": 1500,
+        "etiquetage_estimation": 2000,
+        "rincage_bouteilles_estimation": 500
       },
       "methodes": {
         "fruits": "Hypothèse P2I : 0,35 USD/kg livré; rendement massique de 0,60 kg de jus par kg de fruit. Pas un prix marché observé.",
-        "process": "Hypothèses : emballage 0,18 USD/kg, énergie/eau/nettoyage 0,08 USD/kg.",
+        "process": "Hypothèses par bouteille de 500 ml : bouteille PET 0,12 USD, bouchon 0,02, étiquette 0,03, regroupement 0,03, soit 0,20 USD/bouteille ou 0,40 USD/kg avec hypothèse 0,5 kg/bouteille. Énergie/eau/nettoyage : 0,08 USD/kg. Montants estimés, non prix catalogue.",
         "personnel": "Hypothèses de salaires bruts : 6 opérateurs à 350 USD/mois et 1 responsable à 700; majoration de simulation 15 %, non taux légal déclaré. Les opérateurs sont inclus dans le coût industriel; le responsable est hors CPV.",
         "charges": "Hypothèses annuelles : site 7 200, commercial 4 800, maintenance 3 600, assurance 2 400, administration 3 600, autres 2 400 USD. La maintenance est affectée au coût industriel; les autres postes restent hors CPV.",
-        "production": "500 kg fruits/h × 8 h × 250 jours × utilisation × rendement 0,60. Les ventes ne dépassent pas la production et les stocks reportés.",
+        "production": "500 kg fruits/h × 8 h × 250 jours × utilisation × rendement 0,60. Les ventes ne dépassent pas la production et les stocks reportés. À 0,5 kg par bouteille, le débit maximal de 300 kg/h correspond à environ 600 bouteilles/h et 300 L/h, sous l’hypothèse simplificatrice de densité 1 kg/L.",
         "prix_vente": "Hypothèse P2I 1,40 USD/kg de jus en A1, +2 %/an, sans promesse de débouchés.",
-        "complements": "Enveloppes P2I de dimensionnement, pas devis de prestataires; hors achat de terrain."
-      }
+        "complements": "Enveloppes P2I de dimensionnement, pas devis de prestataires; hors achat de terrain. La ligne initiale inclut toujours la remplisseuse de poches ; la remplisseuse bouteilles est ajoutée en complément sans déduire sa valeur inconnue. Fermeture, étiquetage et rinçage sont des enveloppes estimatives."
+      },
+      "cout_process_hors_emballage_usd_kg": 0.08,
+      "emballage": {
+        "format": "Bouteille PET refermable 500 ml",
+        "marque": "IVOIRE FRUITS — exemple fictif",
+        "masse_produit_kg_par_bouteille": 0.5,
+        "base_masse": "Hypothèse de simulation : 0,5 kg pour 500 ml, densité supposée 1 kg/L; à mesurer selon la recette",
+        "composants_usd_bouteille": {
+          "bouteille_PET": 0.12,
+          "bouchon": 0.02,
+          "etiquette": 0.03,
+          "regroupement": 0.03
+        },
+        "ecologie": "Réduction du poids et recyclabilité technique à étudier ; collecte et recyclage effectifs en Côte d’Ivoire à vérifier. Aucune allégation de recyclage garanti ou de neutralité carbone.",
+        "qualification": "hypotheses_P2I_non_prix_catalogue"
+      },
+      "equipements_complementaires": [
+        {
+          "nom": "Remplisseuse bouteilles Stalmont, 6 têtes",
+          "prix_retenu": 9300,
+          "devise": "EUR",
+          "prix_min": 4700,
+          "prix_max": 9300,
+          "source_url": "https://stalmont.net.pl/en/bottle-filler/",
+          "date_consultation": "2026-10-26",
+          "capacite_l_h": 900,
+          "qualification": "borne_haute_fourchette_catalogue_HT_non_devis",
+          "limites": "Le prix dépend des options; aptitude au contenant, température, interfaces et fermeture à confirmer."
+        }
+      ]
     },
     "aliments_betail": {
       "configuration_id": null,
