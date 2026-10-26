@@ -27,6 +27,10 @@ on:
       - 'tests/check-p2i-bp-tresorerie-12-mois.cjs'
       - 'js/p2i-bp-decouverte-tresorerie-12-mois.js'
       - 'tests/check-p2i-bp-validated-projections.cjs'
+      - 'js/p2i-bp-decouverte-dossier-builder.js'
+      - 'scripts/build-bp-decouverte-95-dossiers.cjs'
+      - 'tests/check-p2i-bp-95-dossiers.cjs'
+      - 'data/p2i-bp-decouverte-95-dossiers-17-rubriques.json'
       - 'tests/check-p2i-bp-script-loading.cjs'
       - 'tests/check-p2i-bp-bfr-scenario-assembleur.cjs'
       - 'js/p2i-bp-decouverte-bfr-engine.js'
@@ -99,3 +103,8 @@ jobs:
         run: node tests/check-p2i-bp-script-loading.cjs
       - name: Vérifier le scénario BFR 40/60 raccordé à la trésorerie
         run: node tests/check-p2i-bp-bfr-scenario-assembleur.cjs
+      - name: Contrôler les 95 dossiers documentaires à 17 rubriques
+        run: |
+          node tests/check-p2i-bp-95-dossiers.cjs
+          node scripts/build-bp-decouverte-95-dossiers.cjs
+          git diff --exit-code -- data/p2i-bp-decouverte-95-dossiers-17-rubriques.json
