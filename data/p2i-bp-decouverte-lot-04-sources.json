@@ -1,0 +1,751 @@
+{
+  "version": "1.0.0",
+  "lot": "LOT-04",
+  "filiere": "Textile, Habillement & Cuir",
+  "avertissement": "Les montants génériques historiques ne sont ni des devis ni des budgets consolidés; ne pas les utiliser comme CAPEX validés ou résultats nets.",
+  "nombre_up": 8,
+  "unites": [
+    {
+      "up_id": "confection",
+      "up_nom": "Confection de vêtements",
+      "description": "Fabrication de vêtements prêts-à-porter pour hommes, femmes et enfants. Spécialisation possible en pagne, tenues traditionnelles, casual et professionnel.",
+      "filiere": "Textile, Habillement & Cuir",
+      "processus": [
+        "Réception des tissus (pagne, coton, polyester)",
+        "Découpe selon patron",
+        "Assemblage des pièces",
+        "Surfilage et finitions",
+        "Pose des boutons/fermetures",
+        "Repassage",
+        "Contrôle qualité",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Pagne (tissus locaux)",
+        "Coton (production locale)",
+        "Polyester (import)",
+        "Fils, boutons, fermetures éclair",
+        "Emballages (sachets, cartons)"
+      ],
+      "marches_cibles": [
+        "Boutiques de mode",
+        "Marchés traditionnels",
+        "Supermarchés",
+        "Entreprises (uniformes)",
+        "Particuliers (sur mesure)"
+      ],
+      "capacite_generique_texte": "5,000 pièces",
+      "machines_catalogue": [
+        {
+          "nom": "Machine à coudre industrielle",
+          "role": "Couture des vêtements",
+          "capacite": "500 pièces/jour",
+          "utilites": "Électricité 0.5kW"
+        },
+        {
+          "nom": "Coupe automatique",
+          "role": "Découpe du tissus",
+          "capacite": "100 mètres/heure",
+          "utilites": "Électricité 2kW"
+        },
+        {
+          "nom": "Surjeteuse",
+          "role": "Finition des coutures",
+          "capacite": "400 pièces/jour",
+          "utilites": "Électricité 0.4kW"
+        },
+        {
+          "nom": "Repasseuse industrielle",
+          "role": "Finition et repassage",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité + vapeur"
+        },
+        {
+          "nom": "Presse à transfert",
+          "role": "Thermocollage des motifs",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Boutonneuse automatique",
+          "role": "Pose de boutons",
+          "capacite": "600 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Brodeuse industrielle",
+          "role": "Broderie personnalisée",
+          "capacite": "400 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité",
+          "role": "Inspection des finitions",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 60000,
+        "ventilation": {
+          "machines": 35000,
+          "installation": 10000,
+          "working_capital": 10000,
+          "training": 5000,
+          "total": 60000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 500000,
+        "marge_brute_indicative_pourcent": 42,
+        "rentabilite_nette_indicative_pourcent": 25
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 60000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "tissage",
+      "up_nom": "Tissage industriel",
+      "description": "Production de tissus à partir de coton local. Fabrication de pagnes, tissus wax, bazin et cotonnades pour le marché local et régional.",
+      "filiere": "Textile, Habillement & Cuir",
+      "processus": [
+        "Réception des fils de coton",
+        "Ourdissage (préparation des chaînes)",
+        "Encolage (renforcement des fils)",
+        "Tissage",
+        "Contrôle qualité",
+        "Conditionnement en rouleaux"
+      ],
+      "matieres_premieres": [
+        "Coton ivoirien (fils)",
+        "Fils de chaîne et de trame",
+        "Colorants et teintures",
+        "Rouleaux d'emballage"
+      ],
+      "marches_cibles": [
+        "Confectionneurs de vêtements",
+        "Couturiers et ateliers",
+        "Grossistes en tissus",
+        "Export vers UEMOA/CEDEAO"
+      ],
+      "capacite_generique_texte": "50,000 mètres",
+      "machines_catalogue": [
+        {
+          "nom": "Ourdissoir",
+          "role": "Préparation des fils",
+          "capacite": "200 m/heure",
+          "utilites": "Électricité 3kW"
+        },
+        {
+          "nom": "Métier à tisser",
+          "role": "Tissage des pagnes",
+          "capacite": "50 m/jour",
+          "utilites": "Électricité 5kW"
+        },
+        {
+          "nom": "Encolleuse",
+          "role": "Application de colle sur fils",
+          "capacite": "150 m/heure",
+          "utilites": "Électricité + chaleur"
+        },
+        {
+          "nom": "Lamineuse",
+          "role": "Aplatissement du tissu",
+          "capacite": "100 m/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Dévidoir",
+          "role": "Enroulage des tissus",
+          "capacite": "150 m/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Contrôle qualité tissage",
+          "role": "Inspection des défauts",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 100000,
+        "ventilation": {
+          "machines": 60000,
+          "installation": 15000,
+          "working_capital": 15000,
+          "training": 10000,
+          "total": 100000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 600000,
+        "marge_brute_indicative_pourcent": 35,
+        "rentabilite_nette_indicative_pourcent": 20
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 100000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "maroquinerie",
+      "up_nom": "Maroquinerie & articles en cuir",
+      "description": "Fabrication d'articles en cuir et simili-cuir : sacs, ceintures, portefeuilles, chaussures, accessoires. Valorisation des peaux locales.",
+      "filiere": "Textile, Habillement & Cuir",
+      "processus": [
+        "Réception du cuir (local)",
+        "Découpe des patrons",
+        "Amincissement (refendage)",
+        "Assemblage et couture",
+        "Collage et marquage",
+        "Finition et polissage",
+        "Contrôle qualité",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Cuir de bovin (local)",
+        "Cuir de chèvre/mouton",
+        "Simili-cuir (import)",
+        "Fils cirés, colle",
+        "Métaux (boucles, rivets)",
+        "Emballages (boîtes, pochettes)"
+      ],
+      "marches_cibles": [
+        "Boutiques de luxe",
+        "Concept stores",
+        "Export Europe",
+        "Particuliers (haut de gamme)",
+        "Entreprises (cadeaux d'affaires)"
+      ],
+      "capacite_generique_texte": "2,000 pièces",
+      "machines_catalogue": [
+        {
+          "nom": "Découpeuse cuir",
+          "role": "Découpe des formes",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité 2kW"
+        },
+        {
+          "nom": "Piqueuse cuir",
+          "role": "Couture des articles cuir",
+          "capacite": "150 pièces/jour",
+          "utilites": "Électricité 0.6kW"
+        },
+        {
+          "nom": "Poinçonneuse",
+          "role": "Pose de rivets et œillets",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Presse à chaud",
+          "role": "Marquage à chaud",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité + chaleur"
+        },
+        {
+          "nom": "Polisseuse cuir",
+          "role": "Lustrage du cuir",
+          "capacite": "150 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Bordeuse",
+          "role": "Finition des bords",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 75000,
+        "ventilation": {
+          "machines": 40000,
+          "installation": 10000,
+          "working_capital": 15000,
+          "training": 10000,
+          "total": 75000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 400000,
+        "marge_brute_indicative_pourcent": 50,
+        "rentabilite_nette_indicative_pourcent": 30
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 75000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "teinture",
+      "up_nom": "Teinturerie industrielle",
+      "description": "Services de teinture et ennoblissement de textiles. Teinture de pagnes, tissus, vêtements. Blanchisserie industrielle pour hôtels et restaurants.",
+      "filiere": "Textile, Habillement & Cuir",
+      "processus": [
+        "Réception des textiles",
+        "Tri par couleur et matière",
+        "Préparation (détachage)",
+        "Teinture en cuve",
+        "Rinçage",
+        "Essorage",
+        "Séchage",
+        "Repassage",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Colorants et teintures",
+        "Eau (importante quantité)",
+        "Produits de fixation",
+        "Détachants",
+        "Emballages (sachets, housses)"
+      ],
+      "marches_cibles": [
+        "Particuliers (mariages, baptêmes)",
+        "Hôtels et restaurants",
+        "Collectivités",
+        "Confectionneurs",
+        "Grossistes en pagnes"
+      ],
+      "capacite_generique_texte": "10,000 pièces",
+      "machines_catalogue": [
+        {
+          "nom": "Cuve de teinture",
+          "role": "Teinture des tissus",
+          "capacite": "500 kg/batch",
+          "utilites": "Eau + électricité + vapeur"
+        },
+        {
+          "nom": "Sécheur textile",
+          "role": "Séchage après teinture",
+          "capacite": "300 kg/batch",
+          "utilites": "Électricité + gaz"
+        },
+        {
+          "nom": "Mélangeur colorant",
+          "role": "Préparation des bains",
+          "capacite": "200 L/batch",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Foulard",
+          "role": "Application uniforme",
+          "capacite": "400 m/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Laveuse textile",
+          "role": "Rinçage post-teinture",
+          "capacite": "500 kg/batch",
+          "utilites": "Eau + électricité"
+        },
+        {
+          "nom": "Centrifugeuse",
+          "role": "Essorage des tissus",
+          "capacite": "300 kg/batch",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 40000,
+        "ventilation": {
+          "machines": 20000,
+          "installation": 5000,
+          "working_capital": 10000,
+          "training": 5000,
+          "total": 40000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 300000,
+        "marge_brute_indicative_pourcent": 45,
+        "rentabilite_nette_indicative_pourcent": 28
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 40000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "broderie",
+      "up_nom": "Broderie industrielle",
+      "description": "Broderie automatisée sur textiles : logos d'entreprises, initiales, motifs décoratifs. Service pour confectionneurs, entreprises et particuliers.",
+      "filiere": "Textile, Habillement & Cuir",
+      "processus": [
+        "Programmation du motif (logiciel DAO)",
+        "Préparation du textile (cadrage)",
+        "Broderie automatisée",
+        "Finition (coupe des fils)",
+        "Contrôle qualité",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Fils de broderie (coton, polyester, métallisés)",
+        "Textiles supports (pagnes, tissus)",
+        "Logiciels de programmation",
+        "Emballages (boîtes, sachets)"
+      ],
+      "marches_cibles": [
+        "Confectionneurs de vêtements",
+        "Entreprises (logos sur uniformes)",
+        "Particuliers (initiales, prénoms)",
+        "Événementiel (mariages, baptêmes)",
+        "Écoles (blasons, logos)"
+      ],
+      "capacite_generique_texte": "5,000 pièces",
+      "machines_catalogue": [
+        {
+          "nom": "Brodeuse multi-têtes",
+          "role": "Broderie automatisée",
+          "capacite": "400 pièces/jour",
+          "utilites": "Électricité 1.5kW"
+        },
+        {
+          "nom": "Digitizer",
+          "role": "Conception des motifs",
+          "capacite": "Standard",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à affranchir",
+          "role": "Préparation des supports",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Détricoteuse",
+          "role": "Défabrication des erreurs",
+          "capacite": "100 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Presse thermique",
+          "role": "Fixation des broderies",
+          "capacite": "200 pièces/jour",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 55000,
+        "ventilation": {
+          "machines": 35000,
+          "installation": 5000,
+          "working_capital": 10000,
+          "training": 5000,
+          "total": 55000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 220000,
+        "marge_brute_indicative_pourcent": 48,
+        "rentabilite_nette_indicative_pourcent": 30
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 55000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "chaussures",
+      "up_nom": "Fabrication de chaussures",
+      "description": "Fabrication de chaussures en cuir et matériaux synthétiques. Chaussures habillées, casual, sécurité, enfants.",
+      "filiere": "Textile, Habillement & Cuir",
+      "processus": [
+        "Réception des matériaux (cuir, tissu, semelles)",
+        "Découpe des pièces",
+        "Couture de la tige",
+        "Assemblage tige/semelle",
+        "Mise en forme",
+        "Finition et polissage",
+        "Contrôle qualité",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Cuir (local)",
+        "Tissus (coton, synthétique)",
+        "Semelles (caoutchouc, EVA)",
+        "Colles, fils",
+        "Emballages (boîtes à chaussures)"
+      ],
+      "marches_cibles": [
+        "Boutiques de chaussures",
+        "Supermarchés",
+        "Marchés",
+        "Entreprises (chaussures de sécurité)",
+        "Export UEMOA/CEDEAO"
+      ],
+      "capacite_generique_texte": "10,000 paires",
+      "machines_catalogue": [
+        {
+          "nom": "Découpeuse chaussures",
+          "role": "Découpe des semelles",
+          "capacite": "500 paires/jour",
+          "utilites": "Électricité 3kW"
+        },
+        {
+          "nom": "Piqueuse chaussures",
+          "role": "Couture des tiges",
+          "capacite": "300 paires/jour",
+          "utilites": "Électricité 0.8kW"
+        },
+        {
+          "nom": "Presse à chaud semelles",
+          "role": "Collage des semelles",
+          "capacite": "400 paires/jour",
+          "utilites": "Électricité + chaleur"
+        },
+        {
+          "nom": "Machine à monter",
+          "role": "Assemblage chaussures",
+          "capacite": "300 paires/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Polisseuse chaussures",
+          "role": "Lustrage et finition",
+          "capacite": "400 paires/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Formeuse à chaud",
+          "role": "Mise en forme des tiges",
+          "capacite": "300 paires/jour",
+          "utilites": "Électricité + chaleur"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 120000,
+        "ventilation": {
+          "machines": 70000,
+          "installation": 15000,
+          "working_capital": 25000,
+          "training": 10000,
+          "total": 120000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 750000,
+        "marge_brute_indicative_pourcent": 40,
+        "rentabilite_nette_indicative_pourcent": 25
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 120000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "uniformes",
+      "up_nom": "Confection d'uniformes",
+      "description": "Fabrication d'uniformes professionnels et scolaires : tenues d'entreprise, uniformes scolaires, vêtements de travail, EPI.",
+      "filiere": "Textile, Habillement & Cuir",
+      "processus": [
+        "Réception des tissus",
+        "Découpe",
+        "Assemblage",
+        "Finition",
+        "Broderie logo (option)",
+        "Contrôle qualité",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Tissus (coton, polyester, mélanges)",
+        "Fils",
+        "Boutons, fermetures",
+        "Broderie logos",
+        "Emballages"
+      ],
+      "marches_cibles": [
+        "Écoles (uniformes scolaires)",
+        "Entreprises (tenues de travail)",
+        "Administrations",
+        "Hôtels et restaurants",
+        "Hôpitaux"
+      ],
+      "capacite_generique_texte": "10,000 pièces",
+      "machines_catalogue": [
+        {
+          "nom": "Coupe laser",
+          "role": "Découpe précise",
+          "capacite": "200 m/heure",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Machine à coudre industrielle",
+          "role": "Couture uniformes",
+          "capacite": "400 pièces/jour",
+          "utilites": "Électricité 0.5kW"
+        },
+        {
+          "nom": "Boutonneuse",
+          "role": "Pose de boutons",
+          "capacite": "500 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Repasseuse à convoyeur",
+          "role": "Finition continue",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité + vapeur"
+        },
+        {
+          "nom": "Machine à poser fermetures",
+          "role": "Pose de zip",
+          "capacite": "400 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Transfert thermique",
+          "role": "Pose logos et insignes",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 70000,
+        "ventilation": {
+          "machines": 40000,
+          "installation": 10000,
+          "working_capital": 15000,
+          "training": 5000,
+          "total": 70000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 450000,
+        "marge_brute_indicative_pourcent": 38,
+        "rentabilite_nette_indicative_pourcent": 22
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 70000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    },
+    {
+      "up_id": "linge",
+      "up_nom": "Linge de maison",
+      "description": "Fabrication de linge de maison : draps, taies d'oreiller, nappes, serviettes, torchons. Valorisation du coton local.",
+      "filiere": "Textile, Habillement & Cuir",
+      "processus": [
+        "Réception des tissus (coton, percale)",
+        "Découpe",
+        "Assemblage",
+        "Ourlet",
+        "Repassage",
+        "Contrôle qualité",
+        "Conditionnement"
+      ],
+      "matieres_premieres": [
+        "Coton (local)",
+        "Percale, satin (import)",
+        "Fils",
+        "Emballages (sachets, boîtes)"
+      ],
+      "marches_cibles": [
+        "Supermarchés",
+        "Boutiques de linge de maison",
+        "Hôtels et restaurants",
+        "Particuliers",
+        "Export UEMOA"
+      ],
+      "capacite_generique_texte": "20,000 pièces",
+      "machines_catalogue": [
+        {
+          "nom": "Coupe multi-plis",
+          "role": "Découpe drap/housse",
+          "capacite": "500 m/heure",
+          "utilites": "Électricité 4kW"
+        },
+        {
+          "nom": "Machine à coudre grande largeur",
+          "role": "Couture linge plat",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité 0.8kW"
+        },
+        {
+          "nom": "Ourleuse automatique",
+          "role": "Ourlet des serviettes",
+          "capacite": "400 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Presse à repasser",
+          "role": "Finition industrielle",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité + vapeur"
+        },
+        {
+          "nom": "Plieuse automatique",
+          "role": "Plage du linge",
+          "capacite": "400 pièces/jour",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Ensacheuse sous vide",
+          "role": "Conditionnement sous vide",
+          "capacite": "300 pièces/jour",
+          "utilites": "Électricité + air"
+        }
+      ],
+      "estimation_generique_non_validee": {
+        "investissement_minimum_usd": 90000,
+        "ventilation": {
+          "machines": 50000,
+          "installation": 15000,
+          "working_capital": 15000,
+          "training": 10000,
+          "total": 90000
+        },
+        "chiffre_affaires_annuel_indicatif_usd": 500000,
+        "marge_brute_indicative_pourcent": 42,
+        "rentabilite_nette_indicative_pourcent": 25
+      },
+      "reference_industrielle_validee": null,
+      "controle": {
+        "montant_total_ventilation_usd": 90000,
+        "ecart_capex_min_ventilation_usd": 0,
+        "capex_complet_valide_usd": null,
+        "projections_3_ans_validees": false,
+        "bfr_36_mois_valide": false,
+        "tresorerie_12_mois_validee": false,
+        "sources_externes_verifiees": [],
+        "statut": "donnees_sources_a_qualifier"
+      }
+    }
+  ]
+}
