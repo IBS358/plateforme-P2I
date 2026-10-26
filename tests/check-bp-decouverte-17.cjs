@@ -32,7 +32,7 @@ assert.ok(html.includes("p2iBiscuiterieSelect"),"Le sélecteur historique doit �
 assert.ok(html.includes("p2iCompteResultat"),"La sortie historique du moteur doit être conservée");
 assert.ok(layout.includes("450000"),"La référence équipement Crackers doit rester 450 000 USD");
 assert.ok(layout.includes("capex=null"),"Ne pas convertir le coût de la ligne en investissement total");
-assert.ok(layout.includes("40 %")&&layout.includes("60 %"));
+assert.ok(layout.includes("Financement de référence : 30 % d’apport et 70 % de dette"),"Financement BP Découverte 30/70 requis");
 assert.ok(layout.includes("12 mois exclusivement"),"Trésorerie : 12 mois seulement");
 assert.ok(layout.includes("Bilan simplifié prévisionnel sur trois exercices"),"Bilan sur 3 exercices");
 assert.ok(layout.includes("function annualMatrix(title,rows)"),"Matrice annuelle commune");
