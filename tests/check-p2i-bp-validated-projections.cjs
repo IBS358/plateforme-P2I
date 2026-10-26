@@ -5,7 +5,7 @@ const root=path.resolve(__dirname,"..");
 const source=name=>fs.readFileSync(path.join(root,"js",name),"utf8");
 const nodes=new Map();
 const makeNode=id=>({id,innerHTML:"",children:[],appendChild(child){this.children.push(child);nodes.set(child.id,child);child.parentNode=this;},remove(){nodes.delete(this.id)}});
-for(const id of ["p2i-r7","p2i-r10","p2i-r11","p2i-r13"])nodes.set(id,makeNode(id));
+for(const id of ["p2i-r7","p2i-r9","p2i-r10","p2i-r11","p2i-r13"])nodes.set(id,makeNode(id));
 const events={};
 const document={readyState:"complete",getElementById:id=>nodes.get(id)||null,createElement:()=>makeNode(""),addEventListener:(e,fn)=>{events[e]=fn}};
 const window={addEventListener:(e,fn)=>{events[e]=fn}};
@@ -27,7 +27,8 @@ window.P2I_BP_PREVISIONS_VALIDABLES={
  bilans_annuels:Array.from({length:3},()=>({actif_total:900000,passif_total:900000}))
 };
 events["p2i:bp-previsions-ready"]();
-for(const id of ["r7","r10","r11","r13"])assert.ok(nodes.has("p2i-validated-finance-"+id),id);
+for(const id of ["r7","r9","r10","r11","r13"])assert.ok(nodes.has("p2i-validated-finance-"+id),id);
+assert.equal((nodes.get("p2i-validated-finance-r9").innerHTML.match(/<tr>/g)||[]).length,4);
 assert.equal((nodes.get("p2i-validated-finance-r10").innerHTML.match(/<tr>/g)||[]).length,37);
 assert.equal((nodes.get("p2i-validated-finance-r13").innerHTML.match(/<tr>/g)||[]).length,13);
 window.P2I_BP_PREVISIONS_VALIDABLES.bfr_mensuel[2].bfr=0;
