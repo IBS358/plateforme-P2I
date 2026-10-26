@@ -20,9 +20,10 @@ function calculate(input){
  for(const [key,value] of Object.entries(expected))
   if(!number(options[key])||!close(options[key],value))
    problems.push("Hypothèse absente ou différente du scénario P2I : "+key);
+ if(!number(data.creances_ouverture_usd))problems.push("Créances clients à l’ouverture manquantes");
  if(problems.length)return Object.freeze({valide:false,blocages:Object.freeze(problems),bfr_mensuel:null});
  const rows=[];
- let previousReceivable=0;
+ let previousReceivable=data.creances_ouverture_usd;
  for(let i=0;i<36;i++){
   const m=months[i]||{};
   const keys=["ventes_usd","consommation_matieres_usd","cout_production_vendue_usd"];
