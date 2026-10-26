@@ -31,7 +31,7 @@ function validate(dataset){
  if(annual.length!==3)push("compte_resultat","Trois exercices annuels requis");
  for(let i=0;i<3;i++){
   const item=annual[i]||{};
-  for(const k of requiredAnnual)if(!finite(item[k]))push("compte_resultat."+(i+1)+"."+k,"Valeur annuelle requise");
+  for(const k of requiredAnnual)if(!(k==="resultat_net"?finite(item[k]):nonnegative(item[k])))push("compte_resultat."+(i+1)+"."+k,"Montant annuel requis ou invalide");
   if(requiredAnnual.every(k=>finite(item[k]))){
    const computed=item.chiffre_affaires-item.cout_produits_vendus-item.charges_exploitation-
     item.amortissements-item.charges_financieres-item.impots;
@@ -42,7 +42,7 @@ function validate(dataset){
  if(bfr.length!==36)push("bfr_mensuel","36 mois requis");
  for(let i=0;i<36;i++){
   const item=bfr[i]||{};
-  for(const k of requiredBfr)if(!finite(item[k]))push("bfr_mensuel."+(i+1)+"."+k,"Montant requis");
+  for(const k of requiredBfr)if(!(k==="bfr"?finite(item[k]):nonnegative(item[k])))push("bfr_mensuel."+(i+1)+"."+k,"Montant requis ou invalide");
   if(requiredBfr.every(k=>finite(item[k]))&&!close(item.stocks+item.creances_clients-item.dettes_exploitation,item.bfr))
    push("bfr_mensuel."+(i+1)+".bfr","BFR incohérent avec stocks, créances et dettes");
  }
@@ -50,7 +50,7 @@ function validate(dataset){
  if(treasury.length!==12)push("tresorerie_mensuelle","12 mois uniquement");
  for(let i=0;i<12;i++){
   const item=treasury[i]||{};
-  for(const k of requiredTreasury)if(!finite(item[k]))push("tresorerie_mensuelle."+(i+1)+"."+k,"Montant requis");
+  for(const k of requiredTreasury)if(!(k==="encaissements"||k==="decaissements"?nonnegative(item[k]):finite(item[k])))push("tresorerie_mensuelle."+(i+1)+"."+k,"Montant requis ou invalide");
   if(requiredTreasury.every(k=>finite(item[k]))&&!close(item.solde_initial+item.encaissements-item.decaissements,item.solde_final))
    push("tresorerie_mensuelle."+(i+1)+".solde_final","Solde de trésorerie incohérent");
   if(i>0&&finite(treasury[i-1]?.solde_final)&&finite(item.solde_initial)&&
