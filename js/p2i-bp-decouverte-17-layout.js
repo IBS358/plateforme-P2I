@@ -134,8 +134,8 @@ const investmentItems=[
 sections[6]+='<h3>Décomposition de l’investissement et financement</h3>'+table(investmentItems)+
  note("Le prix de référence de la ligne intégrée Crackers est une donnée d’équipement, pas un CAPEX complet. Le financement 40 % / 60 % s’applique au total d’investissement documenté ; la réserve de trésorerie initiale est distincte.");
 sections[13]+='<h3>Traçabilité de l’hypothèse industrielle</h3>'+table([
- ["Périmètre",safe(name)],
- ["Variante",safe(configLabel)],
+ ["Périmètre",name],
+ ["Variante",configLabel],
  ["Équipements",isCrackers?"450 000 USD — référence P2I, ligne intégrée 500 kg/h":"Prix de référence à documenter"],
  ["Nature du prix",isCrackers?"Prix de la ligne, hors coûts complémentaires":"À préciser"],
  ["Fret, assurance, taxes, installation et utilités","Non intégrés sans données vérifiées"],
