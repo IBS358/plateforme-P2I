@@ -74,7 +74,7 @@ for(const [key,p] of Object.entries(simulationPack.profils)){
  u.variantes[config].qualification='simulation_decouverte_calculable';
  u.variantes[config].prix_equipement={...source,equipements_complementaires:supplemental};
  u.variantes[config].emballage=packagingExisting;
- u.variantes[config].hypotheses_explicites={...p.methodes,conventions:h,complements_usd:p.complements_usd,base_budget_equipements_usd:equipment,conversion:p.devise_prix==='EUR'?ctx.P2I_BP_V108_REFERENCES.change:null};
+ u.variantes[config].hypotheses_explicites={...p.methodes,sources_prix_marche:p.sources_prix_marche||[],conventions:h,complements_usd:p.complements_usd,base_budget_equipements_usd:equipment,conversion:p.devise_prix==='EUR'?ctx.P2I_BP_V108_REFERENCES.change:null};
  u.statut='simulation_decouverte_disponible';
 }
 const data={schema:'p2i.bp-donnees.v1',date:'2026-10-26',nombre_up:96,nombre_configurations:Object.values(units).reduce((n,u)=>n+u.configurations.length,0),alias_identifiants:{"profilés":"profiles"},source_perimetre_sha256:crypto.createHash('sha256').update(source).digest('hex'),parametres_communs:{electricite_mt_general:{source:'https://www.cie.ci/entreprise/tarifs-electricite',consulte_le:'2026-10-26',regime:'MT général, utilisation annuelle 1 000 à 5 000 heures',devise:'XOF',prime_kw_an_ht:33643.67,kwh_pleines_ht:74.06,kwh_pointe_ht:101,kwh_creuses_ht:61.29,qualification:'bareme_publie_application_contractuelle_a_confirmer'}},financement:{apport:.3,dette:.7},horizons:{resultat_ans:3,bfr_mois:36,tresorerie_mois:12},filieres:ctx.filieres.map(f=>({id:f.id,nom:f.name,up_ids:f.units.map(u=>u.id)})),unites:units};

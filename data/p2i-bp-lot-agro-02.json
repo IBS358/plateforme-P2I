@@ -1,0 +1,321 @@
+{
+  "schema": "p2i.bp-lot.v1",
+  "date": "2026-10-27",
+  "description": "Lot agro automatisé : boulangerie, huile et épices",
+  "sources": [
+    {
+      "id": "catalogue_four_b216",
+      "url": "https://www.restoconcept.com/four-rotatif-boulangerie-diesel-ou-gaz-b216-parisfours/p8612.aspx",
+      "consulte_le": "2026-10-27",
+      "fournisseur": "ParisFours / Restoconcept",
+      "modele": "Four rotatif B216",
+      "prix": 12000,
+      "devise": "EUR",
+      "base": "prix public ; livraison et options non comprises ou à préciser",
+      "capacite": 100,
+      "unite_capacite": "kg/h annoncés pour le four",
+      "fonctions": [
+        "Pétrissage",
+        "Division et boulage",
+        "Fermentation",
+        "Cuisson",
+        "Refroidissement et emballage"
+      ],
+      "qualification": "prix_catalogue_public_non_certifie",
+      "limites": "Four 600 × 800 mm, gaz ou fioul ; fermentation par lots, temps de cycle et chariots à dimensionner. Les autres fonctions proviennent de machines complémentaires ou de postes manuels."
+    },
+    {
+      "id": "catalogue_farmet_fls60",
+      "url": "https://oelwerk.com/fr/farmet-fls-60/fa-fls60",
+      "consulte_le": "2026-10-27",
+      "fournisseur": "Farmet / Oelwerk",
+      "modele": "FLS 60 avec filtration intégrée",
+      "prix": 39000,
+      "devise": "EUR",
+      "base": "prix public ; livraison et options non comprises ou à préciser",
+      "capacite": 60,
+      "unite_capacite": "kg/h de graines entrantes, milieu de la plage 48–72",
+      "fonctions": [
+        "Nettoyage des graines",
+        "Pressage à froid",
+        "Décantation",
+        "Filtration",
+        "Remplissage et fermeture"
+      ],
+      "qualification": "prix_catalogue_public_non_certifie",
+      "limites": "L’unité inclut trois presses, pompe, décantation et filtre ; nettoyage et conditionnement supposés manuels, avec matériel auxiliaire estimé séparément. Rendement et alimentation électrique à confirmer."
+    },
+    {
+      "id": "catalogue_nirudi_gingembre",
+      "url": "https://www.nirudi.com/en/product/complete-100-kgh-output-ginger-powder-processing-line",
+      "consulte_le": "2026-10-27",
+      "fournisseur": "Nirudi",
+      "modele": "Ligne gingembre MSQ-350, HQC-611, DBJ-88A, WN-200",
+      "prix": 4670,
+      "devise": "EUR",
+      "base": "prix public ; livraison et options non comprises ou à préciser",
+      "capacite": 100,
+      "unite_capacite": "kg/h de poudre annoncés, capacité de ligne non démontrée",
+      "fonctions": [
+        "Lavage et épluchage",
+        "Découpe",
+        "Séchage",
+        "Broyage",
+        "Conditionnement"
+      ],
+      "qualification": "prix_catalogue_public_non_certifie",
+      "limites": "La fiche annonce 100 kg/h de poudre mais le lavage est donné à 150–200 kg/h de racines et le séchoir fonctionne par lots. Le rendement de séchage et le cycle rendent cette cadence incohérente ; capacité de simulation à confirmer."
+    }
+  ],
+  "profils": {
+    "boulangerie_industrielle": {
+      "configuration_id": null,
+      "nom": "Petits pains ronds frais",
+      "sous_titre": "Boulangerie : pains de 200 g",
+      "description": "Fabrication de petits pains ronds frais en sachets de deux unités.",
+      "source_equipement": "catalogue_four_b216",
+      "prix_retenu": 12000,
+      "devise_prix": "EUR",
+      "capacite_entree_kg_h": 40,
+      "production_explicite": [
+        40000,
+        50000,
+        60000
+      ],
+      "ventes_explicites": [
+        40000,
+        50000,
+        60000
+      ],
+      "prix_vente_usd_kg": [
+        2.4,
+        2.448,
+        2.49696
+      ],
+      "matieres_usd_kg_produit": 0.48,
+      "cout_process_usd_kg": 0.25,
+      "fixes_industriels_an": 20000,
+      "personnel_hors_cout_industriel": 6000,
+      "charges_fixes_hors_industriel": 12000,
+      "stock_matieres_jours": 15,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Sachet alimentaire en papier identifié, deux pains de 200 g",
+        "cout_usd_par_kg": 0.1,
+        "composants_usd_par_kg": {
+          "sachet": 0.06,
+          "etiquette": 0.02,
+          "regroupement": 0.02
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Papier à examiner selon sa barrière alimentaire et les filières locales ; réemploi des caisses à étudier.",
+        "source": "Hypothèses P2I ; non prix fournisseur"
+      },
+      "complements_usd": {
+        "fret": 5500,
+        "assurance": 700,
+        "douane_transit": 5000,
+        "transport_local": 1800,
+        "genie_civil": 10000,
+        "utilites": 7000,
+        "installation_formation": 4000,
+        "pieces_initiales": 1800,
+        "securite_environnement": 1800,
+        "etudes": 2000,
+        "chariots_et_refroidissement": 4000
+      },
+      "methodes": {
+        "production": "Hypothèse de capacité de 40 kg/h de pain fini, inférieure aux 100 kg/h annoncés pour le four ; cycle de fermentation, poids des pâtons, chariots et rendement à confirmer. 8 h/j, 250 j/an. Ventes égales à la production : aucun invendu ni retour simulé.",
+        "matieres": "Ingrédients : 0,48 USD/kg de pain fini, estimation P2I.",
+        "process": "0,25 USD/kg comprend emballage 0,10 USD/kg, énergie et consommables 0,15 USD/kg ; frais fixes industriels séparés.",
+        "personnel": "Personnel et charges simulés, incluant la manutention et le conditionnement manuel.",
+        "prix_vente": "2,40 USD/kg départ UP en A1, +2 %/an : hypothèse, à distinguer des prix de détail et de la baguette réglementée.",
+        "complements": "Transport, installation, chariots et équipements auxiliaires sont des enveloppes estimées P2I ; vérifier compatibilité chariot, brûleur et cycles."
+      },
+      "visuels": {
+        "atlas": "pain",
+        "product_index": 5
+      },
+      "equipements_complementaires": [
+        {
+          "nom": "Pétrin spirale OTTO200, 200 kg de pâte par lot",
+          "prix_retenu": 13500,
+          "devise": "EUR",
+          "source_url": "https://www.restoconcept.com/petrin-superieur-a-100-kg-de-farine/c2730.aspx",
+          "date_consultation": "2026-10-27",
+          "qualification": "prix_catalogue_public_non_certifie",
+          "limites": "Capacité maximale par lot ; taille minimale et cycle à confirmer."
+        },
+        {
+          "nom": "Diviseuse-bouleuse SIGMA DR14",
+          "prix_retenu": 5680,
+          "devise": "EUR",
+          "source_url": "https://www.restoconcept.com/diviseuse-bouleuse-14-divisions-de-220-a-260-g-dr14-sigma/p14753.aspx",
+          "date_consultation": "2026-10-27",
+          "qualification": "prix_catalogue_public_non_certifie",
+          "limites": "Pâtons de 220–260 g ; rendement à la cuisson et format de 200 g à confirmer."
+        },
+        {
+          "nom": "Armoire de fermentation Caplain AFCH68-H",
+          "prix_retenu": 9481,
+          "devise": "EUR",
+          "source_url": "https://www.restoconcept.com/armoire-de-fermentation-a-chariot-600x800-afch68-h-caplain/p25471.aspx",
+          "date_consultation": "2026-10-27",
+          "qualification": "prix_catalogue_public_non_certifie",
+          "limites": "Un chariot 600 × 800 mm ; hauteur et durée de fermentation à confirmer."
+        }
+      ]
+    },
+    "huiles_alimentaires": {
+      "configuration_id": null,
+      "nom": "Huile de tournesol pressée à froid",
+      "sous_titre": "Pressage et filtration de graines",
+      "description": "Production d’huile de tournesol vierge filtrée en bouteilles refermables de 1 L.",
+      "source_equipement": "catalogue_farmet_fls60",
+      "prix_retenu": 39000,
+      "devise_prix": "EUR",
+      "capacite_entree_kg_h": 16.8,
+      "production_explicite": [
+        15000,
+        21000,
+        26000
+      ],
+      "ventes_explicites": [
+        15000,
+        21000,
+        26000
+      ],
+      "prix_vente_usd_kg": [
+        3.2,
+        3.264,
+        3.32928
+      ],
+      "matieres_usd_kg_produit": 1.607142857,
+      "cout_process_usd_kg": 0.48,
+      "fixes_industriels_an": 18000,
+      "personnel_hors_cout_industriel": 5000,
+      "charges_fixes_hors_industriel": 9000,
+      "stock_matieres_jours": 30,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Bouteille de 1 L refermable, étiquetée et regroupée en carton",
+        "cout_usd_par_kg": 0.28,
+        "composants_usd_par_kg": {
+          "bouteille": 0.17,
+          "bouchon": 0.04,
+          "etiquette": 0.03,
+          "regroupement": 0.04
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Bouteille PET recyclable en principe ; collecte et recyclage locaux à vérifier.",
+        "source": "Hypothèses P2I ; non prix fournisseur"
+      },
+      "complements_usd": {
+        "fret": 5500,
+        "assurance": 700,
+        "douane_transit": 5000,
+        "transport_local": 1800,
+        "genie_civil": 10000,
+        "utilites": 7000,
+        "installation_formation": 4000,
+        "pieces_initiales": 1800,
+        "securite_environnement": 1800,
+        "etudes": 2000,
+        "tri_et_remplissage_manuel": 5000
+      },
+      "methodes": {
+        "production": "Presse : 60 kg/h de graines dans la plage catalogue 48–72. Rendement P2I supposé de 28 %, soit 16,8 kg/h d’huile ; non garanti par le fabricant. 8 h/j, 250 j/an ; aucune perte ni invendu simulé.",
+        "matieres": "Graines supposées à 0,45 USD/kg ; 0,45 / 0,28 = 1,61 USD/kg d’huile ; disponibilité et prix locaux non documentés. Tourteaux non valorisés.",
+        "process": "0,48 USD/kg comprend 0,28 USD/kg d’emballage et 0,20 USD/kg de consommables et énergie.",
+        "personnel": "Conditionnement manuel et charges de personnel supposés.",
+        "prix_vente": "3,20 USD/kg départ UP A1, +2 %/an, hypothèse ; prix de détail relevé à 2 300 FCFA/L pour une huile de tournesol, produit et circuit différents.",
+        "complements": "Tri, outils de dosage, remplissage manuel, installation et import budgétés comme enveloppes P2I ; le filtre et les cuves sont inclus une seule fois dans la presse."
+      },
+      "visuels": {
+        "atlas": "huile",
+        "product_index": 5
+      },
+      "sources_prix_marche": [
+        {
+          "url": "https://jachete.ci/categorie-produit/supermarche/alimentaire/huiles-conserve/",
+          "description": "Huile de tournesol Excella 1 L : 2 300 FCFA au détail ; produit et circuit non identiques."
+        }
+      ]
+    },
+    "epices": {
+      "configuration_id": null,
+      "nom": "Gingembre séché en poudre",
+      "sous_titre": "Épices : lavage, séchage et broyage",
+      "description": "Transformation de gingembre frais en poudre alimentaire conditionnée en sachets refermables de 50 g.",
+      "source_equipement": "catalogue_nirudi_gingembre",
+      "prix_retenu": 4670,
+      "devise_prix": "EUR",
+      "capacite_entree_kg_h": 5,
+      "production_explicite": [
+        5000,
+        6500,
+        8000
+      ],
+      "ventes_explicites": [
+        5000,
+        6500,
+        8000
+      ],
+      "prix_vente_usd_kg": [
+        4.2,
+        4.284,
+        4.36968
+      ],
+      "matieres_usd_kg_produit": 1.4,
+      "cout_process_usd_kg": 0.7,
+      "fixes_industriels_an": 8500,
+      "personnel_hors_cout_industriel": 3600,
+      "charges_fixes_hors_industriel": 5000,
+      "stock_matieres_jours": 7,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Sachet alimentaire refermable de 50 g, marqué et regroupé en carton",
+        "cout_usd_par_kg": 0.45,
+        "composants_usd_par_kg": {
+          "sachet": 0.28,
+          "etiquette": 0.08,
+          "regroupement": 0.09
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Choix du matériau selon conservation et filières locales ; recyclabilité effective à vérifier.",
+        "source": "Hypothèses P2I ; non prix fournisseur"
+      },
+      "complements_usd": {
+        "fret": 5500,
+        "assurance": 700,
+        "douane_transit": 5000,
+        "transport_local": 1800,
+        "genie_civil": 10000,
+        "utilites": 7000,
+        "installation_formation": 4000,
+        "pieces_initiales": 1800,
+        "securite_environnement": 1800,
+        "etudes": 2000,
+        "dosage_et_scellage_manuel": 2500
+      },
+      "methodes": {
+        "production": "Simulation prudente de 5 kg/h de poudre sur 8 h/j et 250 j/an, sous réserve du cycle du séchoir par lots ; 20 % de rendement massique supposé. La cadence annoncée 100 kg/h de poudre est incohérente avec le lavage 150–200 kg/h de frais ; elle n’est pas reprise. Aucune perte de produit fini ni invendu simulé.",
+        "matieres": "À titre d’hypothèse, 5 kg de racines à 0,28 USD/kg pour 1 kg de poudre, soit 1,40 USD/kg ; origine et prix locaux à documenter.",
+        "process": "0,70 USD/kg comprend 0,45 USD/kg d’emballage et 0,25 USD/kg d’énergie et consommables.",
+        "personnel": "Personnel de production, conditionnement et administration estimé P2I.",
+        "prix_vente": "4,20 USD/kg départ UP A1, +2 %/an, hypothèse ; prix de détail très variables selon conditionnement.",
+        "complements": "Doseuse/conditionnement manuel et accessoires sont des enveloppes P2I, distinctes de la ligne de quatre machines ; cycle de séchage, raccordement et hygiène à vérifier."
+      },
+      "visuels": {
+        "atlas": "epices",
+        "product_index": 5
+      },
+      "sources_prix_marche": [
+        {
+          "url": "https://ecomarket-ci.com/produits/gingembre-en-poudre-1kg",
+          "description": "Gingembre en poudre 1 kg : 2 500 FCFA au détail ; prix indicatif différent du départ UP."
+        }
+      ]
+    }
+  }
+}

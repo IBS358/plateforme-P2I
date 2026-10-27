@@ -2,9 +2,9 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 7,
-  "up_avec_simulation_complete": 5,
-  "up_restant_a_alimenter": 91,
+  "simulations_affichables": 10,
+  "up_avec_simulation_complete": 8,
+  "up_restant_a_alimenter": 88,
   "scenarios": [
     {
       "up_id": "conserverie_legumes",
@@ -215,6 +215,58 @@
       ]
     },
     {
+      "up_id": "boulangerie_industrielle",
+      "configuration_id": null,
+      "nom": "Boulangerie industrielle",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_non_certifie",
+      "source_prix": "https://www.restoconcept.com/four-rotatif-boulangerie-diesel-ou-gaz-b216-parisfours/p8612.aspx",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 45511.857299999996,
+      "investissement_simulation_usd": 89111.8573,
+      "reserve_initiale_distincte_usd": 13742.595881080695,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 40000,
+          "ventes_kg": 40000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 96000,
+          "resultat_net_usd": 11516.993346505
+        },
+        {
+          "annee": 2,
+          "production_kg": 49999.99999999999,
+          "ventes_kg": 49999.99999999999,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 122400,
+          "resultat_net_usd": 24914.28294782499
+        },
+        {
+          "annee": 3,
+          "production_kg": 60000,
+          "ventes_kg": 60000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 149817.6,
+          "resultat_net_usd": 38691.05754914501
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        1.4551915228366852e-11,
+        4.3655745685100555e-11,
+        0
+      ]
+    },
+    {
       "up_id": "jus_boissons",
       "configuration_id": null,
       "nom": "Production de jus et boissons",
@@ -316,6 +368,110 @@
         -5.820766091346741e-11,
         -3.4924596548080444e-10,
         -4.656612873077393e-10
+      ]
+    },
+    {
+      "up_id": "huiles_alimentaires",
+      "configuration_id": null,
+      "nom": "Huiles alimentaires",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_non_certifie",
+      "source_prix": "https://oelwerk.com/fr/farmet-fls-60/fa-fls60",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 43652.7,
+      "investissement_simulation_usd": 88252.7,
+      "reserve_initiale_distincte_usd": 45459.447242408336,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 15000,
+          "ventes_kg": 15000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 48000,
+          "resultat_net_usd": -28621.533528333326
+        },
+        {
+          "annee": 2,
+          "production_kg": 21000,
+          "ventes_kg": 21000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 68544,
+          "resultat_net_usd": -21886.860430243338
+        },
+        {
+          "annee": 3,
+          "production_kg": 26000.000000000004,
+          "ventes_kg": 26000.000000000004,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 86561.28000000001,
+          "resultat_net_usd": -16295.546475107116
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -1.4551915228366852e-11,
+        0,
+        -3.2741809263825417e-11
+      ]
+    },
+    {
+      "up_id": "epices",
+      "configuration_id": null,
+      "nom": "Transformation d'épices",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_non_certifie",
+      "source_prix": "https://www.nirudi.com/en/product/complete-100-kgh-output-ginger-powder-processing-line",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 5227.130999999999,
+      "investissement_simulation_usd": 47327.131,
+      "reserve_initiale_distincte_usd": 21530.99594797778,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 5000,
+          "ventes_kg": 5000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 21000.000000000004,
+          "resultat_net_usd": -13740.086496866665
+        },
+        {
+          "annee": 2,
+          "production_kg": 6500.000000000001,
+          "ventes_kg": 6500.000000000001,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 27845.999999999996,
+          "resultat_net_usd": -10436.522629666662
+        },
+        {
+          "annee": 3,
+          "production_kg": 8000.000000000001,
+          "ventes_kg": 8000.000000000001,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 34957.439999999995,
+          "resultat_net_usd": -7087.028762466662
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -2.9103830456733704e-11,
+        -4.729372449219227e-11,
+        -6.912159733474255e-11
       ]
     },
     {

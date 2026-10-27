@@ -386,6 +386,7 @@
             "prix_vente": "Prix départ UP 1,25 USD/kg en année 1, +2 %/an, hypothèse de simulation et non prix de marché relevé.",
             "complements": "Enveloppes P2I d’importation, installation, sécurité et utilités ; le contenu exact de la ligne et la fermeture des bocaux sont à vérifier.",
             "qualite": "Le traitement thermique doit être adapté au produit, à l’emballage et à la durée de conservation visée.",
+            "sources_prix_marche": [],
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -756,6 +757,7 @@
             "production": "550 000, 650 000, 750 000 kg produits; 532 000, 638 000, 745 000 vendus. Stocks cumulés 18 000, 30 000, 35 000 kg. Le précédent calcul partiel de 760 000 kg produits reste une archive, pas le programme de cette projection.",
             "prix_vente": "Repère commercial historique 1 500 FCFA/kg en A1 converti au taux daté P2I; progression de prix de simulation de 2 %/an.",
             "complements": "Ventilation P2I des 155 000 USD complémentaires au budget ligne; total investissement de simulation 605 000 USD conservé.",
+            "sources_prix_marche": [],
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -899,6 +901,12 @@
             "production": "500 kg/h, 8 h/jour, 250 jours/an : capacité annuelle théorique 1 000 000 kg avant arrêts ; volumes et ventes indiqués sont des hypothèses de lancement spécifiques à la variante.",
             "prix_vente": "Hypothèse de prix départ UP hors taxes ; hausse 2 %/an. Les prix de détail repérés en Côte d’Ivoire sont des comparaisons, pas des prix fabricant garantis.",
             "complements": "Enveloppes P2I pour fret, douane, site, utilités, installation, formation et pièces ; hypothèses de simulation, non devis.",
+            "sources_prix_marche": [
+              {
+                "url": "https://openmoise.ci/shop/category/openmarket-supermarche-epicerie-sucree-biscuits-et-gateaux-1736",
+                "description": "Prix de détail de biscuits de formats et marques variés à Abidjan ; comparaison indicative, non prix usine."
+              }
+            ],
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -1042,6 +1050,12 @@
             "production": "500 kg/h, 8 h/jour, 250 jours/an : capacité annuelle théorique 1 000 000 kg avant arrêts ; volumes et ventes indiqués sont des hypothèses de lancement spécifiques à la variante.",
             "prix_vente": "Hypothèse de prix départ UP hors taxes ; hausse 2 %/an. Les prix de détail repérés en Côte d’Ivoire sont des comparaisons, pas des prix fabricant garantis.",
             "complements": "Enveloppes P2I pour fret, douane, site, utilités, installation, formation et pièces ; hypothèses de simulation, non devis.",
+            "sources_prix_marche": [
+              {
+                "url": "https://openmoise.ci/shop/category/openmarket-supermarche-epicerie-sucree-biscuits-et-gateaux-1736",
+                "description": "Prix de détail de biscuits de formats et marques variés à Abidjan ; comparaison indicative, non prix usine."
+              }
+            ],
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -1366,8 +1380,56 @@
         "reference": {
           "configuration_id": "reference",
           "nom": "Boulangerie industrielle",
-          "qualification": "configuration_a_documenter",
-          "reference": null,
+          "qualification": "simulation_decouverte_calculable",
+          "reference": {
+            "up_id": "boulangerie_industrielle",
+            "configuration_id": null,
+            "nom": "Petits pains ronds frais",
+            "sous_titre": "Boulangerie : pains de 200 g",
+            "description": "Fabrication de petits pains ronds frais en sachets de deux unités.",
+            "capacite": 40,
+            "unite": "kg/h",
+            "machines": 45511.857299999996,
+            "investissement": 89111.8573,
+            "production": [
+              40000,
+              50000,
+              60000
+            ],
+            "ventes": [
+              40000,
+              50000,
+              60000
+            ],
+            "prix": [
+              2.4,
+              2.448,
+              2.49696
+            ],
+            "matieres_kg": 0.48,
+            "cout_production_kg": [
+              1.23,
+              1.1639,
+              1.1280903333333332
+            ],
+            "personnel": 6000,
+            "charges_fixes": 12000,
+            "croissance_personnel": 0.03,
+            "croissance_charges": 0.03,
+            "part_apport": 0.3,
+            "part_dette": 0.7,
+            "taux_interet": 0.08,
+            "duree_dette_mois": 60,
+            "duree_amortissement_ans": 10,
+            "taux_tva": 0.18,
+            "taux_is": 0.25,
+            "coussin_tresorerie": 0.1,
+            "source": "data/p2i-bp-lot-agro-02.json / boulangerie_industrielle : prix catalogue ou budget de référence + hypothèses P2I explicites",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 15 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+            "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "stock_matieres_jours": 15
+          },
           "economique_herite_up": true,
           "economique": {
             "budget_minimum_historique": {
@@ -1440,7 +1502,124 @@
             "qualification": "references_historiques_a_documenter",
             "aucune_repartition_fictive_des_charges": true
           },
-          "source": "up-data.js / boulangerie_industrielle"
+          "source": "up-data.js / boulangerie_industrielle",
+          "visuels": {
+            "atlas": "pain",
+            "product_index": 5
+          },
+          "prix_equipement": {
+            "id": "catalogue_four_b216",
+            "url": "https://www.restoconcept.com/four-rotatif-boulangerie-diesel-ou-gaz-b216-parisfours/p8612.aspx",
+            "consulte_le": "2026-10-27",
+            "fournisseur": "ParisFours / Restoconcept",
+            "modele": "Four rotatif B216",
+            "prix": 12000,
+            "devise": "EUR",
+            "base": "prix public ; livraison et options non comprises ou à préciser",
+            "capacite": 100,
+            "unite_capacite": "kg/h annoncés pour le four",
+            "fonctions": [
+              "Pétrissage",
+              "Division et boulage",
+              "Fermentation",
+              "Cuisson",
+              "Refroidissement et emballage"
+            ],
+            "qualification": "prix_catalogue_public_non_certifie",
+            "limites": "Four 600 × 800 mm, gaz ou fioul ; fermentation par lots, temps de cycle et chariots à dimensionner. Les autres fonctions proviennent de machines complémentaires ou de postes manuels.",
+            "equipements_complementaires": [
+              {
+                "nom": "Pétrin spirale OTTO200, 200 kg de pâte par lot",
+                "prix_retenu": 13500,
+                "devise": "EUR",
+                "source_url": "https://www.restoconcept.com/petrin-superieur-a-100-kg-de-farine/c2730.aspx",
+                "date_consultation": "2026-10-27",
+                "qualification": "prix_catalogue_public_non_certifie",
+                "limites": "Capacité maximale par lot ; taille minimale et cycle à confirmer.",
+                "prix_usd": 15110.55
+              },
+              {
+                "nom": "Diviseuse-bouleuse SIGMA DR14",
+                "prix_retenu": 5680,
+                "devise": "EUR",
+                "source_url": "https://www.restoconcept.com/diviseuse-bouleuse-14-divisions-de-220-a-260-g-dr14-sigma/p14753.aspx",
+                "date_consultation": "2026-10-27",
+                "qualification": "prix_catalogue_public_non_certifie",
+                "limites": "Pâtons de 220–260 g ; rendement à la cuisson et format de 200 g à confirmer.",
+                "prix_usd": 6357.624
+              },
+              {
+                "nom": "Armoire de fermentation Caplain AFCH68-H",
+                "prix_retenu": 9481,
+                "devise": "EUR",
+                "source_url": "https://www.restoconcept.com/armoire-de-fermentation-a-chariot-600x800-afch68-h-caplain/p25471.aspx",
+                "date_consultation": "2026-10-27",
+                "qualification": "prix_catalogue_public_non_certifie",
+                "limites": "Un chariot 600 × 800 mm ; hauteur et durée de fermentation à confirmer.",
+                "prix_usd": 10612.0833
+              }
+            ]
+          },
+          "emballage": {
+            "statut": "hypothese_P2I",
+            "format": "Sachet alimentaire en papier identifié, deux pains de 200 g",
+            "cout_usd_par_kg": 0.1,
+            "composants_usd_par_kg": {
+              "sachet": 0.06,
+              "etiquette": 0.02,
+              "regroupement": 0.02
+            },
+            "mode_comptable": "inclus_dans_cout_industriel",
+            "ecologie": "Papier à examiner selon sa barrière alimentaire et les filières locales ; réemploi des caisses à étudier.",
+            "source": "Hypothèses P2I ; non prix fournisseur"
+          },
+          "hypotheses_explicites": {
+            "production": "Hypothèse de capacité de 40 kg/h de pain fini, inférieure aux 100 kg/h annoncés pour le four ; cycle de fermentation, poids des pâtons, chariots et rendement à confirmer. 8 h/j, 250 j/an. Ventes égales à la production : aucun invendu ni retour simulé.",
+            "matieres": "Ingrédients : 0,48 USD/kg de pain fini, estimation P2I.",
+            "process": "0,25 USD/kg comprend emballage 0,10 USD/kg, énergie et consommables 0,15 USD/kg ; frais fixes industriels séparés.",
+            "personnel": "Personnel et charges simulés, incluant la manutention et le conditionnement manuel.",
+            "prix_vente": "2,40 USD/kg départ UP en A1, +2 %/an : hypothèse, à distinguer des prix de détail et de la baguette réglementée.",
+            "complements": "Transport, installation, chariots et équipements auxiliaires sont des enveloppes estimées P2I ; vérifier compatibilité chariot, brûleur et cycles.",
+            "sources_prix_marche": [],
+            "conventions": {
+              "apport": 0.3,
+              "dette": 0.7,
+              "taux_interet_annuel": 0.08,
+              "dette_mois": 60,
+              "amortissement_ans": 10,
+              "tva_simulation": 0.18,
+              "is_simulation": 0.25,
+              "croissance_charges": 0.03,
+              "croissance_personnel": 0.03,
+              "coussin_tresorerie": 0.1,
+              "clients_comptant": 0.4,
+              "clients_30_jours": 0.6,
+              "fournisseurs_comptant": true,
+              "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+            },
+            "complements_usd": {
+              "fret": 5500,
+              "assurance": 700,
+              "douane_transit": 5000,
+              "transport_local": 1800,
+              "genie_civil": 10000,
+              "utilites": 7000,
+              "installation_formation": 4000,
+              "pieces_initiales": 1800,
+              "securite_environnement": 1800,
+              "etudes": 2000,
+              "chariots_et_refroidissement": 4000
+            },
+            "base_budget_equipements_usd": 45511.857299999996,
+            "conversion": {
+              "date": "2026-10-23",
+              "eur_usd": 1.1193,
+              "eur_xof": 655.957,
+              "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+              "parite_url": "https://www.bceao.int/fr/cours/cours-des-devises-contre-Franc-CFA-appliquer-aux-transferts",
+              "statut": "reference_datee_indicative_non_bancaire"
+            }
+          }
         }
       },
       "autres_variantes": "a_recenser",
@@ -1667,7 +1846,7 @@
         "Fiscalité applicable et échéancier de financement",
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
-      "statut": "dossier_redactionnel_et_reperes_historiques_non_valide"
+      "statut": "simulation_decouverte_disponible"
     },
     "jus_boissons": {
       "emballage": {
@@ -1975,6 +2154,20 @@
             "complements": "Configuration indicative composée de machines tarifées séparément : laveuse, deux éplucheuses, broyeur, extracteur, cuves, pasteurisateur, rinceuse, remplisseuse de bouteilles, boucheuse et étiqueteuse. Pas de poste de remplissage en poches. Prix publics et fourchettes, quantités et frais complémentaires estimés ; interfaces, matériels auxiliaires, installation et conditions de transport restent à confirmer.",
             "preparation_ananas": "Hypothèse de 1,5 kg par fruit issue d’un repère de culture en Côte d’Ivoire (CIRAD), à mesurer à réception. Deux éplucheuses de 300 fruits/h donnent 600 fruits/h théoriques, soit 900 kg/h avant arrêts à cette masse moyenne. Cadences réelles, rendement matière et adaptation des machines à l’ananas restent à confirmer. Rendement global du jus de 60 % non mesuré.",
             "utilites": "Le pasteurisateur proposé utilise 30 kW triphasés ; la boucheuse nécessite de l’air comprimé. Puissance cumulée, compresseur, eau, charges et raccordements restent à dimensionner. Le poste courant de process de 0,08 USD/kg est une hypothèse globale, non un calcul fondé sur des mesures de consommation.",
+            "sources_prix_marche": [
+              {
+                "url": "https://www.aboissojus.ci/",
+                "description": "Ananas annoncé naturel, 300 ml à 500 FCFA ; prix de détail, composition et procédé à confirmer."
+              },
+              {
+                "url": "https://www.findglocal.com/CI/Cocody/956295000908071/Fruity-Machin",
+                "description": "Jus naturel d’ananas annoncé à 1 500 FCFA/litre ; prix de détail, composition et procédé à confirmer."
+              },
+              {
+                "url": "https://viaclic3.wixsite.com/latabledange/les-jus",
+                "description": "Jus d’ananas annoncé naturel, 500 ml à 1 500 FCFA ; prix au consommateur, composition et procédé à confirmer."
+              }
+            ],
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -2431,6 +2624,12 @@
             "prix_vente": "Prix sortie UP : 1,70 USD/kg en A1, +2 %/an ; hypothèse comparée à des prix au détail de lait pasteurisé à Abidjan, sans assimilation au prix producteur.",
             "conservation": "Le lait frais nécessite une chaîne du froid. Stock matières de 1 jour et ventes théoriquement immédiates ; pertes et durée de vie ne sont pas simulées.",
             "complements": "Enveloppes P2I d’import, installation, utilités et froid ; pas de devis.",
+            "sources_prix_marche": [
+              {
+                "url": "https://djera-production.com/product/lait-entier-pasteurise-nature-1l-2/",
+                "description": "Lait entier pasteurisé 1 L : 1 800 FCFA, vente au détail Abidjan ; prix producteur non établi."
+              }
+            ],
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -2701,8 +2900,56 @@
         "reference": {
           "configuration_id": "reference",
           "nom": "Huiles alimentaires",
-          "qualification": "configuration_a_documenter",
-          "reference": null,
+          "qualification": "simulation_decouverte_calculable",
+          "reference": {
+            "up_id": "huiles_alimentaires",
+            "configuration_id": null,
+            "nom": "Huile de tournesol pressée à froid",
+            "sous_titre": "Pressage et filtration de graines",
+            "description": "Production d’huile de tournesol vierge filtrée en bouteilles refermables de 1 L.",
+            "capacite": 16.8,
+            "unite": "kg/h",
+            "machines": 43652.7,
+            "investissement": 88252.7,
+            "production": [
+              15000,
+              21000,
+              26000
+            ],
+            "ventes": [
+              15000,
+              21000,
+              26000
+            ],
+            "prix": [
+              3.2,
+              3.264,
+              3.32928
+            ],
+            "matieres_kg": 1.607142857,
+            "cout_production_kg": [
+              3.287142857,
+              3.032614285567143,
+              2.9487190877605305
+            ],
+            "personnel": 5000,
+            "charges_fixes": 9000,
+            "croissance_personnel": 0.03,
+            "croissance_charges": 0.03,
+            "part_apport": 0.3,
+            "part_dette": 0.7,
+            "taux_interet": 0.08,
+            "duree_dette_mois": 60,
+            "duree_amortissement_ans": 10,
+            "taux_tva": 0.18,
+            "taux_is": 0.25,
+            "coussin_tresorerie": 0.1,
+            "source": "data/p2i-bp-lot-agro-02.json / huiles_alimentaires : prix catalogue ou budget de référence + hypothèses P2I explicites",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+            "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "stock_matieres_jours": 30
+          },
           "economique_herite_up": true,
           "economique": {
             "budget_minimum_historique": {
@@ -2775,7 +3022,99 @@
             "qualification": "references_historiques_a_documenter",
             "aucune_repartition_fictive_des_charges": true
           },
-          "source": "up-data.js / huiles_alimentaires"
+          "source": "up-data.js / huiles_alimentaires",
+          "visuels": {
+            "atlas": "huile",
+            "product_index": 5
+          },
+          "prix_equipement": {
+            "id": "catalogue_farmet_fls60",
+            "url": "https://oelwerk.com/fr/farmet-fls-60/fa-fls60",
+            "consulte_le": "2026-10-27",
+            "fournisseur": "Farmet / Oelwerk",
+            "modele": "FLS 60 avec filtration intégrée",
+            "prix": 39000,
+            "devise": "EUR",
+            "base": "prix public ; livraison et options non comprises ou à préciser",
+            "capacite": 60,
+            "unite_capacite": "kg/h de graines entrantes, milieu de la plage 48–72",
+            "fonctions": [
+              "Nettoyage des graines",
+              "Pressage à froid",
+              "Décantation",
+              "Filtration",
+              "Remplissage et fermeture"
+            ],
+            "qualification": "prix_catalogue_public_non_certifie",
+            "limites": "L’unité inclut trois presses, pompe, décantation et filtre ; nettoyage et conditionnement supposés manuels, avec matériel auxiliaire estimé séparément. Rendement et alimentation électrique à confirmer.",
+            "equipements_complementaires": []
+          },
+          "emballage": {
+            "statut": "hypothese_P2I",
+            "format": "Bouteille de 1 L refermable, étiquetée et regroupée en carton",
+            "cout_usd_par_kg": 0.28,
+            "composants_usd_par_kg": {
+              "bouteille": 0.17,
+              "bouchon": 0.04,
+              "etiquette": 0.03,
+              "regroupement": 0.04
+            },
+            "mode_comptable": "inclus_dans_cout_industriel",
+            "ecologie": "Bouteille PET recyclable en principe ; collecte et recyclage locaux à vérifier.",
+            "source": "Hypothèses P2I ; non prix fournisseur"
+          },
+          "hypotheses_explicites": {
+            "production": "Presse : 60 kg/h de graines dans la plage catalogue 48–72. Rendement P2I supposé de 28 %, soit 16,8 kg/h d’huile ; non garanti par le fabricant. 8 h/j, 250 j/an ; aucune perte ni invendu simulé.",
+            "matieres": "Graines supposées à 0,45 USD/kg ; 0,45 / 0,28 = 1,61 USD/kg d’huile ; disponibilité et prix locaux non documentés. Tourteaux non valorisés.",
+            "process": "0,48 USD/kg comprend 0,28 USD/kg d’emballage et 0,20 USD/kg de consommables et énergie.",
+            "personnel": "Conditionnement manuel et charges de personnel supposés.",
+            "prix_vente": "3,20 USD/kg départ UP A1, +2 %/an, hypothèse ; prix de détail relevé à 2 300 FCFA/L pour une huile de tournesol, produit et circuit différents.",
+            "complements": "Tri, outils de dosage, remplissage manuel, installation et import budgétés comme enveloppes P2I ; le filtre et les cuves sont inclus une seule fois dans la presse.",
+            "sources_prix_marche": [
+              {
+                "url": "https://jachete.ci/categorie-produit/supermarche/alimentaire/huiles-conserve/",
+                "description": "Huile de tournesol Excella 1 L : 2 300 FCFA au détail ; produit et circuit non identiques."
+              }
+            ],
+            "conventions": {
+              "apport": 0.3,
+              "dette": 0.7,
+              "taux_interet_annuel": 0.08,
+              "dette_mois": 60,
+              "amortissement_ans": 10,
+              "tva_simulation": 0.18,
+              "is_simulation": 0.25,
+              "croissance_charges": 0.03,
+              "croissance_personnel": 0.03,
+              "coussin_tresorerie": 0.1,
+              "clients_comptant": 0.4,
+              "clients_30_jours": 0.6,
+              "fournisseurs_comptant": true,
+              "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+            },
+            "complements_usd": {
+              "fret": 5500,
+              "assurance": 700,
+              "douane_transit": 5000,
+              "transport_local": 1800,
+              "genie_civil": 10000,
+              "utilites": 7000,
+              "installation_formation": 4000,
+              "pieces_initiales": 1800,
+              "securite_environnement": 1800,
+              "etudes": 2000,
+              "tri_et_remplissage_manuel": 5000
+            },
+            "base_budget_equipements_usd": 43652.7,
+            "conversion": {
+              "date": "2026-10-23",
+              "eur_usd": 1.1193,
+              "eur_xof": 655.957,
+              "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+              "parite_url": "https://www.bceao.int/fr/cours/cours-des-devises-contre-Franc-CFA-appliquer-aux-transferts",
+              "statut": "reference_datee_indicative_non_bancaire"
+            }
+          }
         }
       },
       "autres_variantes": "a_recenser",
@@ -3039,7 +3378,7 @@
         "Fiscalité applicable et échéancier de financement",
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
-      "statut": "dossier_redactionnel_et_reperes_historiques_non_valide"
+      "statut": "simulation_decouverte_disponible"
     },
     "epices": {
       "emballage": {
@@ -3055,8 +3394,56 @@
         "reference": {
           "configuration_id": "reference",
           "nom": "Transformation d'épices",
-          "qualification": "configuration_a_documenter",
-          "reference": null,
+          "qualification": "simulation_decouverte_calculable",
+          "reference": {
+            "up_id": "epices",
+            "configuration_id": null,
+            "nom": "Gingembre séché en poudre",
+            "sous_titre": "Épices : lavage, séchage et broyage",
+            "description": "Transformation de gingembre frais en poudre alimentaire conditionnée en sachets refermables de 50 g.",
+            "capacite": 5,
+            "unite": "kg/h",
+            "machines": 5227.130999999999,
+            "investissement": 47327.131,
+            "production": [
+              5000,
+              6500,
+              8000
+            ],
+            "ventes": [
+              5000,
+              6500,
+              8000
+            ],
+            "prix": [
+              4.2,
+              4.284,
+              4.36968
+            ],
+            "matieres_kg": 1.4,
+            "cout_production_kg": [
+              3.8,
+              3.5099230769230765,
+              3.3550962499999994
+            ],
+            "personnel": 3600,
+            "charges_fixes": 5000,
+            "croissance_personnel": 0.03,
+            "croissance_charges": 0.03,
+            "part_apport": 0.3,
+            "part_dette": 0.7,
+            "taux_interet": 0.08,
+            "duree_dette_mois": 60,
+            "duree_amortissement_ans": 10,
+            "taux_tva": 0.18,
+            "taux_is": 0.25,
+            "coussin_tresorerie": 0.1,
+            "source": "data/p2i-bp-lot-agro-02.json / epices : prix catalogue ou budget de référence + hypothèses P2I explicites",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 7 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+            "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "stock_matieres_jours": 7
+          },
           "economique_herite_up": true,
           "economique": {
             "budget_minimum_historique": {
@@ -3129,7 +3516,98 @@
             "qualification": "references_historiques_a_documenter",
             "aucune_repartition_fictive_des_charges": true
           },
-          "source": "up-data.js / epices"
+          "source": "up-data.js / epices",
+          "visuels": {
+            "atlas": "epices",
+            "product_index": 5
+          },
+          "prix_equipement": {
+            "id": "catalogue_nirudi_gingembre",
+            "url": "https://www.nirudi.com/en/product/complete-100-kgh-output-ginger-powder-processing-line",
+            "consulte_le": "2026-10-27",
+            "fournisseur": "Nirudi",
+            "modele": "Ligne gingembre MSQ-350, HQC-611, DBJ-88A, WN-200",
+            "prix": 4670,
+            "devise": "EUR",
+            "base": "prix public ; livraison et options non comprises ou à préciser",
+            "capacite": 100,
+            "unite_capacite": "kg/h de poudre annoncés, capacité de ligne non démontrée",
+            "fonctions": [
+              "Lavage et épluchage",
+              "Découpe",
+              "Séchage",
+              "Broyage",
+              "Conditionnement"
+            ],
+            "qualification": "prix_catalogue_public_non_certifie",
+            "limites": "La fiche annonce 100 kg/h de poudre mais le lavage est donné à 150–200 kg/h de racines et le séchoir fonctionne par lots. Le rendement de séchage et le cycle rendent cette cadence incohérente ; capacité de simulation à confirmer.",
+            "equipements_complementaires": []
+          },
+          "emballage": {
+            "statut": "hypothese_P2I",
+            "format": "Sachet alimentaire refermable de 50 g, marqué et regroupé en carton",
+            "cout_usd_par_kg": 0.45,
+            "composants_usd_par_kg": {
+              "sachet": 0.28,
+              "etiquette": 0.08,
+              "regroupement": 0.09
+            },
+            "mode_comptable": "inclus_dans_cout_industriel",
+            "ecologie": "Choix du matériau selon conservation et filières locales ; recyclabilité effective à vérifier.",
+            "source": "Hypothèses P2I ; non prix fournisseur"
+          },
+          "hypotheses_explicites": {
+            "production": "Simulation prudente de 5 kg/h de poudre sur 8 h/j et 250 j/an, sous réserve du cycle du séchoir par lots ; 20 % de rendement massique supposé. La cadence annoncée 100 kg/h de poudre est incohérente avec le lavage 150–200 kg/h de frais ; elle n’est pas reprise. Aucune perte de produit fini ni invendu simulé.",
+            "matieres": "À titre d’hypothèse, 5 kg de racines à 0,28 USD/kg pour 1 kg de poudre, soit 1,40 USD/kg ; origine et prix locaux à documenter.",
+            "process": "0,70 USD/kg comprend 0,45 USD/kg d’emballage et 0,25 USD/kg d’énergie et consommables.",
+            "personnel": "Personnel de production, conditionnement et administration estimé P2I.",
+            "prix_vente": "4,20 USD/kg départ UP A1, +2 %/an, hypothèse ; prix de détail très variables selon conditionnement.",
+            "complements": "Doseuse/conditionnement manuel et accessoires sont des enveloppes P2I, distinctes de la ligne de quatre machines ; cycle de séchage, raccordement et hygiène à vérifier.",
+            "sources_prix_marche": [
+              {
+                "url": "https://ecomarket-ci.com/produits/gingembre-en-poudre-1kg",
+                "description": "Gingembre en poudre 1 kg : 2 500 FCFA au détail ; prix indicatif différent du départ UP."
+              }
+            ],
+            "conventions": {
+              "apport": 0.3,
+              "dette": 0.7,
+              "taux_interet_annuel": 0.08,
+              "dette_mois": 60,
+              "amortissement_ans": 10,
+              "tva_simulation": 0.18,
+              "is_simulation": 0.25,
+              "croissance_charges": 0.03,
+              "croissance_personnel": 0.03,
+              "coussin_tresorerie": 0.1,
+              "clients_comptant": 0.4,
+              "clients_30_jours": 0.6,
+              "fournisseurs_comptant": true,
+              "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+            },
+            "complements_usd": {
+              "fret": 5500,
+              "assurance": 700,
+              "douane_transit": 5000,
+              "transport_local": 1800,
+              "genie_civil": 10000,
+              "utilites": 7000,
+              "installation_formation": 4000,
+              "pieces_initiales": 1800,
+              "securite_environnement": 1800,
+              "etudes": 2000,
+              "dosage_et_scellage_manuel": 2500
+            },
+            "base_budget_equipements_usd": 5227.130999999999,
+            "conversion": {
+              "date": "2026-10-23",
+              "eur_usd": 1.1193,
+              "eur_xof": 655.957,
+              "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+              "parite_url": "https://www.bceao.int/fr/cours/cours-des-devises-contre-Franc-CFA-appliquer-aux-transferts",
+              "statut": "reference_datee_indicative_non_bancaire"
+            }
+          }
         }
       },
       "autres_variantes": "a_recenser",
@@ -3373,7 +3851,7 @@
         "Fiscalité applicable et échéancier de financement",
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
-      "statut": "dossier_redactionnel_et_reperes_historiques_non_valide"
+      "statut": "simulation_decouverte_disponible"
     },
     "aliments_betail": {
       "emballage": {
@@ -3550,6 +4028,7 @@
             "production": "Cadence de ligne calculée à 500 kg/h, en deçà de la gamme catalogue; 8 h × 250 jours × utilisation. Rendement net 1 kg/kg simplifié, sans pertes de procédé.",
             "prix_vente": "Hypothèse P2I 0,50 USD/kg A1 puis +2 %/an; pas un prix marché constaté.",
             "complements": "Enveloppes P2I explicites, pas prix catalogue ni devis; raccordements et ensachage manuel dimensionnés pour la petite ligne.",
+            "sources_prix_marche": [],
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -29265,5 +29744,5 @@
     }
   },
   "regles_decouverte": "Prix catalogue public ou budget P2I identifié + hypothèses explicites; pas de certification, partenariat ou devis exigé au Découverte.",
-  "nombre_simulations_completes": 7
+  "nombre_simulations_completes": 10
 }
