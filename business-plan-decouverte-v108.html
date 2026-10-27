@@ -9681,7 +9681,8 @@ function render(){
  if(referenceDossier?.hypotheses_explicites&&r){
   const pe=referenceDossier.prix_equipement,hp=referenceDossier.hypotheses_explicites,pack=referenceDossier.emballage;
   const scenarioEditor=sections[13].match(/<details class="scenario-editor">[\s\S]*?<\/details>/)?.[0]||'';
-  const sourceLink=pe.url?'<p><a href="'+esc(pe.url)+'" target="_blank" rel="noopener noreferrer">Consulter le prix catalogue et le périmètre publiés</a></p>':note(pe.source);
+  // Sources conservées dans le référentiel interne, sans lien fournisseur public.
+  const sourceLink="";
   sections[2]=paragraphSafe(s.description)+table(['Équipement de référence','Valeur'],[['Fournisseur / enseigne',pe.fournisseur||'Référence P2I utilisateur'],['Modèle / ensemble',pe.modele],['Prix publié',pe.prix?pe.prix+' '+pe.devise:pe.prix_min+' – '+pe.prix_max+' '+pe.devise],['Base',pe.base||pe.qualification],['Limites',pe.limites]])+sourceLink+(pe.fonctions?'<div class="process">'+pe.fonctions.map((x,i)=>'<span>'+esc(x)+'</span>').join('')+'</div>':'');
   if(pack?.composants_usd_bouteille&&packagingMatches)sections[2]+=note('Configuration P2I assemblée à partir d’équipements distincts. Aucun poste de remplissage en poches n’est inclus. Capacités, interfaces et utilités doivent être confirmées ensemble.');
   sections[3]=paragraphSafe(dossier.redaction.marche)+'<div class="two-col">'+info('Circuits de vente',dossier.marches.join(' · ')||'Circuits de distribution à définir.')+info('Positionnement',dossier.redaction.positionnement)+'</div>'+help('Approfondir votre étude de marché','Le BP Pro permettra de préciser les prix, la demande et les débouchés.');
