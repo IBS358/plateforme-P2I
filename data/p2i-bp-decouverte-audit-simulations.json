@@ -2,7 +2,7 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 4,
+  "simulations_affichables": 5,
   "up_avec_simulation_complete": 3,
   "up_restant_a_alimenter": 93,
   "scenarios": [
@@ -63,39 +63,39 @@
       "configuration_id": "biscuits_mous",
       "nom": "Biscuits mous",
       "statut": "simulation_decouverte_indicative",
-      "qualification_prix": "budget_reference_historique",
-      "source_prix": "Texte utilisateur du prototype V106 — hypothèses de simulation non vérifiées",
+      "qualification_prix": "prix_catalogue_public_non_certifie",
+      "source_prix": "https://www.made-in-china.com/video-channel/hgfoodmachine_EZKAMYcOXxhu_Hg-Automatic-Complete-Set-Shb620-500kg-Hr-Biscuit-Processing-Production-Line-for-Industrial-Food-Processing-Turnkey.html",
       "certification_prix_exigee": false,
       "accord_fournisseur_exige": false,
       "devis_exige": false,
       "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 160000,
-      "investissement_simulation_usd": 260000,
-      "reserve_initiale_distincte_usd": 82539.0645388889,
+      "budget_equipements_usd": 450000,
+      "investissement_simulation_usd": 605000,
+      "reserve_initiale_distincte_usd": 123191.36805555556,
       "annuel": [
         {
           "annee": 1,
-          "production_kg": 428450.00000000006,
-          "ventes_kg": 411312,
-          "stock_fin_kg": 17137.99999999997,
-          "chiffre_affaires_usd": 946017.6000000001,
-          "resultat_net_usd": 258855.95000000007
+          "production_kg": 450000,
+          "ventes_kg": 441000,
+          "stock_fin_kg": 9000,
+          "chiffre_affaires_usd": 1102500,
+          "resultat_net_usd": 308869.25
         },
         {
           "annee": 2,
-          "production_kg": 560880,
-          "ventes_kg": 555582.9999999999,
-          "stock_fin_kg": 22434.99999999989,
-          "chiffre_affaires_usd": 1322288,
-          "resultat_net_usd": 416009.6582836099
+          "production_kg": 580000,
+          "ventes_kg": 570999.9999999999,
+          "stock_fin_kg": 18000.000000000007,
+          "chiffre_affaires_usd": 1456050,
+          "resultat_net_usd": 464724.78448438447
         },
         {
           "annee": 3,
-          "production_kg": 654360,
-          "ventes_kg": 650621,
-          "stock_fin_kg": 26173.999999999993,
-          "chiffre_affaires_usd": 1600527.9999999993,
-          "resultat_net_usd": 532223.1928780286
+          "production_kg": 680000,
+          "ventes_kg": 672000,
+          "stock_fin_kg": 25999.999999999913,
+          "chiffre_affaires_usd": 1747872,
+          "resultat_net_usd": 591307.0790882746
         }
       ],
       "controles": {
@@ -105,9 +105,61 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        1.1641532182693481e-10,
-        6.984919309616089e-10,
-        1.3969838619232178e-9
+        -4.656612873077393e-10,
+        -4.656612873077393e-10,
+        9.313225746154785e-10
+      ]
+    },
+    {
+      "up_id": "biscuiterie",
+      "configuration_id": "biscuits_durs",
+      "nom": "Biscuits durs",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_non_certifie",
+      "source_prix": "https://www.made-in-china.com/video-channel/hgfoodmachine_EZKAMYcOXxhu_Hg-Automatic-Complete-Set-Shb620-500kg-Hr-Biscuit-Processing-Production-Line-for-Industrial-Food-Processing-Turnkey.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 450000,
+      "investissement_simulation_usd": 605000,
+      "reserve_initiale_distincte_usd": 123480.61805555553,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 500000.00000000006,
+          "ventes_kg": 489999.99999999994,
+          "stock_fin_kg": 9999.999999999942,
+          "chiffre_affaires_usd": 1126999.9999999998,
+          "resultat_net_usd": 319894.24999999977
+        },
+        {
+          "annee": 2,
+          "production_kg": 620000,
+          "ventes_kg": 610000,
+          "stock_fin_kg": 19999.99999999989,
+          "chiffre_affaires_usd": 1431060.0000000002,
+          "resultat_net_usd": 454553.62903379335
+        },
+        {
+          "annee": 3,
+          "production_kg": 720000,
+          "ventes_kg": 712999.9999999999,
+          "stock_fin_kg": 26999.999999999993,
+          "chiffre_affaires_usd": 1706151.9600000007,
+          "resultat_net_usd": 574343.0125590998
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        2.3283064365386963e-10,
+        -2.3283064365386963e-10,
+        -4.656612873077393e-10
       ]
     },
     {

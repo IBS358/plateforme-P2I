@@ -609,11 +609,16 @@
           },
           "emballage": {
             "statut": "hypothese_P2I",
-            "format": "À préciser",
+            "format": "Sachet de 200 g refermable avec soudure de sécurité, regroupement en carton",
             "cout_usd_par_kg": 0.14,
+            "composants_usd_par_kg": {
+              "sachets_fermetures": 0.09,
+              "etiquetage": 0.03,
+              "regroupement": 0.02
+            },
             "mode_comptable": "inclus_dans_cout_industriel",
-            "ecologie": "Matériau, réemploi, collecte et recyclage effectifs à qualifier.",
-            "source": "Hypothèse P2I historique"
+            "ecologie": "Réduction de matière et options de collecte et recyclage local à étudier ; aucune recyclabilité effective garantie.",
+            "source": "Hypothèse P2I, décomposition du budget historique de 0,14 USD/kg ; pas un prix fournisseur."
           },
           "hypotheses_explicites": {
             "matieres": "Recette Crackers du dépôt; quantités par kg de produit et prix unitaires historiques, hypothèses P2I, pas mercuriale validée.",
@@ -658,34 +663,41 @@
         "biscuits_mous": {
           "configuration_id": "biscuits_mous",
           "nom": "Biscuits mous",
-          "qualification": "configuration_a_documenter",
+          "qualification": "simulation_decouverte_calculable",
           "reference": {
+            "up_id": "biscuiterie",
+            "configuration_id": "biscuits_mous",
+            "nom": "Biscuits mous",
+            "sous_titre": "Biscuits tendres et moelleux",
+            "description": "Production de biscuits mous conditionnés en sachets de 200 g, avec hypothèses P2I propres à cette recette.",
             "capacite": 500,
             "unite": "kg/h",
+            "machines": 450000,
+            "investissement": 605000,
             "production": [
-              428450,
-              560880,
-              654360
+              450000,
+              580000,
+              680000
             ],
             "ventes": [
-              411312,
-              555583,
-              650621
+              441000,
+              571000,
+              672000
             ],
             "prix": [
-              2.3,
-              2.380000827959099,
-              2.46000052257766
+              2.5,
+              2.55,
+              2.601
             ],
+            "matieres_kg": 0.72,
             "cout_production_kg": [
-              1.029999124752013,
-              1.0599838367984622,
-              1.091615548837188
+              1.2333333333333334,
+              1.2164655172413794,
+              1.2247154411764705
             ],
-            "matieres_kg": 0.7009546038044112,
-            "personnel": 76000,
-            "croissance_personnel": 0.04,
-            "charges_fixes": 62000,
+            "personnel": 20700,
+            "charges_fixes": 34800,
+            "croissance_personnel": 0.03,
             "croissance_charges": 0.03,
             "part_apport": 0.3,
             "part_dette": 0.7,
@@ -695,17 +707,11 @@
             "taux_tva": 0.18,
             "taux_is": 0.25,
             "coussin_tresorerie": 0.1,
-            "source": "Texte utilisateur du prototype V106 — hypothèses de simulation non vérifiées",
-            "conventions": "Mois uniformes; coûts unitaires industriels reconstruits des CPV/ventes du texte; matières unitaires déduites du proxy MP A1. Stocks PF valorisés au coût moyen pondéré, aucun double compte. TVA sur ventes et achats de matières uniquement, règlements TVA à M+1; autres bases de TVA et TVA CAPEX non modélisées. IS affecté en réserve interne et dette fiscale, sans échéancier fiscal officiel. Emprunt amorti linéairement en 60 mois, aucun différé. Réserve supplémentaire calculée, à financer séparément.",
-            "nom": "Biscuits mous",
-            "sous_titre": "Biscuits tendres et moelleux",
-            "description": "Biscuits à texture tendre, destinés aux goûters et au marché familial.",
-            "machines": 160000,
-            "investissement": 260000,
+            "source": "data/p2i-bp-decouverte-simulations.json / biscuiterie__biscuits_mous : prix catalogue ou budget de référence + hypothèses P2I explicites",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+            "qualification": "simulation_decouverte_prix_et_hypotheses",
             "photo": 1,
-            "statut_exploitation": "Base propre à Biscuits mous, extraite du texte utilisateur V106. Résultats recalculés, hypothèses et prix non vérifiés.",
-            "up_id": "biscuiterie",
-            "configuration_id": "biscuits_mous",
             "technique": {
               "formage": "Moulage rotatif",
               "etapes": [
@@ -717,29 +723,138 @@
               ],
               "source": "https://www.bakerperkins.com/biscuit-cookie-cracker/products/soft-dough-biscuits/",
               "faits": "La documentation fabricant décrit le mélange, le moulage rotatif et la cuisson pour les biscuits à pâte courte. Cette description ne valide ni modèle, ni budget, ni capacité de la ligne P2I. La texture moelleuse du produit fini doit être confirmée par les essais de formulation."
-            },
-            "qualification": "hypotheses_p2i_non_verifiees"
+            }
           },
           "economique_herite_up": false,
           "economique": null,
-          "source": "js/p2i-bp-decouverte-v108-references.js"
+          "source": "js/p2i-bp-decouverte-v108-references.js",
+          "prix_equipement": {
+            "id": "catalogue_hg_biscuit_500",
+            "url": "https://www.made-in-china.com/video-channel/hgfoodmachine_EZKAMYcOXxhu_Hg-Automatic-Complete-Set-Shb620-500kg-Hr-Biscuit-Processing-Production-Line-for-Industrial-Food-Processing-Turnkey.html",
+            "consulte_le": "2026-10-27",
+            "fournisseur": "HG Industry (Shanghai)",
+            "modele": "SHB620 — ligne biscuit annoncée",
+            "prix": 450000,
+            "devise": "USD",
+            "base": "prix de référence FOB publié pour un ensemble ; port, options et configuration à préciser",
+            "capacite": 500,
+            "unite_capacite": "kg/h annoncés",
+            "fonctions": [
+              "Dosage et mélange",
+              "Formage selon variante",
+              "Cuisson",
+              "Refroidissement",
+              "Conditionnement"
+            ],
+            "qualification": "prix_catalogue_public_non_certifie",
+            "limites": "Annonce une application aux biscuits durs, mous et crackers ; composants inclus et options, emballage et adaptation à la recette sont à préciser. Puissance installée annoncée 120 kW, chauffage gaz/électricité.",
+            "equipements_complementaires": []
+          },
+          "emballage": {
+            "statut": "hypothese_P2I",
+            "format": "Sachet de 200 g refermable avec soudure de sécurité, regroupement en carton",
+            "cout_usd_par_kg": 0.16,
+            "mode_comptable": "inclus_dans_cout_industriel",
+            "ecologie": "Réduction de matière et options de collecte et recyclage local à étudier ; aucune recyclabilité effective garantie.",
+            "source": "Hypothèse P2I de coût sachet, étiquetage et regroupement, non prix fournisseur",
+            "composants_usd_par_kg": {
+              "sachets_fermetures": 0.1,
+              "etiquetage": 0.03,
+              "regroupement": 0.03
+            }
+          },
+          "hypotheses_explicites": {
+            "matieres": "Coût de matières par kg de produit fini : estimation P2I distincte pour biscuits mous ; composition et prix des intrants à affiner.",
+            "process": "Coût variable de process inclut emballage, énergie et eau ; charges industrielles fixes incluent opérateurs, entretien et autres frais. Pas de second décompte.",
+            "personnel": "Personnel administratif et commercial : hypothèse 3 personnes × 500 USD/mois × 12 × 1,15.",
+            "charges": "Charges hors production : site, commercialisation, transport, assurance et administration ; hypothèses P2I.",
+            "production": "500 kg/h, 8 h/jour, 250 jours/an : capacité annuelle théorique 1 000 000 kg avant arrêts ; volumes et ventes indiqués sont des hypothèses de lancement spécifiques à la variante.",
+            "prix_vente": "Hypothèse de prix départ UP hors taxes ; hausse 2 %/an. Les prix de détail repérés en Côte d’Ivoire sont des comparaisons, pas des prix fabricant garantis.",
+            "complements": "Enveloppes P2I pour fret, douane, site, utilités, installation, formation et pièces ; hypothèses de simulation, non devis.",
+            "conventions": {
+              "apport": 0.3,
+              "dette": 0.7,
+              "taux_interet_annuel": 0.08,
+              "dette_mois": 60,
+              "amortissement_ans": 10,
+              "tva_simulation": 0.18,
+              "is_simulation": 0.25,
+              "croissance_charges": 0.03,
+              "croissance_personnel": 0.03,
+              "coussin_tresorerie": 0.1,
+              "clients_comptant": 0.4,
+              "clients_30_jours": 0.6,
+              "fournisseurs_comptant": true,
+              "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+            },
+            "complements_usd": {
+              "fret": 25000,
+              "assurance": 4500,
+              "douane_transit": 20000,
+              "transport_local": 5500,
+              "genie_civil": 40000,
+              "utilites": 20000,
+              "installation_formation": 20000,
+              "pieces_initiales": 10000,
+              "securite_environnement": 5000,
+              "etudes": 5000
+            },
+            "base_budget_equipements_usd": 450000,
+            "conversion": null
+          }
         },
         "biscuits_durs": {
           "configuration_id": "biscuits_durs",
           "nom": "Biscuits durs",
-          "qualification": "configuration_a_documenter",
+          "qualification": "simulation_decouverte_calculable",
           "reference": {
-            "nom": "Biscuits durs",
-            "sous_titre": "Biscuits secs à texture ferme",
-            "description": "Biscuits secs et fermes, destinés aux ménages et commerces de proximité.",
-            "machines": null,
-            "investissement": 240000,
-            "photo": 2,
-            "statut_exploitation": "Données d’exploitation propres à Biscuits durs non disponibles : aucun résultat net, BFR ou trésorerie ne sont repris d’une autre variante.",
             "up_id": "biscuiterie",
             "configuration_id": "biscuits_durs",
+            "nom": "Biscuits durs",
+            "sous_titre": "Biscuits secs à texture ferme",
+            "description": "Production de biscuits durs conditionnés en sachets de 200 g, avec hypothèses P2I propres à cette recette.",
             "capacite": 500,
             "unite": "kg/h",
+            "machines": 450000,
+            "investissement": 605000,
+            "production": [
+              500000,
+              620000,
+              720000
+            ],
+            "ventes": [
+              490000,
+              610000,
+              713000
+            ],
+            "prix": [
+              2.3,
+              2.346,
+              2.39292
+            ],
+            "matieres_kg": 0.65,
+            "cout_production_kg": [
+              1.1300000000000001,
+              1.1200419354838709,
+              1.1275009444444444
+            ],
+            "personnel": 20700,
+            "charges_fixes": 34800,
+            "croissance_personnel": 0.03,
+            "croissance_charges": 0.03,
+            "part_apport": 0.3,
+            "part_dette": 0.7,
+            "taux_interet": 0.08,
+            "duree_dette_mois": 60,
+            "duree_amortissement_ans": 10,
+            "taux_tva": 0.18,
+            "taux_is": 0.25,
+            "coussin_tresorerie": 0.1,
+            "source": "data/p2i-bp-decouverte-simulations.json / biscuiterie__biscuits_durs : prix catalogue ou budget de référence + hypothèses P2I explicites",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+            "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "photo": 2,
             "technique": {
               "formage": "Abaisse, calibrage et découpe rotative",
               "etapes": [
@@ -751,20 +866,85 @@
               ],
               "source": "https://www.bakerperkins.com/biscuit-cookie-cracker/products/hard-sweet-biscuit-lines/",
               "faits": "Le fabricant décrit une feuille de pâte calibrée, détendue, puis marquée et découpée avant cuisson. Il ne s’agit pas du moulage rotatif des pâtes courtes. Aucune capacité ou offre commerciale P2I n’est attestée par cette source."
-            },
-            "qualification": "hypotheses_p2i_non_verifiees",
-            "complet": false,
-            "manquants": [
-              "Production et ventes sur trois ans",
-              "Prix de vente propre au produit",
-              "Formulation et coûts industriels",
-              "Personnel et charges d’exploitation",
-              "Budget machines et ventilation du CAPEX"
-            ]
+            }
           },
           "economique_herite_up": false,
           "economique": null,
-          "source": "js/p2i-bp-decouverte-v108-references.js"
+          "source": "js/p2i-bp-decouverte-v108-references.js",
+          "prix_equipement": {
+            "id": "catalogue_hg_biscuit_500",
+            "url": "https://www.made-in-china.com/video-channel/hgfoodmachine_EZKAMYcOXxhu_Hg-Automatic-Complete-Set-Shb620-500kg-Hr-Biscuit-Processing-Production-Line-for-Industrial-Food-Processing-Turnkey.html",
+            "consulte_le": "2026-10-27",
+            "fournisseur": "HG Industry (Shanghai)",
+            "modele": "SHB620 — ligne biscuit annoncée",
+            "prix": 450000,
+            "devise": "USD",
+            "base": "prix de référence FOB publié pour un ensemble ; port, options et configuration à préciser",
+            "capacite": 500,
+            "unite_capacite": "kg/h annoncés",
+            "fonctions": [
+              "Dosage et mélange",
+              "Formage selon variante",
+              "Cuisson",
+              "Refroidissement",
+              "Conditionnement"
+            ],
+            "qualification": "prix_catalogue_public_non_certifie",
+            "limites": "Annonce une application aux biscuits durs, mous et crackers ; composants inclus et options, emballage et adaptation à la recette sont à préciser. Puissance installée annoncée 120 kW, chauffage gaz/électricité.",
+            "equipements_complementaires": []
+          },
+          "emballage": {
+            "statut": "hypothese_P2I",
+            "format": "Sachet de 200 g refermable avec soudure de sécurité, regroupement en carton",
+            "cout_usd_par_kg": 0.14,
+            "mode_comptable": "inclus_dans_cout_industriel",
+            "ecologie": "Réduction de matière et options de collecte et recyclage local à étudier ; aucune recyclabilité effective garantie.",
+            "source": "Hypothèse P2I de coût sachet, étiquetage et regroupement, non prix fournisseur",
+            "composants_usd_par_kg": {
+              "sachets_fermetures": 0.09,
+              "etiquetage": 0.03,
+              "regroupement": 0.02
+            }
+          },
+          "hypotheses_explicites": {
+            "matieres": "Coût de matières par kg de produit fini : estimation P2I distincte pour biscuits durs ; composition et prix des intrants à affiner.",
+            "process": "Coût variable de process inclut emballage, énergie et eau ; charges industrielles fixes incluent opérateurs, entretien et autres frais. Pas de second décompte.",
+            "personnel": "Personnel administratif et commercial : hypothèse 3 personnes × 500 USD/mois × 12 × 1,15.",
+            "charges": "Charges hors production : site, commercialisation, transport, assurance et administration ; hypothèses P2I.",
+            "production": "500 kg/h, 8 h/jour, 250 jours/an : capacité annuelle théorique 1 000 000 kg avant arrêts ; volumes et ventes indiqués sont des hypothèses de lancement spécifiques à la variante.",
+            "prix_vente": "Hypothèse de prix départ UP hors taxes ; hausse 2 %/an. Les prix de détail repérés en Côte d’Ivoire sont des comparaisons, pas des prix fabricant garantis.",
+            "complements": "Enveloppes P2I pour fret, douane, site, utilités, installation, formation et pièces ; hypothèses de simulation, non devis.",
+            "conventions": {
+              "apport": 0.3,
+              "dette": 0.7,
+              "taux_interet_annuel": 0.08,
+              "dette_mois": 60,
+              "amortissement_ans": 10,
+              "tva_simulation": 0.18,
+              "is_simulation": 0.25,
+              "croissance_charges": 0.03,
+              "croissance_personnel": 0.03,
+              "coussin_tresorerie": 0.1,
+              "clients_comptant": 0.4,
+              "clients_30_jours": 0.6,
+              "fournisseurs_comptant": true,
+              "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+            },
+            "complements_usd": {
+              "fret": 25000,
+              "assurance": 4500,
+              "douane_transit": 20000,
+              "transport_local": 5500,
+              "genie_civil": 40000,
+              "utilites": 20000,
+              "installation_formation": 20000,
+              "pieces_initiales": 10000,
+              "securite_environnement": 5000,
+              "etudes": 5000
+            },
+            "base_budget_equipements_usd": 450000,
+            "conversion": null
+          }
         }
       },
       "autres_variantes": "a_recenser",
@@ -28821,5 +29001,5 @@
     }
   },
   "regles_decouverte": "Prix catalogue public ou budget P2I identifié + hypothèses explicites; pas de certification, partenariat ou devis exigé au Découverte.",
-  "nombre_simulations_completes": 4
+  "nombre_simulations_completes": 5
 }
