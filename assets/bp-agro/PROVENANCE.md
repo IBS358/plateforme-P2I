@@ -36,3 +36,7 @@ Ces images ont été générées par IA à partir de descriptions des fonctions.
 ## Gamme détergents liquides — 27 octobre 2026
 
 `atelier-detergent-ia.jpg` : nouvelle planche IA non contractuelle illustrant traitement eau, pesée, mélange, remplissage et étiquetage automatisés, puis trois produits avec marques fictives. Elle ne représente pas le matériel du fournisseur.
+
+## Peinture industrielle aqueuse — 27 octobre 2026
+
+`atelier-peinture-ia.jpg` : illustrations IA non contractuelles de pesée, dispersion, broyage, mélange et conditionnement, avec emballage à marque fictive ; ne représente pas les machines catalogue.

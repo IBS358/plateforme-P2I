@@ -1,0 +1,107 @@
+{
+  "schema": "p2i.bp-lot.v1",
+  "date": "2026-10-27",
+  "description": "Peintures industrielles : primaire anticorrosion aqueux",
+  "sources": [
+    {
+      "id": "catalogue_peinture_keda_aqueuse",
+      "url": "https://www.sourcingai.com/smart-products/kdmachine/chemical-industry-water-based-coating-production-line-making-machine-complete-paint-production-line-FUubGdVNRKJE",
+      "consulte_le": "2026-10-27",
+      "fournisseur": "Laizhou Keda Chemical Machinery Co., Ltd.",
+      "modele": "Ligne de production de revêtements en phase aqueuse",
+      "prix": 38000,
+      "devise": "USD",
+      "base": "prix public pour un ensemble ; capacité personnalisée et périmètre à préciser",
+      "capacite": 125,
+      "unite_capacite": "kg/h de produit fini — hypothèse P2I, non capacité catalogue",
+      "fonctions": [
+        "Pesée des ingrédients",
+        "Dispersion des pigments",
+        "Broyage et contrôle de finesse",
+        "Mélange de finition",
+        "Remplissage et fermeture"
+      ],
+      "qualification": "prix_catalogue_public_non_certifie",
+      "limites": "L’annonce présente une ligne de peinture à eau et une capacité personnalisée sans valeur fixe ; composition exacte, broyage, conditionnement et utilités à confirmer. Budget auxiliaire séparé si nécessaire."
+    }
+  ],
+  "profils": {
+    "peintures": {
+      "configuration_id": null,
+      "nom": "Primaire anticorrosion en phase aqueuse",
+      "sous_titre": "Revêtement industriel pour métal",
+      "description": "Production indicative d’un primaire anticorrosion à base d’eau pour supports métalliques, conditionné en pots refermables de 4 kg.",
+      "source_equipement": "catalogue_peinture_keda_aqueuse",
+      "prix_retenu": 38000,
+      "devise_prix": "USD",
+      "capacite_entree_kg_h": 125,
+      "production_explicite": [
+        120000,
+        160000,
+        200000
+      ],
+      "ventes_explicites": [
+        120000,
+        160000,
+        200000
+      ],
+      "prix_vente_usd_kg": [
+        2.8,
+        2.856,
+        2.91312
+      ],
+      "matieres_usd_kg_produit": 1.1,
+      "cout_process_usd_kg": 0.3,
+      "fixes_industriels_an": 42000,
+      "personnel_hors_cout_industriel": 8000,
+      "charges_fixes_hors_industriel": 15000,
+      "stock_matieres_jours": 30,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Pot refermable de 4 kg étiqueté et regroupé sur palette",
+        "cout_usd_par_kg": 0.18,
+        "composants_usd_par_kg": {
+          "pot": 0.12,
+          "couvercle": 0.025,
+          "etiquette": 0.015,
+          "regroupement": 0.02
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Réemploi et recyclage des pots et gestion des résidus de peinture à examiner localement.",
+        "source": "Hypothèses P2I non prix fournisseur"
+      },
+      "complements_usd": {
+        "fret": 6000,
+        "assurance": 800,
+        "douane_transit": 6500,
+        "transport_local": 2000,
+        "genie_civil": 15000,
+        "utilites": 12000,
+        "installation_formation": 6000,
+        "pieces_initiales": 2500,
+        "securite_environnement": 6000,
+        "etudes_controle": 5000,
+        "auxiliaires_conditionnement": 5000
+      },
+      "methodes": {
+        "production": "Cadence de simulation 125 kg/h de produit fini, hypothèse P2I, non cadence annoncée par le vendeur dont la capacité est personnalisable ; 8 h/j et 250 jours/an. Ventes égales à production sans invendu ni perte supplémentaires.",
+        "matieres": "Liants, pigments, charges, eau et additifs 1,10 USD/kg de produit fini : hypothèse P2I, formule et prix locaux à documenter.",
+        "process": "0,30 USD/kg inclut emballage 0,18 USD/kg et consommables/utilités 0,12 USD/kg ; frais industriels fixes distincts.",
+        "personnel": "Personnel industriel dans frais fixes de production ; personnel administratif et commercial distinct.",
+        "prix_vente": "2,80 USD/kg départ usine année 1 puis +2 %/an : hypothèse P2I ; comparaison prudente à des produits anticorrosion au détail dont la formule et le circuit diffèrent.",
+        "complements": "Enveloppes P2I de transport, installation, utilités, contrôle et sécurité ; périmètre fournisseur de la ligne et des auxiliaires non confirmé.",
+        "qualite": "Anticorrosion, stabilité, adhérence, séchage, résistance et sécurité doivent être testés pour la formule ; aucune performance certifiée présumée."
+      },
+      "sources_prix_marche": [
+        {
+          "url": "https://produitbat.ci/detail/produit/1737027865-Antirouille-Gris-4kg",
+          "description": "Antirouille gris 4 kg, 9 000 FCFA au détail ; formulation, circuit et spécifications peuvent différer."
+        }
+      ],
+      "visuels": {
+        "atlas": "peinture",
+        "product_index": 5
+      }
+    }
+  }
+}

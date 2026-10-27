@@ -26,3 +26,5 @@
 :root{--agro-cosmetique:url('../assets/bp-agro/atelier-cosmetique-ia.jpg')}.agro-cosmetique{background-image:var(--agro-cosmetique)}
 
 :root{--agro-detergent:url('../assets/bp-agro/atelier-detergent-ia.jpg')}.agro-detergent{background-image:var(--agro-detergent)}
+
+:root{--agro-peinture:url('../assets/bp-agro/atelier-peinture-ia.jpg')}.agro-peinture{background-image:var(--agro-peinture)}
