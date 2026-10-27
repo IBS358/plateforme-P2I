@@ -2,9 +2,9 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 15,
-  "up_avec_simulation_complete": 13,
-  "up_restant_a_alimenter": 83,
+  "simulations_affichables": 16,
+  "up_avec_simulation_complete": 14,
+  "up_restant_a_alimenter": 82,
   "scenarios": [
     {
       "up_id": "conserverie_legumes",
@@ -784,6 +784,58 @@
         -5.820766091346741e-11,
         0,
         2.3283064365386963e-10
+      ]
+    },
+    {
+      "up_id": "javel",
+      "configuration_id": null,
+      "nom": "Eau de javel & désinfectants",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "borne_haute_catalogue_non_devis",
+      "source_prix": "https://bojunpack.en.made-in-china.com/product/HZWJOArYZlhy/China-Automatic-Filling-Shampoo-Dishwashing-Liquid-Bleach-Automatic-Filling-Capping-Labeling-Line-Production-Line.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 57000,
+      "investissement_simulation_usd": 122800,
+      "reserve_initiale_distincte_usd": 47214.48666666664,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 700000.0000000001,
+          "ventes_kg": 665000,
+          "stock_fin_kg": 35000.00000000005,
+          "chiffre_affaires_usd": 399000,
+          "resultat_net_usd": 10780.18
+        },
+        {
+          "annee": 2,
+          "production_kg": 850000.0000000001,
+          "ventes_kg": 807499.9999999999,
+          "stock_fin_kg": 77499.99999999993,
+          "chiffre_affaires_usd": 494190,
+          "resultat_net_usd": 31972.465921241503
+        },
+        {
+          "annee": 3,
+          "production_kg": 1000000.0000000001,
+          "ventes_kg": 949999.9999999999,
+          "stock_fin_kg": 127499.99999999981,
+          "chiffre_affaires_usd": 593028.0000000001,
+          "resultat_net_usd": 53333.660618052134
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        1.1641532182693481e-10,
+        -2.9103830456733704e-11,
+        -5.820766091346741e-11
       ]
     }
   ]
