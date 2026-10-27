@@ -5,15 +5,15 @@
   "sources": [
     {
       "id": "catalogue_peinture_keda_aqueuse",
-      "url": "https://www.sourcingai.com/smart-products/kdmachine/chemical-industry-water-based-coating-production-line-making-machine-complete-paint-production-line-FUubGdVNRKJE",
+      "url": "https://www.made-in-china.com/video-channel/shindah_QXIxVBlAIUYR_Emulsion-Paint-Water-Based-Paint-Production-Line.html",
       "consulte_le": "2026-10-27",
-      "fournisseur": "Laizhou Keda Chemical Machinery Co., Ltd.",
-      "modele": "Ligne de production de revêtements en phase aqueuse",
-      "prix": 38000,
+      "fournisseur": "Qingdao Shindah Machinery Co., Ltd.",
+      "modele": "Ligne de peinture en phase aqueuse — gamme 1 000 à 15 000 t/an",
+      "prix": 80000,
       "devise": "USD",
-      "base": "prix public pour un ensemble ; capacité personnalisée et périmètre à préciser",
-      "capacite": 125,
-      "unite_capacite": "kg/h de produit fini — hypothèse P2I, non capacité catalogue",
+      "base": "borne haute de la fourchette catalogue FOB ; capacité et prix d’une configuration précise non couplés par la fiche",
+      "capacite": 1000000,
+      "unite_capacite": "kg/an option basse annoncée ; cadence horaire dépend de la durée effective",
       "fonctions": [
         "Pesée des ingrédients",
         "Dispersion des pigments",
@@ -21,8 +21,10 @@
         "Mélange de finition",
         "Remplissage et fermeture"
       ],
-      "qualification": "prix_catalogue_public_non_certifie",
-      "limites": "L’annonce présente une ligne de peinture à eau et une capacité personnalisée sans valeur fixe ; composition exacte, broyage, conditionnement et utilités à confirmer. Budget auxiliaire séparé si nécessaire."
+      "qualification": "borne_haute_fourchette_catalogue_non_devis",
+      "limites": "La fiche du vendeur liste les fonctions alimentation, préparation, refroidissement, filtration et remplissage ; 1 000 à 15 000 t/an. Le lien exact entre 80 000 USD et 1 000 t/an, la compatibilité avec le primaire anticorrosion, les pots de 4 kg, les utilités et les détails de broyage ne sont pas confirmés.",
+      "prix_min": 30000,
+      "prix_max": 80000
     }
   ],
   "profils": {
@@ -32,18 +34,18 @@
       "sous_titre": "Revêtement industriel pour métal",
       "description": "Production indicative d’un primaire anticorrosion à base d’eau pour supports métalliques, conditionné en pots refermables de 4 kg.",
       "source_equipement": "catalogue_peinture_keda_aqueuse",
-      "prix_retenu": 38000,
+      "prix_retenu": 80000,
       "devise_prix": "USD",
-      "capacite_entree_kg_h": 125,
+      "capacite_entree_kg_h": 500,
       "production_explicite": [
-        120000,
-        160000,
-        200000
+        500000,
+        650000,
+        800000
       ],
       "ventes_explicites": [
-        120000,
-        160000,
-        200000
+        500000,
+        650000,
+        800000
       ],
       "prix_vente_usd_kg": [
         2.8,
@@ -52,9 +54,9 @@
       ],
       "matieres_usd_kg_produit": 1.1,
       "cout_process_usd_kg": 0.3,
-      "fixes_industriels_an": 42000,
-      "personnel_hors_cout_industriel": 8000,
-      "charges_fixes_hors_industriel": 15000,
+      "fixes_industriels_an": 100000,
+      "personnel_hors_cout_industriel": 18000,
+      "charges_fixes_hors_industriel": 45000,
       "stock_matieres_jours": 30,
       "emballage_produit": {
         "statut": "hypothese_P2I",
@@ -84,13 +86,13 @@
         "auxiliaires_conditionnement": 5000
       },
       "methodes": {
-        "production": "Cadence de simulation 125 kg/h de produit fini, hypothèse P2I, non cadence annoncée par le vendeur dont la capacité est personnalisable ; 8 h/j et 250 jours/an. Ventes égales à production sans invendu ni perte supplémentaires.",
+        "production": "La fiche affiche des options de 1 000 à 15 000 t/an ; le scénario retient l’option basse de 1 000 t/an. À titre de convention P2I : 8 h/j et 250 j/an, soit 500 kg/h théoriques ; régime réel non communiqué. Production A1/A2/A3 : 50 %, 65 %, 80 % de cette capacité ; pas de pertes ni invendus simulés. Prix retenu à la borne haute de la gamme, non prix confirmé pour cette option.",
         "matieres": "Liants, pigments, charges, eau et additifs 1,10 USD/kg de produit fini : hypothèse P2I, formule et prix locaux à documenter.",
         "process": "0,30 USD/kg inclut emballage 0,18 USD/kg et consommables/utilités 0,12 USD/kg ; frais industriels fixes distincts.",
         "personnel": "Personnel industriel dans frais fixes de production ; personnel administratif et commercial distinct.",
         "prix_vente": "2,80 USD/kg départ usine année 1 puis +2 %/an : hypothèse P2I ; comparaison prudente à des produits anticorrosion au détail dont la formule et le circuit diffèrent.",
-        "complements": "Enveloppes P2I de transport, installation, utilités, contrôle et sécurité ; périmètre fournisseur de la ligne et des auxiliaires non confirmé.",
-        "qualite": "Anticorrosion, stabilité, adhérence, séchage, résistance et sécurité doivent être testés pour la formule ; aucune performance certifiée présumée."
+        "complements": "Transport, installation, utilités, contrôle, sécurité et auxiliaires non listés sont des enveloppes estimatives P2I. Remplissage et fermeture sont annoncés dans la ligne et ne sont pas ajoutés une seconde fois. Budget auxiliaires 5 000 USD pour matériel périphérique non inclus à vérifier.",
+        "qualite": "Compatibilité de la ligne avec une formulation anticorrosion aqueuse, stabilité, adhérence, séchage et performance doivent être testés ; aucune certification présumée."
       },
       "sources_prix_marche": [
         {

@@ -687,39 +687,39 @@
       "configuration_id": null,
       "nom": "Peintures industrielles",
       "statut": "simulation_decouverte_indicative",
-      "qualification_prix": "prix_catalogue_public_non_certifie",
-      "source_prix": "https://www.sourcingai.com/smart-products/kdmachine/chemical-industry-water-based-coating-production-line-making-machine-complete-paint-production-line-FUubGdVNRKJE",
+      "qualification_prix": "borne_haute_fourchette_catalogue_non_devis",
+      "source_prix": "https://www.made-in-china.com/video-channel/shindah_QXIxVBlAIUYR_Emulsion-Paint-Water-Based-Paint-Production-Line.html",
       "certification_prix_exigee": false,
       "accord_fournisseur_exige": false,
       "devis_exige": false,
       "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 38000,
-      "investissement_simulation_usd": 104800,
-      "reserve_initiale_distincte_usd": 35168.841111111105,
+      "budget_equipements_usd": 80000,
+      "investissement_simulation_usd": 146800,
+      "reserve_initiale_distincte_usd": 106987.16611111113,
       "annuel": [
         {
           "annee": 1,
-          "production_kg": 120000,
-          "ventes_kg": 120000,
+          "production_kg": 500000.00000000006,
+          "ventes_kg": 500000.00000000006,
           "stock_fin_kg": 0,
-          "chiffre_affaires_usd": 336000,
-          "resultat_net_usd": 65391.880000000005
+          "chiffre_affaires_usd": 1400000,
+          "resultat_net_usd": 386139.5800000001
         },
         {
           "annee": 2,
-          "production_kg": 160000,
-          "ventes_kg": 160000,
+          "production_kg": 650000,
+          "ventes_kg": 650000,
           "stock_fin_kg": 0,
-          "chiffre_affaires_usd": 456960,
-          "resultat_net_usd": 108489.6999999999
+          "chiffre_affaires_usd": 1856400,
+          "resultat_net_usd": 548030.2000000001
         },
         {
           "annee": 3,
-          "production_kg": 199999.99999999997,
-          "ventes_kg": 199999.99999999997,
+          "production_kg": 799999.9999999999,
+          "ventes_kg": 799999.9999999999,
           "stock_fin_kg": 0,
-          "chiffre_affaires_usd": 582624.0000000001,
-          "resultat_net_usd": 152362.64500000008
+          "chiffre_affaires_usd": 2330496.0000000005,
+          "resultat_net_usd": 712876.7950000004
         }
       ],
       "controles": {
@@ -729,9 +729,9 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        0,
-        -5.820766091346741e-11,
-        -3.4924596548080444e-10
+        -4.656612873077393e-10,
+        -2.3283064365386963e-10,
+        -1.862645149230957e-9
       ]
     }
   ]
