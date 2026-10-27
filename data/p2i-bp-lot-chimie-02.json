@@ -1,0 +1,106 @@
+{
+  "schema": "p2i.bp-lot.v1",
+  "date": "2026-10-27",
+  "description": "Cosmétiques : lait corporel au karité",
+  "sources": [
+    {
+      "id": "catalogue_cosmetique_henwi_500",
+      "url": "https://henwitech.com/products/500l-cosmetic-cream-lotion-automatic-production-line",
+      "consulte_le": "2026-10-27",
+      "fournisseur": "Henwi Technology",
+      "modele": "HWPL-CLA-500L, configuration 1 flacon rond",
+      "prix": 49550,
+      "devise": "USD",
+      "base": "prix affiché configuration 1 ; frais de livraison et options à préciser",
+      "capacite": 500,
+      "unite_capacite": "litres par lot",
+      "fonctions": [
+        "Traitement de l’eau",
+        "Pesée des ingrédients",
+        "Émulsion sous vide",
+        "Remplissage et fermeture",
+        "Étiquetage"
+      ],
+      "qualification": "prix_catalogue_public_non_certifie",
+      "limites": "La configuration 1 liste traitement eau, émulsionneur, pompes, cuves, remplissage, bouchage, étiquetage et compresseur ; formule, densité, capacité réelle et utilités à vérifier."
+    }
+  ],
+  "profils": {
+    "cosmetiques": {
+      "configuration_id": null,
+      "nom": "Lait corporel au karité",
+      "sous_titre": "Émulsion et conditionnement en flacons",
+      "description": "Fabrication indicative d’un lait corporel contenant du beurre de karité et conditionné en flacons refermables de 250 ml.",
+      "source_equipement": "catalogue_cosmetique_henwi_500",
+      "prix_retenu": 49550,
+      "devise_prix": "USD",
+      "capacite_entree_kg_h": 187.5,
+      "production_explicite": [
+        150000,
+        200000,
+        250000
+      ],
+      "ventes_explicites": [
+        150000,
+        200000,
+        250000
+      ],
+      "prix_vente_usd_kg": [
+        5,
+        5.1,
+        5.202
+      ],
+      "matieres_usd_kg_produit": 1.2,
+      "cout_process_usd_kg": 1,
+      "fixes_industriels_an": 55000,
+      "personnel_hors_cout_industriel": 12000,
+      "charges_fixes_hors_industriel": 30000,
+      "stock_matieres_jours": 30,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Flacon refermable de 250 ml, étiqueté et regroupé en carton",
+        "cout_usd_par_kg": 0.6,
+        "composants_usd_par_kg": {
+          "flacon": 0.37,
+          "bouchon": 0.08,
+          "etiquette": 0.07,
+          "regroupement": 0.08
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Recyclabilité du flacon et collecte locale à vérifier.",
+        "source": "Hypothèse P2I non prix fournisseur"
+      },
+      "complements_usd": {
+        "fret": 7000,
+        "assurance": 800,
+        "douane_transit": 7000,
+        "transport_local": 2000,
+        "genie_civil": 12000,
+        "utilites": 15000,
+        "installation_formation": 6000,
+        "pieces_initiales": 2500,
+        "securite_environnement": 3000,
+        "etudes_et_controle": 5000
+      },
+      "methodes": {
+        "production": "500 L par lot et 1 500 à 2 000 L/j annoncés ; scénario P2I 1 500 L/j, densité supposée de 1 kg/L, 250 j/an. Ventes égales à la production, aucun invendu simulé ; cycle et densité à confirmer.",
+        "matieres": "Matières 1,20 USD/kg, hypothèse P2I de formulation, non prix fournisseur ; part de karité non spécifiée et à formuler.",
+        "process": "1 USD/kg comprend 0,60 USD/kg d’emballage et 0,40 USD/kg d’utilités et consommables ; charges fixes industrielles distinctes.",
+        "personnel": "Personnel de production compris dans les frais industriels ; personnel commercial et administratif distinct.",
+        "prix_vente": "5 USD/kg départ UP en A1 puis +2 %/an, hypothèse P2I, à rapprocher des prix de détail selon formule et circuits, sans les assimiler.",
+        "complements": "Enveloppes P2I pour importation, installation, contrôle, sécurité et utilités ; machine de conditionnement incluse une seule fois dans la ligne.",
+        "qualite": "Formule, innocuité, stabilité, conservation, étiquetage et conditions réglementaires à vérifier ; ne pas présenter de certification ou de teneur en karité non établie."
+      },
+      "sources_prix_marche": [
+        {
+          "url": "https://smartbuy-ci.com/dph/718-lait-de-corps-clarabel-nutrition-karit-250ml-6181100102727.html",
+          "description": "Lait corps karité 250 ml, 1 350 FCFA au détail ; marque, formule et circuit différents."
+        }
+      ],
+      "visuels": {
+        "atlas": "cosmetique",
+        "product_index": 5
+      }
+    }
+  }
+}

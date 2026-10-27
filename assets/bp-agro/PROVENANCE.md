@@ -24,3 +24,7 @@ Ces images ont été générées par IA à partir de descriptions des fonctions.
 ## Savonnerie — 27 octobre 2026
 
 `atelier-savon-ia.jpg` : illustration IA de la préparation de base de savon, mélange, broyage, extrusion et découpe, emballage et produit fini. Illustrations non contractuelles, sans identification de fournisseur.
+
+## Cosmétiques au karité — 27 octobre 2026
+
+`atelier-cosmetique-ia.jpg` : illustrations IA non contractuelles du traitement de l’eau, de la pesée, de l’émulsion, du conditionnement, de l’étiquetage et du produit fini à marque fictive ; elles ne représentent pas les machines catalogue.

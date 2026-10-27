@@ -2,9 +2,9 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 11,
-  "up_avec_simulation_complete": 9,
-  "up_restant_a_alimenter": 87,
+  "simulations_affichables": 12,
+  "up_avec_simulation_complete": 10,
+  "up_restant_a_alimenter": 86,
   "scenarios": [
     {
       "up_id": "conserverie_legumes",
@@ -576,6 +576,58 @@
         0,
         2.9103830456733704e-11,
         5.820766091346741e-11
+      ]
+    },
+    {
+      "up_id": "cosmetiques",
+      "configuration_id": null,
+      "nom": "Cosmétiques naturels",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_non_certifie",
+      "source_prix": "https://henwitech.com/products/500l-cosmetic-cream-lotion-automatic-production-line",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 49550,
+      "investissement_simulation_usd": 109850,
+      "reserve_initiale_distincte_usd": 45646.45201388889,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 150000,
+          "ventes_kg": 150000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 750000,
+          "resultat_net_usd": 229820.47250000003
+        },
+        {
+          "annee": 2,
+          "production_kg": 199999.99999999997,
+          "ventes_kg": 199999.99999999997,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 1020000,
+          "resultat_net_usd": 338660.7124999999
+        },
+        {
+          "annee": 3,
+          "production_kg": 250000.00000000003,
+          "ventes_kg": 250000.00000000003,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 1300500,
+          "resultat_net_usd": 449989.2275000002
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        5.820766091346741e-11,
+        0,
+        0
       ]
     }
   ]

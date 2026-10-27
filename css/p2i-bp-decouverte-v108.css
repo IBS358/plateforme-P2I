@@ -22,3 +22,5 @@
 :root{--agro-betail:url('../assets/bp-agro/atelier-betail-ia.jpg')}.agro-betail{background-image:var(--agro-betail)}
 
 :root{--agro-savon:url('../assets/bp-agro/atelier-savon-ia.jpg')}.agro-savon{background-image:var(--agro-savon)}
+
+:root{--agro-cosmetique:url('../assets/bp-agro/atelier-cosmetique-ia.jpg')}.agro-cosmetique{background-image:var(--agro-cosmetique)}
