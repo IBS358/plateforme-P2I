@@ -18,3 +18,5 @@
 :root{--agro-pain:url('../assets/bp-agro/atelier-pain-ia.jpg');--agro-huile:url('../assets/bp-agro/atelier-huile-ia.jpg');--agro-epices:url('../assets/bp-agro/atelier-epices-ia.jpg')}.agro-pain{background-image:var(--agro-pain)}.agro-huile{background-image:var(--agro-huile)}.agro-epices{background-image:var(--agro-epices)}
 
 :root{--agro-arachide:url('../assets/bp-agro/atelier-arachide-ia.jpg')}.agro-arachide{background-image:var(--agro-arachide)}
+
+:root{--agro-betail:url('../assets/bp-agro/atelier-betail-ia.jpg')}.agro-betail{background-image:var(--agro-betail)}

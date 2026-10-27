@@ -42,7 +42,8 @@
         "Broyage à marteaux",
         "Mélange à ruban",
         "Granulation",
-        "Refroidissement SKLN1.5/2.5"
+        "Refroidissement SKLN1.5/2.5",
+        "Pesée et ensachage manuel"
       ],
       "qualification": "fourchette_catalogue_publique_non_certifiee",
       "limites": "Budget retenu à la borne haute, pas un devis pour un modèle précis. Cadence de calcul prudente 500 kg/h. Pesée, ensachage manuel, alimentation, humidité et cohérence des auxiliaires inclus comme hypothèses de dimensionnement à approfondir au Pro."
@@ -137,7 +138,7 @@
       ],
       "matieres_usd_kg_produit": 0.5833333333333334,
       "fixes_industriels_an": 32579.999999999996,
-      "personnel_hors_cout_industriel": 9660.0,
+      "personnel_hors_cout_industriel": 9660,
       "charges_fixes_hors_industriel": 20400,
       "complements_usd": {
         "fret": 10000,
@@ -321,8 +322,8 @@
       ],
       "matieres_usd_kg_produit": 0.3225,
       "cout_process_usd_kg": 0.027,
-      "fixes_industriels_an": 18360.0,
-      "personnel_hors_cout_industriel": 8280.0,
+      "fixes_industriels_an": 18360,
+      "personnel_hors_cout_industriel": 8280,
       "charges_fixes_hors_industriel": 9600,
       "complements_usd": {
         "fret": 4000,
@@ -345,6 +346,24 @@
         "production": "Cadence de ligne calculée à 500 kg/h, en deçà de la gamme catalogue; 8 h × 250 jours × utilisation. Rendement net 1 kg/kg simplifié, sans pertes de procédé.",
         "prix_vente": "Hypothèse P2I 0,50 USD/kg A1 puis +2 %/an; pas un prix marché constaté.",
         "complements": "Enveloppes P2I explicites, pas prix catalogue ni devis; raccordements et ensachage manuel dimensionnés pour la petite ligne."
+      },
+      "visuels": {
+        "atlas": "betail",
+        "product_index": 5
+      },
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Sac de 25 kg identifié, fermé et regroupé sur palettes",
+        "cout_usd_par_kg": 0.012,
+        "composants_usd_par_kg": {
+          "sac": 0.008,
+          "fermeture": 0.001,
+          "etiquette": 0.001,
+          "regroupement": 0.002
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Réemploi et recyclage à évaluer selon le matériau et les filières locales.",
+        "source": "Hypothèse P2I non tarif fournisseur"
       }
     },
     "biscuiterie__crackers": {
@@ -371,7 +390,7 @@
       "matieres_recette_crackers": true,
       "cout_process_usd_kg": 0.22000000000000003,
       "fixes_industriels_an": 110000,
-      "personnel_hors_cout_industriel": 20700.0,
+      "personnel_hors_cout_industriel": 20700,
       "charges_fixes_hors_industriel": 34800,
       "complements_usd": {
         "fret": 25000,

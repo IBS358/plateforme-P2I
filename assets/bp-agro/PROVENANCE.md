@@ -16,3 +16,7 @@ Ces images ont été générées par IA à partir de descriptions des fonctions.
 ## Huile d’arachide — 27 octobre 2026
 
 `atelier-arachide-ia.jpg` : illustration IA de six étapes distinctes : tri des arachides, préparation des graines, pressage, filtration, conditionnement et bouteille de produit fini avec étiquette fictive. Images d'ambiance non contractuelles, sans identification de machines fournisseur.
+
+## Aliments pour bétail — 27 octobre 2026
+
+`atelier-betail-ia.jpg` : planche générée par IA illustrant broyage à marteaux, mélange à ruban, granulation, refroidissement, pesée et ensachage, puis sac illustratif avec marque fictive. Illustrations non contractuelles des fonctions, sans identification de modèles fournisseur.

@@ -4001,6 +4001,10 @@
             "aucune_repartition_fictive_des_charges": true
           },
           "source": "up-data.js / aliments_betail",
+          "visuels": {
+            "atlas": "betail",
+            "product_index": 5
+          },
           "prix_equipement": {
             "id": "catalogue_feed_small",
             "url": "https://tcpel.net/pellet-production-line/feed-pellet-production-line/",
@@ -4018,7 +4022,8 @@
               "Broyage à marteaux",
               "Mélange à ruban",
               "Granulation",
-              "Refroidissement SKLN1.5/2.5"
+              "Refroidissement SKLN1.5/2.5",
+              "Pesée et ensachage manuel"
             ],
             "qualification": "fourchette_catalogue_publique_non_certifiee",
             "limites": "Budget retenu à la borne haute, pas un devis pour un modèle précis. Cadence de calcul prudente 500 kg/h. Pesée, ensachage manuel, alimentation, humidité et cohérence des auxiliaires inclus comme hypothèses de dimensionnement à approfondir au Pro.",
@@ -4026,11 +4031,17 @@
           },
           "emballage": {
             "statut": "hypothese_P2I",
-            "format": "À préciser",
+            "format": "Sac de 25 kg identifié, fermé et regroupé sur palettes",
             "cout_usd_par_kg": 0.012,
+            "composants_usd_par_kg": {
+              "sac": 0.008,
+              "fermeture": 0.001,
+              "etiquette": 0.001,
+              "regroupement": 0.002
+            },
             "mode_comptable": "inclus_dans_cout_industriel",
-            "ecologie": "Matériau, réemploi, collecte et recyclage effectifs à qualifier.",
-            "source": "Hypothèse P2I historique"
+            "ecologie": "Réemploi et recyclage à évaluer selon le matériau et les filières locales.",
+            "source": "Hypothèse P2I non tarif fournisseur"
           },
           "hypotheses_explicites": {
             "matieres": "Hypothèses : maïs 55 % à 0,28 USD/kg; son 25 % à 0,18; tourteau 17 % à 0,55; complément 3 % à 1,00. À formuler selon l’espèce et le cahier des charges.",
