@@ -2,9 +2,9 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 10,
-  "up_avec_simulation_complete": 8,
-  "up_restant_a_alimenter": 88,
+  "simulations_affichables": 11,
+  "up_avec_simulation_complete": 9,
+  "up_restant_a_alimenter": 87,
   "scenarios": [
     {
       "up_id": "conserverie_legumes",
@@ -524,6 +524,58 @@
         2.9103830456733704e-11,
         5.820766091346741e-11,
         -8.731149137020111e-11
+      ]
+    },
+    {
+      "up_id": "savonnerie",
+      "configuration_id": null,
+      "nom": "Savonnerie industrielle",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_non_certifie",
+      "source_prix": "https://www.mechcn.com/soap-production-line/small-scale/",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 8300,
+      "investissement_simulation_usd": 36400,
+      "reserve_initiale_distincte_usd": 15774.29277777778,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 99999.99999999999,
+          "ventes_kg": 99999.99999999999,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 150000,
+          "resultat_net_usd": 23631.34
+        },
+        {
+          "annee": 2,
+          "production_kg": 140000.00000000003,
+          "ventes_kg": 140000.00000000003,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 214200,
+          "resultat_net_usd": 44515.6
+        },
+        {
+          "annee": 3,
+          "production_kg": 170000,
+          "ventes_kg": 170000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 265302,
+          "resultat_net_usd": 60443.3125
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        1.4551915228366852e-11,
+        5.820766091346741e-11,
+        8.731149137020111e-11
       ]
     }
   ]

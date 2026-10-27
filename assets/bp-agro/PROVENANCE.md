@@ -20,3 +20,7 @@ Ces images ont été générées par IA à partir de descriptions des fonctions.
 ## Aliments pour bétail — 27 octobre 2026
 
 `atelier-betail-ia.jpg` : planche générée par IA illustrant broyage à marteaux, mélange à ruban, granulation, refroidissement, pesée et ensachage, puis sac illustratif avec marque fictive. Illustrations non contractuelles des fonctions, sans identification de modèles fournisseur.
+
+## Savonnerie — 27 octobre 2026
+
+`atelier-savon-ia.jpg` : illustration IA de la préparation de base de savon, mélange, broyage, extrusion et découpe, emballage et produit fini. Illustrations non contractuelles, sans identification de fournisseur.

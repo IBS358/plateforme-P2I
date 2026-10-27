@@ -20,3 +20,5 @@
 :root{--agro-arachide:url('../assets/bp-agro/atelier-arachide-ia.jpg')}.agro-arachide{background-image:var(--agro-arachide)}
 
 :root{--agro-betail:url('../assets/bp-agro/atelier-betail-ia.jpg')}.agro-betail{background-image:var(--agro-betail)}
+
+:root{--agro-savon:url('../assets/bp-agro/atelier-savon-ia.jpg')}.agro-savon{background-image:var(--agro-savon)}

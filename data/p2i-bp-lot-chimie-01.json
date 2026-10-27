@@ -1,0 +1,106 @@
+{
+  "schema": "p2i.bp-lot.v1",
+  "date": "2026-10-27",
+  "description": "Savonnerie : finition de savon solide",
+  "sources": [
+    {
+      "id": "catalogue_savon_mechcn_100",
+      "url": "https://www.mechcn.com/soap-production-line/small-scale/",
+      "consulte_le": "2026-10-27",
+      "fournisseur": "MechCN",
+      "modele": "Petite ligne de finition de savon à partir de base",
+      "prix": 8300,
+      "devise": "USD",
+      "base": "prix à partir de pour ligne plus complète ; pas un devis, configuration et incoterm à préciser",
+      "capacite": 100,
+      "unite_capacite": "kg/h de savon, minimum annoncé",
+      "fonctions": [
+        "Fusion de la base",
+        "Mélange et parfum",
+        "Broyage à rouleaux",
+        "Extrusion et découpe",
+        "Emballage manuel"
+      ],
+      "qualification": "prix_catalogue_public_non_certifie",
+      "limites": "La gamme annonce une ligne plus complète à partir de 8 300 USD ; options, périmètre, performances et utilités de la configuration exacte sont à confirmer."
+    }
+  ],
+  "profils": {
+    "savonnerie": {
+      "configuration_id": null,
+      "nom": "Savon solide ménager",
+      "sous_titre": "Finition de base de savon",
+      "description": "Production de pains de savon ménager de 250 g à partir de base de savon achetée et conditionnement manuel.",
+      "source_equipement": "catalogue_savon_mechcn_100",
+      "prix_retenu": 8300,
+      "devise_prix": "USD",
+      "capacite_entree_kg_h": 100,
+      "production_explicite": [
+        100000,
+        140000,
+        170000
+      ],
+      "ventes_explicites": [
+        100000,
+        140000,
+        170000
+      ],
+      "prix_vente_usd_kg": [
+        1.5,
+        1.53,
+        1.5606
+      ],
+      "matieres_usd_kg_produit": 0.65,
+      "cout_process_usd_kg": 0.16,
+      "fixes_industriels_an": 18000,
+      "personnel_hors_cout_industriel": 4500,
+      "charges_fixes_hors_industriel": 9500,
+      "stock_matieres_jours": 30,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Papier imprimé autour de chaque savon de 250 g, regroupé en carton",
+        "cout_usd_par_kg": 0.08,
+        "composants_usd_par_kg": {
+          "papier": 0.05,
+          "etiquette": 0.01,
+          "regroupement": 0.02
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Possibilités locales de collecte et recyclage à étudier.",
+        "source": "Hypothèse P2I ; non tarif catalogue"
+      },
+      "complements_usd": {
+        "fret": 3500,
+        "assurance": 400,
+        "douane_transit": 3000,
+        "transport_local": 1000,
+        "genie_civil": 6000,
+        "utilites": 4500,
+        "installation_formation": 2500,
+        "pieces_initiales": 1200,
+        "securite_environnement": 2000,
+        "etudes": 1500,
+        "stockage_et_manuel": 2500
+      },
+      "methodes": {
+        "production": "Capacité catalogue minimale 100 kg/h ; hypothèses 8 h/j, 250 jours/an, ventes égales à production sans invendus ni pertes simulés.",
+        "matieres": "Base de savon et additifs : 0,65 USD/kg de savon fini, hypothèse P2I ; prix local non documenté.",
+        "process": "0,16 USD/kg, dont emballage 0,08 USD/kg et énergie/consommables 0,08 USD/kg ; frais industriels fixes séparés.",
+        "personnel": "Personnel de production intégré aux frais fixes industriels, administration distincte.",
+        "prix_vente": "Prix départ UP 1,50 USD/kg en A1, +2 %/an, hypothèse P2I comparée à un prix de détail 300 FCFA pour 250 g, sans confondre vente producteur et détail.",
+        "complements": "Enveloppes estimées P2I pour transport, stockage, installation, sécurité et conditionnement ; aucun devis.",
+        "qualite": "La ligne traite une base achetée ; ce scénario ne comprend pas la fabrication de base par saponification."
+      },
+      "sources_prix_marche": [
+        {
+          "url": "https://www.yakromarket.ci/149-savons",
+          "description": "Savon Fancio petit 250 g, 300 FCFA au détail à Yamoussoukro."
+        }
+      ],
+      "visuels": {
+        "atlas": "savon",
+        "product_index": 5
+      }
+    }
+  }
+}
