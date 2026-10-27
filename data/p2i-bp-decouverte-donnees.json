@@ -386,6 +386,7 @@
             "prix_vente": "Prix départ UP 1,25 USD/kg en année 1, +2 %/an, hypothèse de simulation et non prix de marché relevé.",
             "complements": "Enveloppes P2I d’importation, installation, sécurité et utilités ; le contenu exact de la ligne et la fermeture des bocaux sont à vérifier.",
             "qualite": "Le traitement thermique doit être adapté au produit, à l’emballage et à la durée de conservation visée.",
+            "gamme": null,
             "sources_prix_marche": [],
             "conventions": {
               "apport": 0.3,
@@ -757,6 +758,7 @@
             "production": "550 000, 650 000, 750 000 kg produits; 532 000, 638 000, 745 000 vendus. Stocks cumulés 18 000, 30 000, 35 000 kg. Le précédent calcul partiel de 760 000 kg produits reste une archive, pas le programme de cette projection.",
             "prix_vente": "Repère commercial historique 1 500 FCFA/kg en A1 converti au taux daté P2I; progression de prix de simulation de 2 %/an.",
             "complements": "Ventilation P2I des 155 000 USD complémentaires au budget ligne; total investissement de simulation 605 000 USD conservé.",
+            "gamme": null,
             "sources_prix_marche": [],
             "conventions": {
               "apport": 0.3,
@@ -901,6 +903,7 @@
             "production": "500 kg/h, 8 h/jour, 250 jours/an : capacité annuelle théorique 1 000 000 kg avant arrêts ; volumes et ventes indiqués sont des hypothèses de lancement spécifiques à la variante.",
             "prix_vente": "Hypothèse de prix départ UP hors taxes ; hausse 2 %/an. Les prix de détail repérés en Côte d’Ivoire sont des comparaisons, pas des prix fabricant garantis.",
             "complements": "Enveloppes P2I pour fret, douane, site, utilités, installation, formation et pièces ; hypothèses de simulation, non devis.",
+            "gamme": null,
             "sources_prix_marche": [
               {
                 "url": "https://openmoise.ci/shop/category/openmarket-supermarche-epicerie-sucree-biscuits-et-gateaux-1736",
@@ -1050,6 +1053,7 @@
             "production": "500 kg/h, 8 h/jour, 250 jours/an : capacité annuelle théorique 1 000 000 kg avant arrêts ; volumes et ventes indiqués sont des hypothèses de lancement spécifiques à la variante.",
             "prix_vente": "Hypothèse de prix départ UP hors taxes ; hausse 2 %/an. Les prix de détail repérés en Côte d’Ivoire sont des comparaisons, pas des prix fabricant garantis.",
             "complements": "Enveloppes P2I pour fret, douane, site, utilités, installation, formation et pièces ; hypothèses de simulation, non devis.",
+            "gamme": null,
             "sources_prix_marche": [
               {
                 "url": "https://openmoise.ci/shop/category/openmarket-supermarche-epicerie-sucree-biscuits-et-gateaux-1736",
@@ -1580,6 +1584,7 @@
             "personnel": "Personnel et charges simulés, incluant la manutention et le conditionnement manuel.",
             "prix_vente": "2,40 USD/kg départ UP en A1, +2 %/an : hypothèse, à distinguer des prix de détail et de la baguette réglementée.",
             "complements": "Transport, installation, chariots et équipements auxiliaires sont des enveloppes estimées P2I ; vérifier compatibilité chariot, brûleur et cycles.",
+            "gamme": null,
             "sources_prix_marche": [],
             "conventions": {
               "apport": 0.3,
@@ -2154,6 +2159,7 @@
             "complements": "Configuration indicative composée de machines tarifées séparément : laveuse, deux éplucheuses, broyeur, extracteur, cuves, pasteurisateur, rinceuse, remplisseuse de bouteilles, boucheuse et étiqueteuse. Pas de poste de remplissage en poches. Prix publics et fourchettes, quantités et frais complémentaires estimés ; interfaces, matériels auxiliaires, installation et conditions de transport restent à confirmer.",
             "preparation_ananas": "Hypothèse de 1,5 kg par fruit issue d’un repère de culture en Côte d’Ivoire (CIRAD), à mesurer à réception. Deux éplucheuses de 300 fruits/h donnent 600 fruits/h théoriques, soit 900 kg/h avant arrêts à cette masse moyenne. Cadences réelles, rendement matière et adaptation des machines à l’ananas restent à confirmer. Rendement global du jus de 60 % non mesuré.",
             "utilites": "Le pasteurisateur proposé utilise 30 kW triphasés ; la boucheuse nécessite de l’air comprimé. Puissance cumulée, compresseur, eau, charges et raccordements restent à dimensionner. Le poste courant de process de 0,08 USD/kg est une hypothèse globale, non un calcul fondé sur des mesures de consommation.",
+            "gamme": null,
             "sources_prix_marche": [
               {
                 "url": "https://www.aboissojus.ci/",
@@ -2624,6 +2630,7 @@
             "prix_vente": "Prix sortie UP : 1,70 USD/kg en A1, +2 %/an ; hypothèse comparée à des prix au détail de lait pasteurisé à Abidjan, sans assimilation au prix producteur.",
             "conservation": "Le lait frais nécessite une chaîne du froid. Stock matières de 1 jour et ventes théoriquement immédiates ; pertes et durée de vie ne sont pas simulées.",
             "complements": "Enveloppes P2I d’import, installation, utilités et froid ; pas de devis.",
+            "gamme": null,
             "sources_prix_marche": [
               {
                 "url": "https://djera-production.com/product/lait-entier-pasteurise-nature-1l-2/",
@@ -3073,6 +3080,7 @@
             "prix_vente": "4,50 USD/kg départ usine A1 puis +2 %/an, hypothèse P2I à confronter au prix producteur et aux débouchés ivoiriens ; un prix au détail de marque importée ne prouve pas un prix départ usine.",
             "complements": "Enveloppes P2I pour tri, préparation, conditionnement, transport, sécurité et installation ; pas de prix fournisseur pour les auxiliaires.",
             "qualite": "Arachides sélectionnées et stockées au sec ; contrôler les aflatoxines et les allergènes selon les prescriptions applicables ; conformité sanitaire à vérifier.",
+            "gamme": null,
             "sources_prix_marche": [
               {
                 "url": "https://simagri-ci.info/public/prices-entries-grids",
@@ -3563,6 +3571,7 @@
             "personnel": "Personnel de production, conditionnement et administration estimé P2I.",
             "prix_vente": "20 USD/kg départ UP en A1, puis +2 %/an : hypothèse P2I, environ 586 FCFA par sachet de 50 g au taux P2I. À comparer avec 1 800 FCFA au détail pour un sachet de 50 g ; les prix et circuits diffèrent, sans garantie de commercialisation. La poudre en vrac est affichée à 2 500 FCFA/kg chez un autre vendeur.",
             "complements": "Doseuse/conditionnement manuel et accessoires sont des enveloppes P2I, distinctes de la ligne de quatre machines ; cycle de séchage, raccordement et hygiène à vérifier.",
+            "gamme": null,
             "sources_prix_marche": [
               {
                 "url": "https://lemarcheci.com/346/au-grand-marche/gingembre-1-kg",
@@ -4051,6 +4060,7 @@
             "production": "Cadence de ligne calculée à 500 kg/h, en deçà de la gamme catalogue; 8 h × 250 jours × utilisation. Rendement net 1 kg/kg simplifié, sans pertes de procédé.",
             "prix_vente": "Hypothèse P2I 0,50 USD/kg A1 puis +2 %/an; pas un prix marché constaté.",
             "complements": "Enveloppes P2I explicites, pas prix catalogue ni devis; raccordements et ensachage manuel dimensionnés pour la petite ligne.",
+            "gamme": null,
             "sources_prix_marche": [],
             "conventions": {
               "apport": 0.3,
@@ -4297,36 +4307,36 @@
           "reference": {
             "up_id": "detergents",
             "configuration_id": null,
-            "nom": "Liquide vaisselle en bouteilles",
-            "sous_titre": "Mélange et conditionnement manuel",
-            "description": "Production de liquide vaisselle en bouteilles refermables de 1 L à partir de matières achetées ; formulation et contrôle qualité à définir.",
-            "capacite": 187.5,
+            "nom": "Gamme de produits ménagers liquides",
+            "sous_titre": "Vaisselle, sols et lavage des mains",
+            "description": "Trois produits liquides fabriqués par lots sur une ligne partagée, en bouteilles refermables de 1 L ; scénarios indicatifs à formuler et à contrôler.",
+            "capacite": 375,
             "unite": "kg/h",
-            "machines": 5900,
-            "investissement": 41000,
+            "machines": 32580,
+            "investissement": 105880,
             "production": [
-              150000,
-              200000,
-              250000
+              450000,
+              525000,
+              600000
             ],
             "ventes": [
-              150000,
-              200000,
-              250000
+              450000,
+              525000,
+              600000
             ],
             "prix": [
-              0.95,
-              0.969,
-              0.98838
+              0.985,
+              1.0047,
+              1.024794
             ],
-            "matieres_kg": 0.27,
+            "matieres_kg": 0.277,
             "cout_production_kg": [
-              0.73,
-              0.7004,
-              0.689585
+              0.7114444444444443,
+              0.7115338095238094,
+              0.7164611333333333
             ],
-            "personnel": 6000,
-            "charges_fixes": 14000,
+            "personnel": 12000,
+            "charges_fixes": 30000,
             "croissance_personnel": 0.03,
             "croissance_charges": 0.03,
             "part_apport": 0.3,
@@ -4415,25 +4425,25 @@
             "product_index": 5
           },
           "prix_equipement": {
-            "id": "catalogue_detergent_aile_500",
-            "url": "https://www.made-in-china.com/price/prodetail_Homogenizer_bApYFeVjfhWl.html",
+            "id": "catalogue_detergent_henwi_1000",
+            "url": "https://henwitech.com/products/automatic-filling-line",
             "consulte_le": "2026-10-27",
-            "fournisseur": "Guangzhou Aile Automation Equipment",
-            "modele": "Mélangeur de savon liquide 500 L",
-            "prix": 5900,
+            "fournisseur": "Henwi Technology",
+            "modele": "HWPL-LD-1000L — configuration 1",
+            "prix": 32580,
             "devise": "USD",
-            "base": "prix public un ensemble, livraison et options non précisées",
-            "capacite": 500,
+            "base": "prix affiché configuration 1 ; transport et options à préciser",
+            "capacite": 1000,
             "unite_capacite": "litres par lot",
             "fonctions": [
               "Traitement de l’eau",
               "Pesée des ingrédients",
-              "Mélange",
-              "Remplissage manuel",
-              "Fermeture et étiquetage manuels"
+              "Mélange et homogénéisation",
+              "Remplissage automatique",
+              "Bouchage et étiquetage"
             ],
             "qualification": "prix_catalogue_public_non_certifie",
-            "limites": "Le prix concerne le mélangeur, non une ligne complète. Eau, remplissage, fermeture et étiquetage sont des fonctions auxiliaires budgétées séparément ; durée des lots et utilités à confirmer.",
+            "limites": "Configuration 1 : eau, mélangeur, vapeur, cuves, pompe, remplissage, bouchage, étiquetage et compresseur ; changement de recette, compatibilité 1 L et utilités à vérifier. Alimentation automatique des bouchons sur demande.",
             "equipements_complementaires": []
           },
           "emballage": {
@@ -4451,21 +4461,47 @@
             "source": "Hypothèse P2I non tarif fournisseur"
           },
           "hypotheses_explicites": {
-            "production": "Mélangeur 500 L par lot ; scénario P2I 3 lots/jour sur 8 h, densité supposée 1 kg/L, 250 j/an ; temps de mélange et cadence réelle à confirmer. Aucune perte ni invendu simulés.",
-            "matieres": "Matières et ingrédients 0,27 USD/kg, hypothèse P2I, formule et prix locaux non documentés.",
-            "process": "0,26 USD/kg inclut 0,16 USD/kg d’emballage et 0,10 USD/kg d’utilités et consommables, hypothèses P2I.",
-            "personnel": "Personnel industriel intégré aux frais fixes industriels ; personnel commercial et administratif distinct.",
-            "prix_vente": "0,95 USD/kg départ UP en année 1 puis +2 %/an, hypothèse, soit environ 557 FCFA/L si densité 1 ; prix de détail observé différent.",
-            "complements": "Transport, traitement de l’eau, conditionnement manuel et installation sont des enveloppes P2I distinctes du prix du mélangeur ; aucun prix catalogue d’une ligne complète.",
-            "qualite": "Formulation, stabilité, étiquetage, sécurité des opérateurs et conformité du produit restent à établir.",
-            "sources_prix_marche": [
+            "production": "1 000 L par lot ; minimum catalogue 3 000 L/jour sur 8 heures, densité indicative 1 kg/L, 250 jours/an. Production maximale théorique 750 000 kg/an ; 60 %, 70 %, 80 % d’utilisation, incluant hypothétiquement les changements de recette. Ventes égales à production, aucun invendu simulé. Les temps réels de nettoyage et de changement sont à vérifier.",
+            "matieres": "Coûts estimés par kg : vaisselle 0,27 USD, sols 0,28 USD et savon mains 0,30 USD ; composition et prix livrés à documenter.",
+            "process": "Coût industriel variable 0,29 USD/kg pour chaque produit, dont emballage 0,16 USD/kg ; énergie et consommables 0,13 USD/kg. Ces valeurs sont des hypothèses P2I.",
+            "personnel": "Personnel de fabrication, contrôle et conditionnement inclus dans frais industriels fixes ; personnel commercial et administratif distinct.",
+            "prix_vente": "Hypothèses départ UP par kg en A1 : vaisselle 0,95 USD, sols 1,00 USD, savon mains 1,10 USD ; +2 %/an. Moyenne pondérée du mix 60/25/15 ; prix de détail ne sont pas des prix producteur.",
+            "complements": "Transport, utilités, installation, pièces, sécurité et contrôle sont des enveloppes P2I. Ne pas recompter les fonctions et machines déjà incluses dans la ligne.",
+            "qualite": "Compatibilité des recettes, procédures de nettoyage entre lots, sécurité, stabilité, étiquetage et conformité à établir. Aucun produit biocide n’est présumé ; eau de javel traitée séparément.",
+            "gamme": [
               {
-                "url": "https://openmoise.ci/shop/clean-extra-savon-liquide-vaisselle-citron-1l-58499?page=2521",
-                "description": "Liquide vaisselle 1 L, 700 FCFA au détail ; rupture de stock lors de la consultation."
+                "id": "vaisselle",
+                "nom": "Liquide vaisselle",
+                "part": 0.6,
+                "prix_usd_kg": 0.95,
+                "matieres_usd_kg": 0.27,
+                "process_usd_kg": 0.29
               },
               {
-                "url": "https://quincaillerie-ivoirienne.shop/products/liquide-vaisselle-flacon-1-l/",
-                "description": "Liquide vaisselle 1 L, 999 FCFA au détail ; marque et circuit distincts."
+                "id": "sols",
+                "nom": "Nettoyant sols",
+                "part": 0.25,
+                "prix_usd_kg": 1,
+                "matieres_usd_kg": 0.28,
+                "process_usd_kg": 0.29
+              },
+              {
+                "id": "mains",
+                "nom": "Savon liquide pour les mains",
+                "part": 0.15,
+                "prix_usd_kg": 1.1,
+                "matieres_usd_kg": 0.3,
+                "process_usd_kg": 0.29
+              }
+            ],
+            "sources_prix_marche": [
+              {
+                "url": "https://www.jumia.ci/epicerie-nettoyage-domestique/",
+                "description": "Prix de détail ivoiriens de produits ménagers, formats et marques variables ; comparaison indicative non prix producteur."
+              },
+              {
+                "url": "https://website.uniprice.org/produits",
+                "description": "Liquide vaisselle 1 L et autres produits ménagers : 1 000 FCFA, niveau de marché et conditions à vérifier."
               }
             ],
             "conventions": {
@@ -4485,19 +4521,18 @@
               "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
             },
             "complements_usd": {
-              "fret": 3000,
-              "assurance": 400,
-              "douane_transit": 3000,
-              "transport_local": 1000,
-              "genie_civil": 6000,
-              "utilites": 6000,
-              "installation_formation": 2500,
-              "pieces_initiales": 1200,
-              "securite_environnement": 2500,
-              "etudes_controle": 2500,
-              "eau_et_conditionnement_manuel": 7000
+              "fret": 6000,
+              "assurance": 800,
+              "douane_transit": 6500,
+              "transport_local": 2000,
+              "genie_civil": 18000,
+              "utilites": 20000,
+              "installation_formation": 7000,
+              "pieces_initiales": 3000,
+              "securite_environnement": 5000,
+              "etudes_controle": 5000
             },
-            "base_budget_equipements_usd": 5900,
+            "base_budget_equipements_usd": 32580,
             "conversion": null
           }
         }
@@ -4881,6 +4916,7 @@
             "prix_vente": "Prix départ UP 1,50 USD/kg en A1, +2 %/an, hypothèse P2I comparée à un prix de détail 300 FCFA pour 250 g, sans confondre vente producteur et détail.",
             "complements": "Enveloppes estimées P2I pour transport, stockage, installation, sécurité et emballage manuel ; pas de devis. Ne pas ajouter une deuxième ligne de finition.",
             "qualite": "La ligne traite une base de savon achetée sous forme de copeaux ; elle ne comprend pas la fabrication de base par saponification. Mélangeur, deux convoyeurs, broyeur, extrudeuse, table, coupe-fil et estampeuse listés par le fournisseur ; emballage manuel à part.",
+            "gamme": null,
             "sources_prix_marche": [
               {
                 "url": "https://www.yakromarket.ci/149-savons",
@@ -5294,6 +5330,7 @@
             "prix_vente": "5 USD/kg départ UP en A1 puis +2 %/an, hypothèse P2I, à rapprocher des prix de détail selon formule et circuits, sans les assimiler.",
             "complements": "Enveloppes P2I pour importation, installation, contrôle, sécurité et utilités ; machine de conditionnement incluse une seule fois dans la ligne.",
             "qualite": "Formule, innocuité, stabilité, conservation, étiquetage et conditions réglementaires à vérifier ; ne pas présenter de certification ou de teneur en karité non établie.",
+            "gamme": null,
             "sources_prix_marche": [
               {
                 "url": "https://smartbuy-ci.com/dph/718-lait-de-corps-clarabel-nutrition-karit-250ml-6181100102727.html",

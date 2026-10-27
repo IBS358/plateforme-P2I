@@ -32,3 +32,7 @@ Ces images ont été générées par IA à partir de descriptions des fonctions.
 ## Détergent vaisselle — 27 octobre 2026
 
 `atelier-detergent-ia.jpg` : illustrations IA non contractuelles du traitement de l’eau, de la pesée, du mélange, du remplissage manuel, du bouchage et étiquetage, puis du produit fini à marque fictive ; elles ne représentent pas les modèles catalogue.
+
+## Gamme détergents liquides — 27 octobre 2026
+
+`atelier-detergent-ia.jpg` : nouvelle planche IA non contractuelle illustrant traitement eau, pesée, mélange, remplissage et étiquetage automatisés, puis trois produits avec marques fictives. Elle ne représente pas le matériel du fournisseur.

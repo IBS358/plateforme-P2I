@@ -532,38 +532,38 @@
       "nom": "Détergents & produits ménagers",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
-      "source_prix": "https://www.made-in-china.com/price/prodetail_Homogenizer_bApYFeVjfhWl.html",
+      "source_prix": "https://henwitech.com/products/automatic-filling-line",
       "certification_prix_exigee": false,
       "accord_fournisseur_exige": false,
       "devis_exige": false,
       "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 5900,
-      "investissement_simulation_usd": 41000,
-      "reserve_initiale_distincte_usd": 14688.301388888889,
+      "budget_equipements_usd": 32580,
+      "investissement_simulation_usd": 105880,
+      "reserve_initiale_distincte_usd": 40545.83661111111,
       "annuel": [
         {
           "annee": 1,
-          "production_kg": 150000,
-          "ventes_kg": 150000,
+          "production_kg": 450000,
+          "ventes_kg": 450000,
           "stock_fin_kg": 0,
-          "chiffre_affaires_usd": 142500,
-          "resultat_net_usd": 5110.849999999999
+          "chiffre_affaires_usd": 443250,
+          "resultat_net_usd": 48844.678
         },
         {
           "annee": 2,
-          "production_kg": 199999.99999999997,
-          "ventes_kg": 199999.99999999997,
+          "production_kg": 525000,
+          "ventes_kg": 525000,
           "stock_fin_kg": 0,
-          "chiffre_affaires_usd": 193800,
-          "resultat_net_usd": 20545.250000000022
+          "chiffre_affaires_usd": 527467.5,
+          "resultat_net_usd": 71898.2575
         },
         {
           "annee": 3,
-          "production_kg": 250000.00000000003,
-          "ventes_kg": 250000.00000000003,
+          "production_kg": 600000,
+          "ventes_kg": 600000,
           "stock_fin_kg": 0,
-          "chiffre_affaires_usd": 247095,
-          "resultat_net_usd": 36160.212499999994
+          "chiffre_affaires_usd": 614876.4,
+          "resultat_net_usd": 95129.90200000012
         }
       ],
       "controles": {
@@ -573,8 +573,8 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        -2.9103830456733704e-11,
-        -7.275957614183426e-11,
+        5.820766091346741e-11,
+        1.7462298274040222e-10,
         -5.820766091346741e-11
       ]
     },

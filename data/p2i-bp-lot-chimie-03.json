@@ -4,57 +4,57 @@
   "description": "Détergents : liquide vaisselle",
   "sources": [
     {
-      "id": "catalogue_detergent_aile_500",
-      "url": "https://www.made-in-china.com/price/prodetail_Homogenizer_bApYFeVjfhWl.html",
+      "id": "catalogue_detergent_henwi_1000",
+      "url": "https://henwitech.com/products/automatic-filling-line",
       "consulte_le": "2026-10-27",
-      "fournisseur": "Guangzhou Aile Automation Equipment",
-      "modele": "Mélangeur de savon liquide 500 L",
-      "prix": 5900,
+      "fournisseur": "Henwi Technology",
+      "modele": "HWPL-LD-1000L — configuration 1",
+      "prix": 32580,
       "devise": "USD",
-      "base": "prix public un ensemble, livraison et options non précisées",
-      "capacite": 500,
+      "base": "prix affiché configuration 1 ; transport et options à préciser",
+      "capacite": 1000,
       "unite_capacite": "litres par lot",
       "fonctions": [
         "Traitement de l’eau",
         "Pesée des ingrédients",
-        "Mélange",
-        "Remplissage manuel",
-        "Fermeture et étiquetage manuels"
+        "Mélange et homogénéisation",
+        "Remplissage automatique",
+        "Bouchage et étiquetage"
       ],
       "qualification": "prix_catalogue_public_non_certifie",
-      "limites": "Le prix concerne le mélangeur, non une ligne complète. Eau, remplissage, fermeture et étiquetage sont des fonctions auxiliaires budgétées séparément ; durée des lots et utilités à confirmer."
+      "limites": "Configuration 1 : eau, mélangeur, vapeur, cuves, pompe, remplissage, bouchage, étiquetage et compresseur ; changement de recette, compatibilité 1 L et utilités à vérifier. Alimentation automatique des bouchons sur demande."
     }
   ],
   "profils": {
     "detergents": {
       "configuration_id": null,
-      "nom": "Liquide vaisselle en bouteilles",
-      "sous_titre": "Mélange et conditionnement manuel",
-      "description": "Production de liquide vaisselle en bouteilles refermables de 1 L à partir de matières achetées ; formulation et contrôle qualité à définir.",
-      "source_equipement": "catalogue_detergent_aile_500",
-      "prix_retenu": 5900,
+      "nom": "Gamme de produits ménagers liquides",
+      "sous_titre": "Vaisselle, sols et lavage des mains",
+      "description": "Trois produits liquides fabriqués par lots sur une ligne partagée, en bouteilles refermables de 1 L ; scénarios indicatifs à formuler et à contrôler.",
+      "source_equipement": "catalogue_detergent_henwi_1000",
+      "prix_retenu": 32580,
       "devise_prix": "USD",
-      "capacite_entree_kg_h": 187.5,
+      "capacite_entree_kg_h": 375,
       "production_explicite": [
-        150000,
-        200000,
-        250000
+        450000,
+        525000,
+        600000
       ],
       "ventes_explicites": [
-        150000,
-        200000,
-        250000
+        450000,
+        525000,
+        600000
       ],
       "prix_vente_usd_kg": [
-        0.95,
-        0.969,
-        0.98838
+        0.985,
+        1.0047,
+        1.024794
       ],
-      "matieres_usd_kg_produit": 0.27,
-      "cout_process_usd_kg": 0.26,
-      "fixes_industriels_an": 30000,
-      "personnel_hors_cout_industriel": 6000,
-      "charges_fixes_hors_industriel": 14000,
+      "matieres_usd_kg_produit": 0.277,
+      "cout_process_usd_kg": 0.29,
+      "fixes_industriels_an": 65000,
+      "personnel_hors_cout_industriel": 12000,
+      "charges_fixes_hors_industriel": 30000,
       "stock_matieres_jours": 30,
       "emballage_produit": {
         "statut": "hypothese_P2I",
@@ -71,41 +71,66 @@
         "source": "Hypothèse P2I non tarif fournisseur"
       },
       "complements_usd": {
-        "fret": 3000,
-        "assurance": 400,
-        "douane_transit": 3000,
-        "transport_local": 1000,
-        "genie_civil": 6000,
-        "utilites": 6000,
-        "installation_formation": 2500,
-        "pieces_initiales": 1200,
-        "securite_environnement": 2500,
-        "etudes_controle": 2500,
-        "eau_et_conditionnement_manuel": 7000
+        "fret": 6000,
+        "assurance": 800,
+        "douane_transit": 6500,
+        "transport_local": 2000,
+        "genie_civil": 18000,
+        "utilites": 20000,
+        "installation_formation": 7000,
+        "pieces_initiales": 3000,
+        "securite_environnement": 5000,
+        "etudes_controle": 5000
       },
       "methodes": {
-        "production": "Mélangeur 500 L par lot ; scénario P2I 3 lots/jour sur 8 h, densité supposée 1 kg/L, 250 j/an ; temps de mélange et cadence réelle à confirmer. Aucune perte ni invendu simulés.",
-        "matieres": "Matières et ingrédients 0,27 USD/kg, hypothèse P2I, formule et prix locaux non documentés.",
-        "process": "0,26 USD/kg inclut 0,16 USD/kg d’emballage et 0,10 USD/kg d’utilités et consommables, hypothèses P2I.",
-        "personnel": "Personnel industriel intégré aux frais fixes industriels ; personnel commercial et administratif distinct.",
-        "prix_vente": "0,95 USD/kg départ UP en année 1 puis +2 %/an, hypothèse, soit environ 557 FCFA/L si densité 1 ; prix de détail observé différent.",
-        "complements": "Transport, traitement de l’eau, conditionnement manuel et installation sont des enveloppes P2I distinctes du prix du mélangeur ; aucun prix catalogue d’une ligne complète.",
-        "qualite": "Formulation, stabilité, étiquetage, sécurité des opérateurs et conformité du produit restent à établir."
+        "production": "1 000 L par lot ; minimum catalogue 3 000 L/jour sur 8 heures, densité indicative 1 kg/L, 250 jours/an. Production maximale théorique 750 000 kg/an ; 60 %, 70 %, 80 % d’utilisation, incluant hypothétiquement les changements de recette. Ventes égales à production, aucun invendu simulé. Les temps réels de nettoyage et de changement sont à vérifier.",
+        "matieres": "Coûts estimés par kg : vaisselle 0,27 USD, sols 0,28 USD et savon mains 0,30 USD ; composition et prix livrés à documenter.",
+        "process": "Coût industriel variable 0,29 USD/kg pour chaque produit, dont emballage 0,16 USD/kg ; énergie et consommables 0,13 USD/kg. Ces valeurs sont des hypothèses P2I.",
+        "personnel": "Personnel de fabrication, contrôle et conditionnement inclus dans frais industriels fixes ; personnel commercial et administratif distinct.",
+        "prix_vente": "Hypothèses départ UP par kg en A1 : vaisselle 0,95 USD, sols 1,00 USD, savon mains 1,10 USD ; +2 %/an. Moyenne pondérée du mix 60/25/15 ; prix de détail ne sont pas des prix producteur.",
+        "complements": "Transport, utilités, installation, pièces, sécurité et contrôle sont des enveloppes P2I. Ne pas recompter les fonctions et machines déjà incluses dans la ligne.",
+        "qualite": "Compatibilité des recettes, procédures de nettoyage entre lots, sécurité, stabilité, étiquetage et conformité à établir. Aucun produit biocide n’est présumé ; eau de javel traitée séparément."
       },
       "sources_prix_marche": [
         {
-          "url": "https://openmoise.ci/shop/clean-extra-savon-liquide-vaisselle-citron-1l-58499?page=2521",
-          "description": "Liquide vaisselle 1 L, 700 FCFA au détail ; rupture de stock lors de la consultation."
+          "url": "https://www.jumia.ci/epicerie-nettoyage-domestique/",
+          "description": "Prix de détail ivoiriens de produits ménagers, formats et marques variables ; comparaison indicative non prix producteur."
         },
         {
-          "url": "https://quincaillerie-ivoirienne.shop/products/liquide-vaisselle-flacon-1-l/",
-          "description": "Liquide vaisselle 1 L, 999 FCFA au détail ; marque et circuit distincts."
+          "url": "https://website.uniprice.org/produits",
+          "description": "Liquide vaisselle 1 L et autres produits ménagers : 1 000 FCFA, niveau de marché et conditions à vérifier."
         }
       ],
       "visuels": {
         "atlas": "detergent",
         "product_index": 5
-      }
+      },
+      "gamme": [
+        {
+          "id": "vaisselle",
+          "nom": "Liquide vaisselle",
+          "part": 0.6,
+          "prix_usd_kg": 0.95,
+          "matieres_usd_kg": 0.27,
+          "process_usd_kg": 0.29
+        },
+        {
+          "id": "sols",
+          "nom": "Nettoyant sols",
+          "part": 0.25,
+          "prix_usd_kg": 1,
+          "matieres_usd_kg": 0.28,
+          "process_usd_kg": 0.29
+        },
+        {
+          "id": "mains",
+          "nom": "Savon liquide pour les mains",
+          "part": 0.15,
+          "prix_usd_kg": 1.1,
+          "matieres_usd_kg": 0.3,
+          "process_usd_kg": 0.29
+        }
+      ]
     }
   }
 }

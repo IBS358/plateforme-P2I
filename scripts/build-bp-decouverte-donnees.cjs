@@ -50,6 +50,7 @@ for(const [key,p] of Object.entries(simulationPack.profils)){
   if(source.prix!==undefined&&(p.prix_retenu!==source.prix||p.devise_prix!==source.devise))throw Error('Prix de référence incohérent : '+key);
   for(const field of ['production_explicite','ventes_explicites','prix_vente_usd_kg'])if(!Array.isArray(p[field])||p[field].length!==3||p[field].some(x=>!Number.isFinite(x)||x<0))throw Error('Trois valeurs numériques requises : '+key+' / '+field);
   if(p.ventes_explicites.some((v,i)=>v>p.production_explicite.slice(0,i+1).reduce((a,b)=>a+b,0)-p.ventes_explicites.slice(0,i).reduce((a,b)=>a+b,0)))throw Error('Ventes supérieures à la production et au stock : '+key);
+  if(p.gamme){if(!Array.isArray(p.gamme)||!p.gamme.length||p.gamme.some(x=>!x.nom||!Number.isFinite(x.part)||x.part<0||['prix_usd_kg','matieres_usd_kg','process_usd_kg'].some(k=>!Number.isFinite(x[k])||x[k]<0)))throw Error('Gamme invalide : '+key);const total=p.gamme.reduce((n,x)=>n+x.part,0),moy=k=>p.gamme.reduce((n,x)=>n+x.part*x[k],0);if(Math.abs(total-1)>1e-9||Math.abs(moy('prix_usd_kg')-p.prix_vente_usd_kg[0])>1e-9||Math.abs(moy('matieres_usd_kg')-p.matieres_usd_kg_produit)>1e-9||Math.abs(moy('process_usd_kg')-p.cout_process_usd_kg)>1e-9)throw Error('Gamme et hypothèses agrégées incohérentes : '+key);}
   const pack=p.emballage_produit;if(!pack||!Number.isFinite(pack.cout_usd_par_kg)||!pack.composants_usd_par_kg)throw Error('Emballage à documenter : '+key);
   const packSum=Object.values(pack.composants_usd_par_kg).reduce((a,b)=>a+b,0);if(Math.abs(packSum-pack.cout_usd_par_kg)>1e-9||p.cout_process_usd_kg<packSum)throw Error('Coût emballage incohérent : '+key);
  }
@@ -74,7 +75,7 @@ for(const [key,p] of Object.entries(simulationPack.profils)){
  u.variantes[config].qualification='simulation_decouverte_calculable';
  u.variantes[config].prix_equipement={...source,equipements_complementaires:supplemental};
  u.variantes[config].emballage=packagingExisting;
- u.variantes[config].hypotheses_explicites={...p.methodes,sources_prix_marche:p.sources_prix_marche||[],conventions:h,complements_usd:p.complements_usd,base_budget_equipements_usd:equipment,conversion:p.devise_prix==='EUR'?ctx.P2I_BP_V108_REFERENCES.change:null};
+ u.variantes[config].hypotheses_explicites={...p.methodes,gamme:p.gamme||null,sources_prix_marche:p.sources_prix_marche||[],conventions:h,complements_usd:p.complements_usd,base_budget_equipements_usd:equipment,conversion:p.devise_prix==='EUR'?ctx.P2I_BP_V108_REFERENCES.change:null};
  u.statut='simulation_decouverte_disponible';
 }
 const data={schema:'p2i.bp-donnees.v1',date:'2026-10-26',nombre_up:96,nombre_configurations:Object.values(units).reduce((n,u)=>n+u.configurations.length,0),alias_identifiants:{"profilés":"profiles"},source_perimetre_sha256:crypto.createHash('sha256').update(source).digest('hex'),parametres_communs:{electricite_mt_general:{source:'https://www.cie.ci/entreprise/tarifs-electricite',consulte_le:'2026-10-26',regime:'MT général, utilisation annuelle 1 000 à 5 000 heures',devise:'XOF',prime_kw_an_ht:33643.67,kwh_pleines_ht:74.06,kwh_pointe_ht:101,kwh_creuses_ht:61.29,qualification:'bareme_publie_application_contractuelle_a_confirmer'}},financement:{apport:.3,dette:.7},horizons:{resultat_ans:3,bfr_mois:36,tresorerie_mois:12},filieres:ctx.filieres.map(f=>({id:f.id,nom:f.name,up_ids:f.units.map(u=>u.id)})),unites:units};
