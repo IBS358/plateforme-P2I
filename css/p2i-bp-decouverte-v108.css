@@ -30,3 +30,5 @@
 :root{--agro-peinture:url('../assets/bp-agro/atelier-peinture-ia.jpg')}.agro-peinture{background-image:var(--agro-peinture)}
 
 .engrais-hero{background: url('../assets/bp-agro/atelier-engrais-ia.jpg') center / cover no-repeat; min-height:240px}
+
+.agro-engrais-postes{background-image:url('../assets/bp-agro/postes-engrais-ia.jpg')}
