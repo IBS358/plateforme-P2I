@@ -3416,15 +3416,15 @@
               8000
             ],
             "prix": [
-              4.2,
-              4.284,
-              4.36968
+              20,
+              20.4,
+              20.808
             ],
-            "matieres_kg": 1.4,
+            "matieres_kg": 6.825447399753338,
             "cout_production_kg": [
-              3.8,
-              3.5099230769230765,
-              3.3550962499999994
+              10.325447399753337,
+              10.231133898669015,
+              10.277943396398316
             ],
             "personnel": 3600,
             "charges_fixes": 5000,
@@ -3546,11 +3546,11 @@
           "emballage": {
             "statut": "hypothese_P2I",
             "format": "Sachet alimentaire refermable de 50 g, marqué et regroupé en carton",
-            "cout_usd_par_kg": 0.45,
+            "cout_usd_par_kg": 1,
             "composants_usd_par_kg": {
-              "sachet": 0.28,
-              "etiquette": 0.08,
-              "regroupement": 0.09
+              "sachet": 0.64,
+              "etiquette": 0.16,
+              "regroupement": 0.2
             },
             "mode_comptable": "inclus_dans_cout_industriel",
             "ecologie": "Choix du matériau selon conservation et filières locales ; recyclabilité effective à vérifier.",
@@ -3558,15 +3558,27 @@
           },
           "hypotheses_explicites": {
             "production": "Simulation prudente de 5 kg/h de poudre sur 8 h/j et 250 j/an, sous réserve du cycle du séchoir par lots ; 20 % de rendement massique supposé. La cadence annoncée 100 kg/h de poudre est incohérente avec le lavage 150–200 kg/h de frais ; elle n’est pas reprise. Aucune perte de produit fini ni invendu simulé.",
-            "matieres": "À titre d’hypothèse, 5 kg de racines à 0,28 USD/kg pour 1 kg de poudre, soit 1,40 USD/kg ; origine et prix locaux à documenter.",
-            "process": "0,70 USD/kg comprend 0,45 USD/kg d’emballage et 0,25 USD/kg d’énergie et consommables.",
+            "matieres": "Hypothèse d’achat à 800 FCFA/kg de gingembre frais, en référence à un prix affiché par Le Marché CI, non contrat d’approvisionnement ; rendement supposé de 20 %, soit 4 000 FCFA/kg de poudre (environ 6.83 USD/kg au taux P2I). Prix très variable selon la saison et le marché : 2 500 FCFA/kg relevés à Abidjan le 11 octobre 2026 ; scénario sensible au prix d’achat.",
+            "process": "1,80 USD/kg comprend 1,00 USD/kg d’emballage et 0,80 USD/kg d’énergie et consommables, hypothèses P2I.",
             "personnel": "Personnel de production, conditionnement et administration estimé P2I.",
-            "prix_vente": "4,20 USD/kg départ UP A1, +2 %/an, hypothèse ; prix de détail très variables selon conditionnement.",
+            "prix_vente": "20 USD/kg départ UP en A1, puis +2 %/an : hypothèse P2I, environ 586 FCFA par sachet de 50 g au taux P2I. À comparer avec 1 800 FCFA au détail pour un sachet de 50 g ; les prix et circuits diffèrent, sans garantie de commercialisation. La poudre en vrac est affichée à 2 500 FCFA/kg chez un autre vendeur.",
             "complements": "Doseuse/conditionnement manuel et accessoires sont des enveloppes P2I, distinctes de la ligne de quatre machines ; cycle de séchage, raccordement et hygiène à vérifier.",
             "sources_prix_marche": [
               {
+                "url": "https://lemarcheci.com/346/au-grand-marche/gingembre-1-kg",
+                "description": "Gingembre frais : 800 FCFA/kg affichés ; prix et disponibilité à vérifier."
+              },
+              {
+                "url": "https://www.sikafinance.com/conso/product/gingembre_1042",
+                "description": "Gingembre frais : 2 500 FCFA/kg relevés à Abidjan le 11 octobre 2026 ; comparaison de sensibilité."
+              },
+              {
+                "url": "https://www.jumia.ci/gn-poudre-de-gingembre-50g-30023469.html",
+                "description": "Sachet de poudre de gingembre 50 g : 1 800 FCFA au détail."
+              },
+              {
                 "url": "https://ecomarket-ci.com/produits/gingembre-en-poudre-1kg",
-                "description": "Gingembre en poudre 1 kg : 2 500 FCFA au détail ; prix indicatif différent du départ UP."
+                "description": "Gingembre en poudre en vrac 1 kg : 2 500 FCFA au détail, autre format et autre vendeur."
               }
             ],
             "conventions": {
