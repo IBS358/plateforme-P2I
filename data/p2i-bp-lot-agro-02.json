@@ -65,6 +65,52 @@
       ],
       "qualification": "prix_catalogue_public_non_certifie",
       "limites": "La fiche annonce 100 kg/h de poudre mais le lavage est donné à 150–200 kg/h de racines et le séchoir fonctionne par lots. Le rendement de séchage et le cycle rendent cette cadence incohérente ; capacité de simulation à confirmer."
+    },
+    {
+      "id": "catalogue_raffinerie_palme_glory_10",
+      "url": "https://m.palmoilextractionmachine.com/FAQ/palm_oil_refinery_1361.html",
+      "consulte_le": "2026-10-27",
+      "fournisseur": "Henan Glory",
+      "modele": "Raffinerie huile de palme 10 tonnes/jour",
+      "prix": 185000,
+      "prix_min": 94000,
+      "prix_max": 185000,
+      "devise": "USD",
+      "base": "borne haute de fourchette publiée, pas un devis",
+      "capacite": 10000,
+      "unite_capacite": "kg d’huile brute par jour",
+      "fonctions": [
+        "Réception huile brute",
+        "Dégommage",
+        "Désacidification",
+        "Décoloration",
+        "Désodorisation"
+      ],
+      "qualification": "borne_haute_fourchette_catalogue_non_devis",
+      "limites": "Raffinage et auxiliaires de base ; conditionnement, stockage et fractionnement à prévoir séparément. Périmètre et temps de fonctionnement à confirmer."
+    },
+    {
+      "id": "catalogue_wwmm_arachide_200",
+      "url": "https://wwmmachinery.com/products/custom-solutions",
+      "consulte_le": "2026-10-27",
+      "fournisseur": "WWMM Machinery",
+      "modele": "Automatic Oil Press & Filter Line 200",
+      "prix": 42000,
+      "prix_min": 18500,
+      "prix_max": 42000,
+      "devise": "USD",
+      "base": "borne haute de la fourchette publique par ensemble, hors livraison et options",
+      "capacite": 200,
+      "unite_capacite": "kg/h de graines préparées, valeur de simulation dans la plage 180–250",
+      "fonctions": [
+        "Réception et tri des arachides",
+        "Préparation des graines",
+        "Pressage",
+        "Filtration",
+        "Conditionnement"
+      ],
+      "qualification": "borne_haute_fourchette_catalogue_non_devis",
+      "limites": "Presse et filtre annoncés ; tri, préparation et conditionnement ne sont pas présentés comme inclus ; matériels auxiliaires estimés séparément. Vérifier l’usage alimentaire, les utilités et les contrôles sanitaires."
     }
   ],
   "profils": {
@@ -168,77 +214,78 @@
     },
     "huiles_alimentaires": {
       "configuration_id": null,
-      "nom": "Huile de tournesol pressée à froid",
-      "sous_titre": "Pressage et filtration de graines",
-      "description": "Production d’huile de tournesol vierge filtrée en bouteilles refermables de 1 L.",
-      "source_equipement": "catalogue_farmet_fls60",
-      "prix_retenu": 39000,
-      "devise_prix": "EUR",
-      "capacite_entree_kg_h": 16.8,
+      "nom": "Huile d’arachide filtrée",
+      "sous_titre": "Pressage de graines locales",
+      "description": "Transformation d’arachides décortiquées en huile alimentaire filtrée conditionnée en bouteilles refermables.",
+      "source_equipement": "catalogue_wwmm_arachide_200",
+      "prix_retenu": 42000,
+      "devise_prix": "USD",
+      "capacite_entree_kg_h": 70,
       "production_explicite": [
-        15000,
-        21000,
-        26000
+        70000,
+        90000,
+        110000
       ],
       "ventes_explicites": [
-        15000,
-        21000,
-        26000
+        70000,
+        90000,
+        110000
       ],
       "prix_vente_usd_kg": [
-        3.2,
-        3.264,
-        3.32928
+        4.5,
+        4.59,
+        4.6818
       ],
-      "matieres_usd_kg_produit": 1.607142857,
-      "cout_process_usd_kg": 0.48,
-      "fixes_industriels_an": 18000,
-      "personnel_hors_cout_industriel": 5000,
-      "charges_fixes_hors_industriel": 9000,
+      "matieres_usd_kg_produit": 2.242647002776097,
+      "cout_process_usd_kg": 0.62,
+      "fixes_industriels_an": 25000,
+      "personnel_hors_cout_industriel": 6000,
+      "charges_fixes_hors_industriel": 12000,
       "stock_matieres_jours": 30,
       "emballage_produit": {
         "statut": "hypothese_P2I",
         "format": "Bouteille de 1 L refermable, étiquetée et regroupée en carton",
-        "cout_usd_par_kg": 0.28,
+        "cout_usd_par_kg": 0.18,
         "composants_usd_par_kg": {
-          "bouteille": 0.17,
-          "bouchon": 0.04,
-          "etiquette": 0.03,
-          "regroupement": 0.04
+          "bouteille": 0.11,
+          "bouchon": 0.025,
+          "etiquette": 0.02,
+          "regroupement": 0.025
         },
         "mode_comptable": "inclus_dans_cout_industriel",
         "ecologie": "Bouteille PET recyclable en principe ; collecte et recyclage locaux à vérifier.",
         "source": "Hypothèses P2I ; non prix fournisseur"
       },
       "complements_usd": {
-        "fret": 5500,
-        "assurance": 700,
-        "douane_transit": 5000,
-        "transport_local": 1800,
-        "genie_civil": 10000,
-        "utilites": 7000,
-        "installation_formation": 4000,
-        "pieces_initiales": 1800,
-        "securite_environnement": 1800,
-        "etudes": 2000,
-        "tri_et_remplissage_manuel": 5000
+        "fret": 6000,
+        "assurance": 800,
+        "douane_transit": 6000,
+        "transport_local": 2000,
+        "genie_civil": 12000,
+        "utilites": 10000,
+        "installation_formation": 5000,
+        "pieces_initiales": 2000,
+        "securite_environnement": 2500,
+        "etudes": 2500,
+        "tri_preparation_conditionnement": 15000
       },
       "methodes": {
-        "production": "Presse : 60 kg/h de graines dans la plage catalogue 48–72. Rendement P2I supposé de 28 %, soit 16,8 kg/h d’huile ; non garanti par le fabricant. 8 h/j, 250 j/an ; aucune perte ni invendu simulé.",
-        "matieres": "Graines supposées à 0,45 USD/kg ; 0,45 / 0,28 = 1,61 USD/kg d’huile ; disponibilité et prix locaux non documentés. Tourteaux non valorisés.",
-        "process": "0,48 USD/kg comprend 0,28 USD/kg d’emballage et 0,20 USD/kg de consommables et énergie.",
-        "personnel": "Conditionnement manuel et charges de personnel supposés.",
-        "prix_vente": "3,20 USD/kg départ UP A1, +2 %/an, hypothèse ; prix de détail relevé à 2 300 FCFA/L pour une huile de tournesol, produit et circuit différents.",
-        "complements": "Tri, outils de dosage, remplissage manuel, installation et import budgétés comme enveloppes P2I ; le filtre et les cuves sont inclus une seule fois dans la presse."
-      },
-      "visuels": {
-        "atlas": "huile",
-        "product_index": 5
+        "production": "200 kg/h de graines préparées dans la plage catalogue de 180–250 kg/h ; rendement simulé 35 %, soit 70 kg/h d’huile. 8 h/j et 250 j/an ; volumes inférieurs à la capacité théorique, ventes égales à la production sans invendus simulés.",
+        "matieres": "Arachide grain : 460 FCFA/kg observés au détail à Sinématiali en septembre 2026 ; hypothèse utilisée comme ordre de grandeur, coût livré et niveau de marché à vérifier. Rendement supposé 35 % ; tourteau non valorisé.",
+        "process": "0,62 USD/kg comprend 0,18 USD/kg d’emballage et 0,44 USD/kg d’énergie et consommables ; hypothèses P2I.",
+        "personnel": "Personnel de production inclus dans les frais industriels ; personnel administratif et commercial distinct.",
+        "prix_vente": "4,50 USD/kg départ usine A1 puis +2 %/an, hypothèse P2I à confronter au prix producteur et aux débouchés ivoiriens ; un prix au détail de marque importée ne prouve pas un prix départ usine.",
+        "complements": "Enveloppes P2I pour tri, préparation, conditionnement, transport, sécurité et installation ; pas de prix fournisseur pour les auxiliaires.",
+        "qualite": "Arachides sélectionnées et stockées au sec ; contrôler les aflatoxines et les allergènes selon les prescriptions applicables ; conformité sanitaire à vérifier."
       },
       "sources_prix_marche": [
         {
-          "url": "https://jachete.ci/categorie-produit/supermarche/alimentaire/huiles-conserve/",
-          "description": "Huile de tournesol Excella 1 L : 2 300 FCFA au détail ; produit et circuit non identiques."
+          "url": "https://simagri-ci.info/public/prices-entries-grids",
+          "description": "Arachide grain à Sinématiali : 460 FCFA/kg au détail, relevé du 1 septembre 2026 ; coût industriel livré non établi."
+        },
+        {
+          "url": "https://prices.nedostavka.net/fr/product/3265472020056",
+          "description": "Huile d’arachide Lesieur 1 L : prix moyen signalé 8 063 FCFA à Abidjan Nord ; marque et circuit différents."
         }
       ]
     },

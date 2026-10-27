@@ -375,39 +375,39 @@
       "configuration_id": null,
       "nom": "Huiles alimentaires",
       "statut": "simulation_decouverte_indicative",
-      "qualification_prix": "prix_catalogue_public_non_certifie",
-      "source_prix": "https://oelwerk.com/fr/farmet-fls-60/fa-fls60",
+      "qualification_prix": "borne_haute_fourchette_catalogue_non_devis",
+      "source_prix": "https://wwmmachinery.com/products/custom-solutions",
       "certification_prix_exigee": false,
       "accord_fournisseur_exige": false,
       "devis_exige": false,
       "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 43652.7,
-      "investissement_simulation_usd": 88252.7,
-      "reserve_initiale_distincte_usd": 45459.447242408336,
+      "budget_equipements_usd": 42000,
+      "investissement_simulation_usd": 105800,
+      "reserve_initiale_distincte_usd": 39151.278248058006,
       "annuel": [
         {
           "annee": 1,
-          "production_kg": 15000,
-          "ventes_kg": 15000,
+          "production_kg": 70000.00000000001,
+          "ventes_kg": 70000.00000000001,
           "stock_fin_kg": 0,
-          "chiffre_affaires_usd": 48000,
-          "resultat_net_usd": -28621.533528333326
+          "chiffre_affaires_usd": 315000,
+          "resultat_net_usd": 41739.762354254846
         },
         {
           "annee": 2,
-          "production_kg": 21000,
-          "ventes_kg": 21000,
+          "production_kg": 90000,
+          "ventes_kg": 90000,
           "stock_fin_kg": 0,
-          "chiffre_affaires_usd": 68544,
-          "resultat_net_usd": -21886.860430243338
+          "chiffre_affaires_usd": 413100,
+          "resultat_net_usd": 66499.4171319919
         },
         {
           "annee": 3,
-          "production_kg": 26000.000000000004,
-          "ventes_kg": 26000.000000000004,
+          "production_kg": 110000.00000000001,
+          "ventes_kg": 110000.00000000001,
           "stock_fin_kg": 0,
-          "chiffre_affaires_usd": 86561.28000000001,
-          "resultat_net_usd": -16295.546475107116
+          "chiffre_affaires_usd": 514998,
+          "resultat_net_usd": 91289.61306727419
         }
       ],
       "controles": {
@@ -417,9 +417,9 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        -1.4551915228366852e-11,
+        8.731149137020111e-11,
         0,
-        -3.2741809263825417e-11
+        1.1641532182693481e-10
       ]
     },
     {
