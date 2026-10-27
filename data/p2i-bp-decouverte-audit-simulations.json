@@ -531,15 +531,15 @@
       "configuration_id": null,
       "nom": "Savonnerie industrielle",
       "statut": "simulation_decouverte_indicative",
-      "qualification_prix": "prix_catalogue_public_non_certifie",
-      "source_prix": "https://www.mechcn.com/soap-production-line/small-scale/",
+      "qualification_prix": "borne_haute_fourchette_catalogue_non_devis",
+      "source_prix": "https://sting2013.en.made-in-china.com/product/DQoUpBhEgKRj/China-High-Efficiency-Soap-Noodles-Making-Machine-Professional-Toilet-Soap-Finishing-Line.html",
       "certification_prix_exigee": false,
       "accord_fournisseur_exige": false,
       "devis_exige": false,
       "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 8300,
-      "investissement_simulation_usd": 36400,
-      "reserve_initiale_distincte_usd": 15774.29277777778,
+      "budget_equipements_usd": 20000,
+      "investissement_simulation_usd": 48100,
+      "reserve_initiale_distincte_usd": 17098.619027777782,
       "annuel": [
         {
           "annee": 1,
@@ -547,7 +547,7 @@
           "ventes_kg": 99999.99999999999,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 150000,
-          "resultat_net_usd": 23631.34
+          "resultat_net_usd": 22307.485
         },
         {
           "annee": 2,
@@ -555,7 +555,7 @@
           "ventes_kg": 140000.00000000003,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 214200,
-          "resultat_net_usd": 44515.6
+          "resultat_net_usd": 43290.025
         },
         {
           "annee": 3,
@@ -563,7 +563,7 @@
           "ventes_kg": 170000,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 265302,
-          "resultat_net_usd": 60443.3125
+          "resultat_net_usd": 59316.0175
         }
       ],
       "controles": {
@@ -573,9 +573,9 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        1.4551915228366852e-11,
-        5.820766091346741e-11,
-        8.731149137020111e-11
+        0,
+        2.9103830456733704e-11,
+        5.820766091346741e-11
       ]
     }
   ]
