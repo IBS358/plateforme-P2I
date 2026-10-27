@@ -2,10 +2,62 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 5,
-  "up_avec_simulation_complete": 3,
-  "up_restant_a_alimenter": 93,
+  "simulations_affichables": 7,
+  "up_avec_simulation_complete": 5,
+  "up_restant_a_alimenter": 91,
   "scenarios": [
+    {
+      "up_id": "conserverie_legumes",
+      "configuration_id": null,
+      "nom": "Conserverie de légumes",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_non_certifie",
+      "source_prix": "https://www.made-in-china.com/price/prodetail_Fruit-Vegetable-Processing-Machinery_VFkTlUezaaGD.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 100000,
+      "investissement_simulation_usd": 164700,
+      "reserve_initiale_distincte_usd": 33134.52208333333,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 300000,
+          "ventes_kg": 300000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 375000,
+          "resultat_net_usd": 32619.195
+        },
+        {
+          "annee": 2,
+          "production_kg": 390000,
+          "ventes_kg": 390000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 497250,
+          "resultat_net_usd": 65256.075000000004
+        },
+        {
+          "annee": 3,
+          "production_kg": 450000,
+          "ventes_kg": 450000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 585225,
+          "resultat_net_usd": 87147.74699999994
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        5.820766091346741e-11,
+        0,
+        1.1641532182693481e-10
+      ]
+    },
     {
       "up_id": "biscuiterie",
       "configuration_id": "crackers",
@@ -212,6 +264,58 @@
         2.9103830456733704e-11,
         1.1641532182693481e-10,
         1.7462298274040222e-10
+      ]
+    },
+    {
+      "up_id": "mini_laiterie",
+      "configuration_id": null,
+      "nom": "Mini-laiterie",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_non_certifie",
+      "source_prix": "https://www.sarl-valentis.fr/en/mobile-milk-pasteurization-unit/",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 107340.87,
+      "investissement_simulation_usd": 184040.87,
+      "reserve_initiale_distincte_usd": 42910.38719776389,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 450000,
+          "ventes_kg": 450000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 765000,
+          "resultat_net_usd": 182305.7755595
+        },
+        {
+          "annee": 2,
+          "production_kg": 600000,
+          "ventes_kg": 600000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 1040400,
+          "resultat_net_usd": 271519.3688675
+        },
+        {
+          "annee": 3,
+          "production_kg": 700000.0000000001,
+          "ventes_kg": 700000.0000000001,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 1238076,
+          "resultat_net_usd": 332639.46667550015
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -5.820766091346741e-11,
+        -3.4924596548080444e-10,
+        -4.656612873077393e-10
       ]
     },
     {

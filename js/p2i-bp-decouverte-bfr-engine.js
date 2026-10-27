@@ -15,11 +15,12 @@ function calculate(input){
  if(months.length!==36)problems.push("36 mois de données d'exploitation sont obligatoires");
  const options=data.hypotheses||{};
  const expected={part_clients_comptant:0.4,part_clients_30_jours:0.6,
-  stock_matieres_jours:30,stock_produits_finis_jours:15,
+  stock_produits_finis_jours:15,
   delai_fournisseurs_jours:0,jours_mois:30};
  for(const [key,value] of Object.entries(expected))
   if(!number(options[key])||!close(options[key],value))
    problems.push("Hypothèse absente ou différente du scénario P2I : "+key);
+ if(!number(options.stock_matieres_jours)||options.stock_matieres_jours>30)problems.push("Stock matières : entre 0 et 30 jours");
  if(!number(data.creances_ouverture_usd))problems.push("Créances clients à l’ouverture manquantes");
  if(problems.length)return Object.freeze({valide:false,blocages:Object.freeze(problems),bfr_mensuel:null});
  const rows=[];
@@ -40,7 +41,7 @@ function calculate(input){
    continue;
   }
   const rawStock=hasPhysical?m.stock_matieres_quantite*m.cout_unitaire_matieres_usd:
-   m.consommation_matieres_usd;
+   m.consommation_matieres_usd*options.stock_matieres_jours/30;
   const finishedStock=hasPhysical?m.stock_finis_quantite*m.cout_unitaire_finis_usd:
    m.cout_production_vendue_usd*.5;
   const receivable=m.ventes_usd*.6;
@@ -52,7 +53,7 @@ function calculate(input){
   rows.push(Object.freeze({mois:i+1,stocks_matieres:rawStock,
    stocks_produits_finis:finishedStock,stocks,creances_clients:receivable,
    dettes_exploitation:0,bfr,
-   methode_stock:hasPhysical?"stock_physique_valorise":"stock_cible_30_15_jours",
+   methode_stock:hasPhysical?"stock_physique_valorise":"stock_cible_"+options.stock_matieres_jours+"_15_jours",
    encaissements_clients:m.ventes_usd*.4+previousReceivable}));
   previousReceivable=receivable;
  }

@@ -214,8 +214,56 @@
         "reference": {
           "configuration_id": "reference",
           "nom": "Conserverie de légumes",
-          "qualification": "configuration_a_documenter",
-          "reference": null,
+          "qualification": "simulation_decouverte_calculable",
+          "reference": {
+            "up_id": "conserverie_legumes",
+            "configuration_id": null,
+            "nom": "Sauce tomate en bocaux",
+            "sous_titre": "Transformation de tomates fraîches",
+            "description": "Transformation de tomates fraîches en sauce conditionnée en bocaux de 400 g ; scénario indicatif, distinct des autres conserves de légumes.",
+            "capacite": 400,
+            "unite": "kg/h",
+            "machines": 100000,
+            "investissement": 164700,
+            "production": [
+              300000,
+              390000,
+              450000
+            ],
+            "ventes": [
+              300000,
+              390000,
+              450000
+            ],
+            "prix": [
+              1.25,
+              1.275,
+              1.3005
+            ],
+            "matieres_kg": 0.35,
+            "cout_production_kg": [
+              0.91,
+              0.9040230769230769,
+              0.9159103333333333
+            ],
+            "personnel": 9660,
+            "charges_fixes": 24000,
+            "croissance_personnel": 0.03,
+            "croissance_charges": 0.03,
+            "part_apport": 0.3,
+            "part_dette": 0.7,
+            "taux_interet": 0.08,
+            "duree_dette_mois": 60,
+            "duree_amortissement_ans": 10,
+            "taux_tva": 0.18,
+            "taux_is": 0.25,
+            "coussin_tresorerie": 0.1,
+            "source": "data/p2i-bp-lot-agro-01.json / conserverie_legumes : prix catalogue ou budget de référence + hypothèses P2I explicites",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 2 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+            "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "stock_matieres_jours": 2
+          },
           "economique_herite_up": true,
           "economique": {
             "budget_minimum_historique": {
@@ -288,7 +336,87 @@
             "qualification": "references_historiques_a_documenter",
             "aucune_repartition_fictive_des_charges": true
           },
-          "source": "up-data.js / conserverie_legumes"
+          "source": "up-data.js / conserverie_legumes",
+          "visuels": {
+            "atlas": "tomate",
+            "product_index": 5
+          },
+          "prix_equipement": {
+            "id": "catalogue_tomate_gelgoog",
+            "url": "https://www.made-in-china.com/price/prodetail_Fruit-Vegetable-Processing-Machinery_VFkTlUezaaGD.html",
+            "consulte_le": "2026-10-27",
+            "fournisseur": "Gelgoog Intelligent Technology Co., Ltd.",
+            "modele": "Ligne sauce tomate — référence 500 kg/h",
+            "prix": 100000,
+            "devise": "USD",
+            "base": "prix public annoncé pour 1 à 4 ensembles ; incoterm et périmètre à préciser",
+            "capacite": 500,
+            "unite_capacite": "kg/h de tomates entrantes, selon intitulé",
+            "fonctions": [
+              "Tri et lavage",
+              "Broyage et extraction",
+              "Cuisson",
+              "Remplissage et fermeture",
+              "Conditionnement"
+            ],
+            "qualification": "prix_catalogue_public_non_certifie",
+            "limites": "La fiche présente une gamme de 300 kg à 6 t/h ; taille exacte, traitement thermique, conditionnement en bocaux et périmètre de la ligne sont des hypothèses à rapprocher des spécifications.",
+            "equipements_complementaires": []
+          },
+          "emballage": {
+            "statut": "hypothese_P2I",
+            "format": "Bocal de 400 g avec couvercle refermable, étiqueté et regroupé en carton",
+            "cout_usd_par_kg": 0.24,
+            "composants_usd_par_kg": {
+              "bocal": 0.16,
+              "couvercle": 0.03,
+              "etiquette": 0.02,
+              "regroupement": 0.03
+            },
+            "mode_comptable": "inclus_dans_cout_industriel",
+            "ecologie": "Bocal en verre potentiellement réemployable ; collecte, nettoyage et recyclage locaux à vérifier.",
+            "source": "Hypothèses P2I, non prix fournisseur"
+          },
+          "hypotheses_explicites": {
+            "production": "Ligne annoncée pour 500 kg/h de tomates fraîches ; rendement de simulation 80 %, soit 400 kg/h de sauce, non valeur fournisseur. Ventes égales à la production : aucune perte simulée.",
+            "matieres": "Matières et ingrédients 0,35 USD/kg de sauce, estimation P2I sans relevé de prix local.",
+            "process": "Coût variable 0,42 USD/kg dont emballage 0,24 USD/kg ; frais fixes industriels affectés au coût de production.",
+            "personnel": "Personnel administratif distinct du personnel industriel, hypothèses P2I.",
+            "charges": "Locaux, distribution, assurance et administration : hypothèses P2I.",
+            "prix_vente": "Prix départ UP 1,25 USD/kg en année 1, +2 %/an, hypothèse de simulation et non prix de marché relevé.",
+            "complements": "Enveloppes P2I d’importation, installation, sécurité et utilités ; le contenu exact de la ligne et la fermeture des bocaux sont à vérifier.",
+            "qualite": "Le traitement thermique doit être adapté au produit, à l’emballage et à la durée de conservation visée.",
+            "conventions": {
+              "apport": 0.3,
+              "dette": 0.7,
+              "taux_interet_annuel": 0.08,
+              "dette_mois": 60,
+              "amortissement_ans": 10,
+              "tva_simulation": 0.18,
+              "is_simulation": 0.25,
+              "croissance_charges": 0.03,
+              "croissance_personnel": 0.03,
+              "coussin_tresorerie": 0.1,
+              "clients_comptant": 0.4,
+              "clients_30_jours": 0.6,
+              "fournisseurs_comptant": true,
+              "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+            },
+            "complements_usd": {
+              "fret": 9000,
+              "assurance": 1200,
+              "douane_transit": 9000,
+              "transport_local": 2500,
+              "genie_civil": 15000,
+              "utilites": 12000,
+              "installation_formation": 7000,
+              "pieces_initiales": 3000,
+              "securite_environnement": 3000,
+              "etudes": 3000
+            },
+            "base_budget_equipements_usd": 100000,
+            "conversion": null
+          }
         }
       },
       "autres_variantes": "a_recenser",
@@ -513,7 +641,7 @@
         "Fiscalité applicable et échéancier de financement",
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
-      "statut": "dossier_redactionnel_et_reperes_historiques_non_valide"
+      "statut": "simulation_decouverte_disponible"
     },
     "biscuiterie": {
       "emballage": {
@@ -2131,8 +2259,56 @@
         "reference": {
           "configuration_id": "reference",
           "nom": "Mini-laiterie",
-          "qualification": "configuration_a_documenter",
-          "reference": null,
+          "qualification": "simulation_decouverte_calculable",
+          "reference": {
+            "up_id": "mini_laiterie",
+            "configuration_id": null,
+            "nom": "Lait entier frais pasteurisé en bouteilles",
+            "sous_titre": "Mini-laiterie en conteneur",
+            "description": "Transformation et conditionnement de lait de vache entier pasteurisé en bouteilles refermables de 1 L, avec chaîne du froid.",
+            "capacite": 515,
+            "unite": "kg/h",
+            "machines": 107340.87,
+            "investissement": 184040.87,
+            "production": [
+              450000,
+              600000,
+              700000
+            ],
+            "ventes": [
+              450000,
+              600000,
+              700000
+            ],
+            "prix": [
+              1.7,
+              1.734,
+              1.76868
+            ],
+            "matieres_kg": 0.65,
+            "cout_production_kg": [
+              1.0233333333333334,
+              1.03,
+              1.050291
+            ],
+            "personnel": 9660,
+            "charges_fixes": 24000,
+            "croissance_personnel": 0.03,
+            "croissance_charges": 0.03,
+            "part_apport": 0.3,
+            "part_dette": 0.7,
+            "taux_interet": 0.08,
+            "duree_dette_mois": 60,
+            "duree_amortissement_ans": 10,
+            "taux_tva": 0.18,
+            "taux_is": 0.25,
+            "coussin_tresorerie": 0.1,
+            "source": "data/p2i-bp-lot-agro-01.json / mini_laiterie : prix catalogue ou budget de référence + hypothèses P2I explicites",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 1 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+            "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "stock_matieres_jours": 1
+          },
           "economique_herite_up": true,
           "economique": {
             "budget_minimum_historique": {
@@ -2205,7 +2381,95 @@
             "qualification": "references_historiques_a_documenter",
             "aucune_repartition_fictive_des_charges": true
           },
-          "source": "up-data.js / mini_laiterie"
+          "source": "up-data.js / mini_laiterie",
+          "visuels": {
+            "atlas": "lait",
+            "product_index": 5
+          },
+          "prix_equipement": {
+            "id": "catalogue_lait_valentis_500",
+            "url": "https://www.sarl-valentis.fr/en/mobile-milk-pasteurization-unit/",
+            "consulte_le": "2026-10-27",
+            "fournisseur": "SARL Valentis",
+            "modele": "Unité mobile de pasteurisation 500 L/h",
+            "prix": 95900,
+            "devise": "EUR",
+            "base": "FOB annoncé ; lieu FOB et options à vérifier",
+            "capacite": 500,
+            "unite_capacite": "L/h de lait",
+            "fonctions": [
+              "Réception et stockage",
+              "Pasteurisation HTST",
+              "Refroidissement",
+              "Remplissage en bouteilles",
+              "Nettoyage en place"
+            ],
+            "qualification": "prix_catalogue_public_non_certifie",
+            "limites": "Le fabricant annonce 400 V, 50 Hz et 50 kW, bouteilles en verre ou plastique. Refroidissement, maintien de la chaîne du froid et équipements locaux à dimensionner.",
+            "equipements_complementaires": []
+          },
+          "emballage": {
+            "statut": "hypothese_P2I",
+            "format": "Bouteille refermable de 1 L, étiquetée, regroupée en caisse",
+            "cout_usd_par_kg": 0.18,
+            "composants_usd_par_kg": {
+              "bouteille": 0.12,
+              "bouchon": 0.02,
+              "etiquette": 0.02,
+              "regroupement": 0.02
+            },
+            "mode_comptable": "inclus_dans_cout_industriel",
+            "ecologie": "Options de réemploi et collecte locale à étudier.",
+            "source": "Hypothèses P2I, non prix fournisseur"
+          },
+          "hypotheses_explicites": {
+            "production": "500 L/h × densité supposée 1,03 kg/L = 515 kg/h ; hypothèses de volumes sur trois ans. Ventes égales à la production, zéro invendu ou perte dans le modèle : hypothèse optimiste à tester.",
+            "matieres": "Lait cru : coût simulé 0,65 USD/kg de produit, à documenter selon la collecte locale.",
+            "process": "0,28 USD/kg inclut le conditionnement 0,18 USD/kg et une hypothèse de 0,10 USD/kg pour énergie, eau et nettoyage ; charges industrielles fixes incluses dans le coût industriel.",
+            "personnel": "Responsable administratif distinct du personnel de production ; hypothèses salariales P2I.",
+            "charges": "Charges commerciales, locaux, distribution et frais de gestion estimés P2I.",
+            "prix_vente": "Prix sortie UP : 1,70 USD/kg en A1, +2 %/an ; hypothèse comparée à des prix au détail de lait pasteurisé à Abidjan, sans assimilation au prix producteur.",
+            "conservation": "Le lait frais nécessite une chaîne du froid. Stock matières de 1 jour et ventes théoriquement immédiates ; pertes et durée de vie ne sont pas simulées.",
+            "complements": "Enveloppes P2I d’import, installation, utilités et froid ; pas de devis.",
+            "conventions": {
+              "apport": 0.3,
+              "dette": 0.7,
+              "taux_interet_annuel": 0.08,
+              "dette_mois": 60,
+              "amortissement_ans": 10,
+              "tva_simulation": 0.18,
+              "is_simulation": 0.25,
+              "croissance_charges": 0.03,
+              "croissance_personnel": 0.03,
+              "coussin_tresorerie": 0.1,
+              "clients_comptant": 0.4,
+              "clients_30_jours": 0.6,
+              "fournisseurs_comptant": true,
+              "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+            },
+            "complements_usd": {
+              "fret": 9000,
+              "assurance": 1200,
+              "douane_transit": 9000,
+              "transport_local": 2500,
+              "genie_civil": 15000,
+              "utilites": 12000,
+              "installation_formation": 7000,
+              "pieces_initiales": 3000,
+              "securite_environnement": 3000,
+              "etudes": 3000,
+              "chaine_du_froid": 12000
+            },
+            "base_budget_equipements_usd": 107340.87,
+            "conversion": {
+              "date": "2026-10-23",
+              "eur_usd": 1.1193,
+              "eur_xof": 655.957,
+              "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+              "parite_url": "https://www.bceao.int/fr/cours/cours-des-devises-contre-Franc-CFA-appliquer-aux-transferts",
+              "statut": "reference_datee_indicative_non_bancaire"
+            }
+          }
         }
       },
       "autres_variantes": "a_recenser",
@@ -2421,7 +2685,7 @@
         "Fiscalité applicable et échéancier de financement",
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
-      "statut": "dossier_redactionnel_et_reperes_historiques_non_valide"
+      "statut": "simulation_decouverte_disponible"
     },
     "huiles_alimentaires": {
       "emballage": {
@@ -29001,5 +29265,5 @@
     }
   },
   "regles_decouverte": "Prix catalogue public ou budget P2I identifié + hypothèses explicites; pas de certification, partenariat ou devis exigé au Découverte.",
-  "nombre_simulations_completes": 5
+  "nombre_simulations_completes": 7
 }

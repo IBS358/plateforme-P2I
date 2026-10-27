@@ -1,0 +1,200 @@
+{
+  "schema": "p2i.bp-lot.v1",
+  "date": "2026-10-27",
+  "description": "Lot pilote automatisé : lait pasteurisé et sauce tomate",
+  "sources": [
+    {
+      "id": "catalogue_lait_valentis_500",
+      "url": "https://www.sarl-valentis.fr/en/mobile-milk-pasteurization-unit/",
+      "consulte_le": "2026-10-27",
+      "fournisseur": "SARL Valentis",
+      "modele": "Unité mobile de pasteurisation 500 L/h",
+      "prix": 95900,
+      "devise": "EUR",
+      "base": "FOB annoncé ; lieu FOB et options à vérifier",
+      "capacite": 500,
+      "unite_capacite": "L/h de lait",
+      "fonctions": [
+        "Réception et stockage",
+        "Pasteurisation HTST",
+        "Refroidissement",
+        "Remplissage en bouteilles",
+        "Nettoyage en place"
+      ],
+      "qualification": "prix_catalogue_public_non_certifie",
+      "limites": "Le fabricant annonce 400 V, 50 Hz et 50 kW, bouteilles en verre ou plastique. Refroidissement, maintien de la chaîne du froid et équipements locaux à dimensionner."
+    },
+    {
+      "id": "catalogue_tomate_gelgoog",
+      "url": "https://www.made-in-china.com/price/prodetail_Fruit-Vegetable-Processing-Machinery_VFkTlUezaaGD.html",
+      "consulte_le": "2026-10-27",
+      "fournisseur": "Gelgoog Intelligent Technology Co., Ltd.",
+      "modele": "Ligne sauce tomate — référence 500 kg/h",
+      "prix": 100000,
+      "devise": "USD",
+      "base": "prix public annoncé pour 1 à 4 ensembles ; incoterm et périmètre à préciser",
+      "capacite": 500,
+      "unite_capacite": "kg/h de tomates entrantes, selon intitulé",
+      "fonctions": [
+        "Tri et lavage",
+        "Broyage et extraction",
+        "Cuisson",
+        "Remplissage et fermeture",
+        "Conditionnement"
+      ],
+      "qualification": "prix_catalogue_public_non_certifie",
+      "limites": "La fiche présente une gamme de 300 kg à 6 t/h ; taille exacte, traitement thermique, conditionnement en bocaux et périmètre de la ligne sont des hypothèses à rapprocher des spécifications."
+    }
+  ],
+  "profils": {
+    "mini_laiterie": {
+      "configuration_id": null,
+      "nom": "Lait entier frais pasteurisé en bouteilles",
+      "sous_titre": "Mini-laiterie en conteneur",
+      "description": "Transformation et conditionnement de lait de vache entier pasteurisé en bouteilles refermables de 1 L, avec chaîne du froid.",
+      "source_equipement": "catalogue_lait_valentis_500",
+      "prix_retenu": 95900,
+      "devise_prix": "EUR",
+      "capacite_entree_kg_h": 515,
+      "production_explicite": [
+        450000,
+        600000,
+        700000
+      ],
+      "ventes_explicites": [
+        450000,
+        600000,
+        700000
+      ],
+      "prix_vente_usd_kg": [
+        1.7,
+        1.734,
+        1.76868
+      ],
+      "matieres_usd_kg_produit": 0.65,
+      "cout_process_usd_kg": 0.28,
+      "fixes_industriels_an": 42000,
+      "personnel_hors_cout_industriel": 9660,
+      "charges_fixes_hors_industriel": 24000,
+      "stock_matieres_jours": 1,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Bouteille refermable de 1 L, étiquetée, regroupée en caisse",
+        "cout_usd_par_kg": 0.18,
+        "composants_usd_par_kg": {
+          "bouteille": 0.12,
+          "bouchon": 0.02,
+          "etiquette": 0.02,
+          "regroupement": 0.02
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Options de réemploi et collecte locale à étudier.",
+        "source": "Hypothèses P2I, non prix fournisseur"
+      },
+      "complements_usd": {
+        "fret": 9000,
+        "assurance": 1200,
+        "douane_transit": 9000,
+        "transport_local": 2500,
+        "genie_civil": 15000,
+        "utilites": 12000,
+        "installation_formation": 7000,
+        "pieces_initiales": 3000,
+        "securite_environnement": 3000,
+        "etudes": 3000,
+        "chaine_du_froid": 12000
+      },
+      "methodes": {
+        "production": "500 L/h × densité supposée 1,03 kg/L = 515 kg/h ; hypothèses de volumes sur trois ans. Ventes égales à la production, zéro invendu ou perte dans le modèle : hypothèse optimiste à tester.",
+        "matieres": "Lait cru : coût simulé 0,65 USD/kg de produit, à documenter selon la collecte locale.",
+        "process": "0,28 USD/kg inclut le conditionnement 0,18 USD/kg et une hypothèse de 0,10 USD/kg pour énergie, eau et nettoyage ; charges industrielles fixes incluses dans le coût industriel.",
+        "personnel": "Responsable administratif distinct du personnel de production ; hypothèses salariales P2I.",
+        "charges": "Charges commerciales, locaux, distribution et frais de gestion estimés P2I.",
+        "prix_vente": "Prix sortie UP : 1,70 USD/kg en A1, +2 %/an ; hypothèse comparée à des prix au détail de lait pasteurisé à Abidjan, sans assimilation au prix producteur.",
+        "conservation": "Le lait frais nécessite une chaîne du froid. Stock matières de 1 jour et ventes théoriquement immédiates ; pertes et durée de vie ne sont pas simulées.",
+        "complements": "Enveloppes P2I d’import, installation, utilités et froid ; pas de devis."
+      },
+      "sources_prix_marche": [
+        {
+          "url": "https://djera-production.com/product/lait-entier-pasteurise-nature-1l-2/",
+          "description": "Lait entier pasteurisé 1 L : 1 800 FCFA, vente au détail Abidjan ; prix producteur non établi."
+        }
+      ],
+      "visuels": {
+        "atlas": "lait",
+        "product_index": 5
+      }
+    },
+    "conserverie_legumes": {
+      "configuration_id": null,
+      "nom": "Sauce tomate en bocaux",
+      "sous_titre": "Transformation de tomates fraîches",
+      "description": "Transformation de tomates fraîches en sauce conditionnée en bocaux de 400 g ; scénario indicatif, distinct des autres conserves de légumes.",
+      "source_equipement": "catalogue_tomate_gelgoog",
+      "prix_retenu": 100000,
+      "devise_prix": "USD",
+      "capacite_entree_kg_h": 400,
+      "production_explicite": [
+        300000,
+        390000,
+        450000
+      ],
+      "ventes_explicites": [
+        300000,
+        390000,
+        450000
+      ],
+      "prix_vente_usd_kg": [
+        1.25,
+        1.275,
+        1.3005
+      ],
+      "matieres_usd_kg_produit": 0.35,
+      "cout_process_usd_kg": 0.42,
+      "fixes_industriels_an": 42000,
+      "personnel_hors_cout_industriel": 9660,
+      "charges_fixes_hors_industriel": 24000,
+      "stock_matieres_jours": 2,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Bocal de 400 g avec couvercle refermable, étiqueté et regroupé en carton",
+        "cout_usd_par_kg": 0.24,
+        "composants_usd_par_kg": {
+          "bocal": 0.16,
+          "couvercle": 0.03,
+          "etiquette": 0.02,
+          "regroupement": 0.03
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Bocal en verre potentiellement réemployable ; collecte, nettoyage et recyclage locaux à vérifier.",
+        "source": "Hypothèses P2I, non prix fournisseur"
+      },
+      "complements_usd": {
+        "fret": 9000,
+        "assurance": 1200,
+        "douane_transit": 9000,
+        "transport_local": 2500,
+        "genie_civil": 15000,
+        "utilites": 12000,
+        "installation_formation": 7000,
+        "pieces_initiales": 3000,
+        "securite_environnement": 3000,
+        "etudes": 3000
+      },
+      "methodes": {
+        "production": "Ligne annoncée pour 500 kg/h de tomates fraîches ; rendement de simulation 80 %, soit 400 kg/h de sauce, non valeur fournisseur. Ventes égales à la production : aucune perte simulée.",
+        "matieres": "Matières et ingrédients 0,35 USD/kg de sauce, estimation P2I sans relevé de prix local.",
+        "process": "Coût variable 0,42 USD/kg dont emballage 0,24 USD/kg ; frais fixes industriels affectés au coût de production.",
+        "personnel": "Personnel administratif distinct du personnel industriel, hypothèses P2I.",
+        "charges": "Locaux, distribution, assurance et administration : hypothèses P2I.",
+        "prix_vente": "Prix départ UP 1,25 USD/kg en année 1, +2 %/an, hypothèse de simulation et non prix de marché relevé.",
+        "complements": "Enveloppes P2I d’importation, installation, sécurité et utilités ; le contenu exact de la ligne et la fermeture des bocaux sont à vérifier.",
+        "qualite": "Le traitement thermique doit être adapté au produit, à l’emballage et à la durée de conservation visée."
+      },
+      "visuels": {
+        "atlas": "tomate",
+        "product_index": 5
+      }
+    }
+  }
+}

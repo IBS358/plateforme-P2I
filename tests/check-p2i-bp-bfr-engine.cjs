@@ -46,6 +46,7 @@ assert.equal(actualResult.bfr_mensuel[0].stocks,1600,"Stocks physiques sans addi
 assert.equal(actualResult.bfr_mensuel[0].bfr,7600);
 assert.equal(actualResult.bfr_mensuel[0].methode_stock,"stock_physique_valorise");
 assert.equal(actualResult.bfr_mensuel[1].methode_stock,"stock_cible_30_15_jours");
+const short=clone();short.hypotheses.stock_matieres_jours=1;assert.equal(calculate(short).bfr_mensuel[0].stocks_matieres,2000/30);
 const incompleteStock=clone();
 incompleteStock.mois[0].stock_matieres_quantite=100;
 assert.equal(calculate(incompleteStock).valide,false,"Rejeter la valorisation physique incomplète");

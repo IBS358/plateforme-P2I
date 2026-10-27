@@ -12,12 +12,13 @@ const plain=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 function normalizeInput(value,upId,config){
  if(typeof upId!=='string'||!upId.trim()||upId.length>200||config!==null&&(typeof config!=='string'||!/^[a-z0-9_-]{1,100}$/i.test(config)))throw Error('Identité UP ou variante invalide.');
  if(!plain(value)||value.up_id!==upId||value.configuration_id!==(config||null))throw Error('Les entrées financières ne correspondent pas à cette UP et cette variante.');
- const allowed=new Set([...arrayKeys,...numericKeys,...strKeys,'machines','photo','technique','qualification','complet','manquants','devise']);
+ const allowed=new Set([...arrayKeys,...numericKeys,...strKeys,'machines','photo','technique','qualification','complet','manquants','devise','stock_matieres_jours']);
  for(const key of Object.keys(value))if(!allowed.has(key))throw Error('Paramètre non pris en charge par ce contrat : '+key);
  if(value.devise&&value.devise!=='USD')throw Error('Les entrées du moteur doivent être en USD.');
  const out={};
  for(const key of arrayKeys){const a=value[key];if(!Array.isArray(a)||a.length!==3||a.some(x=>typeof x!=='number'||!Number.isFinite(x)||x<0))throw Error('Entrées incomplètes : '+key);out[key]=a.slice();}
  for(const key of numericKeys){const v=value[key];if(typeof v!=='number'||!Number.isFinite(v)||v<0)throw Error('Entrée invalide ou absente : '+key);out[key]=v;}
+ if(value.stock_matieres_jours!==undefined){if(typeof value.stock_matieres_jours!=='number'||!Number.isFinite(value.stock_matieres_jours)||value.stock_matieres_jours<0||value.stock_matieres_jours>30)throw Error('Stock matières invalide');out.stock_matieres_jours=value.stock_matieres_jours;}
  for(const key of strKeys){if(key==='configuration_id'){out[key]=config||null;continue;}const v=value[key];if(typeof v!=='string'||v.length>5000)throw Error('Texte absent ou trop long : '+key);out[key]=v;}
  if(out.unite!=='kg/h')throw Error('Ce contrat de simulation industrielle accepte une capacité en kg/h.');
  out.machines=value.machines===null?null:typeof value.machines==='number'&&Number.isFinite(value.machines)&&value.machines>=0?value.machines:null;
