@@ -12,3 +12,7 @@ Planches générées par le dispositif intégré de génération d’images, pui
 - `atelier-epices-ia.jpg` : planche demandée pour le lavage du gingembre, découpe, séchage, broyage, conditionnement et sachet final. Illustration générique, non photographie du matériel catalogue.
 
 Ces images ont été générées par IA à partir de descriptions des fonctions. Elles ne constituent pas une preuve de capacité, d'hygiène ou de conformité des équipements.
+
+## Huile d’arachide — 27 octobre 2026
+
+`atelier-arachide-ia.jpg` : illustration IA de six étapes distinctes : tri des arachides, préparation des graines, pressage, filtration, conditionnement et bouteille de produit fini avec étiquette fictive. Images d'ambiance non contractuelles, sans identification de machines fournisseur.

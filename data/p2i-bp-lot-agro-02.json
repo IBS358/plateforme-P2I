@@ -287,7 +287,11 @@
           "url": "https://prices.nedostavka.net/fr/product/3265472020056",
           "description": "Huile d’arachide Lesieur 1 L : prix moyen signalé 8 063 FCFA à Abidjan Nord ; marque et circuit différents."
         }
-      ]
+      ],
+      "visuels": {
+        "atlas": "arachide",
+        "product_index": 5
+      }
     },
     "epices": {
       "configuration_id": null,

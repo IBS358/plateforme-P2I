@@ -3023,6 +3023,10 @@
             "aucune_repartition_fictive_des_charges": true
           },
           "source": "up-data.js / huiles_alimentaires",
+          "visuels": {
+            "atlas": "arachide",
+            "product_index": 5
+          },
           "prix_equipement": {
             "id": "catalogue_wwmm_arachide_200",
             "url": "https://wwmmachinery.com/products/custom-solutions",

@@ -16,3 +16,5 @@
 
 :root{--agro-lait:url('../assets/bp-agro/atelier-lait-ia.jpg');--agro-tomate:url('../assets/bp-agro/atelier-tomate-ia.jpg')}.agro-photo{background-size:300% 200%}.agro-lait{background-image:var(--agro-lait)}.agro-tomate{background-image:var(--agro-tomate)}.agro-0{background-position:0% 0%}.agro-1{background-position:50% 0%}.agro-2{background-position:100% 0%}.agro-3{background-position:0% 100%}.agro-4{background-position:50% 100%}.agro-5{background-position:100% 100%}
 :root{--agro-pain:url('../assets/bp-agro/atelier-pain-ia.jpg');--agro-huile:url('../assets/bp-agro/atelier-huile-ia.jpg');--agro-epices:url('../assets/bp-agro/atelier-epices-ia.jpg')}.agro-pain{background-image:var(--agro-pain)}.agro-huile{background-image:var(--agro-huile)}.agro-epices{background-image:var(--agro-epices)}
+
+:root{--agro-arachide:url('../assets/bp-agro/atelier-arachide-ia.jpg')}.agro-arachide{background-image:var(--agro-arachide)}
