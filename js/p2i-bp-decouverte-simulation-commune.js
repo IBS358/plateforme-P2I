@@ -11,6 +11,17 @@ function evaluerPerformance(annuel,investissement){
  const premier=serie[0];return {reperes:REPERES,annuel:serie,marge_atteinte:premier.marge_nette===null?null:premier.marge_nette>=REPERES.marge_nette_min,roi_atteint:premier.roi_annuel===null?null:premier.roi_annuel>=REPERES.roi_annuel_min,qualification:'repères indicatifs P2I, sans garantie ni seuil bancaire, sans modification des résultats'};
 }
 
+// Calcule un prix cible A1 sans modifier les données du dossier. Il suppose que
+// volumes, coûts et taux d'IS restent inchangés : ce n'est pas un prix de marché.
+function diagnosticPrix(input,annee,performance){
+ const ventes=input.ventes[0],tax=input.taux_is,m=REPERES.marge_nette_min,roi=REPERES.roi_annuel_min;
+ if(!ventes||tax>=1||1-tax<=m)return {statut:'non_calculable',prix_cible:null};
+ const charges=annee.chiffre_affaires-annee.resultat_avant_impot;
+ const caMarge=charges/(1-m/(1-tax));
+ const caRoi=charges+input.investissement*roi/(1-tax);
+ const prix=Math.max(0,caMarge,caRoi)/ventes;
+ return {statut:performance.marge_atteinte&&performance.roi_atteint?'reperes_atteints':'ajustement_a_etudier',prix_cible:prix,prix_actuel:input.prix[0],marge_cible:m,roi_cible:roi,qualification:'Prix mathématique indicatif, à comparer aux prix de marché ; volumes et coûts inchangés. Non appliqué automatiquement.'};
+}
 function calculer(input){
  const s=JSON.parse(JSON.stringify(input));
  for(const k of ['investissement','matieres_kg','personnel','charges_fixes','part_apport','part_dette','taux_interet','duree_dette_mois','duree_amortissement_ans','taux_tva','taux_is','coussin_tresorerie','croissance_personnel','croissance_charges'])if(!positive(s[k]))throw Error('Hypothèse manquante ou invalide : '+k);
@@ -73,7 +84,8 @@ function calculer(input){
   bilans.push({annee:y+1,immobilisations:fixed,stocks_matieres:b.stocks_matieres,stocks_finis:b.stocks_produits_finis,creances:b.creances_clients,tva_clients:last.creances*s.taux_tva,credit_tva:last.credit_tva,banque:last.banque,fonds_propres:equity,dette:last.dette_fin,tva_due:last.tva_due,is_du:last.is_cumule,actif_total:assets,passif_total:liabilities,ecart:assets-liabilities});
   if(!close(assets,liabilities))throw Error('Bilan déséquilibré A'+(y+1)+' : '+(assets-liabilities));
  }
- return {version:'107',statut:'simulation_indicative_non_documentee',entrees:s,mois:months,annuel:annual,performance:evaluerPerformance(annual,s.investissement),bfr:bfr.bfr_mensuel,tresorerie:cash[0].tresorerie_mensuelle,bilans,reserve_initiale:reserve,financement:{apport:s.investissement*.3,dette:debt},moteurs:['P2I_ECONOMIC_RESULT_ENGINE','P2I_FINANCIAL_ENGINE','P2I_BP_BFR_MENSUEL','P2I_BP_MOTEUR_TRESORERIE'],controles:{bilans_equilibres:true,bfr_mois:36,tresorerie_mois:12,financement:'30/70'}};
+ const performance=evaluerPerformance(annual,s.investissement);performance.diagnostic_prix=diagnosticPrix(s,annual[0],performance);
+ return {version:'107',statut:'simulation_indicative_non_documentee',entrees:s,mois:months,annuel:annual,performance,bfr:bfr.bfr_mensuel,tresorerie:cash[0].tresorerie_mensuelle,bilans,reserve_initiale:reserve,financement:{apport:s.investissement*.3,dette:debt},moteurs:['P2I_ECONOMIC_RESULT_ENGINE','P2I_FINANCIAL_ENGINE','P2I_BP_BFR_MENSUEL','P2I_BP_MOTEUR_TRESORERIE'],controles:{bilans_equilibres:true,bfr_mois:36,tresorerie_mois:12,financement:'30/70'}};
 }
 root.P2I_BP_SIMULATION_COMMUNE=Object.freeze({calculer,evaluerPerformance,reperes:REPERES});
 })(typeof window!=='undefined'?window:globalThis);
