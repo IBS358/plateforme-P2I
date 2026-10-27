@@ -2,9 +2,9 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 14,
-  "up_avec_simulation_complete": 12,
-  "up_restant_a_alimenter": 84,
+  "simulations_affichables": 15,
+  "up_avec_simulation_complete": 13,
+  "up_restant_a_alimenter": 83,
   "scenarios": [
     {
       "up_id": "conserverie_legumes",
@@ -732,6 +732,58 @@
         -4.656612873077393e-10,
         -2.3283064365386963e-10,
         -1.862645149230957e-9
+      ]
+    },
+    {
+      "up_id": "engrais",
+      "configuration_id": null,
+      "nom": "Engrais & pesticides",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_historique_cas_fournisseur_non_devis",
+      "source_prix": "https://www.fertilizerproductequipment.com/1000-l-h-npk-liquid-fertilizer-production-equipment-in-france/",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 53186,
+      "investissement_simulation_usd": 112486,
+      "reserve_initiale_distincte_usd": 97644.1632527778,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 440000.00000000006,
+          "ventes_kg": 417999.99999999994,
+          "stock_fin_kg": 21999.99999999994,
+          "chiffre_affaires_usd": 1003200,
+          "resultat_net_usd": 191909.70909999992
+        },
+        {
+          "annee": 2,
+          "production_kg": 549999.9999999999,
+          "ventes_kg": 522500.00000000006,
+          "stock_fin_kg": 49500.00000000001,
+          "chiffre_affaires_usd": 1279079.9999999998,
+          "resultat_net_usd": 266501.3886390324
+        },
+        {
+          "annee": 3,
+          "production_kg": 660000,
+          "ventes_kg": 627000,
+          "stock_fin_kg": 82500,
+          "chiffre_affaires_usd": 1565593.92,
+          "resultat_net_usd": 342030.6998970766
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -5.820766091346741e-11,
+        0,
+        2.3283064365386963e-10
       ]
     }
   ]
