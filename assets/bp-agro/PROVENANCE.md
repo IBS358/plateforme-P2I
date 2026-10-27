@@ -28,3 +28,7 @@ Ces images ont été générées par IA à partir de descriptions des fonctions.
 ## Cosmétiques au karité — 27 octobre 2026
 
 `atelier-cosmetique-ia.jpg` : illustrations IA non contractuelles du traitement de l’eau, de la pesée, de l’émulsion, du conditionnement, de l’étiquetage et du produit fini à marque fictive ; elles ne représentent pas les machines catalogue.
+
+## Détergent vaisselle — 27 octobre 2026
+
+`atelier-detergent-ia.jpg` : illustrations IA non contractuelles du traitement de l’eau, de la pesée, du mélange, du remplissage manuel, du bouchage et étiquetage, puis du produit fini à marque fictive ; elles ne représentent pas les modèles catalogue.

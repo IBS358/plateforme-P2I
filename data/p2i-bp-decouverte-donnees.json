@@ -4293,8 +4293,56 @@
         "reference": {
           "configuration_id": "reference",
           "nom": "Détergents & produits ménagers",
-          "qualification": "configuration_a_documenter",
-          "reference": null,
+          "qualification": "simulation_decouverte_calculable",
+          "reference": {
+            "up_id": "detergents",
+            "configuration_id": null,
+            "nom": "Liquide vaisselle en bouteilles",
+            "sous_titre": "Mélange et conditionnement manuel",
+            "description": "Production de liquide vaisselle en bouteilles refermables de 1 L à partir de matières achetées ; formulation et contrôle qualité à définir.",
+            "capacite": 187.5,
+            "unite": "kg/h",
+            "machines": 5900,
+            "investissement": 41000,
+            "production": [
+              150000,
+              200000,
+              250000
+            ],
+            "ventes": [
+              150000,
+              200000,
+              250000
+            ],
+            "prix": [
+              0.95,
+              0.969,
+              0.98838
+            ],
+            "matieres_kg": 0.27,
+            "cout_production_kg": [
+              0.73,
+              0.7004,
+              0.689585
+            ],
+            "personnel": 6000,
+            "charges_fixes": 14000,
+            "croissance_personnel": 0.03,
+            "croissance_charges": 0.03,
+            "part_apport": 0.3,
+            "part_dette": 0.7,
+            "taux_interet": 0.08,
+            "duree_dette_mois": 60,
+            "duree_amortissement_ans": 10,
+            "taux_tva": 0.18,
+            "taux_is": 0.25,
+            "coussin_tresorerie": 0.1,
+            "source": "data/p2i-bp-lot-chimie-03.json / detergents : prix catalogue ou budget de référence + hypothèses P2I explicites",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+            "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "stock_matieres_jours": 30
+          },
           "economique_herite_up": true,
           "economique": {
             "budget_minimum_historique": {
@@ -4361,7 +4409,97 @@
             "qualification": "references_historiques_a_documenter",
             "aucune_repartition_fictive_des_charges": true
           },
-          "source": "up-data.js / detergents"
+          "source": "up-data.js / detergents",
+          "visuels": {
+            "atlas": "detergent",
+            "product_index": 5
+          },
+          "prix_equipement": {
+            "id": "catalogue_detergent_aile_500",
+            "url": "https://www.made-in-china.com/price/prodetail_Homogenizer_bApYFeVjfhWl.html",
+            "consulte_le": "2026-10-27",
+            "fournisseur": "Guangzhou Aile Automation Equipment",
+            "modele": "Mélangeur de savon liquide 500 L",
+            "prix": 5900,
+            "devise": "USD",
+            "base": "prix public un ensemble, livraison et options non précisées",
+            "capacite": 500,
+            "unite_capacite": "litres par lot",
+            "fonctions": [
+              "Traitement de l’eau",
+              "Pesée des ingrédients",
+              "Mélange",
+              "Remplissage manuel",
+              "Fermeture et étiquetage manuels"
+            ],
+            "qualification": "prix_catalogue_public_non_certifie",
+            "limites": "Le prix concerne le mélangeur, non une ligne complète. Eau, remplissage, fermeture et étiquetage sont des fonctions auxiliaires budgétées séparément ; durée des lots et utilités à confirmer.",
+            "equipements_complementaires": []
+          },
+          "emballage": {
+            "statut": "hypothese_P2I",
+            "format": "Bouteille de 1 L refermable, étiquetée et regroupée en carton",
+            "cout_usd_par_kg": 0.16,
+            "composants_usd_par_kg": {
+              "bouteille": 0.105,
+              "bouchon": 0.02,
+              "etiquette": 0.015,
+              "regroupement": 0.02
+            },
+            "mode_comptable": "inclus_dans_cout_industriel",
+            "ecologie": "Collecte et recyclage du contenant à étudier.",
+            "source": "Hypothèse P2I non tarif fournisseur"
+          },
+          "hypotheses_explicites": {
+            "production": "Mélangeur 500 L par lot ; scénario P2I 3 lots/jour sur 8 h, densité supposée 1 kg/L, 250 j/an ; temps de mélange et cadence réelle à confirmer. Aucune perte ni invendu simulés.",
+            "matieres": "Matières et ingrédients 0,27 USD/kg, hypothèse P2I, formule et prix locaux non documentés.",
+            "process": "0,26 USD/kg inclut 0,16 USD/kg d’emballage et 0,10 USD/kg d’utilités et consommables, hypothèses P2I.",
+            "personnel": "Personnel industriel intégré aux frais fixes industriels ; personnel commercial et administratif distinct.",
+            "prix_vente": "0,95 USD/kg départ UP en année 1 puis +2 %/an, hypothèse, soit environ 557 FCFA/L si densité 1 ; prix de détail observé différent.",
+            "complements": "Transport, traitement de l’eau, conditionnement manuel et installation sont des enveloppes P2I distinctes du prix du mélangeur ; aucun prix catalogue d’une ligne complète.",
+            "qualite": "Formulation, stabilité, étiquetage, sécurité des opérateurs et conformité du produit restent à établir.",
+            "sources_prix_marche": [
+              {
+                "url": "https://openmoise.ci/shop/clean-extra-savon-liquide-vaisselle-citron-1l-58499?page=2521",
+                "description": "Liquide vaisselle 1 L, 700 FCFA au détail ; rupture de stock lors de la consultation."
+              },
+              {
+                "url": "https://quincaillerie-ivoirienne.shop/products/liquide-vaisselle-flacon-1-l/",
+                "description": "Liquide vaisselle 1 L, 999 FCFA au détail ; marque et circuit distincts."
+              }
+            ],
+            "conventions": {
+              "apport": 0.3,
+              "dette": 0.7,
+              "taux_interet_annuel": 0.08,
+              "dette_mois": 60,
+              "amortissement_ans": 10,
+              "tva_simulation": 0.18,
+              "is_simulation": 0.25,
+              "croissance_charges": 0.03,
+              "croissance_personnel": 0.03,
+              "coussin_tresorerie": 0.1,
+              "clients_comptant": 0.4,
+              "clients_30_jours": 0.6,
+              "fournisseurs_comptant": true,
+              "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+            },
+            "complements_usd": {
+              "fret": 3000,
+              "assurance": 400,
+              "douane_transit": 3000,
+              "transport_local": 1000,
+              "genie_civil": 6000,
+              "utilites": 6000,
+              "installation_formation": 2500,
+              "pieces_initiales": 1200,
+              "securite_environnement": 2500,
+              "etudes_controle": 2500,
+              "eau_et_conditionnement_manuel": 7000
+            },
+            "base_budget_equipements_usd": 5900,
+            "conversion": null
+          }
         }
       },
       "autres_variantes": "a_recenser",
@@ -4556,7 +4694,7 @@
         "Fiscalité applicable et échéancier de financement",
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
-      "statut": "dossier_redactionnel_et_reperes_historiques_non_valide"
+      "statut": "simulation_decouverte_disponible"
     },
     "savonnerie": {
       "emballage": {
@@ -30040,5 +30178,5 @@
     }
   },
   "regles_decouverte": "Prix catalogue public ou budget P2I identifié + hypothèses explicites; pas de certification, partenariat ou devis exigé au Découverte.",
-  "nombre_simulations_completes": 12
+  "nombre_simulations_completes": 13
 }

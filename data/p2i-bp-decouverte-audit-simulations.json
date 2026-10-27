@@ -2,9 +2,9 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 12,
-  "up_avec_simulation_complete": 10,
-  "up_restant_a_alimenter": 86,
+  "simulations_affichables": 13,
+  "up_avec_simulation_complete": 11,
+  "up_restant_a_alimenter": 85,
   "scenarios": [
     {
       "up_id": "conserverie_legumes",
@@ -524,6 +524,58 @@
         2.9103830456733704e-11,
         5.820766091346741e-11,
         -8.731149137020111e-11
+      ]
+    },
+    {
+      "up_id": "detergents",
+      "configuration_id": null,
+      "nom": "Détergents & produits ménagers",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_non_certifie",
+      "source_prix": "https://www.made-in-china.com/price/prodetail_Homogenizer_bApYFeVjfhWl.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 5900,
+      "investissement_simulation_usd": 41000,
+      "reserve_initiale_distincte_usd": 14688.301388888889,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 150000,
+          "ventes_kg": 150000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 142500,
+          "resultat_net_usd": 5110.849999999999
+        },
+        {
+          "annee": 2,
+          "production_kg": 199999.99999999997,
+          "ventes_kg": 199999.99999999997,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 193800,
+          "resultat_net_usd": 20545.250000000022
+        },
+        {
+          "annee": 3,
+          "production_kg": 250000.00000000003,
+          "ventes_kg": 250000.00000000003,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 247095,
+          "resultat_net_usd": 36160.212499999994
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -2.9103830456733704e-11,
+        -7.275957614183426e-11,
+        -5.820766091346741e-11
       ]
     },
     {
