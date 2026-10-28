@@ -13,3 +13,6 @@
 - Livrer par ensembles cohérents, avec tests adaptés; ne pas solliciter de confirmations sur ces décisions déjà prises.
 
 - Chaque BP de production doit préciser un emballage adapté au produit, à son usage, à la présentation commerciale, à son coût et aux possibilités locales de réemploi ou de recyclage. Chiffrer contenant, fermeture, étiquette et regroupement sans double compte; les impacts et filières non prouvés restent à qualifier. Les prestations sans produit emballé sont marquées non applicables.
+
+- Choisir l’emballage en comparant le coût complet des solutions adaptées à chaque produit : contenant/fermeture, regroupement, pertes, machines, exploitation, logistique et stocks. Une économie ne baisse jamais automatiquement le prix de vente. Des hypothèses P2I explicites suffisent pour comparer au stade Découverte ; une incompatibilité connue exclut l’option. La poche stérilisable est la piste prioritaire d’étude de la sauce tomate, sans transposer les chiffres financiers du verre.
+- Les stocks d’emballages vides sont distincts de leur consommation : BFR et bilan valorisés au CUMP, achats dans la trésorerie, réserve financée par apport. Les IBC loués ne constituent pas un stock acheté. Préserver les anciennes entrées sans leur attribuer les nouvelles hypothèses.

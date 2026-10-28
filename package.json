@@ -10,7 +10,8 @@
     "build:bp-v108": "node scripts/build-bp-decouverte-v108.cjs",
     "test:browser-v108": "node tests/qa-bp-v108-browser.cjs",
     "test:parcours": "node tests/qa-parcours-decouverte-pro.cjs",
-    "build:bp-donnees": "node scripts/build-bp-decouverte-donnees.cjs"
+    "build:bp-donnees": "node scripts/build-bp-decouverte-donnees.cjs",
+    "test:emballages-browser": "node tests/qa-emballages-communs.cjs"
   },
   "devDependencies": {
     "@supabase/supabase-js": "2.118.0",

@@ -1,0 +1,105 @@
+{
+  "schema": "p2i.conserverie-conditionnements.v1",
+  "date": "2026-10-28",
+  "piste_prioritaire": "poche_sterilisable",
+  "masse_produit_kg": 0.4,
+  "sources": {
+    "poche": {
+      "fournisseur": "Chinee Packing Bag Co., Ltd.",
+      "url": "https://www.china-packagingbags.com/product/121c-high-temp-retort-pouch-for-ready-meal-soup-sauce-packaging/",
+      "consulte_le": "2026-10-28",
+      "reference": "PB-20728, PET/NY/AL/RCPP, thermoscellage ; 121 °C annoncé",
+      "prix_min": 0.03,
+      "prix_max": 0.08,
+      "devise": "USD",
+      "minimum_pieces": 10000,
+      "limites": "Prix de gamme selon dimensions, matériau et impression ; format 400 g, procédé et frais livrés non confirmés."
+    },
+    "boite": {
+      "fournisseur": "Qingdao Baixi Industry Co., Ltd.",
+      "url": "https://baixican.en.made-in-china.com/product-group/leuGfFsAgHWa/Tin-Cans-catalog-1.html",
+      "consulte_le": "2026-10-28",
+      "reference": "425g 300*407 Empty Metal Tin Can for Food Canned Tomato Sauce",
+      "prix_min": 0.08,
+      "prix_max": 0.1,
+      "devise": "USD",
+      "minimum_pieces": 50000,
+      "limites": "FOB annoncé ; inclusion fond/couvercle, dimensions, vernis intérieur et couple boîte/sertisseuse à préciser."
+    },
+    "verre": {
+      "fournisseur": "PADJI SARL",
+      "url": "https://www.padjisarl.com/boutique/packaging/",
+      "consulte_le": "2026-10-28",
+      "reference": "Bocal 500 ml, 350 FCFA publiés ; cible de remplissage 400 g à vérifier",
+      "prix_min": 350,
+      "prix_max": 350,
+      "devise": "XOF",
+      "minimum_pieces": null,
+      "limites": "Boutique au Cameroun ; fourniture vers Abidjan annoncée sur une autre page. Prix livré CI, couvercle, minimum et compatibilité thermique non confirmés."
+    }
+  },
+  "options": [
+    {
+      "id": "poche_sterilisable",
+      "nom": "Poche stérilisable — piste prioritaire",
+      "source_id": "poche",
+      "prix_retenu": 0.08,
+      "fret_usd_piece": 0.015,
+      "assurance_taux": 0.01,
+      "provision_import_transit_taux": 0.2,
+      "livraison_usd_piece": 0.005,
+      "marquage_usd_piece": 0.02,
+      "regroupement_usd_piece": 0.025,
+      "pertes_taux": null,
+      "energie_conditionnement_usd_piece": null,
+      "main_oeuvre_conditionnement_usd_piece": null,
+      "capex_adaptation_usd": null,
+      "amortissement_ans": null,
+      "entretien_annuel_usd": null,
+      "volume_annuel_pieces": null,
+      "qualite": {
+        "protection_produit": "a_documenter",
+        "conservation_visee": "a_documenter",
+        "fermeture": "a_documenter",
+        "compatibilite_machines": "a_documenter",
+        "presentation_tracabilite": "a_documenter"
+      },
+      "qualification": "Borne haute du prix catalogue de gamme + provisions P2I ; comparaison provisoire hors adaptations et exploitation du conditionnement.",
+      "approvisionnement_local_confirme": false,
+      "adaptations": [
+        "Remplissage et thermoscellage propres à la poche, zone de soudure propre, contrôle d’étanchéité, film et barème thermique adaptés ; pas de bouchon ajouté par défaut."
+      ]
+    },
+    {
+      "id": "boite_metal",
+      "nom": "Boîte métallique — alternative",
+      "source_id": "boite",
+      "prix_retenu": 0.1,
+      "fret_usd_piece": 0.06,
+      "assurance_taux": 0.01,
+      "provision_import_transit_taux": 0.2,
+      "livraison_usd_piece": 0.005,
+      "marquage_usd_piece": 0.02,
+      "regroupement_usd_piece": 0.02,
+      "pertes_taux": null,
+      "energie_conditionnement_usd_piece": null,
+      "main_oeuvre_conditionnement_usd_piece": null,
+      "capex_adaptation_usd": null,
+      "amortissement_ans": null,
+      "entretien_annuel_usd": null,
+      "volume_annuel_pieces": null,
+      "qualite": {
+        "protection_produit": "a_documenter",
+        "conservation_visee": "a_documenter",
+        "fermeture": "a_documenter",
+        "compatibilite_machines": "a_documenter",
+        "presentation_tracabilite": "a_documenter"
+      },
+      "qualification": "Borne haute du prix catalogue de gamme + provisions P2I ; comparaison provisoire hors adaptations et exploitation du conditionnement.",
+      "approvisionnement_local_confirme": false,
+      "adaptations": [
+        "Remplissage, sertisseuse et outillage adaptés au couple boîte/couvercle, contrôle du double serti et traitement thermique ; ne pas cumuler une fermeture déjà incluse dans la ligne."
+      ]
+    }
+  ]
+}

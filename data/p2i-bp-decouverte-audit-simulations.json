@@ -20,15 +20,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 100000,
       "investissement_simulation_usd": 167227.2,
-      "reserve_initiale_distincte_usd": 33421.56155333333,
+      "reserve_initiale_distincte_usd": 440300.8017500979,
       "financement": {
         "apport": 50168.16,
         "dette": 117059.04,
-        "apport_reserve": 33421.56155333333,
-        "apport_total": 83589.72155333334,
-        "besoin_total": 200648.76155333334,
-        "total_ressources": 200648.76155333332,
+        "apport_reserve": 440300.8017500979,
+        "apport_total": 490468.9617500979,
+        "besoin_total": 607528.0017500978,
+        "total_ressources": 607528.001750098,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 1.6423732805656468,
+        "stock_lancement": 20529.666007070584,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Bacs et chariots lavables ; transpalette pour palettes de conserves.",
@@ -52,10 +59,10 @@
           "ventes_kg": 300000,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 375000,
-          "resultat_net_usd": 32068.702319999953,
+          "resultat_net_usd": -377953.714409694,
           "amortissements_usd": 16975.44,
           "interets_usd": 8506.29024,
-          "marge_nette": 0.08551653951999988
+          "marge_nette": -1.007876571759184
         },
         {
           "annee": 2,
@@ -66,10 +73,10 @@
           "ventes_kg": 390000,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 497250,
-          "resultat_net_usd": 64724.56080000001,
+          "resultat_net_usd": -476418.0435819137,
           "amortissements_usd": 16975.44,
           "interets_usd": 6633.345600000004,
-          "marge_nette": 0.13016502926093515
+          "marge_nette": -0.9581056683396957
         },
         {
           "annee": 3,
@@ -80,10 +87,10 @@
           "ventes_kg": 450000,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 585225,
-          "resultat_net_usd": 86635.14378000001,
+          "resultat_net_usd": -553161.8146778092,
           "amortissements_usd": 16975.44,
           "interets_usd": 4760.400960000006,
-          "marge_nette": 0.14803732543893378
+          "marge_nette": -0.9452122084289106
         }
       ],
       "controles": {
@@ -93,9 +100,9 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        2.9103830456733704e-11,
         0,
-        0
+        0,
+        -3.4924596548080444e-10
       ]
     },
     {
@@ -112,15 +119,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 450000,
       "investissement_simulation_usd": 608282.78,
-      "reserve_initiale_distincte_usd": 115818.73923515074,
+      "reserve_initiale_distincte_usd": 119027.07256848409,
       "financement": {
         "apport": 182484.834,
         "dette": 425797.946,
-        "apport_reserve": 115818.73923515074,
-        "apport_total": 298303.5732351508,
-        "besoin_total": 724101.5192351508,
-        "total_ressources": 724101.5192351508,
+        "apport_reserve": 119027.07256848409,
+        "apport_total": 301511.9065684841,
+        "besoin_total": 727309.8525684841,
+        "total_ressources": 727309.8525684841,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.14,
+        "stock_lancement": 3208.3333333333335,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Chariots alimentaires, bacs de transfert et transpalette pour sacs de matières et cartons finis.",
@@ -158,10 +172,10 @@
           "ventes_kg": 638000,
           "stock_fin_kg": 29999.999999999993,
           "chiffre_affaires_usd": 1665648.0561988058,
-          "resultat_net_usd": 675837.1063883816,
+          "resultat_net_usd": 675909.292707346,
           "amortissements_usd": 61156.556,
           "interets_usd": 24128.550273333356,
-          "marge_nette": 0.40575024470098264
+          "marge_nette": 0.40579358297925566
         },
         {
           "annee": 3,
@@ -172,10 +186,10 @@
           "ventes_kg": 745000.0000000001,
           "stock_fin_kg": 34999.99999999989,
           "chiffre_affaires_usd": 1983896.4857452547,
-          "resultat_net_usd": 837300.4031306233,
+          "resultat_net_usd": 837388.2741909667,
           "amortissements_usd": 61156.556,
           "interets_usd": 17315.783137333357,
-          "marge_nette": 0.4220484330441715
+          "marge_nette": 0.4220927252040573
         }
       ],
       "controles": {
@@ -185,7 +199,7 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        4.656612873077393e-10,
+        2.3283064365386963e-10,
         9.313225746154785e-10,
         1.862645149230957e-9
       ]
@@ -204,15 +218,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 450000,
       "investissement_simulation_usd": 608282.78,
-      "reserve_initiale_distincte_usd": 123562.39937730556,
+      "reserve_initiale_distincte_usd": 126562.39937730556,
       "financement": {
         "apport": 182484.834,
         "dette": 425797.946,
-        "apport_reserve": 123562.39937730556,
-        "apport_total": 306047.23337730556,
-        "besoin_total": 731845.1793773056,
-        "total_ressources": 731845.1793773056,
+        "apport_reserve": 126562.39937730556,
+        "apport_total": 309047.23337730556,
+        "besoin_total": 734845.1793773056,
+        "total_ressources": 734845.1793773056,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.16,
+        "stock_lancement": 3000,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Chariots alimentaires, bacs de transfert et transpalette pour sacs de matières et cartons finis.",
@@ -250,10 +271,10 @@
           "ventes_kg": 570999.9999999999,
           "stock_fin_kg": 18000.000000000007,
           "chiffre_affaires_usd": 1456050,
-          "resultat_net_usd": 464058.3521931821,
+          "resultat_net_usd": 464125.8518011932,
           "amortissements_usd": 61156.556,
           "interets_usd": 24128.550273333356,
-          "marge_nette": 0.3187104510100492
+          "marge_nette": 0.31875680903897063
         },
         {
           "annee": 3,
@@ -264,10 +285,10 @@
           "ventes_kg": 672000,
           "stock_fin_kg": 25999.999999999913,
           "chiffre_affaires_usd": 1747872,
-          "resultat_net_usd": 590665.6521083212,
+          "resultat_net_usd": 590755.2616160318,
           "amortissements_usd": 61156.556,
           "interets_usd": 17315.783137333357,
-          "marge_nette": 0.3379341577119613
+          "marge_nette": 0.33798542548655264
         }
       ],
       "controles": {
@@ -278,8 +299,8 @@
       },
       "ecart_bilans": [
         0,
-        -2.3283064365386963e-10,
-        1.3969838619232178e-9
+        -4.656612873077393e-10,
+        4.656612873077393e-10
       ]
     },
     {
@@ -296,15 +317,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 450000,
       "investissement_simulation_usd": 608282.78,
-      "reserve_initiale_distincte_usd": 123851.64937730556,
+      "reserve_initiale_distincte_usd": 126768.3160439722,
       "financement": {
         "apport": 182484.834,
         "dette": 425797.946,
-        "apport_reserve": 123851.64937730556,
-        "apport_total": 306336.48337730556,
-        "besoin_total": 732134.4293773056,
-        "total_ressources": 732134.4293773056,
+        "apport_reserve": 126768.3160439722,
+        "apport_total": 309253.1500439722,
+        "besoin_total": 735051.0960439722,
+        "total_ressources": 735051.0960439722,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.14,
+        "stock_lancement": 2916.6666666666674,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Chariots alimentaires, bacs de transfert et transpalette pour sacs de matières et cartons finis.",
@@ -342,10 +370,10 @@
           "ventes_kg": 610000,
           "stock_fin_kg": 19999.99999999989,
           "chiffre_affaires_usd": 1431060.0000000002,
-          "resultat_net_usd": 453887.29126428236,
+          "resultat_net_usd": 453952.9158571734,
           "amortissements_usd": 61156.556,
           "interets_usd": 24128.550273333356,
-          "marge_nette": 0.31716859619043386
+          "marge_nette": 0.317214453521986
         },
         {
           "annee": 3,
@@ -356,10 +384,10 @@
           "ventes_kg": 712999.9999999999,
           "stock_fin_kg": 26999.999999999993,
           "chiffre_affaires_usd": 1706151.9600000007,
-          "resultat_net_usd": 573701.4325519416,
+          "resultat_net_usd": 573785.2483996623,
           "amortissements_usd": 61156.556,
           "interets_usd": 17315.783137333357,
-          "marge_nette": 0.3362545927925092
+          "marge_nette": 0.3363037184563924
         }
       ],
       "controles": {
@@ -369,9 +397,9 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        2.3283064365386963e-10,
         0,
-        0
+        0,
+        -9.313225746154785e-10
       ]
     },
     {
@@ -388,15 +416,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 45511.857299999996,
       "investissement_simulation_usd": 89111.8573,
-      "reserve_initiale_distincte_usd": 13740.865506080696,
+      "reserve_initiale_distincte_usd": 13907.532172747362,
       "financement": {
         "apport": 26733.55719,
         "dette": 62378.30011,
-        "apport_reserve": 13740.865506080696,
-        "apport_total": 40474.4226960807,
-        "besoin_total": 102852.7228060807,
-        "total_ressources": 102852.7228060807,
+        "apport_reserve": 13907.532172747362,
+        "apport_total": 40641.08936274736,
+        "besoin_total": 103019.38947274737,
+        "total_ressources": 103019.38947274737,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.1,
+        "stock_lancement": 166.66666666666666,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Chariots à grilles et de refroidissement ; transfert des sacs et des cartons.",
@@ -434,10 +469,10 @@
           "ventes_kg": 49999.99999999999,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 122400,
-          "resultat_net_usd": 24851.98944782499,
+          "resultat_net_usd": 24855.73944076871,
           "amortissements_usd": 8994.24373,
           "interets_usd": 3534.7703395666667,
-          "marge_nette": 0.20303912947569439
+          "marge_nette": 0.203069766672947
         },
         {
           "annee": 3,
@@ -448,10 +483,10 @@
           "ventes_kg": 60000,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 149817.6,
-          "resultat_net_usd": 38628.76404914501,
+          "resultat_net_usd": 38633.59217211631,
           "amortissements_usd": 8994.24373,
           "interets_usd": 2536.7175378066668,
-          "marge_nette": 0.257838625429489
+          "marge_nette": 0.25787085210360006
         }
       ],
       "controles": {
@@ -461,9 +496,9 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        0,
+        1.4551915228366852e-11,
         2.9103830456733704e-11,
-        2.9103830456733704e-11
+        0
       ]
     },
     {
@@ -480,15 +515,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 97009.64750699999,
       "investissement_simulation_usd": 146636.84750699997,
-      "reserve_initiale_distincte_usd": 51946.37716844164,
+      "reserve_initiale_distincte_usd": 56946.37716844164,
       "financement": {
         "apport": 43991.05425209999,
         "dette": 102645.79325489997,
-        "apport_reserve": 51946.37716844164,
-        "apport_total": 95937.43142054163,
-        "besoin_total": 198583.22467544163,
-        "total_ressources": 198583.2246754416,
+        "apport_reserve": 56946.37716844164,
+        "apport_total": 100937.43142054163,
+        "besoin_total": 203583.22467544163,
+        "total_ressources": 203583.2246754416,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.39999999999999997,
+        "stock_lancement": 5000,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Caisses de fruits, chariots de transfert et transpalette pour les palettes de bouteilles.",
@@ -526,10 +568,10 @@
           "ventes_kg": 382200,
           "stock_fin_kg": 13800,
           "chiffre_affaires_usd": 608156.6399999999,
-          "resultat_net_usd": 78699.09045307933,
+          "resultat_net_usd": 78811.58964132646,
           "amortissements_usd": 14916.404750699996,
           "interets_usd": 5816.594951110993,
-          "marge_nette": 0.12940595444798456
+          "marge_nette": 0.12959093834990681
         },
         {
           "annee": 3,
@@ -540,10 +582,10 @@
           "ventes_kg": 441000,
           "stock_fin_kg": 22800,
           "chiffre_affaires_usd": 715753.5839999999,
-          "resultat_net_usd": 100224.90279815783,
+          "resultat_net_usd": 100375.53761842896,
           "amortissements_usd": 14916.404750699996,
           "interets_usd": 4174.262259032595,
-          "marge_nette": 0.14002710575062638
+          "marge_nette": 0.14023756200769366
         }
       ],
       "controles": {
@@ -555,7 +597,7 @@
       "ecart_bilans": [
         0,
         0,
-        0
+        2.3283064365386963e-10
       ]
     },
     {
@@ -572,15 +614,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 107340.87,
       "investissement_simulation_usd": 186404.87,
-      "reserve_initiale_distincte_usd": 43179.294014430554,
+      "reserve_initiale_distincte_usd": 46554.294014430554,
       "financement": {
         "apport": 55921.460999999996,
         "dette": 130483.40899999999,
-        "apport_reserve": 43179.294014430554,
-        "apport_total": 99100.75501443056,
-        "besoin_total": 229584.16401443054,
-        "total_ressources": 229584.16401443054,
+        "apport_reserve": 46554.294014430554,
+        "apport_total": 102475.75501443056,
+        "besoin_total": 232959.16401443054,
+        "total_ressources": 232959.16401443054,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.18,
+        "stock_lancement": 3375,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Chariots lavables et transpalette adaptés aux flux de la zone froide.",
@@ -618,10 +667,10 @@
           "ventes_kg": 600000,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 1040400,
-          "resultat_net_usd": 271017.18986750004,
+          "resultat_net_usd": 271093.12722461025,
           "amortissements_usd": 18876.887,
           "interets_usd": 7394.05984333333,
-          "marge_nette": 0.2604932620794887
+          "marge_nette": 0.26056625069647277
         },
         {
           "annee": 3,
@@ -632,10 +681,10 @@
           "ventes_kg": 700000.0000000001,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 1238076,
-          "resultat_net_usd": 332154.82777550013,
+          "resultat_net_usd": 332259.1152221543,
           "amortissements_usd": 18876.887,
           "interets_usd": 5306.325299333328,
-          "marge_nette": 0.26828306806326924
+          "marge_nette": 0.26836730154057936
         }
       ],
       "controles": {
@@ -647,7 +696,7 @@
       "ecart_bilans": [
         -5.820766091346741e-11,
         -2.3283064365386963e-10,
-        -2.3283064365386963e-10
+        -6.984919309616089e-10
       ]
     },
     {
@@ -664,15 +713,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 42000,
       "investissement_simulation_usd": 107383.72,
-      "reserve_initiale_distincte_usd": 39333.49053811357,
+      "reserve_initiale_distincte_usd": 39858.49053811357,
       "financement": {
         "apport": 32215.115999999998,
         "dette": 75168.60399999999,
-        "apport_reserve": 39333.49053811357,
-        "apport_total": 71548.60653811357,
-        "besoin_total": 146717.21053811358,
-        "total_ressources": 146717.21053811355,
+        "apport_reserve": 39858.49053811357,
+        "apport_total": 72073.60653811357,
+        "besoin_total": 147242.21053811358,
+        "total_ressources": 147242.21053811355,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.18,
+        "stock_lancement": 525,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Transfert des sacs de graines et des tourteaux ; manutention des bidons et fûts selon les formats retenus.",
@@ -710,10 +766,10 @@
           "ventes_kg": 90000,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 413100,
-          "resultat_net_usd": 66137.49346199186,
+          "resultat_net_usd": 66149.30593976454,
           "amortissements_usd": 10896.744,
           "interets_usd": 4259.554226666664,
-          "marge_nette": 0.1601004441103652
+          "marge_nette": 0.16012903882780088
         },
         {
           "annee": 3,
@@ -724,10 +780,10 @@
           "ventes_kg": 110000.00000000001,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 514998,
-          "resultat_net_usd": 90938.67514527416,
+          "resultat_net_usd": 90954.31826306619,
           "amortissements_usd": 10896.744,
           "interets_usd": 3056.8565626666655,
-          "marge_nette": 0.17658063748844494
+          "marge_nette": 0.17661101259241044
         }
       ],
       "controles": {
@@ -737,9 +793,9 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        2.9103830456733704e-11,
-        5.820766091346741e-11,
-        1.7462298274040222e-10
+        -2.9103830456733704e-11,
+        0,
+        -1.7462298274040222e-10
       ]
     },
     {
@@ -756,15 +812,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 5227.130999999999,
       "investissement_simulation_usd": 48836.021,
-      "reserve_initiale_distincte_usd": 8740.010622483065,
+      "reserve_initiale_distincte_usd": 8948.3439558164,
       "financement": {
         "apport": 14650.8063,
         "dette": 34185.2147,
-        "apport_reserve": 8740.010622483065,
-        "apport_total": 23390.816922483064,
-        "besoin_total": 57576.03162248307,
-        "total_ressources": 57576.03162248306,
+        "apport_reserve": 8948.3439558164,
+        "apport_total": 23599.1502558164,
+        "besoin_total": 57784.3649558164,
+        "total_ressources": 57784.364955816396,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 1,
+        "stock_lancement": 208.33333333333331,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Bacs fermés et petits chariots ; transpalette selon les volumes de sacs et de cartons.",
@@ -802,10 +865,10 @@
           "ventes_kg": 6500.000000000001,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 132599.99999999997,
-          "resultat_net_usd": 37623.732294238536,
+          "resultat_net_usd": 37628.41978541817,
           "amortissements_usd": 5034.4911,
           "interets_usd": 1937.1621663333337,
-          "marge_nette": 0.2837385542551926
+          "marge_nette": 0.28377390486740706
         },
         {
           "annee": 3,
@@ -816,10 +879,10 @@
           "ventes_kg": 8000.000000000001,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 166464,
-          "resultat_net_usd": 51439.449748260115,
+          "resultat_net_usd": 51445.72630776999,
           "amortissements_usd": 5034.4911,
           "interets_usd": 1390.198731133334,
-          "marge_nette": 0.3090124576380486
+          "marge_nette": 0.30905016284463904
         }
       ],
       "controles": {
@@ -829,8 +892,8 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        2.9103830456733704e-11,
         1.4551915228366852e-11,
+        2.9103830456733704e-11,
         0
       ]
     },
@@ -848,15 +911,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 32000,
       "investissement_simulation_usd": 63253.759999999995,
-      "reserve_initiale_distincte_usd": 31699.509081555556,
+      "reserve_initiale_distincte_usd": 31924.509081555556,
       "financement": {
         "apport": 18976.127999999997,
         "dette": 44277.63199999999,
-        "apport_reserve": 31699.509081555556,
-        "apport_total": 50675.63708155556,
-        "besoin_total": 94953.26908155555,
-        "total_ressources": 94953.26908155554,
+        "apport_reserve": 31924.509081555556,
+        "apport_total": 50900.63708155556,
+        "besoin_total": 95178.26908155555,
+        "total_ressources": 95178.26908155554,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.012,
+        "stock_lancement": 225,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Transpalette et moyens de transfert des sacs ; aide au levage selon poids des sacs et hauteur de stockage.",
@@ -894,10 +964,10 @@
           "ventes_kg": 594000,
           "stock_fin_kg": 15000,
           "chiffre_affaires_usd": 302940,
-          "resultat_net_usd": 32189.551639974237,
+          "resultat_net_usd": 32194.614117841254,
           "amortissements_usd": 6450.7519999999995,
           "interets_usd": 2509.065813333335,
-          "marge_nette": 0.1062571850530608
+          "marge_nette": 0.1062738962099467
         },
         {
           "annee": 3,
@@ -908,10 +978,10 @@
           "ventes_kg": 696500,
           "stock_fin_kg": 18500.000000000065,
           "chiffre_affaires_usd": 362319.30000000005,
-          "resultat_net_usd": 43100.70770285602,
+          "resultat_net_usd": 43107.66019112543,
           "amortissements_usd": 6450.7519999999995,
           "interets_usd": 1800.6237013333334,
-          "marge_nette": 0.11895780242138913
+          "marge_nette": 0.11897699126468125
         }
       ],
       "controles": {
@@ -922,8 +992,8 @@
       },
       "ecart_bilans": [
         -2.9103830456733704e-11,
-        0,
-        -1.7462298274040222e-10
+        -5.820766091346741e-11,
+        -1.1641532182693481e-10
       ]
     },
     {
@@ -940,15 +1010,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 32580,
       "investissement_simulation_usd": 107300.52,
-      "reserve_initiale_distincte_usd": 40709.91624783334,
+      "reserve_initiale_distincte_usd": 43709.91624783334,
       "financement": {
         "apport": 32190.156,
         "dette": 75110.364,
-        "apport_reserve": 40709.91624783334,
-        "apport_total": 72900.07224783333,
-        "besoin_total": 148010.43624783334,
-        "total_ressources": 148010.43624783334,
+        "apport_reserve": 43709.91624783334,
+        "apport_total": 75900.07224783333,
+        "besoin_total": 151010.43624783334,
+        "total_ressources": 151010.43624783334,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.16,
+        "stock_lancement": 3000,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Transpalette, chariots de bidons et aide à la manutention des fûts selon leur masse.",
@@ -986,10 +1063,10 @@
           "ventes_kg": 525000,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 527467.5,
-          "resultat_net_usd": 71565.66903,
+          "resultat_net_usd": 71633.16890298689,
           "amortissements_usd": 10872.104,
           "interets_usd": 4256.253960000004,
-          "marge_nette": 0.13567787404911205
+          "marge_nette": 0.13580584377802782
         },
         {
           "annee": 3,
@@ -1000,10 +1077,10 @@
           "ventes_kg": 600000,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 614876.4,
-          "resultat_net_usd": 94806.92839799997,
+          "resultat_net_usd": 94888.0408723855,
           "amortissements_usd": 10872.104,
           "interets_usd": 3054.4881360000068,
-          "marge_nette": 0.15418859529817694
+          "marge_nette": 0.15432051201247193
         }
       ],
       "controles": {
@@ -1014,8 +1091,8 @@
       },
       "ecart_bilans": [
         0,
-        -1.7462298274040222e-10,
-        -2.3283064365386963e-10
+        -2.3283064365386963e-10,
+        -4.0745362639427185e-10
       ]
     },
     {
@@ -1032,15 +1109,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 20000,
       "investissement_simulation_usd": 50464,
-      "reserve_initiale_distincte_usd": 17367.525844444444,
+      "reserve_initiale_distincte_usd": 17700.859177777776,
       "financement": {
         "apport": 15139.199999999999,
         "dette": 35324.799999999996,
-        "apport_reserve": 17367.525844444444,
-        "apport_total": 32506.725844444445,
-        "besoin_total": 67831.52584444445,
-        "total_ressources": 67831.52584444443,
+        "apport_reserve": 17700.859177777776,
+        "apport_total": 32840.05917777777,
+        "besoin_total": 68164.85917777778,
+        "total_ressources": 68164.85917777778,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.08,
+        "stock_lancement": 333.3333333333333,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Chariots de séchage et de transfert ; manutention adaptée aux fûts et aux palettes de savon.",
@@ -1078,10 +1162,10 @@
           "ventes_kg": 140000.00000000003,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 214200,
-          "resultat_net_usd": 42787.84600000002,
+          "resultat_net_usd": 42795.34598588743,
           "amortissements_usd": 5282.8,
           "interets_usd": 2001.7386666666675,
-          "marge_nette": 0.19975651727357618
+          "marge_nette": 0.19979153121329332
         },
         {
           "annee": 3,
@@ -1092,10 +1176,10 @@
           "ventes_kg": 170000,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 265302,
-          "resultat_net_usd": 58831.37859999995,
+          "resultat_net_usd": 58842.193593762204,
           "amortissements_usd": 5282.8,
           "interets_usd": 1436.541866666668,
-          "marge_nette": 0.22175248810789197
+          "marge_nette": 0.22179325294857258
         }
       ],
       "controles": {
@@ -1105,8 +1189,8 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        -2.9103830456733704e-11,
         0,
+        2.9103830456733704e-11,
         5.820766091346741e-11
       ]
     },
@@ -1124,15 +1208,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 49550,
       "investissement_simulation_usd": 112429.17,
-      "reserve_initiale_distincte_usd": 45939.265711791675,
+      "reserve_initiale_distincte_usd": 49689.265711791675,
       "financement": {
         "apport": 33728.751,
         "dette": 78700.419,
-        "apport_reserve": 45939.265711791675,
-        "apport_total": 79668.01671179167,
-        "besoin_total": 158368.43571179168,
-        "total_ressources": 158368.43571179168,
+        "apport_reserve": 49689.265711791675,
+        "apport_total": 83418.01671179167,
+        "besoin_total": 162118.43571179168,
+        "total_ressources": 162118.43571179168,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.6,
+        "stock_lancement": 3750,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Chariots nettoyables, aide au déplacement des fûts et transpalette pour les palettes de flacons.",
@@ -1170,10 +1261,10 @@
           "ventes_kg": 199999.99999999997,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 1020000,
-          "resultat_net_usd": 338119.85669249983,
+          "resultat_net_usd": 338204.23153373355,
           "amortissements_usd": 11500.834,
           "interets_usd": 4459.690410000004,
-          "marge_nette": 0.3314900555808822
+          "marge_nette": 0.33157277601346424
         },
         {
           "annee": 3,
@@ -1184,10 +1275,10 @@
           "ventes_kg": 250000.00000000003,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 1300500,
-          "resultat_net_usd": 449467.71922050003,
+          "resultat_net_usd": 449583.5941612269,
           "amortissements_usd": 11500.834,
           "interets_usd": 3200.4837060000073,
-          "marge_nette": 0.345611471911188
+          "marge_nette": 0.3457005722116316
         }
       ],
       "controles": {
@@ -1198,8 +1289,8 @@
       },
       "ecart_bilans": [
         -1.1641532182693481e-10,
-        0,
-        0
+        -3.4924596548080444e-10,
+        -4.656612873077393e-10
       ]
     },
     {
@@ -1216,15 +1307,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 80000,
       "investissement_simulation_usd": 148220.52000000002,
-      "reserve_initiale_distincte_usd": 107151.24574783334,
+      "reserve_initiale_distincte_usd": 110901.24574783334,
       "financement": {
         "apport": 44466.156,
         "dette": 103754.364,
-        "apport_reserve": 107151.24574783334,
-        "apport_total": 151617.40174783336,
-        "besoin_total": 255371.76574783336,
-        "total_ressources": 255371.76574783336,
+        "apport_reserve": 110901.24574783334,
+        "apport_total": 155367.40174783336,
+        "besoin_total": 259121.76574783336,
+        "total_ressources": 259121.76574783336,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.18,
+        "stock_lancement": 3750.0000000000005,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Transpalette et dispositifs adaptés aux fûts et seaux fermés ; compatibilité avec le zonage de sécurité à vérifier.",
@@ -1262,10 +1360,10 @@
           "ventes_kg": 650000,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 1856400,
-          "resultat_net_usd": 547697.6115299999,
+          "resultat_net_usd": 547781.9863712334,
           "amortissements_usd": 14964.104000000003,
           "interets_usd": 5879.413959999991,
-          "marge_nette": 0.29503211136069807
+          "marge_nette": 0.29507756214783093
         },
         {
           "annee": 3,
@@ -1276,10 +1374,10 @@
           "ventes_kg": 799999.9999999999,
           "stock_fin_kg": 0,
           "chiffre_affaires_usd": 2330496.0000000005,
-          "resultat_net_usd": 712553.8213979999,
+          "resultat_net_usd": 712666.799469178,
           "amortissements_usd": 14964.104000000003,
           "interets_usd": 4219.344135999991,
-          "marge_nette": 0.30575200360695737
+          "marge_nette": 0.3058004817297167
         }
       ],
       "controles": {
@@ -1308,15 +1406,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 21250,
       "investissement_simulation_usd": 99850,
-      "reserve_initiale_distincte_usd": 60030.38148611111,
+      "reserve_initiale_distincte_usd": 61488.71481944444,
       "financement": {
         "apport": 29955,
         "dette": 69895,
-        "apport_reserve": 60030.38148611111,
-        "apport_total": 89985.38148611112,
-        "besoin_total": 159880.38148611112,
-        "total_ressources": 159880.38148611112,
+        "apport_reserve": 61488.71481944444,
+        "apport_total": 91443.71481944443,
+        "besoin_total": 161338.71481944443,
+        "total_ressources": 161338.71481944443,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.14,
+        "stock_lancement": 1458.3333333333337,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Transpalette, chariots pour seaux de 5 kg et aide au déplacement des fûts de dispersion achetée.",
@@ -1354,10 +1459,10 @@
           "ventes_kg": 300000,
           "stock_fin_kg": 7500,
           "chiffre_affaires_usd": 673200.0000000001,
-          "resultat_net_usd": 106574.04849920463,
+          "resultat_net_usd": 106606.86084597101,
           "amortissements_usd": 10127.052,
           "interets_usd": 3960.7166666666685,
-          "marge_nette": 0.1583096382935303
+          "marge_nette": 0.1583583791532546
         },
         {
           "annee": 3,
@@ -1368,10 +1473,10 @@
           "ventes_kg": 350000.00000000006,
           "stock_fin_kg": 7500.000000000004,
           "chiffre_affaires_usd": 801108,
-          "resultat_net_usd": 138462.00796456006,
+          "resultat_net_usd": 138502.56421090718,
           "amortissements_usd": 10127.052,
           "interets_usd": 2842.396666666671,
-          "marge_nette": 0.17283812914683172
+          "marge_nette": 0.17288875433887463
         }
       ],
       "controles": {
@@ -1382,8 +1487,8 @@
       },
       "ecart_bilans": [
         2.3283064365386963e-10,
-        -1.1641532182693481e-10,
-        0
+        0,
+        -1.1641532182693481e-10
       ]
     },
     {
@@ -1400,15 +1505,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 53186,
       "investissement_simulation_usd": 113739.76000000001,
-      "reserve_initiale_distincte_usd": 97789.81886211113,
+      "reserve_initiale_distincte_usd": 100723.15219544448,
       "financement": {
         "apport": 34121.928,
         "dette": 79617.832,
-        "apport_reserve": 97789.81886211113,
-        "apport_total": 131911.74686211115,
-        "besoin_total": 211529.57886211114,
-        "total_ressources": 211529.57886211114,
+        "apport_reserve": 100723.15219544448,
+        "apport_total": 134845.08019544446,
+        "besoin_total": 214462.91219544449,
+        "total_ressources": 214462.91219544446,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.16,
+        "stock_lancement": 2933.333333333334,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Transpalette et transfert des sacs ; aide au levage et captage des poussières selon les charges.",
@@ -1446,10 +1558,10 @@
           "ventes_kg": 522500.00000000006,
           "stock_fin_kg": 49500.00000000001,
           "chiffre_affaires_usd": 1279079.9999999998,
-          "resultat_net_usd": 266201.97782454634,
+          "resultat_net_usd": 266267.9616185995,
           "amortissements_usd": 11499.352000000003,
           "interets_usd": 4511.677146666662,
-          "marge_nette": 0.2081198813401401
+          "marge_nette": 0.20817146825734084
         },
         {
           "annee": 3,
@@ -1460,10 +1572,10 @@
           "ventes_kg": 627000,
           "stock_fin_kg": 82500,
           "chiffre_affaires_usd": 1565593.92,
-          "resultat_net_usd": 341739.2949364412,
+          "resultat_net_usd": 341824.13769232767,
           "amortissements_usd": 11499.352000000003,
           "interets_usd": 3237.7918346666634,
-          "marge_nette": 0.21828092877138996
+          "marge_nette": 0.21833512082898718
         }
       ],
       "controles": {
@@ -1473,9 +1585,9 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        -5.820766091346741e-11,
-        1.1641532182693481e-10,
-        2.3283064365386963e-10
+        -1.1641532182693481e-10,
+        0,
+        0
       ]
     },
     {
@@ -1492,15 +1604,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 18440,
       "investissement_simulation_usd": 93860.52,
-      "reserve_initiale_distincte_usd": 36286.30641450001,
+      "reserve_initiale_distincte_usd": 37086.30641450001,
       "financement": {
         "apport": 28158.156,
         "dette": 65702.364,
-        "apport_reserve": 36286.30641450001,
-        "apport_total": 64444.46241450001,
-        "besoin_total": 130146.82641450001,
-        "total_ressources": 130146.82641450001,
+        "apport_reserve": 37086.30641450001,
+        "apport_total": 65244.46241450001,
+        "besoin_total": 130946.82641450001,
+        "total_ressources": 130946.82641450001,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.16,
+        "stock_lancement": 800,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Transpalette et chariots pour bidons ; manutention adaptée aux fûts, à la rétention et à la séparation des produits incompatibles.",
@@ -1538,10 +1657,10 @@
           "ventes_kg": 150000,
           "stock_fin_kg": 3600,
           "chiffre_affaires_usd": 428400,
-          "resultat_net_usd": 73251.14553161172,
+          "resultat_net_usd": 73269.14545211125,
           "amortissements_usd": 9528.104,
           "interets_usd": 3723.1339599999983,
-          "marge_nette": 0.17098773466762773
+          "marge_nette": 0.1710297512887751
         },
         {
           "annee": 3,
@@ -1552,10 +1671,10 @@
           "ventes_kg": 180000,
           "stock_fin_kg": 3600,
           "chiffre_affaires_usd": 524361.6,
-          "resultat_net_usd": 105051.72784646071,
+          "resultat_net_usd": 105074.90284215898,
           "amortissements_usd": 9528.104,
           "interets_usd": 2671.8961359999967,
-          "marge_nette": 0.20034214528001423
+          "marge_nette": 0.2003863418720192
         }
       ],
       "controles": {
@@ -1567,7 +1686,7 @@
       "ecart_bilans": [
         0,
         5.820766091346741e-11,
-        2.9103830456733704e-10
+        2.3283064365386963e-10
       ]
     },
     {
@@ -1584,15 +1703,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 60000,
       "investissement_simulation_usd": 206900,
-      "reserve_initiale_distincte_usd": 93947.14940972222,
+      "reserve_initiale_distincte_usd": 94103.39940972222,
       "financement": {
         "apport": 62070,
         "dette": 144830,
-        "apport_reserve": 93947.14940972222,
-        "apport_total": 156017.14940972222,
-        "besoin_total": 300847.1494097222,
-        "total_ressources": 300847.1494097222,
+        "apport_reserve": 94103.39940972222,
+        "apport_total": 156173.39940972222,
+        "besoin_total": 301003.3994097222,
+        "total_ressources": 301003.3994097222,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.005,
+        "stock_lancement": 156.25,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Transpalette pour IBC de 1 000 kg net ; charge totale avec tare, sol, accès et besoin éventuel de levage à dimensionner.",
@@ -1630,10 +1756,10 @@
           "ventes_kg": 1000000.0000000001,
           "stock_fin_kg": 22500,
           "chiffre_affaires_usd": 1223999.9999999998,
-          "resultat_net_usd": 258536.42000349824,
+          "resultat_net_usd": 258539.93561415252,
           "amortissements_usd": 20780.615,
           "interets_usd": 8207.033333333336,
-          "marge_nette": 0.2112225653623352
+          "marge_nette": 0.2112254375932619
         },
         {
           "annee": 3,
@@ -1644,10 +1770,10 @@
           "ventes_kg": 1250000,
           "stock_fin_kg": 22500,
           "chiffre_affaires_usd": 1560600.0000000002,
-          "resultat_net_usd": 373556.70068411325,
+          "resultat_net_usd": 373561.52880746784,
           "amortissements_usd": 20780.615,
           "interets_usd": 5889.7533333333395,
-          "marge_nette": 0.23936735914655466
+          "marge_nette": 0.2393704529075149
         }
       ],
       "controles": {
@@ -1658,8 +1784,8 @@
       },
       "ecart_bilans": [
         -5.820766091346741e-11,
-        0,
-        -6.984919309616089e-10
+        -2.3283064365386963e-10,
+        -4.656612873077393e-10
       ]
     },
     {
@@ -1676,15 +1802,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 17684.94,
       "investissement_simulation_usd": 49540.53,
-      "reserve_initiale_distincte_usd": 20363.294706125,
+      "reserve_initiale_distincte_usd": 20488.294706125,
       "financement": {
         "apport": 14862.159,
         "dette": 34678.371,
-        "apport_reserve": 20363.294706125,
-        "apport_total": 35225.453706125,
-        "besoin_total": 69903.824706125,
-        "total_ressources": 69903.824706125,
+        "apport_reserve": 20488.294706125,
+        "apport_total": 35350.453706125,
+        "besoin_total": 70028.824706125,
+        "total_ressources": 70028.824706125,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.25,
+        "stock_lancement": 125,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
@@ -1716,10 +1849,10 @@
           "ventes": 15000,
           "stock_fin": 600,
           "chiffre_affaires_usd": 275400,
-          "resultat_net_usd": 61342.62060867744,
+          "resultat_net_usd": 61345.43306779558,
           "amortissements_usd": 5194.612000000001,
           "interets_usd": 1965.1076900000023,
-          "marge_nette": 0.22274008935612724
+          "marge_nette": 0.2227503016259825
         },
         {
           "annee": 3,
@@ -1727,10 +1860,10 @@
           "ventes": 17000,
           "stock_fin": 600,
           "chiffre_affaires_usd": 318362.4,
-          "resultat_net_usd": 78870.49113205673,
+          "resultat_net_usd": 78874.1122317134,
           "amortissements_usd": 5194.612000000001,
           "interets_usd": 1410.253754000004,
-          "marge_nette": 0.24773808443477222
+          "marge_nette": 0.2477494585783792
         }
       ],
       "controles": {
@@ -1741,7 +1874,7 @@
       },
       "ecart_bilans": [
         0,
-        -8.731149137020111e-11,
+        -5.820766091346741e-11,
         -1.7462298274040222e-10
       ]
     },
@@ -1759,15 +1892,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 19643.715,
       "investissement_simulation_usd": 51499.305,
-      "reserve_initiale_distincte_usd": 22812.64604009821,
+      "reserve_initiale_distincte_usd": 22958.39604009821,
       "financement": {
         "apport": 15449.7915,
         "dette": 36049.5135,
-        "apport_reserve": 22812.64604009821,
-        "apport_total": 38262.43754009821,
-        "besoin_total": 74311.95104009821,
-        "total_ressources": 74311.95104009821,
+        "apport_reserve": 22958.39604009821,
+        "apport_total": 38408.18754009821,
+        "besoin_total": 74457.70104009821,
+        "total_ressources": 74457.70104009821,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.25,
+        "stock_lancement": 145.75,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
@@ -1799,10 +1939,10 @@
           "ventes": 17000,
           "stock_fin": 420,
           "chiffre_affaires_usd": 294780,
-          "resultat_net_usd": 58998.7751719545,
+          "resultat_net_usd": 59002.0601568237,
           "amortissements_usd": 5390.4895,
           "interets_usd": 2042.8057649999994,
-          "marge_nette": 0.20014510879962852
+          "marge_nette": 0.20015625265222778
         },
         {
           "annee": 3,
@@ -1810,10 +1950,10 @@
           "ventes": 20000,
           "stock_fin": 420,
           "chiffre_affaires_usd": 353736,
-          "resultat_net_usd": 82196.73254540717,
+          "resultat_net_usd": 82200.84031368197,
           "amortissements_usd": 5390.4895,
           "interets_usd": 1466.0135489999989,
-          "marge_nette": 0.23236745071298134
+          "marge_nette": 0.2323790632383528
         }
       ],
       "controles": {
@@ -1824,7 +1964,7 @@
       },
       "ecart_bilans": [
         -1.4551915228366852e-11,
-        -8.731149137020111e-11,
+        -1.4551915228366852e-10,
         -5.820766091346741e-11
       ]
     },
@@ -1842,15 +1982,22 @@
       "conditions_negociees_exigees": false,
       "budget_equipements_usd": 8585.030999999999,
       "investissement_simulation_usd": 40440.621,
-      "reserve_initiale_distincte_usd": 28139.4569786625,
+      "reserve_initiale_distincte_usd": 28489.4569786625,
       "financement": {
         "apport": 12132.1863,
         "dette": 28308.434699999998,
-        "apport_reserve": 28139.4569786625,
-        "apport_total": 40271.6432786625,
-        "besoin_total": 68580.0779786625,
-        "total_ressources": 68580.0779786625,
+        "apport_reserve": 28489.4569786625,
+        "apport_total": 40621.6432786625,
+        "besoin_total": 68930.0779786625,
+        "total_ressources": 68930.0779786625,
         "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.35,
+        "stock_lancement": 350,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
@@ -1882,10 +2029,10 @@
           "ventes": 29000,
           "stock_fin": 720,
           "chiffre_affaires_usd": 378624,
-          "resultat_net_usd": 85546.58983948598,
+          "resultat_net_usd": 85554.46480300708,
           "amortissements_usd": 4284.6211,
           "interets_usd": 1604.144633,
-          "marge_nette": 0.22594074818153626
+          "marge_nette": 0.22596154708366897
         },
         {
           "annee": 3,
@@ -1893,10 +2040,10 @@
           "ventes": 34000,
           "stock_fin": 720,
           "chiffre_affaires_usd": 452782.08,
-          "resultat_net_usd": 110674.49135981132,
+          "resultat_net_usd": 110684.2978600038,
           "amortissements_usd": 4284.6211,
           "interets_usd": 1151.2096778,
-          "marge_nette": 0.2444321368898065
+          "marge_nette": 0.24445379521204505
         }
       ],
       "controles": {
@@ -1908,7 +2055,7 @@
       "ecart_bilans": [
         -5.820766091346741e-11,
         -8.731149137020111e-11,
-        -2.3283064365386963e-10
+        -1.7462298274040222e-10
       ]
     }
   ]

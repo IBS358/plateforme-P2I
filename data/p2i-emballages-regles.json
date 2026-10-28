@@ -1,0 +1,136 @@
+{
+  "schema": "p2i.emballages-regles.v1",
+  "date": "2026-10-28",
+  "principes": [
+    "Comparer le coût complet des solutions adaptées au produit, sans imposer un matériau unique.",
+    "Privilégier les offres locales compatibles ; une recherche infructueuse ne démontre pas une absence de fournisseur.",
+    "Conserver distincts prix catalogue, estimations P2I et paramètres personnels.",
+    "Ne jamais abaisser automatiquement le prix de vente à partir d’une économie d’emballage.",
+    "Étudier une production auxiliaire seulement si les volumes et coûts le justifient ; aucun investissement ni gain de marge ajouté automatiquement."
+  ],
+  "criteres_qualite": [
+    "protection_produit",
+    "conservation_visee",
+    "fermeture",
+    "compatibilite_machines",
+    "presentation_tracabilite"
+  ],
+  "composants_cout": [
+    "contenant et fermeture sans doublon",
+    "marquage et regroupement",
+    "fret, assurance, import/transit et livraison",
+    "pertes de conditionnement",
+    "énergie et main-d’œuvre de conditionnement",
+    "investissement adapté et entretien",
+    "stock initial, minimum de commande et délais"
+  ],
+  "statuts_qualite": [
+    "documente",
+    "hypothese_p2i",
+    "a_documenter",
+    "incompatible"
+  ],
+  "sources_locales": {
+    "filtisac_pet": {
+      "fournisseur": "FILTISAC",
+      "url": "https://www.filtisac.com/catalogue/bouchons-et-preformes",
+      "offre": "Préformes PET et bouchons ; une préforme nécessite un soufflage.",
+      "limite": "Format, fermeture, remplissage à chaud, prix et stock non confirmés.",
+      "consulte_le": "2026-10-28"
+    },
+    "filtisac_sacs": {
+      "fournisseur": "FILTISAC",
+      "url": "https://www.filtisac.com/catalogue",
+      "offre": "Sacs PP/PP laminés, big bags.",
+      "limite": "Format, usage exact, fermeture, prix et disponibilité à préciser.",
+      "consulte_le": "2026-10-28"
+    },
+    "nme_cartons": {
+      "fournisseur": "Nouvelle MICI EMBACI",
+      "url": "https://nme.com.ci/nos-produits/cartonnerie/",
+      "offre": "Cartons et étuis sur mesure.",
+      "limite": "Ne confirme pas la disponibilité des contenants primaires ; prix et minimum à préciser.",
+      "consulte_le": "2026-10-28"
+    }
+  },
+  "familles": {
+    "conserve": {
+      "up_ids": [
+        "conserverie_legumes"
+      ],
+      "exigences": "Barrière, étanchéité et traitement thermique adaptés à la recette, à l’acidité mesurée et au contenant ; un doypack ordinaire ne vaut pas une poche stérilisable.",
+      "pistes_locales": [
+        "nme_cartons"
+      ]
+    },
+    "boisson": {
+      "up_ids": [
+        "jus_boissons",
+        "mini_laiterie"
+      ],
+      "exigences": "Aptitude au contact, fermeture, résistance au procédé et conservation visée ; chaîne du froid selon produit.",
+      "pistes_locales": [
+        "filtisac_pet",
+        "nme_cartons"
+      ]
+    },
+    "huile": {
+      "up_ids": [
+        "huiles_alimentaires"
+      ],
+      "exigences": "Compatibilité avec huile, étanchéité, oxygène et lumière ; col et bouchon adaptés.",
+      "pistes_locales": [
+        "filtisac_pet",
+        "nme_cartons"
+      ]
+    },
+    "aliment_sec": {
+      "up_ids": [
+        "biscuiterie",
+        "epices",
+        "boulangerie_industrielle"
+      ],
+      "exigences": "Protection contre humidité, oxygène, contamination et écrasement selon produit ; aptitude alimentaire et fermeture adaptées.",
+      "pistes_locales": [
+        "nme_cartons"
+      ]
+    },
+    "aliment_betail": {
+      "up_ids": [
+        "aliments_betail"
+      ],
+      "exigences": "Résistance au poids et à la manutention, protection contre humidité, fermeture et traçabilité des lots.",
+      "pistes_locales": [
+        "filtisac_sacs"
+      ]
+    },
+    "chimie": {
+      "up_ids": [
+        "detergents",
+        "savonnerie",
+        "cosmetiques",
+        "peintures",
+        "adhesifs",
+        "engrais",
+        "javel",
+        "produits_industriels"
+      ],
+      "exigences": "Compatibilité chimique du contenant et de la fermeture, étanchéité, sécurité d’emploi et étiquetage ; aucune aptitude déduite du seul matériau.",
+      "pistes_locales": [
+        "nme_cartons"
+      ]
+    },
+    "articles_textiles": {
+      "up_ids": [
+        "confection",
+        "uniformes",
+        "linge",
+        "broderie"
+      ],
+      "exigences": "Protection contre salissures et humidité, taille/composition/entretien identifiables ; limiter les protections individuelles inutiles.",
+      "pistes_locales": [
+        "nme_cartons"
+      ]
+    }
+  }
+}

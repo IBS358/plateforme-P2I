@@ -44,14 +44,18 @@ function calculate(input){
    m.consommation_matieres_usd*options.stock_matieres_jours/30;
   const finishedStock=hasPhysical?m.stock_finis_quantite*m.cout_unitaire_finis_usd:
    m.cout_production_vendue_usd*.5;
+  const packKeys=['stock_emballages_quantite','cout_unitaire_emballages_usd'];
+  const hasPack=packKeys.some(k=>m[k]!==undefined);
+  if(hasPack&&packKeys.some(k=>!number(m[k]))){problems.push('Mois '+(i+1)+' : stock emballages incomplet ou invalide');continue;}
+  const packagingStock=hasPack?m.stock_emballages_quantite*m.cout_unitaire_emballages_usd:0;
   const receivable=m.ventes_usd*.6;
   // Les fournisseurs sont payés comptant : aucune dette fournisseur.
   // Les stocks sont des encours distincts : ne pas ajouter la consommation
   // du mois une deuxième fois dans le BFR.
-  const stocks=rawStock+finishedStock;
+  const stocks=rawStock+packagingStock+finishedStock;
   const bfr=stocks+receivable;
   rows.push(Object.freeze({mois:i+1,stocks_matieres:rawStock,
-   stocks_produits_finis:finishedStock,stocks,creances_clients:receivable,
+   stocks_emballages:packagingStock,stocks_produits_finis:finishedStock,stocks,creances_clients:receivable,
    dettes_exploitation:0,bfr,
    methode_stock:hasPhysical?"stock_physique_valorise":"stock_cible_"+options.stock_matieres_jours+"_15_jours",
    encaissements_clients:m.ventes_usd*.4+previousReceivable}));

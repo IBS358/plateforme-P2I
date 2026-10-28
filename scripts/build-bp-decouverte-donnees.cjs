@@ -132,6 +132,11 @@ for(const [key,rawProfile] of Object.entries(simulationPack.profils)){
  if(!manutention.postes_budget_mutualise.length&&!manutention.postes_budget_dedie.length)postes.push({id:'manutention_a_chiffrer',libelle:'Matériel de manutention',categorie:'Manutention',montant_usd:null,qualification:'À chiffrer ; non compris dans le total présenté'});
  input.investissements_detail={schema:'p2i.bp-investissements.v1',postes,manutention};
  if(handlingCost)input.amortissements_specifiques=[{id:'manutention',base_usd:handlingCost.budget_livre_estime_usd,duree_ans:handlingCost.amortissement_ans}];
+ const packCost=packagingExisting?.cout_usd_par_kg??packagingExisting?.cout_usd_par_unite;
+ if(Number.isFinite(packCost)){
+  input.cout_emballages_stockables_unite=id==='produits_industriels'?Object.entries(packagingExisting.composants_usd_par_kg).filter(([k])=>!['location_et_rotation_ibc','lavage_controle'].includes(k)).reduce((n,[,v])=>n+v,0):packCost;
+  input.stock_emballages_jours=15;
+ }
  if(p.stock_matieres_jours!==undefined)input.stock_matieres_jours=p.stock_matieres_jours;
  if(id==='biscuiterie'){input.photo={crackers:0,biscuits_mous:1,biscuits_durs:2}[config];input.technique=ctx.P2I_BP_V108_REFERENCES.technique[config];}
  if(p.visuels)u.variantes[config].visuels=p.visuels;
@@ -144,6 +149,7 @@ for(const [key,rawProfile] of Object.entries(simulationPack.profils)){
  u.statut='simulation_decouverte_disponible';
 }
 const data={schema:'p2i.bp-donnees.v1',date:'2026-10-28',nombre_up:96,nombre_configurations:Object.values(units).reduce((n,u)=>n+u.configurations.length,0),alias_identifiants:{"profilés":"profiles"},source_perimetre_sha256:crypto.createHash('sha256').update(source).digest('hex'),parametres_communs:{hygiene_professionnelle:hygienePolicy,electricite_mt_general:{source:'https://www.cie.ci/entreprise/tarifs-electricite',consulte_le:'2026-10-26',regime:'MT général, utilisation annuelle 1 000 à 5 000 heures',devise:'XOF',prime_kw_an_ht:33643.67,kwh_pleines_ht:74.06,kwh_pointe_ht:101,kwh_creuses_ht:61.29,qualification:'bareme_publie_application_contractuelle_a_confirmer'}},financement:{apport:.3,dette:.7},horizons:{resultat_ans:3,bfr_mois:36,tresorerie_mois:12},filieres:ctx.filieres.map(f=>({id:f.id,nom:f.name,up_ids:f.units.map(u=>u.id)})),unites:units};
+require('./p2i-emballages-commun.cjs').appliquer(data,ctx.P2I_BP_V108_REFERENCES.change);
 data.regles_decouverte=simulationPack.philosophie;
 data.nombre_simulations_completes=Object.values(units).flatMap(u=>Object.values(u.variantes)).filter(v=>v.reference?.production?.length===3).length;
 fs.writeFileSync(path.join(root,'data/p2i-bp-decouverte-donnees.json'),JSON.stringify(data,null,2)+'\n');

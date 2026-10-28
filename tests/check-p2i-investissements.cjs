@@ -14,7 +14,8 @@ for(const u of Object.values(c.P2I_BP_DONNEES.unites)){
   near(r.investissements.postes.reduce((n,p)=>n+(p.montant_usd??0),0),s.investissement);
   near(r.investissements.manutention.budget_dedie_usd,mc.budget_livre_estime_usd);
   near(s.investissement-old.investissement,mc.mode==='budget_ajoute'?mc.budget_livre_estime_usd:0);
-  near(s.cout_production_kg[0]-old.cout_production_kg[0],mc.entretien_supplementaire_usd_an/s.production[0]);
+  const deltaPack=u.up_id==='conserverie_legumes'?v.emballage.cout_usd_par_kg-.24:0;
+  near(s.cout_production_kg[0]-old.cout_production_kg[0],mc.entretien_supplementaire_usd_an/s.production[0]+deltaPack);
   assert.deepEqual(clone(s.prix),old.prix,'Aucun prix de vente relevé pour compenser les coûts');assert.deepEqual(clone(s.ventes),old.ventes);assert.equal(s.machines,old.machines);
   assert.ok(r.annuel[0].resultat_net<before.annuel[0].resultat_net,'Amortissement et charges effectivement déduits');
   near(r.annuel[0].amortissements,(s.investissement-mc.budget_livre_estime_usd)/s.duree_amortissement_ans+mc.budget_livre_estime_usd/5);

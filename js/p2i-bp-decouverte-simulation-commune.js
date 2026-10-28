@@ -67,6 +67,9 @@ function calculer(input){
  for(const k of ['production','ventes','prix','cout_production_kg'])if(!Array.isArray(s[k])||s[k].length!==3||!s[k].every(positive))throw Error('Trois années requises : '+k);
  if(unite.nom==='pièce'&&[...s.production,...s.ventes].some(x=>!Number.isInteger(x)))throw Error('Les quantités en pièces doivent être entières');
  const stockMatieresJours=s.stock_matieres_jours??30;if(!positive(stockMatieresJours)||stockMatieresJours>30)throw Error('Stock matières : entre 0 et 30 jours');
+ const packActive=s.cout_emballages_stockables_unite!==undefined||s.stock_emballages_jours!==undefined;
+ if(packActive&&(!positive(s.cout_emballages_stockables_unite)||!positive(s.stock_emballages_jours)||s.stock_emballages_jours>90))throw Error('Stock emballages : coût et jours entre 0 et 90 requis');
+ let packQty=0,packValue=0;
  const specifics=normaliserAmortissements(s.amortissements_specifiques||[]),specificBase=specifics.reduce((n,x)=>n+x.base_usd,0);
  if(specificBase>s.investissement)throw Error('Bases amortissables spécifiques supérieures à l’investissement');
  const debt=s.investissement*.7,principal=debt/s.duree_dette_mois,amortissement=(s.investissement-specificBase)/s.duree_amortissement_ans+specifics.reduce((n,x)=>n+x.base_usd/x.duree_ans,0);
@@ -79,7 +82,16 @@ function calculer(input){
   for(let m=0;m<12;m++){
    const prod=unite.nom==='pièce'?Math.floor(s.production[y]*(m+1)/12)-Math.floor(s.production[y]*m/12):prodMean,sold=unite.nom==='pièce'?Math.floor(s.ventes[y]*(m+1)/12)-Math.floor(s.ventes[y]*m/12):soldMean;
    const available=stockQty+prod;if(sold>available+.00001)throw Error('Ventes supérieures au stock disponible');
-   const average=available?(stockValue+prod*cost)/available:0;
+   const packPrice=packActive?s.cout_emballages_stockables_unite*(1+s.croissance_charges)**y:0;
+   if(packActive&&cost+1e-9<material+packPrice)throw Error('Coût industriel inférieur aux matières et emballages');
+   const packTarget=packActive?(unite.nom==='pièce'?Math.ceil(prod*s.stock_emballages_jours/30):prod*s.stock_emballages_jours/30):0;
+   const packPurchasesQty=packActive?Math.max(0,prod+packTarget-packQty):0;
+   const packPurchases=packPurchasesQty*packPrice,packAvailable=packQty+packPurchasesQty;
+   const packAverage=packAvailable?(packValue+packPurchases)/packAvailable:0;
+   const packConsumption=packActive?prod*packAverage:0;
+   packQty=packActive?packAvailable-prod:0;packValue=packQty*packAverage;
+   const effectiveCost=cost+(packActive&&prod>0?packConsumption/prod-packPrice:0);
+   const average=available?(stockValue+prod*effectiveCost)/available:0;
    const e=root.P2I_ECONOMIC_RESULT_ENGINE.calculer({type_activite:'fabrication',quantite_produite:available,quantite_vendue:sold,quantite_perdue:0,cout_variable_unitaire:average,charges_fixes_industrielles:0,chiffre_affaires_usd:sold*s.prix[y]});
    stockQty=e.quantite_stockee;stockValue=e.valeur_stock_indicative_usd;
    const raw=prod*material*stockMatieresJours/30,purchases=prod*material+raw-rawPrevious;
@@ -88,7 +100,7 @@ function calculer(input){
    const inputVat=purchases*s.taux_tva,invoiceVat=ca*s.taux_tva;
    const vatPaid=vatDuePrevious,netVat=invoiceVat-inputVat-vatCredit;
    vatCredit=Math.max(0,-netVat);vatDuePrevious=Math.max(0,netVat);
-   const row={mois:y*12+m+1,production:prod,ventes:sold,prix:s.prix[y],ca,cpv:e.cout_produits_vendus_usd,stock_quantite:stockQty,stock_valeur:stockValue,stock_matieres:raw,creances:.6*ca,encaissements:collection,achats_matieres:purchases,cout_process:prod*(cost-material),personnel,charges_fixes:fixed,interets:interest,principal,tva_facturee:invoiceVat,tva_encaissee:collection*s.taux_tva,tva_deductible:inputVat,tva_payee:vatPaid,tva_due:vatDuePrevious,credit_tva:vatCredit,dette_fin:Math.max(0,debtRemaining-principal)};
+   const row={mois:y*12+m+1,production:prod,ventes:sold,prix:s.prix[y],ca,cpv:e.cout_produits_vendus_usd,stock_quantite:stockQty,stock_valeur:stockValue,stock_matieres:raw,stock_emballages:packValue,stock_emballages_quantite:packQty,cout_emballages_moyen:packAverage,consommation_emballages:packConsumption,achats_emballages:packPurchases,creances:.6*ca,encaissements:collection,achats_matieres:purchases,cout_process:prod*(cost-material-packPrice),personnel,charges_fixes:fixed,interets:interest,principal,tva_facturee:invoiceVat,tva_encaissee:collection*s.taux_tva,tva_deductible:inputVat,tva_payee:vatPaid,tva_due:vatDuePrevious,credit_tva:vatCredit,dette_fin:Math.max(0,debtRemaining-principal)};
    row.ebit=ca-row.cpv-personnel-fixed-amortissement/12;
    debtRemaining=row.dette_fin;receivablesPrevious=row.creances;rawPrevious=raw;months.push(row);yearRows.push(row);economic.push(e);
   }
@@ -105,9 +117,9 @@ function calculer(input){
   for(const row of yearRows){row.is_reserve=tax/12;isTotal+=row.is_reserve;row.is_cumule=isTotal;}
   annual.push({annee:y+1,production:sum('production'),ventes:sum('ventes'),stock_quantite:stockQty,chiffre_affaires:f.chiffre_affaires_total_usd,cout_produits_vendus:f.cout_ventes_total_usd,personnel:sum('personnel'),charges_fixes:sum('charges_fixes'),charges_exploitation:f.autres_charges_exploitation_usd,amortissements:amortissement,charges_financieres:sum('interets'),impots:tax,resultat_net:f.resultat_net_usd,resultat_avant_impot:f.resultat_avant_impot_usd,ebit:f.resultat_exploitation_usd,ebitda:f.resultat_exploitation_usd+amortissement,financier:f});
  }
- const bfr=root.P2I_BP_BFR_MENSUEL.calculate({hypotheses:{part_clients_comptant:.4,part_clients_30_jours:.6,stock_matieres_jours:stockMatieresJours,stock_produits_finis_jours:15,delai_fournisseurs_jours:0,jours_mois:30},creances_ouverture_usd:0,mois:months.map(r=>({ventes_usd:r.ca,consommation_matieres_usd:r.production*s.matieres_kg*(1+s.croissance_charges)**Math.floor((r.mois-1)/12),cout_production_vendue_usd:r.cpv,stock_matieres_quantite:r.stock_matieres,cout_unitaire_matieres_usd:1,stock_finis_quantite:r.stock_quantite,cout_unitaire_finis_usd:r.stock_quantite?r.stock_valeur/r.stock_quantite:0}))});
+ const bfr=root.P2I_BP_BFR_MENSUEL.calculate({hypotheses:{part_clients_comptant:.4,part_clients_30_jours:.6,stock_matieres_jours:stockMatieresJours,stock_produits_finis_jours:15,delai_fournisseurs_jours:0,jours_mois:30},creances_ouverture_usd:0,mois:months.map(r=>({ventes_usd:r.ca,consommation_matieres_usd:r.production*s.matieres_kg*(1+s.croissance_charges)**Math.floor((r.mois-1)/12),cout_production_vendue_usd:r.cpv,stock_emballages_quantite:r.stock_emballages,cout_unitaire_emballages_usd:1,stock_matieres_quantite:r.stock_matieres,cout_unitaire_matieres_usd:1,stock_finis_quantite:r.stock_quantite,cout_unitaire_finis_usd:r.stock_quantite?r.stock_valeur/r.stock_quantite:0}))});
  if(!bfr.valide)throw Error(bfr.blocages.join('; '));
- const flows=rows=>rows.map(r=>({ventes_clients:r.encaissements*(1+s.taux_tva),autres_encaissements:0,achats_matiere:r.achats_matieres*(1+s.taux_tva),salaires:r.personnel,charges_exploitation:r.charges_fixes+r.cout_process,investissements:0,service_dette:r.interets+r.principal,impots:r.tva_payee,autres_decaissements:0}));
+ const flows=rows=>rows.map(r=>({ventes_clients:r.encaissements*(1+s.taux_tva),autres_encaissements:0,achats_matiere:r.achats_matieres*(1+s.taux_tva),salaires:r.personnel,charges_exploitation:r.charges_fixes+r.cout_process+r.achats_emballages,investissements:0,service_dette:r.interets+r.principal,impots:r.tva_payee,autres_decaissements:0}));
  const baseline=root.P2I_BP_MOTEUR_TRESORERIE.calculer({solde_initial:0,mois:flows(months.slice(0,12))});
  if(!baseline.valide)throw Error(baseline.erreurs.join('; '));
  const minimum=Math.min(0,...baseline.tresorerie_mensuelle.map((r,i)=>r.solde_final-months[i].is_cumule));
@@ -121,11 +133,11 @@ function calculer(input){
   const last=rows[11],b=bfr.bfr_mensuel[y*12+11],fixed=Math.max(0,s.investissement-amortissement*(y+1));
   const assets=fixed+b.stocks+b.creances_clients+last.creances*s.taux_tva+last.credit_tva+last.banque;
   const equity=s.investissement*.3+reserve+netCumulative,liabilities=equity+last.dette_fin+last.tva_due+last.is_cumule;
-  bilans.push({annee:y+1,immobilisations:fixed,stocks_matieres:b.stocks_matieres,stocks_finis:b.stocks_produits_finis,creances:b.creances_clients,tva_clients:last.creances*s.taux_tva,credit_tva:last.credit_tva,banque:last.banque,fonds_propres:equity,dette:last.dette_fin,tva_due:last.tva_due,is_du:last.is_cumule,actif_total:assets,passif_total:liabilities,ecart:assets-liabilities});
+  bilans.push({annee:y+1,immobilisations:fixed,stocks_matieres:b.stocks_matieres,stocks_emballages:b.stocks_emballages,stocks_finis:b.stocks_produits_finis,creances:b.creances_clients,tva_clients:last.creances*s.taux_tva,credit_tva:last.credit_tva,banque:last.banque,fonds_propres:equity,dette:last.dette_fin,tva_due:last.tva_due,is_du:last.is_cumule,actif_total:assets,passif_total:liabilities,ecart:assets-liabilities});
   if(!close(assets,liabilities))throw Error('Bilan déséquilibré A'+(y+1)+' : '+(assets-liabilities));
  }
  const performance=evaluerPerformance(annual,s.investissement);performance.diagnostic_prix=diagnosticPrix(s,annual[0],performance);
- return {version:'107',statut:'simulation_indicative_non_documentee',entrees:s,unite_production:unite,investissements:ventilerInvestissement(s),mois:months,annuel:annual,performance,bfr:bfr.bfr_mensuel,tresorerie:cash[0].tresorerie_mensuelle,bilans,reserve_initiale:reserve,financement:{apport:s.investissement*.3,dette:debt,apport_reserve:reserve,apport_total:s.investissement*.3+reserve,besoin_total:s.investissement+reserve,total_ressources:s.investissement*.3+reserve+debt,hypothese_reserve_financee_par_apport:true},moteurs:['P2I_ECONOMIC_RESULT_ENGINE','P2I_FINANCIAL_ENGINE','P2I_BP_BFR_MENSUEL','P2I_BP_MOTEUR_TRESORERIE'],controles:{bilans_equilibres:true,bfr_mois:36,tresorerie_mois:12,financement:'30/70'}};
+ return {version:'107',statut:'simulation_indicative_non_documentee',entrees:s,unite_production:unite,investissements:ventilerInvestissement(s),emballages:{statut:packActive?'stock_modele':'non_isole_dossier_historique',jours:packActive?s.stock_emballages_jours:null,cout_stockable_unite:packActive?s.cout_emballages_stockables_unite:null,stock_lancement:packActive?months[0].stock_emballages:null,convention:'Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation.'},mois:months,annuel:annual,performance,bfr:bfr.bfr_mensuel,tresorerie:cash[0].tresorerie_mensuelle,bilans,reserve_initiale:reserve,financement:{apport:s.investissement*.3,dette:debt,apport_reserve:reserve,apport_total:s.investissement*.3+reserve,besoin_total:s.investissement+reserve,total_ressources:s.investissement*.3+reserve+debt,hypothese_reserve_financee_par_apport:true},moteurs:['P2I_ECONOMIC_RESULT_ENGINE','P2I_FINANCIAL_ENGINE','P2I_BP_BFR_MENSUEL','P2I_BP_MOTEUR_TRESORERIE'],controles:{bilans_equilibres:true,bfr_mois:36,tresorerie_mois:12,financement:'30/70'}};
 }
 root.P2I_BP_SIMULATION_COMMUNE=Object.freeze({calculer,uniteProduction,evaluerPerformance,ventilerInvestissement,normaliserInvestissements,normaliserAmortissements,reperes:REPERES});
 })(typeof window!=='undefined'?window:globalThis);

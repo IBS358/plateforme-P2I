@@ -127,7 +127,7 @@
     },
     "conserverie_legumes": {
       "configuration_id": null,
-      "nom": "Sauce tomate en bocaux",
+      "nom": "Sauce tomate — variante en verre",
       "sous_titre": "Transformation de tomates fraîches",
       "description": "Transformation de tomates fraîches en sauce conditionnée en bocaux de 400 g ; scénario indicatif, distinct des autres conserves de légumes.",
       "source_equipement": "catalogue_tomate_gelgoog",
@@ -150,24 +150,33 @@
         1.3005
       ],
       "matieres_usd_kg_produit": 0.35,
-      "cout_process_usd_kg": 0.42,
+      "cout_process_usd_kg": 1.8223732805656467,
       "fixes_industriels_an": 42000,
       "personnel_hors_cout_industriel": 9660,
       "charges_fixes_hors_industriel": 24000,
       "stock_matieres_jours": 2,
       "emballage_produit": {
         "statut": "hypothese_P2I",
-        "format": "Bocal de 400 g avec couvercle refermable, étiqueté et regroupé en carton",
-        "cout_usd_par_kg": 0.24,
+        "format": "Bocal 500 ml — variante en verre, cible 400 g de sauce ; volume utile et traitement à qualifier",
+        "cout_usd_par_kg": 1.6423732805656468,
         "composants_usd_par_kg": {
-          "bocal": 0.16,
-          "couvercle": 0.03,
-          "etiquette": 0.02,
-          "regroupement": 0.03
+          "bocal_fermeture": 1.4930666186960424,
+          "etiquette": 0.06398856937268754,
+          "regroupement": 0.08531809249691671
         },
         "mode_comptable": "inclus_dans_cout_industriel",
         "ecologie": "Bocal en verre potentiellement réemployable ; collecte, nettoyage et recyclage locaux à vérifier.",
-        "source": "Hypothèses P2I, non prix fournisseur"
+        "source": "Tarif PADJI SARL 350 FCFA/bocal 500 ml + provisions P2I 15 FCFA étiquette et 20 FCFA regroupement ; 28/10/2026. Fermeture supposée incluse, prix livré CI et thermique à confirmer.",
+        "source_prix": {
+          "url": "https://www.padjisarl.com/boutique/packaging/",
+          "consulte_le": "2026-10-28",
+          "prix_bocal_xof": 350,
+          "provisions_xof": 35,
+          "masse_produit_kg": 0.4,
+          "conversion_eur_usd": 1.1193,
+          "parite_eur_xof": 655.957,
+          "qualification": "Tarif catalogue + provisions, non prix livré confirmé."
+        }
       },
       "complements_usd": {
         "fret": 9000,
@@ -184,7 +193,7 @@
       "methodes": {
         "production": "Ligne annoncée pour 500 kg/h de tomates fraîches ; rendement de simulation 80 %, soit 400 kg/h de sauce, non valeur fournisseur. Ventes égales à la production : aucune perte simulée.",
         "matieres": "Matières et ingrédients 0,35 USD/kg de sauce, estimation P2I sans relevé de prix local.",
-        "process": "Coût variable 0,42 USD/kg dont emballage 0,24 USD/kg ; frais fixes industriels affectés au coût de production.",
+        "process": "Transformation hors emballage conservée à 0,18 USD/kg. Emballage recalculé depuis le tarif public et les provisions P2I, inclus une seule fois. Aucun changement de prix de vente ; variante distincte de la poche et de la boîte.",
         "personnel": "Personnel administratif distinct du personnel industriel, hypothèses P2I.",
         "charges": "Locaux, distribution, assurance et administration : hypothèses P2I.",
         "prix_vente": "Prix départ UP 1,25 USD/kg en année 1, +2 %/an, hypothèse de simulation et non prix de marché relevé.",
