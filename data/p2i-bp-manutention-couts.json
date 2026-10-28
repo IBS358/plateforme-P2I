@@ -215,6 +215,36 @@
       "mode": "reaffectation_enveloppe",
       "enveloppe_existante": "pesage_ibc_manutention",
       "libelle_solde": "Pesage et raccordement IBC — solde estimatif"
+    },
+    "confection": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 1,
+        "chariot_inox": 2,
+        "bacs": 10,
+        "palettes": 5
+      },
+      "mode": "budget_ajoute"
+    },
+    "uniformes": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 1,
+        "chariot_inox": 2,
+        "bacs": 10,
+        "palettes": 5
+      },
+      "mode": "budget_ajoute"
+    },
+    "linge": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 1,
+        "chariot_inox": 2,
+        "bacs": 10,
+        "palettes": 5
+      },
+      "mode": "budget_ajoute"
     }
   }
 }

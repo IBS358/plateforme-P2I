@@ -13,6 +13,28 @@ assert.match(await p.locator('#p2i-r7').innerText(),/Budget manutention dédié 
 assert.equal(await p.evaluate(()=>P2I_BP_V108_RESULTAT.investissements.postes.some(x=>x.montant_usd===null)),false);
 await p.goto(base+'/business-plan-decouverte.html?unit_id=plastique');await p.waitForSelector('#go-pro');
 assert.match(await p.locator('#p2i-r7').innerText(),/Matériel de manutention/);
+// Textile : affichage en pièces et transmission sans fausse conversion de masse.
+for(const unit of ['confection','uniformes','linge']){
+ await p.goto(base+'/business-plan-decouverte.html?unit_id='+unit);await p.waitForSelector('#go-pro');
+ assert.match(await p.locator('.hero .eyebrow').innerText(),/TEXTILE/);
+ let before=await p.evaluate(()=>P2I_BP_V108_RESULTAT);
+ assert.equal(before.entrees.unite,'pièces/h');assert.match(await p.locator('#p2i-r8').innerText(),/pièces/);assert.doesNotMatch(await p.locator('#p2i-r8').innerText(),/kg/);
+ assert.match(await p.locator('#scenario-form').textContent(),/USD\/pièce/);
+ assert.equal(await p.locator('#p2i-r17 .equipment').count(),8);
+ const positions=await p.locator('#p2i-r17 .equipment .photo-inner').evaluateAll(es=>es.map(e=>getComputedStyle(e).backgroundPosition));assert.equal(new Set(positions).size,8);
+ assert.ok(await p.locator('#p2i-r17 .equipment .photo-inner').first().evaluate(e=>getComputedStyle(e).backgroundImage.startsWith('url("data:image/jpeg;base64,')));
+ if(unit==='linge'){assert.equal(await p.locator('#p2i-r17 .agro-linge').count(),8);assert.doesNotMatch(await p.locator('#p2i-r17 .process').innerText(),/Boutonnières|Surfilage/);}
+ if(unit==='confection'){
+  await p.locator('#p2i-r14 .scenario-editor summary').click();await p.locator('#scenario-form input[name=production]').fill('12001');await p.locator('#scenario-form button[type=submit]').click();
+  before=await p.evaluate(()=>P2I_BP_V108_RESULTAT);assert.ok(before.mois.every(x=>Number.isInteger(x.production)&&Number.isInteger(x.ventes)));
+  assert.equal(before.investissements.statut,'ventile');assert.equal(before.entrees.amortissements_specifiques[0].duree_ans,5);
+ }
+
+ await p.locator('#go-pro').click();await p.waitForFunction(()=>window.P2I_BP_PRO_PASSAGE);
+ assert.equal(await p.evaluate(()=>P2I_BP_PRO_PASSAGE.entrees.unite),'pièces/h');assert.equal(await p.locator('#f_capacity_unit').inputValue(),'pièces/h');
+ assert.deepEqual(await p.evaluate(()=>P2I_BP_PRO_PASSAGE.resultat.annuel),before.annuel);
+ assert.match(await p.locator('#p2i-pro-moteur-commun').textContent(),/USD\/pièce/);
+}
 // Le scénario adhésifs reste propre à cette activité, avec huit postes distincts et une fin de ligne manuelle.
 await p.goto(base+'/business-plan-decouverte.html?unit_id=adhesifs');await p.waitForSelector('#go-pro');
 assert.equal(await p.locator('#p2i-r17 .equipment .agro-adhesifs').count(),8);

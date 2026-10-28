@@ -5,6 +5,11 @@
 (function(root){'use strict';
 const positive=x=>typeof x==='number'&&Number.isFinite(x)&&x>=0;
 const close=(a,b)=>Math.abs(a-b)<.02;
+function uniteProduction(s){
+ const units={'kg/h':{nom:'kg',pluriel:'kg'},'pièces/h':{nom:'pièce',pluriel:'pièces'}};
+ const key=s.unite??'kg/h';if(!Object.prototype.hasOwnProperty.call(units,key))throw Error('Unité de production non prise en charge');
+ return {...units[key],capacite:key};
+}
 function normaliserAmortissements(value){
  if(!Array.isArray(value)||value.length>30)throw Error('Amortissements spécifiques invalides');
  const ids=new Set();return value.map(x=>{
@@ -54,12 +59,13 @@ function diagnosticPrix(input,annee,performance){
  return {statut:performance.marge_atteinte&&performance.roi_atteint?'reperes_atteints':'ajustement_a_etudier',prix_cible:prix,prix_actuel:input.prix[0],marge_cible:m,roi_cible:roi,qualification:'Prix mathématique indicatif, à comparer aux prix de marché ; volumes et coûts inchangés. Non appliqué automatiquement.'};
 }
 function calculer(input){
- const s=JSON.parse(JSON.stringify(input));
+ const s=JSON.parse(JSON.stringify(input)),unite=uniteProduction(s);
  for(const k of ['investissement','matieres_kg','personnel','charges_fixes','part_apport','part_dette','taux_interet','duree_dette_mois','duree_amortissement_ans','taux_tva','taux_is','coussin_tresorerie','croissance_personnel','croissance_charges'])if(!positive(s[k]))throw Error('Hypothèse manquante ou invalide : '+k);
  if(s.machines!=null&&(!positive(s.machines)||s.machines>s.investissement))throw Error('Le budget machines dépasse le budget global de simulation');
  if(!close(s.part_apport+s.part_dette,1)||s.part_apport!==.3||s.part_dette!==.7)throw Error('Financement attendu 30/70');
  if(s.duree_dette_mois<36||s.duree_amortissement_ans<3||s.taux_is>1||s.taux_tva>1)throw Error('Durées ou taux incompatibles');
  for(const k of ['production','ventes','prix','cout_production_kg'])if(!Array.isArray(s[k])||s[k].length!==3||!s[k].every(positive))throw Error('Trois années requises : '+k);
+ if(unite.nom==='pièce'&&[...s.production,...s.ventes].some(x=>!Number.isInteger(x)))throw Error('Les quantités en pièces doivent être entières');
  const stockMatieresJours=s.stock_matieres_jours??30;if(!positive(stockMatieresJours)||stockMatieresJours>30)throw Error('Stock matières : entre 0 et 30 jours');
  const specifics=normaliserAmortissements(s.amortissements_specifiques||[]),specificBase=specifics.reduce((n,x)=>n+x.base_usd,0);
  if(specificBase>s.investissement)throw Error('Bases amortissables spécifiques supérieures à l’investissement');
@@ -67,10 +73,11 @@ function calculer(input){
  let stockQty=0,stockValue=0,rawPrevious=0,receivablesPrevious=0,debtRemaining=debt,vatCredit=0,vatDuePrevious=0,isTotal=0;
  const months=[],annual=[],economic=[];
  for(let y=0;y<3;y++){
-  const prod=s.production[y]/12,sold=s.ventes[y]/12,cost=s.cout_production_kg[y],material=s.matieres_kg*(1+s.croissance_charges)**y;
+  const prodMean=s.production[y]/12,soldMean=s.ventes[y]/12,cost=s.cout_production_kg[y],material=s.matieres_kg*(1+s.croissance_charges)**y;
   if(cost<material)throw Error('Coût industriel inférieur aux matières');
   const yearRows=[];
   for(let m=0;m<12;m++){
+   const prod=unite.nom==='pièce'?Math.floor(s.production[y]*(m+1)/12)-Math.floor(s.production[y]*m/12):prodMean,sold=unite.nom==='pièce'?Math.floor(s.ventes[y]*(m+1)/12)-Math.floor(s.ventes[y]*m/12):soldMean;
    const available=stockQty+prod;if(sold>available+.00001)throw Error('Ventes supérieures au stock disponible');
    const average=available?(stockValue+prod*cost)/available:0;
    const e=root.P2I_ECONOMIC_RESULT_ENGINE.calculer({type_activite:'fabrication',quantite_produite:available,quantite_vendue:sold,quantite_perdue:0,cout_variable_unitaire:average,charges_fixes_industrielles:0,chiffre_affaires_usd:sold*s.prix[y]});
@@ -118,7 +125,7 @@ function calculer(input){
   if(!close(assets,liabilities))throw Error('Bilan déséquilibré A'+(y+1)+' : '+(assets-liabilities));
  }
  const performance=evaluerPerformance(annual,s.investissement);performance.diagnostic_prix=diagnosticPrix(s,annual[0],performance);
- return {version:'107',statut:'simulation_indicative_non_documentee',entrees:s,investissements:ventilerInvestissement(s),mois:months,annuel:annual,performance,bfr:bfr.bfr_mensuel,tresorerie:cash[0].tresorerie_mensuelle,bilans,reserve_initiale:reserve,financement:{apport:s.investissement*.3,dette:debt,apport_reserve:reserve,apport_total:s.investissement*.3+reserve,besoin_total:s.investissement+reserve,total_ressources:s.investissement*.3+reserve+debt,hypothese_reserve_financee_par_apport:true},moteurs:['P2I_ECONOMIC_RESULT_ENGINE','P2I_FINANCIAL_ENGINE','P2I_BP_BFR_MENSUEL','P2I_BP_MOTEUR_TRESORERIE'],controles:{bilans_equilibres:true,bfr_mois:36,tresorerie_mois:12,financement:'30/70'}};
+ return {version:'107',statut:'simulation_indicative_non_documentee',entrees:s,unite_production:unite,investissements:ventilerInvestissement(s),mois:months,annuel:annual,performance,bfr:bfr.bfr_mensuel,tresorerie:cash[0].tresorerie_mensuelle,bilans,reserve_initiale:reserve,financement:{apport:s.investissement*.3,dette:debt,apport_reserve:reserve,apport_total:s.investissement*.3+reserve,besoin_total:s.investissement+reserve,total_ressources:s.investissement*.3+reserve+debt,hypothese_reserve_financee_par_apport:true},moteurs:['P2I_ECONOMIC_RESULT_ENGINE','P2I_FINANCIAL_ENGINE','P2I_BP_BFR_MENSUEL','P2I_BP_MOTEUR_TRESORERIE'],controles:{bilans_equilibres:true,bfr_mois:36,tresorerie_mois:12,financement:'30/70'}};
 }
-root.P2I_BP_SIMULATION_COMMUNE=Object.freeze({calculer,evaluerPerformance,ventilerInvestissement,normaliserInvestissements,normaliserAmortissements,reperes:REPERES});
+root.P2I_BP_SIMULATION_COMMUNE=Object.freeze({calculer,uniteProduction,evaluerPerformance,ventilerInvestissement,normaliserInvestissements,normaliserAmortissements,reperes:REPERES});
 })(typeof window!=='undefined'?window:globalThis);

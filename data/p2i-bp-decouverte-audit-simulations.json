@@ -2,14 +2,15 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 18,
-  "up_avec_simulation_complete": 16,
-  "up_restant_a_alimenter": 80,
+  "simulations_affichables": 21,
+  "up_avec_simulation_complete": 19,
+  "up_restant_a_alimenter": 77,
   "scenarios": [
     {
       "up_id": "conserverie_legumes",
       "configuration_id": null,
       "nom": "Conserverie de légumes",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
       "source_prix": "https://www.made-in-china.com/price/prodetail_Fruit-Vegetable-Processing-Machinery_VFkTlUezaaGD.html",
@@ -44,6 +45,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 300000,
+          "ventes": 300000,
+          "stock_fin": 0,
           "production_kg": 300000,
           "ventes_kg": 300000,
           "stock_fin_kg": 0,
@@ -55,6 +59,9 @@
         },
         {
           "annee": 2,
+          "production": 390000,
+          "ventes": 390000,
+          "stock_fin": 0,
           "production_kg": 390000,
           "ventes_kg": 390000,
           "stock_fin_kg": 0,
@@ -66,6 +73,9 @@
         },
         {
           "annee": 3,
+          "production": 450000,
+          "ventes": 450000,
+          "stock_fin": 0,
           "production_kg": 450000,
           "ventes_kg": 450000,
           "stock_fin_kg": 0,
@@ -92,6 +102,7 @@
       "up_id": "biscuiterie",
       "configuration_id": "crackers",
       "nom": "Crackers",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "budget_reference_utilisateur_pas_prix_catalogue_retrouve",
       "source_prix": "Instruction utilisateur réitérée : Crackers, ligne intégrée 500 kg/h, budget équipements 450 000 USD.",
@@ -126,6 +137,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 549999.9999999999,
+          "ventes": 531999.9999999999,
+          "stock_fin": 18000,
           "production_kg": 549999.9999999999,
           "ventes_kg": 531999.9999999999,
           "stock_fin_kg": 18000,
@@ -137,6 +151,9 @@
         },
         {
           "annee": 2,
+          "production": 650000,
+          "ventes": 638000,
+          "stock_fin": 29999.999999999993,
           "production_kg": 650000,
           "ventes_kg": 638000,
           "stock_fin_kg": 29999.999999999993,
@@ -148,6 +165,9 @@
         },
         {
           "annee": 3,
+          "production": 750000,
+          "ventes": 745000.0000000001,
+          "stock_fin": 34999.99999999989,
           "production_kg": 750000,
           "ventes_kg": 745000.0000000001,
           "stock_fin_kg": 34999.99999999989,
@@ -174,6 +194,7 @@
       "up_id": "biscuiterie",
       "configuration_id": "biscuits_mous",
       "nom": "Biscuits mous",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
       "source_prix": "https://www.made-in-china.com/video-channel/hgfoodmachine_EZKAMYcOXxhu_Hg-Automatic-Complete-Set-Shb620-500kg-Hr-Biscuit-Processing-Production-Line-for-Industrial-Food-Processing-Turnkey.html",
@@ -208,6 +229,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 450000,
+          "ventes": 441000,
+          "stock_fin": 9000,
           "production_kg": 450000,
           "ventes_kg": 441000,
           "stock_fin_kg": 9000,
@@ -219,6 +243,9 @@
         },
         {
           "annee": 2,
+          "production": 580000,
+          "ventes": 570999.9999999999,
+          "stock_fin": 18000.000000000007,
           "production_kg": 580000,
           "ventes_kg": 570999.9999999999,
           "stock_fin_kg": 18000.000000000007,
@@ -230,6 +257,9 @@
         },
         {
           "annee": 3,
+          "production": 680000,
+          "ventes": 672000,
+          "stock_fin": 25999.999999999913,
           "production_kg": 680000,
           "ventes_kg": 672000,
           "stock_fin_kg": 25999.999999999913,
@@ -256,6 +286,7 @@
       "up_id": "biscuiterie",
       "configuration_id": "biscuits_durs",
       "nom": "Biscuits durs",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
       "source_prix": "https://www.made-in-china.com/video-channel/hgfoodmachine_EZKAMYcOXxhu_Hg-Automatic-Complete-Set-Shb620-500kg-Hr-Biscuit-Processing-Production-Line-for-Industrial-Food-Processing-Turnkey.html",
@@ -290,6 +321,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 500000.00000000006,
+          "ventes": 489999.99999999994,
+          "stock_fin": 9999.999999999942,
           "production_kg": 500000.00000000006,
           "ventes_kg": 489999.99999999994,
           "stock_fin_kg": 9999.999999999942,
@@ -301,6 +335,9 @@
         },
         {
           "annee": 2,
+          "production": 620000,
+          "ventes": 610000,
+          "stock_fin": 19999.99999999989,
           "production_kg": 620000,
           "ventes_kg": 610000,
           "stock_fin_kg": 19999.99999999989,
@@ -312,6 +349,9 @@
         },
         {
           "annee": 3,
+          "production": 720000,
+          "ventes": 712999.9999999999,
+          "stock_fin": 26999.999999999993,
           "production_kg": 720000,
           "ventes_kg": 712999.9999999999,
           "stock_fin_kg": 26999.999999999993,
@@ -338,6 +378,7 @@
       "up_id": "boulangerie_industrielle",
       "configuration_id": null,
       "nom": "Boulangerie industrielle",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
       "source_prix": "https://www.restoconcept.com/four-rotatif-boulangerie-diesel-ou-gaz-b216-parisfours/p8612.aspx",
@@ -372,6 +413,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 40000,
+          "ventes": 40000,
+          "stock_fin": 0,
           "production_kg": 40000,
           "ventes_kg": 40000,
           "stock_fin_kg": 0,
@@ -383,6 +427,9 @@
         },
         {
           "annee": 2,
+          "production": 49999.99999999999,
+          "ventes": 49999.99999999999,
+          "stock_fin": 0,
           "production_kg": 49999.99999999999,
           "ventes_kg": 49999.99999999999,
           "stock_fin_kg": 0,
@@ -394,6 +441,9 @@
         },
         {
           "annee": 3,
+          "production": 60000,
+          "ventes": 60000,
+          "stock_fin": 0,
           "production_kg": 60000,
           "ventes_kg": 60000,
           "stock_fin_kg": 0,
@@ -420,6 +470,7 @@
       "up_id": "jus_boissons",
       "configuration_id": null,
       "nom": "Production de jus et boissons",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
       "source_prix": "https://www.made-in-china.com/price/prodetail_Beverage-Processing-Machinery_iqAxpBWVCvRO.html",
@@ -454,6 +505,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 300000,
+          "ventes": 294000,
+          "stock_fin": 6000,
           "production_kg": 300000,
           "ventes_kg": 294000,
           "stock_fin_kg": 6000,
@@ -465,6 +519,9 @@
         },
         {
           "annee": 2,
+          "production": 390000,
+          "ventes": 382200,
+          "stock_fin": 13800,
           "production_kg": 390000,
           "ventes_kg": 382200,
           "stock_fin_kg": 13800,
@@ -476,6 +533,9 @@
         },
         {
           "annee": 3,
+          "production": 450000,
+          "ventes": 441000,
+          "stock_fin": 22800,
           "production_kg": 450000,
           "ventes_kg": 441000,
           "stock_fin_kg": 22800,
@@ -502,6 +562,7 @@
       "up_id": "mini_laiterie",
       "configuration_id": null,
       "nom": "Mini-laiterie",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
       "source_prix": "https://www.sarl-valentis.fr/en/mobile-milk-pasteurization-unit/",
@@ -536,6 +597,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 450000,
+          "ventes": 450000,
+          "stock_fin": 0,
           "production_kg": 450000,
           "ventes_kg": 450000,
           "stock_fin_kg": 0,
@@ -547,6 +611,9 @@
         },
         {
           "annee": 2,
+          "production": 600000,
+          "ventes": 600000,
+          "stock_fin": 0,
           "production_kg": 600000,
           "ventes_kg": 600000,
           "stock_fin_kg": 0,
@@ -558,6 +625,9 @@
         },
         {
           "annee": 3,
+          "production": 700000.0000000001,
+          "ventes": 700000.0000000001,
+          "stock_fin": 0,
           "production_kg": 700000.0000000001,
           "ventes_kg": 700000.0000000001,
           "stock_fin_kg": 0,
@@ -584,6 +654,7 @@
       "up_id": "huiles_alimentaires",
       "configuration_id": null,
       "nom": "Huiles alimentaires",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "borne_haute_fourchette_catalogue_non_devis",
       "source_prix": "https://wwmmachinery.com/products/custom-solutions",
@@ -618,6 +689,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 70000.00000000001,
+          "ventes": 70000.00000000001,
+          "stock_fin": 0,
           "production_kg": 70000.00000000001,
           "ventes_kg": 70000.00000000001,
           "stock_fin_kg": 0,
@@ -629,6 +703,9 @@
         },
         {
           "annee": 2,
+          "production": 90000,
+          "ventes": 90000,
+          "stock_fin": 0,
           "production_kg": 90000,
           "ventes_kg": 90000,
           "stock_fin_kg": 0,
@@ -640,6 +717,9 @@
         },
         {
           "annee": 3,
+          "production": 110000.00000000001,
+          "ventes": 110000.00000000001,
+          "stock_fin": 0,
           "production_kg": 110000.00000000001,
           "ventes_kg": 110000.00000000001,
           "stock_fin_kg": 0,
@@ -666,6 +746,7 @@
       "up_id": "epices",
       "configuration_id": null,
       "nom": "Transformation d'épices",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
       "source_prix": "https://www.nirudi.com/en/product/complete-100-kgh-output-ginger-powder-processing-line",
@@ -700,6 +781,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 5000,
+          "ventes": 5000,
+          "stock_fin": 0,
           "production_kg": 5000,
           "ventes_kg": 5000,
           "stock_fin_kg": 0,
@@ -711,6 +795,9 @@
         },
         {
           "annee": 2,
+          "production": 6500.000000000001,
+          "ventes": 6500.000000000001,
+          "stock_fin": 0,
           "production_kg": 6500.000000000001,
           "ventes_kg": 6500.000000000001,
           "stock_fin_kg": 0,
@@ -722,6 +809,9 @@
         },
         {
           "annee": 3,
+          "production": 8000.000000000001,
+          "ventes": 8000.000000000001,
+          "stock_fin": 0,
           "production_kg": 8000.000000000001,
           "ventes_kg": 8000.000000000001,
           "stock_fin_kg": 0,
@@ -748,6 +838,7 @@
       "up_id": "aliments_betail",
       "configuration_id": null,
       "nom": "Aliments pour bétail",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "fourchette_catalogue_publique_non_certifiee",
       "source_prix": "https://tcpel.net/pellet-production-line/feed-pellet-production-line/",
@@ -782,6 +873,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 450000,
+          "ventes": 441000,
+          "stock_fin": 9000,
           "production_kg": 450000,
           "ventes_kg": 441000,
           "stock_fin_kg": 9000,
@@ -793,6 +887,9 @@
         },
         {
           "annee": 2,
+          "production": 600000,
+          "ventes": 594000,
+          "stock_fin": 15000,
           "production_kg": 600000,
           "ventes_kg": 594000,
           "stock_fin_kg": 15000,
@@ -804,6 +901,9 @@
         },
         {
           "annee": 3,
+          "production": 700000.0000000001,
+          "ventes": 696500,
+          "stock_fin": 18500.000000000065,
           "production_kg": 700000.0000000001,
           "ventes_kg": 696500,
           "stock_fin_kg": 18500.000000000065,
@@ -830,6 +930,7 @@
       "up_id": "detergents",
       "configuration_id": null,
       "nom": "Détergents & produits ménagers",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
       "source_prix": "https://henwitech.com/products/automatic-filling-line",
@@ -864,6 +965,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 450000,
+          "ventes": 450000,
+          "stock_fin": 0,
           "production_kg": 450000,
           "ventes_kg": 450000,
           "stock_fin_kg": 0,
@@ -875,6 +979,9 @@
         },
         {
           "annee": 2,
+          "production": 525000,
+          "ventes": 525000,
+          "stock_fin": 0,
           "production_kg": 525000,
           "ventes_kg": 525000,
           "stock_fin_kg": 0,
@@ -886,6 +993,9 @@
         },
         {
           "annee": 3,
+          "production": 600000,
+          "ventes": 600000,
+          "stock_fin": 0,
           "production_kg": 600000,
           "ventes_kg": 600000,
           "stock_fin_kg": 0,
@@ -912,6 +1022,7 @@
       "up_id": "savonnerie",
       "configuration_id": null,
       "nom": "Savonnerie industrielle",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "borne_haute_fourchette_catalogue_non_devis",
       "source_prix": "https://sting2013.en.made-in-china.com/product/DQoUpBhEgKRj/China-High-Efficiency-Soap-Noodles-Making-Machine-Professional-Toilet-Soap-Finishing-Line.html",
@@ -946,6 +1057,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 99999.99999999999,
+          "ventes": 99999.99999999999,
+          "stock_fin": 0,
           "production_kg": 99999.99999999999,
           "ventes_kg": 99999.99999999999,
           "stock_fin_kg": 0,
@@ -957,6 +1071,9 @@
         },
         {
           "annee": 2,
+          "production": 140000.00000000003,
+          "ventes": 140000.00000000003,
+          "stock_fin": 0,
           "production_kg": 140000.00000000003,
           "ventes_kg": 140000.00000000003,
           "stock_fin_kg": 0,
@@ -968,6 +1085,9 @@
         },
         {
           "annee": 3,
+          "production": 170000,
+          "ventes": 170000,
+          "stock_fin": 0,
           "production_kg": 170000,
           "ventes_kg": 170000,
           "stock_fin_kg": 0,
@@ -994,6 +1114,7 @@
       "up_id": "cosmetiques",
       "configuration_id": null,
       "nom": "Cosmétiques naturels",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
       "source_prix": "https://henwitech.com/products/500l-cosmetic-cream-lotion-automatic-production-line",
@@ -1028,6 +1149,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 150000,
+          "ventes": 150000,
+          "stock_fin": 0,
           "production_kg": 150000,
           "ventes_kg": 150000,
           "stock_fin_kg": 0,
@@ -1039,6 +1163,9 @@
         },
         {
           "annee": 2,
+          "production": 199999.99999999997,
+          "ventes": 199999.99999999997,
+          "stock_fin": 0,
           "production_kg": 199999.99999999997,
           "ventes_kg": 199999.99999999997,
           "stock_fin_kg": 0,
@@ -1050,6 +1177,9 @@
         },
         {
           "annee": 3,
+          "production": 250000.00000000003,
+          "ventes": 250000.00000000003,
+          "stock_fin": 0,
           "production_kg": 250000.00000000003,
           "ventes_kg": 250000.00000000003,
           "stock_fin_kg": 0,
@@ -1076,6 +1206,7 @@
       "up_id": "peintures",
       "configuration_id": null,
       "nom": "Peintures industrielles",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "borne_haute_fourchette_catalogue_non_devis",
       "source_prix": "https://www.made-in-china.com/video-channel/shindah_QXIxVBlAIUYR_Emulsion-Paint-Water-Based-Paint-Production-Line.html",
@@ -1110,6 +1241,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 500000.00000000006,
+          "ventes": 500000.00000000006,
+          "stock_fin": 0,
           "production_kg": 500000.00000000006,
           "ventes_kg": 500000.00000000006,
           "stock_fin_kg": 0,
@@ -1121,6 +1255,9 @@
         },
         {
           "annee": 2,
+          "production": 650000,
+          "ventes": 650000,
+          "stock_fin": 0,
           "production_kg": 650000,
           "ventes_kg": 650000,
           "stock_fin_kg": 0,
@@ -1132,6 +1269,9 @@
         },
         {
           "annee": 3,
+          "production": 799999.9999999999,
+          "ventes": 799999.9999999999,
+          "stock_fin": 0,
           "production_kg": 799999.9999999999,
           "ventes_kg": 799999.9999999999,
           "stock_fin_kg": 0,
@@ -1158,6 +1298,7 @@
       "up_id": "adhesifs",
       "configuration_id": null,
       "nom": "Adhésifs & colles",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "borne_haute_catalogue_equipement_non_ligne_complete",
       "source_prix": "https://shindah.en.made-in-china.com/product/iKHEgvLyJpUJ/China-2000L-Ss-PVAC-Glue-Reactor-White-Glue-Reactor-with-Production-Formula.html",
@@ -1192,6 +1333,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 250000.00000000003,
+          "ventes": 242500.00000000003,
+          "stock_fin": 7500,
           "production_kg": 250000.00000000003,
           "ventes_kg": 242500.00000000003,
           "stock_fin_kg": 7500,
@@ -1203,6 +1347,9 @@
         },
         {
           "annee": 2,
+          "production": 300000,
+          "ventes": 300000,
+          "stock_fin": 7500,
           "production_kg": 300000,
           "ventes_kg": 300000,
           "stock_fin_kg": 7500,
@@ -1214,6 +1361,9 @@
         },
         {
           "annee": 3,
+          "production": 350000.00000000006,
+          "ventes": 350000.00000000006,
+          "stock_fin": 7500.000000000004,
           "production_kg": 350000.00000000006,
           "ventes_kg": 350000.00000000006,
           "stock_fin_kg": 7500.000000000004,
@@ -1240,6 +1390,7 @@
       "up_id": "engrais",
       "configuration_id": null,
       "nom": "Engrais & pesticides",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_historique_cas_fournisseur_non_devis",
       "source_prix": "https://www.fertilizerproductequipment.com/1000-l-h-npk-liquid-fertilizer-production-equipment-in-france/",
@@ -1274,6 +1425,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 440000.00000000006,
+          "ventes": 417999.99999999994,
+          "stock_fin": 21999.99999999994,
           "production_kg": 440000.00000000006,
           "ventes_kg": 417999.99999999994,
           "stock_fin_kg": 21999.99999999994,
@@ -1285,6 +1439,9 @@
         },
         {
           "annee": 2,
+          "production": 549999.9999999999,
+          "ventes": 522500.00000000006,
+          "stock_fin": 49500.00000000001,
           "production_kg": 549999.9999999999,
           "ventes_kg": 522500.00000000006,
           "stock_fin_kg": 49500.00000000001,
@@ -1296,6 +1453,9 @@
         },
         {
           "annee": 3,
+          "production": 660000,
+          "ventes": 627000,
+          "stock_fin": 82500,
           "production_kg": 660000,
           "ventes_kg": 627000,
           "stock_fin_kg": 82500,
@@ -1322,6 +1482,7 @@
       "up_id": "javel",
       "configuration_id": null,
       "nom": "Hygiène & désinfection professionnelles",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
       "source_prix": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line",
@@ -1356,6 +1517,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 120000,
+          "ventes": 116400,
+          "stock_fin": 3600,
           "production_kg": 120000,
           "ventes_kg": 116400,
           "stock_fin_kg": 3600,
@@ -1367,6 +1531,9 @@
         },
         {
           "annee": 2,
+          "production": 150000,
+          "ventes": 150000,
+          "stock_fin": 3600,
           "production_kg": 150000,
           "ventes_kg": 150000,
           "stock_fin_kg": 3600,
@@ -1378,6 +1545,9 @@
         },
         {
           "annee": 3,
+          "production": 180000,
+          "ventes": 180000,
+          "stock_fin": 3600,
           "production_kg": 180000,
           "ventes_kg": 180000,
           "stock_fin_kg": 3600,
@@ -1404,6 +1574,7 @@
       "up_id": "produits_industriels",
       "configuration_id": null,
       "nom": "Produits chimiques industriels",
+      "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "borne_haute_gamme_non_prix_modele_confirme",
       "source_prix": "https://www.greefield.com/project-materials/pce-polycarboxylate-superplasticizer-equipment/concrete-admixture-compounding-mixer-10mbq.html",
@@ -1438,6 +1609,9 @@
       "annuel": [
         {
           "annee": 1,
+          "production": 750000,
+          "ventes": 727500,
+          "stock_fin": 22500,
           "production_kg": 750000,
           "ventes_kg": 727500,
           "stock_fin_kg": 22500,
@@ -1449,6 +1623,9 @@
         },
         {
           "annee": 2,
+          "production": 1000000.0000000001,
+          "ventes": 1000000.0000000001,
+          "stock_fin": 22500,
           "production_kg": 1000000.0000000001,
           "ventes_kg": 1000000.0000000001,
           "stock_fin_kg": 22500,
@@ -1460,6 +1637,9 @@
         },
         {
           "annee": 3,
+          "production": 1250000,
+          "ventes": 1250000,
+          "stock_fin": 22500,
           "production_kg": 1250000,
           "ventes_kg": 1250000,
           "stock_fin_kg": 22500,
@@ -1480,6 +1660,255 @@
         -5.820766091346741e-11,
         0,
         -6.984919309616089e-10
+      ]
+    },
+    {
+      "up_id": "confection",
+      "configuration_id": null,
+      "nom": "Confection de vêtements",
+      "unite_production": "pièce",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_unitaire_HT",
+      "source_prix": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 17684.94,
+      "investissement_simulation_usd": 49540.53,
+      "reserve_initiale_distincte_usd": 20363.294706125,
+      "financement": {
+        "apport": 14862.159,
+        "dette": 34678.371,
+        "apport_reserve": 20363.294706125,
+        "apport_total": 35225.453706125,
+        "besoin_total": 69903.824706125,
+        "total_ressources": 69903.824706125,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "manutention": {
+        "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
+        "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 10 × Bacs lavables avec couvercle, petit format ; 5 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [
+          "manutention"
+        ],
+        "statut": "budget_dedie",
+        "budget_dedie_usd": 2405.59,
+        "budget_mutualise_usd": null
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "production": 12000,
+          "ventes": 11400,
+          "stock_fin": 600,
+          "chiffre_affaires_usd": 205200,
+          "resultat_net_usd": 33634.0697805,
+          "amortissements_usd": 5194.612000000001,
+          "interets_usd": 2519.9616260000003,
+          "marge_nette": 0.16390872212719299
+        },
+        {
+          "annee": 2,
+          "production": 15000,
+          "ventes": 15000,
+          "stock_fin": 600,
+          "chiffre_affaires_usd": 275400,
+          "resultat_net_usd": 61342.62060867744,
+          "amortissements_usd": 5194.612000000001,
+          "interets_usd": 1965.1076900000023,
+          "marge_nette": 0.22274008935612724
+        },
+        {
+          "annee": 3,
+          "production": 17000,
+          "ventes": 17000,
+          "stock_fin": 600,
+          "chiffre_affaires_usd": 318362.4,
+          "resultat_net_usd": 78870.49113205673,
+          "amortissements_usd": 5194.612000000001,
+          "interets_usd": 1410.253754000004,
+          "marge_nette": 0.24773808443477222
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        0,
+        -8.731149137020111e-11,
+        -1.7462298274040222e-10
+      ]
+    },
+    {
+      "up_id": "uniformes",
+      "configuration_id": null,
+      "nom": "Confection d'uniformes",
+      "unite_production": "pièce",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_unitaire_HT",
+      "source_prix": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 19643.715,
+      "investissement_simulation_usd": 51499.305,
+      "reserve_initiale_distincte_usd": 22812.64604009821,
+      "financement": {
+        "apport": 15449.7915,
+        "dette": 36049.5135,
+        "apport_reserve": 22812.64604009821,
+        "apport_total": 38262.43754009821,
+        "besoin_total": 74311.95104009821,
+        "total_ressources": 74311.95104009821,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "manutention": {
+        "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
+        "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 10 × Bacs lavables avec couvercle, petit format ; 5 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [
+          "manutention"
+        ],
+        "statut": "budget_dedie",
+        "budget_dedie_usd": 2405.59,
+        "budget_mutualise_usd": null
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "production": 14000,
+          "ventes": 13580,
+          "stock_fin": 420,
+          "chiffre_affaires_usd": 230860,
+          "resultat_net_usd": 34837.434389250004,
+          "amortissements_usd": 5390.4895,
+          "interets_usd": 2619.597981,
+          "marge_nette": 0.1509028605615958
+        },
+        {
+          "annee": 2,
+          "production": 17000,
+          "ventes": 17000,
+          "stock_fin": 420,
+          "chiffre_affaires_usd": 294780,
+          "resultat_net_usd": 58998.7751719545,
+          "amortissements_usd": 5390.4895,
+          "interets_usd": 2042.8057649999994,
+          "marge_nette": 0.20014510879962852
+        },
+        {
+          "annee": 3,
+          "production": 20000,
+          "ventes": 20000,
+          "stock_fin": 420,
+          "chiffre_affaires_usd": 353736,
+          "resultat_net_usd": 82196.73254540717,
+          "amortissements_usd": 5390.4895,
+          "interets_usd": 1466.0135489999989,
+          "marge_nette": 0.23236745071298134
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -1.4551915228366852e-11,
+        -8.731149137020111e-11,
+        -5.820766091346741e-11
+      ]
+    },
+    {
+      "up_id": "linge",
+      "configuration_id": null,
+      "nom": "Linge de maison",
+      "unite_production": "pièce",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_unitaire_HT",
+      "source_prix": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 8585.030999999999,
+      "investissement_simulation_usd": 40440.621,
+      "reserve_initiale_distincte_usd": 28139.4569786625,
+      "financement": {
+        "apport": 12132.1863,
+        "dette": 28308.434699999998,
+        "apport_reserve": 28139.4569786625,
+        "apport_total": 40271.6432786625,
+        "besoin_total": 68580.0779786625,
+        "total_ressources": 68580.0779786625,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "manutention": {
+        "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
+        "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 10 × Bacs lavables avec couvercle, petit format ; 5 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [
+          "manutention"
+        ],
+        "statut": "budget_dedie",
+        "budget_dedie_usd": 2405.59,
+        "budget_mutualise_usd": null
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "production": 24000,
+          "ventes": 23280,
+          "stock_fin": 720,
+          "chiffre_affaires_usd": 297984,
+          "resultat_net_usd": 58568.47448385002,
+          "amortissements_usd": 4284.6211,
+          "interets_usd": 2057.0795881999998,
+          "marge_nette": 0.19654905794891678
+        },
+        {
+          "annee": 2,
+          "production": 29000,
+          "ventes": 29000,
+          "stock_fin": 720,
+          "chiffre_affaires_usd": 378624,
+          "resultat_net_usd": 85546.58983948598,
+          "amortissements_usd": 4284.6211,
+          "interets_usd": 1604.144633,
+          "marge_nette": 0.22594074818153626
+        },
+        {
+          "annee": 3,
+          "production": 34000,
+          "ventes": 34000,
+          "stock_fin": 720,
+          "chiffre_affaires_usd": 452782.08,
+          "resultat_net_usd": 110674.49135981132,
+          "amortissements_usd": 4284.6211,
+          "interets_usd": 1151.2096778,
+          "marge_nette": 0.2444321368898065
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -5.820766091346741e-11,
+        -8.731149137020111e-11,
+        -2.3283064365386963e-10
       ]
     }
   ]

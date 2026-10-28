@@ -120,6 +120,18 @@
     "manutention": {
       "categorie": "Manutention",
       "libelle": "Matériel de manutention"
+    },
+    "table_coupe_auxiliaires": {
+      "categorie": "Auxiliaires de production",
+      "libelle": "Table de coupe et petit outillage"
+    },
+    "rayonnage_stockage": {
+      "categorie": "Site et stockage",
+      "libelle": "Rayonnages et stockage au sec"
+    },
+    "patronage_informatique": {
+      "categorie": "Préparation et développement",
+      "libelle": "Patronage, informatique et guides"
     }
   },
   "manutention_par_up": {
@@ -192,6 +204,18 @@
       "postes_budget_mutualise": [
         "pesage_ibc_manutention"
       ]
+    },
+    "confection": {
+      "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
+      "postes_budget_mutualise": []
+    },
+    "uniformes": {
+      "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
+      "postes_budget_mutualise": []
+    },
+    "linge": {
+      "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
+      "postes_budget_mutualise": []
     }
   },
   "manutention_defaut": {

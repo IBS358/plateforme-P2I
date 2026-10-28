@@ -8,6 +8,7 @@ const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,`${a} != ${b}`);
 for(const u of Object.values(c.P2I_BP_DONNEES.unites)){
  assert.ok(u.manutention.besoins);
  for(const [config,v]of Object.entries(u.variantes))if(v.reference?.investissements_detail){
+  if(!baseline[u.up_id+'__'+config])continue;
   const s=v.reference,r=api.calculer(s),old=baseline[u.up_id+'__'+config],before=api.calculer(old),mc=v.hypotheses_explicites.manutention_chiffree;
   assert.equal(r.investissements.statut,'ventile');assert.equal(r.investissements.postes_a_chiffrer.length,0,'Plus de manutention absente sur une UP traitée');
   near(r.investissements.postes.reduce((n,p)=>n+(p.montant_usd??0),0),s.investissement);

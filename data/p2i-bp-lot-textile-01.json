@@ -1,0 +1,740 @@
+{
+  "schema": "p2i.bp-lot.v1",
+  "lot": "textile_01_confection_uniformes_linge",
+  "date": "2026-10-28",
+  "sources": [
+    {
+      "id": "textile_juki_ddl8700",
+      "url": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "fournisseur": "TMAC SAS",
+      "modele": "JUKI DDL-8700 complète : table, bâti, moteur",
+      "prix": 875,
+      "devise": "EUR",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-28",
+      "base": "Prix unitaire HT ; ce n’est pas le prix d’une ligne complète.",
+      "limites": "Tissus légers à moyens ; 220 V / 450 W annoncés. Points/minute ne signifie pas vêtements/heure. Sous-classe, aiguille, réglages et matières à confirmer."
+    },
+    {
+      "id": "textile_juki_mo6716",
+      "url": "https://www.glasman.fr/a15840/juki-mo-6716da-surjeteuse-5fils",
+      "fournisseur": "Glasman",
+      "modele": "JUKI MO-6716DA, surjeteuse 5 fils complète",
+      "prix": 1790,
+      "devise": "EUR",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-28",
+      "base": "Machine complète, table, bâti et moteur 220 V annoncés.",
+      "limites": "Sous-classe pour tissu léger à moyen à préciser ; pas un rendement garanti par vêtement."
+    },
+    {
+      "id": "textile_jack_t781",
+      "url": "https://tmac-sas.fr/machine-a-boutonniere/403-jack-jk-t781g-z.html",
+      "fournisseur": "TMAC SAS",
+      "modele": "JACK JK-T781G-Z, boutonnière",
+      "prix": 2800,
+      "devise": "EUR",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-28",
+      "base": "Machine montée sur palette, moteur intégré annoncé.",
+      "limites": "Fait les boutonnières ; ne coud pas les boutons. Pose des boutons manuelle incluse dans l’organisation P2I ; pas de seconde machine pose-boutons ajoutée."
+    },
+    {
+      "id": "textile_battistella_ker2",
+      "url": "https://tmac-sas.fr/repassage/465-tables-%C3%A0-repasser-%C3%A9quip%C3%A9e-de-chaudi%C3%A8re-int%C3%A9gr%C3%A9-.html",
+      "fournisseur": "TMAC SAS",
+      "modele": "BATTISTELLA KER/2, table + chaudière + fer",
+      "prix": 960,
+      "devise": "EUR",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-28",
+      "base": "Ensemble de repassage complet, sans nouvelle chaudière ajoutée.",
+      "limites": "230 V, 2 475 W annoncés par poste ; appoints d’eau, autonomie, sécurité vapeur et finition de grandes pièces à tester."
+    },
+    {
+      "id": "textile_rasor_ds504",
+      "url": "https://www.glasman.fr/a16120/ciseau-de-coupe-electrique-rasor-ds504",
+      "fournisseur": "Glasman",
+      "modele": "RASOR DS504, ciseau électrique circulaire",
+      "prix": 500,
+      "devise": "EUR",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-28",
+      "base": "Outil portatif, table de coupe estimée séparément.",
+      "limites": "Coupe jusqu’à 9 mm annoncés ; petites épaisseurs et passes successives, pas un matelas industriel épais. 220 V / 90 W annoncés ; protection des mains et formation requises."
+    },
+    {
+      "id": "textile_atelier_confection",
+      "url": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "fournisseur": "TMAC SAS (poste principal) ; Glasman (compléments)",
+      "modele": "JUKI DDL-8700 — poste principal de l’ensemble P2I",
+      "prix": 875,
+      "devise": "EUR",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-28",
+      "base": "875 EUR HT par piqueuse DDL-8700 ; quantités P2I et équipements complémentaires chiffrés séparément. Aucun prix global de ligne clé en main publié.",
+      "limites": "Assemblage de postes, pas ligne automatique intégrée. Quantités, équilibrage des opérations, capacité effective, qualité et service après-vente à confirmer ensemble. Pas de tricotage, teinture ou broderie ; tissus légers à moyens. Pas de vêtement EPI certifié dans ce scénario.",
+      "fonctions": [
+        "Réception des tissus",
+        "Patronage et placement",
+        "Coupe à faible épaisseur",
+        "Assemblage à point droit",
+        "Surfilage des coutures",
+        "Boutonnières et boutons",
+        "Repassage vapeur",
+        "Contrôle et conditionnement"
+      ],
+      "postes": [
+        {
+          "description": "Tissus tissés légers à moyens achetés ; contrôle de largeur, défauts et retrait."
+        },
+        {
+          "description": "Patronage et placement manuels ; informatique et table de coupe estimées séparément."
+        },
+        {
+          "description": "Un RASOR DS504, petites épaisseurs jusqu’à 9 mm annoncés ; pas de coupe automatique grand matelas."
+        },
+        {
+          "description": "8 JUKI DDL-8700 avec table, bâti et moteur ; capacité en pièces issue d’une hypothèse d’organisation, pas des points/minute."
+        },
+        {
+          "description": "Deux surjeteuses JUKI MO-6716DA ; réglages et sous-classe à préciser pour le tissu retenu."
+        },
+        {
+          "description": "Une JACK JK-T781G-Z pour les boutonnières ; boutons cousus manuellement. Broderie et marquage non inclus."
+        },
+        {
+          "description": "Deux KER/2 avec chaudière et fer déjà compris ; eau, électricité et sécurité vapeur à organiser."
+        },
+        {
+          "description": "Contrôle de tailles, coutures et aspect, puis pliage et bande papier ; manutention des cartons budgétée."
+        }
+      ]
+    },
+    {
+      "id": "textile_atelier_uniformes",
+      "url": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "fournisseur": "TMAC SAS (poste principal) ; Glasman (compléments)",
+      "modele": "JUKI DDL-8700 — poste principal de l’ensemble P2I",
+      "prix": 875,
+      "devise": "EUR",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-28",
+      "base": "875 EUR HT par piqueuse DDL-8700 ; quantités P2I et équipements complémentaires chiffrés séparément. Aucun prix global de ligne clé en main publié.",
+      "limites": "Assemblage de postes, pas ligne automatique intégrée. Quantités, équilibrage des opérations, capacité effective, qualité et service après-vente à confirmer ensemble. Pas de tricotage, teinture ou broderie ; tissus légers à moyens. Pas de vêtement EPI certifié dans ce scénario.",
+      "fonctions": [
+        "Réception des tissus",
+        "Patronage et placement",
+        "Coupe à faible épaisseur",
+        "Assemblage à point droit",
+        "Surfilage des coutures",
+        "Boutonnières et boutons",
+        "Repassage vapeur",
+        "Contrôle et conditionnement"
+      ],
+      "postes": [
+        {
+          "description": "Tissus tissés légers à moyens achetés ; contrôle de largeur, défauts et retrait."
+        },
+        {
+          "description": "Patronage et placement manuels ; informatique et table de coupe estimées séparément."
+        },
+        {
+          "description": "Un RASOR DS504, petites épaisseurs jusqu’à 9 mm annoncés ; pas de coupe automatique grand matelas."
+        },
+        {
+          "description": "10 JUKI DDL-8700 avec table, bâti et moteur ; capacité en pièces issue d’une hypothèse d’organisation, pas des points/minute."
+        },
+        {
+          "description": "Deux surjeteuses JUKI MO-6716DA ; réglages et sous-classe à préciser pour le tissu retenu."
+        },
+        {
+          "description": "Une JACK JK-T781G-Z pour les boutonnières ; boutons cousus manuellement. Broderie et marquage non inclus."
+        },
+        {
+          "description": "Deux KER/2 avec chaudière et fer déjà compris ; eau, électricité et sécurité vapeur à organiser."
+        },
+        {
+          "description": "Contrôle de tailles, coutures et aspect, puis pliage et bande papier ; manutention des cartons budgétée."
+        }
+      ]
+    },
+    {
+      "id": "textile_atelier_linge",
+      "url": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "fournisseur": "TMAC SAS (poste principal) ; Glasman (compléments)",
+      "modele": "JUKI DDL-8700 — poste principal de l’ensemble P2I",
+      "prix": 875,
+      "devise": "EUR",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-28",
+      "base": "875 EUR HT par piqueuse DDL-8700 ; quantités P2I et équipements complémentaires chiffrés séparément. Aucun prix global de ligne clé en main publié.",
+      "limites": "Assemblage de postes, pas ligne automatique intégrée. Quantités, équilibrage des opérations, capacité effective, qualité et service après-vente à confirmer ensemble. Aucune boutonnière ni surjeteuse nécessaire au drap plat à double ourlet de référence.",
+      "fonctions": [
+        "Réception des tissus",
+        "Patronage et métrage",
+        "Coupe à faible épaisseur",
+        "Ourlets à point droit",
+        "Repassage vapeur",
+        "Contrôle des dimensions",
+        "Pliage et conditionnement",
+        "Stockage et expédition"
+      ],
+      "postes": [
+        {
+          "description": "Tissu coton acheté, largeur et stabilité à contrôler ; pas de filature ou de tissage inclus."
+        },
+        {
+          "description": "Plans de coupe pour un drap fini 180 × 290 cm ; marges d’ourlet et retrait à préciser."
+        },
+        {
+          "description": "Un RASOR DS504, coupe annoncée jusqu’à 9 mm ; table de coupe budgétée à part."
+        },
+        {
+          "description": "Six JUKI DDL-8700 au total ; guides d’ourlet estimés dans les auxiliaires. Double repli : pas de surjeteuse ajoutée par défaut."
+        },
+        {
+          "description": "Deux KER/2, chacune avec chaudière et fer ; travail par zones pour les grandes pièces, sans calandre industrielle."
+        },
+        {
+          "description": "Dimensions finies, aspect et coutures ; essais de retrait au lavage à organiser."
+        },
+        {
+          "description": "Une pièce = un drap ; bande papier et carton groupé, sans compter une taie comme unité vendue."
+        },
+        {
+          "description": "Stockage au sec et transferts par chariots/transpalette ; manutention chiffrée dans le budget."
+        }
+      ]
+    }
+  ],
+  "profils": {
+    "confection": {
+      "up_id": "confection",
+      "configuration_id": null,
+      "nom": "Tuniques en coton — petite série industrielle",
+      "sous_titre": "Prêt-à-porter en tissu tissé acheté, sans fabrication du tissu",
+      "description": "Tuniques en coton — petite série industrielle. Atelier équipé de postes individuels, production et facturation en pièces. Tissus achetés ; origine ivoirienne non présumée. Les ventes et les prix départ atelier sont des hypothèses P2I, pas des commandes acquises.",
+      "source_equipement": "textile_atelier_confection",
+      "prix_retenu": 875,
+      "devise_prix": "EUR",
+      "quantite_equipement_principal": 8,
+      "equipements_complementaires": [
+        {
+          "nom": "1 × RASOR DS504, ciseau électrique circulaire",
+          "source_id": "textile_rasor_ds504",
+          "source_url": "https://www.glasman.fr/a16120/ciseau-de-coupe-electrique-rasor-ds504",
+          "prix_retenu": 500,
+          "devise": "EUR",
+          "quantite": 1,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Coupe jusqu’à 9 mm annoncés ; petites épaisseurs et passes successives, pas un matelas industriel épais. 220 V / 90 W annoncés ; protection des mains et formation requises."
+        },
+        {
+          "nom": "2 × BATTISTELLA KER/2, table + chaudière + fer",
+          "source_id": "textile_battistella_ker2",
+          "source_url": "https://tmac-sas.fr/repassage/465-tables-%C3%A0-repasser-%C3%A9quip%C3%A9e-de-chaudi%C3%A8re-int%C3%A9gr%C3%A9-.html",
+          "prix_retenu": 960,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "230 V, 2 475 W annoncés par poste ; appoints d’eau, autonomie, sécurité vapeur et finition de grandes pièces à tester."
+        },
+        {
+          "nom": "2 × JUKI MO-6716DA, surjeteuse 5 fils complète",
+          "source_id": "textile_juki_mo6716",
+          "source_url": "https://www.glasman.fr/a15840/juki-mo-6716da-surjeteuse-5fils",
+          "prix_retenu": 1790,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Sous-classe pour tissu léger à moyen à préciser ; pas un rendement garanti par vêtement."
+        },
+        {
+          "nom": "1 × JACK JK-T781G-Z, boutonnière",
+          "source_id": "textile_jack_t781",
+          "source_url": "https://tmac-sas.fr/machine-a-boutonniere/403-jack-jk-t781g-z.html",
+          "prix_retenu": 2800,
+          "devise": "EUR",
+          "quantite": 1,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Fait les boutonnières ; ne coud pas les boutons. Pose des boutons manuelle incluse dans l’organisation P2I ; pas de seconde machine pose-boutons ajoutée."
+        }
+      ],
+      "unite_production": "pièce",
+      "capacite_unites_h": 10,
+      "production_explicite": [
+        12000,
+        15000,
+        17000
+      ],
+      "ventes_explicites": [
+        11400,
+        15000,
+        17000
+      ],
+      "prix_vente_usd_unite": [
+        18,
+        18.36,
+        18.7272
+      ],
+      "matieres_usd_unite": 6.2,
+      "cout_process_usd_unite": 0.8,
+      "fixes_industriels_an": 56300,
+      "personnel_hors_cout_industriel": 9660,
+      "charges_fixes_hors_industriel": 9600,
+      "stock_matieres_jours": 30,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Bande papier avec marque illustrative, taille/composition et entretien ; protection papier et carton groupé",
+        "cout_usd_par_unite": 0.25,
+        "composants_usd_par_unite": {
+          "bande_papier": 0.08,
+          "etiquette": 0.04,
+          "protection_papier": 0.06,
+          "carton_groupe": 0.07
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Limiter l’emballage individuel et privilégier les cartons réemployables ; protection contre humidité, collecte et recyclage réels à confirmer. Aucun gain écologique quantifié ni label acquis.",
+        "source": "Hypothèse P2I par pièce, pas tarif fournisseur vérifié."
+      },
+      "complements_usd": {
+        "fret": 2800,
+        "assurance": 250,
+        "douane_transit": 3500,
+        "transport_local": 800,
+        "genie_civil": 6000,
+        "utilites": 3500,
+        "installation_formation": 2500,
+        "pieces_initiales": 1200,
+        "securite_environnement": 1800,
+        "etudes": 1800,
+        "table_coupe_auxiliaires": 1800,
+        "rayonnage_stockage": 2000,
+        "patronage_informatique": 1500
+      },
+      "methodes": {
+        "production": "Capacité de travail P2I 10 pièces/h, 8 h/j, 250 j/an, inférieure au potentiel nominal des seules machines de couture. Le goulot dépend du modèle, des gestes et de l’équilibrage. Volumes de 12000/15000/17000 pièces ; stock initial de lancement puis quantité stable, sans pertes ni invendus supplémentaires simulés.",
+        "matieres": "Hypothèse par pièce : tissu et marge de coupe 5,60 USD, fil/boutons/entoilage et accessoires 0,60 USD, soit 6,20 USD. Prix livré, métrage par taille, pertes et origine à confirmer.",
+        "process": "0.8 USD/pièce dont emballage 0.25 USD ; solde pour électricité, eau de repassage, consommables et petits accessoires. Coûts estimés, non mesurés.",
+        "personnel": "14 personnes de production/contrôle/manutention à 250 USD/mois × 12 × 1,15 (majoration de simulation, pas taux légal) dans les frais industriels ; site, maintenance et autres frais complètent l’enveloppe de 56300 USD/an. Responsable administratif/commercial distinct : 700 USD/mois × 12 × 1,15 = 9 660 USD/an.",
+        "charges": "Hors coûts industriels : commercialisation 6 000, administration 2 400 et assurance 1 200 USD/an. Entretien de la manutention ajouté une seule fois par le module commun. Aucune location récurrente de matériel ni nouvelle embauche supposée.",
+        "prix_vente": "18 USD/pièce départ atelier A1 puis +2 %/an, hypothèse P2I. Les repères ivoiriens de détail ne prouvent pas ce prix producteur ni les volumes accessibles.",
+        "complements": "Fret, site, utilités, table de coupe, patronage, stockage, formation et sécurité : enveloppes P2I. Les tables/bâtis/moteurs des machines et chaudières/fers KER/2 sont déjà compris dans les prix catalogue, sans ajout en double.",
+        "qualite": "Tailles, résistance des coutures, solidité des couleurs, retrait au lavage, étiquetage et traçabilité à tester ; aucune certification, origine du coton ou performance EPI présumées."
+      },
+      "marches": [
+        "Boutiques de prêt-à-porter",
+        "Revendeurs et commandes de petites séries"
+      ],
+      "redaction": {
+        "positionnement": "Prêt-à-porter en tissu tissé acheté, sans fabrication du tissu. Le produit et son unité de vente sont propres à cette UP.",
+        "marche": "Clients à prospecter : Boutiques de prêt-à-porter ; Revendeurs et commandes de petites séries. Les prix au détail documentés servent de comparaison ; pas de volume de demande ni de commande acquis.",
+        "commercial": "Présenter des échantillons, qualifier les tailles et matières, recueillir des commandes par série et suivre réassorts, retours et délais de paiement.",
+        "approvisionnement": "Acheter des tissus tissés et accessoires traçables, définir largeur, grammage, retrait, solidité et régularité des lots ; disponibilité locale et prix livrés à documenter.",
+        "procede": "Réception des tissus → Patronage et placement → Coupe à faible épaisseur → Assemblage à point droit → Surfilage des coutures → Boutonnières et boutons → Repassage vapeur → Contrôle et conditionnement. Pas de filature ni de tissage dans le périmètre.",
+        "opportunites": "Petites séries, réassorts rapides et adaptation aux tailles ; intérêt commercial à confirmer avec des clients.",
+        "risques": "Concurrence importée et artisanale, saisonnalité, retards de paiement, variations des tissus, reprises et invendus par taille. Les volumes de lancement restent des hypothèses.",
+        "qualite": "Tailles, résistance des coutures, solidité des couleurs, retrait au lavage, étiquetage et traçabilité à tester ; aucune certification, origine du coton ou performance EPI présumées.",
+        "utilites": "Machines 220–230 V ; deux repassages KER/2 à 2 475 W chacun et cutter 90 W annoncés. Puissance souscrite, protections électriques, ventilation, eau et sécurité vapeur à dimensionner ; coût variable estimé, pas bilan énergétique mesuré.",
+        "projet": "Tuniques en coton — petite série industrielle. Atelier équipé de postes individuels, production et facturation en pièces. Tissus achetés ; origine ivoirienne non présumée. Les ventes et les prix départ atelier sont des hypothèses P2I, pas des commandes acquises."
+      },
+      "plan_commercial": [
+        {
+          "titre": "Échantillons et cahier des charges",
+          "texte": "Faire approuver tissu, coupe, tailles et finition avant série."
+        },
+        {
+          "titre": "Clients professionnels",
+          "texte": "Prospecter boutiques de prêt-à-porter ; revendeurs et commandes de petites séries."
+        },
+        {
+          "titre": "Marque et présentation",
+          "texte": "Marques et logos P2I illustratifs ; disponibilité juridique à vérifier."
+        },
+        {
+          "titre": "Commandes par série",
+          "texte": "Planifier les séries et éviter une accumulation de tailles invendues."
+        },
+        {
+          "titre": "Qualité et réassort",
+          "texte": "Contrôler les retours, le lavage et la régularité des nouveaux lots."
+        },
+        {
+          "titre": "Suivi commercial",
+          "texte": "Mesurer taux de réassort, marge réelle par article et délais de règlement."
+        }
+      ],
+      "sources_prix_marche": [
+        {
+          "url": "https://openmoise.ci/seller/shop/chic-couture",
+          "consulte_le": "2026-10-28",
+          "description": "Boutique Chic Couture : tuniques affichées à 20 000 FCFA au détail ; pas prix producteur ni preuve de commandes."
+        }
+      ],
+      "visuels": {
+        "atlas": "textile",
+        "product_index": 1,
+        "indices": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          12
+        ]
+      },
+      "nombre_machines_reference": 14
+    },
+    "uniformes": {
+      "up_id": "uniformes",
+      "configuration_id": null,
+      "nom": "Chemises de travail — confection en série",
+      "sous_titre": "Vêtement professionnel ordinaire, hors EPI certifié",
+      "description": "Chemises de travail — confection en série. Atelier équipé de postes individuels, production et facturation en pièces. Tissus achetés ; origine ivoirienne non présumée. Les ventes et les prix départ atelier sont des hypothèses P2I, pas des commandes acquises.",
+      "source_equipement": "textile_atelier_uniformes",
+      "prix_retenu": 875,
+      "devise_prix": "EUR",
+      "quantite_equipement_principal": 10,
+      "equipements_complementaires": [
+        {
+          "nom": "1 × RASOR DS504, ciseau électrique circulaire",
+          "source_id": "textile_rasor_ds504",
+          "source_url": "https://www.glasman.fr/a16120/ciseau-de-coupe-electrique-rasor-ds504",
+          "prix_retenu": 500,
+          "devise": "EUR",
+          "quantite": 1,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Coupe jusqu’à 9 mm annoncés ; petites épaisseurs et passes successives, pas un matelas industriel épais. 220 V / 90 W annoncés ; protection des mains et formation requises."
+        },
+        {
+          "nom": "2 × BATTISTELLA KER/2, table + chaudière + fer",
+          "source_id": "textile_battistella_ker2",
+          "source_url": "https://tmac-sas.fr/repassage/465-tables-%C3%A0-repasser-%C3%A9quip%C3%A9e-de-chaudi%C3%A8re-int%C3%A9gr%C3%A9-.html",
+          "prix_retenu": 960,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "230 V, 2 475 W annoncés par poste ; appoints d’eau, autonomie, sécurité vapeur et finition de grandes pièces à tester."
+        },
+        {
+          "nom": "2 × JUKI MO-6716DA, surjeteuse 5 fils complète",
+          "source_id": "textile_juki_mo6716",
+          "source_url": "https://www.glasman.fr/a15840/juki-mo-6716da-surjeteuse-5fils",
+          "prix_retenu": 1790,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Sous-classe pour tissu léger à moyen à préciser ; pas un rendement garanti par vêtement."
+        },
+        {
+          "nom": "1 × JACK JK-T781G-Z, boutonnière",
+          "source_id": "textile_jack_t781",
+          "source_url": "https://tmac-sas.fr/machine-a-boutonniere/403-jack-jk-t781g-z.html",
+          "prix_retenu": 2800,
+          "devise": "EUR",
+          "quantite": 1,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Fait les boutonnières ; ne coud pas les boutons. Pose des boutons manuelle incluse dans l’organisation P2I ; pas de seconde machine pose-boutons ajoutée."
+        }
+      ],
+      "unite_production": "pièce",
+      "capacite_unites_h": 12,
+      "production_explicite": [
+        14000,
+        17000,
+        20000
+      ],
+      "ventes_explicites": [
+        13580,
+        17000,
+        20000
+      ],
+      "prix_vente_usd_unite": [
+        17,
+        17.34,
+        17.6868
+      ],
+      "matieres_usd_unite": 6.2,
+      "cout_process_usd_unite": 0.85,
+      "fixes_industriels_an": 63200,
+      "personnel_hors_cout_industriel": 9660,
+      "charges_fixes_hors_industriel": 9600,
+      "stock_matieres_jours": 30,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Bande papier avec marque illustrative, taille/composition et entretien ; protection papier et carton groupé",
+        "cout_usd_par_unite": 0.25,
+        "composants_usd_par_unite": {
+          "bande_papier": 0.08,
+          "etiquette": 0.04,
+          "protection_papier": 0.06,
+          "carton_groupe": 0.07
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Limiter l’emballage individuel et privilégier les cartons réemployables ; protection contre humidité, collecte et recyclage réels à confirmer. Aucun gain écologique quantifié ni label acquis.",
+        "source": "Hypothèse P2I par pièce, pas tarif fournisseur vérifié."
+      },
+      "complements_usd": {
+        "fret": 2800,
+        "assurance": 250,
+        "douane_transit": 3500,
+        "transport_local": 800,
+        "genie_civil": 6000,
+        "utilites": 3500,
+        "installation_formation": 2500,
+        "pieces_initiales": 1200,
+        "securite_environnement": 1800,
+        "etudes": 1800,
+        "table_coupe_auxiliaires": 1800,
+        "rayonnage_stockage": 2000,
+        "patronage_informatique": 1500
+      },
+      "methodes": {
+        "production": "Capacité de travail P2I 12 pièces/h, 8 h/j, 250 j/an, inférieure au potentiel nominal des seules machines de couture. Le goulot dépend du modèle, des gestes et de l’équilibrage. Volumes de 14000/17000/20000 pièces ; stock initial de lancement puis quantité stable, sans pertes ni invendus supplémentaires simulés.",
+        "matieres": "Hypothèse par pièce : tissu et marge de coupe 5,60 USD, fil/boutons/entoilage et accessoires 0,60 USD, soit 6,20 USD. Prix livré, métrage par taille, pertes et origine à confirmer.",
+        "process": "0.85 USD/pièce dont emballage 0.25 USD ; solde pour électricité, eau de repassage, consommables et petits accessoires. Coûts estimés, non mesurés.",
+        "personnel": "16 personnes de production/contrôle/manutention à 250 USD/mois × 12 × 1,15 (majoration de simulation, pas taux légal) dans les frais industriels ; site, maintenance et autres frais complètent l’enveloppe de 63200 USD/an. Responsable administratif/commercial distinct : 700 USD/mois × 12 × 1,15 = 9 660 USD/an.",
+        "charges": "Hors coûts industriels : commercialisation 6 000, administration 2 400 et assurance 1 200 USD/an. Entretien de la manutention ajouté une seule fois par le module commun. Aucune location récurrente de matériel ni nouvelle embauche supposée.",
+        "prix_vente": "17 USD/pièce départ atelier A1 puis +2 %/an, hypothèse P2I. Les repères ivoiriens de détail ne prouvent pas ce prix producteur ni les volumes accessibles.",
+        "complements": "Fret, site, utilités, table de coupe, patronage, stockage, formation et sécurité : enveloppes P2I. Les tables/bâtis/moteurs des machines et chaudières/fers KER/2 sont déjà compris dans les prix catalogue, sans ajout en double.",
+        "qualite": "Tailles, résistance des coutures, solidité des couleurs, retrait au lavage, étiquetage et traçabilité à tester ; aucune certification, origine du coton ou performance EPI présumées."
+      },
+      "marches": [
+        "Entreprises et prestataires de services",
+        "Distributeurs de vêtements de travail"
+      ],
+      "redaction": {
+        "positionnement": "Vêtement professionnel ordinaire, hors EPI certifié. Le produit et son unité de vente sont propres à cette UP.",
+        "marche": "Clients à prospecter : Entreprises et prestataires de services ; Distributeurs de vêtements de travail. Les prix au détail documentés servent de comparaison ; pas de volume de demande ni de commande acquis.",
+        "commercial": "Présenter des échantillons, qualifier les tailles et matières, recueillir des commandes par série et suivre réassorts, retours et délais de paiement.",
+        "approvisionnement": "Acheter des tissus tissés et accessoires traçables, définir largeur, grammage, retrait, solidité et régularité des lots ; disponibilité locale et prix livrés à documenter.",
+        "procede": "Réception des tissus → Patronage et placement → Coupe à faible épaisseur → Assemblage à point droit → Surfilage des coutures → Boutonnières et boutons → Repassage vapeur → Contrôle et conditionnement. Pas de filature ni de tissage dans le périmètre.",
+        "opportunites": "Petites séries, réassorts rapides et adaptation aux tailles ; intérêt commercial à confirmer avec des clients.",
+        "risques": "Concurrence importée et artisanale, saisonnalité, retards de paiement, variations des tissus, reprises et invendus par taille. Les volumes de lancement restent des hypothèses.",
+        "qualite": "Tailles, résistance des coutures, solidité des couleurs, retrait au lavage, étiquetage et traçabilité à tester ; aucune certification, origine du coton ou performance EPI présumées.",
+        "utilites": "Machines 220–230 V ; deux repassages KER/2 à 2 475 W chacun et cutter 90 W annoncés. Puissance souscrite, protections électriques, ventilation, eau et sécurité vapeur à dimensionner ; coût variable estimé, pas bilan énergétique mesuré.",
+        "projet": "Chemises de travail — confection en série. Atelier équipé de postes individuels, production et facturation en pièces. Tissus achetés ; origine ivoirienne non présumée. Les ventes et les prix départ atelier sont des hypothèses P2I, pas des commandes acquises."
+      },
+      "plan_commercial": [
+        {
+          "titre": "Échantillons et cahier des charges",
+          "texte": "Faire approuver tissu, coupe, tailles et finition avant série."
+        },
+        {
+          "titre": "Clients professionnels",
+          "texte": "Prospecter entreprises et prestataires de services ; distributeurs de vêtements de travail."
+        },
+        {
+          "titre": "Marque et présentation",
+          "texte": "Marques et logos P2I illustratifs ; disponibilité juridique à vérifier."
+        },
+        {
+          "titre": "Commandes par série",
+          "texte": "Planifier les séries et éviter une accumulation de tailles invendues."
+        },
+        {
+          "titre": "Qualité et réassort",
+          "texte": "Contrôler les retours, le lavage et la régularité des nouveaux lots."
+        },
+        {
+          "titre": "Suivi commercial",
+          "texte": "Mesurer taux de réassort, marge réelle par article et délais de règlement."
+        }
+      ],
+      "sources_prix_marche": [
+        {
+          "url": "https://carrefour.ci/wp-content/uploads/2025/07/CATALOGUE-OBV-2025.pdf",
+          "consulte_le": "2026-10-28",
+          "description": "Catalogue OBV 2025 : chemise homme affichée 13 900 FCFA en promotion. Repère daté de détail d’un autre produit ; ne prouve pas le prix d’une chemise de travail."
+        }
+      ],
+      "visuels": {
+        "atlas": "textile",
+        "product_index": 2,
+        "indices": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          12
+        ]
+      },
+      "nombre_machines_reference": 16
+    },
+    "linge": {
+      "up_id": "linge",
+      "configuration_id": null,
+      "nom": "Draps plats en coton — 180 × 290 cm",
+      "sous_titre": "Une pièce facturée = un drap plat ; ni parure ni prestation de blanchisserie",
+      "description": "Draps plats en coton — 180 × 290 cm. Atelier équipé de postes individuels, production et facturation en pièces. Tissus achetés ; origine ivoirienne non présumée. Les ventes et les prix départ atelier sont des hypothèses P2I, pas des commandes acquises.",
+      "source_equipement": "textile_atelier_linge",
+      "prix_retenu": 875,
+      "devise_prix": "EUR",
+      "quantite_equipement_principal": 6,
+      "equipements_complementaires": [
+        {
+          "nom": "1 × RASOR DS504, ciseau électrique circulaire",
+          "source_id": "textile_rasor_ds504",
+          "source_url": "https://www.glasman.fr/a16120/ciseau-de-coupe-electrique-rasor-ds504",
+          "prix_retenu": 500,
+          "devise": "EUR",
+          "quantite": 1,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Coupe jusqu’à 9 mm annoncés ; petites épaisseurs et passes successives, pas un matelas industriel épais. 220 V / 90 W annoncés ; protection des mains et formation requises."
+        },
+        {
+          "nom": "2 × BATTISTELLA KER/2, table + chaudière + fer",
+          "source_id": "textile_battistella_ker2",
+          "source_url": "https://tmac-sas.fr/repassage/465-tables-%C3%A0-repasser-%C3%A9quip%C3%A9e-de-chaudi%C3%A8re-int%C3%A9gr%C3%A9-.html",
+          "prix_retenu": 960,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "230 V, 2 475 W annoncés par poste ; appoints d’eau, autonomie, sécurité vapeur et finition de grandes pièces à tester."
+        }
+      ],
+      "unite_production": "pièce",
+      "capacite_unites_h": 20,
+      "production_explicite": [
+        24000,
+        29000,
+        34000
+      ],
+      "ventes_explicites": [
+        23280,
+        29000,
+        34000
+      ],
+      "prix_vente_usd_unite": [
+        12.8,
+        13.056,
+        13.31712
+      ],
+      "matieres_usd_unite": 5.6,
+      "cout_process_usd_unite": 0.7,
+      "fixes_industriels_an": 49000,
+      "personnel_hors_cout_industriel": 9660,
+      "charges_fixes_hors_industriel": 9600,
+      "stock_matieres_jours": 30,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Bande papier avec marque illustrative, taille/composition et entretien ; protection papier et carton groupé",
+        "cout_usd_par_unite": 0.35,
+        "composants_usd_par_unite": {
+          "bande_papier": 0.12,
+          "etiquette": 0.05,
+          "protection_papier": 0.08,
+          "carton_groupe": 0.1
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Limiter l’emballage individuel et privilégier les cartons réemployables ; protection contre humidité, collecte et recyclage réels à confirmer. Aucun gain écologique quantifié ni label acquis.",
+        "source": "Hypothèse P2I par pièce, pas tarif fournisseur vérifié."
+      },
+      "complements_usd": {
+        "fret": 2800,
+        "assurance": 250,
+        "douane_transit": 3500,
+        "transport_local": 800,
+        "genie_civil": 6000,
+        "utilites": 3500,
+        "installation_formation": 2500,
+        "pieces_initiales": 1200,
+        "securite_environnement": 1800,
+        "etudes": 1800,
+        "table_coupe_auxiliaires": 1800,
+        "rayonnage_stockage": 2000,
+        "patronage_informatique": 1500
+      },
+      "methodes": {
+        "production": "Capacité de travail P2I 20 pièces/h, 8 h/j, 250 j/an, inférieure au potentiel nominal des seules machines de couture. Le goulot dépend du modèle, des gestes et de l’équilibrage. Volumes de 24000/29000/34000 pièces ; stock initial de lancement puis quantité stable, sans pertes ni invendus supplémentaires simulés.",
+        "matieres": "Hypothèse par drap : tissu largeur 3 m, environ 1,90 m linéaire à 2,80 USD/m et fil/accessoires 0,28 USD, soit 5,60 USD. Prix livré et retrait non vérifiés ; achat de tissu, pas de transformation de coton brut.",
+        "process": "0.7 USD/pièce dont emballage 0.35 USD ; solde pour électricité, eau de repassage, consommables et petits accessoires. Coûts estimés, non mesurés.",
+        "personnel": "12 personnes de production/contrôle/manutention à 250 USD/mois × 12 × 1,15 (majoration de simulation, pas taux légal) dans les frais industriels ; site, maintenance et autres frais complètent l’enveloppe de 49000 USD/an. Responsable administratif/commercial distinct : 700 USD/mois × 12 × 1,15 = 9 660 USD/an.",
+        "charges": "Hors coûts industriels : commercialisation 6 000, administration 2 400 et assurance 1 200 USD/an. Entretien de la manutention ajouté une seule fois par le module commun. Aucune location récurrente de matériel ni nouvelle embauche supposée.",
+        "prix_vente": "12.8 USD/pièce départ atelier A1 puis +2 %/an, hypothèse P2I. Les repères ivoiriens de détail ne prouvent pas ce prix producteur ni les volumes accessibles.",
+        "complements": "Fret, site, utilités, table de coupe, patronage, stockage, formation et sécurité : enveloppes P2I. Les tables/bâtis/moteurs des machines et chaudières/fers KER/2 sont déjà compris dans les prix catalogue, sans ajout en double.",
+        "qualite": "Tailles, résistance des coutures, solidité des couleurs, retrait au lavage, étiquetage et traçabilité à tester ; aucune certification, origine du coton ou performance EPI présumées."
+      },
+      "marches": [
+        "Hôtels et résidences",
+        "Magasins de linge et commandes institutionnelles"
+      ],
+      "redaction": {
+        "positionnement": "Une pièce facturée = un drap plat ; ni parure ni prestation de blanchisserie. Le produit et son unité de vente sont propres à cette UP.",
+        "marche": "Clients à prospecter : Hôtels et résidences ; Magasins de linge et commandes institutionnelles. Les prix au détail documentés servent de comparaison ; pas de volume de demande ni de commande acquis.",
+        "commercial": "Présenter des échantillons, qualifier les tailles et matières, recueillir des commandes par série et suivre réassorts, retours et délais de paiement.",
+        "approvisionnement": "Acheter des tissus tissés et accessoires traçables, définir largeur, grammage, retrait, solidité et régularité des lots ; disponibilité locale et prix livrés à documenter.",
+        "procede": "Réception des tissus → Patronage et métrage → Coupe à faible épaisseur → Ourlets à point droit → Repassage vapeur → Contrôle des dimensions → Pliage et conditionnement → Stockage et expédition. Pas de filature ni de tissage dans le périmètre.",
+        "opportunites": "Petites séries, réassorts rapides et adaptation aux tailles ; intérêt commercial à confirmer avec des clients.",
+        "risques": "Concurrence importée et artisanale, saisonnalité, retards de paiement, variations des tissus, reprises et invendus par taille. Les volumes de lancement restent des hypothèses.",
+        "qualite": "Tailles, résistance des coutures, solidité des couleurs, retrait au lavage, étiquetage et traçabilité à tester ; aucune certification, origine du coton ou performance EPI présumées.",
+        "utilites": "Machines 220–230 V ; deux repassages KER/2 à 2 475 W chacun et cutter 90 W annoncés. Puissance souscrite, protections électriques, ventilation, eau et sécurité vapeur à dimensionner ; coût variable estimé, pas bilan énergétique mesuré.",
+        "projet": "Draps plats en coton — 180 × 290 cm. Atelier équipé de postes individuels, production et facturation en pièces. Tissus achetés ; origine ivoirienne non présumée. Les ventes et les prix départ atelier sont des hypothèses P2I, pas des commandes acquises."
+      },
+      "plan_commercial": [
+        {
+          "titre": "Échantillons et cahier des charges",
+          "texte": "Faire approuver tissu, coupe, tailles et finition avant série."
+        },
+        {
+          "titre": "Clients professionnels",
+          "texte": "Prospecter hôtels et résidences ; magasins de linge et commandes institutionnelles."
+        },
+        {
+          "titre": "Marque et présentation",
+          "texte": "Marques et logos P2I illustratifs ; disponibilité juridique à vérifier."
+        },
+        {
+          "titre": "Commandes par série",
+          "texte": "Planifier les séries et éviter une accumulation de tailles invendues."
+        },
+        {
+          "titre": "Qualité et réassort",
+          "texte": "Contrôler les retours, le lavage et la régularité des nouveaux lots."
+        },
+        {
+          "titre": "Suivi commercial",
+          "texte": "Mesurer taux de réassort, marge réelle par article et délais de règlement."
+        }
+      ],
+      "sources_prix_marche": [
+        {
+          "url": "https://orca.ci/product-category/articles-de-maison/literie/",
+          "consulte_le": "2026-10-28",
+          "description": "Drap plat 100 % coton 180 × 290 cm affiché 14 950 FCFA, promotion 9 718 FCFA lors de consultation. Repère de détail, pas prix départ atelier ; références et qualité à comparer."
+        }
+      ],
+      "visuels": {
+        "atlas": "linge",
+        "product_index": 7,
+        "indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "nombre_machines_reference": 9
+    }
+  }
+}

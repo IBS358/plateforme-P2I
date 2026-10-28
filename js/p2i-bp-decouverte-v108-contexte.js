@@ -20,7 +20,8 @@ function normalizeInput(value,upId,config){
  for(const key of numericKeys){const v=value[key];if(typeof v!=='number'||!Number.isFinite(v)||v<0)throw Error('Entrée invalide ou absente : '+key);out[key]=v;}
  if(value.stock_matieres_jours!==undefined){if(typeof value.stock_matieres_jours!=='number'||!Number.isFinite(value.stock_matieres_jours)||value.stock_matieres_jours<0||value.stock_matieres_jours>30)throw Error('Stock matières invalide');out.stock_matieres_jours=value.stock_matieres_jours;}
  for(const key of strKeys){if(key==='configuration_id'){out[key]=config||null;continue;}const v=value[key];if(typeof v!=='string'||v.length>5000)throw Error('Texte absent ou trop long : '+key);out[key]=v;}
- if(out.unite!=='kg/h')throw Error('Ce contrat de simulation industrielle accepte une capacité en kg/h.');
+ if(!['kg/h','pièces/h'].includes(out.unite))throw Error('Unité de capacité non prise en charge : kg/h ou pièces/h attendu.');
+ if(out.unite==='pièces/h'&&[...out.production,...out.ventes].some(x=>!Number.isInteger(x)))throw Error('Les quantités en pièces doivent être entières');
  out.machines=value.machines===null?null:typeof value.machines==='number'&&Number.isFinite(value.machines)&&value.machines>=0?value.machines:null;
  if(out.machines!==null&&out.machines>out.investissement)throw Error('Le budget machines dépasse le budget global.');
  if(value.amortissements_specifiques!==undefined)out.amortissements_specifiques=root.P2I_BP_SIMULATION_COMMUNE.normaliserAmortissements(value.amortissements_specifiques);
