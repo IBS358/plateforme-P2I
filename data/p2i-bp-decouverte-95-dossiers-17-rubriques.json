@@ -4312,7 +4312,7 @@
     },
     {
       "up_id": "javel",
-      "up_nom": "Eau de javel & désinfectants",
+      "up_nom": "Hygiène & désinfection professionnelles",
       "filiere": "Chimie, Cosmétiques & Détergents",
       "statut": "brouillon_documentaire_non_bancable",
       "sections": [
@@ -4320,9 +4320,9 @@
           "numero": 1,
           "titre": "Projet et activité",
           "contenu": {
-            "description": "Fabrication d'eau de javel et désinfectants.",
+            "description": "Formulation de concentrés professionnels d’hygiène des surfaces, avec priorité aux ingrédients biosourcés compatibles et à la réduction des dangers ; hors médical.",
             "filiere": "Chimie, Cosmétiques & Détergents",
-            "up_nom": "Eau de javel & désinfectants"
+            "up_nom": "Hygiène & désinfection professionnelles"
           }
         },
         {
@@ -4340,45 +4340,68 @@
           "contenu": {
             "machines": [
               {
-                "nom": "Cuve de mélange",
-                "role": "Préparation",
-                "capacite": "5,000 L",
-                "utilites": "Électricité"
+                "nom": "Traitement de l’eau",
+                "role": "Osmose inverse, UV, pompe et stockage eau",
+                "capacite": "500 L/h ; cuve 1 000 L",
+                "utilites": "Électricité + eau"
               },
               {
-                "nom": "Système de dosage",
-                "role": "Dosage du chlore",
-                "capacite": "Automatique",
-                "utilites": "Électricité"
+                "nom": "Cuve de mélange",
+                "role": "Mélange et homogénéisation",
+                "capacite": "1 000 L par lot",
+                "utilites": "Électricité ; chauffage à confirmer selon recette"
+              },
+              {
+                "nom": "Cuves et transfert",
+                "role": "Deux cuves mobiles et pompe à vis",
+                "capacite": "2 × 1 000 L",
+                "utilites": "Électricité 4 kW pour la pompe"
               },
               {
                 "nom": "Remplisseuse",
-                "role": "Conditionnement",
-                "capacite": "2,000 bouteilles/h",
-                "utilites": "Électricité + air"
+                "role": "Dosage semi-automatique",
+                "capacite": "100–10 000 ml ; bidon cylindrique 5 L retenu",
+                "utilites": "Électricité"
+              },
+              {
+                "nom": "Boucheuse",
+                "role": "Fermeture semi-automatique à quatre roues",
+                "capacite": "Bouchon du bidon 5 L à vérifier",
+                "utilites": "Électricité + air selon montage"
               },
               {
                 "nom": "Étiqueteuse",
-                "role": "Étiquetage",
-                "capacite": "2,000 bouteilles/h",
+                "role": "Étiquetage de contenants ronds et codage",
+                "capacite": "Bidon cylindrique 5 L à vérifier",
+                "utilites": "Électricité"
+              },
+              {
+                "nom": "Compresseur",
+                "role": "Air comprimé de la ligne",
+                "capacite": "1,5 kW annoncés",
                 "utilites": "Électricité"
               },
               {
                 "nom": "Poste contrôle",
-                "role": "Contrôle qualité",
-                "capacite": "Standard",
+                "role": "Pesée et contrôle du produit",
+                "capacite": "Budget laboratoire et dosage distinct",
                 "utilites": "Électricité"
               }
             ],
             "configuration_reference": null,
-            "capacite_generique_non_validee": null
+            "capacite_generique_non_validee": "Selon programme de production ; référence 1 000 L par lot"
           }
         },
         {
           "numero": 4,
           "titre": "Étude de marché",
           "contenu": {
-            "marches_cibles": [],
+            "marches_cibles": [
+              "Hôtels et restauration",
+              "Collectivités",
+              "Entreprises de propreté",
+              "Ateliers et sites industriels hors médical"
+            ],
             "analyse_demande": {
               "etat": "a_documenter",
               "message": "Étude de demande, prix et concurrence à documenter",
@@ -4390,7 +4413,12 @@
           "numero": 5,
           "titre": "Stratégie commerciale",
           "contenu": {
-            "marches_cibles": [],
+            "marches_cibles": [
+              "Hôtels et restauration",
+              "Collectivités",
+              "Entreprises de propreté",
+              "Ateliers et sites industriels hors médical"
+            ],
             "politique_prix": {
               "etat": "a_documenter",
               "message": "Politique de prix et canaux à valider",
@@ -4420,7 +4448,7 @@
           "contenu": {
             "investissement_reference_equipements_usd": null,
             "estimation_generique_non_validee": {
-              "investissement_minimum_usd": 60000,
+              "investissement_minimum_usd": 92440,
               "ventilation": null,
               "chiffre_affaires_annuel_indicatif_usd": null,
               "marge_brute_indicative_pourcent": null,
@@ -4437,13 +4465,21 @@
           "titre": "Production et ventes",
           "contenu": {
             "processus": [
-              "Dosage des ingrédients",
-              "Mélange",
-              "Contrôle qualité",
-              "Conditionnement",
-              "Étiquetage"
+              "Préparation de l’eau",
+              "Mélange et homogénéisation",
+              "Stockage et transfert",
+              "Remplissage 5 L",
+              "Fermeture des bidons",
+              "Étiquetage et codage",
+              "Air comprimé",
+              "Dosage et contrôle qualité"
             ],
-            "matieres_premieres": [],
+            "matieres_premieres": [
+              "Base active compatible avec la formulation retenue",
+              "Tensioactifs et auxiliaires biosourcés privilégiés, origine et danger à documenter",
+              "Eau traitée",
+              "Bidons PEHD, bouchons, étiquettes et regroupement"
+            ],
             "capacite_reference": null,
             "production_mensuelle": {
               "etat": "a_documenter",
@@ -4544,44 +4580,70 @@
           "contenu": {
             "machines": [
               {
-                "nom": "Cuve de mélange",
-                "role": "Préparation",
-                "capacite": "5,000 L",
-                "utilites": "Électricité"
+                "nom": "Traitement de l’eau",
+                "role": "Osmose inverse, UV, pompe et stockage eau",
+                "capacite": "500 L/h ; cuve 1 000 L",
+                "utilites": "Électricité + eau"
               },
               {
-                "nom": "Système de dosage",
-                "role": "Dosage du chlore",
-                "capacite": "Automatique",
-                "utilites": "Électricité"
+                "nom": "Cuve de mélange",
+                "role": "Mélange et homogénéisation",
+                "capacite": "1 000 L par lot",
+                "utilites": "Électricité ; chauffage à confirmer selon recette"
+              },
+              {
+                "nom": "Cuves et transfert",
+                "role": "Deux cuves mobiles et pompe à vis",
+                "capacite": "2 × 1 000 L",
+                "utilites": "Électricité 4 kW pour la pompe"
               },
               {
                 "nom": "Remplisseuse",
-                "role": "Conditionnement",
-                "capacite": "2,000 bouteilles/h",
-                "utilites": "Électricité + air"
+                "role": "Dosage semi-automatique",
+                "capacite": "100–10 000 ml ; bidon cylindrique 5 L retenu",
+                "utilites": "Électricité"
+              },
+              {
+                "nom": "Boucheuse",
+                "role": "Fermeture semi-automatique à quatre roues",
+                "capacite": "Bouchon du bidon 5 L à vérifier",
+                "utilites": "Électricité + air selon montage"
               },
               {
                 "nom": "Étiqueteuse",
-                "role": "Étiquetage",
-                "capacite": "2,000 bouteilles/h",
+                "role": "Étiquetage de contenants ronds et codage",
+                "capacite": "Bidon cylindrique 5 L à vérifier",
+                "utilites": "Électricité"
+              },
+              {
+                "nom": "Compresseur",
+                "role": "Air comprimé de la ligne",
+                "capacite": "1,5 kW annoncés",
                 "utilites": "Électricité"
               },
               {
                 "nom": "Poste contrôle",
-                "role": "Contrôle qualité",
-                "capacite": "Standard",
+                "role": "Pesée et contrôle du produit",
+                "capacite": "Budget laboratoire et dosage distinct",
                 "utilites": "Électricité"
               }
             ],
             "processus": [
-              "Dosage des ingrédients",
-              "Mélange",
-              "Contrôle qualité",
-              "Conditionnement",
-              "Étiquetage"
+              "Préparation de l’eau",
+              "Mélange et homogénéisation",
+              "Stockage et transfert",
+              "Remplissage 5 L",
+              "Fermeture des bidons",
+              "Étiquetage et codage",
+              "Air comprimé",
+              "Dosage et contrôle qualité"
             ],
-            "matieres_premieres": [],
+            "matieres_premieres": [
+              "Base active compatible avec la formulation retenue",
+              "Tensioactifs et auxiliaires biosourcés privilégiés, origine et danger à documenter",
+              "Eau traitée",
+              "Bidons PEHD, bouchons, étiquettes et regroupement"
+            ],
             "controles": {
               "etat": "a_documenter",
               "message": "Compatibilité, utilités, sécurité, conformité et interfaces à vérifier",

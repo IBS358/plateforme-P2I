@@ -1,13 +1,57 @@
 {
   "schema": "p2i.bp-donnees.v1",
-  "date": "2026-10-26",
+  "date": "2026-10-28",
   "nombre_up": 96,
   "nombre_configurations": 100,
   "alias_identifiants": {
     "profilés": "profiles"
   },
-  "source_perimetre_sha256": "79da9b32a8b36ceb855f22b98a3d2453f980450010f900f4e25ace04123f3eb6",
+  "source_perimetre_sha256": "30be799e7e3c85b0209f73152494e9e701bc152afe882b1dc4f5250ae14c3fe0",
   "parametres_communs": {
+    "hygiene_professionnelle": {
+      "schema": "p2i.hygiene-qualite.v1",
+      "id": "hygiene_professionnelle_profil_danger_reduit",
+      "date": "2026-10-28",
+      "nature": "Objectifs de conception et plan de vérification, sans certification ni innocuité acquise",
+      "objectifs": [
+        "Base aqueuse non chlorée et non alcoolique, sans ajout d’acide fort ni de base forte à finalité décapante",
+        "Priorité aux tensioactifs et auxiliaires biosourcés documentés lorsqu’ils conviennent à l’usage ; pas de pourcentage naturel revendiqué sans bilan de formulation",
+        "Limiter parfum, colorants et huiles essentielles ; origine naturelle ne vaut pas absence de danger ou allergie",
+        "Choisir pH et concentration avec le formulateur, en évaluant irritations, corrosivité, expositions et compatibilité des surfaces",
+        "Préférer transfert fermé et dosage limitant éclaboussures et exposition ; nettoyage tracé des équipements",
+        "Qualité de l’eau et des matières, pesée, homogénéité, pH, stabilité, emballage, échantillon témoin et traçabilité avant libération des lots"
+      ],
+      "verification_separee": {
+        "securite": "Évaluer le mélange fini et sa dilution d’emploi, établir la fiche de sécurité et les précautions ; aucune garantie générale de produit sain ou sans risque",
+        "efficacite": "Ne pas revendiquer de désinfection avant essais de la formulation finale aux doses, temps de contact, surfaces et conditions d’emploi définis",
+        "naturalite": "Vérifier origine et traçabilité des ingrédients ; certification environnementale éventuelle distincte des essais d’efficacité",
+        "ecologie": "Documenter biodégradabilité et effets aquatiques du mélange et des ingrédients ; ne pas conclure à partir du seul mot naturel"
+      },
+      "referentiels": [
+        {
+          "nom": "NF EN 14885",
+          "portee": "Cadre de sélection des essais selon l’activité désinfectante et le domaine d’usage ; pas un certificat d’innocuité",
+          "source": "https://www.inrs.fr/actualites/faq-nettoyage-entreprise"
+        },
+        {
+          "nom": "EN 13697:2023",
+          "portee": "Exemple d’essai de surface non poreuse sans action mécanique pour usages industriels et collectivités ; adéquation au produit à confirmer",
+          "source": "https://www.boutique.afnor.org/fr-fr/norme/nf-en-13697/antiseptiques-et-desinfectants-chimiques-essai-quantitatif-de-surface-non-p/fa203157/354208"
+        },
+        {
+          "nom": "Référentiel Ecocert Ecodétergents",
+          "portee": "Piste volontaire pour les ingrédients et procédés des produits de nettoyage éligibles ; ne confère pas une efficacité désinfectante",
+          "source": "https://www.ecocert.com/en/certification-detail/ecological-household-products-natdet"
+        },
+        {
+          "nom": "EPA Design for the Environment",
+          "portee": "Exemple américain de démarche combinant ingrédients, danger et efficacité ; aucun label EPA ni applicabilité réglementaire en Côte d’Ivoire présumés",
+          "source": "https://www.epa.gov/pesticide-labels/learn-about-design-environment-dfe-certification"
+        }
+      ],
+      "statut": "a_formuler_et_a_tester",
+      "couts": "Le budget matières et les enveloppes essais/laboratoire restent estimatifs ; ils ne prouvent pas qu’une formulation naturelle performante soit disponible à ces coûts."
+    },
     "electricite_mt_general": {
       "source": "https://www.cie.ci/entreprise/tarifs-electricite",
       "consulte_le": "2026-10-26",
@@ -388,6 +432,8 @@
             "qualite": "Le traitement thermique doit être adapté au produit, à l’emballage et à la durée de conservation visée.",
             "gamme": null,
             "sources_prix_marche": [],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -760,6 +806,8 @@
             "complements": "Ventilation P2I des 155 000 USD complémentaires au budget ligne; total investissement de simulation 605 000 USD conservé.",
             "gamme": null,
             "sources_prix_marche": [],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -910,6 +958,8 @@
                 "description": "Prix de détail de biscuits de formats et marques variés à Abidjan ; comparaison indicative, non prix usine."
               }
             ],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -1060,6 +1110,8 @@
                 "description": "Prix de détail de biscuits de formats et marques variés à Abidjan ; comparaison indicative, non prix usine."
               }
             ],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -1586,6 +1638,8 @@
             "complements": "Transport, installation, chariots et équipements auxiliaires sont des enveloppes estimées P2I ; vérifier compatibilité chariot, brûleur et cycles.",
             "gamme": null,
             "sources_prix_marche": [],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -2174,6 +2228,8 @@
                 "description": "Jus d’ananas annoncé naturel, 500 ml à 1 500 FCFA ; prix au consommateur, composition et procédé à confirmer."
               }
             ],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -2637,6 +2693,8 @@
                 "description": "Lait entier pasteurisé 1 L : 1 800 FCFA, vente au détail Abidjan ; prix producteur non établi."
               }
             ],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -3091,6 +3149,8 @@
                 "description": "Huile d’arachide Lesieur 1 L : prix moyen signalé 8 063 FCFA à Abidjan Nord ; marque et circuit différents."
               }
             ],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -3590,6 +3650,8 @@
                 "description": "Gingembre en poudre en vrac 1 kg : 2 500 FCFA au détail, autre format et autre vendeur."
               }
             ],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -4062,6 +4124,8 @@
             "complements": "Enveloppes P2I explicites, pas prix catalogue ni devis; raccordements et ensachage manuel dimensionnés pour la petite ligne.",
             "gamme": null,
             "sources_prix_marche": [],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -4467,7 +4531,7 @@
             "personnel": "Personnel de fabrication, contrôle et conditionnement inclus dans frais industriels fixes ; personnel commercial et administratif distinct.",
             "prix_vente": "Hypothèses départ UP par kg en A1 : vaisselle 0,95 USD, sols 1,00 USD, savon mains 1,10 USD ; +2 %/an. Moyenne pondérée du mix 60/25/15 ; prix de détail ne sont pas des prix producteur.",
             "complements": "Transport, utilités, installation, pièces, sécurité et contrôle sont des enveloppes P2I. Ne pas recompter les fonctions et machines déjà incluses dans la ligne.",
-            "qualite": "Compatibilité des recettes, procédures de nettoyage entre lots, sécurité, stabilité, étiquetage et conformité à établir. Aucun produit biocide n’est présumé ; eau de javel traitée séparément.",
+            "qualite": "Compatibilité des recettes, nettoyage entre lots, stabilité et étiquetage à établir. Gamme ménagère sans allégation biocide ; produits d’hygiène professionnelle traités dans une UP distincte.",
             "gamme": [
               {
                 "id": "vaisselle",
@@ -4504,6 +4568,8 @@
                 "description": "Liquide vaisselle 1 L et autres produits ménagers : 1 000 FCFA, niveau de marché et conditions à vérifier."
               }
             ],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -4923,6 +4989,8 @@
                 "description": "Savon Fancio petit 250 g, 300 FCFA au détail à Yamoussoukro."
               }
             ],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -5337,6 +5405,8 @@
                 "description": "Lait corps karité 250 ml, 1 350 FCFA au détail ; marque, formule et circuit différents."
               }
             ],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -5752,6 +5822,8 @@
                 "description": "Antirouille gris 4 kg, 9 000 FCFA au détail ; formulation, circuit et spécifications peuvent différer."
               }
             ],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -6444,6 +6516,8 @@
                 "description": "Engrais foliaire FERTIMAX café NPK 10-10-10, 1 L à 5 000 FCFA au détail ; recette, marque et circuit différents, prix producteur non déductible."
               }
             ],
+            "suggestion": null,
+            "qualite_produit": null,
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -6684,41 +6758,41 @@
       "variantes": {
         "reference": {
           "configuration_id": "reference",
-          "nom": "Eau de javel & désinfectants",
+          "nom": "Hygiène & désinfection professionnelles",
           "qualification": "simulation_decouverte_calculable",
           "reference": {
             "up_id": "javel",
             "configuration_id": null,
-            "nom": "Eau de Javel ménagère",
-            "sous_titre": "Dilution, contrôle et conditionnement",
-            "description": "Conditionnement d’eau de Javel à partir de solution d’hypochlorite achetée, en bouteilles refermables de 1 L. Scénario indicatif, sans fabrication du concentré.",
-            "capacite": 1000,
+            "nom": "Concentré professionnel d’hygiène des surfaces",
+            "sous_titre": "Formulation aqueuse non chlorée et conditionnement professionnel",
+            "description": "Production par lots d’un concentré aqueux d’hygiène des surfaces, avec priorité aux ingrédients biosourcés compatibles et à la réduction des dangers. Bidons cylindriques de 5 L ; formulation, sécurité et efficacité désinfectante à établir séparément. Hors usages médicaux.",
+            "capacite": 375,
             "unite": "kg/h",
-            "machines": 57000,
-            "investissement": 122800,
+            "machines": 18440,
+            "investissement": 92440,
             "production": [
-              700000,
-              850000,
-              1000000
+              120000,
+              150000,
+              180000
             ],
             "ventes": [
-              665000,
-              807500,
-              950000
+              116400,
+              150000,
+              180000
             ],
             "prix": [
-              0.6,
-              0.612,
-              0.62424
+              2.8,
+              2.856,
+              2.91312
             ],
-            "matieres_kg": 0.16,
+            "matieres_kg": 1.1,
             "cout_production_kg": [
-              0.4828571428571429,
-              0.48046470588235296,
-              0.4827095
+              1.8783333333333334,
+              1.8402666666666667,
+              1.8306418888888891
             ],
             "personnel": 15000,
-            "charges_fixes": 30000,
+            "charges_fixes": 25000,
             "croissance_personnel": 0.03,
             "croissance_charges": 0.03,
             "part_apport": 0.3,
@@ -6730,17 +6804,17 @@
             "taux_is": 0.25,
             "coussin_tresorerie": 0.1,
             "source": "data/p2i-bp-lot-chimie-06.json / javel : prix catalogue ou budget de référence + hypothèses P2I explicites",
-            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 15 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
-            "stock_matieres_jours": 15
+            "stock_matieres_jours": 30
           },
           "economique_herite_up": true,
           "economique": {
             "budget_minimum_historique": {
-              "valeur": 60000,
+              "valeur": null,
               "unite": "USD",
-              "qualification": "historique_p2i_non_verifie",
+              "qualification": "a_documenter",
               "source": {
                 "fichier": "up-data.js",
                 "up_id": "javel",
@@ -6760,18 +6834,18 @@
               "utilisation": "repere_historique_seulement_pas_une_prevision"
             },
             "fourchette_ca_historique": {
-              "texte": "150000-300000",
+              "texte": null,
               "qualification": "historique_p2i_non_verifie",
               "source": "up-data.js / javel / chiffre_affaires_estime"
             },
             "marge_brute_historique": {
-              "texte": "35-50",
+              "texte": null,
               "valeur": null,
               "qualification": "historique_p2i_non_verifie",
               "source": "up-data.js / javel / marge_brute, gross_margin"
             },
             "ventilation_historique": null,
-            "capacite_texte_historique": null,
+            "capacite_texte_historique": "Selon programme de production ; référence 1 000 L par lot",
             "production": [
               null,
               null,
@@ -6803,79 +6877,196 @@
           },
           "source": "up-data.js / javel",
           "visuels": {
-            "atlas": "javel-postes",
-            "product_index": 5,
+            "atlas": "hygiene-pro",
+            "product_index": 0,
             "indices": [
-              0,
               1,
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8
             ]
           },
           "prix_equipement": {
-            "id": "javel_bojun_conditionnement",
-            "url": "https://bojunpack.en.made-in-china.com/product/HZWJOArYZlhy/China-Automatic-Filling-Shampoo-Dishwashing-Liquid-Bleach-Automatic-Filling-Capping-Labeling-Line-Production-Line.html",
-            "consulte_le": "2026-10-27",
-            "fournisseur": "Changzhou Bojun Packaging Machinery Co., Ltd.",
-            "modele": "BGZ1000-4D — ensemble de conditionnement liquide",
-            "prix": 45000,
+            "id": "hygiene_pro_henwi_1000_conf1",
+            "url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line",
+            "consulte_le": "2026-10-28",
+            "fournisseur": "Henwi Technology Limited",
+            "modele": "HWPL-LD-1000L — ligne semi-automatique, configuration 1",
+            "pays_origine": "Chine",
+            "prix": 18440,
             "devise": "USD",
-            "base": "Borne haute de la fourchette publiée 35 000–45 000 USD ; le périmètre exact et l’incoterm restent à préciser",
-            "capacite": 2000,
-            "unite_capacite": "bouteilles/h maximum pour BG5000-8D décrit, différent du modèle affiché ; non retenu comme cadence garantie",
+            "base": "Prix affiché configuration 1 au 28/10/2026 ; incoterm non précisé, transport en supplément",
+            "capacite": 1000,
+            "unite_capacite": "L par lot ; 3 000 à 5 000 L/j annoncés pour la ligne",
             "fonctions": [
-              "Réception et stockage du concentré",
-              "Mélange en cuve anticorrosion",
-              "Contrôle qualité",
-              "Remplissage des bouteilles",
-              "Bouchage",
-              "Étiquetage"
+              "Préparation de l’eau",
+              "Mélange et homogénéisation",
+              "Stockage et transfert",
+              "Remplissage 5 L",
+              "Fermeture des bidons",
+              "Étiquetage et codage",
+              "Air comprimé",
+              "Dosage et contrôle qualité"
             ],
-            "qualification": "borne_haute_catalogue_non_devis",
-            "limites": "La fiche associe la Javel au titre de la ligne mais décrit deux modèles différents ; il faut confirmer le périmètre remplissage-bouchage-étiquetage, les matériaux en contact et le format 1 L. Cuve de mélange chiffrée séparément. La cadence de simulation ne vaut pas engagement fournisseur.",
-            "equipements_complementaires": [
+            "qualification": "prix_catalogue_public_non_certifie",
+            "limites": "Ligne catalogue de produits liquides aqueux, non garantie pour une formulation désinfectante précise. Format cylindrique 5 L dans la plage annoncée 100–10 000 ml ; vérifier géométrie, bouchon, étiquette, joints et nettoyage. 20 L non couvert. Contrôle qualité et balance budgétés séparément. Aucun prix par machine n’est inventé à partir du total.",
+            "composition_catalogue": [
               {
-                "nom": "Cuve de mélange PP anticorrosion 2 000 L",
-                "fournisseur": "Guangzhou Yeto Machinery Co., Ltd.",
-                "url": "https://www.made-in-china.com/factory/bleach-soap.html",
-                "prix_retenu": 12000,
-                "devise": "USD",
-                "qualification": "borne_haute_fourchette_11000_12000_non_devis",
-                "prix_usd": 12000
+                "nom": "Osmose inverse 500 L/h",
+                "quantite": 1
+              },
+              {
+                "nom": "Lampe UV 40 W",
+                "quantite": 1
+              },
+              {
+                "nom": "Pompe à eau 370 W",
+                "quantite": 1
+              },
+              {
+                "nom": "Cuve eau SS304 1 000 L",
+                "quantite": 1
+              },
+              {
+                "nom": "Mélangeur homogénéisateur 1 000 L",
+                "quantite": 1
+              },
+              {
+                "nom": "Pompe à vis 4 kW",
+                "quantite": 1
+              },
+              {
+                "nom": "Cuve mobile SS316 1 000 L",
+                "quantite": 2
+              },
+              {
+                "nom": "Doseuse semi-automatique à pompe à engrenages",
+                "quantite": 1
+              },
+              {
+                "nom": "Boucheuse semi-automatique à quatre roues",
+                "quantite": 1
+              },
+              {
+                "nom": "Étiqueteuse semi-automatique pour contenants ronds, avec codage",
+                "quantite": 1
+              },
+              {
+                "nom": "Compresseur 1,5 kW",
+                "quantite": 1
               }
-            ]
+            ],
+            "utilites": "35–45 kW installés annoncés ; 220/380 V ; eau, air comprimé et surface 15 × 6 × 3,5 m annoncés ; consommation réelle dépend de la recette et des cycles.",
+            "postes": [
+              {
+                "description": "Osmoseur 500 L/h, UV, pompe à eau et cuve eau de 1 000 L inclus dans la ligne."
+              },
+              {
+                "description": "Mélangeur homogénéisateur de 1 000 L inclus ; cycle et compatibilité de la formulation à vérifier."
+              },
+              {
+                "description": "Deux cuves mobiles SS316 de 1 000 L et une pompe à vis 4 kW incluses."
+              },
+              {
+                "description": "Doseuse semi-automatique à pompe à engrenages ; volume 5 L dans la plage publiée."
+              },
+              {
+                "description": "Boucheuse semi-automatique à quatre roues ; adaptation au bouchon retenu à vérifier."
+              },
+              {
+                "description": "Étiqueteuse pour contenants ronds avec codage ; bidon cylindrique retenu pour éviter un poste supplémentaire."
+              },
+              {
+                "description": "Compresseur 1,5 kW inclus dans la ligne ; débit utile et réseau à dimensionner."
+              },
+              {
+                "description": "Balance et petit laboratoire dans une enveloppe P2I distincte ; essais de stabilité et d’efficacité à réaliser."
+              }
+            ],
+            "equipements_complementaires": []
           },
           "emballage": {
             "statut": "hypothese_P2I",
-            "format": "Bouteille opaque de 1 L avec bouchon, étiquette et carton",
-            "cout_usd_par_kg": 0.14,
+            "format": "Bidon cylindrique opaque PEHD de 5 L avec poignée, bouchon inviolable, étiquette et regroupement",
+            "cout_usd_par_kg": 0.16,
             "composants_usd_par_kg": {
-              "bouteille": 0.09,
+              "bidon_5_l": 0.115,
               "bouchon": 0.02,
-              "etiquette": 0.01,
-              "regroupement": 0.02
+              "etiquette": 0.015,
+              "regroupement": 0.01
             },
             "mode_comptable": "inclus_dans_cout_industriel",
-            "ecologie": "Collecte et valorisation des contenants à étudier ; résidus et effluents à gérer selon la réglementation.",
-            "source": "Hypothèse P2I non tarif fournisseur"
+            "ecologie": "Concentré et grand format visent à réduire les emballages par usage ; gain non quantifié. Collecte et recyclage effectifs à organiser ; réemploi uniquement après procédure adaptée et contenants compatibles.",
+            "source": "Enveloppe P2I de 0,80 USD par bidon de 5 L ; aucun tarif emballage fournisseur confirmé"
           },
           "hypotheses_explicites": {
-            "production": "Cuve 2 000 L ; convention de simulation de deux heures par lot, densité 1 kg/L, soit 1 000 kg/h théoriques, 2 000 h/an. Production A1 à A3 de 35 %, 42,5 %, 50 % ; ventes 95 % de la production. Temps de lot et cadence effective à confirmer. Aucune dégradation du chlore ni perte de qualité du stock n’est simulée ; durée de stockage et rotation à valider.",
-            "matieres": "Solution concentrée achetée, eau et consommables : hypothèse 0,16 USD/kg sans prix local documenté ni formulation définitive.",
-            "process": "0,23 USD/kg dont emballage 0,14 USD/kg et utilités et consommables 0,09 USD/kg ; hypothèses P2I.",
-            "personnel": "Personnel de production inclus dans frais industriels fixes ; personnel administratif et commercial séparé.",
-            "prix_vente": "0,60 USD/kg départ usine A1 puis +2 % par an : hypothèse, comparée aux prix ivoiriens au détail sans supposer que le prix de détail soit le prix producteur. Densité supposée de 1 kg/L.",
-            "complements": "Cuve de mélange facturée une seule fois ; fret, utilités, protection et installation sont des enveloppes indicatives. Compatibilité des composants, air comprimé et alimentation à préciser.",
-            "qualite": "Titre de chlore, stabilité, étiquetage, stockage, ventilation, confinement et protection du personnel doivent être définis ; ne pas mélanger avec des acides ou de l’ammoniac. Pas d’homologation présumée.",
+            "production": "Base basse catalogue 3 000 L/j, 8 h/j et 250 j/an ; densité de calcul 1 kg/L, soit 375 kg/h et 750 000 kg/an théoriques. Production 120/150/180 t, soit 16/20/24 % ; 3,6 t de stock de lancement en A1, puis ventes égales à la production pour éviter l’accumulation automatique. Pas de dégradation ni rebut simulé ; stabilité et durée de conservation à établir.",
+            "matieres": "Enveloppe P2I de 1,10 USD/kg : base active et auxiliaires compatibles, priorité aux ingrédients biosourcés documentés et à faible profil de danger. Ni composition ni prix livrés confirmés ; une formulation répondant à ces objectifs peut modifier le coût.",
+            "process": "0,32 USD/kg dont emballage 0,16 USD/kg et utilités/consommables 0,16 USD/kg. Frais industriels fixes 55 000 USD/an, dont personnel de fabrication et contrôle estimé 36 000 USD/an, autres frais 19 000 USD/an ; hypothèses P2I.",
+            "personnel": "Personnel industriel dans coût de production, personnel administratif/commercial 15 000 USD/an distinct. Équipe catalogue 5–7 personnes ; organisation réelle à préciser.",
+            "prix_vente": "2,80 USD/kg A1, soit 14 USD par bidon de 5 L à densité supposée 1 ; +2 %/an. Hypothèse départ usine, non prix ivoirien observé. Comparateur de détail importé à chimie et performances différentes : aucun coefficient de conversion automatique.",
+            "complements": "Enveloppes P2I pour logistique, site, raccordements, installation, stock de pièces, sécurité, essais de formulation et petit laboratoire. Osmoseur, compresseur, cuves, doseuse, boucheuse et étiqueteuse déjà dans la ligne : pas de double compte.",
+            "qualite": "Objectifs : formulation aqueuse non chlorée, limitation des ingrédients irritants/corrosifs, matières tracées, transfert limitant les contacts, contrôle des lots. Origine naturelle, sécurité du mélange et efficacité sont vérifiées séparément. NF EN 14885 oriente le choix des essais ; EN 13697 constitue un exemple selon usage. Aucun label, caractère non corrosif, efficacité désinfectante ou innocuité acquis.",
             "gamme": null,
             "sources_prix_marche": [
               {
-                "url": "https://www.lemarcheci.com/2-produits-d-entretien/14",
-                "description": "Javel Super Clean 12° 1 L à 560 FCFA au détail ; prix départ usine non indiqué."
+                "url": "https://mr-bricolage.ci/product/desinfectant-cresyl-5l-spado-83994",
+                "description": "Crésyl SPADO 5 L affiché 41 000 FCFA en Côte d’Ivoire ; produit importé de composition et caractéristiques différentes, non comparable à l’identique. Repère de segment uniquement, pas justification du prix producteur."
+              },
+              {
+                "url": "https://prochimiesarl.com/produits",
+                "description": "Offre ivoirienne d’hygiène et de désinfection professionnelles ; prix sur demande, présence de fournisseurs ne démontre pas des commandes disponibles."
               }
             ],
+            "suggestion": "Un conditionnement 20 L et d’autres formulations pourront être étudiés dans le BP Initial/Pro avec un poste adapté ; ils ne sont pas inclus dans les prix, volumes ni résultats du présent scénario.",
+            "qualite_produit": {
+              "schema": "p2i.hygiene-qualite.v1",
+              "id": "hygiene_professionnelle_profil_danger_reduit",
+              "date": "2026-10-28",
+              "nature": "Objectifs de conception et plan de vérification, sans certification ni innocuité acquise",
+              "objectifs": [
+                "Base aqueuse non chlorée et non alcoolique, sans ajout d’acide fort ni de base forte à finalité décapante",
+                "Priorité aux tensioactifs et auxiliaires biosourcés documentés lorsqu’ils conviennent à l’usage ; pas de pourcentage naturel revendiqué sans bilan de formulation",
+                "Limiter parfum, colorants et huiles essentielles ; origine naturelle ne vaut pas absence de danger ou allergie",
+                "Choisir pH et concentration avec le formulateur, en évaluant irritations, corrosivité, expositions et compatibilité des surfaces",
+                "Préférer transfert fermé et dosage limitant éclaboussures et exposition ; nettoyage tracé des équipements",
+                "Qualité de l’eau et des matières, pesée, homogénéité, pH, stabilité, emballage, échantillon témoin et traçabilité avant libération des lots"
+              ],
+              "verification_separee": {
+                "securite": "Évaluer le mélange fini et sa dilution d’emploi, établir la fiche de sécurité et les précautions ; aucune garantie générale de produit sain ou sans risque",
+                "efficacite": "Ne pas revendiquer de désinfection avant essais de la formulation finale aux doses, temps de contact, surfaces et conditions d’emploi définis",
+                "naturalite": "Vérifier origine et traçabilité des ingrédients ; certification environnementale éventuelle distincte des essais d’efficacité",
+                "ecologie": "Documenter biodégradabilité et effets aquatiques du mélange et des ingrédients ; ne pas conclure à partir du seul mot naturel"
+              },
+              "referentiels": [
+                {
+                  "nom": "NF EN 14885",
+                  "portee": "Cadre de sélection des essais selon l’activité désinfectante et le domaine d’usage ; pas un certificat d’innocuité",
+                  "source": "https://www.inrs.fr/actualites/faq-nettoyage-entreprise"
+                },
+                {
+                  "nom": "EN 13697:2023",
+                  "portee": "Exemple d’essai de surface non poreuse sans action mécanique pour usages industriels et collectivités ; adéquation au produit à confirmer",
+                  "source": "https://www.boutique.afnor.org/fr-fr/norme/nf-en-13697/antiseptiques-et-desinfectants-chimiques-essai-quantitatif-de-surface-non-p/fa203157/354208"
+                },
+                {
+                  "nom": "Référentiel Ecocert Ecodétergents",
+                  "portee": "Piste volontaire pour les ingrédients et procédés des produits de nettoyage éligibles ; ne confère pas une efficacité désinfectante",
+                  "source": "https://www.ecocert.com/en/certification-detail/ecological-household-products-natdet"
+                },
+                {
+                  "nom": "EPA Design for the Environment",
+                  "portee": "Exemple américain de démarche combinant ingrédients, danger et efficacité ; aucun label EPA ni applicabilité réglementaire en Côte d’Ivoire présumés",
+                  "source": "https://www.epa.gov/pesticide-labels/learn-about-design-environment-dfe-certification"
+                }
+              ],
+              "statut": "a_formuler_et_a_tester",
+              "couts": "Le budget matières et les enveloppes essais/laboratoire restent estimatifs ; ils ne prouvent pas qu’une formulation naturelle performante soit disponible à ces coûts."
+            },
             "conventions": {
               "apport": 0.3,
               "dette": 0.7,
@@ -6893,25 +7084,26 @@
               "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
             },
             "complements_usd": {
-              "fret": 6000,
-              "assurance": 800,
-              "douane_transit": 6500,
-              "transport_local": 2000,
-              "genie_civil": 16000,
+              "fret": 4500,
+              "assurance": 500,
+              "douane_transit": 4500,
+              "transport_local": 1500,
+              "genie_civil": 18000,
               "utilites": 12000,
               "installation_formation": 6000,
-              "pieces_initiales": 2500,
-              "securite_environnement": 9000,
-              "etudes_controle": 5000
+              "pieces_initiales": 2000,
+              "securite_environnement": 7000,
+              "etudes_essais_formulation": 10000,
+              "laboratoire_dosage": 8000
             },
-            "base_budget_equipements_usd": 57000,
+            "base_budget_equipements_usd": 18440,
             "conversion": null
           }
         }
       },
       "autres_variantes": "a_recenser",
       "up_id": "javel",
-      "up_nom": "Eau de javel & désinfectants",
+      "up_nom": "Hygiène & désinfection professionnelles",
       "filiere_id": "chimie",
       "filiere_nom": "Chimie, Cosmétiques & Détergents",
       "type_activite": "fabrication",
@@ -6919,18 +7111,18 @@
         "reference"
       ],
       "redaction": {
-        "projet": "Fabrication d'eau de javel et désinfectants.",
-        "positionnement": "Eau de javel & désinfectants : Produits désinfectants industriels. Le périmètre économique est celui de cette activité; les chiffres d’une autre UP ou variante ne sont pas transposés.",
-        "procede": "Le flux de référence descriptif comprend Dosage des ingrédients → Mélange → Contrôle qualité → Conditionnement → Étiquetage. Les cadences et les interfaces doivent être dimensionnées ensemble avant de retenir les équipements.",
-        "marche": "La demande pour eau de javel & désinfectants doit être établie auprès des clients visés. Aucun volume de marché local n’est présumé.",
-        "commercial": "Axes commerciaux proposés : Cibler supermarchés et grossistes ; Proposer des formats variés ; Soigner l'emballage ; Communiquer sur l'efficacité ; Développer des marques propres. Ils constituent un programme de prospection à tester, pas des débouchés acquis.",
-        "approvisionnement": "La nomenclature matières et emballages doit être liée à une unité de produit vendable et à un rendement mesuré.",
-        "opportunites": "Demande post-COVID ; Processus simple ; Faible investissement ; Large distribution",
-        "risques": "Sécurité chimique ; Concurrence ; Prix des matières ; Normes",
-        "qualite": "Respecter les normes de sécurité ; Utiliser des équipements de protection ; Nettoyer les équipements régulièrement ; Former le personnel à la sécurité ; Assurer la traçabilité des lots",
-        "utilites": "Optimiser le mélange ; Utiliser des moteurs à haut rendement ; Isoler les cuves ; Éteindre les équipements hors production ; Récupérer la chaleur",
-        "implantation": "Organiser en flux continu ; Séparer zones de production et stockage ; Prévoir zone de stockage des produits chimiques ; Aménager zone de conditionnement ; Faciliter la circulation du personnel",
-        "production": "La capacité catalogue ne constitue pas un volume de ventes. Le programme de production de eau de javel & désinfectants doit intégrer temps disponible, cadence du goulot, rendements, rebuts, arrêts et invendus.",
+        "projet": "Formulation de concentrés professionnels d’hygiène des surfaces, avec priorité aux ingrédients biosourcés compatibles et à la réduction des dangers ; hors médical.",
+        "positionnement": "Hygiène & désinfection professionnelles : Formulation de concentrés professionnels d’hygiène des surfaces, avec priorité aux ingrédients biosourcés compatibles et à la réduction des dangers ; hors médical.. Le périmètre économique est celui de cette activité; les chiffres d’une autre UP ou variante ne sont pas transposés.",
+        "procede": "Le flux de référence descriptif comprend Préparation de l’eau → Mélange et homogénéisation → Stockage et transfert → Remplissage 5 L → Fermeture des bidons → Étiquetage et codage → Air comprimé → Dosage et contrôle qualité. Les cadences et les interfaces doivent être dimensionnées ensemble avant de retenir les équipements.",
+        "marche": "Segments à prospecter : Hôtels et restauration ; Collectivités ; Entreprises de propreté ; Ateliers et sites industriels hors médical. Leur présence dans le référentiel ne démontre ni volume de demande, ni commande, ni prix de vente accepté.",
+        "commercial": "Axes commerciaux proposés : Prospecter hôtels, restauration et collectivités ; Présenter le coût par usage selon dilution validée ; Tester les performances avec les clients professionnels ; Convenir de contrats et conditions de règlement. Ils constituent un programme de prospection à tester, pas des débouchés acquis.",
+        "approvisionnement": "Intrants recensés : Base active compatible avec la formulation retenue ; Tensioactifs et auxiliaires biosourcés privilégiés, origine et danger à documenter ; Eau traitée ; Bidons PEHD, bouchons, étiquettes et regroupement. Pour chaque intrant, préciser qualité, disponibilité, prix livré, rendement, conditionnement et délai de réapprovisionnement.",
+        "opportunites": "Conditionnement professionnel de 5 L ; Formulation concentrée et accompagnement à l’usage ; Approvisionnement de proximité à organiser",
+        "risques": "Qualification des formulations et efficacité ; Coût livré des intrants ; Prospection et délais de règlement B2B ; Traçabilité et compatibilité des emballages",
+        "qualite": "Documenter l’efficacité avant toute allégation ; Tracer les lots et contrôler les matières ; Former le personnel et utiliser les protections adaptées ; Contrôler stabilité, pH et conditionnement ; Vérifier les exigences de mise sur le marché",
+        "utilites": "35–45 kW installés annoncés pour la ligne ; Distinguer puissance installée et consommation réelle ; Adapter le cycle thermique à la formulation ; Suivre eau, air comprimé et consommations",
+        "implantation": "Séparer matières, formulation et produits finis ; Prévoir un poste de contrôle et une zone de stockage ; Organiser nettoyage, ventilation et rétention ; Surface machine annoncée 15 × 6 m, hors autres locaux",
+        "production": "La capacité catalogue ne constitue pas un volume de ventes. Le programme de production de hygiène & désinfection professionnelles doit intégrer temps disponible, cadence du goulot, rendements, rebuts, arrêts et invendus.",
         "economie": "Les repères historiques ci-dessous ne sont pas des devis ou des prévisions. Le prix de vente, les volumes et les charges doivent être documentés séparément; aucune marge historique ne sert à fabriquer un résultat net.",
         "financement": "L’apport de 30 % et la dette de 70 % ne s’appliquent qu’à un budget explicitement retenu. Le budget minimum historique reste distinct du CAPEX consolidé; le BFR et la réserve initiale doivent être financés et présentés séparément.",
         "bfr": "Le BFR sur 36 mois suit stocks de matières, produits finis valorisés, créances clients et dettes fournisseurs. Prix, quantités et délais doivent provenir de ce dossier.",
@@ -6938,32 +7130,57 @@
         "suite": "Priorités : documenter le produit ou la prestation vendue, fixer une capacité cohérente, obtenir les prix fournisseurs, chiffrer le site et les utilités, puis vérifier prix de vente, charges et règlements avant de calculer les états.",
         "qualification": "Redaction_interne_P2I_a_qualifier_non_etude_de_marche"
       },
-      "produits": [],
-      "processus": [
-        "Dosage des ingrédients",
-        "Mélange",
-        "Contrôle qualité",
-        "Conditionnement",
-        "Étiquetage"
+      "produits": [
+        "Concentré aqueux d’hygiène des surfaces en bidons de 5 L"
       ],
-      "matieres": [],
-      "marches": [],
+      "processus": [
+        "Préparation de l’eau",
+        "Mélange et homogénéisation",
+        "Stockage et transfert",
+        "Remplissage 5 L",
+        "Fermeture des bidons",
+        "Étiquetage et codage",
+        "Air comprimé",
+        "Dosage et contrôle qualité"
+      ],
+      "matieres": [
+        "Base active compatible avec la formulation retenue",
+        "Tensioactifs et auxiliaires biosourcés privilégiés, origine et danger à documenter",
+        "Eau traitée",
+        "Bidons PEHD, bouchons, étiquettes et regroupement"
+      ],
+      "marches": [
+        "Hôtels et restauration",
+        "Collectivités",
+        "Entreprises de propreté",
+        "Ateliers et sites industriels hors médical"
+      ],
       "machines": [
         {
-          "nom": "Cuve de mélange",
-          "role": "Préparation",
-          "capacite_texte": "5,000 L",
-          "utilites_texte": "Électricité",
+          "nom": "Traitement de l’eau",
+          "role": "Osmose inverse, UV, pompe et stockage eau",
+          "capacite_texte": "500 L/h ; cuve 1 000 L",
+          "utilites_texte": "Électricité + eau",
           "fabricant": null,
           "modele": null,
           "prix_fournisseur_verifie_usd": null,
           "qualification": "besoin_fonctionnel_historique_non_valide"
         },
         {
-          "nom": "Système de dosage",
-          "role": "Dosage du chlore",
-          "capacite_texte": "Automatique",
-          "utilites_texte": "Électricité",
+          "nom": "Cuve de mélange",
+          "role": "Mélange et homogénéisation",
+          "capacite_texte": "1 000 L par lot",
+          "utilites_texte": "Électricité ; chauffage à confirmer selon recette",
+          "fabricant": null,
+          "modele": null,
+          "prix_fournisseur_verifie_usd": null,
+          "qualification": "besoin_fonctionnel_historique_non_valide"
+        },
+        {
+          "nom": "Cuves et transfert",
+          "role": "Deux cuves mobiles et pompe à vis",
+          "capacite_texte": "2 × 1 000 L",
+          "utilites_texte": "Électricité 4 kW pour la pompe",
           "fabricant": null,
           "modele": null,
           "prix_fournisseur_verifie_usd": null,
@@ -6971,9 +7188,19 @@
         },
         {
           "nom": "Remplisseuse",
-          "role": "Conditionnement",
-          "capacite_texte": "2,000 bouteilles/h",
-          "utilites_texte": "Électricité + air",
+          "role": "Dosage semi-automatique",
+          "capacite_texte": "100–10 000 ml ; bidon cylindrique 5 L retenu",
+          "utilites_texte": "Électricité",
+          "fabricant": null,
+          "modele": null,
+          "prix_fournisseur_verifie_usd": null,
+          "qualification": "besoin_fonctionnel_historique_non_valide"
+        },
+        {
+          "nom": "Boucheuse",
+          "role": "Fermeture semi-automatique à quatre roues",
+          "capacite_texte": "Bouchon du bidon 5 L à vérifier",
+          "utilites_texte": "Électricité + air selon montage",
           "fabricant": null,
           "modele": null,
           "prix_fournisseur_verifie_usd": null,
@@ -6981,8 +7208,18 @@
         },
         {
           "nom": "Étiqueteuse",
-          "role": "Étiquetage",
-          "capacite_texte": "2,000 bouteilles/h",
+          "role": "Étiquetage de contenants ronds et codage",
+          "capacite_texte": "Bidon cylindrique 5 L à vérifier",
+          "utilites_texte": "Électricité",
+          "fabricant": null,
+          "modele": null,
+          "prix_fournisseur_verifie_usd": null,
+          "qualification": "besoin_fonctionnel_historique_non_valide"
+        },
+        {
+          "nom": "Compresseur",
+          "role": "Air comprimé de la ligne",
+          "capacite_texte": "1,5 kW annoncés",
           "utilites_texte": "Électricité",
           "fabricant": null,
           "modele": null,
@@ -6991,8 +7228,8 @@
         },
         {
           "nom": "Poste contrôle",
-          "role": "Contrôle qualité",
-          "capacite_texte": "Standard",
+          "role": "Pesée et contrôle du produit",
+          "capacite_texte": "Budget laboratoire et dosage distinct",
           "utilites_texte": "Électricité",
           "fabricant": null,
           "modele": null,
@@ -7002,9 +7239,9 @@
       ],
       "economie": {
         "budget_minimum_historique": {
-          "valeur": 60000,
+          "valeur": null,
           "unite": "USD",
-          "qualification": "historique_p2i_non_verifie",
+          "qualification": "a_documenter",
           "source": {
             "fichier": "up-data.js",
             "up_id": "javel",
@@ -7024,18 +7261,18 @@
           "utilisation": "repere_historique_seulement_pas_une_prevision"
         },
         "fourchette_ca_historique": {
-          "texte": "150000-300000",
+          "texte": null,
           "qualification": "historique_p2i_non_verifie",
           "source": "up-data.js / javel / chiffre_affaires_estime"
         },
         "marge_brute_historique": {
-          "texte": "35-50",
+          "texte": null,
           "valeur": null,
           "qualification": "historique_p2i_non_verifie",
           "source": "up-data.js / javel / marge_brute, gross_margin"
         },
         "ventilation_historique": null,
-        "capacite_texte_historique": null,
+        "capacite_texte_historique": "Selon programme de production ; référence 1 000 L par lot",
         "production": [
           null,
           null,

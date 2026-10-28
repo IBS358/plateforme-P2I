@@ -13,30 +13,8 @@ Planches générées par le dispositif intégré de génération d’images, pui
 
 Ces images ont été générées par IA à partir de descriptions des fonctions. Elles ne constituent pas une preuve de capacité, d'hygiène ou de conformité des équipements.
 
-## Huile d’arachide — 27 octobre 2026
+## Hygiène professionnelle — 28 octobre 2026
 
-`atelier-arachide-ia.jpg` : illustration IA de six étapes distinctes : tri des arachides, préparation des graines, pressage, filtration, conditionnement et bouteille de produit fini avec étiquette fictive. Images d'ambiance non contractuelles, sans identification de machines fournisseur.
+`postes-hygiene-pro-ia.jpg` : illustration générée et corrigée avec le générateur d’images intégré. Ne représente aucun modèle fournisseur. Composition finale : atelier et bidons cylindriques de 5 L ; traitement de l’eau ; mélangeur ; deux cuves et pompe ; remplissage ; bouchage ; étiquetage ; compresseur ; contrôle qualité. Les quantités, performances et matériaux réels proviennent du référentiel technique, pas des images. Marque P2I PRO illustrative, aucun label sanitaire ou écologique attribué.
 
-## Aliments pour bétail — 27 octobre 2026
-
-`atelier-betail-ia.jpg` : planche générée par IA illustrant broyage à marteaux, mélange à ruban, granulation, refroidissement, pesée et ensachage, puis sac illustratif avec marque fictive. Illustrations non contractuelles des fonctions, sans identification de modèles fournisseur.
-
-## Savonnerie — 27 octobre 2026
-
-`atelier-savon-ia.jpg` : illustration IA de la préparation de base de savon, mélange, broyage, extrusion et découpe, emballage et produit fini. Illustrations non contractuelles, sans identification de fournisseur.
-
-## Cosmétiques au karité — 27 octobre 2026
-
-`atelier-cosmetique-ia.jpg` : illustrations IA non contractuelles du traitement de l’eau, de la pesée, de l’émulsion, du conditionnement, de l’étiquetage et du produit fini à marque fictive ; elles ne représentent pas les machines catalogue.
-
-## Détergent vaisselle — 27 octobre 2026
-
-`atelier-detergent-ia.jpg` : illustrations IA non contractuelles du traitement de l’eau, de la pesée, du mélange, du remplissage manuel, du bouchage et étiquetage, puis du produit fini à marque fictive ; elles ne représentent pas les modèles catalogue.
-
-## Gamme détergents liquides — 27 octobre 2026
-
-`atelier-detergent-ia.jpg` : nouvelle planche IA non contractuelle illustrant traitement eau, pesée, mélange, remplissage et étiquetage automatisés, puis trois produits avec marques fictives. Elle ne représente pas le matériel du fournisseur.
-
-## Peinture industrielle aqueuse — 27 octobre 2026
-
-`atelier-peinture-ia.jpg` : illustrations IA non contractuelles de pesée, dispersion, broyage, mélange et conditionnement, avec emballage à marque fictive ; ne représente pas les machines catalogue.
+Consigne de génération : neuf photographies distinctes en grille 3 × 3, atelier ivoirien de produits aqueux non chlorés, personnel ivoirien protégé, chaque poste correspondant au titre. Correction : remplacer les bidons rectangulaires par des bidons cylindriques compatibles avec l’étiqueteuse de la configuration catalogue retenue ; conserver les autres postes.

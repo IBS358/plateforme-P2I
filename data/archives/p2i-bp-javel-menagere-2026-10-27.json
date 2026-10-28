@@ -1,0 +1,125 @@
+{
+  "schema": "p2i.bp-lot.v1",
+  "date": "2026-10-27",
+  "description": "Eau de Javel ménagère par dilution et conditionnement",
+  "sources": [
+    {
+      "id": "javel_bojun_conditionnement",
+      "url": "https://bojunpack.en.made-in-china.com/product/HZWJOArYZlhy/China-Automatic-Filling-Shampoo-Dishwashing-Liquid-Bleach-Automatic-Filling-Capping-Labeling-Line-Production-Line.html",
+      "consulte_le": "2026-10-27",
+      "fournisseur": "Changzhou Bojun Packaging Machinery Co., Ltd.",
+      "modele": "BGZ1000-4D — ensemble de conditionnement liquide",
+      "prix": 45000,
+      "devise": "USD",
+      "base": "Borne haute de la fourchette publiée 35 000–45 000 USD ; le périmètre exact et l’incoterm restent à préciser",
+      "capacite": 2000,
+      "unite_capacite": "bouteilles/h maximum pour BG5000-8D décrit, différent du modèle affiché ; non retenu comme cadence garantie",
+      "fonctions": [
+        "Réception et stockage du concentré",
+        "Mélange en cuve anticorrosion",
+        "Contrôle qualité",
+        "Remplissage des bouteilles",
+        "Bouchage",
+        "Étiquetage"
+      ],
+      "qualification": "borne_haute_catalogue_non_devis",
+      "limites": "La fiche associe la Javel au titre de la ligne mais décrit deux modèles différents ; il faut confirmer le périmètre remplissage-bouchage-étiquetage, les matériaux en contact et le format 1 L. Cuve de mélange chiffrée séparément. La cadence de simulation ne vaut pas engagement fournisseur."
+    }
+  ],
+  "profils": {
+    "javel": {
+      "configuration_id": null,
+      "nom": "Eau de Javel ménagère",
+      "sous_titre": "Dilution, contrôle et conditionnement",
+      "description": "Conditionnement d’eau de Javel à partir de solution d’hypochlorite achetée, en bouteilles refermables de 1 L. Scénario indicatif, sans fabrication du concentré.",
+      "source_equipement": "javel_bojun_conditionnement",
+      "prix_retenu": 45000,
+      "devise_prix": "USD",
+      "capacite_entree_kg_h": 1000,
+      "production_explicite": [
+        700000,
+        850000,
+        1000000
+      ],
+      "ventes_explicites": [
+        665000,
+        807500,
+        950000
+      ],
+      "prix_vente_usd_kg": [
+        0.6,
+        0.612,
+        0.62424
+      ],
+      "matieres_usd_kg_produit": 0.16,
+      "cout_process_usd_kg": 0.23,
+      "fixes_industriels_an": 65000,
+      "personnel_hors_cout_industriel": 15000,
+      "charges_fixes_hors_industriel": 30000,
+      "stock_matieres_jours": 15,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Bouteille opaque de 1 L avec bouchon, étiquette et carton",
+        "cout_usd_par_kg": 0.14,
+        "composants_usd_par_kg": {
+          "bouteille": 0.09,
+          "bouchon": 0.02,
+          "etiquette": 0.01,
+          "regroupement": 0.02
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Collecte et valorisation des contenants à étudier ; résidus et effluents à gérer selon la réglementation.",
+        "source": "Hypothèse P2I non tarif fournisseur"
+      },
+      "equipements_complementaires": [
+        {
+          "nom": "Cuve de mélange PP anticorrosion 2 000 L",
+          "fournisseur": "Guangzhou Yeto Machinery Co., Ltd.",
+          "url": "https://www.made-in-china.com/factory/bleach-soap.html",
+          "prix_retenu": 12000,
+          "devise": "USD",
+          "qualification": "borne_haute_fourchette_11000_12000_non_devis"
+        }
+      ],
+      "complements_usd": {
+        "fret": 6000,
+        "assurance": 800,
+        "douane_transit": 6500,
+        "transport_local": 2000,
+        "genie_civil": 16000,
+        "utilites": 12000,
+        "installation_formation": 6000,
+        "pieces_initiales": 2500,
+        "securite_environnement": 9000,
+        "etudes_controle": 5000
+      },
+      "methodes": {
+        "production": "Cuve 2 000 L ; convention de simulation de deux heures par lot, densité 1 kg/L, soit 1 000 kg/h théoriques, 2 000 h/an. Production A1 à A3 de 35 %, 42,5 %, 50 % ; ventes 95 % de la production. Temps de lot et cadence effective à confirmer. Aucune dégradation du chlore ni perte de qualité du stock n’est simulée ; durée de stockage et rotation à valider.",
+        "matieres": "Solution concentrée achetée, eau et consommables : hypothèse 0,16 USD/kg sans prix local documenté ni formulation définitive.",
+        "process": "0,23 USD/kg dont emballage 0,14 USD/kg et utilités et consommables 0,09 USD/kg ; hypothèses P2I.",
+        "personnel": "Personnel de production inclus dans frais industriels fixes ; personnel administratif et commercial séparé.",
+        "prix_vente": "0,60 USD/kg départ usine A1 puis +2 % par an : hypothèse, comparée aux prix ivoiriens au détail sans supposer que le prix de détail soit le prix producteur. Densité supposée de 1 kg/L.",
+        "complements": "Cuve de mélange facturée une seule fois ; fret, utilités, protection et installation sont des enveloppes indicatives. Compatibilité des composants, air comprimé et alimentation à préciser.",
+        "qualite": "Titre de chlore, stabilité, étiquetage, stockage, ventilation, confinement et protection du personnel doivent être définis ; ne pas mélanger avec des acides ou de l’ammoniac. Pas d’homologation présumée."
+      },
+      "sources_prix_marche": [
+        {
+          "url": "https://www.lemarcheci.com/2-produits-d-entretien/14",
+          "description": "Javel Super Clean 12° 1 L à 560 FCFA au détail ; prix départ usine non indiqué."
+        }
+      ],
+      "visuels": {
+        "atlas": "javel-postes",
+        "product_index": 5,
+        "indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    }
+  }
+}

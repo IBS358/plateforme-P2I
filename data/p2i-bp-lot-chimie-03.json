@@ -89,7 +89,7 @@
         "personnel": "Personnel de fabrication, contrôle et conditionnement inclus dans frais industriels fixes ; personnel commercial et administratif distinct.",
         "prix_vente": "Hypothèses départ UP par kg en A1 : vaisselle 0,95 USD, sols 1,00 USD, savon mains 1,10 USD ; +2 %/an. Moyenne pondérée du mix 60/25/15 ; prix de détail ne sont pas des prix producteur.",
         "complements": "Transport, utilités, installation, pièces, sécurité et contrôle sont des enveloppes P2I. Ne pas recompter les fonctions et machines déjà incluses dans la ligne.",
-        "qualite": "Compatibilité des recettes, procédures de nettoyage entre lots, sécurité, stabilité, étiquetage et conformité à établir. Aucun produit biocide n’est présumé ; eau de javel traitée séparément."
+        "qualite": "Compatibilité des recettes, nettoyage entre lots, stabilité et étiquetage à établir. Gamme ménagère sans allégation biocide ; produits d’hygiène professionnelle traités dans une UP distincte."
       },
       "sources_prix_marche": [
         {

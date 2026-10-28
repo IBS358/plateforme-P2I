@@ -34,3 +34,6 @@
 .agro-engrais-postes{background-image:url('../assets/bp-agro/postes-engrais-ia.jpg')}
 
 .agro-javel-postes{background-image:url('../assets/bp-agro/postes-javel-ia.jpg')}
+
+/* Atlas hygiène professionnelle : 9 images, 8 postes distincts. */
+.agro-hygiene-pro{background-image:url('../assets/bp-agro/postes-hygiene-pro-ia.jpg');background-size:300% 300%}.agro-hygiene-pro.agro-0{background-position:0% 0%}.agro-hygiene-pro.agro-1{background-position:50% 0%}.agro-hygiene-pro.agro-2{background-position:100% 0%}.agro-hygiene-pro.agro-3{background-position:0% 50%}.agro-hygiene-pro.agro-4{background-position:50% 50%}.agro-hygiene-pro.agro-5{background-position:100% 50%}.agro-hygiene-pro.agro-6{background-position:0% 100%}.agro-hygiene-pro.agro-7{background-position:50% 100%}.agro-hygiene-pro.agro-8{background-position:100% 100%}

@@ -37,7 +37,7 @@ function resolveUnit(sim,registry){
  if(id&&Object.prototype.hasOwnProperty.call(registry,id))return id;
  const normalize=x=>String(x||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
  const name=normalize(sim.up_name||sim.unit_name||sim.unit);if(!name)throw Error('UP absente ou inconnue dans la simulation.');
- const matches=Object.entries(registry).filter(([,u])=>normalize(u.nom)===name);
+ const matches=Object.entries(registry).filter(([,u])=>[u.nom,...(u.anciens_noms||[])].some(alias=>normalize(alias)===name));
  if(matches.length!==1)throw Error('Impossible d’identifier une UP unique pour cette simulation.');
  return matches[0][0];
 }

@@ -2166,134 +2166,188 @@ engrais: {
 },
 
 javel: {
-  id: "javel",
-  nom: "Eau de javel & désinfectants",
-  filiereNom: "Chimie, Cosmétiques & Détergents",
-  type: "production",
-  description: "Fabrication d'eau de javel (hypochlorite de sodium), désinfectants et produits d'hygiène. Demande forte depuis la COVID-19.",
-  capex_min: 60000,
-  chiffre_affaires_estime: "150000-300000",
-  marge_brute: "40-55",
-  emplois_directs: "3-6",
-  emplois_indirects: "2-3",
-  roi_estime: "2-3 ans",
-  investment_breakdown: {
-    machines: 30000,
-    installation: 10000,
-    working_capital: 15000,
-    training: 5000,
-    total: 60000
-  },
-  monthly_capacity: "50,000 L",
-  estimated_revenue: 250000,
-  gross_margin: 48,
-  net_profitability: 32,
-  machines: [
-    { name: "Cuve de mélange", role: "Préparation", capacity: "5,000 L", utilities: "Électricité", price: 15000 },
-    { name: "Système de dosage", role: "Dosage du chlore", capacity: "Automatique", utilities: "Électricité", price: 10000 },
-    { name: "Remplisseuse", role: "Conditionnement", capacity: "2,000 bouteilles/h", utilities: "Électricité + air", price: 15000 },
-    { name: "Étiqueteuse", role: "Étiquetage", capacity: "2,000 bouteilles/h", utilities: "Électricité", price: 8000 },
-    { name: "Poste contrôle", role: "Contrôle qualité (chlore actif)", capacity: "Standard", utilities: "Électricité", price: 12000 }
+  "id": "javel",
+  "nom": "Hygiène & désinfection professionnelles",
+  "anciens_noms": [
+    "Eau de javel & désinfectants"
   ],
-  processus: [
-    "Dosage du chlore et de la soude",
-    "Mélange sous agitation",
-    "Dilution à la concentration souhaitée",
-    "Contrôle qualité (taux de chlore actif)",
-    "Conditionnement en bouteilles/bidons",
-    "Étiquetage (précautions d'usage)"
+  "filiereNom": "Chimie, Cosmétiques & Détergents",
+  "type": "production",
+  "description": "Formulation de concentrés professionnels d’hygiène des surfaces, avec priorité aux ingrédients biosourcés compatibles et à la réduction des dangers ; hors médical.",
+  "capex_min": 92440,
+  "budget_reference_statut": "estimation_p2i_hors_reserve",
+  "exclure_reperes_historiques": true,
+  "chiffre_affaires_estime": null,
+  "marge_brute": null,
+  "estimated_revenue": null,
+  "gross_margin": null,
+  "net_profitability": null,
+  "roi_estime": "Calculé par le moteur commun ; hypothèses indicatives",
+  "machines": [
+    {
+      "name": "Traitement de l’eau",
+      "role": "Osmose inverse, UV, pompe et stockage eau",
+      "capacity": "500 L/h ; cuve 1 000 L",
+      "utilities": "Électricité + eau",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Cuve de mélange",
+      "role": "Mélange et homogénéisation",
+      "capacity": "1 000 L par lot",
+      "utilities": "Électricité ; chauffage à confirmer selon recette",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Cuves et transfert",
+      "role": "Deux cuves mobiles et pompe à vis",
+      "capacity": "2 × 1 000 L",
+      "utilities": "Électricité 4 kW pour la pompe",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Remplisseuse",
+      "role": "Dosage semi-automatique",
+      "capacity": "100–10 000 ml ; bidon cylindrique 5 L retenu",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Boucheuse",
+      "role": "Fermeture semi-automatique à quatre roues",
+      "capacity": "Bouchon du bidon 5 L à vérifier",
+      "utilities": "Électricité + air selon montage",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Étiqueteuse",
+      "role": "Étiquetage de contenants ronds et codage",
+      "capacity": "Bidon cylindrique 5 L à vérifier",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Compresseur",
+      "role": "Air comprimé de la ligne",
+      "capacity": "1,5 kW annoncés",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Poste contrôle",
+      "role": "Pesée et contrôle du produit",
+      "capacity": "Budget laboratoire et dosage distinct",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "enveloppe_P2I_non_prix_catalogue",
+      "source_url": null
+    }
   ],
-  avantages: [
-    "Demande post-COVID (hygiène)",
-    "Processus simple",
-    "Faible investissement",
-    "Large distribution (supermarchés, pharmacies)",
-    "Marges intéressantes"
+  "processus": [
+    "Préparation de l’eau",
+    "Mélange et homogénéisation",
+    "Stockage et transfert",
+    "Remplissage 5 L",
+    "Fermeture des bidons",
+    "Étiquetage et codage",
+    "Air comprimé",
+    "Dosage et contrôle qualité"
   ],
-  challenges: [
-    "Sécurité chimique (chlore, soude)",
-    "Concurrence (importations)",
-    "Prix des matières premières",
-    "Normes sanitaires (taux de chlore)",
-    "Stabilité du produit (dégradation)"
+  "produits": [
+    "Concentré aqueux d’hygiène des surfaces en bidons de 5 L"
   ],
-  sanitaires: [
-    "Respecter les normes de sécurité",
-    "Utiliser des équipements de protection (gants, lunettes, masque)",
-    "Nettoyer les équipements régulièrement",
-    "Former le personnel aux risques chimiques",
-    "Assurer la traçabilité des lots"
+  "raw_materials": [
+    "Base active compatible avec la formulation retenue",
+    "Tensioactifs et auxiliaires biosourcés privilégiés, origine et danger à documenter",
+    "Eau traitée",
+    "Bidons PEHD, bouchons, étiquettes et regroupement"
   ],
-  energie: [
-    "Optimiser le mélange",
-    "Utiliser des moteurs à haut rendement",
-    "Isoler les cuves",
-    "Éteindre les équipements hors production",
-    "Récupérer la chaleur"
+  "target_markets": [
+    "Hôtels et restauration",
+    "Collectivités",
+    "Entreprises de propreté",
+    "Ateliers et sites industriels hors médical"
   ],
-  amenagement: [
-    "Organiser en flux continu",
-    "Séparer zones de production et stockage",
-    "Prévoir zone de stockage des produits chimiques",
-    "Aménager zone de conditionnement",
-    "Faciliter la circulation du personnel"
+  "avantages": [
+    "Conditionnement professionnel de 5 L",
+    "Formulation concentrée et accompagnement à l’usage",
+    "Approvisionnement de proximité à organiser"
   ],
-  marketing: [
-    "Cibler supermarchés, pharmacies, grossistes",
-    "Proposer des formats variés (bouteilles, bidons, jerrycans)",
-    "Soigner l'emballage",
-    "Communiquer sur l'efficacité désinfectante",
-    "Développer des marques propres"
+  "challenges": [
+    "Qualification des formulations et efficacité",
+    "Coût livré des intrants",
+    "Prospection et délais de règlement B2B",
+    "Traçabilité et compatibilité des emballages"
   ],
-  raw_materials: [
-    "Hypochlorite de sodium (chlore)",
-    "Soude caustique",
-    "Eau déminéralisée",
-    "Stabilisants",
-    "Emballages (bouteilles PET, bidons, étiquettes)"
+  "sanitaires": [
+    "Documenter l’efficacité avant toute allégation",
+    "Tracer les lots et contrôler les matières",
+    "Former le personnel et utiliser les protections adaptées",
+    "Contrôler stabilité, pH et conditionnement",
+    "Vérifier les exigences de mise sur le marché"
   ],
-  target_markets: [
-    "Supermarchés",
-    "Pharmacies",
-    "Grossistes",
-    "Hôpitaux et cliniques",
-    "Écoles et collectivités"
+  "energie": [
+    "35–45 kW installés annoncés pour la ligne",
+    "Distinguer puissance installée et consommation réelle",
+    "Adapter le cycle thermique à la formulation",
+    "Suivre eau, air comprimé et consommations"
   ],
-  competitive_advantages: [
-    "Eau de javel fraîche (plus efficace)",
-    "Prix compétitifs",
-    "Conditionnement adapté",
-    "Qualité garantie (taux de chlore)",
-    "Livraison rapide"
+  "amenagement": [
+    "Séparer matières, formulation et produits finis",
+    "Prévoir un poste de contrôle et une zone de stockage",
+    "Organiser nettoyage, ventilation et rétention",
+    "Surface machine annoncée 15 × 6 m, hors autres locaux"
   ],
-  reglementation: [
-    "Respecter les normes de désinfectants",
-    "Fiches de données de sécurité",
-    "Étiquetage des dangers (CLP)",
-    "Contrôle du taux de chlore actif",
-    "Déclaration environnementale"
+  "marketing": [
+    "Prospecter hôtels, restauration et collectivités",
+    "Présenter le coût par usage selon dilution validée",
+    "Tester les performances avec les clients professionnels",
+    "Convenir de contrats et conditions de règlement"
   ],
-  securite: [
-    "Formation du personnel aux risques chimiques",
-    "Équipements de protection (gants, lunettes, masque)",
-    "Ventilation des ateliers",
-    "Stockage sécurisé du chlore",
-    "Douches de sécurité"
+  "competitive_advantages": [
+    "Réactivité locale à construire",
+    "Format adapté aux professionnels",
+    "Traçabilité documentée, sans certification présumée"
   ],
-  environnement: [
-    "Neutralisation des effluents",
-    "Gestion des déchets chimiques",
-    "Réduction des emballages plastiques",
-    "Utilisation de bouteilles recyclées",
-    "Traitement des eaux usées"
+  "reglementation": [
+    "Vérifier les exigences applicables à la formulation et à ses usages",
+    "Établir fiche technique, fiche de sécurité et étiquetage",
+    "Étayer les allégations par des essais appropriés"
   ],
-  etiquetage: [
-    "Pictogrammes de danger (corrosif)",
-    "Mentions de danger (H)",
-    "Conseils de prudence (P)",
-    "Taux de chlore actif",
-    "Numéro de lot",
-    "Date de péremption"
+  "securite": [
+    "Formation au risque chimique",
+    "Protection des yeux et des mains",
+    "Stockage séparé des produits incompatibles",
+    "Ventilation et rétention adaptées"
+  ],
+  "environnement": [
+    "Suivre consommations et effluents",
+    "Organiser la collecte des contenants",
+    "Ne pas présumer d’un bénéfice écologique"
+  ],
+  "etiquetage": [
+    "Identification et destination du produit",
+    "Lot et durée de conservation justifiée",
+    "Mode d’emploi validé et précautions",
+    "Coordonnées du fabricant"
+  ],
+  "monthly_capacity": "Selon programme de production ; référence 1 000 L par lot",
+  "suggestions": [
+    "Un conditionnement 20 L et d’autres formulations pourront être étudiés dans le BP Initial/Pro avec un poste adapté ; ils ne sont pas inclus dans les prix, volumes ni résultats du présent scénario."
   ]
 },
 

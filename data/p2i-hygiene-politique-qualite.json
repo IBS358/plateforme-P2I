@@ -1,0 +1,44 @@
+{
+  "schema": "p2i.hygiene-qualite.v1",
+  "id": "hygiene_professionnelle_profil_danger_reduit",
+  "date": "2026-10-28",
+  "nature": "Objectifs de conception et plan de vérification, sans certification ni innocuité acquise",
+  "objectifs": [
+    "Base aqueuse non chlorée et non alcoolique, sans ajout d’acide fort ni de base forte à finalité décapante",
+    "Priorité aux tensioactifs et auxiliaires biosourcés documentés lorsqu’ils conviennent à l’usage ; pas de pourcentage naturel revendiqué sans bilan de formulation",
+    "Limiter parfum, colorants et huiles essentielles ; origine naturelle ne vaut pas absence de danger ou allergie",
+    "Choisir pH et concentration avec le formulateur, en évaluant irritations, corrosivité, expositions et compatibilité des surfaces",
+    "Préférer transfert fermé et dosage limitant éclaboussures et exposition ; nettoyage tracé des équipements",
+    "Qualité de l’eau et des matières, pesée, homogénéité, pH, stabilité, emballage, échantillon témoin et traçabilité avant libération des lots"
+  ],
+  "verification_separee": {
+    "securite": "Évaluer le mélange fini et sa dilution d’emploi, établir la fiche de sécurité et les précautions ; aucune garantie générale de produit sain ou sans risque",
+    "efficacite": "Ne pas revendiquer de désinfection avant essais de la formulation finale aux doses, temps de contact, surfaces et conditions d’emploi définis",
+    "naturalite": "Vérifier origine et traçabilité des ingrédients ; certification environnementale éventuelle distincte des essais d’efficacité",
+    "ecologie": "Documenter biodégradabilité et effets aquatiques du mélange et des ingrédients ; ne pas conclure à partir du seul mot naturel"
+  },
+  "referentiels": [
+    {
+      "nom": "NF EN 14885",
+      "portee": "Cadre de sélection des essais selon l’activité désinfectante et le domaine d’usage ; pas un certificat d’innocuité",
+      "source": "https://www.inrs.fr/actualites/faq-nettoyage-entreprise"
+    },
+    {
+      "nom": "EN 13697:2023",
+      "portee": "Exemple d’essai de surface non poreuse sans action mécanique pour usages industriels et collectivités ; adéquation au produit à confirmer",
+      "source": "https://www.boutique.afnor.org/fr-fr/norme/nf-en-13697/antiseptiques-et-desinfectants-chimiques-essai-quantitatif-de-surface-non-p/fa203157/354208"
+    },
+    {
+      "nom": "Référentiel Ecocert Ecodétergents",
+      "portee": "Piste volontaire pour les ingrédients et procédés des produits de nettoyage éligibles ; ne confère pas une efficacité désinfectante",
+      "source": "https://www.ecocert.com/en/certification-detail/ecological-household-products-natdet"
+    },
+    {
+      "nom": "EPA Design for the Environment",
+      "portee": "Exemple américain de démarche combinant ingrédients, danger et efficacité ; aucun label EPA ni applicabilité réglementaire en Côte d’Ivoire présumés",
+      "source": "https://www.epa.gov/pesticide-labels/learn-about-design-environment-dfe-certification"
+    }
+  ],
+  "statut": "a_formuler_et_a_tester",
+  "couts": "Le budget matières et les enveloppes essais/laboratoire restent estimatifs ; ils ne prouvent pas qu’une formulation naturelle performante soit disponible à ces coûts."
+}

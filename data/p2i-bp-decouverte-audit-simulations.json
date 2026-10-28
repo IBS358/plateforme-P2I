@@ -789,41 +789,41 @@
     {
       "up_id": "javel",
       "configuration_id": null,
-      "nom": "Eau de javel & désinfectants",
+      "nom": "Hygiène & désinfection professionnelles",
       "statut": "simulation_decouverte_indicative",
-      "qualification_prix": "borne_haute_catalogue_non_devis",
-      "source_prix": "https://bojunpack.en.made-in-china.com/product/HZWJOArYZlhy/China-Automatic-Filling-Shampoo-Dishwashing-Liquid-Bleach-Automatic-Filling-Capping-Labeling-Line-Production-Line.html",
+      "qualification_prix": "prix_catalogue_public_non_certifie",
+      "source_prix": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line",
       "certification_prix_exigee": false,
       "accord_fournisseur_exige": false,
       "devis_exige": false,
       "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 57000,
-      "investissement_simulation_usd": 122800,
-      "reserve_initiale_distincte_usd": 47214.48666666664,
+      "budget_equipements_usd": 18440,
+      "investissement_simulation_usd": 92440,
+      "reserve_initiale_distincte_usd": 36122.164277777774,
       "annuel": [
         {
           "annee": 1,
-          "production_kg": 700000.0000000001,
-          "ventes_kg": 665000,
-          "stock_fin_kg": 35000.00000000005,
-          "chiffre_affaires_usd": 399000,
-          "resultat_net_usd": 10780.18
+          "production_kg": 120000,
+          "ventes_kg": 116400,
+          "stock_fin_kg": 3600,
+          "chiffre_affaires_usd": 325920,
+          "resultat_net_usd": 40001.91399999993
         },
         {
           "annee": 2,
-          "production_kg": 850000.0000000001,
-          "ventes_kg": 807499.9999999999,
-          "stock_fin_kg": 77499.99999999993,
-          "chiffre_affaires_usd": 494190,
-          "resultat_net_usd": 31972.465921241503
+          "production_kg": 150000,
+          "ventes_kg": 150000,
+          "stock_fin_kg": 3600,
+          "chiffre_affaires_usd": 428400,
+          "resultat_net_usd": 73584.13000160559
         },
         {
           "annee": 3,
-          "production_kg": 1000000.0000000001,
-          "ventes_kg": 949999.9999999999,
-          "stock_fin_kg": 127499.99999999981,
-          "chiffre_affaires_usd": 593028.0000000001,
-          "resultat_net_usd": 53333.660618052134
+          "production_kg": 180000,
+          "ventes_kg": 180000,
+          "stock_fin_kg": 3600,
+          "chiffre_affaires_usd": 524361.6,
+          "resultat_net_usd": 105374.96409846621
         }
       ],
       "controles": {
@@ -833,9 +833,9 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
+        1.7462298274040222e-10,
         1.1641532182693481e-10,
-        -2.9103830456733704e-11,
-        -5.820766091346741e-11
+        2.9103830456733704e-10
       ]
     }
   ]

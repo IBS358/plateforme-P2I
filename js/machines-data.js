@@ -215,15 +215,82 @@ const MACHINES_DATA = {
     ]
   },
   javel: {
-    up_nom: "Eau de javel & désinfectants",
-    machines: [
-      { name: "Cuve de mélange", role: "Préparation", capacity: "5,000 L", utilities: "Électricité", price: 15000 },
-      { name: "Système de dosage", role: "Dosage du chlore", capacity: "Automatique", utilities: "Électricité", price: 10000 },
-      { name: "Remplisseuse", role: "Conditionnement", capacity: "2,000 bouteilles/h", utilities: "Électricité + air", price: 15000 },
-      { name: "Étiqueteuse", role: "Étiquetage", capacity: "2,000 bouteilles/h", utilities: "Électricité", price: 8000 },
-      { name: "Poste contrôle", role: "Contrôle qualité", capacity: "Standard", utilities: "Électricité", price: 12000 }
-    ]
-  },
+  "up_nom": "Hygiène & désinfection professionnelles",
+  "machines": [
+    {
+      "name": "Traitement de l’eau",
+      "role": "Osmose inverse, UV, pompe et stockage eau",
+      "capacity": "500 L/h ; cuve 1 000 L",
+      "utilities": "Électricité + eau",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Cuve de mélange",
+      "role": "Mélange et homogénéisation",
+      "capacity": "1 000 L par lot",
+      "utilities": "Électricité ; chauffage à confirmer selon recette",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Cuves et transfert",
+      "role": "Deux cuves mobiles et pompe à vis",
+      "capacity": "2 × 1 000 L",
+      "utilities": "Électricité 4 kW pour la pompe",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Remplisseuse",
+      "role": "Dosage semi-automatique",
+      "capacity": "100–10 000 ml ; bidon cylindrique 5 L retenu",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Boucheuse",
+      "role": "Fermeture semi-automatique à quatre roues",
+      "capacity": "Bouchon du bidon 5 L à vérifier",
+      "utilities": "Électricité + air selon montage",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Étiqueteuse",
+      "role": "Étiquetage de contenants ronds et codage",
+      "capacity": "Bidon cylindrique 5 L à vérifier",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Compresseur",
+      "role": "Air comprimé de la ligne",
+      "capacity": "1,5 kW annoncés",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Poste contrôle",
+      "role": "Pesée et contrôle du produit",
+      "capacity": "Budget laboratoire et dosage distinct",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "enveloppe_P2I_non_prix_catalogue",
+      "source_url": null
+    }
+  ]
+},
   produits_industriels: {
     up_nom: "Produits chimiques industriels",
     machines: [

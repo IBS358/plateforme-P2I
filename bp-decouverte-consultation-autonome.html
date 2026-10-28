@@ -1387,59 +1387,190 @@ aliments_betail: {
   },
 
   javel: {
-    id: "javel",
-    nom: "Eau de javel & désinfectants",
-    filiereNom: "Chimie, Cosmétiques & Détergents",
-    type: "production",
-    description: "Fabrication d'eau de javel et désinfectants.",
-    capex_min: 60000,
-    chiffre_affaires_estime: "150000-300000",
-    marge_brute: "35-50",
-    machines: [
-      { name: "Cuve de mélange", role: "Préparation", capacity: "Batch", utilities: "Électricité" },
-      { name: "Système de dosage", role: "Dosage", capacity: "Standard", utilities: "Électricité" },
-      { name: "Remplisseuse", role: "Conditionnement", capacity: "Semi-automatique", utilities: "Électricité + air" },
-      { name: "Étiqueteuse", role: "Étiquetage", capacity: "Standard", utilities: "Électricité" },
-      { name: "Poste contrôle", role: "Contrôle qualité", capacity: "Standard", utilities: "Électricité" }
-    ],
-    processus: [
-      "Dosage des ingrédients",
-      "Mélange",
-      "Contrôle qualité",
-      "Conditionnement",
-      "Étiquetage"
-    ],
-    avantages: ["Demande post-COVID", "Processus simple", "Faible investissement", "Large distribution"],
-    challenges: ["Sécurité chimique", "Concurrence", "Prix des matières", "Normes"],
-    sanitaires: [
-      "Respecter les normes de sécurité",
-      "Utiliser des équipements de protection",
-      "Nettoyer les équipements régulièrement",
-      "Former le personnel à la sécurité",
-      "Assurer la traçabilité des lots"
-    ],
-    energie: [
-      "Optimiser le mélange",
-      "Utiliser des moteurs à haut rendement",
-      "Isoler les cuves",
-      "Éteindre les équipements hors production",
-      "Récupérer la chaleur"
-    ],
-    amenagement: [
-      "Organiser en flux continu",
-      "Séparer zones de production et stockage",
-      "Prévoir zone de stockage des produits chimiques",
-      "Aménager zone de conditionnement",
-      "Faciliter la circulation du personnel"
-    ],
-    marketing: [
-      "Cibler supermarchés et grossistes",
-      "Proposer des formats variés",
-      "Soigner l'emballage",
-      "Communiquer sur l'efficacité",
-      "Développer des marques propres"
-    ]
-  },
+  "id": "javel",
+  "nom": "Hygiène & désinfection professionnelles",
+  "anciens_noms": [
+    "Eau de javel & désinfectants"
+  ],
+  "filiereNom": "Chimie, Cosmétiques & Détergents",
+  "type": "production",
+  "description": "Formulation de concentrés professionnels d’hygiène des surfaces, avec priorité aux ingrédients biosourcés compatibles et à la réduction des dangers ; hors médical.",
+  "capex_min": 92440,
+  "budget_reference_statut": "estimation_p2i_hors_reserve",
+  "exclure_reperes_historiques": true,
+  "chiffre_affaires_estime": null,
+  "marge_brute": null,
+  "estimated_revenue": null,
+  "gross_margin": null,
+  "net_profitability": null,
+  "roi_estime": "Calculé par le moteur commun ; hypothèses indicatives",
+  "machines": [
+    {
+      "name": "Traitement de l’eau",
+      "role": "Osmose inverse, UV, pompe et stockage eau",
+      "capacity": "500 L/h ; cuve 1 000 L",
+      "utilities": "Électricité + eau",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Cuve de mélange",
+      "role": "Mélange et homogénéisation",
+      "capacity": "1 000 L par lot",
+      "utilities": "Électricité ; chauffage à confirmer selon recette",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Cuves et transfert",
+      "role": "Deux cuves mobiles et pompe à vis",
+      "capacity": "2 × 1 000 L",
+      "utilities": "Électricité 4 kW pour la pompe",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Remplisseuse",
+      "role": "Dosage semi-automatique",
+      "capacity": "100–10 000 ml ; bidon cylindrique 5 L retenu",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Boucheuse",
+      "role": "Fermeture semi-automatique à quatre roues",
+      "capacity": "Bouchon du bidon 5 L à vérifier",
+      "utilities": "Électricité + air selon montage",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Étiqueteuse",
+      "role": "Étiquetage de contenants ronds et codage",
+      "capacity": "Bidon cylindrique 5 L à vérifier",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Compresseur",
+      "role": "Air comprimé de la ligne",
+      "capacity": "1,5 kW annoncés",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Poste contrôle",
+      "role": "Pesée et contrôle du produit",
+      "capacity": "Budget laboratoire et dosage distinct",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "enveloppe_P2I_non_prix_catalogue",
+      "source_url": null
+    }
+  ],
+  "processus": [
+    "Préparation de l’eau",
+    "Mélange et homogénéisation",
+    "Stockage et transfert",
+    "Remplissage 5 L",
+    "Fermeture des bidons",
+    "Étiquetage et codage",
+    "Air comprimé",
+    "Dosage et contrôle qualité"
+  ],
+  "produits": [
+    "Concentré aqueux d’hygiène des surfaces en bidons de 5 L"
+  ],
+  "raw_materials": [
+    "Base active compatible avec la formulation retenue",
+    "Tensioactifs et auxiliaires biosourcés privilégiés, origine et danger à documenter",
+    "Eau traitée",
+    "Bidons PEHD, bouchons, étiquettes et regroupement"
+  ],
+  "target_markets": [
+    "Hôtels et restauration",
+    "Collectivités",
+    "Entreprises de propreté",
+    "Ateliers et sites industriels hors médical"
+  ],
+  "avantages": [
+    "Conditionnement professionnel de 5 L",
+    "Formulation concentrée et accompagnement à l’usage",
+    "Approvisionnement de proximité à organiser"
+  ],
+  "challenges": [
+    "Qualification des formulations et efficacité",
+    "Coût livré des intrants",
+    "Prospection et délais de règlement B2B",
+    "Traçabilité et compatibilité des emballages"
+  ],
+  "sanitaires": [
+    "Documenter l’efficacité avant toute allégation",
+    "Tracer les lots et contrôler les matières",
+    "Former le personnel et utiliser les protections adaptées",
+    "Contrôler stabilité, pH et conditionnement",
+    "Vérifier les exigences de mise sur le marché"
+  ],
+  "energie": [
+    "35–45 kW installés annoncés pour la ligne",
+    "Distinguer puissance installée et consommation réelle",
+    "Adapter le cycle thermique à la formulation",
+    "Suivre eau, air comprimé et consommations"
+  ],
+  "amenagement": [
+    "Séparer matières, formulation et produits finis",
+    "Prévoir un poste de contrôle et une zone de stockage",
+    "Organiser nettoyage, ventilation et rétention",
+    "Surface machine annoncée 15 × 6 m, hors autres locaux"
+  ],
+  "marketing": [
+    "Prospecter hôtels, restauration et collectivités",
+    "Présenter le coût par usage selon dilution validée",
+    "Tester les performances avec les clients professionnels",
+    "Convenir de contrats et conditions de règlement"
+  ],
+  "competitive_advantages": [
+    "Réactivité locale à construire",
+    "Format adapté aux professionnels",
+    "Traçabilité documentée, sans certification présumée"
+  ],
+  "reglementation": [
+    "Vérifier les exigences applicables à la formulation et à ses usages",
+    "Établir fiche technique, fiche de sécurité et étiquetage",
+    "Étayer les allégations par des essais appropriés"
+  ],
+  "securite": [
+    "Formation au risque chimique",
+    "Protection des yeux et des mains",
+    "Stockage séparé des produits incompatibles",
+    "Ventilation et rétention adaptées"
+  ],
+  "environnement": [
+    "Suivre consommations et effluents",
+    "Organiser la collecte des contenants",
+    "Ne pas présumer d’un bénéfice écologique"
+  ],
+  "etiquetage": [
+    "Identification et destination du produit",
+    "Lot et durée de conservation justifiée",
+    "Mode d’emploi validé et précautions",
+    "Coordonnées du fabricant"
+  ],
+  "monthly_capacity": "Selon programme de production ; référence 1 000 L par lot",
+  "suggestions": [
+    "Un conditionnement 20 L et d’autres formulations pourront être étudiés dans le BP Initial/Pro avec un poste adapté ; ils ne sont pas inclus dans les prix, volumes ni résultats du présent scénario."
+  ]
+},
 
   produits_industriels: {
     id: "produits_industriels",
@@ -6852,15 +6983,82 @@ const MACHINES_DATA = {
     ]
   },
   javel: {
-    up_nom: "Eau de javel & désinfectants",
-    machines: [
-      { name: "Cuve de mélange", role: "Préparation", capacity: "5,000 L", utilities: "Électricité", price: 15000 },
-      { name: "Système de dosage", role: "Dosage du chlore", capacity: "Automatique", utilities: "Électricité", price: 10000 },
-      { name: "Remplisseuse", role: "Conditionnement", capacity: "2,000 bouteilles/h", utilities: "Électricité + air", price: 15000 },
-      { name: "Étiqueteuse", role: "Étiquetage", capacity: "2,000 bouteilles/h", utilities: "Électricité", price: 8000 },
-      { name: "Poste contrôle", role: "Contrôle qualité", capacity: "Standard", utilities: "Électricité", price: 12000 }
-    ]
-  },
+  "up_nom": "Hygiène & désinfection professionnelles",
+  "machines": [
+    {
+      "name": "Traitement de l’eau",
+      "role": "Osmose inverse, UV, pompe et stockage eau",
+      "capacity": "500 L/h ; cuve 1 000 L",
+      "utilities": "Électricité + eau",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Cuve de mélange",
+      "role": "Mélange et homogénéisation",
+      "capacity": "1 000 L par lot",
+      "utilities": "Électricité ; chauffage à confirmer selon recette",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Cuves et transfert",
+      "role": "Deux cuves mobiles et pompe à vis",
+      "capacity": "2 × 1 000 L",
+      "utilities": "Électricité 4 kW pour la pompe",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Remplisseuse",
+      "role": "Dosage semi-automatique",
+      "capacity": "100–10 000 ml ; bidon cylindrique 5 L retenu",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Boucheuse",
+      "role": "Fermeture semi-automatique à quatre roues",
+      "capacity": "Bouchon du bidon 5 L à vérifier",
+      "utilities": "Électricité + air selon montage",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Étiqueteuse",
+      "role": "Étiquetage de contenants ronds et codage",
+      "capacity": "Bidon cylindrique 5 L à vérifier",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Compresseur",
+      "role": "Air comprimé de la ligne",
+      "capacity": "1,5 kW annoncés",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "inclus_dans_prix_ligne_sans_ventilation",
+      "source_url": "https://henwitech.com/products/1000l-semi-automatic-daily-liquid-chemicals-production-line"
+    },
+    {
+      "name": "Poste contrôle",
+      "role": "Pesée et contrôle du produit",
+      "capacity": "Budget laboratoire et dosage distinct",
+      "utilities": "Électricité",
+      "price": null,
+      "qualification": "enveloppe_P2I_non_prix_catalogue",
+      "source_url": null
+    }
+  ]
+},
   produits_industriels: {
     up_nom: "Produits chimiques industriels",
     machines: [

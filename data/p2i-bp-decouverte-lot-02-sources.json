@@ -452,53 +452,84 @@
     },
     {
       "up_id": "javel",
-      "up_nom": "Eau de javel & désinfectants",
-      "description": "Fabrication d'eau de javel et désinfectants.",
+      "up_nom": "Hygiène & désinfection professionnelles",
+      "description": "Formulation de concentrés professionnels d’hygiène des surfaces, avec priorité aux ingrédients biosourcés compatibles et à la réduction des dangers ; hors médical.",
       "filiere": "Chimie, Cosmétiques & Détergents",
       "processus": [
-        "Dosage des ingrédients",
-        "Mélange",
-        "Contrôle qualité",
-        "Conditionnement",
-        "Étiquetage"
+        "Préparation de l’eau",
+        "Mélange et homogénéisation",
+        "Stockage et transfert",
+        "Remplissage 5 L",
+        "Fermeture des bidons",
+        "Étiquetage et codage",
+        "Air comprimé",
+        "Dosage et contrôle qualité"
       ],
-      "matieres_premieres": [],
-      "marches_cibles": [],
-      "capacite_generique_texte": null,
+      "matieres_premieres": [
+        "Base active compatible avec la formulation retenue",
+        "Tensioactifs et auxiliaires biosourcés privilégiés, origine et danger à documenter",
+        "Eau traitée",
+        "Bidons PEHD, bouchons, étiquettes et regroupement"
+      ],
+      "marches_cibles": [
+        "Hôtels et restauration",
+        "Collectivités",
+        "Entreprises de propreté",
+        "Ateliers et sites industriels hors médical"
+      ],
+      "capacite_generique_texte": "Selon programme de production ; référence 1 000 L par lot",
       "machines_catalogue": [
         {
-          "nom": "Cuve de mélange",
-          "role": "Préparation",
-          "capacite": "5,000 L",
-          "utilites": "Électricité"
+          "nom": "Traitement de l’eau",
+          "role": "Osmose inverse, UV, pompe et stockage eau",
+          "capacite": "500 L/h ; cuve 1 000 L",
+          "utilites": "Électricité + eau"
         },
         {
-          "nom": "Système de dosage",
-          "role": "Dosage du chlore",
-          "capacite": "Automatique",
-          "utilites": "Électricité"
+          "nom": "Cuve de mélange",
+          "role": "Mélange et homogénéisation",
+          "capacite": "1 000 L par lot",
+          "utilites": "Électricité ; chauffage à confirmer selon recette"
+        },
+        {
+          "nom": "Cuves et transfert",
+          "role": "Deux cuves mobiles et pompe à vis",
+          "capacite": "2 × 1 000 L",
+          "utilites": "Électricité 4 kW pour la pompe"
         },
         {
           "nom": "Remplisseuse",
-          "role": "Conditionnement",
-          "capacite": "2,000 bouteilles/h",
-          "utilites": "Électricité + air"
+          "role": "Dosage semi-automatique",
+          "capacite": "100–10 000 ml ; bidon cylindrique 5 L retenu",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Boucheuse",
+          "role": "Fermeture semi-automatique à quatre roues",
+          "capacite": "Bouchon du bidon 5 L à vérifier",
+          "utilites": "Électricité + air selon montage"
         },
         {
           "nom": "Étiqueteuse",
-          "role": "Étiquetage",
-          "capacite": "2,000 bouteilles/h",
+          "role": "Étiquetage de contenants ronds et codage",
+          "capacite": "Bidon cylindrique 5 L à vérifier",
+          "utilites": "Électricité"
+        },
+        {
+          "nom": "Compresseur",
+          "role": "Air comprimé de la ligne",
+          "capacite": "1,5 kW annoncés",
           "utilites": "Électricité"
         },
         {
           "nom": "Poste contrôle",
-          "role": "Contrôle qualité",
-          "capacite": "Standard",
+          "role": "Pesée et contrôle du produit",
+          "capacite": "Budget laboratoire et dosage distinct",
           "utilites": "Électricité"
         }
       ],
       "estimation_generique_non_validee": {
-        "investissement_minimum_usd": 60000,
+        "investissement_minimum_usd": 92440,
         "ventilation": null,
         "chiffre_affaires_annuel_indicatif_usd": null,
         "marge_brute_indicative_pourcent": null,
