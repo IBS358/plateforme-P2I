@@ -250,8 +250,11 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -276,7 +279,7 @@
             "capacite": 400,
             "unite": "kg/h",
             "machines": 100000,
-            "investissement": 164700,
+            "investissement": 167227.2,
             "production": [
               300000,
               390000,
@@ -294,9 +297,9 @@
             ],
             "matieres_kg": 0.35,
             "cout_production_kg": [
-              0.91,
-              0.9040230769230769,
-              0.9159103333333333
+              0.9103333333333333,
+              0.9042871794871795,
+              0.9161460888888888
             ],
             "personnel": 9660,
             "charges_fixes": 24000,
@@ -395,20 +398,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 2527.2,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Bacs et chariots lavables ; transpalette pour palettes de conserves.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 2527.2,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 2
           },
           "economique_herite_up": true,
@@ -533,6 +546,95 @@
             "prix_vente": "Prix départ UP 1,25 USD/kg en année 1, +2 %/an, hypothèse de simulation et non prix de marché relevé.",
             "complements": "Enveloppes P2I d’importation, installation, sécurité et utilités ; le contenu exact de la ligne et la fermeture des bocaux sont à vérifier.",
             "qualite": "Le traitement thermique doit être adapté au produit, à l’emballage et à la durée de conservation visée.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "chariot_inox": 2,
+                "bacs": 20,
+                "palettes": 10
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "chariot_inox",
+                  "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 503.76,
+                  "montant_usd": 1007.52,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Matériel Horeca",
+                    "modele": "Tournus GL886",
+                    "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                    "prix_unitaire": 447.81,
+                    "eco_participation_unitaire": 2.26,
+                    "devise": "EUR",
+                    "base": "HT, prix promotionnel publié, éco-participation ajoutée par prudence",
+                    "url": "https://www.materiel-horeca.com/fr/8653-chariot-de-service-3-plateaux-tournus-800x530mm-3660171095891.html",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Usage avec récipients fermés ; charge par plateau à confirmer. Ne remplace ni un chariot de four ni un équipement de levage."
+                  }
+                },
+                {
+                  "code": "bacs",
+                  "nom": "Bacs lavables avec couvercle, petit format",
+                  "quantite": 20,
+                  "prix_unitaire_usd": 12,
+                  "montant_usd": 240,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Bacs lavables avec couvercle, petit format",
+                    "prix_unitaire_usd": 12,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 1803.09,
+              "frais_estimes_usd": {
+                "fret": 270.46,
+                "assurance": 18.03,
+                "import_transit": 360.62,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 2527.2,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [],
             "sources_techniques_produit": [],
@@ -565,7 +667,8 @@
               "installation_formation": 7000,
               "pieces_initiales": 3000,
               "securite_environnement": 3000,
-              "etudes": 3000
+              "etudes": 3000,
+              "manutention": 2527.2
             },
             "base_budget_equipements_usd": 100000,
             "conversion": null
@@ -802,8 +905,13 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "crackers",
+          "biscuits_mous",
+          "biscuits_durs"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -828,7 +936,7 @@
             "capacite": 500,
             "unite": "kg/h",
             "machines": 450000,
-            "investissement": 605000,
+            "investissement": 608282.78,
             "production": [
               550000,
               650000,
@@ -846,9 +954,9 @@
             ],
             "matieres_kg": 0.5571999999999999,
             "cout_production_kg": [
-              0.9771999999999998,
-              0.9748236923076922,
-              0.9801301466666665
+              0.9773818181818181,
+              0.9749821538461537,
+              0.9802715999999998
             ],
             "personnel": 20700,
             "charges_fixes": 34800,
@@ -947,20 +1055,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 3282.78,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Chariots alimentaires, bacs de transfert et transpalette pour sacs de matières et cartons finis.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "2 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 20 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 3282.78,
+                "duree_ans": 5
+              }
+            ],
             "photo": 0,
             "technique": {
               "formage": "Laminage, calibrage et découpe",
@@ -1012,6 +1130,95 @@
             "production": "550 000, 650 000, 750 000 kg produits; 532 000, 638 000, 745 000 vendus. Stocks cumulés 18 000, 30 000, 35 000 kg. Le précédent calcul partiel de 760 000 kg produits reste une archive, pas le programme de cette projection.",
             "prix_vente": "Repère commercial historique 1 500 FCFA/kg en A1 converti au taux daté P2I; progression de prix de simulation de 2 %/an.",
             "complements": "Ventilation P2I des 155 000 USD complémentaires au budget ligne; total investissement de simulation 605 000 USD conservé.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 2,
+                "chariot_inox": 2,
+                "bacs": 20,
+                "palettes": 20
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 611.14,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "chariot_inox",
+                  "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 503.76,
+                  "montant_usd": 1007.52,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Matériel Horeca",
+                    "modele": "Tournus GL886",
+                    "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                    "prix_unitaire": 447.81,
+                    "eco_participation_unitaire": 2.26,
+                    "devise": "EUR",
+                    "base": "HT, prix promotionnel publié, éco-participation ajoutée par prudence",
+                    "url": "https://www.materiel-horeca.com/fr/8653-chariot-de-service-3-plateaux-tournus-800x530mm-3660171095891.html",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Usage avec récipients fermés ; charge par plateau à confirmer. Ne remplace ni un chariot de four ni un équipement de levage."
+                  }
+                },
+                {
+                  "code": "bacs",
+                  "nom": "Bacs lavables avec couvercle, petit format",
+                  "quantite": 20,
+                  "prix_unitaire_usd": 12,
+                  "montant_usd": 240,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Bacs lavables avec couvercle, petit format",
+                    "prix_unitaire_usd": 12,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 20,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 500,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 2358.66,
+              "frais_estimes_usd": {
+                "fret": 353.8,
+                "assurance": 23.59,
+                "import_transit": 471.73,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 3282.78,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [],
             "sources_techniques_produit": [],
@@ -1044,7 +1251,8 @@
               "installation_formation": 20000,
               "pieces_initiales": 10000,
               "securite_environnement": 5000,
-              "etudes": 5000
+              "etudes": 5000,
+              "manutention": 3282.78
             },
             "base_budget_equipements_usd": 450000,
             "conversion": null
@@ -1063,7 +1271,7 @@
             "capacite": 500,
             "unite": "kg/h",
             "machines": 450000,
-            "investissement": 605000,
+            "investissement": 608282.78,
             "production": [
               450000,
               580000,
@@ -1081,9 +1289,9 @@
             ],
             "matieres_kg": 0.72,
             "cout_production_kg": [
-              1.2333333333333334,
-              1.2164655172413794,
-              1.2247154411764705
+              1.2335555555555555,
+              1.2166431034482759,
+              1.2248714558823528
             ],
             "personnel": 20700,
             "charges_fixes": 34800,
@@ -1182,20 +1390,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 3282.78,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Chariots alimentaires, bacs de transfert et transpalette pour sacs de matières et cartons finis.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "2 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 20 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 3282.78,
+                "duree_ans": 5
+              }
+            ],
             "photo": 1,
             "technique": {
               "formage": "Moulage rotatif",
@@ -1256,6 +1474,95 @@
             "production": "500 kg/h, 8 h/jour, 250 jours/an : capacité annuelle théorique 1 000 000 kg avant arrêts ; volumes et ventes indiqués sont des hypothèses de lancement spécifiques à la variante.",
             "prix_vente": "Hypothèse de prix départ UP hors taxes ; hausse 2 %/an. Les prix de détail repérés en Côte d’Ivoire sont des comparaisons, pas des prix fabricant garantis.",
             "complements": "Enveloppes P2I pour fret, douane, site, utilités, installation, formation et pièces ; hypothèses de simulation, non devis.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 2,
+                "chariot_inox": 2,
+                "bacs": 20,
+                "palettes": 20
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 611.14,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "chariot_inox",
+                  "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 503.76,
+                  "montant_usd": 1007.52,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Matériel Horeca",
+                    "modele": "Tournus GL886",
+                    "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                    "prix_unitaire": 447.81,
+                    "eco_participation_unitaire": 2.26,
+                    "devise": "EUR",
+                    "base": "HT, prix promotionnel publié, éco-participation ajoutée par prudence",
+                    "url": "https://www.materiel-horeca.com/fr/8653-chariot-de-service-3-plateaux-tournus-800x530mm-3660171095891.html",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Usage avec récipients fermés ; charge par plateau à confirmer. Ne remplace ni un chariot de four ni un équipement de levage."
+                  }
+                },
+                {
+                  "code": "bacs",
+                  "nom": "Bacs lavables avec couvercle, petit format",
+                  "quantite": 20,
+                  "prix_unitaire_usd": 12,
+                  "montant_usd": 240,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Bacs lavables avec couvercle, petit format",
+                    "prix_unitaire_usd": 12,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 20,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 500,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 2358.66,
+              "frais_estimes_usd": {
+                "fret": 353.8,
+                "assurance": 23.59,
+                "import_transit": 471.73,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 3282.78,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -1293,7 +1600,8 @@
               "installation_formation": 20000,
               "pieces_initiales": 10000,
               "securite_environnement": 5000,
-              "etudes": 5000
+              "etudes": 5000,
+              "manutention": 3282.78
             },
             "base_budget_equipements_usd": 450000,
             "conversion": null
@@ -1312,7 +1620,7 @@
             "capacite": 500,
             "unite": "kg/h",
             "machines": 450000,
-            "investissement": 605000,
+            "investissement": 608282.78,
             "production": [
               500000,
               620000,
@@ -1330,9 +1638,9 @@
             ],
             "matieres_kg": 0.65,
             "cout_production_kg": [
-              1.1300000000000001,
-              1.1200419354838709,
-              1.1275009444444444
+              1.1302,
+              1.120208064516129,
+              1.1276482916666666
             ],
             "personnel": 20700,
             "charges_fixes": 34800,
@@ -1431,20 +1739,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 3282.78,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Chariots alimentaires, bacs de transfert et transpalette pour sacs de matières et cartons finis.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "2 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 20 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 3282.78,
+                "duree_ans": 5
+              }
+            ],
             "photo": 2,
             "technique": {
               "formage": "Abaisse, calibrage et découpe rotative",
@@ -1505,6 +1823,95 @@
             "production": "500 kg/h, 8 h/jour, 250 jours/an : capacité annuelle théorique 1 000 000 kg avant arrêts ; volumes et ventes indiqués sont des hypothèses de lancement spécifiques à la variante.",
             "prix_vente": "Hypothèse de prix départ UP hors taxes ; hausse 2 %/an. Les prix de détail repérés en Côte d’Ivoire sont des comparaisons, pas des prix fabricant garantis.",
             "complements": "Enveloppes P2I pour fret, douane, site, utilités, installation, formation et pièces ; hypothèses de simulation, non devis.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 2,
+                "chariot_inox": 2,
+                "bacs": 20,
+                "palettes": 20
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 611.14,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "chariot_inox",
+                  "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 503.76,
+                  "montant_usd": 1007.52,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Matériel Horeca",
+                    "modele": "Tournus GL886",
+                    "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                    "prix_unitaire": 447.81,
+                    "eco_participation_unitaire": 2.26,
+                    "devise": "EUR",
+                    "base": "HT, prix promotionnel publié, éco-participation ajoutée par prudence",
+                    "url": "https://www.materiel-horeca.com/fr/8653-chariot-de-service-3-plateaux-tournus-800x530mm-3660171095891.html",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Usage avec récipients fermés ; charge par plateau à confirmer. Ne remplace ni un chariot de four ni un équipement de levage."
+                  }
+                },
+                {
+                  "code": "bacs",
+                  "nom": "Bacs lavables avec couvercle, petit format",
+                  "quantite": 20,
+                  "prix_unitaire_usd": 12,
+                  "montant_usd": 240,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Bacs lavables avec couvercle, petit format",
+                    "prix_unitaire_usd": 12,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 20,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 500,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 2358.66,
+              "frais_estimes_usd": {
+                "fret": 353.8,
+                "assurance": 23.59,
+                "import_transit": 471.73,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 3282.78,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -1542,7 +1949,8 @@
               "installation_formation": 20000,
               "pieces_initiales": 10000,
               "securite_environnement": 5000,
-              "etudes": 5000
+              "etudes": 5000,
+              "manutention": 3282.78
             },
             "base_budget_equipements_usd": 450000,
             "conversion": null
@@ -1834,8 +2242,11 @@
         ],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -1981,20 +2392,35 @@
                 {
                   "id": "chariots_et_refroidissement",
                   "categorie": "Manutention et auxiliaires mutualisés",
-                  "libelle": "Chariots et refroidissement",
-                  "montant_usd": 4000,
-                  "qualification": "Estimation P2I, non prix catalogue"
+                  "libelle": "Chariots de four et refroidissement — solde estimatif",
+                  "montant_usd": 3169.42,
+                  "qualification": "Solde réaffecté de l’enveloppe P2I initiale, non devis"
+                },
+                {
+                  "id": "manutention",
+                  "categorie": "Manutention",
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 830.58,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Chariots à grilles et de refroidissement ; transfert des sacs et des cartons.",
-                "postes_budget_mutualise": [
-                  "chariots_et_refroidissement"
+                "postes_budget_mutualise": [],
+                "postes_budget_dedie": [
+                  "manutention"
                 ],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention individualisé à l’intérieur de l’enveloppe auxiliaire existante, dont le solde reste une estimation P2I ; aucun nouvel achat ajouté en double, entretien déjà compris.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 830.58,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 15
           },
           "economique_herite_up": true,
@@ -2147,6 +2573,62 @@
             "personnel": "Personnel et charges simulés, incluant la manutention et le conditionnement manuel.",
             "prix_vente": "2,40 USD/kg départ UP en A1, +2 %/an : hypothèse, à distinguer des prix de détail et de la baguette réglementée.",
             "complements": "Transport, installation, chariots et équipements auxiliaires sont des enveloppes estimées P2I ; vérifier compatibilité chariot, brûleur et cycles.",
+            "manutention": "Panier de manutention individualisé à l’intérieur de l’enveloppe auxiliaire existante, dont le solde reste une estimation P2I ; aucun nouvel achat ajouté en double, entretien déjà compris.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "palettes": 10
+              },
+              "mode": "reaffectation_enveloppe",
+              "enveloppe_existante": "chariots_et_refroidissement",
+              "libelle_solde": "Chariots de four et refroidissement — solde estimatif",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 555.57,
+              "frais_estimes_usd": {
+                "fret": 83.34,
+                "assurance": 5.56,
+                "import_transit": 111.11,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 830.58,
+              "entretien_supplementaire_usd_an": 0,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [],
             "sources_techniques_produit": [],
@@ -2180,7 +2662,8 @@
               "pieces_initiales": 1800,
               "securite_environnement": 1800,
               "etudes": 2000,
-              "chariots_et_refroidissement": 4000
+              "chariots_et_refroidissement": 3169.42,
+              "manutention": 830.58
             },
             "base_budget_equipements_usd": 45511.857299999996,
             "conversion": {
@@ -2426,8 +2909,11 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "format": "Bouteille PET refermable 500 ml",
@@ -2460,7 +2946,7 @@
             "capacite": 500,
             "unite": "kg/h",
             "machines": 97009.64750699999,
-            "investissement": 144109.647507,
+            "investissement": 146636.84750699997,
             "production": [
               300000,
               390000,
@@ -2478,9 +2964,9 @@
             ],
             "matieres_kg": 0.5833333333333334,
             "cout_production_kg": [
-              1.1719333333333335,
-              1.1812779487179488,
-              1.2048994933333335
+              1.1722666666666668,
+              1.1815420512820514,
+              1.205135248888889
             ],
             "personnel": 9660,
             "charges_fixes": 20400,
@@ -2579,20 +3065,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 2527.2,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Caisses de fruits, chariots de transfert et transpalette pour les palettes de bouteilles.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
-            }
+            },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 2527.2,
+                "duree_ans": 5
+              }
+            ]
           },
           "economique_herite_up": true,
           "economique": {
@@ -2829,6 +3325,95 @@
             "complements": "Configuration indicative composée de machines tarifées séparément : laveuse, deux éplucheuses, broyeur, extracteur, cuves, pasteurisateur, rinceuse, remplisseuse de bouteilles, boucheuse et étiqueteuse. Pas de poste de remplissage en poches. Prix publics et fourchettes, quantités et frais complémentaires estimés ; interfaces, matériels auxiliaires, installation et conditions de transport restent à confirmer.",
             "preparation_ananas": "Hypothèse de 1,5 kg par fruit issue d’un repère de culture en Côte d’Ivoire (CIRAD), à mesurer à réception. Deux éplucheuses de 300 fruits/h donnent 600 fruits/h théoriques, soit 900 kg/h avant arrêts à cette masse moyenne. Cadences réelles, rendement matière et adaptation des machines à l’ananas restent à confirmer. Rendement global du jus de 60 % non mesuré.",
             "utilites": "Le pasteurisateur proposé utilise 30 kW triphasés ; la boucheuse nécessite de l’air comprimé. Puissance cumulée, compresseur, eau, charges et raccordements restent à dimensionner. Le poste courant de process de 0,08 USD/kg est une hypothèse globale, non un calcul fondé sur des mesures de consommation.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "chariot_inox": 2,
+                "bacs": 20,
+                "palettes": 10
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "chariot_inox",
+                  "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 503.76,
+                  "montant_usd": 1007.52,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Matériel Horeca",
+                    "modele": "Tournus GL886",
+                    "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                    "prix_unitaire": 447.81,
+                    "eco_participation_unitaire": 2.26,
+                    "devise": "EUR",
+                    "base": "HT, prix promotionnel publié, éco-participation ajoutée par prudence",
+                    "url": "https://www.materiel-horeca.com/fr/8653-chariot-de-service-3-plateaux-tournus-800x530mm-3660171095891.html",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Usage avec récipients fermés ; charge par plateau à confirmer. Ne remplace ni un chariot de four ni un équipement de levage."
+                  }
+                },
+                {
+                  "code": "bacs",
+                  "nom": "Bacs lavables avec couvercle, petit format",
+                  "quantite": 20,
+                  "prix_unitaire_usd": 12,
+                  "montant_usd": 240,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Bacs lavables avec couvercle, petit format",
+                    "prix_unitaire_usd": 12,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 1803.09,
+              "frais_estimes_usd": {
+                "fret": 270.46,
+                "assurance": 18.03,
+                "import_transit": 360.62,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 2527.2,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -2874,7 +3459,8 @@
               "installation_formation": 5000,
               "pieces_initiales": 2800,
               "securite_environnement": 1800,
-              "etudes": 3000
+              "etudes": 3000,
+              "manutention": 2527.2
             },
             "base_budget_equipements_usd": 97009.64750699999,
             "conversion": null
@@ -3124,8 +3710,11 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -3150,7 +3739,7 @@
             "capacite": 515,
             "unite": "kg/h",
             "machines": 107340.87,
-            "investissement": 184040.87,
+            "investissement": 186404.87,
             "production": [
               450000,
               600000,
@@ -3168,9 +3757,9 @@
             ],
             "matieres_kg": 0.65,
             "cout_production_kg": [
-              1.0233333333333334,
-              1.03,
-              1.050291
+              1.0235555555555556,
+              1.0301716666666667,
+              1.050442557142857
             ],
             "personnel": 9660,
             "charges_fixes": 24000,
@@ -3276,20 +3865,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 2364,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Chariots lavables et transpalette adaptés aux flux de la zone froide.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 10 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 2364,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 1
           },
           "economique_herite_up": true,
@@ -3414,6 +4013,95 @@
             "prix_vente": "Prix sortie UP : 1,70 USD/kg en A1, +2 %/an ; hypothèse comparée à des prix au détail de lait pasteurisé à Abidjan, sans assimilation au prix producteur.",
             "conservation": "Le lait frais nécessite une chaîne du froid. Stock matières de 1 jour et ventes théoriquement immédiates ; pertes et durée de vie ne sont pas simulées.",
             "complements": "Enveloppes P2I d’import, installation, utilités et froid ; pas de devis.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "chariot_inox": 2,
+                "bacs": 10,
+                "palettes": 10
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "chariot_inox",
+                  "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 503.76,
+                  "montant_usd": 1007.52,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Matériel Horeca",
+                    "modele": "Tournus GL886",
+                    "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                    "prix_unitaire": 447.81,
+                    "eco_participation_unitaire": 2.26,
+                    "devise": "EUR",
+                    "base": "HT, prix promotionnel publié, éco-participation ajoutée par prudence",
+                    "url": "https://www.materiel-horeca.com/fr/8653-chariot-de-service-3-plateaux-tournus-800x530mm-3660171095891.html",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Usage avec récipients fermés ; charge par plateau à confirmer. Ne remplace ni un chariot de four ni un équipement de levage."
+                  }
+                },
+                {
+                  "code": "bacs",
+                  "nom": "Bacs lavables avec couvercle, petit format",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 12,
+                  "montant_usd": 120,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Bacs lavables avec couvercle, petit format",
+                    "prix_unitaire_usd": 12,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 1683.09,
+              "frais_estimes_usd": {
+                "fret": 252.46,
+                "assurance": 16.83,
+                "import_transit": 336.62,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 2364,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -3452,7 +4140,8 @@
               "pieces_initiales": 3000,
               "securite_environnement": 3000,
               "etudes": 3000,
-              "chaine_du_froid": 12000
+              "chaine_du_froid": 12000,
+              "manutention": 2364
             },
             "base_budget_equipements_usd": 107340.87,
             "conversion": {
@@ -3687,8 +4376,11 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -3713,7 +4405,7 @@
             "capacite": 70,
             "unite": "kg/h",
             "machines": 42000,
-            "investissement": 105800,
+            "investissement": 107383.72,
             "production": [
               70000,
               90000,
@@ -3731,9 +4423,9 @@
             ],
             "matieres_kg": 2.242647002776097,
             "cout_production_kg": [
-              3.2197898599189543,
-              3.234637523970491,
-              3.2780958416087977
+              3.2212184313475256,
+              3.2357819684149356,
+              3.279060296154252
             ],
             "personnel": 6000,
             "charges_fixes": 12000,
@@ -3839,20 +4531,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 1583.72,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Transfert des sacs de graines et des tourteaux ; manutention des bidons et fûts selon les formats retenus.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 1 × Diable pour fûts plastiques 120–220 L, 250 kg ; 10 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 1583.72,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 30
           },
           "economique_herite_up": true,
@@ -3978,6 +4680,114 @@
             "prix_vente": "4,50 USD/kg départ usine A1 puis +2 %/an, hypothèse P2I à confronter au prix producteur et aux débouchés ivoiriens ; un prix au détail de marque importée ne prouve pas un prix départ usine.",
             "complements": "Enveloppes P2I pour tri, préparation, conditionnement, transport, sécurité et installation ; pas de prix fournisseur pour les auxiliaires.",
             "qualite": "Arachides sélectionnées et stockées au sec ; contrôler les aflatoxines et les allergènes selon les prescriptions applicables ; conformité sanitaire à vérifier.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "diable_250": 1,
+                "diable_fut": 1,
+                "bacs": 10,
+                "palettes": 10
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "diable_250",
+                  "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 155.58,
+                  "montant_usd": 155.58,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "18.0658.01",
+                    "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                    "prix_unitaire": 139,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc semi-élastique",
+                    "url": "https://www.axess-industries.com/manutention/diable-de-manutention/professionnels/diable-a-dossier-legerement-incurve-p-180658",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Maintien et arrimage des charges à adapter ; pas un lève-fût ni un palettiseur."
+                  }
+                },
+                {
+                  "code": "diable_fut",
+                  "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 278.21,
+                  "montant_usd": 278.21,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "202.1638.01",
+                    "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+                    "prix_unitaire": 248.56,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc",
+                    "url": "https://www.axess-industries.com/manutention/de-futs/diables-a-futs/a-futs-plastiques-de-120-a-220-l-p-12021638",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Pour fûts plastiques de diamètre 500–590 mm ; masse pleine, forme, compatibilité avec le contenu et rétention à confirmer. Pas de dépalettisation mécanisée."
+                  }
+                },
+                {
+                  "code": "bacs",
+                  "nom": "Bacs lavables avec couvercle, petit format",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 12,
+                  "montant_usd": 120,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Bacs lavables avec couvercle, petit format",
+                    "prix_unitaire_usd": 12,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 1109.36,
+              "frais_estimes_usd": {
+                "fret": 166.4,
+                "assurance": 11.09,
+                "import_transit": 221.87,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 1583.72,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -4020,7 +4830,8 @@
               "pieces_initiales": 2000,
               "securite_environnement": 2500,
               "etudes": 2500,
-              "tri_preparation_conditionnement": 15000
+              "tri_preparation_conditionnement": 15000,
+              "manutention": 1583.72
             },
             "base_budget_equipements_usd": 42000,
             "conversion": null
@@ -4296,8 +5107,11 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -4322,7 +5136,7 @@
             "capacite": 5,
             "unite": "kg/h",
             "machines": 5227.130999999999,
-            "investissement": 47327.131,
+            "investissement": 48836.021,
             "production": [
               5000,
               6500,
@@ -4340,9 +5154,9 @@
             ],
             "matieres_kg": 6.825447399753338,
             "cout_production_kg": [
-              10.325447399753337,
-              10.231133898669015,
-              10.277943396398316
+              10.345447399753338,
+              10.24698005251517,
+              10.291204646398315
             ],
             "personnel": 3600,
             "charges_fixes": 5000,
@@ -4448,20 +5262,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 1508.89,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Bacs fermés et petits chariots ; transpalette selon les volumes de sacs et de cartons.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Chariot inox à trois plateaux 800 × 530 mm ; 10 × Bacs lavables avec couvercle, petit format ; 5 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 1508.89,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 7
           },
           "economique_herite_up": true,
@@ -4583,6 +5407,95 @@
             "personnel": "Personnel de production, conditionnement et administration estimé P2I.",
             "prix_vente": "20 USD/kg départ UP en A1, puis +2 %/an : hypothèse P2I, environ 586 FCFA par sachet de 50 g au taux P2I. À comparer avec 1 800 FCFA au détail pour un sachet de 50 g ; les prix et circuits diffèrent, sans garantie de commercialisation. La poudre en vrac est affichée à 2 500 FCFA/kg chez un autre vendeur.",
             "complements": "Doseuse/conditionnement manuel et accessoires sont des enveloppes P2I, distinctes de la ligne de quatre machines ; cycle de séchage, raccordement et hygiène à vérifier.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "chariot_inox": 1,
+                "bacs": 10,
+                "palettes": 5
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "chariot_inox",
+                  "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 503.76,
+                  "montant_usd": 503.76,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Matériel Horeca",
+                    "modele": "Tournus GL886",
+                    "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                    "prix_unitaire": 447.81,
+                    "eco_participation_unitaire": 2.26,
+                    "devise": "EUR",
+                    "base": "HT, prix promotionnel publié, éco-participation ajoutée par prudence",
+                    "url": "https://www.materiel-horeca.com/fr/8653-chariot-de-service-3-plateaux-tournus-800x530mm-3660171095891.html",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Usage avec récipients fermés ; charge par plateau à confirmer. Ne remplace ni un chariot de four ni un équipement de levage."
+                  }
+                },
+                {
+                  "code": "bacs",
+                  "nom": "Bacs lavables avec couvercle, petit format",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 12,
+                  "montant_usd": 120,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Bacs lavables avec couvercle, petit format",
+                    "prix_unitaire_usd": 12,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 5,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 125,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 1054.33,
+              "frais_estimes_usd": {
+                "fret": 158.15,
+                "assurance": 10.54,
+                "import_transit": 210.87,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 1508.89,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -4633,7 +5546,8 @@
               "pieces_initiales": 1800,
               "securite_environnement": 1800,
               "etudes": 2000,
-              "dosage_et_scellage_manuel": 2500
+              "dosage_et_scellage_manuel": 2500,
+              "manutention": 1508.89
             },
             "base_budget_equipements_usd": 5227.130999999999,
             "conversion": {
@@ -4896,8 +5810,11 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -4922,7 +5839,7 @@
             "capacite": 500,
             "unite": "kg/h",
             "machines": 32000,
-            "investissement": 62000,
+            "investissement": 63253.759999999995,
             "production": [
               450000,
               600000,
@@ -4940,9 +5857,9 @@
             ],
             "matieres_kg": 0.3225,
             "cout_production_kg": [
-              0.39030000000000004,
-              0.39150300000000005,
-              0.3986104414285715
+              0.39052222222222227,
+              0.3916746666666667,
+              0.39876199857142863
             ],
             "personnel": 8280,
             "charges_fixes": 9600,
@@ -5048,20 +5965,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 1253.76,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Transpalette et moyens de transfert des sacs ; aide au levage selon poids des sacs et hauteur de stockage.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 2 × Diable pour sacs, caisses et seaux, 250 kg ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
-            }
+            },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 1253.76,
+                "duree_ans": 5
+              }
+            ]
           },
           "economique_herite_up": true,
           "economique": {
@@ -5186,6 +6113,80 @@
             "production": "Cadence de ligne calculée à 500 kg/h, en deçà de la gamme catalogue; 8 h × 250 jours × utilisation. Rendement net 1 kg/kg simplifié, sans pertes de procédé.",
             "prix_vente": "Hypothèse P2I 0,50 USD/kg A1 puis +2 %/an; pas un prix marché constaté.",
             "complements": "Enveloppes P2I explicites, pas prix catalogue ni devis; raccordements et ensachage manuel dimensionnés pour la petite ligne.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "diable_250": 2,
+                "palettes": 10
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "diable_250",
+                  "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 155.58,
+                  "montant_usd": 311.16,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "18.0658.01",
+                    "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                    "prix_unitaire": 139,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc semi-élastique",
+                    "url": "https://www.axess-industries.com/manutention/diable-de-manutention/professionnels/diable-a-dossier-legerement-incurve-p-180658",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Maintien et arrimage des charges à adapter ; pas un lève-fût ni un palettiseur."
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 866.73,
+              "frais_estimes_usd": {
+                "fret": 130.01,
+                "assurance": 8.67,
+                "import_transit": 173.35,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 1253.76,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [],
             "sources_techniques_produit": [],
@@ -5219,7 +6220,8 @@
               "pieces_initiales": 2000,
               "securite_environnement": 1500,
               "pesee_ensachage_manuel": 1500,
-              "etudes": 1000
+              "etudes": 1000,
+              "manutention": 1253.76
             },
             "base_budget_equipements_usd": 32000,
             "conversion": null
@@ -5425,8 +6427,11 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -5451,7 +6456,7 @@
             "capacite": 375,
             "unite": "kg/h",
             "machines": 32580,
-            "investissement": 105880,
+            "investissement": 107300.52,
             "production": [
               450000,
               525000,
@@ -5469,9 +6474,9 @@
             ],
             "matieres_kg": 0.277,
             "cout_production_kg": [
-              0.7114444444444443,
-              0.7115338095238094,
-              0.7164611333333333
+              0.7116666666666667,
+              0.71173,
+              0.71663795
             ],
             "personnel": 12000,
             "charges_fixes": 30000,
@@ -5570,20 +6575,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 1420.52,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Transpalette, chariots de bidons et aide à la manutention des fûts selon leur masse.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 1 × Diable pour fûts plastiques 120–220 L, 250 kg ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 1420.52,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 30
           },
           "economique_herite_up": true,
@@ -5701,6 +6716,100 @@
             "prix_vente": "Hypothèses départ UP par kg en A1 : vaisselle 0,95 USD, sols 1,00 USD, savon mains 1,10 USD ; +2 %/an. Moyenne pondérée du mix 60/25/15 ; prix de détail ne sont pas des prix producteur.",
             "complements": "Transport, utilités, installation, pièces, sécurité et contrôle sont des enveloppes P2I. Ne pas recompter les fonctions et machines déjà incluses dans la ligne.",
             "qualite": "Compatibilité des recettes, nettoyage entre lots, stabilité et étiquetage à établir. Gamme ménagère sans allégation biocide ; produits d’hygiène professionnelle traités dans une UP distincte.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "diable_250": 1,
+                "diable_fut": 1,
+                "palettes": 10
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "diable_250",
+                  "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 155.58,
+                  "montant_usd": 155.58,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "18.0658.01",
+                    "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                    "prix_unitaire": 139,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc semi-élastique",
+                    "url": "https://www.axess-industries.com/manutention/diable-de-manutention/professionnels/diable-a-dossier-legerement-incurve-p-180658",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Maintien et arrimage des charges à adapter ; pas un lève-fût ni un palettiseur."
+                  }
+                },
+                {
+                  "code": "diable_fut",
+                  "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 278.21,
+                  "montant_usd": 278.21,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "202.1638.01",
+                    "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+                    "prix_unitaire": 248.56,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc",
+                    "url": "https://www.axess-industries.com/manutention/de-futs/diables-a-futs/a-futs-plastiques-de-120-a-220-l-p-12021638",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Pour fûts plastiques de diamètre 500–590 mm ; masse pleine, forme, compatibilité avec le contenu et rétention à confirmer. Pas de dépalettisation mécanisée."
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 989.36,
+              "frais_estimes_usd": {
+                "fret": 148.4,
+                "assurance": 9.89,
+                "import_transit": 197.87,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 1420.52,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": [
               {
                 "id": "vaisselle",
@@ -5767,7 +6876,8 @@
               "installation_formation": 7000,
               "pieces_initiales": 3000,
               "securite_environnement": 5000,
-              "etudes_controle": 5000
+              "etudes_controle": 5000,
+              "manutention": 1420.52
             },
             "base_budget_equipements_usd": 32580,
             "conversion": null
@@ -5974,8 +7084,11 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -6000,7 +7113,7 @@
             "capacite": 100,
             "unite": "kg/h",
             "machines": 20000,
-            "investissement": 48100,
+            "investissement": 50464,
             "production": [
               100000,
               140000,
@@ -6018,9 +7131,9 @@
             ],
             "matieres_kg": 0.65,
             "cout_production_kg": [
-              0.99,
-              0.9667285714285715,
-              0.9716595882352941
+              0.9910000000000001,
+              0.9674642857142858,
+              0.9722836470588235
             ],
             "personnel": 4500,
             "charges_fixes": 9500,
@@ -6126,20 +7239,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 2364,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Chariots de séchage et de transfert ; manutention adaptée aux fûts et aux palettes de savon.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 10 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 2364,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 30
           },
           "economique_herite_up": true,
@@ -6263,6 +7386,95 @@
             "prix_vente": "Prix départ UP 1,50 USD/kg en A1, +2 %/an, hypothèse P2I comparée à un prix de détail 300 FCFA pour 250 g, sans confondre vente producteur et détail.",
             "complements": "Enveloppes estimées P2I pour transport, stockage, installation, sécurité et emballage manuel ; pas de devis. Ne pas ajouter une deuxième ligne de finition.",
             "qualite": "La ligne traite une base de savon achetée sous forme de copeaux ; elle ne comprend pas la fabrication de base par saponification. Mélangeur, deux convoyeurs, broyeur, extrudeuse, table, coupe-fil et estampeuse listés par le fournisseur ; emballage manuel à part.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "chariot_inox": 2,
+                "bacs": 10,
+                "palettes": 10
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "chariot_inox",
+                  "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 503.76,
+                  "montant_usd": 1007.52,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Matériel Horeca",
+                    "modele": "Tournus GL886",
+                    "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                    "prix_unitaire": 447.81,
+                    "eco_participation_unitaire": 2.26,
+                    "devise": "EUR",
+                    "base": "HT, prix promotionnel publié, éco-participation ajoutée par prudence",
+                    "url": "https://www.materiel-horeca.com/fr/8653-chariot-de-service-3-plateaux-tournus-800x530mm-3660171095891.html",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Usage avec récipients fermés ; charge par plateau à confirmer. Ne remplace ni un chariot de four ni un équipement de levage."
+                  }
+                },
+                {
+                  "code": "bacs",
+                  "nom": "Bacs lavables avec couvercle, petit format",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 12,
+                  "montant_usd": 120,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Bacs lavables avec couvercle, petit format",
+                    "prix_unitaire_usd": 12,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 1683.09,
+              "frais_estimes_usd": {
+                "fret": 252.46,
+                "assurance": 16.83,
+                "import_transit": 336.62,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 2364,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -6301,7 +7513,8 @@
               "pieces_initiales": 1200,
               "securite_environnement": 2000,
               "etudes": 1500,
-              "stockage_et_manuel": 2500
+              "stockage_et_manuel": 2500,
+              "manutention": 2364
             },
             "base_budget_equipements_usd": 20000,
             "conversion": null
@@ -6508,8 +7721,11 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -6534,7 +7750,7 @@
             "capacite": 187.5,
             "unite": "kg/h",
             "machines": 49550,
-            "investissement": 109850,
+            "investissement": 112429.17,
             "production": [
               150000,
               200000,
@@ -6552,9 +7768,9 @@
             ],
             "matieres_kg": 1.2,
             "cout_production_kg": [
-              2.566666666666667,
-              2.5492500000000007,
-              2.5673779999999997
+              2.5673333333333335,
+              2.5497650000000003,
+              2.56780236
             ],
             "personnel": 12000,
             "charges_fixes": 30000,
@@ -6653,20 +7869,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 2579.17,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Chariots nettoyables, aide au déplacement des fûts et transpalette pour les palettes de flacons.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 1 × Diable pour fûts plastiques 120–220 L, 250 kg ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 2579.17,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 30
           },
           "economique_herite_up": true,
@@ -6784,6 +8010,101 @@
             "prix_vente": "5 USD/kg départ UP en A1 puis +2 %/an, hypothèse P2I, à rapprocher des prix de détail selon formule et circuits, sans les assimiler.",
             "complements": "Enveloppes P2I pour importation, installation, contrôle, sécurité et utilités ; machine de conditionnement incluse une seule fois dans la ligne.",
             "qualite": "Formule, innocuité, stabilité, conservation, étiquetage et conditions réglementaires à vérifier ; ne pas présenter de certification ou de teneur en karité non établie.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "chariot_inox": 2,
+                "diable_fut": 1,
+                "palettes": 10
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "chariot_inox",
+                  "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 503.76,
+                  "montant_usd": 1007.52,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Matériel Horeca",
+                    "modele": "Tournus GL886",
+                    "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                    "prix_unitaire": 447.81,
+                    "eco_participation_unitaire": 2.26,
+                    "devise": "EUR",
+                    "base": "HT, prix promotionnel publié, éco-participation ajoutée par prudence",
+                    "url": "https://www.materiel-horeca.com/fr/8653-chariot-de-service-3-plateaux-tournus-800x530mm-3660171095891.html",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Usage avec récipients fermés ; charge par plateau à confirmer. Ne remplace ni un chariot de four ni un équipement de levage."
+                  }
+                },
+                {
+                  "code": "diable_fut",
+                  "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 278.21,
+                  "montant_usd": 278.21,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "202.1638.01",
+                    "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+                    "prix_unitaire": 248.56,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc",
+                    "url": "https://www.axess-industries.com/manutention/de-futs/diables-a-futs/a-futs-plastiques-de-120-a-220-l-p-12021638",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Pour fûts plastiques de diamètre 500–590 mm ; masse pleine, forme, compatibilité avec le contenu et rétention à confirmer. Pas de dépalettisation mécanisée."
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 1841.3,
+              "frais_estimes_usd": {
+                "fret": 276.2,
+                "assurance": 18.41,
+                "import_transit": 368.26,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 2579.17,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -6821,7 +8142,8 @@
               "installation_formation": 6000,
               "pieces_initiales": 2500,
               "securite_environnement": 3000,
-              "etudes_et_controle": 5000
+              "etudes_et_controle": 5000,
+              "manutention": 2579.17
             },
             "base_budget_equipements_usd": 49550,
             "conversion": null
@@ -7028,8 +8350,11 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -7054,7 +8379,7 @@
             "capacite": 500,
             "unite": "kg/h",
             "machines": 80000,
-            "investissement": 146800,
+            "investissement": 148220.52000000002,
             "production": [
               500000,
               650000,
@@ -7072,9 +8397,9 @@
             ],
             "matieres_kg": 1.1,
             "cout_production_kg": [
-              1.6,
-              1.6004615384615386,
-              1.6178725
+              1.6002,
+              1.6006200000000002,
+              1.6180051125000001
             ],
             "personnel": 18000,
             "charges_fixes": 45000,
@@ -7180,20 +8505,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 1420.52,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Transpalette et dispositifs adaptés aux fûts et seaux fermés ; compatibilité avec le zonage de sécurité à vérifier.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 1 × Diable pour fûts plastiques 120–220 L, 250 kg ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 1420.52,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 30
           },
           "economique_herite_up": true,
@@ -7313,6 +8648,100 @@
             "prix_vente": "2,80 USD/kg départ usine année 1 puis +2 %/an : hypothèse P2I ; comparaison prudente à des produits anticorrosion au détail dont la formule et le circuit diffèrent.",
             "complements": "Transport, installation, utilités, contrôle, sécurité et auxiliaires non listés sont des enveloppes estimatives P2I. Remplissage et fermeture sont annoncés dans la ligne et ne sont pas ajoutés une seconde fois. Budget auxiliaires 5 000 USD pour matériel périphérique non inclus à vérifier.",
             "qualite": "Compatibilité de la ligne avec une formulation anticorrosion aqueuse, stabilité, adhérence, séchage et performance doivent être testés ; aucune certification présumée.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "diable_250": 1,
+                "diable_fut": 1,
+                "palettes": 10
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "diable_250",
+                  "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 155.58,
+                  "montant_usd": 155.58,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "18.0658.01",
+                    "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                    "prix_unitaire": 139,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc semi-élastique",
+                    "url": "https://www.axess-industries.com/manutention/diable-de-manutention/professionnels/diable-a-dossier-legerement-incurve-p-180658",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Maintien et arrimage des charges à adapter ; pas un lève-fût ni un palettiseur."
+                  }
+                },
+                {
+                  "code": "diable_fut",
+                  "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 278.21,
+                  "montant_usd": 278.21,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "202.1638.01",
+                    "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+                    "prix_unitaire": 248.56,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc",
+                    "url": "https://www.axess-industries.com/manutention/de-futs/diables-a-futs/a-futs-plastiques-de-120-a-220-l-p-12021638",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Pour fûts plastiques de diamètre 500–590 mm ; masse pleine, forme, compatibilité avec le contenu et rétention à confirmer. Pas de dépalettisation mécanisée."
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 989.36,
+              "frais_estimes_usd": {
+                "fret": 148.4,
+                "assurance": 9.89,
+                "import_transit": 197.87,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 1420.52,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -7351,7 +8780,8 @@
               "pieces_initiales": 2500,
               "securite_environnement": 6000,
               "etudes_controle": 5000,
-              "auxiliaires_conditionnement": 5000
+              "auxiliaires_conditionnement": 5000,
+              "manutention": 1420.52
             },
             "base_budget_equipements_usd": 80000,
             "conversion": null
@@ -7572,8 +9002,11 @@
         ],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -7726,20 +9159,35 @@
                 {
                   "id": "pompe_flexibles_balance_manutention",
                   "categorie": "Manutention et auxiliaires mutualisés",
-                  "libelle": "Pompe, flexibles, balance et manutention",
-                  "montant_usd": 10000,
-                  "qualification": "Estimation P2I, non prix catalogue"
+                  "libelle": "Pompe, flexibles et balance — solde estimatif",
+                  "montant_usd": 8579.48,
+                  "qualification": "Solde réaffecté de l’enveloppe P2I initiale, non devis"
+                },
+                {
+                  "id": "manutention",
+                  "categorie": "Manutention",
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 1420.52,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Transpalette, chariots pour seaux de 5 kg et aide au déplacement des fûts de dispersion achetée.",
-                "postes_budget_mutualise": [
-                  "pompe_flexibles_balance_manutention"
+                "postes_budget_mutualise": [],
+                "postes_budget_dedie": [
+                  "manutention"
                 ],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention individualisé à l’intérieur de l’enveloppe auxiliaire existante, dont le solde reste une estimation P2I ; aucun nouvel achat ajouté en double, entretien déjà compris.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 1 × Diable pour fûts plastiques 120–220 L, 250 kg ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 1420.52,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 30
           },
           "economique_herite_up": true,
@@ -7914,6 +9362,102 @@
             "prix_vente": "2,20 USD/kg départ atelier A1, soit 11 USD par seau de 5 kg ; +2 %/an. Hypothèse de simulation, comparée aux prix de détail ivoiriens de colles à bois dont qualité et circuit diffèrent ; aucun débouché acquis.",
             "complements": "Enveloppes P2I pour logistique, site, utilités, installation, pièces, sécurité, essais et laboratoire. Pompe, raccords, balance et manutention ne sont pas des prix catalogue vérifiés. Agitateur dans la cuve, remplisseuse comptée une seule fois ; fermeture et étiquetage manuels.",
             "qualite": "Définir formulation et fiche de sécurité, maîtriser conservateurs, exposition et effluents. Évaluer adhérence, viscosité, temps ouvert, stabilité et résistance selon l’usage ; aucune classe EN 204, usage structurel, contact alimentaire, naturalité ou certification acquis.",
+            "manutention": "Panier de manutention individualisé à l’intérieur de l’enveloppe auxiliaire existante, dont le solde reste une estimation P2I ; aucun nouvel achat ajouté en double, entretien déjà compris.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "diable_250": 1,
+                "diable_fut": 1,
+                "palettes": 10
+              },
+              "mode": "reaffectation_enveloppe",
+              "enveloppe_existante": "pompe_flexibles_balance_manutention",
+              "libelle_solde": "Pompe, flexibles et balance — solde estimatif",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "diable_250",
+                  "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 155.58,
+                  "montant_usd": 155.58,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "18.0658.01",
+                    "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                    "prix_unitaire": 139,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc semi-élastique",
+                    "url": "https://www.axess-industries.com/manutention/diable-de-manutention/professionnels/diable-a-dossier-legerement-incurve-p-180658",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Maintien et arrimage des charges à adapter ; pas un lève-fût ni un palettiseur."
+                  }
+                },
+                {
+                  "code": "diable_fut",
+                  "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 278.21,
+                  "montant_usd": 278.21,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "202.1638.01",
+                    "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+                    "prix_unitaire": 248.56,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc",
+                    "url": "https://www.axess-industries.com/manutention/de-futs/diables-a-futs/a-futs-plastiques-de-120-a-220-l-p-12021638",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Pour fûts plastiques de diamètre 500–590 mm ; masse pleine, forme, compatibilité avec le contenu et rétention à confirmer. Pas de dépalettisation mécanisée."
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 989.36,
+              "frais_estimes_usd": {
+                "fret": 148.4,
+                "assurance": 9.89,
+                "import_transit": 197.87,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 1420.52,
+              "entretien_supplementaire_usd_an": 0,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -7991,7 +9535,8 @@
               "securite_environnement": 6000,
               "etudes_essais": 8000,
               "laboratoire": 6000,
-              "pompe_flexibles_balance_manutention": 10000
+              "pompe_flexibles_balance_manutention": 8579.48,
+              "manutention": 1420.52
             },
             "base_budget_equipements_usd": 21250,
             "conversion": null
@@ -8192,8 +9737,11 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -8218,7 +9766,7 @@
             "capacite": 1100,
             "unite": "kg/h",
             "machines": 53186,
-            "investissement": 112486,
+            "investissement": 113739.76000000001,
             "production": [
               440000,
               550000,
@@ -8236,9 +9784,9 @@
             ],
             "matieres_kg": 1.1,
             "cout_production_kg": [
-              1.6204545454545456,
-              1.6339545454545457,
-              1.6588618181818182
+              1.6206818181818183,
+              1.6341418181818184,
+              1.6590225606060607
             ],
             "personnel": 18000,
             "charges_fixes": 35000,
@@ -8330,20 +9878,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 1253.76,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Transpalette et transfert des sacs ; aide au levage et captage des poussières selon les charges.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 2 × Diable pour sacs, caisses et seaux, 250 kg ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 1253.76,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 30
           },
           "economique_herite_up": true,
@@ -8458,6 +10016,80 @@
             "prix_vente": "2,40 USD/kg départ usine A1 puis +2 %/an ; hypothèse P2I, non prix producteur observé. Le comparateur ivoirien concerne un autre produit vendu au détail.",
             "complements": "Enveloppes P2I indicatives ; pièces et assistance signalées dans le cas fournisseur sans être comptées deux fois. Incoterm inconnu ; frais livrés estimés séparément.",
             "qualite": "Teneurs NPK, compatibilité des intrants et réglementation de mise en marché à vérifier ; pas de pesticides ni d’homologation supposée.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "diable_250": 2,
+                "palettes": 10
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "diable_250",
+                  "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 155.58,
+                  "montant_usd": 311.16,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "18.0658.01",
+                    "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                    "prix_unitaire": 139,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc semi-élastique",
+                    "url": "https://www.axess-industries.com/manutention/diable-de-manutention/professionnels/diable-a-dossier-legerement-incurve-p-180658",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Maintien et arrimage des charges à adapter ; pas un lève-fût ni un palettiseur."
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 866.73,
+              "frais_estimes_usd": {
+                "fret": 130.01,
+                "assurance": 8.67,
+                "import_transit": 173.35,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 1253.76,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -8494,7 +10126,8 @@
               "utilites": 12000,
               "installation_formation": 6000,
               "securite_environnement": 6000,
-              "etudes_controle": 5000
+              "etudes_controle": 5000,
+              "manutention": 1253.76
             },
             "base_budget_equipements_usd": 53186,
             "conversion": null
@@ -8702,8 +10335,11 @@
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -8728,7 +10364,7 @@
             "capacite": 375,
             "unite": "kg/h",
             "machines": 18440,
-            "investissement": 92440,
+            "investissement": 93860.52,
             "production": [
               120000,
               150000,
@@ -8746,9 +10382,9 @@
             ],
             "matieres_kg": 1.1,
             "cout_production_kg": [
-              1.8783333333333334,
-              1.8402666666666667,
-              1.8306418888888891
+              1.8791666666666669,
+              1.8409533333333334,
+              1.831231277777778
             ],
             "personnel": 15000,
             "charges_fixes": 25000,
@@ -8854,20 +10490,30 @@
                   "qualification": "Estimation P2I, non prix catalogue"
                 },
                 {
-                  "id": "manutention_a_chiffrer",
-                  "libelle": "Matériel de manutention",
+                  "id": "manutention",
                   "categorie": "Manutention",
-                  "montant_usd": null,
-                  "qualification": "À chiffrer ; non compris dans le total présenté"
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 1420.52,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Transpalette et chariots pour bidons ; manutention adaptée aux fûts, à la rétention et à la séparation des produits incompatibles.",
                 "postes_budget_mutualise": [],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "postes_budget_dedie": [
+                  "manutention"
+                ],
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+                "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 1 × Diable pour fûts plastiques 120–220 L, 250 kg ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 1420.52,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 30
           },
           "economique_herite_up": true,
@@ -9072,6 +10718,100 @@
             "prix_vente": "2,80 USD/kg A1, soit 14 USD par bidon de 5 L à densité supposée 1 ; +2 %/an. Hypothèse départ usine, non prix ivoirien observé. Comparateur de détail importé à chimie et performances différentes : aucun coefficient de conversion automatique.",
             "complements": "Enveloppes P2I pour logistique, site, raccordements, installation, stock de pièces, sécurité, essais de formulation et petit laboratoire. Osmoseur, compresseur, cuves, doseuse, boucheuse et étiqueteuse déjà dans la ligne : pas de double compte.",
             "qualite": "Objectifs : formulation aqueuse non chlorée, limitation des ingrédients irritants/corrosifs, matières tracées, transfert limitant les contacts, contrôle des lots. Origine naturelle, sécurité du mélange et efficacité sont vérifiées séparément. NF EN 14885 oriente le choix des essais ; EN 13697 constitue un exemple selon usage. Aucun label, caractère non corrosif, efficacité désinfectante ou innocuité acquis.",
+            "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 1,
+                "diable_250": 1,
+                "diable_fut": 1,
+                "palettes": 10
+              },
+              "mode": "budget_ajoute",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 305.57,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                },
+                {
+                  "code": "diable_250",
+                  "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 155.58,
+                  "montant_usd": 155.58,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "18.0658.01",
+                    "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+                    "prix_unitaire": 139,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc semi-élastique",
+                    "url": "https://www.axess-industries.com/manutention/diable-de-manutention/professionnels/diable-a-dossier-legerement-incurve-p-180658",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Maintien et arrimage des charges à adapter ; pas un lève-fût ni un palettiseur."
+                  }
+                },
+                {
+                  "code": "diable_fut",
+                  "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+                  "quantite": 1,
+                  "prix_unitaire_usd": 278.21,
+                  "montant_usd": 278.21,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "202.1638.01",
+                    "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+                    "prix_unitaire": 248.56,
+                    "devise": "EUR",
+                    "base": "HT, roues caoutchouc",
+                    "url": "https://www.axess-industries.com/manutention/de-futs/diables-a-futs/a-futs-plastiques-de-120-a-220-l-p-12021638",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Pour fûts plastiques de diamètre 500–590 mm ; masse pleine, forme, compatibilité avec le contenu et rétention à confirmer. Pas de dépalettisation mécanisée."
+                  }
+                },
+                {
+                  "code": "palettes",
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "quantite": 10,
+                  "prix_unitaire_usd": 25,
+                  "montant_usd": 250,
+                  "qualification": "Estimation P2I",
+                  "source": {
+                    "nom": "Palettes de stockage pour marchandises emballées",
+                    "prix_unitaire_usd": 25,
+                    "qualification": "Hypothèse P2I, non prix catalogue"
+                  }
+                }
+              ],
+              "base_achat_usd": 989.36,
+              "frais_estimes_usd": {
+                "fret": 148.4,
+                "assurance": 9.89,
+                "import_transit": 197.87,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 1420.52,
+              "entretien_supplementaire_usd_an": 100,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -9157,7 +10897,8 @@
               "pieces_initiales": 2000,
               "securite_environnement": 7000,
               "etudes_essais_formulation": 10000,
-              "laboratoire_dosage": 8000
+              "laboratoire_dosage": 8000,
+              "manutention": 1420.52
             },
             "base_budget_equipements_usd": 18440,
             "conversion": null
@@ -9400,8 +11141,11 @@
         ],
         "postes_budget_dedie": [],
         "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
-        "statut": "a_chiffrer",
-        "montant_usd": null
+        "statut": "chiffree_dans_variantes",
+        "montant_usd": null,
+        "configurations_chiffrees": [
+          "reference"
+        ]
       },
       "emballage": {
         "statut": "a_documenter",
@@ -9561,20 +11305,35 @@
                 {
                   "id": "pesage_ibc_manutention",
                   "categorie": "Manutention et auxiliaires mutualisés",
-                  "libelle": "Pesage des IBC et manutention",
-                  "montant_usd": 8000,
-                  "qualification": "Estimation P2I, non prix catalogue"
+                  "libelle": "Pesage et raccordement IBC — solde estimatif",
+                  "montant_usd": 7093.85,
+                  "qualification": "Solde réaffecté de l’enveloppe P2I initiale, non devis"
+                },
+                {
+                  "id": "manutention",
+                  "categorie": "Manutention",
+                  "libelle": "Matériel de manutention",
+                  "montant_usd": 906.15,
+                  "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
                 }
               ],
               "manutention": {
                 "besoins": "Transpalette pour IBC de 1 000 kg net ; charge totale avec tare, sol, accès et besoin éventuel de levage à dimensionner.",
-                "postes_budget_mutualise": [
-                  "pesage_ibc_manutention"
+                "postes_budget_mutualise": [],
+                "postes_budget_dedie": [
+                  "manutention"
                 ],
-                "postes_budget_dedie": [],
-                "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+                "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention individualisé à l’intérieur de l’enveloppe auxiliaire existante, dont le solde reste une estimation P2I ; aucun nouvel achat ajouté en double, entretien déjà compris.",
+                "description_budget": "2 × Transpalette manuel 2 500 kg, fourches 1 150 mm. Fret, assurance, import/transit et livraison : provisions P2I incluses."
               }
             },
+            "amortissements_specifiques": [
+              {
+                "id": "manutention",
+                "base_usd": 906.15,
+                "duree_ans": 5
+              }
+            ],
             "stock_matieres_jours": 30
           },
           "economique_herite_up": true,
@@ -9735,6 +11494,48 @@
             "prix_vente": "1,20 USD/kg départ site A1, puis +2 %/an : hypothèse P2I sans prix de vente en vrac observé en Côte d’Ivoire. Les prix locaux documentés de plastifiants en 20 L concernent des formulations et circuits différents ; pas d’équivalence de produit ou de prix.",
             "complements": "Le prix de gamme couvre l’unité de formulation annoncée ; stockage, site loué à aménager, laboratoire, pesage, raccordement IBC et manutention font l’objet d’enveloppes P2I, pas de prix catalogue identifiés. Aucun achat immobilier ou parc IBC n’est inclus ; location des contenants dans le coût variable.",
             "qualite": "Formuler et tester avec les ciments, granulats et conditions locales ; ouvrabilité, prise, résistances et stabilité à vérifier. La référence EN 934-2 apparaît dans les notices de produits commerciaux ; elle ne certifie pas ce projet. Évaluer les dangers du mélange, établir fiche de sécurité, traçabilité, rétention et gestion des effluents. Base aqueuse ne signifie pas naturelle ou sans risque.",
+            "manutention": "Panier de manutention individualisé à l’intérieur de l’enveloppe auxiliaire existante, dont le solde reste une estimation P2I ; aucun nouvel achat ajouté en double, entretien déjà compris.",
+            "manutention_chiffree": {
+              "panier": {
+                "transpalette_2500": 2
+              },
+              "mode": "reaffectation_enveloppe",
+              "enveloppe_existante": "pesage_ibc_manutention",
+              "libelle_solde": "Pesage et raccordement IBC — solde estimatif",
+              "lignes": [
+                {
+                  "code": "transpalette_2500",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "quantite": 2,
+                  "prix_unitaire_usd": 305.57,
+                  "montant_usd": 611.14,
+                  "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                  "source": {
+                    "fournisseur": "Axess Industries",
+                    "modele": "19.1085.01",
+                    "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                    "prix_unitaire": 273,
+                    "devise": "EUR",
+                    "base": "HT, prix public départ fournisseur",
+                    "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                    "consulte_le": "2026-10-28",
+                    "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                  }
+                }
+              ],
+              "base_achat_usd": 611.14,
+              "frais_estimes_usd": {
+                "fret": 91.67,
+                "assurance": 6.11,
+                "import_transit": 122.23,
+                "transport_local": 75
+              },
+              "budget_livre_estime_usd": 906.15,
+              "entretien_supplementaire_usd_an": 0,
+              "amortissement_ans": 5,
+              "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+              "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+            },
             "gamme": null,
             "sources_prix_marche": [
               {
@@ -9809,7 +11610,8 @@
               "laboratoire_beton": 18000,
               "etudes_formulation_essais": 15000,
               "stockage_auxiliaire": 15000,
-              "pesage_ibc_manutention": 8000
+              "pesage_ibc_manutention": 7093.85,
+              "manutention": 906.15
             },
             "base_budget_equipements_usd": 60000,
             "conversion": null

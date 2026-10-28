@@ -9,8 +9,8 @@ await p.locator('#p2i-passage-pro a').click();await p.waitForSelector('#p6.is-ac
 for(const config of ['crackers','biscuits_durs']){await p.goto(base+'/business-plan-decouverte.html?unit_id=biscuiterie&configuration_id='+config);await p.locator('#go-pro').click();await p.waitForFunction(()=>window.P2I_BP_PRO_PASSAGE);assert.equal(await p.evaluate(()=>P2I_BP_PRO_PASSAGE.configuration_id),config);if(config==='crackers')assert.equal(await p.evaluate(()=>P2I_BP_PRO_PASSAGE.resultat.entrees.production[0]),550000);else assert.equal(await p.evaluate(()=>P2I_BP_PRO_PASSAGE.resultat.entrees.production[0]),500000);}
 for(const unit of ['jus_boissons','aliments_betail','mini_laiterie','conserverie_legumes','boulangerie_industrielle','huiles_alimentaires','epices','javel','adhesifs','produits_industriels']){await p.goto(base+'/business-plan-decouverte.html?unit_id='+unit);await p.waitForSelector('#go-pro');const before=await p.evaluate(()=>P2I_BP_V108_RESULTAT.annuel[0].resultat_net);assert.ok(Number.isFinite(before));if(unit==='jus_boissons'){assert.equal(await p.locator('.hero .jus-photo').count(),1);assert.equal(await p.locator('.hero .jus-bouteille').count(),1);assert.equal(await p.locator('#p2i-r17 .jus-poste').count(),10);for(let i=0;i<10;i++){const card=p.locator('#p2i-r17 .equipment').nth(i);const inner=card.locator('.jus-poste');assert.ok(await inner.evaluate((e,n)=>e.classList.contains('jus-poste-'+n),i));assert.equal(await card.locator('.photo').getAttribute('aria-label'),(await card.locator('h3').innerText())+' — illustration générée par IA');assert.ok(await inner.evaluate(e=>getComputedStyle(e).backgroundImage.startsWith('url("data:image/jpeg;base64,')));}assert.equal(await p.locator('#p2i-r7').getByText('Source catalogue équipement').count(),0);assert.equal(await p.locator('#p2i-r5 .info').count(),6);assert.equal(await p.locator('#p2i-r17 .equipment').count(),10);assert.match(await p.locator('#p2i-r17').innerText(),/ÉQUIPEMENT 10 \/ 10/);assert.match(await p.locator('#p2i-r17').innerText(),/Épluchage et parage/);assert.ok(await p.locator('.jus-photo').first().evaluate(e=>getComputedStyle(e).backgroundImage.startsWith('url("data:image/jpeg;base64,')));}assert.equal(await p.locator('#p2i-r10 tbody tr').count(),36);assert.equal(await p.locator('#p2i-r13 tbody tr').count(),12);assert.ok(await p.locator('#p2i-r17 .equipment').count()>=4);await p.locator('#go-pro').click();await p.waitForFunction(()=>window.P2I_BP_PRO_PASSAGE);assert.equal(await p.evaluate(()=>P2I_BP_PRO_PASSAGE.resultat.annuel[0].resultat_net),before);assert.equal(await p.evaluate(()=>P2I_BP_PRO_PASSAGE.up_id),unit);}
 await p.goto(base+'/business-plan-decouverte.html?unit_id=aliments_betail');await p.waitForSelector('#go-pro');
-assert.match(await p.locator('#p2i-r7').innerText(),/À chiffrer — non compris dans le total présenté/);
-assert.equal(await p.evaluate(()=>P2I_BP_V108_RESULTAT.investissements.postes.find(x=>x.id==='manutention_a_chiffrer').montant_usd),null);
+assert.match(await p.locator('#p2i-r7').innerText(),/Budget manutention dédié déjà inclus/);
+assert.equal(await p.evaluate(()=>P2I_BP_V108_RESULTAT.investissements.postes.some(x=>x.montant_usd===null)),false);
 await p.goto(base+'/business-plan-decouverte.html?unit_id=plastique');await p.waitForSelector('#go-pro');
 assert.match(await p.locator('#p2i-r7').innerText(),/Matériel de manutention/);
 // Le scénario adhésifs reste propre à cette activité, avec huit postes distincts et une fin de ligne manuelle.
@@ -20,12 +20,18 @@ const adhesivePositions=await p.locator('#p2i-r17 .equipment .agro-adhesifs').ev
 assert.match(await p.locator('.hero .eyebrow').textContent(),/CHIMIE/);
 assert.match(await p.locator('#p2i-r4').textContent(),/menuisiers/);
 const adhesiveInvestment=await p.evaluate(()=>P2I_BP_V108_RESULTAT.investissements);
-assert.equal(adhesiveInvestment.total_chiffre_usd,99850);assert.equal(adhesiveInvestment.manutention.budget_mutualise_usd,10000);
-assert.match(await p.locator('#p2i-r7').innerText(),/Pompe, flexibles, balance et manutention/);
-assert.match(await p.locator('#p2i-r7').innerText(),/part manutention non isolée/);
+assert.equal(adhesiveInvestment.total_chiffre_usd,99850);assert.equal(adhesiveInvestment.manutention.budget_dedie_usd,1420.52);
+assert.match(await p.locator('#p2i-r7').innerText(),/Pompe, flexibles et balance/);
+assert.match(await p.locator('#p2i-r7').innerText(),/Budget manutention dédié déjà inclus/);
 assert.match(await p.locator('#p2i-r7').innerText(),/Fret international/);
 await p.locator('#go-pro').click();await p.waitForFunction(()=>window.P2I_BP_PRO_PASSAGE);
 assert.deepEqual(await p.evaluate(()=>P2I_BP_PRO_PASSAGE.resultat.investissements),adhesiveInvestment);
+const personal=await p.evaluate(()=>P2I_BP_PRO_PASSAGE.resultat.financement);
+assert.ok(Math.abs(personal.apport_total-(personal.apport+personal.apport_reserve))<1e-8);
+assert.ok(Math.abs(personal.apport_total+personal.dette-personal.besoin_total)<1e-8);
+assert.equal(Number(await p.locator('#equity').inputValue()),personal.apport_total);
+assert.match(await p.locator('#p2i-pro-moteur-commun').innerText(),/Apport personnel total/);
+
 assert.match(await p.locator('#p2i-pro-moteur-commun').innerText(),/Ventilation des investissements/);
 await p.goto(base+'/business-plan-decouverte.html?unit_id=adhesifs');await p.waitForSelector('#go-pro');
 

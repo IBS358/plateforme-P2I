@@ -12,6 +12,23 @@ const measure=(value,field,id)=>({valeur:value??null,unite:field==='gross_margin
 const units={};
 const investmentRules=JSON.parse(fs.readFileSync(path.join(root,'data/p2i-bp-investissements-regles.json'),'utf8'));
 const handling=id=>({...investmentRules.manutention_defaut,...investmentRules.manutention_par_up[id],mode:investmentRules.mode});
+const handlingCosts=JSON.parse(fs.readFileSync(path.join(root,'data/p2i-bp-manutention-couts.json'),'utf8'));
+const money=x=>Math.round(x*100)/100;
+function costHandling(id){
+ const profile=handlingCosts.profils[id];if(!profile)return null;
+ const lignes=Object.entries(profile.panier).map(([code,quantite])=>{
+  if(!Number.isInteger(quantite)||quantite<=0)throw Error('Quantité manutention invalide : '+id);
+  const source=handlingCosts.sources[code],estimated=handlingCosts.accessoires_estimes[code];
+  if(!source&&!estimated)throw Error('Référence manutention inconnue : '+code);
+  const prix=source?money((source.prix_unitaire+(source.eco_participation_unitaire||0))*ctx.P2I_BP_V108_REFERENCES.change.eur_usd):estimated.prix_unitaire_usd;
+  return {code,nom:(source||estimated).nom,quantite,prix_unitaire_usd:prix,montant_usd:money(prix*quantite),qualification:source?'Prix catalogue HT converti ; quantité hypothèse P2I':'Estimation P2I',source:source||estimated};
+ });
+ const c=handlingCosts.conventions,base=money(lignes.reduce((n,l)=>n+l.montant_usd,0));
+ const frais={fret:money(base*c.fret_taux),assurance:money(base*c.assurance_taux),import_transit:money(base*c.import_transit_taux),transport_local:c.transport_local_usd};
+ const budget=money(base+Object.values(frais).reduce((n,v)=>n+v,0));
+ return {...profile,lignes,base_achat_usd:base,frais_estimes_usd:frais,budget_livre_estime_usd:budget,entretien_supplementaire_usd_an:profile.mode==='budget_ajoute'?money(Math.max(c.entretien_supplementaire_min_usd_an,base*c.entretien_supplementaire_taux)):0,amortissement_ans:c.amortissement_ans,qualification:c.qualification,limites:handlingCosts.limites};
+}
+
 for(const row of rows){const u=ups[row.id];if(!u)throw Error('UP absente : '+row.id);const id=row.id,service=u.type==='service',process=list(u.processus),markets=list(u.target_markets),marketing=list(u.marketing),risks=list(u.challenges),opportunities=list(u.avantages),materials=list(u.raw_materials);
 const budget=!u.exclure_reperes_historiques&&Number.isFinite(u.capex_min)?u.capex_min:null;
 const configurations=id==='biscuiterie'?['crackers','biscuits_mous','biscuits_durs']:id==='nettoyage'?['nettoyage_intensif','decontamination_chimique','decontamination_biologique']:['reference'];
@@ -45,9 +62,23 @@ const simulationPack=JSON.parse(fs.readFileSync(path.join(root,'data/p2i-bp-deco
 const batchFiles=fs.readdirSync(path.join(root,'data')).filter(f=>/^p2i-bp-lot-[a-z0-9-]+\.json$/.test(f)).sort();
 const profileFile={};for(const filename of batchFiles){const lot=JSON.parse(fs.readFileSync(path.join(root,'data',filename),'utf8'));if(lot.schema!=='p2i.bp-lot.v1')throw Error('Lot non reconnu : '+filename);for(const source of lot.sources||[]){if(simulationPack.sources.some(x=>x.id===source.id))throw Error('Source dupliquée : '+source.id);simulationPack.sources.push(source);}for(const [key,profile] of Object.entries(lot.profils||{})){if(simulationPack.profils[key])throw Error('Profil dupliqué : '+key);if(!profile.source_equipement||!profile.methodes||!profile.prix_retenu||!profile.prix_vente_usd_kg)throw Error('Profil incomplet : '+key);simulationPack.profils[key]=profile;profileFile[key]='data/'+filename;}}
 
-for(const [key,p] of Object.entries(simulationPack.profils)){
+for(const [key,rawProfile] of Object.entries(simulationPack.profils)){
+ const p=JSON.parse(JSON.stringify(rawProfile));
  const id=p.up_id||key,config=p.configuration_id||'reference',u=units[id],source=simulationPack.sources.find(x=>x.id===p.source_equipement),h=simulationPack.hypotheses_communes;
  if(!u||!source)throw Error('Profil de simulation sans identité ou source');
+ const handlingCost=costHandling(id);
+ if(handlingCost){
+  if(p.complements_usd.manutention!==undefined)throw Error('Manutention déjà chiffrée dans le profil : '+key);
+  if(handlingCost.mode==='reaffectation_enveloppe'){
+   const existing=p.complements_usd[handlingCost.enveloppe_existante];
+   if(!Number.isFinite(existing)||existing<handlingCost.budget_livre_estime_usd)throw Error('Enveloppe auxiliaire insuffisante : '+key);
+   p.complements_usd[handlingCost.enveloppe_existante]=money(existing-handlingCost.budget_livre_estime_usd);
+  }
+  p.complements_usd.manutention=handlingCost.budget_livre_estime_usd;
+  p.fixes_industriels_an+=handlingCost.entretien_supplementaire_usd_an;
+  p.methodes.manutention=handlingCost.mode==='reaffectation_enveloppe'?'Panier de manutention individualisé à l’intérieur de l’enveloppe auxiliaire existante, dont le solde reste une estimation P2I ; aucun nouvel achat ajouté en double, entretien déjà compris.':'Panier de manutention ajouté à l’investissement ; entretien supplémentaire '+handlingCost.entretien_supplementaire_usd_an+' USD/an en A1 dans le coût industriel, puis croissance commune des charges.';
+ }
+
  if(p.redaction){for(const [champ,texte] of Object.entries(p.redaction)){if(!Object.prototype.hasOwnProperty.call(u.redaction,champ)||typeof texte!=='string'||!texte.trim())throw Error('Rédaction de profil invalide : '+key+' / '+champ);u.redaction[champ]=texte;}}
  if(p.marches){if(!Array.isArray(p.marches)||p.marches.some(x=>typeof x!=='string'||!x.trim()))throw Error('Marchés de profil invalides : '+key);u.marches=p.marches.slice();}
  for(const equipement of p.equipements_complementaires||[]){if(equipement.source_id){const preuve=simulationPack.sources.find(x=>x.id===equipement.source_id);if(!preuve||preuve.prix!==equipement.prix_retenu||preuve.devise!==equipement.devise)throw Error('Prix complémentaire sans source cohérente : '+key);}}
@@ -76,15 +107,22 @@ for(const [key,p] of Object.entries(simulationPack.profils)){
  const prix=p.prix_vente_usd_kg||[firstPrice,firstPrice*1.02,firstPrice*1.02**2];
  const input={up_id:id,configuration_id:p.configuration_id,nom:p.nom,sous_titre:p.sous_titre,description:p.description,capacite:p.capacite_entree_kg_h,unite:'kg/h',machines:equipment,investissement:equipment+complement,production,ventes,prix,matieres_kg:matieres,cout_production_kg:production.map((q,y)=>(matieres+processCost)*(1+h.croissance_charges)**y+p.fixes_industriels_an*(1+h.croissance_charges)**y/q),personnel:p.personnel_hors_cout_industriel,charges_fixes:p.charges_fixes_hors_industriel,croissance_personnel:h.croissance_personnel,croissance_charges:h.croissance_charges,part_apport:h.apport,part_dette:h.dette,taux_interet:h.taux_interet_annuel,duree_dette_mois:h.dette_mois,duree_amortissement_ans:h.amortissement_ans,taux_tva:h.tva_simulation,taux_is:h.is_simulation,coussin_tresorerie:h.coussin_tresorerie,source:(profileFile[key]||'data/p2i-bp-decouverte-simulations.json')+' / '+key+' : prix catalogue ou budget de référence + hypothèses P2I explicites',conventions:'Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières '+(p.stock_matieres_jours??30)+' jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.',statut_exploitation:'Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.',qualification:'simulation_decouverte_prix_et_hypotheses'};
 
- const manutention=handling(id),postes=[{id:'equipements',libelle:'Équipements de production',categorie:'Production',montant_usd:equipment,qualification:'Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer'}];
+ const manutention=handling(id);
+ if(handlingCost){
+  manutention.postes_budget_mutualise=[];
+  manutention.mode='Achat initial retenu, sans location récurrente ; amortissement linéaire '+handlingCost.amortissement_ans+' ans. '+p.methodes.manutention;
+  manutention.description_budget=handlingCost.lignes.map(l=>l.quantite+' × '+l.nom).join(' ; ')+'. Fret, assurance, import/transit et livraison : provisions P2I incluses.';
+ }
+ const postes=[{id:'equipements',libelle:'Équipements de production',categorie:'Production',montant_usd:equipment,qualification:'Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer'}];
  for(const [key,amount] of Object.entries(p.complements_usd)){
   const rule=investmentRules.postes[key];if(!rule)throw Error('Poste complémentaire sans libellé : '+key);
   if(!Number.isFinite(amount)||amount<0)throw Error('Coût complémentaire invalide : '+key);
-  postes.push({id:key,...rule,montant_usd:amount,qualification:'Estimation P2I, non prix catalogue'});
+  postes.push({id:key,...rule,libelle:handlingCost?.enveloppe_existante===key?handlingCost.libelle_solde:rule.libelle,montant_usd:amount,qualification:key==='manutention'?'Panier catalogue HT + accessoires et frais livrés estimés P2I':handlingCost?.enveloppe_existante===key?'Solde réaffecté de l’enveloppe P2I initiale, non devis':'Estimation P2I, non prix catalogue'});
  }
  if(p.complements_usd.manutention!==undefined)manutention.postes_budget_dedie=['manutention'];
  if(!manutention.postes_budget_mutualise.length&&!manutention.postes_budget_dedie.length)postes.push({id:'manutention_a_chiffrer',libelle:'Matériel de manutention',categorie:'Manutention',montant_usd:null,qualification:'À chiffrer ; non compris dans le total présenté'});
  input.investissements_detail={schema:'p2i.bp-investissements.v1',postes,manutention};
+ if(handlingCost)input.amortissements_specifiques=[{id:'manutention',base_usd:handlingCost.budget_livre_estime_usd,duree_ans:handlingCost.amortissement_ans}];
  if(p.stock_matieres_jours!==undefined)input.stock_matieres_jours=p.stock_matieres_jours;
  if(id==='biscuiterie'){input.photo={crackers:0,biscuits_mous:1,biscuits_durs:2}[config];input.technique=ctx.P2I_BP_V108_REFERENCES.technique[config];}
  if(p.visuels)u.variantes[config].visuels=p.visuels;
@@ -92,7 +130,8 @@ for(const [key,p] of Object.entries(simulationPack.profils)){
  u.variantes[config].qualification='simulation_decouverte_calculable';
  u.variantes[config].prix_equipement={...source,equipements_complementaires:supplemental};
  u.variantes[config].emballage=packagingExisting;
- u.variantes[config].hypotheses_explicites={...p.methodes,gamme:p.gamme||null,sources_prix_marche:p.sources_prix_marche||[],sources_techniques_produit:p.sources_techniques_produit||[],plan_commercial:p.plan_commercial||null,suggestion:p.suggestion||null,qualite_produit:p.politique_qualite_id===hygienePolicy.id?hygienePolicy:null,conventions:h,complements_usd:p.complements_usd,base_budget_equipements_usd:equipment,conversion:p.devise_prix==='EUR'?ctx.P2I_BP_V108_REFERENCES.change:null};
+ u.variantes[config].hypotheses_explicites={...p.methodes,manutention_chiffree:handlingCost,gamme:p.gamme||null,sources_prix_marche:p.sources_prix_marche||[],sources_techniques_produit:p.sources_techniques_produit||[],plan_commercial:p.plan_commercial||null,suggestion:p.suggestion||null,qualite_produit:p.politique_qualite_id===hygienePolicy.id?hygienePolicy:null,conventions:h,complements_usd:p.complements_usd,base_budget_equipements_usd:equipment,conversion:p.devise_prix==='EUR'?ctx.P2I_BP_V108_REFERENCES.change:null};
+ if(handlingCost)u.manutention={...u.manutention,statut:'chiffree_dans_variantes',configurations_chiffrees:[...new Set([...(u.manutention.configurations_chiffrees||[]),config])]};
  u.statut='simulation_decouverte_disponible';
 }
 const data={schema:'p2i.bp-donnees.v1',date:'2026-10-28',nombre_up:96,nombre_configurations:Object.values(units).reduce((n,u)=>n+u.configurations.length,0),alias_identifiants:{"profilés":"profiles"},source_perimetre_sha256:crypto.createHash('sha256').update(source).digest('hex'),parametres_communs:{hygiene_professionnelle:hygienePolicy,electricite_mt_general:{source:'https://www.cie.ci/entreprise/tarifs-electricite',consulte_le:'2026-10-26',regime:'MT général, utilisation annuelle 1 000 à 5 000 heures',devise:'XOF',prime_kw_an_ht:33643.67,kwh_pleines_ht:74.06,kwh_pointe_ht:101,kwh_creuses_ht:61.29,qualification:'bareme_publie_application_contractuelle_a_confirmer'}},financement:{apport:.3,dette:.7},horizons:{resultat_ans:3,bfr_mois:36,tresorerie_mois:12},filieres:ctx.filieres.map(f=>({id:f.id,nom:f.name,up_ids:f.units.map(u=>u.id)})),unites:units};

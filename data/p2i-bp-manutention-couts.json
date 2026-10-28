@@ -1,0 +1,220 @@
+{
+  "schema": "p2i.bp-manutention-couts.v1",
+  "date": "2026-10-28",
+  "sources": {
+    "transpalette_2500": {
+      "fournisseur": "Axess Industries",
+      "modele": "19.1085.01",
+      "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+      "prix_unitaire": 273,
+      "devise": "EUR",
+      "base": "HT, prix public départ fournisseur",
+      "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+      "consulte_le": "2026-10-28",
+      "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+    },
+    "diable_250": {
+      "fournisseur": "Axess Industries",
+      "modele": "18.0658.01",
+      "nom": "Diable pour sacs, caisses et seaux, 250 kg",
+      "prix_unitaire": 139,
+      "devise": "EUR",
+      "base": "HT, roues caoutchouc semi-élastique",
+      "url": "https://www.axess-industries.com/manutention/diable-de-manutention/professionnels/diable-a-dossier-legerement-incurve-p-180658",
+      "consulte_le": "2026-10-28",
+      "limites": "Maintien et arrimage des charges à adapter ; pas un lève-fût ni un palettiseur."
+    },
+    "diable_fut": {
+      "fournisseur": "Axess Industries",
+      "modele": "202.1638.01",
+      "nom": "Diable pour fûts plastiques 120–220 L, 250 kg",
+      "prix_unitaire": 248.56,
+      "devise": "EUR",
+      "base": "HT, roues caoutchouc",
+      "url": "https://www.axess-industries.com/manutention/de-futs/diables-a-futs/a-futs-plastiques-de-120-a-220-l-p-12021638",
+      "consulte_le": "2026-10-28",
+      "limites": "Pour fûts plastiques de diamètre 500–590 mm ; masse pleine, forme, compatibilité avec le contenu et rétention à confirmer. Pas de dépalettisation mécanisée."
+    },
+    "chariot_inox": {
+      "fournisseur": "Matériel Horeca",
+      "modele": "Tournus GL886",
+      "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+      "prix_unitaire": 447.81,
+      "eco_participation_unitaire": 2.26,
+      "devise": "EUR",
+      "base": "HT, prix promotionnel publié, éco-participation ajoutée par prudence",
+      "url": "https://www.materiel-horeca.com/fr/8653-chariot-de-service-3-plateaux-tournus-800x530mm-3660171095891.html",
+      "consulte_le": "2026-10-28",
+      "limites": "Usage avec récipients fermés ; charge par plateau à confirmer. Ne remplace ni un chariot de four ni un équipement de levage."
+    }
+  },
+  "accessoires_estimes": {
+    "bacs": {
+      "nom": "Bacs lavables avec couvercle, petit format",
+      "prix_unitaire_usd": 12,
+      "qualification": "Hypothèse P2I, non prix catalogue"
+    },
+    "palettes": {
+      "nom": "Palettes de stockage pour marchandises emballées",
+      "prix_unitaire_usd": 25,
+      "qualification": "Hypothèse P2I, non prix catalogue"
+    }
+  },
+  "conventions": {
+    "fret_taux": 0.15,
+    "assurance_taux": 0.01,
+    "import_transit_taux": 0.2,
+    "transport_local_usd": 75,
+    "entretien_supplementaire_min_usd_an": 100,
+    "entretien_supplementaire_taux": 0.03,
+    "amortissement_ans": 5,
+    "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante."
+  },
+  "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil.",
+  "profils": {
+    "jus_boissons": {
+      "panier": {
+        "transpalette_2500": 1,
+        "chariot_inox": 2,
+        "bacs": 20,
+        "palettes": 10
+      },
+      "mode": "budget_ajoute"
+    },
+    "biscuiterie": {
+      "panier": {
+        "transpalette_2500": 2,
+        "chariot_inox": 2,
+        "bacs": 20,
+        "palettes": 20
+      },
+      "mode": "budget_ajoute"
+    },
+    "aliments_betail": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 2,
+        "palettes": 10
+      },
+      "mode": "budget_ajoute"
+    },
+    "mini_laiterie": {
+      "panier": {
+        "transpalette_2500": 1,
+        "chariot_inox": 2,
+        "bacs": 10,
+        "palettes": 10
+      },
+      "mode": "budget_ajoute"
+    },
+    "conserverie_legumes": {
+      "panier": {
+        "transpalette_2500": 1,
+        "chariot_inox": 2,
+        "bacs": 20,
+        "palettes": 10
+      },
+      "mode": "budget_ajoute"
+    },
+    "boulangerie_industrielle": {
+      "panier": {
+        "transpalette_2500": 1,
+        "palettes": 10
+      },
+      "mode": "reaffectation_enveloppe",
+      "enveloppe_existante": "chariots_et_refroidissement",
+      "libelle_solde": "Chariots de four et refroidissement — solde estimatif"
+    },
+    "huiles_alimentaires": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 1,
+        "diable_fut": 1,
+        "bacs": 10,
+        "palettes": 10
+      },
+      "mode": "budget_ajoute"
+    },
+    "epices": {
+      "panier": {
+        "transpalette_2500": 1,
+        "chariot_inox": 1,
+        "bacs": 10,
+        "palettes": 5
+      },
+      "mode": "budget_ajoute"
+    },
+    "savonnerie": {
+      "panier": {
+        "transpalette_2500": 1,
+        "chariot_inox": 2,
+        "bacs": 10,
+        "palettes": 10
+      },
+      "mode": "budget_ajoute"
+    },
+    "cosmetiques": {
+      "panier": {
+        "transpalette_2500": 1,
+        "chariot_inox": 2,
+        "diable_fut": 1,
+        "palettes": 10
+      },
+      "mode": "budget_ajoute"
+    },
+    "detergents": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 1,
+        "diable_fut": 1,
+        "palettes": 10
+      },
+      "mode": "budget_ajoute"
+    },
+    "peintures": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 1,
+        "diable_fut": 1,
+        "palettes": 10
+      },
+      "mode": "budget_ajoute"
+    },
+    "javel": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 1,
+        "diable_fut": 1,
+        "palettes": 10
+      },
+      "mode": "budget_ajoute"
+    },
+    "adhesifs": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 1,
+        "diable_fut": 1,
+        "palettes": 10
+      },
+      "mode": "reaffectation_enveloppe",
+      "enveloppe_existante": "pompe_flexibles_balance_manutention",
+      "libelle_solde": "Pompe, flexibles et balance — solde estimatif"
+    },
+    "engrais": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 2,
+        "palettes": 10
+      },
+      "mode": "budget_ajoute"
+    },
+    "produits_industriels": {
+      "panier": {
+        "transpalette_2500": 2
+      },
+      "mode": "reaffectation_enveloppe",
+      "enveloppe_existante": "pesage_ibc_manutention",
+      "libelle_solde": "Pesage et raccordement IBC — solde estimatif"
+    }
+  }
+}

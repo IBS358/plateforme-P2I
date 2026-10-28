@@ -1,0 +1,2697 @@
+{
+  "conserverie_legumes__reference": {
+    "up_id": "conserverie_legumes",
+    "configuration_id": null,
+    "nom": "Sauce tomate en bocaux",
+    "sous_titre": "Transformation de tomates fraîches",
+    "description": "Transformation de tomates fraîches en sauce conditionnée en bocaux de 400 g ; scénario indicatif, distinct des autres conserves de légumes.",
+    "capacite": 400,
+    "unite": "kg/h",
+    "machines": 100000,
+    "investissement": 164700,
+    "production": [
+      300000,
+      390000,
+      450000
+    ],
+    "ventes": [
+      300000,
+      390000,
+      450000
+    ],
+    "prix": [
+      1.25,
+      1.275,
+      1.3005
+    ],
+    "matieres_kg": 0.35,
+    "cout_production_kg": [
+      0.91,
+      0.9040230769230769,
+      0.9159103333333333
+    ],
+    "personnel": 9660,
+    "charges_fixes": 24000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-agro-01.json / conserverie_legumes : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 2 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 100000,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 9000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 1200,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 9000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 15000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 12000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 7000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes",
+          "categorie": "Études et essais",
+          "libelle": "Études de démarrage",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Bacs et chariots lavables ; transpalette pour palettes de conserves.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 2
+  },
+  "biscuiterie__crackers": {
+    "up_id": "biscuiterie",
+    "configuration_id": "crackers",
+    "nom": "Crackers",
+    "sous_titre": "Biscuits salés croquants",
+    "description": "Programme de production piloté par les ventes pour limiter l’accumulation d’invendus. Ligne intégrée P2I conservée à 450 000 USD / 500 kg/h.",
+    "capacite": 500,
+    "unite": "kg/h",
+    "machines": 450000,
+    "investissement": 605000,
+    "production": [
+      550000,
+      650000,
+      750000
+    ],
+    "ventes": [
+      532000,
+      638000,
+      745000
+    ],
+    "prix": [
+      2.5595427749075017,
+      2.610733630405652,
+      2.662948303013765
+    ],
+    "matieres_kg": 0.5571999999999999,
+    "cout_production_kg": [
+      0.9771999999999998,
+      0.9748236923076922,
+      0.9801301466666665
+    ],
+    "personnel": 20700,
+    "charges_fixes": 34800,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-decouverte-simulations.json / biscuiterie__crackers : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 450000,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 25000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 4500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 20000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 5500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 40000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 20000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 20000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 10000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes",
+          "categorie": "Études et essais",
+          "libelle": "Études de démarrage",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Chariots alimentaires, bacs de transfert et transpalette pour sacs de matières et cartons finis.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "photo": 0,
+    "technique": {
+      "formage": "Laminage, calibrage et découpe",
+      "etapes": [
+        "Dosage et pétrissage",
+        "Laminage",
+        "Calibrage et découpe",
+        "Cuisson",
+        "Refroidissement et emballage"
+      ],
+      "source": "https://www.bakerperkins.com/biscuit-cookie-cracker/products/cracker-lines/",
+      "faits": "Le procédé de mise en feuille et découpe est distinct du moulage des pâtes courtes; la compatibilité du procédé Crackers, les interfaces et la capacité effective de la ligne P2I restent à justifier."
+    }
+  },
+  "biscuiterie__biscuits_mous": {
+    "up_id": "biscuiterie",
+    "configuration_id": "biscuits_mous",
+    "nom": "Biscuits mous",
+    "sous_titre": "Biscuits tendres et moelleux",
+    "description": "Production de biscuits mous conditionnés en sachets de 200 g, avec hypothèses P2I propres à cette recette.",
+    "capacite": 500,
+    "unite": "kg/h",
+    "machines": 450000,
+    "investissement": 605000,
+    "production": [
+      450000,
+      580000,
+      680000
+    ],
+    "ventes": [
+      441000,
+      571000,
+      672000
+    ],
+    "prix": [
+      2.5,
+      2.55,
+      2.601
+    ],
+    "matieres_kg": 0.72,
+    "cout_production_kg": [
+      1.2333333333333334,
+      1.2164655172413794,
+      1.2247154411764705
+    ],
+    "personnel": 20700,
+    "charges_fixes": 34800,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-decouverte-simulations.json / biscuiterie__biscuits_mous : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 450000,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 25000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 4500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 20000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 5500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 40000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 20000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 20000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 10000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes",
+          "categorie": "Études et essais",
+          "libelle": "Études de démarrage",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Chariots alimentaires, bacs de transfert et transpalette pour sacs de matières et cartons finis.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "photo": 1,
+    "technique": {
+      "formage": "Moulage rotatif",
+      "etapes": [
+        "Dosage et mélange",
+        "Moulage rotatif",
+        "Cuisson",
+        "Refroidissement",
+        "Conditionnement"
+      ],
+      "source": "https://www.bakerperkins.com/biscuit-cookie-cracker/products/soft-dough-biscuits/",
+      "faits": "La documentation fabricant décrit le mélange, le moulage rotatif et la cuisson pour les biscuits à pâte courte. Cette description ne valide ni modèle, ni budget, ni capacité de la ligne P2I. La texture moelleuse du produit fini doit être confirmée par les essais de formulation."
+    }
+  },
+  "biscuiterie__biscuits_durs": {
+    "up_id": "biscuiterie",
+    "configuration_id": "biscuits_durs",
+    "nom": "Biscuits durs",
+    "sous_titre": "Biscuits secs à texture ferme",
+    "description": "Production de biscuits durs conditionnés en sachets de 200 g, avec hypothèses P2I propres à cette recette.",
+    "capacite": 500,
+    "unite": "kg/h",
+    "machines": 450000,
+    "investissement": 605000,
+    "production": [
+      500000,
+      620000,
+      720000
+    ],
+    "ventes": [
+      490000,
+      610000,
+      713000
+    ],
+    "prix": [
+      2.3,
+      2.346,
+      2.39292
+    ],
+    "matieres_kg": 0.65,
+    "cout_production_kg": [
+      1.1300000000000001,
+      1.1200419354838709,
+      1.1275009444444444
+    ],
+    "personnel": 20700,
+    "charges_fixes": 34800,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-decouverte-simulations.json / biscuiterie__biscuits_durs : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 450000,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 25000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 4500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 20000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 5500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 40000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 20000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 20000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 10000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes",
+          "categorie": "Études et essais",
+          "libelle": "Études de démarrage",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Chariots alimentaires, bacs de transfert et transpalette pour sacs de matières et cartons finis.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "photo": 2,
+    "technique": {
+      "formage": "Abaisse, calibrage et découpe rotative",
+      "etapes": [
+        "Dosage et mélange",
+        "Abaisse de pâte",
+        "Calibrage et détente",
+        "Découpe et cuisson",
+        "Refroidissement et emballage"
+      ],
+      "source": "https://www.bakerperkins.com/biscuit-cookie-cracker/products/hard-sweet-biscuit-lines/",
+      "faits": "Le fabricant décrit une feuille de pâte calibrée, détendue, puis marquée et découpée avant cuisson. Il ne s’agit pas du moulage rotatif des pâtes courtes. Aucune capacité ou offre commerciale P2I n’est attestée par cette source."
+    }
+  },
+  "boulangerie_industrielle__reference": {
+    "up_id": "boulangerie_industrielle",
+    "configuration_id": null,
+    "nom": "Petits pains ronds frais",
+    "sous_titre": "Boulangerie : pains de 200 g",
+    "description": "Fabrication de petits pains ronds frais en sachets de deux unités.",
+    "capacite": 40,
+    "unite": "kg/h",
+    "machines": 45511.857299999996,
+    "investissement": 89111.8573,
+    "production": [
+      40000,
+      50000,
+      60000
+    ],
+    "ventes": [
+      40000,
+      50000,
+      60000
+    ],
+    "prix": [
+      2.4,
+      2.448,
+      2.49696
+    ],
+    "matieres_kg": 0.48,
+    "cout_production_kg": [
+      1.23,
+      1.1639,
+      1.1280903333333332
+    ],
+    "personnel": 6000,
+    "charges_fixes": 12000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-agro-02.json / boulangerie_industrielle : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 15 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 45511.857299999996,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 5500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 700,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 1800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 10000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 7000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 4000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 1800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 1800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes",
+          "categorie": "Études et essais",
+          "libelle": "Études de démarrage",
+          "montant_usd": 2000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "chariots_et_refroidissement",
+          "categorie": "Manutention et auxiliaires mutualisés",
+          "libelle": "Chariots et refroidissement",
+          "montant_usd": 4000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        }
+      ],
+      "manutention": {
+        "besoins": "Chariots à grilles et de refroidissement ; transfert des sacs et des cartons.",
+        "postes_budget_mutualise": [
+          "chariots_et_refroidissement"
+        ],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 15
+  },
+  "jus_boissons__reference": {
+    "up_id": "jus_boissons",
+    "configuration_id": null,
+    "nom": "Jus d’ananas pasteurisé en bouteilles",
+    "sous_titre": "Ligne de préparation, extraction et conditionnement",
+    "description": "Transformation d’ananas en jus pasteurisé conditionné en bouteilles PET refermables de 500 ml ; quantités de simulation en kg de jus. La marque Ivoire Fruits est illustrative.",
+    "capacite": 500,
+    "unite": "kg/h",
+    "machines": 97009.64750699999,
+    "investissement": 144109.647507,
+    "production": [
+      300000,
+      390000,
+      450000
+    ],
+    "ventes": [
+      294000,
+      382200,
+      441000
+    ],
+    "prix": [
+      1.56,
+      1.5912,
+      1.623024
+    ],
+    "matieres_kg": 0.5833333333333334,
+    "cout_production_kg": [
+      1.1719333333333335,
+      1.1812779487179488,
+      1.2048994933333335
+    ],
+    "personnel": 9660,
+    "charges_fixes": 20400,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-decouverte-simulations.json / jus_boissons : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 97009.64750699999,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 10000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 1000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 1500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 10000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 7000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 2800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 1800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes",
+          "categorie": "Études et essais",
+          "libelle": "Études de démarrage",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Caisses de fruits, chariots de transfert et transpalette pour les palettes de bouteilles.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    }
+  },
+  "mini_laiterie__reference": {
+    "up_id": "mini_laiterie",
+    "configuration_id": null,
+    "nom": "Lait entier frais pasteurisé en bouteilles",
+    "sous_titre": "Mini-laiterie en conteneur",
+    "description": "Transformation et conditionnement de lait de vache entier pasteurisé en bouteilles refermables de 1 L, avec chaîne du froid.",
+    "capacite": 515,
+    "unite": "kg/h",
+    "machines": 107340.87,
+    "investissement": 184040.87,
+    "production": [
+      450000,
+      600000,
+      700000
+    ],
+    "ventes": [
+      450000,
+      600000,
+      700000
+    ],
+    "prix": [
+      1.7,
+      1.734,
+      1.76868
+    ],
+    "matieres_kg": 0.65,
+    "cout_production_kg": [
+      1.0233333333333334,
+      1.03,
+      1.050291
+    ],
+    "personnel": 9660,
+    "charges_fixes": 24000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-agro-01.json / mini_laiterie : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 1 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 107340.87,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 9000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 1200,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 9000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 15000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 12000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 7000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes",
+          "categorie": "Études et essais",
+          "libelle": "Études de démarrage",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "chaine_du_froid",
+          "categorie": "Site et utilités",
+          "libelle": "Chaîne du froid",
+          "montant_usd": 12000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Chariots lavables et transpalette adaptés aux flux de la zone froide.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 1
+  },
+  "huiles_alimentaires__reference": {
+    "up_id": "huiles_alimentaires",
+    "configuration_id": null,
+    "nom": "Huile d’arachide filtrée",
+    "sous_titre": "Pressage de graines locales",
+    "description": "Transformation d’arachides décortiquées en huile alimentaire filtrée conditionnée en bouteilles refermables.",
+    "capacite": 70,
+    "unite": "kg/h",
+    "machines": 42000,
+    "investissement": 105800,
+    "production": [
+      70000,
+      90000,
+      110000
+    ],
+    "ventes": [
+      70000,
+      90000,
+      110000
+    ],
+    "prix": [
+      4.5,
+      4.59,
+      4.6818
+    ],
+    "matieres_kg": 2.242647002776097,
+    "cout_production_kg": [
+      3.2197898599189543,
+      3.234637523970491,
+      3.2780958416087977
+    ],
+    "personnel": 6000,
+    "charges_fixes": 12000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-agro-02.json / huiles_alimentaires : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 42000,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 2000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 12000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 10000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 2000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes",
+          "categorie": "Études et essais",
+          "libelle": "Études de démarrage",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "tri_preparation_conditionnement",
+          "categorie": "Auxiliaires de production",
+          "libelle": "Tri, préparation et conditionnement",
+          "montant_usd": 15000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Transfert des sacs de graines et des tourteaux ; manutention des bidons et fûts selon les formats retenus.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 30
+  },
+  "epices__reference": {
+    "up_id": "epices",
+    "configuration_id": null,
+    "nom": "Gingembre séché en poudre",
+    "sous_titre": "Épices : lavage, séchage et broyage",
+    "description": "Transformation de gingembre frais en poudre alimentaire conditionnée en sachets refermables de 50 g.",
+    "capacite": 5,
+    "unite": "kg/h",
+    "machines": 5227.130999999999,
+    "investissement": 47327.131,
+    "production": [
+      5000,
+      6500,
+      8000
+    ],
+    "ventes": [
+      5000,
+      6500,
+      8000
+    ],
+    "prix": [
+      20,
+      20.4,
+      20.808
+    ],
+    "matieres_kg": 6.825447399753338,
+    "cout_production_kg": [
+      10.325447399753337,
+      10.231133898669015,
+      10.277943396398316
+    ],
+    "personnel": 3600,
+    "charges_fixes": 5000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-agro-02.json / epices : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 7 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 5227.130999999999,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 5500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 700,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 1800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 10000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 7000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 4000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 1800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 1800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes",
+          "categorie": "Études et essais",
+          "libelle": "Études de démarrage",
+          "montant_usd": 2000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "dosage_et_scellage_manuel",
+          "categorie": "Auxiliaires de production",
+          "libelle": "Dosage et scellage manuel",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Bacs fermés et petits chariots ; transpalette selon les volumes de sacs et de cartons.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 7
+  },
+  "aliments_betail__reference": {
+    "up_id": "aliments_betail",
+    "configuration_id": null,
+    "nom": "Aliments granulés pour bétail — petite ligne",
+    "sous_titre": "Broyage, mélange, granulation et refroidissement",
+    "description": "Petite ligne d’aliments granulés avec pesée et ensachage manuel; formule illustrative de simulation, sans allégation d’équilibre nutritionnel certifié.",
+    "capacite": 500,
+    "unite": "kg/h",
+    "machines": 32000,
+    "investissement": 62000,
+    "production": [
+      450000,
+      600000,
+      700000
+    ],
+    "ventes": [
+      441000,
+      594000,
+      696500
+    ],
+    "prix": [
+      0.5,
+      0.51,
+      0.5202
+    ],
+    "matieres_kg": 0.3225,
+    "cout_production_kg": [
+      0.39030000000000004,
+      0.39150300000000005,
+      0.3986104414285715
+    ],
+    "personnel": 8280,
+    "charges_fixes": 9600,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-decouverte-simulations.json / aliments_betail : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 32000,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 4000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 1000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 8000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 2000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 1500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pesee_ensachage_manuel",
+          "categorie": "Auxiliaires de production",
+          "libelle": "Pesée et ensachage manuel",
+          "montant_usd": 1500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes",
+          "categorie": "Études et essais",
+          "libelle": "Études de démarrage",
+          "montant_usd": 1000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Transpalette et moyens de transfert des sacs ; aide au levage selon poids des sacs et hauteur de stockage.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    }
+  },
+  "detergents__reference": {
+    "up_id": "detergents",
+    "configuration_id": null,
+    "nom": "Gamme de produits ménagers liquides",
+    "sous_titre": "Vaisselle, sols et lavage des mains",
+    "description": "Trois produits liquides fabriqués par lots sur une ligne partagée, en bouteilles refermables de 1 L ; scénarios indicatifs à formuler et à contrôler.",
+    "capacite": 375,
+    "unite": "kg/h",
+    "machines": 32580,
+    "investissement": 105880,
+    "production": [
+      450000,
+      525000,
+      600000
+    ],
+    "ventes": [
+      450000,
+      525000,
+      600000
+    ],
+    "prix": [
+      0.985,
+      1.0047,
+      1.024794
+    ],
+    "matieres_kg": 0.277,
+    "cout_production_kg": [
+      0.7114444444444443,
+      0.7115338095238094,
+      0.7164611333333333
+    ],
+    "personnel": 12000,
+    "charges_fixes": 30000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-chimie-03.json / detergents : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 32580,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 6500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 2000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 18000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 20000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 7000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes_controle",
+          "categorie": "Études et essais",
+          "libelle": "Études et contrôle qualité",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Transpalette, chariots de bidons et aide à la manutention des fûts selon leur masse.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 30
+  },
+  "savonnerie__reference": {
+    "up_id": "savonnerie",
+    "configuration_id": null,
+    "nom": "Savon solide ménager",
+    "sous_titre": "Finition de savon à partir de copeaux achetés",
+    "description": "Finition de pains de savon ménager de 250 g à partir de copeaux de savon achetés, puis conditionnement manuel.",
+    "capacite": 100,
+    "unite": "kg/h",
+    "machines": 20000,
+    "investissement": 48100,
+    "production": [
+      100000,
+      140000,
+      170000
+    ],
+    "ventes": [
+      100000,
+      140000,
+      170000
+    ],
+    "prix": [
+      1.5,
+      1.53,
+      1.5606
+    ],
+    "matieres_kg": 0.65,
+    "cout_production_kg": [
+      0.99,
+      0.9667285714285715,
+      0.9716595882352941
+    ],
+    "personnel": 4500,
+    "charges_fixes": 9500,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-chimie-01.json / savonnerie : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 20000,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 3500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 400,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 1000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 4500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 1200,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 2000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes",
+          "categorie": "Études et essais",
+          "libelle": "Études de démarrage",
+          "montant_usd": 1500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "stockage_et_manuel",
+          "categorie": "Auxiliaires de production",
+          "libelle": "Stockage et opérations manuelles",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Chariots de séchage et de transfert ; manutention adaptée aux fûts et aux palettes de savon.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 30
+  },
+  "cosmetiques__reference": {
+    "up_id": "cosmetiques",
+    "configuration_id": null,
+    "nom": "Lait corporel au karité",
+    "sous_titre": "Émulsion et conditionnement en flacons",
+    "description": "Fabrication indicative d’un lait corporel contenant du beurre de karité et conditionné en flacons refermables de 250 ml.",
+    "capacite": 187.5,
+    "unite": "kg/h",
+    "machines": 49550,
+    "investissement": 109850,
+    "production": [
+      150000,
+      200000,
+      250000
+    ],
+    "ventes": [
+      150000,
+      200000,
+      250000
+    ],
+    "prix": [
+      5,
+      5.1,
+      5.202
+    ],
+    "matieres_kg": 1.2,
+    "cout_production_kg": [
+      2.566666666666667,
+      2.5492500000000007,
+      2.5673779999999997
+    ],
+    "personnel": 12000,
+    "charges_fixes": 30000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-chimie-02.json / cosmetiques : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 49550,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 7000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 7000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 2000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 12000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 15000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes_et_controle",
+          "categorie": "Études et essais",
+          "libelle": "Études et contrôle qualité",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Chariots nettoyables, aide au déplacement des fûts et transpalette pour les palettes de flacons.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 30
+  },
+  "peintures__reference": {
+    "up_id": "peintures",
+    "configuration_id": null,
+    "nom": "Primaire anticorrosion en phase aqueuse",
+    "sous_titre": "Revêtement industriel pour métal",
+    "description": "Production indicative d’un primaire anticorrosion à base d’eau pour supports métalliques, conditionné en pots refermables de 4 kg.",
+    "capacite": 500,
+    "unite": "kg/h",
+    "machines": 80000,
+    "investissement": 146800,
+    "production": [
+      500000,
+      650000,
+      800000
+    ],
+    "ventes": [
+      500000,
+      650000,
+      800000
+    ],
+    "prix": [
+      2.8,
+      2.856,
+      2.91312
+    ],
+    "matieres_kg": 1.1,
+    "cout_production_kg": [
+      1.6,
+      1.6004615384615386,
+      1.6178725
+    ],
+    "personnel": 18000,
+    "charges_fixes": 45000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-chimie-04.json / peintures : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 80000,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 6500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 2000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 15000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 12000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes_controle",
+          "categorie": "Études et essais",
+          "libelle": "Études et contrôle qualité",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "auxiliaires_conditionnement",
+          "categorie": "Auxiliaires de production",
+          "libelle": "Auxiliaires de conditionnement",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Transpalette et dispositifs adaptés aux fûts et seaux fermés ; compatibilité avec le zonage de sécurité à vérifier.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 30
+  },
+  "adhesifs__reference": {
+    "up_id": "adhesifs",
+    "configuration_id": null,
+    "nom": "Colle blanche aqueuse pour bois",
+    "sous_titre": "Formulation à partir de dispersion PVAc achetée",
+    "description": "Atelier de formulation et conditionnement de colle blanche aqueuse pour menuiserie intérieure, à partir d’une dispersion PVAc achetée. Seaux refermables de 5 kg. Aucune synthèse du polymère, classe de résistance à l’eau ou innocuité présumée.",
+    "capacite": 440,
+    "unite": "kg/h",
+    "machines": 21250,
+    "investissement": 99850,
+    "production": [
+      250000,
+      300000,
+      350000
+    ],
+    "ventes": [
+      242500,
+      300000,
+      350000
+    ],
+    "prix": [
+      2.2,
+      2.244,
+      2.28888
+    ],
+    "matieres_kg": 1.1,
+    "cout_production_kg": [
+      1.58,
+      1.5862,
+      1.6034745714285714
+    ],
+    "personnel": 12000,
+    "charges_fixes": 28000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-chimie-07.json / adhesifs : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 21250,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 600,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 1500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 18000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 10000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes_essais",
+          "categorie": "Études et essais",
+          "libelle": "Études et essais",
+          "montant_usd": 8000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "laboratoire",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Laboratoire",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pompe_flexibles_balance_manutention",
+          "categorie": "Manutention et auxiliaires mutualisés",
+          "libelle": "Pompe, flexibles, balance et manutention",
+          "montant_usd": 10000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        }
+      ],
+      "manutention": {
+        "besoins": "Transpalette, chariots pour seaux de 5 kg et aide au déplacement des fûts de dispersion achetée.",
+        "postes_budget_mutualise": [
+          "pompe_flexibles_balance_manutention"
+        ],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 30
+  },
+  "engrais__reference": {
+    "up_id": "engrais",
+    "configuration_id": null,
+    "nom": "Engrais foliaire NPK liquide",
+    "sous_titre": "Formulation et conditionnement d’intrants agricoles",
+    "description": "Mélange et conditionnement d’un engrais foliaire NPK liquide en bouteilles de 1 L. Les pesticides sont exclus de ce scénario.",
+    "capacite": 1100,
+    "unite": "kg/h",
+    "machines": 53186,
+    "investissement": 112486,
+    "production": [
+      440000,
+      550000,
+      660000
+    ],
+    "ventes": [
+      418000,
+      522500,
+      627000
+    ],
+    "prix": [
+      2.4,
+      2.448,
+      2.49696
+    ],
+    "matieres_kg": 1.1,
+    "cout_production_kg": [
+      1.6204545454545456,
+      1.6339545454545457,
+      1.6588618181818182
+    ],
+    "personnel": 18000,
+    "charges_fixes": 35000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-chimie-05.json / engrais : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 53186,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 800,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 6500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 2000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 15000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 12000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes_controle",
+          "categorie": "Études et essais",
+          "libelle": "Études et contrôle qualité",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Transpalette et transfert des sacs ; aide au levage et captage des poussières selon les charges.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 30
+  },
+  "javel__reference": {
+    "up_id": "javel",
+    "configuration_id": null,
+    "nom": "Concentré professionnel d’hygiène des surfaces",
+    "sous_titre": "Formulation aqueuse non chlorée et conditionnement professionnel",
+    "description": "Production par lots d’un concentré aqueux d’hygiène des surfaces, avec priorité aux ingrédients biosourcés compatibles et à la réduction des dangers. Bidons cylindriques de 5 L ; formulation, sécurité et efficacité désinfectante à établir séparément. Hors usages médicaux.",
+    "capacite": 375,
+    "unite": "kg/h",
+    "machines": 18440,
+    "investissement": 92440,
+    "production": [
+      120000,
+      150000,
+      180000
+    ],
+    "ventes": [
+      116400,
+      150000,
+      180000
+    ],
+    "prix": [
+      2.8,
+      2.856,
+      2.91312
+    ],
+    "matieres_kg": 1.1,
+    "cout_production_kg": [
+      1.8783333333333334,
+      1.8402666666666667,
+      1.8306418888888891
+    ],
+    "personnel": 15000,
+    "charges_fixes": 25000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-chimie-06.json / javel : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 18440,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 4500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 4500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 1500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "genie_civil",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagements et génie civil",
+          "montant_usd": 18000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 12000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 6000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 2000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 7000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes_essais_formulation",
+          "categorie": "Études et essais",
+          "libelle": "Études et essais de formulation",
+          "montant_usd": 10000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "laboratoire_dosage",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Laboratoire et dosage",
+          "montant_usd": 8000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention_a_chiffrer",
+          "libelle": "Matériel de manutention",
+          "categorie": "Manutention",
+          "montant_usd": null,
+          "qualification": "À chiffrer ; non compris dans le total présenté"
+        }
+      ],
+      "manutention": {
+        "besoins": "Transpalette et chariots pour bidons ; manutention adaptée aux fûts, à la rétention et à la séparation des produits incompatibles.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 30
+  },
+  "produits_industriels__reference": {
+    "up_id": "produits_industriels",
+    "configuration_id": null,
+    "nom": "Adjuvant liquide pour béton — formulation PCE",
+    "sous_titre": "Mélange d’une base polymère achetée et fourniture aux professionnels",
+    "description": "Unité de formulation d’un adjuvant aqueux pour béton, à partir d’une base polycarboxylate achetée, destinée aux centrales à béton et à la préfabrication. Livraison en IBC nominal de 1 000 L à 1 000 kg net. Pas de synthèse, de formulation naturelle ou de conformité produit présumées.",
+    "capacite": 5000,
+    "unite": "kg/h",
+    "machines": 60000,
+    "investissement": 206900,
+    "production": [
+      750000,
+      1000000,
+      1250000
+    ],
+    "ventes": [
+      727500,
+      1000000,
+      1250000
+    ],
+    "prix": [
+      1.2,
+      1.224,
+      1.24848
+    ],
+    "matieres_kg": 0.52,
+    "cout_production_kg": [
+      0.7916666666666666,
+      0.76735,
+      0.7606652999999999
+    ],
+    "personnel": 25000,
+    "charges_fixes": 55000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-chimie-08.json / produits_industriels : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 60000,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 8500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 900,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 9000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "amenagement_site",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagement du site",
+          "montant_usd": 28000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 18000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 9500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 4000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 10000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "laboratoire_beton",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Laboratoire produit et béton",
+          "montant_usd": 18000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes_formulation_essais",
+          "categorie": "Études et essais",
+          "libelle": "Formulation et essais béton",
+          "montant_usd": 15000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "stockage_auxiliaire",
+          "categorie": "Auxiliaires de production",
+          "libelle": "Stockage auxiliaire",
+          "montant_usd": 15000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pesage_ibc_manutention",
+          "categorie": "Manutention et auxiliaires mutualisés",
+          "libelle": "Pesage des IBC et manutention",
+          "montant_usd": 8000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        }
+      ],
+      "manutention": {
+        "besoins": "Transpalette pour IBC de 1 000 kg net ; charge totale avec tare, sol, accès et besoin éventuel de levage à dimensionner.",
+        "postes_budget_mutualise": [
+          "pesage_ibc_manutention"
+        ],
+        "postes_budget_dedie": [],
+        "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+      }
+    },
+    "stock_matieres_jours": 30
+  }
+}

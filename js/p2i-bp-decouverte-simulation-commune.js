@@ -5,6 +5,13 @@
 (function(root){'use strict';
 const positive=x=>typeof x==='number'&&Number.isFinite(x)&&x>=0;
 const close=(a,b)=>Math.abs(a-b)<.02;
+function normaliserAmortissements(value){
+ if(!Array.isArray(value)||value.length>30)throw Error('Amortissements spécifiques invalides');
+ const ids=new Set();return value.map(x=>{
+  if(!x||typeof x.id!=='string'||!x.id||x.id.length>200||ids.has(x.id)||!positive(x.base_usd)||!positive(x.duree_ans)||x.duree_ans<3||x.duree_ans>50)throw Error('Amortissement spécifique invalide');
+  ids.add(x.id);return {id:x.id,base_usd:x.base_usd,duree_ans:x.duree_ans};
+ });
+}
 // Le détail accompagne les paramètres enregistrés, sans remplacer un budget modifié.
 function normaliserInvestissements(value){
  if(!value||value.schema!=='p2i.bp-investissements.v1'||!Array.isArray(value.postes)||value.postes.length>60)throw Error('Ventilation des investissements invalide');
@@ -18,7 +25,8 @@ function normaliserInvestissements(value){
  if(!m||!text(m.besoins)||!text(m.mode)||!Array.isArray(m.postes_budget_mutualise)||m.postes_budget_mutualise.some(id=>!ids.has(id)))throw Error('Manutention invalide');
  const dedie=m.postes_budget_dedie??[];
  if(!Array.isArray(dedie)||new Set([...dedie,...m.postes_budget_mutualise]).size!==dedie.length+m.postes_budget_mutualise.length||[...dedie,...m.postes_budget_mutualise].some(id=>!ids.has(id)||postes.find(p=>p.id===id).montant_usd===null))throw Error('Budget manutention invalide ou compté deux fois');
- return {schema:value.schema,postes,manutention:{besoins:m.besoins,mode:m.mode,postes_budget_mutualise:m.postes_budget_mutualise.slice(),postes_budget_dedie:dedie.slice()}};
+ if(m.description_budget!==undefined&&!text(m.description_budget))throw Error('Description du budget manutention invalide');
+ return {schema:value.schema,postes,manutention:{besoins:m.besoins,mode:m.mode,...(m.description_budget?{description_budget:m.description_budget}:{}),postes_budget_mutualise:m.postes_budget_mutualise.slice(),postes_budget_dedie:dedie.slice()}};
 }
 function ventilerInvestissement(s){
  const fallback={statut:'non_ventile',postes:[{id:'equipements',libelle:'Équipements de production',categorie:'Production',montant_usd:s.machines??null,qualification:'Budget du scénario'}, {id:'non_ventile',libelle:'Autres investissements non ventilés',categorie:'À détailler',montant_usd:s.machines==null?null:s.investissement-s.machines,qualification:'Contenu à documenter'}],total_chiffre_usd:s.investissement,manutention:{statut:'a_chiffrer',besoins:'Moyens de manutention propres au dossier à dimensionner.',mode:'Achat ou location et frais d’utilisation à chiffrer.',postes_budget_mutualise:[],postes_budget_dedie:[],budget_mutualise_usd:null,budget_dedie_usd:null}};
@@ -53,7 +61,9 @@ function calculer(input){
  if(s.duree_dette_mois<36||s.duree_amortissement_ans<3||s.taux_is>1||s.taux_tva>1)throw Error('Durées ou taux incompatibles');
  for(const k of ['production','ventes','prix','cout_production_kg'])if(!Array.isArray(s[k])||s[k].length!==3||!s[k].every(positive))throw Error('Trois années requises : '+k);
  const stockMatieresJours=s.stock_matieres_jours??30;if(!positive(stockMatieresJours)||stockMatieresJours>30)throw Error('Stock matières : entre 0 et 30 jours');
- const debt=s.investissement*.7,principal=debt/s.duree_dette_mois,amortissement=s.investissement/s.duree_amortissement_ans;
+ const specifics=normaliserAmortissements(s.amortissements_specifiques||[]),specificBase=specifics.reduce((n,x)=>n+x.base_usd,0);
+ if(specificBase>s.investissement)throw Error('Bases amortissables spécifiques supérieures à l’investissement');
+ const debt=s.investissement*.7,principal=debt/s.duree_dette_mois,amortissement=(s.investissement-specificBase)/s.duree_amortissement_ans+specifics.reduce((n,x)=>n+x.base_usd/x.duree_ans,0);
  let stockQty=0,stockValue=0,rawPrevious=0,receivablesPrevious=0,debtRemaining=debt,vatCredit=0,vatDuePrevious=0,isTotal=0;
  const months=[],annual=[],economic=[];
  for(let y=0;y<3;y++){
@@ -108,7 +118,7 @@ function calculer(input){
   if(!close(assets,liabilities))throw Error('Bilan déséquilibré A'+(y+1)+' : '+(assets-liabilities));
  }
  const performance=evaluerPerformance(annual,s.investissement);performance.diagnostic_prix=diagnosticPrix(s,annual[0],performance);
- return {version:'107',statut:'simulation_indicative_non_documentee',entrees:s,investissements:ventilerInvestissement(s),mois:months,annuel:annual,performance,bfr:bfr.bfr_mensuel,tresorerie:cash[0].tresorerie_mensuelle,bilans,reserve_initiale:reserve,financement:{apport:s.investissement*.3,dette:debt},moteurs:['P2I_ECONOMIC_RESULT_ENGINE','P2I_FINANCIAL_ENGINE','P2I_BP_BFR_MENSUEL','P2I_BP_MOTEUR_TRESORERIE'],controles:{bilans_equilibres:true,bfr_mois:36,tresorerie_mois:12,financement:'30/70'}};
+ return {version:'107',statut:'simulation_indicative_non_documentee',entrees:s,investissements:ventilerInvestissement(s),mois:months,annuel:annual,performance,bfr:bfr.bfr_mensuel,tresorerie:cash[0].tresorerie_mensuelle,bilans,reserve_initiale:reserve,financement:{apport:s.investissement*.3,dette:debt,apport_reserve:reserve,apport_total:s.investissement*.3+reserve,besoin_total:s.investissement+reserve,total_ressources:s.investissement*.3+reserve+debt,hypothese_reserve_financee_par_apport:true},moteurs:['P2I_ECONOMIC_RESULT_ENGINE','P2I_FINANCIAL_ENGINE','P2I_BP_BFR_MENSUEL','P2I_BP_MOTEUR_TRESORERIE'],controles:{bilans_equilibres:true,bfr_mois:36,tresorerie_mois:12,financement:'30/70'}};
 }
-root.P2I_BP_SIMULATION_COMMUNE=Object.freeze({calculer,evaluerPerformance,ventilerInvestissement,normaliserInvestissements,reperes:REPERES});
+root.P2I_BP_SIMULATION_COMMUNE=Object.freeze({calculer,evaluerPerformance,ventilerInvestissement,normaliserInvestissements,normaliserAmortissements,reperes:REPERES});
 })(typeof window!=='undefined'?window:globalThis);

@@ -44,7 +44,7 @@ function render(){
  const cleaning=id==='nettoyage'?window.P2I_BP_V108_REFERENCES.nettoyage:null,selectedCleaning=cleaning&&Object.prototype.hasOwnProperty.call(cleaning,config)?cleaning[config]:null;
  const pilot=id==='biscuiterie',variants=window.P2I_BP_V108_REFERENCES.variants;
  let s=cleaning?null:window.P2I_BP_DONNEES_ENGINE.reference(id,config||'reference'),r=null,problem=null;
- if(override){s={...(s||{}),...override};delete s.manquants;delete s.complet;if(!override.investissements_detail)delete s.investissements_detail;}
+ if(override){s={...(s||{}),...override};delete s.manquants;delete s.complet;if(!override.investissements_detail)delete s.investissements_detail;if(!override.amortissements_specifiques)delete s.amortissements_specifiques;}
  if(override&&up.type==='service'){problem='Les paramètres de fabrication en kg/h ne sont pas applicables à cette activité de services.';s=null;}
  if(s?.production&&!s.manquants){try{r=window.P2I_BP_SIMULATION_COMMUNE.calculer(s);}catch(e){problem=e.message;}}
  const partial=!r&&!problem&&pilot?window.P2I_BP_V108_REFERENCES.partiel(config):null;
@@ -207,13 +207,18 @@ function render(){
   const iv=r.investissements,m=iv.manutention;
   const mutual=iv.postes.filter(p=>m.postes_budget_mutualise.includes(p.id));
   const manutBudget=m.statut==='budget_dedie'?'Budget manutention dédié déjà inclus : '+usd(m.budget_dedie_usd)+(m.budget_mutualise_usd!=null?' ; autres auxiliaires mutualisés : '+usd(m.budget_mutualise_usd):'')+'. Aucun ajout en double.':m.statut==='budget_mutualise'?'Inclus dans '+mutual.map(p=>p.libelle).join(' ; ')+' — '+usd(m.budget_mutualise_usd)+' pour l’ensemble, part manutention non isolée. Aucun ajout en double.':'À chiffrer — non compris dans le total présenté ; aucun montant nul présumé.';
-  sections[6]=cards([['Équipements de production',usd(s.machines)],['Autres postes budgétés',s.machines==null?'À ventiler':usd(s.investissement-s.machines)],['Investissement chiffré',usd(s.investissement)],['Apport 30 %',usd(r.financement.apport)],['Dette 70 %',usd(r.financement.dette)],['Réserve initiale distincte',usd(r.reserve_initiale)]])+
+  sections[6]=cards([['Équipements de production',usd(s.machines)],['Autres postes budgétés',s.machines==null?'À ventiler':usd(s.investissement-s.machines)],['Investissement chiffré',usd(s.investissement)],['Apport personnel total',usd(r.financement.apport_total)],['Dette 70 % de l’investissement',usd(r.financement.dette)],['Réserve financée par l’apport',usd(r.reserve_initiale)]])+
    '<h3>Contenu du budget d’investissement</h3>'+table(['Poste','Montant','Base du montant'],iv.postes.map(p=>[p.libelle,p.montant_usd===null?'À chiffrer':usd(p.montant_usd),p.qualification]).concat([['Total des postes chiffrés',usd(iv.total_chiffre_usd),'Hors postes à chiffrer et réserve initiale']]))+
-   '<div class="two-col">'+info('Matériel de manutention',m.besoins+' '+manutBudget+' '+m.mode)+'<div class="info"><h3>Financement de l’investissement</h3>'+table(['Ressource','Montant'],[['Apport 30 %',usd(r.financement.apport)],['Dette 70 %',usd(r.financement.dette)],['Réserve distincte à financer',usd(r.reserve_initiale)]])+'</div></div>'+
-   note(iv.statut==='detail_a_reconcilier'?'Le budget de ce dossier a été modifié : la ventilation de référence ne correspond plus aux montants. Elle doit être réconciliée, sans répartir automatiquement la différence.':'Les coûts complémentaires sont des estimations P2I. La réserve initiale est à financer séparément ; les postes à chiffrer ne sont pas compris dans le total.')+
+   '<div class="two-col">'+info('Matériel de manutention',m.besoins+' '+(m.description_budget||'')+' '+manutBudget+' '+m.mode)+'<div class="info"><h3>Financement de l’investissement</h3>'+table(['Ressource','Montant'],[['Apport — 30 % de l’investissement',usd(r.financement.apport)],['Apport pour la réserve initiale',usd(r.financement.apport_reserve)],['Apport personnel total',usd(r.financement.apport_total)],['Dette — 70 % de l’investissement',usd(r.financement.dette)],['Besoin total = ressources prévues',usd(r.financement.besoin_total)]])+'</div></div>'+
+   note(iv.statut==='detail_a_reconcilier'?'Le budget de ce dossier a été modifié : la ventilation de référence ne correspond plus aux montants. Elle doit être réconciliée, sans répartir automatiquement la différence.':'Le plan suppose le versement de l’apport personnel total, réserve initiale comprise, et le décaissement de la dette. La réserve est une ressource de trésorerie, pas une charge. Les postes encore à chiffrer, s’il en existe, restent exclus du total.')+
    note('Les images sont illustratives : le prix des équipements porte uniquement sur le périmètre décrit en rubrique 3, pas sur l’ensemble des installations représentées.');
  }else if(dossier){
   sections[6]+=info('Matériel de manutention',dossier.manutention.besoins+' À chiffrer : aucun coût inclus dans un CAPEX consolidé à ce stade. '+dossier.manutention.mode);
+ }
+
+ if(r&&referenceDossier?.hypotheses_explicites?.manutention_chiffree&&r.investissements.statut==='ventile'&&JSON.stringify(s.investissements_detail)===JSON.stringify(referenceDossier.reference.investissements_detail)){
+  const mc=referenceDossier.hypotheses_explicites.manutention_chiffree;
+  sections[6]+='<details><summary>Détail du panier de manutention et de ses frais estimés</summary>'+table(['Matériel / provision','Quantité','Budget USD'],mc.lignes.map(l=>[l.nom,l.quantite,usd(l.montant_usd)]).concat(Object.entries(mc.frais_estimes_usd).map(([k,v])=>[({fret:'Fret complémentaire estimé',assurance:'Assurance estimée',import_transit:'Provision import / transit',transport_local:'Transport local estimé'})[k],'-',usd(v)])))+note(mc.qualification)+'<p>'+esc(mc.limites)+'</p></details>';
  }
  if(id==='jus_boissons'&&r&&packagingMatches){
   const postes=[

@@ -14,7 +14,7 @@ const html=read('filieres.html'),start=html.indexOf('const filieresData = '),end
 assert.equal(c.filieres.length,12);assert.ok(c.filieres.every(f=>f.units.length===8));assert.equal(c.filieres.flatMap(f=>f.units).filter(x=>x.id==='javel').length,1);
 const d=json('data/p2i-bp-decouverte-donnees.json'),v=d.unites.javel.variantes.reference;
 assert.equal(d.unites.javel.up_nom,name);assert.equal(d.unites.javel.economie.budget_minimum_historique.valeur,null);assert.equal(d.unites.javel.economie.fourchette_ca_historique.texte,null);
-assert.equal(v.reference.machines,18440);assert.equal(v.reference.investissement,u.capex_min);assert.equal(v.reference.capacite,375);assert.equal(v.reference.prix[0],2.8);
+assert.equal(v.reference.machines,18440);assert.equal(v.reference.investissement,u.capex_min+v.hypotheses_explicites.manutention_chiffree.budget_livre_estime_usd);assert.equal(v.reference.capacite,375);assert.equal(v.reference.prix[0],2.8);
 assert.equal(v.prix_equipement.composition_catalogue.find(x=>x.nom.includes('Cuve mobile')).quantite,2);
 assert.equal(v.emballage.cout_usd_par_kg*5,.8);assert.ok(v.emballage.format.includes('cylindrique'));assert.ok(v.hypotheses_explicites.suggestion.includes('ne sont pas inclus'));
 assert.equal(v.hypotheses_explicites.qualite_produit.statut,'a_formuler_et_a_tester');assert.ok(v.hypotheses_explicites.qualite_produit.verification_separee.securite.includes('aucune garantie'));
