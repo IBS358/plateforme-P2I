@@ -2,9 +2,9 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 17,
-  "up_avec_simulation_complete": 15,
-  "up_restant_a_alimenter": 81,
+  "simulations_affichables": 18,
+  "up_avec_simulation_complete": 16,
+  "up_restant_a_alimenter": 80,
   "scenarios": [
     {
       "up_id": "conserverie_legumes",
@@ -888,6 +888,58 @@
         1.7462298274040222e-10,
         1.1641532182693481e-10,
         2.9103830456733704e-10
+      ]
+    },
+    {
+      "up_id": "produits_industriels",
+      "configuration_id": null,
+      "nom": "Produits chimiques industriels",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "borne_haute_gamme_non_prix_modele_confirme",
+      "source_prix": "https://www.greefield.com/project-materials/pce-polycarboxylate-superplasticizer-equipment/concrete-admixture-compounding-mixer-10mbq.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 60000,
+      "investissement_simulation_usd": 206900,
+      "reserve_initiale_distincte_usd": 93949.03722222222,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 750000,
+          "ventes_kg": 727500,
+          "stock_fin_kg": 22500,
+          "chiffre_affaires_usd": 873000,
+          "resultat_net_usd": 139386.14
+        },
+        {
+          "annee": 2,
+          "production_kg": 1000000.0000000001,
+          "ventes_kg": 1000000.0000000001,
+          "stock_fin_kg": 22500,
+          "chiffre_affaires_usd": 1223999.9999999998,
+          "resultat_net_usd": 258604.38125349823
+        },
+        {
+          "annee": 3,
+          "production_kg": 1250000,
+          "ventes_kg": 1250000,
+          "stock_fin_kg": 22500,
+          "chiffre_affaires_usd": 1560600.0000000002,
+          "resultat_net_usd": 373624.66193411325
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        0,
+        -1.1641532182693481e-10,
+        -6.984919309616089e-10
       ]
     }
   ]

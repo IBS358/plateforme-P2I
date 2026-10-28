@@ -1,0 +1,204 @@
+{
+  "schema": "p2i.bp-lot.v1",
+  "date": "2026-10-28",
+  "description": "Produits chimiques industriels : adjuvant aqueux pour béton à partir de base PCE achetée",
+  "sources": [
+    {
+      "id": "industriels_greefield_compounding10t",
+      "url": "https://www.greefield.com/project-materials/pce-polycarboxylate-superplasticizer-equipment/concrete-admixture-compounding-mixer-10mbq.html",
+      "consulte_le": "2026-10-28",
+      "fournisseur": "Zhejiang Greefield Industry Co., Ltd.",
+      "modele": "GRE-10MBQ — unité de formulation par mélange de bases PCE",
+      "pays_origine": "Chine",
+      "prix": 60000,
+      "prix_min": 19600,
+      "prix_max": 60000,
+      "devise": "USD",
+      "base": "Borne haute de la fourchette publique de la gamme d’équipements PCE 19 600–60 000 USD ; prix non explicitement rattaché au seul modèle GRE-10MBQ ni à un incoterm précis",
+      "capacite": 10000,
+      "unite_capacite": "kg par lot annoncés ; mélange 30–50 min selon fiche, 45 min en présentation",
+      "qualification": "borne_haute_gamme_non_prix_modele_confirme",
+      "fonctions": [
+        "Réception de la base polymère",
+        "Alimentation et dosage",
+        "Mélange de l’adjuvant",
+        "Transfert fermé",
+        "Contrôle produit et béton",
+        "Chargement des IBC",
+        "Fermeture et identification",
+        "Manutention et expédition"
+      ],
+      "postes": [
+        {
+          "description": "Base PCE aqueuse achetée ; réception, traçabilité et stockage adaptés. Pas de synthèse du polymère dans ce scénario."
+        },
+        {
+          "description": "Alimentation basse et commande de dosage annoncées dans l’unité ; paramètres et précision à confirmer."
+        },
+        {
+          "description": "Unité de mélange GRE-10MBQ : 10 t par lot annoncées. Les 45 min publiées ne représentent pas le cycle complet retenu dans la simulation."
+        },
+        {
+          "description": "Décharge et transfert intégrés annoncés ; matériaux, débit et raccords à confirmer avec le stockage et les IBC."
+        },
+        {
+          "description": "Contrôles du liquide et essais avec les ciments locaux : pH, densité, stabilité, ouvrabilité, prise et résistances. Laboratoire budgété séparément."
+        },
+        {
+          "description": "IBC nominal de 1 000 L rempli à 1 000 kg net ; volume réel selon densité. Adaptation du raccord et pesage dans les auxiliaires estimés."
+        },
+        {
+          "description": "Fermeture contrôlée, identification du lot et étiquette ; opérations manuelles, sans étiqueteuse automatique ajoutée."
+        },
+        {
+          "description": "Manutention des IBC fermés et organisation du retour des contenants ; moyens auxiliaires dans une enveloppe P2I."
+        }
+      ],
+      "limites": "Référence de gamme, non devis précis pour ce modèle. Alimentation, mélange, commande et décharge annoncés ; stockage, laboratoire, adaptation IBC et manutention sont estimés séparément. Le scénario retient le mélange d’une base achetée, pas la synthèse. L’intégration réelle, la formulation et les performances restent à confirmer. Les affirmations commerciales de zéro déchet ou d’innocuité ne sont pas reprises comme des faits.",
+      "utilites": "Atelier au moins 200 m² et hauteur 6 m, triphasé au moins 10 kW annoncés pour l’unité ; besoins complets de stockage, eau, laboratoire et transfert à dimensionner."
+    }
+  ],
+  "profils": {
+    "produits_industriels": {
+      "configuration_id": null,
+      "nom": "Adjuvant liquide pour béton — formulation PCE",
+      "sous_titre": "Mélange d’une base polymère achetée et fourniture aux professionnels",
+      "description": "Unité de formulation d’un adjuvant aqueux pour béton, à partir d’une base polycarboxylate achetée, destinée aux centrales à béton et à la préfabrication. Livraison en IBC nominal de 1 000 L à 1 000 kg net. Pas de synthèse, de formulation naturelle ou de conformité produit présumées.",
+      "source_equipement": "industriels_greefield_compounding10t",
+      "prix_retenu": 60000,
+      "devise_prix": "USD",
+      "capacite_entree_kg_h": 5000,
+      "production_explicite": [
+        750000,
+        1000000,
+        1250000
+      ],
+      "ventes_explicites": [
+        727500,
+        1000000,
+        1250000
+      ],
+      "prix_vente_usd_kg": [
+        1.2,
+        1.224,
+        1.24848
+      ],
+      "matieres_usd_kg_produit": 0.52,
+      "cout_process_usd_kg": 0.085,
+      "fixes_industriels_an": 140000,
+      "personnel_hors_cout_industriel": 25000,
+      "charges_fixes_hors_industriel": 55000,
+      "stock_matieres_jours": 30,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "IBC nominal de 1 000 L livré à 1 000 kg net ; volume de remplissage selon densité mesurée",
+        "cout_usd_par_kg": 0.035,
+        "composants_usd_par_kg": {
+          "location_et_rotation_ibc": 0.025,
+          "lavage_controle": 0.005,
+          "fermeture": 0.003,
+          "etiquette": 0.002
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Location et retour des IBC supposés dans les calculs, sans achat du parc en CAPEX ; rotation, nettoyage compatible, transport et fin de vie à organiser. Aucun gain écologique quantifié ou biodégradabilité présumés.",
+        "source": "Enveloppe P2I de 35 USD par rotation d’un IBC de 1 000 kg ; aucun tarif local de location/retour confirmé"
+      },
+      "complements_usd": {
+        "fret": 8500,
+        "assurance": 900,
+        "douane_transit": 9000,
+        "transport_local": 3000,
+        "amenagement_site": 28000,
+        "utilites": 18000,
+        "installation_formation": 9500,
+        "pieces_initiales": 4000,
+        "securite_environnement": 10000,
+        "laboratoire_beton": 18000,
+        "etudes_formulation_essais": 15000,
+        "stockage_auxiliaire": 15000,
+        "pesage_ibc_manutention": 8000
+      },
+      "methodes": {
+        "production": "10 t par lot annoncées ; cycle complet de 2 h retenu par convention P2I, incluant alimentation, mélange, transfert et contrôles, soit 5 000 kg/h théoriques. 8 h/j, 250 j/an ; production de 750/1 000/1 250 t, soit 7,5/10/12,5 % du potentiel. Stock de lancement 22,5 t en A1 puis quantité stable ; rotation FIFO supposée, sans pertes ni dégradation simulées. Aucun volume commercial acquis.",
+        "matieres": "Base PCE achetée, eau et auxiliaires : enveloppe 0,52 USD/kg de produit fini, sans formule ni tarifs livrés validés. Le coût dépend fortement de la composition finale ; aucun dosage de monomère ou procédé de synthèse inclus.",
+        "process": "0,085 USD/kg dont conditionnement/location IBC 0,035 USD/kg et eau, énergie, nettoyage et consommables 0,05 USD/kg. Frais industriels fixes 140 000 USD/an dont personnel et contrôle estimés à 60 000 USD/an, autres frais 80 000 USD/an incluant location du site, maintenance et fonctionnement ; hypothèses P2I.",
+        "personnel": "Personnel industriel dans frais de production ; administration et commercial 25 000 USD/an distincts. Organisation et effectif réels à préciser.",
+        "prix_vente": "1,20 USD/kg départ site A1, puis +2 %/an : hypothèse P2I sans prix de vente en vrac observé en Côte d’Ivoire. Les prix locaux documentés de plastifiants en 20 L concernent des formulations et circuits différents ; pas d’équivalence de produit ou de prix.",
+        "complements": "Le prix de gamme couvre l’unité de formulation annoncée ; stockage, site loué à aménager, laboratoire, pesage, raccordement IBC et manutention font l’objet d’enveloppes P2I, pas de prix catalogue identifiés. Aucun achat immobilier ou parc IBC n’est inclus ; location des contenants dans le coût variable.",
+        "qualite": "Formuler et tester avec les ciments, granulats et conditions locales ; ouvrabilité, prise, résistances et stabilité à vérifier. La référence EN 934-2 apparaît dans les notices de produits commerciaux ; elle ne certifie pas ce projet. Évaluer les dangers du mélange, établir fiche de sécurité, traçabilité, rétention et gestion des effluents. Base aqueuse ne signifie pas naturelle ou sans risque."
+      },
+      "marches": [
+        "Centrales à béton prêt à l’emploi",
+        "Préfabricants de produits en béton",
+        "Entreprises de génie civil et distributeurs techniques"
+      ],
+      "redaction": {
+        "positionnement": "Adjuvant liquide aqueux pour béton, formulé à partir de base PCE achetée, vendu en IBC aux professionnels ; performances et prix à démontrer sur chaque application.",
+        "procede": "Réception de base polymère → dosage → mélange → transfert fermé → contrôles → chargement IBC → fermeture et identification → expédition. Aucune synthèse du polymère dans ce scénario.",
+        "marche": "Clients à prospecter : centrales à béton, préfabricants et entreprises de génie civil. Des fournisseurs établis proposent déjà des adjuvants en Côte d’Ivoire ; cette concurrence et les essais de qualification client sont à intégrer. Aucune commande présumée.",
+        "commercial": "Qualifier le produit avec les ciments et conditions des clients, démontrer le coût par m³ de béton et convenir des spécifications et modalités de livraison avant les contrats.",
+        "approvisionnement": "Base PCE aqueuse et auxiliaires achetés, eau et IBC en location : vérifier prix livrés, traçabilité, compatibilité, délai et continuité d’approvisionnement.",
+        "opportunites": "Formulation de proximité, adaptation aux ciments et réactivité logistique ; intérêt économique à démontrer par les essais et les clients.",
+        "risques": "Fournisseurs déjà établis, qualification du béton, sensibilité au ciment et à la température, coût du polymère importé, retards de paiement et retour des IBC.",
+        "qualite": "Contrôler liquide et comportement du béton selon usage ; essais et spécifications à définir. Aucun agrément, équivalence à une marque ou conformité EN 934-2 acquis.",
+        "utilites": "Unité de formulation : triphasé et puissance minimale annoncée 10 kW ; eau, stockage, laboratoire, transfert, nettoyage et fonctionnement global à dimensionner."
+      },
+      "plan_commercial": [
+        {
+          "titre": "Qualification client",
+          "texte": "Essayer le produit avec les ciments et granulats réellement employés."
+        },
+        {
+          "titre": "Coût par usage",
+          "texte": "Comparer le coût par m³ de béton et les performances, pas seulement le prix du liquide."
+        },
+        {
+          "titre": "Contrats B2B",
+          "texte": "Définir spécifications, volumes, contrôles et délais de règlement."
+        },
+        {
+          "titre": "Livraisons",
+          "texte": "Organiser le chargement à masse nette contrôlée, la traçabilité et les retours IBC."
+        },
+        {
+          "titre": "Assistance technique",
+          "texte": "Suivre les conditions d’emploi et les réclamations avec les équipes béton."
+        },
+        {
+          "titre": "Déploiement progressif",
+          "texte": "Consolider les résultats et les commandes avant de monter en capacité."
+        }
+      ],
+      "sources_prix_marche": [
+        {
+          "url": "https://produitbat.ci/detail/produit/1784923304-Plastiment-BV-40---20L",
+          "description": "Plastiment BV 40 20 L affiché 52 500 FCFA, vendeur Sika Côte d’Ivoire ; autre formulation et petit conditionnement, non comparateur identique au PCE en IBC."
+        },
+        {
+          "url": "https://produitbat.ci/detail/produit/1784922755-Plastiretard---Tonnelet-20-litres",
+          "description": "Plastiretard 20 L affiché 41 000 FCFA ; autre fonction et formulation, prix de détail non transposable au prix industriel."
+        }
+      ],
+      "sources_techniques_produit": [
+        {
+          "url": "https://civ.sika.com/dam/dms/ci01/q/sika_viscocrete_tempo-12.pdf",
+          "description": "Exemple commercial de PCE aqueux, conditionné notamment en conteneur 1 000 L et mentionnant EN 934-2 ; spécifications propres à ce produit, non validation de la formule P2I."
+        }
+      ],
+      "visuels": {
+        "atlas": "adjuvants",
+        "product_index": 0,
+        "indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    }
+  }
+}

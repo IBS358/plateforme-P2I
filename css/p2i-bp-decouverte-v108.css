@@ -40,3 +40,6 @@
 
 /* Colle blanche aqueuse : atelier et huit postes illustrés distincts. */
 .agro-adhesifs{background-image:url('../assets/bp-agro/postes-adhesifs-ia.jpg');background-size:300% 300%}.agro-adhesifs.agro-0{background-position:0% 0%}.agro-adhesifs.agro-1{background-position:50% 0%}.agro-adhesifs.agro-2{background-position:100% 0%}.agro-adhesifs.agro-3{background-position:0% 50%}.agro-adhesifs.agro-4{background-position:50% 50%}.agro-adhesifs.agro-5{background-position:100% 50%}.agro-adhesifs.agro-6{background-position:0% 100%}.agro-adhesifs.agro-7{background-position:50% 100%}.agro-adhesifs.agro-8{background-position:100% 100%}
+
+/* Adjuvant béton : atelier et huit postes distincts. */
+.agro-adjuvants{background-image:url('../assets/bp-agro/postes-adjuvants-ia.jpg');background-size:300% 300%}.agro-adjuvants.agro-0{background-position:0% 0%}.agro-adjuvants.agro-1{background-position:50% 0%}.agro-adjuvants.agro-2{background-position:100% 0%}.agro-adjuvants.agro-3{background-position:0% 50%}.agro-adjuvants.agro-4{background-position:50% 50%}.agro-adjuvants.agro-5{background-position:100% 50%}.agro-adjuvants.agro-6{background-position:0% 100%}.agro-adjuvants.agro-7{background-position:50% 100%}.agro-adjuvants.agro-8{background-position:100% 100%}

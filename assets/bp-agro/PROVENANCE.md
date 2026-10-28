@@ -24,3 +24,9 @@ Consigne de génération : neuf photographies distinctes en grille 3 × 3, ateli
 `postes-adhesifs-ia.jpg` : planche générée par IA avec le générateur intégré. Photographies illustratives, pas de représentation contractuelle des machines Shindah ou TGM. Marque P2I COLLE proposée comme maquette, sans label sanitaire ou écologique.
 
 Consigne : atelier ivoirien de formulation de colle blanche aqueuse à partir de dispersion achetée ; planche 3 × 3 avec atelier et seau 5 kg, réception/pesée, cuve agitée, transfert fermé, contrôle viscosité/collage, remplissage pondéral, fermeture manuelle, étiquetage manuel et palettisation. Personnel ivoirien protégé. Ne pas représenter de synthèse du polymère ni de boucheuse ou étiqueteuse automatique.
+
+## Adjuvants pour béton — 28 octobre 2026
+
+`postes-adjuvants-ia.jpg` : illustration générée par le générateur intégré, sans représentation contractuelle du fournisseur ou agrément de produit. Marque P2I BETON illustrative.
+
+Consigne : planche 3 × 3, atelier ivoirien d’adjuvant aqueux à partir de base polymère achetée, IBC nominal 1 000 L à 1 000 kg net ; atelier, réception, dosage, mélange en cuve fermée, transfert fermé, contrôle liquide et béton, chargement IBC, fermeture/identification et expédition au transpalette. Personnel ivoirien protégé, sans représentation de synthèse chimique ni allégation écologique ou de conformité.

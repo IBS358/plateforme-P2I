@@ -5,30 +5,18 @@ esbuild.buildSync({stdin:{contents:"export {createClient} from '@supabase/supaba
 const conf=fs.readFileSync(path.join(root,'js/p2i-bp-decouverte-v108-supabase-config.js'),'utf8');
 const token=conf.match(/"anon_key":"([^"]+)"/)?.[1];if(!token||JSON.parse(Buffer.from(token.split('.')[1],'base64url').toString()).role!=='anon')throw Error('Seule la clé publique anon P2I est autorisée dans la page.');
 let html=fs.readFileSync(path.join(root,'bp-decouverte-v108-source.html'),'utf8');
-const forming='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-v108/formage-biscuiterie-ia.jpg')).toString('base64');
-const bottle='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-jus/bouteille-ivoire-fruits-ia.jpg')).toString('base64');
-const juice='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-jus/illustrations-jus-ia.jpg')).toString('base64');
-const pineapple='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-jus/lavage-ananas-ia.jpg')).toString('base64');
-const juicePreparation='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-jus/postes-preparation-ananas-ia.jpg')).toString('base64');
-const juicePackaging='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-jus/postes-conditionnement-ananas-ia.jpg')).toString('base64');
-const agroLait='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/atelier-lait-ia.jpg')).toString('base64');
-const agroTomate='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/atelier-tomate-ia.jpg')).toString('base64');
-const agroPain='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/atelier-pain-ia.jpg')).toString('base64');
-const agroArachide='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/atelier-arachide-ia.jpg')).toString('base64');
-const agroBetail='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/atelier-betail-ia.jpg')).toString('base64');
-const agroSavon='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/atelier-savon-ia.jpg')).toString('base64');
-const agroCosmetique='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/atelier-cosmetique-ia.jpg')).toString('base64');
-const agroAdhesifs='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/postes-adhesifs-ia.jpg')).toString('base64');
-const agroHygienePro='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/postes-hygiene-pro-ia.jpg')).toString('base64');
-const agroJavelPostes='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/postes-javel-ia.jpg')).toString('base64');
-const agroEngraisPostes='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/postes-engrais-ia.jpg')).toString('base64');
-const agroEngrais='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/atelier-engrais-ia.jpg')).toString('base64');
-const agroDetergent='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/atelier-detergent-ia.jpg')).toString('base64');
-const agroPeinture='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/atelier-peinture-ia.jpg')).toString('base64');
-const agroHuile='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/atelier-huile-ia.jpg')).toString('base64');
-const agroEpices='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-agro/atelier-epices-ia.jpg')).toString('base64');
-const atlas='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'assets/bp-v107/illustrations-biscuiterie-ia.jpg')).toString('base64');
-html=html.replace(/<link rel="stylesheet" href="([^"]+)">/g,(_,file)=>'<style>\n'+fs.readFileSync(path.join(root,file),'utf8').replace("url('../assets/bp-v107/illustrations-biscuiterie-ia.jpg')",'url("'+atlas+'")').replace("url('../assets/bp-v108/formage-biscuiterie-ia.jpg')",'url("'+forming+'")').replace("url('../assets/bp-jus/illustrations-jus-ia.jpg')",'url("'+juice+'")').replace("url('../assets/bp-jus/bouteille-ivoire-fruits-ia.jpg')",'url("'+bottle+'")').replace("url('../assets/bp-jus/lavage-ananas-ia.jpg')",'url("'+pineapple+'")').replace("url('../assets/bp-jus/postes-preparation-ananas-ia.jpg')",'url("'+juicePreparation+'")').replace("url('../assets/bp-jus/postes-conditionnement-ananas-ia.jpg')",'url("'+juicePackaging+'")').replace("url('../assets/bp-agro/atelier-lait-ia.jpg')",'url("'+agroLait+'")').replace("url('../assets/bp-agro/atelier-tomate-ia.jpg')",'url("'+agroTomate+'")').replace("url('../assets/bp-agro/atelier-pain-ia.jpg')",'url("'+agroPain+'")').replace("url('../assets/bp-agro/atelier-huile-ia.jpg')",'url("'+agroHuile+'")').replace("url('../assets/bp-agro/postes-adhesifs-ia.jpg')",'url("'+agroAdhesifs+'")').replace("url('../assets/bp-agro/postes-hygiene-pro-ia.jpg')",'url("'+agroHygienePro+'")').replace("url('../assets/bp-agro/postes-javel-ia.jpg')",'url("'+agroJavelPostes+'")').replace("url('../assets/bp-agro/postes-engrais-ia.jpg')",'url("'+agroEngraisPostes+'")').replace("url('../assets/bp-agro/atelier-engrais-ia.jpg')",'url("'+agroEngrais+'")').replace("url('../assets/bp-agro/atelier-peinture-ia.jpg')",'url("'+agroPeinture+'")').replace("url('../assets/bp-agro/atelier-detergent-ia.jpg')",'url("'+agroDetergent+'")').replace("url('../assets/bp-agro/atelier-cosmetique-ia.jpg')",'url("'+agroCosmetique+'")').replace("url('../assets/bp-agro/atelier-savon-ia.jpg')",'url("'+agroSavon+'")').replace("url('../assets/bp-agro/atelier-betail-ia.jpg')",'url("'+agroBetail+'")').replace("url('../assets/bp-agro/atelier-arachide-ia.jpg')",'url("'+agroArachide+'")').replace("url('../assets/bp-agro/atelier-epices-ia.jpg')",'url("'+agroEpices+'")')+'\n</style>');
+// Toutes les images locales référencées par les CSS sont incorporées automatiquement.
+function inlineCss(file){
+ const cssFile=path.resolve(root,file);
+ const assetsRoot=path.join(root,'assets')+path.sep;
+ const mime={'.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.svg':'image/svg+xml','.webp':'image/webp','.gif':'image/gif'};
+ return fs.readFileSync(cssFile,'utf8').replace(/url\((['"]?)(\.\.\/assets\/[^'"\)]+)\1\)/g,(_,quote,relative)=>{
+  const asset=path.resolve(path.dirname(cssFile),relative),type=mime[path.extname(asset).toLowerCase()];
+  if(!asset.startsWith(assetsRoot)||!type)throw Error('Image locale non prise en charge : '+relative);
+  return 'url("data:'+type+';base64,'+fs.readFileSync(asset).toString('base64')+'")';
+ });
+}
+html=html.replace(/<link rel="stylesheet" href="([^"]+)">/g,(_,file)=>'<style>\n'+inlineCss(file)+'\n</style>');
 html=html.replace(/<script src="([^"]+)"><\/script>/g,(_,file)=>'<script>\n'+fs.readFileSync(path.join(root,file),'utf8').replace(/<\/script/gi,'<\\/script')+'\n</script>');
 html=html.replace('</head>','<!-- SDK Supabase : '+fs.readFileSync(path.join(root,'js/vendor/NOTICE-supabase-v108.txt'),'utf8').replace(/-->/g,'-- >')+' -->\n</head>');
 fs.writeFileSync(path.join(root,'business-plan-decouverte-v108.html'),html);fs.writeFileSync(path.join(root,'business-plan-decouverte.html'),html);console.log('V108 générée : moteurs communs, références indépendantes, SDK et restauration incorporés.');
