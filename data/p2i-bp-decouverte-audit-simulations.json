@@ -2,10 +2,109 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 20,
-  "up_avec_simulation_complete": 18,
-  "up_restant_a_alimenter": 78,
+  "simulations_affichables": 21,
+  "up_avec_simulation_complete": 19,
+  "up_restant_a_alimenter": 77,
   "scenarios": [
+    {
+      "up_id": "conserverie_legumes",
+      "configuration_id": null,
+      "nom": "Conserverie de légumes",
+      "unite_production": "kg",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_de_gamme_configuration_estimee_P2I",
+      "source_prix": "https://www.made-in-china.com/price/prodetail_Fruit-Vegetable-Processing-Machinery_VFkTlUezaaGD.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 150000,
+      "investissement_simulation_usd": 217227.2,
+      "reserve_initiale_distincte_usd": 70477.4849066667,
+      "financement": {
+        "apport": 65168.16,
+        "dette": 152059.04,
+        "apport_reserve": 70477.4849066667,
+        "apport_total": 135645.6449066667,
+        "besoin_total": 287704.6849066667,
+        "total_ressources": 287704.68490666675,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.4124,
+        "stock_lancement": 5155,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
+      },
+      "manutention": {
+        "besoins": "Bacs et chariots lavables ; transpalette pour palettes de conserves.",
+        "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [
+          "manutention"
+        ],
+        "statut": "budget_dedie",
+        "budget_dedie_usd": 2527.2,
+        "budget_mutualise_usd": null
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "production": 300000,
+          "ventes": 300000,
+          "stock_fin": 0,
+          "production_kg": 300000,
+          "ventes_kg": 300000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 375000,
+          "resultat_net_usd": -16505.063573333333,
+          "amortissements_usd": 21975.44,
+          "interets_usd": 11049.623573333332,
+          "marge_nette": -0.04401350286222222
+        },
+        {
+          "annee": 2,
+          "production": 390000,
+          "ventes": 390000,
+          "stock_fin": 0,
+          "production_kg": 390000,
+          "ventes_kg": 390000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 497250,
+          "resultat_net_usd": 7663.238081749052,
+          "amortissements_usd": 21975.44,
+          "interets_usd": 8616.678933333325,
+          "marge_nette": 0.015411237972346007
+        },
+        {
+          "annee": 3,
+          "production": 450000,
+          "ventes": 450000,
+          "stock_fin": 0,
+          "production_kg": 450000,
+          "ventes_kg": 450000,
+          "stock_fin_kg": 0,
+          "chiffre_affaires_usd": 585225,
+          "resultat_net_usd": 20244.484468512586,
+          "amortissements_usd": 21975.44,
+          "interets_usd": 6183.734293333318,
+          "marge_nette": 0.0345926514904739
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        5.820766091346741e-11,
+        1.7462298274040222e-10,
+        2.6193447411060333e-10
+      ]
+    },
     {
       "up_id": "biscuiterie",
       "configuration_id": "crackers",

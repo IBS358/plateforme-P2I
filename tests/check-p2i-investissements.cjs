@@ -13,9 +13,10 @@ for(const u of Object.values(c.P2I_BP_DONNEES.unites)){
   assert.equal(r.investissements.statut,'ventile');assert.equal(r.investissements.postes_a_chiffrer.length,0,'Plus de manutention absente sur une UP traitée');
   near(r.investissements.postes.reduce((n,p)=>n+(p.montant_usd??0),0),s.investissement);
   near(r.investissements.manutention.budget_dedie_usd,mc.budget_livre_estime_usd);
-  near(s.investissement-old.investissement,mc.mode==='budget_ajoute'?mc.budget_livre_estime_usd:0);
-  near(s.cout_production_kg[0]-old.cout_production_kg[0],mc.entretien_supplementaire_usd_an/s.production[0]);
-  assert.deepEqual(clone(s.prix),old.prix,'Aucun prix de vente relevé pour compenser les coûts');assert.deepEqual(clone(s.ventes),old.ventes);assert.equal(s.machines,old.machines);
+  const isConserve=u.up_id==='conserverie_legumes',deltaMachines=isConserve?50000:0,deltaPackaging=isConserve?v.emballage.cout_usd_par_kg-.24:0;
+  near(s.investissement-old.investissement,(mc.mode==='budget_ajoute'?mc.budget_livre_estime_usd:0)+deltaMachines);
+  near(s.cout_production_kg[0]-old.cout_production_kg[0],mc.entretien_supplementaire_usd_an/s.production[0]+deltaPackaging);
+  assert.deepEqual(clone(s.prix),old.prix,'Aucun prix de vente relevé pour compenser les coûts');assert.deepEqual(clone(s.ventes),old.ventes);assert.equal(s.machines,old.machines+deltaMachines);
   assert.ok(r.annuel[0].resultat_net<before.annuel[0].resultat_net,'Amortissement et charges effectivement déduits');
   near(r.annuel[0].amortissements,(s.investissement-mc.budget_livre_estime_usd)/s.duree_amortissement_ans+mc.budget_livre_estime_usd/5);
   near(r.financement.apport,.3*s.investissement);near(r.financement.dette,.7*s.investissement);
@@ -30,7 +31,7 @@ for(const u of Object.values(c.P2I_BP_DONNEES.unites)){
   count++;
  }
 }
-assert.equal(count,17);
+assert.equal(count,18);
 const s=clone(c.P2I_BP_DONNEES.unites.adhesifs.variantes.reference.reference),v=api.ventilerInvestissement(s);
 assert.equal(s.machines,21250);assert.equal(s.investissement,99850);assert.equal(v.manutention.statut,'budget_dedie');assert.equal(v.manutention.budget_dedie_usd,1420.52);
 near(v.postes.find(p=>p.id==='pompe_flexibles_balance_manutention').montant_usd+v.manutention.budget_dedie_usd,10000);
@@ -40,4 +41,4 @@ const dup=clone(s.investissements_detail);dup.manutention.postes_budget_mutualis
 assert.throws(()=>api.normaliserAmortissements([{id:'x',base_usd:100,duree_ans:2}]),/invalide/);
 assert.throws(()=>api.calculer({...s,amortissements_specifiques:[{id:'x',base_usd:s.investissement+1,duree_ans:5}]}),/supérieures/);
 const legacy=clone(baseline['aliments_betail__reference']);assert.equal(api.ventilerInvestissement(legacy).manutention.statut,'a_chiffrer');assert.equal(api.ventilerInvestissement(legacy).postes.find(p=>p.id==='manutention_a_chiffrer').montant_usd,null,'Ancien montant inconnu jamais remplacé par zéro');
-console.log('Investissements : 17 paniers actifs chiffrés, 3 enveloppes réaffectées sans double compte ; entretien, amortissement 5 ans, apport total avec réserve, dette, trésorerie, bilans et dossiers historiques contrôlés.');
+console.log('Investissements : 18 paniers actifs chiffrés, 3 enveloppes réaffectées sans double compte ; entretien, amortissement 5 ans, apport total avec réserve, dette, trésorerie, bilans et dossiers historiques contrôlés.');

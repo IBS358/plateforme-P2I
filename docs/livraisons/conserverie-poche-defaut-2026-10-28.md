@@ -1,5 +1,7 @@
 # Correction : la poche devient la référence affichée de la conserverie
 
+> Étape intermédiaire : les données et visuels ont depuis été rétablis. Voir `conserverie-donnees-visuels-2026-10-28.md` pour les résultats actuels et leurs limites.
+
 La précédente livraison conservait par erreur « Sauce tomate — variante en verre » comme simulation principale, avec ses résultats déficitaires. Ajouter une comparaison de conditionnements n’avait pas corrigé ce défaut.
 
 La consultation courante affiche désormais « Sauce tomate en poche stérilisable ». L’ancien profil, ses prévisions et ses visuels ne sont plus chargés par défaut. L’archive `data/archives/p2i-conserverie-verre-2026-10-28.json` conserve le profil et ses entrées sans modifier les pertes constatées. Les dossiers personnels/importés antérieurs restent calculables et transmissibles au Pro avec leurs paramètres ; ils sont signalés comme dossiers antérieurs.
