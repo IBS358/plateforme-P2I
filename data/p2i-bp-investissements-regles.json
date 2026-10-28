@@ -1,0 +1,203 @@
+{
+  "schema": "p2i.bp-investissements-regles.v1",
+  "postes": {
+    "fret": {
+      "categorie": "Transport et importation",
+      "libelle": "Fret international"
+    },
+    "assurance": {
+      "categorie": "Transport et importation",
+      "libelle": "Assurance transport"
+    },
+    "douane_transit": {
+      "categorie": "Transport et importation",
+      "libelle": "Douane et transit"
+    },
+    "transport_local": {
+      "categorie": "Transport et importation",
+      "libelle": "Transport local"
+    },
+    "genie_civil": {
+      "categorie": "Site et utilités",
+      "libelle": "Aménagements et génie civil"
+    },
+    "amenagement_site": {
+      "categorie": "Site et utilités",
+      "libelle": "Aménagement du site"
+    },
+    "utilites": {
+      "categorie": "Site et utilités",
+      "libelle": "Utilités et raccordements"
+    },
+    "installation_formation": {
+      "categorie": "Installation et démarrage",
+      "libelle": "Installation et formation"
+    },
+    "pieces_initiales": {
+      "categorie": "Installation et démarrage",
+      "libelle": "Pièces de rechange initiales"
+    },
+    "securite_environnement": {
+      "categorie": "Qualité et sécurité",
+      "libelle": "Sécurité et environnement"
+    },
+    "etudes": {
+      "categorie": "Études et essais",
+      "libelle": "Études de démarrage"
+    },
+    "etudes_et_controle": {
+      "categorie": "Études et essais",
+      "libelle": "Études et contrôle qualité"
+    },
+    "etudes_controle": {
+      "categorie": "Études et essais",
+      "libelle": "Études et contrôle qualité"
+    },
+    "etudes_essais": {
+      "categorie": "Études et essais",
+      "libelle": "Études et essais"
+    },
+    "etudes_essais_formulation": {
+      "categorie": "Études et essais",
+      "libelle": "Études et essais de formulation"
+    },
+    "etudes_formulation_essais": {
+      "categorie": "Études et essais",
+      "libelle": "Formulation et essais béton"
+    },
+    "laboratoire": {
+      "categorie": "Qualité et sécurité",
+      "libelle": "Laboratoire"
+    },
+    "laboratoire_beton": {
+      "categorie": "Qualité et sécurité",
+      "libelle": "Laboratoire produit et béton"
+    },
+    "laboratoire_dosage": {
+      "categorie": "Qualité et sécurité",
+      "libelle": "Laboratoire et dosage"
+    },
+    "pesee_ensachage_manuel": {
+      "categorie": "Auxiliaires de production",
+      "libelle": "Pesée et ensachage manuel"
+    },
+    "tri_preparation_conditionnement": {
+      "categorie": "Auxiliaires de production",
+      "libelle": "Tri, préparation et conditionnement"
+    },
+    "dosage_et_scellage_manuel": {
+      "categorie": "Auxiliaires de production",
+      "libelle": "Dosage et scellage manuel"
+    },
+    "auxiliaires_conditionnement": {
+      "categorie": "Auxiliaires de production",
+      "libelle": "Auxiliaires de conditionnement"
+    },
+    "chaine_du_froid": {
+      "categorie": "Site et utilités",
+      "libelle": "Chaîne du froid"
+    },
+    "stockage_auxiliaire": {
+      "categorie": "Auxiliaires de production",
+      "libelle": "Stockage auxiliaire"
+    },
+    "stockage_et_manuel": {
+      "categorie": "Auxiliaires de production",
+      "libelle": "Stockage et opérations manuelles"
+    },
+    "chariots_et_refroidissement": {
+      "categorie": "Manutention et auxiliaires mutualisés",
+      "libelle": "Chariots et refroidissement"
+    },
+    "pompe_flexibles_balance_manutention": {
+      "categorie": "Manutention et auxiliaires mutualisés",
+      "libelle": "Pompe, flexibles, balance et manutention"
+    },
+    "pesage_ibc_manutention": {
+      "categorie": "Manutention et auxiliaires mutualisés",
+      "libelle": "Pesage des IBC et manutention"
+    },
+    "manutention": {
+      "categorie": "Manutention",
+      "libelle": "Matériel de manutention"
+    }
+  },
+  "manutention_par_up": {
+    "jus_boissons": {
+      "besoins": "Caisses de fruits, chariots de transfert et transpalette pour les palettes de bouteilles.",
+      "postes_budget_mutualise": []
+    },
+    "biscuiterie": {
+      "besoins": "Chariots alimentaires, bacs de transfert et transpalette pour sacs de matières et cartons finis.",
+      "postes_budget_mutualise": []
+    },
+    "aliments_betail": {
+      "besoins": "Transpalette et moyens de transfert des sacs ; aide au levage selon poids des sacs et hauteur de stockage.",
+      "postes_budget_mutualise": []
+    },
+    "mini_laiterie": {
+      "besoins": "Chariots lavables et transpalette adaptés aux flux de la zone froide.",
+      "postes_budget_mutualise": []
+    },
+    "conserverie_legumes": {
+      "besoins": "Bacs et chariots lavables ; transpalette pour palettes de conserves.",
+      "postes_budget_mutualise": []
+    },
+    "boulangerie_industrielle": {
+      "besoins": "Chariots à grilles et de refroidissement ; transfert des sacs et des cartons.",
+      "postes_budget_mutualise": [
+        "chariots_et_refroidissement"
+      ]
+    },
+    "huiles_alimentaires": {
+      "besoins": "Transfert des sacs de graines et des tourteaux ; manutention des bidons et fûts selon les formats retenus.",
+      "postes_budget_mutualise": []
+    },
+    "epices": {
+      "besoins": "Bacs fermés et petits chariots ; transpalette selon les volumes de sacs et de cartons.",
+      "postes_budget_mutualise": []
+    },
+    "savonnerie": {
+      "besoins": "Chariots de séchage et de transfert ; manutention adaptée aux fûts et aux palettes de savon.",
+      "postes_budget_mutualise": []
+    },
+    "cosmetiques": {
+      "besoins": "Chariots nettoyables, aide au déplacement des fûts et transpalette pour les palettes de flacons.",
+      "postes_budget_mutualise": []
+    },
+    "detergents": {
+      "besoins": "Transpalette, chariots de bidons et aide à la manutention des fûts selon leur masse.",
+      "postes_budget_mutualise": []
+    },
+    "peintures": {
+      "besoins": "Transpalette et dispositifs adaptés aux fûts et seaux fermés ; compatibilité avec le zonage de sécurité à vérifier.",
+      "postes_budget_mutualise": []
+    },
+    "javel": {
+      "besoins": "Transpalette et chariots pour bidons ; manutention adaptée aux fûts, à la rétention et à la séparation des produits incompatibles.",
+      "postes_budget_mutualise": []
+    },
+    "adhesifs": {
+      "besoins": "Transpalette, chariots pour seaux de 5 kg et aide au déplacement des fûts de dispersion achetée.",
+      "postes_budget_mutualise": [
+        "pompe_flexibles_balance_manutention"
+      ]
+    },
+    "engrais": {
+      "besoins": "Transpalette et transfert des sacs ; aide au levage et captage des poussières selon les charges.",
+      "postes_budget_mutualise": []
+    },
+    "produits_industriels": {
+      "besoins": "Transpalette pour IBC de 1 000 kg net ; charge totale avec tare, sol, accès et besoin éventuel de levage à dimensionner.",
+      "postes_budget_mutualise": [
+        "pesage_ibc_manutention"
+      ]
+    }
+  },
+  "manutention_defaut": {
+    "besoins": "Charges, masses unitaires, distances, stockage et accès à relever pour choisir chariots, transpalette ou moyens de levage adaptés. Aucun chariot élévateur ajouté automatiquement.",
+    "postes_budget_mutualise": [],
+    "postes_budget_dedie": []
+  },
+  "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte."
+}

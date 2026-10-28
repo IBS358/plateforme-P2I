@@ -12,7 +12,7 @@ const plain=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 function normalizeInput(value,upId,config){
  if(typeof upId!=='string'||!upId.trim()||upId.length>200||config!==null&&(typeof config!=='string'||!/^[a-z0-9_-]{1,100}$/i.test(config)))throw Error('Identité UP ou variante invalide.');
  if(!plain(value)||value.up_id!==upId||value.configuration_id!==(config||null))throw Error('Les entrées financières ne correspondent pas à cette UP et cette variante.');
- const allowed=new Set([...arrayKeys,...numericKeys,...strKeys,'machines','photo','technique','qualification','complet','manquants','devise','stock_matieres_jours']);
+ const allowed=new Set([...arrayKeys,...numericKeys,...strKeys,'machines','photo','technique','qualification','complet','manquants','devise','stock_matieres_jours','investissements_detail']);
  for(const key of Object.keys(value))if(!allowed.has(key))throw Error('Paramètre non pris en charge par ce contrat : '+key);
  if(value.devise&&value.devise!=='USD')throw Error('Les entrées du moteur doivent être en USD.');
  const out={};
@@ -23,6 +23,7 @@ function normalizeInput(value,upId,config){
  if(out.unite!=='kg/h')throw Error('Ce contrat de simulation industrielle accepte une capacité en kg/h.');
  out.machines=value.machines===null?null:typeof value.machines==='number'&&Number.isFinite(value.machines)&&value.machines>=0?value.machines:null;
  if(out.machines!==null&&out.machines>out.investissement)throw Error('Le budget machines dépasse le budget global.');
+ if(value.investissements_detail!==undefined)out.investissements_detail=root.P2I_BP_SIMULATION_COMMUNE.normaliserInvestissements(value.investissements_detail);
  out.qualification='hypotheses_utilisateur_non_verifiees';
  if(out.capacite<=0||out.production.some(x=>x>out.capacite*8760))throw Error('Production incompatible avec la capacité horaire déclarée.');
  return out;
