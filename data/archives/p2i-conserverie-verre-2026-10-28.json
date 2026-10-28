@@ -1,0 +1,976 @@
+{
+  "schema": "p2i.conserverie-archive-verre.v1",
+  "date": "2026-10-28",
+  "nature": "Ancienne simulation en verre, retirée du parcours de référence ; conservation pour audit et dossiers personnels existants.",
+  "profil": {
+    "configuration_id": null,
+    "nom": "Sauce tomate — variante en verre",
+    "sous_titre": "Transformation de tomates fraîches",
+    "description": "Transformation de tomates fraîches en sauce conditionnée en bocaux de 400 g ; scénario indicatif, distinct des autres conserves de légumes.",
+    "source_equipement": "catalogue_tomate_gelgoog",
+    "prix_retenu": 100000,
+    "devise_prix": "USD",
+    "capacite_entree_kg_h": 400,
+    "production_explicite": [
+      300000,
+      390000,
+      450000
+    ],
+    "ventes_explicites": [
+      300000,
+      390000,
+      450000
+    ],
+    "prix_vente_usd_kg": [
+      1.25,
+      1.275,
+      1.3005
+    ],
+    "matieres_usd_kg_produit": 0.35,
+    "cout_process_usd_kg": 1.8223732805656467,
+    "fixes_industriels_an": 42000,
+    "personnel_hors_cout_industriel": 9660,
+    "charges_fixes_hors_industriel": 24000,
+    "stock_matieres_jours": 2,
+    "emballage_produit": {
+      "statut": "hypothese_P2I",
+      "format": "Bocal 500 ml — variante en verre, cible 400 g de sauce ; volume utile et traitement à qualifier",
+      "cout_usd_par_kg": 1.6423732805656468,
+      "composants_usd_par_kg": {
+        "bocal_fermeture": 1.4930666186960424,
+        "etiquette": 0.06398856937268754,
+        "regroupement": 0.08531809249691671
+      },
+      "mode_comptable": "inclus_dans_cout_industriel",
+      "ecologie": "Bocal en verre potentiellement réemployable ; collecte, nettoyage et recyclage locaux à vérifier.",
+      "source": "Tarif PADJI SARL 350 FCFA/bocal 500 ml + provisions P2I 15 FCFA étiquette et 20 FCFA regroupement ; 28/10/2026. Fermeture supposée incluse, prix livré CI et thermique à confirmer.",
+      "source_prix": {
+        "url": "https://www.padjisarl.com/boutique/packaging/",
+        "consulte_le": "2026-10-28",
+        "prix_bocal_xof": 350,
+        "provisions_xof": 35,
+        "masse_produit_kg": 0.4,
+        "conversion_eur_usd": 1.1193,
+        "parite_eur_xof": 655.957,
+        "qualification": "Tarif catalogue + provisions, non prix livré confirmé."
+      }
+    },
+    "complements_usd": {
+      "fret": 9000,
+      "assurance": 1200,
+      "douane_transit": 9000,
+      "transport_local": 2500,
+      "genie_civil": 15000,
+      "utilites": 12000,
+      "installation_formation": 7000,
+      "pieces_initiales": 3000,
+      "securite_environnement": 3000,
+      "etudes": 3000
+    },
+    "methodes": {
+      "production": "Ligne annoncée pour 500 kg/h de tomates fraîches ; rendement de simulation 80 %, soit 400 kg/h de sauce, non valeur fournisseur. Ventes égales à la production : aucune perte simulée.",
+      "matieres": "Matières et ingrédients 0,35 USD/kg de sauce, estimation P2I sans relevé de prix local.",
+      "process": "Transformation hors emballage conservée à 0,18 USD/kg. Emballage recalculé depuis le tarif public et les provisions P2I, inclus une seule fois. Aucun changement de prix de vente ; variante distincte de la poche et de la boîte.",
+      "personnel": "Personnel administratif distinct du personnel industriel, hypothèses P2I.",
+      "charges": "Locaux, distribution, assurance et administration : hypothèses P2I.",
+      "prix_vente": "Prix départ UP 1,25 USD/kg en année 1, +2 %/an, hypothèse de simulation et non prix de marché relevé.",
+      "complements": "Enveloppes P2I d’importation, installation, sécurité et utilités ; le contenu exact de la ligne et la fermeture des bocaux sont à vérifier.",
+      "qualite": "Le traitement thermique doit être adapté au produit, à l’emballage et à la durée de conservation visée."
+    },
+    "visuels": {
+      "atlas": "tomate",
+      "product_index": 5
+    }
+  },
+  "dossier": {
+    "manutention": {
+      "besoins": "Bacs et chariots lavables ; transpalette pour palettes de conserves.",
+      "postes_budget_mutualise": [],
+      "postes_budget_dedie": [],
+      "mode": "Achat ou location à arbitrer ; entretien, énergie et location éventuelle à chiffrer dans les charges sans double compte.",
+      "statut": "chiffree_dans_variantes",
+      "montant_usd": null,
+      "configurations_chiffrees": [
+        "reference"
+      ]
+    },
+    "emballage": {
+      "statut": "a_documenter",
+      "usage": null,
+      "presentation": null,
+      "composants": null,
+      "cout_usd_par_unite": null,
+      "ecologie": "Matière, réemploi, collecte et recyclage effectifs à qualifier; aucun bénéfice environnemental présumé.",
+      "source": null
+    },
+    "variantes": {
+      "reference": {
+        "configuration_id": "reference",
+        "nom": "Conserverie de légumes",
+        "qualification": "simulation_decouverte_calculable",
+        "reference": {
+          "up_id": "conserverie_legumes",
+          "configuration_id": null,
+          "nom": "Sauce tomate — variante en verre",
+          "sous_titre": "Transformation de tomates fraîches",
+          "description": "Transformation de tomates fraîches en sauce conditionnée en bocaux de 400 g ; scénario indicatif, distinct des autres conserves de légumes.",
+          "capacite": 400,
+          "unite": "kg/h",
+          "machines": 100000,
+          "investissement": 167227.2,
+          "production": [
+            300000,
+            390000,
+            450000
+          ],
+          "ventes": [
+            300000,
+            390000,
+            450000
+          ],
+          "prix": [
+            1.25,
+            1.275,
+            1.3005
+          ],
+          "matieres_kg": 0.35,
+          "cout_production_kg": [
+            2.31270661389898,
+            2.3487316584697955,
+            2.403923902240983
+          ],
+          "personnel": 9660,
+          "charges_fixes": 24000,
+          "croissance_personnel": 0.03,
+          "croissance_charges": 0.03,
+          "part_apport": 0.3,
+          "part_dette": 0.7,
+          "taux_interet": 0.08,
+          "duree_dette_mois": 60,
+          "duree_amortissement_ans": 10,
+          "taux_tva": 0.18,
+          "taux_is": 0.25,
+          "coussin_tresorerie": 0.1,
+          "source": "data/p2i-bp-lot-agro-01.json / conserverie_legumes : prix catalogue ou budget de référence + hypothèses P2I explicites",
+          "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 2 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+          "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+          "qualification": "simulation_decouverte_prix_et_hypotheses",
+          "investissements_detail": {
+            "schema": "p2i.bp-investissements.v1",
+            "postes": [
+              {
+                "id": "equipements",
+                "libelle": "Équipements de production",
+                "categorie": "Production",
+                "montant_usd": 100000,
+                "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+              },
+              {
+                "id": "fret",
+                "categorie": "Transport et importation",
+                "libelle": "Fret international",
+                "montant_usd": 9000,
+                "qualification": "Estimation P2I, non prix catalogue"
+              },
+              {
+                "id": "assurance",
+                "categorie": "Transport et importation",
+                "libelle": "Assurance transport",
+                "montant_usd": 1200,
+                "qualification": "Estimation P2I, non prix catalogue"
+              },
+              {
+                "id": "douane_transit",
+                "categorie": "Transport et importation",
+                "libelle": "Douane et transit",
+                "montant_usd": 9000,
+                "qualification": "Estimation P2I, non prix catalogue"
+              },
+              {
+                "id": "transport_local",
+                "categorie": "Transport et importation",
+                "libelle": "Transport local",
+                "montant_usd": 2500,
+                "qualification": "Estimation P2I, non prix catalogue"
+              },
+              {
+                "id": "genie_civil",
+                "categorie": "Site et utilités",
+                "libelle": "Aménagements et génie civil",
+                "montant_usd": 15000,
+                "qualification": "Estimation P2I, non prix catalogue"
+              },
+              {
+                "id": "utilites",
+                "categorie": "Site et utilités",
+                "libelle": "Utilités et raccordements",
+                "montant_usd": 12000,
+                "qualification": "Estimation P2I, non prix catalogue"
+              },
+              {
+                "id": "installation_formation",
+                "categorie": "Installation et démarrage",
+                "libelle": "Installation et formation",
+                "montant_usd": 7000,
+                "qualification": "Estimation P2I, non prix catalogue"
+              },
+              {
+                "id": "pieces_initiales",
+                "categorie": "Installation et démarrage",
+                "libelle": "Pièces de rechange initiales",
+                "montant_usd": 3000,
+                "qualification": "Estimation P2I, non prix catalogue"
+              },
+              {
+                "id": "securite_environnement",
+                "categorie": "Qualité et sécurité",
+                "libelle": "Sécurité et environnement",
+                "montant_usd": 3000,
+                "qualification": "Estimation P2I, non prix catalogue"
+              },
+              {
+                "id": "etudes",
+                "categorie": "Études et essais",
+                "libelle": "Études de démarrage",
+                "montant_usd": 3000,
+                "qualification": "Estimation P2I, non prix catalogue"
+              },
+              {
+                "id": "manutention",
+                "categorie": "Manutention",
+                "libelle": "Matériel de manutention",
+                "montant_usd": 2527.2,
+                "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
+              }
+            ],
+            "manutention": {
+              "besoins": "Bacs et chariots lavables ; transpalette pour palettes de conserves.",
+              "postes_budget_mutualise": [],
+              "postes_budget_dedie": [
+                "manutention"
+              ],
+              "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+              "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
+            }
+          },
+          "amortissements_specifiques": [
+            {
+              "id": "manutention",
+              "base_usd": 2527.2,
+              "duree_ans": 5
+            }
+          ],
+          "cout_emballages_stockables_unite": 1.6423732805656468,
+          "stock_emballages_jours": 15,
+          "stock_matieres_jours": 2
+        },
+        "economique_herite_up": true,
+        "economique": {
+          "budget_minimum_historique": {
+            "valeur": 90000,
+            "unite": "USD",
+            "qualification": "historique_p2i_non_verifie",
+            "source": {
+              "fichier": "up-data.js",
+              "up_id": "conserverie_legumes",
+              "champ": "capex_min"
+            },
+            "utilisation": "repere_historique_seulement_pas_une_prevision"
+          },
+          "ca_annuel_historique": {
+            "valeur": 500000,
+            "unite": "USD",
+            "qualification": "historique_p2i_non_verifie",
+            "source": {
+              "fichier": "up-data.js",
+              "up_id": "conserverie_legumes",
+              "champ": "estimated_revenue"
+            },
+            "utilisation": "repere_historique_seulement_pas_une_prevision"
+          },
+          "fourchette_ca_historique": {
+            "texte": "300000-750000",
+            "qualification": "historique_p2i_non_verifie",
+            "source": "up-data.js / conserverie_legumes / chiffre_affaires_estime"
+          },
+          "marge_brute_historique": {
+            "texte": "35-45",
+            "valeur": 40,
+            "qualification": "historique_p2i_non_verifie",
+            "source": "up-data.js / conserverie_legumes / marge_brute, gross_margin"
+          },
+          "ventilation_historique": {
+            "machines": 45000,
+            "installation": 15000,
+            "working_capital": 20000,
+            "training": 10000,
+            "total": 90000
+          },
+          "capacite_texte_historique": "20,000 boîtes",
+          "production": [
+            null,
+            null,
+            null
+          ],
+          "ventes": [
+            null,
+            null,
+            null
+          ],
+          "prix_vente_usd": [
+            null,
+            null,
+            null
+          ],
+          "couts_directs_usd": [
+            null,
+            null,
+            null
+          ],
+          "charges_exploitation_usd": [
+            null,
+            null,
+            null
+          ],
+          "capex_consolide_usd": null,
+          "qualification": "references_historiques_a_documenter",
+          "aucune_repartition_fictive_des_charges": true
+        },
+        "source": "up-data.js / conserverie_legumes",
+        "visuels": {
+          "atlas": "tomate",
+          "product_index": 5
+        },
+        "prix_equipement": {
+          "id": "catalogue_tomate_gelgoog",
+          "url": "https://www.made-in-china.com/price/prodetail_Fruit-Vegetable-Processing-Machinery_VFkTlUezaaGD.html",
+          "consulte_le": "2026-10-27",
+          "fournisseur": "Gelgoog Intelligent Technology Co., Ltd.",
+          "modele": "Ligne sauce tomate — référence 500 kg/h",
+          "prix": 100000,
+          "devise": "USD",
+          "base": "prix public annoncé pour 1 à 4 ensembles ; incoterm et périmètre à préciser",
+          "capacite": 500,
+          "unite_capacite": "kg/h de tomates entrantes, selon intitulé",
+          "fonctions": [
+            "Tri et lavage",
+            "Broyage et extraction",
+            "Cuisson",
+            "Remplissage et fermeture",
+            "Conditionnement"
+          ],
+          "qualification": "prix_catalogue_public_non_certifie",
+          "limites": "La fiche présente une gamme de 300 kg à 6 t/h ; taille exacte, traitement thermique, conditionnement en bocaux et périmètre de la ligne sont des hypothèses à rapprocher des spécifications.",
+          "nombre_machines_reference": null,
+          "quantite_retenue": 1,
+          "equipements_complementaires": []
+        },
+        "emballage": {
+          "statut": "hypothese_P2I",
+          "format": "Bocal 500 ml — variante en verre, cible 400 g de sauce ; volume utile et traitement à qualifier",
+          "cout_usd_par_kg": 1.6423732805656468,
+          "composants_usd_par_kg": {
+            "bocal_fermeture": 1.4930666186960424,
+            "etiquette": 0.06398856937268754,
+            "regroupement": 0.08531809249691671
+          },
+          "mode_comptable": "inclus_dans_cout_industriel",
+          "ecologie": "Bocal en verre potentiellement réemployable ; collecte, nettoyage et recyclage locaux à vérifier.",
+          "source": "Tarif PADJI SARL 350 FCFA/bocal 500 ml + provisions P2I 15 FCFA étiquette et 20 FCFA regroupement ; 28/10/2026. Fermeture supposée incluse, prix livré CI et thermique à confirmer.",
+          "source_prix": {
+            "url": "https://www.padjisarl.com/boutique/packaging/",
+            "consulte_le": "2026-10-28",
+            "prix_bocal_xof": 350,
+            "provisions_xof": 35,
+            "masse_produit_kg": 0.4,
+            "conversion_eur_usd": 1.1193,
+            "parite_eur_xof": 655.957,
+            "qualification": "Tarif catalogue + provisions, non prix livré confirmé."
+          }
+        },
+        "hypotheses_explicites": {
+          "production": "Ligne annoncée pour 500 kg/h de tomates fraîches ; rendement de simulation 80 %, soit 400 kg/h de sauce, non valeur fournisseur. Ventes égales à la production : aucune perte simulée.",
+          "matieres": "Matières et ingrédients 0,35 USD/kg de sauce, estimation P2I sans relevé de prix local.",
+          "process": "Transformation hors emballage conservée à 0,18 USD/kg. Emballage recalculé depuis le tarif public et les provisions P2I, inclus une seule fois. Aucun changement de prix de vente ; variante distincte de la poche et de la boîte.",
+          "personnel": "Personnel administratif distinct du personnel industriel, hypothèses P2I.",
+          "charges": "Locaux, distribution, assurance et administration : hypothèses P2I.",
+          "prix_vente": "Prix départ UP 1,25 USD/kg en année 1, +2 %/an, hypothèse de simulation et non prix de marché relevé.",
+          "complements": "Enveloppes P2I d’importation, installation, sécurité et utilités ; le contenu exact de la ligne et la fermeture des bocaux sont à vérifier.",
+          "qualite": "Le traitement thermique doit être adapté au produit, à l’emballage et à la durée de conservation visée.",
+          "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+          "manutention_chiffree": {
+            "panier": {
+              "transpalette_2500": 1,
+              "chariot_inox": 2,
+              "bacs": 20,
+              "palettes": 10
+            },
+            "mode": "budget_ajoute",
+            "lignes": [
+              {
+                "code": "transpalette_2500",
+                "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                "quantite": 1,
+                "prix_unitaire_usd": 305.57,
+                "montant_usd": 305.57,
+                "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                "source": {
+                  "fournisseur": "Axess Industries",
+                  "modele": "19.1085.01",
+                  "nom": "Transpalette manuel 2 500 kg, fourches 1 150 mm",
+                  "prix_unitaire": 273,
+                  "devise": "EUR",
+                  "base": "HT, prix public départ fournisseur",
+                  "url": "https://www.axess-industries.com/manutention/transpalettes/manuels/transpalette-manuel-professionnel-2500-kg-p-191085",
+                  "consulte_le": "2026-10-28",
+                  "limites": "Palettes accessibles et compatibles avec les fourches ; sol plan et résistant. Déplacement au sol, pas levage en hauteur ni déchargement de camion."
+                }
+              },
+              {
+                "code": "chariot_inox",
+                "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                "quantite": 2,
+                "prix_unitaire_usd": 503.76,
+                "montant_usd": 1007.52,
+                "qualification": "Prix catalogue HT converti ; quantité hypothèse P2I",
+                "source": {
+                  "fournisseur": "Matériel Horeca",
+                  "modele": "Tournus GL886",
+                  "nom": "Chariot inox à trois plateaux 800 × 530 mm",
+                  "prix_unitaire": 447.81,
+                  "eco_participation_unitaire": 2.26,
+                  "devise": "EUR",
+                  "base": "HT, prix promotionnel publié, éco-participation ajoutée par prudence",
+                  "url": "https://www.materiel-horeca.com/fr/8653-chariot-de-service-3-plateaux-tournus-800x530mm-3660171095891.html",
+                  "consulte_le": "2026-10-28",
+                  "limites": "Usage avec récipients fermés ; charge par plateau à confirmer. Ne remplace ni un chariot de four ni un équipement de levage."
+                }
+              },
+              {
+                "code": "bacs",
+                "nom": "Bacs lavables avec couvercle, petit format",
+                "quantite": 20,
+                "prix_unitaire_usd": 12,
+                "montant_usd": 240,
+                "qualification": "Estimation P2I",
+                "source": {
+                  "nom": "Bacs lavables avec couvercle, petit format",
+                  "prix_unitaire_usd": 12,
+                  "qualification": "Hypothèse P2I, non prix catalogue"
+                }
+              },
+              {
+                "code": "palettes",
+                "nom": "Palettes de stockage pour marchandises emballées",
+                "quantite": 10,
+                "prix_unitaire_usd": 25,
+                "montant_usd": 250,
+                "qualification": "Estimation P2I",
+                "source": {
+                  "nom": "Palettes de stockage pour marchandises emballées",
+                  "prix_unitaire_usd": 25,
+                  "qualification": "Hypothèse P2I, non prix catalogue"
+                }
+              }
+            ],
+            "base_achat_usd": 1803.09,
+            "frais_estimes_usd": {
+              "fret": 270.46,
+              "assurance": 18.03,
+              "import_transit": 360.62,
+              "transport_local": 75
+            },
+            "budget_livre_estime_usd": 2527.2,
+            "entretien_supplementaire_usd_an": 100,
+            "amortissement_ans": 5,
+            "qualification": "Provisions P2I : fret 15 %, assurance 1 %, import/transit 20 % de la base d’achat, transport local 75 USD. Ce ne sont ni barème douanier, ni prix livré négocié. Entretien des nouveaux moyens : max(100 USD/an, 3 % de la base achat), ajouté une seule fois aux frais industriels ; panier déjà financé : entretien déjà inclus, sans nouvelle charge. Amortissement linéaire 5 ans des moyens de manutention, convention économique non prescription fiscale. Les frais complémentaires de manutention visent son petit lot d’expédition ; les enveloppes initiales de transport sont conservées pour les équipements de production. Lors d’une réaffectation, le panier livré est prélevé une seule fois sur l’enveloppe existante.",
+            "limites": "Petits flux au sol, avec charges et accès compatibles. Les transpalettes ne remplacent pas un chariot élévateur ; palettes et zones de stockage au sol supposées. Déchargement par transporteur supposé compris dans transport local. Personnel existant affecté aux déplacements ; aucune nouvelle embauche ni location récurrente simulée. Compatibilité, entretien et prix livrés à confirmer. Pas d’équipement ATEX ni de conformité hygiénique du projet présumés. Les palettes d’IBC sont intégrées aux IBC : aucune palette supplémentaire ajoutée à ce profil."
+          },
+          "gamme": null,
+          "sources_prix_marche": [],
+          "sources_techniques_produit": [],
+          "plan_commercial": null,
+          "suggestion": null,
+          "qualite_produit": null,
+          "conventions": {
+            "apport": 0.3,
+            "dette": 0.7,
+            "taux_interet_annuel": 0.08,
+            "dette_mois": 60,
+            "amortissement_ans": 10,
+            "tva_simulation": 0.18,
+            "is_simulation": 0.25,
+            "croissance_charges": 0.03,
+            "croissance_personnel": 0.03,
+            "coussin_tresorerie": 0.1,
+            "clients_comptant": 0.4,
+            "clients_30_jours": 0.6,
+            "fournisseurs_comptant": true,
+            "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+          },
+          "complements_usd": {
+            "fret": 9000,
+            "assurance": 1200,
+            "douane_transit": 9000,
+            "transport_local": 2500,
+            "genie_civil": 15000,
+            "utilites": 12000,
+            "installation_formation": 7000,
+            "pieces_initiales": 3000,
+            "securite_environnement": 3000,
+            "etudes": 3000,
+            "manutention": 2527.2
+          },
+          "base_budget_equipements_usd": 100000,
+          "conversion": null
+        },
+        "controle_emballages": {
+          "statut": "reference_exacte_et_prix_livre_a_documenter",
+          "famille": "conserve",
+          "exigences": "Barrière, étanchéité et traitement thermique adaptés à la recette, à l’acidité mesurée et au contenant ; un doypack ordinaire ne vaut pas une poche stérilisable.",
+          "pistes_locales": [
+            {
+              "id": "nme_cartons",
+              "fournisseur": "Nouvelle MICI EMBACI",
+              "url": "https://nme.com.ci/nos-produits/cartonnerie/",
+              "offre": "Cartons et étuis sur mesure.",
+              "limite": "Ne confirme pas la disponibilité des contenants primaires ; prix et minimum à préciser.",
+              "consulte_le": "2026-10-28"
+            }
+          ],
+          "prix_livre_confirme": false,
+          "compatibilite_confirmee": false,
+          "baisse_prix_automatique": false,
+          "fabrication_auxiliaire_incluse": false,
+          "format": "Bocal 500 ml — variante en verre, cible 400 g de sauce ; volume utile et traitement à qualifier",
+          "cout_actuel_qualification": "Tarif PADJI SARL 350 FCFA/bocal 500 ml + provisions P2I 15 FCFA étiquette et 20 FCFA regroupement ; 28/10/2026. Fermeture supposée incluse, prix livré CI et thermique à confirmer."
+        }
+      }
+    },
+    "autres_variantes": "a_recenser",
+    "up_id": "conserverie_legumes",
+    "up_nom": "Conserverie de légumes",
+    "filiere_id": "agro",
+    "filiere_nom": "Agro-alimentaire & Boissons",
+    "type_activite": "fabrication",
+    "configurations": [
+      "reference"
+    ],
+    "redaction": {
+      "projet": "Transformation industrielle de légumes locaux en conserves (tomates, haricots verts, maïs doux, okra, gombo). Valorisation des produits agricoles ivoiriens pour le marché local et l'export.",
+      "positionnement": "Conserverie de légumes : Transformation industrielle de légumes locaux en conserves. Le périmètre économique est celui de cette activité; les chiffres d’une autre UP ou variante ne sont pas transposés.",
+      "procede": "Le flux de référence descriptif comprend Réception et tri des légumes → Lavage et calibrage → Blanchiement → Mise en conserve → Stérilisation → Étiquetage → Stockage. Les cadences et les interfaces doivent être dimensionnées ensemble avant de retenir les équipements.",
+      "marche": "Segments à prospecter : Supermarchés (Carrefour, Casino) ; Hôtels et restaurants ; Cantines scolaires et universitaires ; Export vers l'Europe ; Marché institutionnel (hôpitaux, prisons). Leur présence dans le référentiel ne démontre ni volume de demande, ni commande, ni prix de vente accepté.",
+      "commercial": "Axes commerciaux proposés : Cibler supermarchés, hôtels et restaurants ; Développer une gamme premium (bio, sans additifs) ; Proposer des conditionnements variés (verre, métal) ; Communiquer sur l'origine locale et la fraîcheur ; Participer aux salons agroalimentaires (SARA, SIAL) ; Exporter vers l'Europe (certification bio). Ils constituent un programme de prospection à tester, pas des débouchés acquis.",
+      "approvisionnement": "Intrants recensés : Tomates (production locale) ; Haricots verts (producteurs locaux) ; Maïs doux (régions du nord) ; Okra, gombo (sud) ; Sel, sucre, vinaigre ; Boîtes de conserve, bocaux en verre, étiquettes. Pour chaque intrant, préciser qualité, disponibilité, prix livré, rendement, conditionnement et délai de réapprovisionnement.",
+      "opportunites": "Valorisation des surplus agricoles ivoiriens ; Conservation longue durée (12-24 mois) ; Marges intéressantes (40-50%) ; Export possible vers l'Europe (normes UE) ; 🇨🇮 Légumes locaux : tomate, haricot vert, maïs doux, okra, gombo",
+      "risques": "Saisonnalité des légumes (prévoir stockage) ; Normes sanitaires strictes (HACCP, ISO) ; Concurrence des importations (Italie, Espagne) ; Gestion des déchets organiques",
+      "qualite": "Respecter les normes HACCP ; Nettoyer les équipements après chaque production ; Contrôler la température de stérilisation (121°C) ; Former le personnel aux bonnes pratiques d'hygiène ; Assurer la traçabilité des lots",
+      "utilites": "Optimiser les cycles de stérilisation ; Récupérer la chaleur des autoclaves ; Isoler les canalisations et cuves ; Utiliser des variateurs de vitesse ; Installer un chauffe-eau solaire",
+      "implantation": "Organiser en flux continu ; Séparer zones propres et sales ; Prévoir zone de stockage climatisée ; Aménager laboratoire de contrôle qualité ; Faciliter la circulation des chariots",
+      "production": "La capacité catalogue ne constitue pas un volume de ventes. Le programme de production de conserverie de légumes doit intégrer temps disponible, cadence du goulot, rendements, rebuts, arrêts et invendus.",
+      "economie": "Les repères historiques ci-dessous ne sont pas des devis ou des prévisions. Le prix de vente, les volumes et les charges doivent être documentés séparément; aucune marge historique ne sert à fabriquer un résultat net.",
+      "financement": "L’apport de 30 % et la dette de 70 % ne s’appliquent qu’à un budget explicitement retenu. Le budget minimum historique reste distinct du CAPEX consolidé; le BFR et la réserve initiale doivent être financés et présentés séparément.",
+      "bfr": "Le BFR sur 36 mois suit stocks de matières, produits finis valorisés, créances clients et dettes fournisseurs. Prix, quantités et délais doivent provenir de ce dossier.",
+      "tresorerie": "Le plan de trésorerie couvre 12 mois, à partir des encaissements et décaissements réels, du financement, des investissements et de l’échéancier de dette. Un montant absent ne vaut pas zéro.",
+      "suite": "Priorités : documenter le produit ou la prestation vendue, fixer une capacité cohérente, obtenir les prix fournisseurs, chiffrer le site et les utilités, puis vérifier prix de vente, charges et règlements avant de calculer les états.",
+      "qualification": "Redaction_interne_P2I_a_qualifier_non_etude_de_marche"
+    },
+    "produits": [],
+    "processus": [
+      "Réception et tri des légumes",
+      "Lavage et calibrage",
+      "Blanchiement",
+      "Mise en conserve",
+      "Stérilisation",
+      "Étiquetage",
+      "Stockage"
+    ],
+    "matieres": [
+      "Tomates (production locale)",
+      "Haricots verts (producteurs locaux)",
+      "Maïs doux (régions du nord)",
+      "Okra, gombo (sud)",
+      "Sel, sucre, vinaigre",
+      "Boîtes de conserve, bocaux en verre, étiquettes"
+    ],
+    "marches": [
+      "Supermarchés (Carrefour, Casino)",
+      "Hôtels et restaurants",
+      "Cantines scolaires et universitaires",
+      "Export vers l'Europe",
+      "Marché institutionnel (hôpitaux, prisons)"
+    ],
+    "machines": [
+      {
+        "nom": "Laveuse-découpeuse",
+        "role": "Nettoyage et coupe des légumes",
+        "capacite_texte": "500-2000 kg/h",
+        "utilites_texte": "Eau + électricité",
+        "fabricant": null,
+        "modele": null,
+        "prix_fournisseur_verifie_usd": null,
+        "qualification": "besoin_fonctionnel_historique_non_valide"
+      },
+      {
+        "nom": "Blanchisseur",
+        "role": "Traitement thermique (blanchiment)",
+        "capacite_texte": "500-2000 kg/h",
+        "utilites_texte": "Électricité + eau + vapeur",
+        "fabricant": null,
+        "modele": null,
+        "prix_fournisseur_verifie_usd": null,
+        "qualification": "besoin_fonctionnel_historique_non_valide"
+      },
+      {
+        "nom": "Remplisseuse-doseuse",
+        "role": "Mise en boîtes/bocaux",
+        "capacite_texte": "1000-5000 unités/h",
+        "utilites_texte": "Électricité + air comprimé",
+        "fabricant": null,
+        "modele": null,
+        "prix_fournisseur_verifie_usd": null,
+        "qualification": "besoin_fonctionnel_historique_non_valide"
+      },
+      {
+        "nom": "Scelleuse-operculieuse",
+        "role": "Fermeture hermétique",
+        "capacite_texte": "1000-5000 unités/h",
+        "utilites_texte": "Électricité",
+        "fabricant": null,
+        "modele": null,
+        "prix_fournisseur_verifie_usd": null,
+        "qualification": "besoin_fonctionnel_historique_non_valide"
+      },
+      {
+        "nom": "Autoclave",
+        "role": "Stérilisation haute température",
+        "capacite_texte": "500-2000 boîtes/batch",
+        "utilites_texte": "Électricité + vapeur + eau",
+        "fabricant": null,
+        "modele": null,
+        "prix_fournisseur_verifie_usd": null,
+        "qualification": "besoin_fonctionnel_historique_non_valide"
+      },
+      {
+        "nom": "Étiqeteuse",
+        "role": "Pose des étiquettes",
+        "capacite_texte": "1000-5000 unités/h",
+        "utilites_texte": "Électricité",
+        "fabricant": null,
+        "modele": null,
+        "prix_fournisseur_verifie_usd": null,
+        "qualification": "besoin_fonctionnel_historique_non_valide"
+      },
+      {
+        "nom": "Cartonneuse-emballeuse",
+        "role": "Conditionnement secondaire",
+        "capacite_texte": "500-2000 cartons/h",
+        "utilites_texte": "Électricité + air comprimé",
+        "fabricant": null,
+        "modele": null,
+        "prix_fournisseur_verifie_usd": null,
+        "qualification": "besoin_fonctionnel_historique_non_valide"
+      }
+    ],
+    "economie": {
+      "budget_minimum_historique": {
+        "valeur": 90000,
+        "unite": "USD",
+        "qualification": "historique_p2i_non_verifie",
+        "source": {
+          "fichier": "up-data.js",
+          "up_id": "conserverie_legumes",
+          "champ": "capex_min"
+        },
+        "utilisation": "repere_historique_seulement_pas_une_prevision"
+      },
+      "ca_annuel_historique": {
+        "valeur": 500000,
+        "unite": "USD",
+        "qualification": "historique_p2i_non_verifie",
+        "source": {
+          "fichier": "up-data.js",
+          "up_id": "conserverie_legumes",
+          "champ": "estimated_revenue"
+        },
+        "utilisation": "repere_historique_seulement_pas_une_prevision"
+      },
+      "fourchette_ca_historique": {
+        "texte": "300000-750000",
+        "qualification": "historique_p2i_non_verifie",
+        "source": "up-data.js / conserverie_legumes / chiffre_affaires_estime"
+      },
+      "marge_brute_historique": {
+        "texte": "35-45",
+        "valeur": 40,
+        "qualification": "historique_p2i_non_verifie",
+        "source": "up-data.js / conserverie_legumes / marge_brute, gross_margin"
+      },
+      "ventilation_historique": {
+        "machines": 45000,
+        "installation": 15000,
+        "working_capital": 20000,
+        "training": 10000,
+        "total": 90000
+      },
+      "capacite_texte_historique": "20,000 boîtes",
+      "production": [
+        null,
+        null,
+        null
+      ],
+      "ventes": [
+        null,
+        null,
+        null
+      ],
+      "prix_vente_usd": [
+        null,
+        null,
+        null
+      ],
+      "couts_directs_usd": [
+        null,
+        null,
+        null
+      ],
+      "charges_exploitation_usd": [
+        null,
+        null,
+        null
+      ],
+      "capex_consolide_usd": null,
+      "qualification": "references_historiques_a_documenter",
+      "aucune_repartition_fictive_des_charges": true
+    },
+    "sources": [
+      {
+        "fichier": "filieres.html",
+        "champ": "filieresData / agro / conserverie_legumes",
+        "qualification": "identite_et_rattachement_confirmes"
+      },
+      {
+        "fichier": "up-data.js",
+        "champ": "conserverie_legumes",
+        "qualification": "description_et_estimations_historiques_non_verifiees"
+      },
+      {
+        "fichier": "machines-data.js",
+        "champ": "conserverie_legumes",
+        "qualification": "besoins_fonctionnels_non_selection_fournisseur"
+      }
+    ],
+    "manquants": [
+      "Configuration fournisseur vérifiable, capacité effective, utilités et interfaces",
+      "Prix fournisseurs, incoterms, dates et coûts complémentaires",
+      "Volumes et prix de vente sur trois ans",
+      "Recettes/nomenclatures ou coûts par prestation, personnel et charges",
+      "Fiscalité applicable et échéancier de financement",
+      "Stocks, pertes, conservation et délais de règlement selon activité"
+    ],
+    "statut": "simulation_decouverte_disponible",
+    "controle_emballages": {
+      "statut": "reference_exacte_et_prix_livre_a_documenter",
+      "famille": "conserve",
+      "exigences": "Barrière, étanchéité et traitement thermique adaptés à la recette, à l’acidité mesurée et au contenant ; un doypack ordinaire ne vaut pas une poche stérilisable.",
+      "pistes_locales": [
+        {
+          "id": "nme_cartons",
+          "fournisseur": "Nouvelle MICI EMBACI",
+          "url": "https://nme.com.ci/nos-produits/cartonnerie/",
+          "offre": "Cartons et étuis sur mesure.",
+          "limite": "Ne confirme pas la disponibilité des contenants primaires ; prix et minimum à préciser.",
+          "consulte_le": "2026-10-28"
+        }
+      ],
+      "prix_livre_confirme": false,
+      "compatibilite_confirmee": false,
+      "baisse_prix_automatique": false,
+      "fabrication_auxiliaire_incluse": false
+    },
+    "comparaison_conditionnements": {
+      "schema": "p2i.conserverie-conditionnements.v1",
+      "date": "2026-10-28",
+      "piste_prioritaire": "poche_sterilisable",
+      "masse_produit_kg": 0.4,
+      "sources": {
+        "poche": {
+          "fournisseur": "Chinee Packing Bag Co., Ltd.",
+          "url": "https://www.china-packagingbags.com/product/121c-high-temp-retort-pouch-for-ready-meal-soup-sauce-packaging/",
+          "consulte_le": "2026-10-28",
+          "reference": "PB-20728, PET/NY/AL/RCPP, thermoscellage ; 121 °C annoncé",
+          "prix_min": 0.03,
+          "prix_max": 0.08,
+          "devise": "USD",
+          "minimum_pieces": 10000,
+          "limites": "Prix de gamme selon dimensions, matériau et impression ; format 400 g, procédé et frais livrés non confirmés."
+        },
+        "boite": {
+          "fournisseur": "Qingdao Baixi Industry Co., Ltd.",
+          "url": "https://baixican.en.made-in-china.com/product-group/leuGfFsAgHWa/Tin-Cans-catalog-1.html",
+          "consulte_le": "2026-10-28",
+          "reference": "425g 300*407 Empty Metal Tin Can for Food Canned Tomato Sauce",
+          "prix_min": 0.08,
+          "prix_max": 0.1,
+          "devise": "USD",
+          "minimum_pieces": 50000,
+          "limites": "FOB annoncé ; inclusion fond/couvercle, dimensions, vernis intérieur et couple boîte/sertisseuse à préciser."
+        },
+        "verre": {
+          "fournisseur": "PADJI SARL",
+          "url": "https://www.padjisarl.com/boutique/packaging/",
+          "consulte_le": "2026-10-28",
+          "reference": "Bocal 500 ml, 350 FCFA publiés ; cible de remplissage 400 g à vérifier",
+          "prix_min": 350,
+          "prix_max": 350,
+          "devise": "XOF",
+          "minimum_pieces": null,
+          "limites": "Boutique au Cameroun ; fourniture vers Abidjan annoncée sur une autre page. Prix livré CI, couvercle, minimum et compatibilité thermique non confirmés."
+        }
+      },
+      "options": [
+        {
+          "id": "poche_sterilisable",
+          "nom": "Poche stérilisable — piste prioritaire",
+          "source_id": "poche",
+          "prix_retenu": 0.08,
+          "fret_usd_piece": 0.015,
+          "assurance_taux": 0.01,
+          "provision_import_transit_taux": 0.2,
+          "livraison_usd_piece": 0.005,
+          "marquage_usd_piece": 0.02,
+          "regroupement_usd_piece": 0.025,
+          "pertes_taux": null,
+          "energie_conditionnement_usd_piece": null,
+          "main_oeuvre_conditionnement_usd_piece": null,
+          "capex_adaptation_usd": null,
+          "amortissement_ans": null,
+          "entretien_annuel_usd": null,
+          "volume_annuel_pieces": null,
+          "qualite": {
+            "protection_produit": "a_documenter",
+            "conservation_visee": "a_documenter",
+            "fermeture": "a_documenter",
+            "compatibilite_machines": "a_documenter",
+            "presentation_tracabilite": "a_documenter"
+          },
+          "qualification": "Borne haute du prix catalogue de gamme + provisions P2I ; comparaison provisoire hors adaptations et exploitation du conditionnement.",
+          "approvisionnement_local_confirme": false,
+          "adaptations": [
+            "Remplissage et thermoscellage propres à la poche, zone de soudure propre, contrôle d’étanchéité, film et barème thermique adaptés ; pas de bouchon ajouté par défaut."
+          ],
+          "source": {
+            "fournisseur": "Chinee Packing Bag Co., Ltd.",
+            "url": "https://www.china-packagingbags.com/product/121c-high-temp-retort-pouch-for-ready-meal-soup-sauce-packaging/",
+            "consulte_le": "2026-10-28",
+            "reference": "PB-20728, PET/NY/AL/RCPP, thermoscellage ; 121 °C annoncé",
+            "prix_min": 0.03,
+            "prix_max": 0.08,
+            "devise": "USD",
+            "minimum_pieces": 10000,
+            "limites": "Prix de gamme selon dimensions, matériau et impression ; format 400 g, procédé et frais livrés non confirmés."
+          },
+          "composants_usd_piece": {
+            "contenant_fermeture": 0.08,
+            "fret": 0.015,
+            "assurance": 0.0008,
+            "import_transit": 0.01916,
+            "livraison_locale": 0.005,
+            "marquage": 0.02,
+            "regroupement": 0.025
+          },
+          "cout_approvisionnement_estime_usd_piece": 0.16496,
+          "cout_approvisionnement_estime_usd_kg": 0.4124,
+          "cout_complet_comparatif_usd_piece": null,
+          "commande_minimale_achat_usd": 800,
+          "couts_manquants": [
+            "pertes_taux",
+            "energie_conditionnement_usd_piece",
+            "main_oeuvre_conditionnement_usd_piece",
+            "capex_adaptation_usd",
+            "amortissement_ans",
+            "entretien_annuel_usd",
+            "volume_annuel_pieces"
+          ],
+          "admissible_comparaison": false,
+          "statut": "a_completer",
+          "resultat_net": null,
+          "roi": null
+        },
+        {
+          "id": "boite_metal",
+          "nom": "Boîte métallique — alternative",
+          "source_id": "boite",
+          "prix_retenu": 0.1,
+          "fret_usd_piece": 0.06,
+          "assurance_taux": 0.01,
+          "provision_import_transit_taux": 0.2,
+          "livraison_usd_piece": 0.005,
+          "marquage_usd_piece": 0.02,
+          "regroupement_usd_piece": 0.02,
+          "pertes_taux": null,
+          "energie_conditionnement_usd_piece": null,
+          "main_oeuvre_conditionnement_usd_piece": null,
+          "capex_adaptation_usd": null,
+          "amortissement_ans": null,
+          "entretien_annuel_usd": null,
+          "volume_annuel_pieces": null,
+          "qualite": {
+            "protection_produit": "a_documenter",
+            "conservation_visee": "a_documenter",
+            "fermeture": "a_documenter",
+            "compatibilite_machines": "a_documenter",
+            "presentation_tracabilite": "a_documenter"
+          },
+          "qualification": "Borne haute du prix catalogue de gamme + provisions P2I ; comparaison provisoire hors adaptations et exploitation du conditionnement.",
+          "approvisionnement_local_confirme": false,
+          "adaptations": [
+            "Remplissage, sertisseuse et outillage adaptés au couple boîte/couvercle, contrôle du double serti et traitement thermique ; ne pas cumuler une fermeture déjà incluse dans la ligne."
+          ],
+          "source": {
+            "fournisseur": "Qingdao Baixi Industry Co., Ltd.",
+            "url": "https://baixican.en.made-in-china.com/product-group/leuGfFsAgHWa/Tin-Cans-catalog-1.html",
+            "consulte_le": "2026-10-28",
+            "reference": "425g 300*407 Empty Metal Tin Can for Food Canned Tomato Sauce",
+            "prix_min": 0.08,
+            "prix_max": 0.1,
+            "devise": "USD",
+            "minimum_pieces": 50000,
+            "limites": "FOB annoncé ; inclusion fond/couvercle, dimensions, vernis intérieur et couple boîte/sertisseuse à préciser."
+          },
+          "composants_usd_piece": {
+            "contenant_fermeture": 0.1,
+            "fret": 0.06,
+            "assurance": 0.001,
+            "import_transit": 0.0322,
+            "livraison_locale": 0.005,
+            "marquage": 0.02,
+            "regroupement": 0.02
+          },
+          "cout_approvisionnement_estime_usd_piece": 0.2382,
+          "cout_approvisionnement_estime_usd_kg": 0.5954999999999999,
+          "cout_complet_comparatif_usd_piece": null,
+          "commande_minimale_achat_usd": 5000,
+          "couts_manquants": [
+            "pertes_taux",
+            "energie_conditionnement_usd_piece",
+            "main_oeuvre_conditionnement_usd_piece",
+            "capex_adaptation_usd",
+            "amortissement_ans",
+            "entretien_annuel_usd",
+            "volume_annuel_pieces"
+          ],
+          "admissible_comparaison": false,
+          "statut": "a_completer",
+          "resultat_net": null,
+          "roi": null
+        }
+      ],
+      "option_moins_couteuse_admissible": null,
+      "baisse_prix_automatique": false,
+      "calcul_rentabilite_automatique": false,
+      "limites": "Les frais sont des provisions P2I, pas des prix livrés confirmés ni des droits officiels. Formats exacts et fermetures à préciser ; aucun rabais de quantité présumé. Aucun ROI des nouvelles options calculé avant consolidation de leur configuration."
+    }
+  }
+}

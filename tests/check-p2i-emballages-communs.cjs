@@ -21,5 +21,5 @@ let result=comparer(options,def.sources,.4,fx);assert.equal(result.option_moins_
 options[0].qualite.fermeture='incompatible';assert.equal(comparer(options,def.sources,.4,fx).option_moins_couteuse_admissible,'boite_metal','La moins chère est exclue si incompatible');
 options[0].qualite.fermeture='hypothese_p2i';options[0].capex_adaptation_usd=1000000;assert.equal(comparer(options,def.sources,.4,fx).option_moins_couteuse_admissible,'boite_metal','Coût machines inclus dans le classement économique');
 const bad=clone(def.options);bad[0].prix_retenu=.001;assert.throws(()=>comparer(bad,def.sources,.4,fx),/fourchette/);
-const g=data.unites.conserverie_legumes.variantes.reference.emballage;assert.ok(Math.abs(g.cout_usd_par_kg-385*1.1193/655.957/.4)<1e-12);assert.equal(g.source_prix.prix_bocal_xof,350);
+const g=require('../data/archives/p2i-conserverie-verre-2026-10-28.json').dossier.variantes.reference.emballage;assert.ok(Math.abs(g.cout_usd_par_kg-385*1.1193/655.957/.4)<1e-12);assert.equal(g.source_prix.prix_bocal_xof,350);
 console.log('Emballages communs : 96 UP suivies ; qualité, coûts complets, hypothèses admises, prix sourcés, absence de baisse automatique et priorité poche contrôlés.');

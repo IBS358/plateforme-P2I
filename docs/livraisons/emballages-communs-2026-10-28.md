@@ -1,5 +1,7 @@
 # Emballages : règle commune, stock initial et priorité à la poche stérilisable
 
+> Compte rendu de la livraison précédente. La correction « poche par défaut » retire désormais le verre du parcours courant et archive ses chiffres. Voir `conserverie-poche-defaut-2026-10-28.md` pour l’état actuel.
+
 Livraison sur `refonte-bp-decouverte-17-rubriques`, base `6f36f17`. Main n’est pas modifiée.
 
 ## Fonctionnement

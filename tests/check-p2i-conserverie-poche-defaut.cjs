@@ -1,0 +1,13 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const data=require('../data/p2i-bp-decouverte-donnees.json'),archive=require('../data/archives/p2i-conserverie-verre-2026-10-28.json');
+const u=data.unites.conserverie_legumes,v=u.variantes.reference;
+assert.equal(v.reference.nom,'Sauce tomate en poche stérilisable');assert.equal(v.reference.complet,false);assert.equal(v.reference.production,undefined);assert.ok(v.reference.manquants.length>=4);
+assert.equal(u.economie.budget_minimum_historique.valeur,null);assert.equal(u.economie.marge_brute_historique.valeur,null);assert.equal(u.economie.ca_annuel_historique.valeur,null);
+assert.equal(v.visuels,undefined,'Pas de photo de bocal attribuée à la nouvelle poche');assert.equal(v.prix_equipement,undefined,'Pas de configuration tarifée du verre transposée');
+assert.ok(u.processus.includes('Thermoscellage'));assert.ok(u.processus.every(x=>!/bocal|capsul|sertiss/i.test(x)));
+const c=vm.createContext({});c.window=c;for(const f of ['js/p2i-economic-result-engine.js','js/p2i-financial-engine.js','js/p2i-bp-decouverte-bfr-engine.js','js/p2i-bp-decouverte-tresorerie-12-mois.js','js/p2i-bp-decouverte-simulation-commune.js','js/p2i-bp-decouverte-v108-contexte.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);
+const input=archive.dossier.variantes.reference.reference;const normalized=c.P2I_BP_V108_CONTEXTE.normalizeInput(input,'conserverie_legumes',null);const old=c.P2I_BP_SIMULATION_COMMUNE.calculer(normalized);
+assert.match(input.nom,/variante en verre/);assert.ok(old.annuel[0].resultat_net<0,'Les pertes historiques restent traçables, pas réécrites en bénéfice');assert.equal(old.entrees.prix[0],1.25);assert.ok(old.bilans.every(x=>Math.abs(x.ecart)<.02));
+assert.throws(()=>c.P2I_BP_SIMULATION_COMMUNE.calculer(v.reference),/Hypothèse|requises/);
+console.log('Conserverie : poche par défaut, aucun chiffre ou visuel du verre transposé, données manquantes explicites et ancien dossier financier recalculable.');
