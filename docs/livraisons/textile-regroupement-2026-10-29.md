@@ -13,7 +13,7 @@ Ouvrir `OUVRIR_Textile.html`, puis choisir la version. Le bouton Aller au Pro tr
 | Linge de maison — draps brodés | 28 | 31 | 142,327.82 | 20.29 % | 23.78 % | 25.53 % |
 | Uniformes — chemises de travail simples | 32 | 19 | 102,296.45 | 13.99 % | 19.75 % | 22.29 % |
 | Uniformes — chemises de travail brodées | 34 | 19 | 156,610.09 | 13.46 % | 19.54 % | 22.24 % |
-| Prêt-à-porter — tuniques en série | 32 | 19 | 102,296.45 | 19.85 % | 24.94 % | 27.15 % |
+| Prêt-à-porter — tuniques en série | 30 | 19 | 96,028.37 | 20.02 % | 25.06 % | 27.25 % |
 
 Version mixte A1 : 36 000 articles produits, 34 920 vendus, CA 539 514 USD, résultat net après IS 91 623,34 USD. A2 : CA 693 396 USD, RN 148 094,92 USD ; A3 : CA 803 709 USD, RN 189 192,92 USD.
 
@@ -25,7 +25,7 @@ Version mixte : 20 piqueuses, 4 surjeteuses, 2 boutonnières, 2 ciseaux électri
 
 Le mix, en nombre d’articles, est 35 % draps simples, 15 % draps brodés, 25 % chemises simples, 15 % chemises brodées et 10 % tuniques. Les prix et coûts sont pondérés par ces parts, sans addition des CA des anciens ateliers. Part brodée 30 %. Les temps moyens par article sont 2,5 min de coupe, 26 min de piquage, 3 min de surjet, 1 min de boutonnière et 4 min de repassage ; ce sont des hypothèses P2I. Avec 65 % de temps productif, les vingt piqueuses limitent la cadence mixte à 30 pièces/h, arrondie à l’entier inférieur.
 
-Les draps simples n’achètent ni surjeteuse ni boutonnière. Les draps brodés ajoutent deux brodeuses et la préparation des motifs ; les chemises brodées conservent les moyens vêtements. Les motifs sont petits, dans le champ des cadres ; pas de broderie intégrale d’un drap. Le prêt-à-porter est sur tissu tissé acheté, hors tricotage/teinture. Aucun vêtement EPI certifié présumé.
+Les draps simples n’achètent ni surjeteuse ni boutonnière. Les tuniques à encolure ronde sans boutonnage n’achètent pas de boutonnière : 30 machines et 8 postes. Les draps brodés ajoutent deux brodeuses et la préparation des motifs ; les chemises brodées conservent les moyens vêtements. Les motifs sont petits, dans le champ des cadres ; pas de broderie intégrale d’un drap. Le prêt-à-porter est sur tissu tissé acheté, hors tricotage/teinture. Aucun vêtement EPI certifié présumé.
 
 Broderie : 5 000 points par motif, 600 points/min effectifs et 3 min de préparation par tête, hypothèses P2I. Le titre catalogue annonce quatre têtes mais l’introduction en cite trois : six têtes productives au total sont retenues prudemment pour les deux machines. Un motif de 20 000 points réduit réellement la cadence dans le test de sensibilité. Les temps de contrôle et manutention demandent une organisation adaptée ; pas de garantie de productivité.
 
@@ -75,3 +75,15 @@ Contrôles : 29 suites Node ; quatre recettes Chromium (général 96 UP, emballa
 Demande et prix départ atelier réels, tissu/laize/qualité et coût livré, supplément accepté pour broderie, salaires et organisation locale, utilités installées, minimums/délais de matières et emballages, détails et disponibilité de la brodeuse, cadences mesurées. Ces éléments ne sont pas présentés comme validés. Les trois nouvelles UP requièrent encore leur configuration tarifée et leurs hypothèses économiques propres.
 
 Travail exclusivement sur `refonte-bp-decouverte-17-rubriques` ; `main` inchangée.
+
+## Correction du bloc 17 — produits et postes propres à chaque version
+
+Chaque bloc 17 commence par le produit sélectionné, son illustration, son nom et la liste des machines avec leurs quantités. Les draps blancs utilisent l’atlas linge, les chemises bleu marine un nouvel atlas dédié, les tuniques le coton imprimé ; les broderies, contrôles et emballages suivent le produit. Les numéros suivent les postes effectivement retenus : mixte 11, drap simple 7, drap brodé 9, chemise simple 9, chemise brodée 11, tunique 8. Réutiliser un modèle de machine ne signifie pas réutiliser un visuel de produit inadapté.
+
+Les deux boutonnières inutiles aux tuniques photographiées sans boutonnage sont retirées : baisse de 6 268,08 USD du budget machines et du CAPEX, sans changement des prix, matières ni volumes ; financement, intérêts, amortissements et états recalculés. Les cinq autres versions gardent exactement leurs entrées financières. Les anciens dossiers gardant 32 machines restent importables, sans afficher la nomenclature de la nouvelle version à 30 machines.
+
+Nouvel asset `assets/bp-agro/postes-textile-productions-ia.jpg` : atlas 4 × 4, générateur intégré, prompt complet dans `textile-productions-generation.json`. Personnes ivoiriennes, illustrations IA de fonctions, pas photos contractuelles des machines fournisseur. Les contrôles Chromium examinent le bloc 17 après chaque clic de version, les familles d’images, titres, quantités et reprise des anciennes entrées.
+
+### Intérêt des trois nouvelles UP
+
+Les quatre anciennes UP sont réunies dans une seule famille, libérant trois places. Le tricotage transforme des fils en étoffes à mailles, distinctes du tissu tissé : intérêt potentiel d’approvisionnement de la confection en maille. Les non-tissés consolident des nappes de fibres sans tissage/tricotage : pistes de garnissage, protection ou usages techniques non médicaux, à qualifier. Le recyclage textile trie et effiloche des chutes propres : valorisation possible de sous-produits en fibres secondaires, sous réserve de débouchés et de qualité. Ce sont des logiques industrielles complémentaires, pas des démonstrations de demande locale ou de rentabilité. Leurs configurations tarifées et prévisions propres restent à compléter.

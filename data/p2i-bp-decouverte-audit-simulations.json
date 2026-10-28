@@ -2250,16 +2250,16 @@
       "accord_fournisseur_exige": false,
       "devis_exige": false,
       "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 39287.43,
-      "investissement_simulation_usd": 102296.45000000001,
-      "reserve_initiale_distincte_usd": 40131.89896618055,
+      "budget_equipements_usd": 33019.35,
+      "investissement_simulation_usd": 96028.37,
+      "reserve_initiale_distincte_usd": 39422.41324984722,
       "financement": {
-        "apport": 30688.935,
-        "dette": 71607.515,
-        "apport_reserve": 40131.89896618055,
-        "apport_total": 70820.83396618055,
-        "besoin_total": 142428.34896618058,
-        "total_ressources": 142428.34896618055,
+        "apport": 28808.511,
+        "dette": 67219.859,
+        "apport_reserve": 39422.41324984722,
+        "apport_total": 68230.92424984722,
+        "besoin_total": 135450.7832498472,
+        "total_ressources": 135450.7832498472,
         "hypothese_reserve_financee_par_apport": true
       },
       "emballages": {
@@ -2288,10 +2288,10 @@
           "ventes": 22800,
           "stock_fin": 1200,
           "chiffre_affaires_usd": 410400,
-          "resultat_net_usd": 81473.2301825,
-          "amortissements_usd": 10640.547,
-          "interets_usd": 5203.4794233333305,
-          "marge_nette": 0.19852151603923002
+          "resultat_net_usd": 82182.46343450001,
+          "amortissements_usd": 10013.739,
+          "interets_usd": 4884.643087333335,
+          "marge_nette": 0.20024966723806045
         },
         {
           "annee": 2,
@@ -2299,10 +2299,10 @@
           "ventes": 30000,
           "stock_fin": 1200,
           "chiffre_affaires_usd": 550800,
-          "resultat_net_usd": 137362.9760321972,
-          "amortissements_usd": 10640.547,
-          "interets_usd": 4057.7591833333304,
-          "marge_nette": 0.249388119157947
+          "resultat_net_usd": 138019.5574121972,
+          "amortissements_usd": 10013.739,
+          "interets_usd": 3809.1253433333336,
+          "marge_nette": 0.25058016959367685
         },
         {
           "annee": 3,
@@ -2310,10 +2310,10 @@
           "ventes": 34000,
           "stock_fin": 1200,
           "chiffre_affaires_usd": 636724.8,
-          "resultat_net_usd": 172895.63337304146,
-          "amortissements_usd": 10640.547,
-          "interets_usd": 2912.038943333332,
-          "marge_nette": 0.27153902812179054
+          "resultat_net_usd": 173499.56288104143,
+          "amortissements_usd": 10013.739,
+          "interets_usd": 2733.607599333334,
+          "marge_nette": 0.2724875218949245
         }
       ],
       "controles": {
@@ -2324,7 +2324,7 @@
       },
       "ecart_bilans": [
         5.820766091346741e-11,
-        0,
+        5.820766091346741e-11,
         0
       ]
     }

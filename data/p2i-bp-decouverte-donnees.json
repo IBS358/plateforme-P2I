@@ -13491,6 +13491,7 @@
             "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
             "mutualisation": "Versions alternatives d’un même projet. Dans la version mixte, part d’articles brodés 30 %, moyenne pondérée des coûts/prix et des minutes par poste ; machines, bâtiment, manutention et salaires comptés une seule fois.",
             "effectif": "20 postes de piquage, 2 de coupe, jusqu’à 4 de surjet, 2 de boutonnière et 4 de repassage ; polyvalence à organiser. Les postes techniques ne sont pas assimilés automatiquement à autant de salariés à temps plein.",
+            "produits_reference": "Draps simples et brodés, chemises de travail simples et brodées, tuniques en coton imprimé. Les postes sont mutualisés entre séries ; les débits ne s’additionnent pas.",
             "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
             "dimensionnement_textile": {
               "capacite_unites_h": 30,
@@ -13941,16 +13942,16 @@
           "economique": null,
           "source": "up-data.js / confection",
           "visuels": {
-            "atlas": "textile",
-            "product_index": 3,
+            "atlas": "linge",
+            "product_index": 7,
             "indices": [
+              1,
+              2,
+              3,
               4,
               5,
               6,
-              7,
-              10,
-              11,
-              12
+              7
             ]
           },
           "redaction": {
@@ -13974,62 +13975,62 @@
             "base": "875 EUR HT par piqueuse complète ; toutes les autres machines tarifées séparément. Ensemble de machines, pas prix d’une ligne intégrée.",
             "limites": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement. ",
             "fonctions": [
-              "Réception et contrôle des tissus",
-              "Patronage et placement",
-              "Coupe",
+              "Réception du coton blanc",
+              "Placement des draps",
+              "Coupe des draps",
               "Ourlets des draps",
-              "Repassage",
-              "Contrôle qualité",
-              "Conditionnement"
+              "Repassage des draps",
+              "Contrôle des draps",
+              "Conditionnement des draps"
             ],
             "postes": [
               {
                 "description": "Tissus achetés, laize et composition à contrôler ; rayonnage dans les auxiliaires.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 4
+                  "atlas": "linge",
+                  "index": 1
                 }
               },
               {
                 "description": "Tables de préparation et informatique dans les auxiliaires.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 5
+                  "atlas": "linge",
+                  "index": 2
                 }
               },
               {
                 "description": "2 ciseaux RASOR DS504 ; passes de faible épaisseur, pas de matelassage épais.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 6
+                  "atlas": "linge",
+                  "index": 3
                 }
               },
               {
                 "description": "20 JUKI DDL-8700 ; postes partagés par programme, sans cumul de débits.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 7
+                  "atlas": "linge",
+                  "index": 4
                 }
               },
               {
                 "description": "4 ensembles BATTISTELLA KER/2 avec chaudière et fer inclus.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 10
+                  "atlas": "linge",
+                  "index": 5
                 }
               },
               {
                 "description": "Contrôle des dimensions, coutures et motifs selon version.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 11
+                  "atlas": "linge",
+                  "index": 6
                 }
               },
               {
                 "description": "Bandes papier et cartons groupés ; coût inclus par pièce, stock vide 15 jours.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 12
+                  "atlas": "linge",
+                  "index": 7
                 }
               }
             ],
@@ -14087,6 +14088,7 @@
             "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
             "mutualisation": "Versions alternatives d’un même projet. Dans la version mixte, part d’articles brodés 30 %, moyenne pondérée des coûts/prix et des minutes par poste ; machines, bâtiment, manutention et salaires comptés une seule fois.",
             "effectif": "20 postes de piquage, 2 de coupe, jusqu’à 4 de surjet, 2 de boutonnière et 4 de repassage ; polyvalence à organiser. Les postes techniques ne sont pas assimilés automatiquement à autant de salariés à temps plein.",
+            "produits_reference": "Drap plat blanc 180 × 290 cm, double ourlet ; ni broderie, ni surjet, ni boutonnière.",
             "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
             "dimensionnement_textile": {
               "capacite_unites_h": 39,
@@ -14496,15 +14498,15 @@
             "atlas": "textile-broderie",
             "product_index": 1,
             "indices": [
+              1,
+              2,
+              3,
+              5,
+              13,
               4,
               5,
-              6,
-              5,
-              4,
-              7,
-              10,
-              7,
-              8
+              14,
+              15
             ]
           },
           "redaction": {
@@ -14528,36 +14530,36 @@
             "base": "875 EUR HT par piqueuse complète ; toutes les autres machines tarifées séparément. Ensemble de machines, pas prix d’une ligne intégrée.",
             "limites": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement. Titre brodeuse 4 têtes, introduction 3 têtes : configuration à préciser, cadence sous hypothèses.",
             "fonctions": [
-              "Réception et contrôle des tissus",
-              "Patronage et placement",
-              "Coupe",
+              "Réception du coton blanc",
+              "Placement des draps",
+              "Coupe des draps",
               "Préparation des motifs et cadrage",
-              "Broderie multi-têtes",
+              "Broderie des monogrammes sur draps",
               "Ourlets des draps",
-              "Repassage",
-              "Contrôle qualité",
-              "Conditionnement"
+              "Repassage des draps",
+              "Contrôle des draps brodés",
+              "Conditionnement des draps brodés"
             ],
             "postes": [
               {
                 "description": "Tissus achetés, laize et composition à contrôler ; rayonnage dans les auxiliaires.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 4
+                  "atlas": "linge",
+                  "index": 1
                 }
               },
               {
                 "description": "Tables de préparation et informatique dans les auxiliaires.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 5
+                  "atlas": "linge",
+                  "index": 2
                 }
               },
               {
                 "description": "2 ciseaux RASOR DS504 ; passes de faible épaisseur, pas de matelassage épais.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 6
+                  "atlas": "linge",
+                  "index": 3
                 }
               },
               {
@@ -14570,36 +14572,36 @@
               {
                 "description": "2 BC-1504C, 8 têtes annoncées mais 6 productives retenues prudemment ; 5 000 points par motif supposés.",
                 "visuel": {
-                  "atlas": "textile-broderie",
-                  "index": 4
+                  "atlas": "textile-productions",
+                  "index": 13
                 }
               },
               {
                 "description": "20 JUKI DDL-8700 ; postes partagés par programme, sans cumul de débits.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 7
+                  "atlas": "linge",
+                  "index": 4
                 }
               },
               {
                 "description": "4 ensembles BATTISTELLA KER/2 avec chaudière et fer inclus.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 10
+                  "atlas": "linge",
+                  "index": 5
                 }
               },
               {
                 "description": "Contrôle des dimensions, coutures et motifs selon version.",
                 "visuel": {
-                  "atlas": "textile-broderie",
-                  "index": 7
+                  "atlas": "textile-productions",
+                  "index": 14
                 }
               },
               {
                 "description": "Bandes papier et cartons groupés ; coût inclus par pièce, stock vide 15 jours.",
                 "visuel": {
-                  "atlas": "textile-broderie",
-                  "index": 8
+                  "atlas": "textile-productions",
+                  "index": 15
                 }
               }
             ],
@@ -14669,6 +14671,7 @@
             "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
             "mutualisation": "Versions alternatives d’un même projet. Dans la version mixte, part d’articles brodés 30 %, moyenne pondérée des coûts/prix et des minutes par poste ; machines, bâtiment, manutention et salaires comptés une seule fois.",
             "effectif": "20 postes de piquage, 2 de coupe, jusqu’à 4 de surjet, 2 de boutonnière et 4 de repassage ; polyvalence à organiser. Les postes techniques ne sont pas assimilés automatiquement à autant de salariés à temps plein.",
+            "produits_reference": "Drap plat blanc 180 × 290 cm, petit monogramme brodé près de l’ourlet ; ni surjet ni boutonnière.",
             "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
             "dimensionnement_textile": {
               "capacite_unites_h": 31,
@@ -15079,15 +15082,15 @@
             "atlas": "textile",
             "product_index": 2,
             "indices": [
+              0,
+              1,
+              2,
+              3,
               4,
               5,
               6,
               7,
-              8,
-              9,
-              10,
-              11,
-              12
+              8
             ]
           },
           "redaction": {
@@ -15111,78 +15114,78 @@
             "base": "875 EUR HT par piqueuse complète ; toutes les autres machines tarifées séparément. Ensemble de machines, pas prix d’une ligne intégrée.",
             "limites": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement. ",
             "fonctions": [
-              "Réception et contrôle des tissus",
-              "Patronage et placement",
-              "Coupe",
-              "Couture et assemblage",
-              "Surfilage",
-              "Boutonnières",
-              "Repassage",
-              "Contrôle qualité",
-              "Conditionnement"
+              "Réception du tissu bleu marine",
+              "Patronage des chemises",
+              "Coupe des chemises",
+              "Assemblage des chemises",
+              "Surfilage des chemises",
+              "Boutonnières des chemises",
+              "Repassage des chemises",
+              "Contrôle des chemises",
+              "Conditionnement des chemises"
             ],
             "postes": [
               {
                 "description": "Tissus achetés, laize et composition à contrôler ; rayonnage dans les auxiliaires.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 4
+                  "atlas": "textile-productions",
+                  "index": 0
                 }
               },
               {
                 "description": "Tables de préparation et informatique dans les auxiliaires.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 5
+                  "atlas": "textile-productions",
+                  "index": 1
                 }
               },
               {
                 "description": "2 ciseaux RASOR DS504 ; passes de faible épaisseur, pas de matelassage épais.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 6
+                  "atlas": "textile-productions",
+                  "index": 2
                 }
               },
               {
                 "description": "20 JUKI DDL-8700 ; postes partagés par programme, sans cumul de débits.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 7
+                  "atlas": "textile-productions",
+                  "index": 3
                 }
               },
               {
                 "description": "4 JUKI MO-6716DA sur les vêtements concernés.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 8
+                  "atlas": "textile-productions",
+                  "index": 4
                 }
               },
               {
                 "description": "2 JACK JK-T781G-Z ; pose des boutons manuelle prévue, pas de deuxième machine ajoutée.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 9
+                  "atlas": "textile-productions",
+                  "index": 5
                 }
               },
               {
                 "description": "4 ensembles BATTISTELLA KER/2 avec chaudière et fer inclus.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 10
+                  "atlas": "textile-productions",
+                  "index": 6
                 }
               },
               {
                 "description": "Contrôle des dimensions, coutures et motifs selon version.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 11
+                  "atlas": "textile-productions",
+                  "index": 7
                 }
               },
               {
                 "description": "Bandes papier et cartons groupés ; coût inclus par pièce, stock vide 15 jours.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 12
+                  "atlas": "textile-productions",
+                  "index": 8
                 }
               }
             ],
@@ -15264,6 +15267,7 @@
             "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
             "mutualisation": "Versions alternatives d’un même projet. Dans la version mixte, part d’articles brodés 30 %, moyenne pondérée des coûts/prix et des minutes par poste ; machines, bâtiment, manutention et salaires comptés une seule fois.",
             "effectif": "20 postes de piquage, 2 de coupe, jusqu’à 4 de surjet, 2 de boutonnière et 4 de repassage ; polyvalence à organiser. Les postes techniques ne sont pas assimilés automatiquement à autant de salariés à temps plein.",
+            "produits_reference": "Chemise de travail ordinaire en tissu tissé bleu marine : assemblage, surfilage et boutonnières, sans broderie. Hors EPI certifié.",
             "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
             "dimensionnement_textile": {
               "capacite_unites_h": 19,
@@ -15675,17 +15679,17 @@
             "atlas": "textile-broderie",
             "product_index": 2,
             "indices": [
+              0,
+              1,
+              2,
+              9,
+              10,
+              3,
               4,
               5,
               6,
-              5,
-              4,
-              7,
-              8,
-              9,
-              10,
-              7,
-              8
+              11,
+              12
             ]
           },
           "redaction": {
@@ -15709,94 +15713,94 @@
             "base": "875 EUR HT par piqueuse complète ; toutes les autres machines tarifées séparément. Ensemble de machines, pas prix d’une ligne intégrée.",
             "limites": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement. Titre brodeuse 4 têtes, introduction 3 têtes : configuration à préciser, cadence sous hypothèses.",
             "fonctions": [
-              "Réception et contrôle des tissus",
-              "Patronage et placement",
-              "Coupe",
-              "Préparation des motifs et cadrage",
-              "Broderie multi-têtes",
-              "Couture et assemblage",
-              "Surfilage",
-              "Boutonnières",
-              "Repassage",
-              "Contrôle qualité",
-              "Conditionnement"
+              "Réception du tissu bleu marine",
+              "Patronage des chemises",
+              "Coupe des chemises",
+              "Cadrage des logos sur chemises",
+              "Broderie des logos sur chemises",
+              "Assemblage des chemises",
+              "Surfilage des chemises",
+              "Boutonnières des chemises",
+              "Repassage des chemises",
+              "Contrôle des chemises brodées",
+              "Conditionnement des chemises brodées"
             ],
             "postes": [
               {
                 "description": "Tissus achetés, laize et composition à contrôler ; rayonnage dans les auxiliaires.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 4
+                  "atlas": "textile-productions",
+                  "index": 0
                 }
               },
               {
                 "description": "Tables de préparation et informatique dans les auxiliaires.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 5
+                  "atlas": "textile-productions",
+                  "index": 1
                 }
               },
               {
                 "description": "2 ciseaux RASOR DS504 ; passes de faible épaisseur, pas de matelassage épais.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 6
+                  "atlas": "textile-productions",
+                  "index": 2
                 }
               },
               {
                 "description": "Petits motifs ; préparation informatique et stabilisateur, champ de cadre à respecter.",
                 "visuel": {
-                  "atlas": "textile-broderie",
-                  "index": 5
+                  "atlas": "textile-productions",
+                  "index": 9
                 }
               },
               {
                 "description": "2 BC-1504C, 8 têtes annoncées mais 6 productives retenues prudemment ; 5 000 points par motif supposés.",
                 "visuel": {
-                  "atlas": "textile-broderie",
-                  "index": 4
+                  "atlas": "textile-productions",
+                  "index": 10
                 }
               },
               {
                 "description": "20 JUKI DDL-8700 ; postes partagés par programme, sans cumul de débits.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 7
+                  "atlas": "textile-productions",
+                  "index": 3
                 }
               },
               {
                 "description": "4 JUKI MO-6716DA sur les vêtements concernés.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 8
+                  "atlas": "textile-productions",
+                  "index": 4
                 }
               },
               {
                 "description": "2 JACK JK-T781G-Z ; pose des boutons manuelle prévue, pas de deuxième machine ajoutée.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 9
+                  "atlas": "textile-productions",
+                  "index": 5
                 }
               },
               {
                 "description": "4 ensembles BATTISTELLA KER/2 avec chaudière et fer inclus.",
                 "visuel": {
-                  "atlas": "textile",
-                  "index": 10
+                  "atlas": "textile-productions",
+                  "index": 6
                 }
               },
               {
                 "description": "Contrôle des dimensions, coutures et motifs selon version.",
                 "visuel": {
-                  "atlas": "textile-broderie",
-                  "index": 7
+                  "atlas": "textile-productions",
+                  "index": 11
                 }
               },
               {
                 "description": "Bandes papier et cartons groupés ; coût inclus par pièce, stock vide 15 jours.",
                 "visuel": {
-                  "atlas": "textile-broderie",
-                  "index": 8
+                  "atlas": "textile-productions",
+                  "index": 12
                 }
               }
             ],
@@ -15890,6 +15894,7 @@
             "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
             "mutualisation": "Versions alternatives d’un même projet. Dans la version mixte, part d’articles brodés 30 %, moyenne pondérée des coûts/prix et des minutes par poste ; machines, bâtiment, manutention et salaires comptés une seule fois.",
             "effectif": "20 postes de piquage, 2 de coupe, jusqu’à 4 de surjet, 2 de boutonnière et 4 de repassage ; polyvalence à organiser. Les postes techniques ne sont pas assimilés automatiquement à autant de salariés à temps plein.",
+            "produits_reference": "Chemise de travail ordinaire bleu marine avec petit logo brodé ; assemblage, surfilage et boutonnières. Hors EPI certifié.",
             "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
             "dimensionnement_textile": {
               "capacite_unites_h": 19,
@@ -16126,8 +16131,8 @@
             "description": "Prêt-à-porter — tuniques en série. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
             "capacite": 19,
             "unite": "pièces/h",
-            "machines": 39287.43,
-            "investissement": 102296.45000000001,
+            "machines": 33019.35,
+            "investissement": 96028.37,
             "production": [
               24000,
               30000,
@@ -16172,7 +16177,7 @@
                   "id": "equipements",
                   "libelle": "Équipements de production",
                   "categorie": "Production",
-                  "montant_usd": 39287.43,
+                  "montant_usd": 33019.35,
                   "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
                 },
                 {
@@ -16307,7 +16312,6 @@
               6,
               7,
               8,
-              9,
               10,
               11,
               12
@@ -16315,7 +16319,7 @@
           },
           "redaction": {
             "projet": "Prêt-à-porter — tuniques en série. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
-            "procede": "Réception tissus → patronage/coupe → ourlets ou assemblage selon article → surfilage/boutonnières des vêtements → repassage → contrôle → bande papier et carton groupé.",
+            "procede": "Réception du coton imprimé → patronage/coupe des tuniques → assemblage et surfilage → finition de l’encolure ronde → repassage → contrôle → conditionnement. Aucun poste de boutonnière ni de broderie.",
             "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes. Stock de produits finis : 3 % de la production A1 non vendus (5 % prêt-à-porter), puis ventes égales à la production annuelle ; stocks antérieurs conservés par le moteur.",
             "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
             "economie": "Prévisions en pièces et coûts propres à cette version. Pas de cumul des résultats des anciennes UP ; demande et suppléments de personnalisation à vérifier.",
@@ -16334,15 +16338,14 @@
             "base": "875 EUR HT par piqueuse complète ; toutes les autres machines tarifées séparément. Ensemble de machines, pas prix d’une ligne intégrée.",
             "limites": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement. ",
             "fonctions": [
-              "Réception et contrôle des tissus",
-              "Patronage et placement",
-              "Coupe",
-              "Couture et assemblage",
-              "Surfilage",
-              "Boutonnières",
-              "Repassage",
-              "Contrôle qualité",
-              "Conditionnement"
+              "Réception du coton imprimé",
+              "Patronage des tuniques",
+              "Coupe des tuniques",
+              "Assemblage des tuniques",
+              "Surfilage des tuniques",
+              "Repassage des tuniques",
+              "Contrôle des tuniques",
+              "Conditionnement des tuniques"
             ],
             "postes": [
               {
@@ -16381,13 +16384,6 @@
                 }
               },
               {
-                "description": "2 JACK JK-T781G-Z ; pose des boutons manuelle prévue, pas de deuxième machine ajoutée.",
-                "visuel": {
-                  "atlas": "textile",
-                  "index": 9
-                }
-              },
-              {
                 "description": "4 ensembles BATTISTELLA KER/2 avec chaudière et fer inclus.",
                 "visuel": {
                   "atlas": "textile",
@@ -16409,7 +16405,7 @@
                 }
               }
             ],
-            "nombre_machines_reference": 32,
+            "nombre_machines_reference": 30,
             "quantite_retenue": 20,
             "equipements_complementaires": [
               {
@@ -16447,18 +16443,6 @@
                 "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
                 "limites": "Sous-classe pour tissu léger à moyen à préciser ; pas un rendement garanti par vêtement.",
                 "prix_usd": 8014.188
-              },
-              {
-                "nom": "2 × JACK JK-T781G-Z, boutonnière",
-                "source_id": "textile_jack_t781",
-                "source_url": "https://tmac-sas.fr/machine-a-boutonniere/403-jack-jk-t781g-z.html",
-                "prix_retenu": 2800,
-                "devise": "EUR",
-                "quantite": 2,
-                "prix_par_unite": true,
-                "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
-                "limites": "Fait les boutonnières ; ne coud pas les boutons. Pose des boutons manuelle incluse dans l’organisation P2I ; pas de seconde machine pose-boutons ajoutée.",
-                "prix_usd": 6268.08
               }
             ]
           },
@@ -16484,9 +16468,10 @@
             "charges": "Hors coûts industriels : commercialisation 6 000, administration 2 400 et assurance 1 200 USD/an. Entretien de la manutention ajouté une seule fois par le module commun. Aucune location récurrente de matériel ni nouvelle embauche supposée.",
             "prix_vente": "Prix P2I départ atelier : drap simple 12,80 USD, chemise simple 17 USD, tunique 18 USD ; valeurs simples inchangées. Broderie : supplément hypothétique 1,50 USD/article, non prix ivoirien observé. Hausse annuelle 2 %. Le repère de détail n’est pas un tarif producteur validé.",
             "complements": "Budgets auxiliaires de l’atelier renforcé : frais de base doublés, compléments broderie explicités ; logiciel de préparation motifs dans patronage/informatique, cadres inclus annoncés non rachetés en double. Devis livrés non requis au Découverte ; provisions P2I, pas tarifs catalogue.",
-            "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+            "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement. Tuniques à encolure ronde sans boutonnage : aucune boutonnière et aucun bouton dans ce programme.",
             "mutualisation": "Versions alternatives d’un même projet. Dans la version mixte, part d’articles brodés 30 %, moyenne pondérée des coûts/prix et des minutes par poste ; machines, bâtiment, manutention et salaires comptés une seule fois.",
             "effectif": "20 postes de piquage, 2 de coupe, jusqu’à 4 de surjet, 2 de boutonnière et 4 de repassage ; polyvalence à organiser. Les postes techniques ne sont pas assimilés automatiquement à autant de salariés à temps plein.",
+            "produits_reference": "Tunique en coton imprimé à encolure ronde, sans boutonnage ni broderie ; assemblage, surfilage et finitions.",
             "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
             "dimensionnement_textile": {
               "capacite_unites_h": 19,
@@ -16495,7 +16480,6 @@
                 "coupe": 26,
                 "piqueuses": 19.5,
                 "surjet": 26,
-                "boutonnieres": 39,
                 "repassage": 26
               },
               "plafond_annuel": 38000,
@@ -16678,7 +16662,7 @@
               "patronage_informatique": 3000,
               "manutention": 4109.02
             },
-            "base_budget_equipements_usd": 39287.43,
+            "base_budget_equipements_usd": 33019.35,
             "conversion": {
               "date": "2026-10-23",
               "eur_usd": 1.1193,
@@ -16728,7 +16712,7 @@
       "redaction": {
         "projet": "Prêt-à-porter — tuniques en série. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
         "positionnement": "Linge de maison, uniformes ordinaires et prêt-à-porter dans une même famille industrielle ; choisir une version selon clients et compétences.",
-        "procede": "Réception tissus → patronage/coupe → ourlets ou assemblage selon article → surfilage/boutonnières des vêtements → repassage → contrôle → bande papier et carton groupé.",
+        "procede": "Réception du coton imprimé → patronage/coupe des tuniques → assemblage et surfilage → finition de l’encolure ronde → repassage → contrôle → conditionnement. Aucun poste de boutonnière ni de broderie.",
         "marche": "Segments à prospecter : Hôtels et résidences ; Entreprises et établissements scolaires ; Distributeurs et boutiques de vêtements. Leur présence dans le référentiel ne démontre ni volume de demande, ni commande, ni prix de vente accepté.",
         "commercial": "Axes commerciaux proposés : Cibler boutiques, marchés et supermarchés ; Développer des collections adaptées aux saisons ; Soigner les finitions pour se démarquer ; Communiquer sur l'origine locale ('Made in Côte d'Ivoire') ; Utiliser les réseaux sociaux (Instagram, Facebook, TikTok) ; Proposer des séries limitées et personnalisées. Ils constituent un programme de prospection à tester, pas des débouchés acquis.",
         "approvisionnement": "Intrants recensés : Tissus achetés selon composition et laize ; Fils, boutons et fournitures ; Fils et stabilisateurs de broderie selon version ; Bandes papier et cartons. Pour chaque intrant, préciser qualité, disponibilité, prix livré, rendement, conditionnement et délai de réapprovisionnement.",

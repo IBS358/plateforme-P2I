@@ -62,3 +62,6 @@ Prompt final complet : `conserverie-poche-generation.json` (outil intégré imag
 
 ## Textile regroupé — 29 octobre 2026
 `postes-textile-broderie-ia.jpg` : atlas 3 × 3 généré avec le générateur intégré image_gen.imagegen. Personnel ivoirien, atelier, drap et chemise brodés, gamme mixte, brodeuse multi-têtes, cadrage, préparation des motifs, contrôle et emballage. Les marques P2I sont fictives ; les machines sont des illustrations de fonction et ne représentent pas les modèles catalogue contractuels. Prompt intégral : `textile-broderie-generation.json`. Les postes coupe/couture/repassage réutilisent `postes-textile-ia.jpg`, chaque fonction avec son index propre.
+
+## Textile — bloc 17 par production, 29 octobre 2026
+`postes-textile-productions-ia.jpg`, générateur intégré : atlas 4 × 4, neuf étapes de chemises bleu marine simples, cadrage/broderie/contrôle/emballage de chemises brodées, broderie/contrôle/emballage de draps blancs. Le bloc draps simples réutilise `postes-linge-ia.jpg` ; les tuniques utilisent le coton imprimé de `postes-textile-ia.jpg`. Aucun visuel de vêtement bleu ou imprimé pour les draps blancs. Prompt intégral : `textile-productions-generation.json`. Illustrations de fonction, pas identification des machines fournisseur.
