@@ -2,9 +2,9 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 16,
-  "up_avec_simulation_complete": 14,
-  "up_restant_a_alimenter": 82,
+  "simulations_affichables": 17,
+  "up_avec_simulation_complete": 15,
+  "up_restant_a_alimenter": 81,
   "scenarios": [
     {
       "up_id": "conserverie_legumes",
@@ -732,6 +732,58 @@
         -4.656612873077393e-10,
         -2.3283064365386963e-10,
         -1.862645149230957e-9
+      ]
+    },
+    {
+      "up_id": "adhesifs",
+      "configuration_id": null,
+      "nom": "Adhésifs & colles",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "borne_haute_catalogue_equipement_non_ligne_complete",
+      "source_prix": "https://shindah.en.made-in-china.com/product/iKHEgvLyJpUJ/China-2000L-Ss-PVAC-Glue-Reactor-White-Glue-Reactor-with-Production-Formula.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 21250,
+      "investissement_simulation_usd": 99850,
+      "reserve_initiale_distincte_usd": 60033.340902777774,
+      "annuel": [
+        {
+          "annee": 1,
+          "production_kg": 250000.00000000003,
+          "ventes_kg": 242500.00000000003,
+          "stock_fin_kg": 7500,
+          "chiffre_affaires_usd": 533499.9999999999,
+          "resultat_net_usd": 71464.47249999987
+        },
+        {
+          "annee": 2,
+          "production_kg": 300000,
+          "ventes_kg": 300000,
+          "stock_fin_kg": 7500,
+          "chiffre_affaires_usd": 673200.0000000001,
+          "resultat_net_usd": 106680.58749920463
+        },
+        {
+          "annee": 3,
+          "production_kg": 350000.00000000006,
+          "ventes_kg": 350000.00000000006,
+          "stock_fin_kg": 7500.000000000004,
+          "chiffre_affaires_usd": 801108,
+          "resultat_net_usd": 138568.54696456005
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        2.3283064365386963e-10,
+        -5.820766091346741e-11,
+        0
       ]
     },
     {

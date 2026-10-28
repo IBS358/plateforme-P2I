@@ -432,6 +432,8 @@
             "qualite": "Le traitement thermique doit être adapté au produit, à l’emballage et à la durée de conservation visée.",
             "gamme": null,
             "sources_prix_marche": [],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -806,6 +808,8 @@
             "complements": "Ventilation P2I des 155 000 USD complémentaires au budget ligne; total investissement de simulation 605 000 USD conservé.",
             "gamme": null,
             "sources_prix_marche": [],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -958,6 +962,8 @@
                 "description": "Prix de détail de biscuits de formats et marques variés à Abidjan ; comparaison indicative, non prix usine."
               }
             ],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -1110,6 +1116,8 @@
                 "description": "Prix de détail de biscuits de formats et marques variés à Abidjan ; comparaison indicative, non prix usine."
               }
             ],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -1638,6 +1646,8 @@
             "complements": "Transport, installation, chariots et équipements auxiliaires sont des enveloppes estimées P2I ; vérifier compatibilité chariot, brûleur et cycles.",
             "gamme": null,
             "sources_prix_marche": [],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -2228,6 +2238,8 @@
                 "description": "Jus d’ananas annoncé naturel, 500 ml à 1 500 FCFA ; prix au consommateur, composition et procédé à confirmer."
               }
             ],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -2693,6 +2705,8 @@
                 "description": "Lait entier pasteurisé 1 L : 1 800 FCFA, vente au détail Abidjan ; prix producteur non établi."
               }
             ],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -3149,6 +3163,8 @@
                 "description": "Huile d’arachide Lesieur 1 L : prix moyen signalé 8 063 FCFA à Abidjan Nord ; marque et circuit différents."
               }
             ],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -3650,6 +3666,8 @@
                 "description": "Gingembre en poudre en vrac 1 kg : 2 500 FCFA au détail, autre format et autre vendeur."
               }
             ],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -4124,6 +4142,8 @@
             "complements": "Enveloppes P2I explicites, pas prix catalogue ni devis; raccordements et ensachage manuel dimensionnés pour la petite ligne.",
             "gamme": null,
             "sources_prix_marche": [],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -4568,6 +4588,8 @@
                 "description": "Liquide vaisselle 1 L et autres produits ménagers : 1 000 FCFA, niveau de marché et conditions à vérifier."
               }
             ],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -4989,6 +5011,8 @@
                 "description": "Savon Fancio petit 250 g, 300 FCFA au détail à Yamoussoukro."
               }
             ],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -5405,6 +5429,8 @@
                 "description": "Lait corps karité 250 ml, 1 350 FCFA au détail ; marque, formule et circuit différents."
               }
             ],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -5822,6 +5848,8 @@
                 "description": "Antirouille gris 4 kg, 9 000 FCFA au détail ; formulation, circuit et spécifications peuvent différer."
               }
             ],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -6078,8 +6106,56 @@
         "reference": {
           "configuration_id": "reference",
           "nom": "Adhésifs & colles",
-          "qualification": "configuration_a_documenter",
-          "reference": null,
+          "qualification": "simulation_decouverte_calculable",
+          "reference": {
+            "up_id": "adhesifs",
+            "configuration_id": null,
+            "nom": "Colle blanche aqueuse pour bois",
+            "sous_titre": "Formulation à partir de dispersion PVAc achetée",
+            "description": "Atelier de formulation et conditionnement de colle blanche aqueuse pour menuiserie intérieure, à partir d’une dispersion PVAc achetée. Seaux refermables de 5 kg. Aucune synthèse du polymère, classe de résistance à l’eau ou innocuité présumée.",
+            "capacite": 440,
+            "unite": "kg/h",
+            "machines": 21250,
+            "investissement": 99850,
+            "production": [
+              250000,
+              300000,
+              350000
+            ],
+            "ventes": [
+              242500,
+              300000,
+              350000
+            ],
+            "prix": [
+              2.2,
+              2.244,
+              2.28888
+            ],
+            "matieres_kg": 1.1,
+            "cout_production_kg": [
+              1.58,
+              1.5862,
+              1.6034745714285714
+            ],
+            "personnel": 12000,
+            "charges_fixes": 28000,
+            "croissance_personnel": 0.03,
+            "croissance_charges": 0.03,
+            "part_apport": 0.3,
+            "part_dette": 0.7,
+            "taux_interet": 0.08,
+            "duree_dette_mois": 60,
+            "duree_amortissement_ans": 10,
+            "taux_tva": 0.18,
+            "taux_is": 0.25,
+            "coussin_tresorerie": 0.1,
+            "source": "data/p2i-bp-lot-chimie-07.json / adhesifs : prix catalogue ou budget de référence + hypothèses P2I explicites",
+            "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+            "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+            "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "stock_matieres_jours": 30
+          },
           "economique_herite_up": true,
           "economique": {
             "budget_minimum_historique": {
@@ -6146,7 +6222,194 @@
             "qualification": "references_historiques_a_documenter",
             "aucune_repartition_fictive_des_charges": true
           },
-          "source": "up-data.js / adhesifs"
+          "source": "up-data.js / adhesifs",
+          "visuels": {
+            "atlas": "adhesifs",
+            "product_index": 0,
+            "indices": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
+          },
+          "prix_equipement": {
+            "id": "adhesifs_shindah_sd2000",
+            "url": "https://shindah.en.made-in-china.com/product/iKHEgvLyJpUJ/China-2000L-Ss-PVAC-Glue-Reactor-White-Glue-Reactor-with-Production-Formula.html",
+            "url_prix": "https://shindah.en.made-in-china.com/product/FyOmhQPxafkA/China-PVAC-Polyvinyl-Acetate-Emulsion-Reactor-Kettle.html",
+            "consulte_le": "2026-10-28",
+            "fournisseur": "Qingdao Shindah Machinery Co., Ltd.",
+            "modele": "SD-2000 — cuve agitée 2 000 L, équipement principal d’un atelier assemblé",
+            "pays_origine": "Chine",
+            "prix": 17000,
+            "prix_min": 13000,
+            "prix_max": 17000,
+            "devise": "USD",
+            "base": "Borne haute de la fourchette catalogue 13 000–17 000 USD pour le modèle 2 000 L ; incoterm et options à préciser",
+            "capacite": 2000,
+            "unite_capacite": "L nominalement annoncés pour SD-2000 ; volume utile à confirmer",
+            "qualification": "borne_haute_catalogue_equipement_non_ligne_complete",
+            "fonctions": [
+              "Réception et pesée",
+              "Mélange de la colle",
+              "Transfert du produit",
+              "Contrôle qualité",
+              "Remplissage des seaux",
+              "Fermeture des seaux",
+              "Étiquetage manuel",
+              "Regroupement et palettisation"
+            ],
+            "postes": [
+              {
+                "description": "Réception de la dispersion PVAc achetée et pesée des intrants ; balance et manutention dans les auxiliaires estimés."
+              },
+              {
+                "description": "Cuve SD-2000 de 2 000 L ; agitateur 5,5 kW annoncé. Mélange d’une dispersion achetée, sans synthèse de polymère dans ce scénario."
+              },
+              {
+                "description": "Pompe, flexibles et raccords compatibles avec la viscosité : enveloppe auxiliaire P2I, non tarif catalogue identifié."
+              },
+              {
+                "description": "Viscosité, pH, stabilité et essais de collage sur bois ; petit laboratoire budgété séparément."
+              },
+              {
+                "description": "Remplisseuse semi-automatique TGM ST-77 : 200 contenants/h annoncés sans format détaillé ; dosage 5 kg à vérifier."
+              },
+              {
+                "description": "Pose manuelle d’un couvercle refermable et contrôle de fermeture ; aucune boucheuse automatique ajoutée."
+              },
+              {
+                "description": "Étiquette adhésive posée manuellement : produit, poids net, lot, précautions et mode d’emploi."
+              },
+              {
+                "description": "Regroupement des seaux fermés et palettisation ; manutention et consommables pris en compte."
+              }
+            ],
+            "limites": "Le prix principal concerne la cuve agitée, pas une ligne complète. Remplisseuse TGM ajoutée une seule fois ; pompe, flexibles, balance et manutention restent des enveloppes P2I. Le volume utile, l’agitateur, les raccordements et le dosage 5 kg doivent être confirmés ensemble. Les postes de fermeture et d’étiquetage sont manuels. Aucune polymérisation ni garantie de performance du produit final n’est présumée.",
+            "utilites": "Agitation 5,5 kW annoncée pour 2 000 L ; alimentation, air de la remplisseuse, nettoyage et transfert à qualifier.",
+            "equipements_complementaires": [
+              {
+                "source_id": "adhesifs_tgm_st77",
+                "nom": "Remplisseuse semi-automatique TGM ST-77",
+                "fournisseur": "Foshan TGM Machine Co., Ltd.",
+                "url": "https://tgmmachine.en.made-in-china.com/product/BrmRvpWxHKVX/China-Semi-Automatic-Iron-Plastic-Bucket-Paint-Glue-White-Latex-Oil-Filling-Machine.html",
+                "url_prix": "https://www.made-in-china.com/products-search/hot-china-products/White_Glue_Machine.html",
+                "consulte_le": "2026-10-28",
+                "prix_retenu": 4250,
+                "devise": "USD",
+                "qualification": "prix_catalogue_liste_fabricant_non_devis",
+                "prix_usd": 4250
+              }
+            ]
+          },
+          "emballage": {
+            "statut": "hypothese_P2I",
+            "format": "Seau plastique de 5 kg, couvercle refermable, anse, étiquette et regroupement",
+            "cout_usd_par_kg": 0.14,
+            "composants_usd_par_kg": {
+              "seau_avec_anse": 0.095,
+              "couvercle": 0.025,
+              "etiquette": 0.01,
+              "regroupement": 0.01
+            },
+            "mode_comptable": "inclus_dans_cout_industriel",
+            "ecologie": "Grand format et fermeture limitant le dessèchement ; recyclage et réemploi effectifs à organiser selon résidus. Aucun caractère naturel ou biodégradable de la colle présumé.",
+            "source": "Enveloppe P2I de 0,70 USD par seau de 5 kg ; prix emballages non confirmé"
+          },
+          "hypotheses_explicites": {
+            "production": "Cuve nominale de 2 000 L ; hypothèses de 80 % de volume utile, densité 1,10 kg/L et cycle complet de 4 h, soit 440 kg/h, sur 8 h/j et 250 j/an. Production 250/300/350 t, inférieure à 880 t/an théoriques. Stock de lancement 7,5 t en A1, stable ensuite ; absence de pertes et conservation à confirmer. La cadence n’est pas une capacité effective garantie.",
+            "matieres": "Dispersion PVAc achetée et auxiliaires de formulation : 1,10 USD/kg de produit fini, hypothèse P2I sans nomenclature ni tarifs livrés validés. Ni monomère acétate de vinyle ni polymérisation dans le scénario.",
+            "process": "0,24 USD/kg dont emballage 0,14 USD/kg et énergie/nettoyage/consommables 0,10 USD/kg. Frais industriels fixes 60 000 USD/an dont personnel de fabrication et contrôle estimé 36 000 USD/an ; hypothèses P2I.",
+            "personnel": "Personnel de fabrication et contrôle inclus dans frais industriels fixes ; personnel administratif/commercial 12 000 USD/an, distinct. La fermeture et l’étiquetage manuels nécessitent une organisation compatible avec le rythme de remplissage.",
+            "prix_vente": "2,20 USD/kg départ atelier A1, soit 11 USD par seau de 5 kg ; +2 %/an. Hypothèse de simulation, comparée aux prix de détail ivoiriens de colles à bois dont qualité et circuit diffèrent ; aucun débouché acquis.",
+            "complements": "Enveloppes P2I pour logistique, site, utilités, installation, pièces, sécurité, essais et laboratoire. Pompe, raccords, balance et manutention ne sont pas des prix catalogue vérifiés. Agitateur dans la cuve, remplisseuse comptée une seule fois ; fermeture et étiquetage manuels.",
+            "qualite": "Définir formulation et fiche de sécurité, maîtriser conservateurs, exposition et effluents. Évaluer adhérence, viscosité, temps ouvert, stabilité et résistance selon l’usage ; aucune classe EN 204, usage structurel, contact alimentaire, naturalité ou certification acquis.",
+            "gamme": null,
+            "sources_prix_marche": [
+              {
+                "url": "https://www.dunya.ci/produits/tendances/10/",
+                "description": "Colle TITAN 5 kg à 8 000 FCFA et EXTRA INDUSTRAP 5 kg à 9 000 FCFA, prix de détail affichés ; performances et disponibilité à vérifier."
+              },
+              {
+                "url": "https://openmoise.ci/shop/colle-a-bois-pro10d-5kg-soudal-ref-108898-80287",
+                "description": "Soudal PRO10D PVAc 5 kg affichée 18 750 FCFA, indiquée en rupture ; gamme et marque différentes, non prix départ usine."
+              },
+              {
+                "url": "https://produitbat.ci/public/detail/produit/1734358796-Colle-Blanche-A-Bois-1kg",
+                "description": "Colle blanche SIPPEC affichée 2 200 FCFA avec intitulé 1 kg mais plusieurs formats dans la description ; incohérence de format conservée, repère qualitatif uniquement."
+              }
+            ],
+            "sources_techniques_produit": [
+              {
+                "url": "https://www.soudal.com/fr-be/pro/produits/colles/colle-bois/pro-10d-colle-bois-blanche",
+                "description": "Produit commercial PVAc aqueux et classe D2 annoncée pour ce produit seulement. Ne confère aucune classe ou équivalence à la formulation P2I."
+              }
+            ],
+            "plan_commercial": [
+              {
+                "titre": "Clients professionnels",
+                "texte": "Prospecter menuisiers, fabricants de mobilier et distributeurs."
+              },
+              {
+                "titre": "Échantillons et essais",
+                "texte": "Faire tester la tenue du collage sur les supports et conditions réels."
+              },
+              {
+                "titre": "Conditionnement",
+                "texte": "Seau refermable de 5 kg ; marque illustrée P2I COLLE proposée comme maquette."
+              },
+              {
+                "titre": "Prix et coût d’usage",
+                "texte": "Comparer prix net, consommation et performance par assemblage."
+              },
+              {
+                "titre": "Distribution",
+                "texte": "Organiser livraisons, réassorts et conditions de règlement."
+              },
+              {
+                "titre": "Suivi",
+                "texte": "Suivre clients actifs, réclamations, réachat et délais de paiement."
+              }
+            ],
+            "suggestion": null,
+            "qualite_produit": null,
+            "conventions": {
+              "apport": 0.3,
+              "dette": 0.7,
+              "taux_interet_annuel": 0.08,
+              "dette_mois": 60,
+              "amortissement_ans": 10,
+              "tva_simulation": 0.18,
+              "is_simulation": 0.25,
+              "croissance_charges": 0.03,
+              "croissance_personnel": 0.03,
+              "coussin_tresorerie": 0.1,
+              "clients_comptant": 0.4,
+              "clients_30_jours": 0.6,
+              "fournisseurs_comptant": true,
+              "nature": "Conventions de simulation P2I, pas conditions négociées ni avis fiscal."
+            },
+            "complements_usd": {
+              "fret": 5000,
+              "assurance": 600,
+              "douane_transit": 5000,
+              "transport_local": 1500,
+              "genie_civil": 18000,
+              "utilites": 10000,
+              "installation_formation": 6000,
+              "pieces_initiales": 2500,
+              "securite_environnement": 6000,
+              "etudes_essais": 8000,
+              "laboratoire": 6000,
+              "pompe_flexibles_balance_manutention": 10000
+            },
+            "base_budget_equipements_usd": 21250,
+            "conversion": null
+          }
         }
       },
       "autres_variantes": "a_recenser",
@@ -6160,15 +6423,15 @@
       ],
       "redaction": {
         "projet": "Fabrication d'adhésifs et colles industriels.",
-        "positionnement": "Adhésifs & colles : Colles industrielles et adhésifs techniques. Le périmètre économique est celui de cette activité; les chiffres d’une autre UP ou variante ne sont pas transposés.",
-        "procede": "Le flux de référence descriptif comprend Dosage des ingrédients → Mélange → Réaction → Contrôle qualité → Conditionnement → Étiquetage. Les cadences et les interfaces doivent être dimensionnées ensemble avant de retenir les équipements.",
-        "marche": "La demande pour adhésifs & colles doit être établie auprès des clients visés. Aucun volume de marché local n’est présumé.",
-        "commercial": "Axes commerciaux proposés : Cibler les industries du meuble et emballage ; Développer des formulations adaptées ; Proposer des conditionnements variés ; Communiquer sur la qualité ; Développer des contrats réguliers. Ils constituent un programme de prospection à tester, pas des débouchés acquis.",
-        "approvisionnement": "La nomenclature matières et emballages doit être liée à une unité de produit vendable et à un rendement mesuré.",
-        "opportunites": "Demande industrielle ; Import substitution ; Marges correctes ; Marché porteur",
-        "risques": "Maîtrise des formulations ; Concurrence ; Prix des matières ; Normes",
-        "qualite": "Respecter les normes de sécurité ; Utiliser des équipements de protection ; Nettoyer les équipements régulièrement ; Former le personnel à la sécurité ; Assurer la traçabilité des lots",
-        "utilites": "Optimiser le mélange ; Utiliser des moteurs à haut rendement ; Isoler les réacteurs ; Récupérer la chaleur ; Éteindre les équipements hors production",
+        "positionnement": "Colle blanche aqueuse pour menuiserie intérieure, en seaux de 5 kg ; performances et prix à comparer aux produits réellement disponibles localement.",
+        "procede": "Réception et pesée → mélange → transfert → contrôle qualité → remplissage → fermeture manuelle → étiquetage manuel → palettisation. Le scénario n’inclut pas de synthèse du polymère.",
+        "marche": "Clients à prospecter : menuisiers, fabricants de mobilier intérieur et distributeurs spécialisés. Plusieurs colles à bois sont affichées en Côte d’Ivoire ; cela ne prouve ni volume accessible ni commandes.",
+        "commercial": "Faire tester la colle sur les bois et panneaux des clients, qualifier la performance et le coût par assemblage, puis organiser contrats et réassorts.",
+        "approvisionnement": "Dispersion PVAc prête à formuler, auxiliaires compatibles et emballages ; prix livré, régularité, traçabilité et stabilité à documenter.",
+        "opportunites": "Service de proximité, conditionnement professionnel et essais sur les supports des clients ; gains commerciaux non présumés.",
+        "risques": "Concurrence de colles locales et importées, prix livré de la dispersion, conservation, résistance du collage, retards de paiement et cadence des postes manuels.",
+        "qualite": "Contrôler viscosité, pH, stabilité et collage ; fiche de sécurité, précautions et traçabilité avant toute allégation. Pas de classe de résistance à l’eau acquise.",
+        "utilites": "Moteur de mélange 5,5 kW annoncé, énergie de transfert, remplissage, air et nettoyage à dimensionner ; pas de chauffage de polymérisation dans ce scénario.",
         "implantation": "Organiser en flux continu ; Séparer zones de production et stockage ; Prévoir zone de stockage ; Aménager zone de conditionnement ; Faciliter la circulation du personnel",
         "production": "La capacité catalogue ne constitue pas un volume de ventes. Le programme de production de adhésifs & colles doit intégrer temps disponible, cadence du goulot, rendements, rebuts, arrêts et invendus.",
         "economie": "Les repères historiques ci-dessous ne sont pas des devis ou des prévisions. Le prix de vente, les volumes et les charges doivent être documentés séparément; aucune marge historique ne sert à fabriquer un résultat net.",
@@ -6188,7 +6451,11 @@
         "Étiquetage"
       ],
       "matieres": [],
-      "marches": [],
+      "marches": [
+        "Menuiseries et fabricants de mobilier intérieur",
+        "Quincailleries et distributeurs spécialisés",
+        "Ateliers de panneaux et assemblage bois"
+      ],
       "machines": [
         {
           "nom": "Réacteur",
@@ -6331,7 +6598,7 @@
         "Fiscalité applicable et échéancier de financement",
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
-      "statut": "dossier_redactionnel_et_reperes_historiques_non_valide"
+      "statut": "simulation_decouverte_disponible"
     },
     "engrais": {
       "emballage": {
@@ -6516,6 +6783,8 @@
                 "description": "Engrais foliaire FERTIMAX café NPK 10-10-10, 1 L à 5 000 FCFA au détail ; recette, marque et circuit différents, prix producteur non déductible."
               }
             ],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": null,
             "qualite_produit": null,
             "conventions": {
@@ -7022,6 +7291,8 @@
                 "description": "Offre ivoirienne d’hygiène et de désinfection professionnelles ; prix sur demande, présence de fournisseurs ne démontre pas des commandes disponibles."
               }
             ],
+            "sources_techniques_produit": [],
+            "plan_commercial": null,
             "suggestion": "Un conditionnement 20 L et d’autres formulations pourront être étudiés dans le BP Initial/Pro avec un poste adapté ; ils ne sont pas inclus dans les prix, volumes ni résultats du présent scénario.",
             "qualite_produit": {
               "schema": "p2i.hygiene-qualite.v1",
@@ -30872,5 +31143,5 @@
     }
   },
   "regles_decouverte": "Prix catalogue public ou budget P2I identifié + hypothèses explicites; pas de certification, partenariat ou devis exigé au Découverte.",
-  "nombre_simulations_completes": 16
+  "nombre_simulations_completes": 17
 }

@@ -18,3 +18,9 @@ Ces images ont été générées par IA à partir de descriptions des fonctions.
 `postes-hygiene-pro-ia.jpg` : illustration générée et corrigée avec le générateur d’images intégré. Ne représente aucun modèle fournisseur. Composition finale : atelier et bidons cylindriques de 5 L ; traitement de l’eau ; mélangeur ; deux cuves et pompe ; remplissage ; bouchage ; étiquetage ; compresseur ; contrôle qualité. Les quantités, performances et matériaux réels proviennent du référentiel technique, pas des images. Marque P2I PRO illustrative, aucun label sanitaire ou écologique attribué.
 
 Consigne de génération : neuf photographies distinctes en grille 3 × 3, atelier ivoirien de produits aqueux non chlorés, personnel ivoirien protégé, chaque poste correspondant au titre. Correction : remplacer les bidons rectangulaires par des bidons cylindriques compatibles avec l’étiqueteuse de la configuration catalogue retenue ; conserver les autres postes.
+
+## Adhésifs — 28 octobre 2026
+
+`postes-adhesifs-ia.jpg` : planche générée par IA avec le générateur intégré. Photographies illustratives, pas de représentation contractuelle des machines Shindah ou TGM. Marque P2I COLLE proposée comme maquette, sans label sanitaire ou écologique.
+
+Consigne : atelier ivoirien de formulation de colle blanche aqueuse à partir de dispersion achetée ; planche 3 × 3 avec atelier et seau 5 kg, réception/pesée, cuve agitée, transfert fermé, contrôle viscosité/collage, remplissage pondéral, fermeture manuelle, étiquetage manuel et palettisation. Personnel ivoirien protégé. Ne pas représenter de synthèse du polymère ni de boucheuse ou étiqueteuse automatique.

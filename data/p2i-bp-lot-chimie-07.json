@@ -1,0 +1,236 @@
+{
+  "schema": "p2i.bp-lot.v1",
+  "date": "2026-10-28",
+  "description": "Adhésifs & colles : colle blanche aqueuse pour bois à partir de dispersion achetée",
+  "sources": [
+    {
+      "id": "adhesifs_shindah_sd2000",
+      "url": "https://shindah.en.made-in-china.com/product/iKHEgvLyJpUJ/China-2000L-Ss-PVAC-Glue-Reactor-White-Glue-Reactor-with-Production-Formula.html",
+      "url_prix": "https://shindah.en.made-in-china.com/product/FyOmhQPxafkA/China-PVAC-Polyvinyl-Acetate-Emulsion-Reactor-Kettle.html",
+      "consulte_le": "2026-10-28",
+      "fournisseur": "Qingdao Shindah Machinery Co., Ltd.",
+      "modele": "SD-2000 — cuve agitée 2 000 L, équipement principal d’un atelier assemblé",
+      "pays_origine": "Chine",
+      "prix": 17000,
+      "prix_min": 13000,
+      "prix_max": 17000,
+      "devise": "USD",
+      "base": "Borne haute de la fourchette catalogue 13 000–17 000 USD pour le modèle 2 000 L ; incoterm et options à préciser",
+      "capacite": 2000,
+      "unite_capacite": "L nominalement annoncés pour SD-2000 ; volume utile à confirmer",
+      "qualification": "borne_haute_catalogue_equipement_non_ligne_complete",
+      "fonctions": [
+        "Réception et pesée",
+        "Mélange de la colle",
+        "Transfert du produit",
+        "Contrôle qualité",
+        "Remplissage des seaux",
+        "Fermeture des seaux",
+        "Étiquetage manuel",
+        "Regroupement et palettisation"
+      ],
+      "postes": [
+        {
+          "description": "Réception de la dispersion PVAc achetée et pesée des intrants ; balance et manutention dans les auxiliaires estimés."
+        },
+        {
+          "description": "Cuve SD-2000 de 2 000 L ; agitateur 5,5 kW annoncé. Mélange d’une dispersion achetée, sans synthèse de polymère dans ce scénario."
+        },
+        {
+          "description": "Pompe, flexibles et raccords compatibles avec la viscosité : enveloppe auxiliaire P2I, non tarif catalogue identifié."
+        },
+        {
+          "description": "Viscosité, pH, stabilité et essais de collage sur bois ; petit laboratoire budgété séparément."
+        },
+        {
+          "description": "Remplisseuse semi-automatique TGM ST-77 : 200 contenants/h annoncés sans format détaillé ; dosage 5 kg à vérifier."
+        },
+        {
+          "description": "Pose manuelle d’un couvercle refermable et contrôle de fermeture ; aucune boucheuse automatique ajoutée."
+        },
+        {
+          "description": "Étiquette adhésive posée manuellement : produit, poids net, lot, précautions et mode d’emploi."
+        },
+        {
+          "description": "Regroupement des seaux fermés et palettisation ; manutention et consommables pris en compte."
+        }
+      ],
+      "limites": "Le prix principal concerne la cuve agitée, pas une ligne complète. Remplisseuse TGM ajoutée une seule fois ; pompe, flexibles, balance et manutention restent des enveloppes P2I. Le volume utile, l’agitateur, les raccordements et le dosage 5 kg doivent être confirmés ensemble. Les postes de fermeture et d’étiquetage sont manuels. Aucune polymérisation ni garantie de performance du produit final n’est présumée.",
+      "utilites": "Agitation 5,5 kW annoncée pour 2 000 L ; alimentation, air de la remplisseuse, nettoyage et transfert à qualifier."
+    },
+    {
+      "id": "adhesifs_tgm_st77",
+      "url": "https://tgmmachine.en.made-in-china.com/product/BrmRvpWxHKVX/China-Semi-Automatic-Iron-Plastic-Bucket-Paint-Glue-White-Latex-Oil-Filling-Machine.html",
+      "url_prix": "https://www.made-in-china.com/products-search/hot-china-products/White_Glue_Machine.html",
+      "consulte_le": "2026-10-28",
+      "fournisseur": "Foshan TGM Machine Co., Ltd.",
+      "modele": "ST-77 — remplisseuse semi-automatique pour colle/latex en seaux",
+      "prix": 4250,
+      "devise": "USD",
+      "base": "Prix public du produit TGM dans la liste fabricant Made-in-China ; fiche technique détaillée sans montant affiché",
+      "capacite": 200,
+      "unite_capacite": "contenants/h annoncés, format non précisé",
+      "qualification": "prix_catalogue_liste_fabricant_non_devis",
+      "limites": "Format 5 kg, précision de pesée, alimentation produit, viscosité admissible et débit à vérifier."
+    }
+  ],
+  "profils": {
+    "adhesifs": {
+      "configuration_id": null,
+      "nom": "Colle blanche aqueuse pour bois",
+      "sous_titre": "Formulation à partir de dispersion PVAc achetée",
+      "description": "Atelier de formulation et conditionnement de colle blanche aqueuse pour menuiserie intérieure, à partir d’une dispersion PVAc achetée. Seaux refermables de 5 kg. Aucune synthèse du polymère, classe de résistance à l’eau ou innocuité présumée.",
+      "source_equipement": "adhesifs_shindah_sd2000",
+      "prix_retenu": 17000,
+      "devise_prix": "USD",
+      "equipements_complementaires": [
+        {
+          "source_id": "adhesifs_tgm_st77",
+          "nom": "Remplisseuse semi-automatique TGM ST-77",
+          "fournisseur": "Foshan TGM Machine Co., Ltd.",
+          "url": "https://tgmmachine.en.made-in-china.com/product/BrmRvpWxHKVX/China-Semi-Automatic-Iron-Plastic-Bucket-Paint-Glue-White-Latex-Oil-Filling-Machine.html",
+          "url_prix": "https://www.made-in-china.com/products-search/hot-china-products/White_Glue_Machine.html",
+          "consulte_le": "2026-10-28",
+          "prix_retenu": 4250,
+          "devise": "USD",
+          "qualification": "prix_catalogue_liste_fabricant_non_devis"
+        }
+      ],
+      "capacite_entree_kg_h": 440,
+      "production_explicite": [
+        250000,
+        300000,
+        350000
+      ],
+      "ventes_explicites": [
+        242500,
+        300000,
+        350000
+      ],
+      "prix_vente_usd_kg": [
+        2.2,
+        2.244,
+        2.28888
+      ],
+      "matieres_usd_kg_produit": 1.1,
+      "cout_process_usd_kg": 0.24,
+      "fixes_industriels_an": 60000,
+      "personnel_hors_cout_industriel": 12000,
+      "charges_fixes_hors_industriel": 28000,
+      "stock_matieres_jours": 30,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Seau plastique de 5 kg, couvercle refermable, anse, étiquette et regroupement",
+        "cout_usd_par_kg": 0.14,
+        "composants_usd_par_kg": {
+          "seau_avec_anse": 0.095,
+          "couvercle": 0.025,
+          "etiquette": 0.01,
+          "regroupement": 0.01
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Grand format et fermeture limitant le dessèchement ; recyclage et réemploi effectifs à organiser selon résidus. Aucun caractère naturel ou biodégradable de la colle présumé.",
+        "source": "Enveloppe P2I de 0,70 USD par seau de 5 kg ; prix emballages non confirmé"
+      },
+      "complements_usd": {
+        "fret": 5000,
+        "assurance": 600,
+        "douane_transit": 5000,
+        "transport_local": 1500,
+        "genie_civil": 18000,
+        "utilites": 10000,
+        "installation_formation": 6000,
+        "pieces_initiales": 2500,
+        "securite_environnement": 6000,
+        "etudes_essais": 8000,
+        "laboratoire": 6000,
+        "pompe_flexibles_balance_manutention": 10000
+      },
+      "methodes": {
+        "production": "Cuve nominale de 2 000 L ; hypothèses de 80 % de volume utile, densité 1,10 kg/L et cycle complet de 4 h, soit 440 kg/h, sur 8 h/j et 250 j/an. Production 250/300/350 t, inférieure à 880 t/an théoriques. Stock de lancement 7,5 t en A1, stable ensuite ; absence de pertes et conservation à confirmer. La cadence n’est pas une capacité effective garantie.",
+        "matieres": "Dispersion PVAc achetée et auxiliaires de formulation : 1,10 USD/kg de produit fini, hypothèse P2I sans nomenclature ni tarifs livrés validés. Ni monomère acétate de vinyle ni polymérisation dans le scénario.",
+        "process": "0,24 USD/kg dont emballage 0,14 USD/kg et énergie/nettoyage/consommables 0,10 USD/kg. Frais industriels fixes 60 000 USD/an dont personnel de fabrication et contrôle estimé 36 000 USD/an ; hypothèses P2I.",
+        "personnel": "Personnel de fabrication et contrôle inclus dans frais industriels fixes ; personnel administratif/commercial 12 000 USD/an, distinct. La fermeture et l’étiquetage manuels nécessitent une organisation compatible avec le rythme de remplissage.",
+        "prix_vente": "2,20 USD/kg départ atelier A1, soit 11 USD par seau de 5 kg ; +2 %/an. Hypothèse de simulation, comparée aux prix de détail ivoiriens de colles à bois dont qualité et circuit diffèrent ; aucun débouché acquis.",
+        "complements": "Enveloppes P2I pour logistique, site, utilités, installation, pièces, sécurité, essais et laboratoire. Pompe, raccords, balance et manutention ne sont pas des prix catalogue vérifiés. Agitateur dans la cuve, remplisseuse comptée une seule fois ; fermeture et étiquetage manuels.",
+        "qualite": "Définir formulation et fiche de sécurité, maîtriser conservateurs, exposition et effluents. Évaluer adhérence, viscosité, temps ouvert, stabilité et résistance selon l’usage ; aucune classe EN 204, usage structurel, contact alimentaire, naturalité ou certification acquis."
+      },
+      "marches": [
+        "Menuiseries et fabricants de mobilier intérieur",
+        "Quincailleries et distributeurs spécialisés",
+        "Ateliers de panneaux et assemblage bois"
+      ],
+      "redaction": {
+        "positionnement": "Colle blanche aqueuse pour menuiserie intérieure, en seaux de 5 kg ; performances et prix à comparer aux produits réellement disponibles localement.",
+        "marche": "Clients à prospecter : menuisiers, fabricants de mobilier intérieur et distributeurs spécialisés. Plusieurs colles à bois sont affichées en Côte d’Ivoire ; cela ne prouve ni volume accessible ni commandes.",
+        "commercial": "Faire tester la colle sur les bois et panneaux des clients, qualifier la performance et le coût par assemblage, puis organiser contrats et réassorts.",
+        "approvisionnement": "Dispersion PVAc prête à formuler, auxiliaires compatibles et emballages ; prix livré, régularité, traçabilité et stabilité à documenter.",
+        "procede": "Réception et pesée → mélange → transfert → contrôle qualité → remplissage → fermeture manuelle → étiquetage manuel → palettisation. Le scénario n’inclut pas de synthèse du polymère.",
+        "opportunites": "Service de proximité, conditionnement professionnel et essais sur les supports des clients ; gains commerciaux non présumés.",
+        "risques": "Concurrence de colles locales et importées, prix livré de la dispersion, conservation, résistance du collage, retards de paiement et cadence des postes manuels.",
+        "qualite": "Contrôler viscosité, pH, stabilité et collage ; fiche de sécurité, précautions et traçabilité avant toute allégation. Pas de classe de résistance à l’eau acquise.",
+        "utilites": "Moteur de mélange 5,5 kW annoncé, énergie de transfert, remplissage, air et nettoyage à dimensionner ; pas de chauffage de polymérisation dans ce scénario."
+      },
+      "plan_commercial": [
+        {
+          "titre": "Clients professionnels",
+          "texte": "Prospecter menuisiers, fabricants de mobilier et distributeurs."
+        },
+        {
+          "titre": "Échantillons et essais",
+          "texte": "Faire tester la tenue du collage sur les supports et conditions réels."
+        },
+        {
+          "titre": "Conditionnement",
+          "texte": "Seau refermable de 5 kg ; marque illustrée P2I COLLE proposée comme maquette."
+        },
+        {
+          "titre": "Prix et coût d’usage",
+          "texte": "Comparer prix net, consommation et performance par assemblage."
+        },
+        {
+          "titre": "Distribution",
+          "texte": "Organiser livraisons, réassorts et conditions de règlement."
+        },
+        {
+          "titre": "Suivi",
+          "texte": "Suivre clients actifs, réclamations, réachat et délais de paiement."
+        }
+      ],
+      "sources_prix_marche": [
+        {
+          "url": "https://www.dunya.ci/produits/tendances/10/",
+          "description": "Colle TITAN 5 kg à 8 000 FCFA et EXTRA INDUSTRAP 5 kg à 9 000 FCFA, prix de détail affichés ; performances et disponibilité à vérifier."
+        },
+        {
+          "url": "https://openmoise.ci/shop/colle-a-bois-pro10d-5kg-soudal-ref-108898-80287",
+          "description": "Soudal PRO10D PVAc 5 kg affichée 18 750 FCFA, indiquée en rupture ; gamme et marque différentes, non prix départ usine."
+        },
+        {
+          "url": "https://produitbat.ci/public/detail/produit/1734358796-Colle-Blanche-A-Bois-1kg",
+          "description": "Colle blanche SIPPEC affichée 2 200 FCFA avec intitulé 1 kg mais plusieurs formats dans la description ; incohérence de format conservée, repère qualitatif uniquement."
+        }
+      ],
+      "sources_techniques_produit": [
+        {
+          "url": "https://www.soudal.com/fr-be/pro/produits/colles/colle-bois/pro-10d-colle-bois-blanche",
+          "description": "Produit commercial PVAc aqueux et classe D2 annoncée pour ce produit seulement. Ne confère aucune classe ou équivalence à la formulation P2I."
+        }
+      ],
+      "visuels": {
+        "atlas": "adhesifs",
+        "product_index": 0,
+        "indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    }
+  }
+}

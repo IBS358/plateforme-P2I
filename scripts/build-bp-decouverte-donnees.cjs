@@ -46,6 +46,10 @@ const profileFile={};for(const filename of batchFiles){const lot=JSON.parse(fs.r
 for(const [key,p] of Object.entries(simulationPack.profils)){
  const id=p.up_id||key,config=p.configuration_id||'reference',u=units[id],source=simulationPack.sources.find(x=>x.id===p.source_equipement),h=simulationPack.hypotheses_communes;
  if(!u||!source)throw Error('Profil de simulation sans identité ou source');
+ if(p.redaction){for(const [champ,texte] of Object.entries(p.redaction)){if(!Object.prototype.hasOwnProperty.call(u.redaction,champ)||typeof texte!=='string'||!texte.trim())throw Error('Rédaction de profil invalide : '+key+' / '+champ);u.redaction[champ]=texte;}}
+ if(p.marches){if(!Array.isArray(p.marches)||p.marches.some(x=>typeof x!=='string'||!x.trim()))throw Error('Marchés de profil invalides : '+key);u.marches=p.marches.slice();}
+ for(const equipement of p.equipements_complementaires||[]){if(equipement.source_id){const preuve=simulationPack.sources.find(x=>x.id===equipement.source_id);if(!preuve||preuve.prix!==equipement.prix_retenu||preuve.devise!==equipement.devise)throw Error('Prix complémentaire sans source cohérente : '+key);}}
+
  if(profileFile[key]){
   if(!source.url||!/^https:\/\//.test(source.url)||!source.fournisseur||!source.consulte_le)throw Error('Source publique incomplète : '+key);
   if(source.prix!==undefined&&(p.prix_retenu!==source.prix||p.devise_prix!==source.devise))throw Error('Prix de référence incohérent : '+key);
@@ -76,7 +80,7 @@ for(const [key,p] of Object.entries(simulationPack.profils)){
  u.variantes[config].qualification='simulation_decouverte_calculable';
  u.variantes[config].prix_equipement={...source,equipements_complementaires:supplemental};
  u.variantes[config].emballage=packagingExisting;
- u.variantes[config].hypotheses_explicites={...p.methodes,gamme:p.gamme||null,sources_prix_marche:p.sources_prix_marche||[],suggestion:p.suggestion||null,qualite_produit:p.politique_qualite_id===hygienePolicy.id?hygienePolicy:null,conventions:h,complements_usd:p.complements_usd,base_budget_equipements_usd:equipment,conversion:p.devise_prix==='EUR'?ctx.P2I_BP_V108_REFERENCES.change:null};
+ u.variantes[config].hypotheses_explicites={...p.methodes,gamme:p.gamme||null,sources_prix_marche:p.sources_prix_marche||[],sources_techniques_produit:p.sources_techniques_produit||[],plan_commercial:p.plan_commercial||null,suggestion:p.suggestion||null,qualite_produit:p.politique_qualite_id===hygienePolicy.id?hygienePolicy:null,conventions:h,complements_usd:p.complements_usd,base_budget_equipements_usd:equipment,conversion:p.devise_prix==='EUR'?ctx.P2I_BP_V108_REFERENCES.change:null};
  u.statut='simulation_decouverte_disponible';
 }
 const data={schema:'p2i.bp-donnees.v1',date:'2026-10-28',nombre_up:96,nombre_configurations:Object.values(units).reduce((n,u)=>n+u.configurations.length,0),alias_identifiants:{"profilés":"profiles"},source_perimetre_sha256:crypto.createHash('sha256').update(source).digest('hex'),parametres_communs:{hygiene_professionnelle:hygienePolicy,electricite_mt_general:{source:'https://www.cie.ci/entreprise/tarifs-electricite',consulte_le:'2026-10-26',regime:'MT général, utilisation annuelle 1 000 à 5 000 heures',devise:'XOF',prime_kw_an_ht:33643.67,kwh_pleines_ht:74.06,kwh_pointe_ht:101,kwh_creuses_ht:61.29,qualification:'bareme_publie_application_contractuelle_a_confirmer'}},financement:{apport:.3,dette:.7},horizons:{resultat_ans:3,bfr_mois:36,tresorerie_mois:12},filieres:ctx.filieres.map(f=>({id:f.id,nom:f.name,up_ids:f.units.map(u=>u.id)})),unites:units};
