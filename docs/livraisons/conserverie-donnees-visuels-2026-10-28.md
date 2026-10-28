@@ -1,3 +1,5 @@
+> Historique : cette étape 400 g est remplacée par la référence 1 kg décrite dans [conserverie-1kg-2026-10-28.md](conserverie-1kg-2026-10-28.md). Les anciens chiffres restent archivés.
+
 # Conserverie : données et visuels de la poche rétablis
 
 La suppression de l’ancien scénario en verre avait laissé la nouvelle référence en poche sans prévisions ni illustrations. Cette livraison remplace le dossier vide par une simulation indicative et un atlas propre au conditionnement en poche.

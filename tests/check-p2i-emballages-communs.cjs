@@ -23,3 +23,9 @@ options[0].qualite.fermeture='hypothese_p2i';options[0].capex_adaptation_usd=100
 const bad=clone(def.options);bad[0].prix_retenu=.001;assert.throws(()=>comparer(bad,def.sources,.4,fx),/fourchette/);
 const g=require('../data/archives/p2i-conserverie-verre-2026-10-28.json').dossier.variantes.reference.emballage;assert.ok(Math.abs(g.cout_usd_par_kg-385*1.1193/655.957/.4)<1e-12);assert.equal(g.source_prix.prix_bocal_xof,350);
 console.log('Emballages communs : 96 UP suivies ; qualité, coûts complets, hypothèses admises, prix sourcés, absence de baisse automatique et priorité poche contrôlés.');
+
+const {chiffrerFormat}=require('../scripts/p2i-emballages-commun.cjs');
+const f={masse_produit_kg:1,pertes_emballages_taux:.02,composants_usd_piece:{achat:.045,frais:.12554}};
+const one=chiffrerFormat(f),small=chiffrerFormat({...f,masse_produit_kg:.4});
+assert.ok(Math.abs(one.cout_usd_par_kg-.17054/.98)<1e-12);assert.ok(Math.abs(small.cout_usd_par_kg-one.cout_usd_par_kg*2.5)<1e-12);
+for(const patch of [{masse_produit_kg:0},{pertes_emballages_taux:1},{composants_usd_piece:{x:-1}},{composants_usd_piece:[]}])assert.throws(()=>chiffrerFormat({...f,...patch}),/invalide/);

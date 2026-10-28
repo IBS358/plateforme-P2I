@@ -2,6 +2,14 @@
 const regles=require('../data/p2i-emballages-regles.json');
 const conserve=require('../data/p2i-conserverie-conditionnements.json');
 const valid=x=>typeof x==='number'&&Number.isFinite(x)&&x>=0;
+// Conversion explicite d'un budget par contenant en coût par kg vendu.
+// La provision de pertes ne crée ni ventes ni économies automatiques.
+function chiffrerFormat(format){
+ const {masse_produit_kg:masse,pertes_emballages_taux:pertes,composants_usd_piece:composants}=format||{};
+ if(!valid(masse)||masse===0||!valid(pertes)||pertes>=1||!composants||typeof composants!=='object'||Array.isArray(composants)||!Object.keys(composants).length||Object.values(composants).some(v=>!valid(v)))throw Error('Format emballage invalide');
+ const parKg=Object.fromEntries(Object.entries(composants).map(([k,v])=>[k,v/masse/(1-pertes)]));
+ return {cout_usd_par_emballage:Object.values(composants).reduce((n,v)=>n+v,0)/(1-pertes),cout_usd_par_kg:Object.values(parKg).reduce((n,v)=>n+v,0),composants_usd_par_kg:parKg,masse_produit_kg:masse,pertes_emballages_taux:pertes};
+}
 function comparer(options,sources,masse,change){
  if(!Array.isArray(options)||!valid(masse)||masse===0)throw Error('Base de comparaison invalide');
  const ids=new Set();
@@ -45,4 +53,4 @@ function appliquer(data,change){
  data.unites.conserverie_legumes.comparaison_conditionnements={...conserve,...comparer(conserve.options,conserve.sources,conserve.masse_produit_kg,change),limites:'Les frais sont des provisions P2I, pas des prix livrés confirmés ni des droits officiels. Formats exacts et fermetures à préciser ; aucun rabais de quantité présumé. Aucun ROI des nouvelles options calculé avant consolidation de leur configuration.'};
  return data;
 }
-module.exports={comparer,suivi,appliquer,regles};
+module.exports={chiffrerFormat,comparer,suivi,appliquer,regles};

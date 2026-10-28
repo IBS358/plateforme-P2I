@@ -17,7 +17,8 @@ for(const u of Object.values(c.P2I_BP_DONNEES.unites)){
   near(s.investissement-old.investissement,(mc.mode==='budget_ajoute'?mc.budget_livre_estime_usd:0)+deltaMachines);
   near(s.cout_production_kg[0]-old.cout_production_kg[0],mc.entretien_supplementaire_usd_an/s.production[0]+deltaPackaging);
   assert.deepEqual(clone(s.prix),old.prix,'Aucun prix de vente relevé pour compenser les coûts');assert.deepEqual(clone(s.ventes),old.ventes);assert.equal(s.machines,old.machines+deltaMachines);
-  assert.ok(r.annuel[0].resultat_net<before.annuel[0].resultat_net,'Amortissement et charges effectivement déduits');
+  const comparable=api.calculer({...old,cout_production_kg:old.cout_production_kg.map((x,i)=>x+deltaPackaging*(1+old.croissance_charges)**i)});
+  assert.ok(r.annuel[0].resultat_net<comparable.annuel[0].resultat_net,'Effet investissement vérifié à coût emballage comparable');
   near(r.annuel[0].amortissements,(s.investissement-mc.budget_livre_estime_usd)/s.duree_amortissement_ans+mc.budget_livre_estime_usd/5);
   near(r.financement.apport,.3*s.investissement);near(r.financement.dette,.7*s.investissement);
   near(r.financement.apport_total,r.financement.apport+r.reserve_initiale);near(r.financement.besoin_total,s.investissement+r.reserve_initiale);near(r.financement.total_ressources,r.financement.besoin_total);

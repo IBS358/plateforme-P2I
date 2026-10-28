@@ -64,6 +64,13 @@ const profileFile={};for(const filename of batchFiles){const lot=JSON.parse(fs.r
 
 for(const [key,rawProfile] of Object.entries(simulationPack.profils)){
  const p=JSON.parse(JSON.stringify(rawProfile));
+ if(p.emballage_produit?.calcul_format){
+  const format=require('./p2i-emballages-commun.cjs').chiffrerFormat(p.emballage_produit.calcul_format);
+  if(!Number.isFinite(p.cout_process_hors_emballage_usd_kg)||p.cout_process_hors_emballage_usd_kg<0)throw Error('Process hors emballage requis : '+key);
+  Object.assign(p.emballage_produit,format);
+  p.cout_process_usd_kg=p.cout_process_hors_emballage_usd_kg+format.cout_usd_par_kg;
+ }
+
  // Les moteurs comptent des unités homogènes ; les anciennes clés internes _kg
  // restent compatibles, sans conversion fictive de pièces en masse.
  if(p.unite_production){

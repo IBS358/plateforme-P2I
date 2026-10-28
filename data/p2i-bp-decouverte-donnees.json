@@ -409,9 +409,9 @@
           "reference": {
             "up_id": "conserverie_legumes",
             "configuration_id": null,
-            "nom": "Sauce tomate en poche stérilisable",
-            "sous_titre": "Tomates fraîches — poche thermoscellée de 400 g",
-            "description": "Transformation de tomates fraîches en sauce conditionnée en poches stérilisables de 400 g. Simulation indicative P2I, calculée sur ses propres coûts de conditionnement ; hypothèses et compatibilités à confirmer.",
+            "nom": "Sauce tomate — poche stérilisable 1 kg",
+            "sous_titre": "Tomates fraîches — format familial et restauration de 1 kg",
+            "description": "Sauce tomate prête à cuisiner, conditionnée en poches stérilisables de 1 kg pour familles et restauration. Simulation indicative P2I, distincte du concentré de tomate ; prix et débouchés restent des hypothèses.",
             "capacite": 400,
             "unite": "kg/h",
             "machines": 150000,
@@ -433,9 +433,9 @@
             ],
             "matieres_kg": 0.35,
             "cout_production_kg": [
-              1.0827333333333333,
-              1.0818591794871795,
-              1.0990452488888889
+              0.8443537414965986,
+              0.8363281998953428,
+              0.8461483399092969
             ],
             "personnel": 9660,
             "charges_fixes": 24000,
@@ -558,7 +558,7 @@
                 "duree_ans": 5
               }
             ],
-            "cout_emballages_stockables_unite": 0.4124,
+            "cout_emballages_stockables_unite": 0.1740204081632653,
             "stock_emballages_jours": 15,
             "stock_matieres_jours": 2
           },
@@ -669,7 +669,7 @@
               "Refroidissement et contrôle"
             ],
             "qualification": "prix_catalogue_de_gamme_configuration_estimee_P2I",
-            "limites": "Référence catalogue, pas offre intégrée confirmée pour la poche 400 g. Débit amont, remplissage, soudure et interfaces à rapprocher de la recette. Deux autoclaves chiffrés séparément ; aucune certification ou capacité de cycle validée présumée.",
+            "limites": "Référence catalogue, pas offre intégrée confirmée pour la poche 1 kg. Débit amont, remplissage, soudure et interfaces à rapprocher de la recette. Deux autoclaves chiffrés séparément ; aucune certification ou capacité de cycle validée présumée.",
             "postes": [
               {
                 "description": "Lavage et tri dans l’ensemble amont."
@@ -709,42 +709,59 @@
           },
           "emballage": {
             "statut": "reference_catalogue_et_provisions_P2I",
-            "format": "Poche stérilisable PET/NY/AL/RCPP, thermoscellée, cible 400 g ; format exact à confirmer",
-            "cout_usd_par_kg": 0.4124,
-            "cout_usd_par_emballage": 0.16496,
+            "format": "Poche stérilisable multicouche, thermoscellée, 1 kg — familles et restauration",
+            "cout_usd_par_kg": 0.1740204081632653,
+            "cout_usd_par_emballage": 0.17402040816326533,
             "composants_usd_par_kg": {
-              "poche_fermeture": 0.19999999999999998,
-              "fret": 0.0375,
-              "assurance": 0.002,
-              "import_transit": 0.0479,
-              "livraison_locale": 0.012499999999999999,
-              "marquage": 0.049999999999999996,
-              "regroupement": 0.0625
+              "poche_fermeture": 0.04591836734693878,
+              "fret": 0.030612244897959183,
+              "assurance": 0.00045918367346938773,
+              "import_transit": 0.015397959183673468,
+              "livraison_locale": 0.010204081632653062,
+              "marquage": 0.020408163265306124,
+              "regroupement": 0.05102040816326531
             },
             "mode_comptable": "inclus_dans_cout_industriel",
             "ecologie": "Moins de masse transportée à étudier ; complexe multicouche, aucune recyclabilité ou collecte locale présumée.",
-            "source": "PB-20728 : borne haute publiée 0,08 USD/pièce ; logistique, marquage et regroupement = provisions P2I. TVA non isolée, frais livrés et format exact non confirmés.",
+            "source": "LONKIA LY-GWD 1 kg : borne haute catalogue de gamme 0,045 USD FOB/pièce. Frais = provisions P2I ; fret, livraison et regroupement par poche doublés par prudence par rapport au 400 g. Provision pertes emballages 2 %. Marquage conservé, sans présumer son inclusion dans le prix.",
             "source_prix": {
-              "fournisseur": "Chinee Packing Bag Co., Ltd.",
-              "url": "https://www.china-packagingbags.com/product/121c-high-temp-retort-pouch-for-ready-meal-soup-sauce-packaging/",
+              "fournisseur": "Zhucheng Lonkia Co., Ltd",
+              "url": "https://lonkiamachinery88.en.made-in-china.com/product/FflUyGjvlcpO/China-Retort-Pouch-1kg-High-Temperature-Food-Grade-Aluminum-Foil-Food-Vacuum-Bag-Storage-Bags.html",
+              "url_prix": "https://lonkiamachinery88.en.made-in-china.com/product-group/lbtfxLmAoDRI/Retort-Pouch-1.html",
               "consulte_le": "2026-10-28",
-              "reference": "PB-20728, PET/NY/AL/RCPP, thermoscellage ; 121 °C annoncé",
-              "prix_min": 0.03,
-              "prix_max": 0.08,
+              "reference": "LY-GWD, poche 1 kg ; PET/AL/PA/RCPP, thermoscellage et impression personnalisables",
+              "prix_min": 0.024,
+              "prix_max": 0.045,
               "devise": "USD",
               "minimum_pieces": 10000,
-              "limites": "Prix de gamme selon dimensions, matériau et impression ; format 400 g, procédé et frais livrés non confirmés."
-            }
+              "limites": "Catalogue de gamme FOB 0,024–0,045 USD et minimum 2 000 ; fiche annonce minimum impression héliogravure 10 000, retenu prudemment. Épaisseur, dimensions, prix de la variante exacte et soudure à confirmer ; fermeture zip annoncée dans un champ, thermoscellage dans le descriptif. Aucune durée de conservation ni certification présumée."
+            },
+            "calcul_format": {
+              "masse_produit_kg": 1,
+              "pertes_emballages_taux": 0.02,
+              "composants_usd_piece": {
+                "poche_fermeture": 0.045,
+                "fret": 0.03,
+                "assurance": 0.00045,
+                "import_transit": 0.01509,
+                "livraison_locale": 0.01,
+                "marquage": 0.02,
+                "regroupement": 0.05
+              }
+            },
+            "masse_produit_kg": 1,
+            "pertes_emballages_taux": 0.02
           },
           "hypotheses_explicites": {
-            "production": "Programme prudent conservé : 300/390/450 t produites et vendues par an. Hypothèse de capacité finale 400 kg/h, 8 h/j et 250 j/an ; rendement 80 % d’une entrée cible de 500 kg/h. Demande commerciale non prouvée. Deux autoclaves supposés traiter 300 kg utiles chacun par cycle total de 90 min, soit 400 kg/h combinés ; charge et cycle sont des hypothèses de dimensionnement, pas une garantie fournisseur.",
+            "production": "Programme prudent conservé : 300/390/450 t produites et vendues par an. Hypothèse de capacité finale 400 kg/h, 8 h/j et 250 j/an ; rendement 80 % d’une entrée cible de 500 kg/h. Demande commerciale non prouvée. Deux autoclaves supposés traiter 300 kg utiles chacun par cycle total de 90 min, soit 400 kg/h combinés ; charge et cycle sont des hypothèses de dimensionnement, pas une garantie fournisseur. Le format 1 kg est étudié à débit massique inchangé, pas comme une hausse de capacité. Débouchés familles et restauration à prospecter ; ventes non garanties.",
             "matieres": "Matières et ingrédients 0,35 USD/kg de sauce, estimation P2I sans relevé de prix local.",
-            "process": "Transformation hors emballage 0,18 USD/kg, estimation P2I conservée ; conditionnement 0.4124 USD/kg incluant poche et frais estimés. Personnel industriel dans les frais fixes ; pas de seconde déduction des emballages.",
+            "process": "Transformation hors emballage 0,18 USD/kg inchangée. Coût de conditionnement calculé par la règle commune : somme des composants par poche / masse nette / (1 − 2 % de pertes emballages). Aucun second prélèvement des emballages au compte de résultat.",
             "personnel": "Personnel administratif distinct du personnel industriel, hypothèses P2I.",
             "charges": "Locaux, distribution, assurance et administration : hypothèses P2I.",
             "prix_vente": "Prix départ UP conservé : 1,25 USD/kg en A1 puis +2 %/an. Hypothèse P2I, non prix de marché ivoirien vérifié ; aucune hausse pour atteindre une marge cible.",
             "complements": "Enveloppes P2I de site, fret, utilités et installation conservées. La ligne à 100 000 USD est une référence catalogue de gamme pour amont et remplissage/fermeture à adapter aux poches ; aucun second doseur ou thermoscelleur ajouté. Deux autoclaves séparés, 25 000 USD chacun à la borne haute publiée. L’éventuel traitement tubulaire amont n’est pas un second poste retenu : périmètre à réconcilier, sans rabais supposé sur le prix de ligne.",
-            "qualite": "La poche, sa soudure, la recette, l’acidité, le barème thermique, le refroidissement et la durée de vie doivent être étudiés ensemble. La mention fournisseur 121 °C n’est pas un barème validé pour cette sauce.",
+            "qualite": "La poche, sa soudure, la recette, l’acidité, le barème thermique, le refroidissement et la durée de vie doivent être étudiés ensemble. La mention fournisseur 121 °C n’est pas un barème validé pour cette sauce. Le format 1 kg exige son propre barème thermique et plan de chargement : aucune transposition automatique du cycle 400 g. Le zip éventuel ne remplace jamais la soudure hermétique. Consignes après ouverture à définir selon essais ; aucun bénéfice de conservation après ouverture présumé.",
+            "emballage": "Format 1 kg : une poche par kg, contre 2,5 pour le 400 g. Borne haute publiée pour une référence mentionnant explicitement 1 kg ; fret 0,030, livraison 0,010 et regroupement 0,050 USD/pièce, soit le double des provisions par poche du 400 g. Marquage 0,020 maintenu. Assurance 1 % achat, import/transit provision 20 % achat + fret + assurance. Pertes emballages 2 %. Montants livrés estimés, pas confirmés.",
             "manutention": "Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
             "manutention_chiffree": {
               "panier": {
@@ -890,8 +907,8 @@
             "compatibilite_confirmee": false,
             "baisse_prix_automatique": false,
             "fabrication_auxiliaire_incluse": false,
-            "format": "Poche stérilisable PET/NY/AL/RCPP, thermoscellée, cible 400 g ; format exact à confirmer",
-            "cout_actuel_qualification": "PB-20728 : borne haute publiée 0,08 USD/pièce ; logistique, marquage et regroupement = provisions P2I. TVA non isolée, frais livrés et format exact non confirmés."
+            "format": "Poche stérilisable multicouche, thermoscellée, 1 kg — familles et restauration",
+            "cout_actuel_qualification": "LONKIA LY-GWD 1 kg : borne haute catalogue de gamme 0,045 USD FOB/pièce. Frais = provisions P2I ; fret, livraison et regroupement par poche doublés par prudence par rapport au 400 g. Provision pertes emballages 2 %. Marquage conservé, sans présumer son inclusion dans le prix."
           }
         }
       },
@@ -905,7 +922,7 @@
         "reference"
       ],
       "redaction": {
-        "projet": "Transformation de tomates fraîches en sauce conditionnée en poches stérilisables de 400 g. Simulation indicative P2I, calculée sur ses propres coûts de conditionnement ; hypothèses et compatibilités à confirmer.",
+        "projet": "Sauce tomate prête à cuisiner, conditionnée en poches stérilisables de 1 kg pour familles et restauration. Simulation indicative P2I, distincte du concentré de tomate ; prix et débouchés restent des hypothèses.",
         "positionnement": "Conserverie de légumes : Transformation industrielle de légumes locaux en conserves. Le périmètre économique est celui de cette activité; les chiffres d’une autre UP ou variante ne sont pas transposés.",
         "procede": "Tri/lavage → broyage/tamisage → préparation/cuisson → dosage en poche → thermoscellage → traitement en autoclaves → refroidissement/contrôle. Un seul poste de remplissage et de soudure dans la ligne ; deux autoclaves parallèles pour le débit cible.",
         "marche": "Segments à prospecter : Supermarchés (Carrefour, Casino) ; Hôtels et restaurants ; Cantines scolaires et universitaires ; Export vers l'Europe ; Marché institutionnel (hôpitaux, prisons). Leur présence dans le référentiel ne démontre ni volume de demande, ni commande, ni prix de vente accepté.",
@@ -913,11 +930,11 @@
         "approvisionnement": "Intrants recensés : Tomates (production locale) ; Haricots verts (producteurs locaux) ; Maïs doux (régions du nord) ; Okra, gombo (sud) ; Sel, sucre, vinaigre ; Boîtes de conserve, bocaux en verre, étiquettes. Pour chaque intrant, préciser qualité, disponibilité, prix livré, rendement, conditionnement et délai de réapprovisionnement.",
         "opportunites": "Valorisation des surplus agricoles ivoiriens ; Conservation longue durée (12-24 mois) ; Marges intéressantes (40-50%) ; Export possible vers l'Europe (normes UE) ; 🇨🇮 Légumes locaux : tomate, haricot vert, maïs doux, okra, gombo",
         "risques": "Saisonnalité des légumes (prévoir stockage) ; Normes sanitaires strictes (HACCP, ISO) ; Concurrence des importations (Italie, Espagne) ; Gestion des déchets organiques",
-        "qualite": "La poche, sa soudure, la recette, l’acidité, le barème thermique, le refroidissement et la durée de vie doivent être étudiés ensemble. La mention fournisseur 121 °C n’est pas un barème validé pour cette sauce.",
+        "qualite": "La poche, sa soudure, la recette, l’acidité, le barème thermique, le refroidissement et la durée de vie doivent être étudiés ensemble. La mention fournisseur 121 °C n’est pas un barème validé pour cette sauce. Le format 1 kg exige son propre barème thermique et plan de chargement : aucune transposition automatique du cycle 400 g. Le zip éventuel ne remplace jamais la soudure hermétique. Consignes après ouverture à définir selon essais ; aucun bénéfice de conservation après ouverture présumé.",
         "utilites": "Optimiser les cycles de stérilisation ; Récupérer la chaleur des autoclaves ; Isoler les canalisations et cuves ; Utiliser des variateurs de vitesse ; Installer un chauffe-eau solaire",
         "implantation": "Organiser en flux continu ; Séparer zones propres et sales ; Prévoir zone de stockage climatisée ; Aménager laboratoire de contrôle qualité ; Faciliter la circulation des chariots",
-        "production": "Programme prudent conservé : 300/390/450 t produites et vendues par an. Hypothèse de capacité finale 400 kg/h, 8 h/j et 250 j/an ; rendement 80 % d’une entrée cible de 500 kg/h. Demande commerciale non prouvée. Deux autoclaves supposés traiter 300 kg utiles chacun par cycle total de 90 min, soit 400 kg/h combinés ; charge et cycle sont des hypothèses de dimensionnement, pas une garantie fournisseur.",
-        "economie": "Les états sont calculés par le moteur commun à partir des prix catalogue retenus et d’hypothèses P2I explicites. Une simulation calculable ne signifie pas un projet rentable validé.",
+        "production": "Programme prudent conservé : 300/390/450 t produites et vendues par an. Hypothèse de capacité finale 400 kg/h, 8 h/j et 250 j/an ; rendement 80 % d’une entrée cible de 500 kg/h. Demande commerciale non prouvée. Deux autoclaves supposés traiter 300 kg utiles chacun par cycle total de 90 min, soit 400 kg/h combinés ; charge et cycle sont des hypothèses de dimensionnement, pas une garantie fournisseur. Le format 1 kg est étudié à débit massique inchangé, pas comme une hausse de capacité. Débouchés familles et restauration à prospecter ; ventes non garanties.",
+        "economie": "Le format 1 kg réduit le nombre de poches consommées par kg. Prix de vente au kg, volumes, frais fixes et investissement inchangés ; résultat recalculé par le moteur commun. Simulation indicative sous hypothèses P2I, sans validation commerciale.",
         "financement": "L’apport de 30 % et la dette de 70 % ne s’appliquent qu’à un budget explicitement retenu. Le budget minimum historique reste distinct du CAPEX consolidé; le BFR et la réserve initiale doivent être financés et présentés séparément.",
         "bfr": "Le BFR sur 36 mois suit stocks de matières, produits finis valorisés, créances clients et dettes fournisseurs. Prix, quantités et délais doivent provenir de ce dossier.",
         "tresorerie": "Le plan de trésorerie couvre 12 mois, à partir des encaissements et décaissements réels, du financement, des investissements et de l’échéancier de dette. Un montant absent ne vaut pas zéro.",
@@ -943,11 +960,8 @@
         "Boîtes de conserve, bocaux en verre, étiquettes"
       ],
       "marches": [
-        "Supermarchés (Carrefour, Casino)",
-        "Hôtels et restaurants",
-        "Cantines scolaires et universitaires",
-        "Export vers l'Europe",
-        "Marché institutionnel (hôpitaux, prisons)"
+        "Restauration et cantines utilisant un sachet de 1 kg",
+        "Ménages à consommation adaptée au format familial ; demande à vérifier"
       ],
       "machines": [
         {

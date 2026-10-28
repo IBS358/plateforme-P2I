@@ -56,3 +56,6 @@ Use case photorealistic-natural. One square website PHOTO ATLAS in an EXACT 3x3 
 Prompt : contact sheet photographique 3×3 de neuf scènes distinctes dans une petite conserverie ivoirienne, équipements inox et personnel en tenue d’hygiène ; poche multicouche sans bec ni bouteille, atelier/tri/broyage/cuisson/dosage/soudure/autoclave/contrôle/produit fini. Texte du produit : P2I TOMATE, SAUCE TOMATE, 400 g. Aucun modèle fournisseur ni certification visuelle.
 
 Prompt final complet : `conserverie-poche-generation.json` (outil intégré image_gen).
+
+## Conserverie — format 1 kg, 28 octobre 2026
+`postes-conserverie-poche-1kg-ia.jpg` : édition par le générateur intégré de l’atlas 400 g. Neuf panneaux conservés, visuel produit remplacé par 1 kg ; sept postes distincts et personnel ivoirien. Marque P2I TOMATE fictive. Illustrations IA, sans représenter une machine fournisseur exacte, une certification ni une capacité garantie. Prompt exact dans `conserverie-poche-1kg-generation.json`.
