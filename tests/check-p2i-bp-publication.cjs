@@ -4,7 +4,7 @@ const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),asse
 const root=path.resolve(__dirname,'..'),ctx=vm.createContext({});
 for(const f of ['up-data.js','js/p2i-bp-decouverte-financial-validation.js','js/p2i-bp-decouverte-publication.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
 const api=ctx.P2I_BP_PUBLICATION,registry=vm.runInContext('P2I_UP_DATA',ctx),report=api.audit(registry);
-assert.equal(report.up_presentes,96);assert.equal(report.configurations,100);assert.equal(report.valides,0);assert.equal(report.ecart_up,0);
+assert.equal(report.up_presentes,96);assert.equal(report.configurations,105);assert.equal(report.valides,0);assert.equal(report.ecart_up,0);
 assert.equal(api.inspect('absent',null,registry).statut,'a_completer');
 assert.ok(api.inspect('biscuiterie','inconnue',registry).blocages.some(x=>x.code==='variante'));
 const source={url:'https://example.com/test-only',date_verification:'2026-10-26',extrait:'Preuve de test synthétique',verifie:true};
@@ -30,4 +30,4 @@ assert.ok(api.inspect('peintures_btp',null,registry,e).blocages.some(x=>x.code==
 assert.equal(api.source({url:'javascript:alert(1)',date_verification:'2026-10-26',extrait:'test',verifie:true}),false);
 const saved=JSON.parse(fs.readFileSync(path.join(root,'data/p2i-bp-decouverte-publication.json'),'utf8'));
 assert.deepEqual(JSON.parse(JSON.stringify(report)),saved,'Audit généré périmé');
-console.log('Publication : 100 configurations, preuve fournisseur, contexte, compatibilité, CAPEX et horizons contrôlés.');
+console.log('Publication : 105 configurations, preuve fournisseur, contexte, compatibilité, CAPEX et horizons contrôlés.');

@@ -7731,7 +7731,7 @@
     },
     {
       "up_id": "confection",
-      "up_nom": "Confection de vêtements",
+      "up_nom": "Confection textile & broderie",
       "filiere": "Textile, Habillement & Cuir",
       "statut": "brouillon_documentaire_non_bancable",
       "sections": [
@@ -7739,9 +7739,9 @@
           "numero": 1,
           "titre": "Projet et activité",
           "contenu": {
-            "description": "Fabrication de vêtements prêts-à-porter pour hommes, femmes et enfants. Spécialisation possible en pagne, tenues traditionnelles, casual et professionnel.",
+            "description": "Un atelier mutualisé pour linge de maison, uniformes et prêt-à-porter, avec ou sans broderie. Versions spécialisées ou mixte ; capacités et budgets propres à chaque version.",
             "filiere": "Textile, Habillement & Cuir",
-            "up_nom": "Confection de vêtements"
+            "up_nom": "Confection textile & broderie"
           }
         },
         {
@@ -7759,56 +7759,44 @@
           "contenu": {
             "machines": [
               {
-                "nom": "Machine à coudre industrielle",
-                "role": "Couture des vêtements",
-                "capacite": "500 pièces/jour",
-                "utilites": "Électricité 0.5kW"
+                "nom": "Piqueuses industrielles",
+                "role": "Assemblage ou ourlets selon version",
+                "capacite": "Selon variante ; voir BP de référence",
+                "utilites": "À rapprocher des fiches catalogue"
               },
               {
-                "nom": "Coupe automatique",
-                "role": "Découpe du tissus",
-                "capacite": "100 mètres/heure",
-                "utilites": "Électricité 2kW"
+                "nom": "Surjeteuses",
+                "role": "Surfilage des vêtements ; non nécessaires au drap à double ourlet",
+                "capacite": "Selon variante ; voir BP de référence",
+                "utilites": "À rapprocher des fiches catalogue"
               },
               {
-                "nom": "Surjeteuse",
-                "role": "Finition des coutures",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité 0.4kW"
+                "nom": "Boutonnières",
+                "role": "Uniformes et prêt-à-porter concernés",
+                "capacite": "Selon variante ; voir BP de référence",
+                "utilites": "À rapprocher des fiches catalogue"
               },
               {
-                "nom": "Repasseuse industrielle",
-                "role": "Finition et repassage",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité + vapeur"
+                "nom": "Brodeuses multi-têtes",
+                "role": "Versions brodées et mixte uniquement",
+                "capacite": "Selon variante ; voir BP de référence",
+                "utilites": "À rapprocher des fiches catalogue"
               },
               {
-                "nom": "Presse à transfert",
-                "role": "Thermocollage des motifs",
-                "capacite": "200 pièces/jour",
-                "utilites": "Électricité"
+                "nom": "Outils de coupe",
+                "role": "Coupe de faible épaisseur par passes",
+                "capacite": "Selon variante ; voir BP de référence",
+                "utilites": "À rapprocher des fiches catalogue"
               },
               {
-                "nom": "Boutonneuse automatique",
-                "role": "Pose de boutons",
-                "capacite": "600 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Brodeuse industrielle",
-                "role": "Broderie personnalisée",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Contrôle qualité",
-                "role": "Inspection des finitions",
-                "capacite": "Standard",
-                "utilites": "Électricité"
+                "nom": "Tables avec fer et chaudière",
+                "role": "Repassage et finition",
+                "capacite": "Selon variante ; voir BP de référence",
+                "utilites": "À rapprocher des fiches catalogue"
               }
             ],
             "configuration_reference": null,
-            "capacite_generique_non_validee": "5,000 pièces"
+            "capacite_generique_non_validee": null
           }
         },
         {
@@ -7816,11 +7804,9 @@
           "titre": "Étude de marché",
           "contenu": {
             "marches_cibles": [
-              "Boutiques de mode",
-              "Marchés traditionnels",
-              "Supermarchés",
-              "Entreprises (uniformes)",
-              "Particuliers (sur mesure)"
+              "Hôtels et résidences",
+              "Entreprises et établissements scolaires",
+              "Distributeurs et boutiques de vêtements"
             ],
             "analyse_demande": {
               "etat": "a_documenter",
@@ -7834,11 +7820,9 @@
           "titre": "Stratégie commerciale",
           "contenu": {
             "marches_cibles": [
-              "Boutiques de mode",
-              "Marchés traditionnels",
-              "Supermarchés",
-              "Entreprises (uniformes)",
-              "Particuliers (sur mesure)"
+              "Hôtels et résidences",
+              "Entreprises et établissements scolaires",
+              "Distributeurs et boutiques de vêtements"
             ],
             "politique_prix": {
               "etat": "a_documenter",
@@ -7869,17 +7853,11 @@
           "contenu": {
             "investissement_reference_equipements_usd": null,
             "estimation_generique_non_validee": {
-              "investissement_minimum_usd": 60000,
-              "ventilation": {
-                "machines": 35000,
-                "installation": 10000,
-                "working_capital": 10000,
-                "training": 5000,
-                "total": 60000
-              },
-              "chiffre_affaires_annuel_indicatif_usd": 500000,
-              "marge_brute_indicative_pourcent": 42,
-              "rentabilite_nette_indicative_pourcent": 25
+              "investissement_minimum_usd": null,
+              "ventilation": null,
+              "chiffre_affaires_annuel_indicatif_usd": null,
+              "marge_brute_indicative_pourcent": null,
+              "rentabilite_nette_indicative_pourcent": null
             },
             "capex_complet_usd": null,
             "apport_30_usd": null,
@@ -7892,21 +7870,18 @@
           "titre": "Production et ventes",
           "contenu": {
             "processus": [
-              "Réception des tissus (pagne, coton, polyester)",
-              "Découpe selon patron",
-              "Assemblage des pièces",
-              "Surfilage et finitions",
-              "Pose des boutons/fermetures",
-              "Repassage",
-              "Contrôle qualité",
+              "Réception des tissus achetés",
+              "Patronage et coupe",
+              "Couture et finitions propres au produit",
+              "Broderie selon version",
+              "Repassage et contrôle",
               "Conditionnement"
             ],
             "matieres_premieres": [
-              "Pagne (tissus locaux)",
-              "Coton (production locale)",
-              "Polyester (import)",
-              "Fils, boutons, fermetures éclair",
-              "Emballages (sachets, cartons)"
+              "Tissus achetés selon composition et laize",
+              "Fils, boutons et fournitures",
+              "Fils et stabilisateurs de broderie selon version",
+              "Bandes papier et cartons"
             ],
             "capacite_reference": null,
             "production_mensuelle": {
@@ -7972,8 +7947,8 @@
             },
             "conditions": "Les chiffres génériques historiques ne constituent ni devis ni résultats financiers validés",
             "controle": {
-              "montant_total_ventilation_usd": 60000,
-              "ecart_capex_min_ventilation_usd": 0,
+              "montant_total_ventilation_usd": null,
+              "ecart_capex_min_ventilation_usd": null,
               "capex_complet_valide_usd": null,
               "projections_3_ans_validees": false,
               "bfr_36_mois_valide": false,
@@ -8008,70 +7983,55 @@
           "contenu": {
             "machines": [
               {
-                "nom": "Machine à coudre industrielle",
-                "role": "Couture des vêtements",
-                "capacite": "500 pièces/jour",
-                "utilites": "Électricité 0.5kW"
+                "nom": "Piqueuses industrielles",
+                "role": "Assemblage ou ourlets selon version",
+                "capacite": "Selon variante ; voir BP de référence",
+                "utilites": "À rapprocher des fiches catalogue"
               },
               {
-                "nom": "Coupe automatique",
-                "role": "Découpe du tissus",
-                "capacite": "100 mètres/heure",
-                "utilites": "Électricité 2kW"
+                "nom": "Surjeteuses",
+                "role": "Surfilage des vêtements ; non nécessaires au drap à double ourlet",
+                "capacite": "Selon variante ; voir BP de référence",
+                "utilites": "À rapprocher des fiches catalogue"
               },
               {
-                "nom": "Surjeteuse",
-                "role": "Finition des coutures",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité 0.4kW"
+                "nom": "Boutonnières",
+                "role": "Uniformes et prêt-à-porter concernés",
+                "capacite": "Selon variante ; voir BP de référence",
+                "utilites": "À rapprocher des fiches catalogue"
               },
               {
-                "nom": "Repasseuse industrielle",
-                "role": "Finition et repassage",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité + vapeur"
+                "nom": "Brodeuses multi-têtes",
+                "role": "Versions brodées et mixte uniquement",
+                "capacite": "Selon variante ; voir BP de référence",
+                "utilites": "À rapprocher des fiches catalogue"
               },
               {
-                "nom": "Presse à transfert",
-                "role": "Thermocollage des motifs",
-                "capacite": "200 pièces/jour",
-                "utilites": "Électricité"
+                "nom": "Outils de coupe",
+                "role": "Coupe de faible épaisseur par passes",
+                "capacite": "Selon variante ; voir BP de référence",
+                "utilites": "À rapprocher des fiches catalogue"
               },
               {
-                "nom": "Boutonneuse automatique",
-                "role": "Pose de boutons",
-                "capacite": "600 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Brodeuse industrielle",
-                "role": "Broderie personnalisée",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Contrôle qualité",
-                "role": "Inspection des finitions",
-                "capacite": "Standard",
-                "utilites": "Électricité"
+                "nom": "Tables avec fer et chaudière",
+                "role": "Repassage et finition",
+                "capacite": "Selon variante ; voir BP de référence",
+                "utilites": "À rapprocher des fiches catalogue"
               }
             ],
             "processus": [
-              "Réception des tissus (pagne, coton, polyester)",
-              "Découpe selon patron",
-              "Assemblage des pièces",
-              "Surfilage et finitions",
-              "Pose des boutons/fermetures",
-              "Repassage",
-              "Contrôle qualité",
+              "Réception des tissus achetés",
+              "Patronage et coupe",
+              "Couture et finitions propres au produit",
+              "Broderie selon version",
+              "Repassage et contrôle",
               "Conditionnement"
             ],
             "matieres_premieres": [
-              "Pagne (tissus locaux)",
-              "Coton (production locale)",
-              "Polyester (import)",
-              "Fils, boutons, fermetures éclair",
-              "Emballages (sachets, cartons)"
+              "Tissus achetés selon composition et laize",
+              "Fils, boutons et fournitures",
+              "Fils et stabilisateurs de broderie selon version",
+              "Bandes papier et cartons"
             ],
             "controles": {
               "etat": "a_documenter",
@@ -9066,317 +9026,6 @@
       ]
     },
     {
-      "up_id": "broderie",
-      "up_nom": "Broderie industrielle",
-      "filiere": "Textile, Habillement & Cuir",
-      "statut": "brouillon_documentaire_non_bancable",
-      "sections": [
-        {
-          "numero": 1,
-          "titre": "Projet et activité",
-          "contenu": {
-            "description": "Broderie automatisée sur textiles : logos d'entreprises, initiales, motifs décoratifs. Service pour confectionneurs, entreprises et particuliers.",
-            "filiere": "Textile, Habillement & Cuir",
-            "up_nom": "Broderie industrielle"
-          }
-        },
-        {
-          "numero": 2,
-          "titre": "Synthèse économique",
-          "contenu": {
-            "etat": "a_documenter",
-            "message": "Compte économique consolidé et chiffré à calculer par le moteur P2I",
-            "donnees": null
-          }
-        },
-        {
-          "numero": 3,
-          "titre": "Configuration industrielle",
-          "contenu": {
-            "machines": [
-              {
-                "nom": "Brodeuse multi-têtes",
-                "role": "Broderie automatisée",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité 1.5kW"
-              },
-              {
-                "nom": "Digitizer",
-                "role": "Conception des motifs",
-                "capacite": "Standard",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Machine à affranchir",
-                "role": "Préparation des supports",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Détricoteuse",
-                "role": "Défabrication des erreurs",
-                "capacite": "100 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Presse thermique",
-                "role": "Fixation des broderies",
-                "capacite": "200 pièces/jour",
-                "utilites": "Électricité"
-              }
-            ],
-            "configuration_reference": null,
-            "capacite_generique_non_validee": "5,000 pièces"
-          }
-        },
-        {
-          "numero": 4,
-          "titre": "Étude de marché",
-          "contenu": {
-            "marches_cibles": [
-              "Confectionneurs de vêtements",
-              "Entreprises (logos sur uniformes)",
-              "Particuliers (initiales, prénoms)",
-              "Événementiel (mariages, baptêmes)",
-              "Écoles (blasons, logos)"
-            ],
-            "analyse_demande": {
-              "etat": "a_documenter",
-              "message": "Étude de demande, prix et concurrence à documenter",
-              "donnees": null
-            }
-          }
-        },
-        {
-          "numero": 5,
-          "titre": "Stratégie commerciale",
-          "contenu": {
-            "marches_cibles": [
-              "Confectionneurs de vêtements",
-              "Entreprises (logos sur uniformes)",
-              "Particuliers (initiales, prénoms)",
-              "Événementiel (mariages, baptêmes)",
-              "Écoles (blasons, logos)"
-            ],
-            "politique_prix": {
-              "etat": "a_documenter",
-              "message": "Politique de prix et canaux à valider",
-              "donnees": null
-            }
-          }
-        },
-        {
-          "numero": 6,
-          "titre": "Opportunités et risques",
-          "contenu": {
-            "opportunites": {
-              "etat": "a_documenter",
-              "message": "Opportunités locales et export à documenter",
-              "donnees": null
-            },
-            "risques": {
-              "etat": "a_documenter",
-              "message": "Risques industriels, commerciaux et réglementaires à qualifier",
-              "donnees": null
-            }
-          }
-        },
-        {
-          "numero": 7,
-          "titre": "Investissement et financement",
-          "contenu": {
-            "investissement_reference_equipements_usd": null,
-            "estimation_generique_non_validee": {
-              "investissement_minimum_usd": 55000,
-              "ventilation": {
-                "machines": 35000,
-                "installation": 5000,
-                "working_capital": 10000,
-                "training": 5000,
-                "total": 55000
-              },
-              "chiffre_affaires_annuel_indicatif_usd": 220000,
-              "marge_brute_indicative_pourcent": 48,
-              "rentabilite_nette_indicative_pourcent": 30
-            },
-            "capex_complet_usd": null,
-            "apport_30_usd": null,
-            "dette_70_usd": null,
-            "avertissement": "Prix des équipements distinct du CAPEX complet; anciens budgets génériques non validés"
-          }
-        },
-        {
-          "numero": 8,
-          "titre": "Production et ventes",
-          "contenu": {
-            "processus": [
-              "Programmation du motif (logiciel DAO)",
-              "Préparation du textile (cadrage)",
-              "Broderie automatisée",
-              "Finition (coupe des fils)",
-              "Contrôle qualité",
-              "Conditionnement"
-            ],
-            "matieres_premieres": [
-              "Fils de broderie (coton, polyester, métallisés)",
-              "Textiles supports (pagnes, tissus)",
-              "Logiciels de programmation",
-              "Emballages (boîtes, sachets)"
-            ],
-            "capacite_reference": null,
-            "production_mensuelle": {
-              "etat": "a_documenter",
-              "message": "Production mensuelle et ventes réellement simulées à documenter",
-              "donnees": null
-            }
-          }
-        },
-        {
-          "numero": 9,
-          "titre": "Compte de résultat prévisionnel",
-          "contenu": {
-            "etat": "a_documenter",
-            "message": "Compte de résultat sur trois exercices à calculer et contrôler",
-            "donnees": null
-          }
-        },
-        {
-          "numero": 10,
-          "titre": "BFR mensuel",
-          "contenu": {
-            "etat": "a_documenter",
-            "message": "BFR : 36 mois, stocks, créances et dettes sans double compte",
-            "donnees": null
-          }
-        },
-        {
-          "numero": 11,
-          "titre": "Bilans prévisionnels",
-          "contenu": {
-            "etat": "a_documenter",
-            "message": "Trois bilans annuels équilibrés à calculer",
-            "donnees": null
-          }
-        },
-        {
-          "numero": 12,
-          "titre": "Indicateurs financiers",
-          "contenu": {
-            "etat": "a_documenter",
-            "message": "Ratios calculés uniquement à partir d'états financiers cohérents",
-            "donnees": null
-          }
-        },
-        {
-          "numero": 13,
-          "titre": "Trésorerie mensuelle",
-          "contenu": {
-            "etat": "a_documenter",
-            "message": "Trésorerie mensuelle : 12 mois uniquement",
-            "donnees": null
-          }
-        },
-        {
-          "numero": 14,
-          "titre": "Hypothèses et sources",
-          "contenu": {
-            "source": {
-              "nature": "Référentiel interne P2I — informations descriptives à confirmer",
-              "statut": "non_valide_exterieurement",
-              "sources_externes_verifiees": []
-            },
-            "conditions": "Les chiffres génériques historiques ne constituent ni devis ni résultats financiers validés",
-            "controle": {
-              "montant_total_ventilation_usd": 55000,
-              "ecart_capex_min_ventilation_usd": 0,
-              "capex_complet_valide_usd": null,
-              "projections_3_ans_validees": false,
-              "bfr_36_mois_valide": false,
-              "tresorerie_12_mois_validee": false,
-              "sources_externes_verifiees": [],
-              "statut": "donnees_sources_a_qualifier"
-            }
-          }
-        },
-        {
-          "numero": 15,
-          "titre": "Prochaines étapes P2I",
-          "contenu": {
-            "actions": [
-              "Qualifier la configuration de référence et sa capacité",
-              "Vérifier les prix fournisseurs et les coûts complémentaires",
-              "Documenter les hypothèses d'exploitation",
-              "Exécuter et contrôler les moteurs économiques et financiers"
-            ]
-          }
-        },
-        {
-          "numero": 16,
-          "titre": "BP Pro",
-          "contenu": {
-            "conditions": "BP Pro après configuration validée, devis officiels et justificatifs techniques et financiers"
-          }
-        },
-        {
-          "numero": 17,
-          "titre": "Dossier technique",
-          "contenu": {
-            "machines": [
-              {
-                "nom": "Brodeuse multi-têtes",
-                "role": "Broderie automatisée",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité 1.5kW"
-              },
-              {
-                "nom": "Digitizer",
-                "role": "Conception des motifs",
-                "capacite": "Standard",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Machine à affranchir",
-                "role": "Préparation des supports",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Détricoteuse",
-                "role": "Défabrication des erreurs",
-                "capacite": "100 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Presse thermique",
-                "role": "Fixation des broderies",
-                "capacite": "200 pièces/jour",
-                "utilites": "Électricité"
-              }
-            ],
-            "processus": [
-              "Programmation du motif (logiciel DAO)",
-              "Préparation du textile (cadrage)",
-              "Broderie automatisée",
-              "Finition (coupe des fils)",
-              "Contrôle qualité",
-              "Conditionnement"
-            ],
-            "matieres_premieres": [
-              "Fils de broderie (coton, polyester, métallisés)",
-              "Textiles supports (pagnes, tissus)",
-              "Logiciels de programmation",
-              "Emballages (boîtes, sachets)"
-            ],
-            "controles": {
-              "etat": "a_documenter",
-              "message": "Compatibilité, utilités, sécurité, conformité et interfaces à vérifier",
-              "donnees": null
-            }
-          }
-        }
-      ]
-    },
-    {
       "up_id": "chaussures",
       "up_nom": "Fabrication de chaussures",
       "filiere": "Textile, Habillement & Cuir",
@@ -9706,8 +9355,8 @@
       ]
     },
     {
-      "up_id": "uniformes",
-      "up_nom": "Confection d'uniformes",
+      "up_id": "tricotage",
+      "up_nom": "Tricotage industriel",
       "filiere": "Textile, Habillement & Cuir",
       "statut": "brouillon_documentaire_non_bancable",
       "sections": [
@@ -9715,9 +9364,9 @@
           "numero": 1,
           "titre": "Projet et activité",
           "contenu": {
-            "description": "Fabrication d'uniformes professionnels et scolaires : tenues d'entreprise, uniformes scolaires, vêtements de travail, EPI.",
+            "description": "Fabrication de mailles à partir de fils achetés, distincte de la confection sur tissus tissés.",
             "filiere": "Textile, Habillement & Cuir",
-            "up_nom": "Confection d'uniformes"
+            "up_nom": "Tricotage industriel"
           }
         },
         {
@@ -9735,44 +9384,26 @@
           "contenu": {
             "machines": [
               {
-                "nom": "Coupe laser",
-                "role": "Découpe précise",
-                "capacite": "200 m/heure",
-                "utilites": "Électricité"
+                "nom": "Tricoteuse industrielle",
+                "role": "Formation de la maille",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               },
               {
-                "nom": "Machine à coudre industrielle",
-                "role": "Couture uniformes",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité 0.5kW"
+                "nom": "Bobinoir",
+                "role": "Préparation des fils",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               },
               {
-                "nom": "Boutonneuse",
-                "role": "Pose de boutons",
-                "capacite": "500 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Repasseuse à convoyeur",
-                "role": "Finition continue",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité + vapeur"
-              },
-              {
-                "nom": "Machine à poser fermetures",
-                "role": "Pose de zip",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Transfert thermique",
-                "role": "Pose logos et insignes",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité"
+                "nom": "Table de contrôle",
+                "role": "Contrôle et classement de la maille",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               }
             ],
             "configuration_reference": null,
-            "capacite_generique_non_validee": "10,000 pièces"
+            "capacite_generique_non_validee": null
           }
         },
         {
@@ -9780,11 +9411,7 @@
           "titre": "Étude de marché",
           "contenu": {
             "marches_cibles": [
-              "Écoles (uniformes scolaires)",
-              "Entreprises (tenues de travail)",
-              "Administrations",
-              "Hôtels et restaurants",
-              "Hôpitaux"
+              "Clients professionnels à prospecter"
             ],
             "analyse_demande": {
               "etat": "a_documenter",
@@ -9798,11 +9425,7 @@
           "titre": "Stratégie commerciale",
           "contenu": {
             "marches_cibles": [
-              "Écoles (uniformes scolaires)",
-              "Entreprises (tenues de travail)",
-              "Administrations",
-              "Hôtels et restaurants",
-              "Hôpitaux"
+              "Clients professionnels à prospecter"
             ],
             "politique_prix": {
               "etat": "a_documenter",
@@ -9833,17 +9456,11 @@
           "contenu": {
             "investissement_reference_equipements_usd": null,
             "estimation_generique_non_validee": {
-              "investissement_minimum_usd": 70000,
-              "ventilation": {
-                "machines": 40000,
-                "installation": 10000,
-                "working_capital": 15000,
-                "training": 5000,
-                "total": 70000
-              },
-              "chiffre_affaires_annuel_indicatif_usd": 450000,
-              "marge_brute_indicative_pourcent": 38,
-              "rentabilite_nette_indicative_pourcent": 22
+              "investissement_minimum_usd": null,
+              "ventilation": null,
+              "chiffre_affaires_annuel_indicatif_usd": null,
+              "marge_brute_indicative_pourcent": null,
+              "rentabilite_nette_indicative_pourcent": null
             },
             "capex_complet_usd": null,
             "apport_30_usd": null,
@@ -9856,20 +9473,14 @@
           "titre": "Production et ventes",
           "contenu": {
             "processus": [
-              "Réception des tissus",
-              "Découpe",
-              "Assemblage",
+              "Préparation des fils",
+              "Tricotage",
+              "Contrôle de la maille",
               "Finition",
-              "Broderie logo (option)",
-              "Contrôle qualité",
               "Conditionnement"
             ],
             "matieres_premieres": [
-              "Tissus (coton, polyester, mélanges)",
-              "Fils",
-              "Boutons, fermetures",
-              "Broderie logos",
-              "Emballages"
+              "Fils de coton ou mélanges spécifiés"
             ],
             "capacite_reference": null,
             "production_mensuelle": {
@@ -9935,8 +9546,8 @@
             },
             "conditions": "Les chiffres génériques historiques ne constituent ni devis ni résultats financiers validés",
             "controle": {
-              "montant_total_ventilation_usd": 70000,
-              "ecart_capex_min_ventilation_usd": 0,
+              "montant_total_ventilation_usd": null,
+              "ecart_capex_min_ventilation_usd": null,
               "capex_complet_valide_usd": null,
               "projections_3_ans_validees": false,
               "bfr_36_mois_valide": false,
@@ -9971,57 +9582,33 @@
           "contenu": {
             "machines": [
               {
-                "nom": "Coupe laser",
-                "role": "Découpe précise",
-                "capacite": "200 m/heure",
-                "utilites": "Électricité"
+                "nom": "Tricoteuse industrielle",
+                "role": "Formation de la maille",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               },
               {
-                "nom": "Machine à coudre industrielle",
-                "role": "Couture uniformes",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité 0.5kW"
+                "nom": "Bobinoir",
+                "role": "Préparation des fils",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               },
               {
-                "nom": "Boutonneuse",
-                "role": "Pose de boutons",
-                "capacite": "500 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Repasseuse à convoyeur",
-                "role": "Finition continue",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité + vapeur"
-              },
-              {
-                "nom": "Machine à poser fermetures",
-                "role": "Pose de zip",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Transfert thermique",
-                "role": "Pose logos et insignes",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité"
+                "nom": "Table de contrôle",
+                "role": "Contrôle et classement de la maille",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               }
             ],
             "processus": [
-              "Réception des tissus",
-              "Découpe",
-              "Assemblage",
+              "Préparation des fils",
+              "Tricotage",
+              "Contrôle de la maille",
               "Finition",
-              "Broderie logo (option)",
-              "Contrôle qualité",
               "Conditionnement"
             ],
             "matieres_premieres": [
-              "Tissus (coton, polyester, mélanges)",
-              "Fils",
-              "Boutons, fermetures",
-              "Broderie logos",
-              "Emballages"
+              "Fils de coton ou mélanges spécifiés"
             ],
             "controles": {
               "etat": "a_documenter",
@@ -10033,8 +9620,8 @@
       ]
     },
     {
-      "up_id": "linge",
-      "up_nom": "Linge de maison",
+      "up_id": "non_tisses",
+      "up_nom": "Non-tissés & textiles techniques",
       "filiere": "Textile, Habillement & Cuir",
       "statut": "brouillon_documentaire_non_bancable",
       "sections": [
@@ -10042,9 +9629,9 @@
           "numero": 1,
           "titre": "Projet et activité",
           "contenu": {
-            "description": "Fabrication de linge de maison : draps, taies d'oreiller, nappes, serviettes, torchons. Valorisation du coton local.",
+            "description": "Production de nappes non tissées à partir de fibres achetées pour usages techniques non médicaux ; performances à qualifier.",
             "filiere": "Textile, Habillement & Cuir",
-            "up_nom": "Linge de maison"
+            "up_nom": "Non-tissés & textiles techniques"
           }
         },
         {
@@ -10062,44 +9649,32 @@
           "contenu": {
             "machines": [
               {
-                "nom": "Coupe multi-plis",
-                "role": "Découpe drap/housse",
-                "capacite": "500 m/heure",
-                "utilites": "Électricité 4kW"
+                "nom": "Ouvreuse et mélangeuse",
+                "role": "Préparation des fibres",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               },
               {
-                "nom": "Machine à coudre grande largeur",
-                "role": "Couture linge plat",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité 0.8kW"
+                "nom": "Carde et nappeuse",
+                "role": "Formation de nappe",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               },
               {
-                "nom": "Ourleuse automatique",
-                "role": "Ourlet des serviettes",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité"
+                "nom": "Consolidation adaptée",
+                "role": "Liaison des fibres selon procédé retenu",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               },
               {
-                "nom": "Presse à repasser",
-                "role": "Finition industrielle",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité + vapeur"
-              },
-              {
-                "nom": "Plieuse automatique",
-                "role": "Plage du linge",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Ensacheuse sous vide",
-                "role": "Conditionnement sous vide",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité + air"
+                "nom": "Découpe et bobinage",
+                "role": "Formats commerciaux",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               }
             ],
             "configuration_reference": null,
-            "capacite_generique_non_validee": "20,000 pièces"
+            "capacite_generique_non_validee": null
           }
         },
         {
@@ -10107,11 +9682,7 @@
           "titre": "Étude de marché",
           "contenu": {
             "marches_cibles": [
-              "Supermarchés",
-              "Boutiques de linge de maison",
-              "Hôtels et restaurants",
-              "Particuliers",
-              "Export UEMOA"
+              "Clients professionnels à prospecter"
             ],
             "analyse_demande": {
               "etat": "a_documenter",
@@ -10125,11 +9696,7 @@
           "titre": "Stratégie commerciale",
           "contenu": {
             "marches_cibles": [
-              "Supermarchés",
-              "Boutiques de linge de maison",
-              "Hôtels et restaurants",
-              "Particuliers",
-              "Export UEMOA"
+              "Clients professionnels à prospecter"
             ],
             "politique_prix": {
               "etat": "a_documenter",
@@ -10160,17 +9727,11 @@
           "contenu": {
             "investissement_reference_equipements_usd": null,
             "estimation_generique_non_validee": {
-              "investissement_minimum_usd": 90000,
-              "ventilation": {
-                "machines": 50000,
-                "installation": 15000,
-                "working_capital": 15000,
-                "training": 10000,
-                "total": 90000
-              },
-              "chiffre_affaires_annuel_indicatif_usd": 500000,
-              "marge_brute_indicative_pourcent": 42,
-              "rentabilite_nette_indicative_pourcent": 25
+              "investissement_minimum_usd": null,
+              "ventilation": null,
+              "chiffre_affaires_annuel_indicatif_usd": null,
+              "marge_brute_indicative_pourcent": null,
+              "rentabilite_nette_indicative_pourcent": null
             },
             "capex_complet_usd": null,
             "apport_30_usd": null,
@@ -10183,19 +9744,14 @@
           "titre": "Production et ventes",
           "contenu": {
             "processus": [
-              "Réception des tissus (coton, percale)",
+              "Ouverture des fibres",
+              "Formation de nappe",
+              "Consolidation",
               "Découpe",
-              "Assemblage",
-              "Ourlet",
-              "Repassage",
-              "Contrôle qualité",
-              "Conditionnement"
+              "Contrôle et conditionnement"
             ],
             "matieres_premieres": [
-              "Coton (local)",
-              "Percale, satin (import)",
-              "Fils",
-              "Emballages (sachets, boîtes)"
+              "Fibres à spécifier selon produit"
             ],
             "capacite_reference": null,
             "production_mensuelle": {
@@ -10261,8 +9817,8 @@
             },
             "conditions": "Les chiffres génériques historiques ne constituent ni devis ni résultats financiers validés",
             "controle": {
-              "montant_total_ventilation_usd": 90000,
-              "ecart_capex_min_ventilation_usd": 0,
+              "montant_total_ventilation_usd": null,
+              "ecart_capex_min_ventilation_usd": null,
               "capex_complet_valide_usd": null,
               "projections_3_ans_validees": false,
               "bfr_36_mois_valide": false,
@@ -10297,56 +9853,328 @@
           "contenu": {
             "machines": [
               {
-                "nom": "Coupe multi-plis",
-                "role": "Découpe drap/housse",
-                "capacite": "500 m/heure",
-                "utilites": "Électricité 4kW"
+                "nom": "Ouvreuse et mélangeuse",
+                "role": "Préparation des fibres",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               },
               {
-                "nom": "Machine à coudre grande largeur",
-                "role": "Couture linge plat",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité 0.8kW"
+                "nom": "Carde et nappeuse",
+                "role": "Formation de nappe",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               },
               {
-                "nom": "Ourleuse automatique",
-                "role": "Ourlet des serviettes",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité"
+                "nom": "Consolidation adaptée",
+                "role": "Liaison des fibres selon procédé retenu",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               },
               {
-                "nom": "Presse à repasser",
-                "role": "Finition industrielle",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité + vapeur"
-              },
-              {
-                "nom": "Plieuse automatique",
-                "role": "Plage du linge",
-                "capacite": "400 pièces/jour",
-                "utilites": "Électricité"
-              },
-              {
-                "nom": "Ensacheuse sous vide",
-                "role": "Conditionnement sous vide",
-                "capacite": "300 pièces/jour",
-                "utilites": "Électricité + air"
+                "nom": "Découpe et bobinage",
+                "role": "Formats commerciaux",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
               }
             ],
             "processus": [
-              "Réception des tissus (coton, percale)",
+              "Ouverture des fibres",
+              "Formation de nappe",
+              "Consolidation",
               "Découpe",
-              "Assemblage",
-              "Ourlet",
-              "Repassage",
-              "Contrôle qualité",
-              "Conditionnement"
+              "Contrôle et conditionnement"
             ],
             "matieres_premieres": [
-              "Coton (local)",
-              "Percale, satin (import)",
-              "Fils",
-              "Emballages (sachets, boîtes)"
+              "Fibres à spécifier selon produit"
+            ],
+            "controles": {
+              "etat": "a_documenter",
+              "message": "Compatibilité, utilités, sécurité, conformité et interfaces à vérifier",
+              "donnees": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "up_id": "recyclage_textile",
+      "up_nom": "Recyclage & valorisation textile",
+      "filiere": "Textile, Habillement & Cuir",
+      "statut": "brouillon_documentaire_non_bancable",
+      "sections": [
+        {
+          "numero": 1,
+          "titre": "Projet et activité",
+          "contenu": {
+            "description": "Tri et valorisation de chutes textiles propres en fibres ou matériaux secondaires ; débouchés et propreté à qualifier.",
+            "filiere": "Textile, Habillement & Cuir",
+            "up_nom": "Recyclage & valorisation textile"
+          }
+        },
+        {
+          "numero": 2,
+          "titre": "Synthèse économique",
+          "contenu": {
+            "etat": "a_documenter",
+            "message": "Compte économique consolidé et chiffré à calculer par le moteur P2I",
+            "donnees": null
+          }
+        },
+        {
+          "numero": 3,
+          "titre": "Configuration industrielle",
+          "contenu": {
+            "machines": [
+              {
+                "nom": "Table de tri",
+                "role": "Classement matière et couleur",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
+              },
+              {
+                "nom": "Découpeuse textile",
+                "role": "Préparation des chutes",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
+              },
+              {
+                "nom": "Effilocheuse",
+                "role": "Ouverture en fibres",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
+              },
+              {
+                "nom": "Aspiration et filtration",
+                "role": "Gestion des poussières",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
+              },
+              {
+                "nom": "Presse à balles",
+                "role": "Conditionnement des fibres",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
+              }
+            ],
+            "configuration_reference": null,
+            "capacite_generique_non_validee": null
+          }
+        },
+        {
+          "numero": 4,
+          "titre": "Étude de marché",
+          "contenu": {
+            "marches_cibles": [
+              "Clients professionnels à prospecter"
+            ],
+            "analyse_demande": {
+              "etat": "a_documenter",
+              "message": "Étude de demande, prix et concurrence à documenter",
+              "donnees": null
+            }
+          }
+        },
+        {
+          "numero": 5,
+          "titre": "Stratégie commerciale",
+          "contenu": {
+            "marches_cibles": [
+              "Clients professionnels à prospecter"
+            ],
+            "politique_prix": {
+              "etat": "a_documenter",
+              "message": "Politique de prix et canaux à valider",
+              "donnees": null
+            }
+          }
+        },
+        {
+          "numero": 6,
+          "titre": "Opportunités et risques",
+          "contenu": {
+            "opportunites": {
+              "etat": "a_documenter",
+              "message": "Opportunités locales et export à documenter",
+              "donnees": null
+            },
+            "risques": {
+              "etat": "a_documenter",
+              "message": "Risques industriels, commerciaux et réglementaires à qualifier",
+              "donnees": null
+            }
+          }
+        },
+        {
+          "numero": 7,
+          "titre": "Investissement et financement",
+          "contenu": {
+            "investissement_reference_equipements_usd": null,
+            "estimation_generique_non_validee": {
+              "investissement_minimum_usd": null,
+              "ventilation": null,
+              "chiffre_affaires_annuel_indicatif_usd": null,
+              "marge_brute_indicative_pourcent": null,
+              "rentabilite_nette_indicative_pourcent": null
+            },
+            "capex_complet_usd": null,
+            "apport_30_usd": null,
+            "dette_70_usd": null,
+            "avertissement": "Prix des équipements distinct du CAPEX complet; anciens budgets génériques non validés"
+          }
+        },
+        {
+          "numero": 8,
+          "titre": "Production et ventes",
+          "contenu": {
+            "processus": [
+              "Réception et tri",
+              "Retrait des corps étrangers",
+              "Découpe et effilochage",
+              "Dépoussiérage",
+              "Compactage et conditionnement"
+            ],
+            "matieres_premieres": [
+              "Chutes textiles propres triées par composition"
+            ],
+            "capacite_reference": null,
+            "production_mensuelle": {
+              "etat": "a_documenter",
+              "message": "Production mensuelle et ventes réellement simulées à documenter",
+              "donnees": null
+            }
+          }
+        },
+        {
+          "numero": 9,
+          "titre": "Compte de résultat prévisionnel",
+          "contenu": {
+            "etat": "a_documenter",
+            "message": "Compte de résultat sur trois exercices à calculer et contrôler",
+            "donnees": null
+          }
+        },
+        {
+          "numero": 10,
+          "titre": "BFR mensuel",
+          "contenu": {
+            "etat": "a_documenter",
+            "message": "BFR : 36 mois, stocks, créances et dettes sans double compte",
+            "donnees": null
+          }
+        },
+        {
+          "numero": 11,
+          "titre": "Bilans prévisionnels",
+          "contenu": {
+            "etat": "a_documenter",
+            "message": "Trois bilans annuels équilibrés à calculer",
+            "donnees": null
+          }
+        },
+        {
+          "numero": 12,
+          "titre": "Indicateurs financiers",
+          "contenu": {
+            "etat": "a_documenter",
+            "message": "Ratios calculés uniquement à partir d'états financiers cohérents",
+            "donnees": null
+          }
+        },
+        {
+          "numero": 13,
+          "titre": "Trésorerie mensuelle",
+          "contenu": {
+            "etat": "a_documenter",
+            "message": "Trésorerie mensuelle : 12 mois uniquement",
+            "donnees": null
+          }
+        },
+        {
+          "numero": 14,
+          "titre": "Hypothèses et sources",
+          "contenu": {
+            "source": {
+              "nature": "Référentiel interne P2I — informations descriptives à confirmer",
+              "statut": "non_valide_exterieurement",
+              "sources_externes_verifiees": []
+            },
+            "conditions": "Les chiffres génériques historiques ne constituent ni devis ni résultats financiers validés",
+            "controle": {
+              "montant_total_ventilation_usd": null,
+              "ecart_capex_min_ventilation_usd": null,
+              "capex_complet_valide_usd": null,
+              "projections_3_ans_validees": false,
+              "bfr_36_mois_valide": false,
+              "tresorerie_12_mois_validee": false,
+              "sources_externes_verifiees": [],
+              "statut": "donnees_sources_a_qualifier"
+            }
+          }
+        },
+        {
+          "numero": 15,
+          "titre": "Prochaines étapes P2I",
+          "contenu": {
+            "actions": [
+              "Qualifier la configuration de référence et sa capacité",
+              "Vérifier les prix fournisseurs et les coûts complémentaires",
+              "Documenter les hypothèses d'exploitation",
+              "Exécuter et contrôler les moteurs économiques et financiers"
+            ]
+          }
+        },
+        {
+          "numero": 16,
+          "titre": "BP Pro",
+          "contenu": {
+            "conditions": "BP Pro après configuration validée, devis officiels et justificatifs techniques et financiers"
+          }
+        },
+        {
+          "numero": 17,
+          "titre": "Dossier technique",
+          "contenu": {
+            "machines": [
+              {
+                "nom": "Table de tri",
+                "role": "Classement matière et couleur",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
+              },
+              {
+                "nom": "Découpeuse textile",
+                "role": "Préparation des chutes",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
+              },
+              {
+                "nom": "Effilocheuse",
+                "role": "Ouverture en fibres",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
+              },
+              {
+                "nom": "Aspiration et filtration",
+                "role": "Gestion des poussières",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
+              },
+              {
+                "nom": "Presse à balles",
+                "role": "Conditionnement des fibres",
+                "capacite": "À dimensionner",
+                "utilites": "À qualifier"
+              }
+            ],
+            "processus": [
+              "Réception et tri",
+              "Retrait des corps étrangers",
+              "Découpe et effilochage",
+              "Dépoussiérage",
+              "Compactage et conditionnement"
+            ],
+            "matieres_premieres": [
+              "Chutes textiles propres triées par composition"
             ],
             "controles": {
               "etat": "a_documenter",

@@ -123,9 +123,9 @@
     "articles_textiles": {
       "up_ids": [
         "confection",
-        "uniformes",
-        "linge",
-        "broderie"
+        "tricotage",
+        "non_tisses",
+        "recyclage_textile"
       ],
       "exigences": "Protection contre salissures et humidité, taille/composition/entretien identifiables ; limiter les protections individuelles inutiles.",
       "pistes_locales": [

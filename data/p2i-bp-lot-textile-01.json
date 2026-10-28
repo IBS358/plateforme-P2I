@@ -1,7 +1,7 @@
 {
   "schema": "p2i.bp-lot.v1",
-  "lot": "textile_01_confection_uniformes_linge",
-  "date": "2026-10-28",
+  "lot": "textile_regroupement_4_up_6_versions",
+  "date": "2026-10-29",
   "sources": [
     {
       "id": "textile_juki_ddl8700",
@@ -11,7 +11,7 @@
       "prix": 875,
       "devise": "EUR",
       "qualification": "prix_catalogue_public_unitaire_HT",
-      "consulte_le": "2026-10-28",
+      "consulte_le": "2026-10-29",
       "base": "Prix unitaire HT ; ce n’est pas le prix d’une ligne complète.",
       "limites": "Tissus légers à moyens ; 220 V / 450 W annoncés. Points/minute ne signifie pas vêtements/heure. Sous-classe, aiguille, réglages et matières à confirmer."
     },
@@ -23,7 +23,7 @@
       "prix": 1790,
       "devise": "EUR",
       "qualification": "prix_catalogue_public_unitaire_HT",
-      "consulte_le": "2026-10-28",
+      "consulte_le": "2026-10-29",
       "base": "Machine complète, table, bâti et moteur 220 V annoncés.",
       "limites": "Sous-classe pour tissu léger à moyen à préciser ; pas un rendement garanti par vêtement."
     },
@@ -35,7 +35,7 @@
       "prix": 2800,
       "devise": "EUR",
       "qualification": "prix_catalogue_public_unitaire_HT",
-      "consulte_le": "2026-10-28",
+      "consulte_le": "2026-10-29",
       "base": "Machine montée sur palette, moteur intégré annoncé.",
       "limites": "Fait les boutonnières ; ne coud pas les boutons. Pose des boutons manuelle incluse dans l’organisation P2I ; pas de seconde machine pose-boutons ajoutée."
     },
@@ -47,7 +47,7 @@
       "prix": 960,
       "devise": "EUR",
       "qualification": "prix_catalogue_public_unitaire_HT",
-      "consulte_le": "2026-10-28",
+      "consulte_le": "2026-10-29",
       "base": "Ensemble de repassage complet, sans nouvelle chaudière ajoutée.",
       "limites": "230 V, 2 475 W annoncés par poste ; appoints d’eau, autonomie, sécurité vapeur et finition de grandes pièces à tester."
     },
@@ -59,151 +59,563 @@
       "prix": 500,
       "devise": "EUR",
       "qualification": "prix_catalogue_public_unitaire_HT",
-      "consulte_le": "2026-10-28",
+      "consulte_le": "2026-10-29",
       "base": "Outil portatif, table de coupe estimée séparément.",
       "limites": "Coupe jusqu’à 9 mm annoncés ; petites épaisseurs et passes successives, pas un matelas industriel épais. 220 V / 90 W annoncés ; protection des mains et formation requises."
     },
     {
-      "id": "textile_atelier_confection",
+      "id": "textile_fuwei_bc1504",
+      "url": "https://fuwei-france.fr/2035900-Machine-a-broder-4-tetes-FW-M1504-Tarif-16200EUR-HT",
+      "fournisseur": "FUWEI France / Mille et une coutures",
+      "modele": "BC-1504C — brodeuse 4 têtes selon intitulé catalogue",
+      "prix": 17115,
+      "devise": "EUR",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-29",
+      "base": "Intitulé 17 115 EUR HT ; affichage 20 538 EUR TTC. Aucune remise temporaire appliquée. Deux machines dans les variantes brodées et mixte.",
+      "limites": "Titre 4 têtes mais introduction descriptive mentionne 3 têtes ; nombre de têtes, accessoires, alimentation et disponibilité à confirmer. Cadre individuel 280 × 280 mm annoncé : petits logos/monogrammes, pas broderie intégrale de drap. Vitesse maximale 1 000 points/min, pas pièces/heure garanties. Quantités, cycle 5 000 points et 600 points/min effectifs = hypothèses P2I. Le stock est indiqué de manière contradictoire sur la page ; aucun délai livré présumé."
+    },
+    {
+      "id": "textile_atelier_reference",
       "url": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
-      "fournisseur": "TMAC SAS (poste principal) ; Glasman (compléments)",
-      "modele": "JUKI DDL-8700 — poste principal de l’ensemble P2I",
+      "fournisseur": "TMAC SAS / Glasman / FUWEI France selon poste",
+      "modele": "Ensemble P2I — Atelier mixte — linge, uniformes et broderie",
       "prix": 875,
       "devise": "EUR",
       "qualification": "prix_catalogue_public_unitaire_HT",
-      "consulte_le": "2026-10-28",
-      "base": "875 EUR HT par piqueuse DDL-8700 ; quantités P2I et équipements complémentaires chiffrés séparément. Aucun prix global de ligne clé en main publié.",
-      "limites": "Assemblage de postes, pas ligne automatique intégrée. Quantités, équilibrage des opérations, capacité effective, qualité et service après-vente à confirmer ensemble. Pas de tricotage, teinture ou broderie ; tissus légers à moyens. Pas de vêtement EPI certifié dans ce scénario.",
+      "consulte_le": "2026-10-29",
+      "base": "875 EUR HT par piqueuse complète ; toutes les autres machines tarifées séparément. Ensemble de machines, pas prix d’une ligne intégrée.",
+      "limites": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement. Titre brodeuse 4 têtes, introduction 3 têtes : configuration à préciser, cadence sous hypothèses.",
       "fonctions": [
-        "Réception des tissus",
+        "Réception et contrôle des tissus",
         "Patronage et placement",
-        "Coupe à faible épaisseur",
-        "Assemblage à point droit",
-        "Surfilage des coutures",
-        "Boutonnières et boutons",
-        "Repassage vapeur",
-        "Contrôle et conditionnement"
+        "Coupe",
+        "Préparation des motifs et cadrage",
+        "Broderie multi-têtes",
+        "Couture et assemblage",
+        "Surfilage",
+        "Boutonnières",
+        "Repassage",
+        "Contrôle qualité",
+        "Conditionnement"
       ],
       "postes": [
         {
-          "description": "Tissus tissés légers à moyens achetés ; contrôle de largeur, défauts et retrait."
+          "description": "Tissus achetés, laize et composition à contrôler ; rayonnage dans les auxiliaires.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 4
+          }
         },
         {
-          "description": "Patronage et placement manuels ; informatique et table de coupe estimées séparément."
+          "description": "Tables de préparation et informatique dans les auxiliaires.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 5
+          }
         },
         {
-          "description": "Un RASOR DS504, petites épaisseurs jusqu’à 9 mm annoncés ; pas de coupe automatique grand matelas."
+          "description": "2 ciseaux RASOR DS504 ; passes de faible épaisseur, pas de matelassage épais.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 6
+          }
         },
         {
-          "description": "8 JUKI DDL-8700 avec table, bâti et moteur ; capacité en pièces issue d’une hypothèse d’organisation, pas des points/minute."
+          "description": "Petits motifs ; préparation informatique et stabilisateur, champ de cadre à respecter.",
+          "visuel": {
+            "atlas": "textile-broderie",
+            "index": 5
+          }
         },
         {
-          "description": "Deux surjeteuses JUKI MO-6716DA ; réglages et sous-classe à préciser pour le tissu retenu."
+          "description": "2 BC-1504C, 8 têtes annoncées mais 6 productives retenues prudemment ; 5 000 points par motif supposés.",
+          "visuel": {
+            "atlas": "textile-broderie",
+            "index": 4
+          }
         },
         {
-          "description": "Une JACK JK-T781G-Z pour les boutonnières ; boutons cousus manuellement. Broderie et marquage non inclus."
+          "description": "20 JUKI DDL-8700 ; postes partagés par programme, sans cumul de débits.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 7
+          }
         },
         {
-          "description": "Deux KER/2 avec chaudière et fer déjà compris ; eau, électricité et sécurité vapeur à organiser."
+          "description": "4 JUKI MO-6716DA sur les vêtements concernés.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 8
+          }
         },
         {
-          "description": "Contrôle de tailles, coutures et aspect, puis pliage et bande papier ; manutention des cartons budgétée."
+          "description": "2 JACK JK-T781G-Z ; pose des boutons manuelle prévue, pas de deuxième machine ajoutée.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 9
+          }
+        },
+        {
+          "description": "4 ensembles BATTISTELLA KER/2 avec chaudière et fer inclus.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 10
+          }
+        },
+        {
+          "description": "Contrôle des dimensions, coutures et motifs selon version.",
+          "visuel": {
+            "atlas": "textile-broderie",
+            "index": 7
+          }
+        },
+        {
+          "description": "Bandes papier et cartons groupés ; coût inclus par pièce, stock vide 15 jours.",
+          "visuel": {
+            "atlas": "textile-broderie",
+            "index": 8
+          }
         }
       ]
     },
     {
-      "id": "textile_atelier_uniformes",
+      "id": "textile_atelier_linge_simple",
       "url": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
-      "fournisseur": "TMAC SAS (poste principal) ; Glasman (compléments)",
-      "modele": "JUKI DDL-8700 — poste principal de l’ensemble P2I",
+      "fournisseur": "TMAC SAS / Glasman / FUWEI France selon poste",
+      "modele": "Ensemble P2I — Linge de maison — draps simples",
       "prix": 875,
       "devise": "EUR",
       "qualification": "prix_catalogue_public_unitaire_HT",
-      "consulte_le": "2026-10-28",
-      "base": "875 EUR HT par piqueuse DDL-8700 ; quantités P2I et équipements complémentaires chiffrés séparément. Aucun prix global de ligne clé en main publié.",
-      "limites": "Assemblage de postes, pas ligne automatique intégrée. Quantités, équilibrage des opérations, capacité effective, qualité et service après-vente à confirmer ensemble. Pas de tricotage, teinture ou broderie ; tissus légers à moyens. Pas de vêtement EPI certifié dans ce scénario.",
+      "consulte_le": "2026-10-29",
+      "base": "875 EUR HT par piqueuse complète ; toutes les autres machines tarifées séparément. Ensemble de machines, pas prix d’une ligne intégrée.",
+      "limites": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement. ",
       "fonctions": [
-        "Réception des tissus",
+        "Réception et contrôle des tissus",
         "Patronage et placement",
-        "Coupe à faible épaisseur",
-        "Assemblage à point droit",
-        "Surfilage des coutures",
-        "Boutonnières et boutons",
-        "Repassage vapeur",
-        "Contrôle et conditionnement"
+        "Coupe",
+        "Ourlets des draps",
+        "Repassage",
+        "Contrôle qualité",
+        "Conditionnement"
       ],
       "postes": [
         {
-          "description": "Tissus tissés légers à moyens achetés ; contrôle de largeur, défauts et retrait."
+          "description": "Tissus achetés, laize et composition à contrôler ; rayonnage dans les auxiliaires.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 4
+          }
         },
         {
-          "description": "Patronage et placement manuels ; informatique et table de coupe estimées séparément."
+          "description": "Tables de préparation et informatique dans les auxiliaires.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 5
+          }
         },
         {
-          "description": "Un RASOR DS504, petites épaisseurs jusqu’à 9 mm annoncés ; pas de coupe automatique grand matelas."
+          "description": "2 ciseaux RASOR DS504 ; passes de faible épaisseur, pas de matelassage épais.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 6
+          }
         },
         {
-          "description": "10 JUKI DDL-8700 avec table, bâti et moteur ; capacité en pièces issue d’une hypothèse d’organisation, pas des points/minute."
+          "description": "20 JUKI DDL-8700 ; postes partagés par programme, sans cumul de débits.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 7
+          }
         },
         {
-          "description": "Deux surjeteuses JUKI MO-6716DA ; réglages et sous-classe à préciser pour le tissu retenu."
+          "description": "4 ensembles BATTISTELLA KER/2 avec chaudière et fer inclus.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 10
+          }
         },
         {
-          "description": "Une JACK JK-T781G-Z pour les boutonnières ; boutons cousus manuellement. Broderie et marquage non inclus."
+          "description": "Contrôle des dimensions, coutures et motifs selon version.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 11
+          }
         },
         {
-          "description": "Deux KER/2 avec chaudière et fer déjà compris ; eau, électricité et sécurité vapeur à organiser."
-        },
-        {
-          "description": "Contrôle de tailles, coutures et aspect, puis pliage et bande papier ; manutention des cartons budgétée."
+          "description": "Bandes papier et cartons groupés ; coût inclus par pièce, stock vide 15 jours.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 12
+          }
         }
       ]
     },
     {
-      "id": "textile_atelier_linge",
+      "id": "textile_atelier_linge_brode",
       "url": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
-      "fournisseur": "TMAC SAS (poste principal) ; Glasman (compléments)",
-      "modele": "JUKI DDL-8700 — poste principal de l’ensemble P2I",
+      "fournisseur": "TMAC SAS / Glasman / FUWEI France selon poste",
+      "modele": "Ensemble P2I — Linge de maison — draps brodés",
       "prix": 875,
       "devise": "EUR",
       "qualification": "prix_catalogue_public_unitaire_HT",
-      "consulte_le": "2026-10-28",
-      "base": "875 EUR HT par piqueuse DDL-8700 ; quantités P2I et équipements complémentaires chiffrés séparément. Aucun prix global de ligne clé en main publié.",
-      "limites": "Assemblage de postes, pas ligne automatique intégrée. Quantités, équilibrage des opérations, capacité effective, qualité et service après-vente à confirmer ensemble. Aucune boutonnière ni surjeteuse nécessaire au drap plat à double ourlet de référence.",
+      "consulte_le": "2026-10-29",
+      "base": "875 EUR HT par piqueuse complète ; toutes les autres machines tarifées séparément. Ensemble de machines, pas prix d’une ligne intégrée.",
+      "limites": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement. Titre brodeuse 4 têtes, introduction 3 têtes : configuration à préciser, cadence sous hypothèses.",
       "fonctions": [
-        "Réception des tissus",
-        "Patronage et métrage",
-        "Coupe à faible épaisseur",
-        "Ourlets à point droit",
-        "Repassage vapeur",
-        "Contrôle des dimensions",
-        "Pliage et conditionnement",
-        "Stockage et expédition"
+        "Réception et contrôle des tissus",
+        "Patronage et placement",
+        "Coupe",
+        "Préparation des motifs et cadrage",
+        "Broderie multi-têtes",
+        "Ourlets des draps",
+        "Repassage",
+        "Contrôle qualité",
+        "Conditionnement"
       ],
       "postes": [
         {
-          "description": "Tissu coton acheté, largeur et stabilité à contrôler ; pas de filature ou de tissage inclus."
+          "description": "Tissus achetés, laize et composition à contrôler ; rayonnage dans les auxiliaires.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 4
+          }
         },
         {
-          "description": "Plans de coupe pour un drap fini 180 × 290 cm ; marges d’ourlet et retrait à préciser."
+          "description": "Tables de préparation et informatique dans les auxiliaires.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 5
+          }
         },
         {
-          "description": "Un RASOR DS504, coupe annoncée jusqu’à 9 mm ; table de coupe budgétée à part."
+          "description": "2 ciseaux RASOR DS504 ; passes de faible épaisseur, pas de matelassage épais.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 6
+          }
         },
         {
-          "description": "Six JUKI DDL-8700 au total ; guides d’ourlet estimés dans les auxiliaires. Double repli : pas de surjeteuse ajoutée par défaut."
+          "description": "Petits motifs ; préparation informatique et stabilisateur, champ de cadre à respecter.",
+          "visuel": {
+            "atlas": "textile-broderie",
+            "index": 5
+          }
         },
         {
-          "description": "Deux KER/2, chacune avec chaudière et fer ; travail par zones pour les grandes pièces, sans calandre industrielle."
+          "description": "2 BC-1504C, 8 têtes annoncées mais 6 productives retenues prudemment ; 5 000 points par motif supposés.",
+          "visuel": {
+            "atlas": "textile-broderie",
+            "index": 4
+          }
         },
         {
-          "description": "Dimensions finies, aspect et coutures ; essais de retrait au lavage à organiser."
+          "description": "20 JUKI DDL-8700 ; postes partagés par programme, sans cumul de débits.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 7
+          }
         },
         {
-          "description": "Une pièce = un drap ; bande papier et carton groupé, sans compter une taie comme unité vendue."
+          "description": "4 ensembles BATTISTELLA KER/2 avec chaudière et fer inclus.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 10
+          }
         },
         {
-          "description": "Stockage au sec et transferts par chariots/transpalette ; manutention chiffrée dans le budget."
+          "description": "Contrôle des dimensions, coutures et motifs selon version.",
+          "visuel": {
+            "atlas": "textile-broderie",
+            "index": 7
+          }
+        },
+        {
+          "description": "Bandes papier et cartons groupés ; coût inclus par pièce, stock vide 15 jours.",
+          "visuel": {
+            "atlas": "textile-broderie",
+            "index": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "textile_atelier_uniformes_simples",
+      "url": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "fournisseur": "TMAC SAS / Glasman / FUWEI France selon poste",
+      "modele": "Ensemble P2I — Uniformes — chemises de travail simples",
+      "prix": 875,
+      "devise": "EUR",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-29",
+      "base": "875 EUR HT par piqueuse complète ; toutes les autres machines tarifées séparément. Ensemble de machines, pas prix d’une ligne intégrée.",
+      "limites": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement. ",
+      "fonctions": [
+        "Réception et contrôle des tissus",
+        "Patronage et placement",
+        "Coupe",
+        "Couture et assemblage",
+        "Surfilage",
+        "Boutonnières",
+        "Repassage",
+        "Contrôle qualité",
+        "Conditionnement"
+      ],
+      "postes": [
+        {
+          "description": "Tissus achetés, laize et composition à contrôler ; rayonnage dans les auxiliaires.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 4
+          }
+        },
+        {
+          "description": "Tables de préparation et informatique dans les auxiliaires.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 5
+          }
+        },
+        {
+          "description": "2 ciseaux RASOR DS504 ; passes de faible épaisseur, pas de matelassage épais.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 6
+          }
+        },
+        {
+          "description": "20 JUKI DDL-8700 ; postes partagés par programme, sans cumul de débits.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 7
+          }
+        },
+        {
+          "description": "4 JUKI MO-6716DA sur les vêtements concernés.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 8
+          }
+        },
+        {
+          "description": "2 JACK JK-T781G-Z ; pose des boutons manuelle prévue, pas de deuxième machine ajoutée.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 9
+          }
+        },
+        {
+          "description": "4 ensembles BATTISTELLA KER/2 avec chaudière et fer inclus.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 10
+          }
+        },
+        {
+          "description": "Contrôle des dimensions, coutures et motifs selon version.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 11
+          }
+        },
+        {
+          "description": "Bandes papier et cartons groupés ; coût inclus par pièce, stock vide 15 jours.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "textile_atelier_uniformes_brodes",
+      "url": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "fournisseur": "TMAC SAS / Glasman / FUWEI France selon poste",
+      "modele": "Ensemble P2I — Uniformes — chemises de travail brodées",
+      "prix": 875,
+      "devise": "EUR",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-29",
+      "base": "875 EUR HT par piqueuse complète ; toutes les autres machines tarifées séparément. Ensemble de machines, pas prix d’une ligne intégrée.",
+      "limites": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement. Titre brodeuse 4 têtes, introduction 3 têtes : configuration à préciser, cadence sous hypothèses.",
+      "fonctions": [
+        "Réception et contrôle des tissus",
+        "Patronage et placement",
+        "Coupe",
+        "Préparation des motifs et cadrage",
+        "Broderie multi-têtes",
+        "Couture et assemblage",
+        "Surfilage",
+        "Boutonnières",
+        "Repassage",
+        "Contrôle qualité",
+        "Conditionnement"
+      ],
+      "postes": [
+        {
+          "description": "Tissus achetés, laize et composition à contrôler ; rayonnage dans les auxiliaires.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 4
+          }
+        },
+        {
+          "description": "Tables de préparation et informatique dans les auxiliaires.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 5
+          }
+        },
+        {
+          "description": "2 ciseaux RASOR DS504 ; passes de faible épaisseur, pas de matelassage épais.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 6
+          }
+        },
+        {
+          "description": "Petits motifs ; préparation informatique et stabilisateur, champ de cadre à respecter.",
+          "visuel": {
+            "atlas": "textile-broderie",
+            "index": 5
+          }
+        },
+        {
+          "description": "2 BC-1504C, 8 têtes annoncées mais 6 productives retenues prudemment ; 5 000 points par motif supposés.",
+          "visuel": {
+            "atlas": "textile-broderie",
+            "index": 4
+          }
+        },
+        {
+          "description": "20 JUKI DDL-8700 ; postes partagés par programme, sans cumul de débits.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 7
+          }
+        },
+        {
+          "description": "4 JUKI MO-6716DA sur les vêtements concernés.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 8
+          }
+        },
+        {
+          "description": "2 JACK JK-T781G-Z ; pose des boutons manuelle prévue, pas de deuxième machine ajoutée.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 9
+          }
+        },
+        {
+          "description": "4 ensembles BATTISTELLA KER/2 avec chaudière et fer inclus.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 10
+          }
+        },
+        {
+          "description": "Contrôle des dimensions, coutures et motifs selon version.",
+          "visuel": {
+            "atlas": "textile-broderie",
+            "index": 7
+          }
+        },
+        {
+          "description": "Bandes papier et cartons groupés ; coût inclus par pièce, stock vide 15 jours.",
+          "visuel": {
+            "atlas": "textile-broderie",
+            "index": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "textile_atelier_pret_a_porter",
+      "url": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "fournisseur": "TMAC SAS / Glasman / FUWEI France selon poste",
+      "modele": "Ensemble P2I — Prêt-à-porter — tuniques en série",
+      "prix": 875,
+      "devise": "EUR",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-29",
+      "base": "875 EUR HT par piqueuse complète ; toutes les autres machines tarifées séparément. Ensemble de machines, pas prix d’une ligne intégrée.",
+      "limites": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement. ",
+      "fonctions": [
+        "Réception et contrôle des tissus",
+        "Patronage et placement",
+        "Coupe",
+        "Couture et assemblage",
+        "Surfilage",
+        "Boutonnières",
+        "Repassage",
+        "Contrôle qualité",
+        "Conditionnement"
+      ],
+      "postes": [
+        {
+          "description": "Tissus achetés, laize et composition à contrôler ; rayonnage dans les auxiliaires.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 4
+          }
+        },
+        {
+          "description": "Tables de préparation et informatique dans les auxiliaires.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 5
+          }
+        },
+        {
+          "description": "2 ciseaux RASOR DS504 ; passes de faible épaisseur, pas de matelassage épais.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 6
+          }
+        },
+        {
+          "description": "20 JUKI DDL-8700 ; postes partagés par programme, sans cumul de débits.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 7
+          }
+        },
+        {
+          "description": "4 JUKI MO-6716DA sur les vêtements concernés.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 8
+          }
+        },
+        {
+          "description": "2 JACK JK-T781G-Z ; pose des boutons manuelle prévue, pas de deuxième machine ajoutée.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 9
+          }
+        },
+        {
+          "description": "4 ensembles BATTISTELLA KER/2 avec chaudière et fer inclus.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 10
+          }
+        },
+        {
+          "description": "Contrôle des dimensions, coutures et motifs selon version.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 11
+          }
+        },
+        {
+          "description": "Bandes papier et cartons groupés ; coût inclus par pièce, stock vide 15 jours.",
+          "visuel": {
+            "atlas": "textile",
+            "index": 12
+          }
         }
       ]
     }
@@ -212,79 +624,90 @@
     "confection": {
       "up_id": "confection",
       "configuration_id": null,
-      "nom": "Tuniques en coton — petite série industrielle",
-      "sous_titre": "Prêt-à-porter en tissu tissé acheté, sans fabrication du tissu",
-      "description": "Tuniques en coton — petite série industrielle. Atelier équipé de postes individuels, production et facturation en pièces. Tissus achetés ; origine ivoirienne non présumée. Les ventes et les prix départ atelier sont des hypothèses P2I, pas des commandes acquises.",
-      "source_equipement": "textile_atelier_confection",
+      "nom": "Atelier mixte — linge, uniformes et broderie",
+      "sous_titre": "Unité vendue : un article textile ; tissus achetés, pas de fabrication du tissu",
+      "description": "Atelier mixte — linge, uniformes et broderie. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
+      "source_equipement": "textile_atelier_reference",
       "prix_retenu": 875,
       "devise_prix": "EUR",
-      "quantite_equipement_principal": 8,
+      "quantite_equipement_principal": 20,
       "equipements_complementaires": [
         {
-          "nom": "1 × RASOR DS504, ciseau électrique circulaire",
+          "nom": "2 × RASOR DS504, ciseau électrique circulaire",
           "source_id": "textile_rasor_ds504",
           "source_url": "https://www.glasman.fr/a16120/ciseau-de-coupe-electrique-rasor-ds504",
           "prix_retenu": 500,
           "devise": "EUR",
-          "quantite": 1,
+          "quantite": 2,
           "prix_par_unite": true,
           "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
           "limites": "Coupe jusqu’à 9 mm annoncés ; petites épaisseurs et passes successives, pas un matelas industriel épais. 220 V / 90 W annoncés ; protection des mains et formation requises."
         },
         {
-          "nom": "2 × BATTISTELLA KER/2, table + chaudière + fer",
+          "nom": "4 × BATTISTELLA KER/2, table + chaudière + fer",
           "source_id": "textile_battistella_ker2",
           "source_url": "https://tmac-sas.fr/repassage/465-tables-%C3%A0-repasser-%C3%A9quip%C3%A9e-de-chaudi%C3%A8re-int%C3%A9gr%C3%A9-.html",
           "prix_retenu": 960,
           "devise": "EUR",
-          "quantite": 2,
+          "quantite": 4,
           "prix_par_unite": true,
           "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
           "limites": "230 V, 2 475 W annoncés par poste ; appoints d’eau, autonomie, sécurité vapeur et finition de grandes pièces à tester."
         },
         {
-          "nom": "2 × JUKI MO-6716DA, surjeteuse 5 fils complète",
+          "nom": "4 × JUKI MO-6716DA, surjeteuse 5 fils complète",
           "source_id": "textile_juki_mo6716",
           "source_url": "https://www.glasman.fr/a15840/juki-mo-6716da-surjeteuse-5fils",
           "prix_retenu": 1790,
           "devise": "EUR",
-          "quantite": 2,
+          "quantite": 4,
           "prix_par_unite": true,
           "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
           "limites": "Sous-classe pour tissu léger à moyen à préciser ; pas un rendement garanti par vêtement."
         },
         {
-          "nom": "1 × JACK JK-T781G-Z, boutonnière",
+          "nom": "2 × JACK JK-T781G-Z, boutonnière",
           "source_id": "textile_jack_t781",
           "source_url": "https://tmac-sas.fr/machine-a-boutonniere/403-jack-jk-t781g-z.html",
           "prix_retenu": 2800,
           "devise": "EUR",
-          "quantite": 1,
+          "quantite": 2,
           "prix_par_unite": true,
           "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
           "limites": "Fait les boutonnières ; ne coud pas les boutons. Pose des boutons manuelle incluse dans l’organisation P2I ; pas de seconde machine pose-boutons ajoutée."
+        },
+        {
+          "nom": "2 × BC-1504C — brodeuse 4 têtes selon intitulé catalogue",
+          "source_id": "textile_fuwei_bc1504",
+          "source_url": "https://fuwei-france.fr/2035900-Machine-a-broder-4-tetes-FW-M1504-Tarif-16200EUR-HT",
+          "prix_retenu": 17115,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Titre 4 têtes mais introduction descriptive mentionne 3 têtes ; nombre de têtes, accessoires, alimentation et disponibilité à confirmer. Cadre individuel 280 × 280 mm annoncé : petits logos/monogrammes, pas broderie intégrale de drap. Vitesse maximale 1 000 points/min, pas pièces/heure garanties. Quantités, cycle 5 000 points et 600 points/min effectifs = hypothèses P2I. Le stock est indiqué de manière contradictoire sur la page ; aucun délai livré présumé."
         }
       ],
       "unite_production": "pièce",
-      "capacite_unites_h": 10,
+      "capacite_unites_h": 1,
       "production_explicite": [
-        12000,
-        15000,
-        17000
+        36000,
+        44000,
+        50000
       ],
       "ventes_explicites": [
-        11400,
-        15000,
-        17000
+        34920,
+        44000,
+        50000
       ],
       "prix_vente_usd_unite": [
-        18,
-        18.36,
-        18.7272
+        15.45,
+        15.759,
+        16.07418
       ],
-      "matieres_usd_unite": 6.2,
-      "cout_process_usd_unite": 0.8,
-      "fixes_industriels_an": 56300,
+      "matieres_usd_unite": 5.99,
+      "cout_process_usd_unite": 0.83,
+      "fixes_industriels_an": 140000,
       "personnel_hors_cout_industriel": 9660,
       "charges_fixes_hors_industriel": 9600,
       "stock_matieres_jours": 30,
@@ -303,45 +726,45 @@
         "source": "Hypothèse P2I par pièce, pas tarif fournisseur vérifié."
       },
       "complements_usd": {
-        "fret": 2800,
-        "assurance": 250,
-        "douane_transit": 3500,
-        "transport_local": 800,
-        "genie_civil": 6000,
-        "utilites": 3500,
-        "installation_formation": 2500,
-        "pieces_initiales": 1200,
-        "securite_environnement": 1800,
-        "etudes": 1800,
-        "table_coupe_auxiliaires": 1800,
-        "rayonnage_stockage": 2000,
-        "patronage_informatique": 1500
+        "fret": 8000,
+        "assurance": 900,
+        "douane_transit": 14000,
+        "transport_local": 1600,
+        "genie_civil": 12000,
+        "utilites": 7000,
+        "installation_formation": 7000,
+        "pieces_initiales": 3600,
+        "securite_environnement": 3600,
+        "etudes": 3600,
+        "table_coupe_auxiliaires": 3600,
+        "rayonnage_stockage": 4000,
+        "patronage_informatique": 6000
       },
       "methodes": {
-        "production": "Capacité de travail P2I 10 pièces/h, 8 h/j, 250 j/an, inférieure au potentiel nominal des seules machines de couture. Le goulot dépend du modèle, des gestes et de l’équilibrage. Volumes de 12000/15000/17000 pièces ; stock initial de lancement puis quantité stable, sans pertes ni invendus supplémentaires simulés.",
-        "matieres": "Hypothèse par pièce : tissu et marge de coupe 5,60 USD, fil/boutons/entoilage et accessoires 0,60 USD, soit 6,20 USD. Prix livré, métrage par taille, pertes et origine à confirmer.",
-        "process": "0.8 USD/pièce dont emballage 0.25 USD ; solde pour électricité, eau de repassage, consommables et petits accessoires. Coûts estimés, non mesurés.",
-        "personnel": "14 personnes de production/contrôle/manutention à 250 USD/mois × 12 × 1,15 (majoration de simulation, pas taux légal) dans les frais industriels ; site, maintenance et autres frais complètent l’enveloppe de 56300 USD/an. Responsable administratif/commercial distinct : 700 USD/mois × 12 × 1,15 = 9 660 USD/an.",
+        "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes. Broderie : 3 têtes productives retenues par machine (6 au total) par prudence malgré l’intitulé 4 têtes ; ne pas assimiler une tête à une machine.",
+        "matieres": "Coûts par article conservés des bases textile P2I : 5,60 USD/drap, 6,20 USD/chemise ou tunique ; broderie +0,30 USD fils et stabilisateur. Estimations, pas prix locaux vérifiés. Drap plat 180 × 290 cm, tissu de laize adaptée à acheter ; aucune parure complète facturée comme un seul drap.",
+        "process": "Process et emballage par article ; +0,20 USD de process pour broderie, dont préparation, énergie et entretien estimés. Personnel industriel dans les frais fixes, pas une deuxième fois en coût variable.",
+        "personnel": "Hypothèse de taille renforcée : 20 postes de couture, moyens coupe/finition et personnel polyvalent ; frais industriels doublés par rapport à la base spécialisée antérieure, plus 12 000 USD/an pour les versions brodées. Atelier mixte : enveloppe industrielle 140 000 USD/an. Personnel administratif 9 660 USD/an distinct. Aucun salaire présenté comme barème officiel.",
         "charges": "Hors coûts industriels : commercialisation 6 000, administration 2 400 et assurance 1 200 USD/an. Entretien de la manutention ajouté une seule fois par le module commun. Aucune location récurrente de matériel ni nouvelle embauche supposée.",
-        "prix_vente": "18 USD/pièce départ atelier A1 puis +2 %/an, hypothèse P2I. Les repères ivoiriens de détail ne prouvent pas ce prix producteur ni les volumes accessibles.",
-        "complements": "Fret, site, utilités, table de coupe, patronage, stockage, formation et sécurité : enveloppes P2I. Les tables/bâtis/moteurs des machines et chaudières/fers KER/2 sont déjà compris dans les prix catalogue, sans ajout en double.",
-        "qualite": "Tailles, résistance des coutures, solidité des couleurs, retrait au lavage, étiquetage et traçabilité à tester ; aucune certification, origine du coton ou performance EPI présumées."
+        "prix_vente": "Prix P2I départ atelier : drap simple 12,80 USD, chemise simple 17 USD, tunique 18 USD ; valeurs simples inchangées. Broderie : supplément hypothétique 1,50 USD/article, non prix ivoirien observé. Hausse annuelle 2 %. Le repère de détail n’est pas un tarif producteur validé.",
+        "complements": "Budgets auxiliaires de l’atelier renforcé : frais de base doublés, compléments broderie explicités ; logiciel de préparation motifs dans patronage/informatique, cadres inclus annoncés non rachetés en double. Devis livrés non requis au Découverte ; provisions P2I, pas tarifs catalogue.",
+        "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+        "mutualisation": "Versions alternatives d’un même projet. Dans la version mixte, part d’articles brodés 30 %, moyenne pondérée des coûts/prix et des minutes par poste ; machines, bâtiment, manutention et salaires comptés une seule fois.",
+        "effectif": "20 postes de piquage, 2 de coupe, jusqu’à 4 de surjet, 2 de boutonnière et 4 de repassage ; polyvalence à organiser. Les postes techniques ne sont pas assimilés automatiquement à autant de salariés à temps plein."
       },
       "marches": [
-        "Boutiques de prêt-à-porter",
-        "Revendeurs et commandes de petites séries"
+        "Hôtels, résidences et distributeurs de linge",
+        "Entreprises, écoles et revendeurs de tenues ordinaires",
+        "Boutiques de prêt-à-porter selon version"
       ],
       "redaction": {
-        "positionnement": "Prêt-à-porter en tissu tissé acheté, sans fabrication du tissu. Le produit et son unité de vente sont propres à cette UP.",
-        "marche": "Clients à prospecter : Boutiques de prêt-à-porter ; Revendeurs et commandes de petites séries. Les prix au détail documentés servent de comparaison ; pas de volume de demande ni de commande acquis.",
-        "commercial": "Présenter des échantillons, qualifier les tailles et matières, recueillir des commandes par série et suivre réassorts, retours et délais de paiement.",
-        "approvisionnement": "Acheter des tissus tissés et accessoires traçables, définir largeur, grammage, retrait, solidité et régularité des lots ; disponibilité locale et prix livrés à documenter.",
-        "procede": "Réception des tissus → Patronage et placement → Coupe à faible épaisseur → Assemblage à point droit → Surfilage des coutures → Boutonnières et boutons → Repassage vapeur → Contrôle et conditionnement. Pas de filature ni de tissage dans le périmètre.",
-        "opportunites": "Petites séries, réassorts rapides et adaptation aux tailles ; intérêt commercial à confirmer avec des clients.",
-        "risques": "Concurrence importée et artisanale, saisonnalité, retards de paiement, variations des tissus, reprises et invendus par taille. Les volumes de lancement restent des hypothèses.",
-        "qualite": "Tailles, résistance des coutures, solidité des couleurs, retrait au lavage, étiquetage et traçabilité à tester ; aucune certification, origine du coton ou performance EPI présumées.",
-        "utilites": "Machines 220–230 V ; deux repassages KER/2 à 2 475 W chacun et cutter 90 W annoncés. Puissance souscrite, protections électriques, ventilation, eau et sécurité vapeur à dimensionner ; coût variable estimé, pas bilan énergétique mesuré.",
-        "projet": "Tuniques en coton — petite série industrielle. Atelier équipé de postes individuels, production et facturation en pièces. Tissus achetés ; origine ivoirienne non présumée. Les ventes et les prix départ atelier sont des hypothèses P2I, pas des commandes acquises."
+        "projet": "Atelier mixte — linge, uniformes et broderie. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
+        "procede": "Réception tissus → patronage/coupe → broderie sur panneaux si nécessaire → ourlets ou assemblage selon article → surfilage/boutonnières des vêtements → repassage → contrôle → bande papier et carton groupé.",
+        "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes. Broderie : 3 têtes productives retenues par machine (6 au total) par prudence malgré l’intitulé 4 têtes ; ne pas assimiler une tête à une machine. Stock de produits finis : 3 % de la production A1 non vendus (5 % prêt-à-porter), puis ventes égales à la production annuelle ; stocks antérieurs conservés par le moteur.",
+        "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+        "economie": "Prévisions en pièces et coûts propres à cette version. Pas de cumul des résultats des anciennes UP ; demande et suppléments de personnalisation à vérifier.",
+        "positionnement": "Linge de maison, uniformes ordinaires et prêt-à-porter dans une même famille industrielle ; choisir une version selon clients et compétences.",
+        "risques": "Concurrence, délais de règlement, achats de tissus, erreurs de taille et de motifs ; pas de commande ni de marge garantie."
       },
       "plan_commercial": [
         {
@@ -350,7 +773,7 @@
         },
         {
           "titre": "Clients professionnels",
-          "texte": "Prospecter boutiques de prêt-à-porter ; revendeurs et commandes de petites séries."
+          "texte": "Prospecter entreprises et prestataires de services ; distributeurs de vêtements de travail."
         },
         {
           "titre": "Marque et présentation",
@@ -371,94 +794,561 @@
       ],
       "sources_prix_marche": [
         {
-          "url": "https://openmoise.ci/seller/shop/chic-couture",
+          "url": "https://carrefour.ci/wp-content/uploads/2025/07/CATALOGUE-OBV-2025.pdf",
           "consulte_le": "2026-10-28",
-          "description": "Boutique Chic Couture : tuniques affichées à 20 000 FCFA au détail ; pas prix producteur ni preuve de commandes."
+          "description": "Catalogue OBV 2025 : chemise homme affichée 13 900 FCFA en promotion. Repère daté de détail d’un autre produit ; ne prouve pas le prix d’une chemise de travail."
         }
       ],
       "visuels": {
-        "atlas": "textile",
-        "product_index": 1,
+        "atlas": "textile-broderie",
+        "product_index": 3,
         "indices": [
           4,
           5,
           6,
+          5,
+          4,
           7,
           8,
           9,
           10,
-          12
+          7,
+          8
         ]
       },
-      "nombre_machines_reference": 14
+      "nombre_machines_reference": 34,
+      "gamme": [
+        {
+          "nom": "Drap simple",
+          "part": 0.35,
+          "prix_usd_kg": 12.8,
+          "matieres_usd_kg": 5.6,
+          "process_usd_kg": 0.7,
+          "brode": false
+        },
+        {
+          "nom": "Drap brodé",
+          "part": 0.15,
+          "prix_usd_kg": 14.3,
+          "matieres_usd_kg": 5.9,
+          "process_usd_kg": 0.9,
+          "brode": true
+        },
+        {
+          "nom": "Chemise simple",
+          "part": 0.25,
+          "prix_usd_kg": 17,
+          "matieres_usd_kg": 6.2,
+          "process_usd_kg": 0.85,
+          "brode": false
+        },
+        {
+          "nom": "Chemise brodée",
+          "part": 0.15,
+          "prix_usd_kg": 18.5,
+          "matieres_usd_kg": 6.5,
+          "process_usd_kg": 1.05,
+          "brode": true
+        },
+        {
+          "nom": "Tunique",
+          "part": 0.1,
+          "prix_usd_kg": 18,
+          "matieres_usd_kg": 6.2,
+          "process_usd_kg": 0.8,
+          "brode": false
+        }
+      ],
+      "dimensionnement_textile": {
+        "heures_jour": 8,
+        "jours_an": 250,
+        "efficacite_postes": 0.65,
+        "moyens": {
+          "coupe": 2,
+          "piqueuses": 20,
+          "surjet": 4,
+          "boutonnieres": 2,
+          "repassage": 4,
+          "brodeuses": 2,
+          "tetes_par_brodeuse": 4,
+          "tetes_productives_par_brodeuse": 3
+        },
+        "temps_minutes_par_article": {
+          "coupe": 2.5,
+          "piqueuses": 26,
+          "surjet": 3,
+          "boutonnieres": 1,
+          "repassage": 4,
+          "part_brodee": 0.3
+        },
+        "broderie": {
+          "points_par_motif": 5000,
+          "points_minute_effectifs": 600,
+          "preparation_minutes_par_tete": 3
+        },
+        "qualification": "Temps et efficacité = hypothèses de dimensionnement P2I, pas garantie de cadence ; équilibrage et tête catalogue à confirmer."
+      },
+      "suggestion": "En BP Initial, programmer les séries de draps, uniformes et petites collections dans le même atelier ; vérifier temps d’occupation et marge par commande. La confection d’emballages papier reste une activité auxiliaire possible, non incluse dans les calculs."
     },
-    "uniformes": {
-      "up_id": "uniformes",
-      "configuration_id": null,
-      "nom": "Chemises de travail — confection en série",
-      "sous_titre": "Vêtement professionnel ordinaire, hors EPI certifié",
-      "description": "Chemises de travail — confection en série. Atelier équipé de postes individuels, production et facturation en pièces. Tissus achetés ; origine ivoirienne non présumée. Les ventes et les prix départ atelier sont des hypothèses P2I, pas des commandes acquises.",
-      "source_equipement": "textile_atelier_uniformes",
+    "confection__linge_simple": {
+      "up_id": "confection",
+      "configuration_id": "linge_simple",
+      "nom": "Linge de maison — draps simples",
+      "sous_titre": "Unité vendue : un article textile ; tissus achetés, pas de fabrication du tissu",
+      "description": "Linge de maison — draps simples. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
+      "source_equipement": "textile_atelier_linge_simple",
       "prix_retenu": 875,
       "devise_prix": "EUR",
-      "quantite_equipement_principal": 10,
+      "quantite_equipement_principal": 20,
       "equipements_complementaires": [
         {
-          "nom": "1 × RASOR DS504, ciseau électrique circulaire",
+          "nom": "2 × RASOR DS504, ciseau électrique circulaire",
           "source_id": "textile_rasor_ds504",
           "source_url": "https://www.glasman.fr/a16120/ciseau-de-coupe-electrique-rasor-ds504",
           "prix_retenu": 500,
           "devise": "EUR",
-          "quantite": 1,
+          "quantite": 2,
           "prix_par_unite": true,
           "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
           "limites": "Coupe jusqu’à 9 mm annoncés ; petites épaisseurs et passes successives, pas un matelas industriel épais. 220 V / 90 W annoncés ; protection des mains et formation requises."
         },
         {
-          "nom": "2 × BATTISTELLA KER/2, table + chaudière + fer",
+          "nom": "4 × BATTISTELLA KER/2, table + chaudière + fer",
           "source_id": "textile_battistella_ker2",
           "source_url": "https://tmac-sas.fr/repassage/465-tables-%C3%A0-repasser-%C3%A9quip%C3%A9e-de-chaudi%C3%A8re-int%C3%A9gr%C3%A9-.html",
           "prix_retenu": 960,
           "devise": "EUR",
+          "quantite": 4,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "230 V, 2 475 W annoncés par poste ; appoints d’eau, autonomie, sécurité vapeur et finition de grandes pièces à tester."
+        }
+      ],
+      "unite_production": "pièce",
+      "capacite_unites_h": 1,
+      "production_explicite": [
+        48000,
+        60000,
+        68000
+      ],
+      "ventes_explicites": [
+        46560,
+        60000,
+        68000
+      ],
+      "prix_vente_usd_unite": [
+        12.8,
+        13.056,
+        13.31712
+      ],
+      "matieres_usd_unite": 5.6,
+      "cout_process_usd_unite": 0.7,
+      "fixes_industriels_an": 98000,
+      "personnel_hors_cout_industriel": 9660,
+      "charges_fixes_hors_industriel": 9600,
+      "stock_matieres_jours": 30,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Bande papier avec marque illustrative, taille/composition et entretien ; protection papier et carton groupé",
+        "cout_usd_par_unite": 0.35,
+        "composants_usd_par_unite": {
+          "bande_papier": 0.12,
+          "etiquette": 0.05,
+          "protection_papier": 0.08,
+          "carton_groupe": 0.1
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Limiter l’emballage individuel et privilégier les cartons réemployables ; protection contre humidité, collecte et recyclage réels à confirmer. Aucun gain écologique quantifié ni label acquis.",
+        "source": "Hypothèse P2I par pièce, pas tarif fournisseur vérifié."
+      },
+      "complements_usd": {
+        "fret": 5600,
+        "assurance": 500,
+        "douane_transit": 7000,
+        "transport_local": 1600,
+        "genie_civil": 12000,
+        "utilites": 7000,
+        "installation_formation": 5000,
+        "pieces_initiales": 2400,
+        "securite_environnement": 3600,
+        "etudes": 3600,
+        "table_coupe_auxiliaires": 3600,
+        "rayonnage_stockage": 4000,
+        "patronage_informatique": 3000
+      },
+      "methodes": {
+        "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes.",
+        "matieres": "Coûts par article conservés des bases textile P2I : 5,60 USD/drap, 6,20 USD/chemise ou tunique ; broderie +0,30 USD fils et stabilisateur. Estimations, pas prix locaux vérifiés. Drap plat 180 × 290 cm, tissu de laize adaptée à acheter ; aucune parure complète facturée comme un seul drap.",
+        "process": "Process et emballage par article ; +0,20 USD de process pour broderie, dont préparation, énergie et entretien estimés. Personnel industriel dans les frais fixes, pas une deuxième fois en coût variable.",
+        "personnel": "Hypothèse de taille renforcée : 20 postes de couture, moyens coupe/finition et personnel polyvalent ; frais industriels doublés par rapport à la base spécialisée antérieure, plus 12 000 USD/an pour les versions brodées. Atelier mixte : enveloppe industrielle 140 000 USD/an. Personnel administratif 9 660 USD/an distinct. Aucun salaire présenté comme barème officiel.",
+        "charges": "Hors coûts industriels : commercialisation 6 000, administration 2 400 et assurance 1 200 USD/an. Entretien de la manutention ajouté une seule fois par le module commun. Aucune location récurrente de matériel ni nouvelle embauche supposée.",
+        "prix_vente": "Prix P2I départ atelier : drap simple 12,80 USD, chemise simple 17 USD, tunique 18 USD ; valeurs simples inchangées. Broderie : supplément hypothétique 1,50 USD/article, non prix ivoirien observé. Hausse annuelle 2 %. Le repère de détail n’est pas un tarif producteur validé.",
+        "complements": "Budgets auxiliaires de l’atelier renforcé : frais de base doublés, compléments broderie explicités ; logiciel de préparation motifs dans patronage/informatique, cadres inclus annoncés non rachetés en double. Devis livrés non requis au Découverte ; provisions P2I, pas tarifs catalogue.",
+        "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+        "mutualisation": "Versions alternatives d’un même projet. Dans la version mixte, part d’articles brodés 30 %, moyenne pondérée des coûts/prix et des minutes par poste ; machines, bâtiment, manutention et salaires comptés une seule fois.",
+        "effectif": "20 postes de piquage, 2 de coupe, jusqu’à 4 de surjet, 2 de boutonnière et 4 de repassage ; polyvalence à organiser. Les postes techniques ne sont pas assimilés automatiquement à autant de salariés à temps plein."
+      },
+      "marches": [
+        "Hôtels, résidences et distributeurs de linge",
+        "Entreprises, écoles et revendeurs de tenues ordinaires",
+        "Boutiques de prêt-à-porter selon version"
+      ],
+      "redaction": {
+        "projet": "Linge de maison — draps simples. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
+        "procede": "Réception tissus → patronage/coupe → ourlets ou assemblage selon article → repassage → contrôle → bande papier et carton groupé.",
+        "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes. Stock de produits finis : 3 % de la production A1 non vendus (5 % prêt-à-porter), puis ventes égales à la production annuelle ; stocks antérieurs conservés par le moteur.",
+        "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+        "economie": "Prévisions en pièces et coûts propres à cette version. Pas de cumul des résultats des anciennes UP ; demande et suppléments de personnalisation à vérifier.",
+        "positionnement": "Linge de maison, uniformes ordinaires et prêt-à-porter dans une même famille industrielle ; choisir une version selon clients et compétences.",
+        "risques": "Concurrence, délais de règlement, achats de tissus, erreurs de taille et de motifs ; pas de commande ni de marge garantie."
+      },
+      "plan_commercial": [
+        {
+          "titre": "Échantillons et cahier des charges",
+          "texte": "Faire approuver tissu, coupe, tailles et finition avant série."
+        },
+        {
+          "titre": "Clients professionnels",
+          "texte": "Prospecter hôtels et résidences ; magasins de linge et commandes institutionnelles."
+        },
+        {
+          "titre": "Marque et présentation",
+          "texte": "Marques et logos P2I illustratifs ; disponibilité juridique à vérifier."
+        },
+        {
+          "titre": "Commandes par série",
+          "texte": "Planifier les séries et éviter une accumulation de tailles invendues."
+        },
+        {
+          "titre": "Qualité et réassort",
+          "texte": "Contrôler les retours, le lavage et la régularité des nouveaux lots."
+        },
+        {
+          "titre": "Suivi commercial",
+          "texte": "Mesurer taux de réassort, marge réelle par article et délais de règlement."
+        }
+      ],
+      "sources_prix_marche": [
+        {
+          "url": "https://orca.ci/product-category/articles-de-maison/literie/",
+          "consulte_le": "2026-10-28",
+          "description": "Drap plat 100 % coton 180 × 290 cm affiché 14 950 FCFA, promotion 9 718 FCFA lors de consultation. Repère de détail, pas prix départ atelier ; références et qualité à comparer."
+        }
+      ],
+      "visuels": {
+        "atlas": "textile",
+        "product_index": 3,
+        "indices": [
+          4,
+          5,
+          6,
+          7,
+          10,
+          11,
+          12
+        ]
+      },
+      "nombre_machines_reference": 26,
+      "dimensionnement_textile": {
+        "heures_jour": 8,
+        "jours_an": 250,
+        "efficacite_postes": 0.65,
+        "moyens": {
+          "coupe": 2,
+          "piqueuses": 20,
+          "surjet": 0,
+          "boutonnieres": 0,
+          "repassage": 4,
+          "brodeuses": 0,
+          "tetes_par_brodeuse": 4
+        },
+        "temps_minutes_par_article": {
+          "coupe": 2,
+          "piqueuses": 12,
+          "surjet": 0,
+          "boutonnieres": 0,
+          "repassage": 2,
+          "part_brodee": 0
+        },
+        "broderie": {
+          "points_par_motif": 5000,
+          "points_minute_effectifs": 600,
+          "preparation_minutes_par_tete": 3
+        },
+        "qualification": "Temps et efficacité = hypothèses de dimensionnement P2I, pas garantie de cadence ; équilibrage et tête catalogue à confirmer."
+      },
+      "suggestion": "En BP Initial, programmer les séries de draps, uniformes et petites collections dans le même atelier ; vérifier temps d’occupation et marge par commande. La confection d’emballages papier reste une activité auxiliaire possible, non incluse dans les calculs."
+    },
+    "confection__linge_brode": {
+      "up_id": "confection",
+      "configuration_id": "linge_brode",
+      "nom": "Linge de maison — draps brodés",
+      "sous_titre": "Unité vendue : un article textile ; tissus achetés, pas de fabrication du tissu",
+      "description": "Linge de maison — draps brodés. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
+      "source_equipement": "textile_atelier_linge_brode",
+      "prix_retenu": 875,
+      "devise_prix": "EUR",
+      "quantite_equipement_principal": 20,
+      "equipements_complementaires": [
+        {
+          "nom": "2 × RASOR DS504, ciseau électrique circulaire",
+          "source_id": "textile_rasor_ds504",
+          "source_url": "https://www.glasman.fr/a16120/ciseau-de-coupe-electrique-rasor-ds504",
+          "prix_retenu": 500,
+          "devise": "EUR",
           "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Coupe jusqu’à 9 mm annoncés ; petites épaisseurs et passes successives, pas un matelas industriel épais. 220 V / 90 W annoncés ; protection des mains et formation requises."
+        },
+        {
+          "nom": "4 × BATTISTELLA KER/2, table + chaudière + fer",
+          "source_id": "textile_battistella_ker2",
+          "source_url": "https://tmac-sas.fr/repassage/465-tables-%C3%A0-repasser-%C3%A9quip%C3%A9e-de-chaudi%C3%A8re-int%C3%A9gr%C3%A9-.html",
+          "prix_retenu": 960,
+          "devise": "EUR",
+          "quantite": 4,
           "prix_par_unite": true,
           "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
           "limites": "230 V, 2 475 W annoncés par poste ; appoints d’eau, autonomie, sécurité vapeur et finition de grandes pièces à tester."
         },
         {
-          "nom": "2 × JUKI MO-6716DA, surjeteuse 5 fils complète",
+          "nom": "2 × BC-1504C — brodeuse 4 têtes selon intitulé catalogue",
+          "source_id": "textile_fuwei_bc1504",
+          "source_url": "https://fuwei-france.fr/2035900-Machine-a-broder-4-tetes-FW-M1504-Tarif-16200EUR-HT",
+          "prix_retenu": 17115,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Titre 4 têtes mais introduction descriptive mentionne 3 têtes ; nombre de têtes, accessoires, alimentation et disponibilité à confirmer. Cadre individuel 280 × 280 mm annoncé : petits logos/monogrammes, pas broderie intégrale de drap. Vitesse maximale 1 000 points/min, pas pièces/heure garanties. Quantités, cycle 5 000 points et 600 points/min effectifs = hypothèses P2I. Le stock est indiqué de manière contradictoire sur la page ; aucun délai livré présumé."
+        }
+      ],
+      "unite_production": "pièce",
+      "capacite_unites_h": 1,
+      "production_explicite": [
+        42000,
+        52000,
+        60000
+      ],
+      "ventes_explicites": [
+        40740,
+        52000,
+        60000
+      ],
+      "prix_vente_usd_unite": [
+        14.3,
+        14.586,
+        14.87772
+      ],
+      "matieres_usd_unite": 5.9,
+      "cout_process_usd_unite": 0.9,
+      "fixes_industriels_an": 110000,
+      "personnel_hors_cout_industriel": 9660,
+      "charges_fixes_hors_industriel": 9600,
+      "stock_matieres_jours": 30,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Bande papier avec marque illustrative, taille/composition et entretien ; protection papier et carton groupé",
+        "cout_usd_par_unite": 0.35,
+        "composants_usd_par_unite": {
+          "bande_papier": 0.12,
+          "etiquette": 0.05,
+          "protection_papier": 0.08,
+          "carton_groupe": 0.1
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Limiter l’emballage individuel et privilégier les cartons réemployables ; protection contre humidité, collecte et recyclage réels à confirmer. Aucun gain écologique quantifié ni label acquis.",
+        "source": "Hypothèse P2I par pièce, pas tarif fournisseur vérifié."
+      },
+      "complements_usd": {
+        "fret": 8000,
+        "assurance": 900,
+        "douane_transit": 14000,
+        "transport_local": 1600,
+        "genie_civil": 12000,
+        "utilites": 7000,
+        "installation_formation": 7000,
+        "pieces_initiales": 3600,
+        "securite_environnement": 3600,
+        "etudes": 3600,
+        "table_coupe_auxiliaires": 3600,
+        "rayonnage_stockage": 4000,
+        "patronage_informatique": 6000
+      },
+      "methodes": {
+        "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes. Broderie : 3 têtes productives retenues par machine (6 au total) par prudence malgré l’intitulé 4 têtes ; ne pas assimiler une tête à une machine.",
+        "matieres": "Coûts par article conservés des bases textile P2I : 5,60 USD/drap, 6,20 USD/chemise ou tunique ; broderie +0,30 USD fils et stabilisateur. Estimations, pas prix locaux vérifiés. Drap plat 180 × 290 cm, tissu de laize adaptée à acheter ; aucune parure complète facturée comme un seul drap.",
+        "process": "Process et emballage par article ; +0,20 USD de process pour broderie, dont préparation, énergie et entretien estimés. Personnel industriel dans les frais fixes, pas une deuxième fois en coût variable.",
+        "personnel": "Hypothèse de taille renforcée : 20 postes de couture, moyens coupe/finition et personnel polyvalent ; frais industriels doublés par rapport à la base spécialisée antérieure, plus 12 000 USD/an pour les versions brodées. Atelier mixte : enveloppe industrielle 140 000 USD/an. Personnel administratif 9 660 USD/an distinct. Aucun salaire présenté comme barème officiel.",
+        "charges": "Hors coûts industriels : commercialisation 6 000, administration 2 400 et assurance 1 200 USD/an. Entretien de la manutention ajouté une seule fois par le module commun. Aucune location récurrente de matériel ni nouvelle embauche supposée.",
+        "prix_vente": "Prix P2I départ atelier : drap simple 12,80 USD, chemise simple 17 USD, tunique 18 USD ; valeurs simples inchangées. Broderie : supplément hypothétique 1,50 USD/article, non prix ivoirien observé. Hausse annuelle 2 %. Le repère de détail n’est pas un tarif producteur validé.",
+        "complements": "Budgets auxiliaires de l’atelier renforcé : frais de base doublés, compléments broderie explicités ; logiciel de préparation motifs dans patronage/informatique, cadres inclus annoncés non rachetés en double. Devis livrés non requis au Découverte ; provisions P2I, pas tarifs catalogue.",
+        "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+        "mutualisation": "Versions alternatives d’un même projet. Dans la version mixte, part d’articles brodés 30 %, moyenne pondérée des coûts/prix et des minutes par poste ; machines, bâtiment, manutention et salaires comptés une seule fois.",
+        "effectif": "20 postes de piquage, 2 de coupe, jusqu’à 4 de surjet, 2 de boutonnière et 4 de repassage ; polyvalence à organiser. Les postes techniques ne sont pas assimilés automatiquement à autant de salariés à temps plein."
+      },
+      "marches": [
+        "Hôtels, résidences et distributeurs de linge",
+        "Entreprises, écoles et revendeurs de tenues ordinaires",
+        "Boutiques de prêt-à-porter selon version"
+      ],
+      "redaction": {
+        "projet": "Linge de maison — draps brodés. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
+        "procede": "Réception tissus → patronage/coupe → broderie sur panneaux si nécessaire → ourlets ou assemblage selon article → repassage → contrôle → bande papier et carton groupé.",
+        "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes. Broderie : 3 têtes productives retenues par machine (6 au total) par prudence malgré l’intitulé 4 têtes ; ne pas assimiler une tête à une machine. Stock de produits finis : 3 % de la production A1 non vendus (5 % prêt-à-porter), puis ventes égales à la production annuelle ; stocks antérieurs conservés par le moteur.",
+        "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+        "economie": "Prévisions en pièces et coûts propres à cette version. Pas de cumul des résultats des anciennes UP ; demande et suppléments de personnalisation à vérifier.",
+        "positionnement": "Linge de maison, uniformes ordinaires et prêt-à-porter dans une même famille industrielle ; choisir une version selon clients et compétences.",
+        "risques": "Concurrence, délais de règlement, achats de tissus, erreurs de taille et de motifs ; pas de commande ni de marge garantie."
+      },
+      "plan_commercial": [
+        {
+          "titre": "Échantillons et cahier des charges",
+          "texte": "Faire approuver tissu, coupe, tailles et finition avant série."
+        },
+        {
+          "titre": "Clients professionnels",
+          "texte": "Prospecter hôtels et résidences ; magasins de linge et commandes institutionnelles."
+        },
+        {
+          "titre": "Marque et présentation",
+          "texte": "Marques et logos P2I illustratifs ; disponibilité juridique à vérifier."
+        },
+        {
+          "titre": "Commandes par série",
+          "texte": "Planifier les séries et éviter une accumulation de tailles invendues."
+        },
+        {
+          "titre": "Qualité et réassort",
+          "texte": "Contrôler les retours, le lavage et la régularité des nouveaux lots."
+        },
+        {
+          "titre": "Suivi commercial",
+          "texte": "Mesurer taux de réassort, marge réelle par article et délais de règlement."
+        }
+      ],
+      "sources_prix_marche": [
+        {
+          "url": "https://orca.ci/product-category/articles-de-maison/literie/",
+          "consulte_le": "2026-10-28",
+          "description": "Drap plat 100 % coton 180 × 290 cm affiché 14 950 FCFA, promotion 9 718 FCFA lors de consultation. Repère de détail, pas prix départ atelier ; références et qualité à comparer."
+        }
+      ],
+      "visuels": {
+        "atlas": "textile-broderie",
+        "product_index": 1,
+        "indices": [
+          4,
+          5,
+          6,
+          5,
+          4,
+          7,
+          10,
+          7,
+          8
+        ]
+      },
+      "nombre_machines_reference": 28,
+      "dimensionnement_textile": {
+        "heures_jour": 8,
+        "jours_an": 250,
+        "efficacite_postes": 0.65,
+        "moyens": {
+          "coupe": 2,
+          "piqueuses": 20,
+          "surjet": 0,
+          "boutonnieres": 0,
+          "repassage": 4,
+          "brodeuses": 2,
+          "tetes_par_brodeuse": 4,
+          "tetes_productives_par_brodeuse": 3
+        },
+        "temps_minutes_par_article": {
+          "coupe": 2,
+          "piqueuses": 12,
+          "surjet": 0,
+          "boutonnieres": 0,
+          "repassage": 2,
+          "part_brodee": 1
+        },
+        "broderie": {
+          "points_par_motif": 5000,
+          "points_minute_effectifs": 600,
+          "preparation_minutes_par_tete": 3
+        },
+        "qualification": "Temps et efficacité = hypothèses de dimensionnement P2I, pas garantie de cadence ; équilibrage et tête catalogue à confirmer."
+      },
+      "suggestion": "En BP Initial, programmer les séries de draps, uniformes et petites collections dans le même atelier ; vérifier temps d’occupation et marge par commande. La confection d’emballages papier reste une activité auxiliaire possible, non incluse dans les calculs."
+    },
+    "confection__uniformes_simples": {
+      "up_id": "confection",
+      "configuration_id": "uniformes_simples",
+      "nom": "Uniformes — chemises de travail simples",
+      "sous_titre": "Unité vendue : un article textile ; tissus achetés, pas de fabrication du tissu",
+      "description": "Uniformes — chemises de travail simples. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
+      "source_equipement": "textile_atelier_uniformes_simples",
+      "prix_retenu": 875,
+      "devise_prix": "EUR",
+      "quantite_equipement_principal": 20,
+      "equipements_complementaires": [
+        {
+          "nom": "2 × RASOR DS504, ciseau électrique circulaire",
+          "source_id": "textile_rasor_ds504",
+          "source_url": "https://www.glasman.fr/a16120/ciseau-de-coupe-electrique-rasor-ds504",
+          "prix_retenu": 500,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Coupe jusqu’à 9 mm annoncés ; petites épaisseurs et passes successives, pas un matelas industriel épais. 220 V / 90 W annoncés ; protection des mains et formation requises."
+        },
+        {
+          "nom": "4 × BATTISTELLA KER/2, table + chaudière + fer",
+          "source_id": "textile_battistella_ker2",
+          "source_url": "https://tmac-sas.fr/repassage/465-tables-%C3%A0-repasser-%C3%A9quip%C3%A9e-de-chaudi%C3%A8re-int%C3%A9gr%C3%A9-.html",
+          "prix_retenu": 960,
+          "devise": "EUR",
+          "quantite": 4,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "230 V, 2 475 W annoncés par poste ; appoints d’eau, autonomie, sécurité vapeur et finition de grandes pièces à tester."
+        },
+        {
+          "nom": "4 × JUKI MO-6716DA, surjeteuse 5 fils complète",
           "source_id": "textile_juki_mo6716",
           "source_url": "https://www.glasman.fr/a15840/juki-mo-6716da-surjeteuse-5fils",
           "prix_retenu": 1790,
           "devise": "EUR",
-          "quantite": 2,
+          "quantite": 4,
           "prix_par_unite": true,
           "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
           "limites": "Sous-classe pour tissu léger à moyen à préciser ; pas un rendement garanti par vêtement."
         },
         {
-          "nom": "1 × JACK JK-T781G-Z, boutonnière",
+          "nom": "2 × JACK JK-T781G-Z, boutonnière",
           "source_id": "textile_jack_t781",
           "source_url": "https://tmac-sas.fr/machine-a-boutonniere/403-jack-jk-t781g-z.html",
           "prix_retenu": 2800,
           "devise": "EUR",
-          "quantite": 1,
+          "quantite": 2,
           "prix_par_unite": true,
           "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
           "limites": "Fait les boutonnières ; ne coud pas les boutons. Pose des boutons manuelle incluse dans l’organisation P2I ; pas de seconde machine pose-boutons ajoutée."
         }
       ],
       "unite_production": "pièce",
-      "capacite_unites_h": 12,
+      "capacite_unites_h": 1,
       "production_explicite": [
-        14000,
-        17000,
-        20000
+        24000,
+        30000,
+        34000
       ],
       "ventes_explicites": [
-        13580,
-        17000,
-        20000
+        23280,
+        30000,
+        34000
       ],
       "prix_vente_usd_unite": [
         17,
@@ -467,7 +1357,7 @@
       ],
       "matieres_usd_unite": 6.2,
       "cout_process_usd_unite": 0.85,
-      "fixes_industriels_an": 63200,
+      "fixes_industriels_an": 126400,
       "personnel_hors_cout_industriel": 9660,
       "charges_fixes_hors_industriel": 9600,
       "stock_matieres_jours": 30,
@@ -486,45 +1376,45 @@
         "source": "Hypothèse P2I par pièce, pas tarif fournisseur vérifié."
       },
       "complements_usd": {
-        "fret": 2800,
-        "assurance": 250,
-        "douane_transit": 3500,
-        "transport_local": 800,
-        "genie_civil": 6000,
-        "utilites": 3500,
-        "installation_formation": 2500,
-        "pieces_initiales": 1200,
-        "securite_environnement": 1800,
-        "etudes": 1800,
-        "table_coupe_auxiliaires": 1800,
-        "rayonnage_stockage": 2000,
-        "patronage_informatique": 1500
+        "fret": 5600,
+        "assurance": 500,
+        "douane_transit": 7000,
+        "transport_local": 1600,
+        "genie_civil": 12000,
+        "utilites": 7000,
+        "installation_formation": 5000,
+        "pieces_initiales": 2400,
+        "securite_environnement": 3600,
+        "etudes": 3600,
+        "table_coupe_auxiliaires": 3600,
+        "rayonnage_stockage": 4000,
+        "patronage_informatique": 3000
       },
       "methodes": {
-        "production": "Capacité de travail P2I 12 pièces/h, 8 h/j, 250 j/an, inférieure au potentiel nominal des seules machines de couture. Le goulot dépend du modèle, des gestes et de l’équilibrage. Volumes de 14000/17000/20000 pièces ; stock initial de lancement puis quantité stable, sans pertes ni invendus supplémentaires simulés.",
-        "matieres": "Hypothèse par pièce : tissu et marge de coupe 5,60 USD, fil/boutons/entoilage et accessoires 0,60 USD, soit 6,20 USD. Prix livré, métrage par taille, pertes et origine à confirmer.",
-        "process": "0.85 USD/pièce dont emballage 0.25 USD ; solde pour électricité, eau de repassage, consommables et petits accessoires. Coûts estimés, non mesurés.",
-        "personnel": "16 personnes de production/contrôle/manutention à 250 USD/mois × 12 × 1,15 (majoration de simulation, pas taux légal) dans les frais industriels ; site, maintenance et autres frais complètent l’enveloppe de 63200 USD/an. Responsable administratif/commercial distinct : 700 USD/mois × 12 × 1,15 = 9 660 USD/an.",
+        "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes.",
+        "matieres": "Coûts par article conservés des bases textile P2I : 5,60 USD/drap, 6,20 USD/chemise ou tunique ; broderie +0,30 USD fils et stabilisateur. Estimations, pas prix locaux vérifiés. Drap plat 180 × 290 cm, tissu de laize adaptée à acheter ; aucune parure complète facturée comme un seul drap.",
+        "process": "Process et emballage par article ; +0,20 USD de process pour broderie, dont préparation, énergie et entretien estimés. Personnel industriel dans les frais fixes, pas une deuxième fois en coût variable.",
+        "personnel": "Hypothèse de taille renforcée : 20 postes de couture, moyens coupe/finition et personnel polyvalent ; frais industriels doublés par rapport à la base spécialisée antérieure, plus 12 000 USD/an pour les versions brodées. Atelier mixte : enveloppe industrielle 140 000 USD/an. Personnel administratif 9 660 USD/an distinct. Aucun salaire présenté comme barème officiel.",
         "charges": "Hors coûts industriels : commercialisation 6 000, administration 2 400 et assurance 1 200 USD/an. Entretien de la manutention ajouté une seule fois par le module commun. Aucune location récurrente de matériel ni nouvelle embauche supposée.",
-        "prix_vente": "17 USD/pièce départ atelier A1 puis +2 %/an, hypothèse P2I. Les repères ivoiriens de détail ne prouvent pas ce prix producteur ni les volumes accessibles.",
-        "complements": "Fret, site, utilités, table de coupe, patronage, stockage, formation et sécurité : enveloppes P2I. Les tables/bâtis/moteurs des machines et chaudières/fers KER/2 sont déjà compris dans les prix catalogue, sans ajout en double.",
-        "qualite": "Tailles, résistance des coutures, solidité des couleurs, retrait au lavage, étiquetage et traçabilité à tester ; aucune certification, origine du coton ou performance EPI présumées."
+        "prix_vente": "Prix P2I départ atelier : drap simple 12,80 USD, chemise simple 17 USD, tunique 18 USD ; valeurs simples inchangées. Broderie : supplément hypothétique 1,50 USD/article, non prix ivoirien observé. Hausse annuelle 2 %. Le repère de détail n’est pas un tarif producteur validé.",
+        "complements": "Budgets auxiliaires de l’atelier renforcé : frais de base doublés, compléments broderie explicités ; logiciel de préparation motifs dans patronage/informatique, cadres inclus annoncés non rachetés en double. Devis livrés non requis au Découverte ; provisions P2I, pas tarifs catalogue.",
+        "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+        "mutualisation": "Versions alternatives d’un même projet. Dans la version mixte, part d’articles brodés 30 %, moyenne pondérée des coûts/prix et des minutes par poste ; machines, bâtiment, manutention et salaires comptés une seule fois.",
+        "effectif": "20 postes de piquage, 2 de coupe, jusqu’à 4 de surjet, 2 de boutonnière et 4 de repassage ; polyvalence à organiser. Les postes techniques ne sont pas assimilés automatiquement à autant de salariés à temps plein."
       },
       "marches": [
-        "Entreprises et prestataires de services",
-        "Distributeurs de vêtements de travail"
+        "Hôtels, résidences et distributeurs de linge",
+        "Entreprises, écoles et revendeurs de tenues ordinaires",
+        "Boutiques de prêt-à-porter selon version"
       ],
       "redaction": {
-        "positionnement": "Vêtement professionnel ordinaire, hors EPI certifié. Le produit et son unité de vente sont propres à cette UP.",
-        "marche": "Clients à prospecter : Entreprises et prestataires de services ; Distributeurs de vêtements de travail. Les prix au détail documentés servent de comparaison ; pas de volume de demande ni de commande acquis.",
-        "commercial": "Présenter des échantillons, qualifier les tailles et matières, recueillir des commandes par série et suivre réassorts, retours et délais de paiement.",
-        "approvisionnement": "Acheter des tissus tissés et accessoires traçables, définir largeur, grammage, retrait, solidité et régularité des lots ; disponibilité locale et prix livrés à documenter.",
-        "procede": "Réception des tissus → Patronage et placement → Coupe à faible épaisseur → Assemblage à point droit → Surfilage des coutures → Boutonnières et boutons → Repassage vapeur → Contrôle et conditionnement. Pas de filature ni de tissage dans le périmètre.",
-        "opportunites": "Petites séries, réassorts rapides et adaptation aux tailles ; intérêt commercial à confirmer avec des clients.",
-        "risques": "Concurrence importée et artisanale, saisonnalité, retards de paiement, variations des tissus, reprises et invendus par taille. Les volumes de lancement restent des hypothèses.",
-        "qualite": "Tailles, résistance des coutures, solidité des couleurs, retrait au lavage, étiquetage et traçabilité à tester ; aucune certification, origine du coton ou performance EPI présumées.",
-        "utilites": "Machines 220–230 V ; deux repassages KER/2 à 2 475 W chacun et cutter 90 W annoncés. Puissance souscrite, protections électriques, ventilation, eau et sécurité vapeur à dimensionner ; coût variable estimé, pas bilan énergétique mesuré.",
-        "projet": "Chemises de travail — confection en série. Atelier équipé de postes individuels, production et facturation en pièces. Tissus achetés ; origine ivoirienne non présumée. Les ventes et les prix départ atelier sont des hypothèses P2I, pas des commandes acquises."
+        "projet": "Uniformes — chemises de travail simples. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
+        "procede": "Réception tissus → patronage/coupe → ourlets ou assemblage selon article → surfilage/boutonnières des vêtements → repassage → contrôle → bande papier et carton groupé.",
+        "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes. Stock de produits finis : 3 % de la production A1 non vendus (5 % prêt-à-porter), puis ventes égales à la production annuelle ; stocks antérieurs conservés par le moteur.",
+        "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+        "economie": "Prévisions en pièces et coûts propres à cette version. Pas de cumul des résultats des anciennes UP ; demande et suppléments de personnalisation à vérifier.",
+        "positionnement": "Linge de maison, uniformes ordinaires et prêt-à-porter dans une même famille industrielle ; choisir une version selon clients et compétences.",
+        "risques": "Concurrence, délais de règlement, achats de tissus, erreurs de taille et de motifs ; pas de commande ni de marge garantie."
       },
       "plan_commercial": [
         {
@@ -570,122 +1460,185 @@
           8,
           9,
           10,
+          11,
           12
         ]
       },
-      "nombre_machines_reference": 16
+      "nombre_machines_reference": 32,
+      "dimensionnement_textile": {
+        "heures_jour": 8,
+        "jours_an": 250,
+        "efficacite_postes": 0.65,
+        "moyens": {
+          "coupe": 2,
+          "piqueuses": 20,
+          "surjet": 4,
+          "boutonnieres": 2,
+          "repassage": 4,
+          "brodeuses": 0,
+          "tetes_par_brodeuse": 4
+        },
+        "temps_minutes_par_article": {
+          "coupe": 3,
+          "piqueuses": 40,
+          "surjet": 6,
+          "boutonnieres": 2,
+          "repassage": 6,
+          "part_brodee": 0
+        },
+        "broderie": {
+          "points_par_motif": 5000,
+          "points_minute_effectifs": 600,
+          "preparation_minutes_par_tete": 3
+        },
+        "qualification": "Temps et efficacité = hypothèses de dimensionnement P2I, pas garantie de cadence ; équilibrage et tête catalogue à confirmer."
+      },
+      "suggestion": "En BP Initial, programmer les séries de draps, uniformes et petites collections dans le même atelier ; vérifier temps d’occupation et marge par commande. La confection d’emballages papier reste une activité auxiliaire possible, non incluse dans les calculs."
     },
-    "linge": {
-      "up_id": "linge",
-      "configuration_id": null,
-      "nom": "Draps plats en coton — 180 × 290 cm",
-      "sous_titre": "Une pièce facturée = un drap plat ; ni parure ni prestation de blanchisserie",
-      "description": "Draps plats en coton — 180 × 290 cm. Atelier équipé de postes individuels, production et facturation en pièces. Tissus achetés ; origine ivoirienne non présumée. Les ventes et les prix départ atelier sont des hypothèses P2I, pas des commandes acquises.",
-      "source_equipement": "textile_atelier_linge",
+    "confection__uniformes_brodes": {
+      "up_id": "confection",
+      "configuration_id": "uniformes_brodes",
+      "nom": "Uniformes — chemises de travail brodées",
+      "sous_titre": "Unité vendue : un article textile ; tissus achetés, pas de fabrication du tissu",
+      "description": "Uniformes — chemises de travail brodées. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
+      "source_equipement": "textile_atelier_uniformes_brodes",
       "prix_retenu": 875,
       "devise_prix": "EUR",
-      "quantite_equipement_principal": 6,
+      "quantite_equipement_principal": 20,
       "equipements_complementaires": [
         {
-          "nom": "1 × RASOR DS504, ciseau électrique circulaire",
+          "nom": "2 × RASOR DS504, ciseau électrique circulaire",
           "source_id": "textile_rasor_ds504",
           "source_url": "https://www.glasman.fr/a16120/ciseau-de-coupe-electrique-rasor-ds504",
           "prix_retenu": 500,
           "devise": "EUR",
-          "quantite": 1,
+          "quantite": 2,
           "prix_par_unite": true,
           "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
           "limites": "Coupe jusqu’à 9 mm annoncés ; petites épaisseurs et passes successives, pas un matelas industriel épais. 220 V / 90 W annoncés ; protection des mains et formation requises."
         },
         {
-          "nom": "2 × BATTISTELLA KER/2, table + chaudière + fer",
+          "nom": "4 × BATTISTELLA KER/2, table + chaudière + fer",
           "source_id": "textile_battistella_ker2",
           "source_url": "https://tmac-sas.fr/repassage/465-tables-%C3%A0-repasser-%C3%A9quip%C3%A9e-de-chaudi%C3%A8re-int%C3%A9gr%C3%A9-.html",
           "prix_retenu": 960,
           "devise": "EUR",
-          "quantite": 2,
+          "quantite": 4,
           "prix_par_unite": true,
           "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
           "limites": "230 V, 2 475 W annoncés par poste ; appoints d’eau, autonomie, sécurité vapeur et finition de grandes pièces à tester."
+        },
+        {
+          "nom": "4 × JUKI MO-6716DA, surjeteuse 5 fils complète",
+          "source_id": "textile_juki_mo6716",
+          "source_url": "https://www.glasman.fr/a15840/juki-mo-6716da-surjeteuse-5fils",
+          "prix_retenu": 1790,
+          "devise": "EUR",
+          "quantite": 4,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Sous-classe pour tissu léger à moyen à préciser ; pas un rendement garanti par vêtement."
+        },
+        {
+          "nom": "2 × JACK JK-T781G-Z, boutonnière",
+          "source_id": "textile_jack_t781",
+          "source_url": "https://tmac-sas.fr/machine-a-boutonniere/403-jack-jk-t781g-z.html",
+          "prix_retenu": 2800,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Fait les boutonnières ; ne coud pas les boutons. Pose des boutons manuelle incluse dans l’organisation P2I ; pas de seconde machine pose-boutons ajoutée."
+        },
+        {
+          "nom": "2 × BC-1504C — brodeuse 4 têtes selon intitulé catalogue",
+          "source_id": "textile_fuwei_bc1504",
+          "source_url": "https://fuwei-france.fr/2035900-Machine-a-broder-4-tetes-FW-M1504-Tarif-16200EUR-HT",
+          "prix_retenu": 17115,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Titre 4 têtes mais introduction descriptive mentionne 3 têtes ; nombre de têtes, accessoires, alimentation et disponibilité à confirmer. Cadre individuel 280 × 280 mm annoncé : petits logos/monogrammes, pas broderie intégrale de drap. Vitesse maximale 1 000 points/min, pas pièces/heure garanties. Quantités, cycle 5 000 points et 600 points/min effectifs = hypothèses P2I. Le stock est indiqué de manière contradictoire sur la page ; aucun délai livré présumé."
         }
       ],
       "unite_production": "pièce",
-      "capacite_unites_h": 20,
+      "capacite_unites_h": 1,
       "production_explicite": [
         24000,
-        29000,
+        30000,
         34000
       ],
       "ventes_explicites": [
         23280,
-        29000,
+        30000,
         34000
       ],
       "prix_vente_usd_unite": [
-        12.8,
-        13.056,
-        13.31712
+        18.5,
+        18.87,
+        19.2474
       ],
-      "matieres_usd_unite": 5.6,
-      "cout_process_usd_unite": 0.7,
-      "fixes_industriels_an": 49000,
+      "matieres_usd_unite": 6.5,
+      "cout_process_usd_unite": 1.05,
+      "fixes_industriels_an": 138400,
       "personnel_hors_cout_industriel": 9660,
       "charges_fixes_hors_industriel": 9600,
       "stock_matieres_jours": 30,
       "emballage_produit": {
         "statut": "hypothese_P2I",
         "format": "Bande papier avec marque illustrative, taille/composition et entretien ; protection papier et carton groupé",
-        "cout_usd_par_unite": 0.35,
+        "cout_usd_par_unite": 0.25,
         "composants_usd_par_unite": {
-          "bande_papier": 0.12,
-          "etiquette": 0.05,
-          "protection_papier": 0.08,
-          "carton_groupe": 0.1
+          "bande_papier": 0.08,
+          "etiquette": 0.04,
+          "protection_papier": 0.06,
+          "carton_groupe": 0.07
         },
         "mode_comptable": "inclus_dans_cout_industriel",
         "ecologie": "Limiter l’emballage individuel et privilégier les cartons réemployables ; protection contre humidité, collecte et recyclage réels à confirmer. Aucun gain écologique quantifié ni label acquis.",
         "source": "Hypothèse P2I par pièce, pas tarif fournisseur vérifié."
       },
       "complements_usd": {
-        "fret": 2800,
-        "assurance": 250,
-        "douane_transit": 3500,
-        "transport_local": 800,
-        "genie_civil": 6000,
-        "utilites": 3500,
-        "installation_formation": 2500,
-        "pieces_initiales": 1200,
-        "securite_environnement": 1800,
-        "etudes": 1800,
-        "table_coupe_auxiliaires": 1800,
-        "rayonnage_stockage": 2000,
-        "patronage_informatique": 1500
+        "fret": 8000,
+        "assurance": 900,
+        "douane_transit": 14000,
+        "transport_local": 1600,
+        "genie_civil": 12000,
+        "utilites": 7000,
+        "installation_formation": 7000,
+        "pieces_initiales": 3600,
+        "securite_environnement": 3600,
+        "etudes": 3600,
+        "table_coupe_auxiliaires": 3600,
+        "rayonnage_stockage": 4000,
+        "patronage_informatique": 6000
       },
       "methodes": {
-        "production": "Capacité de travail P2I 20 pièces/h, 8 h/j, 250 j/an, inférieure au potentiel nominal des seules machines de couture. Le goulot dépend du modèle, des gestes et de l’équilibrage. Volumes de 24000/29000/34000 pièces ; stock initial de lancement puis quantité stable, sans pertes ni invendus supplémentaires simulés.",
-        "matieres": "Hypothèse par drap : tissu largeur 3 m, environ 1,90 m linéaire à 2,80 USD/m et fil/accessoires 0,28 USD, soit 5,60 USD. Prix livré et retrait non vérifiés ; achat de tissu, pas de transformation de coton brut.",
-        "process": "0.7 USD/pièce dont emballage 0.35 USD ; solde pour électricité, eau de repassage, consommables et petits accessoires. Coûts estimés, non mesurés.",
-        "personnel": "12 personnes de production/contrôle/manutention à 250 USD/mois × 12 × 1,15 (majoration de simulation, pas taux légal) dans les frais industriels ; site, maintenance et autres frais complètent l’enveloppe de 49000 USD/an. Responsable administratif/commercial distinct : 700 USD/mois × 12 × 1,15 = 9 660 USD/an.",
+        "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes. Broderie : 3 têtes productives retenues par machine (6 au total) par prudence malgré l’intitulé 4 têtes ; ne pas assimiler une tête à une machine.",
+        "matieres": "Coûts par article conservés des bases textile P2I : 5,60 USD/drap, 6,20 USD/chemise ou tunique ; broderie +0,30 USD fils et stabilisateur. Estimations, pas prix locaux vérifiés. Drap plat 180 × 290 cm, tissu de laize adaptée à acheter ; aucune parure complète facturée comme un seul drap.",
+        "process": "Process et emballage par article ; +0,20 USD de process pour broderie, dont préparation, énergie et entretien estimés. Personnel industriel dans les frais fixes, pas une deuxième fois en coût variable.",
+        "personnel": "Hypothèse de taille renforcée : 20 postes de couture, moyens coupe/finition et personnel polyvalent ; frais industriels doublés par rapport à la base spécialisée antérieure, plus 12 000 USD/an pour les versions brodées. Atelier mixte : enveloppe industrielle 140 000 USD/an. Personnel administratif 9 660 USD/an distinct. Aucun salaire présenté comme barème officiel.",
         "charges": "Hors coûts industriels : commercialisation 6 000, administration 2 400 et assurance 1 200 USD/an. Entretien de la manutention ajouté une seule fois par le module commun. Aucune location récurrente de matériel ni nouvelle embauche supposée.",
-        "prix_vente": "12.8 USD/pièce départ atelier A1 puis +2 %/an, hypothèse P2I. Les repères ivoiriens de détail ne prouvent pas ce prix producteur ni les volumes accessibles.",
-        "complements": "Fret, site, utilités, table de coupe, patronage, stockage, formation et sécurité : enveloppes P2I. Les tables/bâtis/moteurs des machines et chaudières/fers KER/2 sont déjà compris dans les prix catalogue, sans ajout en double.",
-        "qualite": "Tailles, résistance des coutures, solidité des couleurs, retrait au lavage, étiquetage et traçabilité à tester ; aucune certification, origine du coton ou performance EPI présumées."
+        "prix_vente": "Prix P2I départ atelier : drap simple 12,80 USD, chemise simple 17 USD, tunique 18 USD ; valeurs simples inchangées. Broderie : supplément hypothétique 1,50 USD/article, non prix ivoirien observé. Hausse annuelle 2 %. Le repère de détail n’est pas un tarif producteur validé.",
+        "complements": "Budgets auxiliaires de l’atelier renforcé : frais de base doublés, compléments broderie explicités ; logiciel de préparation motifs dans patronage/informatique, cadres inclus annoncés non rachetés en double. Devis livrés non requis au Découverte ; provisions P2I, pas tarifs catalogue.",
+        "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+        "mutualisation": "Versions alternatives d’un même projet. Dans la version mixte, part d’articles brodés 30 %, moyenne pondérée des coûts/prix et des minutes par poste ; machines, bâtiment, manutention et salaires comptés une seule fois.",
+        "effectif": "20 postes de piquage, 2 de coupe, jusqu’à 4 de surjet, 2 de boutonnière et 4 de repassage ; polyvalence à organiser. Les postes techniques ne sont pas assimilés automatiquement à autant de salariés à temps plein."
       },
       "marches": [
-        "Hôtels et résidences",
-        "Magasins de linge et commandes institutionnelles"
+        "Hôtels, résidences et distributeurs de linge",
+        "Entreprises, écoles et revendeurs de tenues ordinaires",
+        "Boutiques de prêt-à-porter selon version"
       ],
       "redaction": {
-        "positionnement": "Une pièce facturée = un drap plat ; ni parure ni prestation de blanchisserie. Le produit et son unité de vente sont propres à cette UP.",
-        "marche": "Clients à prospecter : Hôtels et résidences ; Magasins de linge et commandes institutionnelles. Les prix au détail documentés servent de comparaison ; pas de volume de demande ni de commande acquis.",
-        "commercial": "Présenter des échantillons, qualifier les tailles et matières, recueillir des commandes par série et suivre réassorts, retours et délais de paiement.",
-        "approvisionnement": "Acheter des tissus tissés et accessoires traçables, définir largeur, grammage, retrait, solidité et régularité des lots ; disponibilité locale et prix livrés à documenter.",
-        "procede": "Réception des tissus → Patronage et métrage → Coupe à faible épaisseur → Ourlets à point droit → Repassage vapeur → Contrôle des dimensions → Pliage et conditionnement → Stockage et expédition. Pas de filature ni de tissage dans le périmètre.",
-        "opportunites": "Petites séries, réassorts rapides et adaptation aux tailles ; intérêt commercial à confirmer avec des clients.",
-        "risques": "Concurrence importée et artisanale, saisonnalité, retards de paiement, variations des tissus, reprises et invendus par taille. Les volumes de lancement restent des hypothèses.",
-        "qualite": "Tailles, résistance des coutures, solidité des couleurs, retrait au lavage, étiquetage et traçabilité à tester ; aucune certification, origine du coton ou performance EPI présumées.",
-        "utilites": "Machines 220–230 V ; deux repassages KER/2 à 2 475 W chacun et cutter 90 W annoncés. Puissance souscrite, protections électriques, ventilation, eau et sécurité vapeur à dimensionner ; coût variable estimé, pas bilan énergétique mesuré.",
-        "projet": "Draps plats en coton — 180 × 290 cm. Atelier équipé de postes individuels, production et facturation en pièces. Tissus achetés ; origine ivoirienne non présumée. Les ventes et les prix départ atelier sont des hypothèses P2I, pas des commandes acquises."
+        "projet": "Uniformes — chemises de travail brodées. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
+        "procede": "Réception tissus → patronage/coupe → broderie sur panneaux si nécessaire → ourlets ou assemblage selon article → surfilage/boutonnières des vêtements → repassage → contrôle → bande papier et carton groupé.",
+        "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes. Broderie : 3 têtes productives retenues par machine (6 au total) par prudence malgré l’intitulé 4 têtes ; ne pas assimiler une tête à une machine. Stock de produits finis : 3 % de la production A1 non vendus (5 % prêt-à-porter), puis ventes égales à la production annuelle ; stocks antérieurs conservés par le moteur.",
+        "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+        "economie": "Prévisions en pièces et coûts propres à cette version. Pas de cumul des résultats des anciennes UP ; demande et suppléments de personnalisation à vérifier.",
+        "positionnement": "Linge de maison, uniformes ordinaires et prêt-à-porter dans une même famille industrielle ; choisir une version selon clients et compétences.",
+        "risques": "Concurrence, délais de règlement, achats de tissus, erreurs de taille et de motifs ; pas de commande ni de marge garantie."
       },
       "plan_commercial": [
         {
@@ -694,7 +1647,7 @@
         },
         {
           "titre": "Clients professionnels",
-          "texte": "Prospecter hôtels et résidences ; magasins de linge et commandes institutionnelles."
+          "texte": "Prospecter entreprises et prestataires de services ; distributeurs de vêtements de travail."
         },
         {
           "titre": "Marque et présentation",
@@ -715,26 +1668,272 @@
       ],
       "sources_prix_marche": [
         {
-          "url": "https://orca.ci/product-category/articles-de-maison/literie/",
+          "url": "https://carrefour.ci/wp-content/uploads/2025/07/CATALOGUE-OBV-2025.pdf",
           "consulte_le": "2026-10-28",
-          "description": "Drap plat 100 % coton 180 × 290 cm affiché 14 950 FCFA, promotion 9 718 FCFA lors de consultation. Repère de détail, pas prix départ atelier ; références et qualité à comparer."
+          "description": "Catalogue OBV 2025 : chemise homme affichée 13 900 FCFA en promotion. Repère daté de détail d’un autre produit ; ne prouve pas le prix d’une chemise de travail."
         }
       ],
       "visuels": {
-        "atlas": "linge",
-        "product_index": 7,
+        "atlas": "textile-broderie",
+        "product_index": 2,
         "indices": [
-          1,
-          2,
-          3,
           4,
           5,
           6,
+          5,
+          4,
+          7,
+          8,
+          9,
+          10,
           7,
           8
         ]
       },
-      "nombre_machines_reference": 9
+      "nombre_machines_reference": 34,
+      "dimensionnement_textile": {
+        "heures_jour": 8,
+        "jours_an": 250,
+        "efficacite_postes": 0.65,
+        "moyens": {
+          "coupe": 2,
+          "piqueuses": 20,
+          "surjet": 4,
+          "boutonnieres": 2,
+          "repassage": 4,
+          "brodeuses": 2,
+          "tetes_par_brodeuse": 4,
+          "tetes_productives_par_brodeuse": 3
+        },
+        "temps_minutes_par_article": {
+          "coupe": 3,
+          "piqueuses": 40,
+          "surjet": 6,
+          "boutonnieres": 2,
+          "repassage": 6,
+          "part_brodee": 1
+        },
+        "broderie": {
+          "points_par_motif": 5000,
+          "points_minute_effectifs": 600,
+          "preparation_minutes_par_tete": 3
+        },
+        "qualification": "Temps et efficacité = hypothèses de dimensionnement P2I, pas garantie de cadence ; équilibrage et tête catalogue à confirmer."
+      },
+      "suggestion": "En BP Initial, programmer les séries de draps, uniformes et petites collections dans le même atelier ; vérifier temps d’occupation et marge par commande. La confection d’emballages papier reste une activité auxiliaire possible, non incluse dans les calculs."
+    },
+    "confection__pret_a_porter": {
+      "up_id": "confection",
+      "configuration_id": "pret_a_porter",
+      "nom": "Prêt-à-porter — tuniques en série",
+      "sous_titre": "Unité vendue : un article textile ; tissus achetés, pas de fabrication du tissu",
+      "description": "Prêt-à-porter — tuniques en série. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
+      "source_equipement": "textile_atelier_pret_a_porter",
+      "prix_retenu": 875,
+      "devise_prix": "EUR",
+      "quantite_equipement_principal": 20,
+      "equipements_complementaires": [
+        {
+          "nom": "2 × RASOR DS504, ciseau électrique circulaire",
+          "source_id": "textile_rasor_ds504",
+          "source_url": "https://www.glasman.fr/a16120/ciseau-de-coupe-electrique-rasor-ds504",
+          "prix_retenu": 500,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Coupe jusqu’à 9 mm annoncés ; petites épaisseurs et passes successives, pas un matelas industriel épais. 220 V / 90 W annoncés ; protection des mains et formation requises."
+        },
+        {
+          "nom": "4 × BATTISTELLA KER/2, table + chaudière + fer",
+          "source_id": "textile_battistella_ker2",
+          "source_url": "https://tmac-sas.fr/repassage/465-tables-%C3%A0-repasser-%C3%A9quip%C3%A9e-de-chaudi%C3%A8re-int%C3%A9gr%C3%A9-.html",
+          "prix_retenu": 960,
+          "devise": "EUR",
+          "quantite": 4,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "230 V, 2 475 W annoncés par poste ; appoints d’eau, autonomie, sécurité vapeur et finition de grandes pièces à tester."
+        },
+        {
+          "nom": "4 × JUKI MO-6716DA, surjeteuse 5 fils complète",
+          "source_id": "textile_juki_mo6716",
+          "source_url": "https://www.glasman.fr/a15840/juki-mo-6716da-surjeteuse-5fils",
+          "prix_retenu": 1790,
+          "devise": "EUR",
+          "quantite": 4,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Sous-classe pour tissu léger à moyen à préciser ; pas un rendement garanti par vêtement."
+        },
+        {
+          "nom": "2 × JACK JK-T781G-Z, boutonnière",
+          "source_id": "textile_jack_t781",
+          "source_url": "https://tmac-sas.fr/machine-a-boutonniere/403-jack-jk-t781g-z.html",
+          "prix_retenu": 2800,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true,
+          "qualification": "prix_catalogue_unitaire_quantite_hypothese_P2I",
+          "limites": "Fait les boutonnières ; ne coud pas les boutons. Pose des boutons manuelle incluse dans l’organisation P2I ; pas de seconde machine pose-boutons ajoutée."
+        }
+      ],
+      "unite_production": "pièce",
+      "capacite_unites_h": 1,
+      "production_explicite": [
+        24000,
+        30000,
+        34000
+      ],
+      "ventes_explicites": [
+        22800,
+        30000,
+        34000
+      ],
+      "prix_vente_usd_unite": [
+        18,
+        18.36,
+        18.7272
+      ],
+      "matieres_usd_unite": 6.2,
+      "cout_process_usd_unite": 0.8,
+      "fixes_industriels_an": 112600,
+      "personnel_hors_cout_industriel": 9660,
+      "charges_fixes_hors_industriel": 9600,
+      "stock_matieres_jours": 30,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Bande papier avec marque illustrative, taille/composition et entretien ; protection papier et carton groupé",
+        "cout_usd_par_unite": 0.25,
+        "composants_usd_par_unite": {
+          "bande_papier": 0.08,
+          "etiquette": 0.04,
+          "protection_papier": 0.06,
+          "carton_groupe": 0.07
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Limiter l’emballage individuel et privilégier les cartons réemployables ; protection contre humidité, collecte et recyclage réels à confirmer. Aucun gain écologique quantifié ni label acquis.",
+        "source": "Hypothèse P2I par pièce, pas tarif fournisseur vérifié."
+      },
+      "complements_usd": {
+        "fret": 5600,
+        "assurance": 500,
+        "douane_transit": 7000,
+        "transport_local": 1600,
+        "genie_civil": 12000,
+        "utilites": 7000,
+        "installation_formation": 5000,
+        "pieces_initiales": 2400,
+        "securite_environnement": 3600,
+        "etudes": 3600,
+        "table_coupe_auxiliaires": 3600,
+        "rayonnage_stockage": 4000,
+        "patronage_informatique": 3000
+      },
+      "methodes": {
+        "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes.",
+        "matieres": "Coûts par article conservés des bases textile P2I : 5,60 USD/drap, 6,20 USD/chemise ou tunique ; broderie +0,30 USD fils et stabilisateur. Estimations, pas prix locaux vérifiés. Drap plat 180 × 290 cm, tissu de laize adaptée à acheter ; aucune parure complète facturée comme un seul drap.",
+        "process": "Process et emballage par article ; +0,20 USD de process pour broderie, dont préparation, énergie et entretien estimés. Personnel industriel dans les frais fixes, pas une deuxième fois en coût variable.",
+        "personnel": "Hypothèse de taille renforcée : 20 postes de couture, moyens coupe/finition et personnel polyvalent ; frais industriels doublés par rapport à la base spécialisée antérieure, plus 12 000 USD/an pour les versions brodées. Atelier mixte : enveloppe industrielle 140 000 USD/an. Personnel administratif 9 660 USD/an distinct. Aucun salaire présenté comme barème officiel.",
+        "charges": "Hors coûts industriels : commercialisation 6 000, administration 2 400 et assurance 1 200 USD/an. Entretien de la manutention ajouté une seule fois par le module commun. Aucune location récurrente de matériel ni nouvelle embauche supposée.",
+        "prix_vente": "Prix P2I départ atelier : drap simple 12,80 USD, chemise simple 17 USD, tunique 18 USD ; valeurs simples inchangées. Broderie : supplément hypothétique 1,50 USD/article, non prix ivoirien observé. Hausse annuelle 2 %. Le repère de détail n’est pas un tarif producteur validé.",
+        "complements": "Budgets auxiliaires de l’atelier renforcé : frais de base doublés, compléments broderie explicités ; logiciel de préparation motifs dans patronage/informatique, cadres inclus annoncés non rachetés en double. Devis livrés non requis au Découverte ; provisions P2I, pas tarifs catalogue.",
+        "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+        "mutualisation": "Versions alternatives d’un même projet. Dans la version mixte, part d’articles brodés 30 %, moyenne pondérée des coûts/prix et des minutes par poste ; machines, bâtiment, manutention et salaires comptés une seule fois.",
+        "effectif": "20 postes de piquage, 2 de coupe, jusqu’à 4 de surjet, 2 de boutonnière et 4 de repassage ; polyvalence à organiser. Les postes techniques ne sont pas assimilés automatiquement à autant de salariés à temps plein."
+      },
+      "marches": [
+        "Hôtels, résidences et distributeurs de linge",
+        "Entreprises, écoles et revendeurs de tenues ordinaires",
+        "Boutiques de prêt-à-porter selon version"
+      ],
+      "redaction": {
+        "projet": "Prêt-à-porter — tuniques en série. Atelier mutualisé de taille renforcée ; les versions constituent des programmes alternatifs, pas des chiffres d’affaires cumulables. Prix, volumes, salaires et cadences effectives = hypothèses P2I.",
+        "procede": "Réception tissus → patronage/coupe → ourlets ou assemblage selon article → surfilage/boutonnières des vêtements → repassage → contrôle → bande papier et carton groupé.",
+        "production": "Une équipe 8 h/j, 250 j/an ; cadence du goulot calculée sur les postes partagés avec 65 % de temps productif. Les volumes A1/A2/A3 sont des hypothèses de vente, pas la somme des capacités des anciennes UP. Aucun fonctionnement simultané à pleine capacité des différentes gammes. Stock de produits finis : 3 % de la production A1 non vendus (5 % prêt-à-porter), puis ventes égales à la production annuelle ; stocks antérieurs conservés par le moteur.",
+        "qualite": "Tissus légers à moyens, sous-classe et aiguille adaptées ; pas d’EPI certifié. Broderie de petits motifs dans le champ du cadre, plutôt sur panneau avant assemblage ; stabilisation, lavage et résistance des coutures à tester. Une brodeuse ne remplace ni une piqueuse ni une boutonnière ; un drap simple n’utilise pas les postes vêtement.",
+        "economie": "Prévisions en pièces et coûts propres à cette version. Pas de cumul des résultats des anciennes UP ; demande et suppléments de personnalisation à vérifier.",
+        "positionnement": "Linge de maison, uniformes ordinaires et prêt-à-porter dans une même famille industrielle ; choisir une version selon clients et compétences.",
+        "risques": "Concurrence, délais de règlement, achats de tissus, erreurs de taille et de motifs ; pas de commande ni de marge garantie."
+      },
+      "plan_commercial": [
+        {
+          "titre": "Échantillons et cahier des charges",
+          "texte": "Faire approuver tissu, coupe, tailles et finition avant série."
+        },
+        {
+          "titre": "Clients professionnels",
+          "texte": "Prospecter boutiques de prêt-à-porter ; revendeurs et commandes de petites séries."
+        },
+        {
+          "titre": "Marque et présentation",
+          "texte": "Marques et logos P2I illustratifs ; disponibilité juridique à vérifier."
+        },
+        {
+          "titre": "Commandes par série",
+          "texte": "Planifier les séries et éviter une accumulation de tailles invendues."
+        },
+        {
+          "titre": "Qualité et réassort",
+          "texte": "Contrôler les retours, le lavage et la régularité des nouveaux lots."
+        },
+        {
+          "titre": "Suivi commercial",
+          "texte": "Mesurer taux de réassort, marge réelle par article et délais de règlement."
+        }
+      ],
+      "sources_prix_marche": [
+        {
+          "url": "https://openmoise.ci/seller/shop/chic-couture",
+          "consulte_le": "2026-10-28",
+          "description": "Boutique Chic Couture : tuniques affichées à 20 000 FCFA au détail ; pas prix producteur ni preuve de commandes."
+        }
+      ],
+      "visuels": {
+        "atlas": "textile",
+        "product_index": 1,
+        "indices": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "nombre_machines_reference": 32,
+      "dimensionnement_textile": {
+        "heures_jour": 8,
+        "jours_an": 250,
+        "efficacite_postes": 0.65,
+        "moyens": {
+          "coupe": 2,
+          "piqueuses": 20,
+          "surjet": 4,
+          "boutonnieres": 2,
+          "repassage": 4,
+          "brodeuses": 0,
+          "tetes_par_brodeuse": 4
+        },
+        "temps_minutes_par_article": {
+          "coupe": 3,
+          "piqueuses": 40,
+          "surjet": 6,
+          "boutonnieres": 2,
+          "repassage": 6,
+          "part_brodee": 0
+        },
+        "broderie": {
+          "points_par_motif": 5000,
+          "points_minute_effectifs": 600,
+          "preparation_minutes_par_tete": 3
+        },
+        "qualification": "Temps et efficacité = hypothèses de dimensionnement P2I, pas garantie de cadence ; équilibrage et tête catalogue à confirmer."
+      },
+      "suggestion": "En BP Initial, programmer les séries de draps, uniformes et petites collections dans le même atelier ; vérifier temps d’occupation et marge par commande. La confection d’emballages papier reste une activité auxiliaire possible, non incluse dans les calculs."
     }
   }
 }

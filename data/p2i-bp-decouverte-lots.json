@@ -449,11 +449,11 @@
       "unites": [
         {
           "up_id": "confection",
-          "up_nom": "Confection de vêtements",
-          "fonctions_machines": 8,
-          "investissement_minimum_indicatif_usd": 60000,
-          "ventilation_generique_disponible": true,
-          "capacite_mensuelle_generique_disponible": true,
+          "up_nom": "Confection textile & broderie",
+          "fonctions_machines": 6,
+          "investissement_minimum_indicatif_usd": null,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
           "configuration_reference_validee": false,
           "capex_complet_valide": false,
           "bp_financier_complet": false,
@@ -516,23 +516,6 @@
           ]
         },
         {
-          "up_id": "broderie",
-          "up_nom": "Broderie industrielle",
-          "fonctions_machines": 5,
-          "investissement_minimum_indicatif_usd": 55000,
-          "ventilation_generique_disponible": true,
-          "capacite_mensuelle_generique_disponible": true,
-          "configuration_reference_validee": false,
-          "capex_complet_valide": false,
-          "bp_financier_complet": false,
-          "blocages": [
-            "Prix de configuration industrielle de référence non validé",
-            "Capacité de configuration industrielle de référence non validée",
-            "CAPEX complet et coûts complémentaires non validés",
-            "Hypothèses économiques et projections financières à consolider"
-          ]
-        },
-        {
           "up_id": "chaussures",
           "up_nom": "Fabrication de chaussures",
           "fonctions_machines": 6,
@@ -550,12 +533,12 @@
           ]
         },
         {
-          "up_id": "uniformes",
-          "up_nom": "Confection d'uniformes",
-          "fonctions_machines": 6,
-          "investissement_minimum_indicatif_usd": 70000,
-          "ventilation_generique_disponible": true,
-          "capacite_mensuelle_generique_disponible": true,
+          "up_id": "tricotage",
+          "up_nom": "Tricotage industriel",
+          "fonctions_machines": 3,
+          "investissement_minimum_indicatif_usd": null,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
           "configuration_reference_validee": false,
           "capex_complet_valide": false,
           "bp_financier_complet": false,
@@ -567,12 +550,29 @@
           ]
         },
         {
-          "up_id": "linge",
-          "up_nom": "Linge de maison",
-          "fonctions_machines": 6,
-          "investissement_minimum_indicatif_usd": 90000,
-          "ventilation_generique_disponible": true,
-          "capacite_mensuelle_generique_disponible": true,
+          "up_id": "non_tisses",
+          "up_nom": "Non-tissés & textiles techniques",
+          "fonctions_machines": 4,
+          "investissement_minimum_indicatif_usd": null,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
+          "configuration_reference_validee": false,
+          "capex_complet_valide": false,
+          "bp_financier_complet": false,
+          "blocages": [
+            "Prix de configuration industrielle de référence non validé",
+            "Capacité de configuration industrielle de référence non validée",
+            "CAPEX complet et coûts complémentaires non validés",
+            "Hypothèses économiques et projections financières à consolider"
+          ]
+        },
+        {
+          "up_id": "recyclage_textile",
+          "up_nom": "Recyclage & valorisation textile",
+          "fonctions_machines": 5,
+          "investissement_minimum_indicatif_usd": null,
+          "ventilation_generique_disponible": false,
+          "capacite_mensuelle_generique_disponible": false,
           "configuration_reference_validee": false,
           "capex_complet_valide": false,
           "bp_financier_complet": false,

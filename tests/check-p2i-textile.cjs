@@ -1,24 +1,33 @@
 'use strict';
 const fs=require('fs'),vm=require('vm'),path=require('path'),assert=require('assert/strict');
 const root=path.resolve(__dirname,'..'),c=vm.createContext({});c.window=c;
-for(const f of ['js/p2i-economic-result-engine.js','js/p2i-financial-engine.js','js/p2i-bp-decouverte-bfr-engine.js','js/p2i-bp-decouverte-tresorerie-12-mois.js','js/p2i-bp-decouverte-simulation-commune.js','js/p2i-bp-decouverte-donnees.js','js/p2i-bp-decouverte-v108-contexte.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),c);
-const d=c.P2I_BP_DONNEES,api=c.P2I_BP_SIMULATION_COMMUNE,lot=JSON.parse(fs.readFileSync(path.join(root,'data/p2i-bp-lot-textile-01.json'),'utf8'));
-for(const [id,qty,nombre]of [['confection',8,14],['uniformes',10,16],['linge',6,9]]){
- const v=d.unites[id].variantes.reference,s=v.reference,r=api.calculer(s),p=lot.profils[id];
- assert.equal(s.unite,'pièces/h');assert.equal(r.unite_production.nom,'pièce');assert.equal(v.prix_equipement.quantite_retenue,qty);assert.equal(v.prix_equipement.nombre_machines_reference,nombre);
- const equipment=(875*qty+p.equipements_complementaires.reduce((n,e)=>n+e.prix_retenu*e.quantite,0))*1.1193;
- assert.ok(Math.abs(s.machines-equipment)<1e-8,'Prix unitaires multipliés une seule fois par quantité');
+for(const f of ['up-data.js','machines-data.js','js/p2i-economic-result-engine.js','js/p2i-financial-engine.js','js/p2i-bp-decouverte-bfr-engine.js','js/p2i-bp-decouverte-tresorerie-12-mois.js','js/p2i-bp-decouverte-simulation-commune.js','js/p2i-bp-decouverte-donnees.js','js/p2i-bp-decouverte-v108-contexte.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),c);
+const clone=x=>JSON.parse(JSON.stringify(x)),d=c.P2I_BP_DONNEES,api=c.P2I_BP_SIMULATION_COMMUNE,lot=require('../data/p2i-bp-lot-textile-01.json'),arch=require('../data/archives/p2i-textile-avant-regroupement-2026-10-29.json'),{dimensionner}=require('../scripts/p2i-textile-commun.cjs');
+const registry=vm.runInContext('P2I_UP_DATA',c);assert.equal(Object.keys(registry).length,96);
+for(const id of ['uniformes','linge','broderie']){assert.ok(!Object.keys(registry).includes(id));assert.equal(registry[id].nom,arch.unites[id].nom);assert.equal(d.migrations_textile[id].up_id,'confection');}
+for(const id of ['tricotage','non_tisses','recyclage_textile']){assert.ok(registry[id]);assert.equal(d.unites[id].variantes.reference.reference,null);assert.equal(d.unites[id].economie.budget_minimum_historique.valeur,null);}
+assert.equal(d.unites.confection.configurations.length,6);const results={};
+for(const [key,v] of Object.entries(d.unites.confection.variantes)){
+ const s=v.reference,r=api.calculer(s),p=lot.profils[key==='reference'?'confection':'confection__'+key];results[key]=r;
+ assert.equal(s.up_id,'confection');assert.equal(s.configuration_id,key==='reference'?null:key);assert.equal(s.unite,'pièces/h');assert.equal(r.unite_production.nom,'pièce');
+ assert.equal(v.prix_equipement.quantite_retenue,20);const quantity=20+p.equipements_complementaires.reduce((n,e)=>n+e.quantite,0);assert.equal(v.prix_equipement.nombre_machines_reference,quantity);
+ const equipment=(875*20+p.equipements_complementaires.reduce((n,e)=>n+e.prix_retenu*e.quantite,0))*1.1193;assert.ok(Math.abs(s.machines-equipment)<1e-8);
+ const dim=dimensionner(p.dimensionnement_textile);assert.equal(s.capacite,dim.capacite_unites_h);assert.ok(s.production.every(q=>q<=dim.plafond_annuel));
+ const imgs=v.prix_equipement.postes.map(x=>x.visuel.atlas+':'+x.visuel.index);assert.equal(new Set(imgs).size,imgs.length,'Pas de visuel dupliqué dans le flux');assert.equal(imgs.length,v.prix_equipement.fonctions.length);
  for(const y of r.annuel){assert.equal(y.production,s.production[y.annee-1]);assert.equal(y.ventes,s.ventes[y.annee-1]);assert.ok(Math.abs(y.chiffre_affaires-y.ventes*s.prix[y.annee-1])<1e-7);}
- assert.ok(r.mois.every(m=>Number.isInteger(m.production)&&Number.isInteger(m.ventes)&&Number.isInteger(m.stock_quantite)),'Pièces indivisibles, report de stock réel');
- assert.equal(r.bfr.length,36);assert.equal(r.tresorerie.length,12);assert.ok(r.bilans.every(x=>Math.abs(x.ecart)<.02));assert.ok(Math.abs(r.financement.apport_total+r.financement.dette-r.financement.besoin_total)<1e-7);
- assert.equal(r.investissements.postes_a_chiffrer.length,0);assert.equal(v.visuels.indices.length,8);assert.equal(new Set(v.visuels.indices).size,8);
- assert.equal(Object.values(v.emballage.composants_usd_par_unite).reduce((n,x)=>n+x,0).toFixed(2),v.emballage.cout_usd_par_unite.toFixed(2));
- assert.equal(v.emballage.cout_usd_par_kg,undefined,'Aucune fausse conversion en kilogrammes');
- const normalized=c.P2I_BP_V108_CONTEXTE.normalizeInput(s,id,null);assert.equal(normalized.unite,'pièces/h');assert.equal(api.calculer(normalized).annuel[0].resultat_net,r.annuel[0].resultat_net);
- assert.throws(()=>api.calculer({...s,ventes:[s.ventes[0]+.5,...s.ventes.slice(1)]}),/entières/);
- assert.throws(()=>c.P2I_BP_V108_CONTEXTE.normalizeInput({...s,unite:'mystère/h'},id,null),/Unité/);
- const stress=api.calculer({...s,prix:s.prix.map(x=>x*.5)});assert.ok(stress.annuel[0].resultat_net<0,'Prix stressé jamais relevé automatiquement');assert.equal(stress.entrees.prix[0],s.prix[0]*.5);
+ assert.ok(r.mois.every(m=>Number.isInteger(m.production)&&Number.isInteger(m.ventes)&&Number.isInteger(m.stock_quantite)));assert.equal(r.bfr.length,36);assert.equal(r.tresorerie.length,12);assert.ok(r.bilans.every(x=>Math.abs(x.ecart)<.02));assert.equal(r.investissements.postes_a_chiffrer.length,0);
+ assert.ok(r.annuel[0].resultat_net>0);assert.ok(r.annuel[2].resultat_net>r.annuel[0].resultat_net);assert.ok(Math.min(...r.mois.slice(0,12).map(m=>m.tresorerie_libre))>=0);
+ assert.equal(v.emballage.cout_usd_par_kg,undefined);assert.equal(Object.values(v.emballage.composants_usd_par_unite).reduce((n,x)=>n+x,0).toFixed(2),v.emballage.cout_usd_par_unite.toFixed(2));
+ const norm=c.P2I_BP_V108_CONTEXTE.normalizeInput(s,'confection',s.configuration_id);assert.equal(api.calculer(norm).annuel[0].resultat_net,r.annuel[0].resultat_net);assert.throws(()=>api.calculer({...s,ventes:[s.ventes[0]+.5,...s.ventes.slice(1)]}),/entières/);
+ const stress=api.calculer({...s,prix:s.prix.map(x=>x*.5)});assert.ok(stress.annuel[0].resultat_net<0);assert.equal(stress.entrees.prix[0],s.prix[0]*.5);
+ if(key.startsWith('linge'))assert.equal(p.equipements_complementaires.some(e=>/mo6716|t781/.test(e.source_id)),false);
+ const embroidered=key==='reference'||key.endsWith('brode')||key.endsWith('brodes');assert.equal(p.equipements_complementaires.some(e=>e.source_id==='textile_fuwei_bc1504'),embroidered);
 }
-assert.equal(lot.profils.linge.equipements_complementaires.some(e=>/surjet|bouton/.test(e.source_id)),false,'Drap à double ourlet : pas de surjeteuse ou boutonnière redondante');
-assert.equal(d.unites.linge.variantes.reference.visuels.atlas,'linge');
-console.log('Textile : 3 UP distinctes en pièces, prix unitaires et quantités sourcés, aucun poste redondant dans les draps, emballage/manutention, états équilibrés, sensibilité et passage normalisé contrôlés.');
+const mix=lot.profils.confection,weights=mix.gamme;assert.equal(weights.reduce((n,x)=>n+x.part,0),1);for(const [field,source]of [['prix_vente_usd_unite','prix_usd_kg'],['matieres_usd_unite','matieres_usd_kg'],['cout_process_usd_unite','process_usd_kg']])assert.ok(Math.abs(weights.reduce((n,x)=>n+x.part*x[source],0)-(Array.isArray(mix[field])?mix[field][0]:mix[field]))<1e-10);
+assert.equal(mix.dimensionnement_textile.temps_minutes_par_article.part_brodee,.30);assert.equal(mix.nombre_machines_reference,34);assert.equal(results.reference.entrees.capacite,30,'Goulot partagé : débits spécialisés non additionnés');
+for(const [key,id]of [['linge_simple','linge'],['uniformes_simples','uniformes'],['pret_a_porter','confection']])assert.deepEqual(clone(results[key].entrees.prix),arch.references[id].variantes.reference.reference.prix,'Prix simples conservés');
+for(const id of ['confection','uniformes','linge']){const old=arch.references[id].variantes.reference.reference;const before=api.calculer(old),after=api.calculer(c.P2I_BP_V108_CONTEXTE.normalizeInput(old,id,null));assert.equal(after.annuel[0].resultat_net,before.annuel[0].resultat_net);assert.equal(after.entrees.machines,old.machines);}
+const heavy=clone(lot.profils.confection__linge_brode.dimensionnement_textile);heavy.broderie.points_par_motif=20000;assert.equal(dimensionner(heavy).goulot,'broderie');assert.ok(dimensionner(heavy).capacite_unites_h<results.linge_brode.entrees.capacite);heavy.moyens.brodeuses=0;assert.throws(()=>dimensionner(heavy),/invalide/);
+console.log('Textile regroupé : 6 versions, 96 UP/8 textiles, capacité partagée, prix simples conservés, 34 machines mixte, broderie dimensionnée, visuels distincts, états et anciennes entrées préservés.');
+
+for(const name of ['fiche-production.html','service-detail.html']){const src=fs.readFileSync(path.join(root,name),'utf8'),start=src.indexOf('/* P2I_TEXTILE_PARCOURS_DEBUT */'),end=src.indexOf('/* P2I_TEXTILE_PARCOURS_FIN */');assert.ok(start>0&&end>start);const sub=vm.createContext({});vm.runInContext('const productionsData={confection:{nom:"ancien"},uniformes:{nom:"ancien"},linge:{nom:"ancien"},broderie:{nom:"ancien"}};'+src.slice(start,end),sub);const actual=vm.runInContext('productionsData',sub);assert.equal(actual.confection.nom,registry.confection.nom);for(const id of ['tricotage','non_tisses','recyclage_textile'])assert.equal(actual[id].nom,registry[id].nom);for(const id of ['uniformes','linge','broderie'])assert.ok(!Object.keys(actual).includes(id));}

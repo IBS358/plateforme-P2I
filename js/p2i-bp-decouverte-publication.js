@@ -9,6 +9,7 @@ function inspect(id,config,registry,evidence){
  const u=registry&&registry[id],e=evidence||{},issues=[];
  const add=(code,message)=>issues.push({code,message});
  if(!u)add("identite","UP absente du référentiel");
+ if(u?.bp_configurations&&!u.bp_configurations.includes(config||"reference"))add("variante","Variante textile à sélectionner ou inconnue");
  if(variants[id]&&!Object.prototype.hasOwnProperty.call(variants[id],config||""))add("variante","Variante à sélectionner ou inconnue");
  if(e.up_id!==id||e.configuration_id!==(config||null))add("contexte","Dossier documentaire absent ou rattaché à un autre contexte");
  const r=e.reference||{};
@@ -34,8 +35,8 @@ function inspect(id,config,registry,evidence){
  reference_p2i:id==="biscuiterie"&&config==="crackers"?{equipements_usd:450000,capacite_kg_h:500,statut:"hypothese_p2i_justificatif_fournisseur_manquant"}:null};
 }
 function audit(registry,evidence){
- const dossiers=Object.keys(registry).flatMap(id=>Object.keys(variants[id]||{standard:"Standard"}).map(v=>{
- const config=variants[id]?v:null;
+ const dossiers=Object.keys(registry).flatMap(id=>(registry[id].bp_configurations||Object.keys(variants[id]||{standard:"Standard"})).map(v=>{
+ const config=registry[id].bp_configurations?(v==='reference'?null:v):variants[id]?v:null;
  return inspect(id,config,registry,(evidence||[]).find(x=>x.up_id===id&&x.configuration_id===config));
  }));
  return {objectif_up:96,up_presentes:Object.keys(registry).length,ecart_up:96-Object.keys(registry).length,configurations:dossiers.length,

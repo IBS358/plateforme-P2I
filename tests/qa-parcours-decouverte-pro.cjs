@@ -14,17 +14,18 @@ assert.equal(await p.evaluate(()=>P2I_BP_V108_RESULTAT.investissements.postes.so
 await p.goto(base+'/business-plan-decouverte.html?unit_id=plastique');await p.waitForSelector('#go-pro');
 assert.match(await p.locator('#p2i-r7').innerText(),/Matériel de manutention/);
 // Textile : affichage en pièces et transmission sans fausse conversion de masse.
-for(const unit of ['confection','uniformes','linge']){
- await p.goto(base+'/business-plan-decouverte.html?unit_id='+unit);await p.waitForSelector('#go-pro');
+for(const config of ['reference','linge_simple','linge_brode','uniformes_simples','uniformes_brodes','pret_a_porter']){
+ const unit='confection';
+ await p.goto(base+'/business-plan-decouverte.html?unit_id='+unit+'&configuration_id='+config);await p.waitForSelector('#go-pro');
  assert.match(await p.locator('.hero .eyebrow').innerText(),/TEXTILE/);
  let before=await p.evaluate(()=>P2I_BP_V108_RESULTAT);
  assert.equal(before.entrees.unite,'pièces/h');assert.match(await p.locator('#p2i-r8').innerText(),/pièces/);assert.doesNotMatch(await p.locator('#p2i-r8').innerText(),/kg/);
  assert.match(await p.locator('#scenario-form').textContent(),/USD\/pièce/);
- assert.equal(await p.locator('#p2i-r17 .equipment').count(),8);
- const positions=await p.locator('#p2i-r17 .equipment .photo-inner').evaluateAll(es=>es.map(e=>getComputedStyle(e).backgroundPosition));assert.equal(new Set(positions).size,8);
+ const expected=await p.evaluate(()=>P2I_BP_DONNEES.unites.confection.variantes[P2I_BP_V108_RESULTAT.entrees.configuration_id||'reference'].prix_equipement.fonctions.length);assert.equal(await p.locator('#p2i-r17 .equipment').count(),expected);
+ const distinct=await p.locator('#p2i-r17 .equipment .photo-inner').evaluateAll(es=>new Set(es.map(e=>getComputedStyle(e).backgroundImage+getComputedStyle(e).backgroundPosition)).size);assert.equal(distinct,expected);
  assert.ok(await p.locator('#p2i-r17 .equipment .photo-inner').first().evaluate(e=>getComputedStyle(e).backgroundImage.startsWith('url("data:image/jpeg;base64,')));
- if(unit==='linge'){assert.equal(await p.locator('#p2i-r17 .agro-linge').count(),8);assert.doesNotMatch(await p.locator('#p2i-r17 .process').innerText(),/Boutonnières|Surfilage/);}
- if(unit==='confection'){
+ if(config==='linge_simple'){assert.doesNotMatch(await p.locator('#p2i-r17 .process').innerText(),/Boutonnières|Surfilage/);}
+ if(config==='reference'){
   await p.locator('#p2i-r14 .scenario-editor summary').click();await p.locator('#scenario-form input[name=production]').fill('12001');await p.locator('#scenario-form button[type=submit]').click();
   before=await p.evaluate(()=>P2I_BP_V108_RESULTAT);assert.ok(before.mois.every(x=>Number.isInteger(x.production)&&Number.isInteger(x.ventes)));
   assert.equal(before.investissements.statut,'ventile');assert.equal(before.entrees.amortissements_specifiques[0].duree_ans,5);

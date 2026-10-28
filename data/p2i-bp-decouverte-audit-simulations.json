@@ -2,14 +2,14 @@
   "schema": "p2i.audit-simulations-decouverte.v1",
   "nature": "Simulations indicatives, distinctes du contrôle documentaire du BP Pro",
   "up_couvertes": 96,
-  "simulations_affichables": 21,
-  "up_avec_simulation_complete": 19,
-  "up_restant_a_alimenter": 77,
+  "simulations_affichables": 24,
+  "up_avec_simulation_complete": 17,
+  "up_restant_a_alimenter": 79,
   "scenarios": [
     {
       "up_id": "conserverie_legumes",
       "configuration_id": null,
-      "nom": "Conserverie de légumes",
+      "nom": "Sauce tomate — poche stérilisable 1 kg",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_de_gamme_configuration_estimee_P2I",
@@ -405,7 +405,7 @@
     {
       "up_id": "boulangerie_industrielle",
       "configuration_id": null,
-      "nom": "Boulangerie industrielle",
+      "nom": "Petits pains ronds frais",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
@@ -504,7 +504,7 @@
     {
       "up_id": "jus_boissons",
       "configuration_id": null,
-      "nom": "Production de jus et boissons",
+      "nom": "Jus d’ananas pasteurisé en bouteilles",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
@@ -603,7 +603,7 @@
     {
       "up_id": "mini_laiterie",
       "configuration_id": null,
-      "nom": "Mini-laiterie",
+      "nom": "Lait entier frais pasteurisé en bouteilles",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
@@ -702,7 +702,7 @@
     {
       "up_id": "huiles_alimentaires",
       "configuration_id": null,
-      "nom": "Huiles alimentaires",
+      "nom": "Huile d’arachide filtrée",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "borne_haute_fourchette_catalogue_non_devis",
@@ -801,7 +801,7 @@
     {
       "up_id": "epices",
       "configuration_id": null,
-      "nom": "Transformation d'épices",
+      "nom": "Gingembre séché en poudre",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
@@ -900,7 +900,7 @@
     {
       "up_id": "aliments_betail",
       "configuration_id": null,
-      "nom": "Aliments pour bétail",
+      "nom": "Aliments granulés pour bétail — petite ligne",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "fourchette_catalogue_publique_non_certifiee",
@@ -999,7 +999,7 @@
     {
       "up_id": "detergents",
       "configuration_id": null,
-      "nom": "Détergents & produits ménagers",
+      "nom": "Gamme de produits ménagers liquides",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
@@ -1098,7 +1098,7 @@
     {
       "up_id": "savonnerie",
       "configuration_id": null,
-      "nom": "Savonnerie industrielle",
+      "nom": "Savon solide ménager",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "borne_haute_fourchette_catalogue_non_devis",
@@ -1197,7 +1197,7 @@
     {
       "up_id": "cosmetiques",
       "configuration_id": null,
-      "nom": "Cosmétiques naturels",
+      "nom": "Lait corporel au karité",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
@@ -1296,7 +1296,7 @@
     {
       "up_id": "peintures",
       "configuration_id": null,
-      "nom": "Peintures industrielles",
+      "nom": "Primaire anticorrosion en phase aqueuse",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "borne_haute_fourchette_catalogue_non_devis",
@@ -1395,7 +1395,7 @@
     {
       "up_id": "adhesifs",
       "configuration_id": null,
-      "nom": "Adhésifs & colles",
+      "nom": "Colle blanche aqueuse pour bois",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "borne_haute_catalogue_equipement_non_ligne_complete",
@@ -1494,7 +1494,7 @@
     {
       "up_id": "engrais",
       "configuration_id": null,
-      "nom": "Engrais & pesticides",
+      "nom": "Engrais foliaire NPK liquide",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_historique_cas_fournisseur_non_devis",
@@ -1593,7 +1593,7 @@
     {
       "up_id": "javel",
       "configuration_id": null,
-      "nom": "Hygiène & désinfection professionnelles",
+      "nom": "Concentré professionnel d’hygiène des surfaces",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_non_certifie",
@@ -1692,7 +1692,7 @@
     {
       "up_id": "produits_industriels",
       "configuration_id": null,
-      "nom": "Produits chimiques industriels",
+      "nom": "Adjuvant liquide pour béton — formulation PCE",
       "unite_production": "kg",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "borne_haute_gamme_non_prix_modele_confirme",
@@ -1791,7 +1791,7 @@
     {
       "up_id": "confection",
       "configuration_id": null,
-      "nom": "Confection de vêtements",
+      "nom": "Atelier mixte — linge, uniformes et broderie",
       "unite_production": "pièce",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_unitaire_HT",
@@ -1800,70 +1800,250 @@
       "accord_fournisseur_exige": false,
       "devis_exige": false,
       "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 17684.94,
-      "investissement_simulation_usd": 49540.53,
-      "reserve_initiale_distincte_usd": 20488.294706125,
+      "budget_equipements_usd": 77601.06899999999,
+      "investissement_simulation_usd": 156610.08899999998,
+      "reserve_initiale_distincte_usd": 58097.38251837916,
       "financement": {
-        "apport": 14862.159,
-        "dette": 34678.371,
-        "apport_reserve": 20488.294706125,
-        "apport_total": 35350.453706125,
-        "besoin_total": 70028.824706125,
-        "total_ressources": 70028.824706125,
+        "apport": 46983.026699999995,
+        "dette": 109627.06229999998,
+        "apport_reserve": 58097.38251837916,
+        "apport_total": 105080.40921837915,
+        "besoin_total": 214707.47151837914,
+        "total_ressources": 214707.4715183791,
         "hypothese_reserve_financee_par_apport": true
       },
       "emballages": {
         "statut": "stock_modele",
         "jours": 15,
         "cout_stockable_unite": 0.25,
-        "stock_lancement": 125,
+        "stock_lancement": 375,
         "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
         "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
-        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 10 × Bacs lavables avec couvercle, petit format ; 5 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
+        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 4 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [
           "manutention"
         ],
         "statut": "budget_dedie",
-        "budget_dedie_usd": 2405.59,
+        "budget_dedie_usd": 4109.02,
         "budget_mutualise_usd": null
       },
       "annuel": [
         {
           "annee": 1,
-          "production": 12000,
-          "ventes": 11400,
-          "stock_fin": 600,
-          "chiffre_affaires_usd": 205200,
-          "resultat_net_usd": 33634.0697805,
-          "amortissements_usd": 5194.612000000001,
-          "interets_usd": 2519.9616260000003,
-          "marge_nette": 0.16390872212719299
+          "production": 36000,
+          "ventes": 34920,
+          "stock_fin": 1080,
+          "chiffre_affaires_usd": 539514,
+          "resultat_net_usd": 91623.34192964993,
+          "amortissements_usd": 16071.910899999999,
+          "interets_usd": 7966.233193800001,
+          "marge_nette": 0.16982569855397622
         },
         {
           "annee": 2,
-          "production": 15000,
-          "ventes": 15000,
-          "stock_fin": 600,
-          "chiffre_affaires_usd": 275400,
-          "resultat_net_usd": 61345.43306779558,
-          "amortissements_usd": 5194.612000000001,
-          "interets_usd": 1965.1076900000023,
-          "marge_nette": 0.2227503016259825
+          "production": 44000,
+          "ventes": 44000,
+          "stock_fin": 1080,
+          "chiffre_affaires_usd": 693396.0000000001,
+          "resultat_net_usd": 148094.91719060988,
+          "amortissements_usd": 16071.910899999999,
+          "interets_usd": 6212.200197000002,
+          "marge_nette": 0.21357913398780762
         },
         {
           "annee": 3,
-          "production": 17000,
-          "ventes": 17000,
-          "stock_fin": 600,
-          "chiffre_affaires_usd": 318362.4,
-          "resultat_net_usd": 78874.1122317134,
-          "amortissements_usd": 5194.612000000001,
-          "interets_usd": 1410.253754000004,
-          "marge_nette": 0.2477494585783792
+          "production": 50000,
+          "ventes": 50000,
+          "stock_fin": 1080,
+          "chiffre_affaires_usd": 803709,
+          "resultat_net_usd": 189192.92474594823,
+          "amortissements_usd": 16071.910899999999,
+          "interets_usd": 4458.167200200005,
+          "marge_nette": 0.2353997836853242
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        5.820766091346741e-11,
+        -1.1641532182693481e-10,
+        -2.3283064365386963e-10
+      ]
+    },
+    {
+      "up_id": "confection",
+      "configuration_id": "linge_simple",
+      "nom": "Linge de maison — draps simples",
+      "unite_production": "pièce",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_unitaire_HT",
+      "source_prix": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 25005.162,
+      "investissement_simulation_usd": 88014.182,
+      "reserve_initiale_distincte_usd": 56577.69375063055,
+      "financement": {
+        "apport": 26404.2546,
+        "dette": 61609.92739999999,
+        "apport_reserve": 56577.69375063055,
+        "apport_total": 82981.94835063056,
+        "besoin_total": 144591.87575063054,
+        "total_ressources": 144591.87575063054,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.35,
+        "stock_lancement": 700,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
+      },
+      "manutention": {
+        "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
+        "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 4 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [
+          "manutention"
+        ],
+        "statut": "budget_dedie",
+        "budget_dedie_usd": 4109.02,
+        "budget_mutualise_usd": null
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "production": 48000,
+          "ventes": 46560,
+          "stock_fin": 1440,
+          "chiffre_affaires_usd": 595968,
+          "resultat_net_usd": 130900.26880670001,
+          "amortissements_usd": 9212.3202,
+          "interets_usd": 4476.988057733332,
+          "marge_nette": 0.21964311642017695
+        },
+        {
+          "annee": 2,
+          "production": 60000,
+          "ventes": 60000,
+          "stock_fin": 1440,
+          "chiffre_affaires_usd": 783359.9999999999,
+          "resultat_net_usd": 195158.13186881685,
+          "amortissements_usd": 9212.3202,
+          "interets_usd": 3491.229219333333,
+          "marge_nette": 0.24912955967730913
+        },
+        {
+          "annee": 3,
+          "production": 68000,
+          "ventes": 68000,
+          "stock_fin": 1440,
+          "chiffre_affaires_usd": 905564.16,
+          "resultat_net_usd": 236201.88138410173,
+          "amortissements_usd": 9212.3202,
+          "interets_usd": 2505.4703809333323,
+          "marge_nette": 0.2608339550276611
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -5.820766091346741e-11,
+        0,
+        -2.3283064365386963e-10
+      ]
+    },
+    {
+      "up_id": "confection",
+      "configuration_id": "linge_brode",
+      "nom": "Linge de maison — draps brodés",
+      "unite_production": "pièce",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_unitaire_HT",
+      "source_prix": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 63318.80099999999,
+      "investissement_simulation_usd": 142327.821,
+      "reserve_initiale_distincte_usd": 60202.6106361625,
+      "financement": {
+        "apport": 42698.3463,
+        "dette": 99629.47469999999,
+        "apport_reserve": 60202.6106361625,
+        "apport_total": 102900.95693616249,
+        "besoin_total": 202530.4316361625,
+        "total_ressources": 202530.43163616248,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.35,
+        "stock_lancement": 612.5,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
+      },
+      "manutention": {
+        "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
+        "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 4 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [
+          "manutention"
+        ],
+        "statut": "budget_dedie",
+        "budget_dedie_usd": 4109.02,
+        "budget_mutualise_usd": null
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "production": 42000,
+          "ventes": 40740,
+          "stock_fin": 1260,
+          "chiffre_affaires_usd": 582582,
+          "resultat_net_usd": 118207.18055384995,
+          "amortissements_usd": 14643.6841,
+          "interets_usd": 7239.7418282,
+          "marge_nette": 0.20290221900753877
+        },
+        {
+          "annee": 2,
+          "production": 52000,
+          "ventes": 52000,
+          "stock_fin": 1260,
+          "chiffre_affaires_usd": 758472.0000000001,
+          "resultat_net_usd": 180340.5768846702,
+          "amortissements_usd": 14643.6841,
+          "interets_usd": 5645.670233000003,
+          "marge_nette": 0.2377682721111263
+        },
+        {
+          "annee": 3,
+          "production": 60000,
+          "ventes": 60000,
+          "stock_fin": 1260,
+          "chiffre_affaires_usd": 892663.1999999998,
+          "resultat_net_usd": 227906.95914197643,
+          "amortissements_usd": 14643.6841,
+          "interets_usd": 4051.598637800006,
+          "marge_nette": 0.25531125192791243
         }
       ],
       "controles": {
@@ -1874,14 +2054,14 @@
       },
       "ecart_bilans": [
         0,
-        -5.820766091346741e-11,
-        -1.7462298274040222e-10
+        -2.3283064365386963e-10,
+        -2.3283064365386963e-10
       ]
     },
     {
-      "up_id": "uniformes",
-      "configuration_id": null,
-      "nom": "Confection d'uniformes",
+      "up_id": "confection",
+      "configuration_id": "uniformes_simples",
+      "nom": "Uniformes — chemises de travail simples",
       "unite_production": "pièce",
       "statut": "simulation_decouverte_indicative",
       "qualification_prix": "prix_catalogue_public_unitaire_HT",
@@ -1890,125 +2070,35 @@
       "accord_fournisseur_exige": false,
       "devis_exige": false,
       "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 19643.715,
-      "investissement_simulation_usd": 51499.305,
-      "reserve_initiale_distincte_usd": 22958.39604009821,
+      "budget_equipements_usd": 39287.43,
+      "investissement_simulation_usd": 102296.45000000001,
+      "reserve_initiale_distincte_usd": 41232.65563284723,
       "financement": {
-        "apport": 15449.7915,
-        "dette": 36049.5135,
-        "apport_reserve": 22958.39604009821,
-        "apport_total": 38408.18754009821,
-        "besoin_total": 74457.70104009821,
-        "total_ressources": 74457.70104009821,
+        "apport": 30688.935,
+        "dette": 71607.515,
+        "apport_reserve": 41232.65563284723,
+        "apport_total": 71921.59063284723,
+        "besoin_total": 143529.10563284723,
+        "total_ressources": 143529.10563284723,
         "hypothese_reserve_financee_par_apport": true
       },
       "emballages": {
         "statut": "stock_modele",
         "jours": 15,
         "cout_stockable_unite": 0.25,
-        "stock_lancement": 145.75,
+        "stock_lancement": 250,
         "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
         "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
         "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
-        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 10 × Bacs lavables avec couvercle, petit format ; 5 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
+        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 4 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
         "postes_budget_mutualise": [],
         "postes_budget_dedie": [
           "manutention"
         ],
         "statut": "budget_dedie",
-        "budget_dedie_usd": 2405.59,
-        "budget_mutualise_usd": null
-      },
-      "annuel": [
-        {
-          "annee": 1,
-          "production": 14000,
-          "ventes": 13580,
-          "stock_fin": 420,
-          "chiffre_affaires_usd": 230860,
-          "resultat_net_usd": 34837.434389250004,
-          "amortissements_usd": 5390.4895,
-          "interets_usd": 2619.597981,
-          "marge_nette": 0.1509028605615958
-        },
-        {
-          "annee": 2,
-          "production": 17000,
-          "ventes": 17000,
-          "stock_fin": 420,
-          "chiffre_affaires_usd": 294780,
-          "resultat_net_usd": 59002.0601568237,
-          "amortissements_usd": 5390.4895,
-          "interets_usd": 2042.8057649999994,
-          "marge_nette": 0.20015625265222778
-        },
-        {
-          "annee": 3,
-          "production": 20000,
-          "ventes": 20000,
-          "stock_fin": 420,
-          "chiffre_affaires_usd": 353736,
-          "resultat_net_usd": 82200.84031368197,
-          "amortissements_usd": 5390.4895,
-          "interets_usd": 1466.0135489999989,
-          "marge_nette": 0.2323790632383528
-        }
-      ],
-      "controles": {
-        "bilans_equilibres": true,
-        "bfr_mois": 36,
-        "tresorerie_mois": 12,
-        "financement": "30/70"
-      },
-      "ecart_bilans": [
-        -1.4551915228366852e-11,
-        -1.4551915228366852e-10,
-        -5.820766091346741e-11
-      ]
-    },
-    {
-      "up_id": "linge",
-      "configuration_id": null,
-      "nom": "Linge de maison",
-      "unite_production": "pièce",
-      "statut": "simulation_decouverte_indicative",
-      "qualification_prix": "prix_catalogue_public_unitaire_HT",
-      "source_prix": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
-      "certification_prix_exigee": false,
-      "accord_fournisseur_exige": false,
-      "devis_exige": false,
-      "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 8585.030999999999,
-      "investissement_simulation_usd": 40440.621,
-      "reserve_initiale_distincte_usd": 28489.4569786625,
-      "financement": {
-        "apport": 12132.1863,
-        "dette": 28308.434699999998,
-        "apport_reserve": 28489.4569786625,
-        "apport_total": 40621.6432786625,
-        "besoin_total": 68930.0779786625,
-        "total_ressources": 68930.0779786625,
-        "hypothese_reserve_financee_par_apport": true
-      },
-      "emballages": {
-        "statut": "stock_modele",
-        "jours": 15,
-        "cout_stockable_unite": 0.35,
-        "stock_lancement": 350,
-        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
-      },
-      "manutention": {
-        "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
-        "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
-        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 2 × Chariot inox à trois plateaux 800 × 530 mm ; 10 × Bacs lavables avec couvercle, petit format ; 5 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
-        "postes_budget_mutualise": [],
-        "postes_budget_dedie": [
-          "manutention"
-        ],
-        "statut": "budget_dedie",
-        "budget_dedie_usd": 2405.59,
+        "budget_dedie_usd": 4109.02,
         "budget_mutualise_usd": null
       },
       "annuel": [
@@ -2017,33 +2107,123 @@
           "production": 24000,
           "ventes": 23280,
           "stock_fin": 720,
-          "chiffre_affaires_usd": 297984,
-          "resultat_net_usd": 58568.47448385002,
-          "amortissements_usd": 4284.6211,
-          "interets_usd": 2057.0795881999998,
-          "marge_nette": 0.19654905794891678
+          "chiffre_affaires_usd": 395760,
+          "resultat_net_usd": 55370.23018250005,
+          "amortissements_usd": 10640.547,
+          "interets_usd": 5203.4794233333305,
+          "marge_nette": 0.13990860668713373
         },
         {
           "annee": 2,
-          "production": 29000,
-          "ventes": 29000,
+          "production": 30000,
+          "ventes": 30000,
           "stock_fin": 720,
-          "chiffre_affaires_usd": 378624,
-          "resultat_net_usd": 85554.46480300708,
-          "amortissements_usd": 4284.6211,
-          "interets_usd": 1604.144633,
-          "marge_nette": 0.22596154708366897
+          "chiffre_affaires_usd": 520200,
+          "resultat_net_usd": 102761.81534369734,
+          "amortissements_usd": 10640.547,
+          "interets_usd": 4057.7591833333304,
+          "marge_nette": 0.19754289762340896
         },
         {
           "annee": 3,
           "production": 34000,
           "ventes": 34000,
           "stock_fin": 720,
-          "chiffre_affaires_usd": 452782.08,
-          "resultat_net_usd": 110684.2978600038,
-          "amortissements_usd": 4284.6211,
-          "interets_usd": 1151.2096778,
-          "marge_nette": 0.24445379521204505
+          "chiffre_affaires_usd": 601351.2,
+          "resultat_net_usd": 134059.11643330718,
+          "amortissements_usd": 10640.547,
+          "interets_usd": 2912.038943333332,
+          "marge_nette": 0.22292982276132015
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        2.9103830456733704e-11,
+        0,
+        -1.7462298274040222e-10
+      ]
+    },
+    {
+      "up_id": "confection",
+      "configuration_id": "uniformes_brodes",
+      "nom": "Uniformes — chemises de travail brodées",
+      "unite_production": "pièce",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_unitaire_HT",
+      "source_prix": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 77601.06899999999,
+      "investissement_simulation_usd": 156610.08899999998,
+      "reserve_initiale_distincte_usd": 49065.411518379165,
+      "financement": {
+        "apport": 46983.026699999995,
+        "dette": 109627.06229999998,
+        "apport_reserve": 49065.411518379165,
+        "apport_total": 96048.43821837916,
+        "besoin_total": 205675.50051837915,
+        "total_ressources": 205675.50051837915,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.25,
+        "stock_lancement": 250,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
+      },
+      "manutention": {
+        "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
+        "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 4 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [
+          "manutention"
+        ],
+        "statut": "budget_dedie",
+        "budget_dedie_usd": 4109.02,
+        "budget_mutualise_usd": null
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "production": 24000,
+          "ventes": 23280,
+          "stock_fin": 720,
+          "chiffre_affaires_usd": 430680,
+          "resultat_net_usd": 57954.64192965004,
+          "amortissements_usd": 16071.910899999999,
+          "interets_usd": 7966.233193800001,
+          "marge_nette": 0.13456543589126507
+        },
+        {
+          "annee": 2,
+          "production": 30000,
+          "ventes": 30000,
+          "stock_fin": 720,
+          "chiffre_affaires_usd": 566100,
+          "resultat_net_usd": 110600.54165906316,
+          "amortissements_usd": 16071.910899999999,
+          "interets_usd": 6212.200197000002,
+          "marge_nette": 0.19537279925642673
+        },
+        {
+          "annee": 3,
+          "production": 34000,
+          "ventes": 34000,
+          "stock_fin": 720,
+          "chiffre_affaires_usd": 654411.6,
+          "resultat_net_usd": 145534.78037392214,
+          "amortissements_usd": 16071.910899999999,
+          "interets_usd": 4458.167200200005,
+          "marge_nette": 0.2223902821617498
         }
       ],
       "controles": {
@@ -2054,8 +2234,98 @@
       },
       "ecart_bilans": [
         -5.820766091346741e-11,
-        -8.731149137020111e-11,
-        -1.7462298274040222e-10
+        -5.820766091346741e-11,
+        0
+      ]
+    },
+    {
+      "up_id": "confection",
+      "configuration_id": "pret_a_porter",
+      "nom": "Prêt-à-porter — tuniques en série",
+      "unite_production": "pièce",
+      "statut": "simulation_decouverte_indicative",
+      "qualification_prix": "prix_catalogue_public_unitaire_HT",
+      "source_prix": "https://tmac-sas.fr/machine-a-coudre-industrielle/63-JUKI-DDL8700.html",
+      "certification_prix_exigee": false,
+      "accord_fournisseur_exige": false,
+      "devis_exige": false,
+      "conditions_negociees_exigees": false,
+      "budget_equipements_usd": 39287.43,
+      "investissement_simulation_usd": 102296.45000000001,
+      "reserve_initiale_distincte_usd": 40131.89896618055,
+      "financement": {
+        "apport": 30688.935,
+        "dette": 71607.515,
+        "apport_reserve": 40131.89896618055,
+        "apport_total": 70820.83396618055,
+        "besoin_total": 142428.34896618058,
+        "total_ressources": 142428.34896618055,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "emballages": {
+        "statut": "stock_modele",
+        "jours": 15,
+        "cout_stockable_unite": 0.25,
+        "stock_lancement": 250,
+        "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
+      },
+      "manutention": {
+        "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
+        "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 4 × Chariot inox à trois plateaux 800 × 530 mm ; 20 × Bacs lavables avec couvercle, petit format ; 10 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [
+          "manutention"
+        ],
+        "statut": "budget_dedie",
+        "budget_dedie_usd": 4109.02,
+        "budget_mutualise_usd": null
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "production": 24000,
+          "ventes": 22800,
+          "stock_fin": 1200,
+          "chiffre_affaires_usd": 410400,
+          "resultat_net_usd": 81473.2301825,
+          "amortissements_usd": 10640.547,
+          "interets_usd": 5203.4794233333305,
+          "marge_nette": 0.19852151603923002
+        },
+        {
+          "annee": 2,
+          "production": 30000,
+          "ventes": 30000,
+          "stock_fin": 1200,
+          "chiffre_affaires_usd": 550800,
+          "resultat_net_usd": 137362.9760321972,
+          "amortissements_usd": 10640.547,
+          "interets_usd": 4057.7591833333304,
+          "marge_nette": 0.249388119157947
+        },
+        {
+          "annee": 3,
+          "production": 34000,
+          "ventes": 34000,
+          "stock_fin": 1200,
+          "chiffre_affaires_usd": 636724.8,
+          "resultat_net_usd": 172895.63337304146,
+          "amortissements_usd": 10640.547,
+          "interets_usd": 2912.038943333332,
+          "marge_nette": 0.27153902812179054
+        }
+      ],
+      "controles": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        5.820766091346741e-11,
+        0,
+        0
       ]
     }
   ]

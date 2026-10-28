@@ -1066,14 +1066,14 @@
                 icon: "🧵",
                 description: "Textile, cuir et habillement pour marchés locaux et régionaux",
                 units: [
-                    { id: "confection", name: "Confection de vêtements", minCapex: 60, description: "Vêtements prêts-à-porter et tenues modernes" },
+                    { id: "confection", name: "Confection textile & broderie", minCapex: null, description: "Linge de maison, uniformes et prêt-à-porter ; versions simples, brodées ou atelier mixte" },
                     { id: "tissage", name: "Tissage & pagnes", minCapex: 100, description: "Production de tissus et pagnes locaux" },
                     { id: "maroquinerie", name: "Maroquinerie cuir", minCapex: 75, description: "Articles en cuir pour marchés locaux et export" },
                     { id: "teinture", name: "Teinture textile", minCapex: 40, description: "Teinture textile industrielle et artisanale" },
-                    { id: "broderie", name: "Broderie industrielle", minCapex: 55, description: "Broderie automatisée sur textiles" },
+                    { id: "tricotage", name: "Tricotage industriel", minCapex: null, description: "Fabrication de mailles à partir de fils achetés — BP à compléter" },
                     { id: "chaussures", name: "Chaussures & sandales", minCapex: 120, description: "Production de chaussures et sandales" },
-                    { id: "uniformes", name: "Confection d'uniformes", minCapex: 70, description: "Uniformes scolaires et professionnels" },
-                    { id: "linge", name: "Linge de maison", minCapex: 90, description: "Linge domestique et hôtelier" }
+                    { id: "non_tisses", name: "Non-tissés & textiles techniques", minCapex: null, description: "Nappes de fibres pour usages techniques non médicaux — BP à compléter" },
+                    { id: "recyclage_textile", name: "Recyclage & valorisation textile", minCapex: null, description: "Valorisation de chutes textiles propres — BP à compléter" }
                 ]
             },
             {
@@ -1376,7 +1376,7 @@
                 };
                 
                 card.innerHTML = `
-                    <div class="capex-badge">CAPEX minimum: ${unite.minCapex}k $</div>
+                    <div class="capex-badge">${Number.isFinite(unite.minCapex) ? 'CAPEX minimum: '+unite.minCapex+'k $' : 'Budget propre à la version — à préciser'}</div>
                     <h4 class="unite-name">${unite.name}</h4>
                     <p class="unite-desc">${unite.description}</p>
                 `;
@@ -1397,11 +1397,12 @@
             selectedUnite = unite;
             
             // Mettre à jour le CAPEX minimum dans l'étape 4
-            document.getElementById('minCapex').textContent = `${unite.minCapex}k $`;
-            document.getElementById('capexRange').min = unite.minCapex;
-            document.getElementById('capexInput').min = unite.minCapex;
-            document.getElementById('capexRange').value = Math.max(unite.minCapex, selectedCapex);
-            document.getElementById('capexInput').value = Math.max(unite.minCapex, selectedCapex);
+            document.getElementById('minCapex').textContent = Number.isFinite(unite.minCapex) ? `${unite.minCapex}k $` : 'À préciser selon version';
+            const minimumSaisie = Number.isFinite(unite.minCapex) ? unite.minCapex : 1; // Borne de saisie, pas estimation industrielle
+            document.getElementById('capexRange').min = minimumSaisie;
+            document.getElementById('capexInput').min = minimumSaisie;
+            document.getElementById('capexRange').value = Math.max(minimumSaisie, selectedCapex);
+            document.getElementById('capexInput').value = Math.max(minimumSaisie, selectedCapex);
             
             // Mettre à jour l'estimation OPEX
             updateOpexEstimation();
@@ -1437,7 +1438,7 @@
             });
             
             capexInput.addEventListener('input', function() {
-                const minCapex = selectedUnite ? selectedUnite.minCapex : 50;
+                const minCapex = Number.isFinite(selectedUnite?.minCapex) ? selectedUnite.minCapex : 1;
                 let value = parseInt(this.value) || minCapex;
                 value = Math.max(minCapex, Math.min(1000, value));
                 

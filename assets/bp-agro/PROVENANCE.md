@@ -59,3 +59,6 @@ Prompt final complet : `conserverie-poche-generation.json` (outil intégré imag
 
 ## Conserverie — format 1 kg, 28 octobre 2026
 `postes-conserverie-poche-1kg-ia.jpg` : édition par le générateur intégré de l’atlas 400 g. Neuf panneaux conservés, visuel produit remplacé par 1 kg ; sept postes distincts et personnel ivoirien. Marque P2I TOMATE fictive. Illustrations IA, sans représenter une machine fournisseur exacte, une certification ni une capacité garantie. Prompt exact dans `conserverie-poche-1kg-generation.json`.
+
+## Textile regroupé — 29 octobre 2026
+`postes-textile-broderie-ia.jpg` : atlas 3 × 3 généré avec le générateur intégré image_gen.imagegen. Personnel ivoirien, atelier, drap et chemise brodés, gamme mixte, brodeuse multi-têtes, cadrage, préparation des motifs, contrôle et emballage. Les marques P2I sont fictives ; les machines sont des illustrations de fonction et ne représentent pas les modèles catalogue contractuels. Prompt intégral : `textile-broderie-generation.json`. Les postes coupe/couture/repassage réutilisent `postes-textile-ia.jpg`, chaque fonction avec son index propre.

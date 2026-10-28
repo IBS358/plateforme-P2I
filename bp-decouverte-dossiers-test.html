@@ -73,7 +73,7 @@ function updateUP(){
  if(items.some(d=>d.up_id===requested))$("up").value=requested;
  choose();
 }
-fetch("data/p2i-bp-decouverte-95-dossiers-17-rubriques.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).then(data=>{
+fetch("data/p2i-bp-decouverte-96-dossiers-17-rubriques.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).then(data=>{
  if(!Array.isArray(data.dossiers)||data.dossiers.length!==95)throw Error("Référentiel de 95 dossiers incomplet");
  dossiers=data.dossiers;
  const sectors=[...new Set(dossiers.map(d=>d.filiere))].sort((a,b)=>a.localeCompare(b,"fr"));

@@ -95,8 +95,8 @@ function create({client,registry,configuration}={}){
  }
  function selectMetadataConfiguration(config){
   if(!owned||owned.has_financial_payload)return false;
-  const choices=owned.up_id==='biscuiterie'?root.P2I_BP_V108_REFERENCES.variants:owned.up_id==='nettoyage'?root.P2I_BP_V108_REFERENCES.nettoyage:null;
-  if(!choices||!Object.prototype.hasOwnProperty.call(choices,config))return false;
+  const choices=owned.up_id==='biscuiterie'?root.P2I_BP_V108_REFERENCES.variants:owned.up_id==='nettoyage'?root.P2I_BP_V108_REFERENCES.nettoyage:owned.up_id==='confection'?root.P2I_BP_DONNEES?.unites.confection.variantes:null;
+  if(!choices||!Object.prototype.hasOwnProperty.call(choices,config||'reference'))return false;
   owned.configuration_id=config;return true;
  }
  async function saveSelection(){

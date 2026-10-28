@@ -208,14 +208,6 @@
     "confection": {
       "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
       "postes_budget_mutualise": []
-    },
-    "uniformes": {
-      "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
-      "postes_budget_mutualise": []
-    },
-    "linge": {
-      "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
-      "postes_budget_mutualise": []
     }
   },
   "manutention_defaut": {
