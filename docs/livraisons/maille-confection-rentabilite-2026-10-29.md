@@ -2,26 +2,26 @@
 
 2026-10-29 — Étude de rentabilité indicative ; prix catalogue et repères commerciaux documentés, prix usine, ventes, temps et coûts livrés estimés P2I
 
-**Verdict : après rémunération du dirigeant, l’assortiment simulé est pratiquement à l’équilibre en A1. La marge est insuffisante. Ce résultat ne suffit pas à retenir le projet comme rentable et bancable ; ni prix ni coûts ne sont ajustés automatiquement pour obtenir 10 %.**
+**Verdict : après paie CI et redimensionnement, le scénario est bénéficiaire mais reste sous le repère de marge nette de 10 %. Les ventes supplémentaires sont des hypothèses commerciales. Ce résultat ne suffit pas à retenir le projet comme rentable et bancable ; ni prix ni coûts ne sont ajustés automatiquement pour obtenir 10 %.**
 
 | Indicateur | Année 1 | Année 2 | Année 3 |
 |---|---:|---:|---:|
-| Production (pièces) | 150 000 | 165 000 | 175 000 |
-| Ventes (pièces) | 145 500 | 165 000 | 175 000 |
-| Chiffre d’affaires (USD) | 358 758 | 406 839 | 431 496 |
-| Rémunération annuelle chargée du dirigeant (USD) | 28 800 | 29 664 | 30 554 |
-| Résultat net après IS (USD) | 10 | 2 669 | 15 |
-| Marge nette / CA | 0 % | 0,7 % | 0 % |
-| ROI annuel RN / CAPEX hors réserve | 0 % | 3,7 % | 0 % |
-| RN / besoin total avec réserve | 0 % | 1,8 % | 0 % |
+| Production (pièces) | 400 000 | 450 000 | 490 000 |
+| Ventes (pièces) | 388 000 | 450 000 | 490 000 |
+| Chiffre d’affaires (USD) | 956 689 | 1 109 562 | 1 208 190 |
+| Rémunération annuelle chargée du dirigeant (USD) | 28 353 | 29 198 | 30 069 |
+| Résultat net après IS (USD) | 57 036 | 70 738 | 71 257 |
+| Marge nette / CA | 6 % | 6,4 % | 5,9 % |
+| ROI annuel RN / CAPEX hors réserve | 72,4 % | 89,8 % | 90,5 % |
+| RN / besoin total avec réserve | 23 % | 28,6 % | 28,8 % |
 
-Rémunération dirigeant : 2 000 USD bruts/mois en A1, charges employeur estimées 20 %, soit 28 800 USD/an. Hausse annuelle 3 %. Personnel administratif de 4 800 USD/an conservé ; aucune direction déjà identifiée dans ce montant. Le brut n’est pas le revenu net personnel.
+Rémunération dirigeant : 2 000 USD bruts/mois en A1, gratification budgétée à 0,75 mois en plus de la base, charges et contributions recalculées par la paie CI, soit 28 353 USD/an. Hausse annuelle 3 %. Administration : deux salariés à 400 USD bruts/mois, charges recalculées. Aucune seconde rémunération de direction dans ce poste. Le brut n’est pas le revenu net personnel.
 
 ## Configuration et financement
 
-22 machines complètes : 8 surjeteuses quatre fils JACK E4S-4, 4 recouvreuses W4-D-01, 2 colleteuses W4-D-02, 2 zigzag 20U-93Z, 2 piqueuses auxiliaires JUKI DDL-8700, 2 ciseaux RASOR DS504 et 2 ensembles BATTISTELLA KER/2 (table/chaudière/fer). Pas de tricoteuse de fil, ni teinture ni fabrication de chaussettes. Chaque modèle est compté une seule fois ; la colleteuse ne fabrique pas le bord-côte acheté.
+23 machines complètes : 8 surjeteuses quatre fils JACK E4S-4, 4 recouvreuses W4-D-01, 3 colleteuses W4-D-02, 2 zigzag 20U-93Z, 2 piqueuses auxiliaires JUKI DDL-8700, 2 ciseaux RASOR DS504 et 2 ensembles BATTISTELLA KER/2 (table/chaudière/fer). Pas de tricoteuse de fil, ni teinture ni fabrication de chaussettes. Chaque modèle est compté une seule fois ; la colleteuse ne fabrique pas le bord-côte acheté.
 
-Budget machines : 23 808 USD. CAPEX avec frais et auxiliaires estimés : 72 114 USD. Apport CAPEX 30 % : 21 634 USD ; dette 70 % : 50 479 USD. Réserve supplémentaire financée par apport : 75 840 USD. Apport total : 97 474 USD. Besoin total avec réserve : 147 954 USD.
+Budget machines : 25 430 USD. CAPEX avec frais et auxiliaires estimés : 78 736 USD. Apport CAPEX 30 % : 23 621 USD ; dette 70 % : 55 116 USD. Réserve supplémentaire financée par apport : 168 794 USD. Apport total : 192 415 USD. Besoin total avec réserve : 247 530 USD.
 
 Le ROI affiché est un ratio annuel RN/CAPEX ; ni TRI, ni rendement des seuls fonds propres. La réserve initiale, incluant stocks, créances, TVA et décalages de trésorerie, n’est pas une charge ni un bénéfice. La trésorerie positive suppose le versement de cet apport supplémentaire.
 
@@ -50,44 +50,44 @@ Le coût livré ajoute fret, assurance, provision import/transit et livraison lo
 
 Temps par article, assortiment, efficacité 65 % et effectif = hypothèses P2I. Le goulot partagé et la limite de personnel bornent les volumes ; points/minute non convertis en pièces garanties.
 
-Goulot : colletage ; capacité 93 pièces/h, plafond 186 000 pièces/an. La disponibilité totale des 19 opérateurs productifs est aussi contrôlée : les vitesses des machines ne sont pas additionnées. Chef d’atelier séparé, production par séries. A1 : 600 articles/jour produits, 582 vendus en moyenne ; ces ventes ne constituent pas des commandes acquises.
+Goulot : surjet ; capacité 131 pièces/h, plafond 524 000 pièces/an. La disponibilité de 24 opérateurs par équipe est aussi contrôlée : les vitesses des machines ne sont pas additionnées. Deux équipes distinctes de 24 opérateurs et un chef chacune, plus deux administratifs et un dirigeant : 53 personnes. 8 h par équipe, 250 jours/an, efficacité 65 %. Majoration budgétaire de 10 % des bruts de la seconde équipe ; organisation et primes légales à confirmer. Une troisième colleteuse réduit le goulot. Production par séries. A1 : 1 600 articles/jour produits, 1 552 vendus en moyenne ; ces ventes ne constituent pas des commandes acquises.
 
-Personnel industriel chargé A1 : 60 480 USD ; fixes industriels totaux 73 100 USD, déjà inclus dans le coût de production. Personnel administratif 4 800 USD et autres charges 6 000 USD séparés. Salaires et majoration de charges 20 % = hypothèses, pas barèmes officiels.
+Personnel industriel chargé A1 : 162 616 USD ; fixes industriels totaux 185 616 USD, déjà inclus dans le coût de production. Personnel administratif 11 622 USD et autres charges 16 000 USD séparés. Bruts et effectifs = hypothèses P2I ; anciennes majorations 20 % remplacées par cotisations plafonnées, CMU et contribution employeur globale, sans double compte.
 
 ## Stocks, emballages et fiscalité
 
-Stocks matières cibles 60 jours et emballages vides 15 jours. Modèle agrégé en équivalent article moyen : ce n’est pas une gestion complète par référence, couleur et taille. Emballage par pièce 0,08 USD inclus une seule fois ; sous-vêtements en lots protégés, vente comptée à la pièce. Prix local du format exact d’emballage à confirmer. Stocks invendus A1 : 4 500 pièces, puis maintenus ; pas de recette fictive sur les invendus ni sur les chutes de coupe.
+Stocks matières cibles 60 jours et emballages vides 15 jours. Modèle agrégé en équivalent article moyen : ce n’est pas une gestion complète par référence, couleur et taille. Emballage par pièce 0,08 USD inclus une seule fois ; sous-vêtements en lots protégés, vente comptée à la pièce. Prix local du format exact d’emballage à confirmer. Stocks invendus A1 : 12 000 pièces, puis maintenus ; pas de recette fictive sur les invendus ni sur les chutes de coupe.
 
-Convention commune : TVA 18 %, IS 25 % sur bénéfice positif, taux de dette 8 %/an sur 60 mois, amortissement économique 10 ans, manutention 5 ans. Il ne s’agit pas d’un avis fiscal sur le régime de l’entreprise. IS réservé, calendrier officiel non modélisé. Prix constants ; charges +3 %/an. BFR 36 mois, trésorerie 12 mois.
+Paie : CNPS/CMU selon plafonds documentés, AT/MP 5 % retenu par prudence, contribution globale locale 2,8 % non cumulée avec FDFP, ITS selon une part. Échéances et dettes de paie intégrées au BFR et au bilan. Hypothèses familiales et statut salarié du dirigeant à confirmer. Convention commune : TVA 18 %, IS 25 % sur bénéfice positif, taux de dette 8 %/an sur 60 mois, amortissement économique 10 ans, manutention 5 ans. Il ne s’agit pas d’un avis fiscal sur le régime de l’entreprise. IS réservé, calendrier officiel non modélisé. Prix constants ; charges +3 %/an. BFR 36 mois, trésorerie 12 mois.
 
 ## Sensibilités — année 1
 
 | Sensibilité | Résultat net USD | Marge nette |
 |---|---:|---:|
-| prix vente moins 10 | -35 863 | -11,1 % |
-| matieres fournitures plus 20 | -42 777 | -11,9 % |
-| production ventes moins 25 fixes conserves | -30 370 | -11,3 % |
+| prix vente moins 10 | -19 620 | -2,3 % |
+| matieres fournitures plus 20 | -38 057 | -4 % |
+| production ventes moins 25 fixes conserves | -4 972 | -0,7 % |
 
 ## Comparaisons internes de démarrage — non proposées comme configurations publiques
 
 | Production A1 | Ventes A1 | Charge atelier | CA A1 USD | RN A1 USD | Marge nette | ROI hors réserve | Réserve supplémentaire USD |
 |---:|---:|---:|---:|---:|---:|---:|---:|
-| 120 000 | 116 400 | 64,5 % | 287 007 | -24 293 | -8,5 % | -33,7 % | 87 405 |
-| 150 000 | 145 500 | 80,6 % | 358 758 | 10 | 0 % | 0 % | 75 840 |
-| 175 000 | 169 750 | 94,1 % | 418 551 | 15 201 | 3,6 % | 21,1 % | 80 567 |
-| 186 000 | 180 420 | 100 % | 444 860 | 21 885 | 4,9 % | 30,3 % | 84 674 |
+| 300 000 | 291 000 | 57,3 % | 717 517 | -4 972 | -0,7 % | -6,3 % | 144 186 |
+| 350 000 | 339 500 | 66,8 % | 837 103 | 26 654 | 3,2 % | 33,9 % | 150 130 |
+| 400 000 | 388 000 | 76,3 % | 956 689 | 57 036 | 6 % | 72,4 % | 168 794 |
+| 450 000 | 436 500 | 85,9 % | 1 076 275 | 87 419 | 8,1 % | 111 % | 187 458 |
 
-Référence retenue : 150 000 pièces produites et 145 500 vendues en A1, soit 600 produites et 582 vendues par jour sur 250 jours. Les 4 500 pièces non vendues restent en stock. Programme A2/A3 : 165 000 / 175 000 pièces produites et vendues. Le scénario intensif 175 000 dès A1 reste une comparaison interne.
+Référence redimensionnée : 400 000 pièces produites et 388 000 vendues en A1, soit 1 600 produites et 1 552 vendues par jour sur 250 jours. Les 12 000 pièces non vendues restent en stock. Programme A2/A3 : 450 000 / 490 000 pièces produites et vendues. Débouchés supposés, pas commandes acquises ; aucun chiffre d’affaires export ajouté.
 
-Même à 186 000 pièces/an, la marge A1 reste sous 10 % et toute la capacité théorique est engagée. Aucune économie de matière ni remise fournisseur inventée. Prix et coûts variables inchangés ; les coûts fixes sont répartis sur les volumes par reprogrammerVolumes du moteur commun, puis tous les états, stocks, BFR et réserves sont recalculés.
+L’ancien atelier plafonnait à 186 000 pièces/an. Le parc renforcé en deux équipes atteint un plafond indicatif de 524 000 pièces/an ; la cadence par équipe reste 131 pièces/h. Ne pas confondre heures disponibles et débit simultané. Aucune économie de matière ni remise fournisseur inventée. Prix et coûts variables inchangés ; les coûts fixes sont répartis sur les volumes par reprogrammerVolumes du moteur commun, puis tous les états, stocks, BFR et réserves sont recalculés.
 
-La croissance de volumes ne garantit pas une hausse continue de marge : charges +3 % par an et prix constants. La masse salariale de direction évolue aussi de 3 % par an. La marge A3 baisse malgré le CA supérieur. La réserve supplémentaire est financée par apport ; CAPEX et dette inchangés. Les achats d’emballages, distincts de leur consommation, sont recalculés sans double compte.
+La croissance de volumes ne garantit pas une hausse continue de marge : charges +3 % par an et prix constants. Les salaires bruts évoluent aussi de 3 % par an ; les plafonds sociaux sont gardés constants par convention faute de barème futur connu. La marge A3 baisse malgré le CA supérieur. La réserve supplémentaire est financée par apport ; CAPEX et dette inchangés. Les achats d’emballages, distincts de leur consommation, sont recalculés sans double compte.
 
 Suggestion export : Étudier des distributeurs dans les pays limitrophes, après chiffrage du transport, des formalités et des règlements. Aucune recette export intégrée à cette simulation.
 
-Livraison/distribution : 0,04 USD/pièce, variant avec les volumes. Personnel et autres charges hors industriel conservés puis majorés. Aucune remise de prix sur gros volume ni délai client allongé présumé. Les 60 % de ventes à 30 jours et les fournisseurs payés comptant sont conservés ; aucune vente export dans le scénario de référence.
+Livraison/distribution : 0,04 USD/pièce, variant avec les volumes ; autres charges administratives/commerciales portées à 16 000 USD/an. Compléments CAPEX majorés de 5 000 USD pour locaux, utilités, installation/formation et stockage ; une colleteuse catalogue supplémentaire. Salaires et coûts de deux équipes explicités. Aucune remise de prix sur gros volume ni délai client allongé présumé. Les 60 % de ventes à 30 jours et les fournisseurs payés comptant sont conservés ; aucune vente export dans le scénario de référence.
 
-Prix moyen purement mathématique permettant de réunir les repères A1 à coûts/volumes inchangés : 2,845 USD/pièce, soit environ 1 667 FCFA HT contre 1 445 actuellement. **Ce prix n’est pas un prix de marché et n’est pas appliqué.**
+Prix moyen purement mathématique permettant de réunir les repères A1 à coûts/volumes inchangés : 2,619 USD/pièce, soit environ 1 535 FCFA HT contre 1 445 actuellement. **Ce prix n’est pas un prix de marché et n’est pas appliqué.**
 
 ## Repères commerciaux — détail et usine distincts
 

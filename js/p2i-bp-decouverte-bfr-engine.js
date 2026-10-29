@@ -53,10 +53,13 @@ function calculate(input){
   // Les stocks sont des encours distincts : ne pas ajouter la consommation
   // du mois une deuxième fois dans le BFR.
   const stocks=rawStock+packagingStock+finishedStock;
-  const bfr=stocks+receivable;
+  const hasPayroll=m.dettes_sociales_usd!==undefined||m.dettes_fiscales_salariales_usd!==undefined;
+  if(hasPayroll&&(!number(m.dettes_sociales_usd)||!number(m.dettes_fiscales_salariales_usd))){problems.push('Mois '+(i+1)+' : dettes de paie invalides');continue;}
+  const payrollDebts=hasPayroll?m.dettes_sociales_usd+m.dettes_fiscales_salariales_usd:0;
+  const bfr=stocks+receivable-payrollDebts;
   rows.push(Object.freeze({mois:i+1,stocks_matieres:rawStock,
    stocks_emballages:packagingStock,stocks_produits_finis:finishedStock,stocks,creances_clients:receivable,
-   dettes_exploitation:0,bfr,
+   dettes_exploitation:payrollDebts,...(hasPayroll?{dettes_sociales:m.dettes_sociales_usd,dettes_fiscales_salariales:m.dettes_fiscales_salariales_usd}:{}),bfr,
    methode_stock:hasPhysical?"stock_physique_valorise":"stock_cible_"+options.stock_matieres_jours+"_15_jours",
    encaissements_clients:m.ventes_usd*.4+previousReceivable}));
   previousReceivable=receivable;

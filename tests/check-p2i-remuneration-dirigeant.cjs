@@ -1,6 +1,7 @@
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert/strict'),crypto=require('crypto'),root=path.resolve(__dirname,'..'),c={};c.window=c;vm.createContext(c);
 for(const f of ['js/p2i-economic-result-engine.js','js/p2i-financial-engine.js','js/p2i-bp-decouverte-bfr-engine.js','js/p2i-bp-decouverte-tresorerie-12-mois.js','js/p2i-bp-decouverte-simulation-commune.js','js/p2i-bp-decouverte-donnees.js','js/p2i-bp-decouverte-v108-contexte.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),c);
+c.P2I_BP_DONNEES=require('./helpers/avant-paie-ci.cjs')(c.P2I_BP_DONNEES);
 const api=c.P2I_BP_SIMULATION_COMMUNE,calc=api.calculer,clone=x=>JSON.parse(JSON.stringify(x)),near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,`${a} != ${b}`),hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex'),archive=require('../data/archives/p2i-avant-remuneration-dirigeant-2026-10-29.json'),regles=require('../data/p2i-remuneration-dirigeant-regles.json'),audit=require('../data/p2i-remuneration-dirigeant-audit.json');
 for(const b of archive.scenarios){
  const s=c.P2I_BP_DONNEES.unites[b.up_id].variantes[b.configuration].reference,d=s.remuneration_dirigeant,r=calc(s),old=calc(b.reference),sans=clone(s);delete sans.remuneration_dirigeant;

@@ -1,0 +1,1094 @@
+{
+  "schema": "p2i.maille-rentabilite.v2",
+  "date": "2026-10-29",
+  "nom": "Confection maille & sous-vêtements",
+  "qualification": "Étude de rentabilité indicative ; prix catalogue et repères commerciaux documentés, prix usine, ventes, temps et coûts livrés estimés P2I",
+  "entrees": {
+    "up_id": "tricotage",
+    "configuration_id": null,
+    "nom": "Confection maille & sous-vêtements — assortiment de référence",
+    "sous_titre": "Tee-shirts, marcels, slips et culottes simples",
+    "description": "Atelier de confection utilisant des mailles achetées ; quatre produits fabriqués par séries sur un parc partagé. Ni filature, ni tricotage, ni teinture, ni chaussettes dans ce périmètre.",
+    "capacite": 93,
+    "unite": "pièces/h",
+    "machines": 23807.511,
+    "investissement": 72113.511,
+    "production": [
+      150000,
+      165000,
+      175000
+    ],
+    "ventes": [
+      145500,
+      165000,
+      175000
+    ],
+    "prix": [
+      2.465692873160893,
+      2.465692873160893,
+      2.465692873160893
+    ],
+    "matieres_kg": 1.4704355811764709,
+    "cout_production_kg": [
+      2.117768914509804,
+      2.1356698607329774,
+      2.1728821937844036
+    ],
+    "personnel": 4800,
+    "charges_fixes": 6000,
+    "croissance_personnel": 0.03,
+    "croissance_charges": 0.03,
+    "part_apport": 0.3,
+    "part_dette": 0.7,
+    "taux_interet": 0.08,
+    "duree_dette_mois": 60,
+    "duree_amortissement_ans": 10,
+    "taux_tva": 0.18,
+    "taux_is": 0.25,
+    "coussin_tresorerie": 0.1,
+    "source": "data/p2i-bp-lot-maille-confection.json / tricotage : prix catalogue ou budget de référence + hypothèses P2I explicites",
+    "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 60 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
+    "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
+    "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "remuneration_dirigeant": {
+      "schema": "p2i.remuneration-dirigeant.v1",
+      "brut_mensuel_usd": 2000,
+      "taux_charges": 0.2,
+      "croissance_annuelle": 0.03,
+      "deja_inclus_personnel_annuel_usd": 0,
+      "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+      "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+    },
+    "investissements_detail": {
+      "schema": "p2i.bp-investissements.v1",
+      "postes": [
+        {
+          "id": "equipements",
+          "libelle": "Équipements de production",
+          "categorie": "Production",
+          "montant_usd": 23807.511,
+          "qualification": "Référence équipement et compléments : voir rubrique 3 ; périmètre à confirmer"
+        },
+        {
+          "id": "fret",
+          "categorie": "Transport et importation",
+          "libelle": "Fret international",
+          "montant_usd": 4500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "assurance",
+          "categorie": "Transport et importation",
+          "libelle": "Assurance transport",
+          "montant_usd": 300,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "douane_transit",
+          "categorie": "Transport et importation",
+          "libelle": "Douane et transit",
+          "montant_usd": 5000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "transport_local",
+          "categorie": "Transport et importation",
+          "libelle": "Transport local",
+          "montant_usd": 1200,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "amenagement_site",
+          "categorie": "Site et utilités",
+          "libelle": "Aménagement du site",
+          "montant_usd": 9000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "utilites",
+          "categorie": "Site et utilités",
+          "libelle": "Utilités et raccordements",
+          "montant_usd": 5500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "installation_formation",
+          "categorie": "Installation et démarrage",
+          "libelle": "Installation et formation",
+          "montant_usd": 4500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "pieces_initiales",
+          "categorie": "Installation et démarrage",
+          "libelle": "Pièces de rechange initiales",
+          "montant_usd": 1500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "securite_environnement",
+          "categorie": "Qualité et sécurité",
+          "libelle": "Sécurité et environnement",
+          "montant_usd": 3000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "etudes_essais",
+          "categorie": "Études et essais",
+          "libelle": "Études et essais",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "table_coupe_auxiliaires",
+          "categorie": "Auxiliaires de production",
+          "libelle": "Table de coupe et petit outillage",
+          "montant_usd": 4000,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "rayonnage_stockage",
+          "categorie": "Site et stockage",
+          "libelle": "Rayonnages et stockage au sec",
+          "montant_usd": 3500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "patronage_informatique",
+          "categorie": "Préparation et développement",
+          "libelle": "Patronage, informatique et guides",
+          "montant_usd": 2500,
+          "qualification": "Estimation P2I, non prix catalogue"
+        },
+        {
+          "id": "manutention",
+          "categorie": "Manutention",
+          "libelle": "Matériel de manutention",
+          "montant_usd": 1306,
+          "qualification": "Panier catalogue HT + accessoires et frais livrés estimés P2I"
+        }
+      ],
+      "manutention": {
+        "besoins": "Transpalette pour palettes de balles/rouleaux, diable pour petits lots, bacs de tri et palettes au sol ; déchargement des machines par prestataire dans installation.",
+        "postes_budget_mutualise": [],
+        "postes_budget_dedie": [
+          "manutention"
+        ],
+        "mode": "Achat initial retenu, sans location récurrente ; amortissement linéaire 5 ans. Panier de manutention ajouté à l’investissement ; entretien supplémentaire 100 USD/an en A1 dans le coût industriel, puis croissance commune des charges.",
+        "description_budget": "1 × Transpalette manuel 2 500 kg, fourches 1 150 mm ; 1 × Diable pour sacs, caisses et seaux, 250 kg ; 12 × Bacs lavables avec couvercle, petit format ; 12 × Palettes de stockage pour marchandises emballées. Fret, assurance, import/transit et livraison : provisions P2I incluses."
+      }
+    },
+    "amortissements_specifiques": [
+      {
+        "id": "manutention",
+        "base_usd": 1306,
+        "duree_ans": 5
+      }
+    ],
+    "cout_emballages_stockables_unite": 0.08,
+    "stock_emballages_jours": 15,
+    "stock_matieres_jours": 60
+  },
+  "annuel": [
+    {
+      "annee": 1,
+      "production_pieces": 150000,
+      "ventes_pieces": 145500,
+      "chiffre_affaires_usd": 358758.3130449099,
+      "cout_ventes_usd": 308135.3770611765,
+      "personnel_admin_usd": 4800,
+      "remuneration_dirigeant_usd": 28800,
+      "autres_charges_usd": 6000,
+      "amortissements_usd": 7341.951099999999,
+      "interets_usd": 3668.1739262,
+      "is_usd": 3.2027393833477618,
+      "resultat_net_usd": 9.608218150043285,
+      "marge_nette": 0.000026781869020664375,
+      "roi_capex": 0.00013323741996202745,
+      "rendement_besoin_total": 0.0000649406255094048
+    },
+    {
+      "annee": 2,
+      "production_pieces": 165000,
+      "ventes_pieces": 165000,
+      "chiffre_affaires_usd": 406839.3240715473,
+      "cout_ventes_usd": 352289.97284727474,
+      "personnel_admin_usd": 4944,
+      "remuneration_dirigeant_usd": 29664,
+      "autres_charges_usd": 6180,
+      "amortissements_usd": 7341.951099999999,
+      "interets_usd": 2860.5026030000017,
+      "is_usd": 889.7243803181423,
+      "resultat_net_usd": 2669.173140954427,
+      "marge_nette": 0.00656075502791127,
+      "roi_capex": 0.037013495861467995,
+      "rendement_besoin_total": 0.018040574293757293
+    },
+    {
+      "annee": 3,
+      "production_pieces": 175000,
+      "ventes_pieces": 175000,
+      "chiffre_affaires_usd": 431496.25280315627,
+      "cout_ventes_usd": 380069.9334168937,
+      "personnel_admin_usd": 5092.32,
+      "remuneration_dirigeant_usd": 30553.92,
+      "autres_charges_usd": 6365.399999999999,
+      "amortissements_usd": 7341.951099999999,
+      "interets_usd": 2052.8312798000034,
+      "is_usd": 4.974251615640242,
+      "resultat_net_usd": 14.922754846920725,
+      "marge_nette": 0.0000345837414577232,
+      "roi_capex": 0.0002069342435278283,
+      "rendement_besoin_total": 0.00010086084838510543
+    }
+  ],
+  "financement": {
+    "apport": 21634.0533,
+    "dette": 50479.4577,
+    "apport_reserve": 75840.37879817895,
+    "apport_total": 97474.43209817895,
+    "besoin_total": 147953.88979817895,
+    "total_ressources": 147953.88979817895,
+    "hypothese_reserve_financee_par_apport": true
+  },
+  "controle": {
+    "bilans_equilibres": true,
+    "bfr_mois": 36,
+    "tresorerie_mois": 12,
+    "financement": "30/70"
+  },
+  "ecart_bilans": [
+    -2.9103830456733704e-11,
+    5.820766091346741e-11,
+    4.3655745685100555e-11
+  ],
+  "prix_cible_non_applique": {
+    "statut": "ajustement_a_etudier",
+    "prix_cible": 2.844928644626301,
+    "prix_actuel": 2.465692873160893,
+    "marge_cible": 0.1,
+    "roi_cible": 0.15,
+    "qualification": "Prix mathématique indicatif, à comparer aux prix de marché ; volumes et coûts inchangés. Non appliqué automatiquement."
+  },
+  "comparaisons_volumes_internes": [
+    {
+      "production_A1": 120000,
+      "ventes_A1": 116400,
+      "utilisation_A1": 0.6451612903225806,
+      "selectionne": false,
+      "qualification": "Hypothèse commerciale P2I, pas commandes",
+      "annuel": [
+        {
+          "annee": 1,
+          "production_pieces": 120000,
+          "ventes_pieces": 116400,
+          "chiffre_affaires_usd": 287006.65043592796,
+          "cout_ventes_usd": 260689.70164894115,
+          "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
+          "autres_charges_usd": 6000,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 3668.1739262,
+          "is_usd": 0,
+          "resultat_net_usd": -24293.176239213182,
+          "marge_nette": -0.08464325200240072,
+          "roi_capex": -0.3368741294431384,
+          "rendement_besoin_total": -0.15229080854438798
+        },
+        {
+          "annee": 2,
+          "production_pieces": 165000,
+          "ventes_pieces": 165000,
+          "chiffre_affaires_usd": 406839.3240715473,
+          "cout_ventes_usd": 352747.68365947204,
+          "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
+          "autres_charges_usd": 6180,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2860.5026030000017,
+          "is_usd": 775.2966772688173,
+          "resultat_net_usd": 2325.890031806452,
+          "marge_nette": 0.005716974476630036,
+          "roi_capex": 0.032253179737794936,
+          "rendement_besoin_total": 0.014580706534264586
+        },
+        {
+          "annee": 3,
+          "production_pieces": 175000,
+          "ventes_pieces": 175000,
+          "chiffre_affaires_usd": 431496.25280315627,
+          "cout_ventes_usd": 380103.4245319616,
+          "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
+          "autres_charges_usd": 6365.399999999999,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2052.8312798000034,
+          "is_usd": 0,
+          "resultat_net_usd": -13.594108605349902,
+          "marge_nette": -0.000031504580902007,
+          "roi_capex": -0.00018850987029809022,
+          "rendement_besoin_total": -0.00008521972468989964
+        }
+      ],
+      "financement": {
+        "apport": 21634.0533,
+        "dette": 50479.4577,
+        "apport_reserve": 87404.82416027649,
+        "apport_total": 109038.87746027649,
+        "besoin_total": 159518.3351602765,
+        "total_ressources": 159518.3351602765,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "controle": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -1.1641532182693481e-10,
+        -7.275957614183426e-11,
+        0
+      ],
+      "prix_cible_non_applique": {
+        "statut": "ajustement_a_etudier",
+        "prix_cible": 3.085842849674278,
+        "prix_actuel": 2.465692873160893,
+        "marge_cible": 0.1,
+        "roi_cible": 0.15,
+        "qualification": "Prix mathématique indicatif, à comparer aux prix de marché ; volumes et coûts inchangés. Non appliqué automatiquement."
+      }
+    },
+    {
+      "production_A1": 150000,
+      "ventes_A1": 145500,
+      "utilisation_A1": 0.8064516129032258,
+      "selectionne": true,
+      "qualification": "Hypothèse commerciale P2I, pas commandes",
+      "annuel": [
+        {
+          "annee": 1,
+          "production_pieces": 150000,
+          "ventes_pieces": 145500,
+          "chiffre_affaires_usd": 358758.3130449099,
+          "cout_ventes_usd": 308135.3770611765,
+          "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
+          "autres_charges_usd": 6000,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 3668.1739262,
+          "is_usd": 3.2027393833477618,
+          "resultat_net_usd": 9.608218150043285,
+          "marge_nette": 0.000026781869020664375,
+          "roi_capex": 0.00013323741996202745,
+          "rendement_besoin_total": 0.0000649406255094048
+        },
+        {
+          "annee": 2,
+          "production_pieces": 165000,
+          "ventes_pieces": 165000,
+          "chiffre_affaires_usd": 406839.3240715473,
+          "cout_ventes_usd": 352289.97284727474,
+          "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
+          "autres_charges_usd": 6180,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2860.5026030000017,
+          "is_usd": 889.7243803181423,
+          "resultat_net_usd": 2669.173140954427,
+          "marge_nette": 0.00656075502791127,
+          "roi_capex": 0.037013495861467995,
+          "rendement_besoin_total": 0.018040574293757293
+        },
+        {
+          "annee": 3,
+          "production_pieces": 175000,
+          "ventes_pieces": 175000,
+          "chiffre_affaires_usd": 431496.25280315627,
+          "cout_ventes_usd": 380069.9334168937,
+          "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
+          "autres_charges_usd": 6365.399999999999,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2052.8312798000034,
+          "is_usd": 4.974251615640242,
+          "resultat_net_usd": 14.922754846920725,
+          "marge_nette": 0.0000345837414577232,
+          "roi_capex": 0.0002069342435278283,
+          "rendement_besoin_total": 0.00010086084838510543
+        }
+      ],
+      "financement": {
+        "apport": 21634.0533,
+        "dette": 50479.4577,
+        "apport_reserve": 75840.37879817895,
+        "apport_total": 97474.43209817895,
+        "besoin_total": 147953.88979817895,
+        "total_ressources": 147953.88979817895,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "controle": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -2.9103830456733704e-11,
+        5.820766091346741e-11,
+        4.3655745685100555e-11
+      ],
+      "prix_cible_non_applique": {
+        "statut": "ajustement_a_etudier",
+        "prix_cible": 2.844928644626301,
+        "prix_actuel": 2.465692873160893,
+        "marge_cible": 0.1,
+        "roi_cible": 0.15,
+        "qualification": "Prix mathématique indicatif, à comparer aux prix de marché ; volumes et coûts inchangés. Non appliqué automatiquement."
+      }
+    },
+    {
+      "production_A1": 175000,
+      "ventes_A1": 169750,
+      "utilisation_A1": 0.9408602150537635,
+      "selectionne": false,
+      "qualification": "Hypothèse commerciale P2I, pas commandes",
+      "annuel": [
+        {
+          "annee": 1,
+          "production_pieces": 175000,
+          "ventes_pieces": 169750,
+          "chiffre_affaires_usd": 418551.3652190616,
+          "cout_ventes_usd": 347673.43990470597,
+          "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
+          "autres_charges_usd": 6000,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 3668.1739262,
+          "is_usd": 5066.950072038911,
+          "resultat_net_usd": 15200.85021611673,
+          "marge_nette": 0.036317765223775826,
+          "roi_capex": 0.2107905995052263,
+          "rendement_besoin_total": 0.09955981405416535
+        },
+        {
+          "annee": 2,
+          "production_pieces": 175000,
+          "ventes_pieces": 175000,
+          "chiffre_affaires_usd": 431496.25280315627,
+          "cout_ventes_usd": 368838.9292535152,
+          "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
+          "autres_charges_usd": 6180,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2860.5026030000017,
+          "is_usd": 2916.717461660266,
+          "resultat_net_usd": 8750.152384980798,
+          "marge_nette": 0.02027862890612985,
+          "roi_capex": 0.12133859887893682,
+          "rendement_besoin_total": 0.05731018541782925
+        },
+        {
+          "annee": 3,
+          "production_pieces": 175000,
+          "ventes_pieces": 175000,
+          "chiffre_affaires_usd": 431496.25280315627,
+          "cout_ventes_usd": 379904.0969806294,
+          "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
+          "autres_charges_usd": 6365.399999999999,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2052.8312798000034,
+          "is_usd": 46.43336068172357,
+          "resultat_net_usd": 139.3000820451707,
+          "marge_nette": 0.000322830340101975,
+          "roi_capex": 0.0019316779908992465,
+          "rendement_besoin_total": 0.0009123628000388339
+        }
+      ],
+      "financement": {
+        "apport": 21634.0533,
+        "dette": 50479.4577,
+        "apport_reserve": 80567.06961907122,
+        "apport_total": 102201.12291907122,
+        "besoin_total": 152680.5806190712,
+        "total_ressources": 152680.5806190712,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "controle": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        2.9103830456733704e-11,
+        8.731149137020111e-11,
+        2.3283064365386963e-10
+      ],
+      "prix_cible_non_applique": {
+        "statut": "ajustement_a_etudier",
+        "prix_cible": 2.707263384598885,
+        "prix_actuel": 2.465692873160893,
+        "marge_cible": 0.1,
+        "roi_cible": 0.15,
+        "qualification": "Prix mathématique indicatif, à comparer aux prix de marché ; volumes et coûts inchangés. Non appliqué automatiquement."
+      }
+    },
+    {
+      "production_A1": 186000,
+      "ventes_A1": 180420,
+      "utilisation_A1": 1,
+      "selectionne": false,
+      "qualification": "Plafond théorique sans marge de capacité ; non retenu",
+      "annuel": [
+        {
+          "annee": 1,
+          "production_pieces": 186000,
+          "ventes_pieces": 180420,
+          "chiffre_affaires_usd": 444860.30817568843,
+          "cout_ventes_usd": 365070.1875558589,
+          "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
+          "autres_charges_usd": 6000,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 3668.1739262,
+          "is_usd": 7294.998898407378,
+          "resultat_net_usd": 21884.996695222133,
+          "marge_nette": 0.04919521093030198,
+          "roi_capex": 0.3034798388227434,
+          "rendement_besoin_total": 0.1395840234011152
+        },
+        {
+          "annee": 2,
+          "production_pieces": 186000,
+          "ventes_pieces": 186000,
+          "chiffre_affaires_usd": 458618.87440792605,
+          "cout_ventes_usd": 387294.52388492366,
+          "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
+          "autres_charges_usd": 6180,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2860.5026030000017,
+          "is_usd": 5083.474205000597,
+          "resultat_net_usd": 15250.422615001791,
+          "marge_nette": 0.033252932807638996,
+          "roi_capex": 0.21147802129620052,
+          "rendement_besoin_total": 0.0972682507936609
+        },
+        {
+          "annee": 3,
+          "production_pieces": 186000,
+          "ventes_pieces": 186000,
+          "chiffre_affaires_usd": 458618.87440792605,
+          "cout_ventes_usd": 398913.35944204725,
+          "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
+          "autres_charges_usd": 6365.399999999999,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2052.8312798000034,
+          "is_usd": 2074.7731465196994,
+          "resultat_net_usd": 6224.319439559098,
+          "marge_nette": 0.013571878060175027,
+          "roi_capex": 0.08631280537095327,
+          "rendement_besoin_total": 0.03969914011899808
+        }
+      ],
+      "financement": {
+        "apport": 21634.0533,
+        "dette": 50479.4577,
+        "apport_reserve": 84673.74990544318,
+        "apport_total": 106307.80320544318,
+        "besoin_total": 156787.26090544317,
+        "total_ressources": 156787.26090544317,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "controle": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -1.4551915228366852e-10,
+        -1.4551915228366852e-10,
+        -2.9103830456733704e-10
+      ],
+      "prix_cible_non_applique": {
+        "statut": "ajustement_a_etudier",
+        "prix_cible": 2.6584144213633505,
+        "prix_actuel": 2.465692873160893,
+        "marge_cible": 0.1,
+        "roi_cible": 0.15,
+        "qualification": "Prix mathématique indicatif, à comparer aux prix de marché ; volumes et coûts inchangés. Non appliqué automatiquement."
+      }
+    }
+  ],
+  "ancienne_reference_120000": {
+    "annuel": [
+      {
+        "annee": 1,
+        "production_pieces": 120000,
+        "ventes_pieces": 116400,
+        "chiffre_affaires_usd": 287006.65043592796,
+        "cout_ventes_usd": 260689.70164894115,
+        "personnel_admin_usd": 4800,
+        "remuneration_dirigeant_usd": null,
+        "autres_charges_usd": 6000,
+        "amortissements_usd": 7341.951099999999,
+        "interets_usd": 3668.1739262,
+        "is_usd": 1126.7059401967044,
+        "resultat_net_usd": 3380.1178205901133,
+        "marge_nette": 0.011777141106159485,
+        "roi_capex": 0.04687218488904407,
+        "rendement_besoin_total": 0.02563704931468964
+      },
+      {
+        "annee": 2,
+        "production_pieces": 150000,
+        "ventes_pieces": 150000,
+        "chiffre_affaires_usd": 369853.930974134,
+        "cout_ventes_usd": 327393.17829871946,
+        "personnel_admin_usd": 4944,
+        "remuneration_dirigeant_usd": null,
+        "autres_charges_usd": 6180,
+        "amortissements_usd": 7341.951099999999,
+        "interets_usd": 2860.5026030000017,
+        "is_usd": 5283.574743103638,
+        "resultat_net_usd": 15850.724229310914,
+        "marge_nette": 0.04285671423732805,
+        "roi_capex": 0.21980241995582372,
+        "rendement_besoin_total": 0.12022237694348921
+      },
+      {
+        "annee": 3,
+        "production_pieces": 175000,
+        "ventes_pieces": 175000,
+        "chiffre_affaires_usd": 431496.25280315627,
+        "cout_ventes_usd": 380269.2451572033,
+        "personnel_admin_usd": 5092.32,
+        "remuneration_dirigeant_usd": null,
+        "autres_charges_usd": 6365.399999999999,
+        "amortissements_usd": 7341.951099999999,
+        "interets_usd": 2052.8312798000034,
+        "is_usd": 7593.626316538244,
+        "resultat_net_usd": 22780.878949614733,
+        "marge_nette": 0.05279507945114674,
+        "roi_capex": 0.31590306218226893,
+        "rendement_besoin_total": 0.1727852542611326
+      }
+    ],
+    "financement": {
+      "apport": 21634.0533,
+      "dette": 50479.4577,
+      "apport_reserve": 59731.53010047317,
+      "apport_total": 81365.58340047317,
+      "besoin_total": 131845.04110047317,
+      "total_ressources": 131845.04110047317,
+      "hypothese_reserve_financee_par_apport": true
+    },
+    "controle": {
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "financement": "30/70"
+    },
+    "ecart_bilans": [
+      -1.0186340659856796e-10,
+      -2.0372681319713593e-10,
+      -2.0372681319713593e-10
+    ],
+    "prix_cible_non_applique": {
+      "statut": "ajustement_a_etudier",
+      "prix_cible": 2.8003551415061576,
+      "prix_actuel": 2.465692873160893,
+      "marge_cible": 0.1,
+      "roi_cible": 0.15,
+      "qualification": "Prix mathématique indicatif, à comparer aux prix de marché ; volumes et coûts inchangés. Non appliqué automatiquement."
+    }
+  },
+  "gamme": [
+    {
+      "nom": "Tee-shirt col rond",
+      "id": "tee_shirt",
+      "part": 0.6,
+      "prix_usd_kg": 3.0714513298890016,
+      "matieres_usd_kg": 1.8221722352941179,
+      "process_usd_kg": 0.16,
+      "nomenclature": [
+        {
+          "code": "jersey_coton",
+          "masse_nette_kg": 0.16,
+          "achat_kg": 0.18823529411764706,
+          "prix_livre_estime_usd_kg": 8.6874,
+          "cout_usd": 1.6352752941176472
+        },
+        {
+          "code": "bord_cote",
+          "masse_nette_kg": 0.008,
+          "achat_kg": 0.009411764705882354,
+          "prix_livre_estime_usd_kg": 9.232800000000001,
+          "cout_usd": 0.08689694117647061
+        }
+      ],
+      "fournitures": {
+        "fil": 0.04,
+        "etiquettes_taille_entretien": 0.06
+      },
+      "prix_depart_atelier_xof_ht": 1800
+    },
+    {
+      "nom": "Débardeur / marcel",
+      "id": "marcel",
+      "part": 0.2,
+      "prix_usd_kg": 2.0476342199260014,
+      "matieres_usd_kg": 1.198525929411765,
+      "process_usd_kg": 0.16,
+      "nomenclature": [
+        {
+          "code": "jersey_coton",
+          "masse_nette_kg": 0.1,
+          "achat_kg": 0.11764705882352942,
+          "prix_livre_estime_usd_kg": 8.6874,
+          "cout_usd": 1.0220470588235295
+        },
+        {
+          "code": "jersey_stretch",
+          "masse_nette_kg": 0.008,
+          "achat_kg": 0.009411764705882354,
+          "prix_livre_estime_usd_kg": 10.25088,
+          "cout_usd": 0.0964788705882353
+        }
+      ],
+      "fournitures": {
+        "fil": 0.03,
+        "etiquettes_taille_entretien": 0.05
+      },
+      "prix_depart_atelier_xof_ht": 1200
+    },
+    {
+      "nom": "Slip homme simple",
+      "id": "slip_homme",
+      "part": 0.1,
+      "prix_usd_kg": 1.2797713874537506,
+      "matieres_usd_kg": 0.8329929411764707,
+      "process_usd_kg": 0.16,
+      "nomenclature": [
+        {
+          "code": "jersey_stretch",
+          "masse_nette_kg": 0.05,
+          "achat_kg": 0.05882352941176471,
+          "prix_livre_estime_usd_kg": 10.25088,
+          "cout_usd": 0.6029929411764707
+        }
+      ],
+      "fournitures": {
+        "elastique": 0.16,
+        "fil": 0.03,
+        "etiquettes_taille_entretien": 0.04
+      },
+      "prix_depart_atelier_xof_ht": 750
+    },
+    {
+      "nom": "Culotte femme simple, fond coton",
+      "id": "culotte_femme",
+      "part": 0.1,
+      "prix_usd_kg": 0.8531809249691672,
+      "matieres_usd_kg": 0.5412776,
+      "process_usd_kg": 0.16,
+      "nomenclature": [
+        {
+          "code": "jersey_stretch",
+          "masse_nette_kg": 0.027,
+          "achat_kg": 0.031764705882352945,
+          "prix_livre_estime_usd_kg": 10.25088,
+          "cout_usd": 0.32561618823529415
+        },
+        {
+          "code": "jersey_coton",
+          "masse_nette_kg": 0.003,
+          "achat_kg": 0.0035294117647058825,
+          "prix_livre_estime_usd_kg": 8.6874,
+          "cout_usd": 0.030661411764705885
+        }
+      ],
+      "fournitures": {
+        "elastique": 0.12,
+        "fil": 0.025,
+        "etiquettes_taille_entretien": 0.04
+      },
+      "prix_depart_atelier_xof_ht": 500
+    }
+  ],
+  "dimensionnement": {
+    "capacite_unites_h": 93,
+    "goulot": "colletage",
+    "capacites_unites_h": {
+      "coupe": 145.79439252336448,
+      "surjet": 131.64556962025316,
+      "recouvrement": 132.20338983050846,
+      "colletage": 93.97590361445783,
+      "zigzag": 433.33333333333326,
+      "piqueuses": 519.9999999999999,
+      "repassage": 183.52941176470586,
+      "controle_conditionnement": 124.46808510638296,
+      "personnel_polyvalent": 112.10287443267774
+    },
+    "plafond_annuel": 186000,
+    "qualification": "Temps par article, assortiment, efficacité 65 % et effectif = hypothèses P2I. Le goulot partagé et la limite de personnel bornent les volumes ; points/minute non convertis en pièces garanties."
+  },
+  "fixes_industriels_A1_usd": 73100,
+  "personnel_industriel_A1_usd": 60480,
+  "sensibilites": {
+    "prix_vente_moins_10": {
+      "annuel": [
+        {
+          "annee": 1,
+          "production_pieces": 150000,
+          "ventes_pieces": 145500,
+          "chiffre_affaires_usd": 322882.48174041905,
+          "cout_ventes_usd": 308135.3770611765,
+          "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
+          "autres_charges_usd": 6000,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 3668.1739262,
+          "is_usd": 0,
+          "resultat_net_usd": -35863.02034695746,
+          "marge_nette": -0.11107143426811707,
+          "roi_capex": -0.4973134694129296,
+          "rendement_besoin_total": -0.1967814402964996
+        },
+        {
+          "annee": 2,
+          "production_pieces": 165000,
+          "ventes_pieces": 165000,
+          "chiffre_affaires_usd": 366155.39166439255,
+          "cout_ventes_usd": 352289.97284727474,
+          "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
+          "autres_charges_usd": 6180,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2860.5026030000017,
+          "is_usd": 0,
+          "resultat_net_usd": -37125.03488588219,
+          "marge_nette": -0.10139147403272412,
+          "roi_capex": -0.5148138590268083,
+          "rendement_besoin_total": -0.20370615093832928
+        },
+        {
+          "annee": 3,
+          "production_pieces": 175000,
+          "ventes_pieces": 175000,
+          "chiffre_affaires_usd": 388346.62752284075,
+          "cout_ventes_usd": 380069.9334168937,
+          "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
+          "autres_charges_usd": 6365.399999999999,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2052.8312798000034,
+          "is_usd": 0,
+          "resultat_net_usd": -43129.72827385296,
+          "marge_nette": -0.11105987593858085,
+          "roi_capex": -0.5980811040229751,
+          "rendement_besoin_total": -0.23665407897094415
+        }
+      ],
+      "financement": {
+        "apport": 21634.0533,
+        "dette": 50479.4577,
+        "apport_reserve": 110134.47078588899,
+        "apport_total": 131768.524085889,
+        "besoin_total": 182247.981785889,
+        "total_ressources": 182247.981785889,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "controle": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -1.1641532182693481e-10,
+        4.3655745685100555e-11,
+        -5.093170329928398e-11
+      ],
+      "prix_cible_non_applique": {
+        "statut": "ajustement_a_etudier",
+        "prix_cible": 2.844928644626301,
+        "prix_actuel": 2.219123585844804,
+        "marge_cible": 0.1,
+        "roi_cible": 0.15,
+        "qualification": "Prix mathématique indicatif, à comparer aux prix de marché ; volumes et coûts inchangés. Non appliqué automatiquement."
+      }
+    },
+    "matieres_fournitures_plus_20": {
+      "annuel": [
+        {
+          "annee": 1,
+          "production_pieces": 150000,
+          "ventes_pieces": 145500,
+          "chiffre_affaires_usd": 358758.3130449099,
+          "cout_ventes_usd": 350925.0524734118,
+          "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
+          "autres_charges_usd": 6000,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 3668.1739262,
+          "is_usd": 0,
+          "resultat_net_usd": -42776.86445470186,
+          "marge_nette": -0.11923588359985121,
+          "roi_capex": -0.5931879319355545,
+          "rendement_besoin_total": -0.21380133698267517
+        },
+        {
+          "annee": 2,
+          "production_pieces": 165000,
+          "ventes_pieces": 165000,
+          "chiffre_affaires_usd": 406839.3240715473,
+          "cout_ventes_usd": 402230.37649277656,
+          "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
+          "autres_charges_usd": 6180,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2860.5026030000017,
+          "is_usd": 0,
+          "resultat_net_usd": -46381.50612422925,
+          "marge_nette": -0.11400448132706202,
+          "roi_capex": -0.6431735950871849,
+          "rendement_besoin_total": -0.23181755247936073
+        },
+        {
+          "annee": 3,
+          "production_pieces": 175000,
+          "ventes_pieces": 175000,
+          "chiffre_affaires_usd": 431496.25280315627,
+          "cout_ventes_usd": 434628.5193850388,
+          "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
+          "autres_charges_usd": 6365.399999999999,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2052.8312798000034,
+          "is_usd": 0,
+          "resultat_net_usd": -54538.68896168255,
+          "marge_nette": -0.12639435130057197,
+          "roi_capex": -0.756289469274108,
+          "rendement_besoin_total": -0.27258764208016484
+        }
+      ],
+      "financement": {
+        "apport": 21634.0533,
+        "dette": 50479.4577,
+        "apport_reserve": 127964.11741150136,
+        "apport_total": 149598.17071150136,
+        "besoin_total": 200077.62841150136,
+        "total_ressources": 200077.62841150136,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "controle": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        8.731149137020111e-11,
+        1.7462298274040222e-10,
+        2.9467628337442875e-10
+      ],
+      "prix_cible_non_applique": {
+        "statut": "ajustement_a_etudier",
+        "prix_cible": 3.1842599325901007,
+        "prix_actuel": 2.465692873160893,
+        "marge_cible": 0.1,
+        "roi_cible": 0.15,
+        "qualification": "Prix mathématique indicatif, à comparer aux prix de marché ; volumes et coûts inchangés. Non appliqué automatiquement."
+      }
+    },
+    "production_ventes_moins_25_fixes_conserves": {
+      "annuel": [
+        {
+          "annee": 1,
+          "production_pieces": 112500,
+          "ventes_pieces": 109125,
+          "chiffre_affaires_usd": 269068.7347836825,
+          "cout_ventes_usd": 248828.28279588232,
+          "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
+          "autres_charges_usd": 6000,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 3668.1739262,
+          "is_usd": 0,
+          "resultat_net_usd": -30369.67303839981,
+          "marge_nette": -0.1128695723894323,
+          "roi_capex": -0.42113707427724345,
+          "rendement_besoin_total": -0.18699315606005787
+        },
+        {
+          "annee": 2,
+          "production_pieces": 123750,
+          "ventes_pieces": 123750,
+          "chiffre_affaires_usd": 305129.49305366055,
+          "cout_ventes_usd": 283075.6170700804,
+          "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
+          "autres_charges_usd": 6180,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2860.5026030000017,
+          "is_usd": 0,
+          "resultat_net_usd": -28936.577719419867,
+          "marge_nette": -0.0948337619868527,
+          "roi_capex": -0.401264302876889,
+          "rendement_besoin_total": -0.1781692541269643
+        },
+        {
+          "annee": 3,
+          "production_pieces": 131250,
+          "ventes_pieces": 131250,
+          "chiffre_affaires_usd": 323622.18960236723,
+          "cout_ventes_usd": 304455.2098521885,
+          "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
+          "autres_charges_usd": 6365.399999999999,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2052.8312798000034,
+          "is_usd": 0,
+          "resultat_net_usd": -32239.442629621248,
+          "marge_nette": -0.09962061831802593,
+          "roi_capex": -0.4470652195761381,
+          "rendement_besoin_total": -0.19850576327599787
+        }
+      ],
+      "financement": {
+        "apport": 21634.0533,
+        "dette": 50479.4577,
+        "apport_reserve": 90297.1016571059,
+        "apport_total": 111931.1549571059,
+        "besoin_total": 162410.6126571059,
+        "total_ressources": 162410.6126571059,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "controle": {
+        "bilans_equilibres": true,
+        "bfr_mois": 36,
+        "tresorerie_mois": 12,
+        "financement": "30/70"
+      },
+      "ecart_bilans": [
+        -1.1641532182693481e-10,
+        -2.0372681319713593e-10,
+        -2.6193447411060333e-10
+      ],
+      "prix_cible_non_applique": {
+        "statut": "ajustement_a_etudier",
+        "prix_cible": 3.166147584690271,
+        "prix_actuel": 2.465692873160893,
+        "marge_cible": 0.1,
+        "roi_cible": 0.15,
+        "qualification": "Prix mathématique indicatif, à comparer aux prix de marché ; volumes et coûts inchangés. Non appliqué automatiquement."
+      }
+    }
+  },
+  "reperes_10_marge_15_roi_atteints": false
+}

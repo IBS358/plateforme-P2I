@@ -1,6 +1,6 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const data=require('../data/p2i-bp-decouverte-donnees.json'),archive=require('../data/archives/p2i-conserverie-verre-2026-10-28.json'),lot=require('../data/p2i-bp-lot-agro-01.json');
+const data=require('./helpers/avant-paie-ci.cjs')(require('../data/p2i-bp-decouverte-donnees.json')),archive=require('../data/archives/p2i-conserverie-verre-2026-10-28.json'),lot=require('../data/p2i-bp-lot-agro-01.json');
 const u=data.unites.conserverie_legumes,v=u.variantes.reference,p=lot.profils.conserverie_legumes,s=v.reference;
 assert.equal(s.nom,'Sauce tomate — poche stérilisable 1 kg');assert.equal(s.production.length,3);assert.equal(v.visuels.atlas,'conserverie-poche');assert.equal(new Set(v.visuels.indices).size,7);assert.equal(v.visuels.product_index,8);
 assert.ok(Math.abs(v.emballage.cout_usd_par_emballage-(.17054/.98))<1e-12);assert.ok(Math.abs(v.emballage.cout_usd_par_kg-(.17054/.98))<1e-12);

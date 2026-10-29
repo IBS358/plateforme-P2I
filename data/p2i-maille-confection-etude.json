@@ -192,21 +192,23 @@
     }
   ],
   "production_annuelle_pieces": [
-    150000,
-    165000,
-    175000
+    400000,
+    450000,
+    490000
   ],
   "part_vendue_A1": 0.97,
-  "effectif_productif": 19,
+  "effectif_productif": 24,
   "salaires_charges_industriels_usd_an": {
-    "operateurs_polyvalents": 54720.0,
-    "chef_atelier": 5760.0
+    "operateurs_equipe1_ancienne_provision": 69120,
+    "operateurs_equipe2_ancienne_provision": 76032,
+    "chef_equipe1_ancienne_provision": 5760,
+    "chef_equipe2_ancienne_provision": 6336
   },
   "autres_fixes_industriels_usd_an": {
-    "loyer": 7200,
-    "maintenance": 2400,
-    "energie_fixe": 1800,
-    "autres": 1120
+    "loyer": 9000,
+    "maintenance": 4800,
+    "energie_fixe": 5500,
+    "autres": 3600
   },
   "packaging_usd_piece": {
     "bande_papier": 0.025,
@@ -219,15 +221,17 @@
     "livraison_distribution": 0.04
   },
   "programme_commercial": {
-    "qualification": "Hypothèse P2I de démarrage renforcé, pas commandes acquises ; aucune vente export ajoutée.",
+    "qualification": "Scénario P2I redimensionné : deux équipes distinctes de 24 opérateurs et un chef chacune, 8 h/équipe sur 250 jours. Majoration budgétaire de 10 % du brut de la seconde équipe, pas taux légal certifié. Volumes commerciaux supposés, pas commandes acquises.",
     "jours_an": 250,
-    "reference": "renforce_150000",
+    "reference": "deux_equipes_400000",
     "comparaisons_internes_A1_pieces": [
-      120000,
-      150000,
-      175000,
-      186000
+      300000,
+      350000,
+      400000,
+      450000
     ],
     "suggestion_export": "Étudier des distributeurs dans les pays limitrophes, après chiffrage du transport, des formalités et des règlements. Aucune recette export intégrée à cette simulation."
-  }
+  },
+  "equipes": 2,
+  "effectif_productif_total": 48
 }

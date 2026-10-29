@@ -2,6 +2,7 @@
 const fs=require('fs'),vm=require('vm'),path=require('path'),assert=require('assert/strict');
 const root=path.resolve(__dirname,'..'),c=vm.createContext({});c.window=c;
 for(const f of ['up-data.js','machines-data.js','js/p2i-economic-result-engine.js','js/p2i-financial-engine.js','js/p2i-bp-decouverte-bfr-engine.js','js/p2i-bp-decouverte-tresorerie-12-mois.js','js/p2i-bp-decouverte-simulation-commune.js','js/p2i-bp-decouverte-donnees.js','js/p2i-bp-decouverte-v108-contexte.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),c);
+c.P2I_BP_DONNEES=require('./helpers/avant-paie-ci.cjs')(c.P2I_BP_DONNEES);
 const clone=x=>JSON.parse(JSON.stringify(x)),d=c.P2I_BP_DONNEES,api=c.P2I_BP_SIMULATION_COMMUNE,lot=require('../data/p2i-bp-lot-textile-01.json'),arch=require('../data/archives/p2i-textile-avant-regroupement-2026-10-29.json'),{dimensionner}=require('../scripts/p2i-textile-commun.cjs');
 const registry=vm.runInContext('P2I_UP_DATA',c);assert.equal(Object.keys(registry).length,96);
 for(const id of ['uniformes','linge','broderie']){assert.ok(!Object.keys(registry).includes(id));assert.equal(registry[id].nom,arch.unites[id].nom);assert.equal(d.migrations_textile[id].up_id,'confection');}

@@ -2,6 +2,7 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert/strict'),path=require('path');
 const root=path.resolve(__dirname,'..'),c=vm.createContext({});c.window=c;
 for(const f of ['js/p2i-economic-result-engine.js','js/p2i-financial-engine.js','js/p2i-bp-decouverte-bfr-engine.js','js/p2i-bp-decouverte-tresorerie-12-mois.js','js/p2i-bp-decouverte-simulation-commune.js','js/p2i-bp-decouverte-donnees.js','js/p2i-bp-decouverte-v108-contexte.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),c);
+c.P2I_BP_DONNEES=require('./helpers/avant-paie-ci.cjs')(c.P2I_BP_DONNEES);
 const api=c.P2I_BP_SIMULATION_COMMUNE,clone=x=>JSON.parse(JSON.stringify(x));let count=0;
 const baseline=require('./fixtures/p2i-avant-manutention-2026-10-28.json');
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,`${a} != ${b}`);

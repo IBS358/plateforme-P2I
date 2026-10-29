@@ -1,0 +1,1135 @@
+{
+  "schema": "p2i.paie-ci-profils.v1",
+  "date": "2026-10-29",
+  "profils": {
+    "conserverie_legumes__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 5,
+          "brut_mensuel_usd": 350,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 700,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 25200,
+      "administration_deja_incluse_A1_usd": 9660,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "biscuiterie__crackers": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 13,
+          "brut_mensuel_usd": 347.22222222222223,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_commercial",
+          "role": "administration",
+          "effectif": 3,
+          "brut_mensuel_usd": 500,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 3000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 65000,
+      "administration_deja_incluse_A1_usd": 20700,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "biscuiterie__biscuits_mous": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 13,
+          "brut_mensuel_usd": 347.22222222222223,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_commercial",
+          "role": "administration",
+          "effectif": 3,
+          "brut_mensuel_usd": 500,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 3000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 65000,
+      "administration_deja_incluse_A1_usd": 20700,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "biscuiterie__biscuits_durs": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 13,
+          "brut_mensuel_usd": 347.22222222222223,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_commercial",
+          "role": "administration",
+          "effectif": 3,
+          "brut_mensuel_usd": 500,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 3000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 65000,
+      "administration_deja_incluse_A1_usd": 20700,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "boulangerie_industrielle__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 2,
+          "brut_mensuel_usd": 416.6666666666667,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 416.6666666666667,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 1500,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 12000,
+      "administration_deja_incluse_A1_usd": 6000,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "jus_boissons__reference": {
+      "cohortes": [
+        {
+          "id": "operateurs",
+          "role": "industrie",
+          "effectif": 6,
+          "brut_mensuel_usd": 350,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 28980,
+      "administration_deja_incluse_A1_usd": 0,
+      "taux_atmp": 0.05,
+      "qualification": "Effectifs et bruts repris des hypothèses P2I explicites ; administration éventuellement reconstituée."
+    },
+    "mini_laiterie__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 5,
+          "brut_mensuel_usd": 350,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 25200,
+      "administration_deja_incluse_A1_usd": 0,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "huiles_alimentaires__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 3,
+          "brut_mensuel_usd": 347.22222222222223,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 416.6666666666667,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 15000,
+      "administration_deja_incluse_A1_usd": 6000,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "epices__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 1,
+          "brut_mensuel_usd": 354.1666666666667,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 250.00000000000003,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 1500,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 5100,
+      "administration_deja_incluse_A1_usd": 3600,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "aliments_betail__reference": {
+      "cohortes": [
+        {
+          "id": "operateurs",
+          "role": "industrie",
+          "effectif": 4,
+          "brut_mensuel_usd": 300,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 1500,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 16560,
+      "administration_deja_incluse_A1_usd": 0,
+      "taux_atmp": 0.05,
+      "qualification": "Effectifs et bruts repris des hypothèses P2I explicites ; administration éventuellement reconstituée."
+    },
+    "detergents__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 8,
+          "brut_mensuel_usd": 338.5416666666667,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 2,
+          "brut_mensuel_usd": 416.6666666666667,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 39000,
+      "administration_deja_incluse_A1_usd": 12000,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "savonnerie__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 2,
+          "brut_mensuel_usd": 375.00000000000006,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 312.50000000000006,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 1500,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 10800,
+      "administration_deja_incluse_A1_usd": 4500,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "cosmetiques__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 7,
+          "brut_mensuel_usd": 327.3809523809524,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 2,
+          "brut_mensuel_usd": 416.6666666666667,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 33000,
+      "administration_deja_incluse_A1_usd": 12000,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "peintures__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 12,
+          "brut_mensuel_usd": 347.22222222222223,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 3,
+          "brut_mensuel_usd": 416.6666666666667,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 3000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 60000,
+      "administration_deja_incluse_A1_usd": 18000,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "adhesifs__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 7,
+          "brut_mensuel_usd": 357.1428571428572,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 2,
+          "brut_mensuel_usd": 416.6666666666667,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 36000,
+      "administration_deja_incluse_A1_usd": 12000,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "engrais__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 9,
+          "brut_mensuel_usd": 347.22222222222223,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 3,
+          "brut_mensuel_usd": 416.6666666666667,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 3000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 45000,
+      "administration_deja_incluse_A1_usd": 18000,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "javel__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 7,
+          "brut_mensuel_usd": 327.3809523809524,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 2,
+          "brut_mensuel_usd": 520.8333333333334,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 33000,
+      "administration_deja_incluse_A1_usd": 15000,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "produits_industriels__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 17,
+          "brut_mensuel_usd": 343.13725490196083,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 3,
+          "brut_mensuel_usd": 578.7037037037038,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 84000,
+      "administration_deja_incluse_A1_usd": 25000,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "confection__reference": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 21,
+          "brut_mensuel_usd": 277.77777777777777,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 700,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 84000,
+      "administration_deja_incluse_A1_usd": 9660,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "confection__linge_simple": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 21,
+          "brut_mensuel_usd": 194.44444444444446,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 700,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 58800,
+      "administration_deja_incluse_A1_usd": 9660,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "confection__linge_brode": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 21,
+          "brut_mensuel_usd": 218.25396825396828,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 700,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 66000,
+      "administration_deja_incluse_A1_usd": 9660,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "confection__uniformes_simples": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 21,
+          "brut_mensuel_usd": 250.7936507936508,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 700,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 75840,
+      "administration_deja_incluse_A1_usd": 9660,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "confection__uniformes_brodes": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 21,
+          "brut_mensuel_usd": 274.60317460317464,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 700,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 83040,
+      "administration_deja_incluse_A1_usd": 9660,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "confection__pret_a_porter": {
+      "cohortes": [
+        {
+          "id": "production_reconstituee",
+          "role": "industrie",
+          "effectif": 21,
+          "brut_mensuel_usd": 223.41269841269843,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 700,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 67560,
+      "administration_deja_incluse_A1_usd": 9660,
+      "taux_atmp": 0.05,
+      "qualification": "Reconstitution budgétaire P2I : part salariale industrielle estimée à 60 % des fixes (biscuiterie : enveloppe de 65 000 USD), ancienne majoration supposée 20 %, solde des fixes conservé. Effectif et salaire moyen estimés, à confirmer ; pas de salaires observés."
+    },
+    "tricotage__reference": {
+      "cohortes": [
+        {
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "id": "operateurs_equipe1",
+          "role": "industrie",
+          "effectif": 24,
+          "brut_mensuel_usd": 200,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "id": "chef_equipe1",
+          "role": "industrie",
+          "effectif": 1,
+          "brut_mensuel_usd": 400,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "id": "operateurs_equipe2",
+          "role": "industrie",
+          "effectif": 24,
+          "brut_mensuel_usd": 220,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "id": "chef_equipe2",
+          "role": "industrie",
+          "effectif": 1,
+          "brut_mensuel_usd": 440,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "id": "administration",
+          "role": "administration",
+          "effectif": 2,
+          "brut_mensuel_usd": 400,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 2000,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 157248,
+      "administration_deja_incluse_A1_usd": 11520,
+      "taux_atmp": 0.05,
+      "qualification": "Effectifs/bruts P2I du redimensionnement à deux équipes ; 53 personnes incluant le dirigeant. Primes et salaires estimés, pas grille conventionnelle attestée ; sources et plafonds de paie CI distincts."
+    },
+    "non_tisses__reference": {
+      "cohortes": [
+        {
+          "id": "operateurs",
+          "role": "industrie",
+          "effectif": 5,
+          "brut_mensuel_usd": 300,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "technicien",
+          "role": "industrie",
+          "effectif": 1,
+          "brut_mensuel_usd": 500,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 333.33333333333337,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 1500,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 28800,
+      "administration_deja_incluse_A1_usd": 4800,
+      "taux_atmp": 0.05,
+      "qualification": "Effectifs et bruts repris des hypothèses P2I explicites ; administration éventuellement reconstituée."
+    },
+    "recyclage_textile__reference": {
+      "cohortes": [
+        {
+          "id": "operateurs_tri",
+          "role": "industrie",
+          "effectif": 4,
+          "brut_mensuel_usd": 300,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "chef_atelier",
+          "role": "industrie",
+          "effectif": 1,
+          "brut_mensuel_usd": 350,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "administration_reconstituee",
+          "role": "administration",
+          "effectif": 1,
+          "brut_mensuel_usd": 250.00000000000003,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        },
+        {
+          "id": "dirigeant",
+          "role": "direction",
+          "effectif": 1,
+          "brut_mensuel_usd": 1500,
+          "croissance": 0.03,
+          "personnes_cmu": 1,
+          "parts_its": 1,
+          "statut": "salarie_local",
+          "gratification_mois_brut": 0.75
+        }
+      ],
+      "industrie_deja_incluse_A1_usd": 22320,
+      "administration_deja_incluse_A1_usd": 3600,
+      "taux_atmp": 0.05,
+      "qualification": "Effectifs et bruts repris des hypothèses P2I explicites ; administration éventuellement reconstituée."
+    }
+  }
+}

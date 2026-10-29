@@ -1,0 +1,75 @@
+{
+  "schema": "p2i.paie-ci-regles.v1",
+  "consulte_le": "2026-10-29",
+  "devise": "XOF",
+  "smig_mensuel": 75000,
+  "plafond_retraite": 3375000,
+  "plafond_autres_cnps": 75000,
+  "retraite_employeur": 0.077,
+  "retraite_salarie": 0.063,
+  "prestations_familiales": 0.05,
+  "maternite": 0.0075,
+  "cmu_personne_employeur": 500,
+  "cmu_personne_salarie": 500,
+  "contribution_employeur_local": 0.028,
+  "its_tranches": [
+    [
+      75000,
+      0
+    ],
+    [
+      240000,
+      0.16
+    ],
+    [
+      800000,
+      0.21
+    ],
+    [
+      2400000,
+      0.24
+    ],
+    [
+      8000000,
+      0.28
+    ],
+    [
+      null,
+      0.32
+    ]
+  ],
+  "ricf_demi_part": 5500,
+  "sources": [
+    {
+      "titre": "CNPS — plafonds à compter du 1er janvier 2023",
+      "url": "https://www.cnps.ci/wp-content/uploads/2023/01/NOUVEAU-PLAFOND-DES-COTISATIONS-SOCIALES-DE-LA-CNPS.pdf",
+      "portee": "75 000 FCFA plancher et plafond hors retraite ; 3 375 000 FCFA plafond retraite. Prévaut sur les anciens plafonds encore visibles sur la page employeur."
+    },
+    {
+      "titre": "CNPS — taux, assiette et périodicité",
+      "url": "https://www.cnps.ci/employeur/",
+      "portee": "Retraite 7,7 % employeur / 6,3 % salarié ; PF 5 %, maternité 0,75 %, AT/MP 2–5 %. Échéance mensuelle à partir de 20 salariés, trimestrielle en dessous. Les anciens plafonds affichés sur cette page ne sont pas repris."
+    },
+    {
+      "titre": "DGI — système fiscal ivoirien",
+      "url": "https://dgi.gouv.ci/assets/documents/LE%20SYSTEME%20FISCAL%20IVOIRIEN.pdf",
+      "portee": "ITS progressif sur brut imposable, RICF par parts ; contribution employeur. Hypothèse salaires entièrement imposables, sans indemnité exonérée."
+    },
+    {
+      "titre": "DGI — maintien des contributions employeur, annexe fiscale 2025",
+      "url": "https://dgi.gouv.ci/assets/documents/EBOOK/BODGI_2025/files/basic-html/page40.html",
+      "portee": "Taux d'usage global local 2,8 %, expatrié 12 %. Le modèle ne traite que le personnel local ; ne pas ajouter les taxes FDFP une seconde fois au taux global."
+    },
+    {
+      "titre": "Service public — cotisations CMU",
+      "url": "https://servicepublic.gouv.ci/accueil/detaildemarcheparticulier/3/189/",
+      "portee": "1 000 FCFA par personne, moitié employeur/moitié salarié ; ayants droit à paramétrer, dans les limites légales."
+    },
+    {
+      "titre": "Convention collective interprofessionnelle — article 53, texte publié par le ministère de l’Économie",
+      "url": "https://www.economie-ivoirienne.ci/sites/default/files/sites/default/files/inline-files/Loi%20n%C2%B0%202015-532%20du%2020%20juillet%202015%20portant%20code%20du%20Travail.pdf",
+      "portee": "Gratification minimale de 3/4 du salaire minimum conventionnel mensuel de la catégorie lorsque la convention s’applique. Le modèle provisionne prudemment 75 % du brut mensuel retenu, supérieur ou égal à cette base sous réserve de la catégorie. Versement lissé mensuellement par convention de simulation, à adapter au calendrier réel."
+    }
+  ],
+  "limites": "Calcul prévisionnel pour salariés locaux à salaire mensuel constant sur chaque exercice ; dirigeant supposé salarié, statut juridique à confirmer. Salaires, avantages et effectifs restent des hypothèses P2I. Pas de paie définitive, de certification ni de contrôle des minima catégoriels de convention collective. AT/MP retenu à 5 % par prudence, taux notifié à confirmer. CMU : une personne couverte par salarié par défaut ; ayants droit à préciser. ITS par défaut à une part, net personnel indicatif. Échéances modélisées au mois suivant pour CNPS/CMU et fiscalité salariale, trimestriel CNPS sous 20 salariés ; dates exactes et particularités de régime à approfondir. Sources sociales/fiscales datées 2023–2025 consultées en 2026 ; pas d'exhaustivité réglementaire revendiquée. Gratification budgétée à 0,75 mois du brut annuel de référence, provision et versement lissés mensuellement. Minima catégoriels, primes obligatoires, transport et avantages à ventiler dans les enveloppes de rémunération ; aucune exonération d’assiette revendiquée."
+}

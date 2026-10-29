@@ -1,6 +1,7 @@
 'use strict';
 const fs=require('fs'),vm=require('vm'),assert=require('assert/strict'),crypto=require('crypto'),path=require('path'),root=path.resolve(__dirname,'..'),c={};c.window=c;vm.createContext(c);
 for(const f of ['js/p2i-economic-result-engine.js','js/p2i-financial-engine.js','js/p2i-bp-decouverte-bfr-engine.js','js/p2i-bp-decouverte-tresorerie-12-mois.js','js/p2i-bp-decouverte-simulation-commune.js','js/p2i-bp-decouverte-donnees.js','js/p2i-bp-decouverte-v108-contexte.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),c);
+c.P2I_BP_DONNEES=require('./helpers/avant-paie-ci.cjs')(c.P2I_BP_DONNEES);
 const clone=x=>JSON.parse(JSON.stringify(x)),hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex'),d=c.P2I_BP_DONNEES,calc=c.P2I_BP_SIMULATION_COMMUNE.calculer;
 for(const b of require('../data/archives/p2i-finances-avant-textile-fibres-2026-10-29.json').scenarios){const s=clone(d.unites[b.up_id].variantes[b.configuration].reference);delete s.remuneration_dirigeant;assert.equal(hash(s),b.input_sha256,'Entrées historiques conservées');assert.equal(hash(calc(s)),b.resultat_sha256,'Anciennes sorties financières conservées, stocks mensuels compris');}
 const lot=require('../data/p2i-bp-lot-textile-fibres.json'),{dimensionnerFibres}=require('../scripts/p2i-textile-commun.cjs');

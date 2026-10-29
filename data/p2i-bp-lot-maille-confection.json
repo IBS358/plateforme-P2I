@@ -39,7 +39,7 @@
           "description": "Quatre recouvreuses JACK W4-D-01."
         },
         {
-          "description": "Deux colleteuses JACK W4-D-02, guides adaptés à la bande."
+          "description": "Trois colleteuses JACK W4-D-02, guides adaptés à la bande ; parc partagé entre les deux équipes distinctes."
         },
         {
           "description": "Deux JACK 20U-93Z ; guidage manuel des élastiques, pas d’automate fictif."
@@ -117,7 +117,7 @@
           "nom": "JACK W4-D-02 — colletage",
           "prix_retenu": 1450,
           "devise": "EUR",
-          "quantite": 2,
+          "quantite": 3,
           "prix_par_unite": true
         },
         {
@@ -156,14 +156,14 @@
       "unite_production": "pièce",
       "capacite_unites_h": 1,
       "production_explicite": [
-        150000,
-        165000,
-        175000
+        400000,
+        450000,
+        490000
       ],
       "ventes_explicites": [
-        145500,
-        165000,
-        175000
+        388000,
+        450000,
+        490000
       ],
       "prix_vente_usd_unite": [
         1,
@@ -172,9 +172,9 @@
       ],
       "matieres_usd_unite": 1,
       "cout_process_usd_unite": 0.16,
-      "fixes_industriels_an": 73000.0,
-      "personnel_hors_cout_industriel": 4800,
-      "charges_fixes_hors_industriel": 6000,
+      "fixes_industriels_an": 180148,
+      "personnel_hors_cout_industriel": 11520,
+      "charges_fixes_hors_industriel": 16000,
       "stock_matieres_jours": 60,
       "emballage_produit": {
         "statut": "hypothese_P2I",
@@ -194,26 +194,26 @@
         "assurance": 300,
         "douane_transit": 5000,
         "transport_local": 1200,
-        "amenagement_site": 9000,
-        "utilites": 5500,
-        "installation_formation": 4500,
+        "amenagement_site": 10500,
+        "utilites": 6500,
+        "installation_formation": 6000,
         "pieces_initiales": 1500,
         "securite_environnement": 3000,
         "etudes_essais": 2500,
         "table_coupe_auxiliaires": 4000,
-        "rayonnage_stockage": 3500,
+        "rayonnage_stockage": 4500,
         "patronage_informatique": 2500
       },
       "methodes": {
         "produits_reference": "Assortiment en pièces : 60 % tee-shirts col rond, 20 % marcels, 10 % slips homme, 10 % culottes femme simples. Séries successives, pas quatre ateliers à pleine capacité simultanée.",
         "prix_vente": "Prix départ atelier HT : tee-shirt 1 800 FCFA, marcel 1 200, slip 750, culotte 500. Hypothèses P2I inférieures aux repères de détail pour les trois premiers ; concurrence particulièrement forte sur les culottes. Prix constants sur trois ans, non relevés pour atteindre une marge cible.",
         "matieres": "Nomenclature par article : masses nettes de tissu divisées par rendement de coupe 85 %, plus fils, élastiques et étiquettes. Prix des mailles au kg issus de catalogues, fret/import/local estimés séparément. Masses selon patron moyen à vérifier par taille ; pas de recette sur les chutes.",
-        "personnel": "19 opérateurs productifs polyvalents à 200 USD/mois et un chef à 400, majorés de 20 % par hypothèse P2I ; personnel administratif 4 800 USD/an séparé. Effectif partagé, pas un salarié permanent par machine.",
+        "personnel": "Deux équipes distinctes de 24 opérateurs et un chef, soit 48 opérateurs, 2 chefs, 2 administratifs et 1 dirigeant. Bruts mensuels P2I : opérateurs 200 USD en équipe 1 et 220 en équipe 2 ; chefs 400 et 440 ; administration 2 × 400 ; direction 2 000. Majoration budgétaire équipe 2 de 10 %, pas prime légale validée. Cotisations et contributions recalculées par la paie CI ; anciennes enveloppes majorées de 20 % remplacées, pas cumulées.",
         "process": "Énergie 0,025, aiguilles/huile 0,015, livraison 0,040 et emballages 0,080 USD par pièce ; fils inclus dans la matière, pas une seconde fois ici. Loyer et maintenance dans les fixes industriels.",
-        "production": "Une équipe 8 h/j et 250 j/an ; efficacité productive 65 %. Temps par article et parts de gamme explicites. La capacité retient le minimum des postes partagés et de la disponibilité totale des 19 opérateurs. Volumes commerciaux supposés, pas commandes acquises. Programme renforcé : 150 000, 165 000 et 175 000 pièces produites ; 97 % vendus en A1, puis ventes égales à la production en A2/A3, stock de sécurité fini maintenu. Les ventes supplémentaires exigent des débouchés commerciaux ; aucune remise ni prime export présumée.",
+        "production": "Deux équipes distinctes de 8 h sur 250 jours, efficacité productive 65 %. Goulot calculé par équipe avec une troisième colleteuse et 4 moyens de contrôle/conditionnement ; capacité annuelle multipliée par 2, pas cadence horaire simultanée doublée. Production 400 000 / 450 000 / 490 000 pièces ; ventes A1 388 000, stock final 12 000, ensuite ventes égales à production. Organisation horaire, repos et majorations à approfondir ; pas heures supplémentaires implicites des mêmes salariés.",
         "qualite": "Mailles achetées finies et stabilisées ; relaxation avant coupe, contrôle rétrécissement/dégorgement, coutures extensibles et tailles. Fond de culotte en jersey coton distinct. Aucun label sanitaire, bio ou antibactérien présumé.",
         "complements": "Provisions P2I sur locaux loués et installations ; ensemble de machines tarifées individuellement, pas ligne automatique intégrée. Tables, bâti, moteurs et chaudières déjà inclus ne sont pas rachetés en double.",
-        "charges": "Hors coûts industriels : personnel administratif 4 800 et autres charges 6 000 USD/an. Charges +3 %/an ; prix constants. Stock matières cible 60 jours pour achats importés ; ventilation par couleur et minima de chaque matière à approfondir."
+        "charges": "Administration brute 800 USD/mois, direction distincte, charges calculées par paie CI. Autres charges commerciales/administratives 16 000 USD/an, plus variables livraison 0,04 USD/pièce. Prix constants, charges +3 %/an. Fret matières, énergie, stockage et coûts sociaux explicites ; aucun revenu export présumé."
       },
       "sources_prix_marche": [
         {
@@ -281,7 +281,7 @@
         "risques": "Prix bas des sous-vêtements importés, invendus par taille/couleur, rétrécissement, coût livré des mailles et délais de paiement.",
         "qualite": "Coutures extensibles, contrôle de taille et lavage ; pas de certification présumée."
       },
-      "nombre_machines_reference": 22,
+      "nombre_machines_reference": 23,
       "etude_maille": "data/p2i-maille-confection-etude.json"
     }
   }

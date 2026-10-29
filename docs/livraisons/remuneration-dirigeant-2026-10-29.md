@@ -1,4 +1,4 @@
-# Rémunération du dirigeant — contrôle des UP déjà configurées
+# Ancien calcul forfaitaire du dirigeant — historique avant paie CI
 
 2026-10-29 — Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.
 
