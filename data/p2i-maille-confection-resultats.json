@@ -50,6 +50,15 @@
     "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 60 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
     "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
     "qualification": "simulation_decouverte_prix_et_hypotheses",
+    "remuneration_dirigeant": {
+      "schema": "p2i.remuneration-dirigeant.v1",
+      "brut_mensuel_usd": 2000,
+      "taux_charges": 0.2,
+      "croissance_annuelle": 0.03,
+      "deja_inclus_personnel_annuel_usd": 0,
+      "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+      "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+    },
     "investissements_detail": {
       "schema": "p2i.bp-investissements.v1",
       "postes": [
@@ -188,14 +197,15 @@
       "chiffre_affaires_usd": 358758.3130449099,
       "cout_ventes_usd": 308135.3770611765,
       "personnel_admin_usd": 4800,
+      "remuneration_dirigeant_usd": 28800,
       "autres_charges_usd": 6000,
       "amortissements_usd": 7341.951099999999,
       "interets_usd": 3668.1739262,
-      "is_usd": 7203.202739383348,
-      "resultat_net_usd": 21609.608218150042,
-      "marge_nette": 0.06023444595538869,
-      "roi_capex": 0.29966101939135986,
-      "rendement_besoin_total": 0.15266384981324052
+      "is_usd": 3.2027393833477618,
+      "resultat_net_usd": 9.608218150043285,
+      "marge_nette": 0.000026781869020664375,
+      "roi_capex": 0.00013323741996202745,
+      "rendement_besoin_total": 0.0000649406255094048
     },
     {
       "annee": 2,
@@ -204,14 +214,15 @@
       "chiffre_affaires_usd": 406839.3240715473,
       "cout_ventes_usd": 352289.97284727474,
       "personnel_admin_usd": 4944,
+      "remuneration_dirigeant_usd": 29664,
       "autres_charges_usd": 6180,
       "amortissements_usd": 7341.951099999999,
       "interets_usd": 2860.5026030000017,
-      "is_usd": 8305.724380318143,
-      "resultat_net_usd": 24917.17314095443,
-      "marge_nette": 0.061245734290357005,
-      "roi_capex": 0.3455271112920078,
-      "rendement_besoin_total": 0.17603056657761224
+      "is_usd": 889.7243803181423,
+      "resultat_net_usd": 2669.173140954427,
+      "marge_nette": 0.00656075502791127,
+      "roi_capex": 0.037013495861467995,
+      "rendement_besoin_total": 0.018040574293757293
     },
     {
       "annee": 3,
@@ -220,23 +231,24 @@
       "chiffre_affaires_usd": 431496.25280315627,
       "cout_ventes_usd": 380069.9334168937,
       "personnel_admin_usd": 5092.32,
+      "remuneration_dirigeant_usd": 30553.92,
       "autres_charges_usd": 6365.399999999999,
       "amortissements_usd": 7341.951099999999,
       "interets_usd": 2052.8312798000034,
-      "is_usd": 7643.45425161564,
-      "resultat_net_usd": 22930.36275484692,
-      "marge_nette": 0.05314151074518715,
-      "roi_capex": 0.31797595813698376,
-      "rendement_besoin_total": 0.1619944896931943
+      "is_usd": 4.974251615640242,
+      "resultat_net_usd": 14.922754846920725,
+      "marge_nette": 0.0000345837414577232,
+      "roi_capex": 0.0002069342435278283,
+      "rendement_besoin_total": 0.00010086084838510543
     }
   ],
   "financement": {
     "apport": 21634.0533,
     "dette": 50479.4577,
-    "apport_reserve": 69436.75282857433,
-    "apport_total": 91070.80612857433,
-    "besoin_total": 141550.26382857433,
-    "total_ressources": 141550.26382857433,
+    "apport_reserve": 75840.37879817895,
+    "apport_total": 97474.43209817895,
+    "besoin_total": 147953.88979817895,
+    "total_ressources": 147953.88979817895,
     "hypothese_reserve_financee_par_apport": true
   },
   "controle": {
@@ -246,13 +258,13 @@
     "financement": "30/70"
   },
   "ecart_bilans": [
-    -5.820766091346741e-11,
-    0,
-    0
+    -2.9103830456733704e-11,
+    5.820766091346741e-11,
+    4.3655745685100555e-11
   ],
   "prix_cible_non_applique": {
     "statut": "ajustement_a_etudier",
-    "prix_cible": 2.616538478091804,
+    "prix_cible": 2.844928644626301,
     "prix_actuel": 2.465692873160893,
     "marge_cible": 0.1,
     "roi_cible": 0.15,
@@ -273,14 +285,15 @@
           "chiffre_affaires_usd": 287006.65043592796,
           "cout_ventes_usd": 260689.70164894115,
           "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
           "autres_charges_usd": 6000,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 3668.1739262,
-          "is_usd": 1126.7059401967044,
-          "resultat_net_usd": 3380.1178205901133,
-          "marge_nette": 0.011777141106159485,
-          "roi_capex": 0.04687218488904407,
-          "rendement_besoin_total": 0.02563704931468964
+          "is_usd": 0,
+          "resultat_net_usd": -24293.176239213182,
+          "marge_nette": -0.08464325200240072,
+          "roi_capex": -0.3368741294431384,
+          "rendement_besoin_total": -0.15229080854438798
         },
         {
           "annee": 2,
@@ -289,14 +302,15 @@
           "chiffre_affaires_usd": 406839.3240715473,
           "cout_ventes_usd": 352747.68365947204,
           "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
           "autres_charges_usd": 6180,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2860.5026030000017,
-          "is_usd": 8191.296677268818,
-          "resultat_net_usd": 24573.890031806455,
-          "marge_nette": 0.06040195373907577,
-          "roi_capex": 0.34076679516833475,
-          "rendement_besoin_total": 0.18638463628738072
+          "is_usd": 775.2966772688173,
+          "resultat_net_usd": 2325.890031806452,
+          "marge_nette": 0.005716974476630036,
+          "roi_capex": 0.032253179737794936,
+          "rendement_besoin_total": 0.014580706534264586
         },
         {
           "annee": 3,
@@ -305,23 +319,24 @@
           "chiffre_affaires_usd": 431496.25280315627,
           "cout_ventes_usd": 380103.4245319616,
           "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
           "autres_charges_usd": 6365.399999999999,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2052.8312798000034,
-          "is_usd": 7635.081472848662,
-          "resultat_net_usd": 22905.244418545986,
-          "marge_nette": 0.05308329856805292,
-          "roi_capex": 0.3176276414907324,
-          "rendement_besoin_total": 0.17372852423847274
+          "is_usd": 0,
+          "resultat_net_usd": -13.594108605349902,
+          "marge_nette": -0.000031504580902007,
+          "roi_capex": -0.00018850987029809022,
+          "rendement_besoin_total": -0.00008521972468989964
         }
       ],
       "financement": {
         "apport": 21634.0533,
         "dette": 50479.4577,
-        "apport_reserve": 59731.53010047317,
-        "apport_total": 81365.58340047317,
-        "besoin_total": 131845.04110047317,
-        "total_ressources": 131845.04110047317,
+        "apport_reserve": 87404.82416027649,
+        "apport_total": 109038.87746027649,
+        "besoin_total": 159518.3351602765,
+        "total_ressources": 159518.3351602765,
         "hypothese_reserve_financee_par_apport": true
       },
       "controle": {
@@ -331,13 +346,13 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        -1.0186340659856796e-10,
-        -8.731149137020111e-11,
+        -1.1641532182693481e-10,
+        -7.275957614183426e-11,
         0
       ],
       "prix_cible_non_applique": {
         "statut": "ajustement_a_etudier",
-        "prix_cible": 2.8003551415061576,
+        "prix_cible": 3.085842849674278,
         "prix_actuel": 2.465692873160893,
         "marge_cible": 0.1,
         "roi_cible": 0.15,
@@ -358,14 +373,15 @@
           "chiffre_affaires_usd": 358758.3130449099,
           "cout_ventes_usd": 308135.3770611765,
           "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
           "autres_charges_usd": 6000,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 3668.1739262,
-          "is_usd": 7203.202739383348,
-          "resultat_net_usd": 21609.608218150042,
-          "marge_nette": 0.06023444595538869,
-          "roi_capex": 0.29966101939135986,
-          "rendement_besoin_total": 0.15266384981324052
+          "is_usd": 3.2027393833477618,
+          "resultat_net_usd": 9.608218150043285,
+          "marge_nette": 0.000026781869020664375,
+          "roi_capex": 0.00013323741996202745,
+          "rendement_besoin_total": 0.0000649406255094048
         },
         {
           "annee": 2,
@@ -374,14 +390,15 @@
           "chiffre_affaires_usd": 406839.3240715473,
           "cout_ventes_usd": 352289.97284727474,
           "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
           "autres_charges_usd": 6180,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2860.5026030000017,
-          "is_usd": 8305.724380318143,
-          "resultat_net_usd": 24917.17314095443,
-          "marge_nette": 0.061245734290357005,
-          "roi_capex": 0.3455271112920078,
-          "rendement_besoin_total": 0.17603056657761224
+          "is_usd": 889.7243803181423,
+          "resultat_net_usd": 2669.173140954427,
+          "marge_nette": 0.00656075502791127,
+          "roi_capex": 0.037013495861467995,
+          "rendement_besoin_total": 0.018040574293757293
         },
         {
           "annee": 3,
@@ -390,23 +407,24 @@
           "chiffre_affaires_usd": 431496.25280315627,
           "cout_ventes_usd": 380069.9334168937,
           "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
           "autres_charges_usd": 6365.399999999999,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2052.8312798000034,
-          "is_usd": 7643.45425161564,
-          "resultat_net_usd": 22930.36275484692,
-          "marge_nette": 0.05314151074518715,
-          "roi_capex": 0.31797595813698376,
-          "rendement_besoin_total": 0.1619944896931943
+          "is_usd": 4.974251615640242,
+          "resultat_net_usd": 14.922754846920725,
+          "marge_nette": 0.0000345837414577232,
+          "roi_capex": 0.0002069342435278283,
+          "rendement_besoin_total": 0.00010086084838510543
         }
       ],
       "financement": {
         "apport": 21634.0533,
         "dette": 50479.4577,
-        "apport_reserve": 69436.75282857433,
-        "apport_total": 91070.80612857433,
-        "besoin_total": 141550.26382857433,
-        "total_ressources": 141550.26382857433,
+        "apport_reserve": 75840.37879817895,
+        "apport_total": 97474.43209817895,
+        "besoin_total": 147953.88979817895,
+        "total_ressources": 147953.88979817895,
         "hypothese_reserve_financee_par_apport": true
       },
       "controle": {
@@ -416,13 +434,13 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        -5.820766091346741e-11,
-        0,
-        0
+        -2.9103830456733704e-11,
+        5.820766091346741e-11,
+        4.3655745685100555e-11
       ],
       "prix_cible_non_applique": {
         "statut": "ajustement_a_etudier",
-        "prix_cible": 2.616538478091804,
+        "prix_cible": 2.844928644626301,
         "prix_actuel": 2.465692873160893,
         "marge_cible": 0.1,
         "roi_cible": 0.15,
@@ -443,14 +461,15 @@
           "chiffre_affaires_usd": 418551.3652190616,
           "cout_ventes_usd": 347673.43990470597,
           "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
           "autres_charges_usd": 6000,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 3668.1739262,
-          "is_usd": 12266.950072038911,
-          "resultat_net_usd": 36800.850216116734,
-          "marge_nette": 0.08792433444066271,
-          "roi_capex": 0.5103183814766242,
-          "rendement_besoin_total": 0.24390713546515297
+          "is_usd": 5066.950072038911,
+          "resultat_net_usd": 15200.85021611673,
+          "marge_nette": 0.036317765223775826,
+          "roi_capex": 0.2107905995052263,
+          "rendement_besoin_total": 0.09955981405416535
         },
         {
           "annee": 2,
@@ -459,14 +478,15 @@
           "chiffre_affaires_usd": 431496.25280315627,
           "cout_ventes_usd": 368838.9292535152,
           "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
           "autres_charges_usd": 6180,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2860.5026030000017,
-          "is_usd": 10332.717461660266,
-          "resultat_net_usd": 30998.1523849808,
-          "marge_nette": 0.07183875221072153,
-          "roi_capex": 0.4298522143094766,
-          "rendement_besoin_total": 0.20544825754112092
+          "is_usd": 2916.717461660266,
+          "resultat_net_usd": 8750.152384980798,
+          "marge_nette": 0.02027862890612985,
+          "roi_capex": 0.12133859887893682,
+          "rendement_besoin_total": 0.05731018541782925
         },
         {
           "annee": 3,
@@ -475,23 +495,24 @@
           "chiffre_affaires_usd": 431496.25280315627,
           "cout_ventes_usd": 379904.0969806294,
           "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
           "autres_charges_usd": 6365.399999999999,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2052.8312798000034,
-          "is_usd": 7684.913360681723,
-          "resultat_net_usd": 23054.74008204517,
-          "marge_nette": 0.0534297573438314,
-          "roi_capex": 0.31970070188435523,
-          "rendement_besoin_total": 0.1528012417996426
+          "is_usd": 46.43336068172357,
+          "resultat_net_usd": 139.3000820451707,
+          "marge_nette": 0.000322830340101975,
+          "roi_capex": 0.0019316779908992465,
+          "rendement_besoin_total": 0.0009123628000388339
         }
       ],
       "financement": {
         "apport": 21634.0533,
         "dette": 50479.4577,
-        "apport_reserve": 78767.06961907122,
-        "apport_total": 100401.12291907122,
-        "besoin_total": 150880.5806190712,
-        "total_ressources": 150880.5806190712,
+        "apport_reserve": 80567.06961907122,
+        "apport_total": 102201.12291907122,
+        "besoin_total": 152680.5806190712,
+        "total_ressources": 152680.5806190712,
         "hypothese_reserve_financee_par_apport": true
       },
       "controle": {
@@ -502,12 +523,12 @@
       },
       "ecart_bilans": [
         2.9103830456733704e-11,
-        1.4551915228366852e-10,
-        2.6193447411060333e-10
+        8.731149137020111e-11,
+        2.3283064365386963e-10
       ],
       "prix_cible_non_applique": {
         "statut": "ajustement_a_etudier",
-        "prix_cible": 2.5115003847121735,
+        "prix_cible": 2.707263384598885,
         "prix_actuel": 2.465692873160893,
         "marge_cible": 0.1,
         "roi_cible": 0.15,
@@ -528,14 +549,15 @@
           "chiffre_affaires_usd": 444860.30817568843,
           "cout_ventes_usd": 365070.1875558589,
           "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
           "autres_charges_usd": 6000,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 3668.1739262,
-          "is_usd": 14494.998898407379,
-          "resultat_net_usd": 43484.99669522214,
-          "marge_nette": 0.09774977874188909,
-          "roi_capex": 0.6030076207941413,
-          "rendement_besoin_total": 0.28057142529767065
+          "is_usd": 7294.998898407378,
+          "resultat_net_usd": 21884.996695222133,
+          "marge_nette": 0.04919521093030198,
+          "roi_capex": 0.3034798388227434,
+          "rendement_besoin_total": 0.1395840234011152
         },
         {
           "annee": 2,
@@ -544,14 +566,15 @@
           "chiffre_affaires_usd": 458618.87440792605,
           "cout_ventes_usd": 387294.52388492366,
           "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
           "autres_charges_usd": 6180,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2860.5026030000017,
-          "is_usd": 12499.474205000597,
-          "resultat_net_usd": 37498.42261500179,
-          "marge_nette": 0.08176380150819569,
-          "roi_capex": 0.5199916367267403,
-          "rendement_besoin_total": 0.24194519211407553
+          "is_usd": 5083.474205000597,
+          "resultat_net_usd": 15250.422615001791,
+          "marge_nette": 0.033252932807638996,
+          "roi_capex": 0.21147802129620052,
+          "rendement_besoin_total": 0.0972682507936609
         },
         {
           "annee": 3,
@@ -560,23 +583,24 @@
           "chiffre_affaires_usd": 458618.87440792605,
           "cout_ventes_usd": 398913.35944204725,
           "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
           "autres_charges_usd": 6365.399999999999,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2052.8312798000034,
-          "is_usd": 9713.253146519699,
-          "resultat_net_usd": 29139.759439559097,
-          "marge_nette": 0.06353807282174842,
-          "roi_capex": 0.4040818292644092,
-          "rendement_besoin_total": 0.18801390042848165
+          "is_usd": 2074.7731465196994,
+          "resultat_net_usd": 6224.319439559098,
+          "marge_nette": 0.013571878060175027,
+          "roi_capex": 0.08631280537095327,
+          "rendement_besoin_total": 0.03969914011899808
         }
       ],
       "financement": {
         "apport": 21634.0533,
         "dette": 50479.4577,
-        "apport_reserve": 82873.74990544318,
-        "apport_total": 104507.80320544318,
-        "besoin_total": 154987.26090544317,
-        "total_ressources": 154987.26090544317,
+        "apport_reserve": 84673.74990544318,
+        "apport_total": 106307.80320544318,
+        "besoin_total": 156787.26090544317,
+        "total_ressources": 156787.26090544317,
         "hypothese_reserve_financee_par_apport": true
       },
       "controle": {
@@ -587,12 +611,12 @@
       },
       "ecart_bilans": [
         -1.4551915228366852e-10,
-        -8.731149137020111e-11,
-        -3.4924596548080444e-10
+        -1.4551915228366852e-10,
+        -2.9103830456733704e-10
       ],
       "prix_cible_non_applique": {
         "statut": "ajustement_a_etudier",
-        "prix_cible": 2.4742288031903694,
+        "prix_cible": 2.6584144213633505,
         "prix_actuel": 2.465692873160893,
         "marge_cible": 0.1,
         "roi_cible": 0.15,
@@ -609,6 +633,7 @@
         "chiffre_affaires_usd": 287006.65043592796,
         "cout_ventes_usd": 260689.70164894115,
         "personnel_admin_usd": 4800,
+        "remuneration_dirigeant_usd": null,
         "autres_charges_usd": 6000,
         "amortissements_usd": 7341.951099999999,
         "interets_usd": 3668.1739262,
@@ -625,6 +650,7 @@
         "chiffre_affaires_usd": 369853.930974134,
         "cout_ventes_usd": 327393.17829871946,
         "personnel_admin_usd": 4944,
+        "remuneration_dirigeant_usd": null,
         "autres_charges_usd": 6180,
         "amortissements_usd": 7341.951099999999,
         "interets_usd": 2860.5026030000017,
@@ -641,6 +667,7 @@
         "chiffre_affaires_usd": 431496.25280315627,
         "cout_ventes_usd": 380269.2451572033,
         "personnel_admin_usd": 5092.32,
+        "remuneration_dirigeant_usd": null,
         "autres_charges_usd": 6365.399999999999,
         "amortissements_usd": 7341.951099999999,
         "interets_usd": 2052.8312798000034,
@@ -822,14 +849,15 @@
           "chiffre_affaires_usd": 322882.48174041905,
           "cout_ventes_usd": 308135.3770611765,
           "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
           "autres_charges_usd": 6000,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 3668.1739262,
           "is_usd": 0,
-          "resultat_net_usd": -7063.020346957466,
-          "marge_nette": -0.021874894880905223,
-          "roi_capex": -0.09794309345106587,
-          "rendement_besoin_total": -0.046028760135879324
+          "resultat_net_usd": -35863.02034695746,
+          "marge_nette": -0.11107143426811707,
+          "roi_capex": -0.4973134694129296,
+          "rendement_besoin_total": -0.1967814402964996
         },
         {
           "annee": 2,
@@ -838,14 +866,15 @@
           "chiffre_affaires_usd": 366155.39166439255,
           "cout_ventes_usd": 352289.97284727474,
           "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
           "autres_charges_usd": 6180,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2860.5026030000017,
           "is_usd": 0,
-          "resultat_net_usd": -7461.034885882191,
-          "marge_nette": -0.02037668994021194,
-          "roi_capex": -0.10346237178608861,
-          "rendement_besoin_total": -0.04862256772000309
+          "resultat_net_usd": -37125.03488588219,
+          "marge_nette": -0.10139147403272412,
+          "roi_capex": -0.5148138590268083,
+          "rendement_besoin_total": -0.20370615093832928
         },
         {
           "annee": 3,
@@ -854,23 +883,24 @@
           "chiffre_affaires_usd": 388346.62752284075,
           "cout_ventes_usd": 380069.9334168937,
           "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
           "autres_charges_usd": 6365.399999999999,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2052.8312798000034,
           "is_usd": 0,
-          "resultat_net_usd": -12575.80827385296,
-          "marge_nette": -0.0323829470441669,
-          "roi_capex": -0.1743890721650338,
-          "rendement_besoin_total": -0.08195486266740473
+          "resultat_net_usd": -43129.72827385296,
+          "marge_nette": -0.11105987593858085,
+          "roi_capex": -0.5980811040229751,
+          "rendement_besoin_total": -0.23665407897094415
         }
       ],
       "financement": {
         "apport": 21634.0533,
         "dette": 50479.4577,
-        "apport_reserve": 81334.47078588905,
-        "apport_total": 102968.52408588905,
-        "besoin_total": 153447.98178588905,
-        "total_ressources": 153447.98178588905,
+        "apport_reserve": 110134.47078588899,
+        "apport_total": 131768.524085889,
+        "besoin_total": 182247.981785889,
+        "total_ressources": 182247.981785889,
         "hypothese_reserve_financee_par_apport": true
       },
       "controle": {
@@ -880,13 +910,13 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        -1.4551915228366852e-10,
-        0,
-        -1.1641532182693481e-10
+        -1.1641532182693481e-10,
+        4.3655745685100555e-11,
+        -5.093170329928398e-11
       ],
       "prix_cible_non_applique": {
         "statut": "ajustement_a_etudier",
-        "prix_cible": 2.616538478091804,
+        "prix_cible": 2.844928644626301,
         "prix_actuel": 2.219123585844804,
         "marge_cible": 0.1,
         "roi_cible": 0.15,
@@ -902,14 +932,15 @@
           "chiffre_affaires_usd": 358758.3130449099,
           "cout_ventes_usd": 350925.0524734118,
           "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
           "autres_charges_usd": 6000,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 3668.1739262,
           "is_usd": 0,
-          "resultat_net_usd": -13976.864454701867,
-          "marge_nette": -0.03895899815136053,
-          "roi_capex": -0.1938175559736908,
-          "rendement_besoin_total": -0.08160356133097482
+          "resultat_net_usd": -42776.86445470186,
+          "marge_nette": -0.11923588359985121,
+          "roi_capex": -0.5931879319355545,
+          "rendement_besoin_total": -0.21380133698267517
         },
         {
           "annee": 2,
@@ -918,14 +949,15 @@
           "chiffre_affaires_usd": 406839.3240715473,
           "cout_ventes_usd": 402230.37649277656,
           "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
           "autres_charges_usd": 6180,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2860.5026030000017,
           "is_usd": 0,
-          "resultat_net_usd": -16717.50612422925,
-          "marge_nette": -0.04109117564380106,
-          "roi_capex": -0.23182210784646515,
-          "rendement_besoin_total": -0.09760472677765465
+          "resultat_net_usd": -46381.50612422925,
+          "marge_nette": -0.11400448132706202,
+          "roi_capex": -0.6431735950871849,
+          "rendement_besoin_total": -0.23181755247936073
         },
         {
           "annee": 3,
@@ -934,23 +966,24 @@
           "chiffre_affaires_usd": 431496.25280315627,
           "cout_ventes_usd": 434628.5193850388,
           "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
           "autres_charges_usd": 6365.399999999999,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2052.8312798000034,
           "is_usd": 0,
-          "resultat_net_usd": -23984.76896168255,
-          "marge_nette": -0.055585115295599404,
-          "roi_capex": -0.3325974374161667,
-          "rendement_besoin_total": -0.1400344527427609
+          "resultat_net_usd": -54538.68896168255,
+          "marge_nette": -0.12639435130057197,
+          "roi_capex": -0.756289469274108,
+          "rendement_besoin_total": -0.27258764208016484
         }
       ],
       "financement": {
         "apport": 21634.0533,
         "dette": 50479.4577,
-        "apport_reserve": 99164.11741150136,
-        "apport_total": 120798.17071150136,
-        "besoin_total": 171277.62841150136,
-        "total_ressources": 171277.62841150136,
+        "apport_reserve": 127964.11741150136,
+        "apport_total": 149598.17071150136,
+        "besoin_total": 200077.62841150136,
+        "total_ressources": 200077.62841150136,
         "hypothese_reserve_financee_par_apport": true
       },
       "controle": {
@@ -961,12 +994,12 @@
       },
       "ecart_bilans": [
         8.731149137020111e-11,
-        1.8917489796876907e-10,
-        3.055902197957039e-10
+        1.7462298274040222e-10,
+        2.9467628337442875e-10
       ],
       "prix_cible_non_applique": {
         "statut": "ajustement_a_etudier",
-        "prix_cible": 2.955869766055605,
+        "prix_cible": 3.1842599325901007,
         "prix_actuel": 2.465692873160893,
         "marge_cible": 0.1,
         "roi_cible": 0.15,
@@ -982,14 +1015,15 @@
           "chiffre_affaires_usd": 269068.7347836825,
           "cout_ventes_usd": 248828.28279588232,
           "personnel_admin_usd": 4800,
+          "remuneration_dirigeant_usd": 28800,
           "autres_charges_usd": 6000,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 3668.1739262,
           "is_usd": 0,
-          "resultat_net_usd": -1569.673038399811,
-          "marge_nette": -0.005833725124778053,
-          "roi_capex": -0.02176669831537964,
-          "rendement_besoin_total": -0.011748116464581829
+          "resultat_net_usd": -30369.67303839981,
+          "marge_nette": -0.1128695723894323,
+          "roi_capex": -0.42113707427724345,
+          "rendement_besoin_total": -0.18699315606005787
         },
         {
           "annee": 2,
@@ -998,14 +1032,15 @@
           "chiffre_affaires_usd": 305129.49305366055,
           "cout_ventes_usd": 283075.6170700804,
           "personnel_admin_usd": 4944,
+          "remuneration_dirigeant_usd": 29664,
           "autres_charges_usd": 6180,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2860.5026030000017,
-          "is_usd": 181.85557014503274,
-          "resultat_net_usd": 545.5667104350982,
-          "marge_nette": 0.0017879841931214234,
-          "roi_capex": 0.007565388272873002,
-          "rendement_besoin_total": 0.004083258803963602
+          "is_usd": 0,
+          "resultat_net_usd": -28936.577719419867,
+          "marge_nette": -0.0948337619868527,
+          "roi_capex": -0.401264302876889,
+          "rendement_besoin_total": -0.1781692541269643
         },
         {
           "annee": 3,
@@ -1014,23 +1049,24 @@
           "chiffre_affaires_usd": 323622.18960236723,
           "cout_ventes_usd": 304455.2098521885,
           "personnel_admin_usd": 5092.32,
+          "remuneration_dirigeant_usd": 30553.92,
           "autres_charges_usd": 6365.399999999999,
           "amortissements_usd": 7341.951099999999,
           "interets_usd": 2052.8312798000034,
           "is_usd": 0,
-          "resultat_net_usd": -1685.5226296212459,
-          "marge_nette": -0.005208303644729176,
-          "roi_capex": -0.023373187718196745,
-          "rendement_besoin_total": -0.012615185246900397
+          "resultat_net_usd": -32239.442629621248,
+          "marge_nette": -0.09962061831802593,
+          "roi_capex": -0.4470652195761381,
+          "rendement_besoin_total": -0.19850576327599787
         }
       ],
       "financement": {
         "apport": 21634.0533,
         "dette": 50479.4577,
-        "apport_reserve": 61497.1016571059,
-        "apport_total": 83131.1549571059,
-        "besoin_total": 133610.6126571059,
-        "total_ressources": 133610.6126571059,
+        "apport_reserve": 90297.1016571059,
+        "apport_total": 111931.1549571059,
+        "besoin_total": 162410.6126571059,
+        "total_ressources": 162410.6126571059,
         "hypothese_reserve_financee_par_apport": true
       },
       "controle": {
@@ -1041,12 +1077,12 @@
       },
       "ecart_bilans": [
         -1.1641532182693481e-10,
-        -2.1827872842550278e-10,
-        -2.764863893389702e-10
+        -2.0372681319713593e-10,
+        -2.6193447411060333e-10
       ],
       "prix_cible_non_applique": {
         "statut": "ajustement_a_etudier",
-        "prix_cible": 2.8616273626442754,
+        "prix_cible": 3.166147584690271,
         "prix_actuel": 2.465692873160893,
         "marge_cible": 0.1,
         "roi_cible": 0.15,

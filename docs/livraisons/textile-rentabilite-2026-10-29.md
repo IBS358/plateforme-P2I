@@ -86,7 +86,7 @@ Les valeurs douanières sont des moyennes historiques de catégories agrégées 
 
 Stocks MP et emballages distincts ; emballages 15 jours. Non-tissés : cible MP 120 jours, achats par multiples de 24 t et CUMP, BFR 36 mois. Les prix livrés de fibres et d’emballages sont estimés. Stock de produits finis A1 3 %, pas une vente. Trésorerie affichée sur 12 mois, états sur trois exercices. Dette 8 %/an sur 60 mois, amortissement économique 10 ans (manutention 5 ans), IS 25 %, TVA 18 % : conventions de simulation communes, non avis fiscal ni offre bancaire. Aucun report fiscal de déficit ni calendrier officiel de paiement de l’IS présumé. La réserve calculée est financée par apport, elle ne prouve pas la viabilité à trois ans.
 
-Les 24 simulations antérieures sont conservées à l’identique. Le nouveau lot matières est facultatif, pas appliqué aux anciens dossiers.
+Les paramètres archivés des 24 simulations antérieures restent calculables à l’identique. Les références actives intègrent désormais la rémunération du dirigeant ; voir OUVRIR_Remuneration.html pour leurs résultats actualisés. Le nouveau lot matières est facultatif, pas appliqué aux anciens dossiers.
 
 ## Sources
 

@@ -77,6 +77,26 @@ function reprogrammerVolumes(input,programme){
  }
  s.production=p.production.slice();s.ventes=p.ventes.slice();return s;
 }
+// Rémunération d'un dirigeant opérationnel : charge d'exploitation payée,
+// jamais dividende ni composante automatique du coût des stocks.
+function normaliserRemunerationDirigeant(value,personnel){
+ if(!value||value.schema!=='p2i.remuneration-dirigeant.v1')throw Error('Rémunération du dirigeant invalide');
+ const keys=['schema','brut_mensuel_usd','taux_charges','croissance_annuelle','deja_inclus_personnel_annuel_usd','qualification','justification_non_double_compte'];
+ if(Object.keys(value).some(k=>!keys.includes(k)))throw Error('Champ de rémunération inconnu');
+ for(const k of keys.slice(1,5))if(!positive(value[k]))throw Error('Rémunération du dirigeant : '+k+' invalide');
+ if(value.taux_charges>1||value.croissance_annuelle>1||!positive(personnel)||value.deja_inclus_personnel_annuel_usd>personnel||value.deja_inclus_personnel_annuel_usd>value.brut_mensuel_usd*12*(1+value.taux_charges))throw Error('Rémunération ou réaffectation incompatible');
+ for(const k of keys.slice(5))if(typeof value[k]!=='string'||!value[k].trim()||value[k].length>3000)throw Error('Justification de rémunération absente');
+ return Object.fromEntries(keys.map(k=>[k,value[k]]));
+}
+function appliquerRemunerationDirigeant(input,regles){
+ if(input.remuneration_dirigeant!==undefined)throw Error('Direction déjà configurée : ne pas appliquer le barème deux fois');
+ if(!regles||regles.schema!=='p2i.dirigeant-regles.v1'||!Array.isArray(regles.paliers)||!positive(input.ventes?.[0])||!positive(input.prix?.[0]))throw Error('Règles de direction invalides');
+ const ca=input.ventes[0]*input.prix[0],palier=regles.paliers.find(p=>p.ca_A1_inferieur_usd===null||ca<p.ca_A1_inferieur_usd),credit=regles.reaffectations_personnel?.[input.up_id];
+ if(!palier)throw Error('Palier de direction absent');
+ const s=JSON.parse(JSON.stringify(input));
+ s.remuneration_dirigeant=normaliserRemunerationDirigeant({schema:'p2i.remuneration-dirigeant.v1',brut_mensuel_usd:palier.brut_mensuel_usd,taux_charges:regles.taux_charges_employeur_estime,croissance_annuelle:regles.croissance_annuelle,deja_inclus_personnel_annuel_usd:credit?.montant_annuel_usd||0,qualification:regles.qualification,justification_non_double_compte:credit?.justification||regles.regle_autres_profils},s.personnel);
+ return s;
+}
 function calculer(input){
  const s=JSON.parse(JSON.stringify(input)),unite=uniteProduction(s);
  for(const k of ['investissement','matieres_kg','personnel','charges_fixes','part_apport','part_dette','taux_interet','duree_dette_mois','duree_amortissement_ans','taux_tva','taux_is','coussin_tresorerie','croissance_personnel','croissance_charges'])if(!positive(s[k]))throw Error('Hypothèse manquante ou invalide : '+k);
@@ -91,12 +111,15 @@ function calculer(input){
  const packActive=s.cout_emballages_stockables_unite!==undefined||s.stock_emballages_jours!==undefined;
  if(packActive&&(!positive(s.cout_emballages_stockables_unite)||!positive(s.stock_emballages_jours)||s.stock_emballages_jours>90))throw Error('Stock emballages : coût et jours entre 0 et 90 requis');
  let packQty=0,packValue=0;
+ const dirigeant=s.remuneration_dirigeant===undefined?null:normaliserRemunerationDirigeant(s.remuneration_dirigeant,s.personnel);if(dirigeant)s.remuneration_dirigeant=dirigeant;
  const specifics=normaliserAmortissements(s.amortissements_specifiques||[]),specificBase=specifics.reduce((n,x)=>n+x.base_usd,0);
  if(specificBase>s.investissement)throw Error('Bases amortissables spécifiques supérieures à l’investissement');
  const debt=s.investissement*.7,principal=debt/s.duree_dette_mois,amortissement=(s.investissement-specificBase)/s.duree_amortissement_ans+specifics.reduce((n,x)=>n+x.base_usd/x.duree_ans,0);
  let stockQty=0,stockValue=0,rawPrevious=0,receivablesPrevious=0,debtRemaining=debt,vatCredit=0,vatDuePrevious=0,isTotal=0;
  const months=[],annual=[],economic=[];
  for(let y=0;y<3;y++){
+  const salaireDirigeant=dirigeant?dirigeant.brut_mensuel_usd*(1+dirigeant.taux_charges)*(1+dirigeant.croissance_annuelle)**y:0,creditPersonnel=dirigeant?dirigeant.deja_inclus_personnel_annuel_usd*(1+s.croissance_personnel)**y/12:0;
+  if(salaireDirigeant+1e-9<creditPersonnel)throw Error('Réaffectation supérieure au salaire de direction');
   const prodMean=s.production[y]/12,soldMean=s.ventes[y]/12,cost=s.cout_production_kg[y],material=s.matieres_kg*(1+s.croissance_charges)**y;
   if(cost<material)throw Error('Coût industriel inférieur aux matières');
   const yearRows=[];
@@ -125,13 +148,14 @@ function calculer(input){
    const e=root.P2I_ECONOMIC_RESULT_ENGINE.calculer({type_activite:'fabrication',quantite_produite:available,quantite_vendue:sold,quantite_perdue:0,cout_variable_unitaire:average,charges_fixes_industrielles:0,chiffre_affaires_usd:sold*s.prix[y]});
    stockQty=e.quantite_stockee;stockValue=e.valeur_stock_indicative_usd;
    const ca=e.chiffre_affaires_usd,collection=.4*ca+receivablesPrevious,interest=debtRemaining*s.taux_interet/12;
-   const personnel=s.personnel*(1+s.croissance_personnel)**y/12,fixed=s.charges_fixes*(1+s.croissance_charges)**y/12;
+   const personnel=s.personnel*(1+s.croissance_personnel)**y/12-creditPersonnel,fixed=s.charges_fixes*(1+s.croissance_charges)**y/12;
    const inputVat=purchases*s.taux_tva,invoiceVat=ca*s.taux_tva;
    const vatPaid=vatDuePrevious,netVat=invoiceVat-inputVat-vatCredit;
    vatCredit=Math.max(0,-netVat);vatDuePrevious=Math.max(0,netVat);
    const row={mois:y*12+m+1,production:prod,ventes:sold,prix:s.prix[y],ca,cpv:e.cout_produits_vendus_usd,stock_quantite:stockQty,stock_valeur:stockValue,stock_matieres:raw,stock_emballages:packValue,stock_emballages_quantite:packQty,cout_emballages_moyen:packAverage,consommation_emballages:packConsumption,achats_emballages:packPurchases,creances:.6*ca,encaissements:collection,achats_matieres:purchases,cout_process:prod*(cost-material-packPrice),personnel,charges_fixes:fixed,interets:interest,principal,tva_facturee:invoiceVat,tva_encaissee:collection*s.taux_tva,tva_deductible:inputVat,tva_payee:vatPaid,tva_due:vatDuePrevious,credit_tva:vatCredit,dette_fin:Math.max(0,debtRemaining-principal)};
+   if(dirigeant)Object.assign(row,{personnel_dirigeant:salaireDirigeant,personnel_reaffecte:creditPersonnel});
    if(rawLot)Object.assign(row,{stock_matieres_equivalent_produit:rawQty,achats_matieres_equivalent_produit:rawPurchasesQty,consommation_matieres:rawConsumption});
-   row.ebit=ca-row.cpv-personnel-fixed-amortissement/12;
+   row.ebit=ca-row.cpv-personnel-fixed-amortissement/12-salaireDirigeant;
    debtRemaining=row.dette_fin;receivablesPrevious=row.creances;rawPrevious=raw;months.push(row);yearRows.push(row);economic.push(e);
   }
   const sum=k=>yearRows.reduce((a,x)=>a+x[k],0);
@@ -139,17 +163,17 @@ function calculer(input){
   const postes=Object.fromEntries(Object.entries(root.P2I_FINANCIAL_ENGINE.POSTES).filter(([k])=>k!=='couts_directs').flatMap(([,keys])=>keys.map(k=>[k,post(0)])));
   // Zéros explicites = postes non ventilés dans cette simulation agrégée;
   // personnel et charges fixes regroupés sans les compter dans les CPV.
-  postes.personnel_administratif_commercial=post(sum('personnel'));postes.autres_exploitation=post(sum('charges_fixes'));postes.amortissements=post(amortissement);postes.interets_emprunts=post(sum('interets'));
+  postes.personnel_administratif_commercial=post(sum('personnel')+(dirigeant?sum('personnel_dirigeant'):0));postes.autres_exploitation=post(sum('charges_fixes'));postes.amortissements=post(amortissement);postes.interets_emprunts=post(sum('interets'));
   const data={type_activite:'fabrication',controle_non_double_compte:true,lignes:[{id:s.configuration_id||s.up_id,type_activite:'fabrication',chiffre_affaires:post(sum('ca')),cout_prestations_ou_produits_vendus:post(sum('cpv')),variation_stock:post(0)}],postes};
   const before=root.P2I_FINANCIAL_ENGINE.calculer(data);postes.impot_resultat=post(Math.max(0,before.resultat_avant_impot_usd)*s.taux_is);
   const f=root.P2I_FINANCIAL_ENGINE.calculer(data);if(!f.complet)throw Error('Compte financier incomplet');
   const tax=f.postes.fiscal.impot_resultat.montant_usd;
   for(const row of yearRows){row.is_reserve=tax/12;isTotal+=row.is_reserve;row.is_cumule=isTotal;}
-  annual.push({annee:y+1,production:sum('production'),ventes:sum('ventes'),stock_quantite:stockQty,chiffre_affaires:f.chiffre_affaires_total_usd,cout_produits_vendus:f.cout_ventes_total_usd,personnel:sum('personnel'),charges_fixes:sum('charges_fixes'),charges_exploitation:f.autres_charges_exploitation_usd,amortissements:amortissement,charges_financieres:sum('interets'),impots:tax,resultat_net:f.resultat_net_usd,resultat_avant_impot:f.resultat_avant_impot_usd,ebit:f.resultat_exploitation_usd,ebitda:f.resultat_exploitation_usd+amortissement,financier:f});
+  annual.push({annee:y+1,production:sum('production'),ventes:sum('ventes'),stock_quantite:stockQty,chiffre_affaires:f.chiffre_affaires_total_usd,cout_produits_vendus:f.cout_ventes_total_usd,personnel:sum('personnel'),...(dirigeant?{personnel_dirigeant:sum('personnel_dirigeant'),personnel_reaffecte:sum('personnel_reaffecte')}:{}),charges_fixes:sum('charges_fixes'),charges_exploitation:f.autres_charges_exploitation_usd,amortissements:amortissement,charges_financieres:sum('interets'),impots:tax,resultat_net:f.resultat_net_usd,resultat_avant_impot:f.resultat_avant_impot_usd,ebit:f.resultat_exploitation_usd,ebitda:f.resultat_exploitation_usd+amortissement,financier:f});
  }
  const bfr=root.P2I_BP_BFR_MENSUEL.calculate({hypotheses:{part_clients_comptant:.4,part_clients_30_jours:.6,stock_matieres_jours:stockMatieresJours,stock_produits_finis_jours:15,delai_fournisseurs_jours:0,jours_mois:30},creances_ouverture_usd:0,mois:months.map(r=>({ventes_usd:r.ca,consommation_matieres_usd:r.consommation_matieres??r.production*s.matieres_kg*(1+s.croissance_charges)**Math.floor((r.mois-1)/12),cout_production_vendue_usd:r.cpv,stock_emballages_quantite:r.stock_emballages,cout_unitaire_emballages_usd:1,stock_matieres_quantite:r.stock_matieres,cout_unitaire_matieres_usd:1,stock_finis_quantite:r.stock_quantite,cout_unitaire_finis_usd:r.stock_quantite?r.stock_valeur/r.stock_quantite:0}))});
  if(!bfr.valide)throw Error(bfr.blocages.join('; '));
- const flows=rows=>rows.map(r=>({ventes_clients:r.encaissements*(1+s.taux_tva),autres_encaissements:0,achats_matiere:r.achats_matieres*(1+s.taux_tva),salaires:r.personnel,charges_exploitation:r.charges_fixes+r.cout_process+r.achats_emballages,investissements:0,service_dette:r.interets+r.principal,impots:r.tva_payee,autres_decaissements:0}));
+ const flows=rows=>rows.map(r=>({ventes_clients:r.encaissements*(1+s.taux_tva),autres_encaissements:0,achats_matiere:r.achats_matieres*(1+s.taux_tva),salaires:r.personnel+(dirigeant?r.personnel_dirigeant:0),charges_exploitation:r.charges_fixes+r.cout_process+r.achats_emballages,investissements:0,service_dette:r.interets+r.principal,impots:r.tva_payee,autres_decaissements:0}));
  const baseline=root.P2I_BP_MOTEUR_TRESORERIE.calculer({solde_initial:0,mois:flows(months.slice(0,12))});
  if(!baseline.valide)throw Error(baseline.erreurs.join('; '));
  const minimum=Math.min(0,...baseline.tresorerie_mensuelle.map((r,i)=>r.solde_final-months[i].is_cumule));
@@ -169,5 +193,5 @@ function calculer(input){
  const performance=evaluerPerformance(annual,s.investissement);performance.diagnostic_prix=diagnosticPrix(s,annual[0],performance);
  return {version:'107',statut:'simulation_indicative_non_documentee',entrees:s,unite_production:unite,investissements:ventilerInvestissement(s),emballages:{statut:packActive?'stock_modele':'non_isole_dossier_historique',jours:packActive?s.stock_emballages_jours:null,cout_stockable_unite:packActive?s.cout_emballages_stockables_unite:null,stock_lancement:packActive?months[0].stock_emballages:null,convention:'Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation.'},mois:months,annuel:annual,performance,bfr:bfr.bfr_mensuel,tresorerie:cash[0].tresorerie_mensuelle,bilans,reserve_initiale:reserve,financement:{apport:s.investissement*.3,dette:debt,apport_reserve:reserve,apport_total:s.investissement*.3+reserve,besoin_total:s.investissement+reserve,total_ressources:s.investissement*.3+reserve+debt,hypothese_reserve_financee_par_apport:true},moteurs:['P2I_ECONOMIC_RESULT_ENGINE','P2I_FINANCIAL_ENGINE','P2I_BP_BFR_MENSUEL','P2I_BP_MOTEUR_TRESORERIE'],controles:{bilans_equilibres:true,bfr_mois:36,tresorerie_mois:12,financement:'30/70'}};
 }
-root.P2I_BP_SIMULATION_COMMUNE=Object.freeze({calculer,reprogrammerVolumes,uniteProduction,evaluerPerformance,ventilerInvestissement,normaliserInvestissements,normaliserAmortissements,reperes:REPERES});
+root.P2I_BP_SIMULATION_COMMUNE=Object.freeze({calculer,reprogrammerVolumes,normaliserRemunerationDirigeant,appliquerRemunerationDirigeant,uniteProduction,evaluerPerformance,ventilerInvestissement,normaliserInvestissements,normaliserAmortissements,reperes:REPERES});
 })(typeof window!=='undefined'?window:globalThis);

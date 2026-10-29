@@ -467,6 +467,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 2 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -1432,6 +1441,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 3000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -1793,6 +1811,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 3000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -2168,6 +2195,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 3000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -2864,6 +2900,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 15 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 1500,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -3584,6 +3629,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 9660,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Le responsable hors CPV à 700 USD/mois majoré de 15 % est remplacé par le dirigeant opérationnel. Les six opérateurs de production restent intégralement budgétés."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -4438,6 +4492,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 1 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 9660,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "L'enveloppe de responsable administratif hors industrie est réaffectée à la direction par hypothèse P2I. Le personnel de production reste inchangé ; pas de seconde personne administrative supposée dans cette enveloppe."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -5165,6 +5228,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -5957,6 +6029,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 7 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 1500,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -6705,6 +6786,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 1500,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 8280,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Le responsable hors CPV à 600 USD/mois majoré de 15 % est remplacé par le dirigeant opérationnel. Les quatre opérateurs de production sont conservés."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -7367,6 +7457,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -8069,6 +8168,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 1500,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -8751,6 +8859,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -9425,6 +9542,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 3000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -10122,6 +10248,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -10913,6 +11048,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 3000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -11556,6 +11700,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -12407,6 +12560,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -13139,6 +13301,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -13808,6 +13979,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -14361,6 +14541,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -14945,6 +15134,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -15542,6 +15740,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -16170,6 +16377,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -17988,6 +18204,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 60 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 2000,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -19642,6 +19867,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 120 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 1500,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [
@@ -20480,6 +20714,15 @@
             "conventions": "Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières 30 jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.",
             "statut_exploitation": "Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.",
             "qualification": "simulation_decouverte_prix_et_hypotheses",
+            "remuneration_dirigeant": {
+              "schema": "p2i.remuneration-dirigeant.v1",
+              "brut_mensuel_usd": 1500,
+              "taux_charges": 0.2,
+              "croissance_annuelle": 0.03,
+              "deja_inclus_personnel_annuel_usd": 0,
+              "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+              "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+            },
             "investissements_detail": {
               "schema": "p2i.bp-investissements.v1",
               "postes": [

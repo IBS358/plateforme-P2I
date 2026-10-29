@@ -1,7 +1,7 @@
 /* Référentiel consommable : 96 UP, contenus propres et économie qualifiée. */
 'use strict';
 const fs=require('fs'),vm=require('vm'),path=require('path'),crypto=require('crypto');const root=path.resolve(__dirname,'..'),ctx=vm.createContext({});ctx.window=ctx;
-for(const f of ['up-data.js','machines-data.js','js/p2i-bp-decouverte-v107-scenarios.js','js/p2i-currency-config.js','js/p2i-economic-result-engine.js','js/p2i-commercial-engine.js','js/p2i-hypotheses-commerciales.js','js/p2i-recettes-biscuiterie.js','js/p2i-bp-decouverte-v108-references.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
+for(const f of ['up-data.js','machines-data.js','js/p2i-bp-decouverte-v107-scenarios.js','js/p2i-currency-config.js','js/p2i-economic-result-engine.js','js/p2i-commercial-engine.js','js/p2i-hypotheses-commerciales.js','js/p2i-recettes-biscuiterie.js','js/p2i-bp-decouverte-v108-references.js','js/p2i-bp-decouverte-simulation-commune.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
 const ups=vm.runInContext('P2I_UP_DATA',ctx),machines=vm.runInContext('MACHINES_DATA',ctx);
 const source=fs.readFileSync(path.join(root,'filieres.html'),'utf8'),start=source.indexOf('const filieresData = '),end=source.indexOf('];',start)+2;vm.runInContext(source.slice(start,end)+';this.filieres=filieresData;',ctx);
 const rows=ctx.filieres.flatMap(f=>f.units.map(u=>({...u,id:u.id==='profilés'?'profiles':u.id,id_parcours:u.id,filiere_id:f.id,filiere_nom:f.name})));
@@ -62,6 +62,7 @@ const simulationPack=JSON.parse(fs.readFileSync(path.join(root,'data/p2i-bp-deco
 const batchFiles=fs.readdirSync(path.join(root,'data')).filter(f=>/^p2i-bp-lot-[a-z0-9-]+\.json$/.test(f)).sort();
 const profileFile={};for(const filename of batchFiles){const lot=JSON.parse(fs.readFileSync(path.join(root,'data',filename),'utf8'));if(lot.schema!=='p2i.bp-lot.v1')throw Error('Lot non reconnu : '+filename);for(const source of lot.sources||[]){if(simulationPack.sources.some(x=>x.id===source.id))throw Error('Source dupliquée : '+source.id);simulationPack.sources.push(source);}for(const [key,profile] of Object.entries(lot.profils||{})){if(simulationPack.profils[key])throw Error('Profil dupliqué : '+key);if(!profile.source_equipement||!profile.methodes||!profile.prix_retenu||!(profile.prix_vente_usd_kg||profile.prix_vente_usd_unite))throw Error('Profil incomplet : '+key);simulationPack.profils[key]=profile;profileFile[key]='data/'+filename;}}
 
+const remunerationRules=JSON.parse(fs.readFileSync(path.join(root,'data/p2i-remuneration-dirigeant-regles.json'),'utf8'));
 for(const [key,rawProfile] of Object.entries(simulationPack.profils)){
  const p=JSON.parse(JSON.stringify(rawProfile));
  if(p.etude_maille){
@@ -134,6 +135,7 @@ for(const [key,rawProfile] of Object.entries(simulationPack.profils)){
  const prix=p.prix_vente_usd_kg||[firstPrice,firstPrice*1.02,firstPrice*1.02**2];
  const input={up_id:id,configuration_id:p.configuration_id,nom:p.nom,sous_titre:p.sous_titre,description:p.description,capacite:p.capacite_entree_kg_h,unite:p.unite_production==='pièce'?'pièces/h':'kg/h',machines:equipment,investissement:equipment+complement,production,ventes,prix,matieres_kg:matieres,cout_production_kg:production.map((q,y)=>(matieres+processCost)*(1+h.croissance_charges)**y+p.fixes_industriels_an*(1+h.croissance_charges)**y/q),personnel:p.personnel_hors_cout_industriel,charges_fixes:p.charges_fixes_hors_industriel,croissance_personnel:h.croissance_personnel,croissance_charges:h.croissance_charges,part_apport:h.apport,part_dette:h.dette,taux_interet:h.taux_interet_annuel,duree_dette_mois:h.dette_mois,duree_amortissement_ans:h.amortissement_ans,taux_tva:h.tva_simulation,taux_is:h.is_simulation,coussin_tresorerie:h.coussin_tresorerie,source:(profileFile[key]||'data/p2i-bp-decouverte-simulations.json')+' / '+key+' : prix catalogue ou budget de référence + hypothèses P2I explicites',conventions:'Mois uniformes; clients 40 % comptant / 60 % à 30 jours, fournisseurs comptant, stock matières '+(p.stock_matieres_jours??30)+' jours. Hypothèses standard de Découverte, non conditions négociées. Production, prix, salaires et charges sont des hypothèses de simulation; les sources de prix équipements restent séparées. IS affecté en réserve et dette fiscale, sans échéancier de paiement officiel. Réserve initiale supplémentaire distincte du 30/70.',statut_exploitation:'Simulation indicative Découverte : base équipements sourcée et hypothèses P2I explicites; aucun devis ni partenariat nécessaire.',qualification:'simulation_decouverte_prix_et_hypotheses'};
 
+ Object.assign(input,ctx.P2I_BP_SIMULATION_COMMUNE.appliquerRemunerationDirigeant(input,remunerationRules));
  const manutention=handling(id);
  if(handlingCost){
   manutention.postes_budget_mutualise=[];

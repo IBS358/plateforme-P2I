@@ -1,0 +1,2157 @@
+{
+  "schema": "p2i.audit-dirigeant.v1",
+  "date": "2026-10-29",
+  "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+  "regles": {
+    "schema": "p2i.dirigeant-regles.v1",
+    "date": "2026-10-29",
+    "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+    "methode": "Palier choisi selon le CA HT de référence A1 au moment de la génération. Le salaire n'est pas diminué pour corriger une perte ; il reste conservé lors des simulations personnelles tant que ses paramètres ne sont pas modifiés.",
+    "paliers": [
+      {
+        "ca_A1_inferieur_usd": 300000,
+        "brut_mensuel_usd": 1500
+      },
+      {
+        "ca_A1_inferieur_usd": 1000000,
+        "brut_mensuel_usd": 2000
+      },
+      {
+        "ca_A1_inferieur_usd": null,
+        "brut_mensuel_usd": 3000
+      }
+    ],
+    "taux_charges_employeur_estime": 0.2,
+    "croissance_annuelle": 0.03,
+    "reaffectations_personnel": {
+      "jus_boissons": {
+        "montant_annuel_usd": 9660,
+        "justification": "Le responsable hors CPV à 700 USD/mois majoré de 15 % est remplacé par le dirigeant opérationnel. Les six opérateurs de production restent intégralement budgétés."
+      },
+      "aliments_betail": {
+        "montant_annuel_usd": 8280,
+        "justification": "Le responsable hors CPV à 600 USD/mois majoré de 15 % est remplacé par le dirigeant opérationnel. Les quatre opérateurs de production sont conservés."
+      },
+      "mini_laiterie": {
+        "montant_annuel_usd": 9660,
+        "justification": "L'enveloppe de responsable administratif hors industrie est réaffectée à la direction par hypothèse P2I. Le personnel de production reste inchangé ; pas de seconde personne administrative supposée dans cette enveloppe."
+      }
+    },
+    "regle_autres_profils": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré.",
+    "dossiers_incomplets": "Ne pas ajouter de montant arbitraire aux dossiers sans prévisions calculables ; règle disponible lors de leur configuration.",
+    "anciens_dossiers": "Champ facultatif : absent des anciens paramètres, il n'est jamais ajouté automatiquement à un import ou une simulation enregistrée. L'absence ne signifie pas une rémunération du dirigeant égale à zéro ou déjà validée."
+  },
+  "scenarios": [
+    {
+      "up_id": "conserverie_legumes",
+      "configuration": "reference",
+      "nom": "Sauce tomate — poche stérilisable 1 kg",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 375000,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9660,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 41256.61048326529,
+          "resultat_net_apres_usd": 19656.61048326529,
+          "marge_nette": 0.05241762795537411,
+          "roi_capex": 0.090488716345215,
+          "rendement_besoin_total": 0.07588065104106342
+        },
+        {
+          "annee": 2,
+          "ca_usd": 497250,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9949.799999999997,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 79414.00547831283,
+          "resultat_net_apres_usd": 57166.00547831283,
+          "marge_nette": 0.1149643146874064,
+          "roi_capex": 0.26316228114302825,
+          "rendement_besoin_total": 0.22067862192234866
+        },
+        {
+          "annee": 3,
+          "ca_usd": 585225,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 10248.293999999996,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 105507.41902747849,
+          "resultat_net_apres_usd": 82591.97902747849,
+          "marge_nette": 0.1411285899055551,
+          "roi_capex": 0.38021011653917414,
+          "rendement_besoin_total": 0.3188308149418978
+        }
+      ],
+      "financement_avant": {
+        "apport": 65168.16,
+        "dette": 152059.04,
+        "apport_reserve": 40019.213197324265,
+        "apport_total": 105187.37319732427,
+        "besoin_total": 257246.41319732426,
+        "total_ressources": 257246.41319732426,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 65168.16,
+        "dette": 152059.04,
+        "apport_reserve": 41819.21319732426,
+        "apport_total": 106987.37319732425,
+        "besoin_total": 259046.41319732426,
+        "total_ressources": 259046.41319732426,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "sous_reperes"
+    },
+    {
+      "up_id": "biscuiterie",
+      "configuration": "crackers",
+      "nom": "Crackers",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 3000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 1361676.7562507906,
+          "remuneration_chargee_usd": 43200,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 20700,
+          "cout_direction_supplementaire_usd": 43200,
+          "resultat_net_avant_usd": 520583.8166765475,
+          "resultat_net_apres_usd": 488183.8166765475,
+          "marge_nette": 0.35851667030044754,
+          "roi_capex": 0.8025606391102301,
+          "rendement_besoin_total": 0.6687359286438531
+        },
+        {
+          "annee": 2,
+          "ca_usd": 1665648.0561988058,
+          "remuneration_chargee_usd": 44496,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 21321,
+          "cout_direction_supplementaire_usd": 44496,
+          "resultat_net_avant_usd": 675909.292707346,
+          "resultat_net_apres_usd": 642537.292707346,
+          "marge_nette": 0.3857581379908596,
+          "roi_capex": 1.0563134677383865,
+          "rendement_besoin_total": 0.8801761927549709
+        },
+        {
+          "annee": 3,
+          "ca_usd": 1983896.4857452547,
+          "remuneration_chargee_usd": 45830.87999999998,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 21960.62999999999,
+          "cout_direction_supplementaire_usd": 45830.87999999998,
+          "resultat_net_avant_usd": 837388.2741909667,
+          "resultat_net_apres_usd": 803015.1141909667,
+          "marge_nette": 0.4047666397721918,
+          "roi_capex": 1.3201345502349526,
+          "rendement_besoin_total": 1.1000058579560523
+        }
+      ],
+      "financement_avant": {
+        "apport": 182484.834,
+        "dette": 425797.946,
+        "apport_reserve": 119027.07256848409,
+        "apport_total": 301511.9065684841,
+        "besoin_total": 727309.8525684841,
+        "total_ressources": 727309.8525684841,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 182484.834,
+        "dette": 425797.946,
+        "apport_reserve": 121727.07256848409,
+        "apport_total": 304211.9065684841,
+        "besoin_total": 730009.8525684841,
+        "total_ressources": 730009.8525684841,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "reperes_atteints_non_validation"
+    },
+    {
+      "up_id": "biscuiterie",
+      "configuration": "biscuits_mous",
+      "nom": "Biscuits mous",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 3000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 1102500,
+          "remuneration_chargee_usd": 43200,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 20700,
+          "cout_direction_supplementaire_usd": 43200,
+          "resultat_net_avant_usd": 308178.09494300006,
+          "resultat_net_apres_usd": 275778.09494300006,
+          "marge_nette": 0.2501388616263039,
+          "roi_capex": 0.4533715304960631,
+          "rendement_besoin_total": 0.3739134939175305
+        },
+        {
+          "annee": 2,
+          "ca_usd": 1456050,
+          "remuneration_chargee_usd": 44496,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 21321,
+          "cout_direction_supplementaire_usd": 44496,
+          "resultat_net_avant_usd": 464125.8518011932,
+          "resultat_net_apres_usd": 430753.8518011932,
+          "marge_nette": 0.29583726644084557,
+          "roi_capex": 0.7081473715254494,
+          "rendement_besoin_total": 0.5840372411692392
+        },
+        {
+          "annee": 3,
+          "ca_usd": 1747872,
+          "remuneration_chargee_usd": 45830.87999999998,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 21960.62999999999,
+          "cout_direction_supplementaire_usd": 45830.87999999998,
+          "resultat_net_avant_usd": 590755.2616160318,
+          "resultat_net_apres_usd": 556382.1016160317,
+          "marge_nette": 0.31831970625768463,
+          "roi_capex": 0.9146767258741595,
+          "rendement_besoin_total": 0.7543701961224584
+        }
+      ],
+      "financement_avant": {
+        "apport": 182484.834,
+        "dette": 425797.946,
+        "apport_reserve": 126562.39937730556,
+        "apport_total": 309047.23337730556,
+        "besoin_total": 734845.1793773056,
+        "total_ressources": 734845.1793773056,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 182484.834,
+        "dette": 425797.946,
+        "apport_reserve": 129262.39937730556,
+        "apport_total": 311747.23337730556,
+        "besoin_total": 737545.1793773056,
+        "total_ressources": 737545.1793773056,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "reperes_atteints_non_validation"
+    },
+    {
+      "up_id": "biscuiterie",
+      "configuration": "biscuits_durs",
+      "nom": "Biscuits durs",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 3000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 1126999.9999999998,
+          "remuneration_chargee_usd": 43200,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 20700,
+          "cout_direction_supplementaire_usd": 43200,
+          "resultat_net_avant_usd": 319203.0949429998,
+          "resultat_net_apres_usd": 286803.0949429998,
+          "marge_nette": 0.25448366898225366,
+          "roi_capex": 0.4714963243624944,
+          "rendement_besoin_total": 0.3887531939714062
+        },
+        {
+          "annee": 2,
+          "ca_usd": 1431060.0000000002,
+          "remuneration_chargee_usd": 44496,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 21321,
+          "cout_direction_supplementaire_usd": 44496,
+          "resultat_net_avant_usd": 453952.9158571734,
+          "resultat_net_apres_usd": 420580.9158571734,
+          "marge_nette": 0.2938946765734304,
+          "roi_capex": 0.6914233473076015,
+          "rendement_besoin_total": 0.5700851115131458
+        },
+        {
+          "annee": 3,
+          "ca_usd": 1706151.9600000007,
+          "remuneration_chargee_usd": 45830.87999999998,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 21960.62999999999,
+          "cout_direction_supplementaire_usd": 45830.87999999998,
+          "resultat_net_avant_usd": 573785.2483996623,
+          "resultat_net_apres_usd": 539412.0883996624,
+          "marge_nette": 0.31615711908783445,
+          "roi_capex": 0.8867784953564892,
+          "rendement_besoin_total": 0.7311572850140663
+        }
+      ],
+      "financement_avant": {
+        "apport": 182484.834,
+        "dette": 425797.946,
+        "apport_reserve": 126768.3160439722,
+        "apport_total": 309253.1500439722,
+        "besoin_total": 735051.0960439722,
+        "total_ressources": 735051.0960439722,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 182484.834,
+        "dette": 425797.946,
+        "apport_reserve": 129468.3160439722,
+        "apport_total": 311953.1500439722,
+        "besoin_total": 737751.0960439722,
+        "total_ressources": 737751.0960439722,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "reperes_atteints_non_validation"
+    },
+    {
+      "up_id": "boulangerie_industrielle",
+      "configuration": "reference",
+      "nom": "Petits pains ronds frais",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 1500,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 96000,
+          "remuneration_chargee_usd": 21600,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 6000,
+          "cout_direction_supplementaire_usd": 21600,
+          "resultat_net_avant_usd": 11454.699846504998,
+          "resultat_net_apres_usd": -6327.066871326667,
+          "marge_nette": -0.06590694657631944,
+          "roi_capex": -0.0710014027653609,
+          "rendement_besoin_total": -0.05583846176260968
+        },
+        {
+          "annee": 2,
+          "ca_usd": 122400,
+          "remuneration_chargee_usd": 22248,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 6180,
+          "cout_direction_supplementaire_usd": 22248,
+          "resultat_net_avant_usd": 24855.73944076871,
+          "resultat_net_apres_usd": 8169.739440768714,
+          "marge_nette": 0.06674623726118231,
+          "roi_capex": 0.09167960009255371,
+          "rendement_besoin_total": 0.07210065780104431
+        },
+        {
+          "annee": 3,
+          "ca_usd": 149817.6,
+          "remuneration_chargee_usd": 22915.43999999999,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 6365.399999999999,
+          "cout_direction_supplementaire_usd": 22915.43999999999,
+          "resultat_net_avant_usd": 38633.59217211631,
+          "resultat_net_apres_usd": 21447.012172116323,
+          "marge_nette": 0.14315415660187003,
+          "roi_capex": 0.2406751786119076,
+          "rendement_besoin_total": 0.18927698939332283
+        }
+      ],
+      "financement_avant": {
+        "apport": 26733.55719,
+        "dette": 62378.30011,
+        "apport_reserve": 13907.532172747362,
+        "apport_total": 40641.08936274736,
+        "besoin_total": 103019.38947274737,
+        "total_ressources": 103019.38947274737,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 26733.55719,
+        "dette": 62378.30011,
+        "apport_reserve": 24198.335559993335,
+        "apport_total": 50931.892749993334,
+        "besoin_total": 113310.19285999335,
+        "total_ressources": 113310.19285999333,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "deficitaire_A1"
+    },
+    {
+      "up_id": "jus_boissons",
+      "configuration": "reference",
+      "nom": "Jus d’ananas pasteurisé en bouteilles",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 9660,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Le responsable hors CPV à 700 USD/mois majoré de 15 % est remplacé par le dirigeant opérationnel. Les six opérateurs de production restent intégralement budgétés."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 458640,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 9660,
+          "autres_personnels_usd": 0,
+          "cout_direction_supplementaire_usd": 19140,
+          "resultat_net_avant_usd": 46168.70070458298,
+          "resultat_net_apres_usd": 31813.700704582985,
+          "marge_nette": 0.06936529893725576,
+          "roi_capex": 0.21695570550958757,
+          "rendement_besoin_total": 0.15535590544416156
+        },
+        {
+          "annee": 2,
+          "ca_usd": 608156.6399999999,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 9949.799999999997,
+          "autres_personnels_usd": 0,
+          "cout_direction_supplementaire_usd": 19714.200000000004,
+          "resultat_net_avant_usd": 78811.58964132646,
+          "resultat_net_apres_usd": 64025.93964132645,
+          "marge_nette": 0.10527869866113188,
+          "roi_capex": 0.43662926972205984,
+          "rendement_besoin_total": 0.31265799339900746
+        },
+        {
+          "annee": 3,
+          "ca_usd": 715753.5839999999,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 10248.293999999996,
+          "autres_personnels_usd": 0,
+          "cout_direction_supplementaire_usd": 20305.626000000004,
+          "resultat_net_avant_usd": 100375.53761842896,
+          "resultat_net_apres_usd": 85146.31811842897,
+          "marge_nette": 0.11896037969183118,
+          "roi_capex": 0.5806611337192336,
+          "rendement_besoin_total": 0.41579517797561877
+        }
+      ],
+      "financement_avant": {
+        "apport": 43991.05425209999,
+        "dette": 102645.79325489997,
+        "apport_reserve": 56946.37716844164,
+        "apport_total": 100937.43142054163,
+        "besoin_total": 203583.22467544163,
+        "total_ressources": 203583.2246754416,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 43991.05425209999,
+        "dette": 102645.79325489997,
+        "apport_reserve": 58142.62716844164,
+        "apport_total": 102133.68142054163,
+        "besoin_total": 204779.47467544163,
+        "total_ressources": 204779.4746754416,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "sous_reperes"
+    },
+    {
+      "up_id": "mini_laiterie",
+      "configuration": "reference",
+      "nom": "Lait entier frais pasteurisé en bouteilles",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 9660,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "L'enveloppe de responsable administratif hors industrie est réaffectée à la direction par hypothèse P2I. Le personnel de production reste inchangé ; pas de seconde personne administrative supposée dans cette enveloppe."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 765000,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 9660,
+          "autres_personnels_usd": 0,
+          "cout_direction_supplementaire_usd": 19140,
+          "resultat_net_avant_usd": 181785.98895950004,
+          "resultat_net_apres_usd": 167430.98895950004,
+          "marge_nette": 0.2188640378555556,
+          "roi_capex": 0.8982114520908174,
+          "rendement_besoin_total": 0.7150421426906729
+        },
+        {
+          "annee": 2,
+          "ca_usd": 1040400,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 9949.799999999997,
+          "autres_personnels_usd": 0,
+          "cout_direction_supplementaire_usd": 19714.200000000004,
+          "resultat_net_avant_usd": 271093.12722461025,
+          "resultat_net_apres_usd": 256307.47722461022,
+          "marge_nette": 0.2463547455061613,
+          "roi_capex": 1.3750041896684901,
+          "rendement_besoin_total": 1.0946041043014896
+        },
+        {
+          "annee": 3,
+          "ca_usd": 1238076,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 10248.293999999996,
+          "autres_personnels_usd": 0,
+          "cout_direction_supplementaire_usd": 20305.626000000004,
+          "resultat_net_avant_usd": 332259.1152221543,
+          "resultat_net_apres_usd": 317029.8957221543,
+          "marge_nette": 0.2560665869640913,
+          "roi_capex": 1.7007597265144108,
+          "rendement_besoin_total": 1.3539293851331422
+        }
+      ],
+      "financement_avant": {
+        "apport": 55921.460999999996,
+        "dette": 130483.40899999999,
+        "apport_reserve": 46554.294014430554,
+        "apport_total": 102475.75501443056,
+        "besoin_total": 232959.16401443054,
+        "total_ressources": 232959.16401443054,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 55921.460999999996,
+        "dette": 130483.40899999999,
+        "apport_reserve": 47750.544014430554,
+        "apport_total": 103672.00501443056,
+        "besoin_total": 234155.41401443054,
+        "total_ressources": 234155.41401443054,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "reperes_atteints_non_validation"
+    },
+    {
+      "up_id": "huiles_alimentaires",
+      "configuration": "reference",
+      "nom": "Huile d’arachide filtrée",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 315000,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 6000,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 41366.78543625494,
+          "resultat_net_apres_usd": 19766.78543625494,
+          "marge_nette": 0.06275169979763473,
+          "roi_capex": 0.18407618432528636,
+          "rendement_besoin_total": 0.1326254177584149
+        },
+        {
+          "annee": 2,
+          "ca_usd": 413100,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 6180,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 66149.30593976454,
+          "resultat_net_apres_usd": 43901.305939764534,
+          "marge_nette": 0.10627282967747406,
+          "roi_capex": 0.40882645842185883,
+          "rendement_besoin_total": 0.2945561917074354
+        },
+        {
+          "annee": 3,
+          "ca_usd": 514998,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 6365.399999999999,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 90954.31826306619,
+          "resultat_net_apres_usd": 68038.8782630662,
+          "marge_nette": 0.13211483979173938,
+          "roi_capex": 0.6336051522806828,
+          "rendement_besoin_total": 0.4565074418677323
+        }
+      ],
+      "financement_avant": {
+        "apport": 32215.115999999998,
+        "dette": 75168.60399999999,
+        "apport_reserve": 39858.49053811357,
+        "apport_total": 72073.60653811357,
+        "besoin_total": 147242.21053811358,
+        "total_ressources": 147242.21053811355,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 32215.115999999998,
+        "dette": 75168.60399999999,
+        "apport_reserve": 41658.49053811357,
+        "apport_total": 73873.60653811357,
+        "besoin_total": 149042.21053811358,
+        "total_ressources": 149042.21053811355,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "sous_reperes"
+    },
+    {
+      "up_id": "epices",
+      "configuration": "reference",
+      "nom": "Gingembre séché en poudre",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 1500,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 99999.99999999999,
+          "remuneration_chargee_usd": 21600,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 3600,
+          "cout_direction_supplementaire_usd": 21600,
+          "resultat_net_avant_usd": 24115.60972477498,
+          "resultat_net_apres_usd": 7915.609724774977,
+          "marge_nette": 0.07915609724774977,
+          "roi_capex": 0.1620854763080509,
+          "rendement_besoin_total": 0.13385803213899913
+        },
+        {
+          "annee": 2,
+          "ca_usd": 132599.99999999997,
+          "remuneration_chargee_usd": 22248,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 3708,
+          "cout_direction_supplementaire_usd": 22248,
+          "resultat_net_avant_usd": 37628.41978541817,
+          "resultat_net_apres_usd": 20942.419785418173,
+          "marge_nette": 0.15793680079500888,
+          "roi_capex": 0.42883141084361015,
+          "rendement_besoin_total": 0.3541497368081281
+        },
+        {
+          "annee": 3,
+          "ca_usd": 166464,
+          "remuneration_chargee_usd": 22915.43999999999,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 3819.24,
+          "cout_direction_supplementaire_usd": 22915.43999999999,
+          "resultat_net_avant_usd": 51445.72630776999,
+          "resultat_net_apres_usd": 34259.146307769995,
+          "marge_nette": 0.20580513689308197,
+          "roi_capex": 0.70151387451836,
+          "rendement_besoin_total": 0.5793441146001568
+        }
+      ],
+      "financement_avant": {
+        "apport": 14650.8063,
+        "dette": 34185.2147,
+        "apport_reserve": 8948.3439558164,
+        "apport_total": 23599.1502558164,
+        "besoin_total": 57784.3649558164,
+        "total_ressources": 57784.364955816396,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 14650.8063,
+        "dette": 34185.2147,
+        "apport_reserve": 10298.3439558164,
+        "apport_total": 24949.1502558164,
+        "besoin_total": 59134.3649558164,
+        "total_ressources": 59134.364955816396,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "sous_reperes"
+    },
+    {
+      "up_id": "aliments_betail",
+      "configuration": "reference",
+      "nom": "Aliments granulés pour bétail — petite ligne",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 1500,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 8280,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Le responsable hors CPV à 600 USD/mois majoré de 15 % est remplacé par le dirigeant opérationnel. Les quatre opérateurs de production sont conservés."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 220500,
+          "remuneration_chargee_usd": 21600,
+          "personnel_reaffecte_usd": 8280,
+          "autres_personnels_usd": 0,
+          "cout_direction_supplementaire_usd": 13320,
+          "resultat_net_avant_usd": 15548.580055999966,
+          "resultat_net_apres_usd": 5558.580055999964,
+          "marge_nette": 0.02520897984580483,
+          "roi_capex": 0.0878774646123798,
+          "rendement_besoin_total": 0.057895380999169736
+        },
+        {
+          "annee": 2,
+          "ca_usd": 302940,
+          "remuneration_chargee_usd": 22248,
+          "personnel_reaffecte_usd": 8528.4,
+          "autres_personnels_usd": 0,
+          "cout_direction_supplementaire_usd": 13719.6,
+          "resultat_net_avant_usd": 32194.614117841254,
+          "resultat_net_apres_usd": 21904.914117841254,
+          "marge_nette": 0.07230776430263833,
+          "roi_capex": 0.34630216635092137,
+          "rendement_besoin_total": 0.22815059526535306
+        },
+        {
+          "annee": 3,
+          "ca_usd": 362319.30000000005,
+          "remuneration_chargee_usd": 22915.43999999999,
+          "personnel_reaffecte_usd": 8784.251999999999,
+          "autres_personnels_usd": 0,
+          "cout_direction_supplementaire_usd": 14131.187999999993,
+          "resultat_net_avant_usd": 43107.66019112543,
+          "resultat_net_apres_usd": 32509.269191125437,
+          "marge_nette": 0.08972546919561125,
+          "roi_capex": 0.5139499879710777,
+          "rendement_besoin_total": 0.33860023726620403
+        }
+      ],
+      "financement_avant": {
+        "apport": 18976.127999999997,
+        "dette": 44277.63199999999,
+        "apport_reserve": 31924.509081555556,
+        "apport_total": 50900.63708155556,
+        "besoin_total": 95178.26908155555,
+        "total_ressources": 95178.26908155554,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 18976.127999999997,
+        "dette": 44277.63199999999,
+        "apport_reserve": 32757.009081555556,
+        "apport_total": 51733.13708155556,
+        "besoin_total": 96010.76908155555,
+        "total_ressources": 96010.76908155554,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "sous_reperes"
+    },
+    {
+      "up_id": "detergents",
+      "configuration": "reference",
+      "nom": "Gamme de produits ménagers liquides",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 443250,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 12000,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 48502.407162,
+          "resultat_net_apres_usd": 26902.407161999996,
+          "marge_nette": 0.060693529976311326,
+          "roi_capex": 0.2507201937325187,
+          "rendement_besoin_total": 0.17605084981479097
+        },
+        {
+          "annee": 2,
+          "ca_usd": 527467.5,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 12360,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 71633.16890298689,
+          "resultat_net_apres_usd": 49385.16890298689,
+          "marge_nette": 0.09362694176036795,
+          "roi_capex": 0.4602509745804297,
+          "rendement_besoin_total": 0.3231792940037962
+        },
+        {
+          "annee": 3,
+          "ca_usd": 614876.4,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 12730.799999999997,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 94888.0408723855,
+          "resultat_net_apres_usd": 71972.60087238549,
+          "marge_nette": 0.11705214393069158,
+          "roi_capex": 0.6707572421120186,
+          "rendement_besoin_total": 0.47099270599331183
+        }
+      ],
+      "financement_avant": {
+        "apport": 32190.156,
+        "dette": 75110.364,
+        "apport_reserve": 43709.91624783334,
+        "apport_total": 75900.07224783333,
+        "besoin_total": 151010.43624783334,
+        "total_ressources": 151010.43624783334,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 32190.156,
+        "dette": 75110.364,
+        "apport_reserve": 45509.91624783334,
+        "apport_total": 77700.07224783333,
+        "besoin_total": 152810.43624783334,
+        "total_ressources": 152810.43624783334,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "sous_reperes"
+    },
+    {
+      "up_id": "savonnerie",
+      "configuration": "reference",
+      "nom": "Savon solide ménager",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 1500,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 150000,
+          "remuneration_chargee_usd": 21600,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 4500,
+          "cout_direction_supplementaire_usd": 21600,
+          "resultat_net_avant_usd": 21787.698400000012,
+          "resultat_net_apres_usd": 5587.698400000012,
+          "marge_nette": 0.037251322666666746,
+          "roi_capex": 0.1107264267596705,
+          "rendement_besoin_total": 0.08038135250637557
+        },
+        {
+          "annee": 2,
+          "ca_usd": 214200,
+          "remuneration_chargee_usd": 22248,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 4635,
+          "cout_direction_supplementaire_usd": 22248,
+          "resultat_net_avant_usd": 42795.34598588743,
+          "resultat_net_apres_usd": 26109.345985887427,
+          "marge_nette": 0.12189237154942777,
+          "roi_capex": 0.5173855815212315,
+          "rendement_besoin_total": 0.37559374060033995
+        },
+        {
+          "annee": 3,
+          "ca_usd": 265302,
+          "remuneration_chargee_usd": 22915.43999999999,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 4774.05,
+          "cout_direction_supplementaire_usd": 22915.43999999999,
+          "resultat_net_avant_usd": 58842.193593762204,
+          "resultat_net_apres_usd": 41655.61359376222,
+          "marge_nette": 0.15701206019465447,
+          "roi_capex": 0.8254520766043559,
+          "rendement_besoin_total": 0.5992332299376723
+        }
+      ],
+      "financement_avant": {
+        "apport": 15139.199999999999,
+        "dette": 35324.799999999996,
+        "apport_reserve": 17700.859177777776,
+        "apport_total": 32840.05917777777,
+        "besoin_total": 68164.85917777778,
+        "total_ressources": 68164.85917777778,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 15139.199999999999,
+        "dette": 35324.799999999996,
+        "apport_reserve": 19050.859177777776,
+        "apport_total": 34190.05917777777,
+        "besoin_total": 69514.85917777778,
+        "total_ressources": 69514.85917777778,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "sous_reperes"
+    },
+    {
+      "up_id": "cosmetiques",
+      "configuration": "reference",
+      "nom": "Lait corporel au karité",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 750000,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 12000,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 229260.2016645,
+          "resultat_net_apres_usd": 207660.2016645,
+          "marge_nette": 0.276880268886,
+          "roi_capex": 1.8470313501780722,
+          "rendement_besoin_total": 1.2668508015145834
+        },
+        {
+          "annee": 2,
+          "ca_usd": 1020000,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 12360,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 338204.23153373355,
+          "resultat_net_apres_usd": 315956.23153373355,
+          "marge_nette": 0.30976101130758193,
+          "roi_capex": 2.810269181331976,
+          "rendement_besoin_total": 1.9275210269164669
+        },
+        {
+          "annee": 3,
+          "ca_usd": 1300500,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 12730.799999999997,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 449583.5941612269,
+          "resultat_net_apres_usd": 426668.15416122694,
+          "marge_nette": 0.32808008778256587,
+          "roi_capex": 3.794995143708941,
+          "rendement_besoin_total": 2.6029296357574623
+        }
+      ],
+      "financement_avant": {
+        "apport": 33728.751,
+        "dette": 78700.419,
+        "apport_reserve": 49689.265711791675,
+        "apport_total": 83418.01671179167,
+        "besoin_total": 162118.43571179168,
+        "total_ressources": 162118.43571179168,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 33728.751,
+        "dette": 78700.419,
+        "apport_reserve": 51489.265711791675,
+        "apport_total": 85218.01671179167,
+        "besoin_total": 163918.43571179168,
+        "total_ressources": 163918.43571179168,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "reperes_atteints_non_validation"
+    },
+    {
+      "up_id": "peintures",
+      "configuration": "reference",
+      "nom": "Primaire anticorrosion en phase aqueuse",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 3000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 1400000,
+          "remuneration_chargee_usd": 43200,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 18000,
+          "cout_direction_supplementaire_usd": 43200,
+          "resultat_net_avant_usd": 385797.309162,
+          "resultat_net_apres_usd": 353397.309162,
+          "marge_nette": 0.25242664940142856,
+          "roi_capex": 2.3842670985232,
+          "rendement_besoin_total": 1.349762912768548
+        },
+        {
+          "annee": 2,
+          "ca_usd": 1856400,
+          "remuneration_chargee_usd": 44496,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 18540,
+          "cout_direction_supplementaire_usd": 44496,
+          "resultat_net_avant_usd": 547781.9863712334,
+          "resultat_net_apres_usd": 514409.9863712334,
+          "marge_nette": 0.27710083299463123,
+          "roi_capex": 3.4705719988786528,
+          "rendement_besoin_total": 1.9647334701220893
+        },
+        {
+          "annee": 3,
+          "ca_usd": 2330496.0000000005,
+          "remuneration_chargee_usd": 45830.87999999998,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 19096.2,
+          "cout_direction_supplementaire_usd": 45830.87999999998,
+          "resultat_net_avant_usd": 712666.799469178,
+          "resultat_net_apres_usd": 678293.6394691779,
+          "marge_nette": 0.29105119230806564,
+          "roi_capex": 4.5762465242274,
+          "rendement_besoin_total": 2.5906694102829415
+        }
+      ],
+      "financement_avant": {
+        "apport": 44466.156,
+        "dette": 103754.364,
+        "apport_reserve": 110901.24574783334,
+        "apport_total": 155367.40174783336,
+        "besoin_total": 259121.76574783336,
+        "total_ressources": 259121.76574783336,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 44466.156,
+        "dette": 103754.364,
+        "apport_reserve": 113601.24574783334,
+        "apport_total": 158067.40174783336,
+        "besoin_total": 261821.76574783336,
+        "total_ressources": 261821.76574783336,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "reperes_atteints_non_validation"
+    },
+    {
+      "up_id": "adhesifs",
+      "configuration": "reference",
+      "nom": "Colle blanche aqueuse pour bois",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 533499.9999999999,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 12000,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 71357.93349999987,
+          "resultat_net_apres_usd": 49757.93349999987,
+          "marge_nette": 0.09326697938144307,
+          "roi_capex": 0.4983268252378555,
+          "rendement_besoin_total": 0.30500383403822945
+        },
+        {
+          "annee": 2,
+          "ca_usd": 673200.0000000001,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 12360,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 106606.86084597101,
+          "resultat_net_apres_usd": 84358.86084597101,
+          "marge_nette": 0.1253102508110086,
+          "roi_capex": 0.8448558922981573,
+          "rendement_besoin_total": 0.517098966602355
+        },
+        {
+          "annee": 3,
+          "ca_usd": 801108,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 12730.799999999997,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 138502.56421090718,
+          "resultat_net_apres_usd": 115587.1242109072,
+          "marge_nette": 0.14428407182415753,
+          "roi_capex": 1.1576076535894562,
+          "rendement_besoin_total": 0.7085205025602569
+        }
+      ],
+      "financement_avant": {
+        "apport": 29955,
+        "dette": 69895,
+        "apport_reserve": 61488.71481944444,
+        "apport_total": 91443.71481944443,
+        "besoin_total": 161338.71481944443,
+        "total_ressources": 161338.71481944443,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 29955,
+        "dette": 69895,
+        "apport_reserve": 63288.71481944444,
+        "apport_total": 93243.71481944443,
+        "besoin_total": 163138.71481944443,
+        "total_ressources": 163138.71481944443,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "sous_reperes"
+    },
+    {
+      "up_id": "engrais",
+      "configuration": "reference",
+      "nom": "Engrais foliaire NPK liquide",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 3000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 1003200,
+          "remuneration_chargee_usd": 43200,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 18000,
+          "cout_direction_supplementaire_usd": 43200,
+          "resultat_net_avant_usd": 191602.564156,
+          "resultat_net_apres_usd": 159202.564156,
+          "marge_nette": 0.15869474098484848,
+          "roi_capex": 1.3997089861627983,
+          "rendement_besoin_total": 0.7331019949332751
+        },
+        {
+          "annee": 2,
+          "ca_usd": 1279079.9999999998,
+          "remuneration_chargee_usd": 44496,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 18540,
+          "cout_direction_supplementaire_usd": 44496,
+          "resultat_net_avant_usd": 266267.9616185995,
+          "resultat_net_apres_usd": 232895.96161859948,
+          "marge_nette": 0.1820808406187256,
+          "roi_capex": 2.047621356143177,
+          "rendement_besoin_total": 1.072448141646744
+        },
+        {
+          "annee": 3,
+          "ca_usd": 1565593.92,
+          "remuneration_chargee_usd": 45830.87999999998,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 19096.2,
+          "cout_direction_supplementaire_usd": 45830.87999999998,
+          "resultat_net_avant_usd": 341824.13769232767,
+          "resultat_net_apres_usd": 307450.9776923277,
+          "marge_nette": 0.19637977240760343,
+          "roi_capex": 2.703109077180466,
+          "rendement_besoin_total": 1.415761902362153
+        }
+      ],
+      "financement_avant": {
+        "apport": 34121.928,
+        "dette": 79617.832,
+        "apport_reserve": 100723.15219544448,
+        "apport_total": 134845.08019544446,
+        "besoin_total": 214462.91219544449,
+        "total_ressources": 214462.91219544446,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 34121.928,
+        "dette": 79617.832,
+        "apport_reserve": 103423.15219544448,
+        "apport_total": 137545.08019544446,
+        "besoin_total": 217162.91219544449,
+        "total_ressources": 217162.91219544446,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "reperes_atteints_non_validation"
+    },
+    {
+      "up_id": "javel",
+      "configuration": "reference",
+      "nom": "Concentré professionnel d’hygiène des surfaces",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 325920,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 15000,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 39661.89316200002,
+          "resultat_net_apres_usd": 18061.893162000022,
+          "marge_nette": 0.055418179804860156,
+          "roi_capex": 0.19243333791459946,
+          "rendement_besoin_total": 0.13606271162823905
+        },
+        {
+          "annee": 2,
+          "ca_usd": 428400,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 15450,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 73269.14545211125,
+          "resultat_net_apres_usd": 51021.14545211125,
+          "marge_nette": 0.11909697817953138,
+          "roi_capex": 0.5435847303223043,
+          "rendement_besoin_total": 0.38434926717418066
+        },
+        {
+          "annee": 3,
+          "ca_usd": 524361.6,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 15913.5,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 105074.90284215898,
+          "resultat_net_apres_usd": 82159.46284215897,
+          "marge_nette": 0.15668474358564582,
+          "roi_capex": 0.8753356879139277,
+          "rendement_besoin_total": 0.6189184710572082
+        }
+      ],
+      "financement_avant": {
+        "apport": 28158.156,
+        "dette": 65702.364,
+        "apport_reserve": 37086.30641450001,
+        "apport_total": 65244.46241450001,
+        "besoin_total": 130946.82641450001,
+        "total_ressources": 130946.82641450001,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 28158.156,
+        "dette": 65702.364,
+        "apport_reserve": 38886.30641450001,
+        "apport_total": 67044.46241450001,
+        "besoin_total": 132746.8264145,
+        "total_ressources": 132746.8264145,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "sous_reperes"
+    },
+    {
+      "up_id": "produits_industriels",
+      "configuration": "reference",
+      "nom": "Adjuvant liquide pour béton — formulation PCE",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 873000,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 24999.999999999996,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 139318.17875000002,
+          "resultat_net_apres_usd": 117718.17875000002,
+          "marge_nette": 0.13484327462772053,
+          "roi_capex": 0.5689617145964235,
+          "rendement_besoin_total": 0.38876108715911734
+        },
+        {
+          "annee": 2,
+          "ca_usd": 1223999.9999999998,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 25749.999999999996,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 258539.93561415252,
+          "resultat_net_apres_usd": 236291.93561415252,
+          "marge_nette": 0.1930489670050266,
+          "roi_capex": 1.142058654490829,
+          "rendement_besoin_total": 0.7803476977959113
+        },
+        {
+          "annee": 3,
+          "ca_usd": 1560600.0000000002,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 26522.499999999996,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 373561.52880746784,
+          "resultat_net_apres_usd": 350646.08880746784,
+          "marge_nette": 0.22468671588329348,
+          "roi_capex": 1.6947611832163743,
+          "rendement_besoin_total": 1.1579991819477888
+        }
+      ],
+      "financement_avant": {
+        "apport": 62070,
+        "dette": 144830,
+        "apport_reserve": 94103.39940972222,
+        "apport_total": 156173.39940972222,
+        "besoin_total": 301003.3994097222,
+        "total_ressources": 301003.3994097222,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 62070,
+        "dette": 144830,
+        "apport_reserve": 95903.39940972222,
+        "apport_total": 157973.39940972222,
+        "besoin_total": 302803.3994097222,
+        "total_ressources": 302803.3994097222,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "reperes_atteints_non_validation"
+    },
+    {
+      "up_id": "confection",
+      "configuration": "reference",
+      "nom": "Atelier mixte — linge, uniformes et broderie",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 539514,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9660,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 91623.34192964993,
+          "resultat_net_apres_usd": 70023.34192964993,
+          "marge_nette": 0.12978966612478995,
+          "roi_capex": 0.4471189715603185,
+          "rendement_besoin_total": 0.3234222885638647
+        },
+        {
+          "annee": 2,
+          "ca_usd": 693396.0000000001,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9949.799999999997,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 148094.91719060988,
+          "resultat_net_apres_usd": 125846.91719060988,
+          "marge_nette": 0.18149357249048143,
+          "roi_capex": 0.8035683907350943,
+          "rendement_besoin_total": 0.581259003710303
+        },
+        {
+          "annee": 3,
+          "ca_usd": 803709,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 10248.293999999996,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 189192.92474594823,
+          "resultat_net_apres_usd": 166277.48474594823,
+          "marge_nette": 0.2068876729586806,
+          "roi_capex": 1.0617290738270908,
+          "rendement_besoin_total": 0.7679988296931963
+        }
+      ],
+      "financement_avant": {
+        "apport": 46983.026699999995,
+        "dette": 109627.06229999998,
+        "apport_reserve": 58097.38251837916,
+        "apport_total": 105080.40921837915,
+        "besoin_total": 214707.47151837914,
+        "total_ressources": 214707.4715183791,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 46983.026699999995,
+        "dette": 109627.06229999998,
+        "apport_reserve": 59897.38251837916,
+        "apport_total": 106880.40921837915,
+        "besoin_total": 216507.47151837914,
+        "total_ressources": 216507.4715183791,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "reperes_atteints_non_validation"
+    },
+    {
+      "up_id": "confection",
+      "configuration": "linge_simple",
+      "nom": "Linge de maison — draps simples",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 595968,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9660,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 130900.26880670001,
+          "resultat_net_apres_usd": 109300.26880670001,
+          "marge_nette": 0.183399559719146,
+          "roi_capex": 1.241848374012043,
+          "rendement_besoin_total": 0.7466279685690087
+        },
+        {
+          "annee": 2,
+          "ca_usd": 783359.9999999999,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9949.799999999997,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 195158.13186881685,
+          "resultat_net_apres_usd": 172910.13186881685,
+          "marge_nette": 0.22072882438319147,
+          "roi_capex": 1.9645712536283853,
+          "rendement_besoin_total": 1.1811456816316672
+        },
+        {
+          "annee": 3,
+          "ca_usd": 905564.16,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 10248.293999999996,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 236201.88138410173,
+          "resultat_net_apres_usd": 213286.44138410175,
+          "marge_nette": 0.23552880160816186,
+          "roi_capex": 2.4233190212925204,
+          "rendement_besoin_total": 1.4569554511851597
+        }
+      ],
+      "financement_avant": {
+        "apport": 26404.2546,
+        "dette": 61609.92739999999,
+        "apport_reserve": 56577.69375063055,
+        "apport_total": 82981.94835063056,
+        "besoin_total": 144591.87575063054,
+        "total_ressources": 144591.87575063054,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 26404.2546,
+        "dette": 61609.92739999999,
+        "apport_reserve": 58377.69375063055,
+        "apport_total": 84781.94835063056,
+        "besoin_total": 146391.87575063054,
+        "total_ressources": 146391.87575063054,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "reperes_atteints_non_validation"
+    },
+    {
+      "up_id": "confection",
+      "configuration": "linge_brode",
+      "nom": "Linge de maison — draps brodés",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 582582,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9660,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 118207.18055384995,
+          "resultat_net_apres_usd": 96607.18055384995,
+          "marge_nette": 0.16582589327141922,
+          "roi_capex": 0.678765260896181,
+          "rendement_besoin_total": 0.4727987886105574
+        },
+        {
+          "annee": 2,
+          "ca_usd": 758472.0000000001,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9949.799999999997,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 180340.5768846702,
+          "resultat_net_apres_usd": 158092.5768846702,
+          "marge_nette": 0.20843561381919198,
+          "roi_capex": 1.1107636987196636,
+          "rendement_besoin_total": 0.7737103847858309
+        },
+        {
+          "annee": 3,
+          "ca_usd": 892663.1999999998,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 10248.293999999996,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 227906.95914197643,
+          "resultat_net_apres_usd": 204991.51914197643,
+          "marge_nette": 0.22964038300444833,
+          "roi_capex": 1.4402772255044671,
+          "rendement_besoin_total": 1.0032353844726911
+        }
+      ],
+      "financement_avant": {
+        "apport": 42698.3463,
+        "dette": 99629.47469999999,
+        "apport_reserve": 60202.6106361625,
+        "apport_total": 102900.95693616249,
+        "besoin_total": 202530.4316361625,
+        "total_ressources": 202530.43163616248,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 42698.3463,
+        "dette": 99629.47469999999,
+        "apport_reserve": 62002.6106361625,
+        "apport_total": 104700.95693616249,
+        "besoin_total": 204330.4316361625,
+        "total_ressources": 204330.43163616248,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "reperes_atteints_non_validation"
+    },
+    {
+      "up_id": "confection",
+      "configuration": "uniformes_simples",
+      "nom": "Uniformes — chemises de travail simples",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 395760,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9660,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 55370.23018250005,
+          "resultat_net_apres_usd": 33770.23018250005,
+          "marge_nette": 0.08533007424322833,
+          "roi_capex": 0.3301212327749403,
+          "rendement_besoin_total": 0.23237072873630424
+        },
+        {
+          "annee": 2,
+          "ca_usd": 520200,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9949.799999999997,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 102761.81534369734,
+          "resultat_net_apres_usd": 80513.81534369734,
+          "marge_nette": 0.15477473153344357,
+          "roi_capex": 0.787063630689993,
+          "rendement_besoin_total": 0.5540102582555193
+        },
+        {
+          "annee": 3,
+          "ca_usd": 601351.2,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 10248.293999999996,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 134059.11643330718,
+          "resultat_net_apres_usd": 111143.6764333072,
+          "marge_nette": 0.18482323878842716,
+          "roi_capex": 1.0864861530708758,
+          "rendement_besoin_total": 0.7647723141852636
+        }
+      ],
+      "financement_avant": {
+        "apport": 30688.935,
+        "dette": 71607.515,
+        "apport_reserve": 41232.65563284723,
+        "apport_total": 71921.59063284723,
+        "besoin_total": 143529.10563284723,
+        "total_ressources": 143529.10563284723,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 30688.935,
+        "dette": 71607.515,
+        "apport_reserve": 43032.65563284723,
+        "apport_total": 73721.59063284723,
+        "besoin_total": 145329.10563284723,
+        "total_ressources": 145329.10563284723,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "sous_reperes"
+    },
+    {
+      "up_id": "confection",
+      "configuration": "uniformes_brodes",
+      "nom": "Uniformes — chemises de travail brodées",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 430680,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9660,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 57954.64192965004,
+          "resultat_net_apres_usd": 36354.64192965004,
+          "marge_nette": 0.08441218986173038,
+          "roi_capex": 0.23213473769017554,
+          "rendement_besoin_total": 0.17522378227220892
+        },
+        {
+          "annee": 2,
+          "ca_usd": 566100,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9949.799999999997,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 110600.54165906316,
+          "resultat_net_apres_usd": 88352.54165906315,
+          "marge_nette": 0.15607232230889093,
+          "roi_capex": 0.5641561295521846,
+          "rendement_besoin_total": 0.4258456609976293
+        },
+        {
+          "annee": 3,
+          "ca_usd": 654411.6,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 10248.293999999996,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 145534.78037392214,
+          "resultat_net_apres_usd": 122619.34037392214,
+          "marge_nette": 0.18737342121368591,
+          "roi_capex": 0.7829593939757109,
+          "rendement_besoin_total": 0.5910063601126724
+        }
+      ],
+      "financement_avant": {
+        "apport": 46983.026699999995,
+        "dette": 109627.06229999998,
+        "apport_reserve": 49065.411518379165,
+        "apport_total": 96048.43821837916,
+        "besoin_total": 205675.50051837915,
+        "total_ressources": 205675.50051837915,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 46983.026699999995,
+        "dette": 109627.06229999998,
+        "apport_reserve": 50865.41151837916,
+        "apport_total": 97848.43821837916,
+        "besoin_total": 207475.50051837915,
+        "total_ressources": 207475.50051837915,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "sous_reperes"
+    },
+    {
+      "up_id": "confection",
+      "configuration": "pret_a_porter",
+      "nom": "Prêt-à-porter — tuniques en série",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 410400,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9660,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 82182.46343450001,
+          "resultat_net_apres_usd": 60582.4634345,
+          "marge_nette": 0.147618088290692,
+          "roi_capex": 0.6308808889966581,
+          "rendement_besoin_total": 0.4413997647227812
+        },
+        {
+          "annee": 2,
+          "ca_usd": 550800,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 9949.799999999997,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 138019.5574121972,
+          "resultat_net_apres_usd": 115771.5574121972,
+          "marge_nette": 0.21018801273093174,
+          "roi_capex": 1.2055974438824402,
+          "rendement_besoin_total": 0.8435038013695713
+        },
+        {
+          "annee": 3,
+          "ca_usd": 636724.8,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 10248.293999999996,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 173499.56288104143,
+          "resultat_net_apres_usd": 150584.12288104146,
+          "marge_nette": 0.23649797036497,
+          "roi_capex": 1.5681212008601362,
+          "rendement_besoin_total": 1.0971458181548053
+        }
+      ],
+      "financement_avant": {
+        "apport": 28808.511,
+        "dette": 67219.859,
+        "apport_reserve": 39422.41324984722,
+        "apport_total": 68230.92424984722,
+        "besoin_total": 135450.7832498472,
+        "total_ressources": 135450.7832498472,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 28808.511,
+        "dette": 67219.859,
+        "apport_reserve": 41222.41324984722,
+        "apport_total": 70030.92424984722,
+        "besoin_total": 137250.7832498472,
+        "total_ressources": 137250.7832498472,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "reperes_atteints_non_validation"
+    },
+    {
+      "up_id": "tricotage",
+      "configuration": "reference",
+      "nom": "Confection maille & sous-vêtements — assortiment de référence",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 2000,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 358758.3130449099,
+          "remuneration_chargee_usd": 28800,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 4800,
+          "cout_direction_supplementaire_usd": 28800,
+          "resultat_net_avant_usd": 21609.608218150042,
+          "resultat_net_apres_usd": 9.608218150043285,
+          "marge_nette": 0.000026781869020664375,
+          "roi_capex": 0.00013323741996202745,
+          "rendement_besoin_total": 0.0000649406255094048
+        },
+        {
+          "annee": 2,
+          "ca_usd": 406839.3240715473,
+          "remuneration_chargee_usd": 29664,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 4944,
+          "cout_direction_supplementaire_usd": 29664,
+          "resultat_net_avant_usd": 24917.17314095443,
+          "resultat_net_apres_usd": 2669.173140954427,
+          "marge_nette": 0.00656075502791127,
+          "roi_capex": 0.037013495861467995,
+          "rendement_besoin_total": 0.018040574293757293
+        },
+        {
+          "annee": 3,
+          "ca_usd": 431496.25280315627,
+          "remuneration_chargee_usd": 30553.92,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 5092.32,
+          "cout_direction_supplementaire_usd": 30553.92,
+          "resultat_net_avant_usd": 22930.36275484692,
+          "resultat_net_apres_usd": 14.922754846920725,
+          "marge_nette": 0.0000345837414577232,
+          "roi_capex": 0.0002069342435278283,
+          "rendement_besoin_total": 0.00010086084838510543
+        }
+      ],
+      "financement_avant": {
+        "apport": 21634.0533,
+        "dette": 50479.4577,
+        "apport_reserve": 69436.75282857433,
+        "apport_total": 91070.80612857433,
+        "besoin_total": 141550.26382857433,
+        "total_ressources": 141550.26382857433,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 21634.0533,
+        "dette": 50479.4577,
+        "apport_reserve": 75840.37879817895,
+        "apport_total": 97474.43209817895,
+        "besoin_total": 147953.88979817895,
+        "total_ressources": 147953.88979817895,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "sous_reperes"
+    },
+    {
+      "up_id": "non_tisses",
+      "configuration": "reference",
+      "nom": "Feutre aiguilleté d’ameublement — faisabilité économique",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 1500,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 120279.99999999999,
+          "remuneration_chargee_usd": 21600,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 4800,
+          "cout_direction_supplementaire_usd": 21600,
+          "resultat_net_avant_usd": -54439.52134035086,
+          "resultat_net_apres_usd": -76039.52134035085,
+          "marge_nette": -0.632187573498095,
+          "roi_capex": -0.3676852767344799,
+          "rendement_besoin_total": -0.2139920426044484
+        },
+        {
+          "annee": 2,
+          "ca_usd": 186000,
+          "remuneration_chargee_usd": 22248,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 4944,
+          "cout_direction_supplementaire_usd": 22248,
+          "resultat_net_avant_usd": -42096.42437986688,
+          "resultat_net_apres_usd": -64344.42437986688,
+          "marge_nette": -0.3459377654831553,
+          "roi_capex": -0.3111342242481692,
+          "rendement_besoin_total": -0.18107945132406392
+        },
+        {
+          "annee": 3,
+          "ca_usd": 247999.99999999997,
+          "remuneration_chargee_usd": 22915.43999999999,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 5092.32,
+          "cout_direction_supplementaire_usd": 22915.43999999999,
+          "resultat_net_avant_usd": -32077.42580943504,
+          "resultat_net_apres_usd": -54992.865809435025,
+          "marge_nette": -0.2217454266509477,
+          "roi_capex": -0.2659152336461951,
+          "rendement_besoin_total": -0.1547620957601761
+        }
+      ],
+      "financement_avant": {
+        "apport": 62041.799999999996,
+        "dette": 144764.19999999998,
+        "apport_reserve": 130532.079,
+        "apport_total": 192573.879,
+        "besoin_total": 337338.079,
+        "total_ressources": 337338.07899999997,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 62041.799999999996,
+        "dette": 144764.19999999998,
+        "apport_reserve": 148532.079,
+        "apport_total": 210573.879,
+        "besoin_total": 355338.079,
+        "total_ressources": 355338.07899999997,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "deficitaire_A1"
+    },
+    {
+      "up_id": "recyclage_textile",
+      "configuration": "reference",
+      "nom": "Fibres recyclées de chutes propres — faisabilité économique",
+      "remuneration": {
+        "schema": "p2i.remuneration-dirigeant.v1",
+        "brut_mensuel_usd": 1500,
+        "taux_charges": 0.2,
+        "croissance_annuelle": 0.03,
+        "deja_inclus_personnel_annuel_usd": 0,
+        "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+        "justification_non_double_compte": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré."
+      },
+      "annuel": [
+        {
+          "annee": 1,
+          "ca_usd": 139680,
+          "remuneration_chargee_usd": 21600,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 3600,
+          "cout_direction_supplementaire_usd": 21600,
+          "resultat_net_avant_usd": 1250.6790411764875,
+          "resultat_net_apres_usd": -19932.427945098018,
+          "marge_nette": -0.14270065825528364,
+          "roi_capex": -0.2682478931055099,
+          "rendement_besoin_total": -0.165021944831584
+        },
+        {
+          "annee": 2,
+          "ca_usd": 192000,
+          "remuneration_chargee_usd": 22248,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 3708,
+          "cout_direction_supplementaire_usd": 22248,
+          "resultat_net_avant_usd": 12712.750340618833,
+          "resultat_net_apres_usd": -5297.66621250822,
+          "marge_nette": -0.027592011523480314,
+          "roi_capex": -0.07129526838355207,
+          "rendement_besoin_total": -0.04385974372337705
+        },
+        {
+          "annee": 3,
+          "ca_usd": 240000,
+          "remuneration_chargee_usd": 22915.43999999999,
+          "personnel_reaffecte_usd": 0,
+          "autres_personnels_usd": 3819.24,
+          "cout_direction_supplementaire_usd": 22915.43999999999,
+          "resultat_net_avant_usd": 22417.401308749693,
+          "resultat_net_apres_usd": 5230.821308749695,
+          "marge_nette": 0.021795088786457063,
+          "roi_capex": 0.07039567879780496,
+          "rendement_besoin_total": 0.04330633015776952
+        }
+      ],
+      "financement_avant": {
+        "apport": 22291.8,
+        "dette": 52014.2,
+        "apport_reserve": 25297.42213529416,
+        "apport_total": 47589.222135294156,
+        "besoin_total": 99603.42213529415,
+        "total_ressources": 99603.42213529415,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "financement_apres": {
+        "apport": 22291.8,
+        "dette": 52014.2,
+        "apport_reserve": 46480.52912156867,
+        "apport_total": 68772.32912156866,
+        "besoin_total": 120786.52912156866,
+        "total_ressources": 120786.52912156866,
+        "hypothese_reserve_financee_par_apport": true
+      },
+      "bfr_inchange": true,
+      "bilans_equilibres": true,
+      "bfr_mois": 36,
+      "tresorerie_mois": 12,
+      "lecture": "deficitaire_A1"
+    }
+  ],
+  "total_scenarios": 27,
+  "total_up": 20,
+  "deficitaires_A1": 3,
+  "sous_reperes_A1": 12,
+  "reperes_atteints_A1": 12
+}

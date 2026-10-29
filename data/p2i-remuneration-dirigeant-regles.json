@@ -1,0 +1,21 @@
+{
+  "schema": "p2i.dirigeant-regles.v1",
+  "date": "2026-10-29",
+  "qualification": "Hypothèses budgétaires P2I, pas enquête salariale ni barème légal ; rémunération brute du dirigeant opérationnel, distincte des dividendes et du revenu net personnel.",
+  "methode": "Palier choisi selon le CA HT de référence A1 au moment de la génération. Le salaire n'est pas diminué pour corriger une perte ; il reste conservé lors des simulations personnelles tant que ses paramètres ne sont pas modifiés.",
+  "paliers": [
+    {"ca_A1_inferieur_usd": 300000, "brut_mensuel_usd": 1500},
+    {"ca_A1_inferieur_usd": 1000000, "brut_mensuel_usd": 2000},
+    {"ca_A1_inferieur_usd": null, "brut_mensuel_usd": 3000}
+  ],
+  "taux_charges_employeur_estime": 0.20,
+  "croissance_annuelle": 0.03,
+  "reaffectations_personnel": {
+    "jus_boissons": {"montant_annuel_usd": 9660, "justification": "Le responsable hors CPV à 700 USD/mois majoré de 15 % est remplacé par le dirigeant opérationnel. Les six opérateurs de production restent intégralement budgétés."},
+    "aliments_betail": {"montant_annuel_usd": 8280, "justification": "Le responsable hors CPV à 600 USD/mois majoré de 15 % est remplacé par le dirigeant opérationnel. Les quatre opérateurs de production sont conservés."},
+    "mini_laiterie": {"montant_annuel_usd": 9660, "justification": "L'enveloppe de responsable administratif hors industrie est réaffectée à la direction par hypothèse P2I. Le personnel de production reste inchangé ; pas de seconde personne administrative supposée dans cette enveloppe."}
+  },
+  "regle_autres_profils": "Aucun salaire de direction explicitement identifié : personnel administratif, commercial, techniciens et chefs d'atelier conservés ; direction ajoutée séparément. Une enveloppe administrative générique ne prouve pas qu'un dirigeant est déjà rémunéré.",
+  "dossiers_incomplets": "Ne pas ajouter de montant arbitraire aux dossiers sans prévisions calculables ; règle disponible lors de leur configuration.",
+  "anciens_dossiers": "Champ facultatif : absent des anciens paramètres, il n'est jamais ajouté automatiquement à un import ou une simulation enregistrée. L'absence ne signifie pas une rémunération du dirigeant égale à zéro ou déjà validée."
+}
