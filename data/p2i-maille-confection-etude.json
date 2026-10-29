@@ -192,8 +192,8 @@
     }
   ],
   "production_annuelle_pieces": [
-    120000,
     150000,
+    165000,
     175000
   ],
   "part_vendue_A1": 0.97,
@@ -217,5 +217,17 @@
     "energie": 0.025,
     "aiguilles_huile": 0.015,
     "livraison_distribution": 0.04
+  },
+  "programme_commercial": {
+    "qualification": "Hypothèse P2I de démarrage renforcé, pas commandes acquises ; aucune vente export ajoutée.",
+    "jours_an": 250,
+    "reference": "renforce_150000",
+    "comparaisons_internes_A1_pieces": [
+      120000,
+      150000,
+      175000,
+      186000
+    ],
+    "suggestion_export": "Étudier des distributeurs dans les pays limitrophes, après chiffrage du transport, des formalités et des règlements. Aucune recette export intégrée à cette simulation."
   }
 }

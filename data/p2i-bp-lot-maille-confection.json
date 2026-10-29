@@ -156,13 +156,13 @@
       "unite_production": "pièce",
       "capacite_unites_h": 1,
       "production_explicite": [
-        120000,
         150000,
+        165000,
         175000
       ],
       "ventes_explicites": [
-        116400,
-        150000,
+        145500,
+        165000,
         175000
       ],
       "prix_vente_usd_unite": [
@@ -210,7 +210,7 @@
         "matieres": "Nomenclature par article : masses nettes de tissu divisées par rendement de coupe 85 %, plus fils, élastiques et étiquettes. Prix des mailles au kg issus de catalogues, fret/import/local estimés séparément. Masses selon patron moyen à vérifier par taille ; pas de recette sur les chutes.",
         "personnel": "19 opérateurs productifs polyvalents à 200 USD/mois et un chef à 400, majorés de 20 % par hypothèse P2I ; personnel administratif 4 800 USD/an séparé. Effectif partagé, pas un salarié permanent par machine.",
         "process": "Énergie 0,025, aiguilles/huile 0,015, livraison 0,040 et emballages 0,080 USD par pièce ; fils inclus dans la matière, pas une seconde fois ici. Loyer et maintenance dans les fixes industriels.",
-        "production": "Une équipe 8 h/j et 250 j/an ; efficacité productive 65 %. Temps par article et parts de gamme explicites. La capacité retient le minimum des postes partagés et de la disponibilité totale des 19 opérateurs. Volumes commerciaux supposés, pas commandes acquises.",
+        "production": "Une équipe 8 h/j et 250 j/an ; efficacité productive 65 %. Temps par article et parts de gamme explicites. La capacité retient le minimum des postes partagés et de la disponibilité totale des 19 opérateurs. Volumes commerciaux supposés, pas commandes acquises. Programme renforcé : 150 000, 165 000 et 175 000 pièces produites ; 97 % vendus en A1, puis ventes égales à la production en A2/A3, stock de sécurité fini maintenu. Les ventes supplémentaires exigent des débouchés commerciaux ; aucune remise ni prime export présumée.",
         "qualite": "Mailles achetées finies et stabilisées ; relaxation avant coupe, contrôle rétrécissement/dégorgement, coutures extensibles et tailles. Fond de culotte en jersey coton distinct. Aucun label sanitaire, bio ou antibactérien présumé.",
         "complements": "Provisions P2I sur locaux loués et installations ; ensemble de machines tarifées individuellement, pas ligne automatique intégrée. Tables, bâti, moteurs et chaudières déjà inclus ne sont pas rachetés en double.",
         "charges": "Hors coûts industriels : personnel administratif 4 800 et autres charges 6 000 USD/an. Charges +3 %/an ; prix constants. Stock matières cible 60 jours pour achats importés ; ventilation par couleur et minima de chaque matière à approfondir."

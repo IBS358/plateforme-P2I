@@ -58,6 +58,25 @@ function diagnosticPrix(input,annee,performance){
  const prix=Math.max(0,caMarge,caRoi)/ventes;
  return {statut:performance.marge_atteinte&&performance.roi_atteint?'reperes_atteints':'ajustement_a_etudier',prix_cible:prix,prix_actuel:input.prix[0],marge_cible:m,roi_cible:roi,qualification:'Prix mathématique indicatif, à comparer aux prix de marché ; volumes et coûts inchangés. Non appliqué automatiquement.'};
 }
+// Scénario de volumes à coûts fixes industriels explicitement conservés.
+// Aucun prix, investissement, taux ou résultat n'est ajusté pour viser une marge.
+function reprogrammerVolumes(input,programme){
+ const s=JSON.parse(JSON.stringify(input)),p=programme;
+ if(!p||!positive(p.fixes_industriels_an)||!positive(p.plafond_annuel)||!p.plafond_annuel)throw Error('Programme de volumes : fixes et plafond explicites requis');
+ for(const k of ['production','ventes'])if(!Array.isArray(p[k])||p[k].length!==3||!p[k].every(positive))throw Error('Programme de volumes : trois années requises');
+ if(!Array.isArray(s.production)||s.production.length!==3||!s.production.every(q=>positive(q)&&q>0)||!Array.isArray(s.cout_production_kg)||s.cout_production_kg.length!==3||!s.cout_production_kg.every(positive)||!positive(s.croissance_charges))throw Error('Coûts de référence incomplets');
+ const pieces=uniteProduction(s).nom==='pièce';let stock=0;
+ for(let y=0;y<3;y++){
+  const q=p.production[y],sold=p.ventes[y];
+  if(!q||q>p.plafond_annuel||(pieces&&(!Number.isInteger(q)||!Number.isInteger(sold))))throw Error('Volume hors capacité ou unité invalide');
+  stock+=q-sold;if(stock<0)throw Error('Ventes supérieures au stock disponible');
+  const fixes=p.fixes_industriels_an*(1+s.croissance_charges)**y;
+  const variable=s.cout_production_kg[y]-fixes/s.production[y];
+  if(variable<0)throw Error('Fixes industriels incompatibles avec le coût de référence');
+  s.cout_production_kg[y]=variable+fixes/q;
+ }
+ s.production=p.production.slice();s.ventes=p.ventes.slice();return s;
+}
 function calculer(input){
  const s=JSON.parse(JSON.stringify(input)),unite=uniteProduction(s);
  for(const k of ['investissement','matieres_kg','personnel','charges_fixes','part_apport','part_dette','taux_interet','duree_dette_mois','duree_amortissement_ans','taux_tva','taux_is','coussin_tresorerie','croissance_personnel','croissance_charges'])if(!positive(s[k]))throw Error('Hypothèse manquante ou invalide : '+k);
@@ -150,5 +169,5 @@ function calculer(input){
  const performance=evaluerPerformance(annual,s.investissement);performance.diagnostic_prix=diagnosticPrix(s,annual[0],performance);
  return {version:'107',statut:'simulation_indicative_non_documentee',entrees:s,unite_production:unite,investissements:ventilerInvestissement(s),emballages:{statut:packActive?'stock_modele':'non_isole_dossier_historique',jours:packActive?s.stock_emballages_jours:null,cout_stockable_unite:packActive?s.cout_emballages_stockables_unite:null,stock_lancement:packActive?months[0].stock_emballages:null,convention:'Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation.'},mois:months,annuel:annual,performance,bfr:bfr.bfr_mensuel,tresorerie:cash[0].tresorerie_mensuelle,bilans,reserve_initiale:reserve,financement:{apport:s.investissement*.3,dette:debt,apport_reserve:reserve,apport_total:s.investissement*.3+reserve,besoin_total:s.investissement+reserve,total_ressources:s.investissement*.3+reserve+debt,hypothese_reserve_financee_par_apport:true},moteurs:['P2I_ECONOMIC_RESULT_ENGINE','P2I_FINANCIAL_ENGINE','P2I_BP_BFR_MENSUEL','P2I_BP_MOTEUR_TRESORERIE'],controles:{bilans_equilibres:true,bfr_mois:36,tresorerie_mois:12,financement:'30/70'}};
 }
-root.P2I_BP_SIMULATION_COMMUNE=Object.freeze({calculer,uniteProduction,evaluerPerformance,ventilerInvestissement,normaliserInvestissements,normaliserAmortissements,reperes:REPERES});
+root.P2I_BP_SIMULATION_COMMUNE=Object.freeze({calculer,reprogrammerVolumes,uniteProduction,evaluerPerformance,ventilerInvestissement,normaliserInvestissements,normaliserAmortissements,reperes:REPERES});
 })(typeof window!=='undefined'?window:globalThis);

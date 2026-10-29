@@ -66,6 +66,8 @@ for(const [key,rawProfile] of Object.entries(simulationPack.profils)){
  const p=JSON.parse(JSON.stringify(rawProfile));
  if(p.etude_maille){
   const etude=JSON.parse(fs.readFileSync(path.join(root,p.etude_maille),'utf8')),fx=ctx.P2I_BP_V108_REFERENCES.change,maille=require('./p2i-textile-commun.cjs').chiffrerConfectionMaille(etude,fx.eur_xof/fx.eur_usd);
+  p.suggestion=etude.programme_commercial?.suggestion_export||null;
+  p.production_explicite=etude.production_annuelle_pieces.slice();p.ventes_explicites=p.production_explicite.map((q,i)=>i===0?Math.floor(q*etude.part_vendue_A1):q);
   p.prix_vente_usd_unite=[maille.prix_usd_unite,maille.prix_usd_unite,maille.prix_usd_unite];p.matieres_usd_unite=maille.matieres_usd_unite;p.cout_process_usd_unite=maille.process_usd_unite;p.gamme=maille.gamme;
   p.dimensionnement_textile={heures_jour:8,jours_an:250,efficacite_postes:.65,effectif_productif_total:etude.effectif_productif,moyens:{coupe:2,surjet:8,recouvrement:4,colletage:2,zigzag:2,piqueuses:2,repassage:2,controle_conditionnement:3},temps_minutes_par_article:{...maille.temps_minutes_par_article,part_brodee:0},qualification:'Temps par article, assortiment, efficacité 65 % et effectif = hypothèses P2I. Le goulot partagé et la limite de personnel bornent les volumes ; points/minute non convertis en pièces garanties.'};
  }
