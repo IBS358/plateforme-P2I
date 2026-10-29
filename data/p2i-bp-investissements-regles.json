@@ -208,6 +208,18 @@
     "confection": {
       "besoins": "Chariots pour lots de tissus et pièces fermées, diable pour cartons et transpalette pour palettes de réception ; stockage au sol au sec.",
       "postes_budget_mutualise": []
+    },
+    "tricotage": {
+      "besoins": "Transpalette pour palettes de balles/rouleaux, diable pour petits lots, bacs de tri et palettes au sol ; déchargement des machines par prestataire dans installation.",
+      "postes_budget_mutualise": []
+    },
+    "recyclage_textile": {
+      "besoins": "Transpalette pour palettes de balles/rouleaux, diable pour petits lots, bacs de tri et palettes au sol ; déchargement des machines par prestataire dans installation.",
+      "postes_budget_mutualise": []
+    },
+    "non_tisses": {
+      "besoins": "Transpalette pour palettes de balles/rouleaux, diable pour petits lots, bacs de tri et palettes au sol ; déchargement des machines par prestataire dans installation.",
+      "postes_budget_mutualise": []
     }
   },
   "manutention_defaut": {

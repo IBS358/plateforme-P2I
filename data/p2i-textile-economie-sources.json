@@ -1,0 +1,159 @@
+{
+  "schema": "p2i.textile-economie.v1",
+  "date": "2026-10-29",
+  "qualification": "Scénarios exploratoires : prix publics et statistiques observés séparés des hypothèses P2I ; aucun résultat réalisé ni prix de vente local validé",
+  "sources": {
+    "leadsfon_tech": {
+      "url": "https://carrieleadsfon.en.made-in-china.com/product/BFbAInkyklhC/China-Leadsfon-Single-Jersey-Circular-Knitting-Machine-Textile-Machine.html",
+      "titre": "LEADSFON SL3.0 — fiche du fabricant",
+      "qualification": "Fiche fournisseur ; caractéristiques annoncées, non rendement garanti",
+      "consulte_le": "2026-10-29"
+    },
+    "leadsfon_prix": {
+      "url": "https://www.leadsfon.com/news/how-much-does-a-circular-knitting-machine-cost-in-2026-a-complete-pricing-guide-for-textile-manufacturers/",
+      "titre": "LEADSFON — guide de prix fabricant du 10/04/2026",
+      "qualification": "Fourchette de gamme fabricant, pas tarif ferme d’une SL3.0 configurée",
+      "consulte_le": "2026-10-29"
+    },
+    "rongda_tech": {
+      "url": "https://rongdamachinery.en.made-in-china.com/product/xfBYLtRUmjrp/China-Textile-Waste-Recycling-Complete-Production-Line.html",
+      "titre": "Rongda GM600+GM250 — ligne de recyclage",
+      "qualification": "Fiche fournisseur ; 300 kg/h annoncés sans rendement matière ni puissance détaillée",
+      "consulte_le": "2026-10-29"
+    },
+    "rongda_prix": {
+      "url": "https://www.made-in-china.com/products-search/hot-china-products/Yarn_Waste_Price.html",
+      "titre": "Catalogue public — Textile Waste Recycling Complete Production Line / Gaomi Rongda",
+      "qualification": "Prix affiché sur index de catalogue ; rapprochement par titre et vendeur, périmètre exact non confirmé",
+      "consulte_le": "2026-10-29"
+    },
+    "lebon_tech": {
+      "url": "https://china-lebon.en.made-in-china.com/product/gGPprnsuvNYV/China-Complete-Needle-Punching-Production-Line-for-Automotive-Interior-and-Acoustic-Insulation-Felt.html",
+      "titre": "Lebon — ligne complète de non-tissé aiguilleté",
+      "qualification": "Fiche fournisseur décrivant le flux intégré ; aucune performance normative présumée",
+      "consulte_le": "2026-10-29"
+    },
+    "lebon_prix": {
+      "url": "https://m.made-in-china.com/hot-china-products/Cross_Lapper_Line.html",
+      "titre": "Catalogue public — Needle Punching Production Line with Cross Lapper and Calender / Qingdao Lebon",
+      "qualification": "Fourchette affichée sur index de catalogue ; variante et composition à rapprocher de la fiche technique",
+      "consulte_le": "2026-10-29"
+    },
+    "andritz": {
+      "url": "https://www.andritz.com/products-en/group/nonwoven-textile/textile-recycling/exel",
+      "titre": "ANDRITZ EXEL — recyclage mécanique textile",
+      "qualification": "Référence de procédé indépendante de la sélection budgétaire Rongda ; aucun prix repris",
+      "consulte_le": "2026-10-29"
+    },
+    "nonwoven": {
+      "url": "https://www.andritz.com/nonwoven-textile-en/technologies/needlepunch-4",
+      "titre": "ANDRITZ — Needlepunch line solutions",
+      "qualification": "Référence de procédé ; aucun prix public retenu",
+      "consulte_le": "2026-10-29"
+    },
+    "richbond": {
+      "url": "https://www.richbond.ci/qui-sommes-nous",
+      "titre": "Richbond Côte d’Ivoire — présentation du fabricant",
+      "qualification": "Présence locale de fabrication de literie ; ni achat de fibres ni commande de feutre démontrés",
+      "consulte_le": "2026-10-29"
+    },
+    "cil": {
+      "url": "https://cil.ci/matelas/",
+      "titre": "CIL — matelas fabriqués en Côte d’Ivoire",
+      "qualification": "Existence d’un secteur utilisateur potentiel ; aucun engagement commercial",
+      "consulte_le": "2026-10-29"
+    },
+    "cepici": {
+      "url": "https://cepici.gouv.ci/web/docs/Catalogue%20de%20projets%20d%27investissements%20prioritaires.pdf",
+      "titre": "CEPICI — développement de l’industrie textile de filature et tissage",
+      "qualification": "Contexte industriel, données historiques 2020–2021 ; ne prouve pas un approvisionnement actuel en fil tricotable",
+      "consulte_le": "2026-10-29"
+    },
+    "civ_fil_2024": {
+      "url": "https://wits.worldbank.org/trade/comtrade/en/country/ALL/year/2024/tradeflow/Imports/partner/WLD/product/520512",
+      "titre": "WITS / UN Comtrade — Côte d’Ivoire 2024, fil de coton HS H0 520512",
+      "qualification": "323 780 USD / 109 483 kg = valeur unitaire douanière CIF ; ni devis de fil Ne24 ni prix local actuel",
+      "valeur_usd": 323780,
+      "quantite_kg": 109483,
+      "consulte_le": "2026-10-29"
+    },
+    "civ_mail_2024": {
+      "url": "https://wits.worldbank.org/trade/comtrade/en/country/ALL/year/2024/tradeflow/Imports/partner/WLD/product/600292",
+      "titre": "WITS / UN Comtrade — Côte d’Ivoire 2024, maille de coton HS H0 600292",
+      "qualification": "384 780 USD / 113 722 kg ; catégorie agrégée avec produits et finitions différents. Pas un prix départ atelier de jersey écru",
+      "valeur_usd": 384780,
+      "quantite_kg": 113722,
+      "consulte_le": "2026-10-29"
+    },
+    "civ_feutre_2024": {
+      "url": "https://wits.worldbank.org/trade/comtrade/en/country/ALL/year/2024/tradeflow/Imports/partner/WLD/product/560210",
+      "titre": "WITS / UN Comtrade — Côte d’Ivoire 2024, feutres aiguilletés HS H0 560210",
+      "qualification": "39 860 USD / 6 231 kg. Petit flux déclaré, catégories/qualités mélangées. Ne démontre pas le marché total ni les achats des fabricants de literie",
+      "valeur_usd": 39860,
+      "quantite_kg": 6231,
+      "consulte_le": "2026-10-29"
+    },
+    "civ_effiloche_2024": {
+      "url": "https://wits.worldbank.org/trade/comtrade/en/country/ALL/year/2024/tradeflow/Imports/partner/WLD/product/520291",
+      "titre": "WITS / UN Comtrade — Côte d’Ivoire 2024, effilochés coton HS H0 520291",
+      "qualification": "1 690 USD / 620 kg. Échantillon trop petit pour fixer un prix de vente local ou un volume de débouchés",
+      "valeur_usd": 1690,
+      "quantite_kg": 620,
+      "consulte_le": "2026-10-29"
+    },
+    "jn_fibres": {
+      "url": "https://mandy80326.en.made-in-china.com/product/YJsrjNizZpVX/China-Recycled-Cotton-Fiber-Made-out-of-Clothes.html",
+      "titre": "Jiangnan Textiles — fibres recyclées de vêtements TVC-6",
+      "qualification": "Annonce 0,30–0,65 USD/kg, minimum 24 t ; description polycoton malgré titre cotton. Concurrent international, pas prix livré Abidjan",
+      "prix_min_usd_kg": 0.3,
+      "prix_max_usd_kg": 0.65,
+      "consulte_le": "2026-10-29"
+    },
+    "haorui_feutre": {
+      "url": "https://jjhaorui.en.made-in-china.com/product/RmjrSDNokOkM/China-High-Quality-Needle-Punched-Non-Woven-Mattress-Material-Recycled-Felt.html",
+      "titre": "Haorui Tech — High Quality Needle Punched Non-Woven Mattress Material Recycled Felt",
+      "qualification": "Catalogue : 1,20–1,90 USD/kg, minimum 500 kg ; prix étranger, composition et grammage exacts à rapprocher du produit retenu",
+      "prix_min_usd_kg": 1.2,
+      "prix_max_usd_kg": 1.9,
+      "consulte_le": "2026-10-29"
+    },
+    "ifc_chutes": {
+      "url": "https://www.ifc.org/content/dam/ifc/doc/2023-delta/202212-sourcing-of-post-industrial-cotton-textile-waste-in-the-tangier-area-morocco.pdf",
+      "titre": "IFC décembre 2022 — Sourcing of post-industrial cotton textile waste, §5.2.3 Bangladesh",
+      "qualification": "Repère historique étranger : chutes de coupe 0,14–0,34 USD/kg. Ne prouve ni prix ni gisement actuels en Côte d’Ivoire",
+      "consulte_le": "2026-10-29"
+    },
+    "rongda_presse": {
+      "url": "https://rongdamachinery.en.made-in-china.com/product/pvanrNHKshUQ/China-Hydraulic-Pressure-Fiber-Baling-Machine-Cotton-Baler-Textile-Waste-Recycling-Machine.html",
+      "titre": "Rongda — presse hydraulique pour fibres",
+      "qualification": "Catalogue fournisseur 1 800–2 300 USD FOB ; borne haute budgétée. Cycle, masse et densité des balles à préciser",
+      "consulte_le": "2026-10-29"
+    },
+    "inspection": {
+      "url": "https://www.made-in-china.com/showroom/689f3950861c0cae/product-detailtUVYjNWhZScf/China-Tubular-Fabric-Double-Sided-Inspection-Machine.html",
+      "titre": "Xiamen Xingpenglong — PL-G150 inspection tubulaire",
+      "qualification": "5 000 USD par appareil ; largeur annoncée 1,8–2,8 m, 380 V, 1,5 kW. Disposition à ajuster au tube de maille",
+      "consulte_le": "2026-10-29"
+    }
+  },
+  "scenarios": {
+    "tricotage": {
+      "prix_vente_usd_kg": 3.383514183711155,
+      "matiere_usd_kg_fini": 3.151911453371615,
+      "qualification": "Scénarios exploratoires : prix publics et statistiques observés séparés des hypothèses P2I ; aucun résultat réalisé ni prix de vente local validé",
+      "source_parametres": "data/p2i-bp-lot-textile-fibres.json / profils / tricotage"
+    },
+    "recyclage_textile": {
+      "prix_vente_usd_kg": 0.8,
+      "matiere_usd_kg_fini": 0.35294117647058826,
+      "qualification": "Scénarios exploratoires : prix publics et statistiques observés séparés des hypothèses P2I ; aucun résultat réalisé ni prix de vente local validé",
+      "source_parametres": "data/p2i-bp-lot-textile-fibres.json / profils / recyclage_textile"
+    },
+    "non_tisses": {
+      "prix_vente_usd_kg": 1.55,
+      "matiere_usd_kg_fini": 0.9473684210526316,
+      "qualification": "Scénarios exploratoires : prix publics et statistiques observés séparés des hypothèses P2I ; aucun résultat réalisé ni prix de vente local validé",
+      "source_parametres": "data/p2i-bp-lot-textile-fibres.json / profils / non_tisses"
+    }
+  }
+}

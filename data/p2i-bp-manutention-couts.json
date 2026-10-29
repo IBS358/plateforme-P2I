@@ -225,6 +225,33 @@
         "palettes": 10
       },
       "mode": "budget_ajoute"
+    },
+    "tricotage": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 1,
+        "bacs": 12,
+        "palettes": 12
+      },
+      "mode": "budget_ajoute"
+    },
+    "recyclage_textile": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 1,
+        "bacs": 12,
+        "palettes": 12
+      },
+      "mode": "budget_ajoute"
+    },
+    "non_tisses": {
+      "panier": {
+        "transpalette_2500": 1,
+        "diable_250": 1,
+        "bacs": 12,
+        "palettes": 12
+      },
+      "mode": "budget_ajoute"
     }
   }
 }

@@ -20,7 +20,7 @@ function calculate(input){
  for(const [key,value] of Object.entries(expected))
   if(!number(options[key])||!close(options[key],value))
    problems.push("Hypothèse absente ou différente du scénario P2I : "+key);
- if(!number(options.stock_matieres_jours)||options.stock_matieres_jours>30)problems.push("Stock matières : entre 0 et 30 jours");
+ if(!number(options.stock_matieres_jours)||options.stock_matieres_jours>180)problems.push("Stock matières : entre 0 et 180 jours");
  if(!number(data.creances_ouverture_usd))problems.push("Créances clients à l’ouverture manquantes");
  if(problems.length)return Object.freeze({valide:false,blocages:Object.freeze(problems),bfr_mensuel:null});
  const rows=[];

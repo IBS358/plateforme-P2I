@@ -64,6 +64,8 @@ const profileFile={};for(const filename of batchFiles){const lot=JSON.parse(fs.r
 
 for(const [key,rawProfile] of Object.entries(simulationPack.profils)){
  const p=JSON.parse(JSON.stringify(rawProfile));
+ const fibres=p.dimensionnement_fibres?require('./p2i-textile-commun.cjs').dimensionnerFibres(p.dimensionnement_fibres):null;
+ if(fibres){p.capacite_entree_kg_h=fibres.capacite_produit_fini_kg_h;if(p.production_explicite.some(q=>q>fibres.plafond_annuel_kg))throw Error('Programme supérieur au goulot fibres : '+key);}
  const textile=p.dimensionnement_textile?require('./p2i-textile-commun.cjs').dimensionner(p.dimensionnement_textile):null;
  if(textile){p.capacite_unites_h=textile.capacite_unites_h;if(p.production_explicite.some(q=>q>textile.plafond_annuel))throw Error('Programme supérieur au goulot partagé : '+key);}
  if(p.emballage_produit?.calcul_format){
@@ -146,8 +148,10 @@ for(const [key,rawProfile] of Object.entries(simulationPack.profils)){
   input.cout_emballages_stockables_unite=id==='produits_industriels'?Object.entries(packagingExisting.composants_usd_par_kg).filter(([k])=>!['location_et_rotation_ibc','lavage_controle'].includes(k)).reduce((n,[,v])=>n+v,0):packCost;
   input.stock_emballages_jours=15;
  }
+ if(p.lot_achat_matieres_equivalent_produit!==undefined)input.lot_achat_matieres_equivalent_produit=p.lot_achat_matieres_equivalent_produit;
  if(p.stock_matieres_jours!==undefined)input.stock_matieres_jours=p.stock_matieres_jours;
  if(id==='biscuiterie'){input.photo={crackers:0,biscuits_mous:1,biscuits_durs:2}[config];input.technique=ctx.P2I_BP_V108_REFERENCES.technique[config];}
+ if(p.evaluation_faisabilite)u.variantes[config].evaluation_faisabilite={...p.evaluation_faisabilite,dimensionnement:fibres};
  if(p.visuels)u.variantes[config].visuels=p.visuels;
  if(p.redaction)u.variantes[config].redaction=p.redaction;
  u.variantes[config].nom=p.nom;
@@ -168,6 +172,7 @@ for(const [id,study] of Object.entries(textileFeasibility.unites)){
 const data={schema:'p2i.bp-donnees.v1',date:'2026-10-29',nombre_up:96,nombre_configurations:Object.values(units).reduce((n,u)=>n+u.configurations.length,0),alias_identifiants:{"profilés":"profiles"},migrations_textile:{uniformes:{up_id:"confection",configuration_id:"uniformes_simples"},linge:{up_id:"confection",configuration_id:"linge_simple"},broderie:{up_id:"confection",configuration_id:"uniformes_brodes"}},source_perimetre_sha256:crypto.createHash('sha256').update(source).digest('hex'),parametres_communs:{hygiene_professionnelle:hygienePolicy,electricite_mt_general:{source:'https://www.cie.ci/entreprise/tarifs-electricite',consulte_le:'2026-10-26',regime:'MT général, utilisation annuelle 1 000 à 5 000 heures',devise:'XOF',prime_kw_an_ht:33643.67,kwh_pleines_ht:74.06,kwh_pointe_ht:101,kwh_creuses_ht:61.29,qualification:'bareme_publie_application_contractuelle_a_confirmer'}},financement:{apport:.3,dette:.7},horizons:{resultat_ans:3,bfr_mois:36,tresorerie_mois:12},filieres:ctx.filieres.map(f=>({id:f.id,nom:f.name,up_ids:f.units.map(u=>u.id)})),unites:units};
 require('./p2i-emballages-commun.cjs').appliquer(data,ctx.P2I_BP_V108_REFERENCES.change);
 data.regles_decouverte=simulationPack.philosophie;
+data.nombre_simulations_exploratoires=Object.values(units).flatMap(u=>Object.values(u.variantes)).filter(v=>v.evaluation_faisabilite).length;
 data.nombre_simulations_completes=Object.values(units).flatMap(u=>Object.values(u.variantes)).filter(v=>v.reference?.production?.length===3).length;
 fs.writeFileSync(path.join(root,'data/p2i-bp-decouverte-donnees.json'),JSON.stringify(data,null,2)+'\n');
 fs.writeFileSync(path.join(root,'js/p2i-bp-decouverte-donnees.js'),'/* Généré par scripts/build-bp-decouverte-donnees.cjs. */\nwindow.P2I_BP_DONNEES = '+JSON.stringify(data)+';\n');

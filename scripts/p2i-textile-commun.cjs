@@ -11,4 +11,26 @@ function dimensionner(d){
  const entries=Object.entries(capacites).sort((a,b)=>a[1]-b[1]);if(!entries.length)throw Error('Aucun poste textile dimensionné');
  const capacite=Math.floor(entries[0][1]);if(capacite<1)throw Error('Cadence textile insuffisante');return {capacite_unites_h:capacite,goulot:entries[0][0],capacites_unites_h:capacites,plafond_annuel:capacite*d.heures_jour*d.jours_an,qualification:d.qualification};
 }
-module.exports={dimensionner};
+// Débits en kg de produit fini : distinguer entrée, rendement et goulot.
+function dimensionnerFibres(d){
+ const positive=x=>Number.isFinite(x)&&x>0;
+ if(!d||!positive(d.heures_jour)||!positive(d.jours_an)||!positive(d.rendement)||d.rendement>1)throw Error('Dimensionnement fibres invalide');
+ const capacities={};
+ if(d.type==='tricotage'){
+  for(const k of ['machines','aiguilles','alimentations','rpm','longueur_boucle_mm','titre_ne','efficacite','inspection_kg_h'])if(!positive(d[k]))throw Error('Tricotage incomplet : '+k);
+  if(!Number.isInteger(d.machines)||!Number.isInteger(d.aiguilles)||!Number.isInteger(d.alimentations)||d.efficacite>1)throw Error('Tricotage invalide');
+  // 1 Ne = 1 693,36 m/kg ; chaque aiguille forme une boucle par alimentation/tour.
+  capacities.tricotage=d.machines*d.aiguilles*d.alimentations*d.rpm*60*(d.longueur_boucle_mm/1000)/(d.titre_ne*1693.36)*d.efficacite*d.rendement;
+  capacities.controle=d.inspection_kg_h;
+ }else if(d.type==='recyclage'){
+  for(const k of ['ligne_entree_kg_h','tri_entree_kg_h','presse_sortie_kg_h'])if(!positive(d[k]))throw Error('Recyclage incomplet : '+k);
+  capacities.tri=d.tri_entree_kg_h*d.rendement;capacities.ligne=d.ligne_entree_kg_h*d.rendement;capacities.presse=d.presse_sortie_kg_h;
+ }else if(d.type==='aiguilletage'){
+  for(const k of ['largeur_m','vitesse_m_min','grammage_g_m2','goulot_kg_h'])if(!positive(d[k]))throw Error('Aiguilletage incomplet : '+k);
+  capacities.formation=d.largeur_m*d.vitesse_m_min*d.grammage_g_m2*60/1000;capacities.ligne=d.goulot_kg_h;
+ }else throw Error('Procédé fibres inconnu');
+ const [goulot,val]=Object.entries(capacities).sort((a,b)=>a[1]-b[1])[0],capacite=Math.floor(val);
+ if(capacite<1)throw Error('Cadence fibres insuffisante');
+ return {capacite_produit_fini_kg_h:capacite,capacites_produit_fini_kg_h:capacities,goulot,plafond_annuel_kg:capacite*d.heures_jour*d.jours_an,qualification:d.qualification};
+}
+module.exports={dimensionner,dimensionnerFibres};

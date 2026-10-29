@@ -5,7 +5,7 @@ for(const f of ['up-data.js','machines-data.js','js/p2i-economic-result-engine.j
 const clone=x=>JSON.parse(JSON.stringify(x)),d=c.P2I_BP_DONNEES,api=c.P2I_BP_SIMULATION_COMMUNE,lot=require('../data/p2i-bp-lot-textile-01.json'),arch=require('../data/archives/p2i-textile-avant-regroupement-2026-10-29.json'),{dimensionner}=require('../scripts/p2i-textile-commun.cjs');
 const registry=vm.runInContext('P2I_UP_DATA',c);assert.equal(Object.keys(registry).length,96);
 for(const id of ['uniformes','linge','broderie']){assert.ok(!Object.keys(registry).includes(id));assert.equal(registry[id].nom,arch.unites[id].nom);assert.equal(d.migrations_textile[id].up_id,'confection');}
-for(const id of ['tricotage','non_tisses','recyclage_textile']){assert.ok(registry[id]);assert.equal(d.unites[id].variantes.reference.reference,null);assert.equal(d.unites[id].economie.budget_minimum_historique.valeur,null);}
+for(const id of ['tricotage','non_tisses','recyclage_textile']){assert.ok(registry[id]);assert.equal(d.unites[id].variantes.reference.evaluation_faisabilite.statut,'exploratoire_non_validee');assert.equal(d.unites[id].economie.budget_minimum_historique.valeur,null);}
 assert.equal(d.unites.confection.configurations.length,6);const results={};
 for(const [key,v] of Object.entries(d.unites.confection.variantes)){
  const s=v.reference,r=api.calculer(s),p=lot.profils[key==='reference'?'confection':'confection__'+key];results[key]=r;

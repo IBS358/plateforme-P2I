@@ -12,14 +12,15 @@ const plain=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 function normalizeInput(value,upId,config){
  if(typeof upId!=='string'||!upId.trim()||upId.length>200||config!==null&&(typeof config!=='string'||!/^[a-z0-9_-]{1,100}$/i.test(config)))throw Error('Identité UP ou variante invalide.');
  if(!plain(value)||value.up_id!==upId||value.configuration_id!==(config||null))throw Error('Les entrées financières ne correspondent pas à cette UP et cette variante.');
- const allowed=new Set([...arrayKeys,...numericKeys,...strKeys,'machines','photo','technique','qualification','complet','manquants','devise','stock_matieres_jours','cout_emballages_stockables_unite','stock_emballages_jours','investissements_detail','amortissements_specifiques']);
+ const allowed=new Set([...arrayKeys,...numericKeys,...strKeys,'lot_achat_matieres_equivalent_produit','machines','photo','technique','qualification','complet','manquants','devise','stock_matieres_jours','cout_emballages_stockables_unite','stock_emballages_jours','investissements_detail','amortissements_specifiques']);
  for(const key of Object.keys(value))if(!allowed.has(key))throw Error('Paramètre non pris en charge par ce contrat : '+key);
  if(value.devise&&value.devise!=='USD')throw Error('Les entrées du moteur doivent être en USD.');
  const out={};
  for(const key of arrayKeys){const a=value[key];if(!Array.isArray(a)||a.length!==3||a.some(x=>typeof x!=='number'||!Number.isFinite(x)||x<0))throw Error('Entrées incomplètes : '+key);out[key]=a.slice();}
  for(const key of numericKeys){const v=value[key];if(typeof v!=='number'||!Number.isFinite(v)||v<0)throw Error('Entrée invalide ou absente : '+key);out[key]=v;}
  if(value.cout_emballages_stockables_unite!==undefined||value.stock_emballages_jours!==undefined){for(const k of ['cout_emballages_stockables_unite','stock_emballages_jours']){if(typeof value[k]!=='number'||!Number.isFinite(value[k])||value[k]<0)throw Error('Stock emballages invalide');out[k]=value[k];}if(out.stock_emballages_jours>90)throw Error('Stock emballages invalide');}
- if(value.stock_matieres_jours!==undefined){if(typeof value.stock_matieres_jours!=='number'||!Number.isFinite(value.stock_matieres_jours)||value.stock_matieres_jours<0||value.stock_matieres_jours>30)throw Error('Stock matières invalide');out.stock_matieres_jours=value.stock_matieres_jours;}
+ if(value.lot_achat_matieres_equivalent_produit!==undefined){const lot=value.lot_achat_matieres_equivalent_produit;if(typeof lot!=='number'||!Number.isFinite(lot)||lot<=0)throw Error('Lot matières invalide');out.lot_achat_matieres_equivalent_produit=lot;}
+ if(value.stock_matieres_jours!==undefined){if(typeof value.stock_matieres_jours!=='number'||!Number.isFinite(value.stock_matieres_jours)||value.stock_matieres_jours<0||value.stock_matieres_jours>180)throw Error('Stock matières invalide');out.stock_matieres_jours=value.stock_matieres_jours;}
  for(const key of strKeys){if(key==='configuration_id'){out[key]=config||null;continue;}const v=value[key];if(typeof v!=='string'||v.length>5000)throw Error('Texte absent ou trop long : '+key);out[key]=v;}
  if(!['kg/h','pièces/h'].includes(out.unite))throw Error('Unité de capacité non prise en charge : kg/h ou pièces/h attendu.');
  if(out.unite==='pièces/h'&&[...out.production,...out.ventes].some(x=>!Number.isInteger(x)))throw Error('Les quantités en pièces doivent être entières');

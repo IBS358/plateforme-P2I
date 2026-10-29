@@ -1,0 +1,21 @@
+'use strict';
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict'),crypto=require('crypto'),path=require('path'),root=path.resolve(__dirname,'..'),c={};c.window=c;vm.createContext(c);
+for(const f of ['js/p2i-economic-result-engine.js','js/p2i-financial-engine.js','js/p2i-bp-decouverte-bfr-engine.js','js/p2i-bp-decouverte-tresorerie-12-mois.js','js/p2i-bp-decouverte-simulation-commune.js','js/p2i-bp-decouverte-donnees.js','js/p2i-bp-decouverte-v108-contexte.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),c);
+const clone=x=>JSON.parse(JSON.stringify(x)),hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex'),d=c.P2I_BP_DONNEES,calc=c.P2I_BP_SIMULATION_COMMUNE.calculer;
+for(const b of require('../data/archives/p2i-finances-avant-textile-fibres-2026-10-29.json').scenarios){const s=d.unites[b.up_id].variantes[b.configuration].reference;assert.equal(hash(s),b.input_sha256,'Entrées historiques conservées');assert.equal(hash(calc(s)),b.resultat_sha256,'Anciennes sorties financières conservées, stocks mensuels compris');}
+const lot=require('../data/p2i-bp-lot-textile-fibres.json'),{dimensionnerFibres}=require('../scripts/p2i-textile-commun.cjs');
+for(const id of Object.keys(lot.profils)){
+ const v=d.unites[id].variantes.reference,s=v.reference,p=lot.profils[id],r=calc(s);
+ assert.equal(v.evaluation_faisabilite.statut,'exploratoire_non_validee');assert.equal(r.bfr.length,36);assert.equal(r.tresorerie.length,12);assert.ok(r.bilans.every(b=>Math.abs(b.ecart)<.02));assert.ok(s.production.every(q=>q<=v.evaluation_faisabilite.dimensionnement.plafond_annuel_kg));
+ assert.equal(calc(c.P2I_BP_V108_CONTEXTE.normalizeInput(s,id,null)).annuel[0].resultat_net,r.annuel[0].resultat_net);
+ assert.equal(r.performance.marge_atteinte,false);assert.equal(r.performance.roi_atteint,false);assert.equal(s.prix[0],s.prix[2]);assert.ok(r.performance.diagnostic_prix.prix_cible>s.prix[0]);assert.equal(r.entrees.prix[0],s.prix[0],'Seuil mathématique non appliqué');
+ assert.equal(s.machines,p.prix_retenu*p.quantite_equipement_principal+p.equipements_complementaires.reduce((n,e)=>n+e.quantite*e.prix_retenu,0));assert.equal(r.investissements.postes_a_chiffrer.length,0);
+ const stress=clone(s);stress.prix=stress.prix.map(x=>x*.9);assert.ok(calc(stress).annuel[0].resultat_net<r.annuel[0].resultat_net);
+ assert.throws(()=>calc({...clone(s),stock_matieres_jours:181}),/Stock matières/);
+ if(id==='recyclage_textile'){assert.equal(p.equipements_complementaires[0].quantite,2);assert.equal(s.capacite,153);const smaller=clone(p.dimensionnement_fibres);smaller.presse_sortie_kg_h=100;assert.equal(dimensionnerFibres(smaller).goulot,'presse');assert.equal(dimensionnerFibres(smaller).capacite_produit_fini_kg_h,100);assert.ok(r.annuel[0].resultat_net>0);assert.ok(r.annuel[2].resultat_net>r.annuel[0].resultat_net);}else assert.ok(r.annuel[0].resultat_net<0);
+}
+const s=d.unites.non_tisses.variantes.reference.reference,r=calc(s),lotQty=s.lot_achat_matieres_equivalent_produit;assert.equal(s.stock_matieres_jours,120);assert.equal(lotQty,22800);let qty=0,val=0;
+for(const m of r.mois){assert.ok(Math.abs(m.achats_matieres_equivalent_produit/lotQty-Math.round(m.achats_matieres_equivalent_produit/lotQty))<1e-10);assert.ok(Math.abs(qty+m.achats_matieres_equivalent_produit-m.production-m.stock_matieres_equivalent_produit)<1e-7);assert.ok(Math.abs(val+m.achats_matieres-m.consommation_matieres-m.stock_matieres)<1e-7);assert.ok(Math.abs(r.bfr[m.mois-1].stocks_matieres-m.stock_matieres)<1e-7);qty=m.stock_matieres_equivalent_produit;val=m.stock_matieres;}
+assert.ok(r.mois.some(m=>m.achats_matieres===0),'Pas d’achat fictif inférieur au minimum fournisseur');assert.ok(r.mois[12].consommation_matieres<r.mois[12].production*s.matieres_kg*1.03,'Matière ancienne consommée au CUMP après hausse des prix, sans revalorisation fictive');
+const invalid=clone(s);invalid.lot_achat_matieres_equivalent_produit=-1;assert.throws(()=>calc(invalid),/Lot matières/);assert.throws(()=>c.P2I_BP_V108_CONTEXTE.normalizeInput(invalid,'non_tisses',null),/Lot matières/);
+console.log('Textile fibres : 3 simulations exploratoires, 24 résultats historiques identiques, goulots, absence de seuil forcé, lots matière 24 t, CUMP, conservation achats/consommation/stocks et bilans vérifiés.');

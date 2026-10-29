@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-29",
+  "source_commit": "da85409150d8b65c57e1576d60f77bd8201e3782",
+  "scenarios": [
+    {
+      "up_id": "conserverie_legumes",
+      "configuration": "reference",
+      "input_sha256": "9de3b6f5a1b4f447354ef4bb5cc7f39e4a3c4bdef32ff3661b73f03b4f0fa937",
+      "resultat_sha256": "4af572a26048061e5b6b6c3d90201019970fdabdd2f8345e1d88a614190d9274"
+    },
+    {
+      "up_id": "biscuiterie",
+      "configuration": "crackers",
+      "input_sha256": "c31d6cfb39a7b252867d6a9c482b1ce3ee102cb535e46df8f0581933a4a7b1f9",
+      "resultat_sha256": "51c24ffa42ed5dcdc3b098e5c4b9d39c22b01b5d6b84b810533fa1f158a6c732"
+    },
+    {
+      "up_id": "biscuiterie",
+      "configuration": "biscuits_mous",
+      "input_sha256": "dc20cf47e31b001bba0d9e210ef9952f151b35cea59bcd0365286287609e1895",
+      "resultat_sha256": "b1ef5c9f45c22869d8f8bf18099c44066ce4906a4f0c81b98c6f7c97c5918ec8"
+    },
+    {
+      "up_id": "biscuiterie",
+      "configuration": "biscuits_durs",
+      "input_sha256": "4aa71cf50a3e2e8c8460fbfb1e18590d7eb7d7ff07491bde0dd4ac1a4ba259bd",
+      "resultat_sha256": "baf467b3eed6869bb5aa4e4754eafd6d0ca8d456bca5eef660ceed85285826a2"
+    },
+    {
+      "up_id": "boulangerie_industrielle",
+      "configuration": "reference",
+      "input_sha256": "c6ddc6ea26e6b2510967121e2250f06cf33dbdc4dbdc00f2522cbfa60c126415",
+      "resultat_sha256": "3110caae57a7ae245ce01d7aa6b8379acd68561e5743b5c8bfda957a32c9c4c7"
+    },
+    {
+      "up_id": "jus_boissons",
+      "configuration": "reference",
+      "input_sha256": "6f7a8a1b62e05b1e2c6e94b4ce549c3e113810a0a30b4c67c8731794a66b1faa",
+      "resultat_sha256": "d420498c86797c11171b59be739c275ae18e23a55758649e67750d4a7b0d55e5"
+    },
+    {
+      "up_id": "mini_laiterie",
+      "configuration": "reference",
+      "input_sha256": "5d55797fc5a52cbca81691b5f85b32e73f48efca260bef2231f1938a7ba431ab",
+      "resultat_sha256": "5731bb8de4d0477cd1298099c65274d4ad131b2f2d93f777fceee3ae3569ddba"
+    },
+    {
+      "up_id": "huiles_alimentaires",
+      "configuration": "reference",
+      "input_sha256": "dd0ac172c362aa65b1802b72777ba1b9c751e5249f0304a8a2252edc8fdcf4ba",
+      "resultat_sha256": "16adcc4f86b09f164526020357c305290df54ddd74a3765a04c36f01c0063cc5"
+    },
+    {
+      "up_id": "epices",
+      "configuration": "reference",
+      "input_sha256": "b47860d7f700f715e65c7361f628227feefe334701868555bd489a119181dd90",
+      "resultat_sha256": "ee5f636d3d1e7a3773b26b54dcb056ed343d33bcd7a7db62cd0d817e19bd3275"
+    },
+    {
+      "up_id": "aliments_betail",
+      "configuration": "reference",
+      "input_sha256": "c87c295503338738751dc86ff52ca919c786564ebd5b807d4812d8b5e6628d0d",
+      "resultat_sha256": "ab5acd07c5e5d85944bac3607d1f4e61f176f155e42c90440b0efb0d87a5da63"
+    },
+    {
+      "up_id": "detergents",
+      "configuration": "reference",
+      "input_sha256": "9479f697ab3f70779dfcbccdf9b79001008033cce767a93245eba8648b5b7104",
+      "resultat_sha256": "7f220ce14c650d2dc0405c242c019ac97c98fbde76336ba81c84369a0ac7ec98"
+    },
+    {
+      "up_id": "savonnerie",
+      "configuration": "reference",
+      "input_sha256": "3e3224a3e1b09ab64346a33d0ff9e400cbf359367cffb40b588cfb33e9b64d3d",
+      "resultat_sha256": "04baa2ddc377df53e1f8b248d164afd0ee509b8aeb5971dcb37bcd6f520e9100"
+    },
+    {
+      "up_id": "cosmetiques",
+      "configuration": "reference",
+      "input_sha256": "627fa19ff637074fe68dc30d271213141d01feb78d65cbc6afef918a934332eb",
+      "resultat_sha256": "50b9234c366b9c0666449bf05ebdecf80a91b9ced12cec009c229980e4bf7521"
+    },
+    {
+      "up_id": "peintures",
+      "configuration": "reference",
+      "input_sha256": "1c2d2f87fcc9b79200f68e7592380e1fbe3bd1e5490eda30cdb2d85479f55009",
+      "resultat_sha256": "053e1e0107533910c5094f8e182b6e91dc2086daba1e08f422fb47c0cc7420c4"
+    },
+    {
+      "up_id": "adhesifs",
+      "configuration": "reference",
+      "input_sha256": "f28437ba38707cfe307109a7ead8b0f279856afb268ee0cd6d9b7b34de167e85",
+      "resultat_sha256": "319ac06691f4b1dcf79ed10bbb876d5e792dff1e1a2d396485841b89ed56af02"
+    },
+    {
+      "up_id": "engrais",
+      "configuration": "reference",
+      "input_sha256": "d8d0ea64d5b187b2a820c9170bd9b02448f6bc1810b5d7aef2bd9f43471ebe2f",
+      "resultat_sha256": "610e9c295e8c1de136bc4561f0b4d8a047ee88e0778ed4b35891b098f86a1fae"
+    },
+    {
+      "up_id": "javel",
+      "configuration": "reference",
+      "input_sha256": "95d551c0a4d97b1a952ca2107d2dcc7d7145eab7a634299dde58bc63adadc282",
+      "resultat_sha256": "fa7c7b57fb0c0d3d8ca20c9e47ef2df1d87a297d58bd15d9e20cc3d4ead352f3"
+    },
+    {
+      "up_id": "produits_industriels",
+      "configuration": "reference",
+      "input_sha256": "bc81867a275f944917eaa4e023a67e5406b6df2564644bcd77b81c066476755c",
+      "resultat_sha256": "c38ea93ffc2cca0e2c483c209c449ff781f9e99807e94f806f389e1b128df1ec"
+    },
+    {
+      "up_id": "confection",
+      "configuration": "reference",
+      "input_sha256": "0b98a3736b1fb41532738f2cae032aa0b816dbcd6471077077932986b89a106a",
+      "resultat_sha256": "135420e0a75624c34d3592f259dc638e92a2b2bd10e5ba7173d3da86be11223e"
+    },
+    {
+      "up_id": "confection",
+      "configuration": "linge_simple",
+      "input_sha256": "66f0a1a1999567bba7d65a2542fd671cc1ed2ea21471bfce46462ffb7c04fab0",
+      "resultat_sha256": "7c7a079fd2ec780981605343a537af41d13b210c1f31f94323744bc1e7d8842a"
+    },
+    {
+      "up_id": "confection",
+      "configuration": "linge_brode",
+      "input_sha256": "8b9986657361d3b5829715ee38b72377d9546e9a7435641f69ca12b91d6b071b",
+      "resultat_sha256": "5f085e668bda45f4424053479b076e1bfe13a4157b368e49384bd311ab7b949b"
+    },
+    {
+      "up_id": "confection",
+      "configuration": "uniformes_simples",
+      "input_sha256": "244f3c40e3bbdd24b8e5c5104c4b1f9ddd683a78fc07bb5835f2d51aeca822df",
+      "resultat_sha256": "334c1c6ba7763cdc8cae22e984d13cb05d17e3e4f46643585545c6b336856e61"
+    },
+    {
+      "up_id": "confection",
+      "configuration": "uniformes_brodes",
+      "input_sha256": "59727793956d415256d9ddf15af2cb8f6acd9b98546e206dd0af5954538b41cb",
+      "resultat_sha256": "124bf7eb14a94fe387ebd73f0ee68bc6a8792c495558cace2bb4a0196e3967c5"
+    },
+    {
+      "up_id": "confection",
+      "configuration": "pret_a_porter",
+      "input_sha256": "d49e3f501a7312ab1302564090eac3d4f3b578eb198541cf13bb206e0ebc8e97",
+      "resultat_sha256": "e2d42a9a6d3d1895fcb50b2e3c118f59ad8dbca121ecab40e873322f0d629c84"
+    }
+  ]
+}

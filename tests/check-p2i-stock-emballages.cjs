@@ -14,10 +14,10 @@ for(const u of Object.values(c.P2I_BP_DONNEES.unites))for(const v of Object.valu
  assert.equal(c.P2I_BP_V108_CONTEXTE.normalizeInput(legacy,u.up_id,s.configuration_id).stock_emballages_jours,undefined);
  count++;
 }
-assert.equal(count,24);
+assert.equal(count,27);
 const juice=c.P2I_BP_DONNEES.unites.jus_boissons.variantes.reference.reference,juiceR=api.calculer(juice);near(juiceR.emballages.stock_lancement,5000);near(juiceR.mois[0].achats_emballages,15000);near(juiceR.mois[0].consommation_emballages,10000);
 const zero=api.calculer({...clone(juice),stock_emballages_jours:0});near(juiceR.reserve_initiale-zero.reserve_initiale,5000);
 near(c.P2I_BP_DONNEES.unites.produits_industriels.variantes.reference.reference.cout_emballages_stockables_unite,.005);
 assert.throws(()=>api.calculer({...clone(juice),stock_emballages_jours:91}),/emballages/);
 const missing=clone(juice);delete missing.stock_emballages_jours;assert.throws(()=>api.calculer(missing),/emballages/);
-console.log('24 simulations : stocks vides CUMP, conservation des achats, absence de double compte, BFR/bilans, réserve en apport, IBC loués exclus et dossiers historiques préservés.');
+console.log('27 simulations : stocks vides CUMP, conservation des achats, absence de double compte, BFR/bilans, réserve en apport, IBC loués exclus et dossiers historiques préservés.');
