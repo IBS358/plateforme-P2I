@@ -2332,32 +2332,32 @@
     {
       "up_id": "tricotage",
       "configuration_id": null,
-      "nom": "Jersey écru — faisabilité économique",
-      "unite_production": "kg",
+      "nom": "Confection maille & sous-vêtements — assortiment de référence",
+      "unite_production": "pièce",
       "statut": "simulation_faisabilite_exploratoire",
-      "qualification_prix": "prix_catalogue_ou_borne_gamme_non_devis",
-      "source_prix": "https://www.leadsfon.com/news/how-much-does-a-circular-knitting-machine-cost-in-2026-a-complete-pricing-guide-for-textile-manufacturers/",
+      "qualification_prix": "prix_catalogue_public_unitaire_HT",
+      "source_prix": "https://www.glasman.fr/a16325/surjeteuse-industrielle-4-fils-jack-e4s-4",
       "certification_prix_exigee": false,
       "accord_fournisseur_exige": false,
       "devis_exige": false,
       "conditions_negociees_exigees": false,
-      "budget_equipements_usd": 95000,
-      "investissement_simulation_usd": 174306,
-      "reserve_initiale_distincte_usd": 115799.45474781218,
+      "budget_equipements_usd": 23807.511,
+      "investissement_simulation_usd": 72113.511,
+      "reserve_initiale_distincte_usd": 59731.53010047317,
       "financement": {
-        "apport": 52291.799999999996,
-        "dette": 122014.2,
-        "apport_reserve": 115799.45474781218,
-        "apport_total": 168091.25474781217,
-        "besoin_total": 290105.4547478122,
-        "total_ressources": 290105.4547478122,
+        "apport": 21634.0533,
+        "dette": 50479.4577,
+        "apport_reserve": 59731.53010047317,
+        "apport_total": 81365.58340047317,
+        "besoin_total": 131845.04110047317,
+        "total_ressources": 131845.04110047317,
         "hypothese_reserve_financee_par_apport": true
       },
       "emballages": {
         "statut": "stock_modele",
         "jours": 15,
-        "cout_stockable_unite": 0.025,
-        "stock_lancement": 46.875,
+        "cout_stockable_unite": 0.08,
+        "stock_lancement": 400,
         "convention": "Achats et stock au coût moyen pondéré ; consommation déjà comprise dans le coût de production. TVA des emballages non isolée, convention de simulation."
       },
       "manutention": {
@@ -2375,45 +2375,36 @@
       "annuel": [
         {
           "annee": 1,
-          "production": 45000,
-          "ventes": 43650,
-          "stock_fin": 1350,
-          "production_kg": 45000,
-          "ventes_kg": 43650,
-          "stock_fin_kg": 1350,
-          "chiffre_affaires_usd": 147690.3941189919,
-          "resultat_net_usd": -64463.10602067907,
-          "amortissements_usd": 17561.2,
-          "interets_usd": 8866.365199999997,
-          "marge_nette": -0.43647460219208384
+          "production": 120000,
+          "ventes": 116400,
+          "stock_fin": 3600,
+          "chiffre_affaires_usd": 287006.65043592796,
+          "resultat_net_usd": 3380.1178205901133,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 3668.1739262,
+          "marge_nette": 0.011777141106159485
         },
         {
           "annee": 2,
-          "production": 60000,
-          "ventes": 60000,
-          "stock_fin": 1350,
-          "production_kg": 60000,
-          "ventes_kg": 60000,
-          "stock_fin_kg": 1350,
-          "chiffre_affaires_usd": 203010.85102266932,
-          "resultat_net_usd": -68977.60363677703,
-          "amortissements_usd": 17561.2,
-          "interets_usd": 6914.13799999999,
-          "marge_nette": -0.33977298892793967
+          "production": 150000,
+          "ventes": 150000,
+          "stock_fin": 3600,
+          "chiffre_affaires_usd": 369853.930974134,
+          "resultat_net_usd": 15850.724229310914,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2860.5026030000017,
+          "marge_nette": 0.04285671423732805
         },
         {
           "annee": 3,
-          "production": 75000,
-          "ventes": 75000,
-          "stock_fin": 1350,
-          "production_kg": 75000,
-          "ventes_kg": 75000,
-          "stock_fin_kg": 1350,
-          "chiffre_affaires_usd": 253763.5637783366,
-          "resultat_net_usd": -75667.46083298775,
-          "amortissements_usd": 17561.2,
-          "interets_usd": 4961.910799999985,
-          "marge_nette": -0.29818095122231003
+          "production": 175000,
+          "ventes": 175000,
+          "stock_fin": 3600,
+          "chiffre_affaires_usd": 431496.25280315627,
+          "resultat_net_usd": 22780.878949614733,
+          "amortissements_usd": 7341.951099999999,
+          "interets_usd": 2052.8312798000034,
+          "marge_nette": 0.05279507945114674
         }
       ],
       "controles": {
@@ -2423,9 +2414,9 @@
         "financement": "30/70"
       },
       "ecart_bilans": [
-        1.1641532182693481e-10,
-        1.7462298274040222e-10,
-        9.458744898438454e-11
+        -1.0186340659856796e-10,
+        -2.0372681319713593e-10,
+        -2.0372681319713593e-10
       ]
     },
     {

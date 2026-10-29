@@ -64,6 +64,11 @@ const profileFile={};for(const filename of batchFiles){const lot=JSON.parse(fs.r
 
 for(const [key,rawProfile] of Object.entries(simulationPack.profils)){
  const p=JSON.parse(JSON.stringify(rawProfile));
+ if(p.etude_maille){
+  const etude=JSON.parse(fs.readFileSync(path.join(root,p.etude_maille),'utf8')),fx=ctx.P2I_BP_V108_REFERENCES.change,maille=require('./p2i-textile-commun.cjs').chiffrerConfectionMaille(etude,fx.eur_xof/fx.eur_usd);
+  p.prix_vente_usd_unite=[maille.prix_usd_unite,maille.prix_usd_unite,maille.prix_usd_unite];p.matieres_usd_unite=maille.matieres_usd_unite;p.cout_process_usd_unite=maille.process_usd_unite;p.gamme=maille.gamme;
+  p.dimensionnement_textile={heures_jour:8,jours_an:250,efficacite_postes:.65,effectif_productif_total:etude.effectif_productif,moyens:{coupe:2,surjet:8,recouvrement:4,colletage:2,zigzag:2,piqueuses:2,repassage:2,controle_conditionnement:3},temps_minutes_par_article:{...maille.temps_minutes_par_article,part_brodee:0},qualification:'Temps par article, assortiment, efficacité 65 % et effectif = hypothèses P2I. Le goulot partagé et la limite de personnel bornent les volumes ; points/minute non convertis en pièces garanties.'};
+ }
  const fibres=p.dimensionnement_fibres?require('./p2i-textile-commun.cjs').dimensionnerFibres(p.dimensionnement_fibres):null;
  if(fibres){p.capacite_entree_kg_h=fibres.capacite_produit_fini_kg_h;if(p.production_explicite.some(q=>q>fibres.plafond_annuel_kg))throw Error('Programme supérieur au goulot fibres : '+key);}
  const textile=p.dimensionnement_textile?require('./p2i-textile-commun.cjs').dimensionner(p.dimensionnement_textile):null;
@@ -152,6 +157,7 @@ for(const [key,rawProfile] of Object.entries(simulationPack.profils)){
  if(p.stock_matieres_jours!==undefined)input.stock_matieres_jours=p.stock_matieres_jours;
  if(id==='biscuiterie'){input.photo={crackers:0,biscuits_mous:1,biscuits_durs:2}[config];input.technique=ctx.P2I_BP_V108_REFERENCES.technique[config];}
  if(p.evaluation_faisabilite)u.variantes[config].evaluation_faisabilite={...p.evaluation_faisabilite,dimensionnement:fibres};
+ if(p.etude_maille)u.variantes[config].evaluation_maille={statut:'exploratoire_non_validee',...JSON.parse(fs.readFileSync(path.join(root,p.etude_maille),'utf8'))};
  if(p.visuels)u.variantes[config].visuels=p.visuels;
  if(p.redaction)u.variantes[config].redaction=p.redaction;
  u.variantes[config].nom=p.nom;
@@ -172,7 +178,7 @@ for(const [id,study] of Object.entries(textileFeasibility.unites)){
 const data={schema:'p2i.bp-donnees.v1',date:'2026-10-29',nombre_up:96,nombre_configurations:Object.values(units).reduce((n,u)=>n+u.configurations.length,0),alias_identifiants:{"profilés":"profiles"},migrations_textile:{uniformes:{up_id:"confection",configuration_id:"uniformes_simples"},linge:{up_id:"confection",configuration_id:"linge_simple"},broderie:{up_id:"confection",configuration_id:"uniformes_brodes"}},source_perimetre_sha256:crypto.createHash('sha256').update(source).digest('hex'),parametres_communs:{hygiene_professionnelle:hygienePolicy,electricite_mt_general:{source:'https://www.cie.ci/entreprise/tarifs-electricite',consulte_le:'2026-10-26',regime:'MT général, utilisation annuelle 1 000 à 5 000 heures',devise:'XOF',prime_kw_an_ht:33643.67,kwh_pleines_ht:74.06,kwh_pointe_ht:101,kwh_creuses_ht:61.29,qualification:'bareme_publie_application_contractuelle_a_confirmer'}},financement:{apport:.3,dette:.7},horizons:{resultat_ans:3,bfr_mois:36,tresorerie_mois:12},filieres:ctx.filieres.map(f=>({id:f.id,nom:f.name,up_ids:f.units.map(u=>u.id)})),unites:units};
 require('./p2i-emballages-commun.cjs').appliquer(data,ctx.P2I_BP_V108_REFERENCES.change);
 data.regles_decouverte=simulationPack.philosophie;
-data.nombre_simulations_exploratoires=Object.values(units).flatMap(u=>Object.values(u.variantes)).filter(v=>v.evaluation_faisabilite).length;
+data.nombre_simulations_exploratoires=Object.values(units).flatMap(u=>Object.values(u.variantes)).filter(v=>v.evaluation_faisabilite||v.evaluation_maille).length;
 data.nombre_simulations_completes=Object.values(units).flatMap(u=>Object.values(u.variantes)).filter(v=>v.reference?.production?.length===3).length;
 fs.writeFileSync(path.join(root,'data/p2i-bp-decouverte-donnees.json'),JSON.stringify(data,null,2)+'\n');
 fs.writeFileSync(path.join(root,'js/p2i-bp-decouverte-donnees.js'),'/* Généré par scripts/build-bp-decouverte-donnees.cjs. */\nwindow.P2I_BP_DONNEES = '+JSON.stringify(data)+';\n');

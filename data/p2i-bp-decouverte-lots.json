@@ -534,8 +534,8 @@
         },
         {
           "up_id": "tricotage",
-          "up_nom": "Tricotage industriel",
-          "fonctions_machines": 3,
+          "up_nom": "Confection maille & sous-vêtements",
+          "fonctions_machines": 9,
           "investissement_minimum_indicatif_usd": null,
           "ventilation_generique_disponible": false,
           "capacite_mensuelle_generique_disponible": false,

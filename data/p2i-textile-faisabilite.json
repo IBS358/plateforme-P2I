@@ -139,19 +139,19 @@
   },
   "unites": {
     "tricotage": {
-      "titre": "Tricotage industriel — maille jersey en rouleaux",
+      "titre": "Confection maille & sous-vêtements",
       "priorite": 2,
-      "conclusion": "Scénario économique exploratoire disponible : résultat net et ROI calculés sur trois ans, sans validation commerciale locale. Examiner les résultats avant de retenir le projet.",
-      "produit": "Rouleaux de maille jersey ; fil acheté de titre et composition adaptés. Le jersey ne remplace pas les tissus tissés des draps et chemises de référence.",
+      "conclusion": "Étude économique de produits finis à partir de tissus achetés ; ni vente de jersey écru ni tricotage de fil. Résultat net et ROI sous hypothèses P2I.",
+      "produit": "Tee-shirts, marcels, slips homme et culottes femme simples.",
       "interet": "Approvisionner la confection de tee-shirts et vêtements en maille ; offrir des petites séries et réassorts B2B à tester commercialement.",
       "flux": [
-        "Réception et contrôle du fil",
-        "Alimentation du métier circulaire",
-        "Tricotage jersey",
-        "Inspection et métrage",
-        "Roulage et conditionnement"
+        "Réception/relaxation",
+        "Patronage et coupe",
+        "Assemblage et finitions propres à chaque article",
+        "Contrôle",
+        "Conditionnement"
       ],
-      "machines": "Deux métiers circulaires SL3.0, budget de gamme 45 000 USD chacun, et une inspection tubulaire PL-G150 à 5 000 USD : ensemble 95 000 USD, sans filature ni teinture intégrée.",
+      "machines": "22 machines complètes : 8 surjeteuses, 4 recouvreuses, 2 colleteuses, 2 zigzag, 2 piqueuses auxiliaires, 2 ciseaux électriques et 2 ensembles de repassage.",
       "repere_catalogue": {
         "fournisseur": "LEADSFON",
         "modele": "SL3.0 — candidat technique",
@@ -163,8 +163,8 @@
         "source_technique": "leadsfon_tech"
       },
       "utilites": "Fiche SL3.0 : 5,5 kW et 2 800 kg par machine annoncés. À ajouter : inspection, roulage, éclairage, ventilation et besoins d’ambiance du fil. Le régime électrique local est à définir.",
-      "interfaces": "Jauge, titre du fil, diamètre, densité de maille et poids surfacique à choisir ensemble. Tours/minute et nombre de fournisseurs de fil ne donnent pas seuls une cadence en kg/h. Pas de débit ni de CA déduit de ces données.",
-      "approvisionnement": "Comparer fils disponibles en Côte d’Ivoire et fils importés livrés Abidjan. La présence de coton local ne prouve pas la disponibilité du fil requis. Teinture/finition éventuelles à externaliser et chiffrer ; sinon vendre en écru.",
+      "interfaces": "Pièces/h calculées sur temps moyens et postes partagés, sans conversion des kg/h de l’ancien scénario.",
+      "approvisionnement": "Mailles finies achetées, fils, élastiques et étiquettes ; aucune machine de fabrication du tissu incluse.",
       "emballage": "Rouleaux protégés, mandrins et étiquettes de lot ; chiffrer poids du rouleau, consommation de protection, réemploi et stock vide.",
       "risques": "Prix du fil, irrégularités, défauts de maille, stabilité dimensionnelle après finition et concurrence des rouleaux importés.",
       "manquants": [

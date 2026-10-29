@@ -1,0 +1,221 @@
+{
+  "schema": "p2i.maille-confection.v1",
+  "date": "2026-10-29",
+  "up_id_historique": "tricotage",
+  "nom": "Confection maille & sous-vêtements",
+  "qualification": "Étude de rentabilité indicative ; prix catalogue et repères commerciaux documentés, prix usine, ventes, temps et coûts livrés estimés P2I",
+  "rendement_coupe": 0.85,
+  "fabrics": {
+    "jersey_coton": {
+      "titre": "Jersey teint 180 g/m², 100 % coton, candidat 40s Mingyang",
+      "fournisseur": "Huzhou Mingyang Textile",
+      "url": "https://mytextile.en.made-in-china.com/product/VdZJIOobSnhM/China-High-Quality-Plain-Dyed-40s-100-Cotton-Single-Jersey-Knit-Fabric-for-Garment.html",
+      "prix_catalogue_usd_kg": 6.45,
+      "minimum_kg": 500,
+      "qualification": "Annonce 500–4 999 kg ; prix départ fournisseur, transport et taxes hors annonce",
+      "provisions_usd_kg": {
+        "fret": 0.6,
+        "assurance": 0.0645,
+        "import_transit": 1.4229,
+        "local": 0.15
+      },
+      "consulte_le": "2026-10-29",
+      "prix_livre_estime_usd_kg": 8.6874,
+      "limites": "Provisions P2I, pas taux douaniers vérifiés ni prix livré négocié. Disponibilité locale de la référence exacte non confirmée ; approvisionnement importé dans ce chiffrage."
+    },
+    "jersey_stretch": {
+      "titre": "Jersey 170 g/m², 95 % coton / 5 % élasthanne",
+      "fournisseur": "Fujian Suifu Textile",
+      "url": "https://suifutextile.en.made-in-china.com/product/xpQRjeMJqHcu/China-Customizable-170GSM-Soft-and-Stretchy-95-Cotton-5-Spandex-Jersey-Fabric-for-T-Shirts.html",
+      "prix_catalogue_usd_kg": 7.74,
+      "minimum_kg": 100,
+      "qualification": "Tarif 100–999 kg ; aucune remise des paliers supérieurs appliquée",
+      "provisions_usd_kg": {
+        "fret": 0.6,
+        "assurance": 0.0774,
+        "import_transit": 1.68348,
+        "local": 0.15
+      },
+      "consulte_le": "2026-10-29",
+      "prix_livre_estime_usd_kg": 10.25088,
+      "limites": "Provisions P2I, pas taux douaniers vérifiés ni prix livré négocié. Disponibilité locale de la référence exacte non confirmée ; approvisionnement importé dans ce chiffrage."
+    },
+    "bord_cote": {
+      "titre": "Bord-côte 380 g/m², 97 % coton / 3 % élasthanne",
+      "fournisseur": "Fujian Suifu Textile",
+      "url": "https://suifutextile.en.made-in-china.com/product-group/ceUGIojYhlWp/Cotton-Spandex-1.html",
+      "prix_catalogue_usd_kg": 6.9,
+      "minimum_kg": 100,
+      "qualification": "Borne haute catalogue 6,70–6,90 USD/kg ; choix de largeur et élasticité à confirmer",
+      "provisions_usd_kg": {
+        "fret": 0.6,
+        "assurance": 0.069,
+        "import_transit": 1.5138,
+        "local": 0.15
+      },
+      "consulte_le": "2026-10-29",
+      "prix_livre_estime_usd_kg": 9.232800000000001,
+      "limites": "Provisions P2I, pas taux douaniers vérifiés ni prix livré négocié. Disponibilité locale de la référence exacte non confirmée ; approvisionnement importé dans ce chiffrage."
+    }
+  },
+  "articles": [
+    {
+      "id": "tee_shirt",
+      "nom": "Tee-shirt col rond",
+      "part": 0.6,
+      "prix_depart_atelier_xof_ht": 1800,
+      "matieres_net_kg": {
+        "jersey_coton": 0.16,
+        "bord_cote": 0.008
+      },
+      "fournitures_usd": {
+        "fil": 0.04,
+        "etiquettes_taille_entretien": 0.06
+      },
+      "temps_minutes": {
+        "coupe": 0.6,
+        "surjet": 2.8,
+        "recouvrement": 1.3,
+        "colletage": 0.65,
+        "zigzag": 0,
+        "piqueuses": 0.15,
+        "repassage": 0.5,
+        "controle_conditionnement": 1.0
+      }
+    },
+    {
+      "id": "marcel",
+      "nom": "Débardeur / marcel",
+      "part": 0.2,
+      "prix_depart_atelier_xof_ht": 1200,
+      "matieres_net_kg": {
+        "jersey_coton": 0.1,
+        "jersey_stretch": 0.008
+      },
+      "fournitures_usd": {
+        "fil": 0.03,
+        "etiquettes_taille_entretien": 0.05
+      },
+      "temps_minutes": {
+        "coupe": 0.5,
+        "surjet": 1.8,
+        "recouvrement": 1.0,
+        "colletage": 1.4,
+        "zigzag": 0,
+        "piqueuses": 0.1,
+        "repassage": 0.4,
+        "controle_conditionnement": 0.9
+      }
+    },
+    {
+      "id": "slip_homme",
+      "nom": "Slip homme simple",
+      "part": 0.1,
+      "prix_depart_atelier_xof_ht": 750,
+      "matieres_net_kg": {
+        "jersey_stretch": 0.05
+      },
+      "fournitures_usd": {
+        "elastique": 0.16,
+        "fil": 0.03,
+        "etiquettes_taille_entretien": 0.04
+      },
+      "temps_minutes": {
+        "coupe": 0.4,
+        "surjet": 1.8,
+        "recouvrement": 1.2,
+        "colletage": 0.6,
+        "zigzag": 1.0,
+        "piqueuses": 0.2,
+        "repassage": 0.25,
+        "controle_conditionnement": 0.8
+      }
+    },
+    {
+      "id": "culotte_femme",
+      "nom": "Culotte femme simple, fond coton",
+      "part": 0.1,
+      "prix_depart_atelier_xof_ht": 500,
+      "matieres_net_kg": {
+        "jersey_stretch": 0.027,
+        "jersey_coton": 0.003
+      },
+      "fournitures_usd": {
+        "elastique": 0.12,
+        "fil": 0.025,
+        "etiquettes_taille_entretien": 0.04
+      },
+      "temps_minutes": {
+        "coupe": 0.35,
+        "surjet": 1.5,
+        "recouvrement": 0.8,
+        "colletage": 1.0,
+        "zigzag": 0.8,
+        "piqueuses": 0.2,
+        "repassage": 0.2,
+        "controle_conditionnement": 0.8
+      }
+    }
+  ],
+  "sources_marche": [
+    {
+      "url": "https://www.mon-imprimeur.ci/sc/tee-shirt-100-coton",
+      "produit": "Tee-shirt coton",
+      "prix_affiche_xof_lot": 2500,
+      "pieces_lot": 1,
+      "description": "Tee-shirt blanc campagne 2 500 FCFA, minimum 25 ; qualité supérieure 3 500. Impression et fiscalité de l’offre à préciser, pas prix usine P2I.",
+      "consulte_le": "2026-10-29"
+    },
+    {
+      "url": "https://www.jumia.ci/xcv-lot-de-3-debardeurs-homme-blanc-28201262.html",
+      "produit": "Débardeur homme",
+      "prix_affiche_xof_lot": 6000,
+      "pieces_lot": 3,
+      "description": "Lot XCV de 3 à 6 000 FCFA, repère 2 000 FCFA/pièce ; composition contradictoire 100 % coton / 95 % coton 5 % élasthanne. Prix de détail, pas contrat de gros.",
+      "consulte_le": "2026-10-29"
+    },
+    {
+      "url": "https://www.jumia.ci/dou-color-slips-3-en-1-en-coton-pour-homme-noir-bleu-rouge-28114950.html",
+      "produit": "Slip homme",
+      "prix_affiche_xof_lot": 3200,
+      "pieces_lot": 3,
+      "description": "Dou-color 3-en-1 à 3 200 FCFA lors de consultation (3 300 dans l’index antérieur), soit environ 1 067/pièce ; prix promotionnel de détail, qualité à comparer.",
+      "consulte_le": "2026-10-29"
+    },
+    {
+      "url": "https://www.jumia.ci/fashion-slip-pour-femme-lulola-coton-6-pieces-multicolore-14210921.html",
+      "produit": "Culotte femme",
+      "prix_affiche_xof_lot": 3500,
+      "pieces_lot": 6,
+      "description": "Lot de 6 à 3 500 FCFA, environ 583/pièce : concurrent bas prix auquel une usine vendant 500 FCFA HT ne laisse pratiquement pas de marge revendeur après TVA. Autres annonces plus chères ne garantissent pas une prime de qualité P2I.",
+      "consulte_le": "2026-10-29"
+    }
+  ],
+  "production_annuelle_pieces": [
+    120000,
+    150000,
+    175000
+  ],
+  "part_vendue_A1": 0.97,
+  "effectif_productif": 19,
+  "salaires_charges_industriels_usd_an": {
+    "operateurs_polyvalents": 54720.0,
+    "chef_atelier": 5760.0
+  },
+  "autres_fixes_industriels_usd_an": {
+    "loyer": 7200,
+    "maintenance": 2400,
+    "energie_fixe": 1800,
+    "autres": 1120
+  },
+  "packaging_usd_piece": {
+    "bande_papier": 0.025,
+    "protection_hygienique_quote_part_lot": 0.03,
+    "carton_groupe": 0.025
+  },
+  "autres_variables_usd_piece": {
+    "energie": 0.025,
+    "aiguilles_huile": 0.015,
+    "livraison_distribution": 0.04
+  }
+}

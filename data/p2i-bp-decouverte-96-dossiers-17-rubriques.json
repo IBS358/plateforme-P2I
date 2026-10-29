@@ -9356,7 +9356,7 @@
     },
     {
       "up_id": "tricotage",
-      "up_nom": "Tricotage industriel",
+      "up_nom": "Confection maille & sous-vêtements",
       "filiere": "Textile, Habillement & Cuir",
       "statut": "brouillon_documentaire_non_bancable",
       "sections": [
@@ -9364,9 +9364,9 @@
           "numero": 1,
           "titre": "Projet et activité",
           "contenu": {
-            "description": "Fabrication de mailles à partir de fils achetés, distincte de la confection sur tissus tissés.",
+            "description": "Confection de tee-shirts, marcels, slips et culottes simples à partir de mailles achetées.",
             "filiere": "Textile, Habillement & Cuir",
-            "up_nom": "Tricotage industriel"
+            "up_nom": "Confection maille & sous-vêtements"
           }
         },
         {
@@ -9384,22 +9384,58 @@
           "contenu": {
             "machines": [
               {
-                "nom": "Tricoteuse industrielle",
-                "role": "Formation de la maille",
-                "capacite": "À dimensionner",
-                "utilites": "À qualifier"
+                "nom": "Réception et relaxation de la maille",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
               },
               {
-                "nom": "Bobinoir",
-                "role": "Préparation des fils",
-                "capacite": "À dimensionner",
-                "utilites": "À qualifier"
+                "nom": "Patronage et coupe",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
               },
               {
-                "nom": "Table de contrôle",
-                "role": "Contrôle et classement de la maille",
-                "capacite": "À dimensionner",
-                "utilites": "À qualifier"
+                "nom": "Assemblage au surjet",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
+              },
+              {
+                "nom": "Ourlets au recouvrement",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
+              },
+              {
+                "nom": "Bandes et colletage",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
+              },
+              {
+                "nom": "Pose d’élastiques",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
+              },
+              {
+                "nom": "Étiquettes et coutures de maintien",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
+              },
+              {
+                "nom": "Repassage et contrôle",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
+              },
+              {
+                "nom": "Conditionnement des articles",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
               }
             ],
             "configuration_reference": null,
@@ -9411,7 +9447,9 @@
           "titre": "Étude de marché",
           "contenu": {
             "marches_cibles": [
-              "Clients professionnels à prospecter"
+              "Distributeurs de basiques et sous-vêtements",
+              "Ateliers de personnalisation de tee-shirts",
+              "Revendeurs de proximité et boutiques"
             ],
             "analyse_demande": {
               "etat": "a_documenter",
@@ -9425,7 +9463,9 @@
           "titre": "Stratégie commerciale",
           "contenu": {
             "marches_cibles": [
-              "Clients professionnels à prospecter"
+              "Distributeurs de basiques et sous-vêtements",
+              "Ateliers de personnalisation de tee-shirts",
+              "Revendeurs de proximité et boutiques"
             ],
             "politique_prix": {
               "etat": "a_documenter",
@@ -9473,14 +9513,22 @@
           "titre": "Production et ventes",
           "contenu": {
             "processus": [
-              "Préparation des fils",
-              "Tricotage",
-              "Contrôle de la maille",
-              "Finition",
-              "Conditionnement"
+              "Réception et relaxation de la maille",
+              "Patronage et coupe",
+              "Assemblage au surjet",
+              "Ourlets au recouvrement",
+              "Bandes et colletage",
+              "Pose d’élastiques",
+              "Étiquettes et coutures de maintien",
+              "Repassage et contrôle",
+              "Conditionnement des articles"
             ],
             "matieres_premieres": [
-              "Fils de coton ou mélanges spécifiés"
+              "Jersey coton acheté",
+              "Jersey coton-élasthanne acheté",
+              "Bord-côte acheté",
+              "Fils, élastiques et étiquettes",
+              "Bandes papier, protections de lots et cartons"
             ],
             "capacite_reference": null,
             "production_mensuelle": {
@@ -9582,33 +9630,77 @@
           "contenu": {
             "machines": [
               {
-                "nom": "Tricoteuse industrielle",
-                "role": "Formation de la maille",
-                "capacite": "À dimensionner",
-                "utilites": "À qualifier"
+                "nom": "Réception et relaxation de la maille",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
               },
               {
-                "nom": "Bobinoir",
-                "role": "Préparation des fils",
-                "capacite": "À dimensionner",
-                "utilites": "À qualifier"
+                "nom": "Patronage et coupe",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
               },
               {
-                "nom": "Table de contrôle",
-                "role": "Contrôle et classement de la maille",
-                "capacite": "À dimensionner",
-                "utilites": "À qualifier"
+                "nom": "Assemblage au surjet",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
+              },
+              {
+                "nom": "Ourlets au recouvrement",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
+              },
+              {
+                "nom": "Bandes et colletage",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
+              },
+              {
+                "nom": "Pose d’élastiques",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
+              },
+              {
+                "nom": "Étiquettes et coutures de maintien",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
+              },
+              {
+                "nom": "Repassage et contrôle",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
+              },
+              {
+                "nom": "Conditionnement des articles",
+                "role": "Fonction propre au programme de confection",
+                "capacite": "Voir dimensionnement du BP",
+                "utilites": "Alimentation et réglages à rapprocher de la fiche du modèle"
               }
             ],
             "processus": [
-              "Préparation des fils",
-              "Tricotage",
-              "Contrôle de la maille",
-              "Finition",
-              "Conditionnement"
+              "Réception et relaxation de la maille",
+              "Patronage et coupe",
+              "Assemblage au surjet",
+              "Ourlets au recouvrement",
+              "Bandes et colletage",
+              "Pose d’élastiques",
+              "Étiquettes et coutures de maintien",
+              "Repassage et contrôle",
+              "Conditionnement des articles"
             ],
             "matieres_premieres": [
-              "Fils de coton ou mélanges spécifiés"
+              "Jersey coton acheté",
+              "Jersey coton-élasthanne acheté",
+              "Bord-côte acheté",
+              "Fils, élastiques et étiquettes",
+              "Bandes papier, protections de lots et cartons"
             ],
             "controles": {
               "etat": "a_documenter",

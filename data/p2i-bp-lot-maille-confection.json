@@ -1,0 +1,288 @@
+{
+  "schema": "p2i.bp-lot.v1",
+  "lot": "maille_confection_reference",
+  "date": "2026-10-29",
+  "sources": [
+    {
+      "id": "maille_e4",
+      "url": "https://www.glasman.fr/a16325/surjeteuse-industrielle-4-fils-jack-e4s-4",
+      "fournisseur": "Glasman",
+      "modele": "JACK E4S-4 — surjeteuse 4 fils complète",
+      "prix": 900,
+      "devise": "EUR",
+      "base": "Prix unitaire HT ; table, bâti et moteur inclus",
+      "limites": "En-tête 220 V, tableau 120 V : variante 220–230 V à spécifier. Réglages différentiel, aiguilles et tension selon la maille ; aucune cadence en vêtements déduite des points/minute.",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-29",
+      "fonctions": [
+        "Réception et relaxation de la maille",
+        "Patronage et coupe",
+        "Assemblage au surjet",
+        "Ourlets au recouvrement",
+        "Bandes et colletage",
+        "Pose d’élastiques",
+        "Étiquettes et coutures de maintien",
+        "Repassage et contrôle",
+        "Conditionnement des articles"
+      ],
+      "postes": [
+        {
+          "description": "Tissus finis achetés, pas de tricotage ni de teinture intégrés."
+        },
+        {
+          "description": "Deux RASOR DS504, passes de faible épaisseur ; tables dans auxiliaires."
+        },
+        {
+          "description": "Huit surjeteuses 4 fils JACK E4S-4."
+        },
+        {
+          "description": "Quatre recouvreuses JACK W4-D-01."
+        },
+        {
+          "description": "Deux colleteuses JACK W4-D-02, guides adaptés à la bande."
+        },
+        {
+          "description": "Deux JACK 20U-93Z ; guidage manuel des élastiques, pas d’automate fictif."
+        },
+        {
+          "description": "Deux piqueuses JUKI DDL-8700 pour étiquettes et points de maintien."
+        },
+        {
+          "description": "Deux BATTISTELLA KER/2, chaudière et fer compris ; contrôle manuel séparé."
+        },
+        {
+          "description": "Emballages budgétés par pièce, avec stock vide distinct de 15 jours."
+        }
+      ]
+    },
+    {
+      "id": "maille_w401",
+      "url": "https://tmac-sas.fr/machine-a-recouvreuse/381-jack-jk-w4-d-01gbx364-machine-point-de-recouvrement.html",
+      "fournisseur": "TMAC SAS",
+      "modele": "JACK W4-D-01GBX356 — recouvreuse",
+      "prix": 1150,
+      "devise": "EUR",
+      "base": "Prix unitaire HT ; table, bâti et moteur 220 V inclus",
+      "limites": "Sous-classe et guide d’ourlet à ajuster ; recouvrement inférieur/supérieur, pas une seconde surjeteuse.",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-29"
+    },
+    {
+      "id": "maille_w402",
+      "url": "https://tmac-sas.fr/machine-a-recouvreuse/382-jack-w4.html",
+      "fournisseur": "TMAC SAS",
+      "modele": "JACK W4-D-02BBX364 — colleteuse",
+      "prix": 1450,
+      "devise": "EUR",
+      "base": "Prix unitaire HT ; ensemble complet, guide de colletage à préciser",
+      "limites": "Montage de bandes d’encolure/emmanchure sur matière extensible ; largeur, guide et compatibilité à tester. Pas une tricoteuse de bord-côte.",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-29"
+    },
+    {
+      "id": "maille_zigzag",
+      "url": "https://tmac-sas.fr/machine-a-zig-zag/680-jack-20u-93z.html",
+      "fournisseur": "TMAC SAS",
+      "modele": "JACK 20U-93Z — zigzag",
+      "prix": 950,
+      "devise": "EUR",
+      "base": "Prix unitaire HT, table, bâti et moteur 550 W inclus",
+      "limites": "Pose d’élastiques sous guidage manuel, réglages et résistance des coutures à tester ; pas d’alimentation automatique d’élastique facturée ni supposée.",
+      "qualification": "prix_catalogue_public_unitaire_HT",
+      "consulte_le": "2026-10-29"
+    }
+  ],
+  "profils": {
+    "tricotage": {
+      "up_id": "tricotage",
+      "configuration_id": null,
+      "nom": "Confection maille & sous-vêtements — assortiment de référence",
+      "sous_titre": "Tee-shirts, marcels, slips et culottes simples",
+      "description": "Atelier de confection utilisant des mailles achetées ; quatre produits fabriqués par séries sur un parc partagé. Ni filature, ni tricotage, ni teinture, ni chaussettes dans ce périmètre.",
+      "source_equipement": "maille_e4",
+      "prix_retenu": 900,
+      "devise_prix": "EUR",
+      "quantite_equipement_principal": 8,
+      "equipements_complementaires": [
+        {
+          "source_id": "maille_w401",
+          "nom": "JACK W4-D-01 — recouvrement",
+          "prix_retenu": 1150,
+          "devise": "EUR",
+          "quantite": 4,
+          "prix_par_unite": true
+        },
+        {
+          "source_id": "maille_w402",
+          "nom": "JACK W4-D-02 — colletage",
+          "prix_retenu": 1450,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true
+        },
+        {
+          "source_id": "maille_zigzag",
+          "nom": "JACK 20U-93Z — zigzag",
+          "prix_retenu": 950,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true
+        },
+        {
+          "source_id": "textile_juki_ddl8700",
+          "nom": "JUKI DDL-8700 — piquage auxiliaire",
+          "prix_retenu": 875,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true
+        },
+        {
+          "source_id": "textile_rasor_ds504",
+          "nom": "RASOR DS504 — coupe",
+          "prix_retenu": 500,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true
+        },
+        {
+          "source_id": "textile_battistella_ker2",
+          "nom": "BATTISTELLA KER/2 — repassage complet",
+          "prix_retenu": 960,
+          "devise": "EUR",
+          "quantite": 2,
+          "prix_par_unite": true
+        }
+      ],
+      "unite_production": "pièce",
+      "capacite_unites_h": 1,
+      "production_explicite": [
+        120000,
+        150000,
+        175000
+      ],
+      "ventes_explicites": [
+        116400,
+        150000,
+        175000
+      ],
+      "prix_vente_usd_unite": [
+        1,
+        1,
+        1
+      ],
+      "matieres_usd_unite": 1,
+      "cout_process_usd_unite": 0.16,
+      "fixes_industriels_an": 73000.0,
+      "personnel_hors_cout_industriel": 4800,
+      "charges_fixes_hors_industriel": 6000,
+      "stock_matieres_jours": 60,
+      "emballage_produit": {
+        "statut": "hypothese_P2I",
+        "format": "Bande papier, protection hygiénique par lot de sous-vêtements et carton groupé ; prix de vente et comptabilité toujours par pièce",
+        "cout_usd_par_unite": 0.08,
+        "composants_usd_par_unite": {
+          "bande_papier": 0.025,
+          "protection_hygienique_quote_part_lot": 0.03,
+          "carton_groupe": 0.025
+        },
+        "mode_comptable": "inclus_dans_cout_industriel",
+        "ecologie": "Limiter l’emballage individuel et étudier une protection de lot réemployable ou recyclable ; ni filière ni bénéfice écologique présumé.",
+        "source": "Estimation P2I ; fournisseur local pour le format exact à qualifier."
+      },
+      "complements_usd": {
+        "fret": 4500,
+        "assurance": 300,
+        "douane_transit": 5000,
+        "transport_local": 1200,
+        "amenagement_site": 9000,
+        "utilites": 5500,
+        "installation_formation": 4500,
+        "pieces_initiales": 1500,
+        "securite_environnement": 3000,
+        "etudes_essais": 2500,
+        "table_coupe_auxiliaires": 4000,
+        "rayonnage_stockage": 3500,
+        "patronage_informatique": 2500
+      },
+      "methodes": {
+        "produits_reference": "Assortiment en pièces : 60 % tee-shirts col rond, 20 % marcels, 10 % slips homme, 10 % culottes femme simples. Séries successives, pas quatre ateliers à pleine capacité simultanée.",
+        "prix_vente": "Prix départ atelier HT : tee-shirt 1 800 FCFA, marcel 1 200, slip 750, culotte 500. Hypothèses P2I inférieures aux repères de détail pour les trois premiers ; concurrence particulièrement forte sur les culottes. Prix constants sur trois ans, non relevés pour atteindre une marge cible.",
+        "matieres": "Nomenclature par article : masses nettes de tissu divisées par rendement de coupe 85 %, plus fils, élastiques et étiquettes. Prix des mailles au kg issus de catalogues, fret/import/local estimés séparément. Masses selon patron moyen à vérifier par taille ; pas de recette sur les chutes.",
+        "personnel": "19 opérateurs productifs polyvalents à 200 USD/mois et un chef à 400, majorés de 20 % par hypothèse P2I ; personnel administratif 4 800 USD/an séparé. Effectif partagé, pas un salarié permanent par machine.",
+        "process": "Énergie 0,025, aiguilles/huile 0,015, livraison 0,040 et emballages 0,080 USD par pièce ; fils inclus dans la matière, pas une seconde fois ici. Loyer et maintenance dans les fixes industriels.",
+        "production": "Une équipe 8 h/j et 250 j/an ; efficacité productive 65 %. Temps par article et parts de gamme explicites. La capacité retient le minimum des postes partagés et de la disponibilité totale des 19 opérateurs. Volumes commerciaux supposés, pas commandes acquises.",
+        "qualite": "Mailles achetées finies et stabilisées ; relaxation avant coupe, contrôle rétrécissement/dégorgement, coutures extensibles et tailles. Fond de culotte en jersey coton distinct. Aucun label sanitaire, bio ou antibactérien présumé.",
+        "complements": "Provisions P2I sur locaux loués et installations ; ensemble de machines tarifées individuellement, pas ligne automatique intégrée. Tables, bâti, moteurs et chaudières déjà inclus ne sont pas rachetés en double.",
+        "charges": "Hors coûts industriels : personnel administratif 4 800 et autres charges 6 000 USD/an. Charges +3 %/an ; prix constants. Stock matières cible 60 jours pour achats importés ; ventilation par couleur et minima de chaque matière à approfondir."
+      },
+      "sources_prix_marche": [
+        {
+          "url": "https://www.mon-imprimeur.ci/sc/tee-shirt-100-coton",
+          "produit": "Tee-shirt coton",
+          "prix_affiche_xof_lot": 2500,
+          "pieces_lot": 1,
+          "description": "Tee-shirt blanc campagne 2 500 FCFA, minimum 25 ; qualité supérieure 3 500. Impression et fiscalité de l’offre à préciser, pas prix usine P2I.",
+          "consulte_le": "2026-10-29"
+        },
+        {
+          "url": "https://www.jumia.ci/xcv-lot-de-3-debardeurs-homme-blanc-28201262.html",
+          "produit": "Débardeur homme",
+          "prix_affiche_xof_lot": 6000,
+          "pieces_lot": 3,
+          "description": "Lot XCV de 3 à 6 000 FCFA, repère 2 000 FCFA/pièce ; composition contradictoire 100 % coton / 95 % coton 5 % élasthanne. Prix de détail, pas contrat de gros.",
+          "consulte_le": "2026-10-29"
+        },
+        {
+          "url": "https://www.jumia.ci/dou-color-slips-3-en-1-en-coton-pour-homme-noir-bleu-rouge-28114950.html",
+          "produit": "Slip homme",
+          "prix_affiche_xof_lot": 3200,
+          "pieces_lot": 3,
+          "description": "Dou-color 3-en-1 à 3 200 FCFA lors de consultation (3 300 dans l’index antérieur), soit environ 1 067/pièce ; prix promotionnel de détail, qualité à comparer.",
+          "consulte_le": "2026-10-29"
+        },
+        {
+          "url": "https://www.jumia.ci/fashion-slip-pour-femme-lulola-coton-6-pieces-multicolore-14210921.html",
+          "produit": "Culotte femme",
+          "prix_affiche_xof_lot": 3500,
+          "pieces_lot": 6,
+          "description": "Lot de 6 à 3 500 FCFA, environ 583/pièce : concurrent bas prix auquel une usine vendant 500 FCFA HT ne laisse pratiquement pas de marge revendeur après TVA. Autres annonces plus chères ne garantissent pas une prime de qualité P2I.",
+          "consulte_le": "2026-10-29"
+        }
+      ],
+      "marches": [
+        "Distributeurs de basiques et sous-vêtements",
+        "Ateliers de personnalisation de tee-shirts",
+        "Revendeurs de proximité et boutiques"
+      ],
+      "plan_commercial": [
+        {
+          "titre": "Séries et tailles",
+          "texte": "Tester un nombre limité de tailles et coloris avant d’augmenter les stocks."
+        },
+        {
+          "titre": "Vente aux revendeurs",
+          "texte": "Négocier prix HT, quantité minimale, délai de paiement et réassort ; ne pas confondre prix usine et prix de détail."
+        },
+        {
+          "titre": "Personnalisation",
+          "texte": "Vendre des tee-shirts vierges aux imprimeurs ; aucun revenu de sérigraphie ni machine d’impression ajouté."
+        },
+        {
+          "titre": "Qualité",
+          "texte": "Contrôler les mesures après lavage, l’élasticité des coutures et la traçabilité des tissus."
+        }
+      ],
+      "redaction": {
+        "projet": "Confection de vêtements en maille et sous-vêtements simples à partir de tissus achetés, selon un assortiment et un parc de machines partagés.",
+        "procede": "Réception/relaxation → patronage/coupe → surjet → recouvrement/colletage → élastiques selon produit → contrôle → emballage.",
+        "marche": "Prix de détail locaux documentés, mais ni volumes de commandes ni prix usine confirmés. Le scénario commercial doit être testé auprès de revendeurs.",
+        "approvisionnement": "Mailles coton, coton-élasthanne et bord-côte importés selon catalogues publics ; fils, élastiques et étiquettes sous budgets P2I. Achat local compatible à privilégier lorsqu’un prix est documenté.",
+        "economie": "Simulation par pièce, assortiment pondéré et coûts détaillés ; aucune vente de rouleaux ni capacité de tricoteuse réutilisée.",
+        "risques": "Prix bas des sous-vêtements importés, invendus par taille/couleur, rétrécissement, coût livré des mailles et délais de paiement.",
+        "qualite": "Coutures extensibles, contrôle de taille et lavage ; pas de certification présumée."
+      },
+      "nombre_machines_reference": 22,
+      "etude_maille": "data/p2i-maille-confection-etude.json"
+    }
+  }
+}
