@@ -18195,6 +18195,64 @@
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
       "statut": "dossier_redactionnel_et_reperes_historiques_non_valide",
+      "faisabilite": {
+        "titre": "Tricotage industriel — maille jersey en rouleaux",
+        "priorite": 2,
+        "conclusion": "Faisabilité technique documentée. Périmètre initial conseillé : jersey écru vendu aux transformateurs, sans filature ni atelier de teinture intégré. La compétitivité locale reste à chiffrer.",
+        "produit": "Rouleaux de maille jersey ; fil acheté de titre et composition adaptés. Le jersey ne remplace pas les tissus tissés des draps et chemises de référence.",
+        "interet": "Approvisionner la confection de tee-shirts et vêtements en maille ; offrir des petites séries et réassorts B2B à tester commercialement.",
+        "flux": [
+          "Réception et contrôle du fil",
+          "Alimentation du métier circulaire",
+          "Tricotage jersey",
+          "Inspection et métrage",
+          "Roulage et conditionnement"
+        ],
+        "machines": "Option à étudier : deux métiers circulaires de même jauge, avec contrôle et roulage. Le nombre deux est un scénario P2I de continuité, pas une taille minimale démontrée.",
+        "repere_catalogue": {
+          "fournisseur": "LEADSFON",
+          "modele": "SL3.0 — candidat technique",
+          "prix_min_usd": 35000,
+          "prix_max_usd": 45000,
+          "quantite_scenario": 2,
+          "base": "Guide fabricant : gamme single jersey premium, prix par machine ; pas une ligne complète ni un prix ferme de cette configuration",
+          "source_prix": "leadsfon_prix",
+          "source_technique": "leadsfon_tech"
+        },
+        "utilites": "Fiche SL3.0 : 5,5 kW et 2 800 kg par machine annoncés. À ajouter : inspection, roulage, éclairage, ventilation et besoins d’ambiance du fil. Le régime électrique local est à définir.",
+        "interfaces": "Jauge, titre du fil, diamètre, densité de maille et poids surfacique à choisir ensemble. Tours/minute et nombre de fournisseurs de fil ne donnent pas seuls une cadence en kg/h. Pas de débit ni de CA déduit de ces données.",
+        "approvisionnement": "Comparer fils disponibles en Côte d’Ivoire et fils importés livrés Abidjan. La présence de coton local ne prouve pas la disponibilité du fil requis. Teinture/finition éventuelles à externaliser et chiffrer ; sinon vendre en écru.",
+        "emballage": "Rouleaux protégés, mandrins et étiquettes de lot ; chiffrer poids du rouleau, consommation de protection, réemploi et stock vide.",
+        "risques": "Prix du fil, irrégularités, défauts de maille, stabilité dimensionnelle après finition et concurrence des rouleaux importés.",
+        "manquants": [
+          "Prix livré du fil et pertes de production",
+          "Prix de vente du rouleau écru au kg et demande locale",
+          "Cadence au poids pour le jersey retenu",
+          "Inspection/roulage, fret, installation, stock de fil et personnel"
+        ],
+        "sources": [
+          {
+            "id": "leadsfon_tech",
+            "url": "https://carrieleadsfon.en.made-in-china.com/product/BFbAInkyklhC/China-Leadsfon-Single-Jersey-Circular-Knitting-Machine-Textile-Machine.html",
+            "titre": "LEADSFON SL3.0 — fiche du fabricant",
+            "qualification": "Fiche fournisseur ; caractéristiques annoncées, non rendement garanti"
+          },
+          {
+            "id": "leadsfon_prix",
+            "url": "https://www.leadsfon.com/news/how-much-does-a-circular-knitting-machine-cost-in-2026-a-complete-pricing-guide-for-textile-manufacturers/",
+            "titre": "LEADSFON — guide de prix fabricant du 10/04/2026",
+            "qualification": "Fourchette de gamme fabricant, pas tarif ferme d’une SL3.0 configurée"
+          },
+          {
+            "id": "cepici",
+            "url": "https://cepici.gouv.ci/web/docs/Catalogue%20de%20projets%20d%27investissements%20prioritaires.pdf",
+            "titre": "CEPICI — développement de l’industrie textile de filature et tissage",
+            "qualification": "Contexte industriel, données historiques 2020–2021 ; ne prouve pas un approvisionnement actuel en fil tricotable"
+          }
+        ],
+        "date": "2026-10-29",
+        "qualification": "Préétude documentaire P2I ; décision de priorité interne, non étude de marché ni rentabilité validée"
+      },
       "controle_emballages": {
         "statut": "reference_exacte_et_prix_livre_a_documenter",
         "famille": "articles_textiles",
@@ -18840,6 +18898,78 @@
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
       "statut": "dossier_redactionnel_et_reperes_historiques_non_valide",
+      "faisabilite": {
+        "titre": "Non-tissés — feutres aiguilletés pour ameublement",
+        "priorite": 3,
+        "conclusion": "Faisabilité de procédé documentée ; commencer par des feutres pour ameublement et protection non médicale. Projet plus exigeant à dimensionner après choix du grammage et du client, sans présumer de marge supérieure.",
+        "produit": "Rouleaux ou plaques de feutre aiguilleté ; spécifier masse surfacique, largeur, épaisseur et propriétés attendues. Pas de qualification géotextile, médicale, acoustique ou ignifuge par défaut.",
+        "interet": "Fourniture B2B à l’ameublement et à la literie. Richbond et CIL démontrent la présence d’une industrie locale de literie, pas des achats de ces feutres ni une commande à la P2I.",
+        "flux": [
+          "Ouverture et mélange des fibres",
+          "Alimentation dosée",
+          "Cardage",
+          "Nappage croisé",
+          "Aiguilletage",
+          "Finition et contrôle",
+          "Découpe et enroulage"
+        ],
+        "machines": "Privilégier une ligne complète : ouverture/mélange, alimentation, carde, nappeuse, aiguilleteuse, finition, découpe/enroulage et commande. Dépoussiérage et auxiliaires à identifier dans son périmètre.",
+        "repere_catalogue": {
+          "fournisseur": "Qingdao Lebon Industry",
+          "modele": "Ligne aiguilletée avec nappeuse et calandre — gamme à configurer",
+          "prix_min_usd": 49900,
+          "prix_max_usd": 99900,
+          "quantite_scenario": 1,
+          "base": "Fourchette d’annonce FOB de gamme, pas prix arrêté d’une ligne pour le produit P2I. Ne pas reprendre automatiquement la borne basse comme CAPEX",
+          "source_prix": "lebon_prix",
+          "source_technique": "lebon_tech"
+        },
+        "utilites": "Puissance, air comprimé et auxiliaires dépendants de la configuration. Le procédé aiguilleté ne nécessite pas de teinture humide dans ce périmètre. Aucune économie d’énergie forfaitaire présumée.",
+        "interfaces": "Même largeur utile tout au long de la ligne, débit de carde et nappeuse compatible avec le grammage et l’aiguilleteuse. Relation : kg/h = largeur(m) × vitesse(m/min) × grammage(g/m²) × 60 / 1000 ; le goulot réel et les arrêts restent à intégrer.",
+        "approvisionnement": "Fibres vierges ou régénérées achetées et qualifiées. La qualité de fibres issues de l’UP recyclage est à tester ; les deux activités restent financièrement indépendantes, sans ventes croisées automatiques.",
+        "emballage": "Rouleaux sur mandrin avec protection et étiquette ; intégrer consommation et stock de mandrins/protection. Aucun prix local vérifié à ce stade.",
+        "risques": "Débouchés trop étroits, produit hors spécification, coût de fibre et énergie, régularité du grammage. Une ligne de feutre ne produit pas automatiquement un voile spunbond d’emballage ou des masques.",
+        "manquants": [
+          "Spécification et prix accepté du feutre",
+          "Fibres compatibles et prix livré",
+          "Débit de ligne au grammage choisi et puissance totale",
+          "Périmètre/prix de la variante catalogue, utilités, fret, site et BFR"
+        ],
+        "sources": [
+          {
+            "id": "lebon_tech",
+            "url": "https://china-lebon.en.made-in-china.com/product/gGPprnsuvNYV/China-Complete-Needle-Punching-Production-Line-for-Automotive-Interior-and-Acoustic-Insulation-Felt.html",
+            "titre": "Lebon — ligne complète de non-tissé aiguilleté",
+            "qualification": "Fiche fournisseur décrivant le flux intégré ; aucune performance normative présumée"
+          },
+          {
+            "id": "lebon_prix",
+            "url": "https://m.made-in-china.com/hot-china-products/Cross_Lapper_Line.html",
+            "titre": "Catalogue public — Needle Punching Production Line with Cross Lapper and Calender / Qingdao Lebon",
+            "qualification": "Fourchette affichée sur index de catalogue ; variante et composition à rapprocher de la fiche technique"
+          },
+          {
+            "id": "nonwoven",
+            "url": "https://www.andritz.com/nonwoven-textile-en/technologies/needlepunch-4",
+            "titre": "ANDRITZ — Needlepunch line solutions",
+            "qualification": "Référence de procédé ; aucun prix public retenu"
+          },
+          {
+            "id": "richbond",
+            "url": "https://www.richbond.ci/qui-sommes-nous",
+            "titre": "Richbond Côte d’Ivoire — présentation du fabricant",
+            "qualification": "Présence locale de fabrication de literie ; ni achat de fibres ni commande de feutre démontrés"
+          },
+          {
+            "id": "cil",
+            "url": "https://cil.ci/matelas/",
+            "titre": "CIL — matelas fabriqués en Côte d’Ivoire",
+            "qualification": "Existence d’un secteur utilisateur potentiel ; aucun engagement commercial"
+          }
+        ],
+        "date": "2026-10-29",
+        "qualification": "Préétude documentaire P2I ; décision de priorité interne, non étude de marché ni rentabilité validée"
+      },
       "controle_emballages": {
         "statut": "reference_exacte_et_prix_livre_a_documenter",
         "famille": "articles_textiles",
@@ -19160,6 +19290,77 @@
         "Stocks, pertes, conservation et délais de règlement selon activité"
       ],
       "statut": "dossier_redactionnel_et_reperes_historiques_non_valide",
+      "faisabilite": {
+        "titre": "Recyclage textile — fibres issues de chutes propres",
+        "priorite": 1,
+        "conclusion": "Piste prioritaire pour le prochain chiffrage, sous réserve de quantifier les chutes et débouchés. Démarrer par des chutes de confection propres, triées par composition ; pas de promesse de fil neuf ni de recyclage intégral.",
+        "produit": "Fibres récupérées en balles, destinées au rembourrage ou à certains non-tissés après essais chez les utilisateurs.",
+        "interet": "Valoriser les chutes de plusieurs ateliers et vendre une matière intermédiaire. Le seul atelier P2I de confection ne suffit pas à justifier l’alimentation d’une ligne.",
+        "flux": [
+          "Réception, pesée et tri",
+          "Retrait des pièces dures",
+          "Coupe",
+          "Ouverture et nettoyage",
+          "Collecte des fibres",
+          "Contrôle et mise en balles"
+        ],
+        "machines": "Une ligne intégrée coupe/ouverture/nettoyage/collecte, puis presse à balles si non incluse. Ne pas acheter une seconde coupe ou une seconde ouverture déjà comprises.",
+        "repere_catalogue": {
+          "fournisseur": "Gaomi Rongda Machinery",
+          "modele": "GM600+GM250 — candidat technique",
+          "prix_min_usd": 18900,
+          "prix_max_usd": 18900,
+          "quantite_scenario": 1,
+          "base": "Annonce de ligne complète à 18 900 USD ; index de catalogue, rapprochement par titre/vendeur. La presse, le dépoussiérage et les protections ne sont pas présumés inclus",
+          "source_prix": "rongda_prix",
+          "source_technique": "rongda_tech"
+        },
+        "utilites": "Puissance détaillée non fournie dans la fiche retenue. Intégrer aspiration et captage des poussières, protection incendie, bruit, manutention et local sec ; aucune consommation kWh/kg inventée.",
+        "interfaces": "300 kg/h annoncés par Rongda : base entrée/sortie et rendement non précisés. Longueur, composition, propreté et humidité des fibres à rapprocher des exigences des acheteurs. Ne pas appliquer les cadences ANDRITZ à cette machine.",
+        "approvisionnement": "Collecte mutualisée de chutes propres connues ; pesées par fournisseur et coût du transport. Écarter au démarrage textiles souillés, déchets médicaux et mélanges impossibles à identifier.",
+        "emballage": "Balles cerclées ou sacs de fibres adaptés au transport ; coût, masse par balle, contamination, étiquetage et stockage à préciser.",
+        "risques": "Gisement insuffisant, mélange de fibres, contaminants, poussières et incendie ; prix obtenu inférieur aux frais de tri/collecte. Aucun gain environnemental chiffré sans bilan.",
+        "manquants": [
+          "Tonnages et coût livré des chutes triées",
+          "Rendement vendable et qualité fibre obtenue",
+          "Prix de vente des fibres récupérées et acceptation client",
+          "Presse, aspiration, sécurité, énergie et coût complet installé"
+        ],
+        "sources": [
+          {
+            "id": "rongda_tech",
+            "url": "https://rongdamachinery.en.made-in-china.com/product/xfBYLtRUmjrp/China-Textile-Waste-Recycling-Complete-Production-Line.html",
+            "titre": "Rongda GM600+GM250 — ligne de recyclage",
+            "qualification": "Fiche fournisseur ; 300 kg/h annoncés sans rendement matière ni puissance détaillée"
+          },
+          {
+            "id": "rongda_prix",
+            "url": "https://www.made-in-china.com/products-search/hot-china-products/Yarn_Waste_Price.html",
+            "titre": "Catalogue public — Textile Waste Recycling Complete Production Line / Gaomi Rongda",
+            "qualification": "Prix affiché sur index de catalogue ; rapprochement par titre et vendeur, périmètre exact non confirmé"
+          },
+          {
+            "id": "andritz",
+            "url": "https://www.andritz.com/products-en/group/nonwoven-textile/textile-recycling/exel",
+            "titre": "ANDRITZ EXEL — recyclage mécanique textile",
+            "qualification": "Référence de procédé indépendante de la sélection budgétaire Rongda ; aucun prix repris"
+          },
+          {
+            "id": "richbond",
+            "url": "https://www.richbond.ci/qui-sommes-nous",
+            "titre": "Richbond Côte d’Ivoire — présentation du fabricant",
+            "qualification": "Présence locale de fabrication de literie ; ni achat de fibres ni commande de feutre démontrés"
+          },
+          {
+            "id": "cil",
+            "url": "https://cil.ci/matelas/",
+            "titre": "CIL — matelas fabriqués en Côte d’Ivoire",
+            "qualification": "Existence d’un secteur utilisateur potentiel ; aucun engagement commercial"
+          }
+        ],
+        "date": "2026-10-29",
+        "qualification": "Préétude documentaire P2I ; décision de priorité interne, non étude de marché ni rentabilité validée"
+      },
       "controle_emballages": {
         "statut": "reference_exacte_et_prix_livre_a_documenter",
         "famille": "articles_textiles",
