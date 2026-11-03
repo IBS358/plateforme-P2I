@@ -20,3 +20,11 @@ jobs:
       - run: npm install --no-save playwright
       - run: npx playwright install --with-deps chromium
       - run: node tests/bp-decouverte-navigation.cjs
+      - name: Conserver captures et erreurs, même si le test échoue
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p2i-navigation-diagnostics
+          path: test-results/p2i-navigation/
+          if-no-files-found: warn
+          retention-days: 7
