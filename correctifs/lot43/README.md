@@ -1,16 +1,20 @@
-# Correctif P2I Lot 43 — moteur commun
+# P2I — Correctif du chargement de l'UP mobilier métallique (Lot 43)
 
-Ce dossier contient le **correctif source reproductible** du Lot 43 pour le fichier `P2I/business-plan-decouverte.html` du **Lot 40**.
+Ce dossier publie le correctif source reproductible du Lot 43 sur la **branche de travail uniquement**. Il ne contient pas les 144 Mo de l'archive complète.
 
-Il traite :
-- l'accès à `appro.importations` lorsque la liste est absente ;
-- l'accès à `revueConfig.motifs` lorsque la liste est absente ;
-- l'accès à `prix_equipement.fonctions` lorsque la liste est absente ;
-- la suppression du moteur d'affichage parallèle du mobilier ;
-- le passage par le moteur commun au chargement.
+## Vérification de reproductibilité
 
-**Attention : ce dossier n'est pas l'archive complète du Lot 43.** Les données, images et autres fichiers du Lot 40 doivent être présents localement. Ce correctif ne modifie pas le dépôt principal et ne publie pas Netlify. Le comportement complet dans Edge n'est pas encore certifié.
+Le script a été comparé à partir du HTML du Lot 40 : après suppression du moteur parallèle et correction des accès aux champs facultatifs, le fichier résultant est **identique, caractère par caractère**, au HTML contenu dans le ZIP Lot 43. Cela ne constitue **pas** une validation du rendu dans Edge.
 
-Pour appliquer localement : placer `appliquer-correctif-lot43.ps1` dans le dossier `P2I` extrait du Lot 40, puis exécuter ce script avec PowerShell. Le script crée une sauvegarde `business-plan-decouverte.html.sauvegarde-lot40` avant modification. Il refuse de modifier un fichier qui ne présente pas la signature du Lot 40 attendu.
+## Application locale — uniquement sur le Lot 40
 
-Branche autorisée : `refonte-bp-decouverte-17-rubriques`. Ne pas fusionner dans `main` sans validation.
+1. Ouvrir le fichier [appliquer-correctif-lot43.ps1](./appliquer-correctif-lot43.ps1), puis utiliser le bouton **Download raw file** de GitHub.
+2. Copier ce fichier dans le dossier `P2I` extrait du **Lot 40**, à côté de `business-plan-decouverte.html`.
+3. Ouvrir PowerShell dans ce dossier et exécuter `powershell -NoProfile -File .\appliquer-correctif-lot43.ps1`.
+4. Le script sauvegarde automatiquement le HTML original sous `business-plan-decouverte.html.sauvegarde-lot40` avant de modifier le fichier.
+
+Le script refuse de modifier un HTML dont il ne reconnaît pas la signature. Il ne modifie pas GitHub, Netlify ni la branche `main`.
+
+**Ne pas déployer en production :** les tests visuels et financiers complets restent à réaliser.
+
+Rapport : [VALIDATION.md](./VALIDATION.md).
