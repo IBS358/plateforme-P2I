@@ -1,0 +1,22 @@
+name: P2I - contrôle navigateur BP Découverte
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - refonte-bp-decouverte-17-rubriques
+    paths:
+      - business-plan-decouverte.html
+      - tests/bp-decouverte-navigation.cjs
+      - .github/workflows/p2i-bp-navigation.yml
+jobs:
+  navigation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/bp-decouverte-navigation.cjs
