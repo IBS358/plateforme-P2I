@@ -8,6 +8,10 @@ Le script a été comparé à partir du HTML du Lot 40 : après suppression du m
 
 ## Application locale — uniquement sur le Lot 40
 
+**Option Windows simplifiée :** télécharger les deux fichiers [APPLIQUER_LOT43.bat](./APPLIQUER_LOT43.bat) et [appliquer-correctif-lot43.ps1](./appliquer-correctif-lot43.ps1), les placer ensemble dans le dossier P2I du Lot 40 et double-cliquer sur le fichier `.bat`. Celui-ci lance PowerShell, affiche le résultat et conserve une sauvegarde du fichier original. Ne pas utiliser cette méthode sur les Lots 41–43.
+
+**Ce n'est pas encore un correctif validé en navigateur.**
+
 1. Ouvrir le fichier [appliquer-correctif-lot43.ps1](./appliquer-correctif-lot43.ps1), puis utiliser le bouton **Download raw file** de GitHub.
 2. Copier ce fichier dans le dossier `P2I` extrait du **Lot 40**, à côté de `business-plan-decouverte.html`.
 3. Ouvrir PowerShell dans ce dossier et exécuter `powershell -NoProfile -File .\appliquer-correctif-lot43.ps1`.
