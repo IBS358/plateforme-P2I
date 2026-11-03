@@ -1,30 +1,28 @@
-# P2I Lot 43 — correctif du moteur commun (à appliquer au Lot 40)
-# Ce correctif modifie uniquement le fichier HTML local, après sauvegarde.
+# P2I Lot 43 : correctif du chargement de l'UP mobilier sur la base Lot 40.
+# Copier ce fichier dans P2I (Lot 40), puis executer avec PowerShell.
 $ErrorActionPreference = 'Stop'
 $target = Join-Path $PSScriptRoot 'business-plan-decouverte.html'
-if (-not (Test-Path -LiteralPath $target)) {
-  throw "Placez ce script dans le dossier P2I du Lot 40, à côté de business-plan-decouverte.html."
-}
+if (-not (Test-Path -LiteralPath $target)) { throw "Fichier business-plan-decouverte.html absent." }
 $utf8 = New-Object System.Text.UTF8Encoding($false)
-$source = [System.IO.File]::ReadAllText($target, $utf8)
-if (-not $source.Contains("window.P2I_RENDER_MOBILIER=render;")) {
-  throw "Le fichier n'est pas le Lot 40 attendu ou le moteur parallèle est déjà absent. Aucune modification."
-}
+$s = [System.IO.File]::ReadAllText($target, $utf8)
+$signature = "window.P2I_RENDER_MOBILIER=render;"
+if (-not $s.Contains($signature)) { throw "Version source non reconnue : Lot 40 attendu. Aucun changement." }
+$start = $s.IndexOf("(function(){'use strict';" + "`n" + "const ID='recyclage_metaux';")
+$endMarker = "window.P2I_RENDER_MOBILIER=render;" + "`n" + "})();"
+$end = $s.IndexOf($endMarker, $start)
+if ($start -lt 0 -or $end -lt 0) { throw "Moteur parallele non localise : aucun changement." }
+$end += $endMarker.Length
+$s = $s.Remove($start, $end-$start)
+$oldBoot = "if(id==='recyclage_metaux' && window.P2I_RENDER_MOBILIER){window.P2I_RENDER_MOBILIER();}else{render();}"
+if (-not $s.Contains($oldBoot)) { throw "Point de chargement introuvable : aucun changement." }
+$s = $s.Replace($oldBoot, "render();")
+$s = $s.Replace("revueConfig.motifs.join(' ; ')", "(Array.isArray(revueConfig.motifs)?revueConfig.motifs:[]).join(' ; ')")
+$s = $s.Replace("referenceDossier.prix_equipement.fonctions.length", "(referenceDossier.prix_equipement?.fonctions?.length||dossier?.machines?.length||0)")
+$s = $s.Replace("appro.importations.length", "(Array.isArray(appro.importations)?appro.importations:[]).length")
+$s = $s.Replace("appro.importations.map(", "(Array.isArray(appro.importations)?appro.importations:[]).map(")
+if ($s.Contains($signature) -or $s.Contains("revueConfig.motifs.join(' ; ')") -or $s.Contains("referenceDossier.prix_equipement.fonctions.length")) { throw "Verification echouee : aucun changement." }
 $backup = "$target.sauvegarde-lot40"
-if (-not (Test-Path -LiteralPath $backup)) {
-  [System.IO.File]::Copy($target, $backup)
-}
-$text = $source
-$text = $text.Replace("appro.importations.length", "(Array.isArray(appro.importations)?appro.importations:[]).length")
-$text = $text.Replace("appro.importations.map(", "(Array.isArray(appro.importations)?appro.importations:[]).map(")
-$text = $text.Replace("revueConfig.motifs.join(' ; ')", "(Array.isArray(revueConfig.motifs)?revueConfig.motifs:[]).join(' ; ')")
-$text = $text.Replace("referenceDossier.prix_equipement.fonctions.length", "(referenceDossier.prix_equipement?.fonctions?.length||dossier?.machines?.length||0)")
-$text = $text.Replace("if(id==='recyclage_metaux' && window.P2I_RENDER_MOBILIER){window.P2I_RENDER_MOBILIER();}else{render();}", "render();")
-$pattern = "(?s)\(function\(\)\{'use strict';\r?\nconst ID='recyclage_metaux';.*?window\.P2I_RENDER_MOBILIER=render;\r?\n\}\)\(\);"
-$text = [System.Text.RegularExpressions.Regex]::Replace($text, $pattern, "")
-if ($text.Contains("window.P2I_RENDER_MOBILIER=render;") -or $text.Contains("revueConfig.motifs.join(' ; ')") -or $text.Contains("referenceDossier.prix_equipement.fonctions.length")) {
-  throw "La validation du correctif a échoué. Le fichier original n'a pas été modifié."
-}
-[System.IO.File]::WriteAllText($target, $text, $utf8)
-Write-Host "Correctif Lot 43 appliqué au fichier local. Sauvegarde : $backup"
-Write-Host "ATTENTION : le fonctionnement complet dans Edge et Netlify reste à valider."
+if (-not (Test-Path -LiteralPath $backup)) { [System.IO.File]::Copy($target, $backup) }
+[System.IO.File]::WriteAllText($target, $s, $utf8)
+Write-Host "Correctif applique. Sauvegarde : $backup"
+Write-Host "Lot 43 TEST : validation complete dans Edge encore necessaire."
