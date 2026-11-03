@@ -29,8 +29,13 @@ fs.mkdirSync(output, { recursive: true });
     if (options.filter(x=>x.value).length < 96) throw new Error('Moins de 96 UP dans le sélecteur.');
     const check = async (name, label) => {
       await snapshot(label);
-      const body = await page.locator('body').innerText();
-      if (!body.toLowerCase().includes(name.toLowerCase())) throw new Error('BP non visible: '+name);
+      const app = page.locator('#app');
+      const rendered = await app.innerText();
+      if (!rendered.toLowerCase().includes(name.toLowerCase())) throw new Error('BP non rendu dans #app: '+name);
+      if (rendered.length < 3000) throw new Error('BP probablement incomplet: seulement '+rendered.length+' caractères affichés.');
+      const required = ['Projet et activité','Synthèse économique','Configuration industrielle','Marché et concurrence','Stratégie commerciale','Opportunités et risques','Investissements et financement','Production et ventes','Compte de résultat','BFR mensuel','Bilan simplifié','Indicateurs','Trésorerie','Hypothèses et sources','Suite avec la P2I','Passage vers le BP Pro','Dossier technique'];
+      const missing = required.filter(t=>!rendered.toLowerCase().includes(t.toLowerCase()));
+      if (missing.length) throw new Error('Rubriques absentes du BP affiché: '+missing.join(', '));
       if (errors.length) throw new Error('Erreur JavaScript: '+errors.join(' | '));
       if (!(await page.locator('#app').isVisible())) throw new Error('Contenu BP masqué.');
     };
