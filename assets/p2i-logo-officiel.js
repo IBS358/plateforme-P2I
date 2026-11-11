@@ -6,7 +6,7 @@
     if (!script) return;
     var source = script.getAttribute('src');
     var url = new URL('p2i-logo-officiel.png', new URL(source, document.baseURI)).href;
-    document.querySelectorAll('header .logo, .nav-header .logo, nav .logo').forEach(function (node) {
+    document.querySelectorAll('header .logo, .nav-header .logo, nav .logo, .topbar .brand .logo').forEach(function (node) {
       if (node.querySelector('[data-p2i-official-logo]')) return;
       var image = document.createElement('img');
       image.setAttribute('data-p2i-official-logo', '1');
@@ -17,6 +17,13 @@
       image.onload = function () {
         var old = node.querySelector('.logo-icon');
         if (old) old.hidden = true;
+        if (node.matches('.topbar .brand .logo')) {
+          node.querySelectorAll('i.fa-solid, i.fas').forEach(function (icon) { icon.hidden = true; });
+          node.style.width = 'auto';
+          node.style.height = 'auto';
+          node.style.background = 'transparent';
+          node.style.border = '0';
+        }
         if (node.classList.contains('logo')) {
           node.style.display = 'flex';
           node.style.alignItems = 'center';
