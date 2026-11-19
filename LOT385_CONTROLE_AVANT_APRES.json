@@ -1,0 +1,74 @@
+{
+  "protected_hashes_unchanged": true,
+  "protected_files": 18,
+  "pages": [
+    {
+      "page": "LOT352_METALLURGIE_MECANIQUE/BP_FINALISES/chaudronnerie.html",
+      "rubrics": 17,
+      "print_export": true,
+      "dashboard_return": true,
+      "broken_local_links": [],
+      "images": 0
+    },
+    {
+      "page": "LOT352_METALLURGIE_MECANIQUE/BP_FINALISES/mecanosoudure.html",
+      "rubrics": 17,
+      "print_export": true,
+      "dashboard_return": true,
+      "broken_local_links": [],
+      "images": 0
+    },
+    {
+      "page": "LOT352_METALLURGIE_MECANIQUE/BP_FINALISES/outillage.html",
+      "rubrics": 17,
+      "print_export": true,
+      "dashboard_return": true,
+      "broken_local_links": [],
+      "images": 0
+    },
+    {
+      "page": "LOT352_METALLURGIE_MECANIQUE/BP_FINALISES/pieces.html",
+      "rubrics": 17,
+      "print_export": true,
+      "dashboard_return": true,
+      "broken_local_links": [],
+      "images": 0
+    },
+    {
+      "page": "LOT352_METALLURGIE_MECANIQUE/BP_FINALISES/quincaillerie.html",
+      "rubrics": 17,
+      "print_export": true,
+      "dashboard_return": true,
+      "broken_local_links": [],
+      "images": 0
+    },
+    {
+      "page": "LOT352_METALLURGIE_MECANIQUE/BP_FINALISES/serrurerie.html",
+      "rubrics": 17,
+      "print_export": true,
+      "dashboard_return": true,
+      "broken_local_links": [],
+      "images": 0
+    },
+    {
+      "page": "LOT352_METALLURGIE_MECANIQUE/BP_FINALISES/structures.html",
+      "rubrics": 17,
+      "print_export": true,
+      "dashboard_return": true,
+      "broken_local_links": [],
+      "images": 0
+    },
+    {
+      "page": "LOT352_METALLURGIE_MECANIQUE/BP_REFERENCE_HISTORIQUE/mobilier_lot229_17_rubriques.html",
+      "rubrics": 17,
+      "print_export": true,
+      "dashboard_return": true,
+      "broken_local_links": [],
+      "images": 1
+    }
+  ],
+  "matrix_rows": 96,
+  "target_rows": 8,
+  "non_target_rows_existing_values_unchanged": true,
+  "target_matrix_statuses": 8
+}
