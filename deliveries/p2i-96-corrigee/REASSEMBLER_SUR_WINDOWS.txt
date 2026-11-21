@@ -1,0 +1,21 @@
+P2I — récupération du ZIP final
+
+Le ZIP a été publié en 25 fragments parce que le transfert d’un seul fichier dépasse la limite du canal de dépôt. Téléchargez les 25 fichiers nommés P2I_96_BP_Decouverte_Consolide_Final.zip.part001 à .part025 dans un même dossier. Les liens directs sont disponibles dans le dossier GitHub de la branche livraison-p2i-96-corrigee.
+
+Reconstitution sous Windows (PowerShell), depuis le dossier contenant les fragments :
+
+$zip = 'P2I_96_BP_Decouverte_Consolide_Final.zip'
+$parts = Get-ChildItem -File -Filter "$zip.part*" | Sort-Object Name
+if ($parts.Count -ne 25) { throw "25 fragments attendus, $($parts.Count) trouvés." }
+$out = [System.IO.File]::Create($zip)
+try {
+  foreach ($part in $parts) {
+    $bytes = [System.IO.File]::ReadAllBytes($part.FullName)
+    $out.Write($bytes, 0, $bytes.Length)
+  }
+} finally { $out.Dispose() }
+
+Vérifiez ensuite l’empreinte :
+(Get-FileHash -LiteralPath $zip -Algorithm SHA256).Hash.ToLower()
+Empreinte attendue : 1918c5eee64e76774416044782da392d26382287ce9cea746aeba882978327f3
+La commande d’assemblage recolle les fragments dans l’ordre de leurs noms; aucune décompression ni modification n’est nécessaire.
