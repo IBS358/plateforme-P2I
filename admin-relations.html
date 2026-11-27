@@ -886,11 +886,6 @@
     // LISTE DES ADMINISTRATEURS
     // ============================================================
 
-    const ADMIN_EMAILS = [
-        'admin@p2i.com',
-        'superadmin@p2i.com',
-        'contact@p2i.com'
-    ];
 
 
     // ============================================================
@@ -960,134 +955,16 @@
     // AUTHENTIFICATION
     // ============================================================
 
-    function getActiveEmail() {
-
-        return localStorage.getItem('p2i_user_email') ||
-               localStorage.getItem('p2i_active_user') ||
-               sessionStorage.getItem('p2i_user_email') ||
-               localStorage.getItem('user_email') ||
-               sessionStorage.getItem('user_email') ||
-               (() => {
-
-                    try {
-
-                        const user = JSON.parse(
-                            localStorage.getItem('userP2I') || '{}'
-                        );
-
-                        return user.email || '';
-
-                    } catch (e) {
-
-                        return '';
-
-                    }
-
-               })();
-    }
-
-
-    function isUserAdmin(email) {
-
-        if (!email) return false;
-
-        return ADMIN_EMAILS.includes(
-            email.toLowerCase().trim()
-        );
-    }
-
-
     async function checkAdminAccess() {
-
-    try {
-
-        // =====================================================
-        // 1. Récupérer l'utilisateur de l'application P2I
-        // =====================================================
-
-        const activeEmail = getActiveEmail();
-
-        console.log('👤 Email utilisateur P2I détecté :', activeEmail);
-
-
-        // =====================================================
-        // 2. Si un email P2I existe, vérifier les droits admin
-        // =====================================================
-
-        if (activeEmail && isUserAdmin(activeEmail)) {
-
-            console.log(
-                '✅ Accès administrateur autorisé pour :',
-                activeEmail
-            );
-
-            return true;
+        try {
+            const { data, error } = await supabaseClient.rpc('can_manage_p2i_relations');
+            if (!error && data === true) return true;
+            showAccessDenied('Une session Supabase avec des droits administrateur est requise.');
+        } catch {
+            showAccessDenied('Impossible de vérifier vos droits administrateur.');
         }
-
-
-        // =====================================================
-        // 3. Sinon, essayer Supabase Auth
-        // =====================================================
-
-        const {
-            data,
-            error
-        } = await supabaseClient.auth.getUser();
-
-
-        if (!error && data && data.user) {
-
-            const supabaseEmail =
-                data.user.email || '';
-
-
-            console.log(
-                '👤 Email Supabase détecté :',
-                supabaseEmail
-            );
-
-
-            if (isUserAdmin(supabaseEmail)) {
-
-                console.log(
-                    '✅ Administrateur Supabase reconnu :',
-                    supabaseEmail
-                );
-
-                return true;
-            }
-        }
-
-
-        // =====================================================
-        // 4. Aucun administrateur reconnu
-        // =====================================================
-
-        showAccessDenied(
-            activeEmail
-                ? 'Vous n’avez pas les droits nécessaires pour accéder à cette page.'
-                : 'Vous devez être connecté pour accéder à cette page.'
-        );
-
-        return false;
-
-
-    } catch (error) {
-
-        console.error(
-            '❌ Erreur vérification administrateur :',
-            error
-        );
-
-
-        showAccessDenied(
-            'Impossible de vérifier vos droits administrateur.'
-        );
-
-
         return false;
     }
-}
 
     function showAccessDenied(message) {
 
@@ -1217,23 +1094,7 @@ async function loadRelations() {
             data,
             error
         } = await supabaseClient
-            .from('user_contacts')
-            .select(`
-                id,
-                user_id,
-                product_name,
-                supplier_name,
-                origin,
-                model_id,
-                status,
-                created_at
-            `)
-            .order(
-                'created_at',
-                {
-                    ascending: false
-                }
-            );
+            .rpc('list_p2i_admin_relations');
 
 
         // ========================================================
@@ -1440,11 +1301,7 @@ async function loadRelations() {
             });
 
 
-            console.log(
-                '🗺️ Profile map créée :',
-                profileMap
-            );
-
+    
 
             // ====================================================
             // ASSOCIATION PROFIL ↔ DEMANDE
@@ -1809,23 +1666,7 @@ renderRelations();
                 data,
                 error
             } = await supabaseClient
-                .from('user_contacts')
-                .select(`
-                    id,
-                    user_id,
-                    product_name,
-                    supplier_name,
-                    origin,
-                    model_id,
-                    status,
-                    created_at
-                `)
-                .order(
-                    'created_at',
-                    {
-                        ascending: false
-                    }
-                );
+                .rpc('list_p2i_admin_relations');
 
 
             if (error) {
@@ -1903,14 +1744,7 @@ renderRelations();
                     data: profiles,
                     error: profilesError
                 } = await supabaseClient
-                    .from('profiles')
-                    .select(
-                        'id, full_name, telephone, role'
-                    )
-                    .in(
-                        'id',
-                        uniqueUserIds
-                    );
+                    .rpc('get_user_profiles_for_admin');
 
 
                 if (!profilesError && profiles) {
@@ -1936,6 +1770,8 @@ renderRelations();
                                 rel.userDisplayName =
                                     profile.full_name ||
                                     'Utilisateur';
+
+                                rel.email = profile.email || '';
 
                                 rel.telephone =
                                     profile.telephone ||
